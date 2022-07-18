@@ -1,0 +1,18 @@
+{
+    "Kits":{
+        "tier1kit":{
+            "Name":"Tier1Kit",
+            "Exhaust":"t1exhaust",
+            "Intake":"t1intake",
+            "Tires":"t1tires",
+            "Price":""
+        },
+        "tier2kit":{
+            "Name":"Tier2Kit",
+            "Exhaust":"t2exhaust",
+            "Intake":"t2intake",
+            "Tires":"t2tires",
+            "Price":""
+        }
+    }
+}
