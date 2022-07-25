@@ -3,6 +3,10 @@ const lodash = require('lodash')
 const ms = require('pretty-ms')
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {MessageActionRow, MessageButton} = require("discord.js")
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,35 +38,37 @@ module.exports = {
         const discord = require("discord.js");
         const cars = require('../cardb.json');
         let tracks = ['easy', 'medium', 'hard']
+        
         let moneyearned = 200
         let user = interaction.user;
+        let userdata = await User.findOne({id: interaction.user.id})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})
+
         let track = interaction.options.getString("difficulty")
         if(!track) return interaction.reply("You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard")
         if(!tracks.includes(track.toLowerCase())) return interaction.reply("You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard")
-        let idtoselect = interaction.options.getString("car")
-            if(!idtoselect) return interaction.reply("Specify an id!")
-            let selected = db.fetch(`selected_${idtoselect}_${user.id}`)
-            if(!selected) {
-                let errembed = new discord.MessageEmbed()
-                .setTitle("Error!")
-                .setColor("DARK_RED")
-                .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
-                return  interaction.reply({embeds: [errembed]})
-            }
+        let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
+        let selected = filteredcar[0] || 'No ID'
+        if(selected == "No ID") {
+          let errembed = new discord.MessageEmbed()
+          .setTitle("Error!")
+          .setColor("DARK_RED")
+          .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
+          return  interaction.reply({embeds: [errembed]})
+      }
             let car = selected
-            let driftxp = db.fetch(`driftxp_${user.id}`)
+            let driftxp = userdata.driftxp
         if(!car) return interaction.reply("You need to select a car! Example: /ids select [car]")
-        let user1cars = db.fetch(`cars_${user.id}`)
+        let user1cars = userdata.cars
         if (!user1cars) returninteraction.reply("You dont have any cars!")
         if(!cars.Cars[car.toLowerCase()]) return interaction.reply("Thats not a car!")
-        if (!user1cars.some(e => e.includes(car.toLowerCase()))) return interaction.reply(`You need to enter the car you want to drift with. E.g. \`drift [car]\`\nYour current cars: ${user1cars.join(' ')}`)
-            let driftscore = db.fetch(`${cars.Cars[car.toLowerCase()].Name}drift_${user.id}`) 
-            let usercarspeed = db.fetch(`${cars.Cars[car.toLowerCase()].Name}speed_${user.id}`)
-            let handling = db.fetch(`${cars.Cars[car.toLowerCase()].Name}handling_${user.id}`) 
+            let driftscore = selected.Drift
+            let usercarspeed = selected.Speed
+            let handling = selected.Handling
 
             if(driftscore <= 0) return interaction.reply("You try drifting but your drift rating is too low, so you swerve out and crash.")
-            let timeout = db.fetch(`timeout_${interaction.user.id}`) ||  45000
-            let racing = db.fetch(`drifting_${user.id}`)
+            let timeout = 45000
+            let racing = cooldowndata.drift
             if (racing !== null && timeout - (Date.now() - racing) > 0) {
                 let time = ms(timeout - (Date.now() - racing), {compact: true});
               
@@ -72,13 +78,12 @@ module.exports = {
             
       
           
-           db.set(`drifting_${user.id}`, Date.now())
-           let drifttraining = db.fetch(`driftrank_${user.id}`) || 1
-           if(!db.fetch(`driftrank_${user.id}`)) {
-            db.set(`driftrank_${user.id}`, 1)
-           }
-           let range = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`)
+           cooldowndata.drift = Date.now()
+           cooldowndata.save()
+           let drifttraining = userdata.driftrank
+         
            if(cars.Cars[selected.toLowerCase()].Electric){
+             let range = selected.Range
              if(range <= 0){
                return interaction.reply("Your EV is out of range! Run /charge to charge it!")
              }
@@ -106,67 +111,72 @@ module.exports = {
                     break;
                 }
             }
-            let energydrink = db.fetch(`energydrink_${interaction.user.id}`)
-            let energytimer = db.fetch(`energytimer_${interaction.user.id}`)
+            let usables = userdata.using
+      
+            let energytimer = cooldowndata.energydrink
             let energydrink2
-            if(energydrink){
+            if(usables.includes('energy drink')){
               let timeout = 600000
               if (timeout - (Date.now() - energytimer) > 0) {          
                 console.log("no energy")
               } else {
-                  db.set(`energydrink_${interaction.user.id}`, false)
+                await User.findOneAndUpdate({
+                  id: interaction.user.id
+              }, {
+                  $pull: {
+                    using: "energy drink"
+                  }
+              })
               }
-               energydrink2 = db.fetch(`energydrink_${interaction.user.id}`)
-    
+          
+              userdata.save()
             }
-            if(energydrink2 == true){
+            if(usables.includes('energy drink')){
               ticketsearned = ticketsearned * 2
             }
-            let sponsor = db.fetch(`sponsor_${interaction.user.id}`)
-            let sponsortimer = db.fetch(`sponsortimer_${interaction.user.id}`)
-            let sponsor2
-            if(sponsor){
-              let timeout = 600000
-              if (timeout - (Date.now() - sponsortimer) > 0) {          
-                console.log("no energy")
-              } else {
-                  db.set(`sponsor_${interaction.user.id}`, false)
+            let sponsortimer = cooldowndata.sponsor
+        let sponsor2
+        console.log(sponsor)
+        if(usables.includes('sponsor')){
+          let timeout = 600000
+          if (timeout - (Date.now() - sponsortimer) > 0) {          
+            console.log("no sponsor")
+          } else {
+            await User.findOneAndUpdate({
+              id: interaction.user.id
+          }, {
+              $pull: {
+                using: 'sponsor'
               }
-              sponsor2 = db.fetch(`sponsor_${interaction.user.id}`)
-    
-            }
-            if(sponsor2 == true){
-              moneyearned = moneyearned * 2
-            }
+          })    
+          userdata.save()
+          }
+
+
+        }
+        if(usables.includes('sponsor')){
+          moneyearned = moneyearned * 2
+          moneyearnedtxt = moneyearnedtxt * 2
+          console.log(moneyearned)
+        }
     
             let parts = require('../partsdb.json')
-            let tires = db.fetch(`${cars.Cars[car.toLowerCase()].Name}tires_${interaction.user.id}`) || 'Stock Tires'
-            let numb = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_number`) || 0
-            let tread = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`) 
+            let tires = selected.Tires
+            let tread = selected.Tread
             let tirescore
-            if(tires == "Stock Tires" || !tires){
-                tirescore = 0
-            }
+            
             let drifttires = ["T1DriftTires", "T2DriftTires", "T3DriftTires", "BM1DriftTires", "T4DriftTires", "T5DriftTires"]
             if(!drifttires.includes(tires)) return interaction.reply("Your car needs drift tires to drift!")
-            if(drifttires.includes(tires) && !tread){
-                db.set(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`, parts.Parts[tires.toLowerCase()].Tread) 
-                
-                tirescore = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`) 
-            }
-            else {
-                tirescore = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`) 
-            }
 
-            
-            let newtirescore = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`) 
-            if(newtirescore <= 0) return interaction.reply(`Your tires are out of tread!`)
+           
+            if(tread <= 0) return interaction.reply(`Your tires are out of tread!`)
+            tirescore = tread * 2
             console.log(`Score: ${tirescore}`)
             let newrank = drifttraining * 2
 
             let formula = (driftscore* drifttraining)
             formula += handling
-            formula += newtirescore
+            formula += tirescore
             
       
              console.log(formula)
@@ -306,28 +316,25 @@ module.exports = {
       
                 if(time == 0 && tracklength >= 0){
                     let randomsub = randomRange(2, 10)
-                    db.subtract(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`, randomsub) 
-                    let newtread = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`)
-                    embed.addField("Results", `Failed\n\nTread: ${newtread}`)
+                    selected.Tread -= randomsub
+                    userdata.save()
+                    embed.addField("Results", `Failed\n\nTread: ${selected.Tread}`)
                     interaction.editReply({embeds: [embed]})
-                    if(range){
-                        db.subtract(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, 1)
+                    if(range && range >= 0){
+                        selected.Range -= 1
 
                     }
-                    db.add(`driftxp_${user.id}`, 10)
-                    if(range){
-                        db.subtract(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, 1)
-                        db.add(`batteries_${user.id}`, 1)
-
-                    }
-                    let driftxp = db.fetch(`driftxp_${user.id}`)
+                    userdata.driftxp += 10
+                  
+                    let driftxp = userdata.driftxp
                     if(driftxp >= requiredrank){
-                        if(db.fetch(`driftrank_${user.id}`) < 50){
-                            db.add(`driftrank_${user.id}`, 1)
-                            interaction.channel.send(`${user}, you just ranked up your drift skill to ${db.fetch(`driftrank_${user.id}`)}!`)
-      
+                        if(userdata.driftrank < 50){
+                          userdata.driftrank += 1
+                          interaction.channel.send(`${user}, you just ranked up your drift skill to ${db.fetch(`driftrank_${user.id}`)}!`)
+                          
                         }
-                    }
+                      }
+                      userdata.save()
                     clearInterval(x)
                     clearInterval(y)
                     
@@ -335,32 +342,34 @@ module.exports = {
                 } 
                 if(tracklength <= 0){
                     let randomsub = randomRange(2, 10)
-                    db.subtract(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`, randomsub) 
-                    let newtread = db.fetch(`${cars.Cars[car.toLowerCase()].Name}_${parts.Parts[tires.toLowerCase()].Name}tread_${interaction.user.id}_${numb}`)
-                    embed.addField("Results", `Success\n\nTread: ${newtread}`)
+                    selected.Tread -= randomsub
+                    
+                    embed.addField("Results", `Success\n\nTread: ${selected.Tread}`)
                     if(db.fetch(`doublecash`) == true){
                         moneyearned = moneyearned += moneyearned
                         embed.addField("Double Cash Weekend!", `\u200b`)
                     }
                     embed.addField("Earnings", `$${moneyearned}\n${notorietyearned} Notoriety`)
-                    if(cars.Cars[selected].StatTrack){
-                      db.add(`${cars.Cars[selected].Name}driftwins_${interaction.user.id}`, 1)
+                    if(cars.Cars[selected.Name.toLowerCase()].StatTrack){
+                      selected.Wins += 1
                     }
                     interaction.editReply({embeds: [embed]})
-                    db.add(`cash_${user.id}`, moneyearned)
-                    db.add(`rp_${user.id}`, ticketsearned)
-                    db.add(`notoriety3_${interaction.user.id}`, notorietyearned)
+                    userdata.cash += moneyearned
+                    userdata.rp += ticketsearned
+                    userdata.noto += notorietyearned
 
-                    db.add(`driftxp_${user.id}`, 25)
 
-                    let driftxp = db.fetch(`driftxp_${user.id}`)
+                    userdata.driftxp += 25
+                  
+                    let driftxp = userdata.driftxp
                     if(driftxp >= requiredrank){
-              
-                            db.add(`driftrank_${user.id}`, 1)
-                            interaction.channel.send(`${user}, you just ranked up your drift skill to ${db.fetch(`driftrank_${user.id}`)}!`)
-      
-                        
-                    }
+                        if(userdata.driftrank < 50){
+                          userdata.driftrank += 1
+                          interaction.channel.send(`${user}, you just ranked up your drift skill to ${db.fetch(`driftrank_${user.id}`)}!`)
+                          
+                        }
+                      }
+                      userdata.save()
                     
                     clearInterval(x)
                     clearInterval(y)

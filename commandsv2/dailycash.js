@@ -4,6 +4,8 @@ const db = require('quick.db')
 const ms = require('ms')
 
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -11,46 +13,47 @@ module.exports = {
     .setDescription("Collect your daily cash"),
     async execute(interaction) {
         let uid = interaction.user.id
-        let cash = 250
-        let daily = db.fetch(`daily_${uid}`)
-        let patreon1 = db.fetch(`patreon_tier_1_${uid}`)
-        let patreon2 = db.fetch(`patreon_tier_2_${uid}`)
-        let patreon3 = db.fetch(`patreon_tier_3_${uid}`)
-        
-        let house = db.fetch(`house_${uid}`)
-        if(house && house.Perks.includes("Daily $300")){
-            cash += 300
+        let dcash = 250
+        let userdata = await User.findOne({id: uid}) || new User({id: uid})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})
+
+        let daily = cooldowndata.daily
+        let patreon = userdata.patron
+
+        let house = userdata.house
+        if(house && house.perks.includes("Daily $300")){
+            dcash += 300
         }
-        if(house && house.Perks.includes("Daily $500")){
-            cash += 500
+        if(house && house.perks.includes("Daily $500")){
+            dcash += 500
         }
-        if(house && house.Perks.includes("Daily $1000")){
-            cash += 1000
+        if(house && house.perks.includes("Daily $1000")){
+            dcash += 1000
         }
-        if(house && house.Perks.includes("Daily $1500")){
-            cash += 1500
+        if(house && house.perks.includes("Daily $1500")){
+            dcash += 1500
         }
-        if(patreon1){
-            cash *= 2
+        if(patreon == 1){
+            dcash *= 2
         }
-        if(patreon2){
-            cash *= 3
+        if(patreon == 2){
+            dcash *= 3
         }
-        if(patreon3){
-            cash *= 5
+        if(patreon == 3){
+            dcash *= 5
         }
         if(interaction.guild.id == "931004190149460048") {
-            cash += 500
+            dcash += 500
             console.log("guild")
         }
         let timeout = 86400000;
-        let prestige = db.fetch(`prestige_${interaction.user.id}`)
+        let prestige = userdata.prestige
         if(prestige){
             let mult = require('../prestige.json')[prestige].Mult
   
-            let multy = mult * cash
+            let multy = mult * dcash
   
-            cash = cash += multy
+            dcash = dcash += multy
            
           }
         if (daily !== null && timeout - (Date.now() - daily) > 0) {
@@ -61,13 +64,14 @@ module.exports = {
             interaction.reply({embeds: [timeEmbed]})
         }
         else{
-            let time = ms(timeout - (Date.now() - daily));
-        db.add(`cash_${uid}`, cash)
-        db.set(`daily_${uid}`, Date.now())
+       userdata.cash += dcash
+        cooldowndata.daily = Date.now()
+        userdata.save()
+        cooldowndata.save()
         
         let embed = new Discord.MessageEmbed()
         .setTitle(`Daily Cash ${interaction.user.username}`)
-        .addField("Earned Cash", `$${numberWithCommas(cash)}`)
+        .addField("Earned Cash", `$${numberWithCommas(dcash)}`)
 embed.setColor('#60b0f4')
 
         interaction.reply({embeds: [embed]})

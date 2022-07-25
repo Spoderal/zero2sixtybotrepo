@@ -11,6 +11,11 @@ const Profile = new mongoose.Schema({
         required: false,
         default: 0
     },
+    garageLimit: {
+      type: Number,
+      required: false,
+      default: 10
+    },
     gold: {
         type: Number,
         required: false,
@@ -100,6 +105,94 @@ const Profile = new mongoose.Schema({
         type: Number,
         required: false,
         default: 10000
+    },
+    items: {
+        type: Array,
+        required: false,
+        default: []
+    },
+    racerank:{
+        type: Number,
+        required: false,
+        default: 1
+    },
+    racexp:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    driftrank:{
+        type: Number,
+        required: false,
+        default: 1
+    },
+    driftxp:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    racing:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    prestige: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    using: {
+        type: Array,
+        required: false,
+        default: []
+    },
+    house:{
+        type: Object,
+        required: false
+    },
+    badges:{
+        type: Array,
+        required: false,
+        default: []
+    },
+    xessence:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    helmet:{
+        type: String,
+        required: false,
+        default: 'Default'
+    },
+    description:{
+        type: String,
+        required: false,
+        default: 'No Description'
+    },
+    background:{
+        type:String,
+        required: false,
+        default: 'Default'
+    },
+    job:{
+        type: Object,
+        required: false
+    },
+    cashcuptier:{
+        type: Number,
+        required: false,
+        default: 1
+    },
+    codes:{
+        type: Array,
+        required: false,
+        default: []
+    },
+    pfps:{
+        type: Array,
+        required: false,
+        default: []
     }
 })
 

@@ -72,7 +72,7 @@ else {
        
            }
           db.set(`itemcooldown`, Date.now())
-          db.set(`itemshop`, {Police: randompolice, Other: randomother1, Other2: randomother2, Other: randomother3})
+          db.set(`itemshop`, {Police: randompolice, Other: randomother1, Other2: randomother2, Other3: randomother3})
           db.set(`bought_bank increase_${message.author.id}`, 0)
 
         

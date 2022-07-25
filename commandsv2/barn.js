@@ -5,6 +5,8 @@ const lodash = require('lodash')
 const carsdb = require('../cardb.json')
 const ms = require(`pretty-ms`)
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/profile-schema')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,18 +23,19 @@ module.exports = {
     .setRequired(true))
   ,
   async execute(interaction) {
-    let created = db.fetch(`created_${interaction.user.id}`)
 
-    if(!created) return interaction.reply(`Use \`/start\` to begin!`)
-        let barntimer = db.fetch(`barnfind_${interaction.user.id}`)
-        let barnmaps = db.fetch(`barnmaps_${interaction.user.id}`) || 0
-        let ubarnmaps = db.fetch(`ubarnmaps_${interaction.user.id}`) || 0
-        let rbarnmaps = db.fetch(`rbarnmaps_${interaction.user.id}`) || 0
-        let lbarnmaps = db.fetch(`lbarnmaps_${interaction.user.id}`) || 0
+    let userid = interaction.user.id
+
+    let userdata =  await User.findOne({id: userid}) || new User({id: userid})
+    let cooldowns =  await Cooldowns.findOne({id: userid}) || new Cooldowns({id: userid})
+
+        let barntimer = cooldowns.barn
+        let barnmaps = userdata.cmaps
+        let ubarnmaps = userdata.ucmaps
+        let rbarnmaps = userdata.rmaps
+        let lbarnmaps = userdata.lmaps
         let rarity2 =  interaction.options.getString("rarity")
-        if(barnmaps < 0) {
-          db.set(`barnmaps_${interaction.user.id}`, 0)
-        }
+       
         if(barnmaps == 0 && rarity2 == "common" || !barnmaps && rarity2 == "common") return interaction.reply("You don't have any common barn maps!")
         if(ubarnmaps == 0 && rarity2 == "uncommon" || !ubarnmaps && rarity2 == "uncommon") return interaction.reply("You don't have any uncommon barn maps!")
         if(rbarnmaps == 0 && rarity2 == "rare" || !rbarnmaps && rarity2 == "rare") return interaction.reply("You don't have any rare barn maps!")
@@ -40,17 +43,17 @@ module.exports = {
 
         let timeout = 3600000;
 
-        let house = db.fetch(`house_${interaction.user.id}`)
+        let house = userdata.house
 
-        if(house && house.Perks.includes("6 Hour cooldown on barns") || house && house.Perks.includes("30 Minutes cooldown on barns")){
+        if(house){
           timeout = 1800000
         }
-        if(house && house.Perks.includes("3 Hour cooldown on barns") || house && house.Perks.includes("5 Minute cooldown on barns")){
+        if(house){
           timeout = 300000
         }
 
-        let garagelimit = db.fetch(`garagelimit_${interaction.user.id}`) || 10
-        let usercars = db.fetch(`cars_${interaction.user.id}`) || []
+        let garagelimit = userdata.garageLimit
+        let usercars = userdata.cars
         if(usercars.length >= garagelimit) return interaction.reply("Your spaces are already filled. Sell a car or get more garage space!")
 
         if (barntimer !== null && timeout - (Date.now() - barntimer) > 0) {
@@ -96,67 +99,95 @@ module.exports = {
             switch(rarity2){
               case "common":
                 color = "#388eff"
-                resale = "1000"
+                resale = 1000
                 namefor = "Common"
                 break;
                 case "uncommon":
                   color = "#f9ff3d"
-                  resale = "2500"
+                  resale = 2500
                   namefor = "Uncommon"
                   break;
                   case "rare":
                   color = "#a80000"
-                  resale = "10000"
+                  resale = 10000
                   namefor = "Rare"
                   break;
                   case "legendary":
                     color = "#44e339"
-                    resale = "25000"
+                    resale = 25000
                     namefor = "Legendary"
                     break;
             }
 
 
 
-            let cars = db.fetch(`cars_${interaction.user.id}`) || []
-            let car = carsdb.Cars[barnfind.toLowerCase()]
-            if(cars.includes(car.Name.toLowerCase())) {
-            db.add(`cash_${interaction.user.id}`, resale)
-            db.set(`barnfind_${interaction.user.id}`, Date.now())
-             interaction.reply(`You found a ${car.Name} but you already have this car, so you found $${numberWithCommas(resale)} instead.`)
+            let cars = userdata.cars
+            let carindb = carsdb.Cars[barnfind.toLowerCase()]
+            let carobj = {
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0
+            }
+            function filterByID(item) {
+              if (item.ID == carobj.ID) {
+                return true
+              }
+              return false;
+            }
+            
+            let arrByID = cars.filter(filterByID)
+            console.log(arrByID)
+            if(arrByID.length > 0) {
+              cooldowns.barn = Date.now()
+              Number(resale)
+              Number(userdata.cash)
+              userdata.cash += resale
+              cooldowns.save()
+              userdata.save()
+             interaction.reply(`You found a ${carindb.Name} but you already have this car, so you found $${numberWithCommas(resale)} instead.`)
              return;
             }
-            db.push(`cars_${interaction.user.id}`, car.Name.toLowerCase())
-            db.set(`${car.Name}restoration_${interaction.user.id}`, 0)
-            db.set(`${car.Name}speed_${interaction.user.id}`, car.Speed)
-            db.set(`${car.Name}060_${interaction.user.id}`, car["0-60"])
-            db.set(`barnfind_${interaction.user.id}`, Date.now())
-            db.set(`isselected_${car.Name}_${interaction.user.id}`, car.alias)
-           db.set(`selected_${car.alias}_${interaction.user.id}`, car.Name)
+            
+            userdata.cars.push(carobj)
+            userdata.save()
+            cooldowns.barn = Date.now()
+            cooldowns.save()
+
+          
 
             switch(rarity2){
               case "common":
-                db.subtract(`barnmaps_${interaction.user.id}`, 1)
+                barnmaps -= 1
 
                 break;
                 case "uncommon":
-                db.subtract(`ubarnmaps_${interaction.user.id}`, 1)
+                  ubarnmaps -= 1
+
 
                 break;
                 case "rare":
-                  db.subtract(`rbarnmaps_${interaction.user.id}`, 1)
+                  rbarnmaps -= 1
+
   
                   break;
                   case "legendary":
-                  db.subtract(`lbarnmaps_${interaction.user.id}`, 1)
-  
-                  break;
+                    lbarnmaps -= 1
+
+                    
+                    break;
+                    userdata.save()
             }
             let embed = new Discord.MessageEmbed()
             .setTitle(`${namefor} Barn Find`)
-            .addField(`Car`, `${car.Name}`)
-            .addField(`ID`, `${car.alias}`)
-            .setImage(car.Image)
+            .addField(`Car`, `${carobj.Name}`)
+            .addField(`ID`, `${carobj.ID}`)
+            .setImage(carobj.Livery)
             .setColor(color)
             interaction.reply({embeds: [embed]});
           }

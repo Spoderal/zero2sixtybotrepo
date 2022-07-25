@@ -3,7 +3,9 @@ const Discord = require('discord.js')
 const cars = require('../cardb.json')
 const codes = require('../codes.json')
 const { SlashCommandBuilder } = require("@discordjs/builders");
-
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("code")
@@ -16,35 +18,29 @@ module.exports = {
         let code = interaction.options.getString("code")
         let uid = interaction.user.id
         if(!code) return interaction.reply({content:"Specify a code to redeem! You can find codes in the Discord server, or on the Twitter page!", ephemeral: true})
-        
-        if(codes.Discord[code]){
-            let redeemed = db.fetch(`redeemed_${code}_${uid}`)
-            if(redeemed) return interaction.reply("You've already redeemed this code!")
-            if(codes.Discord[code].Gold){
-                interaction.reply(`Redeemed code ${code} and earned ${numberWithCommas(codes.Discord[code].Reward)} gold`)
-                db.add(`gold_${uid}`, codes.Discord[code].Reward)
+        let userdata = await User.findOne({id: uid}) || new User({id: uid})
 
-            }
-            else {
-                interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Discord[code].Reward)}`)
-                db.add(`cash_${uid}`, codes.Discord[code].Reward)
-            }
-            db.set(`redeemed_${code}_${uid}`, true)
-        }
-        else if(codes.Twitter[code]){
-            let redeemed = db.fetch(`redeemed_${code}_${uid}`)
-            if(redeemed) return interaction.reply("You've already redeemed this code!")
-            if(codes.Twitter[code].Gold){
-                interaction.reply(`Redeemed code ${code} and earned ${numberWithCommas(codes.Twitter[code].Reward)} gold`)
-                db.add(`gold_${uid}`, codes.Twitter[code].Reward)
-
-            }
-          
-            else {
+        let codesredeemed = userdata.codes
+      
+     if(codes.Twitter[code]){
+            if(codesredeemed.includes(code)) return interaction.reply("You've already redeemed this code!")
+         
                 interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Twitter[code].Reward)}`)
-                db.add(`cash_${uid}`, codes.Twitter[code].Reward)
-            }
-            db.set(`redeemed_${code}_${uid}`, true)
+                userdata.cash += codes.Twitter[code].Reward
+      
+            
+                codesredeemed.push(code)
+                userdata.save()
+        }
+        else if(codes.Discord[code]){
+            if(codesredeemed.includes(code)) return interaction.reply("You've already redeemed this code!")
+         
+                interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Discord[code].Reward)}`)
+                userdata.cash += codes.Discord[code].Reward
+      
+            
+                codesredeemed.push(code)
+                userdata.save()
         }
       
         
@@ -56,19 +52,22 @@ module.exports = {
 
             if(!patreontier1 && !patreontier2 && !patreontier3 && !patreontier4) return interaction.reply("You need to purchase a patreon tier to redeem this code!")
 
-            let redeemed = db.fetch(`redeemed_${code}_${uid}`)
-            if(redeemed) return interaction.reply("You've already redeemed this code!")
+            if(codesredeemed.includes(code)) return interaction.reply("You've already redeemed this code!")
+
             if(codes.Patreon[code].Gold){
                 interaction.reply(`Redeemed code ${code} and earned ${numberWithCommas(codes.Patreon[code].Reward)} gold`)
-                db.add(`gold_${uid}`, codes.Patreon[code].Reward)
+                userdata.gold += codes.Patreon[code].Reward
 
             }
           
             else {
                 interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Patreon[code].Reward)}`)
-                db.add(`cash_${uid}`, codes.Patreon[code].Reward)
+                userdata.cash += codes.Patreon[code].Reward
             }
-            db.set(`redeemed_${code}_${uid}`, true)
+      
+            
+            codesredeemed.push(code)
+            userdata.save()
         }
         else {
             interaction.reply({content:"Thats not a valid code!", ephemeral: true})

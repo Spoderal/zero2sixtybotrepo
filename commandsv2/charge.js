@@ -1,7 +1,7 @@
-const db = require('quick.db')
 const Discord = require('discord.js')
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const cars = require('../cardb.json')
+const User = require('../schema/profile-schema')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,31 +14,35 @@ module.exports = {
   ),
   async execute(interaction) {
 
-    let created = db.fetch(`created_${interaction.user.id}`)
-
-    if(!created) return interaction.reply(`Use \`/start\` to begin!`)
+    let userdata = await User.findOne({id: interaction.user.id})
     let car = interaction.options.getString("car");
-    let selected = db.fetch(`selected_${car}_${interaction.user.id}`);
-    if (!selected)
-    return interaction.reply(
-      "That id doesn't have a car! Use /ids select [id] [car] to select it!"
-      );
-      if(!cars.Cars[selected.toLowerCase()].Electric) return interaction.reply("Thats not an EV!")
-      let house = db.fetch(`house_${interaction.user.id}`)
+    let filteredcar = userdata.cars.filter(car => car.ID == car);
+    let selected = filteredcar[0] || 'No ID'
+    if(selected == "No ID") {
+      let errembed = new discord.MessageEmbed()
+      .setTitle("Error!")
+      .setColor("DARK_RED")
+      .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
+      return  interaction.reply({embeds: [errembed]})
+  }
+  
+      if(!cars.Cars[selected.Name.toLowerCase()].Electric) return interaction.reply("Thats not an EV!")
+      let house = userdata.house
           let userid = interaction.user.id
-          let cash = db.fetch(`cash_${userid}`) || 0
-          let range = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`)
-          let maxrange = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}maxrange_${interaction.user.id}`)
+          let cash = userdata.cash
+          let range = selected.Range
+          let maxrange = selected.MaxRange
 
 
           if(range == maxrange) return interaction.reply("This EV doesn't need charged!")
-          if(house && house.Perks.includes("Free EV charging")) {
+          if(house && house.perks.includes("Free EV charging")) {
             let embed = new Discord.MessageEmbed()
             .setTitle(`⚡ Charging ${cars.Cars[selected.toLowerCase()].Name}... ⚡`)
             .setImage(`${cars.Cars[selected.toLowerCase()].Image}`)
  
  .setColor("#60b0f4")            
- db.set(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, maxrange)
+ selected.Range = maxrange
+ userdata.save()
     
             interaction.reply({embeds: [embed]})
               setTimeout(() => {
@@ -55,8 +59,10 @@ module.exports = {
           .setTitle(`⚡ Charging ${cars.Cars[selected.toLowerCase()].Name}... ⚡`)
           .setImage(`${cars.Cars[selected.toLowerCase()].Image}`)
           embed.setColor('#60b0f4')
-          db.set(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, maxrange)
-          db.subtract(`cash_${userid}`, 500)
+          selected.Range = maxrange
+          cash -= 500
+          userdata.save()
+
   
           interaction.reply({embeds: [embed]})
             setTimeout(() => {

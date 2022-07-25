@@ -12,6 +12,7 @@ const double = require('../doublecash')
 const db = require('quick.db')
 const mongoose = require('mongoose')
 const dbSchema = require('../schema/profile-schema')
+const auto = require('../autosetcars')
 
 module.exports = {
     name:"ready",
@@ -30,7 +31,7 @@ module.exports = {
       patron(client)
       items(client)
       double(client)
-      
+      // auto()
       
       var express = require('express');
       var app = express();

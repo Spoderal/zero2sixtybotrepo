@@ -4,6 +4,11 @@ const pfpdb = require('../pfpsdb.json')
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const lodash = require("lodash")
 const colors = require('../colordb.json')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
+
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("editprofile")
@@ -29,9 +34,10 @@ module.exports = {
     async execute(interaction) {
 
         let option = interaction.options.getString("option")
+        let userdata = await User.findOne({id: interaction.user.id})
 
         if(option == "helmet"){
-            let userpfps = db.fetch(`pfps_${interaction.user.id}`)
+            let userpfps = userdata.pfps
             
             let pfp = interaction.options.getString("item")
             if(!pfp) return interaction.reply("Specify a helmet!")
@@ -40,7 +46,8 @@ module.exports = {
             if(!userpfps) return interaction.reply("You dont have any profile pictures.")
             if(!userpfps.includes(pfp.toLowerCase())) return interaction.reply("You dont own that profile picture.")
             
-            db.set(`currentpfp_${interaction.user.id}`, pfp.toLowerCase())
+            userdata.helmet = pfp.toLowerCase()
+            userdata.save()
             
             interaction.reply(`Set your profile picture to "${pfp}"`)
 
@@ -50,7 +57,8 @@ module.exports = {
             let letterCount = titletoset.replace(/\s+/g, '').length;
             if(letterCount > 35) return interaction.reply("Max characters 35!")
         
-            db.set(`profile_description_${interaction.user.id}`, titletoset.toLowerCase())
+            userdata.description = titletoset
+            userdata.save()
         
             interaction.reply(`Set your profile description to "${titletoset}"`)
     
@@ -62,16 +70,17 @@ module.exports = {
             if(!pfp) return interaction.reply("Specify a background! The available backgrounds are: Space, Flames, Police, Finish Line, Ocean, and Default")
             if(!bgdb[pfp.toLowerCase()]) return interaction.reply("Thats not a profile background! The available backgrounds are: Space, Flames, Police, Finish Line, Ocean, and Default")
             
-            db.set(`profilepagebg_${interaction.user.id}`, bgdb[pfp.toLowerCase()].Image)
-            let dailytask = db.fetch(`dailytask_${interaction.user.id}`);
+            userdata.background = pfp
+            let dailytask = userdata.dailytask
             if (
                 dailytask &&
                 !dailytask.completed &&
                 dailytask.task == "Change your profile background"
               ) {
                 interaction.channel.send(`Task completed!`)
-                db.set(`dailytask_${interaction.user.id}.completed`, true);
-                db.add(`cash_${interaction.user.id}`, dailytask.reward);
+                dailytask.completed = true
+
+                userdata.cash += dailytask.reward
               }
             interaction.reply(`Set your profile background to "${pfp}"`)
 
@@ -95,7 +104,7 @@ module.exports = {
         }
         
         else if(option == "view helmets"){
-            let userpfps = db.fetch(`pfps_${interaction.user.id}`)
+            let userpfps = userdata.pfps
         if(userpfps == ['None'] || userpfps == null || !userpfps) return interaction.reply("You don't have any helmets!")
         var userhelmets = []
         let actpfp

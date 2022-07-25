@@ -26,6 +26,9 @@
         },
         "PATREONNUMBER2":{
             "Reward":25000
+        },
+        "ILOVECODES":{
+            "Reward":1000000
         }
     }
 }

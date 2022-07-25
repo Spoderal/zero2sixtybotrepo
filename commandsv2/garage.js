@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const db = require('quick.db')
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const cardb = require('../cardb.json')
 const partdb = require('../partsdb.json')
@@ -59,24 +58,17 @@ module.exports = {
 
         let cars = userdata.cars
         if(cars == null || cars == [] || cars.length <= 0 || !cars.length) return interaction.reply("You dont own any cars!")
-        let engines = db.fetch(`engines_${targetId}`) || ['No Engines']
         let parts = userdata.parts
-        let cash = db.fetch(`cash_${targetId}`) || 0
-        let badges = db.fetch(`badges_${targetId}`) || ['None']
-        let garagelimit = db.fetch(`garagelimit_${targetId}`) || 10
-        if(parts == null) {parts = ["None"]}
-        if(parts.length == 0 || parts == null)  {parts = ['no parts']}
-        if(engines.length === 0 || engines == null)  {engines = ['None']}
+        let badges = userdata.badges
+        let garagelimit = userdata.garageLimit
         var usercars = []
         var actcar
-        var cararrayLength = cars.length;
         var userparts = []
         var actpart
         var partarraylength = parts.length;
         var speeds = []
-        let items = db.fetch(`items_${targetId}`) || ['no items']
+        let items = userdata.items
         var actitems = []
-        let carobject = {}
         var actitem
         let option = interaction.options.getString("option")
         let newspeeds = []
@@ -84,44 +76,14 @@ module.exports = {
         let filteredcar
         let actuserparts = []
         let valuearr = []
-        let xessence = db.fetch(`xessence_${targetId}`) || 0
+        let xessence = userdata.xessence
         let finalid = "NO ID"
         let fetch
-        for (var i = 0; i < cararrayLength; i++ && cars !== ['No Cars']) {
-          actcar = cars[i]
-       
-          
-          
 
-          let userspeed = db.fetch(`${cardb.Cars[actcar.toLowerCase()].Name}speed_${targetId}`)
-          let selecte = db.fetch(`isselected_${cardb.Cars[actcar.toLowerCase()].Name}_${targetId}`) || "NO ID"
-    
-          let user060 = db.fetch(`${cardb.Cars[actcar.toLowerCase()].Name}060_${targetId}`)
-          let values = db.fetch(`${cardb.Cars[actcar.toLowerCase()].Name}resale_${targetId}`) || 0
-          usercars.push(`${cardb.Cars[actcar.toLowerCase()].Emote} ${cardb.Cars[actcar.toLowerCase()].Name} : \`${selecte}\``)
-        let speed = parseInt(userspeed / user060)
-       carobject = {
-        name: cardb.Cars[actcar.toLowerCase()].Name,
-        speed,
-        emote: cardb.Cars[actcar.toLowerCase()].Emote,
-        resale: values
-        }
-        speeds.push(carobject)
-        newspeeds.push(speeds[i].speed)
-        valuearr.push(speeds[i].resale)
-
-        
-        
-        //Do something
-        }
         for (var i = 0; i < items.length; i++ && items !== ['no items'] && items.length > 0) {
-          items = db.fetch(`items_${targetId}`) || ['no items']
-          if(!items || items.length == 0 || items == ['no items']) return interaction.channel.send(`You don't have any items!`)
+          items = userdata.items
+          if(!items || items.length == 0 || items == ['no items']) return interaction.reply(`You don't have any items!`)
 
- 
-          if(!items || items.length == 0) {
-          actitem = "no items"
-          }
           actitem = items[i]
           let emote
           let name
@@ -197,28 +159,12 @@ for (let i = 0; i < valuearr.length; i++) {
         highestspeed = Math.max.apply(Math, newspeeds)
         filteredcar = speeds.filter(e => e.speed == highestspeed);
         }
-        
-        if(engines == null || engines.length == 0 || engines == [''])  {
-        engines == ["None"]
-        }
-       
-      
-        
 
-        
-        if(cars.length === 0 || cars == null)  {usercars = ['No Cars']}
-        let garageimg = db.fetch(`showcase_${target.id}`) || "https://t3.ftcdn.net/jpg/02/70/01/64/360_F_270016456_CJAh2KQGnBKUzJfjDTkD0vEruHX9T2tV.jpg"
+        let garageimg = userdata.showcase || "https://t3.ftcdn.net/jpg/02/70/01/64/360_F_270016456_CJAh2KQGnBKUzJfjDTkD0vEruHX9T2tV.jpg"
      
         usercars = lodash.chunk(usercars.map((a, i) => `${a}\n`), 5)
         actuserparts = lodash.chunk(actuserparts.map((a, i) => `${a}\n`), 10)
 
-        // let row = new MessageActionRow()
-        // .addComponents(
-        //   new MessageButton()
-        //   .setLabel("Filter")
-        //   .setCustomId("filter")
-        //   .setStyle("SECONDARY")
-        // )
         if(subcommand == "parts"){
           let embed1 = new MessageEmbed()
           .setTitle(`${target.username}'s parts`)
@@ -707,21 +653,29 @@ for (let i = 0; i < valuearr.length; i++) {
         }  
         
         else {
+          let usercars = userdata.cars
+          let displaycars = []
+          for(i in usercars){
+            let car = usercars[i]
 
-          let yacht = db.fetch(`yacht_${target.id}`)
+            displaycars.push(`${car.Emote} ${car.Name} \`${car.ID}\``)
+          }
+          displaycars = lodash.chunk(displaycars.map((a, i) => `${a}\n`), 10) || ['No Cars']
+
+          let yacht = userdata.yacht
           if(yacht){
-            usercars[0].push(`🚢 Yacht`)
+            displaycars[0].push(`🚢 Yacht`)
             sum += 1000000000
           }
 
         let embed1 = new MessageEmbed()
         .setTitle(`${target.username}'s cars`)
-        .setDescription(`**IF YOUR ID SAYS TRUE, PLEASE RESELECT YOUR CAR SO ITS COMPATIBLE WITH THE NEW SYSTEM**\n\n${usercars[0].join('\n')}\n\nGarage Value: $${numberWithCommas(sum)}\n\nGarage Limit: ${cars.length}/${garagelimit}`)
+        .setDescription(`${displaycars[0].join('\n')}\n\nGarage Value: $${numberWithCommas(sum)}\n\nGarage Limit: ${cars.length}/${garagelimit}`)
         .setThumbnail('https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png') 
         .setImage(garageimg)
         .addField("​", "​")
-        embed1.setFooter(`Page 1/${usercars.length}`)
-        
+        embed1.setFooter(`Page 1/${displaycars.length}`)
+
         .setColor('#60b0f4')
         
                   
@@ -757,19 +711,21 @@ for (let i = 0; i < valuearr.length; i++) {
           collector.on('collect', async (i) => {
               let current = page;
               if (i.customId.includes('previous') && page !== 1) page--
-              else if (i.customId.includes('next') && page !== usercars.length) page++
+              else if (i.customId.includes('next') && page !== displaycars.length) page++
               else if (i.customId.includes('first')) page = 1
-              else if (i.customId.includes('last')) page = usercars.length
+              else if (i.customId.includes('last')) page = displaycars.length
              
-              embed1.setDescription(`${usercars[page - 1].join('\n')}\n\nGarage Value: $${numberWithCommas(sum)}\n\nGarage Limit: ${cars.length}/${garagelimit}`)
-
+              embed1.setDescription(`${displaycars[page - 1].join('\n')}\n\nGarage Value: $${numberWithCommas(sum)}\n\nGarage Limit: ${cars.length}/${garagelimit}`)
+              
               
               if (current !== page) {
-                  embed1.setFooter(`Page ${page}/${usercars.length}`)
+                  embed1.setFooter(`Page ${page}/${displaycars.length}`)
                   i.update({embeds: [embed1]})
+
               }
               else {
                 return i.update({content: "No pages left!"})
+
               }
           })
 
@@ -778,7 +734,9 @@ for (let i = 0; i < valuearr.length; i++) {
       
     }
         if(sum >= 50000000 && !badges.includes("carrich")){
-          db.push(`badges_${targetId}`, "carrich")
+          
+          badges.push(`badges_${targetId}`, "carrich")
+          userdata.save()
           interaction.channel.send(`${target}, You just earned the "Car Rich" badge for having a total garage value of $50M!`)
         }
         

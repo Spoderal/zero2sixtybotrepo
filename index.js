@@ -9,7 +9,6 @@ const dailytasks = require('./dailytasks')
 const crews = require('./crewrank')
 const badges = require('./badges')
 
-
 const app = express();
 require("dotenv").config()
 
@@ -22,6 +21,7 @@ const client = new Client({
     Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
     Intents.FLAGS.GUILD_MESSAGES,
   ],
+  shards: 'auto',
 });
 
 const Topgg = require("@top-gg/sdk");

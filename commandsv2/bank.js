@@ -1,8 +1,9 @@
-const db = require('quick.db')
 const Discord = require('discord.js')
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const cars = require('../cardb.json')
 const lodash = require(`lodash`)
+const User = require('../schema/profile-schema')
+
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('bank')
@@ -26,11 +27,11 @@ module.exports = {
   async execute(interaction) {
             let subcommand = interaction.options.getSubcommand()
               let user = interaction.user
-     let userid = user.id
-    let cash = db.fetch(`cash_${userid}`) || 0
-    let bank = db.fetch(`bank_${userid}`) || 0
-    let banklimit = db.fetch(`banklimit_${userid}`) || 10000
-    let created = db.fetch(`created_${interaction.user.id}`)
+              let userid = user.id
+              let userdata =  await User.findOne({id: userid}) || new User({id: userid})
+    let cash = userdata.cash 
+    let bank = userdata.bank
+    let banklimit = userdata.bankLimit || 10000
     let amount = interaction.options.getNumber("amount")
 
     if(subcommand === "deposit"){
@@ -39,8 +40,9 @@ module.exports = {
         if(amount > (banklimit - bank)) return interaction.reply("Your bank doesn't have enough room for that much!")
 
         if(amount > cash) return interaction.reply(`You don't have enough cash!`)
-        db.subtract(`cash_${userid}`, amount)
-        db.add(`bank_${userid}`, amount)
+        userdata.bank += amount
+        userdata.cash -= amount
+        userdata.save()
 
         interaction.reply(`Deposited $${numberWithCommas(amount)}`)
 
@@ -48,10 +50,9 @@ module.exports = {
     else if(subcommand === "withdraw"){
 
         if(amount > bank) return interaction.reply("Your bank doesn't have enough cash to withdraw this amount!")
-
-        db.add(`cash_${userid}`, amount)
-        db.subtract(`bank_${userid}`, amount)
-
+        userdata.cash += amount
+        userdata.bank -= amount
+        userdata.save()
         interaction.reply(`Withdrawed $${numberWithCommas(amount)}`)
 
     }
