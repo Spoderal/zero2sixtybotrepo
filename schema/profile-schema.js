@@ -16,7 +16,17 @@ const Profile = new mongoose.Schema({
       required: false,
       default: 10
     },
+    hasvoted:{
+        type: Boolean,
+        required: false,
+        default: false
+    },
     gold: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    votetimer:{
         type: Number,
         required: false,
         default: 0
@@ -101,6 +111,15 @@ const Profile = new mongoose.Schema({
         required: false,
         default: 0
     },
+    pinkslips:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    vault:{
+        type: String,
+        required: false
+    },
     banklimit: {
         type: Number,
         required: false,
@@ -150,6 +169,10 @@ const Profile = new mongoose.Schema({
         type: Object,
         required: false
     },
+    pet:{
+        type: Object,
+        required: false
+    },
     badges:{
         type: Array,
         required: false,
@@ -165,6 +188,26 @@ const Profile = new mongoose.Schema({
         required: false,
         default: 'Default'
     },
+    title:{
+        type: String,
+        required: false,
+        default: 'Noob Racer'
+    },
+    seasonrewards:{
+        type: Array,
+        required: false,
+        default: []
+    },
+    tier: {
+        type: Number,
+        required: false,
+        default: 1
+    },
+    stage:{
+        type: Number,
+        required: false,
+        default: 0
+    },
     description:{
         type: String,
         required: false,
@@ -176,6 +219,37 @@ const Profile = new mongoose.Schema({
         default: 'Default'
     },
     job:{
+        type: Object,
+        required: false
+    },
+    showcase:{
+        type:String,
+        required: false
+    },
+    joinedcrew:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    patron:{
+        type: Object,
+        required: false,
+        default: {}
+    },
+    crewclaimed:{
+        type: Array,
+        required: false,
+        default: []
+    },
+    crew:{
+        type: Object,
+        required: false
+    },
+    dailytask:{
+        type: Object,
+        required: false
+    },
+    weeklytask:{
         type: Object,
         required: false
     },

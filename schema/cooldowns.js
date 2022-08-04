@@ -50,6 +50,41 @@ const Cooldowns = new mongoose.Schema({
         type: Number,
         required: false,
         default: 0
+    },
+    hm:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    junk:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    sponsor:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    waterbottle:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    swheelspin:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    wheelspin:{
+        type: Number,
+        required: false,
+        default: 0
+    },
+    timetrial:{
+        type: Number,
+        required: false,
+        default: 0
     }
 
 })
