@@ -2,6 +2,8 @@ const db = require('quick.db')
 const discord = require('discord.js')
 const cars = require('../cardb.json')
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+
 module.exports = {
   
     data: new SlashCommandBuilder()
@@ -20,13 +22,13 @@ module.exports = {
     .setName("item")
     .setDescription("The amount")
     .addChoice("Cash", "cash")
-    .addChoice("Rare Keys", "rarekeys")
-    .addChoice("Common Keys", "commonkeys")
-    .addChoice("Exotic Keys", "exotickeys")
-    .addChoice("Common Barn Maps", "barnmaps")
-    .addChoice("Uncommon Barn Maps", "ubarnmaps")
-    .addChoice("Rare Barn Maps", "rbarnmaps")
-    .addChoice("Legendary Barn Maps", "lbarnmaps")
+    .addChoice("Rare Keys", "rkeys")
+    .addChoice("Common Keys", "ckeys")
+    .addChoice("Exotic Keys", "ekeys")
+    .addChoice("Common Barn Maps", "cmaps")
+    .addChoice("Uncommon Barn Maps", "ucmaps")
+    .addChoice("Rare Barn Maps", "rmaps")
+    .addChoice("Legendary Barn Maps", "lmaps")
     .addChoice("Wheel spins", "wheelspins")
     .addChoice("Super wheel spins", "swheelspins")
     .setRequired(true)),
@@ -47,9 +49,11 @@ module.exports = {
         
         if(!togive) return
         if(!givingto) return
+        let udata = await User.findOne({id: givingto.id})
       
     
-        db.add(`${itemtogive}_${givingto.id}`, togive)
+        udata[itemtogive] += Number(togive)
+        udata.save()
     
         interaction.reply(`Gave ${givingto} ${numberWithCommas(togive)} ${itemtogive}`)
     

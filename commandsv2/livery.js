@@ -4,7 +4,11 @@ const parts = require("../partsdb.json");
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const lodash = require("lodash")
 const {MessageActionRow, MessageButton} = require("discord.js")
-
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
+const Car = require('../schema/car')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,43 +34,61 @@ module.exports = {
   .setName("id")
   .setDescription("The id of the livery you want to install")
   .setRequired(false)
-  )
-
-  ,
+  ),
   async execute(interaction) {
 
     const db = require("quick.db")
 
     let option = interaction.options.getString("option")
+    let uid = interaction.user.id
+    let userdata = await User.findOne({id: interaction.user.id})
+    
 
     if(option == "install"){
       
-      let idtoselect = interaction.options.getString("car").toLowerCase();
-      if(!idtoselect) return interaction.reply("Specify a car!")
-    let selected = db.fetch(`selected_${idtoselect}_${interaction.user.id}`);
-    if(!selected) {
-      let errembed = new Discord.MessageEmbed()
-      .setTitle("Error!")
-      .setColor("DARK_RED")
-      .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
-      return  interaction.reply({embeds: [errembed]})
-  }
-
+      let idtoselect = interaction.options.getString("car")
+      let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
+            let selected = filteredcar[0] || 'No ID'
+            if(selected == "No ID") {
+              let errembed = new discord.MessageEmbed()
+              .setTitle("Error!")
+              .setColor("DARK_RED")
+              .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
+              return  interaction.reply({embeds: [errembed]})
+          }
           let livid = interaction.options.getString("id")
-          
+          let cardata = await Car.findOne({name: selected.Name})
           if(!livid) return interaction.reply("Specify an id!")
       let list = cars.Cars
-      if(!list[selected.toLowerCase()]) return interaction.reply("That isnt an available car!")
+      if(!list[selected.Name.toLowerCase()]) return interaction.reply("That isnt an available car!")
       
-      if(!db.fetch(`liveries_${cars.Cars[selected.toLowerCase()].Name}`)) return interaction.reply("This car doesn't have any livery id's")
+      if(!cardata.liveries) return interaction.reply("This car doesn't have any livery id's")
       
-      let carid =  db.fetch(`liveries_${cars.Cars[selected.toLowerCase()].Name}`)
+      let carid =  cardata.liveries
       
       let filtered = carid.filter(e => e.id == livid);
       
       
       if(filtered == [] || filtered.length == 0 || !filtered || filtered == null) return interaction.reply("Thats not a valid ID!")
-      db.set(`${cars.Cars[selected.toLowerCase()].Name}livery_${interaction.user.id}`, filtered[0].image)
+      await User.findOneAndUpdate(
+        {
+          id: uid
+        },
+        {
+          $set:{
+            "cars.$[car].Livery": filtered[0].image
+          }
+          
+        },
+        
+        {
+          "arrayFilters":[
+            {
+              "car.Name": selected.Name
+            }
+          ]
+        }
+      )
       let embedapprove = new Discord.MessageEmbed()
       .setTitle(`Installed ${livid}`)
       .setImage(filtered[0].image)
@@ -83,10 +105,11 @@ module.exports = {
           if(!livid) return interaction.reply("Specify an id!")
       let list = cars.Cars
       if(!list[car.toLowerCase()]) return interaction.reply("That isnt an available car!")
+      let cardata = await Car.findOne({name: list[car.toLowerCase()].Name})
+
+      if(!cardata.liveries) return interaction.reply("This car doesn't have any livery id's")
       
-      if(!db.fetch(`liveries_${cars.Cars[car.toLowerCase()].Name}`)) return interaction.reply("This car doesn't have any livery id's")
-      
-      let carid =  db.fetch(`liveries_${cars.Cars[car.toLowerCase()].Name}`)
+      let carid =  cardata.liveries
       
       let filtered = carid.filter(e => e.id == livid);
       
@@ -103,59 +126,56 @@ module.exports = {
       
           let idtoselect = interaction.options.getString("car").toLowerCase();
           if(!idtoselect) return interaction.reply("Specify a car!")
-        let selected = db.fetch(`selected_${idtoselect}_${interaction.user.id}`);
-        if(!selected) {
-          let errembed = new Discord.MessageEmbed()
-          .setTitle("Error!")
-          .setColor("DARK_RED")
-          .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
-          return  interaction.reply({embeds: [errembed]})
-      }
-          
+          let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
+          let selected = filteredcar[0] || 'No ID'
+          if(selected == "No ID") {
+            let errembed = new discord.MessageEmbed()
+            .setTitle("Error!")
+            .setColor("DARK_RED")
+            .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
+            return  interaction.reply({embeds: [errembed]})
+        }
       let list = cars.Cars
-      if(!list[selected.toLowerCase()]) return interaction.reply("That isnt an available car!")
+      if(!list[selected.Name.toLowerCase()]) return interaction.reply("That isnt an available car!")
       
       
-      db.delete(`${cars.Cars[selected.toLowerCase()].Name}livery_${interaction.user.id}`)
+      await User.findOneAndUpdate(
+        {
+          id: uid
+        },
+        {
+          $set:{
+            "cars.$[car].Livery": list[selected.Name.toLowerCase()].Image
+          }
+          
+        },
+        
+        {
+          "arrayFilters":[
+            {
+              "car.Name": selected.Name
+            }
+          ]
+        }
+      )
       let embedapprove = new Discord.MessageEmbed()
       .setTitle(`Your car had its livery removed`)
-      .setImage(cars.Cars[selected.toLowerCase()].Image)
+      .setImage(cars.Cars[selected.Name.toLowerCase()].Image)
       .setColor("#60b0f4")
       
       interaction.reply({embeds: [embedapprove]})
           
-        }
-        else if(option == "view"){
-          let car = interaction.options.getString("car").toLowerCase()
-          let livid = interaction.options.getString("id")
-          
-          if(!car) return interaction.reply("Specify a car!")
-          if(!livid) return interaction.reply("Specify an id!")
-      let list = cars.Cars
-      if(!list[car.toLowerCase()]) return interaction.reply("That isnt an available car!")
-      
-      if(!db.fetch(`liveries_${cars.Cars[car.toLowerCase()].Name}`)) return interaction.reply("This car doesn't have any livery id's")
-      
-      let carid =  db.fetch(`liveries_${cars.Cars[car.toLowerCase()].Name}`)
-      
-      let filtered = carid.filter(e => e.id == livid);
-      
-      
-      if(filtered == [] || filtered.length == 0 || !filtered || filtered == null) return interaction.reply("Thats not a valid ID!")
-      let embedapprove = new Discord.MessageEmbed()
-      .setTitle(`Livery ${livid} for ${cars.Cars[car].Name}`)
-      .setImage(filtered[0].image)
-      .setColor("#60b0f4")
-      
-      interaction.reply({embeds: [embedapprove]})
         }
 
         else if(option == "submit"){
           let cartosubmit = interaction.options.getString("car")
           if(!cartosubmit) return interaction.reply("Usage: /livery submit (car)")
           let list = cars.Cars
+          
           if(!list[cartosubmit.toLowerCase()]) return interaction.reply("That isnt an available car yet! If you'd like to suggest it, use /suggest.")
           interaction.reply("What livery image would you like to submit?")
+          let cardata = await Car.findOne({name: list[cartosubmit.toLowerCase()].Name})
+
           const filter = (m = Discord.Message) => {
               return m.author.id === interaction.user.id
           }
@@ -172,14 +192,22 @@ module.exports = {
                    ImageLink = attachment.url;
       
                   })
-                  let numberlivery = db.fetch(`liverycount_${m.author.id}`) || 0
-                  db.add(`liverycount_${m.author.id}`, 1)
-                  db.add(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_id`, 1)
+                  
+                  let livobj = {
+                    image: ImageLink,
+                    id: cardata.liveries.length += 1,
+                    user: interaction.user.id
+                  }
+
+                  cardata.awaiting.push(livobj)
+
+                  cardata.save()
+                  
                   let embed = new Discord.MessageEmbed()
                   .setImage(ImageLink)
                   .setDescription("Submitted for review!")
                   .addField("Car", cars.Cars[cartosubmit.toLowerCase()].Name)
-                  .addField("ID", `${db.fetch(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_id`)}`)
+                  .addField("ID", `${livobj.id}`)
                   .setColor("#60b0f4")
                   m.reply({embeds: [embed]})
                   let submitchannel = interaction.client.channels.cache.get('931078225021521920')
@@ -187,15 +215,7 @@ module.exports = {
                  
                   
                   submitchannel.send({embeds: [embed]})
-                  db.push(`liverynotifs_${interaction.user.id}`, {LiveryID: db.fetch(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_id`), Approved: false, Car: cartosubmit.toLowerCase()})
-                  db.set(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_image`, ImageLink)
-                  const carlivery = {
-                      id: db.fetch(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_id`),
-                      image: db.fetch(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_image`),
-                      uid: interaction.user.id
-                  }
-      
-                  db.push(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liveriestosubmit`, {id: db.fetch(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_id`),  image: db.fetch(`${cars.Cars[cartosubmit.toLowerCase()].Name}_liverytosubmit_image`),  uid: interaction.user.id})
+
                 }
                 else {
                     return m.reply("Specify an image!")
@@ -213,23 +233,24 @@ if(!idtoapprove) return interaction.reply("Specify an id!")
 if(!cartoapprove) return interaction.reply("Specify a car!")
 let list = cars.Cars
 if(!list[cartoapprove.toLowerCase()]) return interaction.reply("That isnt an available car!")
+let cardata = await Car.findOne({name: list[cartoapprove.toLowerCase()].Name})
 
-if(!db.fetch(`${cars.Cars[cartoapprove.toLowerCase()].Name}_liveriestosubmit`)) return interaction.reply("This car doesn't have any livery id's")
+if(!cardata.awaiting) return interaction.reply("This car doesn't have any livery id's")
 
-let carid =  db.fetch(`${cars.Cars[cartoapprove.toLowerCase()].Name}_liveriestosubmit`)
+let carid = cardata.awaiting
 
 
-
-  let filtered = carid.filter(e => e.id == idtoapprove);
+let filtered = carid.filter(e => e.id == idtoapprove);
 
 
   if(filtered == [] || filtered.length == 0 || !filtered || filtered == null) return interaction.reply("Thats not a valid ID!")
-  db.push(`liveries_${cars.Cars[cartoapprove.toLowerCase()].Name}`, filtered[0])
+  cardata.liveries.push(filtered[0])
+  cardata.save()
   let embedapprove = new Discord.MessageEmbed()
   .setTitle(`Approved ${idtoapprove}`)
   .setImage(filtered[0].image)
   .setColor("#60b0f4")
-  let usertodm = await interaction.client.users.fetch(filtered[0].uid)
+  let usertodm = await interaction.client.users.fetch(filtered[0].user)
 
 
   interaction.reply({embeds: [embedapprove]})
@@ -238,19 +259,20 @@ let carid =  db.fetch(`${cars.Cars[cartoapprove.toLowerCase()].Name}_liveriestos
         else if(option == "list"){
           var car = interaction.options.getString("car").toLowerCase()
           if(!car) return interaction.reply("Specify if you'd like to see the list of liveries (list), install a livery (install [id] [car]), uninstall your current livery (uninstall [car]), view a livery (view [id] [car]), or submit one for review (submit [car]).")
-          var usercars = db.fetch(`cars_${interaction.user.id}`) 
           if(!cars.Cars[car]) return interaction.reply("Thats not a car!")
           let list = cars.Cars
           if(!list[car]) return interaction.reply("That isnt an available car yet! If you'd like to suggest it, use /suggest.")
-          let liveriesforcar = db.fetch(`liveries_${cars.Cars[car].Name}`) || ['None']
-          if(!liveriesforcar) return interaction.reply("This car doesn't have liveries yet, if you'd like to submit one, do /submitlivery")
+          let cardata = await Car.findOne({name: list[car.toLowerCase()].Name})
+
+          let liveriesforcar = cardata.liveries
+          if(!liveriesforcar) return interaction.reply("This car doesn't have liveries yet, if you'd like to submit one, use /livery submit")
           let liverylist = []
           for (var i = 0; i < liveriesforcar.length; i++) {
               actliv = liveriesforcar[i]
               liverylist.push(`${actliv.id}`)
               //Do something
           }
-          let shopItems = db.fetch(`liveries_${cars.Cars[car].Name}`)
+          let shopItems = cardata.liveries
           if (!shopItems || !shopItems.length) return interaction.reply(`This car doesn't have any liveries!`)
           shopItems = lodash.chunk(shopItems.map((a, i) => `**${liverylist.join('\n')}**`))
           
@@ -261,7 +283,7 @@ let carid =  db.fetch(`${cars.Cars[cartoapprove.toLowerCase()].Name}_liveriestos
           .setThumbnail("https://i.ibb.co/Hq4p8bx/usedicon.png")
           .setTimestamp();
           
-          interaction.channel.send({embeds: [embed], fetchReply: true}).then(async emb => {
+          await interaction.reply({embeds: [embed], fetchReply: true}).then(async emb => {
   
               ['⏮️', '◀️', '▶️', '⏭️', '⏹️'].forEach(async m => await emb.react(m))
           
@@ -278,7 +300,7 @@ let carid =  db.fetch(`${cars.Cars[cartoapprove.toLowerCase()].Name}_liveriestos
                   else if (r.emoji.name === '⏹️') return collector.stop()
                 
           
-                  embed.setDescription(`View using \`/liveryview [id] [car]\nSet using /liveryinstall [id] [car]\`\n${shopItems[page - 1].join('\n')}`)
+                  embed.setDescription(`View using \`/livery view [car] [livery id]\nSet using /livery install [car id] [livery id]\`\n${shopItems[page - 1].join('\n')}`)
                   
                   if (current !== page) {
                       embed.setFooter(`Pages ${page}/${shopItems.length}`)

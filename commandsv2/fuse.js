@@ -5,6 +5,10 @@ const lodash = require('lodash')
 const partdb = require("../partsdb.json")
 const cars = require("../cardb.json")
 const colors = require('../colordb.json')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
+
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('fuse')
@@ -30,18 +34,15 @@ module.exports = {
     async execute(interaction) {
         
         let user1 = interaction.user
-        let parts = db.fetch(`parts_${user1.id}`)
-        let user1cars = db.fetch(`cars_${user1.id}`)
+        let userdata = await User.findOne({id: user1.id})
+
+        let parts = userdata.parts
         let parttoinstall = interaction.options.getString("part");
 
 
         
         if(!parttoinstall) return interaction.reply("Specify a part! Try: Exhaust, Tires, Clutch, or Intake")
 
-      
-        let dailytask1 = db.fetch(`dailytask_${user1.id}`)
-        let list2 = cars.Cars
-        
         
         if(!parts) return  interaction.reply("You dont have any parts!")
         let list = partdb.Parts
@@ -50,14 +51,14 @@ module.exports = {
         if(!list3.includes(parttoinstall.toLowerCase())) return interaction.reply("Thats not an available fuse part! Try: Exhaust, Tires, Intercooler, Clutch, Gearbox, ECU, Drift Suspension, Race Suspension, or Intake")
         
         if(parttoinstall == "txexhaust"){
-            let xessence = db.fetch(`xessence_${user1.id}`)
+            let xessence = userdata.xessence
             if(xessence < 100) return interaction.reply(`You need 100 Xessence to fuse this part into a TX!`)
             if(!parts.includes("t5exhaust")) return interaction.reply(`You need a T5Exhaust to do this fuse!`)
 
             for (var i = 0; i < 1; i ++) parts.splice(parts.indexOf("t5exhaust"), 1)
-            db.set(`parts_${user1.id}`, parts)
+            userdata.parts = parts
 
-            db.subtract(`xessence_${user1.id}`, 100)
+            userdata.xessence -= 100
 
             let embed = new discord.MessageEmbed()
             .setTitle("Fusing into a TX...")
@@ -71,7 +72,8 @@ module.exports = {
                 embed.setColor("#ffffff")
                 embed.fields = []
                 embed.addField(`Part`, `${partdb.Parts["txexhaust"].Emote} ${partdb.Parts["txexhaust"].Name}`)
-                db.push(`parts_${user1.id}`, "txexhaust")
+                userdata.parts.push("txexhaust")
+                userdata.save()
             interaction.editReply({embeds: [embed]})
         }, 2000);
         return
@@ -149,18 +151,15 @@ embed.setColor('#60b0f4')
             interaction.editReply({embeds: [embed]})
             
             
-            let achievements = db.fetch(`achievements_${user1.id}`) || ['None']
+            
         for (var i = 0; i < 2; i ++) parts.splice(parts.indexOf(parte.toLowerCase()), 1)
-        db.set(`parts_${user1.id}`, parts)
+        userdata.parts = parts
 
-        db.push(`parts_${user1.id}`, partb)
-        db.add(`partsfused_${user1.id}`, 1)
 
-        if(db.fetch(`partsfused_${user1.id}`) >= 3 && !achievements.includes("fusion master")){
-            interaction.channel.send(`You just completed the achievement "Fuse Master" and earned a rainbow helmet!`)
-            db.push(`pfps_${user1.id}`, "rainbow helmet")
-            db.push(`achievements_${user1.id}`, "fusion master")
-        }
+        userdata.parts.push(partb)
+        userdata.save()
+
+
           
     }, 2000);
 

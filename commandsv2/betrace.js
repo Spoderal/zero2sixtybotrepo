@@ -147,8 +147,8 @@ module.exports = {
           .setTitle(`Bet race in progress...`)
           .addField(`Your bet`, `$${numberWithCommas(moneyearned)}`)
           .addField(
-            `${actualhelmet.Emote} ${cars.Cars[selected.toLowerCase()].Emote} ${
-              cars.Cars[selected.toLowerCase()].Name
+            `${actualhelmet.Emote} ${cars.Cars[selected.Name.toLowerCase()].Emote} ${
+              cars.Cars[selected.Name.toLowerCase()].Name
             }`,
             `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${zero2sixtycar}s\n\n${hemote} Handling: ${handling}`,
             true
@@ -268,7 +268,7 @@ module.exports = {
                   `${earningsresult.join('\n')}`
                   );
                   interaction.editReply({ embeds: [embed] });
-                  userdata.cash += moneyearned
+                  userdata.cash += Number(moneyearned)
                   userdata.racexp += 25
     
     

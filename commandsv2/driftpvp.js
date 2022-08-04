@@ -48,7 +48,7 @@ module.exports = {
         let idtoselect2 = interaction.options.getString("car2");
 
         let userdata = await User.findOne({id: interaction.user.id})
-        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: uid})
         let userdata2 = await User.findOne({id: user2.id})
         let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
         let selected = filteredcar[0] || 'No ID'
@@ -295,7 +295,7 @@ module.exports = {
               earningsresult.push(`${rpemote} ${ticketsearned} RP`)
 
               userdata.rp += ticketsearned
-              userdata.cash += moneyearned
+              userdata.cash += Number(moneyearned)
               userdata.driftxp += 25
 
               let racerank2 = driftrank += 1

@@ -38,7 +38,7 @@ module.exports = {
         let moneyearned = 50;
         let moneyearnedtxt = 50;
         let userdata = await User.findOne({id: interaction.user.id})
-        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: interaction.user.id})
 
         let idtoselect = interaction.options.getString("car");
         let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
@@ -54,7 +54,19 @@ module.exports = {
         let user = interaction.user;
         let bot =  interaction.options.getString("tier");
         let botlist = ["1", "2", "3", "4", "5", "6", "7", "8"];
-        let timeout = cooldowndata.timeout || 45000;
+        let timeout = 45000;
+        if(userdata.patron && userdata.patron.tier == 1){
+          timeout = 30000
+        }
+        else if(userdata.patron && userdata.patron.tier == 2){
+          timeout = 15000
+        }
+        else if(userdata.patron && userdata.patron.tier == 3){
+          timeout = 5000
+        }
+        else if(userdata.patron && userdata.patron.tier == 4){
+          timeout = 5000
+        }
         let botcar = null;
         let racing = cooldowndata.racing 
         
@@ -170,8 +182,8 @@ module.exports = {
           return interaction.reply("This car is too junked to race, sorry!");
         }
 
+        let range = selected.Range
         if(cars.Cars[selected.Name.toLowerCase()].Electric){
-          let range = selected.Range
           if(range <= 0){
             return interaction.reply("Your EV is out of range! Run /charge to charge it!")
           }
@@ -184,6 +196,7 @@ module.exports = {
         let barnwins
         let ubarnmaps
         let crateearned
+        let nitro = selected.Nitro
         let tracklength = 0;
         switch (bot) {
           case "1": {
@@ -333,7 +346,6 @@ module.exports = {
         }
         let sponsortimer = cooldowndata.sponsor
         let sponsor2
-        console.log(sponsor)
         if(usables.includes('sponsor')){
           let timeout = 600000
           if (timeout - (Date.now() - sponsortimer) > 0) {          
@@ -609,22 +621,7 @@ module.exports = {
                   })
                   }
       
-                  // if(using == "emp"){
-                  //   db.delete(`using_${interaction.user.id}`)
-                  //   embed.setDescription("This user had an EMP! Your police car has been stopped.")
-                  //   interaction.editReply({ embeds: [embed] });
-                  //   policelength = 0
-                  //   php = 0
-                  // }
-                  // if(items.includes("spikes") && using !== "emp"){
-                    
-                  //   embed.setDescription("This user has spikes! Your police car has been slowed down.")
-                  //   interaction.editReply({ embeds: [embed] });
-                  //   policelength = 0
-                  //   php / 1.5
-                  //   for (var i = 0; i < 1; i ++) items.splice(items.indexOf("spikes"), 1)
-                  //   db.set(`items_${interaction.user.id}`, items)
-                  // }
+             
                   policelen = policelength
                   policeuser = user
                   userdatacop.job.cooldown = Date.now()
@@ -672,6 +669,8 @@ module.exports = {
           itemusedp = false
           tracklength - 20
         }
+
+
    
         let timer = 0
         let x = setInterval(async () => {
@@ -808,8 +807,8 @@ module.exports = {
                 userdata.fkeys += 1
 
               }
-              userdata.rp += ticketsearned
-              userdata.cash += moneyearned
+              userdata.rp += Number(ticketsearned)
+              userdata.cash += Number(moneyearned)
               userdata.racexp += 25
 
               let racerank2 = userdata.racerank += 1
@@ -829,23 +828,16 @@ module.exports = {
               );
            
              
-            let globalvars = await Global.findOne()
-              
-              if(globalvars.double == true){
-                moneyearned = moneyearned += moneyearned
-                embed.addField("Double Cash Weekend!", `\u200b`)
-                moneyearnedtxt = `$${moneyearned}`
-              }
+        
               interaction.editReply({ embeds: [embed] });
              
          
-             userdata.save()
               
               if(range > 0) {
                 selected.Range -= 1
-                userdata.save()
               }
-             
+              
+              userdata.save()
             
               return;
             } else if (tracklength < tracklength2) {

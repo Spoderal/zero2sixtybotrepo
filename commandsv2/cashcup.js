@@ -39,7 +39,7 @@ module.exports = {
 
       
         let timeout = 7200000 
-        let racing = cooldowndata.cashcup
+        let racing = cooldowndata.cashcup || 0
         let cashcuptier = userdata.cashcuptier
 
      
@@ -194,35 +194,45 @@ module.exports = {
        let tracklength2 = 0;
        tracklength2 += new60
        if(nitro){
-         interaction.channel.send(`${interaction.user}, React to boost ahead!`).then(async emb => {
-           
-         emb.react('🔵')
+       row.addComponents(
+        new MessageButton()
+      .setCustomId("boost")
+      .setEmoji("<:boost:983813400289234978>")
+      .setLabel("Boost")
+      .setStyle("SECONDARY")
+      )
+      msg.edit({components: [row]})
+
+     
+      let filter = (btnInt) => {
+        return interaction.user.id === btnInt.user.id
+    }
    
-           const filter = (_, u) => u.id === interaction.user.id
-           const collector = emb.createReactionCollector({ filter, time: 4000 })
-           collector.on('collect', async (r, user) => {
-             emb.reactions.cache.get(r.emoji.name).users.remove(user.id)
-             emb.reactions.cache.get(r.emoji.name).users.remove(interaction.client.user.id)
-             
-             if (r.emoji.name === '🔵') {
+    const collector = msg.createMessageComponentCollector({
+        filter: filter,
+        time: 10000
+    })
+     
+          
+  
+          
+          collector.on('collect', async (i, user) => {
+
+            if(i.customId.includes("boost")){
+                  
+              let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost
               tracklength += parseInt(boost)
               console.log("boosted " + parseInt(boost))
               i.update({content:'Boosting!', embeds: [embed]})
               selected.Nitro = null
-              userdata.save()
-             
+            }
 
-             } 
+          })
 
-           })
-           collector.on('end', async collected => {
-             if(collected.size === 0){
-               return 
-
-             }
-           })
-         })
-       }
+          
+        }
+          
+        
        let timer = 0
        let x = setInterval(() => {
          tracklength += hp;
@@ -272,7 +282,7 @@ module.exports = {
              interaction.editReply({ embeds: [embed] })
 
              userdata.cashcuptier += 1
-            userdata.cash += moneyearned
+            userdata.cash += Number(moneyearned)
              
              userdata.racexp += 25
              if(cars.Cars[selected.Name.toLowerCase()].Electric){

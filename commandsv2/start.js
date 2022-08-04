@@ -1,6 +1,9 @@
 const db = require("quick.db")
 const discord = require('discord.js')
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,21 +11,19 @@ module.exports = {
     .setDescription("Begin your racing career"),
     async execute(interaction) {
         let userid = interaction.user.id
-        let created = db.fetch(`created_${userid}`)
-        if(created) return interaction.reply("You have an account!")
+        let userdata = await User.findOne({id: userid})
+        if(userdata) return interaction.reply("You have an account!")
         let embed = new discord.MessageEmbed()
         .setTitle("You've started your journey!")
-        .setDescription("The bot will guide you through the commands so you can get started, the tutorial will cover buying a car, racing, and upgrading. Run \`/dealer\` to begin!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n[YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)")
+        .setDescription("Check out the getting started tutorial on YouTube, Run \`/dealer\` to buy your first car, and go race with it!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n[YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)")
         .setColor("#60b0f4")
         .setThumbnail("https://i.ibb.co/5n1ts36/newlogoshadow.png")
         interaction.reply({embeds: [embed]})
-        db.set(`created_${userid}`, true)
-        db.add(`cash_${userid}`, 500)
-        db.set(`cars_${userid}`, [])
-        db.set(`parts_${userid}`, [])
-        db.set(`badges_${userid}`, [])
-        db.set(`newplayer_${userid}`, true)
-        db.set(`newplayerstage_${userid}`, 1)
+        let newuser = await new User({id: interaction.user.id})
 
+        newuser.cash += 500
+
+        newuser.save()
+       
     }
 }

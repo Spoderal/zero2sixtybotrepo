@@ -15,7 +15,7 @@ module.exports = {
         let uid = interaction.user.id
         let dcash = 250
         let userdata = await User.findOne({id: uid}) || new User({id: uid})
-        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: uid})
 
         let daily = cooldowndata.daily
         let patreon = userdata.patron
@@ -33,13 +33,16 @@ module.exports = {
         if(house && house.perks.includes("Daily $1500")){
             dcash += 1500
         }
-        if(patreon == 1){
+        if(patreon && patreon.tier == 1){
             dcash *= 2
         }
-        if(patreon == 2){
+        if(patreon && patreon.tier == 2){
             dcash *= 3
         }
-        if(patreon == 3){
+        if(patreon && patreon.tier == 3){
+            dcash *= 5
+        }
+        if(patreon && patreon.tier == 4){
             dcash *= 5
         }
         if(interaction.guild.id == "931004190149460048") {

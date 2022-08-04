@@ -1,6 +1,8 @@
 const db = require("quick.db")
 const Discord = require("discord.js")
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const Global = require('../schema/global-schema')
+const itemdb = require('../items.json')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,22 +10,20 @@ module.exports = {
     .setDescription("Check the item shop")
 ,
     async execute(interaction) {
-        let itemshop = db.fetch(`itemshop`)
-        let policeitem = itemshop.Police 
-        let multi = itemshop.Multi
-        let other = itemshop.Other
-        let other2 = itemshop.Other2
-        let other3 = itemshop.Other3
+      let global = await Global.findOne()
+        let itemshop = global.itemshop
 
+        let items = []
+
+        for(i in itemshop){
+          let item = itemshop[i]
+
+          items.push(`${item.Emote} ${item.Name} : **$${numberWithCommas(item.Price)}**`)
+        }
+     
         let embed = new Discord.MessageEmbed()
         .setTitle("Daily Item Shop")
-        .setDescription(`
-        ${policeitem.Emote} **${policeitem.Name} : $${numberWithCommas(policeitem.Price)}** \`${policeitem.Type}\`\n${policeitem.Action}
-        \n${other.Emote} **${other.Name} : $${numberWithCommas(other.Price)}**  \`${other.Type}\`\n${other.Action}
-        \n${other2.Emote} **${other2.Name} : $${numberWithCommas(other2.Price)}** \`${other2.Type}\`\n${other2.Action}
-        \n${other3.Emote} **${other3.Name} : $${numberWithCommas(other3.Price)}** \`${other3.Type}\`\n${other3.Action}\n
-
-        `)
+        .setDescription(`${items.join('\n\n')}`)
         .setColor("#60b0f4")
 
         interaction.reply({embeds: [embed]})

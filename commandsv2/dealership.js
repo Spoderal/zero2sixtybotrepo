@@ -12,86 +12,11 @@ module.exports = {
     async execute(interaction) {
 
       const { MessageActionRow, MessageSelectMenu, MessageEmbed, MessageButton, DiscordAPIError } = require('discord.js');
-      const newplayer = db.fetch(`newplayer_${interaction.user.id}`)
-      const newplayerstage = db.fetch(`newplayerstage_${interaction.user.id}`)
-     let created = db.fetch(`created_${interaction.user.id}`)
-
-     if(!created) return interaction.reply(`Use \`/start\` to begin!`)
-
-      if(newplayer && newplayerstage == 1){
-        const row = new MessageActionRow()
-
-        .addComponents(
-          new MessageSelectMenu()
-            .setCustomId('select2')
-            .setPlaceholder('Select a class')
-            .addOptions([
-              {
-                label: 'D Class',
-                description: 'Select this for the list of D class cars',
-                value: 'first_option_tut',
-                customId: 'd_class_tut',
-                emoji:"<:Dclass:954635612986679317>"
-              },
-             
-            ]),
-            
-        );
-
-           let embed = new MessageEmbed()
-        .setTitle('Dealership')
-        .setThumbnail("https://i.ibb.co/844BRBp/Logo-Makr-3-V9-MQG-1.png")
-        .addField(`Available Classes`, "First, you'll need a car, and the only cars you can afford right now are D class cars, so select that from the menu below.", true)
-        .setColor('#60b0f4')
-        .setDescription(`\`/buy (full car name)\` to buy a car\n\n[Official Server](https://discord.gg/bHwqpxJnJk)\n[Buy me a coffee!](https://www.buymeacoffee.com/zero2sixty)`)
-        interaction.reply({embeds: [embed], components: [row]}).then(async msg => {
-        
-  
-          try{
-          const filter = (interaction) => interaction.isSelectMenu() && interaction.user.id === interaction.user.id;
-  
-          const collector = interaction.channel.createMessageComponentCollector({
-            filter,
-          })
-  
-     
-          collector.on('collect', async (collected) => {
-            
-            const value = collected.values[0];
-            if (value === 'first_option_tut') {
-              let embed2
-                    embed2 = new MessageEmbed()
    
-                   .setTitle('D Class')
-         .setFooter('Tip: Purchase a car with "/buy (full car name)"')
-         .setDescription(`**
-         Page 1\n
-         **You're gonna choose one of these cars below, use /buy (car) to buy one.**
 
-         Example: \`/buy 1995 mazda miata\`
 
-         ${cars.Cars["1995 mazda miata"].Emote} ${cars.Cars["1995 mazda miata"].Name} :  $${numberWithCommas(cars.Cars["1995 mazda miata"].Price)}\n
-         ${cars.Cars["1999 honda civic si"].Emote} ${cars.Cars["1999 honda civic si"].Name} : $${numberWithCommas(cars.Cars["1999 honda civic si"].Price)}\n
-         ${cars.Cars["1997 acura integra"].Emote} ${cars.Cars["1997 acura integra"].Name} : $${numberWithCommas(cars.Cars["1997 acura integra"].Price)}\n
-         ${cars.Cars["2005 hyundai tiburon"].Emote} ${cars.Cars["2005 hyundai tiburon"].Name} :  $${numberWithCommas(cars.Cars["2005 hyundai tiburon"].Price)}\n
-         ${cars.Cars["1991 toyota mr2"].Emote} ${cars.Cars["1991 toyota mr2"].Name} : $${numberWithCommas(cars.Cars["1991 toyota mr2"].Price)}\n 
-         ${cars.Cars["2002 pontiac firebird"].Emote} ${cars.Cars["2002 pontiac firebird"].Name} : $${numberWithCommas(cars.Cars["2002 pontiac firebird"].Price)}\n
-         ${cars.Cars["2011 scion tc"].Emote} ${cars.Cars["2011 scion tc"].Name} : $${numberWithCommas(cars.Cars["2011 scion tc"].Price)}\n
-         ${cars.Cars["2002 ford mustang"].Emote} ${cars.Cars["2002 ford mustang"].Name} : $${numberWithCommas(cars.Cars["2002 ford mustang"].Price)}\n
-         ${cars.Cars["2012 hyundai veloster"].Emote} ${cars.Cars["2012 hyundai veloster"].Name} : $${numberWithCommas(cars.Cars["2012 hyundai veloster"].Price)}\n
-         **`)
-         .setColor('#60b0f4')
-         .setThumbnail("https://i.ibb.co/NZ8ySF8/Dclass.png")
-         interaction.editReply({embeds: [embed2], components: [row]})
-        }
-          })
-        } catch(err) {
-          return msg.reply(`Error: ${err}`)
-        }
-  
-      })
-      }
-      else {
+    
+    
         const row = new MessageActionRow()
         .addComponents(
           new MessageSelectMenu()
@@ -644,8 +569,8 @@ module.exports = {
      
       })
   
-   
-      }
+  
+      
     
     function convert(val) {
       

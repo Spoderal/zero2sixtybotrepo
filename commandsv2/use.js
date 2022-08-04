@@ -4,6 +4,10 @@ const db = require('quick.db')
 const ms = require('ms')
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const itemdb = require("../items.json")
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
+const Car = require('../schema/car')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -20,13 +24,15 @@ module.exports = {
     .setDescription("Amount to use")
     ),
     async execute(interaction) {
+      let userdata = await User.findOne({id: interaction.user.id})
+      let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: interaction.user.id})
 
       let itemtouse = interaction.options.getString("item")
       let amount = interaction.options.getNumber("amount")
       let amount2 = amount || 1
       let user = interaction.user 
 
-      let items = db.fetch(`items_${user.id}`)
+      let items = userdata.items
       let emote
       let name
       if(!items.includes(itemtouse.toLowerCase())) return interaction.reply("You don't have this item!")
@@ -41,44 +47,28 @@ module.exports = {
       console.log(itemtouse)
   
         if(itemdb.Police[itemtouse.toLowerCase()]){
-          db.set(`using_${user.id}`, itemtouse.toLowerCase())
+          userdata.using.push(itemtouse.toLowerCase())
           fullname =  `${itemdb.Police[itemtouse.toLowerCase()].Emote} ${itemdb.Police[itemtouse.toLowerCase()].Name}`
 
         }
-       else if(itemdb.Multiplier[itemtouse.toLowerCase()]){
-          
-          fullname =  `${itemdb.Multiplier[itemtouse.toLowerCase()].Emote} ${itemdb.Multiplier[itemtouse.toLowerCase()].Name}`
-        let time = itemdb.Multiplier[itemtouse.toLowerCase()].Time
-        console.log(time)
-          db.set(`usingmulti_${user.id}`, itemtouse)
-          setTimeout(() => {
-            db.delete(`usingmulti_${user.id}`)
-            console.log('Deleted')
-          }, time);
-
-        }
-
+ 
         else  if(itemdb.Other[itemtouse.toLowerCase()] || itemdb.Collectable[0][itemtouse.toLowerCase()]){
           if(itemtouse.toLowerCase() == "pink slip"){
-            db.add(`pinkslips_${interaction.user.id}`, 1)
+            userdata.pinkslips += 1
           }
           else if(itemtouse.toLowerCase() == "bank increase"){
       
-            let banklimit = db.fetch(`banklimit_${interaction.user.id}`) || 10000
+            let banklimit = userdata.banklimit
 
-            if(banklimit >= 250000000) {
-              db.set(`banklimit_${interaction.user.id}`, 250000000)
-            }
+
             if(banklimit >= 250000000) return interaction.reply(`The bank limit cap is currently $${numberWithCommas(250000000)}!`)
-            if(banklimit == 10000 || !banklimit){
-              db.set(`banklimit_${interaction.user.id}`, 10000)
-            }
 
             let finalbanklimit = 5000 * amount2
-            db.add(`banklimit_${interaction.user.id}`, finalbanklimit)
-            let newbank = db.fetch(`banklimit_${interaction.user.id}`)
-            if(newbank >= 250000000){
-              db.set(`banklimit_${interaction.user.id}`, 250000000)
+            userdata.banklimit += finalbanklimit
+            userdata.update()
+
+            if(userdata.banklimit >= 250000000){
+              userdata.banklimit = 250000000
 
             }
 
@@ -86,40 +76,49 @@ module.exports = {
           else if(itemtouse.toLowerCase() == "super wheelspin"){
             let final = 1 * amount2
 
-            db.add(`swheelspins_${user.id}`, final)
+            userdata.swheelspins += final
           }
           else if(itemtouse.toLowerCase() == "energy drink"){
-            db.set(`energydrink_${user.id}`, true)
-            db.set(`energytimer_${user.id}`, Date.now())
+            userdata.using.push(`energy drink`)
+            cooldowndata.energydrink = Date.now()
           }
           else if(itemtouse.toLowerCase() == "sponsor"){
-            db.set(`sponsor_${user.id}`, true)
-            db.set(`sponsortimer_${user.id}`, Date.now())
+            userdata.using.push(`sponsor`)
+            cooldowndata.sponsor = Date.now()
           }
           else if(itemtouse.toLowerCase() == "small vault"){
-            let vault = db.fetch(`vault_${user.id}`)
+            let vault = userdata.vault
             if(vault) return interaction.reply(`You already have a vault activated, prestige to deactivate it!`)
-            db.set(`vault_${user.id}`, "small vault")
+            userdata.vault = itemtouse.toLowerCase()
           }
           else if(itemtouse.toLowerCase() == "medium vault"){
-            let vault = db.fetch(`vault_${user.id}`)
+            let vault = userdata.vault
             if(vault) return interaction.reply(`You already have a vault activated, prestige to deactivate it!`)
-            db.set(`vault_${user.id}`, "medium vault")
+            userdata.vault = itemtouse.toLowerCase()
           }
           else if(itemtouse.toLowerCase() == "large vault"){
-            let vault = db.fetch(`vault_${user.id}`)
+            let vault = userdata.vault
             if(vault) return interaction.reply(`You already have a vault activated, prestige to deactivate it!`)
-            db.set(`vault_${user.id}`, "large vault")
+            userdata.vault = itemtouse.toLowerCase()
           }
           else if(itemtouse.toLowerCase() == "pet egg"){
-            let pet = db.fetch(`pet_${interaction.user.id}`)
+            let pet = userdata.pet
+            let petobj = {
+              condition: 100, 
+              oil: 100, 
+              gas: 100, 
+              love: 100, 
+              car: 'mini miata', 
+              tier: 1, 
+              color: "Red"
+            }
 
             if(pet) return interaction.reply(`You already have a pet!`)
-            db.set(`pet_${interaction.user.id}`, {Condition: 100, Oil: 100, Gas: 100, Love: 100, Car: 'mini miata', Tier: 1, Color: "Red"})
+            userdata.pet = petobj
 
           }
           else if(itemtouse.toLowerCase() == "water bottle"){
-            let watercooldown = db.fetch(`watercooldown_${user.id}`)
+            let watercooldown = cooldowndata.waterbottle
             let timeout = 18000000 
             if (watercooldown !== null && timeout - (Date.now() - watercooldown) > 0) {
               let time = ms(timeout - (Date.now() - watercooldown));
@@ -128,12 +127,13 @@ module.exports = {
               .setDescription(`You can use a water bottle again in ${time}.`);
               return await interaction.reply({embeds: [timeEmbed]})
           }
-            db.delete(`racing_${user.id}`)
-            db.delete(`betracing_${user.id}`)
-            db.delete(`racingcash_${user.id}`)
-            db.delete(`hmracing_${user.id}`)
+          cooldowndata.racing = 0
+          cooldowndata.betracing = 0
 
-            db.set(`watercooldown_${user.id}`, Date.now())
+          cooldowndata.cashcup = 0
+          cooldowndata.hm = 0
+
+          cooldowndata.waterbottle = Date.now()
 
             
           }
@@ -166,18 +166,17 @@ module.exports = {
         }
 
          fullname = `${emote} ${name}`
-         db.set(`usingother_${user.id}`, itemtouse)
     
         for (var i = 0; i < amount2; i ++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1)
-        db.set(`items_${interaction.user.id}`, items)
+        userdata.items = items
 
   
 
       
       console.log(fullname)
-
+      userdata.save()
       await interaction.reply(`Used x${amount2} ${fullname}!`)
-     
+        
       
         function numberWithCommas(x) {
           return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

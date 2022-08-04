@@ -8,6 +8,10 @@ const lodash = require('lodash')
 const partdb = require('../partsdb.json')
 const itemdb = require('../items.json')
 const petdb = require('../pets.json')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
+const Car = require('../schema/car')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -15,15 +19,17 @@ module.exports = {
     .setDescription("View your mini miata"),
     async execute(interaction) {
 
-        let pet = db.fetch(`pet_${interaction.user.id}`)
+        let userdata = await User.findOne({id: interaction.user.id})
+        console.log(userdata)
+        let pet = userdata.pet
         if(!pet) return interaction.reply(`You don't have a pet!`)
-        let condition = db.fetch(`pet_${interaction.user.id}.Condition`)
-        let gas = db.fetch(`pet_${interaction.user.id}.Gas`)
-        let oil = db.fetch(`pet_${interaction.user.id}.Oil`)
-        let love = db.fetch(`pet_${interaction.user.id}.Love`)
-        let color = db.fetch(`pet_${interaction.user.id}.Color`) || 'Red'
-        let spoiler = db.fetch(`pet_${interaction.user.id}.Spoiler`)
-        let name = db.fetch(`pet_${interaction.user.id}.Name`) || "N/A"
+        let condition = pet.condition
+        let gas = pet.gas
+        let oil = pet.oil
+        let love = pet.love
+        let color = pet.color || "Red"
+        let spoiler = pet.spoiler
+        let name = pet.name || 'N/A'
 
         let petimage 
 
@@ -132,22 +138,26 @@ module.exports = {
         
         if(i.customId.includes("drive")){
 
-            let pet = db.fetch(`pet_${interaction.user.id}`)
-            let condition = db.fetch(`pet_${interaction.user.id}.Condition`)
-        let gas = db.fetch(`pet_${interaction.user.id}.Gas`)
-        let oil = db.fetch(`pet_${interaction.user.id}.Oil`)
-        let love = db.fetch(`pet_${interaction.user.id}.Love`)
+            let pet = userdata.pet
+            let condition = pet.condition
+        let gas = pet.gas
+        let oil = pet.oil
+        let love = pet.love
 
+        let addedlove = 100 - pet.love
+
+        await User.findOneAndUpdate({
+            id: interaction.user.id
+        }, 
+        {
+            $set: {
+                "pet.love": 100
+           }
+        })
+        userdata = await User.findOne({id: i.user.id})
+        userdata.save()
+        let newlove = await userdata.pet.love
         
-        if(love < 100){
-                db.add(`pet_${interaction.user.id}.Love`, 10)
-                if(db.fetch(`pet_${interaction.user.id}.Love`) >= 100){
-                    db.set(`pet_${interaction.user.id}.Love`, 100)
-                }
-                
-            }
-         love = db.fetch(`pet_${interaction.user.id}.Love`)
-
             let embed = new Discord.MessageEmbed()
             .setTitle(`Your Pet`)
             .addField("Name", `${name}`, true)
@@ -156,26 +166,32 @@ module.exports = {
             .addField("Condition", `${condition}`, true)
             .addField("Gas", `${gas}`, true)
             .addField("Oil", `${oil}`, true)
-            .addField("Love", `${love}`, true)
+            .addField("Love", `${newlove}`, true)
             .setThumbnail(petimage)
             .setColor("#60b0f4")
-                i.update({content: `You drove your pet car and gave it love!`, embeds: [embed]})
+            i.update({content: `You drove your pet car and gave it love!`, embeds: [embed]})
 
         }
         else if(i.customId.includes("gas")){
 
-            let pet = db.fetch(`pet_${interaction.user.id}`)
-            let condition = db.fetch(`pet_${interaction.user.id}.Condition`)
-        let gas = db.fetch(`pet_${interaction.user.id}.Gas`)
-        let oil = db.fetch(`pet_${interaction.user.id}.Oil`)
-        let love = db.fetch(`pet_${interaction.user.id}.Love`)
-
-        if(gas < 100){
-            db.set(`pet_${interaction.user.id}.Gas`, 100)
-              
-                
-            }
-         gas = db.fetch(`pet_${interaction.user.id}.Gas`)
+            let pet = userdata.pet
+            let condition = pet.condition
+        let gas = pet.gas
+        let oil = pet.oil
+        let love = pet.love
+        await User.findOneAndUpdate({
+            id: interaction.user.id
+        }, 
+        {
+            $set: {
+                "pet.gas": 100
+           }
+        })
+        userdata = await User.findOne({id: i.user.id})
+        userdata.cash -= 2000
+        userdata.save()
+        let newgas = await userdata.pet.gas
+        
 
          let embed = new Discord.MessageEmbed()
          .setTitle(`Your Pet`)
@@ -183,30 +199,35 @@ module.exports = {
             .addField("Status", "Looking for items", true)
     
             .addField("Condition", `${condition}`, true)
-            .addField("Gas", `${gas}`, true)
+            .addField("Gas", `${newgas}`, true)
             .addField("Oil", `${oil}`, true)
             .addField("Love", `${love}`, true)
             .setThumbnail(petimage)
             .setColor("#60b0f4")
-            i.update({content: `You filled your pets gas costing you $2000`, embeds: [embed]})
-            db.subtract(`cash_${i.user.id}`, 2000)
+            i.update({content: `You filled your pets gas costing you $2,000`, embeds: [embed]})
+            
 
         }
         else if(i.customId.includes("oil")){
 
-            let pet = db.fetch(`pet_${interaction.user.id}`)
-            let condition = db.fetch(`pet_${interaction.user.id}.Condition`)
-        let gas = db.fetch(`pet_${interaction.user.id}.Gas`)
-        let oil = db.fetch(`pet_${interaction.user.id}.Oil`)
-        let love = db.fetch(`pet_${interaction.user.id}.Love`)
+            let pet = userdata.pet
+            let condition = pet.condition
+        let gas = pet.gas
+        let oil = pet.oil
+        let love = pet.love
 
-        
-        if(oil < 100){
-                db.set(`pet_${interaction.user.id}.Oil`, 100)
-              
-                
-            }
-            oil = db.fetch(`pet_${interaction.user.id}.Oil`)
+        await User.findOneAndUpdate({
+            id: interaction.user.id
+        }, 
+        {
+            $set: {
+                "pet.oil": 100
+           }
+        })
+        userdata = await User.findOne({id: i.user.id})
+        userdata.cash -= 500
+        userdata.save()
+        let newoil = await userdata.pet.oil
 
             let embed = new Discord.MessageEmbed()
             .setTitle(`Your Pet`)
@@ -216,32 +237,36 @@ module.exports = {
     
             .addField("Condition", `${condition}`, true)
             .addField("Gas", `${gas}`, true)
-            .addField("Oil", `${oil}`, true)
+            .addField("Oil", `${newoil}`, true)
             .addField("Love", `${love}`, true)
             .setThumbnail(petimage)
             .setColor("#60b0f4")
                 i.update({content: `You changed your pets oil costing you $500`, embeds: [embed]})
 
-                db.subtract(`cash_${i.user.id}`, 500)
+              
 
         }
         else if(i.customId.includes("wash")){
 
-            let pet = db.fetch(`pet_${interaction.user.id}`)
-            let condition = db.fetch(`pet_${interaction.user.id}.Condition`)
-        let gas = db.fetch(`pet_${interaction.user.id}.Gas`)
-        let oil = db.fetch(`pet_${interaction.user.id}.Oil`)
-        let love = db.fetch(`pet_${interaction.user.id}.Love`)
+            let pet = userdata.pet
+            let condition = pet.condition
+        let gas = pet.gas
+        let oil = pet.oil
+        let love = pet.love
 
           
-        if(condition < 100){
-            db.add(`pet_${interaction.user.id}.Condition`, 25)
-            if(db.fetch(`pet_${interaction.user.id}.Condition`) >= 100){
-                db.set(`pet_${interaction.user.id}.Condition`, 100)
-            }
-            
-        }
-            condition = db.fetch(`pet_${interaction.user.id}.Condition`)
+    
+        await User.findOneAndUpdate({
+            id: interaction.user.id
+        }, 
+        {
+            $set: {
+                "pet.condition": 100
+           }
+        })
+        userdata = await User.findOne({id: i.user.id})
+        userdata.save()
+        let newcond = await userdata.pet.condition
 
             let embed = new Discord.MessageEmbed()
             .setTitle(`Your Pet`)
@@ -249,7 +274,7 @@ module.exports = {
         .addField("Name", `${name}`, true)
             .addField("Status", "Looking for items", true)
     
-            .addField("Condition", `${condition}`, true)
+            .addField("Condition", `${newcond}`, true)
             .addField("Gas", `${gas}`, true)
             .addField("Oil", `${oil}`, true)
             .addField("Love", `${love}`, true)
@@ -260,8 +285,11 @@ module.exports = {
         }
         else if(i.customId.includes("name")){
 
-            let pet = db.fetch(`pet_${interaction.user.id}`)
-            let name = db.fetch(`pet_${interaction.user.id}.Name`)
+            let pet = userdata.pet
+            let condition = pet.condition
+        let gas = pet.gas
+        let oil = pet.oil
+        let love = pet.love
 
             i.channel.send(`Type the name you want to set`)
         
@@ -274,12 +302,22 @@ module.exports = {
                 time: 1000 * 20
             })
             let nametoset
-            collector2.on('collect', msg => {
+            collector2.on('collect', async msg => {
              nametoset = msg.content
 
-             db.set(`pet_${interaction.user.id}.Name`, nametoset)
+             await User.findOneAndUpdate({
+                id: interaction.user.id
+            }, 
+            {
+                $set: {
+                    "pet.name": nametoset
+               }
+            })
+            userdata = await User.findOne({id: i.user.id})
+            userdata.save()
+           
 
-             name = db.fetch(`pet_${interaction.user.id}.Name`)
+             name = userdata.pet.name
              let embed = new Discord.MessageEmbed()
              .setTitle(`Your Pet`)
              .addField("Name", `${name}`, true)
@@ -330,9 +368,18 @@ module.exports = {
         })
 
         collector3.on('collect', async(i, user) => {
+            userdata = await User.findOne({id: i.user.id})
+
             if(i.customId.includes("black")){
-                db.set(`pet_${i.user.id}.Color`, "Black")
-                let spoiler = db.fetch(`pet_${i.user.id}.Spoiler`)
+                await User.findOneAndUpdate({
+                    id: interaction.user.id
+                }, 
+                {
+                    $set: {
+                        "pet.color": "Black"
+                   }
+                })
+                let spoiler =  userdata.pet.spoiler
                 if(!spoiler){
                     embed.setThumbnail(petdb.Pets["mini miata"].Black)
 
@@ -344,8 +391,15 @@ module.exports = {
                 i.update({embeds: [embed]})
             }
             else if(i.customId.includes("red")){
-                db.set(`pet_${i.user.id}.Color`, "Red")
-                let spoiler = db.fetch(`pet_${i.user.id}.Spoiler`)
+                await User.findOneAndUpdate({
+                    id: interaction.user.id
+                }, 
+                {
+                    $set: {
+                        "pet.color": "Red"
+                   }
+                })
+                let spoiler =  userdata.pet.spoiler
                 if(!spoiler){
                     embed.setThumbnail(petdb.Pets["mini miata"].Red)
 
@@ -357,8 +411,15 @@ module.exports = {
                 i.update({embeds: [embed]})
             }
             else if(i.customId.includes("blue")){
-                db.set(`pet_${i.user.id}.Color`, "Blue")
-                let spoiler = db.fetch(`pet_${i.user.id}.Spoiler`)
+                await User.findOneAndUpdate({
+                    id: interaction.user.id
+                }, 
+                {
+                    $set: {
+                        "pet.color": "Blue"
+                   }
+                })
+                let spoiler =  userdata.pet.spoiler
                 if(!spoiler){
                     embed.setThumbnail(petdb.Pets["mini miata"].Blue)
 
@@ -370,8 +431,15 @@ module.exports = {
                 i.update({embeds: [embed]})
             }
             else if(i.customId.includes("white")){
-                db.set(`pet_${i.user.id}.Color`, "White")
-                let spoiler = db.fetch(`pet_${i.user.id}.Spoiler`)
+                await User.findOneAndUpdate({
+                    id: interaction.user.id
+                }, 
+                {
+                    $set: {
+                        "pet.color": "White"
+                   }
+                })
+                let spoiler =  userdata.pet.spoiler
                 if(!spoiler){
                     embed.setThumbnail(petdb.Pets["mini miata"].White)
 
@@ -382,11 +450,12 @@ module.exports = {
                 }
                 i.update({embeds: [embed]})
             }
+            userdata.save()
         })
         }
 
         else if(i.customId.includes("race")){
-            let timetorace = db.fetch(`pet_${interaction.user.id}.Racing`)
+            let timetorace = pet.racing || 0
             let timeout = 600000
             if (timetorace !== null && timeout - (Date.now() - timetorace) > 0) {
                 let time = ms(timeout - (Date.now() - timetorace));
@@ -394,11 +463,24 @@ module.exports = {
                 i.update({content: `You've already sent your pet racing\n\nRace again in ${time}.`})
             }
             else{
-                let gas = db.fetch(`pet_${interaction.user.id}.Gas`)
-                if(gas <= 0) return interaction.reply(`Your pet is out of gas!`)
-            db.subtract(`pet_${interaction.user.id}.Gas`, 10)
-            db.set(`pet_${interaction.user.id}.Racing`, Date.now())
-            db.set(`pet_${interaction.user.id}.RacingItems`, [])
+                let gas = userdata.pet.gas
+                let lessgas = gas -= 50
+                await User.findOneAndUpdate({
+                    id: interaction.user.id
+                }, 
+                {
+                    $set: {
+                        "pet.gas": lessgas
+                   }
+                })
+            await User.findOneAndUpdate({
+                id: interaction.user.id
+            }, 
+            {
+                $set: {
+                    "pet.racing": Date.now()
+               }
+            })
 
             let rewardrange = randomRange(0, 5)
             let rewards = ["t2tires", "pet spoiler", "bank increase", "water bottle"]
@@ -411,23 +493,20 @@ module.exports = {
             
             setTimeout(() => {
                      
-                                 db.push(`pet_${interaction.user.id}.RacingItems`, ranreward)
-                                 db.push(`pet_${interaction.user.id}.RacingItems`, `${rewardrange} Xessence`)
+                       
                                  i.channel.send({content: `${i.user}, Your pet returned with ${rewardrange} Xessence, and a ${ranreward}`})
-                                 db.add(`xessence_${i.user.id}`, rewardrange)
+                                 userdata.xessence += rewardrange
                                  
                                  if(partdb.Parts[ranreward.toLowerCase()]){
-                                    db.push(`parts_${i.user.id}`, ranreward)
+                                    userdata.parts.push(ranreward.toLowerCase())
                                  }
                                  else if(itemdb.Other[ranreward.toLowerCase()]){
-                                    db.push(`items_${i.user.id}`, ranreward)
-                                 }
-                                 else if(itemdb.Multiplier[ranreward.toLowerCase()]){
-                                    db.push(`items_${i.user.id}`, ranreward)
+                                    userdata.items.push(ranreward.toLowerCase())
                                  }
                                  else if(itemdb.Collectable[ranreward.toLowerCase()]){
-                                    db.push(`items_${i.user.id}`, ranreward)
+                                    userdata.items.push(ranreward.toLowerCase())
                                  }
+                                 userdata.save()
 
                  }, 10000);
                 }

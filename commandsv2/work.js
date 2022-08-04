@@ -9,6 +9,9 @@ const partsdb = require('../partsdb.json')
 const jobsdb = require("../jobs.json")
 const pretty = require('pretty-ms')
 const {MessageActionRow, MessageButton} = require("discord.js")
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -42,7 +45,7 @@ module.exports = {
         let uid = interaction.user.id
 
         let option = interaction.options.getString("option")
-
+        let userdata = await User.findOne({id: uid})
         if(option == "joblist"){
             let embed = new Discord.MessageEmbed()
             .setTitle("Job List")
@@ -57,26 +60,38 @@ module.exports = {
             interaction.reply({embeds: [embed]})
         }
         else if(option == "hire"){
-            let job = db.fetch(`job_${uid}`)
+            let job = userdata.job
             if(job) return interaction.reply("You already have a job! Quit it before getting another job.")
             let jobselected = interaction.options.getString("job")
             if(!jobselected) return interaction.reply("You need to select a job from the menu!")
-            let prestige = db.fetch(`prestige_${uid}`)
+            let prestige = userdata.prestige
 
             if(!jobsdb.Jobs[jobselected.toLowerCase()]) return interaction.reply("Thats not a job!")
             let jobdb = jobsdb.Jobs[jobselected.toLowerCase()]
             if(prestige < jobdb.Prestige || !prestige) return interaction.reply(`You need to be prestige ${jobsdb.Jobs[jobselected.toLowerCase()].Prestige} for this job!`)
 
-            db.set(`job_${uid}`, {Number: 1, Rank: jobdb.Ranks["1"].Name, EXP: 0, Salary: jobdb.Ranks["1"].Salary, Timeout: jobdb.Ranks["1"].Time, Job: jobselected})
+            let jobobj = {
+                Number: 1,
+                Rank: jobdb.Ranks["1"].Name, 
+                EXP: 0, 
+                Salary: jobdb.Ranks["1"].Salary, 
+                Timeout: jobdb.Ranks["1"].Time, 
+                Job: jobselected,
+                worked: 0
+
+            }
+
+            userdata.job = jobobj
+            userdata.save()
             
             interaction.reply(`✅ You're hired!`)
         }
         else if(option == "rank"){
-            let job = db.fetch(`job_${uid}`)
+            let job = userdata.job
             if(!job) return interaction.reply("You don't have a job! Use \`/work hire\` to get a job!")
 
             let jobrank = job.Rank
-            let num = job.Number 
+            let num = job.Number
             let salary = job.Salary
             let exp = job.EXP
             let timeout = job.Timeout
@@ -103,8 +118,8 @@ module.exports = {
 
         } else if(option == "work"){
             
-            let job = db.fetch(`job_${uid}`)
-            let worked = db.fetch(`worked_${uid}`)
+            let job = userdata.job
+            let worked = job.worked || 0
             if(!job) return interaction.reply("You don't have a job! Use \`/work hire\` to get a job!")
             let timeoutj = job.Timeout
             if (worked !== null && timeoutj - (Date.now() - worked) > 0) {
@@ -173,7 +188,8 @@ module.exports = {
                 .setColor("#60b0f4")
                 .setThumbnail(jobsdb.Jobs[actjob].Helmet)
                 interaction.reply({embeds: [embed]})
-                db.set(`worked_${uid}`, Date.now())
+                job.worked = Date.now()
+                userdata.update()
                 const filter = (m = discord.Message) => {
                     return m.author.id === uid
                 }
@@ -187,16 +203,24 @@ module.exports = {
                     if(msg.content.toLowerCase() !== question.Answer) return msg.reply("Incorrect! Careful, if you keep messing up I'm firing you!")
 
                     if(requiredxp !== "MAX"){
-                        db.add(`job_${uid}.EXP`, question.XP)
+                       job.EXP +=  question.XP
 
                     }
 
-                    if(requiredxp !== "MAX" && db.fetch(`job_${uid}.EXP`) >= requiredxp){
+                    if(requiredxp !== "MAX" && job.EXP >= requiredxp){
                         msg.channel.send(`You just ranked up to ${jobsdb.Jobs[actjob].Ranks[addednum].Name}!`)
-                        db.set(`job_${uid}`, {Number: addednum, Rank: jobdb.Ranks[`${addednum}`].Name, EXP: 0, Salary: jobdb.Ranks[`${addednum}`].Salary, Timeout: jobdb.Ranks[`${addednum}`].Time, Job: actjob})
+                        job.Number += 1
+                        job.Rank =  jobdb.Ranks[`${addednum}`].Name
+                        job.Salary = jobdb.Ranks[`${addednum}`].Salary
+                        job.Timeout = jobdb.Ranks[`${addednum}`].Time
+                        job.EXP = 0
+
+
 
                     }
-                    db.add(`cash_${uid}`, salary)
+                    userdata.cash += Number(salary)
+                    
+                    userdata.save()
                     msg.reply(`You've completed your job duties and earned yourself $${salary}, and ${question.XP} XP`)
 
 
@@ -244,7 +268,7 @@ module.exports = {
                 if(cartrending == 2) videotypes1["car review"].Trending = true
                 if(gametrending == 2) videotypes1["gaming"].Trending = true
                 if(podcasttrending == 2) videotypes1["podcast"].Trending = true
-                db.set(`worked_${uid}`, Date.now())
+                userdata.worked = Date.now()
 
                 let type
                     let embed = new Discord.MessageEmbed()
@@ -361,16 +385,24 @@ module.exports = {
                                         emb.edit({embeds: [embed]})
 
                                         if(requiredxp !== "MAX"){
-                                            db.add(`job_${uid}.EXP`, addedsubs)
+                                            job.EXP += addedsubs
                     
                                         }
                     
-                                        if(requiredxp !== "MAX" && db.fetch(`job_${uid}.EXP`) >= requiredxp){
+                                        if(requiredxp !== "MAX" && job.EXP >= requiredxp){
                                             emb.channel.send(`You just ranked up to ${jobsdb.Jobs[actjob].Ranks[addednum].Name}!`)
-                                            db.set(`job_${uid}`, {Number: addednum, Rank: jobdb.Ranks[`${addednum}`].Name, EXP: 0, Salary: jobdb.Ranks[`${addednum}`].Salary, Timeout: jobdb.Ranks[`${addednum}`].Time, Job: actjob})
+                                            job.Number += 1
+                                            job.Rank =  jobdb.Ranks[`${addednum}`].Name
+                                            job.Salary = jobdb.Ranks[`${addednum}`].Salary
+                                            job.Timeout = jobdb.Ranks[`${addednum}`].Time
+                                            job.EXP = 0
+                    
+                    
                     
                                         }
-                                        db.add(`cash_${uid}`, salary)
+                                        userdata.cash += Number(salary)
+                                        
+                    userdata.save()
                                         emb.reply(`You've completed your job duties and earned yourself $${salary}, and ${addedsubs} XP`)
                                     }, 2000);
 
@@ -434,15 +466,15 @@ module.exports = {
                                     if(possiblenumbers.includes(randomrating)){
      
                                         msg.reply(`Your rating was ${numbertorate}/10 while the audience chose ${randomrating}/10, close enough, here's your reward: $${salary} and ${xp1} subscribers`)
-                                        db.add(`job_${uid}.EXP`, xp1)
-                                        db.add(`cash_${uid}`, salary)
+                                        job.EXP += xp1
+                                        userdata.cash += salary
                                     }
                                     if(!possiblenumbers.includes(randomrating)){
                                         let newxp = Math.round(xp1/2)
                                         let newsalary = Math.round(salary/2)
                                         msg.reply(`Your rating was ${numbertorate}/10 while the audience chose ${randomrating}/10, you get half of your salary this time, $${newsalary} and ${newxp} subscribers`)
-                                        db.add(`cash_${uid}`, newsalary)
-                                        db.add(`job_${uid}.EXP`, newxp)
+                                        job.EXP += newxp
+                                        userdata.cash += newsalary
 
                                     }
                                 })
@@ -478,7 +510,8 @@ module.exports = {
 
                 let randomgames = ["clicker", "type"]
                 let randomgame = lodash.sample(randomgames)
-                db.set(`worked_${uid}`, Date.now())
+                job.worked = Date.now()
+                userdata.update()
 
                 if(randomgame == "clicker"){
                     console.log("clicker")
@@ -514,16 +547,23 @@ module.exports = {
                         if(i.customId.includes(randomcolor)){
                             await i.deferUpdate();
                             if(requiredxp !== "MAX"){
-                                db.add(`job_${uid}.EXP`, xp1)
+                                job.EXP += xp1
         
                             }
         
-                            if(requiredxp !== "MAX" && db.fetch(`job_${uid}.EXP`) >= requiredxp){
+                            if(requiredxp !== "MAX" && job.EXP >= requiredxp){
                                 interaction.channel.send(`You just ranked up to ${jobsdb.Jobs[actjob].Ranks[addednum].Name}!`)
-                                db.set(`job_${uid}`, {Number: addednum, Rank: jobdb.Ranks[`${addednum}`].Name, EXP: 0, Salary: jobdb.Ranks[`${addednum}`].Salary, Timeout: jobdb.Ranks[`${addednum}`].Time, Job: actjob})
+                                job.Number += 1
+                                job.Rank =  jobdb.Ranks[`${addednum}`].Name
+                                job.Salary = jobdb.Ranks[`${addednum}`].Salary
+                                job.Timeout = jobdb.Ranks[`${addednum}`].Time
+                                job.EXP = 0
+        
         
                             }
-                            db.add(`cash_${uid}`, salary)
+                           userdata.cash += Number(salary)
+                           
+                    userdata.save()
                             interaction.channel.send(`You've completed your job duties and earned yourself $${salary}, and ${xp1} XP`)
                            }
                           else {
@@ -555,16 +595,23 @@ module.exports = {
                       if(msg.content.toLowerCase() !== randomtype) return msg.reply("Incorrect! Careful, if you keep messing up I'm firing you!")
   
                       if(requiredxp !== "MAX"){
-                          db.add(`job_${uid}.EXP`, xp1)
+                          job.EXP += xp1
   
                       }
   
-                      if(requiredxp !== "MAX" && db.fetch(`job_${uid}.EXP`) >= requiredxp){
+                      if(requiredxp !== "MAX" && job.EXP >= requiredxp){
                           msg.channel.send(`You just ranked up to ${jobsdb.Jobs[actjob].Ranks[addednum].Name}!`)
-                          db.set(`job_${uid}`, {Number: addednum, Rank: jobdb.Ranks[`${addednum}`].Name, EXP: 0, Salary: jobdb.Ranks[`${addednum}`].Salary, Timeout: jobdb.Ranks[`${addednum}`].Time, Job: actjob})
+                          job.Number += 1
+                          job.Rank =  jobdb.Ranks[`${addednum}`].Name
+                          job.Salary = jobdb.Ranks[`${addednum}`].Salary
+                          job.Timeout = jobdb.Ranks[`${addednum}`].Time
+                          job.EXP = 0
+  
   
                       }
-                      db.add(`cash_${uid}`, salary)
+                        userdata.cash += Number(salary)
+                        
+                    userdata.save()
                       msg.reply(`You've completed your job duties and earned yourself $${salary}, and ${xp1} XP`)
   
   
@@ -596,7 +643,8 @@ module.exports = {
                 }
 
                
-                db.set(`worked_${uid}`, Date.now())
+                job.worked = Date.now()
+                userdata.update()
 
                     let randpizzas = ["2", "3", "5", "6"]
                     let randpizza = lodash.sample(randpizzas)
@@ -643,16 +691,22 @@ module.exports = {
                         if(i.customId == randpizza){
                             await i.deferUpdate();
                             if(requiredxp !== "MAX"){
-                                db.add(`job_${uid}.EXP`, xp1)
+                               job.EXP += xp1
                                 
                             }
                             
-                            if(requiredxp !== "MAX" && db.fetch(`job_${uid}.EXP`) >= requiredxp){
+                            if(requiredxp !== "MAX" && job.EXP >= requiredxp){
                                 interaction.channel.send(`You just ranked up to ${jobsdb.Jobs[actjob].Ranks[addednum].Name}!`)
-                                db.set(`job_${uid}`, {Number: addednum, Rank: jobdb.Ranks[`${addednum}`].Name, EXP: 0, Salary: jobdb.Ranks[`${addednum}`].Salary, Timeout: jobdb.Ranks[`${addednum}`].Time, Job: actjob})
+                                job.Number += 1
+                                job.Rank =  jobdb.Ranks[`${addednum}`].Name
+                                job.Salary = jobdb.Ranks[`${addednum}`].Salary
+                                job.Timeout = jobdb.Ranks[`${addednum}`].Time
+                                job.EXP = 0
                                 
                             }
-                            db.add(`cash_${uid}`, salary)
+                            userdata.cash += Number(salary)
+                            
+                    userdata.save()
                             interaction.channel.send(`You've completed your job duties and earned yourself $${salary}, and ${xp1} XP`)
                         }
                         else {
@@ -674,10 +728,9 @@ module.exports = {
                 
 
         //    }
-           
         }
         else if(option == "quit"){
-            let job = db.fetch(`job_${uid}`)
+            let job = userdata.job
             if(!job) return interaction.reply("You don't have a job! Use \`/work hire\` to get a job!")
 
             interaction.reply("Are you sure you want to quit your job? This will erase all of your progress on that job. (Y/N)")
@@ -691,9 +744,16 @@ module.exports = {
                 time: 1000 * 20
             })
 
-            collector.on('collect', msg => {
+            collector.on('collect', async (msg) => {
                 if(msg.content.toLowerCase() == "y"){
-                    db.delete(`job_${uid}`)
+                    await User.findOneAndUpdate({
+                        id: uid
+                    },
+                    {
+                        $unset: 'job'
+                    })
+                               userdata.save()
+
                     interaction.channel.send("Sad to see you go!")
 
                 }

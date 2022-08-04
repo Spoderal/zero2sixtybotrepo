@@ -3,7 +3,9 @@ const db = require('quick.db')
 const seasons = require("../seasons.json")
 
 const {SlashCommandBuilder} = require('@discordjs/builders')
-
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 module.exports = {
   data: new SlashCommandBuilder()
   .setName('season')
@@ -14,10 +16,11 @@ module.exports = {
   .setRequired(false)
   ),
   async execute(interaction) {
+    let userdata = await User.findOne({id: interaction.user.id})
 
     let seasonrewards = seasons.Seasons.Summer.Rewards
     let reward = []
-    let redeemed = db.fetch(`summer_redeemed_rewards_${interaction.user.id}`) || ['None']
+    let redeemed = userdata.seasonrewards
 
     let page = interaction.options.getString("page")
     for(var i in seasonrewards)  {
@@ -36,7 +39,7 @@ module.exports = {
       
       let embed = new discord.MessageEmbed()
       .setTitle("Summer Season Page 1 of 5")
-      .setDescription(`*Ends August 31st 2022*\n**Use \`/reward [number]\` to redeem rewards.**\n\nNext reward: ${redeemed.length}`)
+      .setDescription(`*Ends August 31st 2022*\n**Use \`/reward [number]\` to redeem rewards.**\n\nNext reward: ${redeemed.length += 1}`)
    .addField("Rewards", `${itemrewards1.join('\n')}`)
    .setColor("#60b0f4")
    .setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif")

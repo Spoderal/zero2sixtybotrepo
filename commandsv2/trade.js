@@ -5,6 +5,9 @@ const {SlashCommandBuilder} = require('@discordjs/builders')
 const partdb = require('../partsdb.json')
 const itemdb = require('../items.json')
 const item = require('../item')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,25 +40,24 @@ module.exports = {
         
         let user1 = interaction.user
         let user2 = interaction.options.getUser("target");
-        
+
+        let userdata = await User.findOne({id: user1.id})
+        let userdata2 = await User.findOne({id: user2.id})
+
         let trading = interaction.options.getString("item").toLowerCase()
 
         let trading2 = interaction.options.getString("item2").toLowerCase()
         let amount2 = interaction.options.getNumber("amount2")
         let amount1 = interaction.options.getNumber("amount1")
 
-        let racerank = db.fetch(`racerank_${user1.id}`)
-        let racerank2 = db.fetch(`racerank_${user2.id}`)
 
-        let pre2 = db.fetch(`prestige_${user2.id}`)
-        let pre = db.fetch(`prestige_${user1.id}`)
+        let pre = userdata.prestige
+        let pre2 = userdata2.prestige
 
-        if(pre < 2){
-            return interaction.reply(`${user1}, you need to be prestige 2 before you can trade`)
-        }
-        if(pre2 < 2){
-            return interaction.reply(`${user2}, you need to be prestige 2 before you can trade`)
-        }
+        if(pre < 1) return interaction.reply(`${user1}, you need to be prestige 1 before you can trade`);
+        
+        if(pre2 < 1) return interaction.reply(`${user2}, you need to be prestige 1 before you can trade`);
+        
 
 
         let actamount
@@ -77,7 +79,7 @@ module.exports = {
 
         if(trading.endsWith("cash") && trading2.endsWith("cash")) return interaction.reply("❌ You cant trade cash for cash!")
         if(trading.endsWith("cash") && partdb.Parts[trading2.toLowerCase()]) {
-            let user2parts = db.fetch(`parts_${user2.id}`)
+            let user2parts = userdata2.parts
             let amount2 = interaction.options.getNumber("amount2")
             let actamount
             if(amount2 > 1){
@@ -96,7 +98,7 @@ module.exports = {
             if(actamount > filtereduser.length) return interaction.reply(`${user2} doesn't have that many of that part!`)
 
             let amount = trading.split(' ')[0]
-            let bal = db.fetch(`cash_${user1.id}`)
+            let bal = userdata.cash
             if(bal < amount) return interaction.reply("Settle down you don't have enough cash!")
             if(amount < 1500) return interaction.reply(`Minimum of $1.5k cash needed.`)
 
@@ -121,21 +123,26 @@ module.exports = {
 
                     }
                     
-                    db.set(`parts_${user2.id}`, user2parts)
+                    userdata2.parts = user2parts
                     
                     
                     let user1newpart = []
                     for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                     for(i in user1newpart){
                         
-                        db.push(`parts_${user1.id}`, user1newpart[i])
+                        userdata.parts.push(user1newpart[i])
                     }
                     console.log(amount)
 
-                    db.subtract(`cash_${user1.id}`, amount)
-                    db.add(`cash_${user2.id}`, amount)
+                    userdata.cash -= Number(amount)
+                    userdata2.cash += Number(amount)
+
+
 
                     embed.setTitle("Trade Accepted!")
+                    
+                userdata.save()
+                userdata2.save()
 
                     collector.stop()
 
@@ -162,7 +169,7 @@ module.exports = {
         }
         else if(trading.endsWith("cash") && itemdb.Collectable[0][trading2.toLowerCase()] || trading.endsWith("cash") && itemdb.Police[trading2.toLowerCase()] || trading.endsWith("cash") && itemdb.Other[trading2.toLowerCase()]) {
 
-            let user2parts = db.fetch(`items_${user2.id}`) || []
+            let user2parts = userdata2.items
 
             let amount2 = interaction.options.getNumber("amount2")
             let actamount
@@ -181,7 +188,7 @@ module.exports = {
               console.log(filtereduser)
             if(actamount > filtereduser.length) return interaction.reply(`${user2} doesn't have that many of that item!`)
             let amount = trading.split(' ')[0]
-            let bal = db.fetch(`cash_${user1.id}`)
+            let bal = userdata.cash
             if(bal < amount) return interaction.reply("Settle down you don't have enough cash!")
             if(amount < 1500) return interaction.reply(`Minimum of $1.5k cash needed.`)
             let itemtype
@@ -227,20 +234,23 @@ module.exports = {
                     amount = trading.split(' ')[0]
                     console.log(amount)
                     for (var i = 0; i < actamount; i ++) user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1)
-                    db.set(`items_${user2.id}`, user2parts)
+                    userdata2.items = user2parts
 
 
                     let user1newpart = []
                     for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                     for(i in user1newpart){
                         
-                        db.push(`items_${user1.id}`, user1newpart[i])
+                        userdata.items.push(user1newpart[i])
                     }
                     console.log(amount)
-                    db.subtract(`cash_${user1.id}`, amount)
-                    db.add(`cash_${user2.id}`, amount)
+                    userdata.cash -= Number(amount)
+                    userdata2.cash += Number(amount)
 
                     embed.setTitle("Trade Accepted!")
+                    
+                userdata.save()
+                userdata2.save()
 
                     interaction.editReply({embeds: [embed]})
                 }
@@ -263,8 +273,8 @@ module.exports = {
 
         }
         else if(cardb.Cars[trading.toLowerCase()] && partdb.Parts[trading2.toLowerCase()]) {
-            let user1cars = db.fetch(`cars_${user1.id}`)
-            let user2parts = db.fetch(`parts_${user2.id}`)
+            let user1cars = userdata.cars
+            let user2parts = userdata2.parts
             let amount2 = interaction.options.getNumber("amount2")
             let actamount
             if(amount2 > 1){
@@ -279,14 +289,18 @@ module.exports = {
             if(actamount > filtereduser.length) return interaction.reply(`${user2} doesn't have ${actamount} ${trading2}!`)
 
 
-            if(!user1cars.includes(trading.toLowerCase())) return interaction.channel.send(`You don't have this car!`)
             
-            let selected = db.fetch(`isselected_${cardb.Cars[trading.toLowerCase()].Name}_${user1.id}`)
-            if(selected) return interaction.channel.send(`${user1}, you need to deselect this car before trading it!`)
+            let filteredcar = userdata.cars.filter(car => car.Name == trading.toLowerCase());
+            let selected = filteredcar[0] || 'No ID'
+         
+            if(selected == "No ID") {
+                return interaction.reply(`You don't have this car!`)
+            }
+
             let embed = new Discord.MessageEmbed()
             .setTitle('Trading')
             .setDescription(`The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`)
-            .addField(`Your Offer`, `${cardb.Cars[trading.toLowerCase()].Name}`)
+            .addField(`Your Offer`, `${cardb.Cars[selected.Name.toLowerCase()].Name}`)
             .addField(`${user2.username}'s Offer`, `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`)
             .setColor("#60b0f4")
 
@@ -301,116 +315,23 @@ module.exports = {
                 if(r.emoji.name == '✅'){
 
                     trading = trading.toLowerCase()
-                    let handling = db.fetch(`${cardb.Cars[trading.toLowerCase()].Name}handling_${user1.id}`) || 0
-                    let exhaust = db.fetch(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-                    let gearbox = db.fetch(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-                    let tires = db.fetch(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-                    let turbo = db.fetch(`${cardb.Cars[trading].Name}turbo_${user1.id}`) 
-                    let intake = db.fetch(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-                    let clutch = db.fetch(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-                    let ecu = db.fetch(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-                    let suspension = db.fetch(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
+                  
+                    userdata.cars.pull(selected)
+                    userdata2.cars.push(selected)
                    
-                    let weight = db.fetch(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-                    let offroad = db.fetch(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-                    let drift = db.fetch(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-                    let speed = db.fetch(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-                    let zerosixty = db.fetch(`${cardb.Cars[trading].Name}060_${user1.id}`)
-        
-                    let nitro = db.fetch(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-                    let restoration  = db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
-                    let resale  = db.fetch(`${cardb.Cars[trading].Name}resale_${user1.id}`)
-
-                    let engine = db.fetch(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-                    
-                    let carimage = db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`) || cardb.Cars[trading].Image
-                    
-                    let newcars = db.fetch(`cars_${user1.id}`)
-                    if(!newcars.includes(trading)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                    if(exhaust){
-                        db.set(`${cardb.Cars[trading].Name}exhaust_${user2.id}`, exhaust)
-                        db.delete(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-                    
-                    }
-                    if(gearbox){
-                        db.set(`${cardb.Cars[trading].Name}gearbox_${user2.id}`, gearbox)
-                        db.delete(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-                    }
-                    if(tires){
-                        db.set(`${cardb.Cars[trading].Name}tires_${user2.id}`, tires)
-                        db.delete(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-                    }
-                    if(turbo){
-                        db.set(`${cardb.Cars[trading].Name}turbo_${user2.id}`, turbo)
-                        db.delete(`${cardb.Cars[trading].Name}turbo_${user1.id}`)
-                    }
-                    if(intake){
-                        db.set(`${cardb.Cars[trading].Name}intake_${user2.id}`, intake)
-                        db.delete(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-                    }
-                    if(clutch){
-                        db.set(`${cardb.Cars[trading].Name}clutch_${user2.id}`, clutch)
-                        db.delete(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-                    }
-                    if(ecu){
-                        db.set(`${cardb.Cars[trading].Name}ecu_${user2.id}`, ecu)
-                        db.delete(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-                    }
-                    if(suspension){
-                        db.set(`${cardb.Cars[trading].Name}suspension_${user2.id}`, suspension)
-                        db.delete(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-                    }
-                    if(weight){
-                        db.set(`${cardb.Cars[trading].Name}weight_${user2.id}`, weight)
-                        db.delete(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-                    }
-                    if(offroad){
-                        db.set(`${cardb.Cars[trading].Name}offroad_${user2.id}`, offroad)
-                        db.delete(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-                    }
-                    if(drift){
-                        db.set(`${cardb.Cars[trading].Name}drift_${user2.id}`, drift)
-                        db.delete(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-                    }
-                    if(nitro){
-                        db.set(`${cardb.Cars[trading].Name}nitro_${user2.id}`, nitro)
-                        db.delete(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-                    }
-                    if(engine){
-                        db.set(`${cardb.Cars[trading].Name}engine_${user2.id}`, engine)
-                        db.delete(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-                    }
-                    if(db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`)){
-                        db.set(`${cardb.Cars[trading].Name}livery_${user2.id}`, carimage) 
-                        db.delete(`${cardb.Cars[trading].Name}livery_${user1.id}`)
-                    }
-                    if(db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)){
-                        db.set(`${cardb.Cars[trading].Name}restoration_${user2.id}`, restoration) 
-                        db.delete(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
-                    }
-                    if(db.fetch(`${cardb.Cars[trading].Name}resale_${user1.id}`)){
-                        db.set(`${cardb.Cars[trading].Name}resale_${user2.id}`, resale) 
-                        db.delete(`${cardb.Cars[trading].Name}resale_${user1.id}`)
-                    }
-        
-                    db.set(`${cardb.Cars[trading.toLowerCase()].Name}speed_${user2.id}`, speed)
-                    db.set(`${cardb.Cars[trading].Name}060_${user2.id}`, zerosixty)
-                    db.set(`${cardb.Cars[trading].Name}handling_${user2.id}`, handling)
-                    db.delete(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-                    db.delete(`${cardb.Cars[trading].Name}060_${user1.id}`)
-                    db.delete(`${cardb.Cars[trading].Name}handling_${user1.id}`)
-                    for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading.toLowerCase()), 1)
-                    db.set(`cars_${user1.id}`, newcars)
-                    db.push(`cars_${user2.id}`, trading.toLowerCase())
+                
                     for (var i = 0; i < actamount; i ++) user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1)
-                    db.set(`parts_${user2.id}`, user2parts)
+                    userdata.parts = user2parts
                     let user1newpart = []
                     for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                     for(i in user1newpart){
                         
-                        db.push(`parts_${user1.id}`, user1newpart[i])
+                       userdata.parts.push(user1newpart[i])
                     }
                     embed.setTitle("Trade Accepted!")
+                    
+                userdata.save()
+                userdata2.save()
                     collector.stop()
 
                     interaction.editReply({embeds: [embed]})
@@ -438,8 +359,8 @@ module.exports = {
         // car for item
 
         else if(cardb.Cars[trading.toLowerCase()] && itemdb.Collectable[0][trading2.toLowerCase()] || cardb.Cars[trading.toLowerCase()] && itemdb.Other[trading2.toLowerCase()] || cardb.Cars[trading.toLowerCase()] && itemdb.Police[trading2.toLowerCase()]) {
-            let user1cars = db.fetch(`cars_${user1.id}`)
-            let user2items = db.fetch(`items_${user2.id}`)
+            let user1cars = userdata.cars
+            let user2items = userdata2.items
          let amount2 = interaction.options.getNumber("amount2")
             let actamount
             if(amount2 > 1){
@@ -469,8 +390,13 @@ module.exports = {
               itemtype = "Other"
 
           }
-            let selected = db.fetch(`isselected_${cardb.Cars[trading.toLowerCase()].Name}_${user1.id}`)
-            if(selected) return interaction.channel.send(`${user1}, you need to deselect this car before trading it!`)
+          let filteredcar = userdata.cars.filter(car => car.Name == trading.toLowerCase());
+          let selected = filteredcar[0] || 'No ID'
+       
+          if(selected == "No ID") {
+              return interaction.reply(`You don't have this car!`)
+          }
+
             let embed = new Discord.MessageEmbed()
             .setTitle('Trading')
             .setDescription(`The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`)
@@ -496,111 +422,29 @@ module.exports = {
                 if(r.emoji.name == '✅'){
 
                     trading = trading.toLowerCase()
-                    let handling = db.fetch(`${cardb.Cars[trading.toLowerCase()].Name}handling_${user1.id}`) || 0
-                    let exhaust = db.fetch(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-                    let gearbox = db.fetch(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-                    let tires = db.fetch(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-                    let turbo = db.fetch(`${cardb.Cars[trading].Name}turbo_${user1.id}`) 
-                    let intake = db.fetch(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-                    let clutch = db.fetch(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-                    let ecu = db.fetch(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-                    let suspension = db.fetch(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-                   
-                    let weight = db.fetch(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-                    let offroad = db.fetch(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-                    let drift = db.fetch(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-                    let speed = db.fetch(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-                    let zerosixty = db.fetch(`${cardb.Cars[trading].Name}060_${user1.id}`)
+             
+               
         
-                    let nitro = db.fetch(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-                    let restoration  = db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
+               
         
-                    let engine = db.fetch(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-                    
-                    let carimage = db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`) || cardb.Cars[trading].Image
-                    
-                    let newcars = db.fetch(`cars_${user1.id}`)
-                    if(!newcars.includes(trading)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                    if(exhaust){
-                        db.set(`${cardb.Cars[trading].Name}exhaust_${user2.id}`, exhaust)
-                        db.delete(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-                    
-                    }
-                    if(gearbox){
-                        db.set(`${cardb.Cars[trading].Name}gearbox_${user2.id}`, gearbox)
-                        db.delete(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-                    }
-                    if(tires){
-                        db.set(`${cardb.Cars[trading].Name}tires_${user2.id}`, tires)
-                        db.delete(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-                    }
-                    if(turbo){
-                        db.set(`${cardb.Cars[trading].Name}turbo_${user2.id}`, turbo)
-                        db.delete(`${cardb.Cars[trading].Name}turbo_${user1.id}`)
-                    }
-                    if(intake){
-                        db.set(`${cardb.Cars[trading].Name}intake_${user2.id}`, intake)
-                        db.delete(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-                    }
-                    if(clutch){
-                        db.set(`${cardb.Cars[trading].Name}clutch_${user2.id}`, clutch)
-                        db.delete(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-                    }
-                    if(ecu){
-                        db.set(`${cardb.Cars[trading].Name}ecu_${user2.id}`, ecu)
-                        db.delete(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-                    }
-                    if(suspension){
-                        db.set(`${cardb.Cars[trading].Name}suspension_${user2.id}`, suspension)
-                        db.delete(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-                    }
-                    if(weight){
-                        db.set(`${cardb.Cars[trading].Name}weight_${user2.id}`, weight)
-                        db.delete(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-                    }
-                    if(offroad){
-                        db.set(`${cardb.Cars[trading].Name}offroad_${user2.id}`, offroad)
-                        db.delete(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-                    }
-                    if(drift){
-                        db.set(`${cardb.Cars[trading].Name}drift_${user2.id}`, drift)
-                        db.delete(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-                    }
-                    if(nitro){
-                        db.set(`${cardb.Cars[trading].Name}nitro_${user2.id}`, nitro)
-                        db.delete(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-                    }
-                    if(engine){
-                        db.set(`${cardb.Cars[trading].Name}engine_${user2.id}`, engine)
-                        db.delete(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-                    }
-                    if(db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`)){
-                        db.set(`${cardb.Cars[trading].Name}livery_${user2.id}`, carimage) 
-                        db.delete(`${cardb.Cars[trading].Name}livery_${user1.id}`)
-                    }
-                    if(db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)){
-                        db.set(`${cardb.Cars[trading].Name}restoration_${user2.id}`, restoration) 
-                        db.delete(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
-                    }
-        
-                    db.set(`${cardb.Cars[trading.toLowerCase()].Name}speed_${user2.id}`, speed)
-                    db.set(`${cardb.Cars[trading].Name}060_${user2.id}`, zerosixty)
-                    db.set(`${cardb.Cars[trading].Name}handling_${user2.id}`, handling)
-                    db.delete(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-                    db.delete(`${cardb.Cars[trading].Name}060_${user1.id}`)
-                    db.delete(`${cardb.Cars[trading].Name}handling_${user1.id}`)
-                    for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading.toLowerCase()), 1)
-                    db.set(`cars_${user1.id}`, newcars)
-                    db.push(`cars_${user2.id}`, trading.toLowerCase())
+             
+                    userdata.cars.pull(selected)
+
+                    userdata2.cars.push(selected)
+
                     for (var i = 0; i < actamount; i ++) user2items.splice(user2items.indexOf(trading2.toLowerCase()), 1)
-                    db.set(`items_${user2.id}`, user2items)
+                    userdata2.items = user2items
+
                     let user1newpart = []
                     for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                     for(i in user1newpart){
                         
-                        db.push(`items_${user1.id}`, user1newpart[i])
+                        userdata.items.push(user1newpart[i])
                     }
                     embed.setTitle("Trade Accepted!")
+                    
+                userdata.save()
+                userdata2.save()
                     collector.stop()
 
                     interaction.editReply({embeds: [embed]})
@@ -625,41 +469,24 @@ module.exports = {
 
         }
        else if(trading.endsWith("cash") && cardb.Cars[trading2.toLowerCase()]) {
-            let user2cars = db.fetch(`cars_${user2.id}`)
-            let user1cars = db.fetch(`cars_${user1.id}`)
+            let user2cars = userdata2.cars
+            let user1cars = userdata.cars
 
-            if(!user2cars.includes(trading2)) return interaction.reply(`${user2} doesn't have that car!`)
-            if(user1cars.includes(trading2)) return interaction.reply(`${user1}, you already have that car!`)
+            let carname = cardb.Cars[trading2.toLowerCase()].Name
+            let filteredcar = userdata.cars.filter(car => car.Name == carname);
+            let selected = filteredcar[0] || 'No ID'
+            let filteredcar2 = userdata2.cars.filter(car => car.Name == carname);
+            let selected2 = filteredcar2[0] || 'No ID'
 
-            let selected = db.fetch(`isselected_${cardb.Cars[trading2.toLowerCase()].Name}_${user2.id}`)
+            if(selected2 == "No ID") return interaction.reply(`${user2} doesn't have that car!`)
+            if(selected !== "No ID") return interaction.reply(`${user1}, you already have that car!`)
 
-            if(selected) return interaction.reply(`${user2}, you need to deselect this car before trading it!`)
-
-            let handling = db.fetch(`${cardb.Cars[trading2.toLowerCase()].Name}handling_${user2.id}`) || 0
-            let exhaust = db.fetch(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-            let gearbox = db.fetch(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-            let tires = db.fetch(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-            let turbo = db.fetch(`${cardb.Cars[trading2].Name}turbo_${user2.id}`) 
-            let intake = db.fetch(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-            let clutch = db.fetch(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-            let ecu = db.fetch(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-            let suspension = db.fetch(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
            
-            let weight = db.fetch(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-            let offroad = db.fetch(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-            let drift = db.fetch(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-            let speed = db.fetch(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-            let zerosixty = db.fetch(`${cardb.Cars[trading2].Name}060_${user2.id}`)
 
-            let nitro = db.fetch(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-            let restoration  = db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-
-            let engine = db.fetch(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-            
-            let carimage = db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`) || cardb.Cars[trading2].Image
+         
 
             let amount = trading.split(' ')[0]
-            let bal = db.fetch(`cash_${user1.id}`)
+            let bal = userdata.cash
             if(bal < amount) return interaction.reply("Settle down you don't have enough cash!")
             if(amount < 1500) return interaction.reply(`Minimum of $1.5k cash needed.`)
             let embed = new Discord.MessageEmbed()
@@ -679,82 +506,18 @@ module.exports = {
             collector.on('collect', (r, user) => {
                 
                 if(r.emoji.name == '✅'){
-                let newcars = db.fetch(`cars_${user2.id}`)
-                if(!newcars.includes(trading2)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                if(exhaust){
-                    db.set(`${cardb.Cars[trading2].Name}exhaust_${user1.id}`, exhaust)
-                    db.delete(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-                
-                }
-                if(gearbox){
-                    db.set(`${cardb.Cars[trading2].Name}gearbox_${user1.id}`, gearbox)
-                    db.delete(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-                }
-                if(tires){
-                    db.set(`${cardb.Cars[trading2].Name}tires_${user1.id}`, tires)
-                    db.delete(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-                }
-                if(turbo){
-                    db.set(`${cardb.Cars[trading2].Name}turbo_${user1.id}`, turbo)
-                    db.delete(`${cardb.Cars[trading2].Name}turbo_${user2.id}`)
-                }
-                if(intake){
-                    db.set(`${cardb.Cars[trading2].Name}intake_${user1.id}`, intake)
-                    db.delete(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-                }
-                if(clutch){
-                    db.set(`${cardb.Cars[trading2].Name}clutch_${user1.id}`, clutch)
-                    db.delete(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-                }
-                if(ecu){
-                    db.set(`${cardb.Cars[trading2].Name}ecu_${user1.id}`, ecu)
-                    db.delete(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-                }
-                if(suspension){
-                    db.set(`${cardb.Cars[trading2].Name}suspension_${user1.id}`, suspension)
-                    db.delete(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
-                }
-                if(weight){
-                    db.set(`${cardb.Cars[trading2].Name}weight_${user1.id}`, weight)
-                    db.delete(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-                }
-                if(offroad){
-                    db.set(`${cardb.Cars[trading2].Name}offroad_${user1.id}`, offroad)
-                    db.delete(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-                }
-                if(drift){
-                    db.set(`${cardb.Cars[trading2].Name}drift_${user1.id}`, drift)
-                    db.delete(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-                }
-                if(nitro){
-                    db.set(`${cardb.Cars[trading2].Name}nitro_${user1.id}`, nitro)
-                    db.delete(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-                }
-                if(engine){
-                    db.set(`${cardb.Cars[trading2].Name}engine_${user1.id}`, engine)
-                    db.delete(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-                }
-                if(db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`)){
-                    db.set(`${cardb.Cars[trading2].Name}livery_${user1.id}`, carimage) 
-                    db.delete(`${cardb.Cars[trading2].Name}livery_${user2.id}`)
-                }
-                if(db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)){
-                    db.set(`${cardb.Cars[trading2].Name}restoration_${user1.id}`, restoration) 
-                    db.delete(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-                }
-    
-                db.set(`${cardb.Cars[trading2].Name}speed_${user1.id}`, speed)
-                db.set(`${cardb.Cars[trading2].Name}060_${user1.id}`, zerosixty)
-                db.set(`${cardb.Cars[trading2].Name}handling_${user1.id}`, handling)
-                db.delete(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-                db.delete(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-                db.delete(`${cardb.Cars[trading2].Name}handling_${user2.id}`)
-                db.subtract(`cash_${user1.id}`, amount)
-                db.add(`cash_${user2.id}`, amount)
-                for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading2.toLowerCase()), 1)
-                db.set(`cars_${user2.id}`, newcars)
-                db.push(`cars_${user1.id}`, trading2.toLowerCase())
+              
+                    userdata.cash -= Number(amount)
+                    userdata2.cash += Number(amount)
+       
+                userdata2.cars.pull(selected2)
+                userdata.cars.push(selected2)
+
+           
                 embed.setTitle("Trade Accepted!")
+                
+                userdata.save()
+                userdata2.save()
                 collector.stop()
 
                 interaction.editReply({embeds: [embed]})
@@ -779,43 +542,25 @@ module.exports = {
 
         }
         else  if(trading2.endsWith("cash") && cardb.Cars[trading.toLowerCase()]) {
-            let user1cars = db.fetch(`cars_${user1.id}`) || []
-            let user2cars = db.fetch(`cars_${user2.id}`) || []
+            let user2cars = userdata2.cars
+            let user1cars = userdata.cars
 
-            if(!user1cars.includes(trading)) return interaction.reply(`${user1} doesn't have that car!`)
-            if(user2cars.includes(trading)) return interaction.reply(`${user2} already has that car!`)
-            let selected = db.fetch(`isselected_${cardb.Cars[trading.toLowerCase()].Name}_${user1.id}`)
+            let filteredcar = userdata.cars.filter(car => car.Name == trading.toLowerCase());
+            let selected = filteredcar[0] || 'No ID'
+            let filteredcar2 = userdata2.cars.filter(car => car.Name == trading.toLowerCase());
+            let selected2 = filteredcar2[0] || 'No ID'
 
-            if(selected) return interaction.reply(`${user1}, you need to deselect this car before trading it!`)
+            if(selected == "No ID") return interaction.reply(`${user1} doesn't have that car!`)
+            if(selected2 !== "No ID") return interaction.reply(`${user2}, you already have that car!`)
 
-            let handling = db.fetch(`${cardb.Cars[trading.toLowerCase()].Name}handling_${user1.id}`) || 0
-            let exhaust = db.fetch(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-            let gearbox = db.fetch(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-            let tires = db.fetch(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-            let turbo = db.fetch(`${cardb.Cars[trading].Name}turbo_${user1.id}`) 
-            let intake = db.fetch(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-            let clutch = db.fetch(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-            let ecu = db.fetch(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-            let suspension = db.fetch(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-            let restoration  = db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
+           
 
-            let weight = db.fetch(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-            let offroad = db.fetch(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-            let drift = db.fetch(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-            let speed = db.fetch(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-            let zerosixty = db.fetch(`${cardb.Cars[trading].Name}060_${user1.id}`)
+         
 
-            let nitro = db.fetch(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-          
-            let engine = db.fetch(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-            
-            let carimage = db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`) || cardb.Cars[trading].Image
-
-            let amount = trading2.split(' ')[0]
-            let bal = db.fetch(`cash_${user2.id}`)
+            let amount = trading.split(' ')[0]
+            let bal = userdata2.cash
             if(bal < amount) return interaction.reply("Settle down they don't have enough cash!")
             if(amount < 1500) return interaction.reply(`Minimum of $1.5k cash needed.`)
-
             let embed = new Discord.MessageEmbed()
             .setTitle('Trading')
             .setDescription(`The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`)
@@ -833,80 +578,18 @@ module.exports = {
             collector.on('collect', (r, user) => {
                 
                 if(r.emoji.name == '✅'){
-                let newcars = db.fetch(`cars_${user1.id}`)
-                if(!newcars.includes(trading)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                if(exhaust){
-                    db.set(`${cardb.Cars[trading].Name}exhaust_${user1.id}`, exhaust)
-                    db.delete(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-                
-                }
-                if(gearbox){
-                    db.set(`${cardb.Cars[trading].Name}gearbox_${user2.id}`, gearbox)
-                    db.delete(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-                }
-                if(tires){
-                    db.set(`${cardb.Cars[trading].Name}tires_${user2.id}`, tires)
-                    db.delete(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-                }
-                if(turbo){
-                    db.set(`${cardb.Cars[trading].Name}turbo_${user2.id}`, turbo)
-                    db.delete(`${cardb.Cars[trading].Name}turbo_${user1.id}`)
-                }
-                if(intake){
-                    db.set(`${cardb.Cars[trading].Name}intake_${user2.id}`, intake)
-                    db.delete(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-                }
-                if(clutch){
-                    db.set(`${cardb.Cars[trading].Name}clutch_${user2.id}`, clutch)
-                    db.delete(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-                }
-                if(ecu){
-                    db.set(`${cardb.Cars[trading].Name}ecu_${user2.id}`, ecu)
-                    db.delete(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-                }
-                if(suspension){
-                    db.set(`${cardb.Cars[trading].Name}suspension_${user2.id}`, suspension)
-                    db.delete(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-                }
-                if(weight){
-                    db.set(`${cardb.Cars[trading].Name}weight_${user2.id}`, weight)
-                    db.delete(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-                }
-                if(offroad){
-                    db.set(`${cardb.Cars[trading].Name}offroad_${user2.id}`, offroad)
-                    db.delete(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-                }
-                if(drift){
-                    db.set(`${cardb.Cars[trading].Name}drift_${user2.id}`, drift)
-                    db.delete(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-                }
-                if(nitro){
-                    db.set(`${cardb.Cars[trading].Name}nitro_${user2.id}`, nitro)
-                    db.delete(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-                }
-                if(engine){
-                    db.set(`${cardb.Cars[trading].Name}engine_${user2.id}`, engine)
-                    db.delete(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-                }
-                if(db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`)){
-                    db.set(`${cardb.Cars[trading].Name}livery_${user2.id}`, carimage) 
-                    db.delete(`${cardb.Cars[trading].Name}livery_${user1.id}`)
-                }
-                if(db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)){
-                    db.set(`${cardb.Cars[trading].Name}restoration_${user2.id}`, restoration) 
-                    db.delete(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
-                }
-    
-                db.set(`${cardb.Cars[trading].Name}speed_${user2.id}`, speed)
-                db.set(`${cardb.Cars[trading].Name}060_${user2.id}`, zerosixty)
-                db.set(`${cardb.Cars[trading].Name}handling_${user2.id}`, handling)
-                db.push(`cars_${user2.id}`, trading.toLowerCase())
+              
+                    userdata2.cash -= Number(amount)
+                    userdata.cash += Number(amount)
+       
+                userdata.cars.pull(selected)
+                userdata2.cars.push(selected)
 
-                db.subtract(`cash_${user2.id}`, amount)
-                db.add(`cash_${user1.id}`, amount)
-                for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading.toLowerCase()), 1)
-                db.set(`cars_${user1.id}`, newcars)
+           
                 embed.setTitle("Trade Accepted!")
+                
+                userdata.save()
+                userdata2.save()
                 collector.stop()
 
                 interaction.editReply({embeds: [embed]})
@@ -931,75 +614,33 @@ module.exports = {
 
         }
         else  if(cardb.Cars[trading.toLowerCase()] && cardb.Cars[trading2.toLowerCase()]) {
+            let user2cars = userdata2.cars
+            let user1cars = userdata.cars
 
-            let user1cars = db.fetch(`cars_${user1.id}`)
-            let user2cars = db.fetch(`cars_${user2.id}`)
+            let filteredcar = userdata.cars.filter(car => car.Name == trading.toLowerCase());
+            let selected = filteredcar[0] || 'No ID'
+            let filteredcaru2 = userdata2.cars.filter(car => car.Name == trading.toLowerCase());
+            let selectedu2 = filteredcaru2[0] || 'No ID'
+            let filteredcar2 = userdata2.cars.filter(car => car.Name == trading2.toLowerCase());
+            let selected2 = filteredcar2[0] || 'No ID'
+            let filteredcaru1 = userdata.cars.filter(car => car.Name == trading2.toLowerCase());
+            let selectedu1 = filteredcaru1[0] || 'No ID'
 
-            if(!user1cars.includes(trading)) return interaction.reply(`${user1} doesn't have that car!`)
-            if(!user2cars.includes(trading2)) return interaction.reply(`${user2} doesn't have that car!`)
-            if(user1cars.includes(trading2)) return interaction.reply(`${user1} already has that car!`)
-            if(user2cars.includes(trading)) return interaction.reply(`${user2} already has that car!`)
+            if(selected == "No ID") return interaction.reply(`${user1} doesn't have that car!`)
+            if(selected2 == "No ID") return interaction.reply(`${user2} doesn't have that car!`)
+            if(selectedu2 !== "No ID") return interaction.reply(`${user2} already has this car!`)
+            if(selectedu1 !== 'No ID') return interaction.reply(`${user1} already has this car!`)
 
-            let selected = db.fetch(`isselected_${cardb.Cars[trading.toLowerCase()].Name}_${user1.id}`)
-            let selected2 = db.fetch(`isselected_${cardb.Cars[trading2.toLowerCase()].Name}_${user2.id}`)
-
-            if(selected) return interaction.reply(`${user1}, you need to deselect this car before trading it!`)
-            if(selected2) return interaction.reply(`${user2}, you need to deselect this car before trading it!`)
-
-            let handling = db.fetch(`${cardb.Cars[trading.toLowerCase()].Name}handling_${user1.id}`) || 0
-            let exhaust = db.fetch(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
-            let gearbox = db.fetch(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-            let tires = db.fetch(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-            let turbo = db.fetch(`${cardb.Cars[trading].Name}turbo_${user1.id}`) 
-            let intake = db.fetch(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-            let clutch = db.fetch(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-            let ecu = db.fetch(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-            let suspension = db.fetch(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-            let restoration  = db.fetch(`${cardb.Cars[trading].Name}restoration_${user1.id}`)
-            let restoration2  = db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-
-            let weight = db.fetch(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-            let offroad = db.fetch(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-            let drift = db.fetch(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-            let speed = db.fetch(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-            let zerosixty = db.fetch(`${cardb.Cars[trading].Name}060_${user1.id}`)
-
-            let nitro = db.fetch(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-          
-            let engine = db.fetch(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-            
-            let carimage = db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`) || cardb.Cars[trading].Image
-
-            let handling2 = db.fetch(`${cardb.Cars[trading2.toLowerCase()].Name}handling_${user2.id}`) || 0
-            let exhaust2 = db.fetch(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-            let gearbox2 = db.fetch(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-            let tires2 = db.fetch(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-            let turbo2 = db.fetch(`${cardb.Cars[trading2].Name}turbo_${user2.id}`) 
-            let intake2 = db.fetch(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-            let clutch2 = db.fetch(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-            let ecu2 = db.fetch(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-            let suspension2 = db.fetch(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
            
-            let weight2 = db.fetch(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-            let offroad2 = db.fetch(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-            let drift2 = db.fetch(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-            let speed2 = db.fetch(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-            let zerosixty2 = db.fetch(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-            let resale = db.fetch(`${cardb.Cars[trading].Name}resale_${user1.id}`)
-            let resale2 = db.fetch(`${cardb.Cars[trading2].Name}resale_${user2.id}`)
 
-            let nitro2 = db.fetch(`${cardb.Cars[trading2].Name}nitro_${user1.id}`)
-          
-            let engine2 = db.fetch(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-            
-            let carimage2 = db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`) || cardb.Cars[trading2].Image
+         
 
-            
+
             let embed = new Discord.MessageEmbed()
             .setTitle('Trading')
             .setDescription(`The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`)
             .addField(`Your Offer`, `${cardb.Cars[trading].Name}`)
-            .addField(`${user2.username}'s Offer`, `${cardb.Cars[trading2].Name}`)
+            .addField(`${user2.username}'s Item`, `${cardb.Cars[trading2].Name}`)
             .setColor("#60b0f4")
 
             let msg = await interaction.reply({embeds: [embed], fetchReply: true})
@@ -1012,161 +653,19 @@ module.exports = {
             collector.on('collect', (r, user) => {
                 
                 if(r.emoji.name == '✅'){
-                let newcars = db.fetch(`cars_${user1.id}`)
-                if(!newcars.includes(trading)) return interaction.channel.send(`${user1} doesn't have that car!`)
-                let newcars2 = db.fetch(`cars_${user2.id}`)
-                if(!newcars2.includes(trading2)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                if(exhaust){
-                    db.set(`${cardb.Cars[trading].Name}exhaust_${user1.id}`, exhaust)
-                    db.delete(`${cardb.Cars[trading].Name}exhaust_${user1.id}`)
+              
                 
-                }
-                if(gearbox){
-                    db.set(`${cardb.Cars[trading].Name}gearbox_${user2.id}`, gearbox)
-                    db.delete(`${cardb.Cars[trading].Name}gearbox_${user1.id}`)
-                }
-                if(tires){
-                    db.set(`${cardb.Cars[trading].Name}tires_${user2.id}`, tires)
-                    db.delete(`${cardb.Cars[trading].Name}tires_${user1.id}`)
-                }
-                if(turbo){
-                    db.set(`${cardb.Cars[trading].Name}turbo_${user2.id}`, turbo)
-                    db.delete(`${cardb.Cars[trading].Name}turbo_${user1.id}`)
-                }
-                if(intake){
-                    db.set(`${cardb.Cars[trading].Name}intake_${user2.id}`, intake)
-                    db.delete(`${cardb.Cars[trading].Name}intake_${user1.id}`)
-                }
-                if(clutch){
-                    db.set(`${cardb.Cars[trading].Name}clutch_${user2.id}`, clutch)
-                    db.delete(`${cardb.Cars[trading].Name}clutch_${user1.id}`)
-                }
-                if(ecu){
-                    db.set(`${cardb.Cars[trading].Name}ecu_${user2.id}`, ecu)
-                    db.delete(`${cardb.Cars[trading].Name}ecu_${user1.id}`)
-                }
-                if(suspension){
-                    db.set(`${cardb.Cars[trading].Name}suspension_${user2.id}`, suspension)
-                    db.delete(`${cardb.Cars[trading].Name}suspension_${user1.id}`)
-                }
-                if(weight){
-                    db.set(`${cardb.Cars[trading].Name}weight_${user2.id}`, weight)
-                    db.delete(`${cardb.Cars[trading].Name}weight_${user1.id}`)
-                }
-                if(offroad){
-                    db.set(`${cardb.Cars[trading].Name}offroad_${user2.id}`, offroad)
-                    db.delete(`${cardb.Cars[trading].Name}offroad_${user1.id}`)
-                }
-                if(drift){
-                    db.set(`${cardb.Cars[trading].Name}drift_${user2.id}`, drift)
-                    db.delete(`${cardb.Cars[trading].Name}drift_${user1.id}`)
-                }
-                if(nitro){
-                    db.set(`${cardb.Cars[trading].Name}nitro_${user2.id}`, nitro)
-                    db.delete(`${cardb.Cars[trading].Name}nitro_${user1.id}`)
-                }
-                if(engine){
-                    db.set(`${cardb.Cars[trading].Name}engine_${user2.id}`, engine)
-                    db.delete(`${cardb.Cars[trading].Name}engine_${user1.id}`)
-                }
-                if(db.fetch(`${cardb.Cars[trading].Name}livery_${user1.id}`)){
-                    db.set(`${cardb.Cars[trading].Name}livery_${user2.id}`, carimage) 
-                    db.delete(`${cardb.Cars[trading].Name}livery_${user1.id}`)
-                }
-                if(exhaust){
-                    db.set(`${cardb.Cars[trading2].Name}exhaust_${user1.id}`, exhaust)
-                    db.delete(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-                
-                }
-                if(gearbox2){
-                    db.set(`${cardb.Cars[trading2].Name}gearbox_${user1.id}`, gearbox2)
-                    db.delete(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-                }
-                if(tires2){
-                    db.set(`${cardb.Cars[trading2].Name}tires_${user1.id}`, tires2)
-                    db.delete(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-                }
-                if(turbo2){
-                    db.set(`${cardb.Cars[trading2].Name}turbo_${user1.id}`, turbo2)
-                    db.delete(`${cardb.Cars[trading2].Name}turbo_${user2.id}`)
-                }
-                if(intake2){
-                    db.set(`${cardb.Cars[trading2].Name}intake_${user1.id}`, intake2)
-                    db.delete(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-                }
-                if(clutch2){
-                    db.set(`${cardb.Cars[trading2].Name}clutch_${user1.id}`, clutch2)
-                    db.delete(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-                }
-                if(ecu2){
-                    db.set(`${cardb.Cars[trading2].Name}ecu_${user1.id}`, ecu2)
-                    db.delete(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-                }
-                if(suspension2){
-                    db.set(`${cardb.Cars[trading2].Name}suspension_${user1.id}`, suspension2)
-                    db.delete(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
-                }
-                if(weight2){
-                    db.set(`${cardb.Cars[trading2].Name}weight_${user1.id}`, weight2)
-                    db.delete(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-                }
-                if(offroad2){
-                    db.set(`${cardb.Cars[trading2].Name}offroad_${user1.id}`, offroad2)
-                    db.delete(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-                }
-                if(drift2){
-                    db.set(`${cardb.Cars[trading2].Name}drift_${user1.id}`, drift2)
-                    db.delete(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-                }
-                if(nitro2){
-                    db.set(`${cardb.Cars[trading2].Name}nitro_${user1.id}`, nitro2)
-                    db.delete(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-                }
-                if(engine2){
-                    db.set(`${cardb.Cars[trading2].Name}engine_${user1.id}`, engine2)
-                    db.delete(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-                }
-                if(db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`)){
-                    db.set(`${cardb.Cars[trading2].Name}livery_${user1.id}`, carimage2) 
-                    db.delete(`${cardb.Cars[trading2].Name}livery_${user2.id}`)
-                }
-    
-                if(db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)){
-                    db.set(`${cardb.Cars[trading2].Name}restoration_${user1.id}`, restoration2) 
-                    db.delete(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-                }
-    
-                if(db.fetch(`${cardb.Cars[trading2].Name}restoration_${user1.id}`)){
-                    db.set(`${cardb.Cars[trading2].Name}restoration_${user2.id}`, restoration) 
-                    db.delete(`${cardb.Cars[trading2].Name}restoration_${user1.id}`)
-                }
+       
+                userdata.cars.pull(selected)
+                userdata2.cars.push(selected)
+                userdata2.cars.pull(selected2)
+                userdata.cars.push(selected2)
 
-                db.set(`${cardb.Cars[trading2].Name}speed_${user1.id}`, speed2)
-                db.set(`${cardb.Cars[trading2].Name}060_${user1.id}`, zerosixty2)
-                db.set(`${cardb.Cars[trading2].Name}handling_${user1.id}`, handling2)
-                db.set(`${cardb.Cars[trading].Name}speed_${user2.id}`, speed)
-                db.set(`${cardb.Cars[trading].Name}060_${user2.id}`, zerosixty)
-                db.set(`${cardb.Cars[trading].Name}handling_${user2.id}`, handling)
-                db.set(`${cardb.Cars[trading].Name}resale_${user2.id}`, resale)
-                db.set(`${cardb.Cars[trading2].Name}resale_${user1.id}`, resale2)
-
-                db.delete(`${cardb.Cars[trading].Name}resale_${user1.id}`)
-                db.delete(`${cardb.Cars[trading2].Name}resale_${user2.id}`)
-
-                db.delete(`${cardb.Cars[trading].Name}speed_${user1.id}`)
-                db.delete(`${cardb.Cars[trading].Name}060_${user1.id}`)
-                db.delete(`${cardb.Cars[trading].Name}handling_${user1.id}`)
-                db.delete(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-                db.delete(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-                db.delete(`${cardb.Cars[trading2].Name}handling_${user2.id}`)
-            
-                for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading.toLowerCase()), 1)
-                db.set(`cars_${user1.id}`, newcars)
-                for (var i = 0; i < 1; i ++) newcars2.splice(newcars2.indexOf(trading2.toLowerCase()), 1)
-                db.set(`cars_${user2.id}`, newcars2)
-                db.push(`cars_${user1.id}`, trading2.toLowerCase())
-                db.push(`cars_${user2.id}`, trading.toLowerCase())
+           
                 embed.setTitle("Trade Accepted!")
+                
+                userdata.save()
+                userdata2.save()
                 collector.stop()
 
                 interaction.editReply({embeds: [embed]})
@@ -1186,12 +685,14 @@ module.exports = {
                 }
                 
               })
+  
+
 
         }
         else  if(partdb.Parts[trading.toLowerCase()]) {
 
             let amount1 = interaction.options.getNumber("amount1")
-            let user1parts = db.fetch(`parts_${user1.id}`)
+            let user1parts = userdata.parts
 
             if(!user1parts.includes(trading.toLowerCase())) return interaction.reply(`You don't have this part!`)
             let actamount
@@ -1207,7 +708,7 @@ module.exports = {
             if(amount2 > filtereduser.length) return interaction.reply(`${user1} doesn't have ${actamount} ${trading}!`)
             if(trading2.endsWith("cash")){
                 let amount = trading2.split(' ')[0]
-                let bal = db.fetch(`cash_${user2.id}`) || 0
+                let bal = userdata2.cash
 
                 if(amount > bal) return interaction.reply(`The user doesn't have this much cash!`)
 
@@ -1227,18 +728,21 @@ module.exports = {
     
                 collector.on('collect', (r, user) => {
                     if(r.emoji.name == '✅'){
-                        db.subtract(`cash_${user2.id}`, amount)
-                        db.add(`cash_${user1.id}`, amount)
+                        userdata2.cash -= Number(amount)
+                        userdata.cash += Number(amount)
                         for (var i = 0; i < actamount; i ++) user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1)
-                        db.set(`parts_${user1.id}`, user1parts)
+                         userdata.parts = user1parts
                         let user1newpart = []
                     for (var i = 0; i < actamount; i ++) user1newpart.push(trading.toLowerCase())
                     for(i in user1newpart){
                         
-                        db.push(`parts_${user2.id}`, user1newpart[i])
+                        userdata2.parts.push(user1newpart[i])
                     }
 
                         embed.setTitle("Trade Accepted!")
+                        
+                userdata.save()
+                userdata2.save()
                         collector.stop()
 
                         interaction.editReply({embeds: [embed]})
@@ -1261,7 +765,7 @@ module.exports = {
                   })
             }
             else if(partdb.Parts[trading2.toLowerCase()]){
-                let user2parts = db.fetch(`parts_${user2.id}`)
+                let user2parts = userdata2.parts
                 let amount2 = interaction.options.getNumber("amount2")
                 let amount1 = interaction.options.getNumber("amount1")
         
@@ -1306,25 +810,29 @@ module.exports = {
                 collector.on('collect', (r, user) => {
                     if(r.emoji.name == '✅'){
                         for (var i = 0; i < actamount; i ++) user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1)
-                        db.set(`parts_${user2.id}`, user2parts)
+                        userdata2.parts = user2parts
                         for (var i = 0; i < actamount1; i ++) user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1)
-                        db.set(`parts_${user1.id}`, user1parts)
+                        userdata.parts = user1parts
                         
                         let user1newpart = []
                         for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                         for(i in user1newpart){
                             
-                            db.push(`parts_${user1.id}`, user1newpart[i])
+                            userdata.parts.push(user1newpart[i])
                         }
 
                         let user1newpart2 = []
                         for (var i = 0; i < actamount1; i ++) user1newpart2.push(trading.toLowerCase())
                         for(i in user1newpart2){
                             
-                            db.push(`parts_${user2.id}`, user1newpart2[i])
+                            userdata2.parts.push(user1newpart2[i])
                         }
 
                         embed.setTitle("Trade Accepted!")
+
+                        
+                userdata.save()
+                userdata2.save()
                         collector.stop()
 
                         interaction.editReply({embeds: [embed]})
@@ -1348,8 +856,8 @@ module.exports = {
             }
             // part for item
             else if(itemdb.Collectable[0][trading2.toLowerCase()] || itemdb.Police[trading2.toLowerCase()] || itemdb.Other[trading2.toLowerCase()]){
-                let user1parts = db.fetch(`parts_${user1.id}`) || []
-                let useritems2 = db.fetch(`items_${user2.id}`) || []
+                let user1parts = userdata.parts
+                let useritems2 = userdata2.items
                 let amount2 = interaction.options.getNumber("amount2")
                 let amount1 = interaction.options.getNumber("amount1")
         
@@ -1420,26 +928,29 @@ module.exports = {
                 collector.on('collect', (r, user) => {
                     if(r.emoji.name == '✅'){
                         for (var i = 0; i < actamount1; i ++) user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1)
-                        db.set(`parts_${user1.id}`, user1parts)
+                       userdata.parts = user1parts
                         for (var i = 0; i < actamount; i ++) useritems2.splice(useritems2.indexOf(trading2.toLowerCase()), 1)
-                        db.set(`items_${user2.id}`, useritems2)
+                       userdata2.items = useritems2
                         
                         let user1newpart = []
                         for (var i = 0; i < actamount1; i ++) user1newpart.push(trading.toLowerCase())
                         for(i in user1newpart){
                             
-                            db.push(`parts_${user2.id}`, user1newpart[i])
+                            userdata2.parts.push(user1newpart[i])
                         }
 
                         let user1newpart2 = []
                         for (var i = 0; i < actamount; i ++) user1newpart2.push(trading2.toLowerCase())
                         for(i in user1newpart2){
                             
-                            db.push(`items_${user1.id}`, user1newpart2[i])
+                            userdata.items.push(user1newpart2[i])
                         }
 
 
                         embed.setTitle("Trade Accepted!")
+                        
+                userdata.save()
+                userdata2.save()
                         collector.stop()
 
                         interaction.editReply({embeds: [embed]})
@@ -1462,7 +973,7 @@ module.exports = {
                   })
             }
             else if(cardb.Cars[trading2.toLowerCase()]){
-                let user2cars = db.fetch(`cars_${user2.id}`)
+                let user2cars = userdata2.cars
 
                 if(!user2cars.includes(trading2.toLowerCase())) return interaction.reply(`This user doesn't have this car!`)
                 let amount2 = interaction.options.getNumber("amount2")
@@ -1484,7 +995,14 @@ module.exports = {
                     return part === trading.toLowerCase()
                   })
                 if(actamount1 > filtereduser.length) return interaction.reply(`${user1} doesn't have ${actamount1} ${trading}!`)
-
+                let filteredcar = userdata.cars.filter(car => car.Name == trading2.toLowerCase());
+                let selected = filteredcar[0] || 'No ID'
+                let filteredcar2 = userdata2.cars.filter(car => car.Name == trading2.toLowerCase());
+                let selected2 = filteredcar2[0] || 'No ID'
+    
+                if(selected2 == "No ID") return interaction.reply(`${user2} doesn't have that car!`)
+                if(selected !== "No ID") return interaction.reply(`${user1}, you already have that car!`)
+                 
                 let embed = new Discord.MessageEmbed()
                 .setTitle('Trading')
                 .setDescription(`The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`)
@@ -1501,116 +1019,24 @@ module.exports = {
     
                 collector.on('collect', (r, user) => {
                     if(r.emoji.name == '✅'){
-                        let selected = db.fetch(`isselected_${cardb.Cars[trading2.toLowerCase()].Name}_${user2.id}`)
-
-                        if(selected) return interaction.reply(`${user2}, you need to deselect this car before trading it!`)
-            
-                        let handling = db.fetch(`${cardb.Cars[trading2.toLowerCase()].Name}handling_${user2.id}`) || 0
-                        let exhaust = db.fetch(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-                        let gearbox = db.fetch(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-                        let tires = db.fetch(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-                        let turbo = db.fetch(`${cardb.Cars[trading2].Name}turbo_${user2.id}`) 
-                        let intake = db.fetch(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-                        let clutch = db.fetch(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-                        let ecu = db.fetch(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-                        let suspension = db.fetch(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
+     
+                   
+                        userdata2.cars.pull(selected)
+                        userdata.cars.push(selected)
                        
-                        let weight = db.fetch(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-                        let offroad = db.fetch(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-                        let drift = db.fetch(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-                        let speed = db.fetch(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-                        let zerosixty = db.fetch(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-            
-                        let nitro = db.fetch(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-                        let restoration  = db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-            
-                        let engine = db.fetch(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-                        
-                        let carimage = db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`) || cardb.Cars[trading2].Image
-                        
-                        let newcars = db.fetch(`cars_${user2.id}`)
-                        if(!newcars.includes(trading2)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                        if(exhaust){
-                            db.set(`${cardb.Cars[trading2].Name}exhaust_${user1.id}`, exhaust)
-                            db.delete(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-                        
-                        }
-                        if(gearbox){
-                            db.set(`${cardb.Cars[trading2].Name}gearbox_${user1.id}`, gearbox)
-                            db.delete(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-                        }
-                        if(tires){
-                            db.set(`${cardb.Cars[trading2].Name}tires_${user1.id}`, tires)
-                            db.delete(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-                        }
-                        if(turbo){
-                            db.set(`${cardb.Cars[trading2].Name}turbo_${user1.id}`, turbo)
-                            db.delete(`${cardb.Cars[trading2].Name}turbo_${user2.id}`)
-                        }
-                        if(intake){
-                            db.set(`${cardb.Cars[trading2].Name}intake_${user1.id}`, intake)
-                            db.delete(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-                        }
-                        if(clutch){
-                            db.set(`${cardb.Cars[trading2].Name}clutch_${user1.id}`, clutch)
-                            db.delete(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-                        }
-                        if(ecu){
-                            db.set(`${cardb.Cars[trading2].Name}ecu_${user1.id}`, ecu)
-                            db.delete(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-                        }
-                        if(suspension){
-                            db.set(`${cardb.Cars[trading2].Name}suspension_${user1.id}`, suspension)
-                            db.delete(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
-                        }
-                        if(weight){
-                            db.set(`${cardb.Cars[trading2].Name}weight_${user1.id}`, weight)
-                            db.delete(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-                        }
-                        if(offroad){
-                            db.set(`${cardb.Cars[trading2].Name}offroad_${user1.id}`, offroad)
-                            db.delete(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-                        }
-                        if(drift){
-                            db.set(`${cardb.Cars[trading2].Name}drift_${user1.id}`, drift)
-                            db.delete(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-                        }
-                        if(nitro){
-                            db.set(`${cardb.Cars[trading2].Name}nitro_${user1.id}`, nitro)
-                            db.delete(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-                        }
-                        if(engine){
-                            db.set(`${cardb.Cars[trading2].Name}engine_${user1.id}`, engine)
-                            db.delete(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-                        }
-                        if(db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`)){
-                            db.set(`${cardb.Cars[trading2].Name}livery_${user1.id}`, carimage) 
-                            db.delete(`${cardb.Cars[trading2].Name}livery_${user2.id}`)
-                        }
-                        if(db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)){
-                            db.set(`${cardb.Cars[trading2].Name}restoration_${user1.id}`, restoration) 
-                            db.delete(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-                        }
-            
-                        db.set(`${cardb.Cars[trading2].Name}speed_${user1.id}`, speed)
-                        db.set(`${cardb.Cars[trading2].Name}060_${user1.id}`, zerosixty)
-                        db.set(`${cardb.Cars[trading2].Name}handling_${user1.id}`, handling)
-                        db.delete(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-                        db.delete(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-                        db.delete(`${cardb.Cars[trading2].Name}handling_${user2.id}`)
-                        for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading2.toLowerCase()), 1)
-                        db.set(`cars_${user2.id}`, newcars)
-                        db.push(`cars_${user1.id}`, trading2.toLowerCase())
                         for (var i = 0; i < actamount1; i ++) user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1)
-                        db.set(`parts_${user1.id}`, user1parts)
+                        userdata.parts = user1parts
                         
                         let user1newpart = []
                         for (var i = 0; i < actamount1; i ++) user1newpart.push(trading.toLowerCase())
                         for(i in user1newpart){
                             
-                            db.push(`parts_${user2.id}`, user1newpart[i])
+                            userdata.parts.push(user1newpart[i])
                         }
                         embed.setTitle("Trade Accepted!")
+                        
+                userdata.save()
+                userdata2.save()
                         collector.stop()
 
                         interaction.editReply({embeds: [embed]})
@@ -1637,7 +1063,7 @@ module.exports = {
         }
             else if(itemdb.Collectable[0][trading.toLowerCase()] || itemdb.Police[trading.toLowerCase()] || itemdb.Other[trading.toLowerCase()]){
                 
-                let useritems = db.fetch(`items_${user1.id}`)
+                let useritems = userdata.items
                 let amount2 = interaction.options.getNumber("amount2")
                 let amount1 = interaction.options.getNumber("amount1")
         
@@ -1688,7 +1114,7 @@ module.exports = {
                     console.log(itemtype)
                     trading = trading.toLowerCase()
                     let amount = trading2.split(' ')[0]
-                    let bal = db.fetch(`cash_${user2.id}`)
+                    let bal = userdata2.cash
                     if(bal < amount) return interaction.reply(`Settle down, ${user2} doesn't have enough cash!`)
                     if(amount < 1500) return interaction.reply(`Minimum of $1.5k cash needed.`)
                     let embed = new Discord.MessageEmbed()
@@ -1716,19 +1142,24 @@ module.exports = {
                     collector.on('collect', (r, user) => {
                         
                         if(r.emoji.name == '✅'){
-                            db.subtract(`cash_${user2.id}`, amount)
+
+                            userdata2.cash -= Number(amount)
+                            
                             let user1newpart = []
                             for (var i = 0; i < actamount1; i ++) user1newpart.push(trading.toLowerCase())
                             for(i in user1newpart){
                                 
-                                db.push(`items_${user2.id}`, user1newpart[i])
+                                userdata2.items.push(user1newpart[i])
                             }
         
 
-                            db.add(`cash_${user1.id}`, amount)
+                            userdata.cash += Number(amount)
                             for (var i = 0; i < actamount1; i ++) useritems.splice(useritems.indexOf(trading.toLowerCase()), 1)
-                            db.set(`items_${user1.id}`, useritems)
+                            userdata.items = useritems
                             embed.setTitle("Trade Accepted!")
+                            
+                userdata.save()
+                userdata2.save()
                             collector.stop()
 
                             interaction.editReply({embeds: [embed]})
@@ -1753,7 +1184,7 @@ module.exports = {
                 }
                 else if(partdb.Parts[trading2.toLowerCase()]){
 
-                    let user2parts = db.fetch(`parts_${user2.id}`)
+                    let user2parts = userdata2.parts
 
                     let filtereduser = user2parts.filter(function hasmany(part) {
                         return part === trading2.toLowerCase()
@@ -1787,14 +1218,14 @@ module.exports = {
                     collector.on('collect', (r, user) => {
                         if(r.emoji.name == '✅'){
                             for (var i = 0; i < actamount; i ++) user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1)
-                            db.set(`parts_${user2.id}`, user2parts)
+                            userdata2.parts = user2parts
                             for (var i = 0; i < actamount1; i ++) useritems.splice(useritems.indexOf(trading.toLowerCase()), 1)
-                            db.set(`items_${user1.id}`, useritems)
+                            userdata.items = useritems
                             let user1newpart = []
                             for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                             for(i in user1newpart){
                                 
-                                db.push(`parts_${user1.id}`, user1newpart[i])
+                                userdata.parts.push(user1newpart[i])
                             }  
                             let user1newpart2 = []
                             for (var i = 0; i < actamount1; i ++) user1newpart2.push(trading.toLowerCase())
@@ -1803,12 +1234,16 @@ module.exports = {
 
                             for(i in user1newpart2){
                                 
-                                db.push(`items_${user2.id}`, user1newpart2[i])
+                                userdata.items.push(user1newpart2[i])
+
                             }  
                             
                            
     
                             embed.setTitle("Trade Accepted!")
+                            
+                userdata.save()
+                userdata2.save()
                             collector.stop()
 
                             interaction.editReply({embeds: [embed]})
@@ -1833,10 +1268,18 @@ module.exports = {
                 }
 
                 else if(cardb.Cars[trading2.toLowerCase()]){
-                    let user2cars = db.fetch(`cars_${user2.id}`)
+                    let user2cars = userdata.cars
 
                     if(!user2cars.includes(trading2.toLowerCase())) return interaction.reply(`This user doesn't have this car!`)
-    
+
+                    let filteredcar = userdata.cars.filter(car => car.Name == trading2.toLowerCase());
+                    let selected = filteredcar[0] || 'No ID'
+                    let filteredcar2 = userdata2.cars.filter(car => car.Name == trading2.toLowerCase());
+                    let selected2 = filteredcar2[0] || 'No ID'
+
+                    if(selected !== 'No ID') return interaction.reply(`${user}, you already have this car!`)
+                    if(selected2 == 'No ID') return interaction.reply(`${user2}, you don't have this car!`)
+
                     let embed = new Discord.MessageEmbed()
                     .setTitle('Trading')
                     .setDescription(`The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`)
@@ -1860,122 +1303,23 @@ module.exports = {
         
                     collector.on('collect', (r, user) => {
                         if(r.emoji.name == '✅'){
-                            let selected = db.fetch(`isselected_${cardb.Cars[trading2.toLowerCase()].Name}_${user2.id}`)
-    
-                            if(selected) return interaction.reply(`${user2}, you need to deselect this car before trading it!`)
+                          
                 
-                            let handling = db.fetch(`${cardb.Cars[trading2.toLowerCase()].Name}handling_${user2.id}`) || 0
-                            let exhaust = db.fetch(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-                            let gearbox = db.fetch(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-                            let tires = db.fetch(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-                            let turbo = db.fetch(`${cardb.Cars[trading2].Name}turbo_${user2.id}`) 
-                            let intake = db.fetch(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-                            let clutch = db.fetch(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-                            let ecu = db.fetch(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-                            let suspension = db.fetch(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
-                           
-                            let weight = db.fetch(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-                            let offroad = db.fetch(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-                            let drift = db.fetch(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-                            let speed = db.fetch(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-                            let zerosixty = db.fetch(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-                            let resale = db.fetch(`${cardb.Cars[trading2].Name}resale_${user2.id}`)
-
-                            let nitro = db.fetch(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-                            let restoration  = db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-                
-                            let engine = db.fetch(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-                            
-                            let carimage = db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`) || cardb.Cars[trading2].Image
-                            
-                            let newcars = db.fetch(`cars_${user2.id}`)
-                            if(!newcars.includes(trading2)) return interaction.channel.send(`${user2} doesn't have that car!`)
-                            if(exhaust){
-                                db.set(`${cardb.Cars[trading2].Name}exhaust_${user1.id}`, exhaust)
-                                db.delete(`${cardb.Cars[trading2].Name}exhaust_${user2.id}`)
-                            
-                            }
-                            if(gearbox){
-                                db.set(`${cardb.Cars[trading2].Name}gearbox_${user1.id}`, gearbox)
-                                db.delete(`${cardb.Cars[trading2].Name}gearbox_${user2.id}`)
-                            }
-                            if(tires){
-                                db.set(`${cardb.Cars[trading2].Name}tires_${user1.id}`, tires)
-                                db.delete(`${cardb.Cars[trading2].Name}tires_${user2.id}`)
-                            }
-                            if(turbo){
-                                db.set(`${cardb.Cars[trading2].Name}turbo_${user1.id}`, turbo)
-                                db.delete(`${cardb.Cars[trading2].Name}turbo_${user2.id}`)
-                            }
-                            if(intake){
-                                db.set(`${cardb.Cars[trading2].Name}intake_${user1.id}`, intake)
-                                db.delete(`${cardb.Cars[trading2].Name}intake_${user2.id}`)
-                            }
-                            if(clutch){
-                                db.set(`${cardb.Cars[trading2].Name}clutch_${user1.id}`, clutch)
-                                db.delete(`${cardb.Cars[trading2].Name}clutch_${user2.id}`)
-                            }
-                            if(ecu){
-                                db.set(`${cardb.Cars[trading2].Name}ecu_${user1.id}`, ecu)
-                                db.delete(`${cardb.Cars[trading2].Name}ecu_${user2.id}`)
-                            }
-                            if(suspension){
-                                db.set(`${cardb.Cars[trading2].Name}suspension_${user1.id}`, suspension)
-                                db.delete(`${cardb.Cars[trading2].Name}suspension_${user2.id}`)
-                            }
-                            if(weight){
-                                db.set(`${cardb.Cars[trading2].Name}weight_${user1.id}`, weight)
-                                db.delete(`${cardb.Cars[trading2].Name}weight_${user2.id}`)
-                            }
-                            if(offroad){
-                                db.set(`${cardb.Cars[trading2].Name}offroad_${user1.id}`, offroad)
-                                db.delete(`${cardb.Cars[trading2].Name}offroad_${user2.id}`)
-                            }
-                            if(drift){
-                                db.set(`${cardb.Cars[trading2].Name}drift_${user1.id}`, drift)
-                                db.delete(`${cardb.Cars[trading2].Name}drift_${user2.id}`)
-                            }
-                            if(nitro){
-                                db.set(`${cardb.Cars[trading2].Name}nitro_${user1.id}`, nitro)
-                                db.delete(`${cardb.Cars[trading2].Name}nitro_${user2.id}`)
-                            }
-                            if(engine){
-                                db.set(`${cardb.Cars[trading2].Name}engine_${user1.id}`, engine)
-                                db.delete(`${cardb.Cars[trading2].Name}engine_${user2.id}`)
-                            }
-                            if(db.fetch(`${cardb.Cars[trading2].Name}livery_${user2.id}`)){
-                                db.set(`${cardb.Cars[trading2].Name}livery_${user1.id}`, carimage) 
-                                db.delete(`${cardb.Cars[trading2].Name}livery_${user2.id}`)
-                            }
-                            if(db.fetch(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)){
-                                db.set(`${cardb.Cars[trading2].Name}restoration_${user1.id}`, restoration) 
-                                db.delete(`${cardb.Cars[trading2].Name}restoration_${user2.id}`)
-                            }
-                            if(db.fetch(`${cardb.Cars[trading2].Name}resale_${user2.id}`)){
-                                db.set(`${cardb.Cars[trading2].Name}resale_${user1.id}`, resale) 
-                                db.delete(`${cardb.Cars[trading2].Name}resale_${user2.id}`)
-                            }
-
-                
-                            db.set(`${cardb.Cars[trading2].Name}speed_${user1.id}`, speed)
-                            db.set(`${cardb.Cars[trading2].Name}060_${user1.id}`, zerosixty)
-                            db.set(`${cardb.Cars[trading2].Name}handling_${user1.id}`, handling)
-                            db.delete(`${cardb.Cars[trading2].Name}speed_${user2.id}`)
-                            db.delete(`${cardb.Cars[trading2].Name}060_${user2.id}`)
-                            db.delete(`${cardb.Cars[trading2].Name}handling_${user2.id}`)
-                            for (var i = 0; i < 1; i ++) newcars.splice(newcars.indexOf(trading2.toLowerCase()), 1)
-                            db.set(`cars_${user2.id}`, newcars)
-                            db.push(`cars_${user1.id}`, trading2.toLowerCase())
+                            userdata2.cars.pull(selected)
+                            userdata.cars.push(selected)
                             for (var i = 0; i < actamount1; i ++) useritems.splice(useritems.indexOf(trading.toLowerCase()), 1)
-                            db.set(`items_${user1.id}`, useritems)
+                            userdata.items = useritems
                             let user1newpart = []
                             for (var i = 0; i < actamount1; i ++) user1newpart.push(trading.toLowerCase())
                             for(i in user1newpart){
                                 
-                                db.push(`items_${user2.id}`, user1newpart[i])
+                                userdata2.items.push(user1newpart[i])
                             }
         
                             embed.setTitle("Trade Accepted!")
+                            
+                userdata.save()
+                userdata2.save()
                             collector.stop()
 
                             interaction.editReply({embeds: [embed]})
@@ -2001,7 +1345,7 @@ module.exports = {
                 else if(itemdb.Collectable[0][trading2.toLowerCase()] || itemdb.Police[trading2.toLowerCase()] || itemdb.Other[trading2.toLowerCase()]){
 
 
-                    let user2items = db.fetch(`items_${user2.id}`)
+                    let user2items = userdata2.items
 
                     if(!user2items.includes(trading2.toLowerCase())) return interaction.reply(`This user doesn't have this item!`)
 
@@ -2061,24 +1405,27 @@ module.exports = {
                     collector.on('collect', (r, user) => {
                         if(r.emoji.name == '✅'){
                             for (var i = 0; i < actamount; i ++) user2items.splice(user2items.indexOf(trading2.toLowerCase()), 1)
-                            db.set(`items_${user2.id}`, user2items)
+                            userdata2.items = user2items
                             for (var i = 0; i < actamount1; i ++) useritems.splice(useritems.indexOf(trading.toLowerCase()), 1)
-                            db.set(`items_${user1.id}`, useritems)
+                            userdata.items = useritems
                             let user1newpart = []
                             for (var i = 0; i < actamount; i ++) user1newpart.push(trading2.toLowerCase())
                             for(i in user1newpart){
                                 
-                                db.push(`items_${user1.id}`, user1newpart[i])
+                                userdata.items.push(user1newpart[i])
                             }
                             let user1newpart2 = []
                             for (var i = 0; i < actamount1; i ++) user1newpart2.push(trading.toLowerCase())
                             for(i in user1newpart2){
                                 
-                                db.push(`items_${user2.id}`, user1newpart2[i])
+                                userdata2.items.push(user1newpart2[i])
                             }
     
     
                             embed.setTitle("Trade Accepted!")
+                            
+                userdata.save()
+                userdata2.save()
                             collector.stop()
 
                             interaction.editReply({embeds: [embed]})
@@ -2107,7 +1454,6 @@ module.exports = {
 
                 //Item for car
 
-                
             }
         else {
             interaction.reply(`Error! Did you make sure to specify cash, a car, or a part on the bot?`)

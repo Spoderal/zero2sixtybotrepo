@@ -2,6 +2,10 @@ const cars = require("../cardb.json");
 const Discord = require("discord.js");
 const parts = require("../partsdb.json");
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -18,32 +22,21 @@ module.exports = {
     .setName("id")
     .setDescription("The id to set")
     .setRequired(true))
-    )
-    .addSubcommand((subcommand) => subcommand
-    .setName("deselect")
-    .setDescription("Deselect an ID")
-    .addStringOption((option) =>option
-    .setName("id")
-    .setDescription("The id to deselect")
-    .setRequired(true)
-    ))
-    ,
+    ),
     async execute(interaction) {
       const db = require("quick.db")
       
       let option = interaction.options.getSubcommand()        
         
-      
+      let userdata = await User.findOne({id: interaction.user.id})
+      let uid = interaction.user.id
         
       
      if(option == "select"){
     let cars = require('../cardb.json')
-     let usercars = db.fetch(`cars_${interaction.user.id}`)
+     let usercars = userdata.cars
     let idtochoose = interaction.options.getString("id")
-    let created = db.fetch(`created_${interaction.user.id}`)
-    if(!created) return interaction.reply("You haven't started yet! Run \`/start\` to start.")
-    let newplayer = db.fetch(`newplayer_${interaction.user.id}`)
-    let newplayerstage = db.fetch(`newplayerstage_${interaction.user.id}`)
+  
 
     if(!usercars) return interaction.reply("You don't own any cars!")
     let selecting = interaction.options.getString("car")
@@ -54,13 +47,37 @@ module.exports = {
     
     if(!cars.Cars[selecting.toLowerCase()]) return interaction.reply("Thats not a car!")
   
-    if(!usercars.includes(selecting.toLowerCase())) return interaction.reply("You don't own that car!")
-    if(db.fetch(`selected_${idtochoose}_${interaction.user.id}`) == selecting.toLowerCase()) return interaction.reply("That car is already set to that id! Run /ids Deselect [id] to deselect it")
-    if(db.fetch(`selected_${idtochoose}_${interaction.user.id}`)) return interaction.reply("A car is already set to that id! Run /ids Deselect [id] to deselect it")
-    if(idtochoose == cars.Cars[selecting.toLowerCase()].Name) return interaction.reply("A car id must be unique! Not the car name.")
 
-    db.set(`selected_${idtochoose}_${interaction.user.id}`, selecting.toLowerCase())
-    db.set(`isselected_${cars.Cars[selecting.toLowerCase()].Name}_${interaction.user.id}`, idtochoose)
+    if(idtochoose == cars.Cars[selecting.toLowerCase()].Name) return interaction.reply("A car id must be unique! Not the car name.")
+    let filteredcar = userdata.cars.filter(car => car.Name == cars.Cars[selecting.toLowerCase()].Name);
+    let selected = filteredcar[0] || 'No ID'
+    if(selected == 'No ID') return interaction.reply("You don't own that car!")
+    console.log(selected)
+      
+    await User.findOneAndUpdate(
+      {
+        id: uid
+      },
+      {
+        $set:{
+          "cars.$[car].ID": idtochoose
+        }
+        
+      },
+      
+      {
+        "arrayFilters":[
+          {
+            "car.Name": selected.Name
+          }
+        ]
+      }
+    )
+   
+
+    userdata.save()
+    
+
     let embed = new Discord.MessageEmbed()
     .setTitle("Selected ✅")
     .setDescription(`Selected your **${cars.Cars[selecting.toLowerCase()].Name}** to the ID "${idtochoose}", check with \`/garage cars\``)

@@ -1,6 +1,10 @@
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const {MessageActionRow, MessageButton} = require("discord.js")
 const Canvas = require("canvas")
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
+const Car = require('../schema/car')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -37,21 +41,26 @@ module.exports = {
 
             if(!user2) return interaction.reply("Specify a user to race!")
         
+            let userdata = await User.findOne({id: user.id})
+            let userdata2 = await User.findOne({id: user2.id})
+
            let timeout = 45000
 
-           car = car.toLowerCase()
-           car2 = car2.toLowerCase()
+           idtoselect = car
+           idtoselect2 = car2
 
-           let selected = db.fetch(`selected_${car}_${user.id}`);
-           if(!selected) {
+           let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
+           let selected = filteredcar[0] || 'No ID'
+           if(selected == "No ID") {
              let errembed = new discord.MessageEmbed()
              .setTitle("Error!")
              .setColor("DARK_RED")
              .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
              return  interaction.reply({embeds: [errembed]})
          }
-         let selected2 = db.fetch(`selected_${car2}_${user2.id}`);
-         if(!selected2) {
+         let filteredcar2 = userdata2.cars.filter(car => car.ID == idtoselect2);
+         let selected2 = filteredcar2[0] || 'No ID'
+         if(selected2 == "No ID") {
            let errembed = new discord.MessageEmbed()
            .setTitle("Error!")
            .setColor("DARK_RED")
@@ -59,14 +68,11 @@ module.exports = {
            return  interaction.reply({embeds: [errembed]})
        }
 
-       selected = selected.toLowerCase()
-       select2 = selected2.toLowerCase()
+       
 
-           let user1cars = db.fetch(`cars_${user.id}`)
-           let user2cars = db.fetch(`cars_${user2.id}`)
-
-           let carindb1 = cars.Cars[selected]
-           let carindb2 = cars.Cars[selected2]
+     
+           let carindb1 = cars.Cars[selected.Name.toLowerCase()]
+           let carindb2 = cars.Cars[selected2.Name.toLowerCase()]
 
            
            let row = new MessageActionRow()
@@ -82,36 +88,86 @@ module.exports = {
             
            )
 
-           const canvas = Canvas.createCanvas(720, 400)
-           const context = canvas.getContext('2d');
-           let bg = "./track1.png"
-           const  background = await Canvas.loadImage(bg);
+    
 
-         
-           let height = canvas.height / 4
-           let width = canvas.width / 4
-
+  
            let carimage1 = carindb1.Image
            let carimage2 = carindb2.Image
-           
-           const  carimgstats = await Canvas.loadImage(carimage1);
-           const  carimgstats2 = await Canvas.loadImage(carimage2);
+           let u1speed = selected.Speed
+           let u2speed = selected2.Speed
 
-           context.drawImage(background, 0, 0, canvas.width, canvas.height);
-           context.drawImage(carimgstats, 15, 200, width, height);
-           context.drawImage(carimgstats2, 15, 300, width, height);
+           let u1acc = selected.Acceleration
+           let u2acc = selected2.Acceleration
 
-           const attachment = new discord.MessageAttachment(canvas.toBuffer(), 'pvppage.png');
+           let u1handling = selected.Handling
+           let u2handling = selected2.Handling
 
 
            let embed = new discord.MessageEmbed()
            .setTitle(`${user2.username}, would you like to race ${user.username}?`)
-           .addField(`${user.username}'s car`, `${carindb1.Name}`)
-           .addField(`${user2.username}'s car`, `${carindb2.Name}`)
-           .setImage(`attachment://pvppage.png`)
+           .addField(`${user.username}'s car`, `${carindb1.Emote} ${carindb1.Name}\n\nSpeed: ${u1speed} MPH\n0-60: ${u1acc}s\nHandling: ${u1handling}`)
+           .addField(`${user2.username}'s car`, `${carindb2.Emote} ${carindb2.Name}\n\nSpeed: ${u2speed} MPH\n0-60: ${u2acc}s\nHandling: ${u2handling}`)
+           .setImage(carimage1)
+           .setThumbnail(carimage2)
            .setColor(`#60b0f4`)
 
-           interaction.reply({embeds: [embed], components: [row], files: [attachment]})
+            let msg = await interaction.reply({embeds: [embed], components: [row], fetchReply: true})
+
+            let filter = (btnInt) => {
+                return user2.id == btnInt.user.id
+            }
+              const collector = msg.createMessageComponentCollector({
+                filter: filter,
+                time: 30000
+            })
+            
+            collector.on('collect', async (i, iuser) => {
+                if(i.customId.includes("approve")){
+                    embed.setTitle("Racing!")
+                    i.update({embeds: [embed], components: []})
+
+                    let formula1 = (u1speed / u1acc) 
+                    let formula2 = (u2speed / u2acc) 
+
+                    let tracklength = 0
+                    let tracklength2 = 0
+
+                    setInterval(() => {
+                        tracklength += Number(formula1)
+                        tracklength2 += Number(formula2)
+                    }, 1000);
+                    setTimeout(async () => {
+
+                        console.log(tracklength)
+                        console.log(tracklength2)
+
+                        if(tracklength > tracklength2) {
+                            embed.setTitle(`${user.tag} won!`)
+                            embed.setImage(carimage1)
+                            embed.setThumbnail()
+
+                            console.log("User 1 wins")
+                        }
+                        else if(tracklength < tracklength2) {
+                            embed.setTitle(`${user2.tag} won!`)
+                            embed.setImage(carimage2)
+                            embed.setThumbnail()
+
+                            console.log("User 2 wins")
+                        }
+                       await i.editReply({embeds: [embed]})
+                        
+                    }, 5000);
+
+                }
+                else {
+                    embed.addField("Result", "Declined")
+                    row.components[0].setDisabled(true)
+                    row.components[1].setDisabled(true)
+
+                    i.update({embeds: [embed], components: [row]})
+                }
+            })
         
           
         

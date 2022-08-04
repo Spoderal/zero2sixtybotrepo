@@ -5,6 +5,9 @@ const lodash = require('lodash')
 const partsdb = require('../partsdb.json')
 const ms = require(`pretty-ms`)
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,7 +16,10 @@ module.exports = {
     async execute(interaction) {
 
       let uid = interaction.user.id
-      let barntimer = db.fetch(`junkfind_${uid}`)
+      let cooldowndata = await Cooldowns.findOne({id: uid}) || new Cooldowns({id: uid})
+      let userdata = await User.findOne({id: uid}) || new User()
+
+      let barntimer = cooldowndata.junk
       
       
       let timeout = 60000;
@@ -37,7 +43,7 @@ module.exports = {
           chance: 50
         }];
         
-        function pickRandom() {
+       async function pickRandom() {
           // Calculate chances for common
           var filler = 100 - rarities.map(r => r.chance).reduce((sum, current) => sum + current);
         
@@ -59,8 +65,10 @@ module.exports = {
           let part = partsdb.Parts[barnfind.toLowerCase()]
       
       
-          db.set(`junkfind_${uid}`, Date.now())
-          db.push(`parts_${uid}`, part.Name.toLowerCase())
+          cooldowndata.junk = Date.now()
+          await cooldowndata.save()
+          userdata.parts.push(part.Name.toLowerCase())
+          await userdata.save()
           let embed = new Discord.MessageEmbed()
           .setTitle(`${rarity.type} Part Find`)
           .addField(`Part`, `${part.Name}`)

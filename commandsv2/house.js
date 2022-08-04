@@ -5,6 +5,10 @@ const badgedb = require('../badgedb.json')
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const housedb = require("../houses.json")
 const lodash = require("lodash")
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,8 +23,9 @@ module.exports = {
 
         let user = interaction.user
         let uid = user.id
+        let userdata = await User.findOne({id: uid})
 
-        let house = db.fetch(`house_${uid}`)
+        let house = userdata.house
         let selloption = interaction.options.getBoolean("sell")
 
         if(!house) return interaction.reply(`You don't have a house! View the available houses with \`/houses\``)
@@ -30,78 +35,48 @@ module.exports = {
 
             let price = housedb[housename].Price
 
-            let items = db.fetch(`items_${uid}`) || []
+            let items = userdata.items
 
             if(!items.includes("for sale sign")) return interaction.reply("You need a for sale sign!")
             for (var i = 0; i < 1; i ++) items.splice(items.indexOf("for sale sign"), 1)
-            db.set(`items_${interaction.user.id}`, items)
+            userdata.items = items
 
             db.delete(`partdiscount_${interaction.user.id}`)
             db.delete(`cardiscount_${interaction.user.id}`)
         if(housedb[housename].Rewards.includes("+2 Garage spaces")){
-                if(!db.fetch(`garagelimit_${interaction.user.id}`)) {
-                    db.set(`garagelimit_${interaction.user.id}`, 10)
-                }
-                
-                db.subtract(`garagelimit_${interaction.user.id}`, 2)
+
+                userdata.garageLimit -= 2
             }
             else  if(housedb[housename].Rewards.includes("+3 Garage spaces")){
-                if(!db.fetch(`garagelimit_${interaction.user.id}`)) {
-                    db.set(`garagelimit_${interaction.user.id}`, 10)
-                }
-                
-                db.subtract(`garagelimit_${interaction.user.id}`, 3)
+                userdata.garageLimit -= 3
+
             }
             else  if(housedb[housename].Rewards.includes("+4 Garage spaces")){
-                if(!db.fetch(`garagelimit_${interaction.user.id}`)) {
-                    db.set(`garagelimit_${interaction.user.id}`, 10)
-                }
-                
-                db.subtract(`garagelimit_${interaction.user.id}`, 4)
+                userdata.garageLimit -= 4
+
             }
-            db.add(`cash_${interaction.user.id}`, housedb[housename].Price);
+            else  if(housedb[housename].Rewards.includes("+6 Garage spaces")){
+                userdata.garageLimit -= 6
+
+            }
+            else  if(housedb[housename].Rewards.includes("+15 Garage spaces")){
+                userdata.garageLimit -= 15
+
+            }
+            userdata.cash += housedb[housename].Price
 
             interaction.reply(`You sold your ${housedb[housename].Name} for $${numberWithCommas(housedb[housename].Price)}`)
 
-            db.delete(`house_${uid}`)
+            userdata.house = null
+            userdata.save()
 
             
         }
         else {
-            let perks = house.Perks
+            let perks = house.perks
             let image = housedb[house.name.toLowerCase()].Image
             let houseperks = housedb[house.name.toLowerCase()].Rewards
-            console.log(`db: ${houseperks}`)
-            console.log(`user: ${perks}`)
-            let containsAll = houseperks.every(element => {
-              return perks.includes(element);
-            });
-      
-            if(!containsAll){
-              db.set(`house_${uid}.Perks`, houseperks)
-              if(housedb[house.name.toLowerCase()].Rewards.includes("+2 Garage spaces")){
-                if(!db.fetch(`garagelimit_${interaction.user.id}`)) {
-                    db.set(`garagelimit_${interaction.user.id}`, 10)
-                }
-                
-                db.add(`garagelimit_${interaction.user.id}`, 2)
-            }
-            else  if(housedb[house.name.toLowerCase()].Rewards.includes("+3 Garage spaces")){
-                if(!db.fetch(`garagelimit_${interaction.user.id}`)) {
-                    db.set(`garagelimit_${interaction.user.id}`, 10)
-                }
-                
-                db.add(`garagelimit_${interaction.user.id}`, 3)
-            }
-            else if(housedb[house.name.toLowerCase()].Rewards.includes("+4 Garage spaces")){
-                if(!db.fetch(`garagelimit_${interaction.user.id}`)) {
-                    db.set(`garagelimit_${interaction.user.id}`, 10)
-                }
-                
-                db.add(`garagelimit_${interaction.user.id}`, 4)
-            }
-            }
-    
+
             let embed = new Discord.MessageEmbed()
             .setTitle(`${house.name}`)
             .addField("Perks", `${perks.join('\n')}`)

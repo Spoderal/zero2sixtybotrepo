@@ -8,6 +8,10 @@ const badgedb = require("../badgedb.json")
 const ms = require('pretty-ms')
 const {SlashCommandBuilder} = require('@discordjs/builders')
 const prestiges = require("../prestige.json")
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
 module.exports = {
   
     data: new SlashCommandBuilder()
@@ -17,17 +21,17 @@ module.exports = {
 
       let user = interaction.user
 
-
-      let prestigerank = db.fetch(`prestige_${user.id}`) || 0
-      let driftrank = db.fetch(`driftrank_${user.id}`) || 1
+      let userdata = await User.findOne({id: user.id})
+      let prestigerank = userdata.prestige
+      let driftrank = userdata.driftrank
       let newprestige2 = prestigerank += 1
 
-      let racerank = db.fetch(`racerank_${user.id}`) || 1
+      let racerank = userdata.racerank
       if(newprestige2 >= 12){
         newprestige2 = "Max"
       }
-      let patron = db.fetch(`requiredprest_${interaction.user.id}`) || prestiges[newprestige2].DriftRequired
-      let patron2 = db.fetch(`requiredprest_${interaction.user.id}`) || prestiges[newprestige2].RaceRequired
+      let patron = userdata.patron.required || prestiges[newprestige2].DriftRequired
+      let patron2 = userdata.patron.required || prestiges[newprestige2].RaceRequired
 
       let embed = new Discord.MessageEmbed()
       .setTitle(`${user.username}'s ranks`)
@@ -59,7 +63,7 @@ module.exports = {
       interaction.reply({embeds: [embed]})
         
       
-      db.set(`rankdelay_${user.id}`, Date.now())
+      
 
     }  
   

@@ -4,7 +4,9 @@ const seasons = require('../seasons.json')
 const cardb = require('../cardb.json')
 const ms = require('pretty-ms')
 const {SlashCommandBuilder} = require('@discordjs/builders')
-
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,20 +28,20 @@ module.exports = {
     async execute(interaction) {
 
         let type = interaction.options.getString("type")
+        let uid = interaction.user.id
 
+        let userdata = await User.findOne({id: uid})
+        let global = await Global.findOne({})
         if(type == "season"){
 
             let rew = interaction.options.getString("reward")
-            let uid = interaction.user.id
+             uid = interaction.user.id
       
-
-            let redeemed = db.fetch(`summer_redeemed_rewards_${uid}`) || ['']
-            if(!db.fetch(`summer_redeemed_rewards_${uid}`) || db.fetch(`summer_redeemed_rewards_${uid}`) == null || redeemed == ['']){
-                db.push(`summer_redeemed_rewards_${uid}`, 'Started')
-            }
-            let newredeemed = db.fetch(`summer_redeemed_rewards_${uid}`) 
+            let redeemed = userdata.seasonrewards
+       
+            let newredeemed = userdata.seasonrewards
             
-            let noto = db.fetch(`notoriety3_${uid}`) || 0
+            let noto = userdata.noto
             if(!rew) return interaction.reply({content:"Specify which reward you'd like to redeem. (1, 2, 3, etc)", ephemeral: true})
             if(newredeemed.includes(rew)) return interaction.reply({content:"You've already claimed this reward!", ephemeral: true})
             if(rew > 50 || isNaN(rew)) return interaction.reply({content:"Thats not a reward!", ephemeral: true})
@@ -52,8 +54,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed $${amount}`)
-                db.add(`cash_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.cash += Number(amount)
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("RP")) {
                 console.log("RP")
@@ -61,8 +63,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} RP`)
-                db.add(`rp_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.rp += amount
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Barn Maps") || item.Item.endsWith("Barn Map")) {
                 console.log("Barn Maps")
@@ -70,8 +72,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Barn Maps`)
-                db.add(`barnmaps_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.cmaps += amount
+                userdata.seasonrewards.push(item.Number)
                 
             }
     
@@ -81,8 +83,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Common Keys`)
-                db.add(`commonkeys_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.ckeys += amount
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Drift Keys")) {
                 console.log("Drift Keys")
@@ -90,8 +92,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Drift Keys`)
-                db.add(`driftkeys_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.dkeys += amount
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Garage Space") || item.Item.endsWith("Garage Spaces")) {
                 console.log("Garage Space")
@@ -99,11 +101,9 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Garage Spaces`)
-                if(!db.fetch(`garagelimit_${uid}`)){
-                    db.set(`garagelimit_${uid}`, 10)
-                }
-                db.add(`garagelimit_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+
+                userdata.garage += amount
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Rare Keys")) {
                 console.log("Rare Keys")
@@ -111,8 +111,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Rare Keys`)
-                db.add(`rarekeys_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.rkeys += amount
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Exotic Keys")) {
                 console.log("Exotic Keys")
@@ -120,16 +120,17 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Exotic Keys`)
-                db.add(`exotickeys_${uid}`, amount)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.ekeys += amount
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Helmet")) {
                 console.log("Helmet")
                 console.log(item.Number)
             
                 interaction.reply(`Redeemed ${item.Item}`)
-                db.push(`pfps_${uid}`, item.Item.toLowerCase())
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.pfps.push(item.Item)
+
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Part")) {
                 console.log("Part")
@@ -137,62 +138,69 @@ module.exports = {
                 let part = item.Item.split(' ')[0]
             
                 interaction.reply(`Redeemed ${part}`)
-                db.push(`parts_${uid}`, part.toLowerCase())
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.parts.push(part.toLowerCase())
+                userdata.seasonrewards.push(item.Number)
             }
             else if (item.Item.endsWith("Badge")){
                 let badge = item.Item
-                db.push(`badges_${uid}`, badge.toLowerCase())
+                userdata.badges.push(badge)
                 interaction.reply(`Redeemed ${badge}`)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+                userdata.seasonrewards.push(item.Number)
             
             }
             
             else {
                 console.log("Car")
                 console.log(item.Item)
-                let cartogive = cardb.Cars[item.Item.toLowerCase()]
-                db.push(`cars_${uid}`, cartogive.Name.toLowerCase())
-                db.set(`${cartogive.Name}speed_${uid}`, cartogive.Speed)
-                db.set(`${cartogive.Name}resale_${uid}`, cartogive.sellprice)
-                db.set(`${cartogive.Name}060_${uid}`, cartogive["0-60"])
-                if(cardb.Cars[item.Item.toLowerCase()].Rally){
-                    db.set(`${cartogive.Name}offroad_${uid}`, cartogive.Rally)
-    
+                let carindb = cardb.Cars[item.Item.toLowerCase()]
+                carobj = {
+                    ID: carindb.alias,
+                    Name: carindb.Name,
+                    Speed: carindb.Speed,
+                    Acceleration: carindb["0-60"],
+                    Handling: carindb.Handling,
+                    Parts: [],
+                    Emote: carindb.Emote,
+                    Livery: carindb.Image,
+                    Miles: 0
                 }
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
+              
+                userdata.cars.push(carobj)
+                userdata.seasonrewards.push(item.Number)
                 interaction.reply(`Redeemed ${cartogive.Name}`)
-                db.push(`summer_redeemed_rewards_${uid}`, `${item.Number}`)
             
             }
     
-            db.subtract(`notoriety3_${uid}`, item.Required)
+            userdata.noto -= item.Required
+            userdata.save()
         }
         else if(type == "crew"){
             let rew = interaction.options.getString("reward")
             let uid = interaction.user.id
 
-            let crew = db.fetch(`crew_${uid}`)
+            let ucrew = userdata.crew
 
-            if(!crew) return interaction.reply(`You need to be in a crew!`)
+            let crews = global.crews
+
+            let crew2 = crews.filter(crew => crew.name == ucrew.name)
+            if(!crew2[0]) return interaction.reply("That crew doesn't exist!")
+
             let timeout = 259200000
-            let joined = db.fetch(`joinedcrew_${uid}`)
+            let joined = userdata.joinedcrew
 
             if (joined !== null && timeout - (Date.now() - joined) > 0) {
                 let time = ms(timeout - (Date.now() - joined));
                 let timeEmbed = new discord.MessageEmbed()
-                .setColor("#60b0f4")            
+                .setColor("#60b0f4")
                 .setDescription(`You need to be in this crew for ${time} before claiming rewards.`);
                return interaction.reply({embeds: [timeEmbed]})
             }
-            let redeemed = db.fetch(`crew1redeemed_${uid}`) || ['']
-            if(!db.fetch(`crew1redeemed_${uid}`) || db.fetch(`crew1redeemed_${uid}`) == null || redeemed == ['']){
-                db.push(`crew1redeemed_${uid}`, 'Started')
-            }
+            let redeemed = userdata.crewclaimed
+        
             let rewardss = require('../seasons.json').Seasons.Crew1.Rewards
-            let newredeemed = db.fetch(`crew1redeemed_${uid}`) 
+            let newredeemed = redeemed
             
-            let crewinf = db.fetch(`crew_${crew}`)
+            let crewinf = crew2[0]
             let crewrank = crewinf.Rank
             if(!rew) return interaction.reply({content:"Specify which reward you'd like to redeem. (1, 2, 3, etc)", ephemeral: true})
             if(newredeemed.includes(rew)) return interaction.reply({content:"You've already claimed this reward!", ephemeral: true})
@@ -206,8 +214,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed $${amount}`)
-                db.add(`cash_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.cash += Number(amount)
+                userdata.crewclaimed.push(item.Number)
             }
             else if (item.Item.endsWith("Notoriety")) {
                 console.log("Notoriety")
@@ -215,8 +223,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Notoriety`)
-                db.add(`notoriety3_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.noto += Number(amount)
+                userdata.crewclaimed.push(item.Number)
             }
             else if (item.Item.endsWith("Legendary Barn Maps") || item.Item.endsWith("Legendary Barn Map")) {
                 console.log("Barn Maps")
@@ -224,8 +232,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Barn Maps`)
-                db.add(`lbarnmaps_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.lmaps += Number(amount)
+                userdata.crewclaimed.push(item.Number)
                 
             }
             else if (item.Item.endsWith("Bank Increase")) {
@@ -234,8 +242,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Bank Increase`)
-                db.push(`items_${uid}`, "bank increase")
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.items.push('bank increase')
+                userdata.crewclaimed.push(item.Number)
                 
             }
             else if (item.Item.endsWith("Super wheelspin") || item.Item.endsWith("Super wheelspins")) {
@@ -244,8 +252,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Super wheelspins`)
-                db.add(`swheelspins_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.swheelspins += Number(amount)
+                userdata.crewclaimed.push(item.Number)
                 
             }
     
@@ -255,8 +263,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Common Keys`)
-                db.add(`commonkeys_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.ckeys += Number(amount)
+                userdata.crewclaimed.push(item.Number)
             }
             else if (item.Item.endsWith("Drift Keys")) {
                 console.log("Drift Keys")
@@ -264,8 +272,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Drift Keys`)
-                db.add(`driftkeys_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.dkeys += Number(amount)
+                userdata.crewclaimed.push(item.Number)
             }
             else if (item.Item.endsWith("Garage Space") || item.Item.endsWith("Garage Spaces")) {
                 console.log("Garage Space")
@@ -273,11 +281,9 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Garage Spaces`)
-                if(!db.fetch(`garagelimit_${uid}`)){
-                    db.set(`garagelimit_${uid}`, 10)
-                }
-                db.add(`garagelimit_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.garagelimit += Number(amount)
+
+                userdata.crewclaimed.push(item.Number)
             }
             else if (item.Item.endsWith("Rare Keys")) {
                 console.log("Rare Keys")
@@ -285,8 +291,8 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Rare Keys`)
-                db.add(`rarekeys_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.rkeys += Number(amount)
+                userdata.crewclaimed.push(item.Number)
             }
             else if (item.Item.endsWith("Exotic Keys")) {
                 console.log("Exotic Keys")
@@ -294,8 +300,9 @@ module.exports = {
                 console.log(item.Number)
                 console.log(amount)
                 interaction.reply(`Redeemed ${amount} Exotic Keys`)
-                db.add(`exotickeys_${uid}`, amount)
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.ekeys += Number(amount)
+                userdata.crewclaimed.push(item.Number)
+
             }
             else if (item.Item.endsWith("Part")) {
                 console.log("Part")
@@ -303,26 +310,35 @@ module.exports = {
                 let part = item.Item.split(' ')[0]
             
                 interaction.reply(`Redeemed ${part}`)
-                db.push(`parts_${uid}`, part.toLowerCase())
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.parts.push(part.toLowerCase())
+                userdata.crewclaimed.push(item.Number)
+
             }
             
             else {
                 console.log("Car")
                 console.log(item.Item)
                 let cartogive = cardb.Cars[item.Item.toLowerCase()]
-                db.push(`cars_${uid}`, cartogive.Name.toLowerCase())
-                db.set(`${cartogive.Name}speed_${uid}`, cartogive.Speed)
-                db.set(`${cartogive.Name}resale_${uid}`, cartogive.sellprice)
-                db.set(`${cartogive.Name}060_${uid}`, cartogive["0-60"])
-                if(cardb.Cars[item.Item.toLowerCase()].Rally){
-                    db.set(`${cartogive.Name}offroad_${uid}`, cartogive.Rally)
-    
+                let carindb = cartogive
+                let carobj = {
+                    ID: carindb.alias,
+                    Name: carindb.Name,
+                    Speed: carindb.Speed,
+                    Acceleration: carindb["0-60"],
+                    Handling: carindb.Handling,
+                    Parts: [],
+                    Emote: carindb.Emote,
+                    Livery: carindb.Image,
+                    Miles: 0
                 }
-                db.push(`crew1redeemed_${uid}`, `${item.Number}`)
+                userdata.cars.push(carobj)
+
+                userdata.crewclaimed.push(item.Number)
+
                 interaction.reply(`Redeemed ${cartogive.Name}`)
             
             }
+            userdata.save()
     
         }
         }

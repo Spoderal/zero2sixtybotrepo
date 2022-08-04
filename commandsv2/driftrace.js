@@ -42,11 +42,13 @@ module.exports = {
         let moneyearned = 200
         let user = interaction.user;
         let userdata = await User.findOne({id: interaction.user.id})
-        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: user.id})
 
         let track = interaction.options.getString("difficulty")
         if(!track) return interaction.reply("You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard")
         if(!tracks.includes(track.toLowerCase())) return interaction.reply("You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard")
+        let idtoselect = interaction.options.getString("car");
+
         let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
         let selected = filteredcar[0] || 'No ID'
         if(selected == "No ID") {
@@ -61,13 +63,25 @@ module.exports = {
         if(!car) return interaction.reply("You need to select a car! Example: /ids select [car]")
         let user1cars = userdata.cars
         if (!user1cars) returninteraction.reply("You dont have any cars!")
-        if(!cars.Cars[car.toLowerCase()]) return interaction.reply("Thats not a car!")
+        if(!cars.Cars[car.Name.toLowerCase()]) return interaction.reply("Thats not a car!")
             let driftscore = selected.Drift
             let usercarspeed = selected.Speed
             let handling = selected.Handling
 
             if(driftscore <= 0) return interaction.reply("You try drifting but your drift rating is too low, so you swerve out and crash.")
             let timeout = 45000
+            if(userdata.patron && userdata.patron.tier == 1){
+              timeout = 30000
+            }
+            else if(userdata.patron && userdata.patron.tier == 2){
+              timeout = 15000
+            }
+            else if(userdata.patron && userdata.patron.tier == 3){
+              timeout = 5000
+            }
+            else if(userdata.patron && userdata.patron.tier == 4){
+              timeout = 5000
+            }
             let racing = cooldowndata.drift
             if (racing !== null && timeout - (Date.now() - racing) > 0) {
                 let time = ms(timeout - (Date.now() - racing), {compact: true});
@@ -82,8 +96,8 @@ module.exports = {
            cooldowndata.save()
            let drifttraining = userdata.driftrank
          
-           if(cars.Cars[selected.toLowerCase()].Electric){
-             let range = selected.Range
+           let range = selected.Range
+           if(cars.Cars[selected.Name.toLowerCase()].Electric){
              if(range <= 0){
                return interaction.reply("Your EV is out of range! Run /charge to charge it!")
              }
@@ -136,7 +150,6 @@ module.exports = {
             }
             let sponsortimer = cooldowndata.sponsor
         let sponsor2
-        console.log(sponsor)
         if(usables.includes('sponsor')){
           let timeout = 600000
           if (timeout - (Date.now() - sponsortimer) > 0) {          
@@ -162,21 +175,18 @@ module.exports = {
     
             let parts = require('../partsdb.json')
             let tires = selected.Tires
-            let tread = selected.Tread
-            let tirescore
+
             
             let drifttires = ["T1DriftTires", "T2DriftTires", "T3DriftTires", "BM1DriftTires", "T4DriftTires", "T5DriftTires"]
             if(!drifttires.includes(tires)) return interaction.reply("Your car needs drift tires to drift!")
 
            
-            if(tread <= 0) return interaction.reply(`Your tires are out of tread!`)
-            tirescore = tread * 2
-            console.log(`Score: ${tirescore}`)
+       
+      
             let newrank = drifttraining * 2
 
             let formula = (driftscore* drifttraining)
             formula += handling
-            formula += tirescore
             
       
              console.log(formula)
@@ -216,7 +226,7 @@ module.exports = {
              let embed = new discord.MessageEmbed()
              .setTitle(`Drifting around the ${track} ${trackname} track`)
              .setDescription(`You have ${time}s to complete the track`)
-             .addField(`Your ${cars.Cars[car].Name}'s Stats`, `Speed: ${usercarspeed}\n\nDrift Rating: ${driftscore}\n\nTire Tread: ${newtirescore}`)
+             .addField(`Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`, `Speed: ${usercarspeed}\n\nDrift Rating: ${driftscore}`)
              .addField("Your Drift Rank", `${drifttraining}`)
            
   .setColor("#60b0f4")            
@@ -318,7 +328,7 @@ module.exports = {
                     let randomsub = randomRange(2, 10)
                     selected.Tread -= randomsub
                     userdata.save()
-                    embed.addField("Results", `Failed\n\nTread: ${selected.Tread}`)
+                    embed.addField("Results", `Failed`)
                     interaction.editReply({embeds: [embed]})
                     if(range && range >= 0){
                         selected.Range -= 1
@@ -354,7 +364,7 @@ module.exports = {
                       selected.Wins += 1
                     }
                     interaction.editReply({embeds: [embed]})
-                    userdata.cash += moneyearned
+                    userdata.cash += Number(moneyearned)
                     userdata.rp += ticketsearned
                     userdata.noto += notorietyearned
 

@@ -6,6 +6,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const Cooldowns = require('../schema/cooldowns')
 const partdb = require('../partsdb.json')
 const Global = require('../schema/global-schema')
+const User = require('../schema/profile-schema')
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("code")
@@ -26,7 +28,7 @@ module.exports = {
             if(codesredeemed.includes(code)) return interaction.reply("You've already redeemed this code!")
          
                 interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Twitter[code].Reward)}`)
-                userdata.cash += codes.Twitter[code].Reward
+                userdata.cash += Number(codes.Twitter[code].Reward)
       
             
                 codesredeemed.push(code)
@@ -36,7 +38,7 @@ module.exports = {
             if(codesredeemed.includes(code)) return interaction.reply("You've already redeemed this code!")
          
                 interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Discord[code].Reward)}`)
-                userdata.cash += codes.Discord[code].Reward
+                userdata.cash += Number(codes.Discord[code].Reward)
       
             
                 codesredeemed.push(code)
@@ -45,24 +47,22 @@ module.exports = {
       
         
         else if(codes.Patreon[code]){
-            let patreontier1 = db.fetch(`patreon_tier_1_${uid}`)
-            let patreontier2 = db.fetch(`patreon_tier_2_${uid}`)
-            let patreontier3 = db.fetch(`patreon_tier_3_${uid}`)
-            let patreontier4 = db.fetch(`patreon_tier_4_${uid}`)
+            let patreontier = userdata.patron
 
-            if(!patreontier1 && !patreontier2 && !patreontier3 && !patreontier4) return interaction.reply("You need to purchase a patreon tier to redeem this code!")
+            if(!patreontier) return interaction.reply("You need to purchase a patreon tier to redeem this code!")
 
             if(codesredeemed.includes(code)) return interaction.reply("You've already redeemed this code!")
 
             if(codes.Patreon[code].Gold){
                 interaction.reply(`Redeemed code ${code} and earned ${numberWithCommas(codes.Patreon[code].Reward)} gold`)
-                userdata.gold += codes.Patreon[code].Reward
+                userdata.gold += Number(codes.Patreon[code].Reward)
 
             }
           
             else {
                 interaction.reply(`Redeemed code ${code} and earned $${numberWithCommas(codes.Patreon[code].Reward)}`)
-                userdata.cash += codes.Patreon[code].Reward
+                userdata.cash += Number(codes.Patreon[code].Reward)
+
             }
       
             

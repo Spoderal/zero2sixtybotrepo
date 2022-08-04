@@ -1,6 +1,7 @@
 const db = require("quick.db")
 const Discord = require("discord.js")
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -8,58 +9,67 @@ module.exports = {
     .setDescription("Check the leaderboard")
 ,
     async execute(interaction) {
-        
-      interaction.reply({content: `Please wait...`})
-      let client = interaction.client
-      let racewins = db.all().filter(data => data.ID.startsWith(`dwins`)).sort((a, b) => b.data - a.data)
-      let time = db.all().filter(data => data.ID.startsWith(`timetrialtime`)).sort((a, b) => a.data - b.data)
-     
-      var content = "";
-      var content2 = "";
-      var i = 0;
-      var b = 0;
-      var indexnumb = 0;
-      var indexnum = 0;
-      var indexnum2 = 0;
+      interaction.reply({content:`Please wait...`, fetchReply: true})
 
+      let data = await User.find({})
+      let members = []
+
+      for(let obj of data){
+        console.log(obj.id)
+        try{
+          await interaction.client.users.fetch(`${obj.id}`).then(
+                    members.push(obj)
+           
+   
+          )
+
+        } catch(err){
+          console.log(err)
+        }
+
+      }
+
+      let embed = new Discord.MessageEmbed()
+      .setTitle("Cash Leaderboard")
+      .setColor("#60b0f4")
+
+      members = members.sort(function (b, a) {
+        return a.cash - b.cash
+      })
+
+      members = members.filter(function BigEnough(value) {
+        return value.cash > 0
+      })
+
+      let pos = 0
+
+      for(let obj of members) {
+        pos++
+        if(obj.id == interaction.user.id){
+          embed.setFooter(`Your position is #${pos} on the cash leaderboard`)
+        }
+
+      }
       
-      racewins.length = 10
-      time.length = 10
-      for (b in racewins) {
-        let user = await client.users.fetch(racewins[b].ID.split("_")[1])
-           let wins = racewins[b].data.toLocaleString()
-           let num = ++indexnumb
-           content2 += `${num} - ${user.tag} : **${wins}**\n`
-           
-           
-           
-          }
-          for (i in time) {
-            let user = await client.users.fetch(time[i].ID.split("_")[1])
-               let wins = time[i].data.toLocaleString()
-               let num = ++indexnum2
-               content += `${num} - ${user.tag} : **${wins}s**\n`
-               
-               
-               
-              }
-     
-          if(content2 == ""){
-            content2 = "None yet"
-          }
+      members = members.slice(0, 10)
 
-          if(content == ""){
-            content = "None yet"
-          }
- 
-  const embed = new Discord.MessageEmbed()/*MessageEmbed*/
-  .setTitle(`Global Leaderboard`)
-  .addField("Time Trial Times", `${content}`, true)
-  .setThumbnail("https://i.ibb.co/7WJrz2R/arrow.png")
-  .setColor("#60b0f4")
-  await interaction.channel.send({embeds: [embed]})
+      let desc = ""
+
+      for(let i = 0; i < members.length; i++){
+        let user = interaction.client.users.cache.get(members[i].id)
+        if(!user) return
+        let bal = members[i].cash
+        desc += `${i + 1}. ${user.tag} - $${numberWithCommas(bal)}\n`
+      }
+
+      embed.setDescription(desc)
+
+
+     await interaction.editReply({embeds: [embed]})
+      
+
     }
-    
+
   }
 
   function numberWithCommas(x) {

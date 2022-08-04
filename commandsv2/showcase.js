@@ -2,7 +2,9 @@ const db = require('quick.db')
 const Discord = require('discord.js')
 const pfpdb = require('../pfpsdb.json')
 const {SlashCommandBuilder} = require('@discordjs/builders')
-
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName("showcase")
@@ -14,22 +16,25 @@ module.exports = {
   
     ),
     async execute(interaction) {
+      let userdata = await User.findOne({id: interaction.user.id})
+
         let carsdb = require(`../cardb.json`)
-        let usercars = db.fetch(`cars_${interaction.user.id}`)
+        let usercars = userdata.cars
         
         let idtoselect = interaction.options.getString("car");
-        let selected = db.fetch(`selected_${idtoselect}_${interaction.user.id}`);
-        if (!selected)
-          return interaction.reply(
-            "That id doesn't have a car! Use /ids select [id] [car] to select it!"
-          );
+        let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
+        let selected = filteredcar[0] || 'No ID'
 
-          let carimage = db.fetch(`${carsdb.Cars[selected.toLowerCase()].Name}livery_${interaction.user.id}`) || carsdb.Cars[selected.toLowerCase()].Image
+        if(selected == 'No ID') return interaction.reply(`This car doesn't have an ID!`)
 
-          db.set(`showcase_${interaction.user.id}`, carimage)
+          let carimage = selected.Image || carsdb.Cars[selected.Name.toLowerCase()].Image
+
+         userdata.showcase = carimage
+
+         userdata.save()
        
 
-          interaction.reply(`✅ Showcasing your ${carsdb.Cars[selected.toLowerCase()].Name}`)
+          interaction.reply(`✅ Showcasing your ${carsdb.Cars[selected.Name.toLowerCase()].Name}`)
 
     }
 }

@@ -204,7 +204,8 @@ module.exports = {
                             Livery: carindb.Image,
                             Range: carindb.Range,
                             MaxRange: carindb.Range,
-                            Miles: 0
+                            Miles: 0,
+                            Resale: sellprice
                         }
                         
                     }
@@ -218,7 +219,8 @@ module.exports = {
                            Parts: [],
                            Emote: carindb.Emote,
                            Livery: carindb.Image,
-                           Miles: 0
+                           Miles: 0,
+                           Resale: sellprice
                        }
 
                     }
@@ -239,9 +241,12 @@ module.exports = {
                     interaction.reply({embeds: [embed]});
                 }
                 else {
+                    let sellprice = cars.Cars[bought].Price * 0.65
+
                     if (cash < carprice) return interaction.reply("You don't have enough cash!")
                     let carobj
                     cash -= carprice
+
                     let idtoset = cars.Cars[bought.toLowerCase()].alias
                     let carindb = cars.Cars[bought.toLowerCase()]
                     if(cars.Cars[bought.toLowerCase()].Range){
@@ -256,7 +261,8 @@ module.exports = {
                             Livery: carindb.Image,
                             Range: carindb.Range,
                             MaxRange: carindb.Range,
-                            Miles: 0
+                            Miles: 0,
+                            Resale: sellprice
                         }
                         
                     }
@@ -270,7 +276,8 @@ module.exports = {
                            Parts: [],
                            Emote: carindb.Emote,
                            Livery: carindb.Image,
-                           Miles: 0
+                           Miles: 0,
+                           Resale: sellprice
                        }
 
                     }
@@ -342,16 +349,16 @@ module.exports = {
                             
                             if(parts.Parts[bought].Price == 0) return interaction.reply("This part is not purchasable.")
                             let newprice = parts.Parts[bought].Price * amount2
-                            if(cash < newprice) return interaction.reply("You don't have enough cash!")
-                            userdata.cash -= priceforpart
+                            if(userdata.cash < newprice) return interaction.reply(`You cant afford this! You need $${numberWithCommas(newprice)}`)
+                            userdata.cash -= newprice
                             let user1newpart = []
 
                             for (var i = 0; i < amount2; i ++) user1newpart.push(bought.toLowerCase())
                             for(i in user1newpart){
                         
                                 userdata.parts.push(bought.toLowerCase())
-                                userdata.save()
                             }
+                            userdata.save()
                             let embed = new MessageEmbed()
                             .setTitle(`✅ Bought x${amount2} ${parts.Parts[bought].Name}`)
                             .addField(`Price`, `${cashemote} $${numberWithCommas(parts.Parts[bought].Price)}`)
@@ -480,52 +487,26 @@ module.exports = {
 
     }
    
-    else if (list3.Police[bought] || list3.Other[bought] || list3.Multiplier[bought]) {
-        let pricing
+    else if (list3.Police[bought.toLowerCase()] || list3.Other[bought.toLowerCase()] || list3.Multiplier[bought.toLowerCase()]) {
         let item
         let itemshop = global.itemshop
-        if(list3.Police[bought]){
-            pricing = list3.Police[bought].Price * amount2
-            if(itemshop.Police.Name !== list3.Police[bought].Name) return interaction.reply("This item isnt in the shop today! Check back tomorrow.")
-            if(cash < pricing) return interaction.reply(`You can't afford this item!`)
-           userdata.cash -= pricing
-            let user1newpart = []
+        let filtereditem = itemshop.filter(item => item.Name.toLowerCase() == bought.toLowerCase());
+        let itemindb = filtereditem[0] || 'No ID'
 
-            for (var i = 0; i < amount2; i ++) user1newpart.push(list3.Police[bought].Name.toLowerCase())
-            for(i in user1newpart){
+        if(itemindb == "No ID") return interaction.reply(`That item isn't in the shop today, check back tomorrow!`)
         
-                await User.findOneAndUpdate({
-                    id: interaction.user.id
-                }, {
-                    $push: {
-                         items: user1newpart[i]
-                    }
-                })
-            }
-            userdata.save()
-            interaction.reply(`Purchased x${amount2} ${list3.Police[bought].Emote} ${list3.Police[bought].Name} for $${numberWithCommas(pricing)}`)
+        let pricing = itemindb.Price * amount2
+        if(userdata.cash < pricing) return interaction.reply(`You cant afford this! You need $${numberWithCommas(pricing)}`)
+        
+        let user1newarr = []
 
+        for (var i = 0; i < amount2; i ++) user1newarr.push(bought.toLowerCase())
+        for(i in user1newarr){
+    
+            userdata.items.push(bought.toLowerCase())
         }
-        else if(list3.Other[bought]){
-            pricing = list3.Other[bought].Price * amount2
-            if(itemshop.Other.Name !== list3.Other[bought].Name && itemshop.Other2.Name !== list3.Other[bought].Name && itemshop.Other3.Name !== list3.Other[bought].Name) return interaction.reply("This item isnt in the shop today! Check back tomorrow.")
-         
-            if(cash < pricing) return interaction.reply(`You can't afford this item!`)
-
             userdata.cash -= pricing
-            let user1newpart = []
-
-            for (var i = 0; i < amount2; i ++) user1newpart.push(list3.Other[bought].Name.toLowerCase())
-            for(i in user1newpart){
-        
-                await User.findOneAndUpdate({
-                    id: interaction.user.id
-                }, {
-                    $push: {
-                         items: user1newpart[i]
-                    }
-                })
-            }
+            
             userdata.save()
 
             interaction.reply(`Purchased x${amount2} ${list3.Other[bought].Emote} ${list3.Other[bought].Name} for $${numberWithCommas(pricing)}`)
@@ -538,7 +519,7 @@ module.exports = {
         }
 
     
-}
+
         
     }
   }

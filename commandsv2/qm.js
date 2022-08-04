@@ -3,6 +3,10 @@ const ms = require('pretty-ms');
 const discord = require('discord.js')
 
 const {SlashCommandBuilder} = require('@discordjs/builders')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const partdb = require('../partsdb.json')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -35,22 +39,40 @@ module.exports = {
             let moneyearnedtxt = 75
             let uid = interaction.user.id
             let idtoselect = interaction.options.getString("car")
+            let userdata = await User.findOne({id: interaction.user.id})
+            let cooldowndata = await Cooldowns.findOne({id: interaction.user.id})|| new Cooldowns({id: interaction.user.id})
+            let globaldata = await Global.findOne({})
+
             if(!idtoselect) return interaction.reply("Specify an id! Use /ids select [id] [car] to select a car!")
-            let selected = db.fetch(`selected_${idtoselect}_${uid}`)
-            if(!selected) {
-                let errembed = new discord.MessageEmbed()
-                .setTitle("Error!")
-                .setColor("DARK_RED")
-                .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
-                return  interaction.reply({embeds: [errembed]})
-            }
+            let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
+            let selected = filteredcar[0] || 'No ID'
+            if(selected == "No ID") {
+              let errembed = new discord.MessageEmbed()
+              .setTitle("Error!")
+              .setColor("DARK_RED")
+              .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
+              return  interaction.reply({embeds: [errembed]})
+          }
+          
             let user = interaction.user;
             let bot = interaction.options.getString("tier")
             let botlist = ['1', '2', '3', '4', '5', '6', '7']
-            let timeout = db.fetch(`timeout_${interaction.user.id}`) || 45000
+            let timeout =  45000
+            if(userdata.patron && userdata.patron.tier == 1){
+              timeout = 30000
+            }
+            else if(userdata.patron && userdata.patron.tier == 2){
+              timeout = 15000
+            }
+            else if(userdata.patron && userdata.patron.tier == 3){
+              timeout = 5000
+            }
+            else if(userdata.patron && userdata.patron.tier == 4){
+              timeout = 5000
+            }
             let botcar = null
-            let racing = db.fetch(`racing_${user.id}`)
-            let prestige = db.fetch(`prestige_${uid}`)
+            let racing = cooldowndata.racing
+            let prestige = userdata.prestige
             if(prestige < 1) return interaction.reply("You need to be prestige 1 to do this race!")
             if (racing !== null && timeout - (Date.now() - racing) > 0) {
                 let time = ms(timeout - (Date.now() - racing), {compact: true});
@@ -79,7 +101,6 @@ module.exports = {
                 "2020 bugatti divo"
               ];
 
-            if(prestige < 1) return interaction.reply("You need to be prestige 1 to do this race!")
             let errorembed = new discord.MessageEmbed()
             .setTitle("❌ Error!")
             .setColor("#60b0f4")
@@ -92,47 +113,22 @@ module.exports = {
                 errorembed.setDescription("Please specify  the tier you want to race. Tiers available: 1, 2, 3, 4, 5, and 6")
                  return interaction.reply({embeds: [errorembed]})
             }
-        if(!botlist.includes(bot.toLowerCase()))  {
-            errorembed.setDescription("Thats not a tier! The available tiers are: 1, 2, 3, 4, 5, and 6")
-            return interaction.reply({embeds: [errorembed]})
-            }
-            if(!botlist.includes(bot.toLowerCase()) && !cars.Cars[selected])  {
-                errorembed.setDescription("Thats not a tier! The available tiers are: 1, 2, 3, 4, 5, and 6")
-                return interaction.reply({embeds: [errorembed]})
-            }
-            if(!botlist.includes(bot.toLowerCase()) && user1cars.includes(selected))  {
-                errorembed.setDescription("Thats not a tier! The available tiers are: 1, 2, 3, 4, 5, and 6")
-                return interaction.reply({embeds: [errorembed]})
-            }
-            if(!botlist.includes(bot.toLowerCase()) && !selected)  {
-                errorembed.setDescription("Thats not a tier! The available tiers are: 1, 2, 3, 4, 5, and 6")
-                return interaction.reply({embeds: [errorembed]})
-            }
-            
-            if(!selected) {
-                errorembed.setDescription("Select a car you want to use")
-                return interaction.reply({embeds: [errorembed]})
-            }
-            if(!cars.Cars[selected.toLowerCase()]){
-                errorembed.setDescription("Thats not an available car!")
-                return interaction.reply({embeds: [errorembed]})
-            }
-            if (!user1cars.includes(selected.toLowerCase())) {
-                errorembed.setDescription(`You don't own that car!`)
-      
-                return interaction.reply({embeds: [errorembed]})
-            }
+
+
+
+    
+ 
            
-            let restoration = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}restoration_${uid}`)
-            if(cars.Cars[selected.toLowerCase()].Junked && restoration < 100){
+    
+            if(cars.Cars[selected.Name.toLowerCase()].Junked){
                 return interaction.reply("This car is too junked to race, sorry!")
             }
             let ticketsearned
             let ckeysearned
             let rkeysearned
             let ekeysearned
-            let range = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`)
-            if(cars.Cars[selected.toLowerCase()].Electric){
+            let range = selected.Range
+            if(cars.Cars[selected.Name.toLowerCase()].Electric){
               if(range <= 0){
                 return interaction.reply("Your EV is out of range! Run /charge to charge it!")
               }
@@ -202,60 +198,62 @@ module.exports = {
               moneyearned = moneyearned += multy
              
             }
-
-            let energydrink = db.fetch(`energydrink_${interaction.user.id}`)
-            let energytimer = db.fetch(`energytimer_${interaction.user.id}`)
+            let usables = userdata.using
+      
+            let energytimer = cooldowndata.energydrink
             let energydrink2
-            if(energydrink){
+            if(usables.includes('energy drink')){
               let timeout = 600000
               if (timeout - (Date.now() - energytimer) > 0) {          
                 console.log("no energy")
               } else {
-                  db.set(`energydrink_${interaction.user.id}`, false)
+                await User.findOneAndUpdate({
+                  id: interaction.user.id
+              }, {
+                  $pull: {
+                    using: "energy drink"
+                  }
+              })
               }
-               energydrink2 = db.fetch(`energydrink_${interaction.user.id}`)
-    
+          
+              userdata.save()
             }
-            if(energydrink2 == true){
+            if(usables.includes('energy drink')){
               ticketsearned = ticketsearned * 2
             }
-    
-            let sponsor = db.fetch(`sponsor_${interaction.user.id}`)
-            let sponsortimer = db.fetch(`sponsortimer_${interaction.user.id}`)
+            let sponsortimer = cooldowndata.sponsor
             let sponsor2
-            if(sponsor){
+            if(usables.includes('sponsor')){
               let timeout = 600000
               if (timeout - (Date.now() - sponsortimer) > 0) {          
-                console.log("no energy")
+                console.log("no sponsor")
               } else {
-                  db.set(`sponsor_${interaction.user.id}`, false)
+                await User.findOneAndUpdate({
+                  id: interaction.user.id
+              }, {
+                  $pull: {
+                    using: 'sponsor'
+                  }
+              })    
+              userdata.save()
               }
-               energydrink2 = db.fetch(`sponsor_${interaction.user.id}`)
+    
     
             }
-            if(sponsor2 == true){
+            if(usables.includes('sponsor')){
               moneyearned = moneyearned * 2
-            }
-      
-         
-      
-          
-            let racelevel = db.fetch(`racerank_${uid}`)
-            if(!db.fetch(`racerank_${uid}`)) {
-             db.set(`racerank_${uid}`, 1)
-            }
-            db.set(`racing_${user.id}`, Date.now())
-            if(cars.Cars[selected.toLowerCase()].Electric){
-              if(range <= 0){
-                return interaction.reply("Your EV is out of range! Run /charge to charge it!")
-              }
+              moneyearnedtxt = moneyearnedtxt * 2
+              console.log(moneyearned)
             }
       
           
-            if(!db.fetch(`racerank_${uid}`)) {
-             db.set(`racerank_${uid}`, 1)
-            }
-            db.set(`racing_${user.id}`, Date.now())
+            let racelevel = userdata.racerank
+     
+           cooldowndata.racing = Date.now()
+           cooldowndata.save()
+      
+      
+
             let newrankrequired = racelevel * 100
               if(prestige >= 3){
           newrankrequired * 2
@@ -265,22 +263,21 @@ module.exports = {
         }
             console.log(botcar)
       
-          let user1carspeed = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}speed_${user.id}`);
-          let user1carzerosixty = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}060_${user.id}`) || cars.Cars[selected.toLowerCase()]["0-60"]
-          let dailytask1 = db.fetch(`dailytask_${uid}`)
+            let user1carspeed = selected.Speed
+            let user1carzerosixty = selected.Acceleration
+            let user1carhandling = selected.Handling
+    
       
-          if(!db.fetch(`${cars.Cars[selected.toLowerCase()].Name}handling_${user.id}`)) {
-            db.set(`${cars.Cars[selected.toLowerCase()].Name}handling_${user.id}`, cars.Cars[selected.toLowerCase()].Handling)
-          }
-          let handling = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}handling_${user.id}`) || cars.Cars[selected.toLowerCase()].Handling
-
-          let zero2sixtycar = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}060_${user.id}`)
+          
+          let handling = user1carhandling
+  
+          let zero2sixtycar = selected.Acceleration
           let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"]
           let newhandling = handling / 20
           let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20
           let new60 = user1carspeed / zero2sixtycar
           let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty
-          let driftscore = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}drift_${user.id}`) || 0
+          let driftscore = selected.Drift
 
   
           Number(user1carspeed)
@@ -290,7 +287,7 @@ module.exports = {
           let hp = user1carspeed + newhandling
           hp - driftscore
           let hp2 = cars.Cars[botcar.toLowerCase()].Speed + othernewhandling
-          let userhelmet = db.fetch(`currentpfp_${user.id}`) || 'Default'
+          let userhelmet = userdata.helmet
           console.log(userhelmet)
           userhelmet = userhelmet.toLowerCase()
           let helmets = require('../pfpsdb.json')
@@ -305,10 +302,8 @@ module.exports = {
           let embed = new discord.MessageEmbed()
           .setTitle("3...2...1....GO!")
           .addField(
-            `${actualhelmet.Emote} ${cars.Cars[selected.toLowerCase()].Emote} ${
-              cars.Cars[selected.toLowerCase()].Name
-            }`,
-            `${semote} Speed: ${db.fetch(`${cars.Cars[selected.toLowerCase()].Name}speed_${user.id}`)} MPH\n\n${zemote} 0-60: ${db.fetch(`${cars.Cars[selected.toLowerCase()].Name}060_${user.id}`)}s\n\n${hemote} Handling: ${handling}`,
+            `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
+            `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
             true
           )
           .addField(
@@ -330,7 +325,7 @@ module.exports = {
                   embed.setDescription("Great launch!")
                   embed.addField("Bonus", "$100")
                   moneyearnedtxt += 100
-                  db.add(`cash_${uid}`, 100)
+                  userdata.cash += 100
                   tracklength+=1
                   interaction.editReply({embeds: [embed]})
               }, 2000);
@@ -343,37 +338,47 @@ module.exports = {
           tracklength += new60
           tracklength2 += new62
           
-          let nitro = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}nitro_${interaction.user.id}`)
+          let nitro = selected.Nitro
+
           if(nitro){
-           let boost = db.fetch(`${cars.Cars[selected.toLowerCase()].Name}boost_${interaction.user.id}`)
-           interaction.channel.send(`${interaction.user}, React to boost ahead!`).then(async emb => {
- 
-           emb.react('🔵')
+            row.addComponents(
+             new MessageButton()
+           .setCustomId("boost")
+           .setEmoji("<:boost:983813400289234978>")
+           .setLabel("Boost")
+           .setStyle("SECONDARY")
+           )
+           msg.edit({components: [row]})
      
-             const filter = (_, u) => u.id === interaction.user.id
-             const collector = emb.createReactionCollector({ filter, time: 4000 })
-             collector.on('collect', async (r, user) => {
-               emb.reactions.cache.get(r.emoji.name).users.remove(user.id)
-               emb.reactions.cache.get(r.emoji.name).users.remove(interaction.client.user.id)
- 
-               if (r.emoji.name === '🔵') {
-                 tracklength += parseInt(boost)
-                 console.log(tracklength)
-                 interaction.channel.send('Boosting!')
-                 db.delete(`${cars.Cars[selected.toLowerCase()].Name}nitro_${interaction.user.id}`)
-                 db.delete(`${cars.Cars[selected.toLowerCase()].Name}boost_${interaction.user.id}`)
- 
-               } 
- 
-             })
-             collector.on('end', async collected => {
-               if(collected.size === 0){
-                 return 
- 
-               }
-             })
-           })
+          
+           let filter = (btnInt) => {
+             return interaction.user.id === btnInt.user.id
          }
+        
+         const collector = msg.createMessageComponentCollector({
+             filter: filter,
+             time: 10000
+         })
+          
+               
+       
+               
+               collector.on('collect', async (i, user) => {
+     
+                 if(i.customId.includes("boost")){
+                       
+                   let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost
+                   tracklength += parseInt(boost)
+                   console.log("boosted " + parseInt(boost))
+                   i.update({content:'Boosting!', embeds: [embed]})
+                   selected.Nitro = null
+                 }
+     
+               })
+     
+               
+             }
+               
          let timer = 0
          let x = setInterval(() => {
             tracklength += hp
@@ -387,13 +392,13 @@ module.exports = {
                     console.log("End")
                     clearInterval(x)
                     embed.addField("Results", "Won")
-                    if(db.fetch(`doublecash`) == true){
+                    if(global.double == true){
                       moneyearned = moneyearned += moneyearned
                       embed.addField("Double Cash Weekend!", `\u200b`)
                       moneyearnedtxt = `${moneyearned}`
                     }
-                    if(cars.Cars[selected].StatTrack){
-                      db.add(`${cars.Cars[selected].Name}wins_${interaction.user.id}`, 1)
+                    if(cars.Cars[selected.Name.toLowerCase()].StatTrack){
+                      selected.Wins += 1
                     }
                     let earnings = []
                     
@@ -404,42 +409,38 @@ module.exports = {
                     let ekemote = "<:ekey:993011410210672671>"
                     if(ckeysearned >= 1){
                       earnings.push(`${ckeysearned} ${ckemote} keys`)
-                      db.add(`commonkeys_${uid}`, ckeysearned)
+                      userdata.ckeys += ckeysearned
                     }
                   if(rkeysearned >= 1){
                     earnings.push(`${rkeysearned} ${rkemote} keys`)
-                    db.add(`rarekeys_${uid}`, rkeysearned)
-                    }
+                    userdata.rkeys += rkeysearned
+                  }
                   if(ekeysearned >= 1){
                       earnings.push(`${ekeysearned} ${ekemote} keys`)
-                        db.add(`exotickeys_${uid}`, ekeysearned)
+                      userdata.ekeys += ekeysearned
                     }
-                    if(dailytask1 && dailytask1.task == "Win a quarter mile race" && !dailytask1.completed){
-                      db.set(`dailytask_${user.id}.completed`, true)
-                      db.add(`cash_${user.id}`, dailytask1.reward)
-                      earnings.push(`${user}, you just completed your daily task "${dailytask1.task}"!`)
-                    }
+                  
                     embed.addField("Earnings", `${earnings.join('\n')}`)
                     interaction.editReply({embeds: [embed]})
     
                       
 
                     if(range){
-                        db.subtract(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, 1)
-                        db.add(`batteries_${user.id}`, 1)
+                        range -= 1
     
                     }
-                    db.add(`cash_${uid}`, moneyearned)
-                    db.add(`racexp_${uid}`, 25)
-                    db.add(`rp_${uid}`, ticketsearned)
-                    if(db.fetch(`racexp_${uid}`) >= newrankrequired){
+                    userdata.cash += Number(moneyearned)
+                    userdata.racexp += 10
+                    userdata.rp += ticketsearned
+                    if(userdata.racexp >= newrankrequired){
                     
-                            db.add(`racerank_${uid}`, 1)
+                      userdata.racerank += 1
                             interaction.channel.send(`${user}, you just ranked up your race skill to ${db.fetch(`racerank_${uid}`)}!`)
           
                         
                        }
-                     
+                       userdata.save()
+
                     return;
                 }
           
@@ -449,7 +450,7 @@ module.exports = {
                     interaction.editReply({embeds: [embed]})
                     clearInterval(x)
                     if(range){
-                        db.subtract(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, 1)
+                        range -= 1
     
                     }
           
@@ -461,7 +462,7 @@ module.exports = {
                     interaction.editReply({embeds: [embed]})
                     clearInterval(x)
                     if(range){
-                        db.subtract(`${cars.Cars[selected.toLowerCase()].Name}range_${interaction.user.id}`, 1)
+                        range -= 1
     
                     }
           

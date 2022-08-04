@@ -6,6 +6,9 @@ const {SlashCommandBuilder} = require('@discordjs/builders')
 const lodash = require("lodash")
 const wheelspinrewards = require('../wheelspinrewards.json')
 const partsdb = require('../partsdb.json')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,11 +17,14 @@ module.exports = {
     async execute(interaction) {
 
         let uid = interaction.user.id
-        let wheelspincool = db.fetch(`wheelspincool_${uid}`)
+        let userdata = await User.findOne({id: uid})
+        let cooldowns = await Cooldowns.findOne({id: uid}) || new Cooldowns({id: uid})
+
+        let wheelspincool = cooldowns.wheelspin
         let timeout = 5000;
         
         if (wheelspincool !== null && timeout - (Date.now() - wheelspincool) > 0) return interaction.reply("Please wait 5 seconds before using this command again.")
-         let wheelspins = db.fetch(`wheelspins_${uid}`)
+         let wheelspins = userdata.wheelspins || 0
          if(wheelspins <= 0) return interaction.reply("You're out of wheel spins!")
         let items = ['🏎️', '💵', '⚙️', '🗺️']
       let item =   lodash.sample(items)
@@ -28,11 +34,11 @@ module.exports = {
       let cars = wheelspinrewards.Cars
       let helmets = wheelspinrewards.Helmets
       let parts = wheelspinrewards.Parts
-     let garagespaces =  db.fetch(`garagelimit_${interaction.user.id}`) || 10
+     let garagespaces =  userdata.garageLimit
 
-      let usercars = db.fetch(`cars_${uid}`)
-    db.subtract(`wheelspins_${uid}`, 1)
-    db.set(`wheelspincool_${uid}`, Date.now())
+      let usercars = userdata.cars
+    userdata.wheelspins -= 1
+    cooldowns.wheelspin = Date.now()
         let embed = new Discord.MessageEmbed()
         .setTitle("Wheel Spin!")
         .setDescription(`${item}`)
@@ -60,7 +66,7 @@ module.exports = {
              
                  if(item == "⚙️"){
                     let reward = lodash.sample(parts)
-                    db.push(`parts_${interaction.user.id}`, reward)
+                    userdata.parts.push(reward.toLowerCase())
 
                     embed.setDescription(`You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`)
                     interaction.editReply({embeds: [embed]})
@@ -82,7 +88,7 @@ module.exports = {
                     interaction.editReply({embeds: [embed]})
                     if(usercars.includes(reward)) {
                     let sellprice = carsdb.Cars[reward].sellprice
-                    db.add(`cash_${uid}`, sellprice)
+                    userdata.cash += sellprice
                     interaction.channel.send(`You already own this car, so you got $${numberWithCommas(sellprice)} instead.`)
                     return;
                 } 
@@ -93,24 +99,50 @@ module.exports = {
                 else {
                     let sellprice = carsdb.Cars[reward].Price * 0.75
 
-                    db.push(`cars_${uid}`, carsdb.Cars[reward].Name.toLowerCase())
-                    db.set(`${carsdb.Cars[reward].Name}speed_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Speed))
-                    db.set(`isselected_${carsdb.Cars[reward.toLowerCase()].Name}_${interaction.user.id}`, carsdb.Cars[reward.toLowerCase()].alias)
-                    db.set(`selected_${carsdb.Cars[reward.toLowerCase()].alias}_${interaction.user.id}`, carsdb.Cars[reward.toLowerCase()].Name)
+                    let carindb = carsdb.Cars[reward]
 
-                    db.set(`${carsdb.Cars[reward].Name}resale_${interaction.user.id}`, sellprice)
-                    db.set(`${carsdb.Cars[reward].Name}060_${interaction.user.id}`, `${carsdb.Cars[reward]["0-60"]}`)
-                    db.set(`${carsdb.Cars[reward].Name}drift_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Drift))
+                    let ecarobj = {
+                        ID: carindb.alias,
+                        Name: carindb.Name,
+                        Speed: carindb.Speed,
+                        Acceleration: carindb["0-60"],
+                        Handling: carindb.Handling,
+                        Parts: [],
+                        Emote: carindb.Emote,
+                        Livery: carindb.Image,
+                        Range: carindb.Range,
+                        MaxRange: carindb.Range,
+                        Miles: 0
+                    }
+                    
+                
+         
+                    let carobj = {
+                       ID: carindb.alias,
+                       Name: carindb.Name,
+                       Speed: carindb.Speed,
+                       Acceleration: carindb["0-60"],
+                       Handling: carindb.Handling,
+                       Parts: [],
+                       Emote: carindb.Emote,
+                       Livery: carindb.Image,
+                       Miles: 0
+                   }
+
+                 
                     if(carsdb.Cars[reward.toLowerCase()].Range){
-                        db.set(`${carsdb.Cars[reward].Name}range_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Range))
-                        db.set(`${carsdb.Cars[reward].Name}maxrange_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Range))
+                      userdata.cars.push(ecarobj)
     
                     }
+                    else {
+                        userdata.cars.push(carobj)
+      
+                      }
                 }
                 }
                 else if(item == "💵"){
                     let reward = lodash.sample(cash)
-                    db.add(`cash_${uid}`, reward)
+                    userdata.cash += Number(reward)
                     embed.setDescription(`You won $${numberWithCommas(reward)} cash!`)
                     interaction.editReply({embeds: [embed]})
                 }
@@ -118,18 +150,21 @@ module.exports = {
                     let reward = lodash.sample(maps)
                     switch(reward){
                         case "Common":
-                            db.add(`barnmaps_${interaction.user.id}`, 1)
+                           userdata.cmaps += 1
                         break;
                         case "Uncommon":
-                            db.add(`ubarnmaps_${interaction.user.id}`, 1)
+                            userdata.ucmaps += 1
                         break;
                     }
                     embed.setDescription(`You won a ${numberWithCommas(reward)} barn map!`)
                     interaction.editReply({embeds: [embed]})
                 }
+
+                userdata.save()
              
             }, 500);
         }, 3000);
+
 
 
         function numberWithCommas(x) {

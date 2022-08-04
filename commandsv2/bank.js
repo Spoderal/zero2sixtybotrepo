@@ -31,7 +31,7 @@ module.exports = {
               let userdata =  await User.findOne({id: userid}) || new User({id: userid})
     let cash = userdata.cash 
     let bank = userdata.bank
-    let banklimit = userdata.bankLimit || 10000
+    let banklimit = userdata.banklimit || 10000
     let amount = interaction.options.getNumber("amount")
 
     if(subcommand === "deposit"){
@@ -40,8 +40,8 @@ module.exports = {
         if(amount > (banklimit - bank)) return interaction.reply("Your bank doesn't have enough room for that much!")
 
         if(amount > cash) return interaction.reply(`You don't have enough cash!`)
-        userdata.bank += amount
-        userdata.cash -= amount
+        userdata.bank += Number(amount)
+        userdata.cash -= Number(amount)
         userdata.save()
 
         interaction.reply(`Deposited $${numberWithCommas(amount)}`)
@@ -50,8 +50,8 @@ module.exports = {
     else if(subcommand === "withdraw"){
 
         if(amount > bank) return interaction.reply("Your bank doesn't have enough cash to withdraw this amount!")
-        userdata.cash += amount
-        userdata.bank -= amount
+        userdata.cash += Number(amount)
+        userdata.bank -= Number(amount)
         userdata.save()
         interaction.reply(`Withdrawed $${numberWithCommas(amount)}`)
 

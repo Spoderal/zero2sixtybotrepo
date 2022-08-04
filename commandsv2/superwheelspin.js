@@ -6,6 +6,9 @@ const {SlashCommandBuilder} = require('@discordjs/builders')
 const lodash = require("lodash")
 const wheelspinrewards = require('../superwheelspinrewards.json')
 const partsdb = require('../partsdb.json')
+const User = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
+const Global = require('../schema/global-schema')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,11 +17,13 @@ module.exports = {
     async execute(interaction) {
 
         let uid = interaction.user.id
-        let wheelspincool = db.fetch(`swheelspincool_${uid}`)
+        let userdata = await User.findOne({id: uid})
+        let cooldowndata = await Cooldowns.findOne({id: uid}) || new Cooldowns({id: uid})
+
+        let wheelspincool = cooldowndata.swheelspin || 0
         let timeout = 5000;
-        
         if (wheelspincool !== null && timeout - (Date.now() - wheelspincool) > 0) return interaction.reply("Please wait 5 seconds before using this command again.")
-         let wheelspins = db.fetch(`swheelspins_${uid}`)
+         let wheelspins = userdata.swheelspins
          if(wheelspins <= 0) return interaction.reply("You're out of super wheel spins!")
         let items = ['🏎️', '💵', '⚙️', '❓']
       let item =   lodash.sample(items)
@@ -27,11 +32,13 @@ module.exports = {
       let bad = wheelspinrewards.BadRewards
 
       let parts = wheelspinrewards.Parts
-     let garagespaces =  db.fetch(`garagelimit_${interaction.user.id}`) || 10
+     let garagespaces =  userdata.garagelimit
 
-      let usercars = db.fetch(`cars_${uid}`)
-    db.subtract(`swheelspins_${uid}`, 1)
-    db.set(`swheelspincool_${uid}`, Date.now())
+      let usercars = userdata.cars
+    userdata.swheelspins -= 1
+    userdata.update()
+    cooldowndata.swheelspin = Date.now()
+    cooldowndata.save()
         let embed = new Discord.MessageEmbed()
         .setTitle("Super Wheel Spin!")
         .setDescription(`${item}`)
@@ -59,7 +66,7 @@ module.exports = {
               
                  if(item == "⚙️"){
                     let reward = lodash.sample(parts)
-                    db.push(`parts_${interaction.user.id}`, reward)
+                    userdata.parts.push(reward.toLowerCase())
 
                     embed.setDescription(`You won a ${partsdb.Parts[reward].Name}!`)
                     interaction.editReply({embeds: [embed]})
@@ -75,15 +82,30 @@ module.exports = {
                         reward = lodash.sample(cars)
 
                     }
+                    let carindb = carsdb.Cars[reward.toLowerCase()]
+                    let carobj = {
+                        ID: carindb.alias,
+                        Name: carindb.Name,
+                        Speed: carindb.Speed,
+                        Acceleration: carindb["0-60"],
+                        Handling: carindb.Handling,
+                        Parts: [],
+                        Emote: carindb.Emote,
+                        Livery: carindb.Image,
+                        Miles: 0,
+                        Price: 0
+                    }
 
                     embed.setDescription(`You won a ${carsdb.Cars[reward].Emote} ${carsdb.Cars[reward].Name}!`)
                     embed.setImage(carsdb.Cars[reward].Image)
                     interaction.editReply({embeds: [embed]})
-                    if(usercars.includes(reward)) {
+                    let filtered = usercars.filter(car => car.Name == carsdb.Cars[reward].Name)
+
+                    if(filtered[0]) {
                         let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice
-                    db.add(`cash_${uid}`, sellprice)
+                    userdata.cash += Number(sellprice)
                     interaction.channel.send(`You already own this car, so you got $${numberWithCommas(sellprice)} instead.`)
-                    return;
+                  
                 } 
                 if(usercars.length >= garagespaces){
                     interaction.channel.send("You garage is full!")
@@ -92,16 +114,9 @@ module.exports = {
                 else {
                     let sellprice = carsdb.Cars[reward].Price * 0.75
 
-                    db.push(`cars_${uid}`, carsdb.Cars[reward].Name.toLowerCase())
-                    db.set(`${carsdb.Cars[reward].Name}speed_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Speed))
-                    db.set(`${carsdb.Cars[reward].Name}resale_${interaction.user.id}`, sellprice)
-                    db.set(`${carsdb.Cars[reward].Name}060_${interaction.user.id}`, `${carsdb.Cars[reward]["0-60"]}`)
-                    db.set(`${carsdb.Cars[reward].Name}drift_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Drift))
-                    if(carsdb.Cars[reward.toLowerCase()].Range){
-                        db.set(`${carsdb.Cars[reward].Name}range_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Range))
-                        db.set(`${carsdb.Cars[reward].Name}maxrange_${interaction.user.id}`, parseInt(carsdb.Cars[reward].Range))
-    
-                    }
+                    
+                    userdata.cars.push(carobj)
+
                 }
                 }
                 else if(item == "💵"){
@@ -115,7 +130,7 @@ module.exports = {
                         reward = lodash.sample(cash)
 
                     }
-                    db.add(`cash_${uid}`, reward)
+                    userdata.cash += Number(reward)
                     embed.setDescription(`You won $${numberWithCommas(reward)} cash!`)
                     interaction.editReply({embeds: [embed]})
                 }
@@ -123,6 +138,7 @@ module.exports = {
                     embed.setDescription(`You won nothing lol`)
                     interaction.editReply({embeds: [embed]})
                 }
+                userdata.save()
             }, 500);
         }, 3000);
 
