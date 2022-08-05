@@ -1,11 +1,10 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
-
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
+const partdb = require("../data/partsdb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const items = require("../items.json");
+const items = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
 
