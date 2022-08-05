@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node  ."
+    "format": "yarn lint:fix; yarn prettier:fix",
+    "lint:fix": "eslint --fix .",
+    "lint": "eslint .",
+    "prettier": "prettier -c .",
+    "prettier:fix": "prettier --write .",
+    "start": "node  .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -43,5 +48,11 @@
     "spotify-url-info": "^2.2.9",
     "top.gg": "^2.3.2",
     "topgg-autoposter": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.7.1",
+    "prettier-eslint": "^15.0.1"
   }
 }
