@@ -10,7 +10,12 @@
     "prettier": "prettier -c .",
     "prettier:fix": "prettier --write .",
     "start": "node  .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mongodb:mac:install": "brew tap mongodb/brew; brew update; brew install mongodb-community@6.0",
+    "mongodb:mac:up": "brew services start mongodb-community@6.0",
+    "mongodb:mac:log": "tail -f /usr/local/var/log/mongodb/mongo.log",
+    "mongodb:mac:restart": "brew services restart mongodb-community@6.0",
+    "mongodb:mac:down": "brew services stop mongodb-community@6.0"
   },
   "keywords": [],
   "author": "",
