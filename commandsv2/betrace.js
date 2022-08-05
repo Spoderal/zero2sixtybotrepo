@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/profile-schema");
-const partdb = require("../partsdb.json");
+const partdb = require("../data/partsdb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,7 +24,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let userid = interaction.user.id;
 
@@ -130,7 +130,7 @@ module.exports = {
     let userhelmet = userdata.helmet;
     console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
-    let helmets = require("../pfpsdb.json");
+    let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     console.log(actualhelmet);
 

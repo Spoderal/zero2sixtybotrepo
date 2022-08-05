@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
-const barns = require("../junkparts.json");
+const barns = require("../data/junkparts.json");
 const lodash = require("lodash");
-const partsdb = require("../partsdb.json");
+const partsdb = require("../data/partsdb.json");
 const ms = require(`pretty-ms`);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");

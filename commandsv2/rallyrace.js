@@ -25,7 +25,7 @@ module.exports = {
   async execute(interaction) {
     const db = require("quick.db");
 
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let moneyearned = 200;
     let moneyearnedtxt = 200;

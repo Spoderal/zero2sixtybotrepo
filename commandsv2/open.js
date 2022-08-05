@@ -17,8 +17,8 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    let pfps = require("../pfpsdb.json");
-    let crates = require("../cratedb.json");
+    let pfps = require("../data/pfpsdb.json");
+    let crates = require("../data/cratedb.json");
 
     let userdata = await User.findOne({ id: interaction.user.id });
 

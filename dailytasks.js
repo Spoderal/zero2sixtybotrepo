@@ -10,7 +10,7 @@ module.exports = (client) => {
       member,
     } = message;
 
-    let tasksdb = require("./tasks.json");
+    let tasksdb = require("./data/tasks.json");
     let randomtask = lodash.sample(tasksdb.Daily);
     let randomtask2 = lodash.sample(tasksdb.Weekly);
 

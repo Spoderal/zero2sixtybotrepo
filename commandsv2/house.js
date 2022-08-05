@@ -1,7 +1,7 @@
 const db = require("quick.db");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const housedb = require("../houses.json");
+const housedb = require("../data/houses.json");
 const User = require("../schema/profile-schema");
 
 module.exports = {

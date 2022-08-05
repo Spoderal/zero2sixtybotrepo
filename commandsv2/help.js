@@ -1,4 +1,3 @@
-// const { prefix } = require("../config.json");
 const {
   MessageEmbed,
   MessageButton,

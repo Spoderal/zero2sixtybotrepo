@@ -14,7 +14,7 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
 
-    let carsdb = require(`../cardb.json`);
+    let carsdb = require(`../data/cardb.json`);
 
     let idtoselect = interaction.options.getString("car");
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);

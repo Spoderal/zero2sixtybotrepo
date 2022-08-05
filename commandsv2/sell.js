@@ -21,8 +21,8 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
 
-    let parts = require("../partsdb.json");
-    let profilestuff = require("../pfpsdb.json");
+    let parts = require("../data/partsdb.json");
+    let profilestuff = require("../data/pfpsdb.json");
     let userparts = userdata.parts;
 
     let selling = interaction.options.getString("item");

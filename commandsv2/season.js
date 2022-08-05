@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 const db = require("quick.db");
-const seasons = require("../seasons.json");
+const seasons = require("../data/seasons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 

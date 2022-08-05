@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
+const partdb = require("../data/partsdb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,7 +34,7 @@ module.exports = {
   async execute(interaction) {
     const db = require("quick.db");
 
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let moneyearned = 50;
     let moneyearnedtxt = 50;
@@ -292,7 +292,7 @@ module.exports = {
     }
 
     if (prestige) {
-      let mult = require("../prestige.json")[prestige].Mult;
+      let mult = require("../data/prestige.json")[prestige].Mult;
 
       let multy = mult * moneyearned;
 
@@ -366,7 +366,7 @@ module.exports = {
     let userhelmet = userdata.helmet;
     console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
-    let helmets = require("../pfpsdb.json");
+    let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     console.log(actualhelmet);
     let driftscore = selected.Drift;
@@ -649,7 +649,7 @@ module.exports = {
             interaction.editReply({ embeds: [embed] });
           } else if (policelen > tracklength) {
             let job = userdatacop.job;
-            let jobsdb = require("../jobs.json");
+            let jobsdb = require("../data/jobs.json");
             let num = job.Number;
             let salary = job.Salary;
             let actjob = job.Job;

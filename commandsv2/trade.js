@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
-const cardb = require("../cardb.json");
+const cardb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const partdb = require("../partsdb.json");
-const itemdb = require("../items.json");
+const partdb = require("../data/partsdb.json");
+const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 
 module.exports = {

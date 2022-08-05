@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const profilepics = require("../pfpsdb.json");
-const cardb = require("../cardb.json");
+const profilepics = require("../data/pfpsdb.json");
+const cardb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 

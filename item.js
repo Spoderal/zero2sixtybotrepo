@@ -1,4 +1,4 @@
-const items = require("./items.json");
+const items = require("./data/items.json");
 const policeitems = items.Police;
 const otheritems = items.Other;
 

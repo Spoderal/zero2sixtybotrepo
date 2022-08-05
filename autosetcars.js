@@ -1,5 +1,5 @@
 let db = require("quick.db");
-let cardb = require("./cardb.json");
+let cardb = require("./data/cardb.json");
 
 module.exports = async () => {
   const User = require("./schema/profile-schema");

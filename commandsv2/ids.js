@@ -1,4 +1,4 @@
-const cars = require("../cardb.json");
+const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
@@ -30,7 +30,7 @@ module.exports = {
     let uid = interaction.user.id;
 
     if (option == "select") {
-      let cars = require("../cardb.json");
+      let cars = require("../data/cardb.json");
       let usercars = userdata.cars;
       let idtochoose = interaction.options.getString("id");
 

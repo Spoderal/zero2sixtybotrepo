@@ -19,8 +19,8 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    let crates = require("../imports.json");
-    let cars = require("../cardb.json");
+    let crates = require("../data/imports.json");
+    let cars = require("../data/cardb.json");
     let list = ["common", "rare", "exotic", "drift", "z crate 1"];
 
     let userdata = await User.findOne({ id: interaction.user.id });

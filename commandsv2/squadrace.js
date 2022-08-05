@@ -1,5 +1,5 @@
 const discord = require("discord.js");
-const squads = require("../squads.json");
+const squads = require("../data/squads.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 
@@ -11,7 +11,7 @@ module.exports = {
       option.setName("id").setDescription("The car id to use").setRequired(true)
     ),
   async execute(interaction) {
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let user = interaction.user;
     let userdata = await User.findOne({ id: user.id });

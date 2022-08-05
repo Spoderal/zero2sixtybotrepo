@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const housedb = require("../houses.json");
+const housedb = require("../data/houses.json");
 const lodash = require("lodash");
 const { MessageActionRow, MessageButton } = require("discord.js");
-const warehousedb = require("../warehouses.json");
+const warehousedb = require("../data/warehouses.json");
 
 module.exports = {
   data: new SlashCommandBuilder()

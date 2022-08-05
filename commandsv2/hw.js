@@ -40,7 +40,7 @@ module.exports = {
     const discord = require("discord.js");
     const db = require("quick.db");
 
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let user = interaction.user;
     let user2 = interaction.options.getUser("target");

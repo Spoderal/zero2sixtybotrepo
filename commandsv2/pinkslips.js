@@ -22,7 +22,7 @@ module.exports = {
   async execute(interaction) {
     const ms = require("pretty-ms");
     const discord = require("discord.js");
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let user = interaction.user;
     let user2 = interaction.options.getUser("target");

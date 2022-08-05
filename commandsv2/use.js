@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const itemdb = require("../items.json");
+const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const prestiges = require("../prestige.json");
+const prestiges = require("../data/prestige.json");
 const User = require("../schema/profile-schema");
 
 module.exports = {

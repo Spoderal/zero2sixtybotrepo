@@ -32,7 +32,7 @@ module.exports = {
         .addChoice("Chase", "chase")
     ),
   async execute(interaction) {
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let moneyearned = 400;
     let moneyearnedtxt = 400;
@@ -314,7 +314,7 @@ module.exports = {
             userdata.job.worked = Date.now();
             embed.setTitle(`Caught Tier ${bot} racer!`);
             let job = userdata.job;
-            let jobsdb = require("../jobs.json");
+            let jobsdb = require("../data/jobs.json");
             let num = job.Number;
             let salary = job.Salary;
             let actjob = job.Job;

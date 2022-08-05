@@ -1,6 +1,6 @@
 const db = require("quick.db");
-const squads = require("../squads.json");
-const cars = require("../cardb.json");
+const squads = require("../data/squads.json");
+const cars = require("../data/cardb.json");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 

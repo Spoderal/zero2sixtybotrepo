@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const pfpdb = require("../pfpsdb.json");
+const pfpdb = require("../data/pfpsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
@@ -29,6 +29,7 @@ module.exports = {
   async execute(interaction) {
     let option = interaction.options.getString("option");
     let userdata = await User.findOne({ id: interaction.user.id });
+    let bgdb = require("../data/backgrounds.json");
 
     if (option == "helmet") {
       let userpfps = userdata.pfps;
@@ -57,7 +58,6 @@ module.exports = {
 
       interaction.reply(`Set your profile description to "${titletoset}"`);
     } else if (option == "background") {
-      let bgdb = require("../backgrounds.json");
       let pfp = interaction.options.getString("item");
       if (!pfp)
         return interaction.reply(
@@ -82,7 +82,6 @@ module.exports = {
       }
       interaction.reply(`Set your profile background to "${pfp}"`);
     } else if (option == "vbackground") {
-      let bgdb = require("../backgrounds.json");
       var bgs = [];
       for (let bg in bgdb) {
         bgs.push(`${bgdb[bg].Emote} ${bgdb[bg].Name}`);

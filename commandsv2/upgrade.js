@@ -1,5 +1,5 @@
 const discord = require("discord.js");
-const partdb = require("../partsdb.json");
+const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 

@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
-const carsdb = require("../cardb.json");
+const carsdb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const wheelspinrewards = require("../superwheelspinrewards.json");
-const partsdb = require("../partsdb.json");
+const wheelspinrewards = require("../data/superwheelspinrewards.json");
+const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 

@@ -1,5 +1,5 @@
 const db = require("quick.db");
-const cars = require("../cardb.json");
+const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {

@@ -1,11 +1,11 @@
 const { Intents, MessageEmbed } = require("discord.js");
-const partdb = require("../partsdb.json");
+const partdb = require("../data/partsdb.json");
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILD_MESSAGES);
 myIntents.add(Intents.FLAGS.GUILDS);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const itemdb = require("../items.json");
+const itemdb = require("../data/items.json");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
 

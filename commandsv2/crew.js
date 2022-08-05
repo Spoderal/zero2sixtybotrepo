@@ -1,9 +1,9 @@
 const db = require("quick.db");
 const Discord = require("discord.js");
 const { MessageActionRow, MessageButton } = require("discord.js");
-const icons = require("../crewicons.json");
+const icons = require("../data/crewicons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const crewicons = require("../crewicons.json");
+const crewicons = require("../data/crewicons.json");
 const Global = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 
@@ -121,7 +121,7 @@ module.exports = {
             collector.on("collect", async (i) => {
               if (i.customId.includes("season")) {
                 let crewseason =
-                  require("../seasons.json").Seasons.Crew1.Rewards;
+                  require("../data/seasons.json").Seasons.Crew1.Rewards;
                 let reward = [];
                 for (var w in crewseason) {
                   let item = crewseason[w];

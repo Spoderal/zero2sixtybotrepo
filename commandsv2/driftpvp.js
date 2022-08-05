@@ -34,7 +34,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
 
     let moneyearned = 50;
     let idtoselect = interaction.options.getString("car");
@@ -128,7 +128,7 @@ module.exports = {
 
     console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
-    let helmets = require("../pfpsdb.json");
+    let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     let actualhelmet2 = helmets.Pfps[userhelmet2.toLowerCase()];
 

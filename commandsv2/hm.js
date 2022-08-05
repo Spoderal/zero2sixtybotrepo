@@ -31,7 +31,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
     let moneyearned = 150;
     let moneyearnedtxt = 150;
     let uid = interaction.user.id;
@@ -219,7 +219,7 @@ module.exports = {
       }
     }
     if (prestige) {
-      let mult = require("../prestige.json")[prestige].Mult;
+      let mult = require("../data/prestige.json")[prestige].Mult;
 
       let multy = mult * moneyearned;
 
@@ -319,7 +319,7 @@ module.exports = {
     let userhelmet = userdata.helmet;
     console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
-    let helmets = require("../pfpsdb.json");
+    let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     console.log(actualhelmet);
 
@@ -441,7 +441,7 @@ module.exports = {
             userdata.wheelspins += 1;
           }
           if (bankinc == 1) {
-            let itemdb = require("../items.json");
+            let itemdb = require("../data/items.json");
             let emote = itemdb.Collectable[0]["bank increase"].Emote;
 
             earningsresult.push(`${emote} Bank Increase Earned!`);

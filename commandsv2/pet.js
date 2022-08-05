@@ -3,9 +3,9 @@ const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const lodash = require("lodash");
-const partdb = require("../partsdb.json");
-const itemdb = require("../items.json");
-const petdb = require("../pets.json");
+const partdb = require("../data/partsdb.json");
+const itemdb = require("../data/items.json");
+const petdb = require("../data/pets.json");
 const User = require("../schema/profile-schema");
 
 module.exports = {

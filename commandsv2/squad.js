@@ -1,5 +1,5 @@
 const discord = require("discord.js");
-const squads = require("../squads.json");
+const squads = require("../data/squads.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {

@@ -36,7 +36,7 @@ module.exports = {
     ),
   async execute(interaction) {
     const discord = require("discord.js");
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
     let tracks = ["easy", "medium", "hard"];
 
     let moneyearned = 200;

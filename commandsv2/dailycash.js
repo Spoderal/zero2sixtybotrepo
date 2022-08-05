@@ -52,7 +52,7 @@ module.exports = {
     let timeout = 86400000;
     let prestige = userdata.prestige;
     if (prestige) {
-      let mult = require("../prestige.json")[prestige].Mult;
+      let mult = require("../data/prestige.json")[prestige].Mult;
 
       let multy = mult * dcash;
 

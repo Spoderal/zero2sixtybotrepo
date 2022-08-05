@@ -1,4 +1,4 @@
-const parts = require("../partsdb.json");
+const parts = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
   MessageActionRow,

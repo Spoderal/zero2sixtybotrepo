@@ -15,7 +15,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const cars = require("../cardb.json");
+    const cars = require("../data/cardb.json");
     let moneyearnedtxt = 300;
     let moneyearned = 300;
     let idtoselect = interaction.options.getString("car");

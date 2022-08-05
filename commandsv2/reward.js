@@ -1,6 +1,6 @@
 const discord = require("discord.js");
-const seasons = require("../seasons.json");
-const cardb = require("../cardb.json");
+const seasons = require("../data/seasons.json");
+const cardb = require("../data/cardb.json");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
@@ -204,7 +204,7 @@ module.exports = {
       }
       let redeemed = userdata.crewclaimed;
 
-      let rewardss = require("../seasons.json").Seasons.Crew1.Rewards;
+      let rewardss = require("../data/seasons.json").Seasons.Crew1.Rewards;
       let newredeemed = redeemed;
 
       let crewinf = crew2[0];

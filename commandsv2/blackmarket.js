@@ -1,5 +1,5 @@
-const parts = require("../partsdb.json");
-const cars = require("../cardb.json");
+const parts = require("../data/partsdb.json");
+const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
   MessageActionRow,

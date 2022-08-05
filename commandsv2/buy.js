@@ -26,12 +26,12 @@ module.exports = {
 
     let amount = interaction.options.getNumber("amount");
     let amount2 = amount || 1;
-    let warehousedb = require("../warehouses.json");
-    let cars = require("../cardb.json");
-    let houses = require("../houses.json");
+    let warehousedb = require("../data/warehouses.json");
+    let cars = require("../data/cardb.json");
+    let houses = require("../data/houses.json");
 
     const { MessageEmbed } = require("discord.js");
-    let parts = require("../partsdb.json");
+    let parts = require("../data/partsdb.json");
     let list = cars.Cars;
     let list2 = parts.Parts;
     let list3 = items;
