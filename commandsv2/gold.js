@@ -1,20 +1,11 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
-const badgedb = require("../badgedb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const housedb = require("../houses.json");
-const lodash = require("lodash");
-const colors = require("../colordb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("gold")
     .setDescription("View gold pricing and what it can buy"),
   async execute(interaction) {
-    let user = interaction.user;
-    let uid = user.id;
-
     let embed = new Discord.MessageEmbed()
       .setTitle("Gold Pricing")
       .setDescription(
@@ -50,6 +41,3 @@ module.exports = {
     interaction.reply({ embeds: [embed] });
   },
 };
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

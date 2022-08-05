@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("cashcup")
@@ -17,8 +17,6 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     let user = interaction.user;
 
     const cars = require("../cardb.json");
@@ -44,7 +42,6 @@ module.exports = {
 
     let timeout = 7200000;
     let racing = cooldowndata.cashcup || 0;
-    let cashcuptier = userdata.cashcuptier;
 
     let newcashcuptier = userdata.cashcuptier;
 
@@ -57,7 +54,6 @@ module.exports = {
         `Please wait ${time} before racing in the cash cup again.`
       );
     }
-    let user1cars = userdata.cars;
     let bot1cars = [
       "1995 mazda miata",
       "1991 toyota mr2",
@@ -147,7 +143,6 @@ module.exports = {
     let nitro = selected.Nitro;
 
     let user1carspeed = selected.Speed;
-    let user1carzerosixty = selected.Acceleration;
 
     let handling = selected.Handling;
     let botspeed = cars.Cars[botcar.toLowerCase()].Speed;
@@ -186,7 +181,6 @@ module.exports = {
     let hemote = "<:handling:983963211403505724>";
     let zemote = "<:zerosixtyemote:983963210304614410>";
     let cemote = "<:zecash:983966383408832533>";
-    let rpemote = "<:rp:983968476060336168>";
     let embed = new discord.MessageEmbed()
       .setTitle(`Tier ${newcashcuptier} cash cup race in progress...`)
       .addField(
@@ -227,8 +221,9 @@ module.exports = {
     let tracklength2 = 0;
     tracklength2 += new60;
     if (nitro) {
+      let row = new discord.MessageActionRow();
       row.addComponents(
-        new MessageButton()
+        new discord.MessageButton()
           .setCustomId("boost")
           .setEmoji("<:boost:983813400289234978>")
           .setLabel("Boost")
@@ -245,7 +240,7 @@ module.exports = {
         time: 10000,
       });
 
-      collector.on("collect", async (i, user) => {
+      collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);
@@ -257,6 +252,7 @@ module.exports = {
     }
 
     let timer = 0;
+    let moneyearnedtxt
     let x = setInterval(() => {
       tracklength += hp;
       tracklength2 += hp2;

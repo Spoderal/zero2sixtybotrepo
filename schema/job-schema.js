@@ -23,4 +23,4 @@ const Job = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("job", Profile);
+module.exports = mongoose.model("job", Job);

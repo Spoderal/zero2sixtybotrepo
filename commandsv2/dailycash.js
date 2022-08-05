@@ -1,6 +1,4 @@
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
-const db = require("quick.db");
 const ms = require("ms");
 
 const { SlashCommandBuilder } = require("@discordjs/builders");

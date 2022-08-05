@@ -1,11 +1,9 @@
 const discord = require("discord.js");
-const db = require("quick.db");
 const seasons = require("../seasons.json");
 const cardb = require("../cardb.json");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
 const Global = require("../schema/global-schema");
 
 module.exports = {
@@ -37,8 +35,6 @@ module.exports = {
     if (type == "season") {
       let rew = interaction.options.getString("reward");
       uid = interaction.user.id;
-
-      let redeemed = userdata.seasonrewards;
 
       let newredeemed = userdata.seasonrewards;
 
@@ -166,7 +162,7 @@ module.exports = {
         console.log("Car");
         console.log(item.Item);
         let carindb = cardb.Cars[item.Item.toLowerCase()];
-        carobj = {
+        let carobj = {
           ID: carindb.alias,
           Name: carindb.Name,
           Speed: carindb.Speed,
@@ -180,15 +176,13 @@ module.exports = {
 
         userdata.cars.push(carobj);
         userdata.seasonrewards.push(item.Number);
-        interaction.reply(`Redeemed ${cartogive.Name}`);
+        interaction.reply(`Redeemed ${carobj.Name}`);
       }
 
       userdata.noto -= item.Required;
       userdata.save();
     } else if (type == "crew") {
       let rew = interaction.options.getString("reward");
-      let uid = interaction.user.id;
-
       let ucrew = userdata.crew;
 
       let crews = global.crews;

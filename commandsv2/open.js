@@ -1,12 +1,8 @@
-const db = require("quick.db");
 const lodash = require("lodash");
 const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("open")
@@ -21,12 +17,9 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    let db = require("quick.db");
     let pfps = require("../pfpsdb.json");
     let crates = require("../cratedb.json");
-    let colors = require("../colordb.json");
 
-    let list = ["common", "rare", "seasonal"];
     let userdata = await User.findOne({ id: interaction.user.id });
 
     let bought = interaction.options.getString("crate");

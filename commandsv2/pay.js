@@ -1,6 +1,3 @@
-const db = require("quick.db");
-const discord = require("discord.js");
-const cars = require("../cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 

@@ -1,10 +1,7 @@
-const db = require("quick.db");
 const lodash = require("lodash");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -22,7 +19,6 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    let db = require("quick.db");
     let crates = require("../imports.json");
     let cars = require("../cardb.json");
     let list = ["common", "rare", "exotic", "drift", "z crate 1"];
@@ -50,6 +46,7 @@ module.exports = {
 
     let driftkeys = userdata.dkeys || 0;
     let gold = userdata.gold;
+    let ferrarikeys = userdata.ferrarikeys;
 
     if (bought == "common" && commonkeys < 50)
       return interaction.reply(
@@ -90,6 +87,33 @@ module.exports = {
 
     let result;
     let rarity;
+
+    function pickRandom() {
+      // Calculate chances for common
+      var filler =
+        100 -
+        rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
+
+      if (filler < 0) {
+        console.log("chances sum is higher than 100!");
+        return;
+      }
+
+      // Create an array of 100 elements, based on the chances field
+      var probability = rarities
+        .map((r, i) => Array(r.chance === 0 ? filler : r.chance).fill(i))
+        .reduce((c, v) => c.concat(v), []);
+
+      // Pick one
+      var pIndex = Math.floor(Math.random() * 100);
+      console.log(probability);
+      rarity = rarities[probability[pIndex]];
+      console.log(pIndex);
+      console.log(rarity);
+      result = lodash.sample(crates["z crate"][rarity.type.toLowerCase()]);
+      console.log(result);
+    }
+
     if (bought == "z crate 1") {
       var rarities = [
         {
@@ -110,35 +134,12 @@ module.exports = {
         },
       ];
 
-      function pickRandom() {
-        // Calculate chances for common
-        var filler =
-          100 -
-          rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
-
-        if (filler < 0) {
-          console.log("chances sum is higher than 100!");
-          return;
-        }
-
-        // Create an array of 100 elements, based on the chances field
-        var probability = rarities
-          .map((r, i) => Array(r.chance === 0 ? filler : r.chance).fill(i))
-          .reduce((c, v) => c.concat(v), []);
-
-        // Pick one
-        var pIndex = Math.floor(Math.random() * 100);
-        console.log(probability);
-        rarity = rarities[probability[pIndex]];
-        console.log(pIndex);
-        console.log(rarity);
-        result = lodash.sample(crates["z crate"][rarity.type.toLowerCase()]);
-        console.log(result);
-      }
-
       pickRandom();
       let usercars = userdata.cars;
       let car = cars.Cars[result.toLowerCase()];
+      let cratecontents = crates[bought].Contents;
+      let randomitem = lodash.sample(cratecontents);
+      let carindb = cars.Cars[randomitem.toLowerCase()];
       let carobj = {
         ID: carindb.alias,
         Name: carindb.Name,

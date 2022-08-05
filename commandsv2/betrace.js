@@ -37,8 +37,6 @@ module.exports = {
     let semote = "<:speedemote:983963212393357322>";
     let hemote = "<:handling:983963211403505724>";
     let zemote = "<:zerosixtyemote:983963210304614410>";
-    let cemote = "<:zecash:983966383408832533>";
-    let rpemote = "<:rp:983968476060336168>";
     let moneyearned = interaction.options.getNumber("bet");
 
     let idtoselect = interaction.options.getString("car");
@@ -53,9 +51,6 @@ module.exports = {
         );
       return interaction.reply({ embeds: [errembed] });
     }
-    let user = interaction.user;
-    let bot = randomRange(1, 7);
-    let botlist = ["1", "2", "3", "4", "5", "6", "7"];
     let timeout = 18000000;
     let racing = cooldowns.betracing;
     let prestige = userdata.prestige;
@@ -83,8 +78,6 @@ module.exports = {
     }
 
     let bank = userdata.bank;
-    let banklimit = userdata.bankLimit || 10000;
-
     if (moneyearned > bank)
       return interaction.reply(
         `You don't have enough money in your bank account!`
@@ -118,8 +111,6 @@ module.exports = {
     let othernewhandling = cars.Cars[botcar.Name.toLowerCase()].Handling / 20;
     let new60 = user1carspeed / zero2sixtycar;
     let new62 = cars.Cars[botcar.Name.toLowerCase()].Speed / otherzero2sixty;
-    let using = userdata.using;
-    let items = userdata.items;
     Number(user1carspeed);
     Number(botspeed);
     Number(new60);
@@ -136,10 +127,6 @@ module.exports = {
       "View events with /event",
     ];
     let tip = lodash.sample(tips);
-    let y;
-    let policeuser;
-    let policelen;
-    let salary;
     let userhelmet = userdata.helmet;
     console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
@@ -208,7 +195,7 @@ module.exports = {
         time: 10000,
       });
 
-      collector.on("collect", async (i, user) => {
+      collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Patrts[nitro.toLowerCase()].AddedBoost;
 

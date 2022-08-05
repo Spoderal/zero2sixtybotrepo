@@ -2,6 +2,7 @@ const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("rallybot")
@@ -41,7 +42,6 @@ module.exports = {
     let timeout = db.fetch(`timeout_${interaction.user.id}`) || 45000;
     let botcar = null;
     let racing = db.fetch(`racing_${user.id}`);
-    let racingxp = db.fetch(`racexp_${user.id}`);
 
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
@@ -107,14 +107,12 @@ module.exports = {
     }
     let tracklengthb;
     let weekytask1 = db.fetch(`weeklytask_${interaction.user.id}`);
-    let ticketsearned;
     let barnrandom = randomRange(1, 6);
     console.log(`random ${barnrandom}`);
     let barnmaps;
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
-        ticketsearned = 1;
         tracklengthb = 500;
         break;
       }
@@ -122,7 +120,6 @@ module.exports = {
         botcar = lodash.sample(bot2cars);
         moneyearned += 300;
         moneyearnedtxt += 300;
-        ticketsearned = 1;
         tracklengthb = 600;
         break;
       }
@@ -131,7 +128,6 @@ module.exports = {
         moneyearned += 400;
         moneyearnedtxt += 400;
         tracklengthb = 700;
-        ticketsearned = 2;
         if (barnrandom == 2) {
           barnmaps = 1;
         }
@@ -148,9 +144,6 @@ module.exports = {
 
     console.log(newrankrequired);
     console.log(botcar);
-    let nitro = db.fetch(
-      `${cars.Cars[selected.toLowerCase()].Name}nitro_${interaction.user.id}`
-    );
 
     let user1carspeed = db.fetch(
       `${cars.Cars[selected.toLowerCase()].Name}speed_${user.id}`
@@ -233,7 +226,6 @@ module.exports = {
       )
       .setColor("#60b0f4")
       .setThumbnail("https://i.ibb.co/TkqTq9R/Logo-Makr-17-Np-PO.png");
-    let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
     let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {
@@ -249,7 +241,6 @@ module.exports = {
 
     let tracklength = tracklengthb - launchperc;
     let tracklength2 = tracklengthb;
-    let notorietyearn = 15 * offroad;
 
     let randomobstacle = randomRange(1, 4);
     let timeobs = randomobstacle * 1000;
@@ -265,7 +256,7 @@ module.exports = {
           "https://media1.giphy.com/media/oKuiwS2NsAhjy/giphy.gif",
           "https://media1.giphy.com/media/xT0BKi8beZIotuqrFS/200.gif",
         ];
-        collector.on("collect", async (r, user) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name === "❌") {
             embed.setImage(
               "https://media2.giphy.com/media/3xINyooRG4JB4XPKQu/200w.gif?cid=82a1493by2jz4yaxvxevizi1x2k7e4mk5yl7ija1igl2l5u9&rid=200w.gif&ct=g"

@@ -3,6 +3,7 @@ const squads = require("../squads.json");
 const cars = require("../cardb.json");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("choose")
@@ -126,12 +127,12 @@ module.exports = {
         `isselected_${carname}_${interaction.user.id}`,
         cars.Cars[squadchose.toLowerCase()].alias
       );
-      db.set(
-        `selected_${carsdb.Cars[reward.toLowerCase()].alias}_${
-          interaction.user.id
-        }`,
-        carsdb.Cars[reward.toLowerCase()].Name
-      );
+      // db.set(
+      //   `selected_${cars.Cars[reward.toLowerCase()].alias}_${
+      //     interaction.user.id
+      //   }`,
+      //   cars.Cars[reward.toLowerCase()].Name
+      // );
 
       let embed = new discord.MessageEmbed()
         .setTitle(`✅ Chose ${carname}`)

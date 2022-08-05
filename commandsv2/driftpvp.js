@@ -1,11 +1,9 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
-const { SlashCommandBuilder, time } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
 const Global = require("../schema/global-schema");
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,15 +34,11 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     const cars = require("../cardb.json");
 
     let moneyearned = 50;
-    let moneyearnedtxt = 50;
     let idtoselect = interaction.options.getString("car");
     let user2 = interaction.options.getString("user");
-    let map = interaction.options.getString("track");
     let idtoselect2 = interaction.options.getString("car2");
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -77,8 +71,6 @@ module.exports = {
     }
     console.log(filteredcar);
     let user = interaction.user;
-    let bot = interaction.options.getString("tier");
-    let botlist = ["1", "2", "3", "4", "5", "6", "7", "8"];
     let timeout = cooldowndata.timeout || 45000;
     let botcar = null;
     let racing = cooldowndata.racing;
@@ -93,14 +85,6 @@ module.exports = {
     let zemote = "<:zerosixtyemote:983963210304614410>";
     let cemote = "<:zecash:983966383408832533>";
     let rpemote = "<:rp:983968476060336168>";
-
-    let botdupgrades = randomRange(5, 25);
-    let botemote;
-
-    let prestige = userdata.prestige;
-    let errorembed = new discord.MessageEmbed()
-      .setTitle("❌ Error!")
-      .setColor("#60b0f4");
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
       return interaction.reply("This car is too junked to race, sorry!");
@@ -125,27 +109,12 @@ module.exports = {
         );
       }
     }
-    let weekytask1 = userdata.weeklytask;
     let ticketsearned;
-    let classd;
-    let barnrandom = randomRange(1, 6);
-    let barnmaps;
-    let barnwins;
-    let ubarnmaps;
-    let crateearned;
-    let tracklength = 0;
 
-    let driftlevel = userdata.driftrank;
+    let tracklength = 0;
 
     cooldowndata.racing = Date.now();
     cooldowndata.save();
-    let newrankrequired = racelevel * 200;
-    if (prestige >= 3) {
-      newrankrequired * 2;
-    } else if (prestige >= 5) {
-      newrankrequired * 3;
-    }
-    let carparts = selected.Parts;
 
     let user1carspeed = selected.Speed;
     let user1carzerosixty = selected.Acceleration;
@@ -167,19 +136,13 @@ module.exports = {
     let driftscore = selected.Drift;
     let driftscore2 = selected2.Drift;
 
-    let zero2sixtycar2 = selected2.Acceleration;
     let zero2sixtycar = selected.Acceleration;
     let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"];
-    let newhandling = user1carhandling / 20;
-    let newhandling2 = user2carhandling / 20;
 
-    let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20;
     let new60 = user1carspeed / zero2sixtycar;
     let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
     let using = userdata.using;
-    let items = userdata.Items;
     Number(user1carspeed);
-    Number(botspeed);
     Number(new60);
     Number(new62);
     let driftrank1 = userdata.driftrank;
@@ -199,10 +162,6 @@ module.exports = {
     ];
     let tip = lodash.sample(tips);
     let y;
-    let policeuser;
-    let rcollector;
-    let policelen;
-    let salary;
     let itemusedp;
     let embed = new discord.MessageEmbed()
       .setTitle(`Drift PVP in progress...`)
@@ -223,10 +182,6 @@ module.exports = {
       .setFooter(`${tip}`)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
 
-    let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
-
-    let randomnum = randomRange(1, 4);
-
     tracklength += new62;
     let tracklength2 = 0;
     tracklength2 += new60;
@@ -245,7 +200,6 @@ module.exports = {
         console.log(tracklength);
         clearInterval(x);
         clearInterval(y);
-        collector2.stop();
 
         if (tracklength > tracklength2) {
           if (userdata.cashgain == "10") {
@@ -434,9 +388,5 @@ module.exports = {
         }
       }
     }, 1000);
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

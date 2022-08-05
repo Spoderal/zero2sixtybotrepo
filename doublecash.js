@@ -1,9 +1,8 @@
 const db = require("quick.db");
-const discord = require("discord.js");
-const lodash = require("lodash");
 const { DateTime } = require("luxon");
+
 module.exports = (client) => {
-  client.on("messageCreate", async (message) => {
+  client.on("messageCreate", async () => {
     var myDate = DateTime.now();
 
     let day = myDate.weekday;

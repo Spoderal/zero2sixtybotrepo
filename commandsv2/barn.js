@@ -1,4 +1,3 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const barns = require("../barns.json");
 const lodash = require("lodash");
@@ -117,12 +116,6 @@ module.exports = {
       }
 
       // Create an array of 100 elements, based on the chances field
-      var probability = rarities
-        .map((r, i) => Array(r.chance === 0 ? filler : r.chance).fill(i))
-        .reduce((c, v) => c.concat(v), []);
-      // Pick one
-      var pIndex = Math.floor(Math.random() * 100);
-      var rarity = rarities[probability[pIndex]];
       let barnfind = lodash.sample(barns.Barns[rarity2.toLowerCase()]);
       let resale;
       let namefor;
@@ -210,8 +203,8 @@ module.exports = {
         case "legendary":
           lbarnmaps -= 1;
 
-          break;
           userdata.save();
+          break;
       }
       let embed = new Discord.MessageEmbed()
         .setTitle(`${namefor} Barn Find`)
@@ -228,24 +221,4 @@ module.exports = {
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function convert(val) {
-  // thousands, millions, billions etc..
-  var s = ["", "k", "m", "b", "t"];
-
-  // dividing the value by 3.
-  var sNum = Math.floor(("" + val).length / 3);
-
-  // calculating the precised value.
-  var sVal = parseFloat(
-    (sNum != 0 ? val / Math.pow(1000, sNum) : val).toPrecision(2)
-  );
-
-  if (sVal % 1 != 0) {
-    sVal = sVal.toFixed(1);
-  }
-
-  // appending the letter to precised val.
-  return sVal + s[sNum];
 }

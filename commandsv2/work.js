@@ -1,17 +1,11 @@
 const Discord = require("discord.js");
-const carsdb = require("../cardb.json");
-const db = require("quick.db");
 const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const wheelspinrewards = require("../wheelspinrewards.json");
-const partsdb = require("../partsdb.json");
 const jobsdb = require("../jobs.json");
 const pretty = require("pretty-ms");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -136,7 +130,7 @@ module.exports = {
         .setTitle(`Your rank for ${jobsdb.Jobs[actjob].Name}`)
         .setThumbnail(jobsdb.Jobs[actjob].Helmet)
         .setDescription(
-          `Rank: ${jobrank}\nXP: ${exp}\/${requiredxp}\nSalary: $${salary}/${time}`
+          `Rank: ${jobrank}\nXP: ${exp}/${requiredxp}\nSalary: $${salary}/${time}`
         )
         .setColor("#60b0f4");
 
@@ -157,13 +151,9 @@ module.exports = {
         return interaction.reply({ embeds: [timeEmbed] });
       }
 
-      let jobrank = job.Rank;
       let num = job.Number;
       let salary = job.Salary;
-      let exp = job.EXP;
-      let timeout = job.Timeout;
       let actjob = job.Job;
-      let time = pretty(timeout);
       let addednum = (num += 1);
       let requiredxp;
       let jobdb = jobsdb.Jobs[actjob.toLowerCase()];
@@ -221,12 +211,11 @@ module.exports = {
         const filter = (m = discord.Message) => {
           return m.author.id === uid;
         };
-        let choice,
-          collector = interaction.channel.createMessageCollector({
-            filter,
-            max: 1,
-            time: 1000 * 20,
-          });
+        let collector = interaction.channel.createMessageCollector({
+          filter,
+          max: 1,
+          time: 1000 * 20,
+        });
 
         collector.on("collect", (msg) => {
           if (msg.content.toLowerCase() !== question.Answer)
@@ -256,13 +245,9 @@ module.exports = {
           );
         });
       } else if (actjob == "youtuber") {
-        let jobrank = job.Rank;
         let num = job.Number;
         let salary = job.Salary;
-        let exp = job.EXP;
-        let timeout = job.Timeout;
         let actjob = job.Job;
-        let time = pretty(timeout);
         let addednum = (num += 1);
         let requiredxp;
         let jobdb = jobsdb.Jobs[actjob.toLowerCase()];
@@ -346,7 +331,7 @@ module.exports = {
                   Question: "A funny thing just happened! Whats your reaction?",
                   Answer: "😆",
                 },
-                funny: {
+                angry: {
                   Question: "You crashed your car! Whats your reaction?",
                   Answer: "😡",
                 },
@@ -407,8 +392,6 @@ module.exports = {
                   }
                   let addedsubs = overallscore * 10;
 
-                  let likes = overallscore * 2;
-
                   if (videotypes1[type].Trending) {
                     addedsubs *= 2;
                     embed.addField(`Trending!`, `\u200b`);
@@ -456,12 +439,11 @@ module.exports = {
               let filter2 = (m = discord.Message) => {
                 return m.author.id === uid;
               };
-              let choice,
-                collector = interaction.channel.createMessageCollector({
-                  filter: filter2,
-                  max: 1,
-                  time: 1000 * 20,
-                });
+              let collector = interaction.channel.createMessageCollector({
+                filter: filter2,
+                max: 1,
+                time: 1000 * 20,
+              });
 
               collector.on("collect", (msg) => {
                 let numbertorate = msg.content;
@@ -514,13 +496,9 @@ module.exports = {
           });
         });
       } else if (actjob == "zero2sixty programmer") {
-        let jobrank = job.Rank;
         let num = job.Number;
         let salary = job.Salary;
-        let exp = job.EXP;
-        let timeout = job.Timeout;
         let actjob = job.Job;
-        let time = pretty(timeout);
         let addednum = (num += 1);
         let requiredxp;
         let jobdb = jobsdb.Jobs[actjob.toLowerCase()];
@@ -614,12 +592,11 @@ module.exports = {
           const filter = (m = discord.Message) => {
             return m.author.id === uid;
           };
-          let choice,
-            collector = interaction.channel.createMessageCollector({
-              filter,
-              max: 1,
-              time: 1000 * 10,
-            });
+          let collector = interaction.channel.createMessageCollector({
+            filter,
+            max: 1,
+            time: 1000 * 10,
+          });
 
           collector.on("collect", (msg) => {
             if (msg.content.toLowerCase() !== randomtype)
@@ -654,13 +631,9 @@ module.exports = {
           });
         }
       } else if (actjob == "pizza delivery") {
-        let jobrank = job.Rank;
         let num = job.Number;
         let salary = job.Salary;
-        let exp = job.EXP;
-        let timeout = job.Timeout;
         let actjob = job.Job;
-        let time = pretty(timeout);
         let addednum = (num += 1);
         let requiredxp;
         let jobdb = jobsdb.Jobs[actjob.toLowerCase()];
@@ -764,12 +737,11 @@ module.exports = {
       const filter2 = (m = discord.Message) => {
         return m.author.id === uid;
       };
-      let choice,
-        collector = interaction.channel.createMessageCollector({
-          filter: filter2,
-          max: 1,
-          time: 1000 * 20,
-        });
+      let collector = interaction.channel.createMessageCollector({
+        filter: filter2,
+        max: 1,
+        time: 1000 * 20,
+      });
 
       collector.on("collect", async (msg) => {
         if (msg.content.toLowerCase() == "y") {
@@ -796,8 +768,8 @@ module.exports = {
       return Math.round(Math.random() * (max - min)) + min;
     }
 
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    // function numberWithCommas(x) {
+    //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // }
   },
 };

@@ -1,13 +1,8 @@
 const cars = require("../cardb.json");
 const Discord = require("discord.js");
-const parts = require("../partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 const Car = require("../schema/car");
 
 module.exports = {
@@ -41,8 +36,6 @@ module.exports = {
         .setRequired(false)
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     let option = interaction.options.getString("option");
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -201,7 +194,6 @@ module.exports = {
         time: 1000 * 30,
       });
       collector.on("collect", (m) => {
-        var linktoimg = m.attatchments;
         let ImageLink;
         if (m.attachments.size > 0) {
           m.attachments.forEach((attachment) => {
@@ -316,7 +308,7 @@ module.exports = {
         );
       let liverylist = [];
       for (var i = 0; i < liveriesforcar.length; i++) {
-        actliv = liveriesforcar[i];
+        let actliv = liveriesforcar[i];
         liverylist.push(`${actliv.id}`);
         //Do something
       }
@@ -324,7 +316,7 @@ module.exports = {
       if (!shopItems || !shopItems.length)
         return interaction.reply(`This car doesn't have any liveries!`);
       shopItems = lodash.chunk(
-        shopItems.map((a, i) => `**${liverylist.join("\n")}**`)
+        shopItems.map(() => `**${liverylist.join("\n")}**`)
       );
 
       const embed = new Discord.MessageEmbed({ color: "#60b0f4" })

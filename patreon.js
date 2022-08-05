@@ -1,10 +1,13 @@
 const db = require("quick.db");
-const discord = require("discord.js");
+
 module.exports = (client) => {
   client.on("message", (message) => {
     if (message.author.bot) return;
 
-    const { guild, member } = message;
+    const {
+      //  guild,
+      member,
+    } = message;
 
     let role1 = "931004190220779557";
     let role2 = "932434807605059644";

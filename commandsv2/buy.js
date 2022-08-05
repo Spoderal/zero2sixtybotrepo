@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const items = require("../items.json");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("buy")
@@ -20,7 +21,6 @@ module.exports = {
         .setRequired(false)
     ),
   async execute(interaction) {
-    let db = require("quick.db");
     let userdata = await User.findOne({ id: interaction.user.id });
     let global = await Global.findOne({});
 
@@ -36,7 +36,6 @@ module.exports = {
     let list2 = parts.Parts;
     let list3 = items;
     let cashemote = "<:zecash:983966383408832533>";
-    let patron = userdata.patron;
     let bought = interaction.options.getString("item").toLowerCase();
     let cash = userdata.cash;
     let gold = userdata.gold;
@@ -130,7 +129,6 @@ module.exports = {
           return interaction.reply("You don't have enough cash!");
 
         if (cars.Cars[bought].Police) {
-          let sellprice = cars.Cars[bought].Price * 0.65;
           if (cash < cars.Cars[bought].Price)
             return interaction.reply("You don't have enough cash!");
 
@@ -141,12 +139,7 @@ module.exports = {
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
-          let jobrank = job.Rank;
           let num = job.Number;
-          let salary = job.Salary;
-          let exp = job.EXP;
-          let timeout = job.Timeout;
-          let actjob = job.Job;
 
           if (num < cars.Cars[bought].Police)
             return interaction.reply(
@@ -401,7 +394,7 @@ module.exports = {
           userdata.cash -= newprice;
           let user1newpart = [];
 
-          for (var i = 0; i < amount2; i++)
+          for (let i = 0; i < amount2; i++)
             user1newpart.push(bought.toLowerCase());
           for (i in user1newpart) {
             userdata.parts.push(bought.toLowerCase());
@@ -427,22 +420,22 @@ module.exports = {
     } else if (houses[bought.toLowerCase()]) {
       if (cash < houses[bought.toLowerCase()].Price)
         return interaction.reply("You don't have enough cash!");
-      let house = userdata.house;
-      let garagelimit = userdata.garageLimit;
+      // let house = userdata.house;
+      // let garagelimit = userdata.garageLimit;
       if (bought.toLowerCase() !== "yacht") {
-        if (house) {
-          if (house.perks.includes("+2 Garage spaces")) {
-            garagelimit -= 2;
-          } else if (house.perks.includes("+3 Garage spaces")) {
-            garagelimit -= 3;
-          } else if (house.perks.includes("+4 Garage spaces")) {
-            garagelimit -= 4;
-          } else if (house.perks.includes("+6 Garage spaces")) {
-            garagelimit -= 6;
-          } else if (house.perks.includes("+15 Garage spaces")) {
-            garagelimit -= 15;
-          }
-        }
+        // if (house) {
+        //   if (house.perks.includes("+2 Garage spaces")) {
+        //     garagelimit -= 2;
+        //   } else if (house.perks.includes("+3 Garage spaces")) {
+        //     garagelimit -= 3;
+        //   } else if (house.perks.includes("+4 Garage spaces")) {
+        //     garagelimit -= 4;
+        //   } else if (house.perks.includes("+6 Garage spaces")) {
+        //     garagelimit -= 6;
+        //   } else if (house.perks.includes("+15 Garage spaces")) {
+        //     garagelimit -= 15;
+        //   }
+        // }
         if (houses[bought].Rewards.includes("10% Discount on parts")) {
           userdata.discountparts = 0.1;
         } else if (houses[bought].Rewards.includes("15% Discount on parts")) {
@@ -523,7 +516,6 @@ module.exports = {
       list3.Other[bought.toLowerCase()] ||
       list3.Multiplier[bought.toLowerCase()]
     ) {
-      let item;
       let itemshop = global.itemshop;
       let filtereditem = itemshop.filter(
         (item) => item.Name.toLowerCase() == bought.toLowerCase()
@@ -543,7 +535,7 @@ module.exports = {
 
       let user1newarr = [];
 
-      for (var i = 0; i < amount2; i++) user1newarr.push(bought.toLowerCase());
+      for (let i = 0; i < amount2; i++) user1newarr.push(bought.toLowerCase());
       for (i in user1newarr) {
         userdata.items.push(bought.toLowerCase());
       }

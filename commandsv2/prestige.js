@@ -1,11 +1,7 @@
-const discord = require("discord.js");
-const db = require("quick.db");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const prestiges = require("../prestige.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("prestige")
@@ -142,7 +138,6 @@ module.exports = {
 
     userdata.swheelspins += 1;
 
-    let banklimit = userdata.banklimit;
     let upgrade = prestigerank * 1000;
 
     userdata.banklimit += upgrade;

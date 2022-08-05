@@ -15,7 +15,6 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    let car = interaction.options.getString("car");
     let filteredcar = userdata.cars.filter((car) => car.ID == car);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
@@ -31,7 +30,6 @@ module.exports = {
     if (!cars.Cars[selected.Name.toLowerCase()].Electric)
       return interaction.reply("Thats not an EV!");
     let house = userdata.house;
-    let userid = interaction.user.id;
     let cash = userdata.cash;
     let range = selected.Range;
     let maxrange = selected.MaxRange;
@@ -73,29 +71,6 @@ module.exports = {
         embed.setDescription(`Cost: $500`);
         interaction.editReply({ embeds: [embed] });
       }, 2000);
-    }
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function convert(val) {
-      // thousands, millions, billions etc..
-      var s = ["", "k", "m", "b", "t"];
-
-      // dividing the value by 3.
-      var sNum = Math.floor(("" + val).length / 3);
-
-      // calculating the precised value.
-      var sVal = parseFloat(
-        (sNum != 0 ? val / Math.pow(1000, sNum) : val).toPrecision(2)
-      );
-
-      if (sVal % 1 != 0) {
-        sVal = sVal.toFixed(1);
-      }
-
-      // appending the letter to precised val.
-      return sVal + s[sNum];
     }
   },
 };

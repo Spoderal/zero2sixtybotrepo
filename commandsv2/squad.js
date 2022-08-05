@@ -1,4 +1,3 @@
-const db = require("quick.db");
 const discord = require("discord.js");
 const squads = require("../squads.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");

@@ -2,12 +2,8 @@ const db = require("quick.db");
 const Discord = require("discord.js");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const icons = require("../crewicons.json");
-const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const crewicons = require("../crewicons.json");
-const cars = require("../cardb.json");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
 const Global = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 
@@ -126,7 +122,7 @@ module.exports = {
               if (i.customId.includes("season")) {
                 let crewseason =
                   require("../seasons.json").Seasons.Crew1.Rewards;
-                reward = [];
+                let reward = [];
                 for (var w in crewseason) {
                   let item = crewseason[w];
                   let required = item.Number;
@@ -194,7 +190,6 @@ module.exports = {
       } else if (option == "join") {
         let uid = interaction.user.id;
         let crewname = interaction.options.getString("name");
-        let crewnames = global.crews;
         if (!crewname) return interaction.reply("Please specify a crew name!");
         let crew2 = global.crews.filter((crew) => crew.name == crewname);
         if (crew2.length == 0)
@@ -333,6 +328,7 @@ module.exports = {
           }
         });
       } else if (option == "icon") {
+        let crews = global.crews;
         let crewname = userdata.crew;
         if (!crewname) return interaction.reply("You are not in a crew!");
         let crew2 = crews.filter((crew) => crew.name == crewname);
@@ -352,7 +348,6 @@ module.exports = {
           time: 1000 * 30,
         });
         collector.on("collect", (m) => {
-          var linktoimg = m.attatchments;
           let ImageLink;
           if (m.attachments.size > 0) {
             m.attachments.forEach((attachment) => {

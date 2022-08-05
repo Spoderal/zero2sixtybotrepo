@@ -2,8 +2,6 @@ const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -17,8 +15,6 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     const cars = require("../cardb.json");
     let moneyearnedtxt = 300;
     let moneyearned = 300;
@@ -28,7 +24,6 @@ module.exports = {
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: interaction.user.id });
-    let globaldata = await Global.findOne({});
 
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
@@ -52,10 +47,6 @@ module.exports = {
         `Please wait ${time} before doing the timetrial again.`
       );
     }
-
-    let errorembed = new discord.MessageEmbed()
-      .setTitle("❌ Error!")
-      .setColor("#60b0f4");
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
       return interaction.reply("This car is too junked to race, sorry!");
@@ -81,9 +72,7 @@ module.exports = {
     let user1carzerosixty = selected.Acceleration;
     let handling = selected.Handling;
 
-    let zero2sixtycar = selected.Acceleration;
     let newhandling = handling / 20;
-    let new60 = user1carspeed / zero2sixtycar;
 
     let driftscore = selected.Drift;
     let hp = user1carspeed + newhandling;
@@ -98,7 +87,6 @@ module.exports = {
     let hemote = "<:handling:983963211403505724>";
     let zemote = "<:zerosixtyemote:983963210304614410>";
     let cemote = "<:zecash:983966383408832533>";
-    let rpemote = "<:rp:983968476060336168>";
     let embed = new discord.MessageEmbed()
       .setTitle("Going around the track!")
       .addField(
@@ -109,7 +97,6 @@ module.exports = {
       )
       .setColor("#60b0f4")
       .setThumbnail("https://i.ibb.co/Wfk7s36/timer1.png");
-    let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
     let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {

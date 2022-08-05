@@ -1,7 +1,5 @@
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
 const db = require("quick.db");
-const ms = require("ms");
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
@@ -11,13 +9,11 @@ module.exports = {
     .setDescription("View your notifications"),
   async execute(interaction) {
     let uid = interaction.user.id;
-    let cash = 250;
     let daily = db.fetch(`daily_${uid}`);
     let weekly = db.fetch(`weekly_${uid}`);
     let weeklytimeout = 604800000;
     let dailytimeout = 86400000;
     let votetimer = 43200000;
-    let liverynotifs = db.fetch(`liverynotifs_${uid}`);
     let vote = db.fetch(`votetimer_${uid}`);
 
     let emote = "✅";
@@ -41,9 +37,5 @@ module.exports = {
       .setColor("#60b0f4");
 
     interaction.reply({ embeds: [embed] });
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

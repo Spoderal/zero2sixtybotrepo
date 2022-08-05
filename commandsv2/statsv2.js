@@ -1,14 +1,9 @@
 const cars = require("../cardb.json");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const parts = require("../partsdb.json");
-const Canvas = require("canvas");
-const db = require("quick.db");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,11 +38,9 @@ module.exports = {
         )
     ),
   async execute(interaction) {
-    let useroption = interaction.options.getUser("user") || interaction.user;
     let subcommandfetch = interaction.options.getSubcommand();
 
     var list = cars.Cars;
-    var list2 = parts.Parts;
     var item = interaction.options.getString("item");
 
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
@@ -55,7 +48,7 @@ module.exports = {
       let speedemote = "<:speedemote:983963212393357322>";
       let accelerationemote = "<:zerosixtyemote:983963210304614410>";
 
-      car = item.toLowerCase();
+      let car = item.toLowerCase();
       let carindb = list[car];
       if (!carindb) return interaction.reply(`Thats not a car!`);
 
@@ -100,9 +93,7 @@ module.exports = {
       let speedemote = "<:speedemote:983963212393357322>";
       let accelerationemote = "<:zerosixtyemote:983963210304614410>";
 
-      car = idtoselect;
       let carindb = selected;
-      let trims = carindb.Trims || ["❌ No Trims"];
       let sellprice = selected.Price || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
@@ -152,7 +143,7 @@ module.exports = {
         filter,
       });
 
-      collector2.on("collect", async (i, user) => {
+      collector2.on("collect", async (i) => {
         if (i.customId.includes("parts")) {
           let exhaust = selected.Exhaust || "Stock";
           let intake = selected.Intake || "Stock";

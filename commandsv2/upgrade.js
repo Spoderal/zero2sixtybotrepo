@@ -1,11 +1,7 @@
 const discord = require("discord.js");
-const db = require("quick.db");
 const partdb = require("../partsdb.json");
-const cars = require("../cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -46,8 +42,6 @@ module.exports = {
   async execute(interaction) {
     let user1 = interaction.user;
     let userdata = await User.findOne({ id: user1.id });
-    let user1parts = userdata.parts;
-    let user1cars = userdata.cars;
     let parttoinstall = interaction.options.getString("part");
     let cartoinstall = interaction.options.getString("car");
     let parte = interaction.options.getString("partname");
@@ -199,7 +193,3 @@ module.exports = {
     interaction.reply(`✅`);
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

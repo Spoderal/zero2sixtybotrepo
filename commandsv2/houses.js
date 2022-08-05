@@ -1,7 +1,4 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
-const badgedb = require("../badgedb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const housedb = require("../houses.json");
 const lodash = require("lodash");
@@ -13,9 +10,6 @@ module.exports = {
     .setName("houses")
     .setDescription("View houses for sale"),
   async execute(interaction) {
-    let user = interaction.user;
-    let uid = user.id;
-
     let houseimages = [];
 
     houseimages.push(housedb["speed street"].Image);
@@ -87,7 +81,7 @@ module.exports = {
       time: 10000,
     });
 
-    collector.on("collect", async (i, user) => {
+    collector.on("collect", async (i) => {
       if (i.customId.includes("warehouse")) {
         embed
           .setTitle("Warehouses for sale")

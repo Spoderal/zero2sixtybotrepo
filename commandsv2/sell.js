@@ -1,9 +1,6 @@
-const { MessageFlags } = require("discord.js");
-const splice = require("splice");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("sell")
@@ -24,12 +21,8 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
 
-    let cars = require("../cardb.json");
     let parts = require("../partsdb.json");
-    let userid = interaction.user.id;
-    let db = require("quick.db");
     let profilestuff = require("../pfpsdb.json");
-    let usercars = userdata.cars;
     let userparts = userdata.parts;
 
     let selling = interaction.options.getString("item");
@@ -125,8 +118,6 @@ module.exports = {
         `Sold ${amount} ${selling} for $${numberWithCommas(finalam)}`
       );
     } else if (profilestuff.Pfps[selling.toLowerCase()]) {
-      let pfps = userdata.pfps;
-
       userdata.pfps.pull(selling.toLowerCase());
 
       interaction.reply(`You sold your ${selling} for $0!`);

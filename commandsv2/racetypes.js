@@ -1,11 +1,8 @@
 const {
   MessageActionRow,
-  MessageButton,
   MessageEmbed,
-  MessageCollector,
   MessageSelectMenu,
 } = require("discord.js");
-const db = require("quick.db");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
@@ -116,7 +113,7 @@ module.exports = {
 
     embed.setColor("#60b0f4");
 
-    interaction.reply({ embeds: [embed], components: [row2] }).then((msg) => {
+    interaction.reply({ embeds: [embed], components: [row2] }).then(() => {
       const filter = (interaction2) =>
         interaction2.isSelectMenu() &&
         interaction2.user.id === interaction.user.id;

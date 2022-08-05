@@ -1,8 +1,6 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const Global = require("../schema/global-schema");
-const itemdb = require("../items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,7 +12,7 @@ module.exports = {
 
     let items = [];
 
-    for (i in itemshop) {
+    for (let i in itemshop) {
       let item = itemshop[i];
 
       items.push(

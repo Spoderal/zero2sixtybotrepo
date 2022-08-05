@@ -1,9 +1,6 @@
-const db = require("quick.db");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()

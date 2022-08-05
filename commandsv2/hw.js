@@ -373,9 +373,5 @@ module.exports = {
         }
       }, 1000);
     });
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

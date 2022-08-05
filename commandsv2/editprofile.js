@@ -1,13 +1,8 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const pfpdb = require("../pfpsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const colors = require("../colordb.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -89,7 +84,7 @@ module.exports = {
     } else if (option == "vbackground") {
       let bgdb = require("../backgrounds.json");
       var bgs = [];
-      for (bg in bgdb) {
+      for (let bg in bgdb) {
         bgs.push(`${bgdb[bg].Emote} ${bgdb[bg].Name}`);
       }
 
@@ -112,7 +107,7 @@ module.exports = {
         );
       }
       userhelmets = lodash.chunk(
-        userhelmets.map((a, i) => `${a}\n`),
+        userhelmets.map((a) => `${a}\n`),
         10
       );
       let embed = new Discord.MessageEmbed()

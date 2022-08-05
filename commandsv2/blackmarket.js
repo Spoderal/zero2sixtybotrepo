@@ -1,23 +1,17 @@
-const Discord = require("discord.js");
 const parts = require("../partsdb.json");
-const db = require("quick.db");
 const cars = require("../cardb.json");
-
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const {
+  MessageActionRow,
+  MessageSelectMenu,
+  MessageEmbed,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("blackmarket")
     .setDescription("Check the blackmarket"),
   async execute(interaction) {
-    const {
-      MessageActionRow,
-      MessageSelectMenu,
-      MessageEmbed,
-      MessageButton,
-      DiscordAPIError,
-    } = require("discord.js");
-
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId("select")

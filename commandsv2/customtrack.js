@@ -1,10 +1,4 @@
-const cars = require("../cardb.json");
-const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const parts = require("../partsdb.json");
-const Canvas = require("canvas");
-const db = require("quick.db");
-const { MessageActionRow, MessageButton } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,12 +29,12 @@ module.exports = {
         )
     ),
 
+  // eslint-disable-next-line no-unused-vars
   async execute(interaction) {
-    let subcommandfetch = interaction.options.getSubcommand();
-
-    if (subcommandfetch == "create") {
-      let weathers = ["sunny", "clear", "raining", "snowing"];
-      let times = ["morning", "evening", "night"];
-    }
+    // let subcommandfetch = interaction.options.getSubcommand();
+    // if (subcommandfetch == "create") {
+    //   let weathers = ["sunny", "clear", "raining", "snowing"];
+    //   let times = ["morning", "evening", "night"];
+    // }
   },
 };

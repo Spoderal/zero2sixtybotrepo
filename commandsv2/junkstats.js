@@ -27,7 +27,6 @@ module.exports = {
     var usercars = db.fetch(`cars_${uid}`);
     if (!cars.Cars[car.toLowerCase()])
       return interaction.reply("Thats not a car!");
-    let list = cars.Cars;
     car = car.toLowerCase();
     if (!usercars.includes(`${car.toLowerCase()}`))
       return interaction.reply("You dont have that car!");
@@ -39,8 +38,6 @@ module.exports = {
     let suspension =
       db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
       "Broken Suspension";
-    let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-    let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
     let gearbox =
       db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
 
@@ -51,15 +48,8 @@ module.exports = {
     if (!parts.Parts[engine.toLowerCase()]) {
       engine = "No Engine";
     }
-    let bodykit = db.fetch(`${cars.Cars[car].Name}bodykit_${uid}`);
-    let kmh = speed * 1.609344;
-    var flooredkmh = Math.floor(kmh);
     let licensePlate =
       db.fetch(`${cars.Cars[car].Name}license_plate_${uid}`) || "000000";
-    var resale =
-      db.fetch(`${cars.Cars[car].Name}resale_${uid}`) || "Not sellable";
-
-    let speedemote = "<:speeddefault:932423319020531753>";
     let caremote = cars.Cars[car].Emote || "<:z_none:898352936785178645>";
 
     console.log(engine);
@@ -217,7 +207,7 @@ module.exports = {
       filter: filter,
     });
 
-    collector.on("collect", async (i, user) => {
+    collector.on("collect", async (i) => {
       let restorepart;
       let userparts = db.fetch(`parts_${interaction.user.id}`) || [];
       if (i.customId.includes("exhaust")) {
@@ -345,9 +335,6 @@ module.exports = {
           parts.Parts[gearbox.toLowerCase()].Emote ||
           "<:enginedefault:932419391587483688>";
 
-        let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
         let intakeemote =
           parts.Parts[intake.toLowerCase()].Emote ||
           "<:intakedefault:932419391734292561>";
@@ -402,8 +389,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let engine =
           db.fetch(`${cars.Cars[car].Name}engine_${uid}`) || "No Engine";
         let gearbox =
@@ -560,8 +545,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
@@ -720,8 +703,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
@@ -878,8 +859,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
@@ -1035,8 +1014,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
@@ -1193,8 +1170,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
@@ -1351,8 +1326,6 @@ module.exports = {
         let suspension =
           db.fetch(`${cars.Cars[car].Name}suspension_${uid}`) ||
           "Broken Suspension";
-        let speed = db.fetch(`${cars.Cars[car].Name}speed_${uid}`) || 0;
-        let restoration = db.fetch(`${cars.Cars[car].Name}restoration_${uid}`);
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
@@ -1538,7 +1511,7 @@ module.exports = {
           db.push(`cars_${uid}`, `${fullrestored.Name.toLowerCase()}`);
 
           let newusercars = db.fetch(`cars_${uid}`);
-          for (var i = 0; i < 1; i++)
+          for (let i = 0; i < 1; i++)
             newusercars.splice(newusercars.indexOf(car.toLowerCase()), 1);
           db.set(`cars_${uid}`, newusercars);
           db.delete(`${cars.Cars[car.toLowerCase()].Name}speed_${uid}`);
@@ -1557,17 +1530,13 @@ module.exports = {
         }
       }
       if (items.includes("wrench")) {
-        for (var i = 0; i < 1; i++) items.splice(items.indexOf("wrench"), 1);
+        for (let i = 0; i < 1; i++) items.splice(items.indexOf("wrench"), 1);
         db.set(`items_${uid}`, items);
       } else {
-        for (var i = 0; i < 1; i++)
+        for (let i = 0; i < 1; i++)
           userparts.splice(userparts.indexOf(restorepart.toLowerCase()), 1);
         db.set(`parts_${uid}`, userparts);
       }
     });
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

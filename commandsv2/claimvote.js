@@ -1,10 +1,5 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -14,8 +9,6 @@ module.exports = {
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = (await User.findOne({ id: uid })) || new User({ id: uid });
-    let cooldowndata =
-      (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
     let embed = new Discord.MessageEmbed().setDescription(
       `You haven't voted yet! [Vote](https://top.gg/bot/932455367777067079/vote) then run the command again.`
     );

@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
 const db = require("quick.db");
 const ms = require("ms");
 
@@ -38,7 +37,6 @@ module.exports = {
         );
       interaction.reply({ embeds: [timeEmbed] });
     } else {
-      let time = ms(timeout - (Date.now() - daily));
       db.add(`cash_${interaction.user.id}`, cash);
       db.set(`boost_${interaction.user.id}`, Date.now());
 

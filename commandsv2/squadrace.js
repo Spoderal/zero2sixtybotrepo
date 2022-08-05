@@ -1,11 +1,8 @@
-const ms = require("pretty-ms");
 const discord = require("discord.js");
 const squads = require("../squads.json");
-
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("squadrace")
@@ -14,8 +11,6 @@ module.exports = {
       option.setName("id").setDescription("The car id to use").setRequired(true)
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     const cars = require("../cardb.json");
 
     let user = interaction.user;
@@ -127,9 +122,5 @@ module.exports = {
       }
       return;
     }, 5000);
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

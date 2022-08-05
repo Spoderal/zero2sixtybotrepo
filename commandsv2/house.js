@@ -1,14 +1,8 @@
 const db = require("quick.db");
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
-const badgedb = require("../badgedb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const housedb = require("../houses.json");
-const lodash = require("lodash");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,8 +29,6 @@ module.exports = {
 
     if (selloption) {
       let housename = house.name.toLowerCase();
-
-      let price = housedb[housename].Price;
 
       let items = userdata.items;
 
@@ -72,7 +64,6 @@ module.exports = {
     } else {
       let perks = house.perks;
       let image = housedb[house.name.toLowerCase()].Image;
-      let houseperks = housedb[house.name.toLowerCase()].Rewards;
 
       let embed = new Discord.MessageEmbed()
         .setTitle(`${house.name}`)

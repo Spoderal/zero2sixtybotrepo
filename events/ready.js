@@ -1,6 +1,5 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const config = require("../config.json");
 const dailytasks = require("../dailytasks");
 const crews = require("../crewrank");
 const badges = require("../badges");
@@ -11,8 +10,6 @@ const items = require("../item");
 const double = require("../doublecash");
 const db = require("quick.db");
 const mongoose = require("mongoose");
-const dbSchema = require("../schema/profile-schema");
-const auto = require("../autosetcars");
 
 module.exports = {
   name: "ready",
@@ -44,8 +41,8 @@ module.exports = {
       var authenticationToken = process.env.donateAPI;
       // Verify the token set here and the one from the webhook server match
       if (request.headers.authorization === authenticationToken) {
-        var webhook = request.body;
         // webhook contains the webhook's body
+        // var webhook = request.body;
       }
     });
 
@@ -76,7 +73,7 @@ module.exports = {
     }, 20000);
     const rest = new REST({
       version: "9",
-    }).setToken(config.token);
+    }).setToken(process.env.token);
 
     (async () => {
       try {

@@ -1,11 +1,7 @@
 const cars = require("../cardb.json");
 const Discord = require("discord.js");
-const parts = require("../partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()

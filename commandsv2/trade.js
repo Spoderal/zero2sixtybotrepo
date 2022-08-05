@@ -1,13 +1,9 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const cardb = require("../cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const partdb = require("../partsdb.json");
 const itemdb = require("../items.json");
-const item = require("../item");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -54,7 +50,6 @@ module.exports = {
 
     let trading2 = interaction.options.getString("item2").toLowerCase();
     let amount2 = interaction.options.getNumber("amount2");
-    let amount1 = interaction.options.getNumber("amount1");
 
     let pre = userdata.prestige;
     let pre2 = userdata2.prestige;
@@ -68,19 +63,6 @@ module.exports = {
       return interaction.reply(
         `${user2}, you need to be prestige 1 before you can trade`
       );
-
-    let actamount;
-    if (amount2 > 1) {
-      actamount = amount2;
-    } else {
-      actamount = 1;
-    }
-    let actamount1;
-    if (amount1 > 1) {
-      actamount1 = amount1;
-    } else {
-      actamount1 = 1;
-    }
 
     console.log(trading);
 
@@ -137,18 +119,20 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
-          for (var i = 0; i < actamount; i++) {
+          for (let i = 0; i < actamount; i++) {
             user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
           }
 
           userdata2.parts = user2parts;
 
           let user1newpart = [];
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++) {
             user1newpart.push(trading2.toLowerCase());
-          for (i in user1newpart) {
+          }
+
+          for (let i in user1newpart) {
             userdata.parts.push(user1newpart[i]);
           }
           console.log(amount);
@@ -251,19 +235,19 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
           collector.stop();
           amount = trading.split(" ")[0];
           console.log(amount);
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++)
             user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
           userdata2.items = user2parts;
 
           let user1newpart = [];
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++)
             user1newpart.push(trading2.toLowerCase());
-          for (i in user1newpart) {
+          for (let i in user1newpart) {
             userdata.items.push(user1newpart[i]);
           }
           console.log(amount);
@@ -294,7 +278,6 @@ module.exports = {
       cardb.Cars[trading.toLowerCase()] &&
       partdb.Parts[trading2.toLowerCase()]
     ) {
-      let user1cars = userdata.cars;
       let user2parts = userdata2.parts;
       let amount2 = interaction.options.getNumber("amount2");
       let actamount;
@@ -343,20 +326,20 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
           trading = trading.toLowerCase();
 
           userdata.cars.pull(selected);
           userdata2.cars.push(selected);
 
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++)
             user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
           userdata.parts = user2parts;
           let user1newpart = [];
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++)
             user1newpart.push(trading2.toLowerCase());
-          for (i in user1newpart) {
+          for (let i in user1newpart) {
             userdata.parts.push(user1newpart[i]);
           }
           embed.setTitle("Trade Accepted!");
@@ -458,7 +441,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
           trading = trading.toLowerCase();
 
@@ -466,14 +449,14 @@ module.exports = {
 
           userdata2.cars.push(selected);
 
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++)
             user2items.splice(user2items.indexOf(trading2.toLowerCase()), 1);
           userdata2.items = user2items;
 
           let user1newpart = [];
-          for (var i = 0; i < actamount; i++)
+          for (let i = 0; i < actamount; i++)
             user1newpart.push(trading2.toLowerCase());
-          for (i in user1newpart) {
+          for (let i in user1newpart) {
             userdata.items.push(user1newpart[i]);
           }
           embed.setTitle("Trade Accepted!");
@@ -498,9 +481,6 @@ module.exports = {
         }
       });
     } else if (trading.endsWith("cash") && cardb.Cars[trading2.toLowerCase()]) {
-      let user2cars = userdata2.cars;
-      let user1cars = userdata.cars;
-
       let carname = cardb.Cars[trading2.toLowerCase()].Name;
       let filteredcar = userdata.cars.filter((car) => car.Name == carname);
       let selected = filteredcar[0] || "No ID";
@@ -534,7 +514,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
           userdata.cash -= Number(amount);
           userdata2.cash += Number(amount);
@@ -564,9 +544,6 @@ module.exports = {
         }
       });
     } else if (trading2.endsWith("cash") && cardb.Cars[trading.toLowerCase()]) {
-      let user2cars = userdata2.cars;
-      let user1cars = userdata.cars;
-
       let filteredcar = userdata.cars.filter(
         (car) => car.Name == trading.toLowerCase()
       );
@@ -603,7 +580,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
           userdata2.cash -= Number(amount);
           userdata.cash += Number(amount);
@@ -636,9 +613,6 @@ module.exports = {
       cardb.Cars[trading.toLowerCase()] &&
       cardb.Cars[trading2.toLowerCase()]
     ) {
-      let user2cars = userdata2.cars;
-      let user1cars = userdata.cars;
-
       let filteredcar = userdata.cars.filter(
         (car) => car.Name == trading.toLowerCase()
       );
@@ -681,7 +655,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r, user) => {
+      collector.on("collect", (r) => {
         if (r.emoji.name == "✅") {
           userdata.cars.pull(selected);
           userdata2.cars.push(selected);
@@ -758,17 +732,17 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cash -= Number(amount);
             userdata.cash += Number(amount);
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1);
             userdata.parts = user1parts;
             let user1newpart = [];
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user1newpart.push(trading.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata2.parts.push(user1newpart[i]);
             }
 
@@ -854,26 +828,26 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
             userdata2.parts = user2parts;
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1);
             userdata.parts = user1parts;
 
             let user1newpart = [];
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user1newpart.push(trading2.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata.parts.push(user1newpart[i]);
             }
 
             let user1newpart2 = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart2.push(trading.toLowerCase());
-            for (i in user1newpart2) {
+            for (let i in user1newpart2) {
               userdata2.parts.push(user1newpart2[i]);
             }
 
@@ -990,26 +964,26 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1);
             userdata.parts = user1parts;
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               useritems2.splice(useritems2.indexOf(trading2.toLowerCase()), 1);
             userdata2.items = useritems2;
 
             let user1newpart = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart.push(trading.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata2.parts.push(user1newpart[i]);
             }
 
             let user1newpart2 = [];
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user1newpart2.push(trading2.toLowerCase());
-            for (i in user1newpart2) {
+            for (let i in user1newpart2) {
               userdata.items.push(user1newpart2[i]);
             }
 
@@ -1039,15 +1013,8 @@ module.exports = {
 
         if (!user2cars.includes(trading2.toLowerCase()))
           return interaction.reply(`This user doesn't have this car!`);
-        let amount2 = interaction.options.getNumber("amount2");
         let amount1 = interaction.options.getNumber("amount1");
 
-        let actamount;
-        if (amount2 > 1) {
-          actamount = amount2;
-        } else {
-          actamount = 1;
-        }
         let actamount1;
         if (amount1 > 1) {
           actamount1 = amount1;
@@ -1100,19 +1067,19 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cars.pull(selected);
             userdata.cars.push(selected);
 
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1);
             userdata.parts = user1parts;
 
             let user1newpart = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart.push(trading.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata.parts.push(user1newpart[i]);
             }
             embed.setTitle("Trade Accepted!");
@@ -1227,19 +1194,19 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cash -= Number(amount);
 
             let user1newpart = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart.push(trading.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata2.items.push(user1newpart[i]);
             }
 
             userdata.cash += Number(amount);
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               useritems.splice(useritems.indexOf(trading.toLowerCase()), 1);
             userdata.items = useritems;
             embed.setTitle("Trade Accepted!");
@@ -1314,27 +1281,27 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
             userdata2.parts = user2parts;
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               useritems.splice(useritems.indexOf(trading.toLowerCase()), 1);
             userdata.items = useritems;
             let user1newpart = [];
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user1newpart.push(trading2.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata.parts.push(user1newpart[i]);
             }
             let user1newpart2 = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart2.push(trading.toLowerCase());
             console.log(user1newpart);
             console.log(user1newpart2);
 
-            for (i in user1newpart2) {
+            for (let i in user1newpart2) {
               userdata.items.push(user1newpart2[i]);
             }
 
@@ -1375,7 +1342,7 @@ module.exports = {
         let selected2 = filteredcar2[0] || "No ID";
 
         if (selected !== "No ID")
-          return interaction.reply(`${user}, you already have this car!`);
+          return interaction.reply(`${user2}, you already have this car!`);
         if (selected2 == "No ID")
           return interaction.reply(`${user2}, you don't have this car!`);
 
@@ -1416,17 +1383,17 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cars.pull(selected);
             userdata.cars.push(selected);
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               useritems.splice(useritems.indexOf(trading.toLowerCase()), 1);
             userdata.items = useritems;
             let user1newpart = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart.push(trading.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata2.items.push(user1newpart[i]);
             }
 
@@ -1527,24 +1494,24 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r, user) => {
+        collector.on("collect", (r) => {
           if (r.emoji.name == "✅") {
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user2items.splice(user2items.indexOf(trading2.toLowerCase()), 1);
             userdata2.items = user2items;
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               useritems.splice(useritems.indexOf(trading.toLowerCase()), 1);
             userdata.items = useritems;
             let user1newpart = [];
-            for (var i = 0; i < actamount; i++)
+            for (let i = 0; i < actamount; i++)
               user1newpart.push(trading2.toLowerCase());
-            for (i in user1newpart) {
+            for (let i in user1newpart) {
               userdata.items.push(user1newpart[i]);
             }
             let user1newpart2 = [];
-            for (var i = 0; i < actamount1; i++)
+            for (let i = 0; i < actamount1; i++)
               user1newpart2.push(trading.toLowerCase());
-            for (i in user1newpart2) {
+            for (let i in user1newpart2) {
               userdata2.items.push(user1newpart2[i]);
             }
 
@@ -1582,20 +1549,6 @@ module.exports = {
 
     function numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function removeA(item) {
-      var what,
-        a = arguments,
-        L = a.length,
-        ax;
-      while (L > 1 && item.length) {
-        what = a[--L];
-        while ((ax = item.indexOf(what)) !== -1) {
-          item.splice(ax, 1);
-        }
-      }
-      return item;
     }
   },
 };

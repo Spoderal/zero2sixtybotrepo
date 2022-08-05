@@ -1,5 +1,5 @@
 let db = require("quick.db");
-module.exports = async (client) => {
+module.exports = async () => {
   const User = require("./schema/profile-schema");
 
   let cash = db.all().filter((data) => data.ID.startsWith(`cash_`));
@@ -11,7 +11,7 @@ module.exports = async (client) => {
     .all()
     .filter((data) => data.ID.startsWith(`swheelspins_`));
 
-  for (b in cash) {
+  for (let b in cash) {
     let user = cash[b];
 
     let id = user.ID.split("_")[1];
@@ -33,7 +33,7 @@ module.exports = async (client) => {
     userdata.save();
   }
 
-  for (b in gold) {
+  for (let b in gold) {
     let user = gold[b];
 
     let id = user.ID.split("_")[1];
@@ -54,7 +54,7 @@ module.exports = async (client) => {
     );
     userdata.save();
   }
-  for (b in bank) {
+  for (let b in bank) {
     let user = bank[b];
 
     let id = user.ID.split("_")[1];
@@ -75,7 +75,7 @@ module.exports = async (client) => {
     );
     userdata.save();
   }
-  for (b in rp) {
+  for (let b in rp) {
     let user = rp[b];
 
     let id = user.ID.split("_")[1];
@@ -96,7 +96,7 @@ module.exports = async (client) => {
     );
     userdata.save();
   }
-  for (b in wheelspins) {
+  for (let b in wheelspins) {
     let user = wheelspins[b];
 
     let id = user.ID.split("_")[1];
@@ -117,7 +117,7 @@ module.exports = async (client) => {
     );
     userdata.save();
   }
-  for (b in swheelspins) {
+  for (let b in swheelspins) {
     let user = swheelspins[b];
 
     let id = user.ID.split("_")[1];

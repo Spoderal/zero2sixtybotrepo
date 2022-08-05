@@ -1,11 +1,9 @@
 const discord = require("discord.js");
 const db = require("quick.db");
 const seasons = require("../seasons.json");
-
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("season")

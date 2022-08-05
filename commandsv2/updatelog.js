@@ -1,11 +1,8 @@
 const {
   MessageActionRow,
-  MessageButton,
   MessageEmbed,
-  MessageCollector,
   MessageSelectMenu,
 } = require("discord.js");
-const db = require("quick.db");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
@@ -69,7 +66,6 @@ module.exports = {
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
           let emotef = "<:features_update:974452301920104509>";
-          let emotec = "<:new_cars_emote:974452587980005407>";
           if (value === "1_update") {
             embed.fields = [];
             embed.setDescription("");

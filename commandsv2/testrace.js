@@ -1,10 +1,7 @@
-const lodash = require("lodash");
-const ms = require("pretty-ms");
-const discord = require("discord.js");
-const { MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const db = require("quick.db");
 const cardb = require("../newcars.json");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("testrace")
@@ -33,8 +30,6 @@ module.exports = {
         ephemeral: true,
       });
 
-    let usercar = cardb[selected.toLowerCase()];
-
     console.log(selected);
 
     let carstats = db.fetch(`stats_${selected}_${user.id}`);
@@ -55,7 +50,5 @@ module.exports = {
       });
       return;
     }
-
-    function formula(speed, acceleration, handling, weight, grip) {}
   },
 };

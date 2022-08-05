@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {

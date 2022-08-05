@@ -1,12 +1,11 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
-const discord = require("discord.js");
-
+// const discord = require("discord.js");
+const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,7 +42,6 @@ module.exports = {
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
-    let globaldata = await Global.findOne({});
 
     if (!idtoselect)
       return interaction.reply(
@@ -52,7 +50,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new MessageEmbed()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -63,7 +61,6 @@ module.exports = {
 
     let user = interaction.user;
     let bot = interaction.options.getString("tier");
-    let botlist = ["1", "2", "3", "4", "5", "6", "7"];
     let timeout = 45000;
     if (userdata.patron && userdata.patron.tier == 1) {
       timeout = 30000;
@@ -131,7 +128,7 @@ module.exports = {
       "2020 bugatti divo",
     ];
 
-    let errorembed = new discord.MessageEmbed()
+    let errorembed = new MessageEmbed()
       .setTitle("❌ Error!")
       .setColor("#60b0f4");
     if (!user1cars) {
@@ -228,7 +225,6 @@ module.exports = {
     let usables = userdata.using;
 
     let energytimer = cooldowndata.energydrink;
-    let energydrink2;
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
@@ -252,7 +248,6 @@ module.exports = {
       ticketsearned = ticketsearned * 2;
     }
     let sponsortimer = cooldowndata.sponsor;
-    let sponsor2;
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
@@ -323,7 +318,7 @@ module.exports = {
     let cemote = "<:zecash:983966383408832533>";
     let rpemote = "<:rp:983968476060336168>";
 
-    let embed = new discord.MessageEmbed()
+    let embed = new MessageEmbed()
       .setTitle("3...2...1....GO!")
       .addField(
         `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
@@ -345,7 +340,6 @@ module.exports = {
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
-    let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
@@ -366,7 +360,7 @@ module.exports = {
     let nitro = selected.Nitro;
 
     if (nitro) {
-      row.addComponents(
+      let row = new MessageActionRow().addComponents(
         new MessageButton()
           .setCustomId("boost")
           .setEmoji("<:boost:983813400289234978>")
@@ -384,7 +378,7 @@ module.exports = {
         time: 10000,
       });
 
-      collector.on("collect", async (i, user) => {
+      collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);

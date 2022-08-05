@@ -1,14 +1,15 @@
 const db = require("quick.db");
-const discord = require("discord.js");
 const lodash = require("lodash");
+
 module.exports = (client) => {
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
 
-    const { guild, member } = message;
+    const {
+      //guild,
+      member,
+    } = message;
 
-    let dailytask = db.fetch(`dailytask_${member.id}`);
-    let weeklytask = db.fetch(`weeklytask_${member.id}`);
     let tasksdb = require("./tasks.json");
     let randomtask = lodash.sample(tasksdb.Daily);
     let randomtask2 = lodash.sample(tasksdb.Weekly);

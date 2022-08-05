@@ -1,6 +1,4 @@
-const Discord = require("discord.js");
-const { Client, Intents, MessageEmbed } = require("discord.js");
-const cardb = require("../cardb.json");
+const { Intents, MessageEmbed } = require("discord.js");
 const partdb = require("../partsdb.json");
 const myIntents = new Intents();
 myIntents.add(Intents.FLAGS.GUILD_MESSAGES);
@@ -8,9 +6,7 @@ myIntents.add(Intents.FLAGS.GUILDS);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const itemdb = require("../items.json");
-const colors = require("../colordb.json");
 const { MessageActionRow, MessageButton } = require("discord.js");
-const wait = require("node:timers/promises").setTimeout;
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -66,27 +62,18 @@ module.exports = {
     let parts = userdata.parts;
     let badges = userdata.badges;
     let garagelimit = userdata.garageLimit;
-    var usercars = [];
-    var actcar;
     var userparts = [];
     var actpart;
     var partarraylength = parts.length;
-    var speeds = [];
     let items = userdata.items;
     var actitems = [];
     var actitem;
-    let option = interaction.options.getString("option");
-    let newspeeds = [];
-    let highestspeed;
-    let filteredcar;
     let actuserparts = [];
     let valuearr = [];
     let xessence = userdata.xessence;
-    let finalid = "NO ID";
-    let fetch;
 
     for (
-      var i = 0;
+      let i = 0;
       i < items.length;
       i++ && items !== ["no items"] && items.length > 0
     ) {
@@ -124,7 +111,7 @@ module.exports = {
         actitems.push(finalitem);
       }
     }
-    for (var i = 0; i < partarraylength; i++ && parts !== ["no parts"]) {
+    for (let i = 0; i < partarraylength; i++ && parts !== ["no parts"]) {
       if (!parts || parts.length == 0) {
         actpart = "no parts";
       }
@@ -151,25 +138,16 @@ module.exports = {
       return obj;
     }, {});
 
-    for (var n in quantities) {
+    for (let n in quantities) {
       actuserparts.push(`${n} x${quantities[n]}`);
-    }
-
-    for (var i = 0; i < speeds.length; i++) {
-      highestspeed = Math.max.apply(Math, newspeeds);
-      filteredcar = speeds.filter((e) => e.speed == highestspeed);
     }
 
     let garageimg =
       userdata.showcase ||
       "https://t3.ftcdn.net/jpg/02/70/01/64/360_F_270016456_CJAh2KQGnBKUzJfjDTkD0vEruHX9T2tV.jpg";
 
-    usercars = lodash.chunk(
-      usercars.map((a, i) => `${a}\n`),
-      5
-    );
     actuserparts = lodash.chunk(
-      actuserparts.map((a, i) => `${a}\n`),
+      actuserparts.map((a) => `${a}\n`),
       10
     );
 
@@ -249,6 +227,7 @@ module.exports = {
         }
         let current = page;
         if (i.customId.includes("t1")) {
+          // eslint-disable-next-line no-undef
           for (part in parts) {
             const filterItems = (arr, query) => {
               return arr.filter((el) => el.indexOf(query.toLowerCase()) !== -1);
@@ -258,18 +237,13 @@ module.exports = {
               return i.update(`No T1 parts available`);
           }
           actuserparts = lodash.chunk(
-            actuserparts.map((a, i) => `${a}`),
+            actuserparts.map((a) => `${a}`),
             10
           );
           let newuserparts = [];
-          for (p in actuserparts) {
+          for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
-          }
-          let sum = 0;
-
-          for (let i = 0; i < valuearr.length; i++) {
-            sum += valuearr[i];
           }
           var list = actuserparts[0];
 
@@ -280,7 +254,7 @@ module.exports = {
             return obj;
           }, {});
 
-          for (var n in quantities) {
+          for (let n in quantities) {
             newuserparts.push(
               `${partdb.Parts[n.toLowerCase()].Emote} ${
                 partdb.Parts[n].Name
@@ -288,7 +262,7 @@ module.exports = {
             );
           }
           newuserparts = lodash.chunk(
-            newuserparts.map((a, i) => `${a}\n`),
+            newuserparts.map((a) => `${a}\n`),
             10
           );
 
@@ -298,10 +272,10 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          return;
-
           console.log(actuserparts);
+          return;
         } else if (i.customId.includes("t2")) {
+          // eslint-disable-next-line no-undef
           for (part in parts) {
             const filterItems = (arr, query) => {
               return arr.filter((el) => el.indexOf(query.toLowerCase()) !== -1);
@@ -311,18 +285,13 @@ module.exports = {
               return i.update(`No T2 parts available`);
           }
           actuserparts = lodash.chunk(
-            actuserparts.map((a, i) => `${a}`),
+            actuserparts.map((a) => `${a}`),
             10
           );
           let newuserparts = [];
-          for (p in actuserparts) {
+          for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
-          }
-          let sum = 0;
-
-          for (let i = 0; i < valuearr.length; i++) {
-            sum += valuearr[i];
           }
           var list = actuserparts[0];
 
@@ -333,7 +302,7 @@ module.exports = {
             return obj;
           }, {});
 
-          for (var n in quantities) {
+          for (let n in quantities) {
             newuserparts.push(
               `${partdb.Parts[n.toLowerCase()].Emote} ${
                 partdb.Parts[n].Name
@@ -341,7 +310,7 @@ module.exports = {
             );
           }
           newuserparts = lodash.chunk(
-            newuserparts.map((a, i) => `${a}\n`),
+            newuserparts.map((a) => `${a}\n`),
             10
           );
 
@@ -350,11 +319,11 @@ module.exports = {
           );
 
           i.update({ embeds: [embed1] });
+          console.log(actuserparts);
 
           return;
-
-          console.log(actuserparts);
         } else if (i.customId.includes("t3")) {
+          // eslint-disable-next-line no-undef
           for (part in parts) {
             const filterItems = (arr, query) => {
               return arr.filter((el) => el.indexOf(query.toLowerCase()) !== -1);
@@ -364,18 +333,13 @@ module.exports = {
               return i.update(`No T3 parts available`);
           }
           actuserparts = lodash.chunk(
-            actuserparts.map((a, i) => `${a}`),
+            actuserparts.map((a) => `${a}`),
             10
           );
           let newuserparts = [];
-          for (p in actuserparts) {
+          for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
-          }
-          let sum = 0;
-
-          for (let i = 0; i < valuearr.length; i++) {
-            sum += valuearr[i];
           }
           var list = actuserparts[0];
 
@@ -386,7 +350,7 @@ module.exports = {
             return obj;
           }, {});
 
-          for (var n in quantities) {
+          for (let n in quantities) {
             newuserparts.push(
               `${partdb.Parts[n.toLowerCase()].Emote} ${
                 partdb.Parts[n].Name
@@ -394,7 +358,7 @@ module.exports = {
             );
           }
           newuserparts = lodash.chunk(
-            newuserparts.map((a, i) => `${a}\n`),
+            newuserparts.map((a) => `${a}\n`),
             10
           );
 
@@ -404,10 +368,10 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          return;
-
           console.log(actuserparts);
+          return;
         } else if (i.customId.includes("t4")) {
+          // eslint-disable-next-line no-undef
           for (part in parts) {
             const filterItems = (arr, query) => {
               return arr.filter((el) => el.indexOf(query.toLowerCase()) !== -1);
@@ -418,18 +382,13 @@ module.exports = {
               return i.update(`No T4 parts available`);
           }
           actuserparts = lodash.chunk(
-            actuserparts.map((a, i) => `${a}`),
+            actuserparts.map((a) => `${a}`),
             10
           );
           let newuserparts = [];
-          for (p in actuserparts) {
+          for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
-          }
-          let sum = 0;
-
-          for (let i = 0; i < valuearr.length; i++) {
-            sum += valuearr[i];
           }
           var list = actuserparts[0];
 
@@ -440,7 +399,7 @@ module.exports = {
             return obj;
           }, {});
 
-          for (var n in quantities) {
+          for (let n in quantities) {
             newuserparts.push(
               `${partdb.Parts[n.toLowerCase()].Emote} ${
                 partdb.Parts[n].Name
@@ -448,7 +407,7 @@ module.exports = {
             );
           }
           newuserparts = lodash.chunk(
-            newuserparts.map((a, i) => `${a}\n`),
+            newuserparts.map((a) => `${a}\n`),
             10
           );
 
@@ -458,10 +417,10 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          return;
-
           console.log(actuserparts);
+          return;
         } else if (i.customId.includes("t5")) {
+          // eslint-disable-next-line no-undef
           for (part in parts) {
             const filterItems = (arr, query) => {
               return arr.filter((el) => el.indexOf(query.toLowerCase()) !== -1);
@@ -471,18 +430,13 @@ module.exports = {
               return i.update(`No T5 parts available`);
           }
           actuserparts = lodash.chunk(
-            actuserparts.map((a, i) => `${a}`),
+            actuserparts.map((a) => `${a}`),
             10
           );
           let newuserparts = [];
-          for (p in actuserparts) {
+          for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
-          }
-          let sum = 0;
-
-          for (let i = 0; i < valuearr.length; i++) {
-            sum += valuearr[i];
           }
           var list = actuserparts[0];
 
@@ -493,7 +447,7 @@ module.exports = {
             return obj;
           }, {});
 
-          for (var n in quantities) {
+          for (let n in quantities) {
             newuserparts.push(
               `${partdb.Parts[n.toLowerCase()].Emote} ${
                 partdb.Parts[n].Name
@@ -501,7 +455,7 @@ module.exports = {
             );
           }
           newuserparts = lodash.chunk(
-            newuserparts.map((a, i) => `${a}\n`),
+            newuserparts.map((a) => `${a}\n`),
             10
           );
 
@@ -511,9 +465,8 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          return;
-
           console.log(actuserparts);
+          return;
         } else if (i.customId.includes("previous") && page !== 1) page--;
         else if (i.customId.includes("next") && page !== actuserparts.length)
           page++;
@@ -589,7 +542,7 @@ module.exports = {
       //         return obj;
       //       }, {});
 
-      //       for (var n in quantities) {
+      //       for (let n in quantities) {
       //         if(n.startsWith(`T2`)){
       //           actuserparts.push(`${n} x${quantities[n]}`)
 
@@ -608,7 +561,7 @@ module.exports = {
       if (!items || items.length == 0)
         return interaction.channel.send(`You don't have any items!`);
       actitems = lodash.chunk(
-        actitems.map((a, i) => `${a}\n`),
+        actitems.map((a) => `${a}\n`),
         10
       ) || ["No Items"];
 
@@ -677,13 +630,13 @@ module.exports = {
     } else {
       let usercars = userdata.cars;
       let displaycars = [];
-      for (i in usercars) {
+      for (let i in usercars) {
         let car = usercars[i];
 
         displaycars.push(`${car.Emote} ${car.Name} \`${car.ID}\``);
       }
       displaycars = lodash.chunk(
-        displaycars.map((a, i) => `${a}\n`),
+        displaycars.map((a) => `${a}\n`),
         10
       ) || ["No Cars"];
 

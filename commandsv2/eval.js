@@ -1,7 +1,5 @@
-const db = require("quick.db");
-const discord = require("discord.js");
-const cars = require("../cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("eval")
@@ -10,10 +8,6 @@ module.exports = {
       option.setName("command").setDescription("The command").setRequired(true)
     ),
   async execute(interaction) {
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     if (
       interaction.user.id !== "937967206652837928" &&
       interaction.user.id !== "890390158241853470" &&

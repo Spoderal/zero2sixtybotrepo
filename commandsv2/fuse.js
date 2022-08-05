@@ -1,13 +1,7 @@
 const discord = require("discord.js");
-const db = require("quick.db");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const lodash = require("lodash");
 const partdb = require("../partsdb.json");
-const cars = require("../cardb.json");
-const colors = require("../colordb.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,7 +39,6 @@ module.exports = {
       );
 
     if (!parts) return interaction.reply("You dont have any parts!");
-    let list = partdb.Parts;
     let list3 = [
       "exhaust",
       "tires",
@@ -176,20 +169,6 @@ module.exports = {
         userdata.parts.push(partb);
         userdata.save();
       }, 2000);
-    }
-
-    function removeA(partsitem) {
-      var what,
-        a = arguments,
-        L = a.length,
-        ax;
-      while (L > 1 && partsitem.length) {
-        what = a[--L];
-        while ((ax = partsitem.indexOf(what)) !== -1) {
-          partsitem.splice(ax, 1);
-        }
-      }
-      return partsitem;
     }
   },
 };

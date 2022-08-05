@@ -1,4 +1,3 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const barns = require("../junkparts.json");
 const lodash = require("lodash");
@@ -7,7 +6,6 @@ const ms = require(`pretty-ms`);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -84,28 +82,5 @@ module.exports = {
     }
 
     pickRandom();
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function convert(val) {
-      // thousands, millions, billions etc..
-      var s = ["", "k", "m", "b", "t"];
-
-      // dividing the value by 3.
-      var sNum = Math.floor(("" + val).length / 3);
-
-      // calculating the precised value.
-      var sVal = parseFloat(
-        (sNum != 0 ? val / Math.pow(1000, sNum) : val).toPrecision(2)
-      );
-
-      if (sVal % 1 != 0) {
-        sVal = sVal.toFixed(1);
-      }
-
-      // appending the letter to precised val.
-      return sVal + s[sNum];
-    }
   },
 };

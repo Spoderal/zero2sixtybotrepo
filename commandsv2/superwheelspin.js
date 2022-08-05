@@ -1,14 +1,11 @@
 const Discord = require("discord.js");
 const carsdb = require("../cardb.json");
-const db = require("quick.db");
-const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const wheelspinrewards = require("../superwheelspinrewards.json");
 const partsdb = require("../partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,7 +30,6 @@ module.exports = {
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
-    let bad = wheelspinrewards.BadRewards;
 
     let parts = wheelspinrewards.Parts;
     let garagespaces = userdata.garagelimit;
@@ -115,8 +111,6 @@ module.exports = {
             interaction.channel.send("You garage is full!");
             return;
           } else {
-            let sellprice = carsdb.Cars[reward].Price * 0.75;
-
             userdata.cars.push(carobj);
           }
         } else if (item == "💵") {

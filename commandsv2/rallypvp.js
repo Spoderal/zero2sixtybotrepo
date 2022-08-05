@@ -43,7 +43,6 @@ module.exports = {
     let racing = db.fetch(`racing_${user.id}`);
     let racing2 = db.fetch(`racing_${user2.id}`);
     let racing3 = db.fetch(`racing_${user3.id}`);
-    let dailytask1 = db.fetch(`dailytask_${user.id}`);
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
@@ -117,8 +116,6 @@ module.exports = {
     let selected2;
     let user2carchoice;
     let collector2;
-    let filter2;
-    let dailytask2 = db.fetch(`dailytask_${user2.id}`);
     collector.on("collect", (msg) => {
       user2carchoice = msg.content;
       if (!user2carchoice)
@@ -325,10 +322,6 @@ module.exports = {
             let hp2 = user2carspeed / otherzero2sixty + othernewhandling;
             let hp3 = user3carspeed / otherzero2sixty2 + handling12;
 
-            let notorietyearn = 20 * offroad;
-            let notorietyearn2 = 20 * offroad2;
-            let notorietyearn3 = 20 * offroad3;
-
             let range = db.fetch(
               `${cars.Cars[user1car.toLowerCase()].Name}range_${
                 interaction.user.id
@@ -496,9 +489,5 @@ module.exports = {
         });
       });
     });
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

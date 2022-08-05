@@ -6,7 +6,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,8 +31,6 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     const cars = require("../cardb.json");
     let moneyearned = 150;
     let moneyearnedtxt = 150;
@@ -42,8 +39,6 @@ module.exports = {
     console.log(userdata);
     let cooldowndata =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
-    let global = await Global.findOne();
-
     let idtoselect = interaction.options.getString("car");
     if (!idtoselect)
       return interaction.reply(
@@ -60,7 +55,6 @@ module.exports = {
         );
       return interaction.reply({ embeds: [errembed] });
     }
-    let user = interaction.user;
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3", "4", "5", "6", "7"];
     let timeout = 60000;
@@ -165,7 +159,6 @@ module.exports = {
       }
     }
     let ticketsearned;
-    let wheelspins;
     let bankrand;
     let bankinc;
     switch (bot) {
@@ -213,17 +206,14 @@ module.exports = {
         if (barnrandom == 3) {
           bankinc = 1;
         }
-        wheelspins = 1;
 
         break;
       }
       case "7": {
-        let barnrandom = randomRange(1, 6);
         botcar = lodash.sample(bot7cars);
         moneyearned += 1100;
         moneyearnedtxt += 1100;
         ticketsearned = 10;
-        wheelspins = 2;
 
         break;
       }
@@ -239,7 +229,6 @@ module.exports = {
     let usables = userdata.using;
 
     let energytimer = cooldowndata.energydrink;
-    let energydrink2;
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
@@ -263,7 +252,6 @@ module.exports = {
       ticketsearned = ticketsearned * 2;
     }
     let sponsortimer = cooldowndata.sponsor;
-    let sponsor2;
 
     if (usables.includes("sponsor")) {
       let timeout = 600000;
@@ -359,7 +347,6 @@ module.exports = {
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
-    let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
@@ -377,10 +364,10 @@ module.exports = {
     tracklength += new60;
     tracklength += new62;
     let nitro = selected.Nitro;
-
+    let row = new discord.MessageActionRow();
     if (nitro) {
       row.addComponents(
-        new MessageButton()
+        new discord.MessageButton()
           .setCustomId("boost")
           .setEmoji("<:boost:983813400289234978>")
           .setLabel("Boost")
@@ -397,7 +384,7 @@ module.exports = {
         time: 10000,
       });
 
-      collector.on("collect", async (i, user) => {
+      collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);

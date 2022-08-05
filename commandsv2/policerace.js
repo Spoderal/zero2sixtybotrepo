@@ -4,8 +4,7 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("wanted")
@@ -33,8 +32,6 @@ module.exports = {
         .addChoice("Chase", "chase")
     ),
   async execute(interaction) {
-    const db = require("quick.db");
-
     const cars = require("../cardb.json");
 
     let moneyearned = 400;
@@ -57,7 +54,6 @@ module.exports = {
         );
       return interaction.reply({ embeds: [errembed] });
     }
-    let user = interaction.user;
     let bot = interaction.options.getString("tier");
     let chase = interaction.options.getString("options");
 
@@ -68,7 +64,6 @@ module.exports = {
     let timeout = 45000;
     let botcar = null;
     let racing = cooldowndata.racing;
-    let racingxp = userdata.racerank;
 
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
@@ -140,12 +135,12 @@ module.exports = {
       return interaction.reply({ embeds: [errorembed] });
     }
 
-    if (cars.Cars[selected.Name.toLowerCase()].Junked && restoration < 100) {
-      return interaction.reply("This car is too junked to race, sorry!");
-    }
+    // if (cars.Cars[selected.Name.toLowerCase()].Junked && restoration < 100) {
+    //   return interaction.reply("This car is too junked to race, sorry!");
+    // }
+
     let barnrandom = randomRange(1, 4);
     console.log(`random ${barnrandom}`);
-    let barnmaps;
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
@@ -225,10 +220,8 @@ module.exports = {
       .setColor("#60b0f4")
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let randomobstacle = randomRange(1, 3);
-    let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
     let timeobs = randomobstacle * 1000;
-    let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
@@ -322,15 +315,11 @@ module.exports = {
             embed.setTitle(`Caught Tier ${bot} racer!`);
             let job = userdata.job;
             let jobsdb = require("../jobs.json");
-            let jobrank = job.Rank;
             let num = job.Number;
             let salary = job.Salary;
-            let exp = job.EXP;
-            let timeout = job.Timeout;
             let actjob = job.Job;
             let addednum = (num += 1);
             let requiredxp;
-            let jobdb = jobsdb.Jobs[actjob.toLowerCase()];
             if (jobsdb.Jobs[actjob].Ranks[addednum]) {
               requiredxp = jobsdb.Jobs[actjob].Ranks[addednum].XP;
             } else {

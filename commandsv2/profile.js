@@ -1,15 +1,8 @@
 const Discord = require("discord.js");
-const db = require("quick.db");
-const Canvas = require("canvas");
 const profilepics = require("../pfpsdb.json");
-const badgedb = require("../badgedb.json");
 const cardb = require("../cardb.json");
-const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -29,7 +22,6 @@ module.exports = {
     let prestige = userdata.prestige;
     let racerank = userdata.racerank;
     let driftrank = userdata.driftrank;
-    let networth = 0;
 
     let helmet = userdata.helmet;
     console.log(helmet);
@@ -44,7 +36,7 @@ module.exports = {
 
     let finalprice = 0;
 
-    for (car in cars) {
+    for (let car in cars) {
       let car2 = cars[car];
 
       let price = Number(cardb.Cars[car2.Name.toLowerCase()].Price);

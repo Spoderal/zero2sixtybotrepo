@@ -1,13 +1,9 @@
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
-const db = require("quick.db");
 const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const itemdb = require("../items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -31,8 +27,6 @@ module.exports = {
     let itemtouse = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount");
     let amount2 = amount || 1;
-    let user = interaction.user;
-
     let items = userdata.items;
     let emote;
     let name;
@@ -148,19 +142,15 @@ module.exports = {
     if (itemdb.Police[itemtouse.toLowerCase()]) {
       emote = itemdb.Police[itemtouse.toLowerCase()].Emote;
       name = itemdb.Police[itemtouse.toLowerCase()].Name;
-      type = itemdb.Police[itemtouse.toLowerCase()].Type;
     } else if (itemdb.Multiplier[itemtouse.toLowerCase()]) {
       emote = itemdb.Multiplier[itemtouse.toLowerCase()].Emote;
       name = itemdb.Multiplier[itemtouse.toLowerCase()].Name;
-      type = itemdb.Multiplier[itemtouse.toLowerCase()].Type;
     } else if (itemdb.Other[itemtouse.toLowerCase()]) {
       emote = itemdb.Other[itemtouse.toLowerCase()].Emote;
       name = itemdb.Other[itemtouse.toLowerCase()].Name;
-      type = itemdb.Other[itemtouse.toLowerCase()].Type;
     } else if (itemdb.Collectable[0][itemtouse.toLowerCase()]) {
       emote = itemdb.Collectable[0][itemtouse.toLowerCase()].Emote;
       name = itemdb.Collectable[0][itemtouse.toLowerCase()].Name;
-      type = itemdb.Collectable[0][itemtouse.toLowerCase()].Type;
     }
 
     fullname = `${emote} ${name}`;

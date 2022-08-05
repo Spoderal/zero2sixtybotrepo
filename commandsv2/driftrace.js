@@ -5,8 +5,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -71,13 +69,12 @@ module.exports = {
       return interaction.reply({ embeds: [errembed] });
     }
     let car = selected;
-    let driftxp = userdata.driftxp;
     if (!car)
       return interaction.reply(
         "You need to select a car! Example: /ids select [car]"
       );
     let user1cars = userdata.cars;
-    if (!user1cars) returninteraction.reply("You dont have any cars!");
+    if (!user1cars) interaction.reply("You dont have any cars!");
     if (!cars.Cars[car.Name.toLowerCase()])
       return interaction.reply("Thats not a car!");
     let driftscore = selected.Drift;
@@ -120,7 +117,6 @@ module.exports = {
     let requiredrank = drifttraining * 150;
     let time;
     let ticketsearned;
-    let notearned;
     switch (track) {
       case "easy": {
         time = 15;
@@ -143,7 +139,6 @@ module.exports = {
     let usables = userdata.using;
 
     let energytimer = cooldowndata.energydrink;
-    let energydrink2;
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
@@ -167,7 +162,6 @@ module.exports = {
       ticketsearned = ticketsearned * 2;
     }
     let sponsortimer = cooldowndata.sponsor;
-    let sponsor2;
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
@@ -188,11 +182,10 @@ module.exports = {
     }
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
-      moneyearnedtxt = moneyearnedtxt * 2;
+      let moneyearnedtxt = moneyearnedtxt * 2;
       console.log(moneyearned);
     }
 
-    let parts = require("../partsdb.json");
     let tires = selected.Tires;
 
     let drifttires = [
@@ -205,8 +198,6 @@ module.exports = {
     ];
     if (!drifttires.includes(tires))
       return interaction.reply("Your car needs drift tires to drift!");
-
-    let newrank = drifttraining * 2;
 
     let formula = driftscore * drifttraining;
     formula += handling;
@@ -291,34 +282,28 @@ module.exports = {
         canshift = false;
       }, 3000);
 
-      let userid = user.id;
-
       collector.on("end", async (collected) => {
         if (collected.size == 0 && canshift == false) {
           formula = formula / 2;
         }
       });
     }, randomnum);
-    interaction
-      .reply({ embeds: [embed], components: [row] })
-      .then(async (emb) => {
-        collector.on("collect", async (i) => {
-          if (i.customId.includes("ebrake")) {
-            if (canshift == false) {
-              interaction.channel.send(
-                `You pulled the handbrake at the wrong time!`
-              );
-              formula = formula / 2;
-            } else if (canshift == true) {
-              embed.setDescription("Drifting!!!");
+    interaction.reply({ embeds: [embed], components: [row] }).then(async () => {
+      collector.on("collect", async (i) => {
+        if (i.customId.includes("ebrake")) {
+          if (canshift == false) {
+            interaction.channel.send(
+              `You pulled the handbrake at the wrong time!`
+            );
+            formula = formula / 2;
+          } else if (canshift == true) {
+            embed.setDescription("Drifting!!!");
 
-              await i.update({ embeds: [embed] });
-            }
+            await i.update({ embeds: [embed] });
           }
-        });
-
-        collector.on("end", async (collected) => {});
+        }
       });
+    });
 
     let y = setInterval(() => {
       time -= 1;

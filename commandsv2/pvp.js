@@ -1,10 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
-const Canvas = require("canvas");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -29,9 +25,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const ms = require("pretty-ms");
     const discord = require("discord.js");
-    const db = require("quick.db");
 
     const cars = require("../cardb.json");
 
@@ -45,10 +39,8 @@ module.exports = {
     let userdata = await User.findOne({ id: user.id });
     let userdata2 = await User.findOne({ id: user2.id });
 
-    let timeout = 45000;
-
-    idtoselect = car;
-    idtoselect2 = car2;
+    let idtoselect = car;
+    let idtoselect2 = car2;
 
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
@@ -123,7 +115,7 @@ module.exports = {
       time: 30000,
     });
 
-    collector.on("collect", async (i, iuser) => {
+    collector.on("collect", async (i, user) => {
       if (i.customId.includes("approve")) {
         embed.setTitle("Racing!");
         i.update({ embeds: [embed], components: [] });
@@ -165,9 +157,5 @@ module.exports = {
         i.update({ embeds: [embed], components: [row] });
       }
     });
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

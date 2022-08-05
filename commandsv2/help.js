@@ -1,13 +1,10 @@
-const { prefix } = require("../config.json");
+// const { prefix } = require("../config.json");
 const {
   MessageEmbed,
-  MessageReaction,
   MessageButton,
   MessageActionRow,
   MessageSelectMenu,
 } = require("discord.js");
-const db = require("quick.db");
-const axios = require("axios");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
@@ -33,7 +30,6 @@ module.exports = {
         .setLabel("🧡 Patreon")
         .setURL("https://www.patreon.com/zero2sixtybot")
     );
-    let client = interaction.client;
     const row2 = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId("select")
@@ -85,10 +81,6 @@ module.exports = {
 
     embed.setColor("#60b0f4");
 
-    let msg = await interaction.reply({
-      embeds: [embed],
-      components: [row, row2],
-    });
     const filter = (interaction) =>
       interaction.isSelectMenu() &&
       interaction.user.id === interaction.user.id &&

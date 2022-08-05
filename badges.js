@@ -1,16 +1,14 @@
 const db = require("quick.db");
-const discord = require("discord.js");
+
 module.exports = (client) => {
   client.on("message", (message) => {
     if (message.author.bot) return;
 
-    const { guild, member } = message;
+    const {
+      // guild,
+      member,
+    } = message;
 
-    let cardb = require("./cardb.json");
-    let millionbadge = db.fetch(`millionbadge_${member.id}`);
-    let cars10badge = db.fetch(`10carsbadge_${member.id}`);
-    let driftkingbadge = db.fetch(`driftkingbadge_${member.id}`);
-    let evcar = db.fetch(`hasev_${member.id}`);
     let cash = db.fetch(`cash_${member.id}`);
     let cars = db.fetch(`cars_${message.author.id}`) || [];
     let drift = db.fetch(`drifttraining_${member.id}`);

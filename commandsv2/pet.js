@@ -1,7 +1,5 @@
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
 const ms = require("ms");
-const db = require("quick.db");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const lodash = require("lodash");
@@ -9,9 +7,6 @@ const partdb = require("../partsdb.json");
 const itemdb = require("../items.json");
 const petdb = require("../pets.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -125,15 +120,12 @@ module.exports = {
       filter: filter,
     });
 
-    collector.on("collect", async (i, user) => {
+    collector.on("collect", async (i) => {
       if (i.customId.includes("drive")) {
         let pet = userdata.pet;
         let condition = pet.condition;
         let gas = pet.gas;
         let oil = pet.oil;
-        let love = pet.love;
-
-        let addedlove = 100 - pet.love;
 
         await User.findOneAndUpdate(
           {
@@ -167,7 +159,6 @@ module.exports = {
       } else if (i.customId.includes("gas")) {
         let pet = userdata.pet;
         let condition = pet.condition;
-        let gas = pet.gas;
         let oil = pet.oil;
         let love = pet.love;
         await User.findOneAndUpdate(
@@ -204,7 +195,6 @@ module.exports = {
         let pet = userdata.pet;
         let condition = pet.condition;
         let gas = pet.gas;
-        let oil = pet.oil;
         let love = pet.love;
 
         await User.findOneAndUpdate(
@@ -240,7 +230,6 @@ module.exports = {
         });
       } else if (i.customId.includes("wash")) {
         let pet = userdata.pet;
-        let condition = pet.condition;
         let gas = pet.gas;
         let oil = pet.oil;
         let love = pet.love;
@@ -350,7 +339,7 @@ module.exports = {
           filter: filter3,
         });
 
-        collector3.on("collect", async (i, user) => {
+        collector3.on("collect", async (i) => {
           userdata = await User.findOne({ id: i.user.id });
 
           if (i.customId.includes("black")) {
@@ -491,10 +480,6 @@ module.exports = {
         }
       }
     });
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };
 

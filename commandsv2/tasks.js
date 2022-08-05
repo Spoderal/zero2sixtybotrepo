@@ -11,8 +11,6 @@ module.exports = {
 
   async execute(interaction) {
     let userid = interaction.user.id;
-    let dailytask = db.fetch(`dailytask_${userid}`);
-    let weeklytask = db.fetch(`weeklytask_${userid}`);
     let tasksdb = require("../tasks.json");
     let randomtask = lodash.sample(tasksdb.Daily);
     let randomtask2 = lodash.sample(tasksdb.Weekly);

@@ -1,12 +1,7 @@
 const cars = require("../cardb.json");
 const Discord = require("discord.js");
-const parts = require("../partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,25 +31,18 @@ module.exports = {
     }
     let car = selected;
 
-    let uid = interaction.user.id;
     var usercars = userdata.cars;
     if (!cars.Cars[selected.Name.toLowerCase()])
       return interaction.reply("Thats not a car!");
-    let list = cars.Cars;
     car = car.Name.toLowerCase();
     let exhaust = selected.Exhaust;
     let tires = selected.Tires;
     let intake = selected.Intake;
     let clutch = selected.Clutch;
     let suspension = selected.Suspension;
-    let speed = selected.Speed || 0;
     let gearbox = selected.Gearbox;
 
     let body = selected.Body;
-    let engine = selected.Engine;
-
-    let kmh = speed * 1.609344;
-    var flooredkmh = Math.floor(kmh);
 
     if (!cars.Cars[car].Junked)
       return interaction.reply("Thats not a junk car!");
@@ -94,9 +82,5 @@ module.exports = {
     userdata.save();
 
     interaction.reply(`✅`);
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

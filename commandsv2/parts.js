@@ -1,22 +1,16 @@
-const Discord = require("discord.js");
 const parts = require("../partsdb.json");
-const db = require("quick.db");
-
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const {
+  MessageActionRow,
+  MessageSelectMenu,
+  MessageEmbed,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("parts")
     .setDescription("Check the parts shop"),
   async execute(interaction) {
-    const {
-      MessageActionRow,
-      MessageSelectMenu,
-      MessageEmbed,
-      MessageButton,
-      DiscordAPIError,
-    } = require("discord.js");
-
     const row = new MessageActionRow().addComponents(
       new MessageSelectMenu()
         .setCustomId("select")

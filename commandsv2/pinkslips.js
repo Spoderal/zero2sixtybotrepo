@@ -1,8 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const Global = require("../schema/global-schema");
-const Car = require("../schema/car");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pinkslips")
@@ -23,8 +22,6 @@ module.exports = {
   async execute(interaction) {
     const ms = require("pretty-ms");
     const discord = require("discord.js");
-    const db = require("quick.db");
-
     const cars = require("../cardb.json");
 
     let user = interaction.user;
@@ -44,7 +41,6 @@ module.exports = {
     let user1cars = userdata.cars;
     let racing = userdata.racing;
     let racing2 = userdata2.racing;
-    let dailytask1 = userdata.weekly;
     let prestige = userdata.prestige;
     let prestige2 = userdata2.prestige;
     let pinkslips = userdata.pinkslips;
@@ -251,7 +247,7 @@ module.exports = {
 
             userdata.update();
 
-            racerank = userdata.racexp;
+            let racerank = userdata.racexp;
 
             if (racerank >= newrankrequired) {
               userdata.racerank += 1;
@@ -281,7 +277,7 @@ module.exports = {
 
             userdata2.update();
 
-            racerank = userdata2.racexp;
+            let racerank = userdata2.racexp;
 
             if (racerank >= newrankrequired) {
               userdata2.racerank += 1;
@@ -300,9 +296,5 @@ module.exports = {
         }
       }, 1000);
     });
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

@@ -1,10 +1,10 @@
 const items = require("./items.json");
 const policeitems = items.Police;
-const multiitems = items.Multiplier;
 const otheritems = items.Other;
 
 const lodash = require("lodash");
 const db = require("quick.db");
+
 module.exports = (client) => {
   client.on("messageCreate", async (message) => {
     let energytimer = db.fetch(`energytimer_${message.author.id}`);
@@ -30,7 +30,6 @@ module.exports = (client) => {
     let itemshop = db.fetch(`itemshop`);
     if (!itemshop) {
       let randompolice = lodash.sample(policeitems);
-      let randommulti = lodash.sample(multiitems);
       let randomother1 = lodash.sample(otheritems);
       let randomother2 = lodash.sample(otheritems);
       let randomother3 = lodash.sample(otheritems);
@@ -56,7 +55,6 @@ module.exports = (client) => {
         return;
       } else {
         let randompolice = lodash.sample(policeitems);
-        let randommulti = lodash.sample(multiitems);
         let randomother1 = lodash.sample(otheritems);
         let randomother2 = lodash.sample(otheritems);
         let randomother3 = lodash.sample(otheritems);

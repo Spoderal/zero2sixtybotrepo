@@ -1,12 +1,12 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
-const { SlashCommandBuilder, time } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../partsdb.json");
-const Global = require("../schema/global-schema");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("botrace")
@@ -56,7 +56,6 @@ module.exports = {
       return interaction.reply({ embeds: [errembed] });
     }
     console.log(filteredcar);
-    let user = interaction.user;
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3", "4", "5", "6", "7", "8"];
     let timeout = 45000;
@@ -141,16 +140,16 @@ module.exports = {
       "spoders 2021 porsche 911 targa",
       "spoders 2005 porsche carrera gt",
     ];
-    let botrustcars = [
-      "barn 1970 chevy chevelle ss",
-      "barn 1969 ford mustang",
-      "barn 1966 lamborghini miura",
-      "barn 1954 mercedes 300sl",
-      "barn 1968 pontiac gto",
-      "barn 1990 nissan 240sx",
-      "barn 1970 porsche 917",
-      "barn 1986 lamborghini countach",
-    ];
+    // let botrustcars = [
+    //   "barn 1970 chevy chevelle ss",
+    //   "barn 1969 ford mustang",
+    //   "barn 1966 lamborghini miura",
+    //   "barn 1954 mercedes 300sl",
+    //   "barn 1968 pontiac gto",
+    //   "barn 1990 nissan 240sx",
+    //   "barn 1970 porsche 917",
+    //   "barn 1986 lamborghini countach",
+    // ];
     let botdupgrades = randomRange(5, 25);
     let botemote;
 
@@ -186,12 +185,8 @@ module.exports = {
     let weekytask1 = userdata.weeklytask;
     let ticketsearned;
     let classd;
-    let barnrandom = randomRange(1, 6);
     let barnmaps;
-    let barnwins;
     let ubarnmaps;
-    let crateearned;
-    let nitro = selected.Nitro;
     let tracklength = 0;
     switch (bot) {
       case "1": {
@@ -239,11 +234,6 @@ module.exports = {
         moneyearnedtxt += 400;
         ticketsearned = 4;
         classd = "4";
-        let randcrate = randomRange(1, 3);
-
-        if (randcrate == 2) {
-          crateearned = true;
-        }
         botemote = "<:bottier4:983973327389483008>";
 
         console.log(botcar);
@@ -312,7 +302,6 @@ module.exports = {
     let usables = userdata.using;
 
     let energytimer = cooldowndata.energydrink;
-    let energydrink2;
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
@@ -336,7 +325,6 @@ module.exports = {
       ticketsearned = ticketsearned * 2;
     }
     let sponsortimer = cooldowndata.sponsor;
-    let sponsor2;
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
@@ -371,8 +359,6 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    let carparts = selected.Parts;
-
     let user1carspeed = selected.Speed;
     let user1carzerosixty = selected.Acceleration;
     let user1carhandling = selected.Handling;
@@ -392,7 +378,6 @@ module.exports = {
     let new60 = user1carspeed / zero2sixtycar;
     let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
     let using = userdata.using;
-    let items = userdata.Items;
     Number(user1carspeed);
     Number(botspeed);
     Number(new60);
@@ -416,9 +401,7 @@ module.exports = {
     let tip = lodash.sample(tips);
     let y;
     let policeuser;
-    let rcollector;
     let policelen;
-    let salary;
     let itemusedp;
     let embed = new discord.MessageEmbed()
       .setTitle(`Tier ${classd} bot race in progress...`)
@@ -479,7 +462,7 @@ module.exports = {
         time: 10000,
       });
 
-      collector.on("collect", async (i, user) => {
+      collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts.t1nitro.AddedBoost;
 
@@ -535,8 +518,6 @@ module.exports = {
           let selected2;
           collectorp.on("collect", async (msg) => {
             if (job) {
-              salary = job.Salary;
-
               idtoselectcop = msg.content;
               console.log(idtoselectcop);
               let filteredcar2 = userdatacop.cars.filter(
@@ -567,7 +548,7 @@ module.exports = {
               }
               ispolice = true;
 
-              if ((ispolice = true)) {
+              if (ispolice) {
                 let policespeed = selected2.Speed;
 
                 let policehandling = selected2.Handling;
@@ -590,7 +571,6 @@ module.exports = {
                 let php = policespeed + newhandlingp;
                 let policelength = 600;
                 policelength += poice060;
-                let using2 = userdatacop.using;
                 let items2 = userdatacop.items;
 
                 if (items2 && items2.includes("roadblock")) {
@@ -670,11 +650,8 @@ module.exports = {
           } else if (policelen > tracklength) {
             let job = userdatacop.job;
             let jobsdb = require("../jobs.json");
-            let jobrank = job.Rank;
             let num = job.Number;
             let salary = job.Salary;
-            let exp = job.EXP;
-            let timeout = job.Timeout;
             let actjob = job.Job;
             let addednum = (num += 1);
             let requiredxp;

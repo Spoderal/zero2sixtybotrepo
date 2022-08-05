@@ -1,7 +1,4 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
-const cars = require("../cardb.json");
-const codes = require("../codes.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
 module.exports = {
@@ -21,7 +18,3 @@ module.exports = {
     interaction.reply({ embeds: [embed] });
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

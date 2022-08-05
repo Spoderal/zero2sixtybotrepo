@@ -1,20 +1,21 @@
 let db = require("quick.db");
 let cardb = require("./cardb.json");
-module.exports = async (client) => {
+
+module.exports = async () => {
   const User = require("./schema/profile-schema");
 
   let carsall = db.all().filter((data) => data.ID.startsWith(`cars_`));
   let cars;
   let id;
-  for (c in carsall) {
-    cardata = carsall[c];
+  for (let c in carsall) {
+    let cardata = carsall[c];
 
     cars = cardata.data;
     id = cardata.ID.split("_")[1];
     if (cars.length > 0) {
       console.log(id);
 
-      for (b in cars) {
+      for (let b in cars) {
         console.log(cars);
         let car = cars[b];
 
@@ -38,7 +39,6 @@ module.exports = async (client) => {
           db.fetch(`${cardb.Cars[car].Name}suspension_${id}`) || null;
 
         let weight = db.fetch(`${cardb.Cars[car].Name}weight_${id}`) || null;
-        let offroad = db.fetch(`${cardb.Cars[car].Name}offroad_${id}`) || null;
         let drift =
           db.fetch(`${cardb.Cars[car].Name}drift_${id}`) || carindb.Drift || 0;
         let speed =
@@ -47,8 +47,7 @@ module.exports = async (client) => {
           db.fetch(`${cardb.Cars[car].Name}060_${id}`) || carindb["0-60"];
 
         let nitro = db.fetch(`${cardb.Cars[car].Name}nitro_${id}`) || null;
-        let restoration =
-          db.fetch(`${cardb.Cars[car].Name}restoration_${id}`) || null;
+
         let resale =
           db.fetch(`${cardb.Cars[car].Name}resale_${id}`) ||
           cardb.Cars[car].Price * 0.65 ||
@@ -61,7 +60,7 @@ module.exports = async (client) => {
           db.fetch(`${cardb.Cars[car].Name}livery_${id}`) ||
           cardb.Cars[car].Image;
 
-        carobj = {
+        let carobj = {
           ID: carindb.alias,
           Name: carindb.Name,
           Speed: speed,

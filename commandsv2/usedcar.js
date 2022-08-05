@@ -49,8 +49,6 @@ module.exports = {
   async execute(interaction) {
     let user = interaction.user;
 
-    let garage = db.fetch(`cars_${user.id}`) || [];
-
     let subcommand = interaction.options.getSubcommand();
 
     if (subcommand == "create") {
@@ -146,13 +144,14 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommand == "delist") {
+      // skipped
     } else if (subcommand == "view") {
       let shopid = interaction.options.getUser("user").id || user.id;
 
       let newshop = db.fetch(`usedcarshop_${shopid}`);
       let usedlisted = newshop.Current;
       let used = [];
-      for (i in usedlisted) {
+      for (const i in usedlisted) {
         let uc = usedlisted[i];
         console.log(uc);
 
