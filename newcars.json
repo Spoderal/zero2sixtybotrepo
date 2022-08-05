@@ -1,44 +1,42 @@
 {
-    "Cars":[
-
-      {
-          "id":"1995 mazda miata",
-            "Name":"1995 Mazda Miata",
-            "Brand":"Mazda",
-            "Emote":"<:mazda:931011549680779364>",
-            "Alias":"1995 miata",
-            "HP":128,
-            "Speed":125,
-            "Acceleration":14.1,
-            "Grip":2000,
-            "Price":500,
-            "Engine":"1.8 L 4-cylinder",
-            "Image":"https://static.wikia.nocookie.net/forzamotorsport/images/2/28/MOT_XB1_Mazda_MX-5_90.png/revision/latest?cb=20191028220042",
-            "Drift":0,
-            "Handling":500,
-            "Weight":2300,
-            "Starter":true,
-            "Class":"D"
-        },
-        {
-            "id":"1991 toyota mr2",
-            "Name":"1991 Toyota MR2",
-            "Brand":"Toyota",
-            "Emote":"<:toyota:931012829283233883>",
-            "Alias":"1991 mr2",
-            "HP":200,
-            "Speed":130,
-            "Acceleration":14.5,
-            "Grip":2200,
-            "Price":500,
-            "Engine":"2.0L 3S-GTE",
-            "Image":"https://i.ibb.co/mcY9bN8/mr2.png",
-            "Drift":0,
-            "Handling":500,
-            "Weight":2700,
-            "Starter":true,
-            "Class":"D"
-        }
-    ]
-    
+  "Cars": [
+    {
+      "id": "1995 mazda miata",
+      "Name": "1995 Mazda Miata",
+      "Brand": "Mazda",
+      "Emote": "<:mazda:931011549680779364>",
+      "Alias": "1995 miata",
+      "HP": 128,
+      "Speed": 125,
+      "Acceleration": 14.1,
+      "Grip": 2000,
+      "Price": 500,
+      "Engine": "1.8 L 4-cylinder",
+      "Image": "https://static.wikia.nocookie.net/forzamotorsport/images/2/28/MOT_XB1_Mazda_MX-5_90.png/revision/latest?cb=20191028220042",
+      "Drift": 0,
+      "Handling": 500,
+      "Weight": 2300,
+      "Starter": true,
+      "Class": "D"
+    },
+    {
+      "id": "1991 toyota mr2",
+      "Name": "1991 Toyota MR2",
+      "Brand": "Toyota",
+      "Emote": "<:toyota:931012829283233883>",
+      "Alias": "1991 mr2",
+      "HP": 200,
+      "Speed": 130,
+      "Acceleration": 14.5,
+      "Grip": 2200,
+      "Price": 500,
+      "Engine": "2.0L 3S-GTE",
+      "Image": "https://i.ibb.co/mcY9bN8/mr2.png",
+      "Drift": 0,
+      "Handling": 500,
+      "Weight": 2700,
+      "Starter": true,
+      "Class": "D"
+    }
+  ]
 }

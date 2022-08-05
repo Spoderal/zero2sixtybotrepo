@@ -1,8 +1,46 @@
 {
-    "Cars":["2021 lexus rc f", "2013 lexus lfa", "2014 mclaren 12c", "2012 dodge charger srt8"],
-    "Parts":["t3exhaust", "t4exhaust", "t3tires", "t4tires", "t4intake", "t4racesuspension", "t4driftsuspension", "t3drifttires", "t3intake", "t4turbo", "t4drifttires"],
-    "Cash":["10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000", "150000", "200000", "250000", "300000"],
-    "RareCash":["500000", "750000", "1000000", "2000000"],
-    "SuperRare":["2022 bmw m4", "1988 porsche 911 turbo", "2017 lykan hypersport", "2019 bugatti la voiture noire", "2005 maserati mc12"],
-    "BadRewards":["Nothing lol"]
+  "Cars": [
+    "2021 lexus rc f",
+    "2013 lexus lfa",
+    "2014 mclaren 12c",
+    "2012 dodge charger srt8"
+  ],
+  "Parts": [
+    "t3exhaust",
+    "t4exhaust",
+    "t3tires",
+    "t4tires",
+    "t4intake",
+    "t4racesuspension",
+    "t4driftsuspension",
+    "t3drifttires",
+    "t3intake",
+    "t4turbo",
+    "t4drifttires"
+  ],
+  "Cash": [
+    "10000",
+    "20000",
+    "30000",
+    "40000",
+    "50000",
+    "60000",
+    "70000",
+    "80000",
+    "90000",
+    "100000",
+    "150000",
+    "200000",
+    "250000",
+    "300000"
+  ],
+  "RareCash": ["500000", "750000", "1000000", "2000000"],
+  "SuperRare": [
+    "2022 bmw m4",
+    "1988 porsche 911 turbo",
+    "2017 lykan hypersport",
+    "2019 bugatti la voiture noire",
+    "2005 maserati mc12"
+  ],
+  "BadRewards": ["Nothing lol"]
 }

@@ -1,34 +1,33 @@
 {
-    "Twitter":{
-        "SUMMER2022PART2":{
-            "Reward":"2000"
-        }
-    },
-    "Discord":{
-       "SUMMER2022":{
-           "Reward":"1500"
-       },
-       "300SERVERS":{
-        "Reward":"5000"
-       },
-       "CARZCA11":{
-        "Reward":"2500"
-       }
-    },
-   
-    "Patreon":{
-        "EXCLUSIVEPATREON":{
-            "Reward":5000
-        },
-        "ILO0VEPATREON":{
-            "Reward":50000
-
-        },
-        "PATREONNUMBER2":{
-            "Reward":25000
-        },
-        "ILOVECODES":{
-            "Reward":1000000
-        }
+  "Twitter": {
+    "SUMMER2022PART2": {
+      "Reward": "2000"
     }
+  },
+  "Discord": {
+    "SUMMER2022": {
+      "Reward": "1500"
+    },
+    "300SERVERS": {
+      "Reward": "5000"
+    },
+    "CARZCA11": {
+      "Reward": "2500"
+    }
+  },
+
+  "Patreon": {
+    "EXCLUSIVEPATREON": {
+      "Reward": 5000
+    },
+    "ILO0VEPATREON": {
+      "Reward": 50000
+    },
+    "PATREONNUMBER2": {
+      "Reward": 25000
+    },
+    "ILOVECODES": {
+      "Reward": 1000000
+    }
+  }
 }

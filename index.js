@@ -5,12 +5,12 @@ const db = require("quick.db");
 const config = require("./config.json");
 const apiToken = config.apiToken;
 const express = require("express");
-const dailytasks = require('./dailytasks')
-const crews = require('./crewrank')
-const badges = require('./badges')
+const dailytasks = require("./dailytasks");
+const crews = require("./crewrank");
+const badges = require("./badges");
 
 const app = express();
-require("dotenv").config()
+require("dotenv").config();
 
 const { Client, Intents, Collection } = require("discord.js");
 
@@ -21,7 +21,7 @@ const client = new Client({
     Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
     Intents.FLAGS.GUILD_MESSAGES,
   ],
-  shards: 'auto',
+  shards: "auto",
 });
 
 const Topgg = require("@top-gg/sdk");
@@ -33,7 +33,7 @@ app.post(
   webhook.listener((vote) => {
     console.log("User with id - " + vote.user + " voted!");
     db.set(`voted_${vote.user}`, true);
-    db.set(`votetimer_${vote.user}`, Date.now())
+    db.set(`votetimer_${vote.user}`, Date.now());
     let value = JSON.stringify({
       embeds: [
         {
@@ -43,7 +43,6 @@ app.post(
         },
       ],
     });
-
   })
 );
 
@@ -63,31 +62,22 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+const eventFiles = fs
+  .readdirSync("./events")
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of eventFiles) {
   const event = require(`./events/${file}`);
 
-  if(event.once){
+  if (event.once) {
     client.once(event.name, (...args) => event.execute(...args, commands));
   } else {
     client.on(event.name, (...args) => event.execute(...args, commands));
   }
 }
 
-
-
-client.on('guildCreate', (guild) => {
-
- console.log(`New guild joined! : ${guild.memberCount} members`)
-
-
+client.on("guildCreate", (guild) => {
+  console.log(`New guild joined! : ${guild.memberCount} members`);
 });
-
-
-
-
-
-
 
 client.login(config.token);

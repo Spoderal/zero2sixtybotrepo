@@ -1,8 +1,8 @@
 {
-    "Achievements":{
-        "fusion master":{
-            "Name":"Fusion Master",
-            "Emoji":""
-        }
+  "Achievements": {
+    "fusion master": {
+      "Name": "Fusion Master",
+      "Emoji": ""
     }
+  }
 }

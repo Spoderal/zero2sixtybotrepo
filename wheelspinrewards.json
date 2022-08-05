@@ -1,8 +1,60 @@
 {
-    "Cars":["1987 buick gnx", "1987 buick gnx", "1991 bmw m5", "1964 peel p50", "2020 ford f150 raptor"],
-    "Parts":["t3exhaust", "t2tires","t3exhaust", "t2exhaust", "t2tires","t2tires", "t4tires", "turbo", "t2intake", "t4intake", "t2tires", "t4exhaust", "t2drifttires", "t1intercooler", "t1intercooler", "t1intercooler", "t2intercooler",  "t2intercooler", "t3intercooler", "t4intercooler", "t2drifttires","t4clutch", "t4gearbox", "t2tires", "t2exhaust", "t2clutch", "t4ecu", "t4driftsuspension", "t4racesuspension", "t4spoiler"],
-    "Cash":["1000", "2000", "3000", "4000", "5000", "6000", "7500"],
-    "Maps":["Common", "Uncommon"],
-    "Helmets":["platinum helmet", "gold helmet", "silver helmet", "festive helmet", "red helmet", "purple helmet", "blue helmet", "flame helmet", "doge helmet"],
-    "SuperRare":["1991 acura nsx", "1964 aston martin db5", "2020 dodge charger hellcat", "2017 jeep grand cherokee trackhawk"]
+  "Cars": [
+    "1987 buick gnx",
+    "1987 buick gnx",
+    "1991 bmw m5",
+    "1964 peel p50",
+    "2020 ford f150 raptor"
+  ],
+  "Parts": [
+    "t3exhaust",
+    "t2tires",
+    "t3exhaust",
+    "t2exhaust",
+    "t2tires",
+    "t2tires",
+    "t4tires",
+    "turbo",
+    "t2intake",
+    "t4intake",
+    "t2tires",
+    "t4exhaust",
+    "t2drifttires",
+    "t1intercooler",
+    "t1intercooler",
+    "t1intercooler",
+    "t2intercooler",
+    "t2intercooler",
+    "t3intercooler",
+    "t4intercooler",
+    "t2drifttires",
+    "t4clutch",
+    "t4gearbox",
+    "t2tires",
+    "t2exhaust",
+    "t2clutch",
+    "t4ecu",
+    "t4driftsuspension",
+    "t4racesuspension",
+    "t4spoiler"
+  ],
+  "Cash": ["1000", "2000", "3000", "4000", "5000", "6000", "7500"],
+  "Maps": ["Common", "Uncommon"],
+  "Helmets": [
+    "platinum helmet",
+    "gold helmet",
+    "silver helmet",
+    "festive helmet",
+    "red helmet",
+    "purple helmet",
+    "blue helmet",
+    "flame helmet",
+    "doge helmet"
+  ],
+  "SuperRare": [
+    "1991 acura nsx",
+    "1964 aston martin db5",
+    "2020 dodge charger hellcat",
+    "2017 jeep grand cherokee trackhawk"
+  ]
 }

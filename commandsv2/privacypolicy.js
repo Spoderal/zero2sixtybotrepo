@@ -1,18 +1,17 @@
-const db = require('quick.db')
-const lodash = require('lodash')
-const discord = require('discord.js')
-const {SlashCommandBuilder} = require('@discordjs/builders')
+const db = require("quick.db");
+const lodash = require("lodash");
+const discord = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
-  
-    data: new SlashCommandBuilder()
-    .setName('privacypolicy')
+  data: new SlashCommandBuilder()
+    .setName("privacypolicy")
     .setDescription("Check the privacy policy of the bot"),
-    
-    async execute(interaction) {
 
-        let embed = new discord.MessageEmbed()
-        .setTitle("Privacy Policy")
-        .setDescription(`By using the Discord bot Zero2Sixty, you agree to the following.
+  async execute(interaction) {
+    let embed = new discord.MessageEmbed()
+      .setTitle("Privacy Policy")
+      .setDescription(
+        `By using the Discord bot Zero2Sixty, you agree to the following.
     
         Information stored
         
@@ -35,9 +34,9 @@ module.exports = {
         
         If you would like us to remove your data, please contact us via email at zero2sixtybot@gmail.com
         
-        We reserve the right to change this at any time.`)
-        .setColor("#60b0f4")
-        interaction.reply({embeds: [embed]})
-    }
-    
-  }
+        We reserve the right to change this at any time.`
+      )
+      .setColor("#60b0f4");
+    interaction.reply({ embeds: [embed] });
+  },
+};

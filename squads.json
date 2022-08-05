@@ -1,237 +1,284 @@
 {
-    "Squads":{
-        "flamehouse":{
-            "Name":"FlameHouse",
-            "Icon": "https://i.ibb.co/fHpW6dk/Logo-Makr-1qe2-Yy.png",
-            "Members":["Sally", "Max", "John", "Sam"],
-            "Leader":"Hal",
-            "Color":"#ffac43",
-            "Class":"D",
-            "Carlist":["1: Sallys 1997 Acura Integra", "2: Maxs 1995 Mazda Miata", "3: Johns 1991 Toyota MR2", "4: Sams 1999 Mitsubishi Eclipse", "5: Hals 1998 BMW M3 E36"]
-        },
-        "skullcrunchers":{
-            "Name":"SkullCrunchers",
-            "Icon": "https://i.ibb.co/cbcw9gZ/Logo-Makr-11.png",
-            "Members":["Dale", "Joe", "Sean", "Ashley"],
-            "Leader":"Damien",
-            "Color":"#838383",
-            "Class":"C",
-            "Carlist":["1: Dales 2004 Subaru WRX STI", "2: Joes 2010 Ford Mustang", "3: Seans 1989 Nissan Skyline R32", "4: Ashleys 2013 Mazda Speed3", "5: Damiens 2001 Toyota Supra MK4"]
-        },
-        "thespeed":{
-            "Name":"TheSpeed",
-            "Icon": "https://i.ibb.co/273wN5g/Logo-Makr-0n0-Kl-O.png",
-            "Members":["Madison", "Jeremy", "Eli", "X"],
-            "Leader":"Alex",
-            "Color":"#d74631",
-            "Class":"B",
-            "Carlist":["1: Madisons 2015 Lotus Exige Sport", "2: Jeremys 2011 Audi RS5", "3: Elis 2020 Audi TT RS", "4: Xs 2012 Dodge Challenger SRT8", "5: Alexs 1993 Porsche 959"]
-        },
-        "scrapheads":{
-            "Name":"Scrapheads",
-            "Icon": "https://i.ibb.co/7v0RPkh/Logo-Makr-5c-Pwv-L.png",
-            "Members":["Rex", "Ryan", "Saw", "Heather"],
-            "Leader":"Scrappy",
-            "Color":"#9c4c00",
-            "Class":"A",
-            "Carlist":["1: Rexs 1969 Ford Mustang", "2: Ryans 1990 Nissan 240SX", "3: Saws 1990 BMW M3", "4: Heathers 1967 Chevy Camaro", "5: Scrappys 1973 Ferrari Dino"]
-        },
-        "snowmonsters":{
-            "Name":"SnowMonsters",
-            "Icon": "https://i.ibb.co/QpKv8W6/Logo-Makr-1-Dmlw-Q.png",
-            "Members":["Casey", "Jeffery", "Katie", "Pam"],
-            "Leader":"Snowy",
-            "Color":"#FFFFFF",
-            "Class":"S",
-            "Carlist":["1: Caseys 2021 Ferrari SF90 Stradale", "2: Jefferys 2008 Bugatti Veyron", "3: Katies 2022 Aston Martin Valkyrie", "4: Pams 2016 Bugatti Chiron", "5: Snowys 2018 Koenigsegg Agera"]
-        },
-        "tuner4life":{
-            "Name":"Tuner4Life",
-            "Icon": "https://i.ibb.co/NghGjYw/Logo-Makr-6-Mz-RD7.png",
-            "Members":["Luke", "Tom", "Bruce", "Molly"],
-            "Leader":"Jessica",
-            "Color":"#730071",
-            "Class":"S+",
-            "Carlist":["1: Lukes 2000 Honda Civic Type R", "2: Toms 2007 Infiniti G35 Coupe", "3: Bruces 2019 Subaru BRZ", "4: Mollys 2020 Nissan 370Z Nismo", "5: Jessicas 2014 Lamborghini Huracan"]
-        },
-        "bikergang":{
-            "Name":"BikerGang",
-            "Icon": "https://i.ibb.co/w6Jq1ng/Logo-Makr-08-UUt9.png",
-            "Members":["Jake", "Jane", "Naomi", "Paul"],
-            "Leader":"Katherine",
-            "Color":"#000000",
-            "Class":"S",
-            "Carlist":["1: Jakes 2015 Honda CBR", "2: Janes 2018 Ducati Panigale V4", "3: Naomis 2019 BMW S1000RR", "4: Pauls 2022 Suzuki Hayabusa", "5: Katherines 2022 Yamaha YZF-R1"]
-        },
-        "zeroracers":{
-            "Name":"ZeroRacers",
-            "Icon": "https://i.ibb.co/02v72Bg/newlogo2.png",
-            "Members":["Adri", "Logan", "Kayla", "Fred"],
-            "Leader":"Spoder",
-            "Color":"#60b0f4",
-            "Class":"U",
-            "Carlist":["1: Adris 2013 Lamborghini Veneno", "2: Logans 2019 Bugatti La Voiture Noire", "3: Kaylas 2020 Koenigsegg Regera", "4: Freds 2014 Porsche 918 Spyder", "5: Spoders 2021 Porsche 911 Targa"]
-        },
-        "flamehouse1":{
-            "Name":"Sally",
-            "Car":"sallys 1997 acura integra"
-        },
-        "flamehouse2":{
-            "Name":"Max",
-            "Car":"maxs 1995 mazda miata"
-        },
-        "flamehouse3":{
-            "Name":"John",
-            "Car":"johns 1991 toyota mr2"
-        },
-        "flamehouse4":{
-            "Name":"Sam",
-            "Car":"sams 1999 mitsubishi eclipse"
-        },
-        "flamehouse5":{
-            "Name":"Hal",
-            "Car":"hals 1998 bmw m3 e36"
-        },
-        "skullcrunchers1":{
-            "Name":"Dale",
-            "Car":"dales 2004 subaru wrx sti"
-        },
-        "skullcrunchers2":{
-            "Name":"Joe",
-            "Car":"joes 2010 ford mustang"
-        },
-        "skullcrunchers3":{
-            "Name":"Sean",
-            "Car":"seans 1989 nissan skyline r32"
-        },
-        "skullcrunchers4":{
-            "Name":"Ashley",
-            "Car":"ashleys 2013 mazda speed3"
-        },
-        "skullcrunchers5":{
-            "Name":"Damien",
-            "Car":"damiens 2001 toyota supra mk4"
-        },
-        "thespeed1":{
-            "Name":"Madison",
-            "Car":"madisons 2015 lotus exige sport"
-        },
-        "thespeed2":{
-            "Name":"Jeremy",
-            "Car":"jeremys 2011 audi rs5"
-        },
-        "thespeed3":{
-            "Name":"Eli",
-            "Car":"elis 2020 audi tt rs"
-        },
-        "thespeed4":{
-            "Name":"X",
-            "Car":"xs 2012 dodge challenger srt8"
-        },
-        "thespeed5":{
-            "Name":"Alex",
-            "Car":"alexs 1993 porsche 959"
-        },
-        "scrapheads1":{
-            "Name":"Rex",
-            "Car":"rexs 1969 ford mustang"
-        },
-        "scrapheads2":{
-            "Name":"Ryan",
-            "Car":"ryans 1990 nissan 240sx"
-        },
-        "scrapheads3":{
-            "Name":"Saw",
-            "Car":"saws 1990 bmw m3"
-        },
-        "scrapheads4":{
-            "Name":"Heather",
-            "Car":"heathers 1967 chevy camaro"
-        },
-        "scrapheads5":{
-            "Name":"Scrappy",
-            "Car":"scrappys 1973 ferrari dino"
-        },
-        "snowmonsters1":{
-            "Name":"Casey",
-            "Car":"caseys 2021 ferrari sf90 stradale"
-        },
-        "snowmonsters2":{
-            "Name":"Jeffery",
-            "Car":"jefferys 2008 bugatti veyron"
-        },
-        "snowmonsters3":{
-            "Name":"Katie",
-            "Car":"katies 2022 aston martin valkyrie"
-        },
-        "snowmonsters4":{
-            "Name":"Pam",
-            "Car":"pams 2016 bugatti chiron"
-        },
-        "snowmonsters5":{
-            "Name":"Snowy",
-            "Car":"snowys 2018 koenigsegg agera"
-        },
-        "tuner4life1":{
-            "Name":"Luke",
-            "Car":"lukes 2000 honda civic type r"
-        },
-        "tuner4life2":{
-            "Name":"Tom",
-            "Car":"toms 2007 infiniti g35 coupe"
-        },
-        "tuner4life3":{
-            "Name":"Bruce",
-            "Car":"bruces 2019 subaru brz"
-        },
-        "tuner4life4":{
-            "Name":"Molly",
-            "Car":"mollys 2020 nissan 370z nismo"
-        },
-        "tuner4life5":{
-            "Name":"Jessica",
-            "Car":"jessicas 2014 lamborghini huracan"
-        },
-        "bikergang1":{
-            "Name":"Jake",
-            "Car":"jakes 2015 honda cbr"
-        },
-        "bikergang2":{
-            "Name":"Jane",
-            "Car":"janes 2018 ducati panigale v4"
-        },
-        "bikergang3":{
-            "Name":"Naomi",
-            "Car":"naomis 2019 bmw s1000rr"
-        },
-        "bikergang4":{
-            "Name":"Paul",
-            "Car":"pauls 2022 suzuki hayabusa"
-        },
-        "bikergang5":{
-            "Name":"Katherine",
-            "Car":"katherines 2022 yamaha yzf-r1"
-        },
-        "zeroracers1":{
-            "Name":"Adri",
-            "Car":"adris 2013 lamborghini veneno"
-        },
-        "zeroracers2":{
-            "Name":"Logan",
-            "Car":"Logans 2019 Bugatti La Voiture Noire"
-        },
-        "zeroracers3":{
-            "Name":"Kayla",
-            "Car":"kaylas 2020 koenigsegg regera"
-        },
-        "zeroracers4":{
-            "Name":"Fred",
-            "Car":"freds 2014 porsche 918 spyder"
-        },
-        "zeroracers5":{
-            "Name":"Spoder",
-            "Car":"spoders 2021 porsche 911 targa"
-        }
-
+  "Squads": {
+    "flamehouse": {
+      "Name": "FlameHouse",
+      "Icon": "https://i.ibb.co/fHpW6dk/Logo-Makr-1qe2-Yy.png",
+      "Members": ["Sally", "Max", "John", "Sam"],
+      "Leader": "Hal",
+      "Color": "#ffac43",
+      "Class": "D",
+      "Carlist": [
+        "1: Sallys 1997 Acura Integra",
+        "2: Maxs 1995 Mazda Miata",
+        "3: Johns 1991 Toyota MR2",
+        "4: Sams 1999 Mitsubishi Eclipse",
+        "5: Hals 1998 BMW M3 E36"
+      ]
+    },
+    "skullcrunchers": {
+      "Name": "SkullCrunchers",
+      "Icon": "https://i.ibb.co/cbcw9gZ/Logo-Makr-11.png",
+      "Members": ["Dale", "Joe", "Sean", "Ashley"],
+      "Leader": "Damien",
+      "Color": "#838383",
+      "Class": "C",
+      "Carlist": [
+        "1: Dales 2004 Subaru WRX STI",
+        "2: Joes 2010 Ford Mustang",
+        "3: Seans 1989 Nissan Skyline R32",
+        "4: Ashleys 2013 Mazda Speed3",
+        "5: Damiens 2001 Toyota Supra MK4"
+      ]
+    },
+    "thespeed": {
+      "Name": "TheSpeed",
+      "Icon": "https://i.ibb.co/273wN5g/Logo-Makr-0n0-Kl-O.png",
+      "Members": ["Madison", "Jeremy", "Eli", "X"],
+      "Leader": "Alex",
+      "Color": "#d74631",
+      "Class": "B",
+      "Carlist": [
+        "1: Madisons 2015 Lotus Exige Sport",
+        "2: Jeremys 2011 Audi RS5",
+        "3: Elis 2020 Audi TT RS",
+        "4: Xs 2012 Dodge Challenger SRT8",
+        "5: Alexs 1993 Porsche 959"
+      ]
+    },
+    "scrapheads": {
+      "Name": "Scrapheads",
+      "Icon": "https://i.ibb.co/7v0RPkh/Logo-Makr-5c-Pwv-L.png",
+      "Members": ["Rex", "Ryan", "Saw", "Heather"],
+      "Leader": "Scrappy",
+      "Color": "#9c4c00",
+      "Class": "A",
+      "Carlist": [
+        "1: Rexs 1969 Ford Mustang",
+        "2: Ryans 1990 Nissan 240SX",
+        "3: Saws 1990 BMW M3",
+        "4: Heathers 1967 Chevy Camaro",
+        "5: Scrappys 1973 Ferrari Dino"
+      ]
+    },
+    "snowmonsters": {
+      "Name": "SnowMonsters",
+      "Icon": "https://i.ibb.co/QpKv8W6/Logo-Makr-1-Dmlw-Q.png",
+      "Members": ["Casey", "Jeffery", "Katie", "Pam"],
+      "Leader": "Snowy",
+      "Color": "#FFFFFF",
+      "Class": "S",
+      "Carlist": [
+        "1: Caseys 2021 Ferrari SF90 Stradale",
+        "2: Jefferys 2008 Bugatti Veyron",
+        "3: Katies 2022 Aston Martin Valkyrie",
+        "4: Pams 2016 Bugatti Chiron",
+        "5: Snowys 2018 Koenigsegg Agera"
+      ]
+    },
+    "tuner4life": {
+      "Name": "Tuner4Life",
+      "Icon": "https://i.ibb.co/NghGjYw/Logo-Makr-6-Mz-RD7.png",
+      "Members": ["Luke", "Tom", "Bruce", "Molly"],
+      "Leader": "Jessica",
+      "Color": "#730071",
+      "Class": "S+",
+      "Carlist": [
+        "1: Lukes 2000 Honda Civic Type R",
+        "2: Toms 2007 Infiniti G35 Coupe",
+        "3: Bruces 2019 Subaru BRZ",
+        "4: Mollys 2020 Nissan 370Z Nismo",
+        "5: Jessicas 2014 Lamborghini Huracan"
+      ]
+    },
+    "bikergang": {
+      "Name": "BikerGang",
+      "Icon": "https://i.ibb.co/w6Jq1ng/Logo-Makr-08-UUt9.png",
+      "Members": ["Jake", "Jane", "Naomi", "Paul"],
+      "Leader": "Katherine",
+      "Color": "#000000",
+      "Class": "S",
+      "Carlist": [
+        "1: Jakes 2015 Honda CBR",
+        "2: Janes 2018 Ducati Panigale V4",
+        "3: Naomis 2019 BMW S1000RR",
+        "4: Pauls 2022 Suzuki Hayabusa",
+        "5: Katherines 2022 Yamaha YZF-R1"
+      ]
+    },
+    "zeroracers": {
+      "Name": "ZeroRacers",
+      "Icon": "https://i.ibb.co/02v72Bg/newlogo2.png",
+      "Members": ["Adri", "Logan", "Kayla", "Fred"],
+      "Leader": "Spoder",
+      "Color": "#60b0f4",
+      "Class": "U",
+      "Carlist": [
+        "1: Adris 2013 Lamborghini Veneno",
+        "2: Logans 2019 Bugatti La Voiture Noire",
+        "3: Kaylas 2020 Koenigsegg Regera",
+        "4: Freds 2014 Porsche 918 Spyder",
+        "5: Spoders 2021 Porsche 911 Targa"
+      ]
+    },
+    "flamehouse1": {
+      "Name": "Sally",
+      "Car": "sallys 1997 acura integra"
+    },
+    "flamehouse2": {
+      "Name": "Max",
+      "Car": "maxs 1995 mazda miata"
+    },
+    "flamehouse3": {
+      "Name": "John",
+      "Car": "johns 1991 toyota mr2"
+    },
+    "flamehouse4": {
+      "Name": "Sam",
+      "Car": "sams 1999 mitsubishi eclipse"
+    },
+    "flamehouse5": {
+      "Name": "Hal",
+      "Car": "hals 1998 bmw m3 e36"
+    },
+    "skullcrunchers1": {
+      "Name": "Dale",
+      "Car": "dales 2004 subaru wrx sti"
+    },
+    "skullcrunchers2": {
+      "Name": "Joe",
+      "Car": "joes 2010 ford mustang"
+    },
+    "skullcrunchers3": {
+      "Name": "Sean",
+      "Car": "seans 1989 nissan skyline r32"
+    },
+    "skullcrunchers4": {
+      "Name": "Ashley",
+      "Car": "ashleys 2013 mazda speed3"
+    },
+    "skullcrunchers5": {
+      "Name": "Damien",
+      "Car": "damiens 2001 toyota supra mk4"
+    },
+    "thespeed1": {
+      "Name": "Madison",
+      "Car": "madisons 2015 lotus exige sport"
+    },
+    "thespeed2": {
+      "Name": "Jeremy",
+      "Car": "jeremys 2011 audi rs5"
+    },
+    "thespeed3": {
+      "Name": "Eli",
+      "Car": "elis 2020 audi tt rs"
+    },
+    "thespeed4": {
+      "Name": "X",
+      "Car": "xs 2012 dodge challenger srt8"
+    },
+    "thespeed5": {
+      "Name": "Alex",
+      "Car": "alexs 1993 porsche 959"
+    },
+    "scrapheads1": {
+      "Name": "Rex",
+      "Car": "rexs 1969 ford mustang"
+    },
+    "scrapheads2": {
+      "Name": "Ryan",
+      "Car": "ryans 1990 nissan 240sx"
+    },
+    "scrapheads3": {
+      "Name": "Saw",
+      "Car": "saws 1990 bmw m3"
+    },
+    "scrapheads4": {
+      "Name": "Heather",
+      "Car": "heathers 1967 chevy camaro"
+    },
+    "scrapheads5": {
+      "Name": "Scrappy",
+      "Car": "scrappys 1973 ferrari dino"
+    },
+    "snowmonsters1": {
+      "Name": "Casey",
+      "Car": "caseys 2021 ferrari sf90 stradale"
+    },
+    "snowmonsters2": {
+      "Name": "Jeffery",
+      "Car": "jefferys 2008 bugatti veyron"
+    },
+    "snowmonsters3": {
+      "Name": "Katie",
+      "Car": "katies 2022 aston martin valkyrie"
+    },
+    "snowmonsters4": {
+      "Name": "Pam",
+      "Car": "pams 2016 bugatti chiron"
+    },
+    "snowmonsters5": {
+      "Name": "Snowy",
+      "Car": "snowys 2018 koenigsegg agera"
+    },
+    "tuner4life1": {
+      "Name": "Luke",
+      "Car": "lukes 2000 honda civic type r"
+    },
+    "tuner4life2": {
+      "Name": "Tom",
+      "Car": "toms 2007 infiniti g35 coupe"
+    },
+    "tuner4life3": {
+      "Name": "Bruce",
+      "Car": "bruces 2019 subaru brz"
+    },
+    "tuner4life4": {
+      "Name": "Molly",
+      "Car": "mollys 2020 nissan 370z nismo"
+    },
+    "tuner4life5": {
+      "Name": "Jessica",
+      "Car": "jessicas 2014 lamborghini huracan"
+    },
+    "bikergang1": {
+      "Name": "Jake",
+      "Car": "jakes 2015 honda cbr"
+    },
+    "bikergang2": {
+      "Name": "Jane",
+      "Car": "janes 2018 ducati panigale v4"
+    },
+    "bikergang3": {
+      "Name": "Naomi",
+      "Car": "naomis 2019 bmw s1000rr"
+    },
+    "bikergang4": {
+      "Name": "Paul",
+      "Car": "pauls 2022 suzuki hayabusa"
+    },
+    "bikergang5": {
+      "Name": "Katherine",
+      "Car": "katherines 2022 yamaha yzf-r1"
+    },
+    "zeroracers1": {
+      "Name": "Adri",
+      "Car": "adris 2013 lamborghini veneno"
+    },
+    "zeroracers2": {
+      "Name": "Logan",
+      "Car": "Logans 2019 Bugatti La Voiture Noire"
+    },
+    "zeroracers3": {
+      "Name": "Kayla",
+      "Car": "kaylas 2020 koenigsegg regera"
+    },
+    "zeroracers4": {
+      "Name": "Fred",
+      "Car": "freds 2014 porsche 918 spyder"
+    },
+    "zeroracers5": {
+      "Name": "Spoder",
+      "Car": "spoders 2021 porsche 911 targa"
     }
+  }
 }

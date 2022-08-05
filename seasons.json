@@ -1,877 +1,871 @@
 {
-    "Seasons":{
-        "Winter":{
-            "Rewards":{
-                "1":{
-                "Number":"1",
-                "Item":"50 Cash",
-                "Required":"250"
-            },
-            "2":{
-                "Number":"2",
-                "Item":"150 Cash",
-                "Required":"500"
-
-            },
-            "3":{
-                "Number":"3",
-                "Item":"200 Cash",
-                "Required":"1000"
-            },
-            "4":{
-                "Number":"4",
-                "Item":"250 Cash",
-                "Required":"2000"
-            },
-            "5":{
-                "Number":"5",
-                "Item":"300 Cash",
-                "Required":"2500"
-            },
-            "6":{
-                "Number":"6",
-                "Item":"350 Cash",
-                "Required":"3000"
-            },
-            "7":{
-                "Number":"7",
-                "Item":"400 Cash",
-                "Required":"3500"
-            },
-            "8":{
-                "Number":"8",
-                "Item":"450 Cash",
-                "Required":"4000"
-            },
-            "9":{
-                "Number":"9",
-                "Item":"500 Cash",
-                "Required":"4500"
-            },
-            "10":{
-                "Number":"10",
-                "Item":"550 Cash",
-                "Required":"5000"
-            },
-            "11":{
-                "Number":"11",
-                "Item":"2018 Subaru WRX STI WE",
-                "Required":"5500"
-            },
-            "12":{
-                "Number":"12",
-                "Item":"500 Cash",
-                "Required":"6000"
-            },
-            "13":{
-                "Number":"13",
-                "Item":"500 Cash",
-                "Required":"6500"
-            },
-            "14":{
-                "Number":"14",
-                "Item":"1000 Cash",
-                "Required":"7000"
-            },
-            "15":{
-                "Number":"15",
-                "Item":"10 RP",
-                "Required":"7500"
-            },
-            "16":{
-                "Number":"16",
-                "Item":"200 Cash",
-                "Required":"8000"
-            },
-            "17":{
-                "Number":"17",
-                "Item":"20 RP",
-                "Required":"8500"
-            },
-            "18":{
-                "Number":"18",
-                "Item":"700 Cash",
-                "Required":"9000"
-            },
-            "19":{
-                "Number":"19",
-                "Item":"200 Cash",
-                "Required":"9500"
-            },
-            "20":{
-                "Number":"20",
-                "Item":"Snow Helmet",
-                "Required":"10000"
-            },
-            "21":{
-                "Number":"21",
-                "Item":"500 Cash",
-                "Required":"10100"
-            },
-            "22":{
-                "Number":"22",
-                "Item":"300 Cash",
-                "Required":"10200"
-            },
-            "23":{
-                "Number":"23",
-                "Item":"250 Cash",
-                "Required":"10300"
-            },
-            "24":{
-                "Number":"24",
-                "Item":"200 Cash",
-                "Required":"10400"
-            },
-            "25":{
-                "Number":"25",
-                "Item":"750 Cash",
-                "Required":"10500"
-            },
-            "26":{
-                "Number":"26",
-                "Item":"150 Cash",
-                "Required":"10600"
-            },
-            "27":{
-                "Number":"27",
-                "Item":"500 Cash",
-                "Required":"10700"
-            },
-            "28":{
-                "Number":"28",
-                "Item":"20 RP",
-                "Required":"10800"
-            },
-            "29":{
-                "Number":"29",
-                "Item":"10 RP",
-                "Required":"10900"
-            },
-            "30":{
-                "Number":"30",
-                "Item":"2016 Ford Focus RS WE",
-                "Required":"11000"
-            },
-            "31":{
-                "Number":"31",
-                "Item":"10 RP",
-                "Required":"12000"
-            },
-            "32":{
-                "Number":"32",
-                "Item":"1000 Cash",
-                "Required":"13000"
-            },
-            "33":{
-                "Number":"33",
-                "Item":"20 RP",
-                "Required":"14000"
-            },
-            "34":{
-                "Number":"34",
-                "Item":"250 Cash",
-                "Required":"15000"
-            },
-            "35":{
-                "Number":"35",
-                "Item":"500 Cash",
-                "Required":"15500"
-            },
-            "36":{
-                "Number":"36",
-                "Item":"750 Cash",
-                "Required":"15600"
-            },
-            "37":{
-                "Number":"37",
-                "Item":"100 Cash",
-                "Required":"15700"
-            },
-            "38":{
-                "Number":"38",
-                "Item":"500 Cash",
-                "Required":"15800"
-            },
-            "39":{
-                "Number":"39",
-                "Item":"200 Cash",
-                "Required":"15900"
-            },
-            "40":{
-                "Number":"40",
-                "Item":"40 RP",
-                "Required":"16000"
-            },
-            "41":{
-                "Number":"41",
-                "Item":"22 RP",
-                "Required":"16500"
-            },
-            "42":{
-                "Number":"42",
-                "Item":"Earth Helmet",
-                "Required":"17000"
-            },
-            "43":{
-                "Number":"43",
-                "Item":"1000 Cash",
-                "Required":"17500"
-            },
-            "44":{
-                "Number":"44",
-                "Item":"250 Cash",
-                "Required":"18000"
-            },
-            "45":{
-                "Number":"45",
-                "Item":"50 RP",
-                "Required":"18500"
-            },
-            "46":{
-                "Number":"46",
-                "Item":"T4Exhaust Part",
-                "Required":"19000"
-            },
-            "47":{
-                "Number":"47",
-                "Item":"500 Cash",
-                "Required":"19500"
-            },
-            "48":{
-                "Number":"48",
-                "Item":"2018 Dodge Challenger Demon",
-                "Required":"20000"
-            },
-            "49":{
-                "Number":"49",
-                "Item":"5000 Cash",
-                "Required":"25000"
-            },
-            "50":{
-                "Number":"50",
-                "Item":"Winter Badge",
-                "Required":"30000"
-            }
-            }
+  "Seasons": {
+    "Winter": {
+      "Rewards": {
+        "1": {
+          "Number": "1",
+          "Item": "50 Cash",
+          "Required": "250"
         },
-        "Spring":{
-            "Rewards":{
-                "1":{
-                "Number":"1",
-                "Item":"150 Cash",
-                "Required":"250"
-            },
-            "2":{
-                "Number":"2",
-                "Item":"150 Cash",
-                "Required":"500"
-
-            },
-            "3":{
-                "Number":"3",
-                "Item":"200 Cash",
-                "Required":"1000"
-            },
-            "4":{
-                "Number":"4",
-                "Item":"250 Cash",
-                "Required":"2000"
-            },
-            "5":{
-                "Number":"5",
-                "Item":"300 Cash",
-                "Required":"2500"
-            },
-            "6":{
-                "Number":"6",
-                "Item":"350 Cash",
-                "Required":"3000"
-            },
-            "7":{
-                "Number":"7",
-                "Item":"400 Cash",
-                "Required":"3500"
-            },
-            "8":{
-                "Number":"8",
-                "Item":"450 Cash",
-                "Required":"4000"
-            },
-            "9":{
-                "Number":"9",
-                "Item":"500 Cash",
-                "Required":"4500"
-            },
-            "10":{
-                "Number":"10",
-                "Item":"1 Garage Space",
-                "Required":"5000"
-            },
-            "11":{
-                "Number":"11",
-                "Item":"1984 Audi Quattro",
-                "Required":"5500"
-            },
-            "12":{
-                "Number":"12",
-                "Item":"500 Cash",
-                "Required":"6000"
-            },
-            "13":{
-                "Number":"13",
-                "Item":"500 Cash",
-                "Required":"6500"
-            },
-            "14":{
-                "Number":"14",
-                "Item":"DayNNight Helmet",
-                "Required":"7000"
-            },
-            "15":{
-                "Number":"15",
-                "Item":"300 Cash",
-                "Required":"7500"
-            },
-            "16":{
-                "Number":"16",
-                "Item":"200 Cash",
-                "Required":"8000"
-            },
-            "17":{
-                "Number":"17",
-                "Item":"20 RP",
-                "Required":"8500"
-            },
-            "18":{
-                "Number":"18",
-                "Item":"250 Cash",
-                "Required":"9000"
-            },
-            "19":{
-                "Number":"19",
-                "Item":"200 Cash",
-                "Required":"9500"
-            },
-            "20":{
-                "Number":"20",
-                "Item":"1 Barn Map",
-                "Required":"10000"
-            },
-            "21":{
-                "Number":"21",
-                "Item":"500 Cash",
-                "Required":"10100"
-            },
-            "22":{
-                "Number":"22",
-                "Item":"300 Cash",
-                "Required":"10200"
-            },
-            "23":{
-                "Number":"23",
-                "Item":"T3RallyTires Part",
-                "Required":"10300"
-            },
-            "24":{
-                "Number":"24",
-                "Item":"200 Cash",
-                "Required":"10400"
-            },
-            "25":{
-                "Number":"25",
-                "Item":"1 Garage Space",
-                "Required":"10500"
-            },
-            "26":{
-                "Number":"26",
-                "Item":"150 Cash",
-                "Required":"10600"
-            },
-            "27":{
-                "Number":"27",
-                "Item":"T4Intake Part",
-                "Required":"10700"
-            },
-            "28":{
-                "Number":"28",
-                "Item":"20 RP",
-                "Required":"10800"
-            },
-            "29":{
-                "Number":"29",
-                "Item":"10 RP",
-                "Required":"10900"
-            },
-            "30":{
-                "Number":"30",
-                "Item":"T3OffRoadSuspension Part",
-                "Required":"11000"
-            },
-            "31":{
-                "Number":"31",
-                "Item":"10 RP",
-                "Required":"12000"
-            },
-            "32":{
-                "Number":"32",
-                "Item":"1000 Cash",
-                "Required":"13000"
-            },
-            "33":{
-                "Number":"33",
-                "Item":"200 Cash",
-                "Required":"14000"
-            },
-            "34":{
-                "Number":"34",
-                "Item":"250 Cash",
-                "Required":"15000"
-            },
-            "35":{
-                "Number":"35",
-                "Item":"500 Cash",
-                "Required":"15500"
-            },
-            "36":{
-                "Number":"36",
-                "Item":"1 Garage Space",
-                "Required":"15600"
-            },
-            "37":{
-                "Number":"37",
-                "Item":"1978 Porsche 911 SC",
-                "Required":"15700"
-            },
-            "38":{
-                "Number":"38",
-                "Item":"Star Helmet",
-                "Required":"15800"
-            },
-            "39":{
-                "Number":"39",
-                "Item":"500 Cash",
-                "Required":"15900"
-            },
-            "40":{
-                "Number":"40",
-                "Item":"25 Common Keys",
-                "Required":"16000"
-            },
-            "41":{
-                "Number":"41",
-                "Item":"250 Cash",
-                "Required":"16500"
-            },
-            "42":{
-                "Number":"42",
-                "Item":"500 Cash",
-                "Required":"17000"
-            },
-            "43":{
-                "Number":"43",
-                "Item":"1 Barn Map",
-                "Required":"17500"
-            },
-            "44":{
-                "Number":"44",
-                "Item":"Gaming Helmet",
-                "Required":"18000"
-            },
-            "45":{
-                "Number":"45",
-                "Item":"50 RP",
-                "Required":"18500"
-            },
-            "46":{
-                "Number":"46",
-                "Item":"2 Barn Maps",
-                "Required":"19000"
-            },
-            "47":{
-                "Number":"47",
-                "Item":"2000 Cash",
-                "Required":"19500"
-            },
-            "48":{
-                "Number":"48",
-                "Item":"10 Rare Keys",
-                "Required":"20000"
-            },
-            "49":{
-                "Number":"49",
-                "Item":"2 Exotic Keys",
-                "Required":"25000"
-            },
-            "50":{
-                "Number":"50",
-                "Item":"Spring Badge",
-                "Required":"30000"
-            }
-            }
-            
+        "2": {
+          "Number": "2",
+          "Item": "150 Cash",
+          "Required": "500"
         },
-        "Summer":{
-            "Rewards":{
-                "1":{
-                "Number":"1",
-                "Item":"2000 Cash",
-                "Required":"250"
-            },
-            "2":{
-                "Number":"2",
-                "Item":"1500 Cash",
-                "Required":"500"
-
-            },
-            "3":{
-                "Number":"3",
-                "Item":"2000 Cash",
-                "Required":"1000"
-            },
-            "4":{
-                "Number":"4",
-                "Item":"2500 Cash",
-                "Required":"2000"
-            },
-            "5":{
-                "Number":"5",
-                "Item":"3000 Cash",
-                "Required":"2500"
-            },
-            "6":{
-                "Number":"6",
-                "Item":"3500 Cash",
-                "Required":"3000"
-            },
-            "7":{
-                "Number":"7",
-                "Item":"2 Rare Keys",
-                "Required":"3500"
-            },
-            "8":{
-                "Number":"8",
-                "Item":"1 Garage Space",
-                "Required":"4000"
-            },
-            "9":{
-                "Number":"9",
-                "Item":"Japan Helmet",
-                "Required":"4500"
-            },
-            "10":{
-                "Number":"10",
-                "Item":"1 Garage Space",
-                "Required":"5000"
-            },
-            "11":{
-                "Number":"11",
-                "Item":"5 Drift Keys",
-                "Required":"5500"
-            },
-            "12":{
-                "Number":"12",
-                "Item":"5000 Cash",
-                "Required":"6000"
-            },
-            "13":{
-                "Number":"13",
-                "Item":"5000 Cash",
-                "Required":"6500"
-            },
-            "14":{
-                "Number":"14",
-                "Item":"T4DriftTires Part",
-                "Required":"7000"
-            },
-            "15":{
-                "Number":"15",
-                "Item":"5000 Cash",
-                "Required":"7500"
-            },
-            "16":{
-                "Number":"16",
-                "Item":"2000 Cash",
-                "Required":"8000"
-            },
-            "17":{
-                "Number":"17",
-                "Item":"Underwater Helmet",
-                "Required":"8500"
-            },
-            "18":{
-                "Number":"18",
-                "Item":"2500 Cash",
-                "Required":"9000"
-            },
-            "19":{
-                "Number":"19",
-                "Item":"Silvia Helmet",
-                "Required":"9500"
-            },
-            "20":{
-                "Number":"20",
-                "Item":"2 Barn Maps",
-                "Required":"10000"
-            },
-            "21":{
-                "Number":"21",
-                "Item":"Lemon Helmet",
-                "Required":"10100"
-            },
-            "22":{
-                "Number":"22",
-                "Item":"3000 Cash",
-                "Required":"10200"
-            },
-            "23":{
-                "Number":"23",
-                "Item":"T3DriftSuspension Part",
-                "Required":"10300"
-            },
-            "24":{
-                "Number":"24",
-                "Item":"2000 Cash",
-                "Required":"10400"
-            },
-            "25":{
-                "Number":"25",
-                "Item":"1 Garage Space",
-                "Required":"10500"
-            },
-            "26":{
-                "Number":"26",
-                "Item":"5 Drift Keys",
-                "Required":"10600"
-            },
-            "27":{
-                "Number":"27",
-                "Item":"T4DriftSuspension Part",
-                "Required":"10700"
-            },
-            "28":{
-                "Number":"28",
-                "Item":"200 RP",
-                "Required":"10800"
-            },
-            "29":{
-                "Number":"29",
-                "Item":"5 Drift Keys",
-                "Required":"10900"
-            },
-            "30":{
-                "Number":"30",
-                "Item":"T4DriftTires Part",
-                "Required":"11000"
-            },
-            "31":{
-                "Number":"31",
-                "Item":"Watermelon Helmet",
-                "Required":"12000"
-            },
-            "32":{
-                "Number":"32",
-                "Item":"RX7 Helmet",
-                "Required":"13000"
-            },
-            "33":{
-                "Number":"33",
-                "Item":"2000 Cash",
-                "Required":"14000"
-            },
-            "34":{
-                "Number":"34",
-                "Item":"5 Drift Keys",
-                "Required":"15000"
-            },
-            "35":{
-                "Number":"35",
-                "Item":"Flamingo Helmet",
-                "Required":"15500"
-            },
-            "36":{
-                "Number":"36",
-                "Item":"1 Garage Space",
-                "Required":"15600"
-            },
-            "37":{
-                "Number":"37",
-                "Item":"5 Drift Keys",
-                "Required":"15700"
-            },
-            "38":{
-                "Number":"38",
-                "Item":"Drift Helmet",
-                "Required":"15800"
-            },
-            "39":{
-                "Number":"39",
-                "Item":"5000 Cash",
-                "Required":"15900"
-            },
-            "40":{
-                "Number":"40",
-                "Item":"25 Common Keys",
-                "Required":"16000"
-            },
-            "41":{
-                "Number":"41",
-                "Item":"2500 Cash",
-                "Required":"16500"
-            },
-            "42":{
-                "Number":"42",
-                "Item":"10 Drift Keys",
-                "Required":"17000"
-            },
-            "43":{
-                "Number":"43",
-                "Item":"2 Barn Maps",
-                "Required":"17500"
-            },
-            "44":{
-                "Number":"44",
-                "Item":"Cocktail Helmet",
-                "Required":"18000"
-            },
-            "45":{
-                "Number":"45",
-                "Item":"10 Drift Keys",
-                "Required":"18500"
-            },
-            "46":{
-                "Number":"46",
-                "Item":"2 Barn Maps",
-                "Required":"19000"
-            },
-            "47":{
-                "Number":"47",
-                "Item":"20000 Cash",
-                "Required":"19500"
-            },
-            "48":{
-                "Number":"48",
-                "Item":"10 Rare Keys",
-                "Required":"20000"
-            },
-            "49":{
-                "Number":"49",
-                "Item":"2 Exotic Keys",
-                "Required":"25000"
-            },
-            "50":{
-                "Number":"50",
-                "Item":"Summer Badge",
-                "Required":"30000"
-            }
-            }
-            
+        "3": {
+          "Number": "3",
+          "Item": "200 Cash",
+          "Required": "1000"
         },
-        "Crew1":{
-            "Rewards":{
-                "1":{
-                    "Number":"1",
-                    "Item":"2000 Cash"
-                },
-                "2":{
-                    "Number":"2",
-                    "Item":"5 Rare Keys"
-                },
-                "3":{
-                    "Number":"3",
-                    "Item":"25 Common Keys"
-                },
-                "4":{
-                    "Number":"4",
-                    "Item":"1 Super wheelspin"
-                },
-                "5":{
-                    "Number":"5",
-                    "Item":"2 Exotic Keys"
-                },
-                "6":{
-                    "Number":"6",
-                    "Item":"T4DriftTires Part"
-                },
-                "7":{
-                    "Number":"7",
-                    "Item":"DualTurbo Part"
-                },
-                "8":{
-                    "Number":"8",
-                    "Item":"5000 Cash"
-                },
-                "9":{
-                    "Number":"9",
-                    "Item":"3000 Cash"
-                },
-                "10":{
-                    "Number":"10",
-                    "Item":"500 Notoriety"
-                },
-                "11":{
-                    "Number":"11",
-                    "Item":"500 Notoriety"
-                },
-                "12":{
-                    "Number":"12",
-                    "Item":"1 Bank Increase"
-                },
-                "13":{
-                    "Number":"13",
-                    "Item":"5000 Cash"
-                },
-                "14":{
-                    "Number":"14",
-                    "Item":"5000 Cash"
-                },
-                "15":{
-                    "Number":"15",
-                    "Item":"5000 Cash"
-                },
-                "16":{
-                    "Number":"16",
-                    "Item":"3500 Cash"
-                },
-                "17":{
-                    "Number":"17",
-                    "Item":"1 Super wheelspin"
-                },
-                "18":{
-                    "Number":"18",
-                    "Item":"5000 Cash"
-                },
-                "19":{
-                    "Number":"19",
-                    "Item":"25 Common Keys"
-                },
-                "20":{
-                    "Number":"20",
-                    "Item":"5 Rare Keys"
-                },
-                "21":{
-                    "Number":"21",
-                    "Item":"2 Exotic Keys"
-                },
-                "22":{
-                    "Number":"22",
-                    "Item":"1 Legendary Barn Map"
-                },
-                "23":{
-                    "Number":"23",
-                    "Item":"2500 Cash"
-                },
-                "24":{
-                    "Number":"24",
-                    "Item":"5 Drift Keys"
-                },
-                "100":{
-                    "Number":"100",
-                    "Item":"2022 Ferrari Roma",
-                    "Car":true
-                }
-            }
-
+        "4": {
+          "Number": "4",
+          "Item": "250 Cash",
+          "Required": "2000"
+        },
+        "5": {
+          "Number": "5",
+          "Item": "300 Cash",
+          "Required": "2500"
+        },
+        "6": {
+          "Number": "6",
+          "Item": "350 Cash",
+          "Required": "3000"
+        },
+        "7": {
+          "Number": "7",
+          "Item": "400 Cash",
+          "Required": "3500"
+        },
+        "8": {
+          "Number": "8",
+          "Item": "450 Cash",
+          "Required": "4000"
+        },
+        "9": {
+          "Number": "9",
+          "Item": "500 Cash",
+          "Required": "4500"
+        },
+        "10": {
+          "Number": "10",
+          "Item": "550 Cash",
+          "Required": "5000"
+        },
+        "11": {
+          "Number": "11",
+          "Item": "2018 Subaru WRX STI WE",
+          "Required": "5500"
+        },
+        "12": {
+          "Number": "12",
+          "Item": "500 Cash",
+          "Required": "6000"
+        },
+        "13": {
+          "Number": "13",
+          "Item": "500 Cash",
+          "Required": "6500"
+        },
+        "14": {
+          "Number": "14",
+          "Item": "1000 Cash",
+          "Required": "7000"
+        },
+        "15": {
+          "Number": "15",
+          "Item": "10 RP",
+          "Required": "7500"
+        },
+        "16": {
+          "Number": "16",
+          "Item": "200 Cash",
+          "Required": "8000"
+        },
+        "17": {
+          "Number": "17",
+          "Item": "20 RP",
+          "Required": "8500"
+        },
+        "18": {
+          "Number": "18",
+          "Item": "700 Cash",
+          "Required": "9000"
+        },
+        "19": {
+          "Number": "19",
+          "Item": "200 Cash",
+          "Required": "9500"
+        },
+        "20": {
+          "Number": "20",
+          "Item": "Snow Helmet",
+          "Required": "10000"
+        },
+        "21": {
+          "Number": "21",
+          "Item": "500 Cash",
+          "Required": "10100"
+        },
+        "22": {
+          "Number": "22",
+          "Item": "300 Cash",
+          "Required": "10200"
+        },
+        "23": {
+          "Number": "23",
+          "Item": "250 Cash",
+          "Required": "10300"
+        },
+        "24": {
+          "Number": "24",
+          "Item": "200 Cash",
+          "Required": "10400"
+        },
+        "25": {
+          "Number": "25",
+          "Item": "750 Cash",
+          "Required": "10500"
+        },
+        "26": {
+          "Number": "26",
+          "Item": "150 Cash",
+          "Required": "10600"
+        },
+        "27": {
+          "Number": "27",
+          "Item": "500 Cash",
+          "Required": "10700"
+        },
+        "28": {
+          "Number": "28",
+          "Item": "20 RP",
+          "Required": "10800"
+        },
+        "29": {
+          "Number": "29",
+          "Item": "10 RP",
+          "Required": "10900"
+        },
+        "30": {
+          "Number": "30",
+          "Item": "2016 Ford Focus RS WE",
+          "Required": "11000"
+        },
+        "31": {
+          "Number": "31",
+          "Item": "10 RP",
+          "Required": "12000"
+        },
+        "32": {
+          "Number": "32",
+          "Item": "1000 Cash",
+          "Required": "13000"
+        },
+        "33": {
+          "Number": "33",
+          "Item": "20 RP",
+          "Required": "14000"
+        },
+        "34": {
+          "Number": "34",
+          "Item": "250 Cash",
+          "Required": "15000"
+        },
+        "35": {
+          "Number": "35",
+          "Item": "500 Cash",
+          "Required": "15500"
+        },
+        "36": {
+          "Number": "36",
+          "Item": "750 Cash",
+          "Required": "15600"
+        },
+        "37": {
+          "Number": "37",
+          "Item": "100 Cash",
+          "Required": "15700"
+        },
+        "38": {
+          "Number": "38",
+          "Item": "500 Cash",
+          "Required": "15800"
+        },
+        "39": {
+          "Number": "39",
+          "Item": "200 Cash",
+          "Required": "15900"
+        },
+        "40": {
+          "Number": "40",
+          "Item": "40 RP",
+          "Required": "16000"
+        },
+        "41": {
+          "Number": "41",
+          "Item": "22 RP",
+          "Required": "16500"
+        },
+        "42": {
+          "Number": "42",
+          "Item": "Earth Helmet",
+          "Required": "17000"
+        },
+        "43": {
+          "Number": "43",
+          "Item": "1000 Cash",
+          "Required": "17500"
+        },
+        "44": {
+          "Number": "44",
+          "Item": "250 Cash",
+          "Required": "18000"
+        },
+        "45": {
+          "Number": "45",
+          "Item": "50 RP",
+          "Required": "18500"
+        },
+        "46": {
+          "Number": "46",
+          "Item": "T4Exhaust Part",
+          "Required": "19000"
+        },
+        "47": {
+          "Number": "47",
+          "Item": "500 Cash",
+          "Required": "19500"
+        },
+        "48": {
+          "Number": "48",
+          "Item": "2018 Dodge Challenger Demon",
+          "Required": "20000"
+        },
+        "49": {
+          "Number": "49",
+          "Item": "5000 Cash",
+          "Required": "25000"
+        },
+        "50": {
+          "Number": "50",
+          "Item": "Winter Badge",
+          "Required": "30000"
         }
+      }
+    },
+    "Spring": {
+      "Rewards": {
+        "1": {
+          "Number": "1",
+          "Item": "150 Cash",
+          "Required": "250"
+        },
+        "2": {
+          "Number": "2",
+          "Item": "150 Cash",
+          "Required": "500"
+        },
+        "3": {
+          "Number": "3",
+          "Item": "200 Cash",
+          "Required": "1000"
+        },
+        "4": {
+          "Number": "4",
+          "Item": "250 Cash",
+          "Required": "2000"
+        },
+        "5": {
+          "Number": "5",
+          "Item": "300 Cash",
+          "Required": "2500"
+        },
+        "6": {
+          "Number": "6",
+          "Item": "350 Cash",
+          "Required": "3000"
+        },
+        "7": {
+          "Number": "7",
+          "Item": "400 Cash",
+          "Required": "3500"
+        },
+        "8": {
+          "Number": "8",
+          "Item": "450 Cash",
+          "Required": "4000"
+        },
+        "9": {
+          "Number": "9",
+          "Item": "500 Cash",
+          "Required": "4500"
+        },
+        "10": {
+          "Number": "10",
+          "Item": "1 Garage Space",
+          "Required": "5000"
+        },
+        "11": {
+          "Number": "11",
+          "Item": "1984 Audi Quattro",
+          "Required": "5500"
+        },
+        "12": {
+          "Number": "12",
+          "Item": "500 Cash",
+          "Required": "6000"
+        },
+        "13": {
+          "Number": "13",
+          "Item": "500 Cash",
+          "Required": "6500"
+        },
+        "14": {
+          "Number": "14",
+          "Item": "DayNNight Helmet",
+          "Required": "7000"
+        },
+        "15": {
+          "Number": "15",
+          "Item": "300 Cash",
+          "Required": "7500"
+        },
+        "16": {
+          "Number": "16",
+          "Item": "200 Cash",
+          "Required": "8000"
+        },
+        "17": {
+          "Number": "17",
+          "Item": "20 RP",
+          "Required": "8500"
+        },
+        "18": {
+          "Number": "18",
+          "Item": "250 Cash",
+          "Required": "9000"
+        },
+        "19": {
+          "Number": "19",
+          "Item": "200 Cash",
+          "Required": "9500"
+        },
+        "20": {
+          "Number": "20",
+          "Item": "1 Barn Map",
+          "Required": "10000"
+        },
+        "21": {
+          "Number": "21",
+          "Item": "500 Cash",
+          "Required": "10100"
+        },
+        "22": {
+          "Number": "22",
+          "Item": "300 Cash",
+          "Required": "10200"
+        },
+        "23": {
+          "Number": "23",
+          "Item": "T3RallyTires Part",
+          "Required": "10300"
+        },
+        "24": {
+          "Number": "24",
+          "Item": "200 Cash",
+          "Required": "10400"
+        },
+        "25": {
+          "Number": "25",
+          "Item": "1 Garage Space",
+          "Required": "10500"
+        },
+        "26": {
+          "Number": "26",
+          "Item": "150 Cash",
+          "Required": "10600"
+        },
+        "27": {
+          "Number": "27",
+          "Item": "T4Intake Part",
+          "Required": "10700"
+        },
+        "28": {
+          "Number": "28",
+          "Item": "20 RP",
+          "Required": "10800"
+        },
+        "29": {
+          "Number": "29",
+          "Item": "10 RP",
+          "Required": "10900"
+        },
+        "30": {
+          "Number": "30",
+          "Item": "T3OffRoadSuspension Part",
+          "Required": "11000"
+        },
+        "31": {
+          "Number": "31",
+          "Item": "10 RP",
+          "Required": "12000"
+        },
+        "32": {
+          "Number": "32",
+          "Item": "1000 Cash",
+          "Required": "13000"
+        },
+        "33": {
+          "Number": "33",
+          "Item": "200 Cash",
+          "Required": "14000"
+        },
+        "34": {
+          "Number": "34",
+          "Item": "250 Cash",
+          "Required": "15000"
+        },
+        "35": {
+          "Number": "35",
+          "Item": "500 Cash",
+          "Required": "15500"
+        },
+        "36": {
+          "Number": "36",
+          "Item": "1 Garage Space",
+          "Required": "15600"
+        },
+        "37": {
+          "Number": "37",
+          "Item": "1978 Porsche 911 SC",
+          "Required": "15700"
+        },
+        "38": {
+          "Number": "38",
+          "Item": "Star Helmet",
+          "Required": "15800"
+        },
+        "39": {
+          "Number": "39",
+          "Item": "500 Cash",
+          "Required": "15900"
+        },
+        "40": {
+          "Number": "40",
+          "Item": "25 Common Keys",
+          "Required": "16000"
+        },
+        "41": {
+          "Number": "41",
+          "Item": "250 Cash",
+          "Required": "16500"
+        },
+        "42": {
+          "Number": "42",
+          "Item": "500 Cash",
+          "Required": "17000"
+        },
+        "43": {
+          "Number": "43",
+          "Item": "1 Barn Map",
+          "Required": "17500"
+        },
+        "44": {
+          "Number": "44",
+          "Item": "Gaming Helmet",
+          "Required": "18000"
+        },
+        "45": {
+          "Number": "45",
+          "Item": "50 RP",
+          "Required": "18500"
+        },
+        "46": {
+          "Number": "46",
+          "Item": "2 Barn Maps",
+          "Required": "19000"
+        },
+        "47": {
+          "Number": "47",
+          "Item": "2000 Cash",
+          "Required": "19500"
+        },
+        "48": {
+          "Number": "48",
+          "Item": "10 Rare Keys",
+          "Required": "20000"
+        },
+        "49": {
+          "Number": "49",
+          "Item": "2 Exotic Keys",
+          "Required": "25000"
+        },
+        "50": {
+          "Number": "50",
+          "Item": "Spring Badge",
+          "Required": "30000"
+        }
+      }
+    },
+    "Summer": {
+      "Rewards": {
+        "1": {
+          "Number": "1",
+          "Item": "2000 Cash",
+          "Required": "250"
+        },
+        "2": {
+          "Number": "2",
+          "Item": "1500 Cash",
+          "Required": "500"
+        },
+        "3": {
+          "Number": "3",
+          "Item": "2000 Cash",
+          "Required": "1000"
+        },
+        "4": {
+          "Number": "4",
+          "Item": "2500 Cash",
+          "Required": "2000"
+        },
+        "5": {
+          "Number": "5",
+          "Item": "3000 Cash",
+          "Required": "2500"
+        },
+        "6": {
+          "Number": "6",
+          "Item": "3500 Cash",
+          "Required": "3000"
+        },
+        "7": {
+          "Number": "7",
+          "Item": "2 Rare Keys",
+          "Required": "3500"
+        },
+        "8": {
+          "Number": "8",
+          "Item": "1 Garage Space",
+          "Required": "4000"
+        },
+        "9": {
+          "Number": "9",
+          "Item": "Japan Helmet",
+          "Required": "4500"
+        },
+        "10": {
+          "Number": "10",
+          "Item": "1 Garage Space",
+          "Required": "5000"
+        },
+        "11": {
+          "Number": "11",
+          "Item": "5 Drift Keys",
+          "Required": "5500"
+        },
+        "12": {
+          "Number": "12",
+          "Item": "5000 Cash",
+          "Required": "6000"
+        },
+        "13": {
+          "Number": "13",
+          "Item": "5000 Cash",
+          "Required": "6500"
+        },
+        "14": {
+          "Number": "14",
+          "Item": "T4DriftTires Part",
+          "Required": "7000"
+        },
+        "15": {
+          "Number": "15",
+          "Item": "5000 Cash",
+          "Required": "7500"
+        },
+        "16": {
+          "Number": "16",
+          "Item": "2000 Cash",
+          "Required": "8000"
+        },
+        "17": {
+          "Number": "17",
+          "Item": "Underwater Helmet",
+          "Required": "8500"
+        },
+        "18": {
+          "Number": "18",
+          "Item": "2500 Cash",
+          "Required": "9000"
+        },
+        "19": {
+          "Number": "19",
+          "Item": "Silvia Helmet",
+          "Required": "9500"
+        },
+        "20": {
+          "Number": "20",
+          "Item": "2 Barn Maps",
+          "Required": "10000"
+        },
+        "21": {
+          "Number": "21",
+          "Item": "Lemon Helmet",
+          "Required": "10100"
+        },
+        "22": {
+          "Number": "22",
+          "Item": "3000 Cash",
+          "Required": "10200"
+        },
+        "23": {
+          "Number": "23",
+          "Item": "T3DriftSuspension Part",
+          "Required": "10300"
+        },
+        "24": {
+          "Number": "24",
+          "Item": "2000 Cash",
+          "Required": "10400"
+        },
+        "25": {
+          "Number": "25",
+          "Item": "1 Garage Space",
+          "Required": "10500"
+        },
+        "26": {
+          "Number": "26",
+          "Item": "5 Drift Keys",
+          "Required": "10600"
+        },
+        "27": {
+          "Number": "27",
+          "Item": "T4DriftSuspension Part",
+          "Required": "10700"
+        },
+        "28": {
+          "Number": "28",
+          "Item": "200 RP",
+          "Required": "10800"
+        },
+        "29": {
+          "Number": "29",
+          "Item": "5 Drift Keys",
+          "Required": "10900"
+        },
+        "30": {
+          "Number": "30",
+          "Item": "T4DriftTires Part",
+          "Required": "11000"
+        },
+        "31": {
+          "Number": "31",
+          "Item": "Watermelon Helmet",
+          "Required": "12000"
+        },
+        "32": {
+          "Number": "32",
+          "Item": "RX7 Helmet",
+          "Required": "13000"
+        },
+        "33": {
+          "Number": "33",
+          "Item": "2000 Cash",
+          "Required": "14000"
+        },
+        "34": {
+          "Number": "34",
+          "Item": "5 Drift Keys",
+          "Required": "15000"
+        },
+        "35": {
+          "Number": "35",
+          "Item": "Flamingo Helmet",
+          "Required": "15500"
+        },
+        "36": {
+          "Number": "36",
+          "Item": "1 Garage Space",
+          "Required": "15600"
+        },
+        "37": {
+          "Number": "37",
+          "Item": "5 Drift Keys",
+          "Required": "15700"
+        },
+        "38": {
+          "Number": "38",
+          "Item": "Drift Helmet",
+          "Required": "15800"
+        },
+        "39": {
+          "Number": "39",
+          "Item": "5000 Cash",
+          "Required": "15900"
+        },
+        "40": {
+          "Number": "40",
+          "Item": "25 Common Keys",
+          "Required": "16000"
+        },
+        "41": {
+          "Number": "41",
+          "Item": "2500 Cash",
+          "Required": "16500"
+        },
+        "42": {
+          "Number": "42",
+          "Item": "10 Drift Keys",
+          "Required": "17000"
+        },
+        "43": {
+          "Number": "43",
+          "Item": "2 Barn Maps",
+          "Required": "17500"
+        },
+        "44": {
+          "Number": "44",
+          "Item": "Cocktail Helmet",
+          "Required": "18000"
+        },
+        "45": {
+          "Number": "45",
+          "Item": "10 Drift Keys",
+          "Required": "18500"
+        },
+        "46": {
+          "Number": "46",
+          "Item": "2 Barn Maps",
+          "Required": "19000"
+        },
+        "47": {
+          "Number": "47",
+          "Item": "20000 Cash",
+          "Required": "19500"
+        },
+        "48": {
+          "Number": "48",
+          "Item": "10 Rare Keys",
+          "Required": "20000"
+        },
+        "49": {
+          "Number": "49",
+          "Item": "2 Exotic Keys",
+          "Required": "25000"
+        },
+        "50": {
+          "Number": "50",
+          "Item": "Summer Badge",
+          "Required": "30000"
+        }
+      }
+    },
+    "Crew1": {
+      "Rewards": {
+        "1": {
+          "Number": "1",
+          "Item": "2000 Cash"
+        },
+        "2": {
+          "Number": "2",
+          "Item": "5 Rare Keys"
+        },
+        "3": {
+          "Number": "3",
+          "Item": "25 Common Keys"
+        },
+        "4": {
+          "Number": "4",
+          "Item": "1 Super wheelspin"
+        },
+        "5": {
+          "Number": "5",
+          "Item": "2 Exotic Keys"
+        },
+        "6": {
+          "Number": "6",
+          "Item": "T4DriftTires Part"
+        },
+        "7": {
+          "Number": "7",
+          "Item": "DualTurbo Part"
+        },
+        "8": {
+          "Number": "8",
+          "Item": "5000 Cash"
+        },
+        "9": {
+          "Number": "9",
+          "Item": "3000 Cash"
+        },
+        "10": {
+          "Number": "10",
+          "Item": "500 Notoriety"
+        },
+        "11": {
+          "Number": "11",
+          "Item": "500 Notoriety"
+        },
+        "12": {
+          "Number": "12",
+          "Item": "1 Bank Increase"
+        },
+        "13": {
+          "Number": "13",
+          "Item": "5000 Cash"
+        },
+        "14": {
+          "Number": "14",
+          "Item": "5000 Cash"
+        },
+        "15": {
+          "Number": "15",
+          "Item": "5000 Cash"
+        },
+        "16": {
+          "Number": "16",
+          "Item": "3500 Cash"
+        },
+        "17": {
+          "Number": "17",
+          "Item": "1 Super wheelspin"
+        },
+        "18": {
+          "Number": "18",
+          "Item": "5000 Cash"
+        },
+        "19": {
+          "Number": "19",
+          "Item": "25 Common Keys"
+        },
+        "20": {
+          "Number": "20",
+          "Item": "5 Rare Keys"
+        },
+        "21": {
+          "Number": "21",
+          "Item": "2 Exotic Keys"
+        },
+        "22": {
+          "Number": "22",
+          "Item": "1 Legendary Barn Map"
+        },
+        "23": {
+          "Number": "23",
+          "Item": "2500 Cash"
+        },
+        "24": {
+          "Number": "24",
+          "Item": "5 Drift Keys"
+        },
+        "100": {
+          "Number": "100",
+          "Item": "2022 Ferrari Roma",
+          "Car": true
+        }
+      }
     }
+  }
 }

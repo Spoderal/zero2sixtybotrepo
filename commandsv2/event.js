@@ -7,7 +7,7 @@ const {
 } = require("discord.js");
 const db = require("quick.db");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const lodash = require('lodash')
+const lodash = require("lodash");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("events")
@@ -23,16 +23,16 @@ module.exports = {
             description: "Information for the Spring Season Event",
             value: "spring_event",
             customId: "spring",
-            emoji:'☀️'
+            emoji: "☀️",
           },
-          
+
           {
             label: "Ferrari Championship",
             description: "Information for the Ferrari Championship Event",
             value: "ferrari",
             customId: "ferrarievent",
-            emoji:'<:ferrari:931011838374727730>'
-          }
+            emoji: "<:ferrari:931011838374727730>",
+          },
         ])
     );
 
@@ -47,25 +47,24 @@ module.exports = {
         
       `);
 
-      embed.setColor("#60b0f4")            
+    embed.setColor("#60b0f4");
 
-    interaction.reply({ embeds: [embed], components: [row2] })
-      .then((msg) => {
-        const filter = (interaction2) =>
+    interaction.reply({ embeds: [embed], components: [row2] }).then((msg) => {
+      const filter = (interaction2) =>
         interaction2.isSelectMenu() &&
         interaction2.user.id === interaction.user.id;
 
-        const collector = interaction.channel.createMessageComponentCollector({
-          filter,
-          time: 1000 * 15,
-        });
+      const collector = interaction.channel.createMessageComponentCollector({
+        filter,
+        time: 1000 * 15,
+      });
 
-        collector.on("collect", async (collected) => {
-          const value = collected.values[0];
-          if (value === "spring_event") {
-            embed.setTitle("Summer Season");
-            embed.setFooter('Prefix is "/"');
-            embed.setDescription(`Its time to drift! Get your best set of tires, your favorite car to drift in, and start drifting around different types of tracks!
+      collector.on("collect", async (collected) => {
+        const value = collected.values[0];
+        if (value === "spring_event") {
+          embed.setTitle("Summer Season");
+          embed.setFooter('Prefix is "/"');
+          embed.setDescription(`Its time to drift! Get your best set of tires, your favorite car to drift in, and start drifting around different types of tracks!
 
             There are many different rewards to claim this season, get more garage space, some cool helmets, keys, cash, and more!
 
@@ -81,19 +80,15 @@ module.exports = {
     
             **Ends August 31st 2022**
                   `);
-            embed.setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif");
-            embed.setImage(
-              "https://i.ibb.co/XYrY5d6/seasonsummer.png"
-            );
-            embed.setColor("#60b0f4")            
+          embed.setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif");
+          embed.setImage("https://i.ibb.co/XYrY5d6/seasonsummer.png");
+          embed.setColor("#60b0f4");
 
- await interaction.editReply({ embeds: [embed], components: [row2] });
-          } 
-          
-          else   if (value === "ferrari") {
-            embed.setTitle("Ferrari Championship");
-            embed.setFooter('Prefix is "/"');
-            embed.setDescription(`Race with your favorite Ferrari in bot races to stack up on Ferrari keys!\n
+          await interaction.editReply({ embeds: [embed], components: [row2] });
+        } else if (value === "ferrari") {
+          embed.setTitle("Ferrari Championship");
+          embed.setFooter('Prefix is "/"');
+          embed.setDescription(`Race with your favorite Ferrari in bot races to stack up on Ferrari keys!\n
 
             Only Ferraris are allowed in this event!
 
@@ -101,16 +96,15 @@ module.exports = {
 
             Event Ends **7/31/2022**
                   `);
-            embed.setThumbnail('https://upload.wikimedia.org/wikipedia/commons/c/cb/F40_Ferrari_20090509.jpg');
-            embed.setImage();
-            embed.setColor("#60b0f4")            
+          embed.setThumbnail(
+            "https://upload.wikimedia.org/wikipedia/commons/c/cb/F40_Ferrari_20090509.jpg"
+          );
+          embed.setImage();
+          embed.setColor("#60b0f4");
 
- await interaction.editReply({ embeds: [embed], components: [row2] });
-          } 
-    
-        
-         
-        });
+          await interaction.editReply({ embeds: [embed], components: [row2] });
+        }
       });
+    });
   },
 };
