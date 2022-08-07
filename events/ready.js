@@ -10,6 +10,13 @@ const items = require("../item");
 const double = require("../doublecash");
 const db = require("quick.db");
 const mongoose = require("mongoose");
+const path = require("path");
+const fs = require("fs");
+
+let mongoCertPath = path.resolve("./ca-certificate.crt");
+if (process.env.CA_CERT) {
+  fs.writeFileSync(mongoCertPath, process.env.CA_CERT);
+}
 
 module.exports = {
   name: "ready",
@@ -17,8 +24,7 @@ module.exports = {
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, {
       keepAlive: true,
-      sslCA: process.env.CA_CERT,
-      ssl: true,
+      sslCA: mongoCertPath,
     });
 
     badges(client);
