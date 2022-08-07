@@ -17,7 +17,8 @@ module.exports = {
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, {
       keepAlive: true,
-      cert: process.env.CA_CERT,
+      sslCA: process.env.CA_CERT,
+      ssl: true,
     });
 
     badges(client);
