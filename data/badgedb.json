@@ -1,0 +1,96 @@
+{
+  "100wins": {
+    "Image": "https://i.ibb.co/h7PLPHz/Logo-Makr-5vz6-Ik.png",
+    "Name": "Race King",
+    "Emote": "<:badge_racem:933642381604036609>"
+  },
+  "1mcash": {
+    "Image": "https://i.ibb.co/zmBWhMs/Logo-Makr-0-N89u6.png",
+    "Name": "Filthy Rich",
+    "Emote": "<:badge_mil:933642381239144469>"
+  },
+  "10cars": {
+    "Image": "https://i.ibb.co/k3cbGG1/Logo-Makr-0r-Y8-JW.png",
+    "Name": "Car Collector",
+    "Emote": "<:badge_carcc:933642381704691752>"
+  },
+  "driftking": {
+    "Image": "https://i.ibb.co/mbVqKLF/Logo-Makr-8i9p-Mj.png",
+    "Name": "Drift King",
+    "Emote": "<:badge_dking:933642381553713152>"
+  },
+  "how?": {
+    "Image": "https://i.ibb.co/8sMzCX8/Logo-Makr-1-Ud-TVm.png",
+    "Name": "How?",
+    "Emote": "<:badge_how:933642378575757352>"
+  },
+  "timemaster": {
+    "Image": "https://i.ibb.co/pjZtCsB/timerbadge.png",
+    "Name": "Time Master",
+    "Emote": "<:badge_tm:933642381599866890>"
+  },
+  "carrich": {
+    "Image": "https://i.ibb.co/YfBdYfK/carrich.png",
+    "Name": "Car Rich",
+    "Emote": "<:carrich:953886473189486593>"
+  },
+  "2ez": {
+    "Image": "https://i.ibb.co/f9KSKQv/2ez.png",
+    "Name": "2EZ",
+    "Emote": "<:2ez:947252313251274832>"
+  },
+  "secret": {
+    "Image": "https://i.ibb.co/VDZWbdt/Logo-Makr-3-Oqko-L.png",
+    "Name": "Secret",
+    "Emote": "<:badge_sec:933642379901153330>"
+  },
+  "earth badge": {
+    "Image": "https://i.ibb.co/0CZXb6C/earthseason.png",
+    "Name": "Earth Lover",
+    "Emote": "<:earthbadge:937639245441556561>"
+  },
+  "winter badge": {
+    "Image": "https://i.ibb.co/VDZWbdt/Logo-Makr-3-Oqko-L.png",
+    "Name": "Winter Season",
+    "Emote": "<:winterseason:932890300744089650>"
+  },
+  "world cup": {
+    "Image": "https://i.ibb.co/KjJMvrD/badge-trophy.png",
+    "Name": "World Cup 2022",
+    "Emote": "<:badge_trophy:972599533651509258>"
+  },
+  "world cup 2": {
+    "Image": "https://i.ibb.co/zHMKHzQ/worldcup2nd.png",
+    "Name": "World Cup 2022 2nd",
+    "Emote": "<:worldcup2nd:972601860693315595>"
+  },
+  "none": {
+    "Image": "https://i.ibb.co/VDZWbdt/Logo-Makr-3-Oqko-L.png",
+    "Name": "None",
+    "Emote": ""
+  },
+  "Flamehouse": {
+    "Image": "https://i.ibb.co/b7K8wSz/Logo-Makr-9-JME7x.png"
+  },
+  "Skullcrunchers": {
+    "Image": "https://i.ibb.co/cYBsC2q/Logo-Makr-6-Bm-Nwt.png"
+  },
+  "Thespeed": {
+    "Image": "https://i.ibb.co/TMdGfNk/Logo-Makr-8-HQc-AO.png"
+  },
+  "Scrapheads": {
+    "Image": "https://i.ibb.co/MnzTmx8/Logo-Makr-33.png"
+  },
+  "Snow": {
+    "Image": "https://i.ibb.co/KhQmCPN/Logo-Makr-2-BYthb.png"
+  },
+  "Tuner": {
+    "Image": "https://i.ibb.co/GvR7MTk/badgetuner.png"
+  },
+  "BikerGang": {
+    "Image": "https://i.ibb.co/BZTf2WJ/bikergangwin.png"
+  },
+  "ZeroRacers": {
+    "Image": "https://i.ibb.co/hDpN9x4/badgezero.png"
+  }
+}

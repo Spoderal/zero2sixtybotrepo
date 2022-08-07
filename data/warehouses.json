@@ -1,0 +1,14 @@
+{
+  "t1warehouse": {
+    "Space": 5,
+    "Price": 500000,
+    "Name": "T1Warehouse",
+    "Emote": "<:Warehouse1:985014760884019202>"
+  },
+  "t2warehouse": {
+    "Space": 10,
+    "Price": 1000000,
+    "Name": "T2Warehouse",
+    "Emote": "<:Warehouse2:985080791245676624>"
+  }
+}

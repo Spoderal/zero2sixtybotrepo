@@ -1,47 +1,42 @@
-const cars = require("../cardb.json");
 const Discord = require("discord.js");
-const db = require("quick.db")
-const moment = require("moment")
-const Canvas = require("canvas")
-const profilepics = require("../pfpsdb.json")
-const badgedb = require("../badgedb.json")
-const ms = require('pretty-ms')
-const {SlashCommandBuilder} = require('@discordjs/builders')
-const prestiges = require("../prestige.json")
-const User = require('../schema/profile-schema')
-const Cooldowns = require('../schema/cooldowns')
-const partdb = require('../partsdb.json')
-const Global = require('../schema/global-schema')
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const prestiges = require("../data/prestige.json");
+const User = require("../schema/profile-schema");
+
 module.exports = {
-  
-    data: new SlashCommandBuilder()
-    .setName('rank')
+  data: new SlashCommandBuilder()
+    .setName("rank")
     .setDescription("See your ranks"),
-    async execute(interaction) {
+  async execute(interaction) {
+    let user = interaction.user;
 
-      let user = interaction.user
+    let userdata = await User.findOne({ id: user.id });
+    let prestigerank = userdata.prestige;
+    let driftrank = userdata.driftrank;
+    let newprestige2 = (prestigerank += 1);
 
-      let userdata = await User.findOne({id: user.id})
-      let prestigerank = userdata.prestige
-      let driftrank = userdata.driftrank
-      let newprestige2 = prestigerank += 1
+    let racerank = userdata.racerank;
+    if (newprestige2 >= 12) {
+      newprestige2 = "Max";
+    }
+    let patron =
+      userdata.patron.required || prestiges[newprestige2].DriftRequired;
+    let patron2 =
+      userdata.patron.required || prestiges[newprestige2].RaceRequired;
 
-      let racerank = userdata.racerank
-      if(newprestige2 >= 12){
-        newprestige2 = "Max"
-      }
-      let patron = userdata.patron.required || prestiges[newprestige2].DriftRequired
-      let patron2 = userdata.patron.required || prestiges[newprestige2].RaceRequired
-
-      let embed = new Discord.MessageEmbed()
+    let embed = new Discord.MessageEmbed()
       .setTitle(`${user.username}'s ranks`)
-      .setDescription(`
+      .setDescription(
+        `
       Race Rank: ${racerank}/${patron}\n
       Drift Rank: ${driftrank}/${patron2}\n
       **Prestige**: ${prestigerank}
       
-      `)
-      .addField("Prestige Ranks", `*Prestige resets your cash balance and RP*
+      `
+      )
+      .addField(
+        "Prestige Ranks",
+        `*Prestige resets your cash balance and RP*
       \nPrestige 1: 0.1x cash earnings
       \nPrestige 2: 0.2x cash earnings
       \nPrestige 3: 0.3x cash earnings
@@ -55,16 +50,11 @@ module.exports = {
       \nPrestige 11: 1.1x cash earnings
 
       
-      `)
+      `
+      )
 
-      .setColor("#60b0f4")
-      
-      
-      interaction.reply({embeds: [embed]})
-        
-      
-      
+      .setColor("#60b0f4");
 
-    }  
-  
-};      
+    interaction.reply({ embeds: [embed] });
+  },
+};

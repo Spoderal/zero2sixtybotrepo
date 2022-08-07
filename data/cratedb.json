@@ -1,0 +1,33 @@
+{
+  "Crates": {
+    "common": {
+      "Contents": [
+        "green helmet",
+        "red helmet",
+        "blue helmet",
+        "yellow helmet"
+      ],
+      "Price": "450"
+    },
+    "rare": {
+      "Contents": [
+        "flame helmet",
+        "purple helmet",
+        "rainbow helmet",
+        "turqoise helmet"
+      ],
+      "Price": "750"
+    },
+    "seasonal": {
+      "Contents": [
+        "stig helmet",
+        "beach helmet",
+        "sunrise helmet",
+        "discord helmet",
+        "grass helmet",
+        "dark mode helmet"
+      ],
+      "Price": "800"
+    }
+  }
+}

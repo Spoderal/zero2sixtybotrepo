@@ -1,0 +1,83 @@
+{
+  "common": {
+    "Contents": [
+      "2000 honda civic type r",
+      "1984 porsche 944",
+      "1994 honda prelude",
+      "1994 toyota celica gt4",
+      "2000 lexus sc400",
+      "sil-eighty",
+      "1989 toyota celica"
+    ]
+  },
+  "rare": {
+    "Contents": [
+      "2020 toyota gr yaris",
+      "1993 nissan silvia s14",
+      "2022 audi rs3 sportback",
+      "2022 bmw m8",
+      "1989 mazda rx7 fc",
+      "2019 porsche 911 speedster",
+      "2002 nissan silvia s15",
+      "2020 polestar one",
+      "2013 mitsubishi evo x",
+      "2014 ford mustang gt500",
+      "2012 mazda rx8"
+    ]
+  },
+  "exotic": {
+    "Contents": [
+      "2005 porsche carrera gt",
+      "1995 ferrari f50",
+      "1995 mclaren f1",
+      "2001 lamborghini diablo",
+      "2007 aston martin dbs",
+      "2021 mercedes amg gt63",
+      "2004 mercedes-mclaren slr",
+      "1990 ferrari testarossa",
+      "1965 shelby cobra 427",
+      "2005 ford gt",
+      "2021 porsche 911 targa",
+      "2022 lamborghini countach",
+      "2022 shelby super snake",
+      "2020 mclaren senna",
+      "2021 lamborghini huracan sto",
+      "2021 lamborghini urus"
+    ]
+  },
+  "drift": {
+    "Contents": [
+      "drift 2008 nissan 350z",
+      "drift 2002 mazda rx7 fd",
+      "drift 1993 nissan silvia s14",
+      "drift 2002 nissan silvia s15",
+      "drift 1999 mitsubishi eclipse",
+      "drift 1998 bmw m3 e36",
+      "drift 2000 lexus sc400",
+      "drift 1995 mazda miata"
+    ]
+  },
+  "z crate": {
+    "common": ["2005 mazda rx8", "2001 toyota supra mk4"],
+    "uncommon": ["2008 mazda miata", "2001 toyota supra mk4"],
+    "rare": [
+      "stat track 2005 mazda rx8",
+      "stat track 2008 mazda miata",
+      "stat track 2001 toyota supra mk4"
+    ],
+    "legendary": [
+      "stat track 1997 porsche 911 gt1",
+      "stat track 2019 bugatti la voiture noire"
+    ]
+  },
+  "ferrari": {
+    "Contents": [
+      "1987 ferrari f40",
+      "1990 ferrari testarossa",
+      "1995 ferrari f50",
+      "1998 ferrari f355",
+      "2013 ferrari laferrari",
+      "2005 ferrari f430"
+    ]
+  }
+}

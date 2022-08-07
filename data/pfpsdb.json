@@ -1,0 +1,264 @@
+{
+  "Pfps": {
+    "default": {
+      "Image": "https://i.ibb.co/vjFfBwj/newdefault.png",
+      "Emote": "<:default_helmet:985041491133095966>"
+    },
+    "red helmet": {
+      "Name": "Red Helmet",
+      "Image": "https://i.ibb.co/Qr2DsCQ/redhelmet.png",
+      "Emote": "<:helmet_red:965083877515329586>"
+    },
+    "green helmet": {
+      "Name": "Green Helmet",
+      "Image": "https://i.ibb.co/xfH4n3q/helmet-green.png",
+      "Emote": "<:helmet_green:965083188470894612>"
+    },
+    "yellow helmet": {
+      "Name": "Yellow Helmet",
+      "Image": "https://i.ibb.co/hHyG8nz/helmet-yellow.png",
+      "Emote": "<:helmet_yellow:966921705106833419>"
+    },
+    "blue helmet": {
+      "Name": "Blue Helmet",
+      "Image": "https://i.ibb.co/9ZGBW9t/helmet-blue.png",
+      "Emote": "<:helmet_blue:965083188894511165>"
+    },
+    "flame helmet": {
+      "Name": "Flame Helmet",
+      "Image": "https://i.ibb.co/VDBnwGF/helmet-flame.png",
+      "Emote": "<:helmet_flame:965083189196492851>"
+    },
+    "rainbow helmet": {
+      "Name": "Rainbow Helmet",
+      "Image": "https://i.ibb.co/RbJVmZd/helmet-rainbow.png",
+      "Emote": "<:helmet_rainbow:965083188974194728>"
+    },
+    "purple helmet": {
+      "Name": "Purple Helmet",
+      "Image": "https://i.ibb.co/xCdgg8C/helmet-purple.png",
+      "Emote": "<:helmet_purple:965083188596703272>"
+    },
+    "rust helmet": {
+      "Name": "Rust Helmet",
+      "Image": "https://i.ibb.co/VC274y7/helmet-rust.png",
+      "Emote": "<:helmet_rust:965083189297180726>"
+    },
+    "pinky helmet": {
+      "Name": "Pinky Helmet",
+      "Image": "https://i.ibb.co/R27RJ6W/helmet-pink.png",
+      "Emote": "<:helmet_pink:965083188600897536>"
+    },
+    "turqoise helmet": {
+      "Name": "Turqoise Helmet",
+      "Image": "https://i.ibb.co/tK1F2Sv/helmet-turqoise.png",
+      "Emote": "<:helmet_turqoise:965083188915478628>"
+    },
+    "no helmet": {
+      "Name": "No Helmet",
+      "Image": "https://i.ibb.co/FmpRTSg/helmet-no.png",
+      "Emote": "<:helmet_no:965083188806447104>"
+    },
+    "blank": {
+      "Name": "Blank",
+      "Image": "https://i.ibb.co/THpDgdX/blank.png",
+      "Emote": "<:helmet_blank:965087529852370964>"
+    },
+    "reverse blank": {
+      "Name": "Reverse Blank",
+      "Image": "https://i.ibb.co/V3ZH5xy/reverse-blank.png",
+      "Emote": "<:helmet_reverse:965087529831395418>"
+    },
+    "flower power": {
+      "Name": "Flower Power",
+      "Image": "https://i.ibb.co/PhwTVHd/Flower-Power.png",
+      "Emote": "<:helmet_flowers:965086962555953222>"
+    },
+    "tangerine": {
+      "Name": "Tangerine",
+      "Image": "https://i.ibb.co/V9fk8Xm/Tangerine.png",
+      "Emote": "<:helmet_tangerine:965086962853769266>"
+    },
+    "cash money": {
+      "Name": "Cash Money",
+      "Image": "https://i.ibb.co/Qfz3WXG/cashmoney.png",
+      "Emote": "<:helmet_money:965086963260616754>"
+    },
+    "feelshelmetman": {
+      "Name": "FeelsHelmetMan",
+      "Image": "https://i.ibb.co/4F139yt/pepehelm.png",
+      "Emote": "<:helmet_feels:965086963394805770>"
+    },
+    "mlg helmet": {
+      "Name": "MLG Helmet",
+      "Image": "https://i.ibb.co/2Y1BS1Y/mlghelm.png",
+      "Emote": "<:helmet_mlg:965086963126399047>"
+    },
+    "troll helmet": {
+      "Name": "Troll Helmet",
+      "Image": "https://i.ibb.co/FJ3kSM3/trollhelm.png",
+      "Emote": "<:helmet_troll:965086963357069312>"
+    },
+    "doge helmet": {
+      "Name": "Doge Helmet",
+      "Image": "https://i.ibb.co/r25Tjbh/dogehelm.png",
+      "Emote": "<:helmet_doge:965086963323535390>"
+    },
+    "cheez-it helmet": {
+      "Name": "Cheez-It Helmet",
+      "Image": "https://i.ibb.co/VMMPVcD/cheezithelm.png",
+      "Emote": "<:helmet_cheezit:965086963336101918>"
+    },
+    "spooky helmet": {
+      "Name": "Spooky Helmet",
+      "Image": "https://i.ibb.co/tBJsZrC/New-Project-25.png",
+      "Emote": "<:helmetspooky:965086962304286840>"
+    },
+
+    "snow helmet": {
+      "Name": "Snow Helmet",
+      "Image": "https://i.ibb.co/YRdbQrG/snowy-helmet.png",
+      "Emote": "<:helmet_snow:965086963256422471>"
+    },
+    "festive helmet": {
+      "Name": "Festive Helmet",
+      "Image": "https://i.ibb.co/XYdF4Wg/festive-helmet.png",
+      "Emote": "<:helmet_festive:965086963218673724>"
+    },
+    "rudolph helmet": {
+      "Name": "Rudolph Helmet",
+      "Image": "https://i.ibb.co/DDBtsHs/rudolph-helmet.png",
+      "Emote": "<:helmet_rudolph:965086962543362129>"
+    },
+    "cracked helmet": {
+      "Name": "Cracked Helmet",
+      "Image": "https://i.ibb.co/pn8SfSD/cracked-helmet.png",
+      "Emote": "<:helmet_cracked:965086962602098700>"
+    },
+    "tree helmet": {
+      "Name": "Tree Helmet",
+      "Image": "https://i.ibb.co/Tq8YmZr/christmas-tree-helmet.png",
+      "Emote": "<:helmet_tree:965086963432579092>"
+    },
+    "gold helmet": {
+      "Name": "Gold Helmet",
+      "Image": "https://i.ibb.co/HT2wTtM/New-Project-78-3.png",
+      "Emote": "<:helmet_gold:965086962702749746>"
+    },
+    "silver helmet": {
+      "Name": "Silver Helmet",
+      "Image": "https://i.ibb.co/LzqVQmb/New-Project-78-4.png",
+      "Emote": "<:helmet_silver:965086962446893056>"
+    },
+    "bronze helmet": {
+      "Name": "Bronze Helmet",
+      "Image": "https://i.ibb.co/ZXX8vWZ/New-Project-78-6.png",
+      "Emote": "<:helmet_bronze:965086962602090536>"
+    },
+    "platinum helmet": {
+      "Name": "Platinum Helmet",
+      "Image": "https://i.ibb.co/7JLdPjR/New-Project-78-8.png",
+      "Emote": "<:helmet_platinum:965086963399012392>"
+    },
+    "cobalt helmet": {
+      "Name": "Cobalt Helmet",
+      "Image": "https://i.ibb.co/2N7rRmh/cobalthelmet.png",
+      "Emote": "<:helmet_cobalt:965086963273187338>"
+    },
+    "earth helmet": {
+      "Name": "Earth Helmet",
+      "Image": "https://i.ibb.co/ryfqwqB/earthhelmet.png",
+      "Emote": "<:helmet_earth:965086963633885264>"
+    },
+    "daynnight helmet": {
+      "Name": "DayNNight Helmet",
+      "Image": "https://i.ibb.co/j5TS3fS/daynhelmet.png",
+      "Emote": "<:daynhelmet:965083355832012921>"
+    },
+    "star helmet": {
+      "Name": "Star Helmet",
+      "Image": "https://i.ibb.co/X5gjwHV/starshelmet.png",
+      "Emote": "<:starshelmet:965083284923121715>"
+    },
+    "gaming helmet": {
+      "Name": "Gaming Helmet",
+      "Image": "https://i.ibb.co/QDzCght/gaminghelmet.png",
+      "Emote": "<:helmet_gaming:965083228299993149>"
+    },
+    "dark mode helmet": {
+      "Name": "Dark Mode Helmet",
+      "Image": "https://i.ibb.co/DWVN31G/helmet-darkmodde.png",
+      "Emote": "<:helmet_darkmodde:965083188512833537>"
+    },
+    "grass helmet": {
+      "Name": "Grass Helmet",
+      "Image": "https://i.ibb.co/6wD5DND/helmet-grass.png",
+      "Emote": "<:helmet_grass:965083188449927228>"
+    },
+    "discord helmet": {
+      "Name": "Discord Helmet",
+      "Image": "https://i.ibb.co/jhXfqd2/helmet-discord.png",
+      "Emote": "<:helmet_discord:965083189045518346>"
+    },
+    "sunrise helmet": {
+      "Name": "Sunrise Helmet",
+      "Image": "https://i.ibb.co/JmJYtZB/helmet-sunrise2.png",
+      "Emote": "<:helmet_sunrise2:965083188793835560>"
+    },
+    "beach helmet": {
+      "Name": "Beach Helmet",
+      "Image": "https://i.ibb.co/sCJFyzq/helmet-beach.png",
+      "Emote": "<:helmet_beach:965083189003550730>"
+    },
+    "stig helmet": {
+      "Name": "Stig Helmet",
+      "Image": "https://i.ibb.co/9ZHFk4y/helmet-stig.png",
+      "Emote": "<:helmet_stig:965083188894519316>"
+    },
+    "underwater helmet": {
+      "Name": "Underwater Helmet",
+      "Image": "https://i.ibb.co/8YYsPbd/helmet-pool.png",
+      "Emote": "<:helmet_pool:970478129548247140>"
+    },
+    "lemon helmet": {
+      "Name": "Lemon Helmet",
+      "Image": "https://i.ibb.co/P133brW/helmet-lemon.png",
+      "Emote": "<:helmet_lemon:970478235177615371> "
+    },
+    "cocktail helmet": {
+      "Name": "Cocktail Helmet",
+      "Image": "https://i.ibb.co/GHctFTy/helmet-cocktail.png",
+      "Emote": "<:helmet_cocktail:970478128667451442>"
+    },
+    "drift helmet": {
+      "Name": "Drift Helmet",
+      "Image": "https://i.ibb.co/cQXp8HP/helmet-drift.png",
+      "Emote": "<:helmet_drift:970478129443377224>"
+    },
+    "flamingo helmet": {
+      "Name": "Flamingo Helmet",
+      "Image": "https://i.ibb.co/yQ9Mp30/helmet-flamingo.png",
+      "Emote": "<:helmet_flamingo:970478234456191037>"
+    },
+    "silvia helmet": {
+      "Name": "Silvia Helmet",
+      "Image": "https://i.ibb.co/D7vyngy/helmet-silvia.png",
+      "Emote": "<:helmet_silvia:970478128617123870>"
+    },
+    "rx7 helmet": {
+      "Name": "RX7 Helmet",
+      "Image": "https://i.ibb.co/jLPHn9G/helmet-rx7.png",
+      "Emote": "<:helmet_rx7:970478128252190730>"
+    },
+    "watermelon helmet": {
+      "Name": "Watermelon Helmet",
+      "Image": "https://i.ibb.co/Bjk4JND/helmet-watermelon.png",
+      "Emote": "<:helmet_watermelon:970478234443599913>"
+    },
+    "japan helmet": {
+      "Name": "Japan Helmet",
+      "Image": "https://i.ibb.co/K0VgWZz/helmet-japan.png",
+      "Emote": "<:helmet_japan:970478128180899840>"
+    }
+  }
+}

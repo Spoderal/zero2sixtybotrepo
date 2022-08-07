@@ -1,0 +1,7 @@
+{
+  "Parts": {
+    "common": ["j1exhaust", "j1tires", "j1intake", "body"],
+    "uncommon": ["j1suspension", "j1clutch", "j1gearbox"],
+    "rare": ["v6"]
+  }
+}

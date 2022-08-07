@@ -1,65 +1,67 @@
-const cars = require("../cardb.json");
+const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
-const parts = require("../partsdb.json");
-const {SlashCommandBuilder} = require('@discordjs/builders')
-const {MessageActionRow, MessageButton} = require("discord.js")
-const User = require('../schema/profile-schema')
-const Cooldowns = require('../schema/cooldowns')
-const partdb = require('../partsdb.json')
-const Global = require('../schema/global-schema')
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const User = require("../schema/profile-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
-  .setName('restore')
-  .setDescription("View the status of the barn find you own and restore it")
-  .addStringOption((option) =>option
-  .setName("car")
-  .setDescription("The car by id you want to view")
-  .setRequired(true))
-  ,
+    .setName("restore")
+    .setDescription("View the status of the barn find you own and restore it")
+    .addStringOption((option) =>
+      option
+        .setName("car")
+        .setDescription("The car by id you want to view")
+        .setRequired(true)
+    ),
   async execute(interaction) {
+    var idtoselect = interaction.options.getString("car");
+    let userdata = await User.findOne({ id: interaction.user.id });
 
-    var idtoselect = interaction.options.getString("car")
-    let userdata = await User.findOne({id: interaction.user.id})
-
-    let filteredcar = userdata.cars.filter(car => car.ID == idtoselect);
-    let selected = filteredcar[0] || 'No ID'
-    console.log(selected)
-    if(selected == "No ID") {
+    let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
+    let selected = filteredcar[0] || "No ID";
+    console.log(selected);
+    if (selected == "No ID") {
       let errembed = new Discord.MessageEmbed()
-      .setTitle("Error!")
-      .setColor("DARK_RED")
-      .setDescription(`That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`)
-      return  interaction.reply({embeds: [errembed]})
-  }
-    let car = selected
+        .setTitle("Error!")
+        .setColor("DARK_RED")
+        .setDescription(
+          `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
+        );
+      return interaction.reply({ embeds: [errembed] });
+    }
+    let car = selected;
 
-    let uid = interaction.user.id
-    var usercars = userdata.cars
-    if(!cars.Cars[selected.Name.toLowerCase()]) return interaction.reply("Thats not a car!")
-    let list = cars.Cars
-    car = car.Name.toLowerCase()
-    let exhaust = selected.Exhaust
-    let tires = selected.Tires 
-    let intake = selected.Intake 
-    let clutch = selected.Clutch
-    let suspension = selected.Suspension
-    let speed = selected.Speed || 0
-    let gearbox = selected.Gearbox
-    
-    let body = selected.Body
-    let engine = selected.Engine
- 
-    let kmh = speed * 1.609344
-    var flooredkmh = Math.floor(kmh)
+    var usercars = userdata.cars;
+    if (!cars.Cars[selected.Name.toLowerCase()])
+      return interaction.reply("Thats not a car!");
+    car = car.Name.toLowerCase();
+    let exhaust = selected.Exhaust;
+    let tires = selected.Tires;
+    let intake = selected.Intake;
+    let clutch = selected.Clutch;
+    let suspension = selected.Suspension;
+    let gearbox = selected.Gearbox;
 
-    if(!cars.Cars[car].Junked) return interaction.reply("Thats not a junk car!")
+    let body = selected.Body;
 
+    if (!cars.Cars[car].Junked)
+      return interaction.reply("Thats not a junk car!");
 
-    if(!exhaust && !tires && !intake && !clutch && !suspension && !gearbox && !body) return interaction.reply(`You haven't completed this restoration! Use /upgrade to restore it.`)
+    if (
+      !exhaust &&
+      !tires &&
+      !intake &&
+      !clutch &&
+      !suspension &&
+      !gearbox &&
+      !body
+    )
+      return interaction.reply(
+        `You haven't completed this restoration! Use /upgrade to restore it.`
+      );
 
-    let carindb = cars.Cars[selected.Name.toLowerCase()].restored
-    carindb = cars.Cars[carindb.toLowerCase()]
+    let carindb = cars.Cars[selected.Name.toLowerCase()].restored;
+    carindb = cars.Cars[carindb.toLowerCase()];
     let carobj = {
       ID: carindb.alias,
       Name: carindb.Name,
@@ -69,23 +71,16 @@ module.exports = {
       Parts: [],
       Emote: carindb.Emote,
       Livery: carindb.Image,
-      Miles: 0
-  }
+      Miles: 0,
+    };
 
-  for (var i = 0; i < 1; i ++) usercars.splice(usercars.indexOf(selected), 1)
-  userdata.cars = usercars
+    for (var i = 0; i < 1; i++) usercars.splice(usercars.indexOf(selected), 1);
+    userdata.cars = usercars;
 
-  userdata.cars.push(carobj)
+    userdata.cars.push(carobj);
 
-  userdata.save()
+    userdata.save();
 
-  interaction.reply(`✅`)
-
-  
-    
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-  }
-  
+    interaction.reply(`✅`);
+  },
 };
