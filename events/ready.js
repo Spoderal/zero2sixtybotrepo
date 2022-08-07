@@ -25,6 +25,7 @@ module.exports = {
     await mongoose.connect(process.env.DATABASE_URL, {
       keepAlive: true,
       sslCA: mongoCertPath,
+      tlsInsecure: true,
     });
 
     badges(client);
