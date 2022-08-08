@@ -13,20 +13,23 @@ const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 
-let mongoCertPath = path.resolve("./ca-certificate.crt");
+let mongoConfig = {
+  keepAlive: true,
+};
+
+// SSL for production only
 if (process.env.CA_CERT) {
+  let mongoCertPath = path.resolve("./ca-certificate.crt");
   fs.writeFileSync(mongoCertPath, process.env.CA_CERT);
+  mongoConfig.sslCA = mongoCertPath;
+  mongoConfig.tlsInsecure = true;
 }
 
 module.exports = {
   name: "ready",
   once: true,
   async execute(client, commands) {
-    await mongoose.connect(process.env.DATABASE_URL, {
-      keepAlive: true,
-      sslCA: mongoCertPath,
-      tlsInsecure: true,
-    });
+    await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
 
     badges(client);
     crews(client);
@@ -82,7 +85,7 @@ module.exports = {
     }, 20000);
     const rest = new REST({
       version: "9",
-    }).setToken(process.env.token);
+    }).setToken(process.env.TOKEN);
 
     (async () => {
       try {
