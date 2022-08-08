@@ -79,4 +79,4 @@ client.on("guildCreate", (guild) => {
   console.log(`New guild joined! : ${guild.memberCount} members`);
 });
 
-client.login(process.env.DATABASE_URL);
+client.login(process.env.TOKEN);
