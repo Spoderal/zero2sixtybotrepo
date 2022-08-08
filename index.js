@@ -37,8 +37,6 @@ const client = new Client({
 //   })
 // );
 
-
-
 // See .env-example for an explanation of FORCE_DISABLE_BOT
 if (process.env.FORCE_DISABLE_BOT === "true") {
   app.listen(8080);
@@ -48,10 +46,10 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
 
     The env var 'FORCE_DISABLE_BOT' is set to 'true'.
 
-    This node process will continue to run and listen on port 8080, but will not
-    be operational in any capacity other than to ensure the CI/CD deployment succeeds.
+    This node process will continue to run and listen on port 8080.
+    This is only to ensure the CI/CD deployment succeeds.
     
-    To enable the bot again, update 'FORCE_DISABLE_BOT' to 'true' and redeploy/restart.
+    To re-enable, set 'FORCE_DISABLE_BOT' to 'true' and redeploy.
 
     `
   );
