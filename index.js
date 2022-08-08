@@ -37,46 +37,63 @@ const client = new Client({
 //   })
 // );
 
-app.listen(4500);
+// See .env-example for an explanation of FORCE_DISABLE_BOT
+if (process.env.FORCE_DISABLE_BOT === "true") {
+  app.listen(8080);
+  console.warn(
+    `
+    !! WARNING - DISCORD BOT DISABLED !!
 
-const commandFiles = fs
-  .readdirSync("./commandsv2")
-  .filter((file) => file.endsWith(".js"));
+    The env var 'FORCE_DISABLE_BOT' is set to 'true'.
 
-const commands = [];
+    This node process will continue to run and listen on port 8080.
+    This is only to ensure the CI/CD deployment succeeds.
+    
+    To re-enable, set 'FORCE_DISABLE_BOT' to 'true' and redeploy.
 
-client.commands = new Collection();
+    `
+  );
+} else {
+  app.listen(4500);
+  const commandFiles = fs
+    .readdirSync("./commandsv2")
+    .filter((file) => file.endsWith(".js"));
 
-for (const file of commandFiles) {
-  const command = require(`./commandsv2/${file}`);
-  const existingCommand = commands.find((c) => c.name === command.data.name);
-  if (existingCommand) {
-    console.warn(
-      `WARNING: The command '${existingCommand.name}' from file '${file}' was not added because it was already added from '${existingCommand.fileLocation}'!`
-    );
-  } else {
-    commands.push({ ...command.data.toJSON(), fileLocation: file });
+  const commands = [];
+
+  client.commands = new Collection();
+
+  for (const file of commandFiles) {
+    const command = require(`./commandsv2/${file}`);
+    const existingCommand = commands.find((c) => c.name === command.data.name);
+    if (existingCommand) {
+      console.warn(
+        `WARNING: The command '${existingCommand.name}' from file '${file}' was not added because it was already added from '${existingCommand.fileLocation}'!`
+      );
+    } else {
+      commands.push({ ...command.data.toJSON(), fileLocation: file });
+    }
+    client.commands.set(command.data.name, command);
   }
-  client.commands.set(command.data.name, command);
-}
-// console.log(JSON.stringify(commands, null, 2));
+  // console.log(JSON.stringify(commands, null, 2));
 
-const eventFiles = fs
-  .readdirSync("./events")
-  .filter((file) => file.endsWith(".js"));
+  const eventFiles = fs
+    .readdirSync("./events")
+    .filter((file) => file.endsWith(".js"));
 
-for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
+  for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
 
-  if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args, commands));
-  } else {
-    client.on(event.name, (...args) => event.execute(...args, commands));
+    if (event.once) {
+      client.once(event.name, (...args) => event.execute(...args, commands));
+    } else {
+      client.on(event.name, (...args) => event.execute(...args, commands));
+    }
   }
+
+  client.on("guildCreate", (guild) => {
+    console.log(`New guild joined! : ${guild.memberCount} members`);
+  });
+
+  client.login(process.env.TOKEN);
 }
-
-client.on("guildCreate", (guild) => {
-  console.log(`New guild joined! : ${guild.memberCount} members`);
-});
-
-client.login(process.env.token);
