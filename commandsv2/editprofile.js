@@ -3,6 +3,7 @@ const pfpdb = require("../data/pfpsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,11 +13,13 @@ module.exports = {
       option
         .setName("option")
         .setDescription("Description or helmet")
-        .addChoice("Helmet", "helmet")
-        .addChoice("Description", "description")
-        .addChoice("View Helmets", "view helmets")
-        .addChoice("Background", "background")
-        .addChoice("View backgrounds", "vbackground")
+        .addChoices(
+          { name: "Helmet", value: "helmet" },
+          { name: "Description", value: "description" },
+          { name: "View Helmets", value: "view helmets" },
+          { name: "Background", value: "background" },
+          { name: "View backgrounds", value: "vbackground" }
+        )
 
         .setRequired(true)
     )
@@ -87,10 +90,10 @@ module.exports = {
         bgs.push(`${bgdb[bg].Emote} ${bgdb[bg].Name}`);
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Backgrounds Available")
         .setDescription(`${bgs.join("\n\n")}`)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
     } else if (option == "view helmets") {
@@ -109,12 +112,12 @@ module.exports = {
         userhelmets.map((a) => `${a}\n`),
         10
       );
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Your Profile Helmets")
         .setDescription(`${userhelmets[0].join(` \n`)}`);
 
       embed
-        .setColor("#60b0f4")
+        .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/F0hLvQt/newzerologo.png");
       interaction.reply("Please wait...");
       interaction.channel.send({ embeds: [embed] }).then(async (emb) => {
@@ -134,7 +137,7 @@ module.exports = {
           embed.setDescription(`\n${userhelmets[page - 1].join("\n")}`);
 
           if (current !== page) {
-            embed.setFooter(`Pages ${page}/${userhelmets.length}`);
+            embed.setFooter({ text: `Pages ${page}/${userhelmets.length}` });
             emb.edit({ embeds: [embed] });
           }
         });

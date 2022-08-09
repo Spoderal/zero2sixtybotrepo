@@ -2,7 +2,9 @@ const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
 const parts = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -50,111 +52,100 @@ module.exports = {
     }
     let licensePlate =
       db.fetch(`${cars.Cars[car].Name}license_plate_${uid}`) || "000000";
-    let caremote = cars.Cars[car].Emote || "<:z_none:898352936785178645>";
+    let caremote = cars.Cars[car].Emote || emotes.none;
 
     console.log(engine);
-    let engineemote =
-      parts.Parts[engine.toLowerCase()].Emote ||
-      "<:enginedefault:932419391587483688>";
+    let engineemote = parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
     let gearboxemote =
-      parts.Parts[gearbox.toLowerCase()].Emote ||
-      "<:enginedefault:932419391587483688>";
+      parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
 
     let exhaustemote =
-      parts.Parts[exhaust.toLowerCase()].Emote ||
-      "<:exhaustdefault:932419391650418709>";
-    let intakeemote =
-      parts.Parts[intake.toLowerCase()].Emote ||
-      "<:intakedefault:932419391734292561>";
-    let tiresemote =
-      parts.Parts[tires.toLowerCase()].Emote ||
-      "<:tiresdefault:932419392036306954>";
+      parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
+    let intakeemote = parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+    let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
     let suspensionemote =
-      parts.Parts[suspension.toLowerCase()].Emote ||
-      "<:suspensiondefault:932419391847563314>";
-    let clutchemote =
-      parts.Parts[clutch.toLowerCase()].Emote ||
-      "<:defaultclutch:935084786748370954>";
-    let spoileremote = "<:spoilerdefault:932419391868526612>";
+      parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
+    let clutchemote = parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
+    let spoileremote = emotes.spoiler;
     let items = db.fetch(`items_${interaction.user.id}`) || [];
     if (body == "Body") {
       body = "Restored";
       let restoredcar = cars.Cars[car].restored;
       carimage = cars.Cars[restoredcar.toLowerCase()].Image;
-      spoileremote = "<:spoilerrestored:941546331716063232>";
+      spoileremote = emotes.spoilerRestored;
     }
 
     if (!cars.Cars[car].Junked)
       return interaction.reply("Thats not a junk car!");
 
-    let row = new MessageActionRow();
-    let row2 = new MessageActionRow();
+    let row = new ActionRowBuilder();
+    let row2 = new ActionRowBuilder();
     if (engine == "No Engine") {
       row.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Engine")
           .setCustomId("engine")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (exhaust == "Cracked Exhaust") {
       row.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Exhaust")
           .setCustomId("exhaust")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (intake == "No Intake") {
       row.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Intake")
           .setCustomId("intake")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (tires == "Flat Tires") {
       row.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Tires")
           .setCustomId("tires")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (suspension == "Broken Suspension") {
       row2.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Suspension")
           .setCustomId("suspension")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (clutch == "No Clutch") {
       row2.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Clutch")
           .setCustomId("clutch")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (body == "Rusted") {
       row2.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Body")
           .setCustomId("body")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
     if (gearbox == "No Gearbox") {
       row2.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setLabel("Gearbox")
           .setCustomId("gearbox")
-          .setStyle("DANGER")
+          .setStyle("Danger")
       );
     }
 
-    let color = "DANGER";
+    let color = "Danger";
     if (
       engine !== "No Engine" &&
       exhaust !== "Cracked Exhaust" &&
@@ -165,28 +156,34 @@ module.exports = {
       body !== "Rusted" &&
       clutch !== "No Clutch"
     ) {
-      color = "SUCCESS";
+      color = "Success";
     }
     row.addComponents(
-      new MessageButton()
+      new ButtonBuilder()
         .setLabel("Restore")
         .setCustomId("restore")
         .setStyle(`${color}`)
     );
 
-    let embed = new Discord.MessageEmbed()
-      .setFooter(`License Plate: ${licensePlate}`)
+    let embed = new Discord.EmbedBuilder()
+      .setFooter({ text: `License Plate: ${licensePlate}` })
       .setTitle(`${caremote} ${cars.Cars[car.toLowerCase()].Name}`)
-      .addField(`${engineemote} Engine`, `${engine}`, true)
-      .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-      .addField(`${tiresemote} Tires`, `${tires}`, true)
-      .addField(`${intakeemote} Intake`, `${intake}`, true)
-      .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-      .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-      .addField(`${spoileremote} Body`, `${body}`, true)
-      .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-      .addField(`\u200b`, `\u200b`, true)
-      .setColor("#60b0f4")
+      .addFields([
+        { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+        { name: `${exhaustemote} Exhaust`, value: `${exhaust}`, inline: true },
+        { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+        { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+        {
+          name: `${suspensionemote} Suspension`,
+          value: `${suspension}`,
+          inline: true,
+        },
+        { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+        { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+        { name: `${gearboxemote} Gearbox`, value: `${gearbox}`, inline: true },
+        { name: `\u200b`, value: `\u200b`, inline: true },
+      ])
+      .setColor(colors.blue)
       .setImage(`${carimage}`);
 
     let msg = await interaction.reply({
@@ -239,76 +236,75 @@ module.exports = {
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let nexhaust = db.fetch(`${cars.Cars[car].Name}exhaust_${uid}`);
         let nexhaustemote =
-          parts.Parts[nexhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
-        let row = new MessageActionRow();
+          parts.Parts[nexhaust.toLowerCase()].Emote || emotes.exhaust;
+        let row = new ActionRowBuilder();
 
-        let row2 = new MessageActionRow();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -322,41 +318,47 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
 
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${nexhaustemote} Exhaust`, `${nexhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${nexhaustemote} Exhaust`,
+            value: `${nexhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -394,95 +396,87 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
 
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
 
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -496,23 +490,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -548,97 +555,89 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
 
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
 
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
 
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
 
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -652,23 +651,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -706,97 +718,89 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
         let body = db.fetch(`${cars.Cars[car].Name}body_${uid}`);
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
 
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
 
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
 
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -810,23 +814,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -862,96 +879,88 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
 
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
 
         let body = db.fetch(`${cars.Cars[car].Name}body_${uid}`) || "Rusted";
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -965,23 +974,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -1017,97 +1039,89 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
 
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
 
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
 
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
 
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -1121,23 +1135,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -1173,97 +1200,89 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
 
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
 
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
 
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
 
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -1277,23 +1296,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
 
         let comp = [];
         if (row.components[0]) {
@@ -1329,98 +1361,90 @@ module.exports = {
         let gearbox =
           db.fetch(`${cars.Cars[car].Name}gearbox_${uid}`) || "No Gearbox";
         let engineemote =
-          parts.Parts[engine.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
         let gearboxemote =
-          parts.Parts[gearbox.toLowerCase()].Emote ||
-          "<:enginedefault:932419391587483688>";
+          parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
         let body = db.fetch(`${cars.Cars[car].Name}body_${uid}`);
 
         let exhaustemote =
-          parts.Parts[exhaust.toLowerCase()].Emote ||
-          "<:exhaustdefault:932419391650418709>";
+          parts.Parts[exhaust.toLowerCase()].Emote || emotes.exhaust;
         let intakeemote =
-          parts.Parts[intake.toLowerCase()].Emote ||
-          "<:intakedefault:932419391734292561>";
-        let tiresemote =
-          parts.Parts[tires.toLowerCase()].Emote ||
-          "<:tiresdefault:932419392036306954>";
+          parts.Parts[intake.toLowerCase()].Emote || emotes.intake;
+        let tiresemote = parts.Parts[tires.toLowerCase()].Emote || emotes.tires;
         let suspensionemote =
-          parts.Parts[suspension.toLowerCase()].Emote ||
-          "<:suspensiondefault:932419391847563314>";
+          parts.Parts[suspension.toLowerCase()].Emote || emotes.suspension;
 
         let clutchemote =
-          parts.Parts[clutch.toLowerCase()].Emote ||
-          "<:defaultclutch:935084786748370954>";
+          parts.Parts[clutch.toLowerCase()].Emote || emotes.clutch;
 
-        let row = new MessageActionRow();
-        let row2 = new MessageActionRow();
+        let row = new ActionRowBuilder();
+        let row2 = new ActionRowBuilder();
         if (engine == "No Engine") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Engine")
               .setCustomId("engine")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (exhaust == "Cracked Exhaust") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Exhaust")
               .setCustomId("exhaust")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (intake == "No Intake") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Intake")
               .setCustomId("intake")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (tires == "Flat Tires") {
           row.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Tires")
               .setCustomId("tires")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (suspension == "Broken Suspension") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Suspension")
               .setCustomId("suspension")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (clutch == "No Clutch") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Clutch")
               .setCustomId("clutch")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (body == "Rusted") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Body")
               .setCustomId("body")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
         if (gearbox == "No Gearbox") {
           row2.addComponents(
-            new MessageButton()
+            new ButtonBuilder()
               .setLabel("Gearbox")
               .setCustomId("gearbox")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
         }
 
-        let color = "DANGER";
+        let color = "Danger";
         if (
           engine !== "No Engine" &&
           exhaust !== "Cracked Exhaust" &&
@@ -1434,23 +1458,36 @@ module.exports = {
           color = "SUCCESS";
         }
         row.addComponents(
-          new MessageButton()
+          new ButtonBuilder()
             .setLabel("Restore")
             .setCustomId("restore")
             .setStyle(`${color}`)
         );
         embed.fields = [];
 
-        embed
-          .addField(`${engineemote} Engine`, `${engine}`, true)
-          .addField(`${exhaustemote} Exhaust`, `${exhaust}`, true)
-          .addField(`${tiresemote} Tires`, `${tires}`, true)
-          .addField(`${intakeemote} Intake`, `${intake}`, true)
-          .addField(`${suspensionemote} Suspension`, `${suspension}`, true)
-          .addField(`${clutchemote} Clutch`, `${clutch}`, true)
-          .addField(`${spoileremote} Body`, `${body}`, true)
-          .addField(`${gearboxemote} Gearbox`, `${gearbox}`, true)
-          .addField(`\u200b`, `\u200b`, true);
+        embed.addFields([
+          { name: `${engineemote} Engine`, value: `${engine}`, inline: true },
+          {
+            name: `${exhaustemote} Exhaust`,
+            value: `${exhaust}`,
+            inline: true,
+          },
+          { name: `${tiresemote} Tires`, value: `${tires}`, inline: true },
+          { name: `${intakeemote} Intake`, value: `${intake}`, inline: true },
+          {
+            name: `${suspensionemote} Suspension`,
+            value: `${suspension}`,
+            inline: true,
+          },
+          { name: `${clutchemote} Clutch`, value: `${clutch}`, inline: true },
+          { name: `${spoileremote} Body`, value: `${body}`, inline: true },
+          {
+            name: `${gearboxemote} Gearbox`,
+            value: `${gearbox}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ]);
         embed.setImage(carimage);
 
         let comp = [];
@@ -1488,12 +1525,14 @@ module.exports = {
           let restoredcar = cars.Cars[car.toLowerCase()].restored;
           let fullrestored = cars.Cars[restoredcar.toLowerCase()];
           console.log(fullrestored.Name.toLowerCase());
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
             .setTitle(`Fully Restored!`)
-            .addField(`Car`, `${fullrestored.Name}`)
-            .addField(`ID`, `${fullrestored.alias}`)
+            .addFields([
+              { name: `Car`, value: `${fullrestored.Name}` },
+              { name: `ID`, value: `${fullrestored.alias}` },
+            ])
             .setImage(fullrestored.Image)
-            .setColor("#60b0f4");
+            .setColor(colors.blue);
           i.update({ embeds: [embed] });
           db.set(
             `${cars.Cars[fullrestored.Name.toLowerCase()].Name}speed_${uid}`,

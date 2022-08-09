@@ -1,18 +1,20 @@
 const Discord = require("discord.js");
-
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("imports")
     .setDescription("View import crates"),
   async execute(interaction) {
-    let key1emote = "<:commonkey:938734258065932339>";
-    let key2emote = "<:rarekey:938734258367918120>";
-    let key3emote = "<:exotickey:938734258275631164>";
-    let key4emote = "<:driftkey:970486254896570469>";
-    let goldemote = "<:z_gold:933929482518167552>";
+    let key1emote = emotes.commonKey;
+    let key2emote = emotes.rareKey;
+    let key3emote = emotes.exoticKey;
+    let key4emote = emotes.drfitKey;
+    let goldemote = emotes.gold;
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle("Import Crates")
       .addFields({
         name: "​",
@@ -22,7 +24,7 @@ module.exports = {
         "Exclusive cars that you can only find in crates!\n\nUse `/unbox` to buy them!"
       )
       .setThumbnail("https://i.ibb.co/vs3Gm1H/Logo-Makr-2hu-VKG.png")
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
     interaction.reply({ embeds: [embed] });
   },
   permissions: "",

@@ -21,7 +21,7 @@ module.exports = {
     let selected = filteredcar[0] || "No ID";
     console.log(selected);
     if (selected == "No ID") {
-      let errembed = new Discord.MessageEmbed()
+      let errembed = new Discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(

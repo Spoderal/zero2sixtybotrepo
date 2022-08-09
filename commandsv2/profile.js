@@ -3,6 +3,8 @@ const profilepics = require("../data/pfpsdb.json");
 const cardb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -50,26 +52,24 @@ module.exports = {
     console.log(cars[0]);
     let bestcar = cars[0];
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle(title)
       .setAuthor(`Spoder - Profile`)
-      .setColor("#60b0f4")
+      .setColor(colors.blue)
       .setThumbnail(acthelmet)
-      .addField(
-        `Progress`,
-        `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`
-      )
-      .addField(
-        `Best Car`,
-        `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
-        true
-      )
-      .addField(`Networth`, `$${numberWithCommas(finalprice)}`, true);
+      .addFields([
+        {
+          name: `Progress`,
+          value: `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`,
+        },
+        {
+          name: `Best Car`,
+          value: `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
+          inline: true,
+        },
+        { name: `Networth`, value: `${toCurrency(finalprice)}`, inline: true },
+      ]);
 
     interaction.reply({ embeds: [embed] });
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

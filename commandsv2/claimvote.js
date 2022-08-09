@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,11 +10,11 @@ module.exports = {
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = (await User.findOne({ id: uid })) || new User({ id: uid });
-    let embed = new Discord.MessageEmbed().setDescription(
+    let embed = new Discord.EmbedBuilder().setDescription(
       `You haven't voted yet! [Vote](https://top.gg/bot/932455367777067079/vote) then run the command again.`
     );
 
-    embed.setColor("#60b0f4");
+    embed.setColor(colors.blue);
     let voted = userdata.hasvoted;
 
     if (voted == false) return interaction.reply({ embeds: [embed] });
@@ -22,12 +23,12 @@ module.exports = {
     userdata.wheelspins += 1;
     userdata.hasvoted = false;
 
-    let embed2 = new Discord.MessageEmbed()
+    let embed2 = new Discord.EmbedBuilder()
       .setThumbnail("https://i.ibb.co/JjrvkQs/smalllogo.png")
       .setDescription(
         "Thank you for voting! Here's $1k cash, and a wheelspin! 💙"
       );
-    embed.setColor("#60b0f4");
+    embed.setColor(colors.blue);
 
     userdata.save();
 

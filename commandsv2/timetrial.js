@@ -3,6 +3,8 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const Cooldowns = require("../schema/cooldowns");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,7 +30,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -83,26 +85,28 @@ module.exports = {
     let timer = setInterval(() => {
       timernum++;
     }, 1000);
-    let semote = "<:speedemote:983963212393357322>";
-    let hemote = "<:handling:983963211403505724>";
-    let zemote = "<:zerosixtyemote:983963210304614410>";
-    let cemote = "<:zecash:983966383408832533>";
-    let embed = new discord.MessageEmbed()
+    let semote = emotes.speed;
+    let hemote = emotes.handling;
+    let zemote = emotes.zero2sixty;
+    let cemote = emotes.cash;
+    let embed = new discord.EmbedBuilder()
       .setTitle("Going around the track!")
-      .addField(
-        `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
-          cars.Cars[selected.toLowerCase()].Name
-        }`,
-        `${semote} Speed: ${user1carspeed} MPH\n${zemote} 0-60: ${user1carzerosixty}s\n${hemote} Handling:${handling}`
-      )
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
+            cars.Cars[selected.toLowerCase()].Name
+          }`,
+          value: `${semote} Speed: ${user1carspeed} MPH\n${zemote} 0-60: ${user1carzerosixty}s\n${hemote} Handling:${handling}`,
+        },
+      ])
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/Wfk7s36/timer1.png");
     let randomnum = randomRange(2, 4);
     let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
-        embed.addField("Bonus", "$100");
+        embed.addFields([{ name: "Bonus", value: "$100" }]);
         moneyearnedtxt += 100;
         userdata.cash += 100;
         interaction.editReply({ embeds: [embed] });
@@ -123,9 +127,10 @@ module.exports = {
         moneyearnedtxt + moneyearned;
         console.log("End");
         clearInterval(x, timer);
-        embed.addField("Results", `Finished in ${timernum}s`);
-
-        embed.addField("Earnings", `${cemote} $${moneyearned}`);
+        embed.addFields([
+          { name: "Results", value: `Finished in ${timernum}s` },
+          { name: "Earnings", value: `${cemote} $${moneyearned}` },
+        ]);
         interaction.editReply({ embeds: [embed] });
         userdata.cash += Number(moneyearned);
         userdata.save();

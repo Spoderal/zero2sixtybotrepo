@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const db = require("quick.db");
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -29,12 +30,14 @@ module.exports = {
       emote3 = "❌";
     }
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle(`Notification Panel`)
-      .addField("Daily", `${emote}`)
-      .addField(`Weekly`, `${emote2}`)
-      .addField(`Top.gg Vote`, `${emote3}`)
-      .setColor("#60b0f4");
+      .addFields([
+        { name: "Daily", value: `${emote}` },
+        { name: `Weekly`, value: `${emote2}` },
+        { name: `Top.gg Vote`, value: `${emote3}` },
+      ])
+      .setColor(colors.blue);
 
     interaction.reply({ embeds: [embed] });
   },

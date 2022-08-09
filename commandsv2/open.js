@@ -1,7 +1,8 @@
 const lodash = require("lodash");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,9 +12,11 @@ module.exports = {
       option
         .setName("crate")
         .setDescription("The crate you want to open")
-        .addChoice("Common", "common")
-        .addChoice("Rare", "rare")
-        .addChoice("Seasonal", "seasonal")
+        .addChoices(
+          { name: "Common", value: "common" },
+          { name: "Rare", value: "rare" },
+          { name: "Seasonal", value: "seasonal" }
+        )
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -44,7 +47,7 @@ module.exports = {
     let cratecontents = crates.Crates[bought.toLowerCase()].Contents;
     let randomitem = lodash.sample(cratecontents);
     userdata.cash -= crates.Crates[bought.toLowerCase()].Price;
-    let embed = new MessageEmbed();
+    let embed = new EmbedBuilder();
 
     if (pfps.Pfps[randomitem]) {
       let helmets = userdata.pfps;
@@ -59,7 +62,7 @@ module.exports = {
       userdata.pfps.push(randomitem);
       userdata.save();
       embed.setTitle("Preview");
-      embed.setThumbnail(pfps.Pfps[randomitem].Image).setColor("#60b0f4");
+      embed.setThumbnail(pfps.Pfps[randomitem].Image).setColor(colors.blue);
       interaction.reply({
         content: `You opened a ${bought} and won a ${randomitem} profile image!`,
         embeds: [embed],

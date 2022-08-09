@@ -4,8 +4,9 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const jobsdb = require("../data/jobs.json");
 const pretty = require("pretty-ms");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,22 +17,29 @@ module.exports = {
         .setName("option")
         .setDescription("Options for the work command")
         .setRequired(true)
-        .addChoice("Job List", "joblist")
-        .addChoice("Hire", "hire")
-        .addChoice("Quit", "quit")
-        .addChoice("Work", "work")
-        .addChoice("Rank", "rank")
+        .addChoices(
+          { name: "Job List", value: "joblist" },
+          { name: "Hire", value: "hire" },
+          { name: "Quit", value: "quit" },
+          { name: "Work", value: "work" },
+          { name: "Rank", value: "rank" }
+        )
     )
     .addStringOption((option) =>
       option
         .setName("job")
         .setDescription("The job to be hired for, quit, or to work for")
         .setRequired(false)
-        .addChoice("Mechanic", "mechanic")
-        .addChoice("Police", "police")
-        .addChoice("YouTuber", "youtuber")
-        .addChoice("Zero2Sixty Programmer", "zero2sixty programmer")
-        .addChoice("Pizza Delivery", "pizza delivery")
+        .addChoices(
+          { name: "Mechanic", value: "mechanic" },
+          { name: "Police", value: "police" },
+          { name: "YouTuber", value: "youtuber" },
+          {
+            name: "Zero2Sixty Programmer",
+            value: "zero2sixty programmer",
+          },
+          { name: "Pizza Delivery", value: "pizza delivery" }
+        )
     ),
   async execute(interaction) {
     let uid = interaction.user.id;
@@ -39,35 +47,41 @@ module.exports = {
     let option = interaction.options.getString("option");
     let userdata = await User.findOne({ id: uid });
     if (option == "joblist") {
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Job List")
-        .addField(
-          "Mechanic",
-          `<:helmet_mechanic:967208601145974875>\nPrestige Required: 2\nStarting Rank: Tire Installer\nStarting Salary: $150/6 hours`,
-          true
-        )
-        .addField(
-          "Police",
-          `<:helmet_police:967209460630171658>\nPrestige Required: 3\nStarting Rank: Cadet\nStarting Salary: $200 per chase\n\nChase other players, or chase bots in wanted!`,
-          true
-        )
-        .addField(
-          "YouTuber",
-          `<:helmet_youtube:967208601435398164>\nPrestige Required: 4\nStarting Rank: 100 Subscribers\nStarting Salary: $50/1 hour`,
-          true
-        )
-        .addField(
-          "Zero2Sixty Programmer",
-          `<:helmet_programmer:973390981179260928>\nPrestige Required: 7\nStarting Rank: Jr Web Developer\nStarting Salary: $400/6 hours`,
-          true
-        )
-        .addField(
-          "Pizza Delivery",
-          `<:pizzaman:978186078802559007>\nPrestige Required: 5\nStarting Rank: Pizza Boy\nStarting Salary: $250/3 hours`,
-          true
-        )
+        .addFields([
+          {
+            name: "Mechanic",
+            value: `<:helmet_mechanic:967208601145974875>\nPrestige Required: 2\nStarting Rank: Tire Installer\nStarting Salary: $150/6 hours`,
+            inline: true,
+          },
 
-        .setColor("#60b0f4");
+          {
+            name: "Police",
+            value: `<:helmet_police:967209460630171658>\nPrestige Required: 3\nStarting Rank: Cadet\nStarting Salary: $200 per chase\n\nChase other players, or chase bots in wanted!`,
+            inline: true,
+          },
+
+          {
+            name: "YouTuber",
+            value: `<:helmet_youtube:967208601435398164>\nPrestige Required: 4\nStarting Rank: 100 Subscribers\nStarting Salary: $50/1 hour`,
+            inline: true,
+          },
+
+          {
+            name: "Zero2Sixty Programmer",
+            value: `<:helmet_programmer:973390981179260928>\nPrestige Required: 7\nStarting Rank: Jr Web Developer\nStarting Salary: $400/6 hours`,
+            inline: true,
+          },
+
+          {
+            name: "Pizza Delivery",
+            value: `<:pizzaman:978186078802559007>\nPrestige Required: 5\nStarting Rank: Pizza Boy\nStarting Salary: $250/3 hours`,
+            inline: true,
+          },
+        ])
+
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
     } else if (option == "hire") {
@@ -126,13 +140,13 @@ module.exports = {
       } else {
         requiredxp = "MAX";
       }
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Your rank for ${jobsdb.Jobs[actjob].Name}`)
         .setThumbnail(jobsdb.Jobs[actjob].Helmet)
         .setDescription(
           `Rank: ${jobrank}\nXP: ${exp}/${requiredxp}\nSalary: $${salary}/${time}`
         )
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
     } else if (option == "work") {
@@ -145,8 +159,8 @@ module.exports = {
       let timeoutj = job.Timeout;
       if (worked !== null && timeoutj - (Date.now() - worked) > 0) {
         let time = ms(timeoutj - (Date.now() - worked));
-        let timeEmbed = new Discord.MessageEmbed()
-          .setColor("#60b0f4")
+        let timeEmbed = new Discord.EmbedBuilder()
+          .setColor(colors.blue)
           .setDescription(`You've already worked!\n\nWork again in ${time}.`);
         return interaction.reply({ embeds: [timeEmbed] });
       }
@@ -196,19 +210,19 @@ module.exports = {
 
         let question = lodash.sample(questions);
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`Working...`)
           .setDescription(
             `Duties: ${
               question.Question
             }\n\n__Options__:\n${question.Options.join("\n")}`
           )
-          .setColor("#60b0f4")
+          .setColor(colors.blue)
           .setThumbnail(jobsdb.Jobs[actjob].Helmet);
         interaction.reply({ embeds: [embed] });
         job.worked = Date.now();
         userdata.update();
-        const filter = (m = discord.Message) => {
+        const filter = (m = Discord.Message) => {
           return m.author.id === uid;
         };
         let collector = interaction.channel.createMessageCollector({
@@ -288,12 +302,12 @@ module.exports = {
         userdata.worked = Date.now();
 
         let type;
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Video Types")
           .setDescription(
             `Gaming 🎮: Choose the correct reaction to game events\n\nCar Review 🚗: Choose the rating the audience agrees with or get half of your salary.`
           )
-          .setColor("#60b0f4");
+          .setColor(colors.blue);
 
         interaction.reply({ embeds: [embed] });
         interaction.channel.send("Choose a video type!").then((emb) => {
@@ -353,10 +367,10 @@ module.exports = {
               let imagegam = gameimages[game].Image;
               let reactiontub = lodash.sample(reactiontuber);
 
-              let embed = new Discord.MessageEmbed()
+              let embed = new Discord.EmbedBuilder()
                 .setTitle(`Playing ${game}...`)
                 .setDescription(`${reactiontub.Question}`)
-                .setColor("#60b0f4")
+                .setColor(colors.blue)
                 .setThumbnail(`${imagegam}`);
 
               interaction.channel.send({ embeds: [embed] }).then((emb) => {
@@ -382,24 +396,29 @@ module.exports = {
                     overallscore -= 2;
                     rcollector2.stop();
 
-                    embed.addField(`???`, `\u200b`);
+                    embed.addFields([{ name: `???`, value: `\u200b` }]);
                     emb.edit({ embeds: [embed] });
                   } else if (r.emoji.name == reactiontub.Answer) {
                     overallscore += 2;
                     rcollector2.stop();
-                    embed.addField(`Bonus!`, `\u200b`);
+                    embed.addFields([{ name: `Bonus!`, value: `\u200b` }]);
                     emb.edit({ embeds: [embed] });
                   }
                   let addedsubs = overallscore * 10;
 
                   if (videotypes1[type].Trending) {
                     addedsubs *= 2;
-                    embed.addField(`Trending!`, `\u200b`);
+                    embed.addFields([{ name: `Trending!`, value: `\u200b` }]);
                     emb.edit({ embeds: [embed] });
                   }
 
                   setTimeout(() => {
-                    embed.addField(`Results`, `New subscribers: ${addedsubs}`);
+                    embed.addFields([
+                      {
+                        name: `Results`,
+                        value: `New subscribers: ${addedsubs}`,
+                      },
+                    ]);
 
                     emb.edit({ embeds: [embed] });
 
@@ -436,7 +455,7 @@ module.exports = {
               interaction.channel.send(
                 `Choose a rating to give to the ${cartoreview} out of 10, if your rating is close to what most people think you get a reward!`
               );
-              let filter2 = (m = discord.Message) => {
+              let filter2 = (m = Discord.Message) => {
                 return m.author.id === uid;
               };
               let collector = interaction.channel.createMessageCollector({
@@ -515,15 +534,15 @@ module.exports = {
 
         if (randomgame == "clicker") {
           console.log("clicker");
-          let row = new MessageActionRow().addComponents(
-            new MessageButton()
+          let row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
               .setCustomId("green")
               .setEmoji("🖱️")
-              .setStyle("SUCCESS"),
-            new MessageButton()
+              .setStyle("Success"),
+            new ButtonBuilder()
               .setCustomId("red")
               .setEmoji("🖱️")
-              .setStyle("DANGER")
+              .setStyle("Danger")
           );
 
           let colors = ["green", "red"];
@@ -589,7 +608,7 @@ module.exports = {
             content: `Type \`${randomtype}\` in 10 seconds!`,
           });
 
-          const filter = (m = discord.Message) => {
+          const filter = (m = Discord.Message) => {
             return m.author.id === uid;
           };
           let collector = interaction.channel.createMessageCollector({
@@ -652,23 +671,23 @@ module.exports = {
           `Remember that this customer wants ${randpizza} pizzas.`
         );
         setTimeout(() => {
-          let row = new MessageActionRow().addComponents(
-            new MessageButton()
+          let row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
               .setCustomId("2")
               .setLabel("2 🍕")
-              .setStyle("SECONDARY"),
-            new MessageButton()
+              .setStyle("Secondary"),
+            new ButtonBuilder()
               .setCustomId("5")
               .setLabel("5 🍕")
-              .setStyle("SECONDARY"),
-            new MessageButton()
+              .setStyle("Secondary"),
+            new ButtonBuilder()
               .setCustomId("3")
               .setLabel("3 🍕")
-              .setStyle("SECONDARY"),
-            new MessageButton()
+              .setStyle("Secondary"),
+            new ButtonBuilder()
               .setCustomId("6")
               .setLabel("6 🍕")
-              .setStyle("SECONDARY")
+              .setStyle("Secondary")
           );
 
           interaction.editReply({
@@ -734,7 +753,7 @@ module.exports = {
         "Are you sure you want to quit your job? This will erase all of your progress on that job. (Y/N)"
       );
 
-      const filter2 = (m = discord.Message) => {
+      const filter2 = (m = Discord.Message) => {
         return m.author.id === uid;
       };
       let collector = interaction.channel.createMessageCollector({
@@ -767,9 +786,5 @@ module.exports = {
     function randomRange(min, max) {
       return Math.round(Math.random() * (max - min)) + min;
     }
-
-    // function numberWithCommas(x) {
-    //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // }
   },
 };

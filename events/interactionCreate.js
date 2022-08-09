@@ -7,6 +7,11 @@ module.exports = {
     if (interaction.isSelectMenu()) {
       await interaction.deferUpdate();
     }
+    if (interaction.isAutocomplete()) {
+      const command = interaction.client.commands.get(interaction.commandName);
+      if (!command || typeof command.autoComplete !== "function") return;
+      await command.autoComplete(interaction);
+    }
     if (interaction.isCommand()) {
       const command = interaction.client.commands.get(interaction.commandName);
       if (!command) return;

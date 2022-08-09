@@ -4,6 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const Car = require("../schema/car");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,12 +15,14 @@ module.exports = {
         .setName("option")
         .setDescription("Install, submit, or view")
         .setRequired(true)
-        .addChoice("Submit", "submit")
-        .addChoice("View", "view")
-        .addChoice("Install", "install")
-        .addChoice("Remove", "remove")
-        .addChoice("Approve", "approve")
-        .addChoice("List", "list")
+        .addChoices(
+          { name: "Submit", value: "submit" },
+          { name: "View", value: "view" },
+          { name: "Install", value: "install" },
+          { name: "Remove", value: "remove" },
+          { name: "Approve", value: "approve" },
+          { name: "List", value: "list" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -45,7 +48,7 @@ module.exports = {
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID") {
-        let errembed = new discord.MessageEmbed()
+        let errembed = new Discord.EmbedBuilder()
           .setTitle("Error!")
           .setColor("DARK_RED")
           .setDescription(
@@ -92,10 +95,10 @@ module.exports = {
           ],
         }
       );
-      let embedapprove = new Discord.MessageEmbed()
+      let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Installed ${livid}`)
         .setImage(filtered[0].image)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embedapprove] });
     } else if (option == "view") {
@@ -123,10 +126,10 @@ module.exports = {
         filtered == null
       )
         return interaction.reply("Thats not a valid ID!");
-      let embedapprove = new Discord.MessageEmbed()
+      let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Livery ${livid} for ${cars.Cars[car].Name}`)
         .setImage(filtered[0].image)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embedapprove] });
     } else if (option == "remove") {
@@ -135,7 +138,7 @@ module.exports = {
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID") {
-        let errembed = new discord.MessageEmbed()
+        let errembed = new Discord.EmbedBuilder()
           .setTitle("Error!")
           .setColor("DARK_RED")
           .setDescription(
@@ -165,10 +168,10 @@ module.exports = {
           ],
         }
       );
-      let embedapprove = new Discord.MessageEmbed()
+      let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Your car had its livery removed`)
         .setImage(cars.Cars[selected.Name.toLowerCase()].Image)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embedapprove] });
     } else if (option == "submit") {
@@ -210,12 +213,14 @@ module.exports = {
 
           cardata.save();
 
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
             .setImage(ImageLink)
             .setDescription("Submitted for review!")
-            .addField("Car", cars.Cars[cartosubmit.toLowerCase()].Name)
-            .addField("ID", `${livobj.id}`)
-            .setColor("#60b0f4");
+            .addFields([
+              { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
+              { name: "ID", value: `${livobj.id}` },
+            ])
+            .setColor(colors.blue);
           m.reply({ embeds: [embed] });
           let submitchannel =
             interaction.client.channels.cache.get("931078225021521920");
@@ -271,10 +276,10 @@ module.exports = {
         return interaction.reply("Thats not a valid ID!");
       cardata.liveries.push(filtered[0]);
       cardata.save();
-      let embedapprove = new Discord.MessageEmbed()
+      let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Approved ${idtoapprove}`)
         .setImage(filtered[0].image)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
       let usertodm = await interaction.client.users.fetch(filtered[0].user);
 
       interaction.reply({ embeds: [embedapprove] });
@@ -319,14 +324,14 @@ module.exports = {
         shopItems.map(() => `**${liverylist.join("\n")}**`)
       );
 
-      const embed = new Discord.MessageEmbed({ color: "#60b0f4" })
+      const embed = new Discord.EmbedBuilder({ color: "#60b0f4" })
         .setTitle(`Liveries for ${cars.Cars[car].Name}`)
         .setDescription(
           `View using \`/liveryview [id] [car]\`\nSet using \`/liveryinstall [id] [car]\`\n${shopItems[0].join(
             "\n"
           )}`
         )
-        .setFooter(`Pages 1/${shopItems.length}`)
+        .setFooter({ text: `Pages 1/${shopItems.length}` })
         .setThumbnail("https://i.ibb.co/Hq4p8bx/usedicon.png")
         .setTimestamp();
 
@@ -359,7 +364,7 @@ module.exports = {
             );
 
             if (current !== page) {
-              embed.setFooter(`Pages ${page}/${shopItems.length}`);
+              embed.setFooter({ text: `Pages ${page}/${shopItems.length}` });
               interaction.editReply({ embeds: [embed] });
             }
           });

@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -64,29 +66,27 @@ module.exports = {
     if (weeklytask1.completed == true) weeklyemote = "✅";
     else if (!weeklytask1.completed) weeklyemote = "❌";
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle(`Tasks`)
       .setDescription(`Complete daily/weekly tasks for rewards.`)
-      .addField(
-        "Daily",
-        `${dailytask1.task} : $${numberWithCommas(
-          dailytask1.reward
-        )} ${dailyemote} *${dailyms} left*`
-      )
-      .addField(
-        "Weekly",
-        `${weeklytask1.task} : $${numberWithCommas(
-          weeklytask1.reward
-        )} ${weeklyemote} *${weeklyms} left*`
-      )
+      .addFields([
+        {
+          name: "Daily",
+          value: `${dailytask1.task} : ${toCurrency(
+            dailytask1.reward
+          )} ${dailyemote} *${dailyms} left*`,
+        },
+        {
+          name: "Weekly",
+          value: `${weeklytask1.task} : ${toCurrency(
+            weeklytask1.reward
+          )} ${weeklyemote} *${weeklyms} left*`,
+        },
+      ])
 
-      .setColor("#60b0f4")
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/Srtk0HT/Logo-Makr-5-Db-APp.png");
 
     interaction.reply({ embeds: [embed] });
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

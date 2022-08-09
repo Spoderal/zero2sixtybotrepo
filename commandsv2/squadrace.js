@@ -2,6 +2,8 @@ const discord = require("discord.js");
 const squads = require("../data/squads.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,15 +32,15 @@ module.exports = {
 
         break;
     }
-    let semote = "<:speedometer3:1002856993075249162>";
-    let hemote = "<:handling:983963211403505724>";
-    let aemote = "<:zerosixtyemote:983963210304614410>";
+    let semote = emotes.speedometer;
+    let hemote = emotes.handling;
+    let aemote = emotes.zero2sixty;
 
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     console.log(filteredcar);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -55,32 +57,30 @@ module.exports = {
     let sqacc = Number(squadcar["0-60"]);
     let sqhandling = Number(squadcar.Handling);
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`Squad race in progress...`)
       .setThumbnail(squads.Squads[squad].Icon)
-      .setColor("#60b0f4")
-      .addField(
-        `${selected.Emote} ${selected.Name}`,
-        `
-    ${semote} Speed: ${u1speed} MPH\n
-    ${aemote} 0-60: ${u1acc}s\n
-    ${hemote} Handling: ${u1handling}\n
-
-    
-    `,
-        true
-      )
-      .addField(
-        `${squadcar.Emote} ${squadcar.Name}`,
-        `
-    ${semote} Speed: ${sqspeed} MPH\n
-    ${aemote} 0-60: ${sqacc}s\n
-    ${hemote} Handling: ${sqhandling}\n
-
-    
-    `,
-        true
-      );
+      .setColor(colors.blue)
+      .addFields([
+        {
+          name: `${selected.Emote} ${selected.Name}`,
+          value: `
+            ${semote} Speed: ${u1speed} MPH\n
+            ${aemote} 0-60: ${u1acc}s\n
+            ${hemote} Handling: ${u1handling}\n
+          `,
+          inline: true,
+        },
+        {
+          name: `${squadcar.Emote} ${squadcar.Name}`,
+          value: `
+            ${semote} Speed: ${sqspeed} MPH\n
+            ${aemote} 0-60: ${sqacc}s\n
+            ${hemote} Handling: ${sqhandling}\n
+          `,
+          inline: true,
+        },
+      ]);
 
     interaction.reply({ embeds: [embed] });
 

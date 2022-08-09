@@ -3,6 +3,8 @@ const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -41,8 +43,8 @@ module.exports = {
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       let time = ms(timeout - (Date.now() - daily));
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor("#60b0f4")
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
         .setDescription(
           `You've already collected your weekly cash\n\nCollect it again in ${time}.`
         );
@@ -51,21 +53,22 @@ module.exports = {
       userdata.cash += Number(cash);
       cooldowns.weekly = Date.now();
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Weekly Cash for ${interaction.user.username}`)
-        .addField("Earned Cash", `$${numberWithCommas(cash)}`)
-        .setColor("#60b0f4");
+        .addFields("Earned Cash", `${toCurrency(cash)}`)
+        .setColor(colors.blue);
       if (gold) {
         userdata.gold += Number(gold);
-        embed.addField(`Earned Gold`, `<:z_gold:933929482518167552> ${gold}`);
+        embed.addFields([
+          {
+            name: `Earned Gold`,
+            value: `<:z_gold:933929482518167552> ${gold}`,
+          },
+        ]);
       }
       cooldowns.save();
       userdata.save();
       interaction.reply({ embeds: [embed] });
-    }
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 };

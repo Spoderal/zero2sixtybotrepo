@@ -2,10 +2,13 @@ const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,16 +37,16 @@ module.exports = {
       (await Cooldowns.findOne({ id: userid })) ||
       new Cooldowns({ id: userid });
 
-    let semote = "<:speedemote:983963212393357322>";
-    let hemote = "<:handling:983963211403505724>";
-    let zemote = "<:zerosixtyemote:983963210304614410>";
+    let semote = emotes.speed;
+    let hemote = emotes.handling;
+    let zemote = emotes.zero2sixty;
     let moneyearned = interaction.options.getNumber("bet");
 
     let idtoselect = interaction.options.getString("car");
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -137,27 +140,32 @@ module.exports = {
     bank -= moneyearned;
     userdata.save();
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`Bet race in progress...`)
-      .addField(`Your bet`, `$${numberWithCommas(moneyearned)}`)
-      .addField(
-        `${actualhelmet.Emote} ${
-          cars.Cars[selected.Name.toLowerCase()].Emote
-        } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
-        `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${zero2sixtycar}s\n\n${hemote} Handling: ${handling}`,
-        true
-      )
-      .addField(
-        `🤖 ${cars.Cars[botcar.Name.toLowerCase()].Emote} ${
-          cars.Cars[botcar.Name.toLowerCase()].Name
-        }`,
-        `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
-          cars.Cars[botcar.Name.toLowerCase()].Handling
-        }`,
-        true
-      )
-      .setColor("#60b0f4")
-      .setFooter(`${tip}`)
+      .addFields([
+        {
+          name: `Your bet`,
+          value: `${toCurrency(moneyearned)}`,
+        },
+        {
+          name: `${actualhelmet.Emote} ${
+            cars.Cars[selected.Name.toLowerCase()].Emote
+          } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
+          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${zero2sixtycar}s\n\n${hemote} Handling: ${handling}`,
+          inline: true,
+        },
+        {
+          name: `🤖 ${cars.Cars[botcar.Name.toLowerCase()].Emote} ${
+            cars.Cars[botcar.Name.toLowerCase()].Name
+          }`,
+          calue: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+            cars.Cars[botcar.Name.toLowerCase()].Handling
+          }`,
+          inline: true,
+        },
+      ])
+      .setColor(colors.blue)
+      .setFooter({ text: tip })
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
 
@@ -175,14 +183,14 @@ module.exports = {
     let tracklength2 = 0;
     tracklength2 += new60;
     if (nitro) {
-      let row = new MessageActionRow();
+      let row = new ActionRowBuilder();
 
       row.addComponents(
-        new MessageButton()
+        new ButtonBuilder()
           .setCustomId("boost")
-          .setEmoji("<:boost:983813400289234978>")
+          .setEmoji(emotes.boost)
           .setLabel("Boost")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
       msg.edit({ components: [row] });
 
@@ -230,7 +238,7 @@ module.exports = {
           let finalamount = moneyearned + moneyearned * 0.35;
 
           let earningsresult = [];
-          earningsresult.push(`$${numberWithCommas(finalamount)}`);
+          earningsresult.push(`${toCurrency(finalamount)}`);
           if (userdata.racexp >= reqxp) {
             userdata.racerank += 1;
             earningsresult.push(
@@ -239,7 +247,12 @@ module.exports = {
             userdata.racexp = 0;
           }
 
-          embed.addField("Earnings", `${earningsresult.join("\n")}`);
+          embed.addFields([
+            {
+              name: "Earnings",
+              value: `${earningsresult.join("\n")}`,
+            },
+          ]);
           interaction.editReply({ embeds: [embed] });
           userdata.cash += Number(moneyearned);
           userdata.racexp += 25;
@@ -286,7 +299,3 @@ module.exports = {
     }
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

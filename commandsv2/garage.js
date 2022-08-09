@@ -1,13 +1,12 @@
-const { Intents, MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const partdb = require("../data/partsdb.json");
-const myIntents = new Intents();
-myIntents.add(Intents.FLAGS.GUILD_MESSAGES);
-myIntents.add(Intents.FLAGS.GUILDS);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const itemdb = require("../data/items.json");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -152,59 +151,57 @@ module.exports = {
     );
 
     if (subcommand == "parts") {
-      let embed1 = new MessageEmbed()
+      let embed1 = new EmbedBuilder()
         .setTitle(`${target.username}'s parts`)
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
-
         .setDescription(`${xessence} Xessence\n\n${actuserparts[0].join("\n")}`)
-        .addField("​", "​")
+        .addFields([{ name: "​", value: "​" }])
+        .setColor(colors.blue);
 
-        .setColor("#60b0f4");
-
-      let row = new MessageActionRow().addComponents(
-        new MessageButton()
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("previous")
           .setEmoji("◀️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("next")
           .setEmoji("▶️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("first")
           .setEmoji("⏮️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("last")
           .setEmoji("⏭️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("filter")
           .setEmoji("🔍")
           .setLabel("Filter")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
-      let row2 = new MessageActionRow().addComponents(
-        new MessageButton()
+      let row2 = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("t1")
           .setLabel("T1")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("t2")
           .setLabel("T2")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("t3")
           .setLabel("T3")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("t4")
           .setLabel("T4")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("t5")
           .setLabel("T5")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
       await interaction.deferReply();
       let msg = await interaction.editReply({
@@ -293,9 +290,9 @@ module.exports = {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
           }
-          var list = actuserparts[0];
+          list = actuserparts[0];
 
-          var quantities = list.reduce(function (obj, n) {
+          quantities = list.reduce(function (obj, n) {
             if (obj[n]) obj[n]++;
             else obj[n] = 1;
 
@@ -341,9 +338,9 @@ module.exports = {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
           }
-          var list = actuserparts[0];
+          list = actuserparts[0];
 
-          var quantities = list.reduce(function (obj, n) {
+          quantities = list.reduce(function (obj, n) {
             if (obj[n]) obj[n]++;
             else obj[n] = 1;
 
@@ -390,9 +387,9 @@ module.exports = {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
           }
-          var list = actuserparts[0];
+          list = actuserparts[0];
 
-          var quantities = list.reduce(function (obj, n) {
+          quantities = list.reduce(function (obj, n) {
             if (obj[n]) obj[n]++;
             else obj[n] = 1;
 
@@ -438,9 +435,9 @@ module.exports = {
             let part2 = actuserparts[0][p];
             console.log(`part: ${part2}`);
           }
-          var list = actuserparts[0];
+          list = actuserparts[0];
 
-          var quantities = list.reduce(function (obj, n) {
+          quantities = list.reduce(function (obj, n) {
             if (obj[n]) obj[n]++;
             else obj[n] = 1;
 
@@ -478,7 +475,7 @@ module.exports = {
         );
 
         if (current !== page) {
-          embed1.setFooter(`Pages ${page}/${actuserparts.length}`);
+          embed1.setFooter({ text: `Pages ${page}/${actuserparts.length}` });
           i.update({ embeds: [embed1] });
         }
         if (current == page) {
@@ -497,28 +494,28 @@ module.exports = {
       // collector2.on('collect', async (i, user) => {
 
       //   if(i.customId.includes("filter")){
-      //     let filtrow = new MessageActionRow()
+      //     let filtrow = new ActionRowBuilder()
       //     .addComponents(
-      //       new MessageButton()
+      //       new ButtonBuilder()
       //       .setLabel("T1")
       //       .setCustomId("t1")
-      //       .setStyle("SUCCESS"),
-      //       new MessageButton()
+      //       .setStyle("Success"),
+      //       new ButtonBuilder()
       //       .setLabel("T2")
       //       .setCustomId("t2")
-      //       .setStyle("SUCCESS"),
-      //       new MessageButton()
+      //       .setStyle("Success"),
+      //       new ButtonBuilder()
       //       .setLabel("T3")
       //       .setCustomId("t3")
-      //       .setStyle("SUCCESS"),
-      //       new MessageButton()
+      //       .setStyle("Success"),
+      //       new ButtonBuilder()
       //       .setLabel("T4")
       //       .setCustomId("t4")
-      //       .setStyle("SUCCESS"),
-      //       new MessageButton()
+      //       .setStyle("Success"),
+      //       new ButtonBuilder()
       //       .setLabel("T5")
       //       .setCustomId("t5")
-      //       .setStyle("SUCCESS")
+      //       .setStyle("Success")
       //     )
 
       //     i.update({components: [row, filtrow]})
@@ -569,31 +566,30 @@ module.exports = {
         actitems = ["No Items"];
       }
 
-      let embed1 = new MessageEmbed()
+      let embed1 = new EmbedBuilder()
         .setTitle(`${target.username}'s items`)
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
-
         .setDescription(`${actitems[0].join("\n")}`)
-        .addField("​", "​")
-        .setColor("#60b0f4");
+        .addFields([{ name: "​", value: "​" }])
+        .setColor(colors.blue);
 
-      let row = new MessageActionRow().addComponents(
-        new MessageButton()
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("previous")
           .setEmoji("◀️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("next")
           .setEmoji("▶️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("first")
           .setEmoji("⏮️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("last")
           .setEmoji("⏭️")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
       await interaction.deferReply();
 
@@ -621,7 +617,7 @@ module.exports = {
         embed1.setDescription(`\n${actitems[page - 1].join("\n")}`);
 
         if (current !== page) {
-          embed1.setFooter(`Pages ${page}/${actitems.length}`);
+          embed1.setFooter({ text: `Pages ${page}/${actitems.length}` });
           i.update({ embeds: [embed1] });
         } else {
           return i.update({ content: "No pages left!" });
@@ -646,38 +642,38 @@ module.exports = {
         sum += 1000000000;
       }
 
-      let embed1 = new MessageEmbed()
+      let embed1 = new EmbedBuilder()
         .setTitle(`${target.username}'s cars`)
         .setDescription(
-          `${displaycars[0].join("\n")}\n\nGarage Value: $${numberWithCommas(
+          `${displaycars[0].join("\n")}\n\nGarage Value: ${toCurrency(
             sum
           )}\n\nGarage Limit: ${cars.length}/${garagelimit}`
         )
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
         .setImage(garageimg)
-        .addField("​", "​");
+        .addFields([{ name: "​", value: "​" }]);
+
       embed1
-        .setFooter(`Page 1/${displaycars.length}`)
+        .setFooter({ text: `Page 1/${displaycars.length}` })
+        .setColor(colors.blue);
 
-        .setColor("#60b0f4");
-
-      let row = new MessageActionRow().addComponents(
-        new MessageButton()
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("previous")
           .setEmoji("◀️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("next")
           .setEmoji("▶️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("first")
           .setEmoji("⏮️")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("last")
           .setEmoji("⏭️")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
       await interaction.deferReply();
 
@@ -702,15 +698,13 @@ module.exports = {
         else if (i.customId.includes("last")) page = displaycars.length;
 
         embed1.setDescription(
-          `${displaycars[page - 1].join(
-            "\n"
-          )}\n\nGarage Value: $${numberWithCommas(sum)}\n\nGarage Limit: ${
-            cars.length
-          }/${garagelimit}`
+          `${displaycars[page - 1].join("\n")}\n\nGarage Value: ${toCurrency(
+            sum
+          )}\n\nGarage Limit: ${cars.length}/${garagelimit}`
         );
 
         if (current !== page) {
-          embed1.setFooter(`Page ${page}/${displaycars.length}`);
+          embed1.setFooter({ text: `Page ${page}/${displaycars.length}` });
           i.update({ embeds: [embed1] });
         } else {
           return i.update({ content: "No pages left!" });
@@ -723,10 +717,6 @@ module.exports = {
       interaction.channel.send(
         `${target}, You just earned the "Car Rich" badge for having a total garage value of $50M!`
       );
-    }
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 };

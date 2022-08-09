@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const Global = require("../schema/global-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,20 +17,14 @@ module.exports = {
     for (let i in itemshop) {
       let item = itemshop[i];
 
-      items.push(
-        `${item.Emote} ${item.Name} : **$${numberWithCommas(item.Price)}**`
-      );
+      items.push(`${item.Emote} ${item.Name} : **${toCurrency(item.Price)}**`);
     }
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle("Daily Item Shop")
       .setDescription(`${items.join("\n\n")}`)
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
 
     interaction.reply({ embeds: [embed] });
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

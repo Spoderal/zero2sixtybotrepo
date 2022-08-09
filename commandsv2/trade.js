@@ -4,6 +4,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -100,17 +102,19 @@ module.exports = {
       if (amount < 1500)
         return interaction.reply(`Minimum of $1.5k cash needed.`);
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(`Your Offer`, `$${numberWithCommas(amount)}`)
-        .addField(
-          `${user2.username}'s Item`,
-          `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`
-        )
-        .setColor("#60b0f4");
+        .addFields([
+          { name: `Your Offer`, value: `${toCurrency(amount)}` },
+          {
+            name: `${user2.username}'s Item`,
+            value: `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`,
+          },
+        ])
+        .setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -205,28 +209,32 @@ module.exports = {
       } else if (itemdb.Other[trading2.toLowerCase()]) {
         itemtype = "Other";
       }
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(`Your Offer`, `$${numberWithCommas(amount)}`);
+        .addFields([{ name: `Your Offer`, value: `${toCurrency(amount)}` }]);
       if (itemtype == "Collectable") {
-        embed.addField(
-          `${user2.username}'s Offer`,
-          `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
-            itemdb[itemtype][0][trading2.toLowerCase()].Name
-          } x${actamount}`
-        );
+        embed.addFields([
+          {
+            name: `${user2.username}'s Offer`,
+            value: `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
+              itemdb[itemtype][0][trading2.toLowerCase()].Name
+            } x${actamount}`,
+          },
+        ]);
       } else {
-        embed.addField(
-          `${user2.username}'s Offer`,
-          `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
-            itemdb[itemtype][trading2.toLowerCase()].Name
-          } x${actamount}`
-        );
+        embed.addFields([
+          {
+            name: `${user2.username}'s Offer`,
+            value: `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
+              itemdb[itemtype][trading2.toLowerCase()].Name
+            } x${actamount}`,
+          },
+        ]);
       }
-      embed.setColor("#60b0f4");
+      embed.setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -304,20 +312,22 @@ module.exports = {
         return interaction.reply(`You don't have this car!`);
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(
-          `Your Offer`,
-          `${cardb.Cars[selected.Name.toLowerCase()].Name}`
-        )
-        .addField(
-          `${user2.username}'s Offer`,
-          `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`
-        )
-        .setColor("#60b0f4");
+        .addFields([
+          {
+            name: `Your Offer`,
+            value: `${cardb.Cars[selected.Name.toLowerCase()].Name}`,
+          },
+          {
+            name: `${user2.username}'s Offer`,
+            value: `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`,
+          },
+        ])
+        .setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -411,28 +421,37 @@ module.exports = {
         return interaction.reply(`You don't have this car!`);
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(`Your Offer`, `${cardb.Cars[trading.toLowerCase()].Name}`);
+        .addFields([
+          {
+            name: `Your Offer`,
+            value: `${cardb.Cars[trading.toLowerCase()].Name}`,
+          },
+        ]);
       if (itemtype == "Collectable") {
-        embed.addField(
-          `${user2.username}'s Offer`,
-          `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
-            itemdb[itemtype][0][trading2.toLowerCase()].Name
-          } x${actamount}`
-        );
+        embed.addFields([
+          {
+            name: `${user2.username}'s Offer`,
+            value: `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
+              itemdb[itemtype][0][trading2.toLowerCase()].Name
+            } x${actamount}`,
+          },
+        ]);
       } else {
-        embed.addField(
-          `${user2.username}'s Offer`,
-          `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
-            itemdb[itemtype][trading2.toLowerCase()].Name
-          } x${actamount}`
-        );
+        embed.addFields([
+          {
+            name: `${user2.username}'s Offer`,
+            value: `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
+              itemdb[itemtype][trading2.toLowerCase()].Name
+            } x${actamount}`,
+          },
+        ]);
       }
-      embed.setColor("#60b0f4");
+      embed.setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -498,14 +517,19 @@ module.exports = {
         return interaction.reply("Settle down you don't have enough cash!");
       if (amount < 1500)
         return interaction.reply(`Minimum of $1.5k cash needed.`);
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(`Your Offer`, `$${amount}`)
-        .addField(`${user2.username}'s Item`, `${cardb.Cars[trading2].Name}`)
-        .setColor("#60b0f4");
+        .addFields([
+          { name: `Your Offer`, value: `$${amount}` },
+          {
+            name: `${user2.username}'s Item`,
+            value: `${cardb.Cars[trading2].Name}`,
+          },
+        ])
+        .setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -564,14 +588,16 @@ module.exports = {
         return interaction.reply("Settle down they don't have enough cash!");
       if (amount < 1500)
         return interaction.reply(`Minimum of $1.5k cash needed.`);
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(`Your Offer`, `${cardb.Cars[trading].Name}`)
-        .addField(`${user2.username}'s Item`, `$${amount}`)
-        .setColor("#60b0f4");
+        .addFields([
+          { name: `Your Offer`, value: `${cardb.Cars[trading].Name}` },
+          { name: `${user2.username}'s Item`, value: `$${amount}` },
+        ])
+        .setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -639,14 +665,19 @@ module.exports = {
       if (selectedu1 !== "No ID")
         return interaction.reply(`${user1} already has this car!`);
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
           `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
         )
-        .addField(`Your Offer`, `${cardb.Cars[trading].Name}`)
-        .addField(`${user2.username}'s Item`, `${cardb.Cars[trading2].Name}`)
-        .setColor("#60b0f4");
+        .addFields([
+          { name: `Your Offer`, value: `${cardb.Cars[trading].Name}` },
+          {
+            name: `${user2.username}'s Item`,
+            value: `${cardb.Cars[trading2].Name}`,
+          },
+        ])
+        .setColor(colors.blue);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
       msg.react("✅");
@@ -710,17 +741,21 @@ module.exports = {
         if (amount > bal)
           return interaction.reply(`The user doesn't have this much cash!`);
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           )
-          .addField(
-            `Your Offer`,
-            `${partdb.Parts[trading.toLowerCase()].Name} x${actamount}`
-          )
-          .addField(`${user2.username}'s Item`, `$${amount}`)
-          .setColor("#60b0f4");
+          .addFields([
+            {
+              name: `Your Offer`,
+              value: `${
+                partdb.Parts[trading.toLowerCase()].Name
+              } x${actamount}`,
+            },
+            { name: `${user2.username}'s Item`, value: `$${amount}` },
+          ])
+          .setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -803,20 +838,26 @@ module.exports = {
         if (!user2parts.includes(trading2.toLowerCase()))
           return interaction.reply(`This user doesn't have this part!`);
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           )
-          .addField(
-            `Your Offer`,
-            `${partdb.Parts[trading.toLowerCase()].Name} x${actamount1}`
-          )
-          .addField(
-            `${user2.username}'s Item`,
-            `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`
-          )
-          .setColor("#60b0f4");
+          .addFields([
+            {
+              name: `Your Offer`,
+              value: `${
+                partdb.Parts[trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+            {
+              name: `${user2.username}'s Item`,
+              value: `${
+                partdb.Parts[trading2.toLowerCase()].Name
+              } x${actamount}`,
+            },
+          ])
+          .setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -928,31 +969,39 @@ module.exports = {
           itemtype = "Other";
         }
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           )
-          .addField(
-            `Your Offer`,
-            `${partdb.Parts[trading.toLowerCase()].Name} x${actamount1}`
-          );
+          .addFields([
+            {
+              name: `Your Offer`,
+              value: `${
+                partdb.Parts[trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         if (itemtype == "Collectable") {
-          embed.addField(
-            `${user2.username}'s Offer`,
-            `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading2.toLowerCase()].Name
-            } x${actamount}`
-          );
+          embed.addFields([
+            {
+              name: `${user2.username}'s Offer`,
+              value: `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
+                itemdb[itemtype][0][trading2.toLowerCase()].Name
+              } x${actamount}`,
+            },
+          ]);
         } else {
-          embed.addField(
-            `${user2.username}'s Offer`,
-            `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
-              itemdb[itemtype][trading2.toLowerCase()].Name
-            } x${actamount}`
-          );
+          embed.addFields([
+            {
+              name: `${user2.username}'s Offer`,
+              value: `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading2.toLowerCase()].Name
+              } x${actamount}`,
+            },
+          ]);
         }
-        embed.setColor("#60b0f4");
+        embed.setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -1042,20 +1091,24 @@ module.exports = {
         if (selected !== "No ID")
           return interaction.reply(`${user1}, you already have that car!`);
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           )
-          .addField(
-            `Your Offer`,
-            `${partdb.Parts[trading.toLowerCase()].Name} x${actamount1}`
-          )
-          .addField(
-            `${user2.username}'s Item`,
-            `${cardb.Cars[trading2.toLowerCase()].Name}`
-          )
-          .setColor("#60b0f4");
+          .addFields([
+            {
+              name: `Your Offer`,
+              value: `${
+                partdb.Parts[trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+            {
+              name: `${user2.username}'s Item`,
+              value: `${cardb.Cars[trading2.toLowerCase()].Name}`,
+            },
+          ])
+          .setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -1159,30 +1212,39 @@ module.exports = {
           );
         if (amount < 1500)
           return interaction.reply(`Minimum of $1.5k cash needed.`);
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           );
         if (itemtype == "Collectable") {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][0][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         } else {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         }
 
         embed
-          .addField(`${user2.username}'s Item`, `$${numberWithCommas(amount)}`)
-          .setColor("#60b0f4");
+          .addFields([
+            {
+              name: `${user2.username}'s Item`,
+              value: `${toCurrency(amount)}`,
+            },
+          ])
+          .setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -1244,32 +1306,40 @@ module.exports = {
         if (!user2parts.includes(trading2.toLowerCase()))
           return interaction.reply(`This user doesn't have this part!`);
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           );
         if (itemtype == "Collectable") {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][0][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         } else {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         }
         embed
-          .addField(
-            `${user2.username}'s Item`,
-            `${partdb.Parts[trading2.toLowerCase()].Name} x${actamount}`
-          )
-          .setColor("#60b0f4");
+          .addFields([
+            {
+              name: `${user2.username}'s Item`,
+              value: `${
+                partdb.Parts[trading2.toLowerCase()].Name
+              } x${actamount}`,
+            },
+          ])
+          .setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -1346,32 +1416,38 @@ module.exports = {
         if (selected2 == "No ID")
           return interaction.reply(`${user2}, you don't have this car!`);
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           );
         if (itemtype == "Collectable") {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][0][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         } else {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         }
         embed
-          .addField(
-            `${user2.username}'s Item`,
-            `${cardb.Cars[trading2.toLowerCase()].Name}`
-          )
-          .setColor("#60b0f4");
+          .addFields([
+            {
+              name: `${user2.username}'s Item`,
+              value: `${cardb.Cars[trading2.toLowerCase()].Name}`,
+            },
+          ])
+          .setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -1446,43 +1522,51 @@ module.exports = {
           itemtype2 = "Other";
         }
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
             `The user has 1 minute to react to this with ✅ to accept the offer, and ❌ to decline the offer.`
           );
         if (itemtype == "Collectable") {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][0][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         } else {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
-              itemdb[itemtype][trading.toLowerCase()].Name
-            } x${actamount1}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
+              } x${actamount1}`,
+            },
+          ]);
         }
         if (itemtype2 == "Collectable") {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype2][0][trading2.toLowerCase()].Emote} ${
-              itemdb[itemtype2][0][trading2.toLowerCase()].Name
-            } x${actamount}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype2][0][trading2.toLowerCase()].Emote} ${
+                itemdb[itemtype2][0][trading2.toLowerCase()].Name
+              } x${actamount}`,
+            },
+          ]);
         } else {
-          embed.addField(
-            `Your Offer`,
-            `${itemdb[itemtype2][trading2.toLowerCase()].Emote} ${
-              itemdb[itemtype2][trading2.toLowerCase()].Name
-            } x${actamount}`
-          );
+          embed.addFields([
+            {
+              name: `Your Offer`,
+              value: `${itemdb[itemtype2][trading2.toLowerCase()].Emote} ${
+                itemdb[itemtype2][trading2.toLowerCase()].Name
+              } x${actamount}`,
+            },
+          ]);
         }
 
-        embed.setColor("#60b0f4");
+        embed.setColor(colors.blue);
 
         let msg = await interaction.reply({
           embeds: [embed],
@@ -1545,10 +1629,6 @@ module.exports = {
       interaction.reply(
         `Error! Did you make sure to specify cash, a car, or a part on the bot?`
       );
-    }
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 };

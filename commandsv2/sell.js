@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -40,7 +41,7 @@ module.exports = {
       userdata.cash += Number(price);
 
       interaction.reply(
-        `You sold your ${selected.Name} for $${numberWithCommas(price)}!`
+        `You sold your ${selected.Name} for ${toCurrency(price)}!`
       );
     } else if (parts.Parts[selling.toLowerCase()]) {
       if (
@@ -69,7 +70,7 @@ module.exports = {
       userdata.parts = userparts;
       let finalamount = amount * resale;
       interaction.reply(
-        `You sold your ${selling} for $${numberWithCommas(finalamount)}!`
+        `You sold your ${selling} for ${toCurrency(finalamount)}!`
       );
     } else if (
       selling.toLowerCase() == "legendary barn maps" ||
@@ -114,9 +115,7 @@ module.exports = {
 
       userdata.cash += finalam;
 
-      interaction.reply(
-        `Sold ${amount} ${selling} for $${numberWithCommas(finalam)}`
-      );
+      interaction.reply(`Sold ${amount} ${selling} for ${toCurrency(finalam)}`);
     } else if (profilestuff.Pfps[selling.toLowerCase()]) {
       userdata.pfps.pull(selling.toLowerCase());
 
@@ -124,9 +123,5 @@ module.exports = {
     }
 
     userdata.save();
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

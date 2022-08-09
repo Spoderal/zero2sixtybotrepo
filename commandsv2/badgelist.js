@@ -1,13 +1,14 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("badgelist")
     .setDescription("Check the available badges to collect"),
-  async execute(interaction) {
-    let embed = new Discord.MessageEmbed()
 
+  async execute(interaction) {
+    let embed = new EmbedBuilder()
       .setTitle(`Badges Available`)
       .setDescription(
         `**Car Collector** = *Own 10 cars*\n
@@ -21,7 +22,7 @@ module.exports = {
        **SECRET** = *SECRET*
        `
       )
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
 
     interaction.reply({ embeds: [embed] });
   },

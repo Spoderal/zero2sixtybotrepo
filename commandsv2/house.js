@@ -3,6 +3,8 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const housedb = require("../data/houses.json");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -54,7 +56,7 @@ module.exports = {
       userdata.cash += housedb[housename].Price;
 
       interaction.reply(
-        `You sold your ${housedb[housename].Name} for $${numberWithCommas(
+        `You sold your ${housedb[housename].Name} for ${toCurrency(
           housedb[housename].Price
         )}`
       );
@@ -65,16 +67,13 @@ module.exports = {
       let perks = house.perks;
       let image = housedb[house.name.toLowerCase()].Image;
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`${house.name}`)
-        .addField("Perks", `${perks.join("\n")}`)
-        .setColor("#60b0f4")
+        .addFields([{ name: "Perks", value: `${perks.join("\n")}` }])
+        .setColor(colors.blue)
         .setImage(image);
 
       interaction.reply({ embeds: [embed] });
     }
   },
 };
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

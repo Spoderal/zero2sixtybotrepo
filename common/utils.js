@@ -3,7 +3,6 @@ function numberWithCommas(x) {
 }
 
 function toCurrency(n) {
-  console.log(n);
   const num = parseInt(n);
   if (num < 0) console.warn("toCurrency: `num` is < 0");
 

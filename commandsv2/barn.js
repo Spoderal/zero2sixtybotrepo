@@ -6,6 +6,8 @@ const ms = require(`pretty-ms`);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,10 +17,12 @@ module.exports = {
       option
         .setName("rarity")
         .setDescription("The barn you want to search")
-        .addChoice("Common", "common")
-        .addChoice("Uncommon", "uncommon")
-        .addChoice("Rare", "rare")
-        .addChoice("Legendary", "legendary")
+        .addChoices(
+          { name: "Common", value: "common" },
+          { name: "Uncommon", value: "uncommon" },
+          { name: "Rare", value: "rare" },
+          { name: "Legendary", value: "legendary" }
+        )
 
         .setRequired(true)
     ),
@@ -79,8 +83,8 @@ module.exports = {
 
     if (barntimer !== null && timeout - (Date.now() - barntimer) > 0) {
       let time = ms(timeout - (Date.now() - barntimer));
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor("#60b0f4")
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
         .setDescription(`Please wait ${time} before searching barns again.`);
       interaction.reply({ embeds: [timeEmbed] });
       return;
@@ -175,7 +179,7 @@ module.exports = {
         interaction.reply(
           `You found a ${
             carindb.Name
-          } but you already have this car, so you found $${numberWithCommas(
+          } but you already have this car, so you found ${toCurrency(
             resale
           )} instead.`
         );
@@ -206,10 +210,12 @@ module.exports = {
           userdata.save();
           break;
       }
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`${namefor} Barn Find`)
-        .addField(`Car`, `${carobj.Name}`)
-        .addField(`ID`, `${carobj.ID}`)
+        .addFields([
+          { nmw: "Car", value: carobj.Name },
+          { nmw: "ID", value: carobj.ID },
+        ])
         .setImage(carobj.Livery)
         .setColor(color);
       interaction.reply({ embeds: [embed] });
@@ -218,7 +224,3 @@ module.exports = {
     pickRandom();
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

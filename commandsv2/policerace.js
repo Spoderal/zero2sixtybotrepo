@@ -4,6 +4,7 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,9 +15,11 @@ module.exports = {
         .setName("tier")
         .setDescription("The police tier to run from")
         .setRequired(true)
-        .addChoice("Tier 1", "1")
-        .addChoice("Tier 2", "2")
-        .addChoice("Tier 3", "3")
+        .addChoices(
+          { name: "Tier 1", value: "1" },
+          { name: "Tier 2", value: "2" },
+          { name: "Tier 3", value: "3" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -29,7 +32,7 @@ module.exports = {
         .setName("options")
         .setDescription("Optional")
         .setRequired(false)
-        .addChoice("Chase", "chase")
+        .addChoices({ name: "Chase", value: "chase" })
     ),
   async execute(interaction) {
     const cars = require("../data/cardb.json");
@@ -46,7 +49,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -87,8 +90,8 @@ module.exports = {
       let timeoutj = job.Timeout;
       if (worked !== null && timeoutj - (Date.now() - worked) > 0) {
         let time = ms(timeoutj - (Date.now() - worked));
-        let timeEmbed = new discord.MessageEmbed()
-          .setColor("#60b0f4")
+        let timeEmbed = new discord.EmbedBuilder()
+          .setColor(colors.blue)
           .setDescription(`You've already worked!\n\nWork again in ${time}.`);
         return interaction.reply({ embeds: [timeEmbed] });
       }
@@ -97,9 +100,9 @@ module.exports = {
       bot3cars = ["2008 bugatti veyron"];
     }
 
-    let errorembed = new discord.MessageEmbed()
+    let errorembed = new discord.EmbedBuilder()
       .setTitle("❌ Error!")
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
       return interaction.reply({ embeds: [errorembed] });
@@ -201,23 +204,25 @@ module.exports = {
     let hp = user1carspeed + newhandling;
     let hp2 = cars.Cars[botcar.toLowerCase()].Speed + othernewhandling;
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`🚨Tier ${bot} chase in progress...🚨`)
-      .addField(
-        `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
-          cars.Cars[selected.toLowerCase()].Name
-        }`,
-        `Speed: ${user1carspeed}\n\n0-60: ${selected.Acceleration}`
-      )
-      .addField(
-        `🚨${cars.Cars[botcar.toLowerCase()].Emote} ${
-          cars.Cars[botcar.toLowerCase()].Name
-        }`,
-        `Speed: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n0-60: ${
-          cars.Cars[botcar.toLowerCase()]["0-60"]
-        }`
-      )
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
+            cars.Cars[selected.toLowerCase()].Name
+          }`,
+          value: `Speed: ${user1carspeed}\n\n0-60: ${selected.Acceleration}`,
+        },
+        {
+          name: `🚨${cars.Cars[botcar.toLowerCase()].Emote} ${
+            cars.Cars[botcar.toLowerCase()].Name
+          }`,
+          value: `Speed: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n0-60: ${
+            cars.Cars[botcar.toLowerCase()]["0-60"]
+          }`,
+        },
+      ])
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let randomobstacle = randomRange(1, 3);
     let randomnum = randomRange(2, 4);
@@ -225,7 +230,7 @@ module.exports = {
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
-        embed.addField("Bonus", "$100");
+        embed.addFields([{ name: "Bonus", value: "$100" }]);
         moneyearnedtxt += 100;
         userdata.cash += 100;
         hp += 1;
@@ -327,7 +332,9 @@ module.exports = {
             }
             let xp2 = randomRange(15, 25);
 
-            embed.addField(`Busted!`, `No earnings from this race`);
+            embed.addFields([
+              { name: `Busted!`, value: `No earnings from this race` },
+            ]);
 
             if (requiredxp !== "MAX") {
               job.EXP += 10;
@@ -339,7 +346,7 @@ module.exports = {
             );
             return interaction.editReply({ embeds: [embed] });
           }
-          embed.addField(`Earnings`, `$${moneyearnedtxt}`);
+          embed.addFields([{ name: `Earnings`, value: `$${moneyearnedtxt}` }]);
 
           interaction.editReply({ embeds: [embed] });
           userdata.cash += Number(moneyearned);

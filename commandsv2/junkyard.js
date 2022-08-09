@@ -6,6 +6,7 @@ const ms = require(`pretty-ms`);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,8 +24,8 @@ module.exports = {
 
     if (barntimer !== null && timeout - (Date.now() - barntimer) > 0) {
       let time = ms(timeout - (Date.now() - barntimer));
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor("#60b0f4")
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
         .setDescription(
           `Please wait ${time} before searching junkyards again.`
         );
@@ -74,10 +75,10 @@ module.exports = {
       await cooldowndata.save();
       userdata.parts.push(part.Name.toLowerCase());
       await userdata.save();
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`${rarity.type} Part Find`)
-        .addField(`Part`, `${part.Name}`)
-        .setColor("#60b0f4");
+        .addFields([{ name: `Part`, value: `${part.Name}` }])
+        .setColor(colors.blue);
       interaction.reply({ embeds: [embed] });
     }
 

@@ -1,19 +1,21 @@
+const {
+  ActionRowBuilder,
+  SelectMenuBuilder,
+  EmbedBuilder,
+} = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const parts = require("../data/partsdb.json");
 const cars = require("../data/cardb.json");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const {
-  MessageActionRow,
-  MessageSelectMenu,
-  MessageEmbed,
-} = require("discord.js");
+const colors = require("../common/colors");
+const { numberWithCommas } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("blackmarket")
     .setDescription("Check the blackmarket"),
   async execute(interaction) {
-    const row = new MessageActionRow().addComponents(
-      new MessageSelectMenu()
+    const row = new ActionRowBuilder().addComponents(
+      new SelectMenuBuilder()
         .setCustomId("select")
         .setPlaceholder("Select an item")
         .addOptions([
@@ -32,15 +34,18 @@ module.exports = {
         ])
     );
 
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
       .setTitle("Black Market")
       .setThumbnail("https://i.ibb.co/89GbzcB/Logo-Makr-8u-BQuo.png")
-      .addField(
-        `Available Parts`,
-        "*Choose an item from the drop down below*\n\n**Exclusive parts you can only buy with gold!**",
-        true
-      )
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `Available Parts`,
+          value:
+            "*Choose an item from the drop down below*\n\n**Exclusive parts you can only buy with gold!**",
+          inline: true,
+        },
+      ])
+      .setColor(colors.blue)
       .setDescription(
         `\`/buy (part)\` to buy a part\n\n[Official Server](https://discord.gg/bHwqpxJnJk)\n[Buy me a coffee!](https://www.buymeacoffee.com/zero2sixty)`
       );
@@ -63,10 +68,10 @@ module.exports = {
             const value = collected.values[0];
             if (value === "parts") {
               let embed2;
-              embed2 = new MessageEmbed()
+              embed2 = new EmbedBuilder()
 
                 .setTitle("Black Market Parts")
-                .setFooter('Tip: Purchase a part with "/buy [part]"')
+                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
                 .setDescription(
                   `**
        Page 1\n
@@ -97,15 +102,15 @@ module.exports = {
     
        **`
                 )
-                .setColor("#60b0f4")
+                .setColor(colors.blue)
                 .setThumbnail("https://i.ibb.co/sP3F1p2/exhaustdefault.png");
               interaction.editReply({ embeds: [embed2], components: [row] });
             } else if (value === "cars") {
               let embed2;
-              embed2 = new MessageEmbed()
+              embed2 = new EmbedBuilder()
 
                 .setTitle("Cars")
-                .setFooter('Tip: Purchase a part with "/buy [part]"')
+                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
                 .setDescription(
                   `**
     Page 1\n
@@ -144,7 +149,7 @@ module.exports = {
     
     **`
                 )
-                .setColor("#60b0f4")
+                .setColor(colors.blue)
                 .setThumbnail("https://i.ibb.co/NKHhh2r/tiresdefault.png");
               interaction.editReply({ embeds: [embed2], components: [row] });
             }
@@ -153,9 +158,5 @@ module.exports = {
           return msg.reply(`Error: ${err}`);
         }
       });
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

@@ -5,6 +5,7 @@ const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,8 +18,10 @@ module.exports = {
         .setDescription(
           "Decide if you want to claim a reward from a crew or season"
         )
-        .addChoice("Season", "season")
-        .addChoice("Crew", "crew")
+        .addChoices(
+          { name: "Season", value: "season" },
+          { name: "Crew", value: "crew" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -195,8 +198,8 @@ module.exports = {
 
       if (joined !== null && timeout - (Date.now() - joined) > 0) {
         let time = ms(timeout - (Date.now() - joined));
-        let timeEmbed = new discord.MessageEmbed()
-          .setColor("#60b0f4")
+        let timeEmbed = new discord.EmbedBuilder()
+          .setColor(colors.blue)
           .setDescription(
             `You need to be in this crew for ${time} before claiming rewards.`
           );

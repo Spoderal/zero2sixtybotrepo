@@ -1,9 +1,12 @@
 const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -44,9 +47,9 @@ module.exports = {
     var item = interaction.options.getString("item");
 
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
-      let handlingemote = "<:handling:983963211403505724>";
-      let speedemote = "<:speedemote:983963212393357322>";
-      let accelerationemote = "<:zerosixtyemote:983963210304614410>";
+      let handlingemote = emotes.handling;
+      let speedemote = emotes.speed;
+      let accelerationemote = emotes.zero2sixty;
 
       let car = item.toLowerCase();
       let carindb = list[car];
@@ -54,20 +57,38 @@ module.exports = {
 
       let trims = carindb.Trims || ["❌ No Trims"];
       let sellprice = carindb.Price * 0.65;
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Stats for ${carindb.Emote} ${carindb.Name}`)
-        .addField(`Speed`, `${speedemote} ${carindb.Speed}`, true)
-        .addField(
-          `Acceleration`,
-          `${accelerationemote} ${carindb["0-60"]}`,
-          true
-        )
-        .addField(`Handling`, `${handlingemote} ${carindb.Handling}`, true)
-        .addField(`Price`, `$${numberWithCommas(carindb.Price)}`, true)
-        .addField(`Sell Price`, `$${numberWithCommas(sellprice)}`, true)
-        .addField(`Trims`, `${trims.join("\n")}`, true)
+        .addFields([
+          {
+            name: `Speed`,
+            value: `${speedemote} ${carindb.Speed}`,
+            inline: true,
+          },
+          {
+            name: `Acceleration`,
+            value: `${accelerationemote} ${carindb["0-60"]}`,
+            inline: true,
+          },
+          {
+            name: `Handling`,
+            value: `${handlingemote} ${carindb.Handling}`,
+            inline: true,
+          },
+          {
+            name: `Price`,
+            value: `${toCurrency(carindb.Price)}`,
+            inline: true,
+          },
+          {
+            name: `Sell Price`,
+            value: `${toCurrency(sellprice)}`,
+            inline: true,
+          },
+          { name: `Trims`, value: `${trims.join("\n")}`, inline: true },
+        ])
 
-        .setColor("#60b0f4")
+        .setColor(colors.blue)
 
         .setImage(carindb.Image);
 
@@ -80,7 +101,7 @@ module.exports = {
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID") {
-        let errembed = new Discord.MessageEmbed()
+        let errembed = new Discord.EmbedBuilder()
           .setTitle("Error!")
           .setColor("DARK_RED")
           .setDescription(
@@ -89,44 +110,62 @@ module.exports = {
         return interaction.reply({ embeds: [errembed] });
       }
 
-      let handlingemote = "<:handling:983963211403505724>";
-      let speedemote = "<:speedemote:983963212393357322>";
-      let accelerationemote = "<:zerosixtyemote:983963210304614410>";
+      let handlingemote = emotes.handling;
+      let speedemote = emotes.speed;
+      let accelerationemote = emotes.zero2sixty;
 
       let carindb = selected;
       let sellprice = selected.Price || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       console.log(sellprice);
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
         )
-        .addField(`Speed`, `${speedemote} ${carindb.Speed} MPH`, true)
-        .addField(
-          `Acceleration`,
-          `${accelerationemote} ${carindb.Acceleration}s`,
-          true
-        )
-        .addField(`Handling`, `${handlingemote} ${carindb.Handling}`, true)
-        .addField(`Drift`, `${handlingemote} ${cardrift}`, true)
-        .addField(`Sell Price`, `$${numberWithCommas(sellprice)}`, true)
-        .addField(`\u200b`, `\u200b`, true)
+        .addFields([
+          {
+            name: `Speed`,
+            value: `${speedemote} ${carindb.Speed} MPH`,
+            inline: true,
+          },
+          {
+            name: `Acceleration`,
+            value: `${accelerationemote} ${carindb.Acceleration}s`,
+            inline: true,
+          },
+          {
+            name: `Handling`,
+            value: `${handlingemote} ${carindb.Handling}`,
+            inline: true,
+          },
+          {
+            name: `Drift`,
+            value: `${handlingemote} ${cardrift}`,
+            inline: true,
+          },
+          {
+            name: `Sell Price`,
+            value: `${toCurrency(sellprice)}`,
+            inline: true,
+          },
+          { name: `\u200b`, value: `\u200b`, inline: true },
+        ])
 
-        .setColor("#60b0f4")
+        .setColor(colors.blue)
 
         .setImage(carimage);
-      let row = new MessageActionRow().addComponents(
-        new MessageButton()
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("parts")
           .setEmoji("⚙️")
           .setLabel("Parts")
-          .setStyle("SECONDARY"),
-        new MessageButton()
+          .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("stats")
           .setEmoji("📈")
           .setLabel("Stats")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
 
       let msg = await interaction.reply({
@@ -166,41 +205,81 @@ module.exports = {
           let engineemote = partindb[engine.toLowerCase()].Emote || "🔵";
           let turboemote = partindb[turbo.toLowerCase()].Emote || "🔵";
 
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
             .setTitle(
               `Parts for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
             )
-            .addField(`Exhaust`, `${exhaustemote} ${exhaust}`, true)
-            .addField(`Intake`, `${intakeemote} ${intake}`, true)
-            .addField(`Tires`, `${tiresemote} ${tires}`, true)
-            .addField(`Turbo`, `${turboemote} ${turbo}`, true)
-            .addField(`Suspension`, `${suspensionemote} ${suspension}`, true)
-            .addField(`Clutch`, `${clutchemote} ${clutch}`, true)
-            .addField(`ECU`, `${ecuemote} ${ecu}`, true)
-            .addField(`Engine`, `${engineemote} ${engine}`, true)
-            .addField(`\u200b`, `\u200b`, true)
+            .addFields([
+              {
+                name: `Exhaust`,
+                value: `${exhaustemote} ${exhaust}`,
+                inline: true,
+              },
+              {
+                name: `Intake`,
+                value: `${intakeemote} ${intake}`,
+                inline: true,
+              },
+              { name: `Tires`, value: `${tiresemote} ${tires}`, inline: true },
+              { name: `Turbo`, value: `${turboemote} ${turbo}`, inline: true },
+              {
+                name: `Suspension`,
+                value: `${suspensionemote} ${suspension}`,
+                inline: true,
+              },
+              {
+                name: `Clutch`,
+                value: `${clutchemote} ${clutch}`,
+                inline: true,
+              },
+              { name: `ECU`, value: `${ecuemote} ${ecu}`, inline: true },
+              {
+                name: `Engine`,
+                value: `${engineemote} ${engine}`,
+                inline: true,
+              },
+              { name: `\u200b`, value: `\u200b`, inline: true },
+            ])
 
-            .setColor("#60b0f4")
+            .setColor(colors.blue)
             .setImage(carimage);
           i.update({ embeds: [embed] });
         } else if (i.customId.includes("stats")) {
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
             .setTitle(
               `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
             )
-            .addField(`Speed`, `${speedemote} ${carindb.Speed}`, true)
-            .addField(
-              `Acceleration`,
-              `${accelerationemote} ${carindb.Acceleration}`,
-              true
-            )
-            .addField(`Handling`, `${handlingemote} ${carindb.Handling}`, true)
-            .addField(`Drift`, `${handlingemote} ${cardrift}`, true)
-            .addField(`Sell Price`, `$${numberWithCommas(sellprice)}`, true)
-            .addField(`\u200b`, `\u200b`, true)
-            .addField(`\u200b`, `\u200b`, true)
+            .addFields([
+              {
+                name: `Speed`,
+                value: `${speedemote} ${carindb.Speed}`,
+                inline: true,
+              },
+              {
+                name: `Acceleration`,
+                value: `${accelerationemote} ${carindb.Acceleration}`,
+                inline: true,
+              },
+              {
+                name: `Handling`,
+                value: `${handlingemote} ${carindb.Handling}`,
+                inline: true,
+              },
+              {
+                name: `Drift`,
+                value: `${handlingemote} ${cardrift}`,
+                inline: true,
+              },
+              {
+                name: `Sell Price`,
+                value: `${toCurrency(sellprice)}`,
+                inline: true,
+              },
+              { name: `\u200b`, value: `\u200b`, inline: true },
+              { name: `\u200b`, value: `\u200b`, inline: true },
+            ])
 
-            .setColor("#60b0f4")
+            .setColor(colors.blue)
 
             .setImage(carimage);
           i.update({ embeds: [embed] });
@@ -239,16 +318,12 @@ module.exports = {
         );
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Stats for ${partindb.Emote} ${partindb.Name}`)
         .setDescription(`${stats.join("\n")}`)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
-    }
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 };

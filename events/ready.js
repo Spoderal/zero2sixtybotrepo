@@ -12,6 +12,7 @@ const db = require("quick.db");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
+const { numberWithCommas } = require("../common/utils");
 
 let mongoConfig = {
   keepAlive: true,
@@ -109,7 +110,3 @@ module.exports = {
     })();
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

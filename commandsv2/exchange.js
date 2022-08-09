@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -9,14 +10,15 @@ module.exports = {
       option
         .setName("item")
         .setDescription("The item to exchange gold for")
-        .addChoice("Cash", "cash")
-        .addChoice("Rare Keys", "rkeys")
-        .addChoice("Exotic Keys", "ekeys")
-        .addChoice("Uncommon Barn Maps", "ubmaps")
-        .addChoice("Rare Barn Maps", "rbmaps")
-        .addChoice("Legendary Barn Maps", "lbmaps")
-        .addChoice("Super Wheel Spins", "swspins")
-
+        .addChoices(
+          { name: "Cash", value: "cash" },
+          { name: "Rare Keys", value: "rkeys" },
+          { name: "Exotic Keys", value: "ekeys" },
+          { name: "Uncommon Barn Maps", value: "ubmaps" },
+          { name: "Rare Barn Maps", value: "rbmaps" },
+          { name: "Legendary Barn Maps", value: "lbmaps" },
+          { name: "Super Wheel Spins", value: "swspins" }
+        )
         .setRequired(true)
     )
     .addNumberOption((option) =>
@@ -44,7 +46,7 @@ module.exports = {
       userdata.save();
 
       interaction.reply(
-        `Converted ${toturnin} gold into $${numberWithCommas(finalamount)}`
+        `Converted ${toturnin} gold into ${toCurrency(finalamount)}`
       );
     } else if (toconv == "rkeys") {
       let finalamount = toturnin * 2.5;
@@ -97,6 +99,3 @@ module.exports = {
     }
   },
 };
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

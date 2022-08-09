@@ -4,14 +4,14 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const { Client, Intents, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
 
 const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-    Intents.FLAGS.GUILD_MESSAGES,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildMessages,
   ],
   shards: "auto",
 });
@@ -75,7 +75,6 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
     }
     client.commands.set(command.data.name, command);
   }
-  // console.log(JSON.stringify(commands, null, 2));
 
   const eventFiles = fs
     .readdirSync("./events")
@@ -87,7 +86,9 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
     if (event.once) {
       client.once(event.name, (...args) => event.execute(...args, commands));
     } else {
-      client.on(event.name, (...args) => event.execute(...args, commands));
+      client.on(event.name, async (...args) =>
+        event.execute(...args, commands)
+      );
     }
   }
 

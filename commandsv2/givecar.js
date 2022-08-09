@@ -1,5 +1,4 @@
 const db = require("quick.db");
-const discord = require("discord.js");
 const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 
@@ -62,9 +61,6 @@ module.exports = {
       interaction.reply(
         `Gave <@${givingto.id}> a ${cars.Cars[togive.toLowerCase()].Name}`
       );
-    }
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 };

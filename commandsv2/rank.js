@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const prestiges = require("../data/prestige.json");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,7 +25,7 @@ module.exports = {
     let patron2 =
       userdata.patron.required || prestiges[newprestige2].RaceRequired;
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle(`${user.username}'s ranks`)
       .setDescription(
         `
@@ -34,26 +35,27 @@ module.exports = {
       
       `
       )
-      .addField(
-        "Prestige Ranks",
-        `*Prestige resets your cash balance and RP*
-      \nPrestige 1: 0.1x cash earnings
-      \nPrestige 2: 0.2x cash earnings
-      \nPrestige 3: 0.3x cash earnings
-      \nPrestige 4: 0.4x cash earnings
-      \nPrestige 5: 0.5x cash earnings
-      \nPrestige 6: 0.6x cash earnings
-      \nPrestige 7: 0.7x cash earnings
-      \nPrestige 8: 0.8x cash earnings
-      \nPrestige 9: 0.9x cash earnings
-      \nPrestige 10: 1x cash earnings
-      \nPrestige 11: 1.1x cash earnings
+      .addFields([
+        {
+          name: "Prestige Ranks",
+          value: `
+            *Prestige resets your cash balance and RP*\n
+            Prestige 1: 0.1x cash earnings\n
+            Prestige 2: 0.2x cash earnings\n
+            Prestige 3: 0.3x cash earnings\n
+            Prestige 4: 0.4x cash earnings\n
+            Prestige 5: 0.5x cash earnings\n
+            Prestige 6: 0.6x cash earnings\n
+            Prestige 7: 0.7x cash earnings\n
+            Prestige 8: 0.8x cash earnings\n
+            Prestige 9: 0.9x cash earnings\n
+            Prestige 10: 1x cash earnings\n
+            Prestige 11: 1.1x cash earnings
+          `,
+        },
+      ])
 
-      
-      `
-      )
-
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
 
     interaction.reply({ embeds: [embed] });
   },

@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -19,23 +20,21 @@ module.exports = {
       option
         .setName("item")
         .setDescription("The amount")
-        .addChoice("Cash", "cash")
-        .addChoice("Rare Keys", "rkeys")
-        .addChoice("Common Keys", "ckeys")
-        .addChoice("Exotic Keys", "ekeys")
-        .addChoice("Common Barn Maps", "cmaps")
-        .addChoice("Uncommon Barn Maps", "ucmaps")
-        .addChoice("Rare Barn Maps", "rmaps")
-        .addChoice("Legendary Barn Maps", "lmaps")
-        .addChoice("Wheel spins", "wheelspins")
-        .addChoice("Super wheel spins", "swheelspins")
+        .addChoices(
+          { name: "Cash", value: "cash" },
+          { name: "Rare Keys", value: "rkeys" },
+          { name: "Common Keys", value: "ckeys" },
+          { name: "Exotic Keys", value: "ekeys" },
+          { name: "Common Barn Maps", value: "cmaps" },
+          { name: "Uncommon Barn Maps", value: "ucmaps" },
+          { name: "Rare Barn Maps", value: "rmaps" },
+          { name: "Legendary Barn Maps", value: "lmaps" },
+          { name: "Wheel spins", value: "wheelspins" },
+          { name: "Super wheel spins", value: "swheelspins" }
+        )
         .setRequired(true)
     ),
   async execute(interaction) {
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     if (
       interaction.user.id !== "937967206652837928" &&
       interaction.user.id !== "890390158241853470" &&

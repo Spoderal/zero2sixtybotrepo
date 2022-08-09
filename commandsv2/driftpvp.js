@@ -5,6 +5,9 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const Global = require("../schema/global-schema");
+const { colors } = require("../common/colors");
+const { emotes } = require("../common/emotes");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pvpdrift")
@@ -14,9 +17,11 @@ module.exports = {
         .setName("track")
         .setDescription("The track you want to drift on")
         .setRequired(true)
-        .addChoice("Regular", "regular")
-        .addChoice("Mountain", "mountain")
-        .addChoice("Parking Lot", "parking")
+        .addChoices(
+          { name: "Regular", value: "regular" },
+          { name: "Mountain", value: "mountain" },
+          { name: "Parking Lot", value: "parking" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -49,7 +54,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -61,7 +66,7 @@ module.exports = {
     let filteredcar2 = userdata2.cars.filter((car) => car.ID == idtoselect2);
     let selected2 = filteredcar2[0] || "No ID";
     if (selected2 == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -80,11 +85,11 @@ module.exports = {
 
       return interaction.reply(`Please wait ${time} before racing again.`);
     }
-    let semote = "<:speedemote:983963212393357322>";
-    let hemote = "<:handling:983963211403505724>";
-    let zemote = "<:zerosixtyemote:983963210304614410>";
-    let cemote = "<:zecash:983966383408832533>";
-    let rpemote = "<:rp:983968476060336168>";
+    let semote = emotes.speed;
+    let hemote = emotes.handling;
+    let zemote = emotes.zero2sixty;
+    let cemote = emotes.cash;
+    let rpemote = emotes.rp;
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
       return interaction.reply("This car is too junked to race, sorry!");
@@ -163,23 +168,24 @@ module.exports = {
     let tip = lodash.sample(tips);
     let y;
     let itemusedp;
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`Drift PVP in progress...`)
-      .addField(
-        `${user.username} ${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-        `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}\n\n Drift: ${driftscore}`,
-        true
-      )
-      .addField(
-        `${user2.username} ${actualhelmet2.Emote} ${
-          cars.Cars[botcar.toLowerCase()].Emote
-        } ${cars.Cars[botcar.toLowerCase()].Name}`,
-        `${semote} Speed: ${user2carspeed} MPH\n\n${zemote} 0-60: ${user2carzerosixty}s\n\n${hemote} Handling: ${user2carhandling}\n\n Drift: ${driftscore}`,
-        true
-      )
-      .setColor("#60b0f4")
-
-      .setFooter(`${tip}`)
+      .addFields([
+        {
+          name: `${user.username} ${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
+          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}\n\n Drift: ${driftscore}`,
+          inline: true,
+        },
+        {
+          name: `${user2.username} ${actualhelmet2.Emote} ${
+            cars.Cars[botcar.toLowerCase()].Emote
+          } ${cars.Cars[botcar.toLowerCase()].Name}`,
+          value: `${semote} Speed: ${user2carspeed} MPH\n\n${zemote} 0-60: ${user2carzerosixty}s\n\n${hemote} Handling: ${user2carhandling}\n\n Drift: ${driftscore}`,
+          inline: true,
+        },
+      ])
+      .setColor(colors.blue)
+      .setFooter({ text: tip })
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
 
     tracklength += new62;
@@ -262,13 +268,20 @@ module.exports = {
             userdata.driftxp = 0;
           }
 
-          embed.addField("Earnings", `${cemote} ${earningsresult.join("\n")}`);
+          embed.addFields([
+            {
+              name: "Earnings",
+              value: `${cemote} ${earningsresult.join("\n")}`,
+            },
+          ]);
 
           let globalvars = await Global.findOne();
 
           if (globalvars.double == true) {
             moneyearned = moneyearned += moneyearned;
-            embed.addField("Double Cash Weekend!", `\u200b`);
+            embed.addFields([
+              { name: "Double Cash Weekend!", value: `\u200b` },
+            ]);
             moneyearnedtxt = `$${moneyearned}`;
           }
           interaction.editReply({ embeds: [embed] });
@@ -346,13 +359,20 @@ module.exports = {
             userdata2.racexp = 0;
           }
 
-          embed.addField("Earnings", `${cemote} ${earningsresult.join("\n")}`);
+          embed.addFields([
+            {
+              name: "Earnings",
+              value: `${cemote} ${earningsresult.join("\n")}`,
+            },
+          ]);
 
           let globalvars = await Global.findOne();
 
           if (globalvars.double == true) {
             moneyearned = moneyearned += moneyearned;
-            embed.addField("Double Cash Weekend!", `\u200b`);
+            embed.addFields([
+              { name: "Double Cash Weekend!", value: `\u200b` },
+            ]);
             moneyearnedtxt = `$${moneyearned}`;
           }
           interaction.editReply({ embeds: [embed] });

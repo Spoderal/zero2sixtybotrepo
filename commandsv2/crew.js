@@ -1,11 +1,14 @@
 const db = require("quick.db");
 const Discord = require("discord.js");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const icons = require("../data/crewicons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const crewicons = require("../data/crewicons.json");
 const Global = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { numberWithCommas } = require("../common/utils");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,14 +23,19 @@ module.exports = {
             .setName("option")
             .setDescription("Join, create, leave, and more")
             .setRequired(true)
-            .addChoice("Join", "join")
-            .addChoice("Leave", "leave")
-            .addChoice("View", "view")
-            .addChoice("Create", "create")
-            .addChoice("Global Leaderboard", "leaderboard")
-            .addChoice("Set Icon (crew owner)", "icon")
-            .addChoice("Delete (DANGEROUS)", "delete")
-            .addChoice("Approve Icon (BOT SUPPORT)", "approveico")
+            .addChoices(
+              { name: "Join", value: "join" },
+              { name: "Leave", value: "leave" },
+              { name: "View", value: "view" },
+              { name: "Create", value: "create" },
+              { name: "Global Leaderboard", value: "leaderboard" },
+              { name: "Set Icon (crew owner)", value: "icon" },
+              { name: "Delete (DANGEROUS)", value: "delete" },
+              {
+                name: "Approve Icon (BOT SUPPORT)",
+                value: "approveico",
+              }
+            )
         )
         .addStringOption((option) =>
           option.setName("name").setDescription("The name of the crew or icon")
@@ -57,7 +65,7 @@ module.exports = {
         if (!crew2[0]) return interaction.reply("That crew doesn't exist!");
         crew2 = crew2[0];
         let rpmembers = crew2.members;
-        let emoji = "<:zerorp:939078761234698290>";
+        let emoji = emotes.zerorp;
         var finalLb = "";
         let total = 0;
         let rparray = [];
@@ -82,29 +90,30 @@ module.exports = {
 
         let icon = crew2.icon || icons.Icons.default;
         let mlength = crew2.members.length;
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`Info for ${crew2.name}`)
           .setThumbnail(icon)
-          .addField(
-            "Information",
-            `${mlength} members\n\nRank ${crew2.Rank}\n\nRP: ${total}\n\nCrew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}`,
-            true
-          )
-          .addField("Leaderboard", `${finalLb}`, true)
+          .addFields([
+            {
+              name: "Information",
+              value: `${mlength} members\n\nRank ${crew2.Rank}\n\nRP: ${total}\n\nCrew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}`,
+              inline: true,
+            },
+            { name: "Leaderboard", value: `${finalLb}`, inline: true },
+          ])
+          .setColor(colors.blue);
 
-          .setColor("#60b0f4");
-
-        let row = new MessageActionRow().addComponents(
-          new MessageButton()
+        let row = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
             .setCustomId("season")
             .setEmoji("💵")
             .setLabel("Season 1")
-            .setStyle("SECONDARY"),
-          new MessageButton()
+            .setStyle("Secondary"),
+          new ButtonBuilder()
             .setCustomId("stats")
             .setEmoji("📊")
             .setLabel("Stats")
-            .setStyle("SECONDARY")
+            .setStyle("Secondary")
         );
 
         interaction
@@ -120,8 +129,8 @@ module.exports = {
 
             collector.on("collect", async (i) => {
               if (i.customId.includes("season")) {
-                let crewseason =
-                  require("../data/seasons.json").Seasons.Crew1.Rewards;
+                let crewseason = require("../data/seasons.json").Seasons.Crew1
+                  .Rewards;
                 let reward = [];
                 for (var w in crewseason) {
                   let item = crewseason[w];
@@ -134,7 +143,9 @@ module.exports = {
                 }
                 embed.setTitle(`Season 1 for ${crew2.crewname}`);
                 embed.fields = [];
-                embed.addField("Rewards", `${reward.join("\n")}`);
+                embed.addFields([
+                  { name: "Rewards", value: `${reward.join("\n")}` },
+                ]);
 
                 await i.update({ embeds: [embed] });
               } else if (i.customId.includes("stats")) {
@@ -142,14 +153,15 @@ module.exports = {
                 embed
                   .setTitle(`Info for ${crew2.name}`)
                   .setThumbnail(icon)
-                  .addField(
-                    "Information",
-                    `${crew2.members.length} members\n\nRank ${crew2.Rank}\n\nRP: ${total}\n\nCrew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}`,
-                    true
-                  )
-                  .addField("Leaderboard", `${finalLb}`, true)
-
-                  .setColor("#60b0f4");
+                  .addFields([
+                    {
+                      name: "Information",
+                      value: `${crew2.members.length} members\n\nRank ${crew2.Rank}\n\nRP: ${total}\n\nCrew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}`,
+                      inline: true,
+                    },
+                    { name: "Leaderboard", value: `${finalLb}`, inline: true },
+                  ])
+                  .setColor(colors.blue);
 
                 await i.update({ embeds: [embed] });
               }
@@ -255,13 +267,13 @@ module.exports = {
         global.save();
         userdata.crew = crewobj;
         userdata.save();
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`${crewname}`)
           .setThumbnail(crewicons.Icons.Default)
           .setDescription(
             `✅ Created a crew with the name ${crewname}, and the owner as <@${interaction.user.id}>`
           )
-          .setColor("#60b0f4");
+          .setColor(colors.blue);
 
         interaction.reply({ embeds: [embed] });
       } else if (option == "leave") {
@@ -339,7 +351,7 @@ module.exports = {
         interaction.reply(
           "What crew icon would you like to submit? **Send an image below**"
         );
-        const filter = (m = discord.Message) => {
+        const filter = (m = Discord.Message) => {
           return m.author.id === interaction.user.id;
         };
         let collector = interaction.channel.createMessageCollector({
@@ -353,11 +365,11 @@ module.exports = {
             m.attachments.forEach((attachment) => {
               ImageLink = attachment.url;
             });
-            let embed = new Discord.MessageEmbed()
+            let embed = new Discord.EmbedBuilder()
               .setImage(ImageLink)
               .setDescription("Crew icon submitted for review!")
-              .addField(`Crew Name`, `${crewname}`)
-              .setColor("#60b0f4");
+              .addFields([{ name: `Crew Name`, value: `${crewname}` }])
+              .setColor(colors.blue);
             m.reply({ embeds: [embed] });
             let submitchannel =
               interaction.client.channels.cache.get("931078225021521920");
@@ -410,9 +422,9 @@ module.exports = {
           let bal = members[i].Rank;
           desc += `${i + 1}. ${user} - Rank ${numberWithCommas(bal)}\n`;
         }
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle("Crew Leaderboard")
-          .setColor("#60b0f4")
+          .setColor(colors.blue)
           .setDescription(desc);
 
         setTimeout(() => {
@@ -454,6 +466,3 @@ module.exports = {
     }
   },
 };
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

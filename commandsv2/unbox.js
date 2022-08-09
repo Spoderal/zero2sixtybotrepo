@@ -1,7 +1,8 @@
 const lodash = require("lodash");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,11 +12,13 @@ module.exports = {
       option
         .setName("crate")
         .setDescription("The crate you want to unbox")
-        .addChoice("Common", "common")
-        .addChoice("Rare", "rare")
-        .addChoice("Exotic", "exotic")
-        .addChoice("Drift", "drift")
-        .addChoice("Z Crate 1", "z crate 1")
+        .addChoices(
+          { name: "Common", value: "common" },
+          { name: "Rare", value: "rare" },
+          { name: "Exotic", value: "exotic" },
+          { name: "Drift", value: "drift" },
+          { name: "Z Crate 1", value: "z crate 1" }
+        )
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -162,13 +165,13 @@ module.exports = {
         return;
       }
 
-      let embed = new MessageEmbed()
+      let embed = new EmbedBuilder()
         .setTitle(`${rarity.type} Car Find`)
-        .addField(`Car`, `${car.Name}`)
+        .addFields([{ name: `Car`, value: `${car.Name}` }])
         .setImage(`${car.Image}`)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
       if (car.StatTrack) {
-        embed.addField(`Stack Track!`, `\u200b`);
+        embed.addFields([{ name: `Stack Track!`, value: `\u200b` }]);
       }
       userdata.cars.push(carobj);
       interaction.reply({ embeds: [embed] });
@@ -196,22 +199,24 @@ module.exports = {
         return;
       }
 
-      let embedfinal = new MessageEmbed()
+      let embedfinal = new EmbedBuilder()
         .setTitle(`Unboxing ${bought} crate...`)
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
 
       interaction.reply({ embeds: [embedfinal] });
       setTimeout(() => {
         userdata.cars.push(carobj);
         embedfinal.setTitle(`Unboxed ${bought} crate!`);
-        embedfinal.addField(
-          `Car`,
-          `${cars.Cars[randomitem].Emote} ${cars.Cars[randomitem].Name}`
-        );
-        embedfinal.addField(
-          `ID`,
-          `${cars.Cars[randomitem].Emote} ${cars.Cars[randomitem].alias}`
-        );
+        embedfinal.addFields([
+          {
+            name: `Car`,
+            value: `${cars.Cars[randomitem].Emote} ${cars.Cars[randomitem].Name}`,
+          },
+          {
+            name: `ID`,
+            value: `${cars.Cars[randomitem].Emote} ${cars.Cars[randomitem].alias}`,
+          },
+        ]);
         embedfinal.setImage(cars.Cars[randomitem].Image);
         interaction.editReply({ embeds: [embedfinal] });
       }, 1000);
