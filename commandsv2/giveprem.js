@@ -11,14 +11,15 @@ module.exports = {
         .setName("tier")
         .setDescription("The premium tier to give")
         .setRequired(true)
-        .addChoice("Tier 1", "1")
-        .addChoice("Tier 2", "2")
-        .addChoice("Tier 3", "3")
-        .addChoice("Starter Pack JDM", "spj")
-        .addChoice("Starter Pack American Muscle", "spa")
-        .addChoice("Starter Pack Euro", "spe")
-
-        .addChoice("Booster", "b")
+        .addChoices(
+          { name: "Tier 1", value: "1" },
+          { name: "Tier 2", value: "2" },
+          { name: "Tier 3", value: "3" },
+          { name: "Starter Pack JDM", value: "spj" },
+          { name: "Starter Pack American Muscle", value: "spa" },
+          { name: "Starter Pack Euro", value: "spe" },
+          { name: "Booster", value: "b" }
+        )
     )
     .addUserOption((option) =>
       option

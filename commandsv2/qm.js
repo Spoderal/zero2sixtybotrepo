@@ -1,11 +1,13 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 // const discord = require("discord.js");
-const { MessageActionRow, MessageButton, MessageEmbed } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,13 +18,15 @@ module.exports = {
         .setName("tier")
         .setDescription("The bot tier to race")
         .setRequired(true)
-        .addChoice("Tier 1", "1")
-        .addChoice("Tier 2", "2")
-        .addChoice("Tier 3", "3")
-        .addChoice("Tier 4", "4")
-        .addChoice("Tier 5", "5")
-        .addChoice("Tier 6", "6")
-        .addChoice("Tier 7", "7")
+        .addChoices(
+          { name: "Tier 1", value: "1" },
+          { name: "Tier 2", value: "2" },
+          { name: "Tier 3", value: "3" },
+          { name: "Tier 4", value: "4" },
+          { name: "Tier 5", value: "5" },
+          { name: "Tier 6", value: "6" },
+          { name: "Tier 7", value: "7" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -50,7 +54,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new MessageEmbed()
+      let errembed = new EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -128,9 +132,9 @@ module.exports = {
       "2020 bugatti divo",
     ];
 
-    let errorembed = new MessageEmbed()
+    let errorembed = new EmbedBuilder()
       .setTitle("❌ Error!")
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
       return interaction.reply({ embeds: [errorembed] });
@@ -312,38 +316,40 @@ module.exports = {
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     console.log(actualhelmet);
-    let semote = "<:speedemote:983963212393357322>";
-    let hemote = "<:handling:983963211403505724>";
-    let zemote = "<:zerosixtyemote:983963210304614410>";
-    let cemote = "<:zecash:983966383408832533>";
-    let rpemote = "<:rp:983968476060336168>";
+    let semote = emotes.speed;
+    let hemote = emotes.handling;
+    let zemote = emotes.zero2sixty;
+    let cemote = emotes.cash;
+    let rpemote = emotes.rp;
 
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
       .setTitle("3...2...1....GO!")
-      .addField(
-        `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-        `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
-        true
-      )
-      .addField(
-        `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
-          cars.Cars[botcar.toLowerCase()].Name
-        }`,
-        `${semote} Speed: ${
-          cars.Cars[botcar.toLowerCase()].Speed
-        } MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
-          cars.Cars[botcar.toLowerCase()].Handling
-        }`,
-        true
-      )
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
+          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
+          inline: true,
+        },
+        {
+          name: `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
+            cars.Cars[botcar.toLowerCase()].Name
+          }`,
+          value: `${semote} Speed: ${
+            cars.Cars[botcar.toLowerCase()].Speed
+          } MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+            cars.Cars[botcar.toLowerCase()].Handling
+          }`,
+          inline: true,
+        },
+      ])
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
-        embed.addField("Bonus", "$100");
+        embed.addFields([{ name: "Bonus", value: "$100" }]);
         moneyearnedtxt += 100;
         userdata.cash += 100;
         tracklength += 1;
@@ -360,12 +366,12 @@ module.exports = {
     let nitro = selected.Nitro;
 
     if (nitro) {
-      let row = new MessageActionRow().addComponents(
-        new MessageButton()
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("boost")
-          .setEmoji("<:boost:983813400289234978>")
+          .setEmoji(emotes.boost)
           .setLabel("Boost")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
       msg.edit({ components: [row] });
 
@@ -401,10 +407,12 @@ module.exports = {
         if (tracklength > tracklength2) {
           console.log("End");
           clearInterval(x);
-          embed.addField("Results", "Won");
+          embed.addFields([{ name: "Results", value: "Won" }]);
           if (global.double == true) {
             moneyearned = moneyearned += moneyearned;
-            embed.addField("Double Cash Weekend!", `\u200b`);
+            embed.addFields([
+              { name: "Double Cash Weekend!", value: `\u200b` },
+            ]);
             moneyearnedtxt = `${moneyearned}`;
           }
           if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
@@ -414,9 +422,9 @@ module.exports = {
 
           earnings.push(`${cemote} $${moneyearnedtxt}`);
           earnings.push(`${rpemote} ${ticketsearned} RP`);
-          let ckemote = "<:ckey:993011409132728370>";
-          let rkemote = "<:rkey:993011407681486868>";
-          let ekemote = "<:ekey:993011410210672671>";
+          let ckemote = emotes.ckey;
+          let rkemote = emotes.rkey;
+          let ekemote = emotes.ekey;
           if (ckeysearned >= 1) {
             earnings.push(`${ckeysearned} ${ckemote} keys`);
             userdata.ckeys += ckeysearned;
@@ -430,7 +438,9 @@ module.exports = {
             userdata.ekeys += ekeysearned;
           }
 
-          embed.addField("Earnings", `${earnings.join("\n")}`);
+          embed.addFields([
+            { name: "Earnings", value: `${earnings.join("\n")}` },
+          ]);
           interaction.editReply({ embeds: [embed] });
 
           if (range) {
@@ -452,7 +462,7 @@ module.exports = {
           return;
         } else if (tracklength < tracklength2) {
           console.log("End");
-          embed.addField("Results", "Lost");
+          embed.addFields([{ name: "Results", value: "Lost" }]);
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);
           if (range) {
@@ -462,7 +472,7 @@ module.exports = {
           return;
         } else if (tracklength == tracklength2) {
           console.log("End");
-          embed.addField("Results", "Tie");
+          embed.addFields([{ name: "Results", value: "Tie" }]);
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);
           if (range) {

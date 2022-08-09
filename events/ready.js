@@ -12,6 +12,7 @@ const db = require("quick.db");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
+const { numberWithCommas } = require("../common/utils");
 
 let mongoConfig = {
   keepAlive: true,
@@ -93,7 +94,7 @@ module.exports = {
           await rest.put(Routes.applicationCommands(CLIENT_ID), {
             body: commands,
           });
-          console.log("Registered commands globally.");
+          console.log(`Registered ${commands.length} commands globally.`);
         } else {
           await rest.put(
             Routes.applicationGuildCommands(CLIENT_ID, process.env.GUILD_ID),
@@ -101,8 +102,7 @@ module.exports = {
               body: commands,
             }
           );
-          console.log("Registered commands locally.");
-          console.log(commands.length);
+          console.log(`Registered ${commands.length} commands locally.`);
         }
       } catch (err) {
         if (err) console.error(err);
@@ -110,7 +110,3 @@ module.exports = {
     })();
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

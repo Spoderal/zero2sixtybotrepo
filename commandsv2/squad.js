@@ -11,14 +11,16 @@ module.exports = {
         .setName("squad")
         .setDescription("The squad you want to see the details of")
         .setRequired(true)
-        .addChoice("Flame House", "flamehouse")
-        .addChoice("Skull Crunchers", "skullcrunchers")
-        .addChoice("The Speed", "thespeed")
-        .addChoice("Scrap Heads", "scrapheads")
-        .addChoice("Snow Monsters", "snowmonsters")
-        .addChoice("Tuner4Life", "tuner4life")
-        .addChoice("BikerGang", "bikergang")
-        .addChoice("ZeroRacers", "zeroracers")
+        .addChoices(
+          { name: "Flame House", value: "flamehouse" },
+          { name: "Skull Crunchers", value: "skullcrunchers" },
+          { name: "The Speed", value: "thespeed" },
+          { name: "Scrap Heads", value: "scrapheads" },
+          { name: "Snow Monsters", value: "snowmonsters" },
+          { name: "Tuner4Life", value: "tuner4life" },
+          { name: "BikerGang", value: "bikergang" },
+          { name: "ZeroRacers", value: "zeroracers" }
+        )
     ),
   async execute(interaction) {
     let squas = squads.Squads;
@@ -27,13 +29,15 @@ module.exports = {
     if (!squas[squad.toLowerCase()])
       return interaction.reply("Thats not a squad!");
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`Squad Info for ${squas[squad.toLowerCase()].Name}`)
       .setThumbnail(squas[squad.toLowerCase()].Icon)
       .setColor(squas[squad].Color)
-      .addField("Leader", squas[squad].Leader)
-      .addField("Members", `${squas[squad].Members.join("\n")}`)
-      .addField("Class", `${squas[squad].Class}`);
+      .addFields([
+        { name: "Leader", value: squas[squad].Leader },
+        { name: "Members", value: `${squas[squad].Members.join("\n")}` },
+        { name: "Class", value: `${squas[squad].Class}` },
+      ]);
 
     interaction.reply({ embeds: [embed] });
   },

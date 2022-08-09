@@ -1,12 +1,13 @@
 const Discord = require("discord.js");
 const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const lodash = require("lodash");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
 const petdb = require("../data/pets.json");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -53,57 +54,58 @@ module.exports = {
       }
     }
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle(`Your Pet`)
-      .addField("Name", `${name}`, true)
-      .addField("Status", "Looking for items", true)
-
-      .addField("Condition", `${condition}`, true)
-      .addField("Gas", `${gas}`, true)
-      .addField("Oil", `${oil}`, true)
-      .addField("Love", `${love}`, true)
+      .addFields([
+        { name: "Name", value: `${name}`, inline: true },
+        { name: "Status", value: "Looking for items", inline: true },
+        { name: "Condition", value: `${condition}`, inline: true },
+        { name: "Gas", value: `${gas}`, inline: true },
+        { name: "Oil", value: `${oil}`, inline: true },
+        { name: "Love", value: `${love}`, inline: true },
+      ])
       .setThumbnail(petimage)
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
 
-    let row = new MessageActionRow().addComponents(
-      new MessageButton()
+    let row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setLabel("Drive")
         .setEmoji("🚗")
         .setCustomId("drive")
-        .setStyle("SECONDARY"),
-      new MessageButton()
+        .setStyle("Secondary"),
+      new ButtonBuilder()
         .setLabel("Change Oil")
         .setEmoji("🛢️")
         .setCustomId("oil")
-        .setStyle("SECONDARY"),
-      new MessageButton()
+        .setStyle("Secondary"),
+      new ButtonBuilder()
         .setLabel("Fill Gas")
         .setEmoji("⛽")
         .setCustomId("gas")
-        .setStyle("SECONDARY"),
-      new MessageButton()
+        .setStyle("Secondary"),
+      new ButtonBuilder()
         .setLabel("Wash")
         .setEmoji("🧼")
         .setCustomId("wash")
-        .setStyle("SECONDARY"),
-      new MessageButton()
+        .setStyle("Secondary"),
+      new ButtonBuilder()
         .setLabel("Change Name")
         .setEmoji("📝")
         .setCustomId("name")
-        .setStyle("SECONDARY")
+        .setStyle("Secondary")
     );
 
-    let row2 = new MessageActionRow().addComponents(
-      new MessageButton()
+    let row2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setLabel("Paint")
         .setEmoji("🖌️")
         .setCustomId("paint")
-        .setStyle("SECONDARY"),
-      new MessageButton()
+        .setStyle("Secondary"),
+      new ButtonBuilder()
         .setLabel("Send Racing")
         .setEmoji("🏁")
         .setCustomId("race")
-        .setStyle("SECONDARY")
+        .setStyle("Secondary")
     );
 
     let msg = await interaction.reply({
@@ -141,17 +143,18 @@ module.exports = {
         userdata.save();
         let newlove = await userdata.pet.love;
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`Your Pet`)
-          .addField("Name", `${name}`, true)
-          .addField("Status", "Looking for items", true)
-
-          .addField("Condition", `${condition}`, true)
-          .addField("Gas", `${gas}`, true)
-          .addField("Oil", `${oil}`, true)
-          .addField("Love", `${newlove}`, true)
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for items", inline: true },
+            { name: "Condition", value: `${condition}`, inline: true },
+            { name: "Gas", value: `${gas}`, inline: true },
+            { name: "Oil", value: `${oil}`, inline: true },
+            { name: "Love", value: `${newlove}`, inline: true },
+          ])
           .setThumbnail(petimage)
-          .setColor("#60b0f4");
+          .setColor(colors.blue);
         i.update({
           content: `You drove your pet car and gave it love!`,
           embeds: [embed],
@@ -176,17 +179,19 @@ module.exports = {
         userdata.save();
         let newgas = await userdata.pet.gas;
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`Your Pet`)
-          .addField("Name", `${name}`, true)
-          .addField("Status", "Looking for items", true)
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for items", inline: true },
 
-          .addField("Condition", `${condition}`, true)
-          .addField("Gas", `${newgas}`, true)
-          .addField("Oil", `${oil}`, true)
-          .addField("Love", `${love}`, true)
+            { name: "Condition", value: `${condition}`, inline: true },
+            { name: "Gas", value: `${newgas}`, inline: true },
+            { name: "Oil", value: `${oil}`, inline: true },
+            { name: "Love", value: `${love}`, inline: true },
+          ])
           .setThumbnail(petimage)
-          .setColor("#60b0f4");
+          .setColor(colors.blue);
         i.update({
           content: `You filled your pets gas costing you $2,000`,
           embeds: [embed],
@@ -212,18 +217,18 @@ module.exports = {
         userdata.save();
         let newoil = await userdata.pet.oil;
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`Your Pet`)
-
-          .addField("Name", `${name}`, true)
-          .addField("Status", "Looking for items", true)
-
-          .addField("Condition", `${condition}`, true)
-          .addField("Gas", `${gas}`, true)
-          .addField("Oil", `${newoil}`, true)
-          .addField("Love", `${love}`, true)
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for items", inline: true },
+            { name: "Condition", value: `${condition}`, inline: true },
+            { name: "Gas", value: `${gas}`, inline: true },
+            { name: "Oil", value: `${newoil}`, inline: true },
+            { name: "Love", value: `${love}`, inline: true },
+          ])
           .setThumbnail(petimage)
-          .setColor("#60b0f4");
+          .setColor(colors.blue);
         i.update({
           content: `You changed your pets oil costing you $500`,
           embeds: [embed],
@@ -248,18 +253,18 @@ module.exports = {
         userdata.save();
         let newcond = await userdata.pet.condition;
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
           .setTitle(`Your Pet`)
-
-          .addField("Name", `${name}`, true)
-          .addField("Status", "Looking for items", true)
-
-          .addField("Condition", `${newcond}`, true)
-          .addField("Gas", `${gas}`, true)
-          .addField("Oil", `${oil}`, true)
-          .addField("Love", `${love}`, true)
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for items", inline: true },
+            { name: "Condition", value: `${newcond}`, inline: true },
+            { name: "Gas", value: `${gas}`, inline: true },
+            { name: "Oil", value: `${oil}`, inline: true },
+            { name: "Love", value: `${love}`, inline: true },
+          ])
           .setThumbnail(petimage)
-          .setColor("#60b0f4");
+          .setColor(colors.blue);
         i.update({ content: `You washed your pet`, embeds: [embed] });
       } else if (i.customId.includes("name")) {
         let pet = userdata.pet;
@@ -270,7 +275,7 @@ module.exports = {
 
         i.channel.send(`Type the name you want to set`);
 
-        const filter2 = (m = discord.Message) => {
+        const filter2 = (m = Discord.Message) => {
           return m.author.id === interaction.user.id;
         };
         let collector2 = interaction.channel.createMessageCollector({
@@ -296,37 +301,38 @@ module.exports = {
           userdata.save();
 
           name = userdata.pet.name;
-          let embed = new Discord.MessageEmbed()
+          let embed = new Discord.EmbedBuilder()
             .setTitle(`Your Pet`)
-            .addField("Name", `${name}`, true)
-            .addField("Status", "Looking for items", true)
-
-            .addField("Condition", `${condition}`, true)
-            .addField("Gas", `${gas}`, true)
-            .addField("Oil", `${oil}`, true)
-            .addField("Love", `${love}`, true)
+            .addFields([
+              { name: "Name", value: `${name}`, inline: true },
+              { name: "Status", value: "Looking for items", inline: true },
+              { name: "Condition", value: `${condition}`, inline: true },
+              { name: "Gas", value: `${gas}`, inline: true },
+              { name: "Oil", value: `${oil}`, inline: true },
+              { name: "Love", value: `${love}`, inline: true },
+            ])
             .setThumbnail(petimage)
-            .setColor("#60b0f4");
+            .setColor(colors.blue);
           i.update({ content: `You changed your pets name`, embeds: [embed] });
         });
       } else if (i.customId.includes("paint")) {
-        let row3 = new MessageActionRow().addComponents(
-          new MessageButton()
+        let row3 = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
             .setCustomId("black")
             .setEmoji("⚫")
-            .setStyle("SECONDARY"),
-          new MessageButton()
+            .setStyle("Secondary"),
+          new ButtonBuilder()
             .setCustomId("red")
             .setEmoji("🔴")
-            .setStyle("SECONDARY"),
-          new MessageButton()
+            .setStyle("Secondary"),
+          new ButtonBuilder()
             .setCustomId("white")
             .setEmoji("⚪")
-            .setStyle("SECONDARY"),
-          new MessageButton()
+            .setStyle("Secondary"),
+          new ButtonBuilder()
             .setCustomId("blue")
             .setEmoji("🔵")
-            .setStyle("SECONDARY")
+            .setStyle("Secondary")
         );
 
         let msg = await i.update({ components: [row, row3], fetchReply: true });

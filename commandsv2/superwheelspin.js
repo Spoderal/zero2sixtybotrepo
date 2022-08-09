@@ -6,6 +6,8 @@ const wheelspinrewards = require("../data/superwheelspinrewards.json");
 const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -39,10 +41,10 @@ module.exports = {
     userdata.update();
     cooldowndata.swheelspin = Date.now();
     cooldowndata.save();
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle("Super Wheel Spin!")
       .setDescription(`${item}`)
-      .setColor("#60b0f4")
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
     interaction.reply({ embeds: [embed] });
     setTimeout(() => {
@@ -102,7 +104,7 @@ module.exports = {
             let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice;
             userdata.cash += Number(sellprice);
             interaction.channel.send(
-              `You already own this car, so you got $${numberWithCommas(
+              `You already own this car, so you got ${toCurrency(
                 sellprice
               )} instead.`
             );
@@ -123,7 +125,7 @@ module.exports = {
             reward = lodash.sample(cash);
           }
           userdata.cash += Number(reward);
-          embed.setDescription(`You won $${numberWithCommas(reward)} cash!`);
+          embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
         } else if (item == "❓") {
           embed.setDescription(`You won nothing lol`);
@@ -132,9 +134,5 @@ module.exports = {
         userdata.save();
       }, 500);
     }, 3000);
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

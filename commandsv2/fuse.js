@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const partdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,18 +12,20 @@ module.exports = {
       option
         .setName("part")
         .setDescription("The part to upgrade")
-        .addChoice("Exhaust", "exhaust")
-        .addChoice("Tires", "tires")
-        .addChoice("Intake", "intake")
-        .addChoice("Clutch", "clutch")
-        .addChoice("Gearbox", "gearbox")
-        .addChoice("ECU", "ecu")
-        .addChoice("Drift Suspension", "dsuspension")
-        .addChoice("Race Suspension", "rsuspension")
-        .addChoice("Intercooler", "intercooler")
-        .addChoice("Turbo", "turbo")
-        .addChoice("Spoiler", "spoiler")
-        .addChoice("TXExhaust", "txexhaust")
+        .addChoices(
+          { name: "Exhaust", value: "exhaust" },
+          { name: "Tires", value: "tires" },
+          { name: "Intake", value: "intake" },
+          { name: "Clutch", value: "clutch" },
+          { name: "Gearbox", value: "gearbox" },
+          { name: "ECU", value: "ecu" },
+          { name: "Drift Suspension", value: "dsuspension" },
+          { name: "Race Suspension", value: "rsuspension" },
+          { name: "Intercooler", value: "intercooler" },
+          { name: "Turbo", value: "turbo" },
+          { name: "Spoiler", value: "spoiler" },
+          { name: "TXExhaust", value: "txexhaust" }
+        )
         .setRequired(true)
     ),
 
@@ -73,13 +76,15 @@ module.exports = {
 
       userdata.xessence -= 100;
 
-      let embed = new discord.MessageEmbed()
+      let embed = new discord.EmbedBuilder()
         .setTitle("Fusing into a TX...")
-        .addField(
-          `Part`,
-          `${partdb.Parts["t5exhaust"].Emote} ${partdb.Parts["t5exhaust"].Name}`
-        );
-      embed.setColor("#60b0f4");
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5exhaust"].Emote} ${partdb.Parts["t5exhaust"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
 
@@ -87,10 +92,12 @@ module.exports = {
         embed.setTitle("Fused!");
         embed.setColor("#ffffff");
         embed.fields = [];
-        embed.addField(
-          `Part`,
-          `${partdb.Parts["txexhaust"].Emote} ${partdb.Parts["txexhaust"].Name}`
-        );
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txexhaust"].Emote} ${partdb.Parts["txexhaust"].Name}`,
+          },
+        ]);
         userdata.parts.push("txexhaust");
         userdata.save();
         interaction.editReply({ embeds: [embed] });
@@ -143,23 +150,25 @@ module.exports = {
           `You need 2 ${partdb.Parts[parte].Name} to fuse them!`
         );
 
-      let embed = new discord.MessageEmbed()
-        .setTitle("Fusing...")
-        .addField(
-          `Parts`,
-          `${partdb.Parts[parte].Emote} ${partdb.Parts[parte].Name}\n${partdb.Parts[parte].Emote} ${partdb.Parts[parte].Name}`
-        );
-      embed.setColor("#60b0f4");
+      let embed = new discord.EmbedBuilder().setTitle("Fusing...").addFields([
+        {
+          name: `Parts`,
+          value: `${partdb.Parts[parte].Emote} ${partdb.Parts[parte].Name}\n${partdb.Parts[parte].Emote} ${partdb.Parts[parte].Name}`,
+        },
+      ]);
+      embed.setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
 
       setTimeout(() => {
         embed.setTitle("Fused!");
         embed.fields = [];
-        embed.addField(
-          `Part`,
-          `${partdb.Parts[partb].Emote} ${partdb.Parts[partb].Name}`
-        );
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts[partb].Emote} ${partdb.Parts[partb].Name}`,
+          },
+        ]);
         interaction.editReply({ embeds: [embed] });
 
         for (var i = 0; i < 2; i++)

@@ -4,6 +4,8 @@ const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -60,8 +62,8 @@ module.exports = {
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       let time = ms(timeout - (Date.now() - daily));
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor("#60b0f4")
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
         .setDescription(
           `You've already collected your daily cash\n\nCollect it again in ${time}.`
         );
@@ -72,16 +74,12 @@ module.exports = {
       userdata.save();
       cooldowndata.save();
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Daily Cash ${interaction.user.username}`)
-        .addField("Earned Cash", `$${numberWithCommas(dcash)}`);
-      embed.setColor("#60b0f4");
+        .addFields([{ name: "Earned Cash", value: `${toCurrency(dcash)}` }]);
+      embed.setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
-    }
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
 };

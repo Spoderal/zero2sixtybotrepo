@@ -2,6 +2,7 @@ const db = require("quick.db");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const cardb = require("../data/cardb.json");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -67,14 +68,14 @@ module.exports = {
       db.add(`numused`, 1);
 
       let newshop = db.fetch(`usedcarshop_${user.id}`);
-      let embed = new Discord.MessageEmbed()
-        .setTitle("Created!")
-        .addField("Name", `${name}`, true)
-        .addField("Sales", `${newshop.Sales}`, true)
-        .addField("Cars listed", `${newshop.Listed}`, true)
-        .addField("Money earned", `$${newshop.Profit}`, true)
-        .addField("Owner", `${user.username}`, true)
-        .addField("Store ID", `${newshop.ID}`, true);
+      let embed = new Discord.EmbedBuilder().setTitle("Created!").addFields([
+        { name: "Name", value: `${name}`, inline: true },
+        { name: "Sales", value: `${newshop.Sales}`, inline: true },
+        { name: "Cars listed", value: `${newshop.Listed}`, inline: true },
+        { name: "Money earned", value: `$${newshop.Profit}`, inline: true },
+        { name: "Owner", value: `${user.username}`, inline: true },
+        { name: "Store ID", value: `${newshop.ID}`, inline: true },
+      ]);
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommand == "list") {
@@ -133,14 +134,16 @@ module.exports = {
 
       db.add(`usedcarshop_${user.id}.Listed`, 1);
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`✅ Listed ${carindb.Name}`)
         .setImage(carlivery)
-        .addField(`Price`, `$${numberWithCommas(carprice)}`)
-        .addField(
-          `Stats`,
-          `${carspeed} MPH\n${caracc}s 0-60\n${carhand} Handling`
-        );
+        .addFields([
+          { name: `Price`, value: `${toCurrency(carprice)}` },
+          {
+            name: `Stats`,
+            value: `${carspeed} MPH\n${caracc}s 0-60\n${carhand} Handling`,
+          },
+        ]);
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommand == "delist") {
@@ -156,26 +159,24 @@ module.exports = {
         console.log(uc);
 
         used.push(
-          `${cardb.Cars[uc.Car.toLowerCase()].Emote} ${
-            uc.Car
-          } : $${numberWithCommas(uc.Price)}`
+          `${cardb.Cars[uc.Car.toLowerCase()].Emote} ${uc.Car} : ${toCurrency(
+            uc.Price
+          )}`
         );
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`${newshop.Name}`)
-        .addField("Sales", `${newshop.Sales}`, true)
-        .addField("Cars listed", `${newshop.Listed}`, true)
-        .addField("Money earned", `$${newshop.Profit}`, true)
-        .addField("Owner", `${user.username}`, true)
-        .addField("Store ID", `${newshop.ID}`, true)
-        .addField(`Current Cars`, `${used.join(`\n`)}`);
+        .addFields([
+          { name: "Sales", value: `${newshop.Sales}`, inline: true },
+          { name: "Cars listed", value: `${newshop.Listed}`, inline: true },
+          { name: "Money earned", value: `$${newshop.Profit}`, inline: true },
+          { name: "Owner", value: `${user.username}`, inline: true },
+          { name: "Store ID", value: `${newshop.ID}`, inline: true },
+          { name: `Current Cars`, value: `${used.join(`\n`)}` },
+        ]);
 
       interaction.reply({ embeds: [embed] });
     }
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

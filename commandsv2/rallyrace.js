@@ -2,6 +2,7 @@ const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,9 +13,11 @@ module.exports = {
         .setName("tier")
         .setDescription("The bot tier to race")
         .setRequired(true)
-        .addChoice("Tier 1", "1")
-        .addChoice("Tier 2", "2")
-        .addChoice("Tier 3", "3")
+        .addChoices(
+          { name: "Tier 1", value: "1" },
+          { name: "Tier 2", value: "2" },
+          { name: "Tier 3", value: "3" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -53,9 +56,9 @@ module.exports = {
     let bot2cars = ["1984 audi quattro", "2017 ford focus rs"];
     let bot3cars = ["1978 porsche 911 sc", "2017 ford focus rs"];
 
-    let errorembed = new discord.MessageEmbed()
+    let errorembed = new discord.EmbedBuilder()
       .setTitle("❌ Error!")
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
       return interaction.reply({ embeds: [errorembed] });
@@ -204,34 +207,36 @@ module.exports = {
       );
     }
     console.log(hp);
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${bot} rally race in progress...`)
-      .addField(
-        `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
-          cars.Cars[selected.toLowerCase()].Name
-        }`,
-        `Speed: ${user1carspeed}\n\n0-60: ${db.fetch(
-          `${cars.Cars[selected.toLowerCase()].Name}060_${user.id}`
-        )}\n
-            Offroad rating: ${offroad}`
-      )
-      .addField(
-        `Bots ${cars.Cars[botcar.toLowerCase()].Emote} ${
-          cars.Cars[botcar.toLowerCase()].Name
-        }`,
-        `Speed: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n0-60: ${
-          cars.Cars[botcar.toLowerCase()]["0-60"]
-        }
-            \nOffroad rating: ${cars.Cars[botcar.toLowerCase()].Rally}`
-      )
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
+            cars.Cars[selected.toLowerCase()].Name
+          }`,
+          value: `Speed: ${user1carspeed}\n\n0-60: ${db.fetch(
+            `${cars.Cars[selected.toLowerCase()].Name}060_${user.id}`
+          )}\n
+        Offroad rating: ${offroad}`,
+        },
+        {
+          name: `Bots ${cars.Cars[botcar.toLowerCase()].Emote} ${
+            cars.Cars[botcar.toLowerCase()].Name
+          }`,
+          value: `Speed: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n0-60: ${
+            cars.Cars[botcar.toLowerCase()]["0-60"]
+          }
+          \nOffroad rating: ${cars.Cars[botcar.toLowerCase()].Rally}`,
+        },
+      ])
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/TkqTq9R/Logo-Makr-17-Np-PO.png");
     let randomnum = randomRange(2, 4);
     let launchperc = Math.round(hp / randomnum);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
-        embed.addField("Bonus", "$100");
+        embed.addFields([{ name: "Bonus", value: "$100" }]);
         moneyearnedtxt += 100;
         db.add(`cash_${interaction.user.id}`, 100);
         interaction.editReply({ embeds: [embed] });
@@ -316,9 +321,9 @@ module.exports = {
         console.log("End");
         clearInterval(x);
         embed.setTitle(`Tier ${bot} rally race won!`);
-        embed.addField("Earnings", `$${moneyearnedtxt}`);
+        embed.addFields([{ name: "Earnings", value: `$${moneyearnedtxt}` }]);
         if (barnmaps == 1) {
-          embed.addField("Barn Map Found", `\u200b`);
+          embed.addFields([{ name: "Barn Map Found", value: `\u200b` }]);
           db.add(`barnmaps_${interaction.user.id}`, 1);
         }
         interaction.editReply({ embeds: [embed] });

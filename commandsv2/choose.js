@@ -3,6 +3,7 @@ const squads = require("../data/squads.json");
 const cars = require("../data/cardb.json");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,10 +14,12 @@ module.exports = {
         .setName("squad")
         .setDescription("The squad to choose the car from PRESTIGE 2 REQUIRED")
         .setRequired(true)
-        .addChoice("The Speed", "thespeed")
-        .addChoice("Scrap Heads", "scrapheads")
-        .addChoice("Snow Monsters", "snowmonsters")
-        .addChoice("Biker Gang", "bikergang")
+        .addChoices(
+          { name: "The Speed", value: "thespeed" },
+          { name: "Scrap Heads", value: "scrapheads" },
+          { name: "Snow Monsters", value: "snowmonsters" },
+          { name: "Biker Gang", value: "bikergang" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -49,11 +52,11 @@ module.exports = {
     if (idchose == "list") {
       let listcars = squads.Squads[squadchose.toLowerCase()].Carlist;
 
-      let embed = new discord.MessageEmbed()
+      let embed = new discord.EmbedBuilder()
         .setTitle(`List of cars for ${squads.Squads[squadchose].Name}`)
         .setDescription(`${listcars.join("\n\n")}`);
 
-      embed.setColor("#60b0f4").setThumbnail(squads.Squads[squadchose].Icon);
+      embed.setColor(colors.blue).setThumbnail(squads.Squads[squadchose].Icon);
       interaction.reply({ embeds: [embed] });
     } else {
       if (!squadlist.includes(squadchose.toLowerCase()))
@@ -134,11 +137,13 @@ module.exports = {
       //   cars.Cars[reward.toLowerCase()].Name
       // );
 
-      let embed = new discord.MessageEmbed()
+      let embed = new discord.EmbedBuilder()
         .setTitle(`✅ Chose ${carname}`)
-        .addField(`ID`, `${cars.Cars[squadchose.toLowerCase()].alias}`)
+        .addFields([
+          { name: `ID`, value: `${cars.Cars[squadchose.toLowerCase()].alias}` },
+        ])
         .setImage(`${cars.Cars[squadchose.toLowerCase()].Image}`);
-      embed.setColor("#60b0f4");
+      embed.setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
     }

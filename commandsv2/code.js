@@ -1,6 +1,7 @@
 const codes = require("../data/codes.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,7 +31,7 @@ module.exports = {
         return interaction.reply("You've already redeemed this code!");
 
       interaction.reply(
-        `Redeemed code ${code} and earned $${numberWithCommas(
+        `Redeemed code ${code} and earned ${toCurrency(
           codes.Twitter[code].Reward
         )}`
       );
@@ -43,7 +44,7 @@ module.exports = {
         return interaction.reply("You've already redeemed this code!");
 
       interaction.reply(
-        `Redeemed code ${code} and earned $${numberWithCommas(
+        `Redeemed code ${code} and earned ${toCurrency(
           codes.Discord[code].Reward
         )}`
       );
@@ -64,14 +65,14 @@ module.exports = {
 
       if (codes.Patreon[code].Gold) {
         interaction.reply(
-          `Redeemed code ${code} and earned ${numberWithCommas(
+          `Redeemed code ${code} and earned ${toCurrency(
             codes.Patreon[code].Reward
           )} gold`
         );
         userdata.gold += Number(codes.Patreon[code].Reward);
       } else {
         interaction.reply(
-          `Redeemed code ${code} and earned $${numberWithCommas(
+          `Redeemed code ${code} and earned ${toCurrency(
             codes.Patreon[code].Reward
           )}`
         );
@@ -88,7 +89,3 @@ module.exports = {
     }
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

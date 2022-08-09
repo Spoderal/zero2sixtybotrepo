@@ -4,6 +4,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -62,7 +64,7 @@ module.exports = {
 
         if (banklimit >= 250000000)
           return interaction.reply(
-            `The bank limit cap is currently $${numberWithCommas(250000000)}!`
+            `The bank limit cap is currently ${toCurrency(250000000)}!`
           );
 
         let finalbanklimit = 5000 * amount2;
@@ -125,8 +127,8 @@ module.exports = {
           timeout - (Date.now() - watercooldown) > 0
         ) {
           let time = ms(timeout - (Date.now() - watercooldown));
-          let timeEmbed = new Discord.MessageEmbed()
-            .setColor("#60b0f4")
+          let timeEmbed = new Discord.EmbedBuilder()
+            .setColor(colors.blue)
             .setDescription(`You can use a water bottle again in ${time}.`);
           return await interaction.reply({ embeds: [timeEmbed] });
         }
@@ -162,9 +164,5 @@ module.exports = {
     console.log(fullname);
     userdata.save();
     await interaction.reply(`Used x${amount2} ${fullname}!`);
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };

@@ -2,9 +2,11 @@ const db = require("quick.db");
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,18 +17,22 @@ module.exports = {
         .setName("difficulty")
         .setDescription("The track difficulty")
         .setRequired(true)
-        .addChoice("Easy", "easy")
-        .addChoice("Medium", "medium")
-        .addChoice("Hard", "hard")
+        .addChoices(
+          { name: "Easy", value: "easy" },
+          { name: "Medium", value: "medium" },
+          { name: "Hard", value: "hard" }
+        )
     )
     .addStringOption((option) =>
       option
         .setName("track")
         .setDescription("The track you want to drift on")
         .setRequired(true)
-        .addChoice("Regular", "regular")
-        .addChoice("Mountain", "mountain")
-        .addChoice("Parking Lot", "parking")
+        .addChoices(
+          { name: "Regular", value: "regular" },
+          { name: "Mountain", value: "mountain" },
+          { name: "Parking Lot", value: "parking" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -60,7 +66,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -242,25 +248,26 @@ module.exports = {
     }
     let notorietyearned = driftscore * 5 - time;
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
       .setDescription(`You have ${time}s to complete the track`)
-      .addField(
-        `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
-        `Speed: ${usercarspeed}\n\nDrift Rating: ${driftscore}`
-      )
-      .addField("Your Drift Rank", `${drifttraining}`)
-
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
+          value: `Speed: ${usercarspeed}\n\nDrift Rating: ${driftscore}`,
+        },
+        { name: "Your Drift Rank", value: `${drifttraining}` },
+      ])
+      .setColor(colors.blue)
       .setImage(`${trackgif}`)
       .setThumbnail("https://i.ibb.co/XzW37RH/drifticon.png");
 
-    let row = new MessageActionRow().addComponents(
-      new MessageButton()
+    let row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setCustomId("ebrake")
-        .setEmoji("<:ebrake:969671303961387050>")
+        .setEmoji(emotes.eBrake)
         .setLabel("Handbrake")
-        .setStyle("SECONDARY")
+        .setStyle("Secondary")
     );
     const filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
@@ -275,7 +282,7 @@ module.exports = {
       time: 10000,
     });
     setTimeout(() => {
-      embed.addField("\u200b", "Shift now!");
+      embed.addFields([{ name: "\u200b", value: "Shift now!" }]);
       interaction.editReply({ embeds: [embed] });
       canshift = true;
       setTimeout(() => {
@@ -318,7 +325,7 @@ module.exports = {
         let randomsub = randomRange(2, 10);
         selected.Tread -= randomsub;
         userdata.save();
-        embed.addField("Results", `Failed`);
+        embed.addFields([{ name: "Results", value: `Failed` }]);
         interaction.editReply({ embeds: [embed] });
         if (range && range >= 0) {
           selected.Range -= 1;
@@ -346,15 +353,19 @@ module.exports = {
         let randomsub = randomRange(2, 10);
         selected.Tread -= randomsub;
 
-        embed.addField("Results", `Success\n\nTread: ${selected.Tread}`);
+        embed.addFields([
+          { name: "Results", value: `Success\n\nTread: ${selected.Tread}` },
+        ]);
         if (db.fetch(`doublecash`) == true) {
           moneyearned = moneyearned += moneyearned;
-          embed.addField("Double Cash Weekend!", `\u200b`);
+          embed.addFields([{ name: "Double Cash Weekend!", value: `\u200b` }]);
         }
-        embed.addField(
-          "Earnings",
-          `$${moneyearned}\n${notorietyearned} Notoriety`
-        );
+        embed.addFields([
+          {
+            name: "Earnings",
+            value: `$${moneyearned}\n${notorietyearned} Notoriety`,
+          },
+        ]);
         if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
           selected.Wins += 1;
         }

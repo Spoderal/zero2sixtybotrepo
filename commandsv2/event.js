@@ -1,17 +1,19 @@
 const {
-  MessageActionRow,
-  MessageEmbed,
-  MessageSelectMenu,
+  ActionRowBuilder,
+  EmbedBuilder,
+  SelectMenuBuilder,
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("events")
     .setDescription("Check the current events"),
   async execute(interaction) {
-    const row2 = new MessageActionRow().addComponents(
-      new MessageSelectMenu()
+    const row2 = new ActionRowBuilder().addComponents(
+      new SelectMenuBuilder()
         .setCustomId("select")
         .setPlaceholder("No event selected")
         .addOptions([
@@ -28,14 +30,14 @@ module.exports = {
             description: "Information for the Ferrari Championship Event",
             value: "ferrari",
             customId: "ferrarievent",
-            emoji: "<:ferrari:931011838374727730>",
+            emoji: emotes.ferrari,
           },
         ])
     );
 
-    let embed = new MessageEmbed();
+    let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
-    embed.setFooter('Prefix is "/"');
+    embed.setFooter({ text: 'Prefix is "/"' });
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
@@ -44,7 +46,7 @@ module.exports = {
         
       `);
 
-    embed.setColor("#60b0f4");
+    embed.setColor(colors.blue);
 
     interaction.reply({ embeds: [embed], components: [row2] }).then(() => {
       const filter = (interaction2) =>
@@ -60,7 +62,7 @@ module.exports = {
         const value = collected.values[0];
         if (value === "spring_event") {
           embed.setTitle("Summer Season");
-          embed.setFooter('Prefix is "/"');
+          embed.setFooter({ text: 'Prefix is "/"' });
           embed.setDescription(`Its time to drift! Get your best set of tires, your favorite car to drift in, and start drifting around different types of tracks!
 
             There are many different rewards to claim this season, get more garage space, some cool helmets, keys, cash, and more!
@@ -79,12 +81,12 @@ module.exports = {
                   `);
           embed.setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif");
           embed.setImage("https://i.ibb.co/XYrY5d6/seasonsummer.png");
-          embed.setColor("#60b0f4");
+          embed.setColor(colors.blue);
 
           await interaction.editReply({ embeds: [embed], components: [row2] });
         } else if (value === "ferrari") {
           embed.setTitle("Ferrari Championship");
-          embed.setFooter('Prefix is "/"');
+          embed.setFooter({ text: 'Prefix is "/"' });
           embed.setDescription(`Race with your favorite Ferrari in bot races to stack up on Ferrari keys!\n
 
             Only Ferraris are allowed in this event!
@@ -97,7 +99,7 @@ module.exports = {
             "https://upload.wikimedia.org/wikipedia/commons/c/cb/F40_Ferrari_20090509.jpg"
           );
           embed.setImage();
-          embed.setColor("#60b0f4");
+          embed.setColor(colors.blue);
 
           await interaction.editReply({ embeds: [embed], components: [row2] });
         }

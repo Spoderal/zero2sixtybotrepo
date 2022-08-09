@@ -11,19 +11,21 @@ module.exports = {
       option
         .setName("part")
         .setDescription("The part to remove")
-        .addChoice("Exhaust", "exhaust")
-        .addChoice("Tires", "tires")
-        .addChoice("Intake", "intake")
-        .addChoice("Turbo", "turbo")
-        .addChoice("Suspension", "suspension")
-        .addChoice("Spoiler", "spoiler")
-        .addChoice("Body", "body")
-        .addChoice("ECU", "ecu")
-        .addChoice("Clutch", "clutch")
-        .addChoice("Engine", "engine")
-        .addChoice("Gearbox", "gearbox")
-        .addChoice("Weight", "weight")
-        .addChoice("Intercooler", "intercooler")
+        .addChoices(
+          { name: "Exhaust", value: "exhaust" },
+          { name: "Tires", value: "tires" },
+          { name: "Intake", value: "intake" },
+          { name: "Turbo", value: "turbo" },
+          { name: "Suspension", value: "suspension" },
+          { name: "Spoiler", value: "spoiler" },
+          { name: "Body", value: "body" },
+          { name: "ECU", value: "ecu" },
+          { name: "Clutch", value: "clutch" },
+          { name: "Engine", value: "engine" },
+          { name: "Gearbox", value: "gearbox" },
+          { name: "Weight", value: "weight" },
+          { name: "Intercooler", value: "intercooler" }
+        )
 
         .setRequired(true)
     )
@@ -93,7 +95,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == cartoinstall);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(

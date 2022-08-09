@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const cars = require("../data/cardb.json");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +19,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == car);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new Discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -37,11 +38,11 @@ module.exports = {
     if (range == maxrange)
       return interaction.reply("This EV doesn't need charged!");
     if (house && house.perks.includes("Free EV charging")) {
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`⚡ Charging ${cars.Cars[selected.toLowerCase()].Name}... ⚡`)
         .setImage(`${cars.Cars[selected.toLowerCase()].Image}`)
 
-        .setColor("#60b0f4");
+        .setColor(colors.blue);
       selected.Range = maxrange;
       userdata.save();
 
@@ -57,10 +58,10 @@ module.exports = {
           "You don't have enough cash! You need $500 to charge your vehicle."
         );
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`⚡ Charging ${cars.Cars[selected.toLowerCase()].Name}... ⚡`)
         .setImage(`${cars.Cars[selected.toLowerCase()].Image}`);
-      embed.setColor("#60b0f4");
+      embed.setColor(colors.blue);
       selected.Range = maxrange;
       cash -= 500;
       userdata.save();

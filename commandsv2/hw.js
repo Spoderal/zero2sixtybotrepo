@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -72,7 +73,7 @@ module.exports = {
       );
     let selected = db.fetch(`selected_${idtoselect}_${user.id}`);
     if (!selected) {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -246,22 +247,25 @@ module.exports = {
       let weekytask1 = db.fetch(`weeklytask_${user.id}`);
       let weekytask2 = db.fetch(`weeklytask_${user2.id}`);
 
-      let embed = new discord.MessageEmbed()
+      let embed = new discord.EmbedBuilder()
         .setTitle("3...2...1....GO!")
-        .addField(
-          `${user.username}'s ${cars.Cars[user1car.toLowerCase()].Emote} ${
-            cars.Cars[user1car.toLowerCase()].Name
-          }`,
-          `Speed: ${user1carspeed}\n\n0-60: ${newzero1}s`
-        )
-        .addField(
-          `${user2.username}'s ${cars.Cars[user2car.toLowerCase()].Emote} ${
-            cars.Cars[user2car.toLowerCase()].Name
-          }`,
-          `Speed: ${user2carspeed}\n\n0-60: ${newzero2}s`
-        )
-        .setColor("#60b0f4")
+        .addFields([
+          {
+            name: `${user.username}'s ${
+              cars.Cars[user1car.toLowerCase()].Emote
+            } ${cars.Cars[user1car.toLowerCase()].Name}`,
+            value: `Speed: ${user1carspeed}\n\n0-60: ${newzero1}s`,
+          },
+          {
+            name: `${user2.username}'s ${
+              cars.Cars[user2car.toLowerCase()].Emote
+            } ${cars.Cars[user2car.toLowerCase()].Name}`,
+            value: `Speed: ${user2carspeed}\n\n0-60: ${newzero2}s`,
+          },
+        ])
+        .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+
       let msg2 = await interaction.editReply({ embeds: [embed] });
 
       let tracklength = 0;
@@ -282,8 +286,10 @@ module.exports = {
           if (tracklength > tracklength2) {
             console.log("End");
             clearInterval(x);
-            embed.addField("Results", `${user.username} Won`);
-            embed.addField("Earnings", `500`);
+            embed.addFields([
+              { name: "Results", value: `${user.username} Won` },
+              { name: "Earnings", value: `500` },
+            ]);
 
             msg2.edit({ embeds: [embed] });
             db.add(`cash_${user.id}`, 500);
@@ -327,8 +333,10 @@ module.exports = {
           } else if (tracklength < tracklength2) {
             console.log("End");
             clearInterval(x);
-            embed.addField("Results", `${user2.username} Won`);
-            embed.addField("Earnings", `500`);
+            embed.addFields([
+              { name: "Results", value: `${user2.username} Won` },
+              { name: "Earnings", value: `500` },
+            ]);
 
             msg2.edit({ embeds: [embed] });
             db.add(`cash_${user2.id}`, 500);

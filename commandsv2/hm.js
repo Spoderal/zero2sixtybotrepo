@@ -5,6 +5,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
+const colors = require("../common/colors");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,13 +17,15 @@ module.exports = {
         .setName("tier")
         .setDescription("The bot tier to race")
         .setRequired(true)
-        .addChoice("Tier 1", "1")
-        .addChoice("Tier 2", "2")
-        .addChoice("Tier 3", "3")
-        .addChoice("Tier 4", "4")
-        .addChoice("Tier 5", "5")
-        .addChoice("Tier 6", "6")
-        .addChoice("Tier 7", "7")
+        .addChoices(
+          { name: "Tier 1", value: "1" },
+          { name: "Tier 2", value: "2" },
+          { name: "Tier 3", value: "3" },
+          { name: "Tier 4", value: "4" },
+          { name: "Tier 5", value: "5" },
+          { name: "Tier 6", value: "6" },
+          { name: "Tier 7", value: "7" }
+        )
     )
     .addStringOption((option) =>
       option
@@ -46,7 +50,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -119,9 +123,9 @@ module.exports = {
       "2020 koenigsegg regera",
       "2020 bugatti divo",
     ];
-    let errorembed = new discord.MessageEmbed()
+    let errorembed = new discord.EmbedBuilder()
       .setTitle("❌ Error!")
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
       return interaction.reply({ embeds: [errorembed] });
@@ -302,11 +306,11 @@ module.exports = {
     let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
     let driftscore = selected.Drift;
 
-    let semote = "<:speedemote:983963212393357322>";
-    let hemote = "<:handling:983963211403505724>";
-    let zemote = "<:zerosixtyemote:983963210304614410>";
-    let cemote = "<:zecash:983966383408832533>";
-    let rpemote = "<:rp:983968476060336168>";
+    let semote = emotes.speed;
+    let hemote = emotes.handling;
+    let zemote = emotes.zero2sixty;
+    let cemote = emotes.cash;
+    let rpemote = emotes.rp;
 
     Number(user1carspeed);
     Number(cars.Cars[botcar.toLowerCase()].Speed);
@@ -322,34 +326,37 @@ module.exports = {
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     console.log(actualhelmet);
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle("3...2...1....GO!")
-      .addField(
-        `${actualhelmet.Emote} ${
-          cars.Cars[selected.Name.toLowerCase()].Emote
-        } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
-        `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
-        true
-      )
-      .addField(
-        `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
-          cars.Cars[botcar.toLowerCase()].Name
-        }`,
-        `${semote} Speed: ${
-          cars.Cars[botcar.toLowerCase()].Speed
-        } MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
-          cars.Cars[botcar.toLowerCase()].Handling
-        }`,
-        true
-      )
-      .setColor("#60b0f4")
+      .addFields([
+        {
+          name: `${actualhelmet.Emote} ${
+            cars.Cars[selected.Name.toLowerCase()].Emote
+          } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
+          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          inline: true,
+        },
+        {
+          name: `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
+            cars.Cars[botcar.toLowerCase()].Name
+          }`,
+          value: `${semote} Speed: ${
+            cars.Cars[botcar.toLowerCase()].Speed
+          } MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+            cars.Cars[botcar.toLowerCase()].Handling
+          }`,
+          inline: true,
+        },
+      ])
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+
     let msg = await interaction.reply({ embeds: [embed] });
     let randomnum = randomRange(2, 4);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
-        embed.addField("Bonus", "$50");
+        embed.addFields([{ name: "Bonus", value: "$50" }]);
         moneyearnedtxt += 50;
         userdata.cash += 50;
         tracklength += 1;
@@ -363,14 +370,14 @@ module.exports = {
     tracklength += new60;
     tracklength += new62;
     let nitro = selected.Nitro;
-    let row = new discord.MessageActionRow();
+    let row = new discord.ActionRowBuilder();
     if (nitro) {
       row.addComponents(
-        new discord.MessageButton()
+        new discord.ButtonBuilder()
           .setCustomId("boost")
-          .setEmoji("<:boost:983813400289234978>")
+          .setEmoji(emotes.boost)
           .setLabel("Boost")
-          .setStyle("SECONDARY")
+          .setStyle("Secondary")
       );
       msg.edit({ components: [row] });
 
@@ -406,7 +413,7 @@ module.exports = {
         if (tracklength > tracklength2) {
           console.log("End");
           clearInterval(x);
-          embed.addField("Results", "Won");
+          embed.addFields([{ name: "Results", value: "Won" }]);
           if (userdata.cashgain == "10") {
             let calccash = moneyearned * 0.1;
             moneyearnedtxt += calccash;
@@ -448,7 +455,12 @@ module.exports = {
             userdata.items.push("bank increase");
           }
 
-          embed.addField("Earnings", `${cemote} ${earningsresult.join("\n")}`);
+          embed.addFields([
+            {
+              name: "Earnings",
+              value: `${cemote} ${earningsresult.join("\n")}`,
+            },
+          ]);
 
           interaction.editReply({ embeds: [embed] });
           if (range && range > 0) {
@@ -471,7 +483,7 @@ module.exports = {
           return;
         } else if (tracklength < tracklength2) {
           console.log("End");
-          embed.addField("Results", "Lost");
+          embed.addFields([{ name: "Results", value: "Lost" }]);
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);
           if (range && range > 0) {

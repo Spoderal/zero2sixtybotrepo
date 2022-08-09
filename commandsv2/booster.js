@@ -1,8 +1,10 @@
-const Discord = require("discord.js");
 const db = require("quick.db");
 const ms = require("ms");
 
+const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,8 +32,8 @@ module.exports = {
 
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       let time = ms(timeout - (Date.now() - daily));
-      let timeEmbed = new Discord.MessageEmbed()
-        .setColor("#60b0f4")
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
         .setDescription(
           `You've already collected your booster cash\n\nCollect it again in ${time}.`
         );
@@ -40,15 +42,11 @@ module.exports = {
       db.add(`cash_${interaction.user.id}`, cash);
       db.set(`boost_${interaction.user.id}`, Date.now());
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Booster Cash for ${interaction.user.username}`)
-        .addField("Earned Cash", `$${numberWithCommas(cash)}`)
-        .setColor("#60b0f4");
+        .addFields([{ name: "Earned Cash", value: `${toCurrency(cash)}` }])
+        .setColor(colors.blue);
       interaction.reply({ embeds: [embed] });
     }
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

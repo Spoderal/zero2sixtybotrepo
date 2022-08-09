@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -54,7 +55,7 @@ module.exports = {
       userdata.cash -= Number(amount);
       userdata.save();
 
-      interaction.reply(`Deposited $${numberWithCommas(amount)}`);
+      interaction.reply(`Deposited ${toCurrency(amount)}`);
     } else if (subcommand === "withdraw") {
       if (amount > bank)
         return interaction.reply(
@@ -63,11 +64,7 @@ module.exports = {
       userdata.cash += Number(amount);
       userdata.bank -= Number(amount);
       userdata.save();
-      interaction.reply(`Withdrawed $${numberWithCommas(amount)}`);
-    }
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      interaction.reply(`Withdrawed ${toCurrency(amount)}`);
     }
   },
 };

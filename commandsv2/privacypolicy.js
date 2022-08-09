@@ -1,5 +1,6 @@
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -7,7 +8,7 @@ module.exports = {
     .setDescription("Check the privacy policy of the bot"),
 
   async execute(interaction) {
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle("Privacy Policy")
       .setDescription(
         `By using the Discord bot Zero2Sixty, you agree to the following.
@@ -35,7 +36,7 @@ module.exports = {
         
         We reserve the right to change this at any time.`
       )
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
     interaction.reply({ embeds: [embed] });
   },
 };

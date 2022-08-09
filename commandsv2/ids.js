@@ -2,6 +2,7 @@ const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -76,7 +77,7 @@ module.exports = {
 
       userdata.save();
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Selected ✅")
         .setDescription(
           `Selected your **${
@@ -126,9 +127,9 @@ module.exports = {
       if (!selectedids || selectedids.length == 0)
         return interaction.reply("You don't have any IDs!");
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new Discord.EmbedBuilder()
         .setTitle("Your IDs")
-        .setColor("#60b0f4")
+        .setColor(colors.blue)
         .setDescription(`${selectedids.join("\n")}`);
 
       interaction.reply({ embeds: [embed] });

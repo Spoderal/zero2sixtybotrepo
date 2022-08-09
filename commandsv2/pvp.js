@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -56,7 +56,7 @@ module.exports = {
     let filteredcar2 = userdata2.cars.filter((car) => car.ID == idtoselect2);
     let selected2 = filteredcar2[0] || "No ID";
     if (selected2 == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -68,12 +68,12 @@ module.exports = {
     let carindb1 = cars.Cars[selected.Name.toLowerCase()];
     let carindb2 = cars.Cars[selected2.Name.toLowerCase()];
 
-    let row = new MessageActionRow().addComponents(
-      new MessageButton()
+    let row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setCustomId("approve")
-        .setStyle("SUCCESS")
+        .setStyle("Success")
         .setEmoji("✔️"),
-      new MessageButton().setCustomId("deny").setStyle("DANGER").setEmoji("✖️")
+      new ButtonBuilder().setCustomId("deny").setStyle("Danger").setEmoji("✖️")
     );
 
     let carimage1 = carindb1.Image;
@@ -87,16 +87,18 @@ module.exports = {
     let u1handling = selected.Handling;
     let u2handling = selected2.Handling;
 
-    let embed = new discord.MessageEmbed()
+    let embed = new discord.EmbedBuilder()
       .setTitle(`${user2.username}, would you like to race ${user.username}?`)
-      .addField(
-        `${user.username}'s car`,
-        `${carindb1.Emote} ${carindb1.Name}\n\nSpeed: ${u1speed} MPH\n0-60: ${u1acc}s\nHandling: ${u1handling}`
-      )
-      .addField(
-        `${user2.username}'s car`,
-        `${carindb2.Emote} ${carindb2.Name}\n\nSpeed: ${u2speed} MPH\n0-60: ${u2acc}s\nHandling: ${u2handling}`
-      )
+      .addFields([
+        {
+          name: `${user.username}'s car`,
+          value: `${carindb1.Emote} ${carindb1.Name}\n\nSpeed: ${u1speed} MPH\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
+        },
+        {
+          name: `${user2.username}'s car`,
+          value: `${carindb2.Emote} ${carindb2.Name}\n\nSpeed: ${u2speed} MPH\n0-60: ${u2acc}s\nHandling: ${u2handling}`,
+        },
+      ])
       .setImage(carimage1)
       .setThumbnail(carimage2)
       .setColor(`#60b0f4`);
@@ -150,7 +152,7 @@ module.exports = {
           await i.editReply({ embeds: [embed] });
         }, 5000);
       } else {
-        embed.addField("Result", "Declined");
+        embed.addFields([{ name: "Result", value: "Declined" }]);
         row.components[0].setDisabled(true);
         row.components[1].setDisabled(true);
 

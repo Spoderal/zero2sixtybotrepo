@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -74,7 +75,7 @@ module.exports = {
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
-      let errembed = new discord.MessageEmbed()
+      let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -117,7 +118,7 @@ module.exports = {
       let filteredcar2 = userdata2.cars.filter((car) => car.ID == idtoselect);
       selected2 = filteredcar2[0] || "No ID";
       if (selected2 == "No ID") {
-        let errembed = new discord.MessageEmbed()
+        let errembed = new discord.EmbedBuilder()
           .setTitle("Error!")
           .setColor("DARK_RED")
           .setDescription(
@@ -199,17 +200,19 @@ module.exports = {
       userdata.update();
       userdata2.update();
 
-      let embed = new discord.MessageEmbed()
+      let embed = new discord.EmbedBuilder()
         .setTitle("3...2...1....GO!")
-        .addField(
-          `${user.username}'s ${selected.Emote} ${selected.Name}`,
-          `Speed: ${user1carspeed}\n\n0-60: ${newzero1}s`
-        )
-        .addField(
-          `${user2.username}'s ${selected2.Emote} ${selected2.Name}`,
-          `Speed: ${user2carspeed}\n\n0-60: ${newzero2}s`
-        )
-        .setColor("#60b0f4")
+        .addFields([
+          {
+            name: `${user.username}'s ${selected.Emote} ${selected.Name}`,
+            value: `Speed: ${user1carspeed}\n\n0-60: ${newzero1}s`,
+          },
+          {
+            name: `${user2.username}'s ${selected2.Emote} ${selected2.Name}`,
+            value: `Speed: ${user2carspeed}\n\n0-60: ${newzero2}s`,
+          },
+        ])
+        .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
       let msg2 = await interaction.editReply({ embeds: [embed] });
 
@@ -231,11 +234,13 @@ module.exports = {
           if (tracklength > tracklength2) {
             console.log("End");
             clearInterval(x);
-            embed.addField("Results", `${user.username} Won`);
-            embed.addField(
-              "Earnings",
-              `${cars.Cars[user2car.toLowerCase()].Name}`
-            );
+            embed.addFields([
+              { name: "Results", value: `${user.username} Won` },
+              {
+                name: "Earnings",
+                value: `${cars.Cars[user2car.toLowerCase()].Name}`,
+              },
+            ]);
             user2car = user2car.toLowerCase();
 
             userdata.cars.push(selected2);
@@ -262,11 +267,13 @@ module.exports = {
           } else if (tracklength < tracklength2) {
             console.log("End");
             clearInterval(x);
-            embed.addField("Results", `${user2.username} Won`);
-            embed.addField(
-              "Earnings",
-              `${cars.Cars[user1car.toLowerCase()].Name}`
-            );
+            embed.addFields([
+              { name: "Results", value: `${user2.username} Won` },
+              {
+                name: "Earnings",
+                value: `${cars.Cars[user1car.toLowerCase()].Name}`,
+              },
+            ]);
             user1car = user1car.toLowerCase();
             userdata2.cars.push(selected);
             userdata.cars.pull(selected);
@@ -290,7 +297,7 @@ module.exports = {
             userdata2.save();
             return;
           } else if (tracklength == tracklength2) {
-            embed.addField("Results", `Tied!`);
+            embed.addFields([{ name: "Results", value: `Tied!` }]);
             msg2.edit({ embeds: [embed] });
           }
         }

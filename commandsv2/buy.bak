@@ -2,83 +2,156 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const items = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
-let warehousedb = require("../data/warehouses.json");
-let cars = require("../data/cardb.json");
-let houses = require("../data/houses.json");
-const { EmbedBuilder } = require("discord.js");
-let parts = require("../data/partsdb.json");
+
+// Car Data
+const carsData = require("../data/cardb.json");
 const { emotes } = require("../common/emotes");
-const colors = require("../common/colors");
 const { toCurrency, numberWithCommas } = require("../common/utils");
+const colors = require("../common/colors");
+
+const cars = Object.values(carsData.Cars);
+// eslint-disable-next-line no-prototype-builtins
+const carsWithClasses = cars.filter((c) => c.hasOwnProperty("Class"));
+const classNames = new Set(carsWithClasses.map((c) => c.Class.toUpperCase()));
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("buy")
-    .setDescription("Buy a car or part")
-
+    .setDescription("Buy a car")
     .addStringOption((option) =>
       option
-        .setName("item")
-        .setDescription("The car or part to buy")
+        .setName("class")
+        .setDescription("The class of the car")
         .setRequired(true)
+        .setAutocomplete(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("name")
+        .setDescription("The alias or name of the car")
+        .setRequired(true)
+        .setAutocomplete(true)
     )
     .addNumberOption((option) =>
       option
-        .setName("amount")
-        .setDescription("The amount to buy")
+        .setName("quantity")
+        .setDescription("The quantity you'd like to buy")
         .setRequired(false)
+        .setAutocomplete(true)
     ),
+
+  async autoComplete(interaction) {
+    const { name, type, value, focused } = interaction.options.getFocused(true);
+
+    console.log("autoComplete interaction: ", { name, type, value, focused });
+
+    switch (name) {
+      case "class": {
+        const data = [...classNames.values()].map((cn) => ({
+          name: cn,
+          value: cn,
+        }));
+        console.log("sending class names back to client");
+        interaction.respond(data);
+        break;
+      }
+
+      case "name": {
+        try {
+          const selectedClass = interaction.options.get("class", true).value;
+          const carsInClass = carsWithClasses
+            .filter((c) => c.Class === selectedClass)
+            .map((c) => ({ name: c.Name, value: c.Name }));
+          console.log({ selectedClass, carsInClass });
+          if (carsInClass?.length > 0) interaction.respond(carsInClass);
+        } catch (e) {
+          console.log(e);
+        }
+        return;
+      }
+
+      default:
+        return;
+    }
+
+    // console.log(focusedValue);
+    // return filteredCars;
+  },
+
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     let global = await Global.findOne({});
+
     let amount = interaction.options.getNumber("amount");
     let amount2 = amount || 1;
-    let list = cars.Cars;
+    let warehousedb = require("../data/warehouses.json");
+    let houses = require("../data/houses.json");
+
+    const { EmbedBuilder } = require("discord.js");
+    let parts = require("../data/partsdb.json");
     let list2 = parts.Parts;
     let list3 = items;
-    let cashemote = emotes.cash;
-    let bought = interaction.options.getString("item").toLowerCase();
+    let boughtInput = interaction.options.getString("name").toLowerCase();
+    let boughtCar = cars.find(
+      (c) =>
+        c.Name.toLowerCase() === boughtInput ||
+        c.alias.toLowerCase() === boughtInput
+    );
+    let boughtName = boughtCar?.Name?.toLowerCase();
+    console.log(boughtCar);
+    console.log(boughtName, cars[boughtName]);
+
     let cash = userdata.cash;
     let gold = userdata.gold;
     let usercars = userdata.cars;
     let garagelimit = userdata.garageLimit;
 
+    console.log(
+      boughtCar,
+      list2[boughtName],
+      list3.Other[boughtName],
+      list3.Police[boughtName],
+      list3.Multiplier[boughtName],
+      warehousedb[boughtName]
+    );
+
     if (
-      !list[bought] &&
-      !list2[bought] &&
-      !list3.Other[bought] &&
-      !list3.Police[bought] &&
-      !list3.Multiplier[bought] &&
-      !warehousedb[bought.toLowerCase()]
+      !boughtCar &&
+      !list2[boughtName] &&
+      !list3.Other[boughtName] &&
+      !list3.Police[boughtName] &&
+      !list3.Multiplier[boughtName] &&
+      !warehousedb[boughtName]
     )
       return interaction.reply(
         "That car or part isn't available yet, suggest it in the support server! In the meantime, check how to use the command by running /buy."
       );
-    if (!bought)
+    if (!boughtName)
       return interaction.reply(
         "To use this command, specify the car or part you want to buy. Example: /buy 1995 Mazda Miata"
       );
-    if (list[bought]) {
+
+    if (boughtCar) {
       if (usercars.length >= garagelimit)
         return interaction.reply(
           "Your spaces are already filled. Sell a car or get more garage space!"
         );
 
-      if (cars.Cars[bought].Price == 0)
+      if (boughtCar.Price == 0)
         return interaction.reply("This car is not purchasable.");
-      if (usercars.includes(cars.Cars[bought].Name.toLowerCase()))
+      if (usercars.includes(boughtCar.Name.toLowerCase()))
         return interaction.reply("You already own this car!");
-      let carprice = cars.Cars[bought].Price;
+      let carprice = boughtCar.Price;
 
-      if (cars.Cars[bought].Blackmarket) {
+      if (boughtCar.Blackmarket) {
         if (gold < carprice)
           return interaction.reply("You don't have enough gold!");
 
         userdata.gold -= carprice;
         let carobj;
-        let idtoset = cars.Cars[bought.toLowerCase()].alias;
-        let carindb = cars.Cars[bought.toLowerCase()];
-        if (cars.Cars[bought.toLowerCase()].Range) {
+        let idtoset = boughtCar.alias;
+        let carindb = boughtCar;
+        if (boughtCar.Range) {
           carobj = {
             ID: carindb.alias,
             Name: carindb.Name,
@@ -116,23 +189,28 @@ module.exports = {
           }
         );
 
-        let embed = new EmbedBuilder()
-          .setTitle(`Bought ${cars.Cars[bought].Name}`)
-          .addFields([
+        let embed = new EmbedBuilder({
+          title: `Bought ${boughtCar.Name}`,
+          color: "#60b0f4",
+          thumbnail: `${boughtCar.Image}`,
+
+          fields: [
             { name: "Price", value: `${carprice} ${emotes.gold}` },
             { name: `ID`, value: `${idtoset}` },
-            { name: "New gold balance", value: `${gold} ${emotes.gold}` },
-          ])
-          .setColor(colors.blue)
-          .setThumbnail(`${cars.Cars[bought].Image}`);
+            {
+              name: "New gold balance",
+              value: `${gold} ${emotes.gold}`,
+            },
+          ],
+        });
         interaction.reply({ embeds: [embed] });
         return;
       } else {
         if (cash < carprice)
           return interaction.reply("You don't have enough cash!");
 
-        if (cars.Cars[bought].Police) {
-          if (cash < cars.Cars[bought].Price)
+        if (boughtCar.Police) {
+          if (cash < boughtCar.Price)
             return interaction.reply("You don't have enough cash!");
 
           let job = userdata.job;
@@ -144,15 +222,15 @@ module.exports = {
 
           let num = job.Number;
 
-          if (num < cars.Cars[bought].Police)
+          if (num < boughtCar.Police)
             return interaction.reply(
-              `You need the rank "${cars.Cars[bought].Rank}" to buy this car!`
+              `You need the rank "${boughtCar.Rank}" to buy this car!`
             );
           let carobj;
-          let idtoset = cars.Cars[bought.toLowerCase()].alias;
-          let carindb = cars.Cars[bought.toLowerCase()];
-          userdata.cash -= cars.Cars[bought].Price;
-          if (cars.Cars[bought.toLowerCase()].Range) {
+          let idtoset = boughtCar.alias;
+          let carindb = boughtCar;
+          userdata.cash -= boughtCar.Price;
+          if (boughtCar.Range) {
             carobj = {
               ID: carindb.alias,
               Name: carindb.Name,
@@ -190,33 +268,29 @@ module.exports = {
             }
           );
           let embed = new EmbedBuilder()
-            .setTitle(`Bought ${cars.Cars[bought].Name}`)
+            .setTitle(`Bought ${boughtCar.Name}`)
             .addFields([
-              {
-                name: "Price",
-                value: `${toCurrency(cars.Cars[bought].Price)}`,
-              },
+              { name: "Price", value: `${toCurrency(boughtCar.Price)}` },
               { name: `ID`, value: `${idtoset}` },
               { name: "New cash balance", value: `${toCurrency(cash)}` },
             ])
             .setColor(colors.blue)
-            .setThumbnail(`${cars.Cars[bought].Image}`);
+            .setThumbnail(`${boughtCar.Image}`);
           return interaction.reply({ embeds: [embed] });
         }
-        let sellprice = cars.Cars[bought].Price * 0.65;
-
+        let sellprice = boughtCar.Price * 0.65;
+        console.log(sellprice);
         let discountcar = "0";
         if (discountcar !== "0") {
           let disccarprice =
-            cars.Cars[bought].Price -
-            cars.Cars[bought].Price * parseFloat(discountcar);
+            boughtCar.Price - boughtCar.Price * parseFloat(discountcar);
           let carobj;
           if (cash < disccarprice)
             return interaction.reply(`You can't afford this car!`);
           cash -= disccarprice;
-          let idtoset = cars.Cars[bought.toLowerCase()].alias;
-          let carindb = cars.Cars[bought.toLowerCase()];
-          if (cars.Cars[bought.toLowerCase()].Range) {
+          let idtoset = boughtCar.alias;
+          let carindb = boughtCar;
+          if (boughtCar.Range) {
             carobj = {
               ID: carindb.alias,
               Name: carindb.Name,
@@ -256,7 +330,7 @@ module.exports = {
             }
           );
           let embed = new EmbedBuilder()
-            .setTitle(`Bought ${cars.Cars[bought].Name}`)
+            .setTitle(`Bought ${boughtCar.Name}`)
             .addFields([
               {
                 name: "Price",
@@ -266,19 +340,19 @@ module.exports = {
               { name: `ID`, value: `${idtoset}` },
             ])
             .setColor(colors.blue)
-            .setThumbnail(`${cars.Cars[bought].Image}`);
+            .setThumbnail(`${boughtCar.Image}`);
           interaction.reply({ embeds: [embed] });
         } else {
-          let sellprice = cars.Cars[bought].Price * 0.65;
+          let sellprice = boughtCar.Price * 0.65;
 
           if (cash < carprice)
             return interaction.reply("You don't have enough cash!");
           let carobj;
           cash -= carprice;
 
-          let idtoset = cars.Cars[bought.toLowerCase()].alias;
-          let carindb = cars.Cars[bought.toLowerCase()];
-          if (cars.Cars[bought.toLowerCase()].Range) {
+          let idtoset = boughtCar.alias;
+          let carindb = boughtCar;
+          if (boughtCar.Range) {
             carobj = {
               ID: carindb.alias,
               Name: carindb.Name,
@@ -321,54 +395,49 @@ module.exports = {
           userdata.save();
 
           let embed = new EmbedBuilder()
-            .setTitle(`✅ Bought ${cars.Cars[bought].Name}`)
+            .setTitle(`✅ Bought ${boughtCar.Name}`)
             .addFields([
               {
                 name: "Price",
-                value: `${cashemote} ${toCurrency(carprice)}`,
+                value: `${emotes.cash} ${toCurrency(carprice)}`,
                 inline: true,
               },
-              {
-                name: `ID`,
-                value: `\`${idtoset}\``,
-                inline: true,
-              },
+
+              { name: `ID`, value: `${idtoset}`, inline: true },
               {
                 name: "New cash balance",
-                value: `${cashemote} ${toCurrency(cash)}`,
+                value: `${emotes.cash} ${toCurrency(cash)}`,
               },
             ])
-            .setColor(colors.blue)
-            .setThumbnail(`${cars.Cars[bought].Image}`);
+            .setColor(3447003)
+            .setThumbnail(`${boughtCar.Image}`);
           interaction.reply({ embeds: [embed] });
         }
       }
-    } else if (list2[bought.toLowerCase()]) {
-      bought = bought.toLowerCase();
-
+    } else if (list2[boughtName.toLowerCase()]) {
       let discount = userdata.discountparts;
       if (amount2 > 50)
         return interaction.reply(
           `The max amount you can buy in one command is 50!`
         );
-      if (parts.Parts[bought].Tier == "BM1") {
-        if (gold < parts.Parts[bought].Price)
+      if (parts.Parts[boughtName].Tier == "BM1") {
+        if (gold < parts.Parts[boughtName].Price)
           return interaction.reply("You don't have enough gold!");
-        userdata.gold -= parts.Parts[bought].Price;
-        userdata.parts.push(bought.toLowerCase());
+        userdata.gold -= parts.Parts[boughtName].Price;
+        userdata.parts.push(boughtName.toLowerCase());
         userdata.save();
 
         interaction.reply(
-          `You bought a ${parts.Parts[bought].Name} for 🪙 ${numberWithCommas(
-            parts.Parts[bought].Price
-          )}`
+          `You bought a ${
+            parts.Parts[boughtName].Name
+          } for 🪙 ${numberWithCommas(parts.Parts[boughtName].Price)}`
         );
       } else {
         if (discount) {
           let priceforpart =
-            parts.Parts[bought].Price -
-            parts.Parts[bought].Price * parseFloat(discount);
-          if (parts.Parts[bought].Price == 0)
+            parts.Parts[boughtName].Price -
+            parts.Parts[boughtName].Price * parseFloat(discount);
+          if (parts.Parts[boughtName].Price == 0)
             return interaction.reply("This part is not purchasable.");
           if (cash < priceforpart * amount2)
             return interaction.reply("You don't have enough cash!");
@@ -376,35 +445,35 @@ module.exports = {
           userdata.cash -= priceforpart;
           let user1newpart = [];
           for (var i = 0; i < amount2; i++)
-            user1newpart.push(bought.toLowerCase());
+            user1newpart.push(boughtName.toLowerCase());
           for (i in user1newpart) {
-            userdata.parts.push(bought.toLowerCase());
+            userdata.parts.push(boughtName.toLowerCase());
           }
           userdata.save();
 
           let embed = new EmbedBuilder()
             .setTitle(
-              `✅ Bought x${amount2} ${parts.Parts[bought].Name} Discounted`
+              `✅ Bought x${amount2} ${parts.Parts[boughtName].Name} Discounted`
             )
             .addFields([
               {
                 name: `Price`,
-                value: `${cashemote} ${toCurrency(priceforpart)}`,
+                value: `${emotes.cash} ${toCurrency(priceforpart)}`,
               },
               {
                 name: "New cash balance",
-                value: `${cashemote} ${toCurrency(cash)}`,
+                value: `${emotes.cash} ${toCurrency(cash)}`,
               },
             ])
-            .setColor(colors.blue);
-          if (parts.Parts[bought].Image) {
-            embed.setThumbnail(parts.Parts[bought].Image);
+            .setColor(`#60b0f4`);
+          if (parts.Parts[boughtName].Image) {
+            embed.setThumbnail(parts.Parts[boughtName].Image);
           }
           await interaction.reply({ embeds: [embed] });
         } else {
-          if (parts.Parts[bought].Price == 0)
+          if (parts.Parts[boughtName].Price == 0)
             return interaction.reply("This part is not purchasable.");
-          let newprice = parts.Parts[bought].Price * amount2;
+          let newprice = parts.Parts[boughtName].Price * amount2;
           if (userdata.cash < newprice)
             return interaction.reply(
               `You cant afford this! You need ${toCurrency(newprice)}`
@@ -413,36 +482,38 @@ module.exports = {
           let user1newpart = [];
 
           for (let i = 0; i < amount2; i++)
-            user1newpart.push(bought.toLowerCase());
+            user1newpart.push(boughtName.toLowerCase());
           for (i in user1newpart) {
-            userdata.parts.push(bought.toLowerCase());
+            userdata.parts.push(boughtName.toLowerCase());
           }
           userdata.save();
           let embed = new EmbedBuilder()
-            .setTitle(`✅ Bought x${amount2} ${parts.Parts[bought].Name}`)
+            .setTitle(`✅ Bought x${amount2} ${parts.Parts[boughtName].Name}`)
             .addFields([
               {
                 name: `Price`,
-                value: `${cashemote} ${toCurrency(parts.Parts[bought].Price)}`,
+                value: `${emotes.cash} ${toCurrency(
+                  parts.Parts[boughtName].Price
+                )}`,
               },
               {
                 name: "New cash balance",
-                value: `${cashemote} ${toCurrency(cash)}`,
+                value: `${emotes.cash} ${toCurrency(cash)}`,
               },
             ])
-            .setColor(colors.blue);
-          if (parts.Parts[bought].Image) {
-            embed.setThumbnail(parts.Parts[bought].Image);
+            .setColor(`#60b0f4`);
+          if (parts.Parts[boughtName].Image) {
+            embed.setThumbnail(parts.Parts[boughtName].Image);
           }
           await interaction.reply({ embeds: [embed] });
         }
       }
-    } else if (houses[bought.toLowerCase()]) {
-      if (cash < houses[bought.toLowerCase()].Price)
+    } else if (houses[boughtName.toLowerCase()]) {
+      if (cash < houses[boughtName.toLowerCase()].Price)
         return interaction.reply("You don't have enough cash!");
       // let house = userdata.house;
       // let garagelimit = userdata.garageLimit;
-      if (bought.toLowerCase() !== "yacht") {
+      if (boughtName.toLowerCase() !== "yacht") {
         // if (house) {
         //   if (house.perks.includes("+2 Garage spaces")) {
         //     garagelimit -= 2;
@@ -456,60 +527,66 @@ module.exports = {
         //     garagelimit -= 15;
         //   }
         // }
-        if (houses[bought].Rewards.includes("10% Discount on parts")) {
+        if (houses[boughtName].Rewards.includes("10% Discount on parts")) {
           userdata.discountparts = 0.1;
-        } else if (houses[bought].Rewards.includes("15% Discount on parts")) {
+        } else if (
+          houses[boughtName].Rewards.includes("15% Discount on parts")
+        ) {
           userdata.discountparts = 0.15;
-        } else if (houses[bought].Rewards.includes("20% Discount on parts")) {
+        } else if (
+          houses[boughtName].Rewards.includes("20% Discount on parts")
+        ) {
           userdata.discountparts = 0.2;
         }
-        if (houses[bought].Rewards.includes("20% Discount on parts AND cars")) {
+        if (
+          houses[boughtName].Rewards.includes("20% Discount on parts AND cars")
+        ) {
           userdata.discountparts = 0.2;
           userdata.discountcars = 0.2;
         } else if (
-          houses[bought].Rewards.includes("25% Discount on parts AND cars")
+          houses[boughtName].Rewards.includes("25% Discount on parts AND cars")
         ) {
           userdata.discountparts = 0.2;
           userdata.discountcars = 0.2;
         }
 
-        if (houses[bought].Rewards.includes("+2 Garage spaces")) {
+        if (houses[boughtName].Rewards.includes("+2 Garage spaces")) {
           userdata.garageLimit += 2;
-        } else if (houses[bought].Rewards.includes("+3 Garage spaces")) {
+        } else if (houses[boughtName].Rewards.includes("+3 Garage spaces")) {
           userdata.garageLimit += 3;
-        } else if (houses[bought].Rewards.includes("+4 Garage spaces")) {
+        } else if (houses[boughtName].Rewards.includes("+4 Garage spaces")) {
           userdata.garageLimit += 4;
-        } else if (houses[bought].Rewards.includes("+6 Garage spaces")) {
+        } else if (houses[boughtName].Rewards.includes("+6 Garage spaces")) {
           userdata.garageLimit += 6;
-        } else if (houses[bought].Rewards.includes("+15 Garage spaces")) {
+        } else if (houses[boughtName].Rewards.includes("+15 Garage spaces")) {
           userdata.garageLimit += 15;
         }
         let houseobj = {
-          name: houses[bought.toLowerCase()].Name,
-          perks: houses[bought.toLowerCase()].Rewards,
+          name: houses[boughtName.toLowerCase()].Name,
+          perks: houses[boughtName.toLowerCase()].Rewards,
         };
         userdata.house = houseobj;
       } else {
         userdata.yacht = true;
       }
-      userdata.cash -= houses[bought.toLowerCase()].Price;
+      userdata.cash -= houses[boughtName.toLowerCase()].Price;
       userdata.save();
       interaction.reply(
-        `You bought ${houses[bought].Name} for ${toCurrency(
-          houses[bought].Price
+        `You bought ${houses[boughtName].Name} for ${toCurrency(
+          houses[boughtName].Price
         )}`
       );
-    } else if (warehousedb[bought.toLowerCase()]) {
+    } else if (warehousedb[boughtName.toLowerCase()]) {
       let warehouses = userdata.warehouses;
       let prestige = userdata.prestige;
-      let wareprice = warehousedb[bought.toLowerCase()].Price;
+      let wareprice = warehousedb[boughtName.toLowerCase()].Price;
       if (cash < wareprice)
         return interaction.reply(`You cant afford this warehouse!`);
       if (prestige < 11)
         return interaction.reply(
           `Your prestige needs to be 11 before you can buy warehouses!`
         );
-      if (warehouses.includes(bought.toLowerCase()))
+      if (warehouses.includes(boughtName.toLowerCase()))
         return interaction.reply(`You've already purchased this warehouse!`);
 
       await User.findOneAndUpdate(
@@ -518,27 +595,27 @@ module.exports = {
         },
         {
           $push: {
-            warehouses: bought.toLowerCase(),
+            warehouses: boughtName.toLowerCase(),
           },
         }
       );
 
-      userdata.garageLimit += warehousedb[bought.toLowerCase()].Space;
+      userdata.garageLimit += warehousedb[boughtName.toLowerCase()].Space;
       userdata.save();
 
       interaction.reply(
-        `You bought the ${warehousedb[bought.toLowerCase()].Emote} ${
-          warehousedb[bought.toLowerCase()].Name
-        } for ${toCurrency(warehousedb[bought.toLowerCase()].Price)}`
+        `You bought the ${warehousedb[boughtName.toLowerCase()].Emote} ${
+          warehousedb[boughtName.toLowerCase()].Name
+        } for ${toCurrency(warehousedb[boughtName.toLowerCase()].Price)}`
       );
     } else if (
-      list3.Police[bought.toLowerCase()] ||
-      list3.Other[bought.toLowerCase()] ||
-      list3.Multiplier[bought.toLowerCase()]
+      list3.Police[boughtName.toLowerCase()] ||
+      list3.Other[boughtName.toLowerCase()] ||
+      list3.Multiplier[boughtName.toLowerCase()]
     ) {
       let itemshop = global.itemshop;
       let filtereditem = itemshop.filter(
-        (item) => item.Name.toLowerCase() == bought.toLowerCase()
+        (item) => item.Name.toLowerCase() == boughtName.toLowerCase()
       );
       let itemindb = filtereditem[0] || "No ID";
 
@@ -555,17 +632,18 @@ module.exports = {
 
       let user1newarr = [];
 
-      for (let i = 0; i < amount2; i++) user1newarr.push(bought.toLowerCase());
+      for (let i = 0; i < amount2; i++)
+        user1newarr.push(boughtName.toLowerCase());
       for (i in user1newarr) {
-        userdata.items.push(bought.toLowerCase());
+        userdata.items.push(boughtName.toLowerCase());
       }
       userdata.cash -= pricing;
 
       userdata.save();
 
       interaction.reply(
-        `Purchased x${amount2} ${list3.Other[bought].Emote} ${
-          list3.Other[bought].Name
+        `Purchased x${amount2} ${list3.Other[boughtName].Emote} ${
+          list3.Other[boughtName].Name
         } for ${toCurrency(pricing)}`
       );
     } else {

@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const colors = require("../common/colors");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,9 +25,9 @@ module.exports = {
       }
     }
 
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle("Cash Leaderboard")
-      .setColor("#60b0f4");
+      .setColor(colors.blue);
 
     members = members.sort(function (b, a) {
       return a.cash - b.cash;
@@ -40,7 +42,9 @@ module.exports = {
     for (let obj of members) {
       pos++;
       if (obj.id == interaction.user.id) {
-        embed.setFooter(`Your position is #${pos} on the cash leaderboard`);
+        embed.setFooter({
+          text: `Your position is #${pos} on the cash leaderboard`,
+        });
       }
     }
 
@@ -52,7 +56,7 @@ module.exports = {
       let user = interaction.client.users.cache.get(members[i].id);
       if (!user) return;
       let bal = members[i].cash;
-      desc += `${i + 1}. ${user.tag} - $${numberWithCommas(bal)}\n`;
+      desc += `${i + 1}. ${user.tag} - ${toCurrency(bal)}\n`;
     }
 
     embed.setDescription(desc);
@@ -60,7 +64,3 @@ module.exports = {
     await interaction.editReply({ embeds: [embed] });
   },
 };
-
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}

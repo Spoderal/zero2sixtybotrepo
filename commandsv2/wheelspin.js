@@ -6,6 +6,8 @@ const wheelspinrewards = require("../data/wheelspinrewards.json");
 const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
+const { numberWithCommas, toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -38,10 +40,10 @@ module.exports = {
     let usercars = userdata.cars;
     userdata.wheelspins -= 1;
     cooldowns.wheelspin = Date.now();
-    let embed = new Discord.MessageEmbed()
+    let embed = new Discord.EmbedBuilder()
       .setTitle("Wheel Spin!")
       .setDescription(`${item}`)
-      .setColor("#60b0f4")
+      .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
     interaction.reply({ embeds: [embed] });
     setTimeout(() => {
@@ -80,13 +82,15 @@ module.exports = {
             `You won a ${carsdb.Cars[reward].Emote} ${carsdb.Cars[reward].Name}!`
           );
           embed.setImage(carsdb.Cars[reward].Image);
-          embed.addField(`ID`, `${carsdb.Cars[reward.toLowerCase()].alias}`);
+          embed.addFields([
+            { name: `ID`, value: `${carsdb.Cars[reward.toLowerCase()].alias}` },
+          ]);
           interaction.editReply({ embeds: [embed] });
           if (usercars.includes(reward)) {
             let sellprice = carsdb.Cars[reward].sellprice;
             userdata.cash += sellprice;
             interaction.channel.send(
-              `You already own this car, so you got $${numberWithCommas(
+              `You already own this car, so you got ${toCurrency(
                 sellprice
               )} instead.`
             );
@@ -133,7 +137,7 @@ module.exports = {
         } else if (item == "💵") {
           let reward = lodash.sample(cash);
           userdata.cash += Number(reward);
-          embed.setDescription(`You won $${numberWithCommas(reward)} cash!`);
+          embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
         } else if (item == "🗺️") {
           let reward = lodash.sample(maps);
@@ -154,9 +158,5 @@ module.exports = {
         userdata.save();
       }, 500);
     }, 3000);
-
-    function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   },
 };
