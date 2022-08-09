@@ -40,12 +40,12 @@ module.exports = {
             .setRequired(false)
         )
     ),
+
   async execute(interaction) {
     let subcommandfetch = interaction.options.getSubcommand();
 
     var list = cars.Cars;
     var item = interaction.options.getString("item");
-
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
       let handlingemote = emotes.handling;
       let speedemote = emotes.speed;
@@ -94,9 +94,7 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommandfetch == "carid") {
-      let idtoselect = interaction.options.getString("item");
-      console.log(idtoselect);
-
+      let idtoselect = interaction.options.getString("id");
       let userdata = await User.findOne({ id: interaction.user.id });
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
