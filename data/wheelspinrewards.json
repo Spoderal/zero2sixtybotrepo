@@ -38,8 +38,19 @@
     "t4racesuspension",
     "t4spoiler"
   ],
-  "Cash": ["1000", "2000", "3000", "4000", "5000", "6000", "7500"],
-  "Maps": ["Common", "Uncommon"],
+  "Cash": [
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7500
+  ],
+  "Maps": [
+    "Common",
+    "Uncommon"
+  ],
   "Helmets": [
     "platinum helmet",
     "gold helmet",

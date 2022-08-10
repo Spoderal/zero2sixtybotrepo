@@ -7,7 +7,7 @@
         "blue helmet",
         "yellow helmet"
       ],
-      "Price": "450"
+      "Price": 450
     },
     "rare": {
       "Contents": [
@@ -16,7 +16,7 @@
         "rainbow helmet",
         "turqoise helmet"
       ],
-      "Price": "750"
+      "Price": 750
     },
     "seasonal": {
       "Contents": [
@@ -27,7 +27,7 @@
         "grass helmet",
         "dark mode helmet"
       ],
-      "Price": "800"
+      "Price": 800
     }
   }
 }

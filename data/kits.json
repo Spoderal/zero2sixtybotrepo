@@ -5,14 +5,14 @@
       "Exhaust": "t1exhaust",
       "Intake": "t1intake",
       "Tires": "t1tires",
-      "Price": ""
+      "Price": 0
     },
     "tier2kit": {
       "Name": "Tier2Kit",
       "Exhaust": "t2exhaust",
       "Intake": "t2intake",
       "Tires": "t2tires",
-      "Price": ""
+      "Price": 0
     }
   }
 }
