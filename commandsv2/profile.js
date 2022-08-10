@@ -52,25 +52,32 @@ module.exports = {
     let cash = userdata.cash;
     finalprice += cash;
 
+    const fields = [
+      {
+        name: `Progress`,
+        value: `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`,
+      },
+    ];
     let bestcar = cars[0];
+    if (bestcar) {
+      fields.push({
+        name: `Best Car`,
+        value: `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
+        inline: true,
+      });
+    }
+    fields.push({
+      name: `Networth`,
+      value: `${toCurrency(finalprice)}`,
+      inline: true,
+    });
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(title)
-      .setAuthor(`${user.username} - Profile`)
+      .setAuthor({ name: `${user.username} - Profile` })
       .setColor(colors.blue)
       .setThumbnail(acthelmet)
-      .addFields([
-        {
-          name: `Progress`,
-          value: `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`,
-        },
-        {
-          name: `Best Car`,
-          value: `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
-          inline: true,
-        },
-        { name: `Networth`, value: `${toCurrency(finalprice)}`, inline: true },
-      ]);
+      .addFields(fields);
 
     interaction.reply({ embeds: [embed] });
   },
