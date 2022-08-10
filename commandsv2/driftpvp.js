@@ -1,4 +1,3 @@
-const lodash = require("lodash");
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -49,7 +48,7 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
-      new Cooldowns({ id: uid });
+      new Cooldowns({ id: interaction.user.id });
     let userdata2 = await User.findOne({ id: user2.id });
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
@@ -97,16 +96,16 @@ module.exports = {
       return interaction.reply("This car is too junked to race, sorry!");
     }
 
+    let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
-      let range = selected.Range;
       if (range <= 0) {
         return interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }
     }
+    let range2 = selected2.Range;
     if (cars.Cars[selected2.Name.toLowerCase()].Electric) {
-      let range2 = selected2.Range;
       if (range2 <= 0) {
         return interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
@@ -206,28 +205,28 @@ module.exports = {
         if (tracklength > tracklength2) {
           if (userdata.cashgain == "10") {
             let calccash = moneyearned * 0.1;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "15") {
             let calccash = moneyearned * 0.15;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "20") {
             let calccash = moneyearned * 0.2;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "25") {
             let calccash = moneyearned * 0.25;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "50") {
             let calccash = moneyearned * 0.5;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
-            moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
+            // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
           }
 
           embed.setTitle(`Drift PVP Winner: ${user.tag}`);
@@ -239,7 +238,7 @@ module.exports = {
           let earningsresult = [];
           if (interaction.guild.id == "931004190149460048") {
             let calccash = moneyearned * 0.05;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           earningsresult.push(`$${moneyearned}`);
@@ -249,7 +248,7 @@ module.exports = {
           userdata.cash += Number(moneyearned);
           userdata.driftxp += 25;
 
-          let racerank2 = (driftrank += 1);
+          let racerank2 = (userdata.driftrank += 1);
 
           let reqxp = racerank2 * 1000;
 
@@ -275,7 +274,7 @@ module.exports = {
             embed.addFields([
               { name: "Double Cash Weekend!", value: `\u200b` },
             ]);
-            moneyearnedtxt = `$${moneyearned}`;
+            // moneyearnedtxt = `$${moneyearned}`;
           }
           interaction.editReply({ embeds: [embed] });
 
@@ -295,28 +294,28 @@ module.exports = {
           embed.setTitle(`Drift PVP Winner: ${user2.tag}`);
           if (userdata2.cashgain == "10") {
             let calccash = moneyearned * 0.1;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata2.cashgain == "15") {
             let calccash = moneyearned * 0.15;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata2.cashgain == "20") {
             let calccash = moneyearned * 0.2;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata2.cashgain == "25") {
             let calccash = moneyearned * 0.25;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata2.cashgain == "50") {
             let calccash = moneyearned * 0.5;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
-            moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
+            // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
           }
 
           if (cars.Cars[selected2.Name.toLowerCase()].StatTrack) {
@@ -326,7 +325,7 @@ module.exports = {
           let earningsresult = [];
           if (interaction.guild.id == "931004190149460048") {
             let calccash = moneyearned * 0.05;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           earningsresult.push(`$${moneyearned}`);
@@ -362,7 +361,7 @@ module.exports = {
             embed.addFields([
               { name: "Double Cash Weekend!", value: `\u200b` },
             ]);
-            moneyearnedtxt = `$${moneyearned}`;
+            // moneyearnedtxt = `$${moneyearned}`;
           }
           interaction.editReply({ embeds: [embed] });
 
