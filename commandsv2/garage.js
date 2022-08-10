@@ -110,6 +110,7 @@ module.exports = {
         actitems.push(finalitem);
       }
     }
+
     for (let i = 0; i < partarraylength; i++ && parts !== ["no parts"]) {
       if (!parts || parts.length == 0) {
         actpart = "no parts";
@@ -154,7 +155,10 @@ module.exports = {
       let embed1 = new EmbedBuilder()
         .setTitle(`${target.username}'s parts`)
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
-        .setDescription(`${xessence} Xessence\n\n${actuserparts[0].join("\n")}`)
+        .setDescription(
+          `${xessence} Xessence\n
+          ${actuserparts[0]?.join("\n") || "0 Parts"}`
+        )
         .addFields([{ name: "​", value: "​" }])
         .setColor(colors.blue);
 
