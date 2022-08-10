@@ -113,7 +113,7 @@ module.exports = {
       let speedemote = emotes.speed;
       let accelerationemote = emotes.zero2sixty;
       let carindb = selected;
-      let sellprice = selected.Price || 0;
+      let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
 
@@ -284,7 +284,6 @@ module.exports = {
                 value: `${toCurrency(sellprice)}`,
                 inline: true,
               },
-              { name: `\u200b`, value: `\u200b`, inline: true },
               { name: `\u200b`, value: `\u200b`, inline: true },
             ])
             .setColor(colors.blue)
