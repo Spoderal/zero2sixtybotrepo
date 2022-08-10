@@ -58,8 +58,14 @@
     ]
   },
   "z crate": {
-    "common": ["2005 mazda rx8", "2001 toyota supra mk4"],
-    "uncommon": ["2008 mazda miata", "2001 toyota supra mk4"],
+    "common": [
+      "2005 mazda rx8",
+      "2001 toyota supra mk4"
+    ],
+    "uncommon": [
+      "2008 mazda miata",
+      "2001 toyota supra mk4"
+    ],
     "rare": [
       "stat track 2005 mazda rx8",
       "stat track 2008 mazda miata",
