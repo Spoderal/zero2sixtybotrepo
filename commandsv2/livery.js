@@ -283,15 +283,13 @@ module.exports = {
       let usertodm = await interaction.client.users.fetch(filtered[0].user);
 
       interaction.reply({ embeds: [embedapprove] });
-      usertodm
-        .send(
-          `Your recent livery for the ${
-            cars.Cars[cartoapprove.toLowerCase()].Name
-          } was approved! Use /livery Install [car] [id] to use it. ${
-            filtered[0].image
-          }`
-        )
-        .catch(() => console.log("Dms off"));
+      usertodm.send(
+        `Your recent livery for the ${
+          cars.Cars[cartoapprove.toLowerCase()].Name
+        } was approved! Use /livery Install [car] [id] to use it. ${
+          filtered[0].image
+        }`
+      );
     } else if (option == "list") {
       var car = interaction.options.getString("car").toLowerCase();
       if (!car)

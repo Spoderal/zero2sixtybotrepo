@@ -15,7 +15,6 @@ module.exports = {
     .setDescription("View your mini miata"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    console.log(userdata);
     let pet = userdata.pet;
     if (!pet) return interaction.reply(`You don't have a pet!`);
     let condition = pet.condition;

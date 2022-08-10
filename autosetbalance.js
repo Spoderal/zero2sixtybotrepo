@@ -18,8 +18,6 @@ module.exports = async () => {
     let cash2 = user.data;
     let userdata = (await User.findOne({ id: id })) || new User({ id: id });
 
-    console.log(id);
-
     await User.findOneAndUpdate(
       {
         id: id,
@@ -40,8 +38,6 @@ module.exports = async () => {
     let cash2 = user.data;
     let userdata = (await User.findOne({ id: id })) || new User({ id: id });
 
-    console.log(id);
-
     await User.findOneAndUpdate(
       {
         id: id,
@@ -60,8 +56,6 @@ module.exports = async () => {
     let id = user.ID.split("_")[1];
     let cash2 = user.data;
     let userdata = (await User.findOne({ id: id })) || new User({ id: id });
-
-    console.log(id);
 
     await User.findOneAndUpdate(
       {
@@ -82,8 +76,6 @@ module.exports = async () => {
     let cash2 = user.data;
     let userdata = (await User.findOne({ id: id })) || new User({ id: id });
 
-    console.log(id);
-
     await User.findOneAndUpdate(
       {
         id: id,
@@ -102,8 +94,6 @@ module.exports = async () => {
     let id = user.ID.split("_")[1];
     let cash2 = user.data;
     let userdata = (await User.findOne({ id: id })) || new User({ id: id });
-
-    console.log(id);
 
     await User.findOneAndUpdate(
       {
@@ -124,8 +114,6 @@ module.exports = async () => {
     let cash2 = user.data;
     let userdata = (await User.findOne({ id: id })) || new User({ id: id });
 
-    console.log(id);
-
     await User.findOneAndUpdate(
       {
         id: id,
@@ -138,6 +126,4 @@ module.exports = async () => {
     );
     userdata.save();
   }
-
-  console.log(cash);
 };

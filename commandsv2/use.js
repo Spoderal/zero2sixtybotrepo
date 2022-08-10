@@ -37,7 +37,6 @@ module.exports = {
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
     });
-    console.log(filtereduser);
     if (amount2 > 50)
       return interaction.reply(
         `The max amount you can use in one command is 50!`
@@ -46,7 +45,6 @@ module.exports = {
     if (amount2 > filtereduser.length)
       return interaction.reply("You don't have that many of that item!");
     let fullname;
-    console.log(itemtouse);
 
     if (itemdb.Police[itemtouse.toLowerCase()]) {
       userdata.using.push(itemtouse.toLowerCase());
@@ -161,7 +159,6 @@ module.exports = {
       items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
     userdata.items = items;
 
-    console.log(fullname);
     userdata.save();
     await interaction.reply(`Used x${amount2} ${fullname}!`);
   },

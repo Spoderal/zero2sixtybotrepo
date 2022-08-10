@@ -43,8 +43,7 @@ module.exports = {
               interaction.channel.send({ embeds: [embed] });
             }
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
             ct++;
           });
       });

@@ -54,7 +54,6 @@ module.exports = {
       db.fetch(`${cars.Cars[car].Name}license_plate_${uid}`) || "000000";
     let caremote = cars.Cars[car].Emote || emotes.none;
 
-    console.log(engine);
     let engineemote = parts.Parts[engine.toLowerCase()].Emote || emotes.engine;
     let gearboxemote =
       parts.Parts[gearbox.toLowerCase()].Emote || emotes.engine;
@@ -1524,7 +1523,6 @@ module.exports = {
 
           let restoredcar = cars.Cars[car.toLowerCase()].restored;
           let fullrestored = cars.Cars[restoredcar.toLowerCase()];
-          console.log(fullrestored.Name.toLowerCase());
           let embed = new Discord.EmbedBuilder()
             .setTitle(`Fully Restored!`)
             .addFields([

@@ -66,8 +66,6 @@ module.exports = {
         `${user2}, you need to be prestige 1 before you can trade`
       );
 
-    console.log(trading);
-
     if (user1 == user2) return interaction.reply(`You cant trade yourself!`);
 
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
@@ -82,14 +80,11 @@ module.exports = {
         actamount = 1;
       }
 
-      console.log(actamount);
-
       if (!user2parts.includes(trading2.toLowerCase()))
         return interaction.reply(`This user doesn't have this part!`);
       let filtereduser = user2parts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
-      console.log(filtereduser);
       if (actamount > filtereduser.length)
         return interaction.reply(
           `${user2} doesn't have that many of that part!`
@@ -139,7 +134,6 @@ module.exports = {
           for (let i in user1newpart) {
             userdata.parts.push(user1newpart[i]);
           }
-          console.log(amount);
 
           userdata.cash -= Number(amount);
           userdata2.cash += Number(amount);
@@ -182,14 +176,11 @@ module.exports = {
         actamount = 1;
       }
 
-      console.log(actamount);
-
       if (!user2parts.includes(trading2.toLowerCase()))
         return interaction.reply(`This user doesn't have this item!`);
       let filtereduser = user2parts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
-      console.log(filtereduser);
       if (actamount > filtereduser.length)
         return interaction.reply(
           `${user2} doesn't have that many of that item!`
@@ -247,7 +238,6 @@ module.exports = {
         if (r.emoji.name == "✅") {
           collector.stop();
           amount = trading.split(" ")[0];
-          console.log(amount);
           for (let i = 0; i < actamount; i++)
             user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
           userdata2.items = user2parts;
@@ -258,7 +248,6 @@ module.exports = {
           for (let i in user1newpart) {
             userdata.items.push(user1newpart[i]);
           }
-          console.log(amount);
           userdata.cash -= Number(amount);
           userdata2.cash += Number(amount);
 
@@ -1202,7 +1191,6 @@ module.exports = {
       }
 
       if (trading2.toLowerCase().endsWith("cash")) {
-        console.log(itemtype);
         trading = trading.toLowerCase();
         let amount = trading2.split(" ")[0];
         let bal = userdata2.cash;
@@ -1368,8 +1356,6 @@ module.exports = {
             let user1newpart2 = [];
             for (let i = 0; i < actamount1; i++)
               user1newpart2.push(trading.toLowerCase());
-            console.log(user1newpart);
-            console.log(user1newpart2);
 
             for (let i in user1newpart2) {
               userdata.items.push(user1newpart2[i]);

@@ -70,7 +70,6 @@ module.exports = {
       let squadlevel = db.fetch(
         `${squadchose.toLowerCase()}_level_${interaction.user.id}`
       );
-      console.log(squadlevel);
       if (!squadlevel)
         return interaction.reply(
           "You need to beat this squad before taking a car!"

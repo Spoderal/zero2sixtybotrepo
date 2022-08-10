@@ -13,17 +13,10 @@ module.exports = async () => {
     cars = cardata.data;
     id = cardata.ID.split("_")[1];
     if (cars.length > 0) {
-      console.log(id);
-
       for (let b in cars) {
-        console.log(cars);
         let car = cars[b];
 
-        console.log(car);
-
         let carindb = cardb.Cars[car.toLowerCase()];
-
-        console.log(carindb);
 
         let handling =
           db.fetch(`${cardb.Cars[car.toLowerCase()].Name}handling_${id}`) ||
@@ -91,7 +84,6 @@ module.exports = async () => {
         if (!userdata) {
           userdata = new User({ id: id });
         }
-        console.log(id);
 
         await User.findOneAndUpdate(
           {

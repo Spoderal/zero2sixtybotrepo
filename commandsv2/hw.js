@@ -279,12 +279,9 @@ module.exports = {
         tracklength += hp;
         tracklength2 += hp2;
         timer++;
-        console.log(tracklength);
-        console.log(tracklength2);
 
         if (timer >= 30) {
           if (tracklength > tracklength2) {
-            console.log("End");
             clearInterval(x);
             embed.addFields([
               { name: "Results", value: `${user.username} Won` },
@@ -331,7 +328,6 @@ module.exports = {
             }
             return;
           } else if (tracklength < tracklength2) {
-            console.log("End");
             clearInterval(x);
             embed.addFields([
               { name: "Results", value: `${user2.username} Won` },

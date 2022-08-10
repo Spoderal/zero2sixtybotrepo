@@ -9,12 +9,12 @@ async function findOrCreateUserInDB(user) {
 
   // User was found, return
   if (userFromDB) {
-    console.log("Found user in db: ", { userFromDB });
+    // console.log("Found user in db: ", { userFromDB });
     return userFromDB;
   }
   // No user found, create a new one
   else {
-    console.log("No user in db: ", { user });
+    // console.log("No user in db: ", { user });
     return new User({ id: user.id });
   }
 }

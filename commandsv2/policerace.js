@@ -142,8 +142,6 @@ module.exports = {
     //   return interaction.reply("This car is too junked to race, sorry!");
     // }
 
-    let barnrandom = randomRange(1, 4);
-    console.log(`random ${barnrandom}`);
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
@@ -183,8 +181,6 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    console.log(newrankrequired);
-    console.log(botcar);
 
     let user1carspeed = selected.Speed;
 
@@ -237,7 +233,6 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
-    console.log(randomnum);
     setTimeout(() => {
       interaction.channel.send("⛔ Obstacle! ⛔").then(async (emb) => {
         emb.react("🟢");
@@ -312,7 +307,6 @@ module.exports = {
             moneyearned += calccash;
           }
 
-          console.log("End");
           clearInterval(x);
           embed.setTitle(`Got away from Tier ${bot} police!`);
           if (chase == "chase") {
@@ -365,7 +359,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.setTitle(`Busted!`);
           if (chase == "chase") {
             embed.setTitle("They got away!");
@@ -378,7 +371,6 @@ module.exports = {
           interaction.editReply({ embeds: [embed] });
           return;
         } else if (tracklength == tracklength2) {
-          console.log("End");
           embed.setTitle(`Busted!`);
           if (chase == "chase") {
             embed.setTitle("They got away!");

@@ -404,9 +404,6 @@ module.exports = {
             let tracklength = 0;
             let tracklength2 = 0;
             let tracklength3 = 0;
-            console.log(hp);
-            console.log(hp2);
-            console.log(hp3);
 
             let timer = 0;
             let x = setInterval(() => {
@@ -417,7 +414,6 @@ module.exports = {
 
               if (timer >= 10) {
                 if (tracklength > tracklength2 && tracklength > tracklength3) {
-                  console.log("End");
                   clearInterval(x);
                   embed.addFields([
                     { name: "Results", value: `${user.username} Won` },
@@ -443,7 +439,6 @@ module.exports = {
                   tracklength2 > tracklength &&
                   tracklength2 > tracklength3
                 ) {
-                  console.log("End");
                   clearInterval(x);
                   embed.addFields([
                     { name: "Results", value: `${user2.username} Won` },
@@ -469,7 +464,6 @@ module.exports = {
                   tracklength3 > tracklength2 &&
                   tracklength3 > tracklength
                 ) {
-                  console.log("End");
                   clearInterval(x);
                   embed.addFields([
                     { name: "Results", value: `${user3.username} Won` },
