@@ -40,9 +40,9 @@ module.exports = {
             .setRequired(false)
         )
     ),
+
   async execute(interaction) {
     let subcommandfetch = interaction.options.getSubcommand();
-
     var list = cars.Cars;
     var item = interaction.options.getString("item");
 
@@ -50,13 +50,14 @@ module.exports = {
       let handlingemote = emotes.handling;
       let speedemote = emotes.speed;
       let accelerationemote = emotes.zero2sixty;
-
       let car = item.toLowerCase();
       let carindb = list[car];
+
       if (!carindb) return interaction.reply(`Thats not a car!`);
 
       let trims = carindb.Trims || ["❌ No Trims"];
       let sellprice = carindb.Price * 0.65;
+
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Stats for ${carindb.Emote} ${carindb.Name}`)
         .addFields([
@@ -87,19 +88,16 @@ module.exports = {
           },
           { name: `Trims`, value: `${trims.join("\n")}`, inline: true },
         ])
-
         .setColor(colors.blue)
-
         .setImage(carindb.Image);
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommandfetch == "carid") {
-      let idtoselect = interaction.options.getString("item");
-      console.log(idtoselect);
-
+      let idtoselect = interaction.options.getString("id");
       let userdata = await User.findOne({ id: interaction.user.id });
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
+
       if (selected == "No ID") {
         let errembed = new Discord.EmbedBuilder()
           .setTitle("Error!")
@@ -107,18 +105,19 @@ module.exports = {
           .setDescription(
             `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
           );
+
         return interaction.reply({ embeds: [errembed] });
       }
 
       let handlingemote = emotes.handling;
       let speedemote = emotes.speed;
       let accelerationemote = emotes.zero2sixty;
-
       let carindb = selected;
       let sellprice = selected.Price || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       console.log(sellprice);
+
       let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
@@ -151,10 +150,9 @@ module.exports = {
           },
           { name: `\u200b`, value: `\u200b`, inline: true },
         ])
-
         .setColor(colors.blue)
-
         .setImage(carimage);
+
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("parts")
@@ -192,9 +190,7 @@ module.exports = {
           let clutch = selected.Clutch || "Stock";
           let ecu = selected.ECU || "Stock";
           let turbo = selected.Turbo || "Stock";
-
           let partindb = partdb.Parts;
-
           let exhaustemote = partindb[exhaust.toLowerCase()].Emote || "🔵";
           let intakeemote = partindb[intake.toLowerCase()].Emote || "🔵";
           let suspensionemote =
@@ -278,9 +274,7 @@ module.exports = {
               { name: `\u200b`, value: `\u200b`, inline: true },
               { name: `\u200b`, value: `\u200b`, inline: true },
             ])
-
             .setColor(colors.blue)
-
             .setImage(carimage);
           i.update({ embeds: [embed] });
         }
@@ -291,7 +285,6 @@ module.exports = {
     ) {
       let part = interaction.options.getString("item");
       part = part.toLowerCase();
-
       let partindb = partdb.Parts[part];
 
       if (!partindb) return interaction.reply(`Thats not a part!`);
@@ -303,7 +296,6 @@ module.exports = {
       if (partindb.AddedDrift) {
         stats.push(`Drift: +${partindb.AddedDrift}`);
       }
-
       if (partindb.DecreasedDrift) {
         stats.push(`Drift: -${partindb.DecreasedDrift}`);
       }
