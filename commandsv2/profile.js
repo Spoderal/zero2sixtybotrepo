@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-const prestigedb = require(`../prestige.json`);
+const prestigedb = require(`../data/prestige.json`);
 
 module.exports = {
   data: new SlashCommandBuilder()
