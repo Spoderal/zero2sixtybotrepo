@@ -109,8 +109,8 @@ module.exports = {
       return interaction.reply("This car is too junked to race, sorry!");
     }
 
+    let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
-      let range = selected.Range;
       if (range <= 0) {
         return interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
@@ -118,7 +118,7 @@ module.exports = {
       }
     }
 
-    cooldowndata.cashcup += Date.now();
+    cooldowndata.cashcup = Date.now();
     cooldowndata.save();
 
     if (newcashcuptier <= 5) {
@@ -251,7 +251,6 @@ module.exports = {
     }
 
     let timer = 0;
-    let moneyearnedtxt;
     let x = setInterval(() => {
       tracklength += hp;
       tracklength2 += hp2;
@@ -263,23 +262,18 @@ module.exports = {
         if (tracklength > tracklength2) {
           if (userdata.cashgain == "10") {
             let calccash = moneyearned * 0.1;
-            moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "15") {
             let calccash = moneyearned * 0.15;
-            moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "20") {
             let calccash = moneyearned * 0.2;
-            moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "25") {
             let calccash = moneyearned * 0.25;
-            moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "50") {
             let calccash = moneyearned * 0.5;
-            moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           embed.setTitle(`Tier ${newcashcuptier} cash cup race won!`);

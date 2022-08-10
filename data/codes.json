@@ -13,9 +13,19 @@
     },
     "CARZCA11": {
       "Reward": 2500
+    },
+    "TOOMANYBUGS": {
+      "Reward": 20000
+    },
+    "FIXTHEBUGS": {
+      "Reward": 10000
     }
   },
   "Patreon": {
+    "GOLDFOREVER": {
+      "Reward": 20,
+      "Gold": true
+    },
     "EXCLUSIVEPATREON": {
       "Reward": 5000
     },

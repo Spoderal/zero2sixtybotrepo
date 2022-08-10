@@ -7,6 +7,7 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { userGetPatreonTimeout } = require("../common/user");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,7 +37,7 @@ module.exports = {
   async execute(interaction) {
     const cars = require("../data/cardb.json");
     let moneyearned = 150;
-    let moneyearnedtxt = 150;
+    // let moneyearnedtxt = 150;
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
     let cooldowndata =
@@ -59,16 +60,8 @@ module.exports = {
     }
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3", "4", "5", "6", "7"];
-    let timeout = 60000;
-    if (userdata.patron && userdata.patron.tier == 1) {
-      timeout = 30000;
-    } else if (userdata.patron && userdata.patron.tier == 2) {
-      timeout = 15000;
-    } else if (userdata.patron && userdata.patron.tier == 3) {
-      timeout = 5000;
-    } else if (userdata.patron && userdata.patron.tier == 4) {
-      timeout = 5000;
-    }
+
+    const timeout = userGetPatreonTimeout(userdata);
     let botcar = null;
     let racing = cooldowndata.hm;
 
@@ -161,7 +154,7 @@ module.exports = {
       }
     }
     let ticketsearned;
-    let bankrand;
+    // let bankrand;
     let bankinc;
     switch (bot) {
       case "1": {
@@ -172,28 +165,28 @@ module.exports = {
       case "2": {
         botcar = lodash.sample(bot2cars);
         moneyearned += 150;
-        moneyearnedtxt += 150;
+        // moneyearnedtxt += 150;
         ticketsearned = 3;
         break;
       }
       case "3": {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
-        moneyearnedtxt += 300;
+        // moneyearnedtxt += 300;
         ticketsearned = 4;
         break;
       }
       case "4": {
         botcar = lodash.sample(bot4cars);
         moneyearned += 500;
-        moneyearnedtxt += 500;
+        // moneyearnedtxt += 500;
         ticketsearned = 4;
         break;
       }
       case "5": {
         botcar = lodash.sample(bot5cars);
         moneyearned += 600;
-        moneyearnedtxt += 600;
+        // moneyearnedtxt += 600;
         ticketsearned = 5;
         break;
       }
@@ -201,9 +194,9 @@ module.exports = {
         let barnrandom = randomRange(1, 6);
         botcar = lodash.sample(bot6cars);
         moneyearned += 750;
-        moneyearnedtxt += 750;
+        // moneyearnedtxt += 750;
         ticketsearned = 6;
-        bankrand = randomRange(1, 3);
+        // bankrand = randomRange(1, 3);
         if (barnrandom == 3) {
           bankinc = 1;
         }
@@ -213,7 +206,7 @@ module.exports = {
       case "7": {
         botcar = lodash.sample(bot7cars);
         moneyearned += 1100;
-        moneyearnedtxt += 1100;
+        // moneyearnedtxt += 1100;
         ticketsearned = 10;
 
         break;
@@ -274,7 +267,7 @@ module.exports = {
     }
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
-      moneyearnedtxt = moneyearnedtxt * 2;
+      // moneyearnedtxt = moneyearnedtxt * 2;
     }
 
     let racelevel = userdata.racerank;
@@ -351,7 +344,7 @@ module.exports = {
       setTimeout(() => {
         embed.setDescription("Great launch!");
         embed.addFields([{ name: "Bonus", value: "$50" }]);
-        moneyearnedtxt += 50;
+        // moneyearnedtxt += 50;
         userdata.cash += 50;
         tracklength += 1;
         interaction.editReply({ embeds: [embed] });
@@ -405,23 +398,23 @@ module.exports = {
           embed.addFields([{ name: "Results", value: "Won" }]);
           if (userdata.cashgain == "10") {
             let calccash = moneyearned * 0.1;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "15") {
             let calccash = moneyearned * 0.15;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "20") {
             let calccash = moneyearned * 0.2;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "25") {
             let calccash = moneyearned * 0.25;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "50") {
             let calccash = moneyearned * 0.5;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
 

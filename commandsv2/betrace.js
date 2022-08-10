@@ -4,7 +4,7 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
@@ -87,7 +87,9 @@ module.exports = {
 
     let racelevel = userdata.racerank;
 
-    userdata.betracing = Date.now();
+    cooldowns.betracing = Date.now();
+    cooldowns.save();
+
     let newrankrequired = racelevel * 200;
     if (prestige >= 3) {
       newrankrequired * 2;
@@ -132,7 +134,7 @@ module.exports = {
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
 
-    bank -= moneyearned;
+    userdata.bank -= moneyearned;
     userdata.save();
 
     let embed = new discord.EmbedBuilder()
@@ -244,17 +246,16 @@ module.exports = {
             },
           ]);
           interaction.editReply({ embeds: [embed] });
-          userdata.cash += Number(moneyearned);
+          userdata.cash += finalamount;
           userdata.racexp += 25;
 
           if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
             selected.Wins += 1;
-            userdata.save();
           }
           if (range > 0) {
             selected.Range -= 1;
-            userdata.save();
           }
+          userdata.save();
 
           return;
         } else if (tracklength < tracklength2) {
@@ -266,17 +267,22 @@ module.exports = {
             selected.Range -= 1;
             userdata.save();
           }
+
           interaction.editReply({ embeds: [embed] });
+
           return;
         } else if (tracklength == tracklength2) {
           embed.setTitle(`Bet race tied, you still lost your earnings!`);
+
           clearInterval(x);
+
           if (range > 0) {
             selected.Range -= 1;
             userdata.save();
           }
 
           interaction.editReply({ embeds: [embed] });
+
           return;
         }
       }

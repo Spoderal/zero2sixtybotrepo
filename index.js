@@ -1,10 +1,10 @@
+// const db = require("quick.db");
 const fs = require("fs");
-
 require("dotenv").config();
 const express = require("express");
 const app = express();
-
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
+// const User = require("./schema/profile-schema");
 
 const client = new Client({
   intents: [
@@ -22,9 +22,13 @@ const client = new Client({
 // const DBL = require("dblapi.js");
 // app.post(
 //   "/vote",
-//   webhook.listener((vote) => {
+//   webhook.listener(async (vote) => {
 //     console.log("User with id - " + vote.user + " voted!");
-//     db.set(`voted_${vote.user}`, true);
+//     let userdata = await User.findOne({ id: vote.user });
+//     userdata.hasvoted = true;
+//     userdata.votetimer = Date.now();
+//     userdata.save();
+
 //     db.set(`votetimer_${vote.user}`, Date.now());
 //     let value = JSON.stringify({
 //       embeds: [

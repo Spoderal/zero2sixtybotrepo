@@ -35,7 +35,6 @@ module.exports = {
       rkeys,
       ekeys,
       dkeys,
-      fkeys,
       bank,
       banklimit,
       noto: notoriety,
@@ -81,7 +80,6 @@ module.exports = {
             ${emotes.rareKey} Rare: ${rkeys}
             ${emotes.exoticKey} Exotic: ${ekeys}
             ${emotes.dirftKey} Drift: ${dkeys}
-            ${emotes.ferrari} Ferrari: ${fkeys}
           `,
             inline: true,
           },

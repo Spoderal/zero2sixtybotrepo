@@ -26,6 +26,7 @@ module.exports = {
 
         .setRequired(true)
     ),
+
   async execute(interaction) {
     let userid = interaction.user.id;
 
@@ -42,37 +43,22 @@ module.exports = {
     let lbarnmaps = userdata.lmaps;
     let rarity2 = interaction.options.getString("rarity");
 
-    if (
-      (barnmaps == 0 && rarity2 == "common") ||
-      (!barnmaps && rarity2 == "common")
-    )
+    if (!barnmaps && rarity2 == "common")
       return interaction.reply("You don't have any common barn maps!");
-    if (
-      (ubarnmaps == 0 && rarity2 == "uncommon") ||
-      (!ubarnmaps && rarity2 == "uncommon")
-    )
-      return interaction.reply("You don't have any uncommon barn maps!");
-    if (
-      (rbarnmaps == 0 && rarity2 == "rare") ||
-      (!rbarnmaps && rarity2 == "rare")
-    )
-      return interaction.reply("You don't have any rare barn maps!");
-    if (
-      (lbarnmaps == 0 && rarity2 == "legendary") ||
-      (!lbarnmaps && rarity2 == "legendary")
-    )
-      return interaction.reply("You don't have any legendary barn maps!");
 
-    let timeout = 3600000;
+    if (!ubarnmaps && rarity2 == "uncommon")
+      return interaction.reply("You don't have any uncommon barn maps!");
+
+    if (!rbarnmaps && rarity2 == "rare")
+      return interaction.reply("You don't have any rare barn maps!");
+
+    if (!lbarnmaps && rarity2 == "legendary")
+      return interaction.reply("You don't have any legendary barn maps!");
 
     let house = userdata.house;
 
-    if (house) {
-      timeout = 1800000;
-    }
-    if (house) {
-      timeout = 300000;
-    }
+    let timeout = 3600000;
+    if (house) timeout = 300000;
 
     let garagelimit = userdata.garageLimit;
     let usercars = userdata.cars;
@@ -86,9 +72,12 @@ module.exports = {
       let timeEmbed = new Discord.EmbedBuilder()
         .setColor(colors.blue)
         .setDescription(`Please wait ${time} before searching barns again.`);
+
       interaction.reply({ embeds: [timeEmbed] });
+
       return;
     }
+
     var rarities = [
       {
         type: "Common",
@@ -108,117 +97,104 @@ module.exports = {
       },
     ];
 
-    function pickRandom() {
-      // Calculate chances for common
-      var filler =
-        100 -
-        rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
+    // Calculate chances for common
+    var filler =
+      100 -
+      rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
 
-      if (filler <= 0) {
-        return;
-      }
+    if (filler <= 0) return;
 
-      // Create an array of 100 elements, based on the chances field
-      let barnfind = lodash.sample(barns.Barns[rarity2.toLowerCase()]);
-      let resale;
-      let namefor;
-      let color;
-      switch (rarity2) {
-        case "common":
-          color = "#388eff";
-          resale = 1000;
-          namefor = "Common";
-          break;
-        case "uncommon":
-          color = "#f9ff3d";
-          resale = 2500;
-          namefor = "Uncommon";
-          break;
-        case "rare":
-          color = "#a80000";
-          resale = 10000;
-          namefor = "Rare";
-          break;
-        case "legendary":
-          color = "#44e339";
-          resale = 25000;
-          namefor = "Legendary";
-          break;
-      }
-
-      let cars = userdata.cars;
-      let carindb = carsdb.Cars[barnfind.toLowerCase()];
-      let carobj = {
-        ID: carindb.alias,
-        Name: carindb.Name,
-        Speed: carindb.Speed,
-        Acceleration: carindb["0-60"],
-        Handling: carindb.Handling,
-        Parts: [],
-        Emote: carindb.Emote,
-        Livery: carindb.Image,
-        Miles: 0,
-      };
-      function filterByID(item) {
-        if (item.ID == carobj.ID) {
-          return true;
-        }
-        return false;
-      }
-
-      let arrByID = cars.filter(filterByID);
-      if (arrByID.length > 0) {
-        cooldowns.barn = Date.now();
-        Number(resale);
-        Number(userdata.cash);
-        userdata.cash += resale;
-        cooldowns.save();
-        userdata.save();
-        interaction.reply(
-          `You found a ${
-            carindb.Name
-          } but you already have this car, so you found ${toCurrency(
-            resale
-          )} instead.`
-        );
-        return;
-      }
-
-      userdata.cars.push(carobj);
-      userdata.save();
-      cooldowns.barn = Date.now();
-      cooldowns.save();
-
-      switch (rarity2) {
-        case "common":
-          barnmaps -= 1;
-
-          break;
-        case "uncommon":
-          ubarnmaps -= 1;
-
-          break;
-        case "rare":
-          rbarnmaps -= 1;
-
-          break;
-        case "legendary":
-          lbarnmaps -= 1;
-
-          userdata.save();
-          break;
-      }
-      let embed = new Discord.EmbedBuilder()
-        .setTitle(`${namefor} Barn Find`)
-        .addFields([
-          { nmw: "Car", value: carobj.Name },
-          { nmw: "ID", value: carobj.ID },
-        ])
-        .setImage(carobj.Livery)
-        .setColor(color);
-      interaction.reply({ embeds: [embed] });
+    // Create an array of 100 elements, based on the chances field
+    let barnfind = lodash.sample(barns.Barns[rarity2.toLowerCase()]);
+    let resale;
+    let namefor;
+    let color;
+    switch (rarity2) {
+      case "common":
+        color = "#388eff";
+        resale = 1000;
+        namefor = "Common";
+        break;
+      case "uncommon":
+        color = "#f9ff3d";
+        resale = 2500;
+        namefor = "Uncommon";
+        break;
+      case "rare":
+        color = "#a80000";
+        resale = 10000;
+        namefor = "Rare";
+        break;
+      case "legendary":
+        color = "#44e339";
+        resale = 25000;
+        namefor = "Legendary";
+        break;
     }
 
-    pickRandom();
+    let cars = userdata.cars;
+    let carindb = carsdb.Cars[barnfind.toLowerCase()];
+    let carobj = {
+      ID: carindb.alias,
+      Name: carindb.Name,
+      Speed: carindb.Speed,
+      Acceleration: carindb["0-60"],
+      Handling: carindb.Handling,
+      Parts: [],
+      Emote: carindb.Emote,
+      Livery: carindb.Image,
+      Miles: 0,
+    };
+
+    switch (rarity2) {
+      case "common":
+        userdata.cmaps -= 1;
+        break;
+
+      case "uncommon":
+        userdata.ucmaps -= 1;
+        break;
+
+      case "rare":
+        userdata.rmaps -= 1;
+        break;
+
+      case "legendary":
+        userdata.lmaps -= 1;
+        break;
+    }
+
+    let arrByID = cars.find((item) => item.ID == carobj.ID);
+    if (arrByID.length > 0) {
+      cooldowns.barn = Date.now();
+      userdata.cash += resale;
+
+      interaction.reply(
+        `You found a ${
+          carindb.Name
+        } but you already have this car, so you found ${toCurrency(
+          resale
+        )} instead.`
+      );
+
+      return;
+    }
+
+    userdata.cars.push(carobj);
+    userdata.save();
+
+    cooldowns.barn = Date.now();
+    cooldowns.save();
+
+    let embed = new Discord.EmbedBuilder()
+      .setTitle(`${namefor} Barn Find`)
+      .addFields([
+        { nmw: "Car", value: carobj.Name },
+        { nmw: "ID", value: carobj.ID },
+      ])
+      .setImage(carobj.Livery)
+      .setColor(color);
+
+    interaction.reply({ embeds: [embed] });
   },
 };

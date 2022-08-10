@@ -5,6 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const prestigedb = require(`../prestige.json`);
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,7 +22,7 @@ module.exports = {
 
     let userdata = await User.findOne({ id: user.id });
 
-    let prestige = userdata.prestige;
+    let prestige = userdata.prestige || 0;
     let racerank = userdata.racerank;
     let driftrank = userdata.driftrank;
 
@@ -29,6 +30,9 @@ module.exports = {
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
 
     let title = userdata.title;
+
+    if (prestige == 0) title = "Noob Racer";
+    else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
 
     let cars = userdata.cars;
     cars = cars.sort(function (b, a) {
@@ -52,7 +56,7 @@ module.exports = {
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(title)
-      .setAuthor(`Spoder - Profile`)
+      .setAuthor(`${user.username} - Profile`)
       .setColor(colors.blue)
       .setThumbnail(acthelmet)
       .addFields([

@@ -5,12 +5,9 @@ module.exports = (client) => {
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
 
-    const {
-      //guild,
-      member,
-    } = message;
+    const { member } = message;
 
-    let tasksdb = require("./data/tasks.json");
+    let tasksdb = require("./tasks.json");
     let randomtask = lodash.sample(tasksdb.Daily);
     let randomtask2 = lodash.sample(tasksdb.Weekly);
 

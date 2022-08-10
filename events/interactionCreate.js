@@ -1,4 +1,4 @@
-const db = require("quick.db");
+const User = require(`../schema/profile-schema`);
 
 module.exports = {
   name: "interactionCreate",
@@ -7,54 +7,43 @@ module.exports = {
     if (interaction.isSelectMenu()) {
       await interaction.deferUpdate();
     }
-    if (interaction.isAutocomplete()) {
-      const command = interaction.client.commands.get(interaction.commandName);
-      if (!command || typeof command.autoComplete !== "function") return;
-      await command.autoComplete(interaction);
-    }
     if (interaction.isCommand()) {
       const command = interaction.client.commands.get(interaction.commandName);
       if (!command) return;
 
       try {
         await command.execute(interaction);
-        if (db.fetch(`pet_${interaction.user.id}`)) {
-          db.subtract(`pet_${interaction.user.id}.Condition`, 1);
-          db.subtract(`pet_${interaction.user.id}.Oil`, 1);
+        let userdata = await User.findOne({ id: interaction.user.id });
+        let pet = userdata.pet;
+        if (userdata && pet) {
+          let newlove = (pet.condition -= 1);
+          let newoil = (pet.oil -= 1);
 
-          if (db.fetch(`pet_${interaction.user.id}.Oil`) < 50) {
-            db.subtract(`pet_${interaction.user.id}.Love`, 1);
-            interaction.user
-              .send(`Careful, your pets oil is below 50!`)
-              .catch(() => {
-                // do nothing?
-              });
-          }
-          if (db.fetch(`pet_${interaction.user.id}.Condition`) < 50) {
-            db.subtract(`pet_${interaction.user.id}.Love`, 1);
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "pet.oil": newoil,
+                "pet.condition": newlove,
+              },
+            }
+          );
 
-            interaction.user
-              .send(`Careful, your pets condition is below 50!`)
-              .catch(() => {
-                // do nothing?
-              });
+          if (pet.oil < 50 || pet.condition < 50) pet.love -= 1;
+          if (pet.love < 10) {
+            interaction.user.send(
+              `Careful, your pets love is below 10! It might blow up!`
+            );
           }
-          if (db.fetch(`pet_${interaction.user.id}.Love`) < 50) {
-            interaction.user
-              .send(`Careful, your pets love is below 50!`)
-              .catch(() => {
-                // do nothing?
-              });
+          if (pet.love <= 0) {
+            interaction.user.send(
+              `Your pet blew up! Next time, take care of it!`
+            );
+            pet = null;
           }
-          if (db.fetch(`pet_${interaction.user.id}.Love`) <= 0) {
-            interaction.user
-              .send(`Your pet blew up! Next time, take care of it!`)
-              .catch(() => {
-                // do nothing?
-              });
-
-            db.delete(`pet_${interaction.user.id}`);
-          }
+          userdata.save();
         }
       } catch (err) {
         if (err) console.error(err);
