@@ -30,6 +30,13 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+
+    if (!userdata?.cash) {
+      return interaction.reply(
+        "You don't have a profile yet! Use `/start` to get started!"
+      );
+    }
+
     let global = await Global.findOne({});
     let amount = interaction.options.getNumber("amount");
     let amount2 = amount || 1;
