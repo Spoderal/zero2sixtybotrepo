@@ -101,10 +101,10 @@ module.exports = {
       if (selected == "No ID") {
         let errembed = new Discord.EmbedBuilder()
           .setTitle("Error!")
-          .setColor("DARK_RED")
-          .setDescription(
-            `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
-          );
+          .setColor("DARK_RED").setDescription(`
+            That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n
+            **Example: /ids Select 1 1995 mazda miata**
+          `);
 
         return interaction.reply({ embeds: [errembed] });
       }
@@ -116,7 +116,6 @@ module.exports = {
       let sellprice = selected.Price || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
-      console.log(sellprice);
 
       let embed = new Discord.EmbedBuilder()
         .setTitle(
@@ -182,15 +181,17 @@ module.exports = {
 
       collector2.on("collect", async (i) => {
         if (i.customId.includes("parts")) {
-          let exhaust = selected.Exhaust || "Stock";
-          let intake = selected.Intake || "Stock";
-          let suspension = selected.Suspension || "Stock";
-          let tires = selected.Tires || "Stock";
-          let engine = selected.Engine || "Stock";
-          let clutch = selected.Clutch || "Stock";
-          let ecu = selected.ECU || "Stock";
-          let turbo = selected.Turbo || "Stock";
+          let exhaust = selected.Exhaust || "Stock Exhaust";
+          let intake = selected.Intake || "Stock Intake";
+          let suspension = selected.Suspension || "Stock Suspension";
+          let tires = selected.Tires || "Stock Tires";
+          let engine = selected.Engine || "Stock Engine";
+          let clutch = selected.Clutch || "Stock Clutch";
+          let ecu = selected.ECU || "Stock ECU";
+          let turbo = selected.Turbo || "Stock Turbo";
+
           let partindb = partdb.Parts;
+
           let exhaustemote = partindb[exhaust.toLowerCase()].Emote || "🔵";
           let intakeemote = partindb[intake.toLowerCase()].Emote || "🔵";
           let suspensionemote =
@@ -208,30 +209,42 @@ module.exports = {
             .addFields([
               {
                 name: `Exhaust`,
-                value: `${exhaustemote} ${exhaust}`,
+                value: `${exhaustemote} ${exhaust.split(" ")[0]}`,
                 inline: true,
               },
               {
                 name: `Intake`,
-                value: `${intakeemote} ${intake}`,
+                value: `${intakeemote} ${intake.split(" ")[0]}`,
                 inline: true,
               },
-              { name: `Tires`, value: `${tiresemote} ${tires}`, inline: true },
-              { name: `Turbo`, value: `${turboemote} ${turbo}`, inline: true },
+              {
+                name: `Tires`,
+                value: `${tiresemote} ${tires.split(" ")[0]}`,
+                inline: true,
+              },
+              {
+                name: `Turbo`,
+                value: `${turboemote} ${turbo.split(" ")[0]}`,
+                inline: true,
+              },
               {
                 name: `Suspension`,
-                value: `${suspensionemote} ${suspension}`,
+                value: `${suspensionemote} ${suspension.split(" ")[0]}`,
                 inline: true,
               },
               {
                 name: `Clutch`,
-                value: `${clutchemote} ${clutch}`,
+                value: `${clutchemote} ${clutch.split(" ")[0]}`,
                 inline: true,
               },
-              { name: `ECU`, value: `${ecuemote} ${ecu}`, inline: true },
+              {
+                name: `ECU`,
+                value: `${ecuemote} ${ecu.split(" ")[0]}`,
+                inline: true,
+              },
               {
                 name: `Engine`,
-                value: `${engineemote} ${engine}`,
+                value: `${engineemote} ${engine.split(" ")[0]}`,
                 inline: true,
               },
               { name: `\u200b`, value: `\u200b`, inline: true },

@@ -17,7 +17,6 @@
       "DecreasedSpeed": "0",
       "AddHandling": "2"
     },
-
     "t1clutch": {
       "Name": "T1Clutch",
       "AddedSixty": 0.3,
@@ -572,28 +571,6 @@
       "Type": "body",
       "DecreasedSpeed": "0"
     },
-    "cracked exhaust": {
-      "Emote": "<:exhaustdefault:932419391650418709>"
-    },
-    "flat tires": {
-      "Emote": "<:exhaustdefault:932419391650418709>"
-    },
-
-    "rusted": {
-      "Emote": "<:spoilerdefault:932419391868526612>"
-    },
-    "broken suspension": {
-      "Emote": "<:suspensiondefault:932419391847563314>"
-    },
-    "no clutch": {
-      "Emote": "<:defaultclutch:935084786748370954>"
-    },
-    "no gearbox": {
-      "Emote": "<:enginedefault:932419391587483688>"
-    },
-    "no engine": {
-      "Emote": "<:enginedefault:932419391587483688>"
-    },
     "v10": {
       "Name": "V10",
       "AddedSpeed": "14",
@@ -812,7 +789,6 @@
       "DecreasedSpeed": "2",
       "DecreaseHandling": "3"
     },
-
     "bm1drifttires": {
       "Name": "BM1DriftTires",
       "DecreaseSpeed": 0,
@@ -1261,7 +1237,6 @@
       "AddHandling": "5",
       "Color": "#00ae00"
     },
-
     "t1drifttires": {
       "Name": "T1DriftTires",
       "DecreaseSpeed": 5,
@@ -1494,7 +1469,6 @@
       "Type": "bodykit",
       "DecreasedSpeed": "0"
     },
-
     "t1bodykit": {
       "Name": "T1BodyKit",
       "AddedSpeed": "0",
@@ -1615,7 +1589,6 @@
       "Type": "spoiler",
       "DecreasedSpeed": "0"
     },
-
     "ls1": {
       "Name": "LS1",
       "AddedSpeed": "10",
@@ -1709,7 +1682,6 @@
       "Type": "rangeboost",
       "DecreasedSpeed": "0"
     },
-
     "bm spoiler": {
       "Name": "BM Spoiler",
       "AddedSpeed": 2,
@@ -1733,11 +1705,41 @@
       "Emote": "<:z_nitrous:916531625444130817>",
       "Tier": "1"
     },
+    "cracked exhaust": {
+      "Emote": "<:exhaustdefault:932419391650418709>"
+    },
+    "flat tires": {
+      "Emote": "<:exhaustdefault:932419391650418709>"
+    },
+    "rusted": {
+      "Emote": "<:spoilerdefault:932419391868526612>"
+    },
+    "broken suspension": {
+      "Emote": "<:suspensiondefault:932419391847563314>"
+    },
+    "no clutch": {
+      "Emote": "<:defaultclutch:935084786748370954>"
+    },
+    "no gearbox": {
+      "Emote": "<:enginedefault:932419391587483688>"
+    },
+    "no engine": {
+      "Emote": "<:enginedefault:932419391587483688>"
+    },
     "no parts": {
       "Name": "No Parts",
       "Emote": "<:empty_1:932046438328856646>"
     },
     "no intake": {
+      "Emote": "<:intakedefault:932419391734292561>"
+    },
+    "no turbo": {
+      "Emote": "<:turbodefault:932419392145354814>"
+    },
+    "stock engine": {
+      "Emote": "<:enginedefault:932419391587483688>"
+    },
+    "stock intake": {
       "Emote": "<:intakedefault:932419391734292561>"
     },
     "stock exhaust": {
@@ -1756,7 +1758,7 @@
     "stock clutch": {
       "Emote": "<:defaultclutch:935084786748370954>"
     },
-    "no turbo": {
+    "stock turbo": {
       "Emote": "<:turbodefault:932419392145354814>"
     },
     "broken": {
