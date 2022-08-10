@@ -21,7 +21,7 @@ module.exports = (client) => {
     if (sponsor) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
-        console.log("no energy");
+        // do nothing?
       } else {
         db.set(`sponsor_${message.author}`, false);
       }

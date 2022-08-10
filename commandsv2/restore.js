@@ -19,7 +19,6 @@ module.exports = {
 
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
-    console.log(selected);
     if (selected == "No ID") {
       let errembed = new Discord.EmbedBuilder()
         .setTitle("Error!")

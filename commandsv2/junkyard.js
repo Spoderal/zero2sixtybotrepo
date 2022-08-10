@@ -54,7 +54,6 @@ module.exports = {
         rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
 
       if (filler <= 0) {
-        console.log("chances sum is higher than 100!");
         return;
       }
 
@@ -67,7 +66,6 @@ module.exports = {
       var pIndex = Math.floor(Math.random() * 100);
       var rarity = rarities[probability[pIndex]];
       let barnfind = lodash.sample(barns.Parts[rarity.type.toLowerCase()]);
-      console.log(barnfind);
 
       let part = partsdb.Parts[barnfind.toLowerCase()];
 

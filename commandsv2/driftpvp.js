@@ -74,7 +74,6 @@ module.exports = {
         );
       return interaction.reply({ embeds: [errembed] });
     }
-    console.log(filteredcar);
     let user = interaction.user;
     let timeout = cooldowndata.timeout || 45000;
     let botcar = null;
@@ -131,13 +130,11 @@ module.exports = {
     let userhelmet = userdata.helmet;
     let userhelmet2 = userdata2.helmet;
 
-    console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     let actualhelmet2 = helmets.Pfps[userhelmet2.toLowerCase()];
 
-    console.log(actualhelmet);
     let driftscore = selected.Drift;
     let driftscore2 = selected2.Drift;
 
@@ -203,7 +200,6 @@ module.exports = {
       timer++;
 
       if (timer >= 10) {
-        console.log(tracklength);
         clearInterval(x);
         clearInterval(y);
 
@@ -229,12 +225,9 @@ module.exports = {
             moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
-          console.log(`before: ${moneyearned}`);
-          console.log("End");
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
             moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
-            console.log(moneyearned);
           }
 
           embed.setTitle(`Drift PVP Winner: ${user.tag}`);
@@ -299,7 +292,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.setTitle(`Drift PVP Winner: ${user2.tag}`);
           if (userdata2.cashgain == "10") {
             let calccash = moneyearned * 0.1;
@@ -322,12 +314,9 @@ module.exports = {
             moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
-          console.log(`before: ${moneyearned}`);
-          console.log("End");
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
             moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
-            console.log(moneyearned);
           }
 
           if (cars.Cars[selected2.Name.toLowerCase()].StatTrack) {
@@ -391,7 +380,6 @@ module.exports = {
           interaction.editReply({ embeds: [embed] });
           return;
         } else if (tracklength == tracklength2) {
-          console.log("End");
           embed.setTitle(`Drift PVP race tied!`);
           clearInterval(x);
           if (range2 && range2 > 0) {

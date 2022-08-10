@@ -144,7 +144,6 @@ module.exports = {
       let filtereduser = parts.filter(function hasmany(part) {
         return part === parte.toLowerCase();
       });
-      console.log(filtereduser);
       if (2 > filtereduser.length)
         return interaction.reply(
           `You need 2 ${partdb.Parts[parte].Name} to fuse them!`

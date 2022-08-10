@@ -98,7 +98,6 @@ module.exports = {
         rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
 
       if (filler < 0) {
-        console.log("chances sum is higher than 100!");
         return;
       }
 
@@ -109,12 +108,8 @@ module.exports = {
 
       // Pick one
       var pIndex = Math.floor(Math.random() * 100);
-      console.log(probability);
       rarity = rarities[probability[pIndex]];
-      console.log(pIndex);
-      console.log(rarity);
       result = lodash.sample(crates["z crate"][rarity.type.toLowerCase()]);
-      console.log(result);
     }
 
     if (bought == "z crate 1") {

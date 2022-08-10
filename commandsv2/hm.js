@@ -39,7 +39,6 @@ module.exports = {
     let moneyearnedtxt = 150;
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
-    console.log(userdata);
     let cooldowndata =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
     let idtoselect = interaction.options.getString("car");
@@ -205,7 +204,6 @@ module.exports = {
         moneyearnedtxt += 750;
         ticketsearned = 6;
         bankrand = randomRange(1, 3);
-        console.log(`bank: ${bankrand}`);
         if (barnrandom == 3) {
           bankinc = 1;
         }
@@ -235,7 +233,7 @@ module.exports = {
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
-        console.log("no energy");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -259,7 +257,7 @@ module.exports = {
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
-        console.log("no sponsor");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -277,7 +275,6 @@ module.exports = {
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
       moneyearnedtxt = moneyearnedtxt * 2;
-      console.log(moneyearned);
     }
 
     let racelevel = userdata.racerank;
@@ -290,7 +287,6 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    console.log(botcar);
 
     let user1carspeed = selected.Speed;
     let user1carzerosixty = selected.Acceleration;
@@ -320,11 +316,9 @@ module.exports = {
     hp - driftscore;
     let hp2 = cars.Cars[botcar.toLowerCase()].Speed + othernewhandling;
     let userhelmet = userdata.helmet;
-    console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    console.log(actualhelmet);
 
     let embed = new discord.EmbedBuilder()
       .setTitle("3...2...1....GO!")
@@ -363,7 +357,6 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
-    console.log(randomnum);
 
     let tracklength = 0;
     let tracklength2 = 0;
@@ -394,7 +387,6 @@ module.exports = {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);
-          console.log("boosted " + parseInt(boost));
           i.update({ content: "Boosting!", embeds: [embed] });
           selected.Nitro = null;
         }
@@ -406,12 +398,9 @@ module.exports = {
       tracklength += hp;
       tracklength2 += hp2;
       timer++;
-      console.log(tracklength);
-      console.log(tracklength2);
 
       if (timer >= 20) {
         if (tracklength > tracklength2) {
-          console.log("End");
           clearInterval(x);
           embed.addFields([{ name: "Results", value: "Won" }]);
           if (userdata.cashgain == "10") {
@@ -482,7 +471,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.addFields([{ name: "Results", value: "Lost" }]);
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);

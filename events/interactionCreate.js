@@ -26,24 +26,32 @@ module.exports = {
             db.subtract(`pet_${interaction.user.id}.Love`, 1);
             interaction.user
               .send(`Careful, your pets oil is below 50!`)
-              .catch(() => console.log("Dms off"));
+              .catch(() => {
+                // do nothing?
+              });
           }
           if (db.fetch(`pet_${interaction.user.id}.Condition`) < 50) {
             db.subtract(`pet_${interaction.user.id}.Love`, 1);
 
             interaction.user
               .send(`Careful, your pets condition is below 50!`)
-              .catch(() => console.log("Dms off"));
+              .catch(() => {
+                // do nothing?
+              });
           }
           if (db.fetch(`pet_${interaction.user.id}.Love`) < 50) {
             interaction.user
               .send(`Careful, your pets love is below 50!`)
-              .catch(() => console.log("Dms off"));
+              .catch(() => {
+                // do nothing?
+              });
           }
           if (db.fetch(`pet_${interaction.user.id}.Love`) <= 0) {
             interaction.user
               .send(`Your pet blew up! Next time, take care of it!`)
-              .catch(() => console.log("Dms off"));
+              .catch(() => {
+                // do nothing?
+              });
 
             db.delete(`pet_${interaction.user.id}`);
           }

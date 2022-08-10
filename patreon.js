@@ -28,7 +28,6 @@ module.exports = (client) => {
         db.add(`garagelimit_${member.id}`, 5);
         db.set(`timeout_${member.id}`, 30000);
         db.set(`patreon_tier_1_${member.id}`, true);
-        console.log("give perks 1");
       }
     }
     if (member.roles.cache.get(role2)) {
@@ -44,7 +43,6 @@ module.exports = (client) => {
         db.add(`garagelimit_${member.id}`, 10);
         db.set(`timeout_${member.id}`, 15000);
         db.set(`patreon_tier_2_${member.id}`, true);
-        console.log("give perks 2");
       }
     }
     if (member.roles.cache.get(role3)) {
@@ -62,7 +60,6 @@ module.exports = (client) => {
         db.set(`timeout_${member.id}`, 5000);
         db.set(`requiredprest_${member.id}`, 40);
         db.set(`patreon_tier_3_${member.id}`, true);
-        console.log("give perks 3");
       }
     }
     if (member.roles.cache.get(role4)) {
@@ -80,7 +77,6 @@ module.exports = (client) => {
         db.set(`requiredprest_${member.id}`, 25);
         db.set(`timeout_${member.id}`, 5000);
         db.set(`patreon_tier_4_${member.id}`, true);
-        console.log("give perks 4");
       }
     }
   });

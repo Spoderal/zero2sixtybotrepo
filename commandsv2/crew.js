@@ -215,7 +215,6 @@ module.exports = {
         newarray = actcrew.members;
 
         actcrew.members = newarray;
-        console.log(actcrew);
         await Global.findOneAndUpdate(
           {},
 
@@ -396,11 +395,10 @@ module.exports = {
         let data = global.crews;
         let members = [];
         for (let obj of data) {
-          console.log(obj);
           try {
             members.push(obj);
           } catch (err) {
-            console.log(err);
+            // do nothing?
           }
         }
 

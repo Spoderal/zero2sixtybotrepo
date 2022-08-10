@@ -115,7 +115,6 @@ module.exports = {
         rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
 
       if (filler <= 0) {
-        console.log("chances sum is higher than 100!");
         return;
       }
 
@@ -168,7 +167,6 @@ module.exports = {
       }
 
       let arrByID = cars.filter(filterByID);
-      console.log(arrByID);
       if (arrByID.length > 0) {
         cooldowns.barn = Date.now();
         Number(resale);

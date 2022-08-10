@@ -140,8 +140,6 @@ module.exports = {
     let racelevel = userdata.racerank;
 
     let newrankrequired = racelevel * 200;
-    console.log(newrankrequired);
-    console.log(botcar);
     let nitro = selected.Nitro;
 
     let user1carspeed = selected.Speed;
@@ -174,11 +172,9 @@ module.exports = {
     ];
     let tip = lodash.sample(tips);
     let userhelmet = userdata.helmet;
-    console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    console.log(actualhelmet);
     let semote = emotes.speed;
     let hemote = emotes.handling;
     let zemote = emotes.zero2sixty;
@@ -248,7 +244,6 @@ module.exports = {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);
-          console.log("boosted " + parseInt(boost));
           i.update({ content: "Boosting!", embeds: [embed] });
           selected.Nitro = null;
         }
@@ -263,7 +258,6 @@ module.exports = {
       timer++;
 
       if (timer >= 10) {
-        console.log(tracklength);
         clearInterval(x);
 
         if (tracklength > tracklength2) {
@@ -288,7 +282,6 @@ module.exports = {
             moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
-          console.log("End");
           embed.setTitle(`Tier ${newcashcuptier} cash cup race won!`);
           let earningsresult = [];
 
@@ -326,7 +319,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.setTitle(`Tier ${newcashcuptier} cash cup race lost!`);
           if (newcashcuptier > 1) {
             embed.setDescription(
@@ -345,7 +337,6 @@ module.exports = {
           interaction.editReply({ embeds: [embed] });
           return;
         } else if (tracklength == tracklength2) {
-          console.log("End");
           embed.setTitle(`Tier ${newcashcuptier} bot race tied!`);
           clearInterval(x);
           if (cars.Cars[selected.Name.toLowerCase()].Electric) {

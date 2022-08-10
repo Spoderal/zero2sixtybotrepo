@@ -156,7 +156,6 @@ module.exports = {
       let used = [];
       for (const i in usedlisted) {
         let uc = usedlisted[i];
-        console.log(uc);
 
         used.push(
           `${cardb.Cars[uc.Car.toLowerCase()].Emote} ${uc.Car} : ${toCurrency(

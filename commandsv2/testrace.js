@@ -30,8 +30,6 @@ module.exports = {
         ephemeral: true,
       });
 
-    console.log(selected);
-
     let carstats = db.fetch(`stats_${selected}_${user.id}`);
 
     if (!carstats) {

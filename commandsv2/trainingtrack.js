@@ -55,7 +55,6 @@ module.exports = {
         );
       return interaction.reply({ embeds: [errembed] });
     }
-    console.log(filteredcar);
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3"];
     let timeout = 45000;
@@ -118,7 +117,6 @@ module.exports = {
       case "1": {
         botcar = lodash.sample(bot1cars);
         ticketsearned = 1;
-        console.log(botcar);
         classd = "1";
         botemote = emotes.botTier1;
         break;
@@ -129,7 +127,6 @@ module.exports = {
         moneyearned += 150;
         moneyearnedtxt += 150;
         ticketsearned = 2;
-        console.log(botcar);
         classd = "2";
         botemote = emotes.botTier2;
 
@@ -140,7 +137,6 @@ module.exports = {
         moneyearned += 300;
         moneyearnedtxt += 300;
         ticketsearned = 3;
-        console.log(botcar);
         classd = "3";
         botemote = emotes.botTier3;
 
@@ -162,7 +158,7 @@ module.exports = {
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
-        console.log("no energy");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -185,7 +181,7 @@ module.exports = {
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
-        console.log("no sponsor");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -202,7 +198,6 @@ module.exports = {
     }
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
-      console.log(moneyearned);
     }
 
     let racelevel = userdata.racerank;
@@ -220,11 +215,9 @@ module.exports = {
     let user1carhandling = selected.Handling;
 
     let userhelmet = userdata.helmet;
-    console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    console.log(actualhelmet);
     let driftscore = selected.Drift;
     let botspeed = cars.Cars[botcar.toLowerCase()].Speed;
     let zero2sixtycar = selected.Acceleration;
@@ -240,7 +233,6 @@ module.exports = {
     Number(new62);
     if (bot == "dclass") {
       botspeed += botdupgrades;
-      console.log(botspeed);
     }
     let hp = user1carspeed + newhandling;
     hp - driftscore;
@@ -325,7 +317,6 @@ module.exports = {
           let boost = partdb.Parts.t1nitro.AddedBoost;
 
           tracklength += parseInt(boost);
-          console.log("boosted " + parseInt(boost));
           i.update({ content: "Boosting!", embeds: [embed] });
           selected.Nitro = null;
           userdata.save();
@@ -336,8 +327,6 @@ module.exports = {
       user = r.user;
 
       if (r.customId.includes("chase")) {
-        console.log("police");
-
         let userid = r.user.id;
 
         let userdatacop = await User.findOne({ id: userid });
@@ -345,7 +334,7 @@ module.exports = {
         let job = userdatacop.job;
 
         if (!job || job.Type !== "police") {
-          r.user.send(`You're not a cop!`).catch(() => console.log("Dms off"));
+          // do nothing?
         }
         let policejobs = job.cooldown;
         let timeout2 = 10800000;
@@ -356,9 +345,9 @@ module.exports = {
             compact: true,
           });
           ispolice = false;
-          user
-            .send({ content: `Please wait ${time} before chasing users again` })
-            .catch(() => console.log("DMs Off"));
+          user.send({
+            content: `Please wait ${time} before chasing users again`,
+          });
         } else {
           msg.channel.send(
             `🚨${user}, what car via id would you like to chase ${interaction.user.username} in?🚨`
@@ -377,7 +366,6 @@ module.exports = {
           collectorp.on("collect", async (msg) => {
             if (job) {
               idtoselectcop = msg.content;
-              console.log(idtoselectcop);
               let filteredcar2 = userdatacop.cars.filter(
                 (car) => car.ID == idtoselectcop
               );
@@ -461,8 +449,6 @@ module.exports = {
                 y = setInterval(() => {
                   policelength += php;
                   policelen = policelength;
-
-                  console.log(`Police: ${policelen}`);
                 }, 1000);
               }
             }
@@ -498,7 +484,6 @@ module.exports = {
       timer++;
 
       if (timer >= 10) {
-        console.log(tracklength);
         clearInterval(x);
         clearInterval(y);
         collector2.stop();
@@ -585,12 +570,9 @@ module.exports = {
             moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
-          console.log(`before: ${moneyearned}`);
-          console.log("End");
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
             moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
-            console.log(moneyearned);
           }
 
           embed.setTitle(`Tier ${classd} bot race won!`);
@@ -677,7 +659,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.setTitle(`Tier ${classd} bot race lost!`);
 
           clearInterval(x);
@@ -688,7 +669,6 @@ module.exports = {
           interaction.editReply({ embeds: [embed] });
           return;
         } else if (tracklength == tracklength2) {
-          console.log("End");
           embed.setTitle(`Tier ${classd} bot race tied!`);
           clearInterval(x);
           if (range > 0) {

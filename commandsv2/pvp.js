@@ -133,21 +133,14 @@ module.exports = {
           tracklength2 += Number(formula2);
         }, 1000);
         setTimeout(async () => {
-          console.log(tracklength);
-          console.log(tracklength2);
-
           if (tracklength > tracklength2) {
             embed.setTitle(`${user.tag} won!`);
             embed.setImage(carimage1);
             embed.setThumbnail();
-
-            console.log("User 1 wins");
           } else if (tracklength < tracklength2) {
             embed.setTitle(`${user2.tag} won!`);
             embed.setImage(carimage2);
             embed.setThumbnail();
-
-            console.log("User 2 wins");
           }
           await i.editReply({ embeds: [embed] });
         }, 5000);

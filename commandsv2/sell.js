@@ -58,7 +58,6 @@ module.exports = {
       let filtereduser = userparts.filter(function hasmany(part) {
         return part === selling.toLowerCase();
       });
-      console.log(filtereduser);
       if (amount > filtereduser.length)
         return interaction.reply("You don't have that many of that part!");
       if (parts.Parts[selling.toLowerCase()].sellprice > 0) {

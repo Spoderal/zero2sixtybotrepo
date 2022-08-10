@@ -15,13 +15,12 @@ module.exports = {
     let members = [];
 
     for (let obj of data) {
-      console.log(obj.id);
       try {
         await interaction.client.users
           .fetch(`${obj.id}`)
           .then(members.push(obj));
       } catch (err) {
-        console.log(err);
+        // do nothing?
       }
     }
 
