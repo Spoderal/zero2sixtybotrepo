@@ -232,7 +232,7 @@ module.exports = {
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
-        console.log("no energy");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -255,7 +255,7 @@ module.exports = {
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
-        console.log("no sponsor");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -273,7 +273,6 @@ module.exports = {
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
       moneyearnedtxt = moneyearnedtxt * 2;
-      console.log(moneyearned);
     }
 
     let racelevel = userdata.racerank;
@@ -287,7 +286,6 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    console.log(botcar);
 
     let user1carspeed = selected.Speed;
     let user1carzerosixty = selected.Acceleration;
@@ -311,11 +309,9 @@ module.exports = {
     hp - driftscore;
     let hp2 = cars.Cars[botcar.toLowerCase()].Speed + othernewhandling;
     let userhelmet = userdata.helmet;
-    console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    console.log(actualhelmet);
     let semote = emotes.speed;
     let hemote = emotes.handling;
     let zemote = emotes.zero2sixty;
@@ -356,7 +352,6 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
-    console.log(randomnum);
 
     let tracklength = 0;
     let tracklength2 = 0;
@@ -388,7 +383,6 @@ module.exports = {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);
-          console.log("boosted " + parseInt(boost));
           i.update({ content: "Boosting!", embeds: [embed] });
           selected.Nitro = null;
         }
@@ -400,12 +394,9 @@ module.exports = {
       tracklength += hp;
       tracklength2 += hp2;
       timer++;
-      console.log(tracklength);
-      console.log(tracklength2);
 
       if (timer >= 15) {
         if (tracklength > tracklength2) {
-          console.log("End");
           clearInterval(x);
           embed.addFields([{ name: "Results", value: "Won" }]);
           if (global.double == true) {
@@ -461,7 +452,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.addFields([{ name: "Results", value: "Lost" }]);
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);
@@ -471,7 +461,6 @@ module.exports = {
 
           return;
         } else if (tracklength == tracklength2) {
-          console.log("End");
           embed.addFields([{ name: "Results", value: "Tie" }]);
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);

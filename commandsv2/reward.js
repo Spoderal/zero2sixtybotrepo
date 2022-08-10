@@ -70,18 +70,12 @@ module.exports = {
           ephemeral: true,
         });
       if (item.Item.endsWith("Cash")) {
-        console.log("Cash");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed $${amount}`);
         userdata.cash += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("RP")) {
-        console.log("RP");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} RP`);
         userdata.rp += amount;
         userdata.seasonrewards.push(item.Number);
@@ -89,26 +83,17 @@ module.exports = {
         item.Item.endsWith("Barn Maps") ||
         item.Item.endsWith("Barn Map")
       ) {
-        console.log("Barn Maps");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Barn Maps`);
         userdata.cmaps += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Common Keys")) {
-        console.log("Common Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Common Keys`);
         userdata.ckeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Drift Keys")) {
-        console.log("Drift Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Drift Keys`);
         userdata.dkeys += amount;
         userdata.seasonrewards.push(item.Number);
@@ -116,41 +101,27 @@ module.exports = {
         item.Item.endsWith("Garage Space") ||
         item.Item.endsWith("Garage Spaces")
       ) {
-        console.log("Garage Space");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Garage Spaces`);
 
         userdata.garage += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Rare Keys")) {
-        console.log("Rare Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Rare Keys`);
         userdata.rkeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Exotic Keys")) {
-        console.log("Exotic Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Exotic Keys`);
         userdata.ekeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Helmet")) {
-        console.log("Helmet");
-        console.log(item.Number);
-
         interaction.reply(`Redeemed ${item.Item}`);
         userdata.pfps.push(item.Item);
 
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Part")) {
-        console.log("Part");
-        console.log(item.Number);
         let part = item.Item.split(" ")[0];
 
         interaction.reply(`Redeemed ${part}`);
@@ -162,8 +133,6 @@ module.exports = {
         interaction.reply(`Redeemed ${badge}`);
         userdata.seasonrewards.push(item.Number);
       } else {
-        console.log("Car");
-        console.log(item.Item);
         let carindb = cardb.Cars[item.Item.toLowerCase()];
         let carobj = {
           ID: carindb.alias,
@@ -240,18 +209,12 @@ module.exports = {
           ephemeral: true,
         });
       if (item.Item.endsWith("Cash")) {
-        console.log("Cash");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed $${amount}`);
         userdata.cash += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Notoriety")) {
-        console.log("Notoriety");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Notoriety`);
         userdata.noto += Number(amount);
         userdata.crewclaimed.push(item.Number);
@@ -259,18 +222,12 @@ module.exports = {
         item.Item.endsWith("Legendary Barn Maps") ||
         item.Item.endsWith("Legendary Barn Map")
       ) {
-        console.log("Barn Maps");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Barn Maps`);
         userdata.lmaps += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Bank Increase")) {
-        console.log("Bank Increase");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Bank Increase`);
         userdata.items.push("bank increase");
         userdata.crewclaimed.push(item.Number);
@@ -278,26 +235,17 @@ module.exports = {
         item.Item.endsWith("Super wheelspin") ||
         item.Item.endsWith("Super wheelspins")
       ) {
-        console.log("Super wheelspin");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Super wheelspins`);
         userdata.swheelspins += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Common Keys")) {
-        console.log("Common Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Common Keys`);
         userdata.ckeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Drift Keys")) {
-        console.log("Drift Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Drift Keys`);
         userdata.dkeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
@@ -305,41 +253,28 @@ module.exports = {
         item.Item.endsWith("Garage Space") ||
         item.Item.endsWith("Garage Spaces")
       ) {
-        console.log("Garage Space");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Garage Spaces`);
         userdata.garagelimit += Number(amount);
 
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Rare Keys")) {
-        console.log("Rare Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Rare Keys`);
         userdata.rkeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Exotic Keys")) {
-        console.log("Exotic Keys");
         let amount = item.Item.split(" ")[0];
-        console.log(item.Number);
-        console.log(amount);
         interaction.reply(`Redeemed ${amount} Exotic Keys`);
         userdata.ekeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Part")) {
-        console.log("Part");
-        console.log(item.Number);
         let part = item.Item.split(" ")[0];
 
         interaction.reply(`Redeemed ${part}`);
         userdata.parts.push(part.toLowerCase());
         userdata.crewclaimed.push(item.Number);
       } else {
-        console.log("Car");
-        console.log(item.Item);
         let cartogive = cardb.Cars[item.Item.toLowerCase()];
         let carindb = cartogive;
         let carobj = {

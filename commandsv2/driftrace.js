@@ -148,7 +148,7 @@ module.exports = {
     if (usables.includes("energy drink")) {
       let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
-        console.log("no energy");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -171,7 +171,7 @@ module.exports = {
     if (usables.includes("sponsor")) {
       let timeout = 600000;
       if (timeout - (Date.now() - sponsortimer) > 0) {
-        console.log("no sponsor");
+        // do nothing?
       } else {
         await User.findOneAndUpdate(
           {
@@ -189,7 +189,6 @@ module.exports = {
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
       let moneyearnedtxt = moneyearnedtxt * 2;
-      console.log(moneyearned);
     }
 
     let tires = selected.Tires;
@@ -207,8 +206,6 @@ module.exports = {
 
     let formula = driftscore * drifttraining;
     formula += handling;
-
-    console.log(formula);
 
     let tracklength;
     let trackname;
@@ -318,8 +315,6 @@ module.exports = {
 
     let x = setInterval(() => {
       tracklength -= formula;
-      console.log(`formula: ${formula}`);
-      console.log(tracklength);
 
       if (time == 0 && tracklength >= 0) {
         let randomsub = randomRange(2, 10);

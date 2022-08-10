@@ -212,17 +212,18 @@ module.exports = {
       let uid = interaction.user.id;
       let crewname = interaction.options.getString("name");
       if (!crewname) return interaction.reply("Please specify a crew name!");
+
       let crew2 = globalModel.crews.filter((crew) => crew.name == crewname);
       if (crew2.length == 0)
         return interaction.reply("That crew doesn't exist!");
+
       let crew = userdata.crew;
       let actcrew = crew2[0];
       if (crew) return interaction.reply("You're already in a crew!");
+
       let newarray = [];
       actcrew.members.push(`${uid}`);
-
       newarray = actcrew.members;
-
       actcrew.members = newarray;
       await Global.findOneAndUpdate(
         {},
@@ -366,14 +367,17 @@ module.exports = {
       interaction.reply(
         "What crew icon would you like to submit? **Send an image below**"
       );
+      
       const filter = (m) => {
         return m.author.id === interaction.user.id;
       };
+
       let collector = interaction.channel.createMessageCollector({
         filter,
         max: 1,
         time: 1000 * 30,
       });
+
       collector.on("collect", (m) => {
         let ImageLink;
         if (m.attachments.size > 0) {
@@ -413,7 +417,9 @@ module.exports = {
       for (let obj of data) {
         try {
           members.push(obj);
-        } catch (err) {}
+        } catch (err) {
+          // do nothing?
+        }
       }
 
       members = members.sort(function (b, a) {

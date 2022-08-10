@@ -49,7 +49,6 @@ module.exports = {
     }
     if (interaction.guild.id == "931004190149460048") {
       dcash += 500;
-      console.log("guild");
     }
     let timeout = 86400000;
     let prestige = userdata.prestige;

@@ -104,13 +104,11 @@ module.exports = {
       return interaction.reply({ embeds: [errembed] });
     }
 
-    console.log(actpart);
     let realpart = parte;
     if (!userdata.parts.includes(realpart.toLowerCase()))
       return interaction.reply(`You don't have this part!`);
     if (selected[actpart] && selected[actpart] !== null)
       return interaction.reply(`This car already has a "${actpart}"!`);
-    console.log(realpart);
     let partindb = partdb.Parts[realpart.toLowerCase()];
     if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
       let newspeed = Number(partindb.AddedSpeed);

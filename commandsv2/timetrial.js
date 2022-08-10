@@ -112,20 +112,15 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
-    console.log(randomnum);
 
     let tracklength = 5000 - launchperc;
 
     let x = setInterval(() => {
       tracklength -= hp;
 
-      console.log(tracklength);
-
       if (tracklength <= 0) {
-        console.log(timernum);
         moneyearned -= timernum;
         moneyearnedtxt + moneyearned;
-        console.log("End");
         clearInterval(x, timer);
         embed.addFields([
           { name: "Results", value: `Finished in ${timernum}s` },

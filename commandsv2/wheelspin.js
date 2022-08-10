@@ -72,7 +72,6 @@ module.exports = {
         } else if (item == "🏎️") {
           let randomnum = lodash.random(5);
           let reward;
-          console.log(randomnum);
           if (randomnum == 2) {
             reward = lodash.sample(wheelspinrewards.SuperRare);
           } else {

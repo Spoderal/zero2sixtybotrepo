@@ -55,7 +55,7 @@ module.exports = {
 
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Weekly Cash for ${interaction.user.username}`)
-        .addFields("Earned Cash", `${toCurrency(cash)}`)
+        .addFields([{ name: "Earned Cash", value: `${toCurrency(cash)}` }])
         .setColor(colors.blue);
       if (gold) {
         userdata.gold += Number(gold);

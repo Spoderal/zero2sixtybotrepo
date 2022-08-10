@@ -43,8 +43,6 @@ module.exports = {
       swheelspins,
     } = profile;
 
-    console.log({ cash, bank });
-
     if (typeof cash === "undefined") {
       interaction.reply(
         "You haven't started yet! Use `/start` to create a profile and begin!"

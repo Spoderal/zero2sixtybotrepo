@@ -28,7 +28,6 @@ module.exports = {
       case 1:
         squad = "flame house";
         botcar = squads.Squads["flame house"].Cars[stage];
-        console.log(botcar);
 
         break;
     }
@@ -37,7 +36,6 @@ module.exports = {
     let aemote = emotes.zero2sixty;
 
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
-    console.log(filteredcar);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
       let errembed = new discord.EmbedBuilder()
@@ -98,8 +96,6 @@ module.exports = {
     let x = setInterval(() => {
       track1 += formula1;
       track2 += formula2;
-      console.log(`1: ${track1}`);
-      console.log(`2: ${track2}`);
     }, 1000);
 
     setTimeout(() => {

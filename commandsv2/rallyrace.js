@@ -111,7 +111,6 @@ module.exports = {
     let tracklengthb;
     let weekytask1 = db.fetch(`weeklytask_${interaction.user.id}`);
     let barnrandom = randomRange(1, 6);
-    console.log(`random ${barnrandom}`);
     let barnmaps;
     switch (bot) {
       case "1": {
@@ -144,9 +143,6 @@ module.exports = {
     }
     db.set(`racing_${user.id}`, Date.now());
     let newrankrequired = racelevel * 200;
-
-    console.log(newrankrequired);
-    console.log(botcar);
 
     let user1carspeed = db.fetch(
       `${cars.Cars[selected.toLowerCase()].Name}speed_${user.id}`
@@ -206,7 +202,6 @@ module.exports = {
         1
       );
     }
-    console.log(hp);
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${bot} rally race in progress...`)
       .addFields([
@@ -242,7 +237,6 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
-    console.log(randomnum);
 
     let tracklength = tracklengthb - launchperc;
     let tracklength2 = tracklengthb;
@@ -318,7 +312,6 @@ module.exports = {
           moneyearnedtxt += calccash;
           moneyearned += calccash;
         }
-        console.log("End");
         clearInterval(x);
         embed.setTitle(`Tier ${bot} rally race won!`);
         embed.addFields([{ name: "Earnings", value: `$${moneyearnedtxt}` }]);
@@ -370,7 +363,6 @@ module.exports = {
         }
         return;
       } else if (tracklength2 <= 0) {
-        console.log("End");
         embed.setTitle(`Tier ${bot} rally race lost!`);
         clearInterval(x);
         db.add(`raceslost_${interaction.user.id}`, 1);

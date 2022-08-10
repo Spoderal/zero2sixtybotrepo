@@ -2,7 +2,11 @@
   "Pets": {
     "mini miata": {
       "Name": "Mini Miata",
-      "Colors": ["Red", "Blue", "Black"],
+      "Colors": [
+        "Red",
+        "Blue",
+        "Black"
+      ],
       "Image": "https://i.ibb.co/3f76980/minimiata2.png",
       "Findables": 1,
       "Rarity": 20,

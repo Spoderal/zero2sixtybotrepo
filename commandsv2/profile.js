@@ -26,7 +26,6 @@ module.exports = {
     let driftrank = userdata.driftrank;
 
     let helmet = userdata.helmet;
-    console.log(helmet);
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
 
     let title = userdata.title;
@@ -49,7 +48,6 @@ module.exports = {
     let cash = userdata.cash;
     finalprice += cash;
 
-    console.log(cars[0]);
     let bestcar = cars[0];
 
     let embed = new Discord.EmbedBuilder()

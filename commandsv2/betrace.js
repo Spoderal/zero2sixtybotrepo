@@ -65,7 +65,6 @@ module.exports = {
       return interaction.reply(`Please wait ${time} before racing again.`);
     }
     let botcar = lodash.sample(cars.Cars);
-    console.log(botcar);
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
       return interaction.reply("This car is too junked to race, sorry!");
@@ -95,8 +94,6 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    console.log(newrankrequired);
-    console.log(botcar);
     let nitro = selected.Nitro;
 
     let user1carspeed = selected.Speed;
@@ -131,11 +128,9 @@ module.exports = {
     ];
     let tip = lodash.sample(tips);
     let userhelmet = userdata.helmet;
-    console.log(userhelmet);
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    console.log(actualhelmet);
 
     bank -= moneyearned;
     userdata.save();
@@ -208,7 +203,6 @@ module.exports = {
           let boost = partdb.Patrts[nitro.toLowerCase()].AddedBoost;
 
           tracklength += parseInt(boost);
-          console.log("boosted " + parseInt(boost));
           i.update({ content: "Boosting!", embeds: [embed] });
           nitro = null;
           userdata.save();
@@ -222,13 +216,9 @@ module.exports = {
       timer++;
 
       if (timer >= 10) {
-        console.log(tracklength);
         clearInterval(x);
 
         if (tracklength > tracklength2) {
-          console.log(moneyearned);
-          console.log("End");
-
           embed.setTitle(`Bet race won!`);
 
           let racerank2 = userdata.racerank;
@@ -268,7 +258,6 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          console.log("End");
           embed.setTitle(`Bet race lost!`);
 
           clearInterval(x);
@@ -280,7 +269,6 @@ module.exports = {
           interaction.editReply({ embeds: [embed] });
           return;
         } else if (tracklength == tracklength2) {
-          console.log("End");
           embed.setTitle(`Bet race tied, you still lost your earnings!`);
           clearInterval(x);
           if (range > 0) {

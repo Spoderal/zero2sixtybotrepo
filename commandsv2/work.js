@@ -379,7 +379,6 @@ module.exports = {
                 emb.react("😭");
 
                 let overallscore = randomRange(5, 10);
-                console.log(overallscore);
 
                 let filter = (_, u) => u.id === interaction.user.id;
                 let rcollector2 = emb.createReactionCollector({
@@ -443,8 +442,6 @@ module.exports = {
                       `You've completed your job duties and earned yourself $${salary}, and ${addedsubs} XP`
                     );
                   }, 2000);
-
-                  console.log(overallscore);
                 });
               });
             } else if (type == "car review") {
@@ -533,7 +530,6 @@ module.exports = {
         userdata.update();
 
         if (randomgame == "clicker") {
-          console.log("clicker");
           let row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
               .setCustomId("green")
@@ -595,14 +591,7 @@ module.exports = {
             }
           });
         } else if (randomgame == "type") {
-          console.log("type");
-
-          let typing = [
-            "hello world",
-            "zero2sixty typing",
-            "slash commands",
-            `console.log("hi")`,
-          ];
+          let typing = ["hello world", "zero2sixty typing", "slash commands"];
           let randomtype = lodash.sample(typing);
           interaction.reply({
             content: `Type \`${randomtype}\` in 10 seconds!`,

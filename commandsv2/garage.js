@@ -110,6 +110,7 @@ module.exports = {
         actitems.push(finalitem);
       }
     }
+
     for (let i = 0; i < partarraylength; i++ && parts !== ["no parts"]) {
       if (!parts || parts.length == 0) {
         actpart = "no parts";
@@ -154,7 +155,10 @@ module.exports = {
       let embed1 = new EmbedBuilder()
         .setTitle(`${target.username}'s parts`)
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
-        .setDescription(`${xessence} Xessence\n\n${actuserparts[0].join("\n")}`)
+        .setDescription(
+          `${xessence} Xessence\n
+          ${actuserparts[0]?.join("\n") || "0 Parts"}`
+        )
         .addFields([{ name: "​", value: "​" }])
         .setColor(colors.blue);
 
@@ -240,7 +244,6 @@ module.exports = {
           let newuserparts = [];
           for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
-            console.log(`part: ${part2}`);
           }
           var list = actuserparts[0];
 
@@ -269,7 +272,6 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          console.log(actuserparts);
           return;
         } else if (i.customId.includes("t2")) {
           // eslint-disable-next-line no-undef
@@ -288,7 +290,6 @@ module.exports = {
           let newuserparts = [];
           for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
-            console.log(`part: ${part2}`);
           }
           list = actuserparts[0];
 
@@ -316,7 +317,6 @@ module.exports = {
           );
 
           i.update({ embeds: [embed1] });
-          console.log(actuserparts);
 
           return;
         } else if (i.customId.includes("t3")) {
@@ -336,7 +336,6 @@ module.exports = {
           let newuserparts = [];
           for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
-            console.log(`part: ${part2}`);
           }
           list = actuserparts[0];
 
@@ -365,7 +364,6 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          console.log(actuserparts);
           return;
         } else if (i.customId.includes("t4")) {
           // eslint-disable-next-line no-undef
@@ -385,7 +383,6 @@ module.exports = {
           let newuserparts = [];
           for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
-            console.log(`part: ${part2}`);
           }
           list = actuserparts[0];
 
@@ -414,7 +411,6 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          console.log(actuserparts);
           return;
         } else if (i.customId.includes("t5")) {
           // eslint-disable-next-line no-undef
@@ -433,7 +429,6 @@ module.exports = {
           let newuserparts = [];
           for (let p in actuserparts) {
             let part2 = actuserparts[0][p];
-            console.log(`part: ${part2}`);
           }
           list = actuserparts[0];
 
@@ -462,7 +457,6 @@ module.exports = {
 
           i.update({ embeds: [embed1] });
 
-          console.log(actuserparts);
           return;
         } else if (i.customId.includes("previous") && page !== 1) page--;
         else if (i.customId.includes("next") && page !== actuserparts.length)
@@ -544,7 +538,6 @@ module.exports = {
       //           actuserparts.push(`${n} x${quantities[n]}`)
 
       //         }
-      //         console.log(`filtered: ${actuserparts}`)
 
       //       }
 

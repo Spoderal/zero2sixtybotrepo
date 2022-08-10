@@ -54,7 +54,6 @@ module.exports = {
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID")
         return interaction.reply("You don't own that car!");
-      console.log(selected);
 
       await User.findOneAndUpdate(
         {

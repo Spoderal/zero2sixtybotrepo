@@ -77,7 +77,9 @@
     "Name": "Moon Base"
   },
   "yacht": {
-    "Rewards": ["Bragging rights"],
+    "Rewards": [
+      "Bragging rights"
+    ],
     "Price": 1000000000,
     "Emote": "🚢",
     "Image": "https://i.ibb.co/6NBHdjT/210701131326-worlds-largest-yacht-credit-winch-design-3.jpg",
