@@ -50,33 +50,5 @@
             "Task":"Win a half mile race in a 1999 Mitsubishi Eclipse",
             "Reward":"2500"
         }
-    },
-    "Special":{
-        "1":{
-            "Daily":{
-                "pdailytask_1":{
-                    "Task":"Win 20 PVP races",
-                    "Reward":500000
-
-                },
-                "pdailytask_2":{
-                    "Task":"Win 10 Half Mile races",
-                    "Reward":250000
-
-                }
-            }
-        },
-        "4":{
-            "pdailytask_1":{
-                "Task":"Win 25 Half Mile races",
-                "Reward":1000000
-
-            },
-            "pdailytask_2":{
-                "Task":"Get a T4Intake from a wheelspin",
-                "Reward":750000
-
-            }
-        }
     }
 }

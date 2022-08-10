@@ -69,8 +69,11 @@ module.exports = {
             let handling = selected.Handling
 
             if(driftscore <= 0) return interaction.reply("You try drifting but your drift rating is too low, so you swerve out and crash.")
-            let timeout = 45000
-            if(userdata.patron && userdata.patron.tier == 1){
+            let timeout 
+            if(!userdata.patron || !userdata.patron.tier){
+              timeout = 45000
+            }
+            else if(userdata.patron && userdata.patron.tier == 1){
               timeout = 30000
             }
             else if(userdata.patron && userdata.patron.tier == 2){
@@ -326,7 +329,7 @@ module.exports = {
       
                 if(time == 0 && tracklength >= 0){
                     let randomsub = randomRange(2, 10)
-                    selected.Tread -= randomsub
+             
                     userdata.save()
                     embed.addField("Results", `Failed`)
                     interaction.editReply({embeds: [embed]})
@@ -352,9 +355,8 @@ module.exports = {
                 } 
                 if(tracklength <= 0){
                     let randomsub = randomRange(2, 10)
-                    selected.Tread -= randomsub
+                  
                     
-                    embed.addField("Results", `Success\n\nTread: ${selected.Tread}`)
                     if(db.fetch(`doublecash`) == true){
                         moneyearned = moneyearned += moneyearned
                         embed.addField("Double Cash Weekend!", `\u200b`)

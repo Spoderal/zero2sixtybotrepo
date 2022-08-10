@@ -16,19 +16,19 @@ module.exports = (client) => {
         let cars = db.fetch(`cars_${message.author.id}`) || []
         let drift = db.fetch(`drifttraining_${member.id}`) 
         if(cash >= 1000000 && !db.fetch(`millionbadge_${member.id}`)){
-            message.reply(`You just earned the "Millionaire" badge for having 1m cash! Congratulations!`)
+            message.channel.send(`You just earned the "Millionaire" badge for having 1m cash! Congratulations!`)
             db.set(`millionbadge_${member.id}`, true)
             db.push(`badges_${member.id}`, "1mcash")
         }
         if(cars.length >= 10 && !db.fetch(`10carsbadge_${member.id}`)){
-            message.reply(`You just earned the "2ManyCars" badge for having 10 cars or more! Congratulations!`)
+            message.channel.send(`You just earned the "2ManyCars" badge for having 10 cars or more! Congratulations!`)
             db.set(`10carsbadge_${member.id}`, true)
             db.push(`badges_${member.id}`, "10cars")
 
         }
 
         if(drift >= 50 && !db.fetch(`driftkingbadge_${member.id}`)){
-            message.reply(`You just earned the "Drift King" badge for having a drift score of 50 or more! Congratulations!`)
+            message.channel.send(`You just earned the "Drift King" badge for having a drift score of 50 or more! Congratulations!`)
             db.set(`driftkingbadge_${member.id}`, true)
             db.push(`badges_${member.id}`, "driftking")
 

@@ -96,6 +96,14 @@ module.exports = {
               break;
     }
     
+    if(cartoinstall == "pet"){
+      if(!user1parts.includes("pet spoiler")) return interaction.reply(`You don't have a pet spoiler!`)
+      userdata.pet.spoiler = true
+      userdata.save()
+
+      interaction.reply(`✅`)
+      return;
+    }
 
     let filteredcar = userdata.cars.filter(car => car.ID == cartoinstall);
     let selected = filteredcar[0] || 'No ID'
@@ -126,10 +134,15 @@ console.log(realpart)
     selected.Speed = stat -= newspeed
   }
   if(partindb.AddedSixty && partindb.AddedSixty > 0){
-    let newspeed = parseFloat(partindb.AddedSixty)
-    let stat = parseFloat(selected.Acceleration)
+   
+      let newspeed = parseFloat(partindb.AddedSixty)
+      let stat = parseFloat(selected.Acceleration)
+      
+      if(stat > 2 && !stat == 2){
+        selected.Acceleration = stat -= newspeed
 
-    selected.Acceleration = stat -= newspeed
+      }
+
   }
   if(partindb.DecreasedSixty && partindb.DecreasedSixty > 0){
     let newspeed = parseFloat(partindb.DecreasedSixty)

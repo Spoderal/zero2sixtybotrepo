@@ -56,19 +56,22 @@ module.exports = {
             let user = interaction.user;
             let bot = interaction.options.getString("tier")
             let botlist = ['1', '2', '3', '4', '5', '6', '7']
-            let timeout = 60000
-            if(userdata.patron && userdata.patron.tier == 1){
-              timeout = 30000
-            }
-            else if(userdata.patron && userdata.patron.tier == 2){
-              timeout = 15000
-            }
-            else if(userdata.patron && userdata.patron.tier == 3){
-              timeout = 5000
-            }
-            else if(userdata.patron && userdata.patron.tier == 4){
-              timeout = 5000
-            }
+            let timeout 
+        if(!userdata.patron || !userdata.patron.tier){
+          timeout = 45000
+        }
+        else if(userdata.patron && userdata.patron.tier == 1){
+          timeout = 30000
+        }
+        else if(userdata.patron && userdata.patron.tier == 2){
+          timeout = 15000
+        }
+        else if(userdata.patron && userdata.patron.tier == 3){
+          timeout = 5000
+        }
+        else if(userdata.patron && userdata.patron.tier == 4){
+          timeout = 5000
+        }
             let botcar = null
             let racing = cooldowndata.hm 
 

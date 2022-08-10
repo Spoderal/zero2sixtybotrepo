@@ -12,7 +12,7 @@ const double = require('../doublecash')
 const db = require('quick.db')
 const mongoose = require('mongoose')
 const dbSchema = require('../schema/profile-schema')
-const auto = require('../autosetcars')
+ const auto = require('../autosetbalance')
 
 module.exports = {
     name:"ready",
@@ -20,7 +20,7 @@ module.exports = {
     async execute(client, commands){
     
       await mongoose.connect(
-        process.env.dbpass, {
+        process.env.dbproduction, {
           keepAlive: true
         }
       )
@@ -31,7 +31,7 @@ module.exports = {
       patron(client)
       items(client)
       double(client)
-      // auto()
+   // auto(client)
       
       var express = require('express');
       var app = express();

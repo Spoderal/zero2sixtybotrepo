@@ -1,3 +1,22 @@
 {
-   "Colors":["#ec222a", "#f79522", "#f7ee23", "#3b9a46", "#2364b0", "#6d2b7c"]
+    "Colors":{
+        "Default":{
+            "color": "#3d3d3c"
+        },
+        "Red":{
+            "color":"#eb4034"
+        },
+        "Orange":{
+            "color":"#f08629"
+
+        },
+        "Blue":{
+            "color":"#423bd9"
+
+        },
+        "Green":{
+            "color":"#2bab38"
+
+        }
+    }
 }

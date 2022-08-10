@@ -20,6 +20,8 @@ module.exports = {
     async execute(interaction) {
 
         let userdata = await User.findOne({id: interaction.user.id})
+        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: interaction.user.id})
+
         console.log(userdata)
         let pet = userdata.pet
         if(!pet) return interaction.reply(`You don't have a pet!`)
@@ -455,7 +457,7 @@ module.exports = {
         }
 
         else if(i.customId.includes("race")){
-            let timetorace = pet.racing || 0
+            let timetorace = cooldowndata.pet
             let timeout = 600000
             if (timetorace !== null && timeout - (Date.now() - timetorace) > 0) {
                 let time = ms(timeout - (Date.now() - timetorace));
@@ -473,12 +475,12 @@ module.exports = {
                         "pet.gas": lessgas
                    }
                 })
-            await User.findOneAndUpdate({
+            await Cooldowns.findOneAndUpdate({
                 id: interaction.user.id
             }, 
             {
                 $set: {
-                    "pet.racing": Date.now()
+                    "pet": Date.now()
                }
             })
 

@@ -124,8 +124,10 @@ console.log(realpart)
    if(partindb.DecreasedSixty && partindb.DecreasedSixty > 0){
      let newspeed = parseFloat(partindb.DecreasedSixty)
      let stat = parseFloat(selected.Acceleration)
- 
-     selected.Acceleration = stat -= newspeed
+     if(stat > 2 && !stat == 2){
+      selected.Acceleration = stat -= newspeed
+
+    }
    }
    if(partindb.AddHandling && partindb.AddHandling > 0){
      let newspeed = Number(partindb.AddHandling)

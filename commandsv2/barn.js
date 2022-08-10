@@ -140,14 +140,39 @@ module.exports = {
               }
               return false;
             }
-            
+            switch(rarity2){
+              case "common":
+                userdata.cmaps -= 1
+                userdata.update()
+
+                break;
+                case "uncommon":
+                  userdata.ucmaps -= 1
+                  userdata.update()
+
+
+                break;
+                case "rare":
+                  userdata.rmaps -= 1
+                  userdata.update()
+
+  
+                  break;
+                  case "legendary":
+                    userdata.lmaps -= 1
+                    userdata.update()
+
+
+                    
+                    break;
+                  }
             let arrByID = cars.filter(filterByID)
             console.log(arrByID)
             if(arrByID.length > 0) {
               cooldowns.barn = Date.now()
               Number(resale)
               Number(userdata.cash)
-              userdata.cash += resale
+              userdata.cash += parseInt(resale)
               cooldowns.save()
               userdata.save()
              interaction.reply(`You found a ${carindb.Name} but you already have this car, so you found $${numberWithCommas(resale)} instead.`)
@@ -155,34 +180,13 @@ module.exports = {
             }
             
             userdata.cars.push(carobj)
-            userdata.save()
+            userdata.update()
             cooldowns.barn = Date.now()
             cooldowns.save()
 
           
 
-            switch(rarity2){
-              case "common":
-                barnmaps -= 1
-
-                break;
-                case "uncommon":
-                  ubarnmaps -= 1
-
-
-                break;
-                case "rare":
-                  rbarnmaps -= 1
-
-  
-                  break;
-                  case "legendary":
-                    lbarnmaps -= 1
-
-                    
-                    break;
-                    userdata.save()
-            }
+         
             let embed = new Discord.MessageEmbed()
             .setTitle(`${namefor} Barn Find`)
             .addField(`Car`, `${carobj.Name}`)
@@ -190,6 +194,8 @@ module.exports = {
             .setImage(carobj.Livery)
             .setColor(color)
             interaction.reply({embeds: [embed]});
+            userdata.save()
+
           }
           
           pickRandom();

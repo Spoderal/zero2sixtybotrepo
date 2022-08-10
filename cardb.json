@@ -118,6 +118,124 @@
             "Class":"D"
 
         },
+        "jons 1997 acura integra":{
+            "alias":"jons 1997 integra",
+            "Name":"Jons 1997 Acura Integra",
+            "Emote":"<:acura:931012624164978728>",
+            "Speed":140,
+            "kmh": "209",
+            "Price":0,
+            "sellprice":0,
+            "Engine":"1.8 L 4-cylinder",
+            "Image":"https://i.ibb.co/r02zwXw/Acura-Integra-GSR-e1591392861907.jpg",
+            "0-60":11.3,
+            "Drift":"0",
+            "Handling":"500",
+            "Class":"D"
+
+        },
+      
+        "jessicas 2005 hyundai tiburon":{
+            "alias":"jessicas 2005 tiburon",
+            "Name":"Jessicas 2005 Hyundai Tiburon",
+            "Emote":"<:hyundai:931015215447941200>",
+            "Speed":143,
+            "kmh": "209",
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"3.5 L V6",
+            "Image":"https://i.ibb.co/98rx435/2005-hyundai-tiburon-gt-v6-2dr-hatchback.jpg",
+            "0-60":10.4,
+            "Drift":"0",
+            "Handling":"500"
+        },
+        "troys 1994 honda prelude":{
+            "alias":"troys 2005 tiburon",
+            "Name":"Troys 1994 Honda Prelude",
+            "Emote":"<:honda:931011549705957397>",
+            "Speed":150,
+            "kmh": "209",
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"2.3 L 4-cylinder",
+            "Image":"https://i.ibb.co/QcjjZ7Y/maxresdefault-2.jpg",
+            "0-60":10.4,
+            "Drift":"0",
+            "Handling":"500"
+        },
+        "freds 2002 ford mustang":{
+            "alias":"freds 2002 mustang",
+            "Name":"Freds 2002 Ford Mustang",
+            "Emote":"<:ford:931012624152399902>",
+            "Speed":153,
+            "kmh": "217",
+
+            "Price":"500",
+            "sellprice":375,
+            "Engine":"3.8 L V6,",
+            "Image":"https://i.ibb.co/41ZBPgt/99gt.jpg",
+            "0-60":10,
+            "Drift":"0",
+            "Handling":"500",
+            "Class":"D"
+        },
+        "heathers 2007 infiniti g35 coupe":{
+            "alias":"heathers 2007 g35 coupe",
+            "Name":"Heathers 2007 Infiniti G35 Coupe",
+            "Emote":"<:infiniti:933637817370824724>",
+            "Speed":160,
+            "kmh": "209",
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"3.5 L V6",
+            "Image":"https://i.ibb.co/5sYnp8p/Jgd4-VEHz7s.png",
+            "0-60":10,
+            "Handling":600
+        },
+        "pauls 2007 mitsubishi evo ix":{
+            "alias":"pauls 2007 evo ix",
+            "Name":"Pauls 2007 Mitsubishi Evo IX",
+            "Emote":"<:mistu:931012414479147038>",
+            "kmh": "201",
+
+            "Speed":165,
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"2.0 L 4-cylinder",
+            "Image":"https://i.ibb.co/RjDLLsJ/bx-NB3e8jbf.png",
+            "0-60":9.8,
+            "Handling":550
+        },
+        "larrys 2002 mazda rx7 fd":{
+            "alias":"larrys 2002 rx7 fd",
+            "Name":"Larrys 2002 Mazda RX7 FD",
+            "Emote":"<:mazda:931011549680779364>",
+            "Speed":170,
+            "kmh": "201",
+
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"1.3 L 13B-REW Wankel Rotary",
+            "Image":"https://i.ibb.co/1Xpsm8M/mazda-rx7-adlawd-feed-kit-30.jpg",
+            "0-60":9.5,
+            "Drift":"0",
+            "Handling":570
+        },
+        "ollies 2009 honda s2000 cr":{
+            "alias":"ollies 2009 s2000 cr",
+            "Name":"Ollies 2009 Honda S2000 CR",
+            "Emote":"<:honda:931011549705957397>",
+            "Speed":175,
+            "kmh":"257",
+
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"2.2 L 4-cylinder",
+            "Image":"https://i.ibb.co/26ZGGcg/390134.png",
+            "0-60":9.4,
+            "Drift":"3",
+            "Handling":500
+        },
         "sallys 1997 acura integra":{
             "alias":"sallys 1997 integra",
             "Name":"Sallys 1997 Acura Integra",
@@ -732,7 +850,7 @@
             "0-60":"10.3",
             "Drift":"0",
             "Handling":"500",
-            "Trims":["2020 porsche 718 cayman gt4"]
+            "Trims":["2020 Porsche 718 Cayman GT4"]
         },
         "2020 porsche 718 cayman gt4":{
             "alias":"2020 718 cayman gt4",
@@ -1636,7 +1754,7 @@
             "Price":"0",
             "sellprice":18750,
             "Engine":"2.0 L S20 I6",
-            "Image":"https://i.ibb.co/5FRP2tx/p4zabd9nw5031.jpg",
+            "Image":"https://cdn1.mecum.com/auctions/da0919/da0919-383596/images/01-1560443888398@2x.jpg?1567691600000",
             "RestoreOnly":true,
             "0-60":14,
             "Drift":"0",
@@ -3609,7 +3727,7 @@
             "0-60":"8.5",
             "Drift":"0",
             "Handling":"500",
-            "Trims":["2019 chevy corvette c7 zr1"]
+            "Trims":["2019 Chevy Corvette C7 ZR1"]
         },
         "2019 chevy corvette c7 zr1":{
             "alias":"2019 c7 zr1",
@@ -3673,7 +3791,7 @@
             "0-60":"6.3",
             "Drift":"0",
             "Handling":"500",
-            "Trims":["2006 lamborghini gallardo spyder"]
+            "Trims":["2006 Lamborghini Gallardo Spyder"]
         },
         "2006 lamborghini gallardo spyder":{
             "alias":"2006 gallardo s",
@@ -4205,6 +4323,21 @@
             "Drift":0,
             "Handling":500,
             "Obtained":"Season"
+        },
+        "2022 ferrari 296":{
+            "alias":"2022 296",
+            "Name":"2022 Ferrari 296",
+            "Emote":"<:ferrari:931011838374727730>",
+            "Speed":200,
+
+            "Price":"0",
+            "sellprice":0,
+            "Engine":"V6",
+            "Image":"https://i.ibb.co/ZVnb6dZ/ferrariii.jpg",
+            "0-60":7.3,
+            "Drift":0,
+            "Handling":500,
+            "Obtained":"Crew Season"
         },
         "1995 ferrari f50":{
             "alias":"1995 f50",
