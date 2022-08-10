@@ -14,6 +14,9 @@ module.exports = {
       try {
         await command.execute(interaction);
         let userdata = await User.findOne({ id: interaction.user.id });
+
+        if (!userdata) return;
+
         let pet = userdata.pet;
         if (userdata && pet) {
           let newlove = (pet.condition -= 1);
