@@ -18,6 +18,8 @@ let mongoConfig = {
   keepAlive: true,
 };
 
+//test
+
 // SSL for production only
 if (process.env.CA_CERT) {
   let mongoCertPath = path.resolve("./ca-certificate.crt");
