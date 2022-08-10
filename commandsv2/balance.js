@@ -2,8 +2,8 @@ const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { numberWithCommas, toCurrency } = require("../common/utils");
 const {
-  getUserFromInteraction,
-  findOrCreateUserInDB,
+  userFindOrCreateInDB,
+  userGetFromInteraction,
 } = require("../common/user");
 const { getRandomTip } = require("../common/tips");
 const { emotes } = require("../common/emotes");
@@ -21,8 +21,8 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const user = getUserFromInteraction(interaction);
-    const profile = await findOrCreateUserInDB(user);
+    const user = userGetFromInteraction(interaction);
+    const profile = await userFindOrCreateInDB(user);
     const {
       cash,
       gold,
