@@ -456,6 +456,9 @@ module.exports = {
               },
             }
           );
+          
+         cooldowndata.save()
+
 
           let rewardrange = randomRange(0, 5);
           let rewards = [
