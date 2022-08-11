@@ -6,6 +6,7 @@ const Cooldowns = require("../schema/cooldowns");
 const Global = require("../schema/global-schema");
 const { colors } = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { tipFooterRandom } = require("../common/tips");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -152,16 +153,6 @@ module.exports = {
     let hp = driftscore * 2 + driftrank1;
     let hp2 = driftscore2 * 2 + driftrank2;
 
-    let tips = [
-      "Try buying gold to support us! Starting at $0.99 for 20, and you can do so much with it!",
-      "Join the support server to get a boost in botrace earnings",
-      "Create a crew and get benefits such as cash bonuses!",
-      "Use /weekly, /daily, and /vote to get a small cash boost!",
-      "Notoriety is used for seasons, check the current season with /season",
-      "Use keys to purchase import crates with exclusive cars",
-      "View events with /event",
-    ];
-    let tip = lodash.sample(tips);
     let y;
     let itemusedp;
     let embed = new discord.EmbedBuilder()
@@ -181,7 +172,7 @@ module.exports = {
         },
       ])
       .setColor(colors.blue)
-      .setFooter({ text: tip })
+      .setFooter(tipFooterRandom)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
 
     tracklength += new62;
