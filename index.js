@@ -5,6 +5,8 @@ const express = require("express");
 const app = express();
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const User = require("./schema/profile-schema");
+const Topgg = require("@top-gg/sdk");
+const path = require("path");
 
 const client = new Client({
   intents: [
@@ -17,7 +19,6 @@ const client = new Client({
   shards: "auto",
 });
 
-const Topgg = require("@top-gg/sdk");
 const webhook = new Topgg.Webhook("ZeroSpideral3!#");
 app.post(
   "/vote",
@@ -70,11 +71,11 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
   }
 
   const eventFiles = fs
-    .readdirSync("./events")
-    .filter((file) => file.endsWith(".js"));
+    .readdirSync("./events", { withFileTypes: true })
+    .filter((file) => !file.isDirectory() && path.extname(file.name) === ".js");
 
   for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
+    const event = require(`./events/${file.name}`);
 
     if (event.once) {
       client.once(event.name, (...args) => event.execute(...args, commands));
