@@ -4,7 +4,7 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {MessageActionRow, MessageButton} = require("discord.js")
 const User = require('../schema/profile-schema')
-const Cooldowns = require('../schema/profile-schema')
+const Cooldowns = require('../schema/cooldowns')
 const partdb = require('../partsdb.json')
 
 module.exports = {
@@ -54,7 +54,7 @@ module.exports = {
         let bot =  randomRange(1, 7)
         let botlist = ["1", "2", "3", "4", "5", "6", "7"];
         let timeout = 18000000;
-        let racing = cooldowns.betracing
+        let racing =  cooldowns.betracing
         let prestige = userdata.prestige
         if(prestige < 5) return interaction.reply("You need to be prestige 5 to do this race!")
         if (racing !== null && timeout - (Date.now() - racing) > 0) {
@@ -85,10 +85,11 @@ module.exports = {
         if(moneyearned > bank) return interaction.reply(`You don't have enough money in your bank account!`)
 
     
-        
         let racelevel = userdata.racerank
        
-        userdata.betracing = Date.now()
+        cooldowns.betracing = Date.now()
+        cooldowns.save()
+
         let newrankrequired = racelevel * 200;
         if(prestige >= 3){
           newrankrequired * 2
@@ -140,7 +141,7 @@ module.exports = {
        let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()]
        console.log(actualhelmet)
 
-       bank -= moneyearned
+       userdata.bank -= moneyearned
        userdata.save()
 
         let embed = new discord.MessageEmbed()
@@ -268,19 +269,17 @@ module.exports = {
                   `${earningsresult.join('\n')}`
                   );
                   interaction.editReply({ embeds: [embed] });
-                  userdata.cash += Number(moneyearned)
+                  userdata.cash += parseInt(finalamount)
                   userdata.racexp += 25
     
     
               if(cars.Cars[selected.Name.toLowerCase()].StatTrack){
                 selected.Wins += 1
-                userdata.save()
               }
               if(range > 0) {
                 selected.Range -= 1
-                userdata.save()
               }
-              
+              userdata.save()
           
               return;
             } else if (tracklength < tracklength2) {

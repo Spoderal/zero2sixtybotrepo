@@ -73,7 +73,6 @@ module.exports = {
           ${key2emote} Rare: ${rkeys}
           ${key3emote} Exotic: ${ekeys}
           ${key4emote} Drift: ${dkeys}
-          <:ferrari:931011838374727730> Ferrari: ${fkeys}
           `, true)
           .addField("Event Items", `
           <:zeronotor:962785804202176574> Notoriety: ${numberWithCommas(notoriety)}

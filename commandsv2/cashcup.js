@@ -73,7 +73,7 @@ module.exports = {
             }
           }
 
-          cooldowndata.cashcup += Date.now()
+          cooldowndata.cashcup = Date.now()
         cooldowndata.save()
           
           

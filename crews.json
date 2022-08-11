@@ -1,0 +1,39 @@
+{
+    "Squads":{
+            "Max":{
+                "Car":{
+                    "DatabaseName":"Maxs1991ToyotaMR2",
+                    "Name":"1991 Toyota MR2"
+                },
+                "Crew":"Angelz",
+                "Image":"https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/71214564285961.5acd39a5d4fcc.png"
+            },
+            "Sarah":{
+                "Car":{
+                    "DatabaseName":"Sarahs2002PontiacFirebird",
+                    "Name":"2002 Pontiac Firebird"
+                },
+                "Crew":"Angelz",
+                "Image":"https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/71214564285961.5acd39a5d4fcc.png"
+
+            },
+            "Jordan":{
+                "Car":{
+                    "DatabaseName":"Jordans2008Nissan350Z",
+                    "Name":"2008 Nissan 350Z"
+                },
+                "Crew":"Angelz",
+                "Image":"https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/71214564285961.5acd39a5d4fcc.png"
+
+            },
+            "Angel":{
+                "Car":{
+                    "DatabaseName":"Angels1998BMWM3E36",
+                    "Name":"1998 BMW M3 E36"
+                },
+                "Crew":"Angelz",
+                "Image":"https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/71214564285961.5acd39a5d4fcc.png"
+
+            }
+        }
+}

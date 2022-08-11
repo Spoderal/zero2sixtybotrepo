@@ -261,6 +261,19 @@ module.exports = {
         let crews = global.crews
         let crewname = crew.name
         let crew2 = crews.filter(crew => crew.name == crewname)
+        if(crew && !crew2[0]) {
+          await User.findOneAndUpdate({
+            id: uid
+          },
+          {
+            $unset: {
+              crew: {}
+            }
+          }
+          )
+          interaction.reply(`Your crew didn't exist but you were in one, so we deleted it from your data for you`)
+          return
+        }
         if(!crew2[0]) return interaction.reply("That crew doesn't exist!")
 
         if(crew2[0].owner.id == uid) return interaction.reply(`You're the owner! Run /crew delete to delete this crew`)

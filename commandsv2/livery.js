@@ -174,7 +174,7 @@ module.exports = {
           
           if(!list[cartosubmit.toLowerCase()]) return interaction.reply("That isnt an available car yet! If you'd like to suggest it, use /suggest.")
           interaction.reply("What livery image would you like to submit?")
-          let cardata = await Car.findOne({name: list[cartosubmit.toLowerCase()].Name})
+          let cardata = await Car.findOne({name: list[cartosubmit.toLowerCase()].Name}) || new Car({name: list[cartosubmit.toLowerCase()].Name})
 
           const filter = (m = Discord.Message) => {
               return m.author.id === interaction.user.id

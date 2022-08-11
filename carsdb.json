@@ -60,7 +60,7 @@
         },
         "2015 mercedes amg gts":{
             "Name":"2015 Mercedes AMG GTS",
-            "Emote":"<:mercedes:933223984231743508>",
+            "Emote":"<:mercedes_z:901324974621589504>",
             "Speed":185,
             "kmh": "297",
             "Price":"80000",
@@ -103,38 +103,6 @@
             "Image":"https://bringatrailer.com/wp-content/uploads/2020/08/1610507134f66e7dff9f98764daT_R50447_PC_rev1-scaled.jpg?fit=940%2C627",
             "Rear":"https://barrettjacksoncdn.azureedge.net/staging/carlist/items/Fullsize/Cars/222422/222422_Rear_3-4_Web.jpg",
             "060":6
-        },
-        "2007 infiniti g35 coupe":{
-            "Name":"2007 Infiniti G35 Coupe",
-            "Emote":"<:acura:886482371065561148>",
-            "Speed":136,
-            "kmh": "209",
-            "Price":"1250",
-            "sellprice":937,
-            "Engine":"3.5 L V6",
-            "Image":"https://pictures.topspeed.com/IMG/crop/200610/2007-infiniti-g35-coupe-12_800x0w.jpg",
-            "Rear":"https://i.ytimg.com/vi/f8PnvpRq3jU/maxresdefault.jpg"
-        },
-        "2005 hyundai tiburon":{
-            "Name":"2005 Hyundai Tiburon",
-            "Emote":"<:hyundai:931015215447941200>",
-            "Speed":133,
-            "kmh": "209",
-            "Price":"500",
-            "sellprice":375,
-            "Engine":"3.5 L V6",
-            "Image":"https://static.cargurus.com/images/site/2009/07/21/15/24/2005-hyundai-tiburon-gt-pic-40276-1600x1200.jpeg",
-            "Rear":"https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/Hyundai-Tiburon-2005.jpg"
-        },
-        "2017 mercedes amg one": {
-            "Name": "2017 Mercedes-AMG One",
-            "Emote": "<:mercedes:933223984231743508>",
-            "Speed": "215",
-            "Price": "370000",
-            "sellprice": 277500,
-            "Engine": "PU106C Hybrid E-turbo V6",
-            "Image": "https://wallpapercave.com/wp/wp3697539.jpg",
-            "Rear": "https://car-images.bauersecure.com/pagefiles/84358/amg-hypercar-56.jpg"
         },
         "sallys 1997 acura integra":{
             "Name":"Sallys 1997 Acura Integra",
@@ -327,7 +295,7 @@
         },
         "2014 hyundai genesis coupe":{
             "Name":"2014 Hyundai Genesis Coupe",
-            "Emote":"<:hyundai:931015215447941200>",
+            "Emote":"<:hyundai:886485486833635329>",
             "Speed":150,
             "kmh": "241",
 

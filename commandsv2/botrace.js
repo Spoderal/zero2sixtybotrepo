@@ -54,8 +54,11 @@ module.exports = {
         let user = interaction.user;
         let bot =  interaction.options.getString("tier");
         let botlist = ["1", "2", "3", "4", "5", "6", "7", "8"];
-        let timeout = 45000;
-        if(userdata.patron && userdata.patron.tier == 1){
+        let timeout 
+        if(!userdata.patron || !userdata.patron.tier){
+          timeout = 45000
+        }
+        else if(userdata.patron && userdata.patron.tier == 1){
           timeout = 30000
         }
         else if(userdata.patron && userdata.patron.tier == 2){
@@ -382,9 +385,9 @@ module.exports = {
         }
         let carparts = selected.Parts
        
-        let user1carspeed = selected.Speed
-        let user1carzerosixty = selected.Acceleration
-        let user1carhandling = selected.Handling
+        let user1carspeed = parseInt(selected.Speed)
+        let user1carzerosixty = parseInt(selected.Acceleration)
+        let user1carhandling = parseInt(selected.Handling)
 
         let userhelmet = userdata.helmet
         console.log(userhelmet)
@@ -393,13 +396,14 @@ module.exports = {
         let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()]
         console.log(actualhelmet)
         let driftscore = selected.Drift
-        let botspeed = cars.Cars[botcar.toLowerCase()].Speed
-        let zero2sixtycar = selected.Acceleration
-        let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"]
+        let botspeed = parseInt(cars.Cars[botcar.toLowerCase()].Speed)
+        let zero2sixtycar = parseInt(selected.Acceleration)
+        let otherzero2sixty = parseInt(cars.Cars[botcar.toLowerCase()]["0-60"])
         let newhandling = user1carhandling / 20
-        let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20
+        let bothandling = parseInt(cars.Cars[botcar.toLowerCase()].Handling)
+        let othernewhandling = bothandling / 20
         let new60 = user1carspeed / zero2sixtycar
-        let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty
+        let new62 = botspeed / otherzero2sixty
         let using = userdata.using
         let items = userdata.Items
         Number(user1carspeed)
@@ -807,8 +811,8 @@ module.exports = {
                 userdata.fkeys += 1
 
               }
-              userdata.rp += Number(ticketsearned)
-              userdata.cash += Number(moneyearned)
+              userdata.rp += parseInt(ticketsearned)
+              userdata.cash += parseInt(moneyearned)
               userdata.racexp += 25
 
               let racerank2 = userdata.racerank += 1

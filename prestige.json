@@ -12,11 +12,10 @@
         "Mult":0.2
     },
     "3":{
-        "Unlocks":["Police Job", "Contracts"],
+        "Unlocks":["Police Job"],
         "RaceRequired":100,
         "DriftRequired":100,
-        "Mult":0.3,
-        "Contracts":[{"todo":"Win 10 PVP races", "reward":50000, "completed":false}, {"todo":"Win T4Tires from a wheelspin", "reward":25000, "completed":false}]
+        "Mult":0.3
     },
     "4":{
         "Unlocks":["YouTuber Job"],

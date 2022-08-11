@@ -10,6 +10,7 @@ const User = require('../schema/profile-schema')
 const Cooldowns = require('../schema/cooldowns')
 const Global = require('../schema/global-schema')
 const Car = require('../schema/car')
+const prestigedb = require(`../prestige.json`)
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,7 +29,7 @@ module.exports = {
       let userdata = await User.findOne({id: user.id})
 
 
-      let prestige = userdata.prestige
+      let prestige = userdata.prestige || 0
       let racerank = userdata.racerank
       let driftrank = userdata.driftrank
       let networth = 0
@@ -38,6 +39,14 @@ module.exports = {
       let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image
 
       let title = userdata.title
+
+      if(prestige == 0){
+        title = "Noob Racer"
+      }
+
+     else if(prestige > 0){
+        title = prestigedb[`${prestige}`].Title
+      }
 
       let cars = userdata.cars
       cars = cars.sort(function (b, a) {
@@ -61,8 +70,8 @@ module.exports = {
       let bestcar = cars[0]
 
       let embed = new Discord.MessageEmbed()
-      .setTitle(title)
-      .setAuthor(`Spoder - Profile`)
+      .setTitle(`${title}`)
+      .setAuthor(`${user.username} - Profile`)
       .setColor("#60b0f4")
       .setThumbnail(acthelmet)
       .addField(`Progress`, `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`)

@@ -1,0 +1,35 @@
+{
+    "roboegg":{
+        "Emote":"<:egg_bot:964250157073973278>"
+    },
+    "flameegg":{
+        "Emote":"<:egg_flame:964250157229170708>"
+    },
+    "redegg":{
+        "Emote":"<:egg_red:964250156981698651>"
+    },
+    "porscheegg":{
+        "Emote":"<:egg_porsche:964250157438877756>"
+    },
+    "hmegg":{
+        "Emote":"<:egg_hm:964250156855853077>"
+    },
+    "driftegg":{
+        "Emote":"<:egg_drift:964250157069787148>"
+    },
+    "moneyegg":{
+        "Emote":"<:egg_money:964250157417893988>"
+    },
+    "pingegg":{
+        "Emote":"<:egg_ping:964250157187203162>"
+    },
+    "pvpegg":{
+        "Emote":"<:egg_pvp:964250157212389488>"
+    },
+    "zeroegg":{
+        "Emote":"<:egg_zero:964250156746834011>"
+    },
+    "raceegg":{
+        "Emote":"<:egg_race:964285904804012072>"
+    }
+}
