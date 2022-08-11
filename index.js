@@ -23,13 +23,12 @@ app.post(
   "/vote",
   webhook.listener(async (vote) => {
     console.log("User with id - " + vote.user + " voted!");
-    let userdata = await User.findOne({id: vote.user})
-    userdata.hasvoted = true
-    userdata.votetimer = Date.now()
-    userdata.save()
+    let userdata = await User.findOne({ id: vote.user });
+    userdata.hasvoted = true;
+    userdata.votetimer = Date.now();
+    userdata.save();
   })
 );
-
 
 // See .env-example for an explanation of FORCE_DISABLE_BOT
 if (process.env.FORCE_DISABLE_BOT === "true") {
