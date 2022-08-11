@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { invisibleSpace } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +19,7 @@ module.exports = {
       .setTitle("Import Crates")
       .addFields([
         {
-          name: "​",
+          name: invisibleSpace,
           value: `
             Common Import Crate: 50 ${key1emote} Keys
             Rare Import Crate : 25 ${key2emote} Keys
