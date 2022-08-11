@@ -30,7 +30,9 @@ module.exports = {
 
     if (!selling) return await interaction.reply("Specify a car or part!");
 
-    let filteredcar = userdata.cars.filter((car) => car.ID == selling || car.Name == selling);
+    let filteredcar = userdata.cars.filter(
+      (car) => car.ID == selling || car.Name == selling
+    );
     let selected = filteredcar[0] || "No ID";
 
     if (selected !== "No ID") {
@@ -122,6 +124,11 @@ module.exports = {
       userdata.pfps.pull(selling.toLowerCase());
 
       await interaction.reply(`You sold your ${selling} for $0!`);
+    } else {
+      await interaction.reply({
+        content: `You don't have "${selling}". Maybe it was a typo?`,
+        ephemeral: true
+      });
     }
 
     userdata.save();
