@@ -17,13 +17,13 @@ module.exports = {
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
         console.time(commandExecutionTimeName);
         await command.execute(interaction);
-        console.endTime(commandExecutionTimeName);
+        console.timeEnd(commandExecutionTimeName);
 
         // Pets
         const petExecutionTimeName = "Pet update time";
         console.time(petExecutionTimeName);
         await updatePetOnCommands(interaction);
-        console.time(petExecutionTimeName);
+        console.timeEnd(petExecutionTimeName);
       } catch (err) {
         if (err) console.error({ interactionCreateExecuteError: err });
         try {
