@@ -9,6 +9,13 @@ module.exports = {
     }
     if (interaction.isCommand()) {
       const command = interaction.client.commands.get(interaction.commandName);
+      console.log(
+        JSON.stringify(
+          { command: { ...command }, interaction: { ...interaction } },
+          null,
+          2
+        )
+      );
       if (!command) return;
 
       try {
