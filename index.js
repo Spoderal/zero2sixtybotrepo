@@ -65,8 +65,8 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
       );
     } else {
       commands.push({ ...command.data.toJSON(), fileLocation: file });
+      client.commands.set(command.data.name, command);
     }
-    client.commands.set(command.data.name, command);
   }
 
   const eventFiles = fs
