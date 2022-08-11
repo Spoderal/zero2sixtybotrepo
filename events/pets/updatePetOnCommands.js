@@ -1,4 +1,4 @@
-const User = require(`../schema/profile-schema`);
+const User = require(`../../schema/profile-schema`);
 
 async function updatePetOnCommands(interaction) {
   let userdata = await User.findOne({ id: interaction.user.id });
