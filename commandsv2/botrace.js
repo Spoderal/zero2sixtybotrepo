@@ -8,6 +8,78 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { randomRange } = require("../common/utils");
+const { userGetPatreonTimeout } = require("../common/user");
+
+let bot1cars = [
+  "1995 mazda miata",
+  "1991 toyota mr2",
+  "2002 pontiac firebird",
+  "2005 hyundai tiburon",
+  "1999 honda civic si",
+];
+let bot2cars = [
+  "2014 hyundai genesis coupe",
+  "2008 nissan 350z",
+  "2010 chevy camaro v6",
+  "2010 ford mustang",
+  "2004 subaru wrx sti",
+  "2013 mazda speed3",
+  "2001 toyota supra mk4",
+];
+let bot3cars = [
+  "2020 porsche 718 cayman",
+  "2015 lotus exige sport",
+  "2011 audi rs5",
+  "2021 toyota supra",
+  "2011 bmw m3",
+  "2021 lexus rc f",
+];
+let bot4cars = [
+  "2013 lexus lfa",
+  "1993 jaguar xj220",
+  "2021 porsche 911 gt3",
+  "2017 ford gt",
+  "2014 lamborghini huracan",
+  "2018 audi r8",
+];
+let bot5cars = [
+  "2010 ferrari 458 italia",
+  "2005 pagani zonda f",
+  "2020 aston martin vantage",
+  "2020 mclaren 570s",
+  "2005 Pagani Zonda F",
+];
+let bot6cars = [
+  "2021 ferrari sf90 stradale",
+  "2022 aston martin valkyrie",
+  "2016 bugatti chiron",
+  "2008 bugatti veyron",
+  "2021 mclaren 720s",
+  "2016 aston martin vulkan",
+  "2013 mclaren p1",
+];
+let bot7cars = [
+  "2021 bugatti bolide",
+  "2013 lamborghini veneno",
+  "2020 koenigsegg regera",
+  "2020 bugatti divo",
+];
+let bot8cars = [
+  "spoders 2022 porsche 718 cayman gt4 rs",
+  "spoders 2021 porsche 911 targa",
+  "spoders 2005 porsche carrera gt",
+];
+// let botrustcars = [
+//   "barn 1970 chevy chevelle ss",
+//   "barn 1969 ford mustang",
+//   "barn 1966 lamborghini miura",
+//   "barn 1954 mercedes 300sl",
+//   "barn 1968 pontiac gto",
+//   "barn 1990 nissan 240sx",
+//   "barn 1970 porsche 917",
+//   "barn 1986 lamborghini countach",
+// ];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,13 +107,14 @@ module.exports = {
         .setDescription("The car id to use")
         .setRequired(true)
     ),
+
   async execute(interaction) {
     const db = require("quick.db");
 
     const cars = require("../data/cardb.json");
 
     let moneyearned = 50;
-    let moneyearnedtxt = 50;
+    // let moneyearnedtxt = 50;
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
@@ -61,98 +134,23 @@ module.exports = {
     }
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3", "4", "5", "6", "7", "8"];
-    let timeout = 45000;
-    if (userdata.patron && userdata.patron.tier == 1) {
-      timeout = 30000;
-    } else if (userdata.patron && userdata.patron.tier == 2) {
-      timeout = 15000;
-    } else if (userdata.patron && userdata.patron.tier == 3) {
-      timeout = 5000;
-    } else if (userdata.patron && userdata.patron.tier == 4) {
-      timeout = 5000;
-    }
+
+    const timeout = userGetPatreonTimeout(userdata);
+
     let botcar = null;
     let racing = cooldowndata.racing;
-
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
       return interaction.reply(`Please wait ${time} before racing again.`);
     }
+
     let semote = emotes.speed;
     let hemote = emotes.handling;
     let zemote = emotes.zero2sixty;
     let cemote = emotes.cash;
     let rpemote = emotes.rp;
-    let bot1cars = [
-      "1995 mazda miata",
-      "1991 toyota mr2",
-      "2002 pontiac firebird",
-      "2005 hyundai tiburon",
-      "1999 honda civic si",
-    ];
-    let bot2cars = [
-      "2014 hyundai genesis coupe",
-      "2008 nissan 350z",
-      "2010 chevy camaro v6",
-      "2010 ford mustang",
-      "2004 subaru wrx sti",
-      "2013 mazda speed3",
-      "2001 toyota supra mk4",
-    ];
-    let bot3cars = [
-      "2020 porsche 718 cayman",
-      "2015 lotus exige sport",
-      "2011 audi rs5",
-      "2021 toyota supra",
-      "2011 bmw m3",
-      "2021 lexus rc f",
-    ];
-    let bot4cars = [
-      "2013 lexus lfa",
-      "1993 jaguar xj220",
-      "2021 porsche 911 gt3",
-      "2017 ford gt",
-      "2014 lamborghini huracan",
-      "2018 audi r8",
-    ];
-    let bot5cars = [
-      "2010 ferrari 458 italia",
-      "2005 pagani zonda f",
-      "2020 aston martin vantage",
-      "2020 mclaren 570s",
-      "2005 Pagani Zonda F",
-    ];
-    let bot6cars = [
-      "2021 ferrari sf90 stradale",
-      "2022 aston martin valkyrie",
-      "2016 bugatti chiron",
-      "2008 bugatti veyron",
-      "2021 mclaren 720s",
-      "2016 aston martin vulkan",
-      "2013 mclaren p1",
-    ];
-    let bot7cars = [
-      "2021 bugatti bolide",
-      "2013 lamborghini veneno",
-      "2020 koenigsegg regera",
-      "2020 bugatti divo",
-    ];
-    let bot8cars = [
-      "spoders 2022 porsche 718 cayman gt4 rs",
-      "spoders 2021 porsche 911 targa",
-      "spoders 2005 porsche carrera gt",
-    ];
-    // let botrustcars = [
-    //   "barn 1970 chevy chevelle ss",
-    //   "barn 1969 ford mustang",
-    //   "barn 1966 lamborghini miura",
-    //   "barn 1954 mercedes 300sl",
-    //   "barn 1968 pontiac gto",
-    //   "barn 1990 nissan 240sx",
-    //   "barn 1970 porsche 917",
-    //   "barn 1986 lamborghini countach",
-    // ];
+
     let botdupgrades = randomRange(5, 25);
     let botemote;
 
@@ -210,7 +208,7 @@ module.exports = {
       case "2": {
         botcar = lodash.sample(bot2cars);
         moneyearned += 150;
-        moneyearnedtxt += 150;
+        // moneyearnedtxt += 150;
         ticketsearned = 2;
         classd = "2";
         botemote = emotes.botTier2;
@@ -220,7 +218,7 @@ module.exports = {
       case "3": {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
-        moneyearnedtxt += 300;
+        // moneyearnedtxt += 300;
         ticketsearned = 3;
         classd = "3";
         botemote = emotes.botTier3;
@@ -230,7 +228,7 @@ module.exports = {
       case "4": {
         botcar = lodash.sample(bot4cars);
         moneyearned += 400;
-        moneyearnedtxt += 400;
+        // moneyearnedtxt += 400;
         ticketsearned = 4;
         classd = "4";
         botemote = emotes.botTier4;
@@ -240,7 +238,7 @@ module.exports = {
       case "5": {
         botcar = lodash.sample(bot5cars);
         moneyearned += 500;
-        moneyearnedtxt += 500;
+        // moneyearnedtxt += 500;
         ticketsearned = 5;
         classd = "5";
         botemote = emotes.botTier5;
@@ -252,7 +250,7 @@ module.exports = {
       case "6": {
         botcar = lodash.sample(bot6cars);
         moneyearned += 700;
-        moneyearnedtxt += 700;
+        // moneyearnedtxt += 700;
         ticketsearned = 10;
         classd = "6";
         botemote = emotes.botTier6;
@@ -264,7 +262,7 @@ module.exports = {
       case "7": {
         botcar = lodash.sample(bot7cars);
         moneyearned += 1000;
-        moneyearnedtxt += 1000;
+        // moneyearnedtxt += 1000;
         ticketsearned = 20;
         classd = "7";
         botemote = emotes.botTier7;
@@ -275,7 +273,7 @@ module.exports = {
       case "8": {
         botcar = lodash.sample(bot8cars);
         moneyearned += 1300;
-        moneyearnedtxt += 1300;
+        // moneyearnedtxt += 1300;
         ticketsearned = 30;
         classd = "8";
         botemote = emotes.botTier8;
@@ -339,35 +337,37 @@ module.exports = {
     }
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
-      moneyearnedtxt = moneyearnedtxt * 2;
+      // moneyearnedtxt = moneyearnedtxt * 2;
     }
 
     let racelevel = userdata.racerank;
 
     cooldowndata.racing = Date.now();
     cooldowndata.save();
+
     let newrankrequired = racelevel * 200;
     if (prestige >= 3) {
       newrankrequired * 2;
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    let user1carspeed = selected.Speed;
-    let user1carzerosixty = selected.Acceleration;
-    let user1carhandling = selected.Handling;
+    let user1carspeed = parseInt(selected.Speed);
+    let user1carzerosixty = parseInt(selected.Acceleration);
+    let user1carhandling = parseInt(selected.Handling);
 
     let userhelmet = userdata.helmet;
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
     let driftscore = selected.Drift;
-    let botspeed = cars.Cars[botcar.toLowerCase()].Speed;
-    let zero2sixtycar = selected.Acceleration;
-    let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"];
+    let botspeed = parseInt(cars.Cars[botcar.toLowerCase()].Speed);
+    let zero2sixtycar = parseInt(selected.Acceleration);
+    let otherzero2sixty = parseInt(cars.Cars[botcar.toLowerCase()]["0-60"]);
     let newhandling = user1carhandling / 20;
-    let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20;
+    let bothandling = parseInt(cars.Cars[botcar.toLowerCase()].Handling);
+    let othernewhandling = bothandling / 20;
     let new60 = user1carspeed / zero2sixtycar;
-    let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
+    let new62 = botspeed / otherzero2sixty;
     let using = userdata.using;
     Number(user1carspeed);
     Number(botspeed);
@@ -605,7 +605,7 @@ module.exports = {
         embed.setDescription("Great launch!");
         embed.addFields([{ name: "Bonus", value: "$100" }]);
         hp += 1;
-        moneyearnedtxt += 100;
+        // moneyearnedtxt += 100;
         userdata.cash += 100;
         interaction.editReply({ embeds: [embed] });
       }, 2000);
@@ -640,7 +640,7 @@ module.exports = {
 
             interaction.editReply({ embeds: [embed] });
           } else if (policelen > tracklength) {
-            let job = userdatacop.job;
+            let job = userdata.job;
             let jobsdb = require("../data/jobs.json");
             let num = job.Number;
             let salary = job.Salary;
@@ -679,8 +679,8 @@ module.exports = {
                 Job: actjob,
               });
             }
-            userdatacop.cash += salary;
-            userdatacop.save();
+            userdata.cash += salary;
+            userdata.save();
             msg.reply(
               `You've completed your job duties and earned yourself $${salary}, and ${xp2} XP`
             );
@@ -691,28 +691,28 @@ module.exports = {
         if (tracklength > tracklength2) {
           if (userdata.cashgain == "10") {
             let calccash = moneyearned * 0.1;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "15") {
             let calccash = moneyearned * 0.15;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "20") {
             let calccash = moneyearned * 0.2;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "25") {
             let calccash = moneyearned * 0.25;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "50") {
             let calccash = moneyearned * 0.5;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
-            moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
+            // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
           }
 
           embed.setTitle(`Tier ${classd} bot race won!`);
@@ -724,7 +724,7 @@ module.exports = {
           let earningsresult = [];
           if (interaction.guild.id == "931004190149460048") {
             let calccash = moneyearned * 0.05;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           earningsresult.push(`$${moneyearned}`);
@@ -756,8 +756,8 @@ module.exports = {
             earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
             userdata.fkeys += 1;
           }
-          userdata.rp += Number(ticketsearned);
-          userdata.cash += Number(moneyearned);
+          userdata.rp += parseInt(ticketsearned);
+          userdata.cash += parseInt(moneyearned);
           userdata.racexp += 25;
 
           let racerank2 = (userdata.racerank += 1);
@@ -811,9 +811,5 @@ module.exports = {
         }
       }
     }, 1000);
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

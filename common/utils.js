@@ -9,7 +9,12 @@ function toCurrency(n) {
   return `$${numberWithCommas(num)}`;
 }
 
+function randomRange(min, max) {
+  return Math.round(Math.random() * (max - min)) + min;
+}
+
 module.exports = {
   numberWithCommas,
   toCurrency,
+  randomRange,
 };

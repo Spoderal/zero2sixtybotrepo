@@ -7,6 +7,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { userGetPatreonTimeout } = require("../common/user");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -91,16 +92,9 @@ module.exports = {
       return interaction.reply(
         "You try drifting but your drift rating is too low, so you swerve out and crash."
       );
-    let timeout = 45000;
-    if (userdata.patron && userdata.patron.tier == 1) {
-      timeout = 30000;
-    } else if (userdata.patron && userdata.patron.tier == 2) {
-      timeout = 15000;
-    } else if (userdata.patron && userdata.patron.tier == 3) {
-      timeout = 5000;
-    } else if (userdata.patron && userdata.patron.tier == 4) {
-      timeout = 5000;
-    }
+
+    const timeout = userGetPatreonTimeout(userdata);
+
     let racing = cooldowndata.drift;
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
@@ -317,8 +311,6 @@ module.exports = {
       tracklength -= formula;
 
       if (time == 0 && tracklength >= 0) {
-        let randomsub = randomRange(2, 10);
-        selected.Tread -= randomsub;
         userdata.save();
         embed.addFields([{ name: "Results", value: `Failed` }]);
         interaction.editReply({ embeds: [embed] });
@@ -345,12 +337,6 @@ module.exports = {
         return;
       }
       if (tracklength <= 0) {
-        let randomsub = randomRange(2, 10);
-        selected.Tread -= randomsub;
-
-        embed.addFields([
-          { name: "Results", value: `Success\n\nTread: ${selected.Tread}` },
-        ]);
         if (db.fetch(`doublecash`) == true) {
           moneyearned = moneyearned += moneyearned;
           embed.addFields([{ name: "Double Cash Weekend!", value: `\u200b` }]);
@@ -392,7 +378,3 @@ module.exports = {
     }, 1000);
   },
 };
-
-function randomRange(min, max) {
-  return Math.round(Math.random() * (max - min)) + min;
-}

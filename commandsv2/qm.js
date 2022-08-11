@@ -8,6 +8,7 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { userGetPatreonTimeout } = require("../common/user");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -65,16 +66,7 @@ module.exports = {
 
     let user = interaction.user;
     let bot = interaction.options.getString("tier");
-    let timeout = 45000;
-    if (userdata.patron && userdata.patron.tier == 1) {
-      timeout = 30000;
-    } else if (userdata.patron && userdata.patron.tier == 2) {
-      timeout = 15000;
-    } else if (userdata.patron && userdata.patron.tier == 3) {
-      timeout = 5000;
-    } else if (userdata.patron && userdata.patron.tier == 4) {
-      timeout = 5000;
-    }
+    const timeout = userGetPatreonTimeout(userdata);
     let botcar = null;
     let racing = cooldowndata.racing;
     let prestige = userdata.prestige;

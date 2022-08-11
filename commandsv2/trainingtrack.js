@@ -37,7 +37,7 @@ module.exports = {
     const cars = require("../data/cardb.json");
 
     let moneyearned = 50;
-    let moneyearnedtxt = 50;
+    // let moneyearnedtxt = 50;
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
@@ -125,7 +125,7 @@ module.exports = {
       case "2": {
         botcar = lodash.sample(bot2cars);
         moneyearned += 150;
-        moneyearnedtxt += 150;
+        // moneyearnedtxt += 150;
         ticketsearned = 2;
         classd = "2";
         botemote = emotes.botTier2;
@@ -135,7 +135,7 @@ module.exports = {
       case "3": {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
-        moneyearnedtxt += 300;
+        // moneyearnedtxt += 300;
         ticketsearned = 3;
         classd = "3";
         botemote = emotes.botTier3;
@@ -463,7 +463,7 @@ module.exports = {
         embed.setDescription("Great launch!");
         embed.addFields([{ name: "Bonus", value: "$100" }]);
         hp += 1;
-        moneyearnedtxt += 100;
+        // moneyearnedtxt += 100;
         userdata.cash += 100;
         interaction.editReply({ embeds: [embed] });
       }, 2000);
@@ -498,7 +498,7 @@ module.exports = {
 
             interaction.editReply({ embeds: [embed] });
           } else if (policelen > tracklength) {
-            let userid = r.user.id;
+            let userid = interaction.user.id;
             let userdatacop = await User.findOne({ id: userid });
             let job = userdatacop.job;
             let jobsdb = require("../data/jobs.json");
@@ -551,28 +551,28 @@ module.exports = {
         if (tracklength > tracklength2) {
           if (userdata.cashgain == "10") {
             let calccash = moneyearned * 0.1;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "15") {
             let calccash = moneyearned * 0.15;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "20") {
             let calccash = moneyearned * 0.2;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "25") {
             let calccash = moneyearned * 0.25;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           } else if (userdata.cashgain == "50") {
             let calccash = moneyearned * 0.5;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
-            moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
+            // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
           }
 
           embed.setTitle(`Tier ${classd} bot race won!`);
@@ -584,7 +584,7 @@ module.exports = {
           let earningsresult = [];
           if (interaction.guild.id == "931004190149460048") {
             let calccash = moneyearned * 0.05;
-            moneyearnedtxt += calccash;
+            // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
           earningsresult.push(`$${moneyearned}`);
@@ -646,7 +646,7 @@ module.exports = {
             embed.addFields([
               { name: "Double Cash Weekend!", value: `\u200b` },
             ]);
-            moneyearnedtxt = `$${moneyearned}`;
+            // moneyearnedtxt = `$${moneyearned}`;
           }
           interaction.editReply({ embeds: [embed] });
 

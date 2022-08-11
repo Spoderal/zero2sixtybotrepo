@@ -5,6 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const prestigedb = require(`../data/prestige.json`);
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,7 +22,7 @@ module.exports = {
 
     let userdata = await User.findOne({ id: user.id });
 
-    let prestige = userdata.prestige;
+    let prestige = userdata.prestige || 0;
     let racerank = userdata.racerank;
     let driftrank = userdata.driftrank;
 
@@ -29,6 +30,9 @@ module.exports = {
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
 
     let title = userdata.title;
+
+    if (prestige == 0) title = "Noob Racer";
+    else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
 
     let cars = userdata.cars;
     cars = cars.sort(function (b, a) {
@@ -48,25 +52,32 @@ module.exports = {
     let cash = userdata.cash;
     finalprice += cash;
 
+    const fields = [
+      {
+        name: `Progress`,
+        value: `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`,
+      },
+    ];
     let bestcar = cars[0];
+    if (bestcar) {
+      fields.push({
+        name: `Best Car`,
+        value: `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
+        inline: true,
+      });
+    }
+    fields.push({
+      name: `Networth`,
+      value: `${toCurrency(finalprice)}`,
+      inline: true,
+    });
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(title)
-      .setAuthor(`Spoder - Profile`)
+      .setAuthor({ name: `${user.username} - Profile` })
       .setColor(colors.blue)
       .setThumbnail(acthelmet)
-      .addFields([
-        {
-          name: `Progress`,
-          value: `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`,
-        },
-        {
-          name: `Best Car`,
-          value: `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
-          inline: true,
-        },
-        { name: `Networth`, value: `${toCurrency(finalprice)}`, inline: true },
-      ]);
+      .addFields(fields);
 
     interaction.reply({ embeds: [embed] });
   },

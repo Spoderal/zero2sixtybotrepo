@@ -43,6 +43,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let user1 = interaction.user;
+    let user1parts = userdata.parts;
     let userdata = await User.findOne({ id: user1.id });
     let parttoinstall = interaction.options.getString("part");
     let cartoinstall = interaction.options.getString("car");
@@ -92,6 +93,16 @@ module.exports = {
         break;
     }
 
+    if (cartoinstall == "pet") {
+      if (!user1parts.includes("pet spoiler"))
+        return interaction.reply(`You don't have a pet spoiler!`);
+      userdata.pet.spoiler = true;
+      userdata.save();
+
+      interaction.reply(`✅`);
+      return;
+    }
+
     let filteredcar = userdata.cars.filter((car) => car.ID == cartoinstall);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
@@ -107,8 +118,10 @@ module.exports = {
     let realpart = parte;
     if (!userdata.parts.includes(realpart.toLowerCase()))
       return interaction.reply(`You don't have this part!`);
+
     if (selected[actpart] && selected[actpart] !== null)
       return interaction.reply(`This car already has a "${actpart}"!`);
+
     let partindb = partdb.Parts[realpart.toLowerCase()];
     if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
       let newspeed = Number(partindb.AddedSpeed);
@@ -125,7 +138,7 @@ module.exports = {
       let newspeed = parseFloat(partindb.AddedSixty);
       let stat = parseFloat(selected.Acceleration);
 
-      selected.Acceleration = stat -= newspeed;
+      if (stat > 2) selected.Acceleration = stat -= newspeed;
     }
     if (partindb.DecreasedSixty && partindb.DecreasedSixty > 0) {
       let newspeed = parseFloat(partindb.DecreasedSixty);
