@@ -97,7 +97,7 @@ module.exports = {
     // console.timeEnd("test completed");
     // await interaction.reply({ embeds: [embed] });
     await interaction.reply("test reply");
-    console.timeEnd("test after reply");
+    console.timeEnd("test");
     // }
   },
 };
