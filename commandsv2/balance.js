@@ -1,13 +1,13 @@
-const { EmbedBuilder } = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { numberWithCommas, toCurrency } = require("../common/utils");
-const {
-  userFindOrCreateInDB,
-  userGetFromInteraction,
-} = require("../common/user");
-const { tipFooterRandom } = require("../common/tips");
-const { emotes } = require("../common/emotes");
-const colors = require("../common/colors");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+// const { SlashCommandBuilder } = require("@discordjs/builders");
+// const { numberWithCommas, toCurrency } = require("../common/utils");
+// const {
+//   userFindOrCreateInDB,
+//   userGetFromInteraction,
+// } = require("../common/user");
+// const { tipFooterRandom } = require("../common/tips");
+// const { emotes } = require("../common/emotes");
+// const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()

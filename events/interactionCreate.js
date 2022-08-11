@@ -1,4 +1,4 @@
-const User = require(`../schema/profile-schema`);
+// const User = require(`../schema/profile-schema`);
 
 module.exports = {
   name: "interactionCreate",
@@ -20,41 +20,41 @@ module.exports = {
 
       try {
         await command.execute(interaction);
-        let userdata = await User.findOne({ id: interaction.user.id });
+        // let userdata = await User.findOne({ id: interaction.user.id });
 
-        if (!userdata) return;
+        // if (!userdata) return;
 
-        let pet = userdata.pet;
-        if (userdata && pet) {
-          let newlove = (pet.condition -= 1);
-          let newoil = (pet.oil -= 1);
+        // let pet = userdata.pet;
+        // if (userdata && pet) {
+        //   let newlove = (pet.condition -= 1);
+        //   let newoil = (pet.oil -= 1);
 
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "pet.oil": newoil,
-                "pet.condition": newlove,
-              },
-            }
-          );
+        //   await User.findOneAndUpdate(
+        //     {
+        //       id: interaction.user.id,
+        //     },
+        //     {
+        //       $set: {
+        //         "pet.oil": newoil,
+        //         "pet.condition": newlove,
+        //       },
+        //     }
+        //   );
 
-          if (pet.oil < 50 || pet.condition < 50) pet.love -= 1;
-          if (pet.love < 10) {
-            interaction.user.send(
-              `Careful, your pets love is below 10! It might blow up!`
-            );
-          }
-          if (pet.love <= 0) {
-            interaction.user.send(
-              `Your pet blew up! Next time, take care of it!`
-            );
-            pet = null;
-          }
-          userdata.save();
-        }
+        //   if (pet.oil < 50 || pet.condition < 50) pet.love -= 1;
+        //   if (pet.love < 10) {
+        //     interaction.user.send(
+        //       `Careful, your pets love is below 10! It might blow up!`
+        //     );
+        //   }
+        //   if (pet.love <= 0) {
+        //     interaction.user.send(
+        //       `Your pet blew up! Next time, take care of it!`
+        //     );
+        //     pet = null;
+        //   }
+        //   userdata.save();
+        // }
       } catch (err) {
         if (err) console.error(err);
         try {
