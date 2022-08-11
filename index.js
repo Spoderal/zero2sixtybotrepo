@@ -20,24 +20,18 @@ const client = new Client({
 const Topgg = require("@top-gg/sdk");
 
 const webhook = new Topgg.Webhook("ZeroSpideral3!#");
+const DBL = require("dblapi.js");
 app.post(
   "/vote",
-  webhook.listener((vote) => {
+  webhook.listener(async (vote) => {
     console.log("User with id - " + vote.user + " voted!");
-    db.set(`voted_${vote.user}`, true);
-    db.set(`votetimer_${vote.user}`, Date.now())
-    let value = JSON.stringify({
-      embeds: [
-        {
-          title: "New Vote!",
-          description: `<@${vote.user}> Just voted for Zero2Sixty!`,
-          color: "RED",
-        },
-      ],
-    });
-
+    let userdata = await User.findOne({id: vote.user})
+    userdata.hasvoted = true
+    userdata.votetimer = Date.now()
+    userdata.save()
   })
 );
+
 
 // See .env-example for an explanation of FORCE_DISABLE_BOT
 if (process.env.FORCE_DISABLE_BOT === "true") {
