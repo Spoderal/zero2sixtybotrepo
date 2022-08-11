@@ -17,29 +17,27 @@ const client = new Client({
   shards: "auto",
 });
 
-// const Topgg = require("@top-gg/sdk");
-// const webhook = new Topgg.Webhook("ZeroSpideral3!#");
-// app.post(
-//   "/vote",
-//   webhook.listener(async (vote) => {
-//     console.log("User with id - " + vote.user + " voted!");
-//     let userdata = await User.findOne({ id: vote.user });
-//     userdata.hasvoted = true;
-//     userdata.votetimer = Date.now();
-//     userdata.save();
+const Topgg = require("@top-gg/sdk");
 
-//     db.set(`votetimer_${vote.user}`, Date.now());
-//     let value = JSON.stringify({
-//       embeds: [
-//         {
-//           title: "New Vote!",
-//           description: `<@${vote.user}> Just voted for Zero2Sixty!`,
-//           color: "RED",
-//         },
-//       ],
-//     });
-//   })
-// );
+const webhook = new Topgg.Webhook("ZeroSpideral3!#");
+app.post(
+  "/vote",
+  webhook.listener((vote) => {
+    console.log("User with id - " + vote.user + " voted!");
+    db.set(`voted_${vote.user}`, true);
+    db.set(`votetimer_${vote.user}`, Date.now())
+    let value = JSON.stringify({
+      embeds: [
+        {
+          title: "New Vote!",
+          description: `<@${vote.user}> Just voted for Zero2Sixty!`,
+          color: "RED",
+        },
+      ],
+    });
+
+  })
+);
 
 // See .env-example for an explanation of FORCE_DISABLE_BOT
 if (process.env.FORCE_DISABLE_BOT === "true") {
