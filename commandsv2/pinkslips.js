@@ -109,7 +109,7 @@ module.exports = {
     });
     let selected2;
     let user2carchoice;
-    collector.on("collect", (msg) => {
+    collector.on("collect", async (msg) => {
       user2carchoice = msg.content;
       if (!user2carchoice)
         return await interaction.reply(

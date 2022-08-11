@@ -118,7 +118,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           for (let i = 0; i < actamount; i++) {
             user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
@@ -234,7 +234,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           collector.stop();
           amount = trading.split(" ")[0];
@@ -325,7 +325,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           trading = trading.toLowerCase();
 
@@ -449,7 +449,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           trading = trading.toLowerCase();
 
@@ -527,7 +527,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           userdata.cash -= Number(amount);
           userdata2.cash += Number(amount);
@@ -595,7 +595,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           userdata2.cash -= Number(amount);
           userdata.cash += Number(amount);
@@ -675,7 +675,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           userdata.cars.pull(selected);
           userdata2.cars.push(selected);
@@ -756,7 +756,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cash -= Number(amount);
             userdata.cash += Number(amount);
@@ -858,7 +858,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount; i++)
               user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
@@ -1002,7 +1002,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount1; i++)
               user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1);
@@ -1109,7 +1109,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cars.pull(selected);
             userdata.cars.push(selected);
@@ -1244,7 +1244,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cash -= Number(amount);
 
@@ -1339,7 +1339,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount; i++)
               user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
@@ -1445,7 +1445,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cars.pull(selected);
             userdata.cars.push(selected);
@@ -1564,7 +1564,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount; i++)
               user2items.splice(user2items.indexOf(trading2.toLowerCase()), 1);

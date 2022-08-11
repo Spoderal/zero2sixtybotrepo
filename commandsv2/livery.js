@@ -196,7 +196,7 @@ module.exports = {
         max: 1,
         time: 1000 * 30,
       });
-      collector.on("collect", (m) => {
+      collector.on("collect", async (m) => {
         let ImageLink;
         if (m.attachments.size > 0) {
           m.attachments.forEach((attachment) => {

@@ -378,7 +378,7 @@ module.exports = {
         time: 1000 * 30,
       });
 
-      collector.on("collect", (m) => {
+      collector.on("collect", async (m) => {
         let ImageLink;
         if (m.attachments.size > 0) {
           m.attachments.forEach((attachment) => {
@@ -473,7 +473,7 @@ module.exports = {
         time: 1000 * 30,
       });
 
-      collector.on("collect", (m) => {
+      collector.on("collect", async (m) => {
         if (m.content.toLowerCase() == "yes") {
           let crewlist = globalModel.crews;
           let crewobj = crew2[0];
