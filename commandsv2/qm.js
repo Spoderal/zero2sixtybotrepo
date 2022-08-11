@@ -9,6 +9,7 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
+const { doubleCashWeekendField } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -393,9 +394,7 @@ module.exports = {
           embed.addFields([{ name: "Results", value: "Won" }]);
           if (global.double == true) {
             moneyearned = moneyearned += moneyearned;
-            embed.addFields([
-              { name: "Double Cash Weekend!", value: `\u200b` },
-            ]);
+            embed.addFields([doubleCashWeekendField]);
             moneyearnedtxt = `${moneyearned}`;
           }
           if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {

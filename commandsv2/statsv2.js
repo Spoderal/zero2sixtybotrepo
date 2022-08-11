@@ -6,7 +6,7 @@ const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, blankInlineField } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -147,7 +147,7 @@ module.exports = {
             value: `${toCurrency(sellprice)}`,
             inline: true,
           },
-          { name: `\u200b`, value: `\u200b`, inline: true },
+          blankInlineField,
         ])
         .setColor(colors.blue)
         .setImage(carimage);
@@ -247,7 +247,7 @@ module.exports = {
                 value: `${engineemote} ${engine.split(" ")[0]}`,
                 inline: true,
               },
-              { name: `\u200b`, value: `\u200b`, inline: true },
+              blankInlineField,
             ])
 
             .setColor(colors.blue)
@@ -284,7 +284,7 @@ module.exports = {
                 value: `${toCurrency(sellprice)}`,
                 inline: true,
               },
-              { name: `\u200b`, value: `\u200b`, inline: true },
+              blankInlineField,
             ])
             .setColor(colors.blue)
             .setImage(carimage);

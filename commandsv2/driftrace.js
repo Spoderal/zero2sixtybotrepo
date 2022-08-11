@@ -8,6 +8,7 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
+const { invisibleSpace, doubleCashWeekendField } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -273,7 +274,7 @@ module.exports = {
       time: 10000,
     });
     setTimeout(() => {
-      embed.addFields([{ name: "\u200b", value: "Shift now!" }]);
+      embed.addFields([{ name: invisibleSpace, value: "Shift now!" }]);
       interaction.editReply({ embeds: [embed] });
       canshift = true;
       setTimeout(() => {
@@ -339,7 +340,7 @@ module.exports = {
       if (tracklength <= 0) {
         if (db.fetch(`doublecash`) == true) {
           moneyearned = moneyearned += moneyearned;
-          embed.addFields([{ name: "Double Cash Weekend!", value: `\u200b` }]);
+          embed.addFields([doubleCashWeekendField]);
         }
         embed.addFields([
           {

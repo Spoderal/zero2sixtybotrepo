@@ -10,6 +10,7 @@ const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { tipFooterRandom } = require("../common/tips");
+const { doubleCashWeekendField } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -634,9 +635,7 @@ module.exports = {
 
           if (globalvars.double == true) {
             moneyearned = moneyearned += moneyearned;
-            embed.addFields([
-              { name: "Double Cash Weekend!", value: `\u200b` },
-            ]);
+            embed.addFields([doubleCashWeekendField]);
             // moneyearnedtxt = `$${moneyearned}`;
           }
           interaction.editReply({ embeds: [embed] });
