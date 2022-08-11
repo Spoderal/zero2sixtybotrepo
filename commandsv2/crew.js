@@ -367,7 +367,7 @@ module.exports = {
       interaction.reply(
         "What crew icon would you like to submit? **Send an image below**"
       );
-      
+
       const filter = (m) => {
         return m.author.id === interaction.user.id;
       };

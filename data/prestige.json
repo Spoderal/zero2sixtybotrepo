@@ -1,27 +1,18 @@
 {
   "1": {
-    "Unlocks": [
-      "Quater mile races"
-    ],
+    "Unlocks": ["Quater mile races"],
     "RaceRequired": 50,
     "DriftRequired": 50,
     "Mult": 0.1
   },
   "2": {
-    "Unlocks": [
-      "Squad cars",
-      "Wanted races",
-      "Mechanic Job"
-    ],
+    "Unlocks": ["Squad cars", "Wanted races", "Mechanic Job"],
     "RaceRequired": 100,
     "DriftRequired": 50,
     "Mult": 0.2
   },
   "3": {
-    "Unlocks": [
-      "Police Job",
-      "Contracts"
-    ],
+    "Unlocks": ["Police Job", "Contracts"],
     "RaceRequired": 100,
     "DriftRequired": 100,
     "Mult": 0.3,
@@ -39,66 +30,49 @@
     ]
   },
   "4": {
-    "Unlocks": [
-      "YouTuber Job"
-    ],
+    "Unlocks": ["YouTuber Job"],
     "RaceRequired": 150,
     "DriftRequired": 100,
     "Mult": 0.4
   },
   "5": {
-    "Unlocks": [
-      "Pizza Delivery Job",
-      "Bet race"
-    ],
+    "Unlocks": ["Pizza Delivery Job", "Bet race"],
     "RaceRequired": 150,
     "DriftRequired": 150,
     "Mult": 0.5
   },
   "6": {
-    "Unlocks": [
-      "No unlocks"
-    ],
+    "Unlocks": ["No unlocks"],
     "RaceRequired": 150,
     "DriftRequired": 150,
     "Mult": 0.6
   },
   "7": {
-    "Unlocks": [
-      "Zero2Sixty Programmer Job"
-    ],
+    "Unlocks": ["Zero2Sixty Programmer Job"],
     "RaceRequired": 150,
     "DriftRequired": 150,
     "Mult": 0.7
   },
   "8": {
-    "Unlocks": [
-      "No unlocks"
-    ],
+    "Unlocks": ["No unlocks"],
     "RaceRequired": 150,
     "DriftRequired": 150,
     "Mult": 0.8
   },
   "9": {
-    "Unlocks": [
-      "No unlocks"
-    ],
+    "Unlocks": ["No unlocks"],
     "RaceRequired": 150,
     "DriftRequired": 150,
     "Mult": 0.9
   },
   "10": {
-    "Unlocks": [
-      "No unlocks"
-    ],
+    "Unlocks": ["No unlocks"],
     "RaceRequired": 150,
     "DriftRequired": 150,
     "Mult": 1
   },
   "11": {
-    "Unlocks": [
-      "Warehouse Access"
-    ],
+    "Unlocks": ["Warehouse Access"],
     "RaceRequired": 200,
     "DriftRequired": 200,
     "Mult": 1.1

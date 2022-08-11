@@ -3,12 +3,7 @@
     "flamehouse": {
       "Name": "FlameHouse",
       "Icon": "https://i.ibb.co/fHpW6dk/Logo-Makr-1qe2-Yy.png",
-      "Members": [
-        "Sally",
-        "Max",
-        "John",
-        "Sam"
-      ],
+      "Members": ["Sally", "Max", "John", "Sam"],
       "Leader": "Hal",
       "Color": "#ffac43",
       "Class": "D",
@@ -23,12 +18,7 @@
     "skullcrunchers": {
       "Name": "SkullCrunchers",
       "Icon": "https://i.ibb.co/cbcw9gZ/Logo-Makr-11.png",
-      "Members": [
-        "Dale",
-        "Joe",
-        "Sean",
-        "Ashley"
-      ],
+      "Members": ["Dale", "Joe", "Sean", "Ashley"],
       "Leader": "Damien",
       "Color": "#838383",
       "Class": "C",
@@ -43,12 +33,7 @@
     "thespeed": {
       "Name": "TheSpeed",
       "Icon": "https://i.ibb.co/273wN5g/Logo-Makr-0n0-Kl-O.png",
-      "Members": [
-        "Madison",
-        "Jeremy",
-        "Eli",
-        "X"
-      ],
+      "Members": ["Madison", "Jeremy", "Eli", "X"],
       "Leader": "Alex",
       "Color": "#d74631",
       "Class": "B",
@@ -63,12 +48,7 @@
     "scrapheads": {
       "Name": "Scrapheads",
       "Icon": "https://i.ibb.co/7v0RPkh/Logo-Makr-5c-Pwv-L.png",
-      "Members": [
-        "Rex",
-        "Ryan",
-        "Saw",
-        "Heather"
-      ],
+      "Members": ["Rex", "Ryan", "Saw", "Heather"],
       "Leader": "Scrappy",
       "Color": "#9c4c00",
       "Class": "A",
@@ -83,12 +63,7 @@
     "snowmonsters": {
       "Name": "SnowMonsters",
       "Icon": "https://i.ibb.co/QpKv8W6/Logo-Makr-1-Dmlw-Q.png",
-      "Members": [
-        "Casey",
-        "Jeffery",
-        "Katie",
-        "Pam"
-      ],
+      "Members": ["Casey", "Jeffery", "Katie", "Pam"],
       "Leader": "Snowy",
       "Color": "#FFFFFF",
       "Class": "S",
@@ -103,12 +78,7 @@
     "tuner4life": {
       "Name": "Tuner4Life",
       "Icon": "https://i.ibb.co/NghGjYw/Logo-Makr-6-Mz-RD7.png",
-      "Members": [
-        "Luke",
-        "Tom",
-        "Bruce",
-        "Molly"
-      ],
+      "Members": ["Luke", "Tom", "Bruce", "Molly"],
       "Leader": "Jessica",
       "Color": "#730071",
       "Class": "S+",
@@ -123,12 +93,7 @@
     "bikergang": {
       "Name": "BikerGang",
       "Icon": "https://i.ibb.co/w6Jq1ng/Logo-Makr-08-UUt9.png",
-      "Members": [
-        "Jake",
-        "Jane",
-        "Naomi",
-        "Paul"
-      ],
+      "Members": ["Jake", "Jane", "Naomi", "Paul"],
       "Leader": "Katherine",
       "Color": "#000000",
       "Class": "S",
@@ -143,12 +108,7 @@
     "zeroracers": {
       "Name": "ZeroRacers",
       "Icon": "https://i.ibb.co/02v72Bg/newlogo2.png",
-      "Members": [
-        "Adri",
-        "Logan",
-        "Kayla",
-        "Fred"
-      ],
+      "Members": ["Adri", "Logan", "Kayla", "Fred"],
       "Leader": "Spoder",
       "Color": "#60b0f4",
       "Class": "U",
