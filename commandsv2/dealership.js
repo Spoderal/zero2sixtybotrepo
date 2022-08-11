@@ -8,6 +8,7 @@ const {
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { toCurrency } = require("../common/utils");
+const { tipFooterPurchaseCar } = require("../common/tips");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -162,9 +163,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("D Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1
@@ -225,9 +224,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("D Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 2
@@ -264,9 +261,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("C Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1\n
@@ -327,9 +322,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("C Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 2\n
@@ -358,9 +351,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("B Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1
@@ -421,9 +412,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("B Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 2
@@ -460,9 +449,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("A Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1
@@ -525,9 +512,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("A Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 2\n
@@ -560,9 +545,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("S Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                   Page 1
@@ -615,9 +598,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("U Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1\n
@@ -656,9 +637,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("EV Class")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1\n
@@ -694,9 +673,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("New Cars")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `
                 Page 1\n
@@ -713,9 +690,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("Common Import Cars")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1\n
@@ -736,9 +711,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("Rare Import Cars")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1\n
@@ -764,9 +737,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("Exotic Import Cars")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Page 1\n
@@ -796,9 +767,7 @@ module.exports = {
             embed2 = new EmbedBuilder()
 
               .setTitle("Police Cars")
-              .setFooter({
-                text: 'Tip: Purchase a car with "/buy (full car name)"',
-              })
+              .setFooter(tipFooterPurchaseCar)
               .setDescription(
                 `**
                 Cadet\n

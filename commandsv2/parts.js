@@ -8,6 +8,7 @@ const {
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const { emotes } = require("../common/emotes");
+const { tipFooterPurchasePart } = require("../common/tips");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -126,7 +127,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Exhausts")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -148,7 +149,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Tires")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -179,7 +180,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Intakes")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -201,7 +202,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Turbos")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -223,7 +224,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Body")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -257,7 +258,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Suspension")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -294,7 +295,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Engines")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                     Page 1\n
@@ -328,7 +329,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Gearboxes")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n
@@ -350,7 +351,7 @@ module.exports = {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("ECUs & Clutches")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipFooterPurchasePart)
                 .setDescription(
                   `**
                   Page 1\n

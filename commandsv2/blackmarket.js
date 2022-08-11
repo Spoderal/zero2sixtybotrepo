@@ -8,6 +8,7 @@ const parts = require("../data/partsdb.json");
 const cars = require("../data/cardb.json");
 const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
+const { tipPurchasePartFooter } = require("../common/tips");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -71,7 +72,7 @@ module.exports = {
               embed2 = new EmbedBuilder()
 
                 .setTitle("Black Market Parts")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipPurchasePartFooter)
                 .setDescription(
                   `**
        Page 1\n
@@ -110,7 +111,7 @@ module.exports = {
               embed2 = new EmbedBuilder()
 
                 .setTitle("Cars")
-                .setFooter({ text: 'Tip: Purchase a part with "/buy [part]"' })
+                .setFooter(tipPurchasePartFooter)
                 .setDescription(
                   `**
     Page 1\n

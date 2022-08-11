@@ -5,6 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
+const { tipFooterSeason } = require("../common/tips");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -49,7 +50,7 @@ module.exports = {
         .addFields([{ name: "Rewards", value: `${itemrewards1.join("\n")}` }])
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif")
-        .setFooter({ text: "Tip: Use /season [page #] to view page numbers" });
+        .setFooter(tipFooterSeason);
       interaction.reply({ embeds: [embed] });
     } else if (page == "2") {
       let embed = new discord.EmbedBuilder()
@@ -61,7 +62,7 @@ module.exports = {
         .addFields([{ name: "Rewards", value: `${itemrewards2.join("\n")}` }])
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
-        .setFooter({ text: "Tip: Use /season [page #] to view page numbers" });
+        .setFooter(tipFooterSeason);
       interaction.reply({ embeds: [embed] });
     } else if (page == "3") {
       let embed = new discord.EmbedBuilder()
@@ -73,7 +74,7 @@ module.exports = {
         .addFields([{ name: "Rewards", value: `${itemrewards3.join("\n")}` }])
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
-        .setFooter({ text: "Tip: Use /season [page #] to view page numbers" });
+        .setFooter(tipFooterSeason);
       interaction.reply({ embeds: [embed] });
     } else if (page == "4") {
       let embed = new discord.EmbedBuilder()
@@ -85,7 +86,7 @@ module.exports = {
         .addFields([{ name: "Rewards", value: `${itemrewards4.join("\n")}` }])
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
-        .setFooter({ text: "Tip: Use /season [page #] to view page numbers" });
+        .setFooter(tipFooterSeason);
       interaction.reply({ embeds: [embed] });
     } else if (page == "5") {
       let embed = new discord.EmbedBuilder()
@@ -97,7 +98,7 @@ module.exports = {
         .addFields([{ name: "Rewards", value: `${itemrewards5.join("\n")}` }])
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
-        .setFooter({ text: "Tip: Use /season [page #] to view page numbers" });
+        .setFooter(tipFooterSeason);
       interaction.reply({ embeds: [embed] });
     }
   },

@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
+const { invisibleSpace } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -166,7 +167,7 @@ module.exports = {
         .setImage(`${car.Image}`)
         .setColor(colors.blue);
       if (car.StatTrack) {
-        embed.addFields([{ name: `Stack Track!`, value: `\u200b` }]);
+        embed.addFields([{ name: `Stack Track!`, value: invisibleSpace }]);
       }
       userdata.cars.push(carobj);
       interaction.reply({ embeds: [embed] });

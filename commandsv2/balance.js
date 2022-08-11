@@ -5,7 +5,7 @@ const {
   userFindOrCreateInDB,
   userGetFromInteraction,
 } = require("../common/user");
-const { getRandomTip } = require("../common/tips");
+const { tipFooterRandom } = require("../common/tips");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
 
@@ -61,7 +61,7 @@ module.exports = {
         )
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
-        .setFooter({ text: `Tip: ${getRandomTip()}` })
+        .setFooter(tipFooterRandom)
         .setFields([
           {
             name: "Barn Maps",

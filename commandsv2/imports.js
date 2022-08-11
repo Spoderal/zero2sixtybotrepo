@@ -16,10 +16,19 @@ module.exports = {
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Import Crates")
-      .addFields([{
-        name: "​",
-        value: `Common Import Crate: 50 ${key1emote} Keys\nRare Import Crate : 25 ${key2emote} Keys\nExotic Import Crate : 20 ${key3emote} Keys\nDrift Import Crate : 5 ${key4emote} **LIMITED**\nFerrari Import Crate : 100 <:ferrari:931011838374727730> **LIMITED**\nZ Crate 1 : 5 ${goldemote}`,
-      }])
+      .addFields([
+        {
+          name: "​",
+          value: `
+            Common Import Crate: 50 ${key1emote} Keys
+            Rare Import Crate : 25 ${key2emote} Keys
+            Exotic Import Crate : 20 ${key3emote} Keys
+            Drift Import Crate : 5 ${key4emote} **LIMITED**
+            Ferrari Import Crate : 100 <:ferrari:931011838374727730> **LIMITED**
+            Z Crate 1 : 5 ${goldemote}
+          `,
+        },
+      ])
       .setDescription(
         "Exclusive cars that you can only find in crates!\n\nUse `/unbox` to buy them!"
       )

@@ -7,6 +7,7 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { tipFooterRandom } = require("../common/tips");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -161,16 +162,6 @@ module.exports = {
     let hp = user1carspeed + newhandling;
     hp - driftscore;
     let hp2 = botspeed + othernewhandling;
-    let tips = [
-      "Try buying gold to support us! Starting at $0.99 for 20, and you can do so much with it!",
-      "You can upgrade cars with /upgrade",
-      "Create a crew and get benefits such as cash bonuses!",
-      "Use /weekly, /daily, and /vote to get a small cash boost!",
-      "Notoriety is used for seasons, check the current season with /season",
-      "Use keys to purchase import crates with exclusive cars",
-      "View events with /event",
-    ];
-    let tip = lodash.sample(tips);
     let userhelmet = userdata.helmet;
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
@@ -201,7 +192,7 @@ module.exports = {
       ])
       .setColor(colors.blue)
 
-      .setFooter({ text: tip })
+      .setFooter(tipFooterRandom)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
 

@@ -13,8 +13,25 @@ function randomRange(min, max) {
   return Math.round(Math.random() * (max - min)) + min;
 }
 
+const invisibleSpace = "\u200b";
+const blankField = { name: invisibleSpace, value: invisibleSpace };
+const blankInlineField = {
+  name: invisibleSpace,
+  value: invisibleSpace,
+  inline: true,
+};
+
+const doubleCashWeekendField = {
+  name: "Double Cash Weekend!",
+  value: invisibleSpace,
+};
+
 module.exports = {
   numberWithCommas,
   toCurrency,
   randomRange,
+  invisibleSpace,
+  blankField,
+  blankInlineField,
+  doubleCashWeekendField,
 };
