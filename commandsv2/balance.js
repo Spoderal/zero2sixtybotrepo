@@ -21,6 +21,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    console.time("test");
     const user = userGetFromInteraction(interaction);
     const profile = await userFindOrCreateInDB(user);
     const {
@@ -43,7 +44,7 @@ module.exports = {
     } = profile;
 
     if (typeof cash === "undefined") {
-      interaction.reply(
+      await interaction.reply(
         "You haven't started yet! Use `/start` to create a profile and begin!"
       );
     } else {
@@ -93,8 +94,8 @@ module.exports = {
             inline: true,
           },
         ]);
-
-      interaction.reply({ embeds: [embed] });
+      console.timeEnd("test");
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };
