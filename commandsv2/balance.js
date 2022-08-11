@@ -66,28 +66,30 @@ module.exports = {
           {
             name: "Barn Maps",
             value: `
-            ${emotes.barnMapCommon} Common: ${numberWithCommas(barnmaps)}
-            ${emotes.barnMapUncommon} Uncommon: ${numberWithCommas(ubarnmaps)}
-            ${emotes.barnMapRare} Rare: ${numberWithCommas(rbarnmaps)}
-            ${emotes.barnMapLegendary} Legendary: ${numberWithCommas(lbarnmaps)}
-          `,
+              ${emotes.barnMapCommon} Common: ${numberWithCommas(barnmaps)}
+              ${emotes.barnMapUncommon} Uncommon: ${numberWithCommas(ubarnmaps)}
+              ${emotes.barnMapRare} Rare: ${numberWithCommas(rbarnmaps)}
+              ${emotes.barnMapLegendary} Legendary: ${numberWithCommas(
+              lbarnmaps
+            )}
+            `,
             inline: true,
           },
           {
             name: "Keys",
             value: `
-            ${emotes.commonKey} Common: ${ckeys}
-            ${emotes.rareKey} Rare: ${rkeys}
-            ${emotes.exoticKey} Exotic: ${ekeys}
-            ${emotes.dirftKey} Drift: ${dkeys}
-          `,
+              ${emotes.commonKey} Common: ${ckeys}
+              ${emotes.rareKey} Rare: ${rkeys}
+              ${emotes.exoticKey} Exotic: ${ekeys}
+              ${emotes.dirftKey} Drift: ${dkeys}
+            `,
             inline: true,
           },
           {
             name: "Event Items",
             value: `
-            ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
-          `,
+              ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
+            `,
             inline: true,
           },
         ]);
