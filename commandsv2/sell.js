@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
+let parts = require("../data/partsdb.json");
+let profilestuff = require("../data/pfpsdb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,9 +23,6 @@ module.exports = {
 
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-
-    let parts = require("../data/partsdb.json");
-    let profilestuff = require("../data/pfpsdb.json");
     let userparts = userdata.parts;
 
     let selling = interaction.options.getString("item");
@@ -31,7 +30,7 @@ module.exports = {
 
     if (!selling) return await interaction.reply("Specify a car or part!");
 
-    let filteredcar = userdata.cars.filter((car) => car.ID == selling);
+    let filteredcar = userdata.cars.filter((car) => car.ID == selling || car.Name == selling);
     let selected = filteredcar[0] || "No ID";
 
     if (selected !== "No ID") {
@@ -59,7 +58,9 @@ module.exports = {
         return part === selling.toLowerCase();
       });
       if (amount > filtereduser.length)
-        return await interaction.reply("You don't have that many of that part!");
+        return await interaction.reply(
+          "You don't have that many of that part!"
+        );
       if (parts.Parts[selling.toLowerCase()].sellprice > 0) {
         userdata.cash += parts.Parts[selling.toLowerCase()].sellprice * amount;
       }
@@ -114,7 +115,9 @@ module.exports = {
 
       userdata.cash += finalam;
 
-      await interaction.reply(`Sold ${amount} ${selling} for ${toCurrency(finalam)}`);
+      await interaction.reply(
+        `Sold ${amount} ${selling} for ${toCurrency(finalam)}`
+      );
     } else if (profilestuff.Pfps[selling.toLowerCase()]) {
       userdata.pfps.pull(selling.toLowerCase());
 
