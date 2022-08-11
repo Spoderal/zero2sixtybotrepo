@@ -24,6 +24,7 @@ app.post(
   webhook.listener(async (vote) => {
     console.log("User with id - " + vote.user + " voted!");
     let userdata = await User.findOne({ id: vote.user });
+    if (!userdata) return;
     userdata.hasvoted = true;
     userdata.votetimer = Date.now();
     userdata.save();
