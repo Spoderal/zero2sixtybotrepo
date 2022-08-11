@@ -7,7 +7,7 @@ module.exports = {
     if (interaction.isSelectMenu()) {
       await interaction.deferUpdate();
     }
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
       const command = interaction.client.commands.get(interaction.commandName);
       console.log(
         JSON.stringify(
@@ -56,7 +56,7 @@ module.exports = {
         //   userdata.save();
         // }
       } catch (err) {
-        if (err) console.error(err);
+        if (err) console.error({ interactionCreateExecuteError: err });
         try {
           await interaction.reply({
             content:
