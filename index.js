@@ -49,13 +49,12 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
   );
 } else {
   app.listen(4500);
+
+  const commands = [];
+  client.commands = new Collection();
   const commandFiles = fs
     .readdirSync("./commandsv2")
     .filter((file) => file.endsWith(".js"));
-
-  const commands = [];
-
-  client.commands = new Collection();
 
   for (const file of commandFiles) {
     const command = require(`./commandsv2/${file}`);
@@ -80,9 +79,7 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
     if (event.once) {
       client.once(event.name, (...args) => event.execute(...args, commands));
     } else {
-      client.on(event.name, async (...args) =>
-        event.execute(...args, commands)
-      );
+      client.on(event.name, (...args) => event.execute(...args, commands));
     }
   }
 

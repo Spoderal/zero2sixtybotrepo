@@ -18,8 +18,6 @@ let mongoConfig = {
   keepAlive: true,
 };
 
-//test
-
 // SSL for production only
 if (process.env.CA_CERT) {
   let mongoCertPath = path.resolve("./ca-certificate.crt");
@@ -80,14 +78,15 @@ module.exports = {
     let randomstatus = lodash.sample(randomstatuses);
     client.user.setActivity(randomstatus);
 
-    const CLIENT_ID = client.user.id;
     setInterval(() => {
       let randomstatus = lodash.sample(randomstatuses);
       client.user.setActivity(randomstatus);
     }, 20000);
-    const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
     try {
+      const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+      const CLIENT_ID = client.user.id;
+
       if (process.env.ENV === "production") {
         await rest.put(Routes.applicationCommands(CLIENT_ID), {
           body: commands,
