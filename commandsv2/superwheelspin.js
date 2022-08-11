@@ -22,12 +22,12 @@ module.exports = {
     let wheelspincool = cooldowndata.swheelspin || 0;
     let timeout = 5000;
     if (wheelspincool !== null && timeout - (Date.now() - wheelspincool) > 0)
-      return interaction.reply(
+      return await interaction.reply(
         "Please wait 5 seconds before using this command again."
       );
     let wheelspins = userdata.swheelspins;
     if (wheelspins <= 0)
-      return interaction.reply("You're out of super wheel spins!");
+      return await interaction.reply("You're out of super wheel spins!");
     let items = ["🏎️", "💵", "⚙️", "❓"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
@@ -46,7 +46,7 @@ module.exports = {
       .setDescription(`${item}`)
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
     setTimeout(() => {
       let item = lodash.sample(items);
       embed.setDescription(`${item}`);

@@ -14,7 +14,7 @@ module.exports = {
     let racerank = userdata.racerank;
     let prestigerank = userdata.prestige;
     if (prestigerank == 11)
-      return interaction.reply(
+      return await interaction.reply(
         "Your prestige is currently maxed! The current max prestige is 11."
       );
     let newprestige2 = (prestigerank += 1);
@@ -25,9 +25,9 @@ module.exports = {
       userdata.patron.required || prestiges[newprestige2].RaceRequired;
 
     if (driftrank < patron)
-      return interaction.reply(`Your drift rank needs to be ${patron}!`);
+      return await interaction.reply(`Your drift rank needs to be ${patron}!`);
     if (racerank < patron2)
-      return interaction.reply(`Your race rank needs to be ${patron2}!`);
+      return await interaction.reply(`Your race rank needs to be ${patron2}!`);
 
     userdata.prestige += 1;
     await User.findOneAndUpdate(
@@ -145,7 +145,7 @@ module.exports = {
 
     userdata.save();
 
-    interaction.reply(
+    await interaction.reply(
       `Prestiged to rank ${
         userdata.prestige
       }! Your bank limit is now increased by ${toCurrency(

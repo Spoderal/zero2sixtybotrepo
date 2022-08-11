@@ -40,7 +40,7 @@ module.exports = {
       interaction.user.id !== "890390158241853470" &&
       interaction.user.id !== "670895157016657920"
     ) {
-      interaction.reply({
+      await interaction.reply({
         content: "You dont have permission to use this command!",
         ephemeral: true,
       });
@@ -57,7 +57,7 @@ module.exports = {
       udata[itemtogive] += Number(togive);
       udata.save();
 
-      interaction.reply(
+      await interaction.reply(
         `Gave ${givingto} ${numberWithCommas(togive)} ${itemtogive}`
       );
     }

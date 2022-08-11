@@ -20,7 +20,7 @@ module.exports = {
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
     let pet = userdata.pet;
-    if (!pet) return interaction.reply(`You don't have a pet!`);
+    if (!pet) return await interaction.reply(`You don't have a pet!`);
     let condition = pet.condition;
     let gas = pet.gas;
     let oil = pet.oil;

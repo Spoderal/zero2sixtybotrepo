@@ -66,7 +66,7 @@ module.exports = {
         .setDescription(
           `You've already collected your daily cash\n\nCollect it again in ${time}.`
         );
-      interaction.reply({ embeds: [timeEmbed] });
+      await interaction.reply({ embeds: [timeEmbed] });
     } else {
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
@@ -78,7 +78,7 @@ module.exports = {
         .addFields([{ name: "Earned Cash", value: `${toCurrency(dcash)}` }]);
       embed.setColor(colors.blue);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

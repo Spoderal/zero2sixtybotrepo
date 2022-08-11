@@ -17,7 +17,7 @@ module.exports = {
     let code = interaction.options.getString("code");
     let uid = interaction.user.id;
     if (!code)
-      return interaction.reply({
+      return await interaction.reply({
         content:
           "Specify a code to redeem! You can find codes in the Discord server, or on the Twitter page!",
         ephemeral: true,
@@ -28,9 +28,9 @@ module.exports = {
 
     if (codes.Twitter[code]) {
       if (codesredeemed.includes(code))
-        return interaction.reply("You've already redeemed this code!");
+        return await interaction.reply("You've already redeemed this code!");
 
-      interaction.reply(
+      await interaction.reply(
         `Redeemed code ${code} and earned ${toCurrency(
           codes.Twitter[code].Reward
         )}`
@@ -41,9 +41,9 @@ module.exports = {
       userdata.save();
     } else if (codes.Discord[code]) {
       if (codesredeemed.includes(code))
-        return interaction.reply("You've already redeemed this code!");
+        return await interaction.reply("You've already redeemed this code!");
 
-      interaction.reply(
+      await interaction.reply(
         `Redeemed code ${code} and earned ${toCurrency(
           codes.Discord[code].Reward
         )}`
@@ -56,22 +56,22 @@ module.exports = {
       let patreontier = userdata.patron;
 
       if (!patreontier)
-        return interaction.reply(
+        return await interaction.reply(
           "You need to purchase a patreon tier to redeem this code!"
         );
 
       if (codesredeemed.includes(code))
-        return interaction.reply("You've already redeemed this code!");
+        return await interaction.reply("You've already redeemed this code!");
 
       if (codes.Patreon[code].Gold) {
-        interaction.reply(
+        await interaction.reply(
           `Redeemed code ${code} and earned ${toCurrency(
             codes.Patreon[code].Reward
           )} gold`
         );
         userdata.gold += Number(codes.Patreon[code].Reward);
       } else {
-        interaction.reply(
+        await interaction.reply(
           `Redeemed code ${code} and earned ${toCurrency(
             codes.Patreon[code].Reward
           )}`
@@ -82,7 +82,7 @@ module.exports = {
       codesredeemed.push(code);
       userdata.save();
     } else {
-      interaction.reply({
+      await interaction.reply({
         content: "Thats not a valid code!",
         ephemeral: true,
       });

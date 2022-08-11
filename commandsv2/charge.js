@@ -25,18 +25,18 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
     if (!cars.Cars[selected.Name.toLowerCase()].Electric)
-      return interaction.reply("Thats not an EV!");
+      return await interaction.reply("Thats not an EV!");
     let house = userdata.house;
     let cash = userdata.cash;
     let range = selected.Range;
     let maxrange = selected.MaxRange;
 
     if (range == maxrange)
-      return interaction.reply("This EV doesn't need charged!");
+      return await interaction.reply("This EV doesn't need charged!");
     if (house && house.perks.includes("Free EV charging")) {
       let embed = new Discord.EmbedBuilder()
         .setTitle(`⚡ Charging ${cars.Cars[selected.toLowerCase()].Name}... ⚡`)
@@ -46,7 +46,7 @@ module.exports = {
       selected.Range = maxrange;
       userdata.save();
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
       setTimeout(() => {
         embed.setTitle("🔋 Charged! 🔋");
         embed.setDescription(`Cost: $0`);
@@ -54,7 +54,7 @@ module.exports = {
       }, 2000);
     } else {
       if (cash < 500)
-        return interaction.reply(
+        return await interaction.reply(
           "You don't have enough cash! You need $500 to charge your vehicle."
         );
 
@@ -66,7 +66,7 @@ module.exports = {
       cash -= 500;
       userdata.save();
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
       setTimeout(() => {
         embed.setTitle("🔋 Charged! 🔋");
         embed.setDescription(`Cost: $500`);

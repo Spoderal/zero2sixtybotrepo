@@ -9,7 +9,7 @@ module.exports = {
     .setName("leaderstats")
     .setDescription("Check the leaderboard"),
   async execute(interaction) {
-    interaction.reply({ content: `Please wait...`, fetchReply: true });
+    await interaction.reply({ content: `Please wait...`, fetchReply: true });
 
     let data = await User.find({});
     let members = [];

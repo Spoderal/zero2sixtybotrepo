@@ -38,36 +38,36 @@ module.exports = {
       let userpfps = userdata.pfps;
 
       let pfp = interaction.options.getString("item");
-      if (!pfp) return interaction.reply("Specify a helmet!");
+      if (!pfp) return await interaction.reply("Specify a helmet!");
       let pfplist = pfpdb;
       if (!pfplist.Pfps[pfp.toLowerCase()])
-        return interaction.reply("Thats not a profile picture.");
+        return await interaction.reply("Thats not a profile picture.");
       if (!userpfps)
-        return interaction.reply("You dont have any profile pictures.");
+        return await interaction.reply("You dont have any profile pictures.");
       if (!userpfps.includes(pfp.toLowerCase()))
-        return interaction.reply("You dont own that profile picture.");
+        return await interaction.reply("You dont own that profile picture.");
 
       userdata.helmet = pfp.toLowerCase();
       userdata.save();
 
-      interaction.reply(`Set your profile picture to "${pfp}"`);
+      await interaction.reply(`Set your profile picture to "${pfp}"`);
     } else if (option == "description") {
       let titletoset = interaction.options.getString("item");
       let letterCount = titletoset.replace(/\s+/g, "").length;
-      if (letterCount > 35) return interaction.reply("Max characters 35!");
+      if (letterCount > 35) return await interaction.reply("Max characters 35!");
 
       userdata.description = titletoset;
       userdata.save();
 
-      interaction.reply(`Set your profile description to "${titletoset}"`);
+      await interaction.reply(`Set your profile description to "${titletoset}"`);
     } else if (option == "background") {
       let pfp = interaction.options.getString("item");
       if (!pfp)
-        return interaction.reply(
+        return await interaction.reply(
           "Specify a background! The available backgrounds are: Space, Flames, Police, Finish Line, Ocean, and Default"
         );
       if (!bgdb[pfp.toLowerCase()])
-        return interaction.reply(
+        return await interaction.reply(
           "Thats not a profile background! The available backgrounds are: Space, Flames, Police, Finish Line, Ocean, and Default"
         );
 
@@ -83,7 +83,7 @@ module.exports = {
 
         userdata.cash += dailytask.reward;
       }
-      interaction.reply(`Set your profile background to "${pfp}"`);
+      await interaction.reply(`Set your profile background to "${pfp}"`);
     } else if (option == "vbackground") {
       var bgs = [];
       for (let bg in bgdb) {
@@ -95,11 +95,11 @@ module.exports = {
         .setDescription(`${bgs.join("\n\n")}`)
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (option == "view helmets") {
       let userpfps = userdata.pfps;
       if (userpfps == ["None"] || userpfps == null || !userpfps)
-        return interaction.reply("You don't have any helmets!");
+        return await interaction.reply("You don't have any helmets!");
       var userhelmets = [];
       let actpfp;
       for (var i = 0; i < userpfps.length; i++ && userpfps !== ["None"]) {
@@ -119,7 +119,7 @@ module.exports = {
       embed
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/F0hLvQt/newzerologo.png");
-      interaction.reply("Please wait...");
+      await interaction.reply("Please wait...");
       interaction.channel.send({ embeds: [embed] }).then(async (emb) => {
         ["⏮️", "◀️", "▶️", "⏭️", "⏹️"].forEach(async (m) => await emb.react(m));
         const filter = (_, u) => u.id === interaction.user.id;

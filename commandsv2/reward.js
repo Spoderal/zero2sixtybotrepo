@@ -43,40 +43,40 @@ module.exports = {
 
       let noto = userdata.noto;
       if (!rew)
-        return interaction.reply({
+        return await interaction.reply({
           content: "Specify which reward you'd like to redeem. (1, 2, 3, etc)",
           ephemeral: true,
         });
       if (newredeemed.includes(rew))
-        return interaction.reply({
+        return await interaction.reply({
           content: "You've already claimed this reward!",
           ephemeral: true,
         });
       if (rew > 50 || isNaN(rew))
-        return interaction.reply({
+        return await interaction.reply({
           content: "Thats not a reward!",
           ephemeral: true,
         });
       if (!newredeemed.includes(`${rew - 1}`) && rew != "1")
-        return interaction.reply({
+        return await interaction.reply({
           content:
             "You need to claim the reward before this before you can claim it!",
           ephemeral: true,
         });
       let item = seasons.Seasons.Summer.Rewards[rew];
       if (noto < item.Required)
-        return interaction.reply({
+        return await interaction.reply({
           content: `You need ${item.Required} notoriety for this reward!`,
           ephemeral: true,
         });
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed $${amount}`);
+        await interaction.reply(`Redeemed $${amount}`);
         userdata.cash += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("RP")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} RP`);
+        await interaction.reply(`Redeemed ${amount} RP`);
         userdata.rp += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (
@@ -84,17 +84,17 @@ module.exports = {
         item.Item.endsWith("Barn Map")
       ) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Barn Maps`);
+        await interaction.reply(`Redeemed ${amount} Barn Maps`);
         userdata.cmaps += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Common Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Common Keys`);
+        await interaction.reply(`Redeemed ${amount} Common Keys`);
         userdata.ckeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Drift Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Drift Keys`);
+        await interaction.reply(`Redeemed ${amount} Drift Keys`);
         userdata.dkeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (
@@ -102,35 +102,35 @@ module.exports = {
         item.Item.endsWith("Garage Spaces")
       ) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Garage Spaces`);
+        await interaction.reply(`Redeemed ${amount} Garage Spaces`);
 
         userdata.garage += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Rare Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Rare Keys`);
+        await interaction.reply(`Redeemed ${amount} Rare Keys`);
         userdata.rkeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Exotic Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Exotic Keys`);
+        await interaction.reply(`Redeemed ${amount} Exotic Keys`);
         userdata.ekeys += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Helmet")) {
-        interaction.reply(`Redeemed ${item.Item}`);
+        await interaction.reply(`Redeemed ${item.Item}`);
         userdata.pfps.push(item.Item);
 
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Part")) {
         let part = item.Item.split(" ")[0];
 
-        interaction.reply(`Redeemed ${part}`);
+        await interaction.reply(`Redeemed ${part}`);
         userdata.parts.push(part.toLowerCase());
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Badge")) {
         let badge = item.Item;
         userdata.badges.push(badge);
-        interaction.reply(`Redeemed ${badge}`);
+        await interaction.reply(`Redeemed ${badge}`);
         userdata.seasonrewards.push(item.Number);
       } else {
         let carindb = cardb.Cars[item.Item.toLowerCase()];
@@ -148,7 +148,7 @@ module.exports = {
 
         userdata.cars.push(carobj);
         userdata.seasonrewards.push(item.Number);
-        interaction.reply(`Redeemed ${carobj.Name}`);
+        await interaction.reply(`Redeemed ${carobj.Name}`);
       }
 
       userdata.noto -= item.Required;
@@ -160,7 +160,7 @@ module.exports = {
       let crews = global.crews;
 
       let crew2 = crews.filter((crew) => crew.name == ucrew.name);
-      if (!crew2[0]) return interaction.reply("That crew doesn't exist!");
+      if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       let timeout = 259200000;
       let joined = userdata.joinedcrew;
@@ -172,7 +172,7 @@ module.exports = {
           .setDescription(
             `You need to be in this crew for ${time} before claiming rewards.`
           );
-        return interaction.reply({ embeds: [timeEmbed] });
+        return await interaction.reply({ embeds: [timeEmbed] });
       }
       let redeemed = userdata.crewclaimed;
 
@@ -182,40 +182,40 @@ module.exports = {
       let crewinf = crew2[0];
       let crewrank = crewinf.Rank;
       if (!rew)
-        return interaction.reply({
+        return await interaction.reply({
           content: "Specify which reward you'd like to redeem. (1, 2, 3, etc)",
           ephemeral: true,
         });
       if (newredeemed.includes(rew))
-        return interaction.reply({
+        return await interaction.reply({
           content: "You've already claimed this reward!",
           ephemeral: true,
         });
       if (!rewardss[rew] || isNaN(rew))
-        return interaction.reply({
+        return await interaction.reply({
           content: "Thats not a reward!",
           ephemeral: true,
         });
       if (!newredeemed.includes(`${rew - 1}`) && rew != "1" && rew != "100")
-        return interaction.reply({
+        return await interaction.reply({
           content:
             "You need to claim the reward before this before you can claim it!",
           ephemeral: true,
         });
       let item = seasons.Seasons.Crew1.Rewards[rew];
       if (crewrank < item.Number)
-        return interaction.reply({
+        return await interaction.reply({
           content: `You need crew rank ${item.Number} for this reward!`,
           ephemeral: true,
         });
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed $${amount}`);
+        await interaction.reply(`Redeemed $${amount}`);
         userdata.cash += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Notoriety")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Notoriety`);
+        await interaction.reply(`Redeemed ${amount} Notoriety`);
         userdata.noto += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (
@@ -223,12 +223,12 @@ module.exports = {
         item.Item.endsWith("Legendary Barn Map")
       ) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Barn Maps`);
+        await interaction.reply(`Redeemed ${amount} Barn Maps`);
         userdata.lmaps += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Bank Increase")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Bank Increase`);
+        await interaction.reply(`Redeemed ${amount} Bank Increase`);
         userdata.items.push("bank increase");
         userdata.crewclaimed.push(item.Number);
       } else if (
@@ -236,17 +236,17 @@ module.exports = {
         item.Item.endsWith("Super wheelspins")
       ) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Super wheelspins`);
+        await interaction.reply(`Redeemed ${amount} Super wheelspins`);
         userdata.swheelspins += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Common Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Common Keys`);
+        await interaction.reply(`Redeemed ${amount} Common Keys`);
         userdata.ckeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Drift Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Drift Keys`);
+        await interaction.reply(`Redeemed ${amount} Drift Keys`);
         userdata.dkeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (
@@ -254,24 +254,24 @@ module.exports = {
         item.Item.endsWith("Garage Spaces")
       ) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Garage Spaces`);
+        await interaction.reply(`Redeemed ${amount} Garage Spaces`);
         userdata.garagelimit += Number(amount);
 
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Rare Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Rare Keys`);
+        await interaction.reply(`Redeemed ${amount} Rare Keys`);
         userdata.rkeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Exotic Keys")) {
         let amount = item.Item.split(" ")[0];
-        interaction.reply(`Redeemed ${amount} Exotic Keys`);
+        await interaction.reply(`Redeemed ${amount} Exotic Keys`);
         userdata.ekeys += Number(amount);
         userdata.crewclaimed.push(item.Number);
       } else if (item.Item.endsWith("Part")) {
         let part = item.Item.split(" ")[0];
 
-        interaction.reply(`Redeemed ${part}`);
+        await interaction.reply(`Redeemed ${part}`);
         userdata.parts.push(part.toLowerCase());
         userdata.crewclaimed.push(item.Number);
       } else {
@@ -292,7 +292,7 @@ module.exports = {
 
         userdata.crewclaimed.push(item.Number);
 
-        interaction.reply(`Redeemed ${cartogive.Name}`);
+        await interaction.reply(`Redeemed ${cartogive.Name}`);
       }
       userdata.save();
     }

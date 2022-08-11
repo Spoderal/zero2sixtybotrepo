@@ -56,11 +56,11 @@ module.exports = {
 
     let track = interaction.options.getString("difficulty");
     if (!track)
-      return interaction.reply(
+      return await interaction.reply(
         "You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard"
       );
     if (!tracks.includes(track.toLowerCase()))
-      return interaction.reply(
+      return await interaction.reply(
         "You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard"
       );
     let idtoselect = interaction.options.getString("car");
@@ -74,23 +74,23 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
     let car = selected;
     if (!car)
-      return interaction.reply(
+      return await interaction.reply(
         "You need to select a car! Example: /ids select [car]"
       );
     let user1cars = userdata.cars;
-    if (!user1cars) interaction.reply("You dont have any cars!");
+    if (!user1cars) await interaction.reply("You dont have any cars!");
     if (!cars.Cars[car.Name.toLowerCase()])
-      return interaction.reply("Thats not a car!");
+      return await interaction.reply("Thats not a car!");
     let driftscore = selected.Drift;
     let usercarspeed = selected.Speed;
     let handling = selected.Handling;
 
     if (driftscore <= 0)
-      return interaction.reply(
+      return await interaction.reply(
         "You try drifting but your drift rating is too low, so you swerve out and crash."
       );
 
@@ -100,7 +100,7 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(`Please wait ${time} before drifting again.`);
+      return await interaction.reply(`Please wait ${time} before drifting again.`);
     }
 
     cooldowndata.drift = Date.now();
@@ -110,7 +110,7 @@ module.exports = {
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }
@@ -197,7 +197,7 @@ module.exports = {
       "T5DriftTires",
     ];
     if (!drifttires.includes(tires))
-      return interaction.reply("Your car needs drift tires to drift!");
+      return await interaction.reply("Your car needs drift tires to drift!");
 
     let formula = driftscore * drifttraining;
     formula += handling;
@@ -287,7 +287,7 @@ module.exports = {
         }
       });
     }, randomnum);
-    interaction.reply({ embeds: [embed], components: [row] }).then(async () => {
+    await interaction.reply({ embeds: [embed], components: [row] }).then(async () => {
       collector.on("collect", async (i) => {
         if (i.customId.includes("ebrake")) {
           if (canshift == false) {

@@ -25,7 +25,7 @@ module.exports = {
     let selloption = interaction.options.getBoolean("sell");
 
     if (!house)
-      return interaction.reply(
+      return await interaction.reply(
         `You don't have a house! View the available houses with \`/houses\``
       );
 
@@ -35,7 +35,7 @@ module.exports = {
       let items = userdata.items;
 
       if (!items.includes("for sale sign"))
-        return interaction.reply("You need a for sale sign!");
+        return await interaction.reply("You need a for sale sign!");
       for (var i = 0; i < 1; i++)
         items.splice(items.indexOf("for sale sign"), 1);
       userdata.items = items;
@@ -55,7 +55,7 @@ module.exports = {
       }
       userdata.cash += housedb[housename].Price;
 
-      interaction.reply(
+      await interaction.reply(
         `You sold your ${housedb[housename].Name} for ${toCurrency(
           housedb[housename].Price
         )}`
@@ -73,7 +73,7 @@ module.exports = {
         .setColor(colors.blue)
         .setImage(image);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

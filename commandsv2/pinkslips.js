@@ -28,7 +28,7 @@ module.exports = {
     let user = interaction.user;
     let user2 = interaction.options.getUser("target");
     let userdata = await User.findOne({ id: user.id });
-    if (!user2) return interaction.reply("Specify a user to race!");
+    if (!user2) return await interaction.reply("Specify a user to race!");
     let userdata2 = await User.findOne({ id: user2.id });
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
@@ -48,28 +48,28 @@ module.exports = {
     let pinkslips2 = userdata2.pinkslips;
 
     if (!pinkslips || pinkslips < 1) {
-      return interaction.reply(`You don't have any pink slips!`);
+      return await interaction.reply(`You don't have any pink slips!`);
     }
     if (!pinkslips2 || pinkslips2 < 1) {
-      return interaction.reply(`${user2} doesn't have any pink slips!`);
+      return await interaction.reply(`${user2} doesn't have any pink slips!`);
     }
 
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(`Please wait ${time} before racing again.`);
     }
     if (racing2 !== null && timeout - (Date.now() - racing2) > 0) {
       let time = ms(timeout - (Date.now() - racing2), { compact: true });
 
-      return interaction.reply(
+      return await interaction.reply(
         `The other user needs to wait ${time} before racing again.`
       );
     }
 
     let idtoselect = interaction.options.getString("car");
     if (!idtoselect)
-      return interaction.reply(
+      return await interaction.reply(
         "Specify an id! Use /ids select [id] [car] to select a car! `Command example: /race @test 1`"
       );
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
@@ -81,24 +81,24 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
-    if (!user1cars) return interaction.reply("You dont have any cars!");
+    if (!user1cars) return await interaction.reply("You dont have any cars!");
     let user1carchoice = selected;
 
     if (user.id === user2.id)
-      return interaction.reply("You cant race yourself!");
+      return await interaction.reply("You cant race yourself!");
 
     let user2cars = userdata2.cars;
-    if (!user2cars) return interaction.reply("They dont have any cars!");
+    if (!user2cars) return await interaction.reply("They dont have any cars!");
     if (!cars.Cars[user1carchoice.Name.toLowerCase()])
-      return interaction.reply("Thats not a car!");
+      return await interaction.reply("Thats not a car!");
 
     if (cars.Cars[user1carchoice.Name.toLowerCase()].Junked) {
-      return interaction.reply("This car is too junked to race, sorry!");
+      return await interaction.reply("This car is too junked to race, sorry!");
     }
-    interaction.reply(`${user2}, what car do you wish to verse ${user} in?`);
+    await interaction.reply(`${user2}, what car do you wish to verse ${user} in?`);
     const filter = (m = discord.Message) => {
       return m.author.id === user2.id;
     };
@@ -112,7 +112,7 @@ module.exports = {
     collector.on("collect", (msg) => {
       user2carchoice = msg.content;
       if (!user2carchoice)
-        return interaction.reply(
+        return await interaction.reply(
           "Specify an id! Use /ids select [id] [car] to select a car! `Command example: /race @test 1`"
         );
       let filteredcar2 = userdata2.cars.filter((car) => car.ID == idtoselect);
@@ -124,7 +124,7 @@ module.exports = {
           .setDescription(
             `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
           );
-        return interaction.reply({ embeds: [errembed] });
+        return await interaction.reply({ embeds: [errembed] });
       }
 
       if (cars.Cars[selected2.Name.toLowerCase()].Junked) {

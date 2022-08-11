@@ -57,7 +57,7 @@ module.exports = {
 
     let cars = userdata.cars;
     if (cars == null || cars == [] || cars.length <= 0 || !cars.length)
-      return interaction.reply("You dont own any cars!");
+      return await interaction.reply("You dont own any cars!");
     let parts = userdata.parts;
     let badges = userdata.badges;
     let garagelimit = userdata.garageLimit;
@@ -78,7 +78,7 @@ module.exports = {
     ) {
       items = userdata.items;
       if (!items || items.length == 0 || items == ["no items"])
-        return interaction.reply(`You don't have any items!`);
+        return await interaction.reply(`You don't have any items!`);
 
       actitem = items[i];
       let emote;

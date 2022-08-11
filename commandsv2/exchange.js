@@ -35,17 +35,17 @@ module.exports = {
     let gold = userdata.gold;
 
     if (!toturnin)
-      return interaction.reply("Specify how much gold you'd like to exchange!");
-    if (isNaN(toturnin)) return interaction.reply("Specify a number!");
+      return await interaction.reply("Specify how much gold you'd like to exchange!");
+    if (isNaN(toturnin)) return await interaction.reply("Specify a number!");
     if (toturnin > gold)
-      return interaction.reply("You don't have enough gold!");
+      return await interaction.reply("You don't have enough gold!");
     if (toconv == "cash") {
       let finalamount = toturnin * 10000;
       userdata.gold -= toturnin;
       userdata.cash += finalamount;
       userdata.save();
 
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${toCurrency(finalamount)}`
       );
     } else if (toconv == "rkeys") {
@@ -53,7 +53,7 @@ module.exports = {
       userdata.gold -= toturnin;
       userdata.rkeys += finalamount;
       userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} rare keys`
       );
     } else if (toconv == "ekeys") {
@@ -61,7 +61,7 @@ module.exports = {
       userdata.gold -= toturnin;
       userdata.ekeys += finalamount;
       userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} exotic keys`
       );
     } else if (toconv == "ubmaps") {
@@ -69,7 +69,7 @@ module.exports = {
       userdata.gold -= toturnin;
       userdata.ucmaps += finalamount;
       userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} uncommon barn maps`
       );
     } else if (toconv == "rbmaps") {
@@ -77,7 +77,7 @@ module.exports = {
       userdata.gold -= toturnin;
       userdata.rmaps += finalamount;
       userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} rare barn maps`
       );
     } else if (toconv == "lbmaps") {
@@ -85,7 +85,7 @@ module.exports = {
       userdata.gold -= toturnin;
       userdata.lmaps += finalamount;
       userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} legendary barn maps`
       );
     } else if (toconv == "swspins") {
@@ -93,7 +93,7 @@ module.exports = {
       userdata.gold -= toturnin;
       userdata.swheelspins += finalamount;
       userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} Super wheelspins`
       );
     }

@@ -50,7 +50,7 @@ module.exports = {
       new Cooldowns({ id: interaction.user.id });
 
     if (!idtoselect)
-      return interaction.reply(
+      return await interaction.reply(
         "Specify an id! Use /ids select [id] [car] to select a car!"
       );
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
@@ -62,7 +62,7 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
     let user = interaction.user;
@@ -72,11 +72,11 @@ module.exports = {
     let racing = cooldowndata.racing;
     let prestige = userdata.prestige;
     if (prestige < 1)
-      return interaction.reply("You need to be prestige 1 to do this race!");
+      return await interaction.reply("You need to be prestige 1 to do this race!");
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(`Please wait ${time} before racing again.`);
     }
     let user1cars = db.fetch(`cars_${user.id}`);
     let bot1cars = [
@@ -130,18 +130,18 @@ module.exports = {
       .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     if (!bot) {
       errorembed.setDescription(
         "Please specify  the tier you want to race. Tiers available: 1, 2, 3, 4, 5, and 6"
       );
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
-      return interaction.reply("This car is too junked to race, sorry!");
+      return await interaction.reply("This car is too junked to race, sorry!");
     }
     let ticketsearned;
     let ckeysearned;
@@ -150,7 +150,7 @@ module.exports = {
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }

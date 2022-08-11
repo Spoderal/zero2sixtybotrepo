@@ -34,7 +34,7 @@ module.exports = {
       )
       .setThumbnail("https://i.ibb.co/vs3Gm1H/Logo-Makr-2hu-VKG.png")
       .setColor(colors.blue);
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
   permissions: "",
   requiredRoles: [],

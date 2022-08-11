@@ -55,14 +55,14 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
     let bot = interaction.options.getString("tier");
     let chase = interaction.options.getString("options");
 
     let prestige = userdata.prestige;
     if (prestige < 2)
-      return interaction.reply("You need to be prestige 2 to do this race!");
+      return await interaction.reply("You need to be prestige 2 to do this race!");
     let botlist = ["1", "2", "3"];
     let timeout = 45000;
     let botcar = null;
@@ -71,7 +71,7 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(`Please wait ${time} before racing again.`);
     }
     let user1cars = userdata.cars;
     let bot1cars = [
@@ -85,7 +85,7 @@ module.exports = {
       job = userdata.job;
 
       if (job.Job !== "police" || !job)
-        return interaction.reply(`You're not a cop!`);
+        return await interaction.reply(`You're not a cop!`);
       let worked = job.worked;
       let timeoutj = job.Timeout;
       if (worked !== null && timeoutj - (Date.now() - worked) > 0) {
@@ -93,7 +93,7 @@ module.exports = {
         let timeEmbed = new discord.EmbedBuilder()
           .setColor(colors.blue)
           .setDescription(`You've already worked!\n\nWork again in ${time}.`);
-        return interaction.reply({ embeds: [timeEmbed] });
+        return await interaction.reply({ embeds: [timeEmbed] });
       }
       bot1cars = ["2014 hyundai genesis coupe", "2008 nissan 350z"];
       bot2cars = ["2020 porsche 718 cayman", "2011 bmw m3"];
@@ -105,41 +105,41 @@ module.exports = {
       .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     if (!botlist.includes(bot.toLowerCase())) {
       errorembed.setDescription(
         "Thats not a tier! The available tiers are: 1, 2, and 3"
       );
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
     if (!botlist.includes(bot.toLowerCase()) && !cars.Cars[selected]) {
       errorembed.setDescription(
         "Thats not a tier! The available tiers are: 1, 2, and 3"
       );
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
     if (!botlist.includes(bot.toLowerCase()) && user1cars.includes(selected)) {
       errorembed.setDescription(
         "Thats not a tier! The available tiers are: 1, 2, and 3"
       );
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
     if (!botlist.includes(bot.toLowerCase()) && !selected) {
       errorembed.setDescription(
         "Thats not a tier! The available tiers are: 1, 2, and 3"
       );
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     if (!cars.Cars[selected.toLowerCase()]) {
       errorembed.setDescription("Thats not an available car!");
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     // if (cars.Cars[selected.Name.toLowerCase()].Junked && restoration < 100) {
-    //   return interaction.reply("This car is too junked to race, sorry!");
+    //   return await interaction.reply("This car is too junked to race, sorry!");
     // }
 
     switch (bot) {
@@ -164,7 +164,7 @@ module.exports = {
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }

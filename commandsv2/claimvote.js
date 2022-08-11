@@ -17,7 +17,7 @@ module.exports = {
     embed.setColor(colors.blue);
     let voted = userdata.hasvoted;
 
-    if (voted == false) return interaction.reply({ embeds: [embed] });
+    if (voted == false) return await interaction.reply({ embeds: [embed] });
 
     userdata.cash += 1000;
     userdata.wheelspins += 1;
@@ -32,6 +32,6 @@ module.exports = {
 
     userdata.save();
 
-    interaction.reply({ embeds: [embed2] });
+    await interaction.reply({ embeds: [embed2] });
   },
 };

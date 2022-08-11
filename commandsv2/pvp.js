@@ -34,7 +34,7 @@ module.exports = {
     let car = interaction.options.getString("car");
     let car2 = interaction.options.getString("car2");
 
-    if (!user2) return interaction.reply("Specify a user to race!");
+    if (!user2) return await interaction.reply("Specify a user to race!");
 
     let userdata = await User.findOne({ id: user.id });
     let userdata2 = await User.findOne({ id: user2.id });
@@ -51,7 +51,7 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
     let filteredcar2 = userdata2.cars.filter((car) => car.ID == idtoselect2);
     let selected2 = filteredcar2[0] || "No ID";
@@ -62,7 +62,7 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
     let carindb1 = cars.Cars[selected.Name.toLowerCase()];

@@ -35,25 +35,25 @@ module.exports = {
       let usercars = userdata.cars;
       let idtochoose = interaction.options.getString("id");
 
-      if (!usercars) return interaction.reply("You don't own any cars!");
+      if (!usercars) return await interaction.reply("You don't own any cars!");
       let selecting = interaction.options.getString("car");
-      if (!selecting) return interaction.reply("Specify a car!");
+      if (!selecting) return await interaction.reply("Specify a car!");
       if (!idtochoose)
-        return interaction.reply(
+        return await interaction.reply(
           "Specify an id! Example: /ids select 1 1995 mazda miata"
         );
 
       if (!cars.Cars[selecting.toLowerCase()])
-        return interaction.reply("Thats not a car!");
+        return await interaction.reply("Thats not a car!");
 
       if (idtochoose == cars.Cars[selecting.toLowerCase()].Name)
-        return interaction.reply("A car id must be unique! Not the car name.");
+        return await interaction.reply("A car id must be unique! Not the car name.");
       let filteredcar = userdata.cars.filter(
         (car) => car.Name == cars.Cars[selecting.toLowerCase()].Name
       );
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID")
-        return interaction.reply("You don't own that car!");
+        return await interaction.reply("You don't own that car!");
 
       await User.findOneAndUpdate(
         {
@@ -84,15 +84,15 @@ module.exports = {
           }** to the ID "${idtochoose}", check with \`/garage cars\``
         )
         .setColor(`#60b0f4`);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (option == "deselect") {
       let usercars = db.fetch(`cars_${interaction.user.id}`);
       let idtochoose = interaction.options.getString("id");
       let selectedids = db.fetch(`selectedids_${interaction.user.id}`);
-      if (!usercars) return interaction.reply("You don't own any cars!");
-      if (!idtochoose) return interaction.reply("Specify an id!");
+      if (!usercars) return await interaction.reply("You don't own any cars!");
+      if (!idtochoose) return await interaction.reply("Specify an id!");
       if (!db.fetch(`selected_${idtochoose}_${interaction.user.id}`))
-        return interaction.reply(
+        return await interaction.reply(
           `There is no car set to that id! Run /ids select [id] [car] to select it, if you are reselecting a car, here's your old IDs: ${selectedids.join(
             ", "
           )}`
@@ -120,18 +120,18 @@ module.exports = {
         }`
       );
 
-      interaction.reply(`You deselected ${idtochoose}`);
+      await interaction.reply(`You deselected ${idtochoose}`);
     } else if (option == "list") {
       let selectedids = db.fetch(`selectedids_${interaction.user.id}`) || [];
       if (!selectedids || selectedids.length == 0)
-        return interaction.reply("You don't have any IDs!");
+        return await interaction.reply("You don't have any IDs!");
 
       let embed = new Discord.EmbedBuilder()
         .setTitle("Your IDs")
         .setColor(colors.blue)
         .setDescription(`${selectedids.join("\n")}`);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

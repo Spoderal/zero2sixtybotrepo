@@ -29,7 +29,7 @@ module.exports = {
     let selling = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount") || 1;
 
-    if (!selling) return interaction.reply("Specify a car or part!");
+    if (!selling) return await interaction.reply("Specify a car or part!");
 
     let filteredcar = userdata.cars.filter((car) => car.ID == selling);
     let selected = filteredcar[0] || "No ID";
@@ -40,7 +40,7 @@ module.exports = {
       userdata.cars.pull(selected);
       userdata.cash += Number(price);
 
-      interaction.reply(
+      await interaction.reply(
         `You sold your ${selected.Name} for ${toCurrency(price)}!`
       );
     } else if (parts.Parts[selling.toLowerCase()]) {
@@ -49,17 +49,17 @@ module.exports = {
           parts.Parts[selling.toLowerCase()].Name.toLowerCase()
         )
       )
-        return interaction.reply("You dont have that part!");
+        return await interaction.reply("You dont have that part!");
       if (
         parts.Parts[selling.toLowerCase()].sellprice == "N/A" ||
         !parts.Parts[selling.toLowerCase()].sellprice
       )
-        return interaction.reply("That part is unsellable!");
+        return await interaction.reply("That part is unsellable!");
       let filtereduser = userparts.filter(function hasmany(part) {
         return part === selling.toLowerCase();
       });
       if (amount > filtereduser.length)
-        return interaction.reply("You don't have that many of that part!");
+        return await interaction.reply("You don't have that many of that part!");
       if (parts.Parts[selling.toLowerCase()].sellprice > 0) {
         userdata.cash += parts.Parts[selling.toLowerCase()].sellprice * amount;
       }
@@ -68,7 +68,7 @@ module.exports = {
         userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
       userdata.parts = userparts;
       let finalamount = amount * resale;
-      interaction.reply(
+      await interaction.reply(
         `You sold your ${selling} for ${toCurrency(finalamount)}!`
       );
     } else if (
@@ -98,7 +98,7 @@ module.exports = {
         maps = userdata.cmaps;
       }
       if (maps < amount)
-        return interaction.reply(`You dont have enough barn maps!`);
+        return await interaction.reply(`You dont have enough barn maps!`);
 
       let finalam = exchange * amount;
 
@@ -114,11 +114,11 @@ module.exports = {
 
       userdata.cash += finalam;
 
-      interaction.reply(`Sold ${amount} ${selling} for ${toCurrency(finalam)}`);
+      await interaction.reply(`Sold ${amount} ${selling} for ${toCurrency(finalam)}`);
     } else if (profilestuff.Pfps[selling.toLowerCase()]) {
       userdata.pfps.pull(selling.toLowerCase());
 
-      interaction.reply(`You sold your ${selling} for $0!`);
+      await interaction.reply(`You sold your ${selling} for $0!`);
     }
 
     userdata.save();

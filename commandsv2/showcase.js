@@ -21,7 +21,7 @@ module.exports = {
     let selected = filteredcar[0] || "No ID";
 
     if (selected == "No ID")
-      return interaction.reply(`This car doesn't have an ID!`);
+      return await interaction.reply(`This car doesn't have an ID!`);
 
     let carimage =
       selected.Image || carsdb.Cars[selected.Name.toLowerCase()].Image;
@@ -30,7 +30,7 @@ module.exports = {
 
     userdata.save();
 
-    interaction.reply(
+    await interaction.reply(
       `✅ Showcasing your ${carsdb.Cars[selected.Name.toLowerCase()].Name}`
     );
   },

@@ -53,7 +53,7 @@ module.exports = {
       let car = item.toLowerCase();
       let carindb = list[car];
 
-      if (!carindb) return interaction.reply(`Thats not a car!`);
+      if (!carindb) return await interaction.reply(`Thats not a car!`);
 
       let trims = carindb.Trims || ["❌ No Trims"];
       let sellprice = carindb.Price * 0.65;
@@ -91,7 +91,7 @@ module.exports = {
         .setColor(colors.blue)
         .setImage(carindb.Image);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (subcommandfetch == "carid") {
       let idtoselect = interaction.options.getString("id");
       let userdata = await User.findOne({ id: interaction.user.id });
@@ -106,7 +106,7 @@ module.exports = {
             **Example: /ids Select 1 1995 mazda miata**
           `);
 
-        return interaction.reply({ embeds: [errembed] });
+        return await interaction.reply({ embeds: [errembed] });
       }
 
       let handlingemote = emotes.handling;
@@ -299,7 +299,7 @@ module.exports = {
       part = part.toLowerCase();
       let partindb = partdb.Parts[part];
 
-      if (!partindb) return interaction.reply(`Thats not a part!`);
+      if (!partindb) return await interaction.reply(`Thats not a part!`);
       let stats = [];
 
       if (partindb.AddedSpeed) {
@@ -327,7 +327,7 @@ module.exports = {
         .setDescription(`${stats.join("\n")}`)
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

@@ -54,17 +54,17 @@ module.exports = {
           .setDescription(
             `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
           );
-        return interaction.reply({ embeds: [errembed] });
+        return await interaction.reply({ embeds: [errembed] });
       }
       let livid = interaction.options.getString("id");
       let cardata = await Car.findOne({ name: selected.Name });
-      if (!livid) return interaction.reply("Specify an id!");
+      if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
       if (!list[selected.Name.toLowerCase()])
-        return interaction.reply("That isnt an available car!");
+        return await interaction.reply("That isnt an available car!");
 
       if (!cardata.liveries)
-        return interaction.reply("This car doesn't have any livery id's");
+        return await interaction.reply("This car doesn't have any livery id's");
 
       let carid = cardata.liveries;
 
@@ -76,7 +76,7 @@ module.exports = {
         !filtered ||
         filtered == null
       )
-        return interaction.reply("Thats not a valid ID!");
+        return await interaction.reply("Thats not a valid ID!");
       await User.findOneAndUpdate(
         {
           id: uid,
@@ -100,20 +100,20 @@ module.exports = {
         .setImage(filtered[0].image)
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embedapprove] });
+      await interaction.reply({ embeds: [embedapprove] });
     } else if (option == "view") {
       let car = interaction.options.getString("car").toLowerCase();
       let livid = interaction.options.getString("id");
 
-      if (!car) return interaction.reply("Specify a car!");
-      if (!livid) return interaction.reply("Specify an id!");
+      if (!car) return await interaction.reply("Specify a car!");
+      if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
       if (!list[car.toLowerCase()])
-        return interaction.reply("That isnt an available car!");
+        return await interaction.reply("That isnt an available car!");
       let cardata = await Car.findOne({ name: list[car.toLowerCase()].Name });
 
       if (!cardata.liveries)
-        return interaction.reply("This car doesn't have any livery id's");
+        return await interaction.reply("This car doesn't have any livery id's");
 
       let carid = cardata.liveries;
 
@@ -125,16 +125,16 @@ module.exports = {
         !filtered ||
         filtered == null
       )
-        return interaction.reply("Thats not a valid ID!");
+        return await interaction.reply("Thats not a valid ID!");
       let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Livery ${livid} for ${cars.Cars[car].Name}`)
         .setImage(filtered[0].image)
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embedapprove] });
+      await interaction.reply({ embeds: [embedapprove] });
     } else if (option == "remove") {
       let idtoselect = interaction.options.getString("car").toLowerCase();
-      if (!idtoselect) return interaction.reply("Specify a car!");
+      if (!idtoselect) return await interaction.reply("Specify a car!");
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID") {
@@ -144,11 +144,11 @@ module.exports = {
           .setDescription(
             `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
           );
-        return interaction.reply({ embeds: [errembed] });
+        return await interaction.reply({ embeds: [errembed] });
       }
       let list = cars.Cars;
       if (!list[selected.Name.toLowerCase()])
-        return interaction.reply("That isnt an available car!");
+        return await interaction.reply("That isnt an available car!");
 
       await User.findOneAndUpdate(
         {
@@ -173,17 +173,17 @@ module.exports = {
         .setImage(cars.Cars[selected.Name.toLowerCase()].Image)
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embedapprove] });
+      await interaction.reply({ embeds: [embedapprove] });
     } else if (option == "submit") {
       let cartosubmit = interaction.options.getString("car");
-      if (!cartosubmit) return interaction.reply("Usage: /livery submit (car)");
+      if (!cartosubmit) return await interaction.reply("Usage: /livery submit (car)");
       let list = cars.Cars;
 
       if (!list[cartosubmit.toLowerCase()])
-        return interaction.reply(
+        return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-      interaction.reply("What livery image would you like to submit?");
+      await interaction.reply("What livery image would you like to submit?");
       let cardata =
         (await Car.findOne({ name: list[cartosubmit.toLowerCase()].Name })) ||
         new Car({ name: list[cartosubmit.toLowerCase()].Name });
@@ -245,23 +245,23 @@ module.exports = {
       ];
 
       if (!whitelist.includes(interaction.user.id))
-        return interaction.reply({
+        return await interaction.reply({
           content: `You don't have permission to use this command!`,
           ephemeral: true,
         });
       let idtoapprove = interaction.options.getString("id");
       let cartoapprove = interaction.options.getString("car");
-      if (!idtoapprove) return interaction.reply("Specify an id!");
-      if (!cartoapprove) return interaction.reply("Specify a car!");
+      if (!idtoapprove) return await interaction.reply("Specify an id!");
+      if (!cartoapprove) return await interaction.reply("Specify a car!");
       let list = cars.Cars;
       if (!list[cartoapprove.toLowerCase()])
-        return interaction.reply("That isnt an available car!");
+        return await interaction.reply("That isnt an available car!");
       let cardata = await Car.findOne({
         name: list[cartoapprove.toLowerCase()].Name,
       });
 
       if (!cardata.awaiting)
-        return interaction.reply("This car doesn't have any livery id's");
+        return await interaction.reply("This car doesn't have any livery id's");
 
       let carid = cardata.awaiting;
 
@@ -273,7 +273,7 @@ module.exports = {
         !filtered ||
         filtered == null
       )
-        return interaction.reply("Thats not a valid ID!");
+        return await interaction.reply("Thats not a valid ID!");
       cardata.liveries.push(filtered[0]);
       cardata.save();
       let embedapprove = new Discord.EmbedBuilder()
@@ -282,7 +282,7 @@ module.exports = {
         .setColor(colors.blue);
       let usertodm = await interaction.client.users.fetch(filtered[0].user);
 
-      interaction.reply({ embeds: [embedapprove] });
+      await interaction.reply({ embeds: [embedapprove] });
       usertodm.send(
         `Your recent livery for the ${
           cars.Cars[cartoapprove.toLowerCase()].Name
@@ -293,20 +293,20 @@ module.exports = {
     } else if (option == "list") {
       var car = interaction.options.getString("car").toLowerCase();
       if (!car)
-        return interaction.reply(
+        return await interaction.reply(
           "Specify if you'd like to see the list of liveries (list), install a livery (install [id] [car]), uninstall your current livery (uninstall [car]), view a livery (view [id] [car]), or submit one for review (submit [car])."
         );
-      if (!cars.Cars[car]) return interaction.reply("Thats not a car!");
+      if (!cars.Cars[car]) return await interaction.reply("Thats not a car!");
       let list = cars.Cars;
       if (!list[car])
-        return interaction.reply(
+        return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
       let cardata = await Car.findOne({ name: list[car.toLowerCase()].Name });
 
       let liveriesforcar = cardata.liveries;
       if (!liveriesforcar)
-        return interaction.reply(
+        return await interaction.reply(
           "This car doesn't have liveries yet, if you'd like to submit one, use /livery submit"
         );
       let liverylist = [];
@@ -317,7 +317,7 @@ module.exports = {
       }
       let shopItems = cardata.liveries;
       if (!shopItems || !shopItems.length)
-        return interaction.reply(`This car doesn't have any liveries!`);
+        return await interaction.reply(`This car doesn't have any liveries!`);
       shopItems = lodash.chunk(
         shopItems.map(() => `**${liverylist.join("\n")}**`)
       );
