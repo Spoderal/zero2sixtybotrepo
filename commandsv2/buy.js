@@ -83,7 +83,7 @@ module.exports = {
       if (boughtCarPrice == 0)
         return await interaction.reply("This car is not purchasable.");
 
-      if (usercars.includes(boughtCar.Name.toLowerCase()))
+      if (usercars.find((c) =>  c.Name == boughtCar.Name))
         return await interaction.reply("You already own this car!");
 
       if (boughtCar.Blackmarket) {
@@ -474,7 +474,9 @@ module.exports = {
           `Your prestige needs to be 11 before you can buy warehouses!`
         );
       if (warehouses.includes(bought))
-        return await interaction.reply(`You've already purchased this warehouse!`);
+        return await interaction.reply(
+          `You've already purchased this warehouse!`
+        );
 
       userdata.warehouses.push(bought);
       userdata.garageLimit += boughtWarehouse.Space;
@@ -523,7 +525,9 @@ module.exports = {
         } for ${toCurrency(pricing)}`
       );
     } else {
-      await interaction.reply(`Thats not a purchasable item, car, house, or part!`);
+      await interaction.reply(
+        `Thats not a purchasable item, car, house, or part!`
+      );
     }
   },
 };
