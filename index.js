@@ -4,7 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
-// const User = require("./schema/profile-schema");
+const User = require("./schema/profile-schema");
 
 const client = new Client({
   intents: [
@@ -18,7 +18,6 @@ const client = new Client({
 });
 
 const Topgg = require("@top-gg/sdk");
-
 const webhook = new Topgg.Webhook("ZeroSpideral3!#");
 app.post(
   "/vote",
