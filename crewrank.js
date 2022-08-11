@@ -32,7 +32,6 @@ module.exports = (client) => {
 
           totalrp += userrp;
         }
-        console.log(totalrp);
         let requiredrp = crewrank * 1000;
         if (parseInt(totalrp) > parseInt(requiredrp)) {
           let rank = crew2.Rank;
