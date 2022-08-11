@@ -19,7 +19,6 @@ const client = new Client({
 
 // const Topgg = require("@top-gg/sdk");
 // const webhook = new Topgg.Webhook("ZeroSpideral3!#");
-// const DBL = require("dblapi.js");
 // app.post(
 //   "/vote",
 //   webhook.listener(async (vote) => {
