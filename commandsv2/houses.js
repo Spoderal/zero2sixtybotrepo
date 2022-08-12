@@ -33,29 +33,28 @@ module.exports = {
     let embed = new Discord.EmbedBuilder()
       .setTitle("Houses For Sale")
       .setDescription(
-        `**YOU CAN ONLY OWN 1 AT A TIME**\n\n**__Speed Street: ${toCurrency(
-          housedb["speed street"].Price
-        )}__** ${housedb["speed street"].Emote}\n__Perks__\n${housedb[
-          "speed street"
-        ].Rewards.join("\n")}\n
-        **__Driving Drive: ${toCurrency(housedb["driving drive"].Price)}__** ${
+        `**YOU CAN ONLY OWN 1 AT A TIME**\n
+        **__Speed Street:__ ${toCurrency(housedb["speed street"].Price)}** ${
+          housedb["speed street"].Emote
+        }\n__Perks__\n${housedb["speed street"].Rewards.join("\n")}\n
+        **__Driving Drive:__ ${toCurrency(housedb["driving drive"].Price)}** ${
           housedb["driving drive"].Emote
         }\n__Perks__\n${housedb["driving drive"].Rewards.join("\n")}\n
-        **__Zero Avenue: ${toCurrency(housedb["zero avenue"].Price)}__** ${
+        **__Zero Avenue:__ ${toCurrency(housedb["zero avenue"].Price)}** ${
           housedb["zero avenue"].Emote
         }\n__Perks__\n${housedb["zero avenue"].Rewards.join("\n")}\n
-        **__Bently Boulevard: ${toCurrency(
+        **__Bently Boulevard:__ ${toCurrency(
           housedb["bently boulevard"].Price
-        )}__** ${housedb["bently boulevard"].Emote}\n__Perks__\n${housedb[
+        )}** ${housedb["bently boulevard"].Emote}\n__Perks__\n${housedb[
           "bently boulevard"
         ].Rewards.join("\n")}\n
-        **__Porsche Point: ${toCurrency(housedb["porsche point"].Price)}__** ${
+        **__Porsche Point:__ ${toCurrency(housedb["porsche point"].Price)}** ${
           housedb["porsche point"].Emote
         }\n__Perks__\n${housedb["porsche point"].Rewards.join("\n")}\n
-        **__Moon Base: ${toCurrency(housedb["moon base"].Price)}__** ${
+        **__Moon Base:__ ${toCurrency(housedb["moon base"].Price)}** ${
           housedb["moon base"].Emote
         }\n__Perks__\n${housedb["moon base"].Rewards.join("\n")}\n
-        **__Yacht: ${toCurrency(housedb["yacht"].Price)}__** ${
+        **__Yacht:__ ${toCurrency(housedb["yacht"].Price)}** ${
           housedb["yacht"].Emote
         }\n__Perks__\n${housedb["yacht"].Rewards.join("\n")}\n
 
@@ -80,19 +79,18 @@ module.exports = {
 
     collector.on("collect", async (i) => {
       if (i.customId.includes("warehouse")) {
-        embed
-          .setTitle("Warehouses for sale")
-          .setDescription(
-            `**__${warehousedb.t1warehouse.Emote} ${
-              warehousedb.t1warehouse.Name
-            } : ${toCurrency(warehousedb.t1warehouse.Price)}__**\n${
-              warehousedb.t1warehouse.Space
-            } Garage Spaces\n\n**__${warehousedb.t2warehouse.Emote} ${
-              warehousedb.t2warehouse.Name
-            } : ${toCurrency(warehousedb.t2warehouse.Price)}__**\n${
-              warehousedb.t2warehouse.Space
-            } Garage Spaces`
-          );
+        embed.setTitle("Warehouses for sale").setDescription(
+          `**__${warehousedb.t1warehouse.Emote} ${
+            warehousedb.t1warehouse.Name
+          }__ : ${toCurrency(warehousedb.t1warehouse.Price)}**\n${
+            warehousedb.t1warehouse.Space
+          } Garage Spaces\n
+            **__${warehousedb.t2warehouse.Emote} ${
+            warehousedb.t2warehouse.Name
+          }__ : ${toCurrency(warehousedb.t2warehouse.Price)}**\n${
+            warehousedb.t2warehouse.Space
+          } Garage Spaces`
+        );
         i.update({ embeds: [embed] });
       }
     });
