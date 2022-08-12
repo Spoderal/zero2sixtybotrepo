@@ -2,3 +2,5 @@ node_modules
 VPS STUFF
 
 .env
+
+json.sqlite
