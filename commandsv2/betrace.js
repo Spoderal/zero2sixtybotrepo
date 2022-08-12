@@ -59,11 +59,15 @@ module.exports = {
     let racing = cooldowns.betracing;
     let prestige = userdata.prestige;
     if (prestige < 5)
-      return await interaction.reply("You need to be prestige 5 to do this race!");
+      return await interaction.reply(
+        "You need to be prestige 5 to do this race!"
+      );
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(
+        `Please wait ${time} before racing again.`
+      );
     }
     let botcar = lodash.sample(cars.Cars);
 
@@ -214,20 +218,21 @@ module.exports = {
         if (tracklength > tracklength2) {
           embed.setTitle(`Bet race won!`);
 
-          let racerank2 = userdata.racerank;
-
-          let reqxp = racerank2 * 1000;
+          let earningsresult = [];
 
           let finalamount = moneyearned + moneyearned * 0.35;
-
-          let earningsresult = [];
           earningsresult.push(`${toCurrency(finalamount)}`);
+
+          userdata.racexp += 25;
+          let racerank2 = userdata.racerank;
+          let reqxp = racerank2 * 1000;
+          earningsresult.push(`+25 XP`);
           if (userdata.racexp >= reqxp) {
             userdata.racerank += 1;
+            userdata.racexp = 0;
             earningsresult.push(
               `Ranked up your race rank to ${userdata.racerank}`
             );
-            userdata.racexp = 0;
           }
 
           embed.addFields([
@@ -238,7 +243,6 @@ module.exports = {
           ]);
           interaction.editReply({ embeds: [embed] });
           userdata.cash += finalamount;
-          userdata.racexp += 25;
 
           if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
             selected.Wins += 1;

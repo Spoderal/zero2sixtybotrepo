@@ -72,11 +72,15 @@ module.exports = {
     let racing = cooldowndata.racing;
     let prestige = userdata.prestige;
     if (prestige < 1)
-      return await interaction.reply("You need to be prestige 1 to do this race!");
+      return await interaction.reply(
+        "You need to be prestige 1 to do this race!"
+      );
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(
+        `Please wait ${time} before racing again.`
+      );
     }
     let user1cars = db.fetch(`cars_${user.id}`);
     let bot1cars = [

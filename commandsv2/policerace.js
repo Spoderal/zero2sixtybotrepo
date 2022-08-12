@@ -62,7 +62,9 @@ module.exports = {
 
     let prestige = userdata.prestige;
     if (prestige < 2)
-      return await interaction.reply("You need to be prestige 2 to do this race!");
+      return await interaction.reply(
+        "You need to be prestige 2 to do this race!"
+      );
     let botlist = ["1", "2", "3"];
     let timeout = 45000;
     let botcar = null;
@@ -71,7 +73,9 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(
+        `Please wait ${time} before racing again.`
+      );
     }
     let user1cars = userdata.cars;
     let bot1cars = [

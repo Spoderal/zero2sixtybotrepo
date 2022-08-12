@@ -55,7 +55,13 @@ module.exports = {
     const fields = [
       {
         name: `Progress`,
-        value: `Race Rank: ${racerank}\nDrift Rank: ${driftrank}\nPrestige: ${prestige}\nTier: ${userdata.tier}`,
+        value: `
+          Race Rank: ${racerank}
+          XP: ${userdata.racexp}
+          Drift Rank: ${driftrank}
+          Prestige: ${prestige}
+          Tier: ${userdata.tier}
+        `,
       },
     ];
     let bestcar = cars[0];

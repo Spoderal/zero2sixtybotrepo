@@ -191,7 +191,9 @@ module.exports = {
 
       if (filtered[0]) {
         userdata.cash += 3000;
-        await interaction.reply("You already own this car, so you got $3k instead.");
+        await interaction.reply(
+          "You already own this car, so you got $3k instead."
+        );
         return;
       }
 

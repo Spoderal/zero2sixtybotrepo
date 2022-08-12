@@ -54,12 +54,15 @@ module.exports = {
     } else if (option == "description") {
       let titletoset = interaction.options.getString("item");
       let letterCount = titletoset.replace(/\s+/g, "").length;
-      if (letterCount > 35) return await interaction.reply("Max characters 35!");
+      if (letterCount > 35)
+        return await interaction.reply("Max characters 35!");
 
       userdata.description = titletoset;
       userdata.save();
 
-      await interaction.reply(`Set your profile description to "${titletoset}"`);
+      await interaction.reply(
+        `Set your profile description to "${titletoset}"`
+      );
     } else if (option == "background") {
       let pfp = interaction.options.getString("item");
       if (!pfp)

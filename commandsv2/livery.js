@@ -176,7 +176,8 @@ module.exports = {
       await interaction.reply({ embeds: [embedapprove] });
     } else if (option == "submit") {
       let cartosubmit = interaction.options.getString("car");
-      if (!cartosubmit) return await interaction.reply("Usage: /livery submit (car)");
+      if (!cartosubmit)
+        return await interaction.reply("Usage: /livery submit (car)");
       let list = cars.Cars;
 
       if (!list[cartosubmit.toLowerCase()])

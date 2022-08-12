@@ -46,7 +46,8 @@ module.exports = {
     let tier = interaction.options.getString("tier");
     let tierlist = ["1", "2", "3", "b", "u", "spj", "spa", "spe"];
 
-    if (!tierlist.includes(tier)) return await interaction.reply("Thats not a tier!");
+    if (!tierlist.includes(tier))
+      return await interaction.reply("Thats not a tier!");
     if (tier == 1) {
       db.add(`garagelimit_${user.id}`, 5);
       db.set(`timeout_${user.id}`, 30000);
@@ -100,7 +101,9 @@ module.exports = {
         cars.Cars["2010 ford mustang"]["0-60"]
       );
       db.add(`cash_${user.id}`, 25000);
-      await interaction.reply(`Gave ${user} the Beginner American Muscle Pack!`);
+      await interaction.reply(
+        `Gave ${user} the Beginner American Muscle Pack!`
+      );
 
       return;
     }

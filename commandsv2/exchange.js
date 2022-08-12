@@ -35,7 +35,9 @@ module.exports = {
     let gold = userdata.gold;
 
     if (!toturnin)
-      return await interaction.reply("Specify how much gold you'd like to exchange!");
+      return await interaction.reply(
+        "Specify how much gold you'd like to exchange!"
+      );
     if (isNaN(toturnin)) return await interaction.reply("Specify a number!");
     if (toturnin > gold)
       return await interaction.reply("You don't have enough gold!");

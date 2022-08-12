@@ -66,7 +66,9 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(
+        `Please wait ${time} before racing again.`
+      );
     }
     let semote = emotes.speed;
     let hemote = emotes.handling;
@@ -612,7 +614,7 @@ module.exports = {
           userdata.cash += Number(moneyearned);
           userdata.racexp += 25;
 
-          let racerank2 = (userdata.racerank += 1);
+          let racerank2 = userdata.racerank;
 
           let reqxp = racerank2 * 1000;
 

@@ -58,7 +58,9 @@ module.exports = {
     let weeklyms = ms(timeout2 - (Date.now() - weeklytimeleft));
 
     if (!dailytask1 || !weeklytask1)
-      return await interaction.reply("Please send a message to set your tasks.");
+      return await interaction.reply(
+        "Please send a message to set your tasks."
+      );
     let dailyemote;
     let weeklyemote;
     if (dailytask1.completed == true) dailyemote = "✅";

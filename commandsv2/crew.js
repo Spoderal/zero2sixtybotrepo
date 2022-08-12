@@ -211,7 +211,8 @@ module.exports = {
     } else if (option == "join") {
       let uid = interaction.user.id;
       let crewname = interaction.options.getString("name");
-      if (!crewname) return await interaction.reply("Please specify a crew name!");
+      if (!crewname)
+        return await interaction.reply("Please specify a crew name!");
 
       let crew2 = globalModel.crews.filter((crew) => crew.name == crewname);
       if (crew2.length == 0)
@@ -253,10 +254,12 @@ module.exports = {
       await interaction.reply(`✅ Joined ${crewname}`);
     } else if (option == "create") {
       let crewname = interaction.options.getString("name");
-      if (!crewname) return await interaction.reply("Please specify a crew name!");
+      if (!crewname)
+        return await interaction.reply("Please specify a crew name!");
 
       let isCrewNameTaken = crews?.find((crew) => crew.name == crewname);
-      if (isCrewNameTaken) return await interaction.reply("That crew already exist!");
+      if (isCrewNameTaken)
+        return await interaction.reply("That crew already exist!");
 
       let crew = userdata?.crew;
       if (crew)
@@ -301,7 +304,8 @@ module.exports = {
       if (!crew) return await interaction.reply("You're not in a crew!");
 
       let currentCrew = crews.find(({ name }) => name == crew.name);
-      if (!currentCrew) return await interaction.reply("That crew doesn't exist!");
+      if (!currentCrew)
+        return await interaction.reply("That crew doesn't exist!");
 
       if (currentCrew.owner.id == uid)
         return await interaction.reply(

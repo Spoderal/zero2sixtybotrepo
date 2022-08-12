@@ -57,7 +57,9 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(
+        `Please wait ${time} before racing again.`
+      );
     }
     if (racing2 !== null && timeout - (Date.now() - racing2) > 0) {
       let time = ms(timeout - (Date.now() - racing2), { compact: true });
@@ -98,7 +100,9 @@ module.exports = {
     if (cars.Cars[user1carchoice.Name.toLowerCase()].Junked) {
       return await interaction.reply("This car is too junked to race, sorry!");
     }
-    await interaction.reply(`${user2}, what car do you wish to verse ${user} in?`);
+    await interaction.reply(
+      `${user2}, what car do you wish to verse ${user} in?`
+    );
     const filter = (m = discord.Message) => {
       return m.author.id === user2.id;
     };

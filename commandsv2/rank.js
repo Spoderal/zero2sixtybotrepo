@@ -29,27 +29,26 @@ module.exports = {
       .setTitle(`${user.username}'s ranks`)
       .setDescription(
         `
-      Race Rank: ${racerank}/${patron}\n
-      Drift Rank: ${driftrank}/${patron2}\n
-      **Prestige**: ${prestigerank}
-      
-      `
+        **Prestige**: ${prestigerank}\n
+        Race Rank: ${racerank}/${patron}\n
+        Drift Rank: ${driftrank}/${patron2}\n
+        `
       )
       .addFields([
         {
           name: "Prestige Ranks",
           value: `
             *Prestige resets your cash balance and RP*\n
-            Prestige 1: 0.1x cash earnings\n
-            Prestige 2: 0.2x cash earnings\n
-            Prestige 3: 0.3x cash earnings\n
-            Prestige 4: 0.4x cash earnings\n
-            Prestige 5: 0.5x cash earnings\n
-            Prestige 6: 0.6x cash earnings\n
-            Prestige 7: 0.7x cash earnings\n
-            Prestige 8: 0.8x cash earnings\n
-            Prestige 9: 0.9x cash earnings\n
-            Prestige 10: 1x cash earnings\n
+            Prestige 1: 0.1x cash earnings
+            Prestige 2: 0.2x cash earnings
+            Prestige 3: 0.3x cash earnings
+            Prestige 4: 0.4x cash earnings
+            Prestige 5: 0.5x cash earnings
+            Prestige 6: 0.6x cash earnings
+            Prestige 7: 0.7x cash earnings
+            Prestige 8: 0.8x cash earnings
+            Prestige 9: 0.9x cash earnings
+            Prestige 10: 1x cash earnings
             Prestige 11: 1.1x cash earnings
           `,
         },
