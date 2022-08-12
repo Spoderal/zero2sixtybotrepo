@@ -70,17 +70,18 @@ module.exports = {
       let rparray = [];
       let newrparray = [];
       for (i in rpmembers) {
-        let user = rpmembers[i];
-        let newuserdata = await User.findOne({ id: user });
+        let userId = rpmembers[i];
+        let user = await interaction.client.users.fetch(userId);
+        let isOwner = false;
+        if (user.id === crew.owner) isOwner = true;
+        let newuserdata = await User.findOne({ id: user.id });
         let rp = newuserdata.rp || 0;
-
-        rparray.push({ rp: rp, user: user });
+        rparray.push({ rp, user, isOwner });
         newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
       newrparray.length = 10;
       for (var i in newrparray) {
-        let name = await interaction.client.users.fetch(newrparray[i].user);
-        let tag = name.tag;
+        let tag = newrparray[i].user.tag;
         total += newrparray[i].rp;
         finalLb += `**${
           newrparray.indexOf(newrparray[i]) + 1
@@ -89,6 +90,7 @@ module.exports = {
 
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
+      let owner = newrparray.find((u) => u?.isOwner);
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
         .setThumbnail(icon)
@@ -99,7 +101,7 @@ module.exports = {
               ${mlength} members\n
               Rank ${crew2.Rank}\n
               RP: ${total}\n
-              Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
+              Crew Leader: ${owner.user.username}#${owner.user.discriminator}
             `,
             inline: true,
           },
