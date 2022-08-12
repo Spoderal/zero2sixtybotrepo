@@ -27,7 +27,8 @@ module.exports = {
         "Please wait 5 seconds before using this command again."
       );
     let wheelspins = userdata.wheelspins || 0;
-    if (wheelspins <= 0) return await interaction.reply("You're out of wheel spins!");
+    if (wheelspins <= 0)
+      return await interaction.reply("You're out of wheel spins!");
     let items = ["🏎️", "💵", "⚙️", "🗺️"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;

@@ -37,7 +37,9 @@ module.exports = {
 
       db.add(`goldbal_${givingto.id}`, togive);
 
-      await interaction.reply(`Gave ${givingto} ${numberWithCommas(togive)} gold!`);
+      await interaction.reply(
+        `Gave ${givingto} ${numberWithCommas(togive)} gold!`
+      );
     }
   },
 };

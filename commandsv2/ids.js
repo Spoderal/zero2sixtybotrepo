@@ -47,7 +47,9 @@ module.exports = {
         return await interaction.reply("Thats not a car!");
 
       if (idtochoose == cars.Cars[selecting.toLowerCase()].Name)
-        return await interaction.reply("A car id must be unique! Not the car name.");
+        return await interaction.reply(
+          "A car id must be unique! Not the car name."
+        );
       let filteredcar = userdata.cars.filter(
         (car) => car.Name == cars.Cars[selecting.toLowerCase()].Name
       );

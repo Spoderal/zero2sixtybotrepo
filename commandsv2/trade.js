@@ -66,7 +66,8 @@ module.exports = {
         `${user2}, you need to be prestige 1 before you can trade`
       );
 
-    if (user1 == user2) return await interaction.reply(`You cant trade yourself!`);
+    if (user1 == user2)
+      return await interaction.reply(`You cant trade yourself!`);
 
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
       return await interaction.reply("❌ You cant trade cash for cash!");
@@ -93,7 +94,9 @@ module.exports = {
       let amount = trading.split(" ")[0];
       let bal = userdata.cash;
       if (bal < amount)
-        return await interaction.reply("Settle down you don't have enough cash!");
+        return await interaction.reply(
+          "Settle down you don't have enough cash!"
+        );
       if (amount < 1500)
         return await interaction.reply(`Minimum of $1.5k cash needed.`);
 
@@ -188,7 +191,9 @@ module.exports = {
       let amount = trading.split(" ")[0];
       let bal = userdata.cash;
       if (bal < amount)
-        return await interaction.reply("Settle down you don't have enough cash!");
+        return await interaction.reply(
+          "Settle down you don't have enough cash!"
+        );
       if (amount < 1500)
         return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let itemtype;
@@ -503,7 +508,9 @@ module.exports = {
       let amount = trading.split(" ")[0];
       let bal = userdata.cash;
       if (bal < amount)
-        return await interaction.reply("Settle down you don't have enough cash!");
+        return await interaction.reply(
+          "Settle down you don't have enough cash!"
+        );
       if (amount < 1500)
         return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let embed = new Discord.EmbedBuilder()
@@ -574,7 +581,9 @@ module.exports = {
       let amount = trading.split(" ")[0];
       let bal = userdata2.cash;
       if (bal < amount)
-        return await interaction.reply("Settle down they don't have enough cash!");
+        return await interaction.reply(
+          "Settle down they don't have enough cash!"
+        );
       if (amount < 1500)
         return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let embed = new Discord.EmbedBuilder()
@@ -728,7 +737,9 @@ module.exports = {
         let bal = userdata2.cash;
 
         if (amount > bal)
-          return await interaction.reply(`The user doesn't have this much cash!`);
+          return await interaction.reply(
+            `The user doesn't have this much cash!`
+          );
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -1078,7 +1089,9 @@ module.exports = {
         if (selected2 == "No ID")
           return await interaction.reply(`${user2} doesn't have that car!`);
         if (selected !== "No ID")
-          return await interaction.reply(`${user1}, you already have that car!`);
+          return await interaction.reply(
+            `${user1}, you already have that car!`
+          );
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -1398,7 +1411,9 @@ module.exports = {
         let selected2 = filteredcar2[0] || "No ID";
 
         if (selected !== "No ID")
-          return await interaction.reply(`${user2}, you already have this car!`);
+          return await interaction.reply(
+            `${user2}, you already have this car!`
+          );
         if (selected2 == "No ID")
           return await interaction.reply(`${user2}, you don't have this car!`);
 

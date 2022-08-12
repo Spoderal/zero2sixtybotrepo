@@ -143,7 +143,9 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(
+        `Please wait ${time} before racing again.`
+      );
     }
 
     let semote = emotes.speed;
@@ -447,7 +449,6 @@ module.exports = {
       collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts.t1nitro.AddedBoost;
-
           tracklength += parseInt(boost);
           i.update({ content: "Boosting!", embeds: [embed] });
           selected.Nitro = null;
@@ -507,7 +508,10 @@ module.exports = {
                   .setTitle("Error!")
                   .setColor("DARK_RED")
                   .setDescription(
-                    `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
+                    `
+                    That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n
+                    **Example: /ids Select 1 1995 mazda miata**
+                    `
                   );
                 return await interaction.reply({ embeds: [errembed] });
               }
@@ -711,12 +715,13 @@ module.exports = {
             selected.Wins += 1;
             userdata.save();
           }
-          let earningsresult = [];
           if (interaction.guild.id == "931004190149460048") {
             let calccash = moneyearned * 0.05;
             // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
+
+          let earningsresult = [];
           earningsresult.push(`$${moneyearned}`);
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
           if (barnmaps) {
@@ -725,7 +730,6 @@ module.exports = {
           }
           if (ubarnmaps) {
             earningsresult.push(`${ubarnmaps} Uncommon Barn Maps`);
-
             userdata.ucmaps += ubarnmaps;
           }
           if (
@@ -741,25 +745,24 @@ module.exports = {
             userdata.cash += userdata.weeklytask.reward;
             userdata.save();
           }
-
           if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.ferrari) {
             earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
             userdata.fkeys += 1;
           }
+
           userdata.rp += parseInt(ticketsearned);
           userdata.cash += parseInt(moneyearned);
           userdata.racexp += 25;
+          earningsresult.push(`+25 XP`);
 
-          let racerank2 = (userdata.racerank += 1);
+          let requiredXP = userdata.racerank * 1000;
 
-          let reqxp = racerank2 * 1000;
-
-          if (userdata.racexp >= reqxp) {
+          if (userdata.racexp >= requiredXP) {
             userdata.racerank += 1;
+            userdata.racexp = 0;
             earningsresult.push(
               `Ranked up your race rank to ${userdata.racerank}`
             );
-            userdata.racexp = 0;
           }
 
           embed.addFields([

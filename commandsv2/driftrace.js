@@ -100,7 +100,9 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return await interaction.reply(`Please wait ${time} before drifting again.`);
+      return await interaction.reply(
+        `Please wait ${time} before drifting again.`
+      );
     }
 
     cooldowndata.drift = Date.now();
@@ -287,22 +289,24 @@ module.exports = {
         }
       });
     }, randomnum);
-    await interaction.reply({ embeds: [embed], components: [row] }).then(async () => {
-      collector.on("collect", async (i) => {
-        if (i.customId.includes("ebrake")) {
-          if (canshift == false) {
-            interaction.channel.send(
-              `You pulled the handbrake at the wrong time!`
-            );
-            formula = formula / 2;
-          } else if (canshift == true) {
-            embed.setDescription("Drifting!!!");
+    await interaction
+      .reply({ embeds: [embed], components: [row] })
+      .then(async () => {
+        collector.on("collect", async (i) => {
+          if (i.customId.includes("ebrake")) {
+            if (canshift == false) {
+              interaction.channel.send(
+                `You pulled the handbrake at the wrong time!`
+              );
+              formula = formula / 2;
+            } else if (canshift == true) {
+              embed.setDescription("Drifting!!!");
 
-            await i.update({ embeds: [embed] });
+              await i.update({ embeds: [embed] });
+            }
           }
-        }
+        });
       });
-    });
 
     let y = setInterval(() => {
       time -= 1;
@@ -345,7 +349,10 @@ module.exports = {
         embed.addFields([
           {
             name: "Earnings",
-            value: `$${moneyearned}\n${notorietyearned} Notoriety`,
+            value: `
+              $${moneyearned}\n
+              ${notorietyearned} Notoriety
+            `,
           },
         ]);
         if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {

@@ -83,7 +83,7 @@ module.exports = {
       if (boughtCarPrice == 0)
         return await interaction.reply("This car is not purchasable.");
 
-      if (usercars.find((c) =>  c.Name == boughtCar.Name))
+      if (usercars.find((c) => c.Name == boughtCar.Name))
         return await interaction.reply("You already own this car!");
 
       if (boughtCar.Blackmarket) {
