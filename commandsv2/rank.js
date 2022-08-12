@@ -14,16 +14,16 @@ module.exports = {
     let userdata = await User.findOne({ id: user.id });
     let prestigerank = userdata.prestige;
     let driftrank = userdata.driftrank;
-    let newprestige2 = (prestigerank += 1);
+    let newprestige2 = prestigerank + 1;
 
     let racerank = userdata.racerank;
     if (newprestige2 >= 12) {
       newprestige2 = "Max";
     }
     let patron =
-      userdata.patron.required || prestiges[newprestige2].DriftRequired;
-    let patron2 =
       userdata.patron.required || prestiges[newprestige2].RaceRequired;
+    let patron2 =
+      userdata.patron.required || prestiges[newprestige2].DriftRequired;
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${user.username}'s ranks`)
