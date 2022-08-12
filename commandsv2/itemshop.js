@@ -12,8 +12,14 @@ module.exports = {
     let global = await Global.findOne();
     let itemshop = global.itemshop;
 
-    let items = [];
+    if (!itemshop?.length) {
+      await interaction.reply({
+        content: "There are no items in the item shop.",
+      });
+      return;
+    }
 
+    let items = [];
     for (let i in itemshop) {
       let item = itemshop[i];
 
