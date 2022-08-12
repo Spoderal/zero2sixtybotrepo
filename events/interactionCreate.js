@@ -1,4 +1,4 @@
-const User = require(`../schema/profile-schema`);
+const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 
 module.exports = {
   name: "interactionCreate",
@@ -7,49 +7,25 @@ module.exports = {
     if (interaction.isSelectMenu()) {
       await interaction.deferUpdate();
     }
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
       const command = interaction.client.commands.get(interaction.commandName);
+
       if (!command) return;
 
       try {
+        // Command
+        const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
+        console.time(commandExecutionTimeName);
         await command.execute(interaction);
-        let userdata = await User.findOne({ id: interaction.user.id });
+        console.timeEnd(commandExecutionTimeName);
 
-        if (!userdata) return;
-
-        let pet = userdata.pet;
-        if (userdata && pet) {
-          let newlove = (pet.condition -= 1);
-          let newoil = (pet.oil -= 1);
-
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "pet.oil": newoil,
-                "pet.condition": newlove,
-              },
-            }
-          );
-
-          if (pet.oil < 50 || pet.condition < 50) pet.love -= 1;
-          if (pet.love < 10) {
-            interaction.user.send(
-              `Careful, your pets love is below 10! It might blow up!`
-            );
-          }
-          if (pet.love <= 0) {
-            interaction.user.send(
-              `Your pet blew up! Next time, take care of it!`
-            );
-            pet = null;
-          }
-          userdata.save();
-        }
+        // Pets
+        const petExecutionTimeName = "Pet update time";
+        console.time(petExecutionTimeName);
+        await updatePetOnCommands(interaction);
+        console.timeEnd(petExecutionTimeName);
       } catch (err) {
-        if (err) console.error(err);
+        if (err) console.error({ interactionCreateExecuteError: err });
         try {
           await interaction.reply({
             content:

@@ -36,7 +36,7 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
     let timeout = 120000;
@@ -45,19 +45,19 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(
+      return await interaction.reply(
         `Please wait ${time} before doing the timetrial again.`
       );
     }
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
-      return interaction.reply("This car is too junked to race, sorry!");
+      return await interaction.reply("This car is too junked to race, sorry!");
     }
 
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           `Your EV is out of range! Run /charge to charge it!`
         );
       }

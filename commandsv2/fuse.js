@@ -37,11 +37,11 @@ module.exports = {
     let parttoinstall = interaction.options.getString("part");
 
     if (!parttoinstall)
-      return interaction.reply(
+      return await interaction.reply(
         "Specify a part! Try: Exhaust, Tires, Clutch, or Intake"
       );
 
-    if (!parts) return interaction.reply("You dont have any parts!");
+    if (!parts) return await interaction.reply("You dont have any parts!");
     let list3 = [
       "exhaust",
       "tires",
@@ -58,18 +58,18 @@ module.exports = {
     ];
 
     if (!list3.includes(parttoinstall.toLowerCase()))
-      return interaction.reply(
+      return await interaction.reply(
         "Thats not an available fuse part! Try: Exhaust, Tires, Intercooler, Clutch, Gearbox, ECU, Drift Suspension, Race Suspension, or Intake"
       );
 
     if (parttoinstall == "txexhaust") {
       let xessence = userdata.xessence;
       if (xessence < 100)
-        return interaction.reply(
+        return await interaction.reply(
           `You need 100 Xessence to fuse this part into a TX!`
         );
       if (!parts.includes("t5exhaust"))
-        return interaction.reply(`You need a T5Exhaust to do this fuse!`);
+        return await interaction.reply(`You need a T5Exhaust to do this fuse!`);
 
       for (var i = 0; i < 1; i++) parts.splice(parts.indexOf("t5exhaust"), 1);
       userdata.parts = parts;
@@ -86,7 +86,7 @@ module.exports = {
         ]);
       embed.setColor(colors.blue);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
 
       setTimeout(() => {
         embed.setTitle("Fused!");
@@ -145,7 +145,7 @@ module.exports = {
         return part === parte.toLowerCase();
       });
       if (2 > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `You need 2 ${partdb.Parts[parte].Name} to fuse them!`
         );
 
@@ -157,7 +157,7 @@ module.exports = {
       ]);
       embed.setColor(colors.blue);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
 
       setTimeout(() => {
         embed.setTitle("Fused!");

@@ -51,7 +51,7 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif")
         .setFooter(tipFooterSeason);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (page == "2") {
       let embed = new discord.EmbedBuilder()
         .setTitle("Summer Season Page 2 of 5")
@@ -63,7 +63,7 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
         .setFooter(tipFooterSeason);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (page == "3") {
       let embed = new discord.EmbedBuilder()
         .setTitle("Summer Season Page 3 of 5")
@@ -75,7 +75,7 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
         .setFooter(tipFooterSeason);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (page == "4") {
       let embed = new discord.EmbedBuilder()
         .setTitle("Summer Season Page 4 of 5")
@@ -87,7 +87,7 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
         .setFooter(tipFooterSeason);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (page == "5") {
       let embed = new discord.EmbedBuilder()
         .setTitle("Summer Season Page 5 of 5")
@@ -99,7 +99,7 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/xFH9Ps9/summericongif.gif")
         .setFooter(tipFooterSeason);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

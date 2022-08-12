@@ -79,6 +79,6 @@ module.exports = {
       .setThumbnail(acthelmet)
       .addFields(fields);
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

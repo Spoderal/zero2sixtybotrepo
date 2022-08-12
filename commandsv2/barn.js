@@ -44,16 +44,16 @@ module.exports = {
     let rarity2 = interaction.options.getString("rarity");
 
     if (!barnmaps && rarity2 == "common")
-      return interaction.reply("You don't have any common barn maps!");
+      return await interaction.reply("You don't have any common barn maps!");
 
     if (!ubarnmaps && rarity2 == "uncommon")
-      return interaction.reply("You don't have any uncommon barn maps!");
+      return await interaction.reply("You don't have any uncommon barn maps!");
 
     if (!rbarnmaps && rarity2 == "rare")
-      return interaction.reply("You don't have any rare barn maps!");
+      return await interaction.reply("You don't have any rare barn maps!");
 
     if (!lbarnmaps && rarity2 == "legendary")
-      return interaction.reply("You don't have any legendary barn maps!");
+      return await interaction.reply("You don't have any legendary barn maps!");
 
     let house = userdata.house;
 
@@ -63,7 +63,7 @@ module.exports = {
     let garagelimit = userdata.garageLimit;
     let usercars = userdata.cars;
     if (usercars.length >= garagelimit)
-      return interaction.reply(
+      return await interaction.reply(
         "Your spaces are already filled. Sell a car or get more garage space!"
       );
 
@@ -73,7 +73,7 @@ module.exports = {
         .setColor(colors.blue)
         .setDescription(`Please wait ${time} before searching barns again.`);
 
-      interaction.reply({ embeds: [timeEmbed] });
+      await interaction.reply({ embeds: [timeEmbed] });
 
       return;
     }
@@ -169,7 +169,7 @@ module.exports = {
       cooldowns.barn = Date.now();
       userdata.cash += resale;
 
-      interaction.reply(
+      await interaction.reply(
         `You found a ${
           carindb.Name
         } but you already have this car, so you found ${toCurrency(
@@ -195,6 +195,6 @@ module.exports = {
       .setImage(carobj.Livery)
       .setColor(color);
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

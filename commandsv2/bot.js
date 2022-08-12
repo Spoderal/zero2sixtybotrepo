@@ -44,6 +44,6 @@ module.exports = {
       .setFooter({ text: "Created at " + bot.createdAt })
       .setColor(colors.blue);
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

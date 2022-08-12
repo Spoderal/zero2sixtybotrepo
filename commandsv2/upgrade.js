@@ -95,11 +95,11 @@ module.exports = {
 
     if (cartoinstall == "pet") {
       if (!user1parts.includes("pet spoiler"))
-        return interaction.reply(`You don't have a pet spoiler!`);
+        return await interaction.reply(`You don't have a pet spoiler!`);
       userdata.pet.spoiler = true;
       userdata.save();
 
-      interaction.reply(`✅`);
+      await interaction.reply(`✅`);
       return;
     }
 
@@ -112,15 +112,15 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
     let realpart = parte;
     if (!userdata.parts.includes(realpart.toLowerCase()))
-      return interaction.reply(`You don't have this part!`);
+      return await interaction.reply(`You don't have this part!`);
 
     if (selected[actpart] && selected[actpart] !== null)
-      return interaction.reply(`This car already has a "${actpart}"!`);
+      return await interaction.reply(`This car already has a "${actpart}"!`);
 
     let partindb = partdb.Parts[realpart.toLowerCase()];
     if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
@@ -203,6 +203,6 @@ module.exports = {
     userdata.parts.pull(realpart.toLowerCase());
     userdata.save();
 
-    interaction.reply(`✅`);
+    await interaction.reply(`✅`);
   },
 };

@@ -10,7 +10,7 @@ module.exports = {
     let userid = interaction.user.id;
     let userdata = await User.findOne({ id: userid });
 
-    if (userdata) return interaction.reply("You have an account!");
+    if (userdata) return await interaction.reply("You have an account!");
 
     let embed = new discord.EmbedBuilder({
       title: "You've started your journey!",
@@ -19,7 +19,7 @@ module.exports = {
       description:
         "Check out the getting started tutorial on YouTube, Run `/dealer` to buy your first car, and go race with it!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n[YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)",
     });
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
 
     let newuser = await new User({ id: interaction.user.id });
     newuser.cash += 500;

@@ -29,7 +29,7 @@ module.exports = {
         .setDescription(
           `Please wait ${time} before searching junkyards again.`
         );
-      interaction.reply({ embeds: [timeEmbed] });
+      await interaction.reply({ embeds: [timeEmbed] });
       return;
     }
     var rarities = [
@@ -77,7 +77,7 @@ module.exports = {
         .setTitle(`${rarity.type} Part Find`)
         .addFields([{ name: `Part`, value: `${part.Name}` }])
         .setColor(colors.blue);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
 
     pickRandom();

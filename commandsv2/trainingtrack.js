@@ -55,7 +55,7 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3"];
@@ -66,7 +66,7 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(`Please wait ${time} before racing again.`);
     }
     let semote = emotes.speed;
     let hemote = emotes.handling;
@@ -89,22 +89,22 @@ module.exports = {
       errorembed.setDescription(
         "Thats not a tier! The available tiers are: 1, 2, 3, 4, 5, 6, 7 and 8"
       );
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     if (!cars.Cars[selected.Name.toLowerCase()]) {
       errorembed.setDescription("Thats not an available car!");
-      return interaction.reply({ embeds: [errorembed] });
+      return await interaction.reply({ embeds: [errorembed] });
     }
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked && bot !== "rust") {
-      return interaction.reply("This car is too junked to race, sorry!");
+      return await interaction.reply("This car is too junked to race, sorry!");
     }
 
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }
@@ -369,7 +369,7 @@ module.exports = {
                   .setDescription(
                     `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
                   );
-                return interaction.reply({ embeds: [errembed] });
+                return await interaction.reply({ embeds: [errembed] });
               }
 
               if (!cars.Cars[selected2.Name.toLowerCase()].Police) {

@@ -23,7 +23,7 @@ module.exports = {
       interaction.user.id !== "474183542797107231" &&
       interaction.user.id !== "670895157016657920"
     ) {
-      interaction.reply({
+      await interaction.reply({
         content: "You dont have permission to use this command!",
         ephemeral: true,
       });
@@ -37,7 +37,7 @@ module.exports = {
 
       db.add(`goldbal_${givingto.id}`, togive);
 
-      interaction.reply(`Gave ${givingto} ${numberWithCommas(togive)} gold!`);
+      await interaction.reply(`Gave ${givingto} ${numberWithCommas(togive)} gold!`);
     }
   },
 };

@@ -32,15 +32,15 @@ module.exports = {
     let bought = interaction.options.getString("crate");
     let carsu = userdata.cars;
     if (!bought)
-      return interaction.reply(
+      return await interaction.reply(
         "**To use this command, specify the crate you want to buy. To check what crates are available check the imports shop by sending /imports.**"
       );
     if (!list.includes(bought))
-      return interaction.reply("**That crate isn't available!**");
+      return await interaction.reply("**That crate isn't available!**");
     let garagelimit = userdata.garagelimit;
 
     if (carsu.length >= garagelimit)
-      return interaction.reply(
+      return await interaction.reply(
         `Your garage is full! Sell a car or get more garage space.`
       );
 
@@ -53,27 +53,27 @@ module.exports = {
     let ferrarikeys = userdata.ferrarikeys;
 
     if (bought == "common" && commonkeys < 50)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough keys! This crate costs 50 common keys`
       );
     if (bought == "rare" && rarekeys < 25)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough keys! This crate costs 25 rare keys`
       );
     if (bought == "exotic" && exotickeys < 20)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough keys! This crate costs 20 exotic keys`
       );
     if (bought == "drift" && driftkeys < 5)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough keys! This crate costs 5 drift keys`
       );
     if (bought == "z crate 1" && gold < 5)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough gold! This crate costs 5 gold`
       );
     if (bought == "ferrari" && ferrarikeys < 100)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough keys! This crate costs 100 ferrari keys`
       );
 
@@ -155,7 +155,7 @@ module.exports = {
 
       if (filtered[0]) {
         userdata.cash += 500000;
-        interaction.reply(
+        await interaction.reply(
           "You already own this car, so you got $500k instead."
         );
         return;
@@ -170,7 +170,7 @@ module.exports = {
         embed.addFields([{ name: `Stack Track!`, value: invisibleSpace }]);
       }
       userdata.cars.push(carobj);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else {
       let cratecontents = crates[bought].Contents;
       let randomitem = lodash.sample(cratecontents);
@@ -191,7 +191,7 @@ module.exports = {
 
       if (filtered[0]) {
         userdata.cash += 3000;
-        interaction.reply("You already own this car, so you got $3k instead.");
+        await interaction.reply("You already own this car, so you got $3k instead.");
         return;
       }
 
@@ -199,7 +199,7 @@ module.exports = {
         .setTitle(`Unboxing ${bought} crate...`)
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embedfinal] });
+      await interaction.reply({ embeds: [embedfinal] });
       setTimeout(() => {
         userdata.cars.push(carobj);
         embedfinal.setTitle(`Unboxed ${bought} crate!`);

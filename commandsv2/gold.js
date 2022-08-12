@@ -40,6 +40,6 @@ module.exports = {
       .setColor(`#60b0f4`)
       .setThumbnail("https://i.ibb.co/zXDct3P/goldpile.png");
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

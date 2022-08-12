@@ -44,7 +44,7 @@ module.exports = {
     const crews = globalModel?.crews;
 
     if (!crews?.length && option !== "create") {
-      return interaction.reply(
+      return await interaction.reply(
         "There are no crews yet! Be the first by using `/crew create <name>` !"
       );
     }
@@ -55,13 +55,13 @@ module.exports = {
       if (!crewname) {
         crew = userdata.crew;
         if (!crew)
-          return interaction.reply(
+          return await interaction.reply(
             "You're not in a crew! Join one with `/joincrew <crew name>`"
           );
         crewname = crew.name;
       }
       let crew2 = crews.filter((crew) => crew.name == crewname);
-      if (!crew2[0]) return interaction.reply("That crew doesn't exist!");
+      if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
       crew2 = crew2[0];
       let rpmembers = crew2.members;
       let emoji = emotes.zerorp;
@@ -191,35 +191,35 @@ module.exports = {
       ];
 
       if (!whitelist.includes(interaction.user.id))
-        return interaction.reply({
+        return await interaction.reply({
           content: `You don't have permission to use this command!`,
           ephemeral: true,
         });
       let crewname = interaction.options.getString("name");
 
       let crew2 = globalModel.crews.filter((crew) => crew.name == crewname);
-      if (!crew2[0]) return interaction.reply("That crew doesn't exist!");
+      if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       let iconchoice = crew2.icontoapprove;
 
-      if (!iconchoice) return interaction.reply(`Wrong name!`);
+      if (!iconchoice) return await interaction.reply(`Wrong name!`);
 
       crew2.icon = iconchoice;
       globalModel.save();
 
-      interaction.reply(`✅`);
+      await interaction.reply(`✅`);
     } else if (option == "join") {
       let uid = interaction.user.id;
       let crewname = interaction.options.getString("name");
-      if (!crewname) return interaction.reply("Please specify a crew name!");
+      if (!crewname) return await interaction.reply("Please specify a crew name!");
 
       let crew2 = globalModel.crews.filter((crew) => crew.name == crewname);
       if (crew2.length == 0)
-        return interaction.reply("That crew doesn't exist!");
+        return await interaction.reply("That crew doesn't exist!");
 
       let crew = userdata.crew;
       let actcrew = crew2[0];
-      if (crew) return interaction.reply("You're already in a crew!");
+      if (crew) return await interaction.reply("You're already in a crew!");
 
       let newarray = [];
       actcrew.members.push(`${uid}`);
@@ -250,17 +250,17 @@ module.exports = {
       userdata.joinedcrew = Date.now();
       userdata.save();
 
-      interaction.reply(`✅ Joined ${crewname}`);
+      await interaction.reply(`✅ Joined ${crewname}`);
     } else if (option == "create") {
       let crewname = interaction.options.getString("name");
-      if (!crewname) return interaction.reply("Please specify a crew name!");
+      if (!crewname) return await interaction.reply("Please specify a crew name!");
 
       let isCrewNameTaken = crews?.find((crew) => crew.name == crewname);
-      if (isCrewNameTaken) return interaction.reply("That crew already exist!");
+      if (isCrewNameTaken) return await interaction.reply("That crew already exist!");
 
       let crew = userdata?.crew;
       if (crew)
-        return interaction.reply(
+        return await interaction.reply(
           "You're already in a crew! If you're a member, leave with `/crew leave`, and if you're the owner, delete it with `/crew delete`"
         );
 
@@ -293,22 +293,22 @@ module.exports = {
         )
         .setColor(colors.blue);
 
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     } else if (option == "leave") {
       let uid = interaction.user.id;
       let crew = userdata.crew;
 
-      if (!crew) return interaction.reply("You're not in a crew!");
+      if (!crew) return await interaction.reply("You're not in a crew!");
 
       let currentCrew = crews.find(({ name }) => name == crew.name);
-      if (!currentCrew) return interaction.reply("That crew doesn't exist!");
+      if (!currentCrew) return await interaction.reply("That crew doesn't exist!");
 
       if (currentCrew.owner.id == uid)
-        return interaction.reply(
+        return await interaction.reply(
           "You're the owner! Run `/crew delete` to delete this crew"
         );
 
-      interaction.reply(
+      await interaction.reply(
         "Are you sure? Say `yes` to confirm, and anything else to cancel."
       );
       const filter = (m) => {
@@ -356,15 +356,15 @@ module.exports = {
       });
     } else if (option == "icon") {
       let crewname = userdata.crew;
-      if (!crewname) return interaction.reply("You are not in a crew!");
+      if (!crewname) return await interaction.reply("You are not in a crew!");
 
       let crew2 = crews.filter((crew) => crew.name == crewname);
-      if (!crew2[0]) return interaction.reply("That crew doesn't exist!");
+      if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       if (crew2.ownerid !== interaction.user.id)
-        return interaction.reply("You're not the crew owner!");
+        return await interaction.reply("You're not the crew owner!");
 
-      interaction.reply(
+      await interaction.reply(
         "What crew icon would you like to submit? **Send an image below**"
       );
 
@@ -378,7 +378,7 @@ module.exports = {
         time: 1000 * 30,
       });
 
-      collector.on("collect", (m) => {
+      collector.on("collect", async (m) => {
         let ImageLink;
         if (m.attachments.size > 0) {
           m.attachments.forEach((attachment) => {
@@ -410,7 +410,7 @@ module.exports = {
         }
       });
     } else if (option == "leaderboard") {
-      interaction.reply({ content: `Please wait...`, fetchReply: true });
+      await interaction.reply({ content: `Please wait...`, fetchReply: true });
 
       let data = globalModel.crews;
       let members = [];
@@ -454,12 +454,12 @@ module.exports = {
       let crewname = crew.name;
       let crew2 = crews.find((crew) => crew.name == crewname);
 
-      if (!crew2) return interaction.reply("That crew doesn't exist!");
+      if (!crew2) return await interaction.reply("That crew doesn't exist!");
 
       if (crew2.owner.id !== uid)
-        return interaction.reply("You're not the crew owner!");
+        return await interaction.reply("You're not the crew owner!");
 
-      interaction.reply(
+      await interaction.reply(
         "Are you sure? This will permanently remove all perks from all members. Say `yes` to confirm, and anything else to cancel."
       );
 
@@ -473,7 +473,7 @@ module.exports = {
         time: 1000 * 30,
       });
 
-      collector.on("collect", (m) => {
+      collector.on("collect", async (m) => {
         if (m.content.toLowerCase() == "yes") {
           let crewlist = globalModel.crews;
           let crewobj = crew2[0];

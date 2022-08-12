@@ -48,7 +48,7 @@ module.exports = {
 
     embed.setColor(colors.blue);
 
-    interaction.reply({ embeds: [embed], components: [row2] }).then(() => {
+    await interaction.reply({ embeds: [embed], components: [row2] }).then(() => {
       const filter = (interaction2) =>
         interaction2.isSelectMenu() &&
         interaction2.user.id === interaction.user.id;

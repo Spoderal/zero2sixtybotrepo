@@ -36,17 +36,17 @@ module.exports = {
       interaction.user.id !== "937967206652837928" &&
       interaction.user.id !== "670895157016657920"
     )
-      return interaction.reply({
+      return await interaction.reply({
         content: "You don't have permission to run this command.",
         ephemeral: true,
       });
 
     let user = interaction.options.getUser("user");
-    if (!user) return interaction.reply("Specify a user!");
+    if (!user) return await interaction.reply("Specify a user!");
     let tier = interaction.options.getString("tier");
     let tierlist = ["1", "2", "3", "b", "u", "spj", "spa", "spe"];
 
-    if (!tierlist.includes(tier)) return interaction.reply("Thats not a tier!");
+    if (!tierlist.includes(tier)) return await interaction.reply("Thats not a tier!");
     if (tier == 1) {
       db.add(`garagelimit_${user.id}`, 5);
       db.set(`timeout_${user.id}`, 30000);
@@ -80,7 +80,7 @@ module.exports = {
         cars.Cars["1989 nissan skyline r32"]["0-60"]
       );
       db.add(`cash_${user.id}`, 25000);
-      interaction.reply(`Gave ${user} the Beginner JDM Pack!`);
+      await interaction.reply(`Gave ${user} the Beginner JDM Pack!`);
 
       return;
     }
@@ -100,7 +100,7 @@ module.exports = {
         cars.Cars["2010 ford mustang"]["0-60"]
       );
       db.add(`cash_${user.id}`, 25000);
-      interaction.reply(`Gave ${user} the Beginner American Muscle Pack!`);
+      await interaction.reply(`Gave ${user} the Beginner American Muscle Pack!`);
 
       return;
     }
@@ -120,13 +120,13 @@ module.exports = {
         cars.Cars["2002 bmw m3 gtr"]["0-60"]
       );
       db.add(`cash_${user.id}`, 25000);
-      interaction.reply(`Gave ${user} the Beginner Euro Pack!`);
+      await interaction.reply(`Gave ${user} the Beginner Euro Pack!`);
 
       return;
     }
 
     db.set(`patreon_tier_${tier}_${user.id}`, true);
 
-    interaction.reply(`Gave ${user} tier ${tier} on the patreon.`);
+    await interaction.reply(`Gave ${user} tier ${tier} on the patreon.`);
   },
 };

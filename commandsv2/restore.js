@@ -26,13 +26,13 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
     let car = selected;
 
     var usercars = userdata.cars;
     if (!cars.Cars[selected.Name.toLowerCase()])
-      return interaction.reply("Thats not a car!");
+      return await interaction.reply("Thats not a car!");
     car = car.Name.toLowerCase();
     let exhaust = selected.Exhaust;
     let tires = selected.Tires;
@@ -44,7 +44,7 @@ module.exports = {
     let body = selected.Body;
 
     if (!cars.Cars[car].Junked)
-      return interaction.reply("Thats not a junk car!");
+      return await interaction.reply("Thats not a junk car!");
 
     if (
       !exhaust &&
@@ -55,7 +55,7 @@ module.exports = {
       !gearbox &&
       !body
     )
-      return interaction.reply(
+      return await interaction.reply(
         `You haven't completed this restoration! Use /upgrade to restore it.`
       );
 
@@ -80,6 +80,6 @@ module.exports = {
 
     userdata.save();
 
-    interaction.reply(`✅`);
+    await interaction.reply(`✅`);
   },
 };

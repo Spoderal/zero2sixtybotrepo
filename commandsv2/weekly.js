@@ -48,7 +48,7 @@ module.exports = {
         .setDescription(
           `You've already collected your weekly cash\n\nCollect it again in ${time}.`
         );
-      interaction.reply({ embeds: [timeEmbed] });
+      await interaction.reply({ embeds: [timeEmbed] });
     } else {
       userdata.cash += Number(cash);
       cooldowns.weekly = Date.now();
@@ -68,7 +68,7 @@ module.exports = {
       }
       cooldowns.save();
       userdata.save();
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

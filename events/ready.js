@@ -1,5 +1,5 @@
 const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+const { Routes } = require("discord-api-types/v10");
 const dailytasks = require("../dailytasks");
 const crews = require("../crewrank");
 const badges = require("../badges");
@@ -17,8 +17,6 @@ const { numberWithCommas } = require("../common/utils");
 let mongoConfig = {
   keepAlive: true,
 };
-
-//test
 
 // SSL for production only
 if (process.env.CA_CERT) {
@@ -62,10 +60,9 @@ module.exports = {
     });
 
     app.listen(8080, function () {
-      console.log("Listening on port 8080");
+      console.log("Listening on port 8080.");
     });
 
-    console.log("Zero2Sixty is ready.");
     let randomstatuses = [
       `☀️ Summer ☀️  /season`,
       `⬆️ BIG UPDATE 6/12`,
@@ -81,34 +78,32 @@ module.exports = {
     let randomstatus = lodash.sample(randomstatuses);
     client.user.setActivity(randomstatus);
 
-    const CLIENT_ID = client.user.id;
     setInterval(() => {
       let randomstatus = lodash.sample(randomstatuses);
       client.user.setActivity(randomstatus);
     }, 20000);
-    const rest = new REST({
-      version: "9",
-    }).setToken(process.env.TOKEN);
 
-    (async () => {
-      try {
-        if (process.env.ENV === "production") {
-          await rest.put(Routes.applicationCommands(CLIENT_ID), {
+    try {
+      const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+      const CLIENT_ID = client.user.id;
+
+      if (process.env.ENV === "production") {
+        await rest.put(Routes.applicationCommands(CLIENT_ID), {
+          body: commands,
+        });
+        console.log(`Registered ${commands.length} commands globally.`);
+      } else {
+        await rest.put(
+          Routes.applicationGuildCommands(CLIENT_ID, process.env.GUILD_ID),
+          {
             body: commands,
-          });
-          console.log(`Registered ${commands.length} commands globally.`);
-        } else {
-          await rest.put(
-            Routes.applicationGuildCommands(CLIENT_ID, process.env.GUILD_ID),
-            {
-              body: commands,
-            }
-          );
-          console.log(`Registered ${commands.length} commands locally.`);
-        }
-      } catch (err) {
-        if (err) console.error(err);
+          }
+        );
+        console.log(`Registered ${commands.length} commands locally.`);
       }
-    })();
+      console.log("Zero2Sixty is ready.");
+    } catch (err) {
+      if (err) console.error(err);
+    }
   },
 };

@@ -57,19 +57,19 @@ module.exports = {
     let pre2 = userdata2.prestige;
 
     if (pre < 1)
-      return interaction.reply(
+      return await interaction.reply(
         `${user1}, you need to be prestige 1 before you can trade`
       );
 
     if (pre2 < 1)
-      return interaction.reply(
+      return await interaction.reply(
         `${user2}, you need to be prestige 1 before you can trade`
       );
 
-    if (user1 == user2) return interaction.reply(`You cant trade yourself!`);
+    if (user1 == user2) return await interaction.reply(`You cant trade yourself!`);
 
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
-      return interaction.reply("❌ You cant trade cash for cash!");
+      return await interaction.reply("❌ You cant trade cash for cash!");
     if (trading.endsWith("cash") && partdb.Parts[trading2.toLowerCase()]) {
       let user2parts = userdata2.parts;
       let amount2 = interaction.options.getNumber("amount2");
@@ -81,21 +81,21 @@ module.exports = {
       }
 
       if (!user2parts.includes(trading2.toLowerCase()))
-        return interaction.reply(`This user doesn't have this part!`);
+        return await interaction.reply(`This user doesn't have this part!`);
       let filtereduser = user2parts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
       if (actamount > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `${user2} doesn't have that many of that part!`
         );
 
       let amount = trading.split(" ")[0];
       let bal = userdata.cash;
       if (bal < amount)
-        return interaction.reply("Settle down you don't have enough cash!");
+        return await interaction.reply("Settle down you don't have enough cash!");
       if (amount < 1500)
-        return interaction.reply(`Minimum of $1.5k cash needed.`);
+        return await interaction.reply(`Minimum of $1.5k cash needed.`);
 
       let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
@@ -118,7 +118,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           for (let i = 0; i < actamount; i++) {
             user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
@@ -177,20 +177,20 @@ module.exports = {
       }
 
       if (!user2parts.includes(trading2.toLowerCase()))
-        return interaction.reply(`This user doesn't have this item!`);
+        return await interaction.reply(`This user doesn't have this item!`);
       let filtereduser = user2parts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
       if (actamount > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `${user2} doesn't have that many of that item!`
         );
       let amount = trading.split(" ")[0];
       let bal = userdata.cash;
       if (bal < amount)
-        return interaction.reply("Settle down you don't have enough cash!");
+        return await interaction.reply("Settle down you don't have enough cash!");
       if (amount < 1500)
-        return interaction.reply(`Minimum of $1.5k cash needed.`);
+        return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let itemtype;
 
       if (itemdb.Collectable[0][trading2.toLowerCase()]) {
@@ -234,7 +234,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           collector.stop();
           amount = trading.split(" ")[0];
@@ -288,7 +288,7 @@ module.exports = {
         return part === trading2.toLowerCase();
       });
       if (actamount > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `${user2} doesn't have ${actamount} ${trading2}!`
         );
 
@@ -298,7 +298,7 @@ module.exports = {
       let selected = filteredcar[0] || "No ID";
 
       if (selected == "No ID") {
-        return interaction.reply(`You don't have this car!`);
+        return await interaction.reply(`You don't have this car!`);
       }
 
       let embed = new Discord.EmbedBuilder()
@@ -325,7 +325,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           trading = trading.toLowerCase();
 
@@ -387,7 +387,7 @@ module.exports = {
       });
 
       if (actamount > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `${user2} doesn't have ${amount2} ${trading2}!`
         );
       if (!user1cars.includes(trading.toLowerCase()))
@@ -407,7 +407,7 @@ module.exports = {
       let selected = filteredcar[0] || "No ID";
 
       if (selected == "No ID") {
-        return interaction.reply(`You don't have this car!`);
+        return await interaction.reply(`You don't have this car!`);
       }
 
       let embed = new Discord.EmbedBuilder()
@@ -449,7 +449,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           trading = trading.toLowerCase();
 
@@ -496,16 +496,16 @@ module.exports = {
       let selected2 = filteredcar2[0] || "No ID";
 
       if (selected2 == "No ID")
-        return interaction.reply(`${user2} doesn't have that car!`);
+        return await interaction.reply(`${user2} doesn't have that car!`);
       if (selected !== "No ID")
-        return interaction.reply(`${user1}, you already have that car!`);
+        return await interaction.reply(`${user1}, you already have that car!`);
 
       let amount = trading.split(" ")[0];
       let bal = userdata.cash;
       if (bal < amount)
-        return interaction.reply("Settle down you don't have enough cash!");
+        return await interaction.reply("Settle down you don't have enough cash!");
       if (amount < 1500)
-        return interaction.reply(`Minimum of $1.5k cash needed.`);
+        return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
@@ -527,7 +527,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           userdata.cash -= Number(amount);
           userdata2.cash += Number(amount);
@@ -567,16 +567,16 @@ module.exports = {
       let selected2 = filteredcar2[0] || "No ID";
 
       if (selected == "No ID")
-        return interaction.reply(`${user1} doesn't have that car!`);
+        return await interaction.reply(`${user1} doesn't have that car!`);
       if (selected2 !== "No ID")
-        return interaction.reply(`${user2}, you already have that car!`);
+        return await interaction.reply(`${user2}, you already have that car!`);
 
       let amount = trading.split(" ")[0];
       let bal = userdata2.cash;
       if (bal < amount)
-        return interaction.reply("Settle down they don't have enough cash!");
+        return await interaction.reply("Settle down they don't have enough cash!");
       if (amount < 1500)
-        return interaction.reply(`Minimum of $1.5k cash needed.`);
+        return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
         .setDescription(
@@ -595,7 +595,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           userdata2.cash -= Number(amount);
           userdata.cash += Number(amount);
@@ -646,13 +646,13 @@ module.exports = {
       let selectedu1 = filteredcaru1[0] || "No ID";
 
       if (selected == "No ID")
-        return interaction.reply(`${user1} doesn't have that car!`);
+        return await interaction.reply(`${user1} doesn't have that car!`);
       if (selected2 == "No ID")
-        return interaction.reply(`${user2} doesn't have that car!`);
+        return await interaction.reply(`${user2} doesn't have that car!`);
       if (selectedu2 !== "No ID")
-        return interaction.reply(`${user2} already has this car!`);
+        return await interaction.reply(`${user2} already has this car!`);
       if (selectedu1 !== "No ID")
-        return interaction.reply(`${user1} already has this car!`);
+        return await interaction.reply(`${user1} already has this car!`);
 
       let embed = new Discord.EmbedBuilder()
         .setTitle("Trading")
@@ -675,7 +675,7 @@ module.exports = {
       const filter = (_, u) => u.id === user2.id;
       const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-      collector.on("collect", (r) => {
+      collector.on("collect", async (r) => {
         if (r.emoji.name == "✅") {
           userdata.cars.pull(selected);
           userdata2.cars.push(selected);
@@ -708,7 +708,7 @@ module.exports = {
       let user1parts = userdata.parts;
 
       if (!user1parts.includes(trading.toLowerCase()))
-        return interaction.reply(`You don't have this part!`);
+        return await interaction.reply(`You don't have this part!`);
       let actamount;
       if (amount1 > 1) {
         actamount = amount1;
@@ -720,7 +720,7 @@ module.exports = {
         return part === trading.toLowerCase();
       });
       if (amount2 > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `${user1} doesn't have ${actamount} ${trading}!`
         );
       if (trading2.endsWith("cash")) {
@@ -728,7 +728,7 @@ module.exports = {
         let bal = userdata2.cash;
 
         if (amount > bal)
-          return interaction.reply(`The user doesn't have this much cash!`);
+          return await interaction.reply(`The user doesn't have this much cash!`);
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -756,7 +756,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cash -= Number(amount);
             userdata.cash += Number(amount);
@@ -812,7 +812,7 @@ module.exports = {
           return part === trading2.toLowerCase();
         });
         if (actamount > filtereduser.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user2} doesn't have ${actamount} ${trading2}!`
           );
 
@@ -820,12 +820,12 @@ module.exports = {
           return part === trading.toLowerCase();
         });
         if (amount1 > filtereduser2.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user1} doesn't have ${actamount1} ${trading}!`
           );
 
         if (!user2parts.includes(trading2.toLowerCase()))
-          return interaction.reply(`This user doesn't have this part!`);
+          return await interaction.reply(`This user doesn't have this part!`);
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -858,7 +858,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount; i++)
               user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
@@ -927,16 +927,16 @@ module.exports = {
           actamount1 = 1;
         }
         if (!user1parts.includes(trading.toLowerCase()))
-          return interaction.reply(`You don't have this part!`);
+          return await interaction.reply(`You don't have this part!`);
 
         if (!useritems2.includes(trading2.toLowerCase()))
-          return interaction.reply(`This user doesn't have this item!`);
+          return await interaction.reply(`This user doesn't have this item!`);
 
         let filtereduser = useritems2.filter(function hasmany(part) {
           return part === trading2.toLowerCase();
         });
         if (amount2 > filtereduser.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user2} doesn't have ${actamount} ${trading2}!`
           );
 
@@ -944,7 +944,7 @@ module.exports = {
           return part === trading.toLowerCase();
         });
         if (amount1 > filtereduser2.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user1} doesn't have ${actamount1} ${trading}!`
           );
 
@@ -1002,7 +1002,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount1; i++)
               user1parts.splice(user1parts.indexOf(trading.toLowerCase()), 1);
@@ -1050,7 +1050,7 @@ module.exports = {
         let user2cars = userdata2.cars;
 
         if (!user2cars.includes(trading2.toLowerCase()))
-          return interaction.reply(`This user doesn't have this car!`);
+          return await interaction.reply(`This user doesn't have this car!`);
         let amount1 = interaction.options.getNumber("amount1");
 
         let actamount1;
@@ -1063,7 +1063,7 @@ module.exports = {
           return part === trading.toLowerCase();
         });
         if (actamount1 > filtereduser.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user1} doesn't have ${actamount1} ${trading}!`
           );
         let filteredcar = userdata.cars.filter(
@@ -1076,9 +1076,9 @@ module.exports = {
         let selected2 = filteredcar2[0] || "No ID";
 
         if (selected2 == "No ID")
-          return interaction.reply(`${user2} doesn't have that car!`);
+          return await interaction.reply(`${user2} doesn't have that car!`);
         if (selected !== "No ID")
-          return interaction.reply(`${user1}, you already have that car!`);
+          return await interaction.reply(`${user1}, you already have that car!`);
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -1109,7 +1109,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cars.pull(selected);
             userdata.cars.push(selected);
@@ -1168,14 +1168,14 @@ module.exports = {
         actamount1 = 1;
       }
       if (!useritems)
-        return interaction.reply(`${user1}, you don't have any items!`);
+        return await interaction.reply(`${user1}, you don't have any items!`);
       if (!useritems.includes(trading.toLowerCase()))
-        return interaction.reply(`${user1}, you don't have this item`);
+        return await interaction.reply(`${user1}, you don't have this item`);
       let filtereduser = useritems.filter(function hasmany(part) {
         return part === trading.toLowerCase();
       });
       if (actamount1 > filtereduser.length)
-        return interaction.reply(
+        return await interaction.reply(
           `${user1} doesn't have ${actamount1} ${trading}!`
         );
 
@@ -1195,11 +1195,11 @@ module.exports = {
         let amount = trading2.split(" ")[0];
         let bal = userdata2.cash;
         if (bal < amount)
-          return interaction.reply(
+          return await interaction.reply(
             `Settle down, ${user2} doesn't have enough cash!`
           );
         if (amount < 1500)
-          return interaction.reply(`Minimum of $1.5k cash needed.`);
+          return await interaction.reply(`Minimum of $1.5k cash needed.`);
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
           .setDescription(
@@ -1244,7 +1244,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cash -= Number(amount);
 
@@ -1287,12 +1287,12 @@ module.exports = {
           return part === trading2.toLowerCase();
         });
         if (actamount > filtereduser.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user2} doesn't have ${actamount} ${trading2}!`
           );
 
         if (!user2parts.includes(trading2.toLowerCase()))
-          return interaction.reply(`This user doesn't have this part!`);
+          return await interaction.reply(`This user doesn't have this part!`);
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -1339,7 +1339,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount; i++)
               user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
@@ -1386,7 +1386,7 @@ module.exports = {
         let user2cars = userdata.cars;
 
         if (!user2cars.includes(trading2.toLowerCase()))
-          return interaction.reply(`This user doesn't have this car!`);
+          return await interaction.reply(`This user doesn't have this car!`);
 
         let filteredcar = userdata.cars.filter(
           (car) => car.Name == trading2.toLowerCase()
@@ -1398,9 +1398,9 @@ module.exports = {
         let selected2 = filteredcar2[0] || "No ID";
 
         if (selected !== "No ID")
-          return interaction.reply(`${user2}, you already have this car!`);
+          return await interaction.reply(`${user2}, you already have this car!`);
         if (selected2 == "No ID")
-          return interaction.reply(`${user2}, you don't have this car!`);
+          return await interaction.reply(`${user2}, you don't have this car!`);
 
         let embed = new Discord.EmbedBuilder()
           .setTitle("Trading")
@@ -1445,7 +1445,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             userdata2.cars.pull(selected);
             userdata.cars.push(selected);
@@ -1488,13 +1488,13 @@ module.exports = {
         let user2items = userdata2.items;
 
         if (!user2items.includes(trading2.toLowerCase()))
-          return interaction.reply(`This user doesn't have this item!`);
+          return await interaction.reply(`This user doesn't have this item!`);
 
         let filtereduser = user2items.filter(function hasmany(part) {
           return part === trading2.toLowerCase();
         });
         if (actamount > filtereduser.length)
-          return interaction.reply(
+          return await interaction.reply(
             `${user2} doesn't have ${actamount} ${trading2}!`
           );
 
@@ -1564,7 +1564,7 @@ module.exports = {
         const filter = (_, u) => u.id === user2.id;
         const collector = msg.createReactionCollector({ filter, time: 60000 });
 
-        collector.on("collect", (r) => {
+        collector.on("collect", async (r) => {
           if (r.emoji.name == "✅") {
             for (let i = 0; i < actamount; i++)
               user2items.splice(user2items.indexOf(trading2.toLowerCase()), 1);
@@ -1612,7 +1612,7 @@ module.exports = {
 
       //Item for car
     } else {
-      interaction.reply(
+      await interaction.reply(
         `Error! Did you make sure to specify cash, a car, or a part on the bot?`
       );
     }

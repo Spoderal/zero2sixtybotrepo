@@ -37,6 +37,6 @@ module.exports = {
         We reserve the right to change this at any time.`
       )
       .setColor(colors.blue);
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

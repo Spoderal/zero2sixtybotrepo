@@ -5,6 +5,8 @@ const express = require("express");
 const app = express();
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const User = require("./schema/profile-schema");
+const Topgg = require("@top-gg/sdk");
+const path = require("path");
 
 const client = new Client({
   intents: [
@@ -17,19 +19,18 @@ const client = new Client({
   shards: "auto",
 });
 
-const Topgg = require("@top-gg/sdk");
 const webhook = new Topgg.Webhook("ZeroSpideral3!#");
 app.post(
   "/vote",
   webhook.listener(async (vote) => {
     console.log("User with id - " + vote.user + " voted!");
-    let userdata = await User.findOne({id: vote.user})
-    userdata.hasvoted = true
-    userdata.votetimer = Date.now()
-    userdata.save()
+    let userdata = await User.findOne({ id: vote.user });
+    if (!userdata) return;
+    userdata.hasvoted = true;
+    userdata.votetimer = Date.now();
+    userdata.save();
   })
 );
-
 
 // See .env-example for an explanation of FORCE_DISABLE_BOT
 if (process.env.FORCE_DISABLE_BOT === "true") {
@@ -49,13 +50,12 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
   );
 } else {
   app.listen(4500);
+
+  const commands = [];
+  client.commands = new Collection();
   const commandFiles = fs
     .readdirSync("./commandsv2")
     .filter((file) => file.endsWith(".js"));
-
-  const commands = [];
-
-  client.commands = new Collection();
 
   for (const file of commandFiles) {
     const command = require(`./commandsv2/${file}`);
@@ -66,23 +66,21 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
       );
     } else {
       commands.push({ ...command.data.toJSON(), fileLocation: file });
+      client.commands.set(command.data.name, command);
     }
-    client.commands.set(command.data.name, command);
   }
 
   const eventFiles = fs
-    .readdirSync("./events")
-    .filter((file) => file.endsWith(".js"));
+    .readdirSync("./events", { withFileTypes: true })
+    .filter((file) => !file.isDirectory() && path.extname(file.name) === ".js");
 
   for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
+    const event = require(`./events/${file.name}`);
 
     if (event.once) {
       client.once(event.name, (...args) => event.execute(...args, commands));
     } else {
-      client.on(event.name, async (...args) =>
-        event.execute(...args, commands)
-      );
+      client.on(event.name, (...args) => event.execute(...args, commands));
     }
   }
 

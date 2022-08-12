@@ -18,7 +18,7 @@ module.exports = {
     let patreon3 = db.fetch(`patreon_tier_3_${interaction.user.id}`);
     let booster = db.fetch(`patreon_tier_b_${interaction.user.id}`);
     if (!booster)
-      return interaction.reply("You're not a community server booster!");
+      return await interaction.reply("You're not a community server booster!");
     if (patreon1) {
       cash *= 2;
     }
@@ -37,7 +37,7 @@ module.exports = {
         .setDescription(
           `You've already collected your booster cash\n\nCollect it again in ${time}.`
         );
-      interaction.reply({ embeds: [timeEmbed] });
+      await interaction.reply({ embeds: [timeEmbed] });
     } else {
       db.add(`cash_${interaction.user.id}`, cash);
       db.set(`boost_${interaction.user.id}`, Date.now());
@@ -46,7 +46,7 @@ module.exports = {
         .setTitle(`Booster Cash for ${interaction.user.username}`)
         .addFields([{ name: "Earned Cash", value: `${toCurrency(cash)}` }])
         .setColor(colors.blue);
-      interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };

@@ -58,7 +58,7 @@ module.exports = {
     let weeklyms = ms(timeout2 - (Date.now() - weeklytimeleft));
 
     if (!dailytask1 || !weeklytask1)
-      return interaction.reply("Please send a message to set your tasks.");
+      return await interaction.reply("Please send a message to set your tasks.");
     let dailyemote;
     let weeklyemote;
     if (dailytask1.completed == true) dailyemote = "✅";
@@ -87,6 +87,6 @@ module.exports = {
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/Srtk0HT/Logo-Makr-5-Db-APp.png");
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

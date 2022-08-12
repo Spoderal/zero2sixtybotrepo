@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { invisibleSpace } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,7 +19,7 @@ module.exports = {
       .setTitle("Import Crates")
       .addFields([
         {
-          name: "​",
+          name: invisibleSpace,
           value: `
             Common Import Crate: 50 ${key1emote} Keys
             Rare Import Crate : 25 ${key2emote} Keys
@@ -34,7 +35,7 @@ module.exports = {
       )
       .setThumbnail("https://i.ibb.co/vs3Gm1H/Logo-Makr-2hu-VKG.png")
       .setColor(colors.blue);
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
   permissions: "",
   requiredRoles: [],

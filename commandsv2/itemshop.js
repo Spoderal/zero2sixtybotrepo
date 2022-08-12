@@ -25,6 +25,6 @@ module.exports = {
       .setDescription(`${items.join("\n\n")}`)
       .setColor(colors.blue);
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
 };

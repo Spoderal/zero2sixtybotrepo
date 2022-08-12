@@ -41,30 +41,30 @@ module.exports = {
 
     if (subcommand === "deposit") {
       if (amount > banklimit)
-        return interaction.reply(
+        return await interaction.reply(
           "Your bank doesn't have enough room for that much!"
         );
       if (amount > banklimit - bank)
-        return interaction.reply(
+        return await interaction.reply(
           "Your bank doesn't have enough room for that much!"
         );
 
       if (amount > cash)
-        return interaction.reply(`You don't have enough cash!`);
+        return await interaction.reply(`You don't have enough cash!`);
       userdata.bank += Number(amount);
       userdata.cash -= Number(amount);
       userdata.save();
 
-      interaction.reply(`Deposited ${toCurrency(amount)}`);
+      await interaction.reply(`Deposited ${toCurrency(amount)}`);
     } else if (subcommand === "withdraw") {
       if (amount > bank)
-        return interaction.reply(
+        return await interaction.reply(
           "Your bank doesn't have enough cash to withdraw this amount!"
         );
       userdata.cash += Number(amount);
       userdata.bank -= Number(amount);
       userdata.save();
-      interaction.reply(`Withdrawed ${toCurrency(amount)}`);
+      await interaction.reply(`Withdrawed ${toCurrency(amount)}`);
     }
   },
 };

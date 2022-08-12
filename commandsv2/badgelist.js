@@ -11,20 +11,21 @@ module.exports = {
     let embed = new EmbedBuilder()
       .setTitle(`Badges Available`)
       .setDescription(
-        `**Car Collector** = *Own 10 cars*\n
-       **Filthy Rich** = *Earn 1 million cash*\n
-       **Time Master** = *Complete the time trial in under 20 seconds*\n
-       **Drift King** = *Earn a drift level of 50 or more*\n
-       **How?** = *Win a race in a Peel P50*\n
-       **Race King** = *Win 100 races*\n
-       **2EZ** = *Win a group pvp race*\n
-       **Car Rich** = *Have a total garage value of $50M*\n
-       **SECRET** = *SECRET*
-       `
+        `
+        **Car Collector** = *Own 10 cars*
+        **Filthy Rich** = *Earn 1 million cash*
+        **Time Master** = *Complete the time trial in under 20 seconds*
+        **Drift King** = *Earn a drift level of 50 or more*
+        **How?** = *Win a race in a Peel P50*
+        **Race King** = *Win 100 races*
+        **2EZ** = *Win a group pvp race*
+        **Car Rich** = *Have a total garage value of $50M*
+        **SECRET** = *SECRET*
+      `
       )
       .setColor(colors.blue);
 
-    interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
   },
   permissions: "",
   requiredRoles: [],

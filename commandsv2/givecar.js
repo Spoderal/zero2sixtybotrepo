@@ -20,7 +20,7 @@ module.exports = {
       interaction.user.id !== "890390158241853470" &&
       interaction.user.id !== "937967206652837928"
     ) {
-      interaction.reply("You dont have permission to use this command!");
+      await interaction.reply("You dont have permission to use this command!");
       return;
     } else {
       let togive = interaction.options.getString("car");
@@ -30,7 +30,7 @@ module.exports = {
       if (!givingto) return;
 
       if (!cars.Cars[togive.toLowerCase()])
-        return interaction.reply("Thats not a car!");
+        return await interaction.reply("Thats not a car!");
 
       db.push(
         `cars_${givingto.id}`,
@@ -58,7 +58,7 @@ module.exports = {
         );
       }
 
-      interaction.reply(
+      await interaction.reply(
         `Gave <@${givingto.id}> a ${cars.Cars[togive.toLowerCase()].Name}`
       );
     }

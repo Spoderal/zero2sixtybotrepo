@@ -33,17 +33,17 @@ module.exports = {
     let emote;
     let name;
     if (!items.includes(itemtouse.toLowerCase()))
-      return interaction.reply("You don't have this item!");
+      return await interaction.reply("You don't have this item!");
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
     });
     if (amount2 > 50)
-      return interaction.reply(
+      return await interaction.reply(
         `The max amount you can use in one command is 50!`
       );
 
     if (amount2 > filtereduser.length)
-      return interaction.reply("You don't have that many of that item!");
+      return await interaction.reply("You don't have that many of that item!");
     let fullname;
 
     if (itemdb.Police[itemtouse.toLowerCase()]) {
@@ -61,7 +61,7 @@ module.exports = {
         let banklimit = userdata.banklimit;
 
         if (banklimit >= 250000000)
-          return interaction.reply(
+          return await interaction.reply(
             `The bank limit cap is currently ${toCurrency(250000000)}!`
           );
 
@@ -85,21 +85,21 @@ module.exports = {
       } else if (itemtouse.toLowerCase() == "small vault") {
         let vault = userdata.vault;
         if (vault)
-          return interaction.reply(
+          return await interaction.reply(
             `You already have a vault activated, prestige to deactivate it!`
           );
         userdata.vault = itemtouse.toLowerCase();
       } else if (itemtouse.toLowerCase() == "medium vault") {
         let vault = userdata.vault;
         if (vault)
-          return interaction.reply(
+          return await interaction.reply(
             `You already have a vault activated, prestige to deactivate it!`
           );
         userdata.vault = itemtouse.toLowerCase();
       } else if (itemtouse.toLowerCase() == "large vault") {
         let vault = userdata.vault;
         if (vault)
-          return interaction.reply(
+          return await interaction.reply(
             `You already have a vault activated, prestige to deactivate it!`
           );
         userdata.vault = itemtouse.toLowerCase();
@@ -115,7 +115,7 @@ module.exports = {
           color: "Red",
         };
 
-        if (pet) return interaction.reply(`You already have a pet!`);
+        if (pet) return await interaction.reply(`You already have a pet!`);
         userdata.pet = petobj;
       } else if (itemtouse.toLowerCase() == "water bottle") {
         let watercooldown = cooldowndata.waterbottle;

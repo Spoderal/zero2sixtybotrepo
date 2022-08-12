@@ -61,7 +61,7 @@ module.exports = {
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
 
     let filteredcar2 = userdata2.cars.filter((car) => car.ID == idtoselect2);
@@ -73,7 +73,7 @@ module.exports = {
         .setDescription(
           `${user2.username}, That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
-      return interaction.reply({ embeds: [errembed] });
+      return await interaction.reply({ embeds: [errembed] });
     }
     let user = interaction.user;
     let timeout = cooldowndata.timeout || 45000;
@@ -83,7 +83,7 @@ module.exports = {
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
-      return interaction.reply(`Please wait ${time} before racing again.`);
+      return await interaction.reply(`Please wait ${time} before racing again.`);
     }
     let semote = emotes.speed;
     let hemote = emotes.handling;
@@ -92,16 +92,16 @@ module.exports = {
     let rpemote = emotes.rp;
 
     if (cars.Cars[selected.Name.toLowerCase()].Junked) {
-      return interaction.reply("This car is too junked to race, sorry!");
+      return await interaction.reply("This car is too junked to race, sorry!");
     }
     if (cars.Cars[selected2.Name.toLowerCase()].Junked) {
-      return interaction.reply("This car is too junked to race, sorry!");
+      return await interaction.reply("This car is too junked to race, sorry!");
     }
 
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }
@@ -109,7 +109,7 @@ module.exports = {
     let range2 = selected2.Range;
     if (cars.Cars[selected2.Name.toLowerCase()].Electric) {
       if (range2 <= 0) {
-        return interaction.reply(
+        return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }

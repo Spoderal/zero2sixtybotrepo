@@ -32,7 +32,7 @@ module.exports = {
     const userdata = await User.findOne({ id: interaction.user.id });
 
     if (!userdata?.id) {
-      return interaction.reply(
+      return await interaction.reply(
         "You don't have a profile yet! Use `/start` to get started!"
       );
     }
@@ -48,7 +48,7 @@ module.exports = {
     const bought = interaction.options.getString("item").toLowerCase();
 
     if (!bought)
-      return interaction.reply(
+      return await interaction.reply(
         "To use this command, specify the car or part you want to buy. Example: /buy 1995 Mazda Miata"
       );
 
@@ -69,26 +69,26 @@ module.exports = {
       !itemsList.Police[bought] &&
       !itemsList.Multiplier[bought]
     )
-      return interaction.reply(
+      return await interaction.reply(
         "That car or part isn't available yet, suggest it in the support server! In the meantime, check how to use the command by running /buy."
       );
 
     if (boughtCar) {
       if (usercars?.length >= garagelimit)
-        return interaction.reply(
+        return await interaction.reply(
           "Your spaces are already filled. Sell a car or get more garage space!"
         );
 
       const boughtCarPrice = parseInt(boughtCar.Price);
       if (boughtCarPrice == 0)
-        return interaction.reply("This car is not purchasable.");
+        return await interaction.reply("This car is not purchasable.");
 
-      if (usercars.includes(boughtCar.Name.toLowerCase()))
-        return interaction.reply("You already own this car!");
+      if (usercars.find((c) =>  c.Name == boughtCar.Name))
+        return await interaction.reply("You already own this car!");
 
       if (boughtCar.Blackmarket) {
         if (gold < boughtCarPrice)
-          return interaction.reply("You don't have enough gold!");
+          return await interaction.reply("You don't have enough gold!");
 
         let idtoset = boughtCar.alias;
         let carindb = boughtCar;
@@ -125,28 +125,28 @@ module.exports = {
           .setColor(colors.blue)
           .setThumbnail(`${boughtCar.Image}`);
 
-        interaction.reply({ embeds: [embed] });
+        await interaction.reply({ embeds: [embed] });
 
         return;
       } else {
         if (cash < boughtCarPrice)
-          return interaction.reply("You don't have enough cash!");
+          return await interaction.reply("You don't have enough cash!");
 
         if (boughtCar.Police) {
           if (cash < boughtCarPrice)
-            return interaction.reply("You don't have enough cash!");
+            return await interaction.reply("You don't have enough cash!");
 
           let job = userdata.job;
-          if (!job) return interaction.reply("You don't have a job!");
+          if (!job) return await interaction.reply("You don't have a job!");
           if (job.Job !== "police")
-            return interaction.reply(
+            return await interaction.reply(
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
           let num = job.Number;
 
           if (num < boughtCar.Police)
-            return interaction.reply(
+            return await interaction.reply(
               `You need the rank "${boughtCar.Rank}" to buy this car!`
             );
           let idtoset = boughtCar.alias;
@@ -187,7 +187,7 @@ module.exports = {
             .setColor(colors.blue)
             .setThumbnail(`${boughtCar.Image}`);
 
-          return interaction.reply({ embeds: [embed] });
+          return await interaction.reply({ embeds: [embed] });
         }
         let sellprice = boughtCarPrice * 0.65;
 
@@ -197,7 +197,7 @@ module.exports = {
             boughtCarPrice - boughtCarPrice * parseFloat(discountcar);
 
           if (cash < disccarprice)
-            return interaction.reply(`You can't afford this car!`);
+            return await interaction.reply(`You can't afford this car!`);
 
           cash -= disccarprice;
           let idtoset = boughtCar.alias;
@@ -240,12 +240,12 @@ module.exports = {
             .setColor(colors.blue)
             .setThumbnail(`${boughtCar.Image}`);
 
-          interaction.reply({ embeds: [embed] });
+          await interaction.reply({ embeds: [embed] });
         } else {
           let sellprice = boughtCarPrice * 0.65;
 
           if (cash < boughtCarPrice)
-            return interaction.reply("You don't have enough cash!");
+            return await interaction.reply("You don't have enough cash!");
 
           cash -= boughtCarPrice;
           let idtoset = boughtCar.alias;
@@ -294,7 +294,7 @@ module.exports = {
             .setColor(colors.blue)
             .setThumbnail(`${boughtCar.Image}`);
 
-          interaction.reply({ embeds: [embed] });
+          await interaction.reply({ embeds: [embed] });
         }
       }
     } else if (boughtPart) {
@@ -302,19 +302,19 @@ module.exports = {
       let discount = userdata.discountparts;
 
       if (amount2 > 50)
-        return interaction.reply(
+        return await interaction.reply(
           `The max amount you can buy in one command is 50!`
         );
 
       if (boughtPart.Tier == "BM1") {
         if (gold < boughtPartPrice)
-          return interaction.reply("You don't have enough gold!");
+          return await interaction.reply("You don't have enough gold!");
 
         userdata.gold -= boughtPartPrice;
         userdata.parts.push(bought);
         await userdata.save();
 
-        interaction.reply(
+        await interaction.reply(
           `You bought a ${boughtPart.Name} for 🪙 ${numberWithCommas(
             boughtPartPrice
           )}`
@@ -325,10 +325,10 @@ module.exports = {
             boughtPartPrice - boughtPartPrice * parseFloat(discount);
 
           if (boughtPartPrice == 0)
-            return interaction.reply("This part is not purchasable.");
+            return await interaction.reply("This part is not purchasable.");
 
           if (cash < priceforpart * amount2)
-            return interaction.reply("You don't have enough cash!");
+            return await interaction.reply("You don't have enough cash!");
 
           priceforpart = amount2 * priceforpart;
           cash -= priceforpart;
@@ -361,11 +361,11 @@ module.exports = {
           await interaction.reply({ embeds: [embed] });
         } else {
           if (boughtPartPrice == 0)
-            return interaction.reply("This part is not purchasable.");
+            return await interaction.reply("This part is not purchasable.");
 
           let newprice = boughtPartPrice * amount2;
           if (userdata.cash < newprice)
-            return interaction.reply(
+            return await interaction.reply(
               `You cant afford this! You need ${toCurrency(newprice)}`
             );
 
@@ -403,7 +403,7 @@ module.exports = {
     } else if (boughtHouse) {
       const boughtHousePrice = parseInt(boughtHouse.Price);
       if (cash < boughtHousePrice)
-        return interaction.reply("You don't have enough cash!");
+        return await interaction.reply("You don't have enough cash!");
 
       // let house = userdata.house;
       // let garagelimit = userdata.garageLimit;
@@ -460,7 +460,7 @@ module.exports = {
       }
       userdata.cash -= boughtHousePrice;
       await userdata.save();
-      interaction.reply(
+      await interaction.reply(
         `You bought ${boughtHouse.Name} for ${toCurrency(boughtHousePrice)}`
       );
     } else if (boughtWarehouse) {
@@ -468,19 +468,21 @@ module.exports = {
       let prestige = userdata.prestige;
       let wareprice = parseInt(boughtWarehouse.Price);
       if (cash < wareprice)
-        return interaction.reply(`You cant afford this warehouse!`);
+        return await interaction.reply(`You cant afford this warehouse!`);
       if (prestige < 11)
-        return interaction.reply(
+        return await interaction.reply(
           `Your prestige needs to be 11 before you can buy warehouses!`
         );
       if (warehouses.includes(bought))
-        return interaction.reply(`You've already purchased this warehouse!`);
+        return await interaction.reply(
+          `You've already purchased this warehouse!`
+        );
 
       userdata.warehouses.push(bought);
       userdata.garageLimit += boughtWarehouse.Space;
       await userdata.save();
 
-      interaction.reply(
+      await interaction.reply(
         `You bought the ${boughtWarehouse.Emote} ${
           boughtWarehouse.Name
         } for ${toCurrency(boughtWarehouse.Price)}`
@@ -497,13 +499,13 @@ module.exports = {
       let itemindb = filtereditem[0] || "No ID";
 
       if (itemindb == "No ID")
-        return interaction.reply(
+        return await interaction.reply(
           `That item isn't in the shop today, check back tomorrow!`
         );
 
       let pricing = parseInt(itemindb.Price) * amount2;
       if (userdata.cash < pricing)
-        return interaction.reply(
+        return await interaction.reply(
           `You cant afford this! You need ${toCurrency(pricing)}`
         );
 
@@ -517,13 +519,15 @@ module.exports = {
 
       await userdata.save();
 
-      interaction.reply(
+      await interaction.reply(
         `Purchased x${amount2} ${itemsList.Other[bought].Emote} ${
           itemsList.Other[bought].Name
         } for ${toCurrency(pricing)}`
       );
     } else {
-      interaction.reply(`Thats not a purchasable item, car, house, or part!`);
+      await interaction.reply(
+        `Thats not a purchasable item, car, house, or part!`
+      );
     }
   },
 };

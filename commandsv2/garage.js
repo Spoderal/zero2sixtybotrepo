@@ -6,7 +6,7 @@ const itemdb = require("../data/items.json");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, blankField } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -57,7 +57,7 @@ module.exports = {
 
     let cars = userdata.cars;
     if (cars == null || cars == [] || cars.length <= 0 || !cars.length)
-      return interaction.reply("You dont own any cars!");
+      return await interaction.reply("You dont own any cars!");
     let parts = userdata.parts;
     let badges = userdata.badges;
     let garagelimit = userdata.garageLimit;
@@ -78,7 +78,7 @@ module.exports = {
     ) {
       items = userdata.items;
       if (!items || items.length == 0 || items == ["no items"])
-        return interaction.reply(`You don't have any items!`);
+        return await interaction.reply(`You don't have any items!`);
 
       actitem = items[i];
       let emote;
@@ -159,7 +159,7 @@ module.exports = {
           `${xessence} Xessence\n
           ${actuserparts[0]?.join("\n") || "0 Parts"}`
         )
-        .addFields([{ name: "​", value: "​" }])
+        .addFields([blankField])
         .setColor(colors.blue);
 
       let row = new ActionRowBuilder().addComponents(
@@ -563,7 +563,7 @@ module.exports = {
         .setTitle(`${target.username}'s items`)
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
         .setDescription(`${actitems[0].join("\n")}`)
-        .addFields([{ name: "​", value: "​" }])
+        .addFields([blankField])
         .setColor(colors.blue);
 
       let row = new ActionRowBuilder().addComponents(
@@ -643,8 +643,7 @@ module.exports = {
           )}\n\nGarage Limit: ${cars.length}/${garagelimit}`
         )
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
-        .setImage(garageimg)
-        .addFields([{ name: "​", value: "​" }]);
+        .setImage(garageimg);
 
       embed1
         .setFooter({ text: `Page 1/${displaycars.length}` })

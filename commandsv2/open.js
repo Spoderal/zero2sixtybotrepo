@@ -28,18 +28,18 @@ module.exports = {
     let bought = interaction.options.getString("crate");
     let cash = userdata.cash;
     if (!bought)
-      return interaction.reply(
+      return await interaction.reply(
         "**To use this command, specify the crate you want to buy. To check what crates are available check the crates shop by sending /crates.**"
       );
     if (!crates.Crates[bought.toLowerCase()])
-      return interaction.reply(
+      return await interaction.reply(
         "**That crate isn't available yet, suggest it in the support server! In the meantime, check how to use the command by running /open.**"
       );
     if (!crates.Crates[bought.toLowerCase()].Price)
-      return interaction.reply("Thats not a purchasable crate!");
+      return await interaction.reply("Thats not a purchasable crate!");
 
     if (cash < crates.Crates[bought.toLowerCase()].Price)
-      return interaction.reply(
+      return await interaction.reply(
         `You dont have enough cash! This crate costs $${
           crates.Crates[bought.toLowerCase()].Price
         }`
@@ -53,7 +53,7 @@ module.exports = {
       let helmets = userdata.pfps;
       if (helmets.includes(pfps.Pfps[randomitem].Name.toLowerCase())) {
         userdata.cash += crates.Crates[bought.toLowerCase()].Price;
-        interaction.reply(
+        await interaction.reply(
           `You already have the helmet you won, so you've received a full refund!`
         );
         return;
@@ -63,7 +63,7 @@ module.exports = {
       userdata.save();
       embed.setTitle("Preview");
       embed.setThumbnail(pfps.Pfps[randomitem].Image).setColor(colors.blue);
-      interaction.reply({
+      await interaction.reply({
         content: `You opened a ${bought} and won a ${randomitem} profile image!`,
         embeds: [embed],
       });
