@@ -43,14 +43,13 @@ module.exports = {
     ),
   async execute(interaction) {
     let user1 = interaction.user;
-    let user1parts = userdata.parts;
     let userdata = await User.findOne({ id: user1.id });
+    let user1parts = userdata.parts;
     let parttoinstall = interaction.options.getString("part");
     let cartoinstall = interaction.options.getString("car");
     let parte = interaction.options.getString("partname");
 
     let actpart;
-
     switch (parttoinstall) {
       case "exhaust":
         actpart = "Exhaust";
