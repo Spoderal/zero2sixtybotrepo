@@ -82,7 +82,7 @@ module.exports = {
         `Please wait ${time} before racing again.`
       );
     }
-    let user1cars = db.fetch(`cars_${user.id}`);
+    let user1cars = userdata.cars
     let bot1cars = [
       "1995 mazda miata",
       "1991 toyota mr2",
