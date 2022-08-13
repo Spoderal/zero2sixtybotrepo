@@ -150,7 +150,7 @@ module.exports = {
           name: `🤖 ${cars.Cars[botcar.Name.toLowerCase()].Emote} ${
             cars.Cars[botcar.Name.toLowerCase()].Name
           }`,
-          calue: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.Name.toLowerCase()].Handling
           }`,
           inline: true,
