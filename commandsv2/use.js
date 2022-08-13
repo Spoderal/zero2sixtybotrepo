@@ -22,9 +22,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    let cooldowndata =
-      (await Cooldowns.findOne({ id: interaction.user.id })) ||
-      new Cooldowns({ id: interaction.user.id });
+    let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id }) || new Cooldowns({ id: interaction.user.id });
 
     let itemtouse = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount");
@@ -32,7 +30,7 @@ module.exports = {
     let items = userdata.items;
     let emote;
     let name;
-    if (!items.includes(itemtouse.toLowerCase()))
+    if (!items.includes(itemtouse.toLowerCase()) && !itemtouse == "gold")
       return await interaction.reply("You don't have this item!");
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
@@ -42,7 +40,7 @@ module.exports = {
         `The max amount you can use in one command is 50!`
       );
 
-    if (amount2 > filtereduser.length)
+    if (amount2 > filtereduser.length && !itemtouse == "gold")
       return await interaction.reply("You don't have that many of that item!");
     let fullname;
 
@@ -137,7 +135,27 @@ module.exports = {
         cooldowndata.hm = 0;
 
         cooldowndata.waterbottle = Date.now();
+        cooldowndata.save()
       }
+ 
+    }
+    else if (itemtouse.toLowerCase() == "gold") {
+      console.log("gold")
+      let gold = userdata.gold
+      if(gold <= 0) return interaction.reply(`You need 5 gold to clear your cooldowns!`)
+  
+      userdata.gold -= 5
+      cooldowndata.racing = 0
+      cooldowndata.betracing = 0
+      cooldowndata.drift = 0
+
+      cooldowndata.cashcup = 0
+      cooldowndata.hm = 0
+      cooldowndata.qm = 0
+      cooldowndata.save()
+      userdata.save()
+
+     return interaction.reply(`Cleared race cooldowns for 5 gold`)
     }
     if (itemdb.Police[itemtouse.toLowerCase()]) {
       emote = itemdb.Police[itemtouse.toLowerCase()].Emote;
@@ -160,6 +178,7 @@ module.exports = {
     userdata.items = items;
 
     userdata.save();
+
     await interaction.reply(`Used x${amount2} ${fullname}!`);
   },
 };

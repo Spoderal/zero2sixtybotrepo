@@ -5,7 +5,7 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const { emotes } = require("../common/emotes");
+// const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,15 +23,8 @@ module.exports = {
             value: "spring_event",
             customId: "spring",
             emoji: "☀️",
-          },
-
-          {
-            label: "Ferrari Championship",
-            description: "Information for the Ferrari Championship Event",
-            value: "ferrari",
-            customId: "ferrarievent",
-            emoji: emotes.ferrari,
-          },
+          }
+       
         ])
     );
 
@@ -41,8 +34,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Summer Season 2022 ☀️\n
-          Ferrari Championship <:ferrari:931011838374727730>
+          Summer Season 2022 ☀️
         
       `);
 

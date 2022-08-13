@@ -2576,6 +2576,34 @@
       "Drift": 0,
       "Handling": 500
     },
+    "2023 ferrari daytona sp3": {
+      "alias": "2023 daytona sp3",
+      "Name": "2023 Ferrari Daytona SP3",
+      "Emote": "<:ferrari:931011838374727730>",
+      "Speed": 201,
+      "kmh": 321,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "6.5 L F140 HC V12",
+      "Image": "https://www.topgear.com/sites/default/files/2022/07/20-Ferrari-Daytona-SP3.jpg",
+      "0-60": 6,
+      "Drift": 0,
+      "Handling": 500
+    },
+    "pizza delivery car": {
+      "alias": "pizza delivery car",
+      "Name": "Pizza Delivery Car",
+      "Emote": "🍕",
+      "Speed": 150,
+      "kmh": 321,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "Pizza Engine",
+      "Image": "https://cdn.vox-cdn.com/thumbor/DIzS-b4uls7g46HCF8HOmBRguMI=/31x0:642x407/1200x800/filters:focal(31x0:642x407)/cdn.vox-cdn.com/uploads/chorus_image/image/47486271/Screenshot_2015-10-21_16.58.21.0.0.png",
+      "0-60": 10,
+      "Drift": 0,
+      "Handling": 500
+    },
     "2005 pagani zonda f": {
       "alias": "2005 zonda f",
       "Name": "2005 Pagani Zonda F",

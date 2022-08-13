@@ -1,6 +1,6 @@
-const db = require("quick.db");
 const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const User = require(`../schema/profile-schema`)
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,35 +28,35 @@ module.exports = {
 
       if (!togive) return;
       if (!givingto) return;
-
+      
+      let udata2 = await User.findOne({id: givingto.id}) 
       if (!cars.Cars[togive.toLowerCase()])
-        return await interaction.reply("Thats not a car!");
+      return await interaction.reply("Thats not a car!");
+        let carindb = cars.Cars[togive.toLowerCase()]
+        let carobj = {
+          ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+        };
+        if (carindb.Range) {
+          carobj = {
+            ...carobj,
+            Range: carindb.Range,
+            MaxRange: carindb.Range,
+          };
+        }
 
-      db.push(
-        `cars_${givingto.id}`,
-        cars.Cars[togive.toLowerCase()].Name.toLowerCase()
-      );
-      db.set(
-        `${cars.Cars[togive.toLowerCase()].Name}speed_${givingto.id}`,
-        cars.Cars[togive.toLowerCase()].Speed
-      );
-      db.set(
-        `${cars.Cars[togive.toLowerCase()].Name}resale_${givingto.id}`,
-        cars.Cars[togive.toLowerCase()].Price * 0.75
-      );
-      db.set(
-        `${cars.Cars[togive.toLowerCase()].Name}060_${givingto.id}`,
-        cars.Cars[togive.toLowerCase()]["0-60"]
-      );
+        udata2.cars.push(carobj)
+          
+        udata2.save()
 
-      if (cars.Cars[togive.toLowerCase()].Junked) {
-        db.set(
-          `${cars.Cars[togive.toLowerCase()].Name}restoration_${
-            interaction.user.id
-          }`,
-          0
-        );
-      }
+
 
       await interaction.reply(
         `Gave <@${givingto.id}> a ${cars.Cars[togive.toLowerCase()].Name}`

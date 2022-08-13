@@ -25,7 +25,6 @@ module.exports = {
             Rare Import Crate : 25 ${key2emote} Keys
             Exotic Import Crate : 20 ${key3emote} Keys
             Drift Import Crate : 5 ${key4emote} **LIMITED**
-            Ferrari Import Crate : 100 <:ferrari:931011838374727730> **LIMITED**
             Z Crate 1 : 5 ${goldemote}
           `,
         },

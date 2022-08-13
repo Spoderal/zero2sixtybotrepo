@@ -28,7 +28,7 @@ module.exports = {
         {
           name: "What else?",
           value:
-            "You can get exclusive cars that come with parts already installed, and you can get black market parts that don't change any other stat besides 1 stat, this means you wont lose speed or 0-60 if you buy a black market drift part.",
+            "You can get exclusive cars that come with parts already installed, and you can get black market parts that don't change any other stat besides 1 stat, this means you wont lose speed or 0-60 if you buy a black market drift part.\n\nYou can also use 5 gold to clear all of your race cooldowns.",
         },
         {
           name: `How to purchase`,

@@ -217,6 +217,7 @@ module.exports = {
         ]);
         embedfinal.setImage(cars.Cars[randomitem].Image);
         interaction.editReply({ embeds: [embedfinal] });
+        userdata.save()
       }, 1000);
     }
   },
