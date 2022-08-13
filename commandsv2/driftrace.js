@@ -2,13 +2,14 @@ const db = require("quick.db");
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
 const { invisibleSpace, doubleCashWeekendField } = require("../common/utils");
+const cars = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,10 +44,7 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    const discord = require("discord.js");
-    const cars = require("../data/cardb.json");
     let tracks = ["easy", "medium", "hard"];
-
     let moneyearned = 200;
     let user = interaction.user;
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -65,10 +63,25 @@ module.exports = {
       );
     let idtoselect = interaction.options.getString("car");
 
-    let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
-    let selected = filteredcar[0] || "No ID";
+    let selected = userdata.cars.find((car) => car.ID == idtoselect);
+
+    // This will auto-correct a database issue when a user purchased a vehicle
+    // and ".Drift" value was set to an object with NaN due to strings in data
+    if (Number.isNaN(selected?.Drift)) {
+      const carInLocalDB = cars.Cars[selected.Name.toLowerCase()];
+      await User.updateOne(
+        { id: interaction.user.id, "cars.Name": carInLocalDB.Name },
+        {
+          $set: {
+            "cars.$.Drift": carInLocalDB.Drift,
+          },
+        }
+      );
+      selected.Drift = carInLocalDB.Drift;
+    }
+
     if (selected == "No ID") {
-      let errembed = new discord.EmbedBuilder()
+      let errembed = new EmbedBuilder()
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
@@ -240,15 +253,18 @@ module.exports = {
 
         break;
     }
-    let notorietyearned = driftscore * 5 - time;
+    let notorietyearned = driftscore < 4 ? 5 : driftscore * 5 - time;
 
-    let embed = new discord.EmbedBuilder()
+    let embed = new EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
       .setDescription(`You have ${time}s to complete the track`)
       .addFields([
         {
           name: `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
-          value: `Speed: ${usercarspeed}\n\nDrift Rating: ${driftscore}`,
+          value: `
+            Speed: ${usercarspeed}\n
+            Drift Rating: ${driftscore}
+          `,
         },
         { name: "Your Drift Rank", value: `${drifttraining}` },
       ])
@@ -263,6 +279,7 @@ module.exports = {
         .setLabel("Handbrake")
         .setStyle("Secondary")
     );
+
     const filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
     };
@@ -275,6 +292,7 @@ module.exports = {
       filter,
       time: 10000,
     });
+
     setTimeout(() => {
       embed.addFields([{ name: invisibleSpace, value: "Shift now!" }]);
       interaction.editReply({ embeds: [embed] });
@@ -289,6 +307,7 @@ module.exports = {
         }
       });
     }, randomnum);
+
     await interaction
       .reply({ embeds: [embed], components: [row] })
       .then(async () => {
@@ -300,7 +319,7 @@ module.exports = {
               );
               formula = formula / 2;
             } else if (canshift == true) {
-              embed.setDescription("Drifting!!!");
+              embed.setFooter({ text: "Drifting!!!" });
 
               await i.update({ embeds: [embed] });
             }
@@ -316,7 +335,6 @@ module.exports = {
       tracklength -= formula;
 
       if (time == 0 && tracklength >= 0) {
-        userdata.save();
         embed.addFields([{ name: "Results", value: `Failed` }]);
         interaction.editReply({ embeds: [embed] });
         if (range && range >= 0) {
@@ -350,8 +368,9 @@ module.exports = {
           {
             name: "Earnings",
             value: `
-              $${moneyearned}\n
+              $${moneyearned}
               ${notorietyearned} Notoriety
+              +25 XP
             `,
           },
         ]);
@@ -369,10 +388,9 @@ module.exports = {
         if (driftxp >= requiredrank) {
           if (userdata.driftrank < 50) {
             userdata.driftrank += 1;
+            userdata.driftxp = 0;
             interaction.channel.send(
-              `${user}, you just ranked up your drift skill to ${db.fetch(
-                `driftrank_${user.id}`
-              )}!`
+              `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
             );
           }
         }
