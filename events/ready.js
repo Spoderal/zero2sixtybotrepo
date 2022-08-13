@@ -13,12 +13,14 @@ const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 const { numberWithCommas } = require("../common/utils");
+const User = require("../schema/profile-schema");
+const Topgg = require("@top-gg/sdk");
 
 let mongoConfig = {
   keepAlive: true,
 };
 
-// SSL for production only
+// MongoDB SSL for production only
 if (process.env.CA_CERT) {
   let mongoCertPath = path.resolve("./ca-certificate.crt");
   fs.writeFileSync(mongoCertPath, process.env.CA_CERT);
@@ -38,12 +40,10 @@ module.exports = {
     patron(client);
     items(client);
     double(client);
-    // auto()
 
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
-
     app.use(bodyParser.json());
 
     app.post("/webhooks/zero2sixtybotgold", function (request, response) {
@@ -58,6 +58,28 @@ module.exports = {
         // var webhook = request.body;
       }
     });
+    console.log("Registered endpoint: /webhooks/zero2sixtybotgold");
+
+    const webhookAuth = process.env.TOPGG_WEBHOOK_AUTHORIZATION;
+    if (webhookAuth) {
+      const webhook = new Topgg.Webhook(webhookAuth);
+      app.post(
+        "/vote",
+        webhook.listener(async (vote) => {
+          console.log("User with id - " + vote.user + " voted!");
+          let userdata = await User.findOne({ id: vote.user });
+          if (!userdata) return;
+          userdata.hasvoted = true;
+          userdata.votetimer = Date.now();
+          userdata.save();
+        })
+      );
+      console.log("Registered endpoint: /vote");
+    } else {
+      console.log(
+        "WARNING: Endpoint /vote failed to register. Missing `TOPGG_WEBHOOK_AUTHORIZATION` enviornment variable"
+      );
+    }
 
     app.listen(8080, function () {
       console.log("Listening on port 8080.");
