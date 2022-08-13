@@ -262,7 +262,7 @@ module.exports = {
         {
           name: `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
           value: `
-            Speed: ${usercarspeed}\n
+            Speed: ${usercarspeed}
             Drift Rating: ${driftscore}
           `,
         },
@@ -271,6 +271,8 @@ module.exports = {
       .setColor(colors.blue)
       .setImage(`${trackgif}`)
       .setThumbnail("https://i.ibb.co/XzW37RH/drifticon.png");
+
+    const originalEmbed = embed;
 
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -284,7 +286,7 @@ module.exports = {
       return interaction.user.id === btnInt.user.id;
     };
 
-    let rns = [1000, 2000, 3000, 4000, 5000];
+    let rns = [1000, 2000, 3000, 4000];
 
     let randomnum = lodash.sample(rns);
     let canshift = false;
@@ -295,11 +297,11 @@ module.exports = {
 
     setTimeout(() => {
       embed.addFields([{ name: invisibleSpace, value: "Shift now!" }]);
-      interaction.editReply({ embeds: [embed] });
+      interaction.editReply({ embeds: [embed], components: [row] });
       canshift = true;
       setTimeout(() => {
         canshift = false;
-      }, 3000);
+      }, 2000);
 
       collector.on("end", async (collected) => {
         if (collected.size == 0 && canshift == false) {
@@ -309,7 +311,7 @@ module.exports = {
     }, randomnum);
 
     await interaction
-      .reply({ embeds: [embed], components: [row] })
+      .reply({ embeds: [embed], components: [] })
       .then(async () => {
         collector.on("collect", async (i) => {
           if (i.customId.includes("ebrake")) {
@@ -320,8 +322,7 @@ module.exports = {
               formula = formula / 2;
             } else if (canshift == true) {
               embed.setFooter({ text: "Drifting!!!" });
-
-              await i.update({ embeds: [embed] });
+              await i.update({ embeds: [originalEmbed], components: [] });
             }
           }
         });
@@ -334,72 +335,75 @@ module.exports = {
     let x = setInterval(() => {
       tracklength -= formula;
 
-      if (time == 0 && tracklength >= 0) {
-        embed.addFields([{ name: "Results", value: `Failed` }]);
-        interaction.editReply({ embeds: [embed] });
-        if (range && range >= 0) {
-          selected.Range -= 1;
-        }
-        userdata.driftxp += 10;
-
-        let driftxp = userdata.driftxp;
-        if (driftxp >= requiredrank) {
-          if (userdata.driftrank < 50) {
-            userdata.driftrank += 1;
-            interaction.channel.send(
-              `${user}, you just ranked up your drift skill to ${db.fetch(
-                `driftrank_${user.id}`
-              )}!`
-            );
+      if (time == 0) {
+        if (tracklength >= 0) {
+          embed.addFields([{ name: "Results", value: `Failed` }]);
+          embed.setFooter({ text: invisibleSpace });
+          interaction.editReply({ embeds: [embed], components: [] });
+          if (range && range >= 0) {
+            selected.Range -= 1;
           }
-        }
-        userdata.save();
-        clearInterval(x);
-        clearInterval(y);
+          userdata.driftxp += 10;
 
-        return;
-      }
-      if (tracklength <= 0) {
-        if (db.fetch(`doublecash`) == true) {
-          moneyearned = moneyearned += moneyearned;
-          embed.addFields([doubleCashWeekendField]);
-        }
-        embed.addFields([
-          {
-            name: "Earnings",
-            value: `
+          let driftxp = userdata.driftxp;
+          if (driftxp >= requiredrank) {
+            if (userdata.driftrank < 50) {
+              userdata.driftrank += 1;
+              interaction.channel.send(
+                `${user}, you just ranked up your drift skill to ${db.fetch(
+                  `driftrank_${user.id}`
+                )}!`
+              );
+            }
+          }
+          userdata.save();
+          clearInterval(x);
+          clearInterval(y);
+
+          return;
+        } else if (tracklength <= 0) {
+          if (db.fetch(`doublecash`) == true) {
+            moneyearned = moneyearned += moneyearned;
+            embed.addFields([doubleCashWeekendField]);
+          }
+          embed.addFields([
+            {
+              name: "Earnings",
+              value: `
               $${moneyearned}
               ${notorietyearned} Notoriety
               +25 XP
             `,
-          },
-        ]);
-        if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
-          selected.Wins += 1;
-        }
-        interaction.editReply({ embeds: [embed] });
-        userdata.cash += Number(moneyearned);
-        userdata.rp += ticketsearned;
-        userdata.noto += notorietyearned;
-
-        userdata.driftxp += 25;
-
-        let driftxp = userdata.driftxp;
-        if (driftxp >= requiredrank) {
-          if (userdata.driftrank < 50) {
-            userdata.driftrank += 1;
-            userdata.driftxp = 0;
-            interaction.channel.send(
-              `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
-            );
+            },
+          ]);
+          embed.setFooter({ text: invisibleSpace });
+          if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
+            selected.Wins += 1;
           }
+          interaction.editReply({ embeds: [embed], components: [] });
+          userdata.cash += Number(moneyearned);
+          userdata.rp += ticketsearned;
+          userdata.noto += notorietyearned;
+
+          userdata.driftxp += 25;
+
+          let driftxp = userdata.driftxp;
+          if (driftxp >= requiredrank) {
+            if (userdata.driftrank < 50) {
+              userdata.driftrank += 1;
+              userdata.driftxp = 0;
+              interaction.channel.send(
+                `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
+              );
+            }
+          }
+          userdata.save();
+
+          clearInterval(x);
+          clearInterval(y);
+
+          return;
         }
-        userdata.save();
-
-        clearInterval(x);
-        clearInterval(y);
-
-        return;
       }
     }, 1000);
   },
