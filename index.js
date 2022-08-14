@@ -4,8 +4,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
-const User = require("./schema/profile-schema");
-const Topgg = require("@top-gg/sdk");
 const path = require("path");
 
 const client = new Client({
@@ -18,19 +16,6 @@ const client = new Client({
   ],
   shards: "auto",
 });
-
-const webhook = new Topgg.Webhook("ZeroSpideral3!#");
-app.post(
-  "/vote",
-  webhook.listener(async (vote) => {
-    console.log("User with id - " + vote.user + " voted!");
-    let userdata = await User.findOne({ id: vote.user });
-    if (!userdata) return;
-    userdata.hasvoted = true;
-    userdata.votetimer = Date.now();
-    userdata.save();
-  })
-);
 
 // See .env-example for an explanation of FORCE_DISABLE_BOT
 if (process.env.FORCE_DISABLE_BOT === "true") {
@@ -49,8 +34,6 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
     `
   );
 } else {
-  app.listen(4500);
-
   const commands = [];
   client.commands = new Collection();
   const commandFiles = fs
