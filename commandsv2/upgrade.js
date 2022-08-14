@@ -130,7 +130,7 @@ module.exports = {
     userdata.save();
 
     await interaction.reply(
-      `Upgrade your ${partType} to ${partInLocalDB?.Name || inputPartName}`
+      `Upgraded your ${partType} to ${partInLocalDB?.Name || inputPartName}`
     );
   },
 };
