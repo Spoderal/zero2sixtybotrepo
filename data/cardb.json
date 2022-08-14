@@ -697,9 +697,7 @@
       "0-60": 10.3,
       "Drift": 0,
       "Handling": 500,
-      "Trims": [
-        "2020 porsche 718 cayman gt4"
-      ]
+      "Trims": ["2020 porsche 718 cayman gt4"]
     },
     "2020 porsche 718 cayman gt4": {
       "alias": "2020 718 cayman gt4",
@@ -3478,9 +3476,7 @@
       "0-60": 8.5,
       "Drift": 0,
       "Handling": 500,
-      "Trims": [
-        "2019 chevy corvette c7 zr1"
-      ]
+      "Trims": ["2019 chevy corvette c7 zr1"]
     },
     "2019 chevy corvette c7 zr1": {
       "alias": "2019 c7 zr1",
@@ -3540,9 +3536,7 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 500,
-      "Trims": [
-        "2006 lamborghini gallardo spyder"
-      ]
+      "Trims": ["2006 lamborghini gallardo spyder"]
     },
     "2006 lamborghini gallardo spyder": {
       "alias": "2006 gallardo s",
