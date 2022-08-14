@@ -189,18 +189,20 @@ module.exports = {
           let clutch = selected.Clutch || "Stock Clutch";
           let ecu = selected.ECU || "Stock ECU";
           let turbo = selected.Turbo || "Stock Turbo";
+          let nitro = selected.Nitro || "Stock Nitro";
 
           let partindb = partdb.Parts;
 
-          let exhaustemote = partindb[exhaust.toLowerCase()].Emote || "🔵";
-          let intakeemote = partindb[intake.toLowerCase()].Emote || "🔵";
+          let exhaustemote = partindb[exhaust.toLowerCase()]?.Emote || "🔵";
+          let intakeemote = partindb[intake.toLowerCase()]?.Emote || "🔵";
           let suspensionemote =
-            partindb[suspension.toLowerCase()].Emote || "🔵";
-          let tiresemote = partindb[tires.toLowerCase()].Emote || "🔵";
-          let clutchemote = partindb[clutch.toLowerCase()].Emote || "🔵";
-          let ecuemote = partindb[ecu.toLowerCase()].Emote || "🔵";
-          let engineemote = partindb[engine.toLowerCase()].Emote || "🔵";
-          let turboemote = partindb[turbo.toLowerCase()].Emote || "🔵";
+            partindb[suspension.toLowerCase()]?.Emote || "🔵";
+          let tiresemote = partindb[tires.toLowerCase()]?.Emote || "🔵";
+          let clutchemote = partindb[clutch.toLowerCase()]?.Emote || "🔵";
+          let ecuemote = partindb[ecu.toLowerCase()]?.Emote || "🔵";
+          let engineemote = partindb[engine.toLowerCase()]?.Emote || "🔵";
+          let turboemote = partindb[turbo.toLowerCase()]?.Emote || "🔵";
+          let nitroemote = partindb[nitro.toLowerCase()]?.Emote || "🔵";
 
           let embed = new Discord.EmbedBuilder()
             .setTitle(
@@ -245,6 +247,11 @@ module.exports = {
               {
                 name: `Engine`,
                 value: `${engineemote} ${engine.split(" ")[0]}`,
+                inline: true,
+              },
+              {
+                name: `Nitro`,
+                value: `${nitroemote} ${nitro.split(" ")[0]}`,
                 inline: true,
               },
               blankInlineField,
