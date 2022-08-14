@@ -22,7 +22,9 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id }) || new Cooldowns({ id: interaction.user.id });
+    let cooldowndata =
+      (await Cooldowns.findOne({ id: interaction.user.id })) ||
+      new Cooldowns({ id: interaction.user.id });
 
     let itemtouse = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount");
@@ -135,27 +137,26 @@ module.exports = {
         cooldowndata.hm = 0;
 
         cooldowndata.waterbottle = Date.now();
-        cooldowndata.save()
+        cooldowndata.save();
       }
- 
-    }
-    else if (itemtouse.toLowerCase() == "gold") {
-      console.log("gold")
-      let gold = userdata.gold
-      if(gold <= 0) return interaction.reply(`You need 5 gold to clear your cooldowns!`)
-  
-      userdata.gold -= 5
-      cooldowndata.racing = 0
-      cooldowndata.betracing = 0
-      cooldowndata.drift = 0
+    } else if (itemtouse.toLowerCase() == "gold") {
+      console.log("gold");
+      let gold = userdata.gold;
+      if (gold <= 0)
+        return interaction.reply(`You need 5 gold to clear your cooldowns!`);
 
-      cooldowndata.cashcup = 0
-      cooldowndata.hm = 0
-      cooldowndata.qm = 0
-      cooldowndata.save()
-      userdata.save()
+      userdata.gold -= 5;
+      cooldowndata.racing = 0;
+      cooldowndata.betracing = 0;
+      cooldowndata.drift = 0;
 
-     return interaction.reply(`Cleared race cooldowns for 5 gold`)
+      cooldowndata.cashcup = 0;
+      cooldowndata.hm = 0;
+      cooldowndata.qm = 0;
+      cooldowndata.save();
+      userdata.save();
+
+      return interaction.reply(`Cleared race cooldowns for 5 gold`);
     }
     if (itemdb.Police[itemtouse.toLowerCase()]) {
       emote = itemdb.Police[itemtouse.toLowerCase()].Emote;

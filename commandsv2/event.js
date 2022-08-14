@@ -23,8 +23,7 @@ module.exports = {
             value: "spring_event",
             customId: "spring",
             emoji: "☀️",
-          }
-       
+          },
         ])
     );
 

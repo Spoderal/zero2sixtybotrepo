@@ -68,8 +68,8 @@ module.exports = {
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
           if (value === "1_update") {
-            embed.fields = []
-            embed.setDescription(`\u200b`)
+            embed.fields = [];
+            embed.setDescription(`\u200b`);
             embed
               .setTitle(`Small Update`)
               .addFields([
@@ -90,8 +90,8 @@ module.exports = {
                   name: `${emotes.ckey} New Cars`,
                   value: `
                   ${emotes.ferrari} 2023 Ferrari Daytona SP3
-                  `
-                }
+                  `,
+                },
               ])
               .setFooter({ text: "8/13/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
@@ -103,7 +103,7 @@ module.exports = {
             });
           } else if (value === "2_update") {
             embed.fields = [];
-            embed.setDescription(`\u200b`)
+            embed.setDescription(`\u200b`);
 
             embed.setTitle(`Small Patch`);
             embed
@@ -125,7 +125,7 @@ module.exports = {
             });
           } else if (value === "3_update") {
             embed.fields = [];
-            embed.setDescription(`\u200b`)
+            embed.setDescription(`\u200b`);
             embed.setTitle(`Big Update`);
             embed
               .setDescription(

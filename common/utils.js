@@ -1,3 +1,5 @@
+const wait = require("node:timers/promises").setTimeout;
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -34,4 +36,5 @@ module.exports = {
   blankField,
   blankInlineField,
   doubleCashWeekendField,
+  wait,
 };
