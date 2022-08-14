@@ -2,27 +2,32 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, wait } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("leaderstats")
     .setDescription("Check the leaderboard"),
-  async execute(interaction) {
-    await interaction.reply({ content: `Please wait...`, fetchReply: true });
 
-    let data = await User.find({});
+  async execute(interaction) {
+    await interaction.deferReply();
+
+    let users = await User.find({});
     let members = [];
 
-    for (let obj of data) {
+    for (let user of users) {
       try {
-        await interaction.client.users
-          .fetch(`${obj.id}`)
-          .then(members.push(obj));
+        await interaction.client.users.fetch(user.id).then(members.push(user));
       } catch (err) {
-        // do nothing?
+        // swallow this error
       }
     }
+
+    if (!members.length) {
+      await interaction.editReply("The leaderboard is currently empty!");
+      return;
+    }
+    console.log(members);
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Cash Leaderboard")
