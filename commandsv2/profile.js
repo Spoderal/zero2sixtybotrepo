@@ -31,8 +31,10 @@ module.exports = {
 
     let title = userdata.title;
 
+    console.log({ title });
     if (prestige == 0) title = "Noob Racer";
     else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
+    console.log({ title });
 
     let cars = userdata.cars;
     cars = cars.sort(function (b, a) {
