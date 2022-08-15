@@ -1,10 +1,9 @@
-const { EmbedBuilder } = require("discord.js");
-const partdb = require("../data/partsdb.json");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const itemdb = require("../data/items.json");
-const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
+const partdb = require("../data/partsdb.json");
+const itemdb = require("../data/items.json");
 const colors = require("../common/colors");
 const { toCurrency, blankField } = require("../common/utils");
 
@@ -63,20 +62,17 @@ module.exports = {
     let garagelimit = userdata.garageLimit;
     var userparts = [];
     var actpart;
-    var partarraylength = parts.length;
     let items = userdata.items;
     var actitems = [];
     var actitem;
     let actuserparts = [];
-    let valuearr = [];
+    let sum = 0;
     let xessence = userdata.xessence;
-
     for (
       let i = 0;
       i < items.length;
       i++ && items !== ["no items"] && items.length > 0
     ) {
-      items = userdata.items;
       if (!items || items.length == 0 || items == ["no items"])
         return await interaction.reply(`You don't have any items!`);
 
@@ -84,24 +80,31 @@ module.exports = {
       let emote;
       let name;
       let type;
+      let price = 0;
 
       if (itemdb.Police[actitem.toLowerCase()]) {
         emote = itemdb.Police[actitem.toLowerCase()].Emote;
         name = itemdb.Police[actitem.toLowerCase()].Name;
         type = itemdb.Police[actitem.toLowerCase()].Type;
+        price = itemdb.Police[0][actitem.toLowerCase()].Price;
       } else if (itemdb.Multiplier[actitem.toLowerCase()]) {
         emote = itemdb.Multiplier[actitem.toLowerCase()].Emote;
         name = itemdb.Multiplier[actitem.toLowerCase()].Name;
         type = itemdb.Multiplier[actitem.toLowerCase()].Type;
+        price = itemdb.Multiplier[0][actitem.toLowerCase()].Price;
       } else if (itemdb.Other[actitem.toLowerCase()]) {
         emote = itemdb.Other[actitem.toLowerCase()].Emote;
         name = itemdb.Other[actitem.toLowerCase()].Name;
         type = itemdb.Other[actitem.toLowerCase()].Type;
+        price = itemdb.Other[0][actitem.toLowerCase()].Price;
       } else if (itemdb.Collectable[0][actitem.toLowerCase()]) {
         emote = itemdb.Collectable[0][actitem.toLowerCase()].Emote;
         name = itemdb.Collectable[0][actitem.toLowerCase()].Name;
         type = itemdb.Collectable[0][actitem.toLowerCase()].Type;
+        price = itemdb.Collectable[0][actitem.toLowerCase()].Price;
       }
+
+      if (price) sum += Number(price);
 
       //Do something
       let x2 = items.filter((x) => x == `${actitem.toLowerCase()}`).length;
@@ -111,11 +114,13 @@ module.exports = {
       }
     }
 
-    for (let i = 0; i < partarraylength; i++ && parts !== ["no parts"]) {
+    for (let i = 0; i < parts?.length; i++ && parts !== ["no parts"]) {
       if (!parts || parts.length == 0) {
         actpart = "no parts";
       }
       actpart = parts[i];
+      let price = partdb.Parts[actpart.toLowerCase()].Price;
+      if (price) sum += Number(price);
       //Do something
       userparts.push(
         `${partdb.Parts[actpart.toLowerCase()].Emote} ${
@@ -124,11 +129,6 @@ module.exports = {
       );
     }
 
-    let sum = 0;
-
-    for (let i = 0; i < valuearr.length; i++) {
-      sum += valuearr[i];
-    }
     var list = userparts;
 
     var quantities = list.reduce(function (obj, n) {
@@ -621,7 +621,8 @@ module.exports = {
       let displaycars = [];
       for (let i in usercars) {
         let car = usercars[i];
-
+        let price = usercars[i].Resale;
+        if (price) sum += Number(price);
         displaycars.push(`${car.Emote} ${car.Name} \`${car.ID}\``);
       }
       displaycars = lodash.chunk(
@@ -638,9 +639,9 @@ module.exports = {
       let embed1 = new EmbedBuilder()
         .setTitle(`${target.username}'s cars`)
         .setDescription(
-          `${displaycars[0].join("\n")}\n\nGarage Value: ${toCurrency(
-            sum
-          )}\n\nGarage Limit: ${cars.length}/${garagelimit}`
+          `${displaycars[0].join("\n")}\n
+          Garage Value: ${toCurrency(sum)}\n
+          Garage Limit: ${cars.length}/${garagelimit}`
         )
         .setThumbnail("https://i.ibb.co/DCNwJrs/Logo-Makr-0i1c-Uy.png")
         .setImage(garageimg);
