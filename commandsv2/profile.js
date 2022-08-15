@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-// const prestigedb = require(`../data/prestige.json`);
+ const prestigedb = require(`../data/prestige.json`);
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,8 +33,8 @@ module.exports = {
 
     // I think this was intended to use prestige to update the user's title? Not
     // sure, but `.Title` doesn't exist on any entries in prestigedb -inergy
-    // if (prestige == 0) title = "Noob Racer";
-    // else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
+     if (prestige == 0) title = "Noob Racer";
+     else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
 
     let cars = userdata.cars;
     cars = cars.sort(function (b, a) {
