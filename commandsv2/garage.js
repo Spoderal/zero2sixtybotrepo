@@ -96,7 +96,7 @@ module.exports = {
         emote = itemdb.Other[actitem.toLowerCase()].Emote;
         name = itemdb.Other[actitem.toLowerCase()].Name;
         type = itemdb.Other[actitem.toLowerCase()].Type;
-        price = itemdb.Other[0][actitem.toLowerCase()].Price;
+        price = itemdb.Other[actitem.toLowerCase()].Price;
       } else if (itemdb.Collectable[0][actitem.toLowerCase()]) {
         emote = itemdb.Collectable[0][actitem.toLowerCase()].Emote;
         name = itemdb.Collectable[0][actitem.toLowerCase()].Name;
