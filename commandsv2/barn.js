@@ -164,9 +164,10 @@ module.exports = {
         break;
     }
 
-    let arrByID = cars.find((item) => item.ID == carobj.ID);
-    if (arrByID.length > 0) {
-      cooldowns.barn = Date.now();
+    let arrByID = cars.find(
+      (item) => item.ID == carobj.ID || item.Name == carobj.Name
+    );
+    if (arrByID) {
       userdata.cash += resale;
 
       await interaction.reply(
