@@ -8,6 +8,50 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
+const { invisibleSpace, toCurrency } = require("../common/utils");
+
+let bot1cars = [
+  "1995 mazda miata",
+  "1991 toyota mr2",
+  "2002 pontiac firebird",
+  "2002 ford mustang",
+  "2005 hyundai tiburon",
+];
+let bot2cars = [
+  "2014 hyundai genesis coupe",
+  "2008 nissan 350z",
+  "2008 nissan 350z",
+  "2010 ford mustang",
+];
+let bot3cars = [
+  "2020 porsche 718 cayman",
+  "2015 lotus exige sport",
+  "2011 audi rs5",
+];
+let bot4cars = [
+  "2015 mercedes amg gts",
+  "2016 alfa romeo giulia",
+  "2021 porsche 911 gt3",
+  "2017 ford gt",
+];
+let bot5cars = [
+  "2010 ferrari 458 italia",
+  "2018 lamborghini aventador s",
+  "2016 aston martin vulkan",
+  "2021 mclaren 720s",
+];
+let bot6cars = [
+  "2021 ferrari sf90 stradale",
+  "2022 aston martin valkyrie",
+  "2016 bugatti chiron",
+];
+let bot7cars = [
+  "2021 bugatti bolide",
+  "2013 lamborghini veneno",
+  "2020 koenigsegg regera",
+  "2020 bugatti divo",
+];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,19 +78,26 @@ module.exports = {
         .setDescription("The car id to use")
         .setRequired(true)
     ),
+
   async execute(interaction) {
     const cars = require("../data/cardb.json");
     let moneyearned = 150;
-    // let moneyearnedtxt = 150;
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
+
+    if (!userdata?.id) {
+      return await interaction.reply(GET_STARTED_MESSAGE);
+    }
+
     let cooldowndata =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
+
     let idtoselect = interaction.options.getString("car");
     if (!idtoselect)
       return await interaction.reply(
         "Specify an id! Use /ids select [id] [car] to select a car!"
       );
+
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
@@ -54,7 +105,8 @@ module.exports = {
         .setTitle("Error!")
         .setColor("DARK_RED")
         .setDescription(
-          `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
+          `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n
+          **Example: /ids Select 1 1995 mazda miata**`
         );
       return await interaction.reply({ embeds: [errembed] });
     }
@@ -74,47 +126,7 @@ module.exports = {
       );
     }
     let user1cars = userdata.cars;
-    let bot1cars = [
-      "1995 mazda miata",
-      "1991 toyota mr2",
-      "2002 pontiac firebird",
-      "2002 ford mustang",
-      "2005 hyundai tiburon",
-    ];
-    let bot2cars = [
-      "2014 hyundai genesis coupe",
-      "2008 nissan 350z",
-      "2008 nissan 350z",
-      "2010 ford mustang",
-    ];
-    let bot3cars = [
-      "2020 porsche 718 cayman",
-      "2015 lotus exige sport",
-      "2011 audi rs5",
-    ];
-    let bot4cars = [
-      "2015 mercedes amg gts",
-      "2016 alfa romeo giulia",
-      "2021 porsche 911 gt3",
-      "2017 ford gt",
-    ];
-    let bot5cars = [
-      "2010 ferrari 458 italia",
-      "2018 lamborghini aventador s",
-      "2016 aston martin vulkan",
-      "2021 mclaren 720s",
-    ];
-    let bot6cars = [
-      "2021 ferrari sf90 stradale",
-      "2022 aston martin valkyrie",
-      "2016 bugatti chiron",
-    ];
-    let bot7cars = [
-      "2021 bugatti bolide",
-      "2013 lamborghini veneno",
-      "2020 koenigsegg regera",
-      "2020 bugatti divo",
-    ];
+
     let errorembed = new discord.EmbedBuilder()
       .setTitle("❌ Error!")
       .setColor(colors.blue);
@@ -136,17 +148,19 @@ module.exports = {
       return await interaction.reply({ embeds: [errorembed] });
     }
 
-    if (!cars.Cars[selected.Name.toLowerCase()]) {
+    const selectedCarInfo = cars.Cars[selected.Name.toLowerCase()];
+
+    if (!selectedCarInfo) {
       errorembed.setDescription("Thats not an available car!");
       return await interaction.reply({ embeds: [errorembed] });
     }
 
-    if (cars.Cars[selected.Name.toLowerCase()].Junked && bot !== "rust") {
+    if (selectedCarInfo.Junked && bot !== "rust") {
       return await interaction.reply("This car is too junked to race, sorry!");
     }
 
     let range = selected.Range;
-    if (cars.Cars[selected.Name.toLowerCase()].Electric) {
+    if (selectedCarInfo.Electric) {
       if (range <= 0) {
         return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
@@ -165,28 +179,24 @@ module.exports = {
       case "2": {
         botcar = lodash.sample(bot2cars);
         moneyearned += 150;
-        // moneyearnedtxt += 150;
         ticketsearned = 3;
         break;
       }
       case "3": {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
-        // moneyearnedtxt += 300;
         ticketsearned = 4;
         break;
       }
       case "4": {
         botcar = lodash.sample(bot4cars);
         moneyearned += 500;
-        // moneyearnedtxt += 500;
         ticketsearned = 4;
         break;
       }
       case "5": {
         botcar = lodash.sample(bot5cars);
         moneyearned += 600;
-        // moneyearnedtxt += 600;
         ticketsearned = 5;
         break;
       }
@@ -194,7 +204,6 @@ module.exports = {
         let barnrandom = randomRange(1, 6);
         botcar = lodash.sample(bot6cars);
         moneyearned += 750;
-        // moneyearnedtxt += 750;
         ticketsearned = 6;
         // bankrand = randomRange(1, 3);
         if (barnrandom == 3) {
@@ -206,7 +215,6 @@ module.exports = {
       case "7": {
         botcar = lodash.sample(bot7cars);
         moneyearned += 1100;
-        // moneyearnedtxt += 1100;
         ticketsearned = 10;
 
         break;
@@ -267,7 +275,6 @@ module.exports = {
     }
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
-      // moneyearnedtxt = moneyearnedtxt * 2;
     }
 
     let racelevel = userdata.racerank;
@@ -287,12 +294,14 @@ module.exports = {
 
     let handling = user1carhandling;
 
+    const selectedBotCar = cars.Cars[botcar.toLowerCase()];
+
     let zero2sixtycar = selected.Acceleration;
-    let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"];
+    let otherzero2sixty = selectedBotCar["0-60"];
     let newhandling = handling / 20;
-    let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20;
+    let othernewhandling = selectedBotCar.Handling / 20;
     let new60 = user1carspeed / zero2sixtycar;
-    let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
+    let new62 = selectedBotCar.Speed / otherzero2sixty;
     let driftscore = selected.Drift;
 
     let semote = emotes.speed;
@@ -302,12 +311,12 @@ module.exports = {
     let rpemote = emotes.rp;
 
     Number(user1carspeed);
-    Number(cars.Cars[botcar.toLowerCase()].Speed);
+    Number(selectedBotCar.Speed);
     Number(new60);
     Number(new62);
     let hp = user1carspeed + newhandling;
     hp - driftscore;
-    let hp2 = cars.Cars[botcar.toLowerCase()].Speed + othernewhandling;
+    let hp2 = selectedBotCar.Speed + othernewhandling;
     let userhelmet = userdata.helmet;
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
@@ -317,34 +326,31 @@ module.exports = {
       .setTitle("3...2...1....GO!")
       .addFields([
         {
-          name: `${actualhelmet.Emote} ${
-            cars.Cars[selected.Name.toLowerCase()].Emote
-          } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          name: `
+            ${actualhelmet.Emote} ${selectedCarInfo.Emote} ${selectedCarInfo.Name}`,
+          value: `${semote} Speed: ${user1carspeed} MPH\n
+            ${zemote} 0-60: ${user1carzerosixty}s\n
+            ${hemote} Handling: ${user1carhandling}
+          `,
           inline: true,
         },
         {
-          name: `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
-            cars.Cars[botcar.toLowerCase()].Name
-          }`,
-          value: `${semote} Speed: ${
-            cars.Cars[botcar.toLowerCase()].Speed
-          } MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
-            cars.Cars[botcar.toLowerCase()].Handling
-          }`,
+          name: `🤖 ${selectedBotCar.Emote} ${selectedBotCar.Name}`,
+          value: `${semote} Speed: ${selectedBotCar.Speed} MPH\n
+          ${zemote} 0-60: ${otherzero2sixty}s\n
+          ${hemote} Handling: ${selectedBotCar.Handling}`,
           inline: true,
         },
       ])
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
 
-    let msg = await interaction.reply({ embeds: [embed] });
+    let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
     let randomnum = randomRange(2, 4);
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
         embed.addFields([{ name: "Bonus", value: "$50" }]);
-        // moneyearnedtxt += 50;
         userdata.cash += 50;
         tracklength += 1;
         interaction.editReply({ embeds: [embed] });
@@ -356,8 +362,8 @@ module.exports = {
     tracklength += new60;
     tracklength += new62;
     let nitro = selected.Nitro;
-    let row = new discord.ActionRowBuilder();
     if (nitro) {
+      let row = new discord.ActionRowBuilder();
       row.addComponents(
         new discord.ButtonBuilder()
           .setCustomId("boost")
@@ -366,6 +372,12 @@ module.exports = {
           .setStyle("Secondary")
       );
       msg.edit({ components: [row] });
+
+      // Don't let them boost after a few second of the button being visible
+      const miisedChanceTimer = setTimeout(() => {
+        embed.setFooter({ text: "You missed the chance to boost!" });
+        interaction.editReply({ embeds: [embed], components: [] });
+      }, 3000);
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
@@ -378,10 +390,16 @@ module.exports = {
 
       collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
+          clearTimeout(miisedChanceTimer);
           let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
           tracklength += parseInt(boost);
-          i.update({ content: "Boosting!", embeds: [embed] });
+          embed.setFooter({ text: "Boosting!!!" });
+          await i.update({ embeds: [embed], components: [] });
           selected.Nitro = null;
+          setTimeout(() => {
+            embed.setFooter({ text: "Good boost timing!" });
+            i.editReply({ embeds: [embed], components: [] });
+          }, 3000);
         }
       });
     }
@@ -396,33 +414,14 @@ module.exports = {
         if (tracklength > tracklength2) {
           clearInterval(x);
           embed.addFields([{ name: "Results", value: "Won" }]);
-          if (userdata.cashgain == "10") {
-            let calccash = moneyearned * 0.1;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "15") {
-            let calccash = moneyearned * 0.15;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "20") {
-            let calccash = moneyearned * 0.2;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "25") {
-            let calccash = moneyearned * 0.25;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "50") {
-            let calccash = moneyearned * 0.5;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          }
+          let calccash = moneyearned;
+          moneyearned += calccash;
 
           let earningsresult = [];
-          if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
+          if (selectedCarInfo.StatTrack) {
             selected.Wins += 1;
           }
-          earningsresult.push(`$${moneyearned}`);
+          earningsresult.push(toCurrency(moneyearned));
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
           if (bot == "6" || bot == "7") {
             earningsresult.push(`Wheel Spin Earned!`);
@@ -443,7 +442,7 @@ module.exports = {
               value: `${cemote} ${earningsresult.join("\n")}`,
             },
           ]);
-
+          embed.setFooter({ text: invisibleSpace });
           interaction.editReply({ embeds: [embed] });
           if (range && range > 0) {
             selected.Range -= 1;
@@ -465,6 +464,7 @@ module.exports = {
           return;
         } else if (tracklength < tracklength2) {
           embed.addFields([{ name: "Results", value: "Lost" }]);
+          embed.setFooter({ text: invisibleSpace });
           interaction.editReply({ embeds: [embed] });
           clearInterval(x);
           if (range && range > 0) {
