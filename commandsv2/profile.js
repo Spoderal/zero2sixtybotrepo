@@ -5,7 +5,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
- const prestigedb = require(`../data/prestige.json`);
+const prestigedb = require(`../data/prestige.json`);
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,22 +20,19 @@ module.exports = {
     ),
   async execute(interaction) {
     let user = interaction.options.getUser("user") || interaction.user;
-
     let userdata = await User.findOne({ id: user.id });
+
+    if (!userdata?.id) await interaction.reply(GET_STARTED_MESSAGE);
 
     let prestige = userdata.prestige || 0;
     let racerank = userdata.racerank;
     let driftrank = userdata.driftrank;
-
     let helmet = userdata.helmet;
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
-
     let title = userdata.title;
 
-    // I think this was intended to use prestige to update the user's title? Not
-    // sure, but `.Title` doesn't exist on any entries in prestigedb -inergy
-     if (prestige == 0) title = "Noob Racer";
-     else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
+    if (prestige == 0) title = "Noob Racer";
+    else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
 
     let cars = userdata.cars;
     cars = cars.sort(function (b, a) {
@@ -42,12 +40,9 @@ module.exports = {
     });
 
     let finalprice = 0;
-
     for (let car in cars) {
       let car2 = cars[car];
-
       let price = Number(cardb.Cars[car2.Name.toLowerCase()].Price);
-
       finalprice += price;
     }
 
@@ -66,11 +61,17 @@ module.exports = {
         `,
       },
     ];
+
     let bestcar = cars[0];
     if (bestcar) {
       fields.push({
         name: `Best Car`,
-        value: `${bestcar.Emote} ${bestcar.Name}\n\nSpeed: ${bestcar.Speed}MPH\n0-60: ${bestcar.Acceleration}s\nHandling: ${bestcar.Handling}`,
+        value: `
+          ${bestcar.Emote} ${bestcar.Name}\n
+          Speed: ${bestcar.Speed}MPH
+          0-60: ${bestcar.Acceleration}s
+          Handling: ${bestcar.Handling}
+        `,
         inline: true,
       });
     }
