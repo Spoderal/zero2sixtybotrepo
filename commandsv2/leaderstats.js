@@ -13,9 +13,6 @@ module.exports = {
     await interaction.deferReply();
 
     let users = await User.find({});
-
-    console.log(`DEBUG: Found ${users?.length} users`);
-
     if (!users?.length) {
       return await interaction.editReply("The leaderboard is currently empty!");
     }
@@ -24,21 +21,15 @@ module.exports = {
       .setTitle("Cash Leaderboard")
       .setColor(colors.blue);
 
-    console.log("DEBUG: filtering with cash, sorting by cash, and slicing to 50");
     const filteredUsers = users
       .filter((value) => value.cash > 0)
       .sort((b, a) => a.cash - b.cash)
-      .slice(0, 50);
-
-    console.log(
-      `DEBUG: Filtered user array length is now at ${filteredUsers?.length}`
-    );
+      .slice(0, 40);
 
     if (!filteredUsers?.length) {
       return await interaction.editReply("The leaderboard is currently empty!");
     }
 
-    console.log("DEBUG: Fetching user names...");
     let currentUserPosition = 0;
     for (let i = 0; i < filteredUsers?.length; i++) {
       const user = await interaction.client.users
@@ -50,7 +41,6 @@ module.exports = {
         filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
     }
 
-    console.log("DEBUG: Slicing to 10...");
     const onlyTaggedUsers = filteredUsers.filter((u) => u.tag).slice(0, 10);
     if (!onlyTaggedUsers?.length) {
       return await interaction.editReply("The leaderboard is currently empty!");
@@ -62,7 +52,6 @@ module.exports = {
       });
     }
 
-    console.log("DEBUG: Creating the list of users for the description...");
     let desc = "";
     for (let i = 0; i < onlyTaggedUsers.length; i++) {
       desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${toCurrency(
@@ -72,7 +61,6 @@ module.exports = {
 
     embed.setDescription(desc);
 
-    console.log("DEBUG: Replying");
     await interaction.editReply({ embeds: [embed] });
   },
 };
