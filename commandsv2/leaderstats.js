@@ -24,12 +24,11 @@ module.exports = {
       .setTitle("Cash Leaderboard")
       .setColor(colors.blue);
 
-    console.log("DEBUG: filtering, sorting, and slicing members array");
+    console.log("DEBUG: filtering with cash, sorting by cash, and slicing to 50");
     const filteredUsers = users
       .filter((value) => value.cash > 0)
       .sort((b, a) => a.cash - b.cash)
-      .slice(0, 10);
-    // console.log(filteredUsers);
+      .slice(0, 50);
 
     console.log(
       `DEBUG: Filtered user array length is now at ${filteredUsers?.length}`
@@ -51,7 +50,8 @@ module.exports = {
         filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
     }
 
-    const onlyTaggedUsers = filteredUsers.filter((u) => u.tag);
+    console.log("DEBUG: Slicing to 10...");
+    const onlyTaggedUsers = filteredUsers.filter((u) => u.tag).slice(0, 10);
     if (!onlyTaggedUsers?.length) {
       return await interaction.editReply("The leaderboard is currently empty!");
     }
