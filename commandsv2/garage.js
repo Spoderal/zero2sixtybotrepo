@@ -86,12 +86,12 @@ module.exports = {
         emote = itemdb.Police[actitem.toLowerCase()].Emote;
         name = itemdb.Police[actitem.toLowerCase()].Name;
         type = itemdb.Police[actitem.toLowerCase()].Type;
-        price = itemdb.Police[0][actitem.toLowerCase()].Price;
+        price = itemdb.Police[actitem.toLowerCase()].Price;
       } else if (itemdb.Multiplier[actitem.toLowerCase()]) {
         emote = itemdb.Multiplier[actitem.toLowerCase()].Emote;
         name = itemdb.Multiplier[actitem.toLowerCase()].Name;
         type = itemdb.Multiplier[actitem.toLowerCase()].Type;
-        price = itemdb.Multiplier[0][actitem.toLowerCase()].Price;
+        price = itemdb.Multiplier[actitem.toLowerCase()].Price;
       } else if (itemdb.Other[actitem.toLowerCase()]) {
         emote = itemdb.Other[actitem.toLowerCase()].Emote;
         name = itemdb.Other[actitem.toLowerCase()].Name;
