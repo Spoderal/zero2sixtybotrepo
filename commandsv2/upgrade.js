@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const { capitalize } = require("lodash");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,91 +10,30 @@ module.exports = {
     .setDescription("Upgrade a part on your car")
     .addStringOption((option) =>
       option
-        .setName("part")
-        .setDescription("The part to remove")
-        .addChoices(
-          { name: "Exhaust", value: "exhaust" },
-          { name: "Tires", value: "tires" },
-          { name: "Intake", value: "intake" },
-          { name: "Turbo", value: "turbo" },
-          { name: "Suspension", value: "suspension" },
-          { name: "Spoiler", value: "spoiler" },
-          { name: "Body", value: "body" },
-          { name: "ECU", value: "ecu" },
-          { name: "Clutch", value: "clutch" },
-          { name: "Engine", value: "engine" },
-          { name: "Gearbox", value: "gearbox" },
-          { name: "Weight", value: "weight" },
-          { name: "Intercooler", value: "intercooler" }
-        )
-
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
         .setName("car")
-        .setDescription("The car id to upgrade the part on")
+        .setDescription("Your car ID or Name to upgrade")
         .setRequired(true)
     )
     .addStringOption((option) =>
-      option
-        .setName("partname")
-        .setDescription("The part name to add")
-        .setRequired(true)
+      option.setName("part").setDescription("The part Name").setRequired(true)
     ),
+
   async execute(interaction) {
+    let inputCarIdOrName = interaction.options.getString("car");
+    let inputPartName = interaction.options.getString("part").toLowerCase();
+    let partInLocalDB = partdb.Parts[inputPartName];
+    let partType =
+      partInLocalDB.Type === "ecu" ? "ECU" : capitalize(partInLocalDB.Type);
+
     let user1 = interaction.user;
     let userdata = await User.findOne({ id: user1.id });
-    let user1parts = userdata.parts;
-    let parttoinstall = interaction.options.getString("part");
-    let cartoinstall = interaction.options.getString("car");
-    let parte = interaction.options.getString("partname");
+    let userParts = userdata.parts;
+    let userCar = userdata.cars.find(
+      (car) => car.ID == inputCarIdOrName || car.Name == inputCarIdOrName
+    );
 
-    let actpart;
-    switch (parttoinstall) {
-      case "exhaust":
-        actpart = "Exhaust";
-        break;
-      case "intake":
-        actpart = "Intake";
-        break;
-      case "tires":
-        actpart = "Tires";
-        break;
-      case "engine":
-        actpart = "Engine";
-        break;
-      case "turbo":
-        actpart = "Turbo";
-        break;
-      case "weight":
-        actpart = "Weight";
-        break;
-      case "gearbox":
-        actpart = "Gearbox";
-        break;
-      case "body":
-        actpart = "Body";
-        break;
-      case "ecu":
-        actpart = "ECU";
-        break;
-      case "spoiler":
-        actpart = "Spoiler";
-        break;
-      case "suspension":
-        actpart = "Suspension";
-        break;
-      case "intercooler":
-        actpart = "Intercooler";
-        break;
-      case "clutch":
-        actpart = "Clutch";
-        break;
-    }
-
-    if (cartoinstall == "pet") {
-      if (!user1parts.includes("pet spoiler"))
+    if (inputCarIdOrName == "pet") {
+      if (!userParts.includes("pet spoiler"))
         return await interaction.reply(`You don't have a pet spoiler!`);
       userdata.pet.spoiler = true;
       userdata.save();
@@ -102,84 +42,71 @@ module.exports = {
       return;
     }
 
-    let filteredcar = userdata.cars.filter((car) => car.ID == cartoinstall);
-    let selected = filteredcar[0] || "No ID";
+    let selected = userCar || "No ID";
     if (selected == "No ID") {
       let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
-        .setColor("DARK_RED")
-        .setDescription(
-          `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
-        );
+        .setColor("DARK_RED").setDescription(`
+          That car/id isn't selected!
+          Use \`/ids select [id] [car to select]\` to select a car to your specified id!\n
+          **Example: \`/ids select 1 1995 mazda miata\`**
+        `);
       return await interaction.reply({ embeds: [errembed] });
     }
 
-    let realpart = parte;
-    if (!userdata.parts.includes(realpart.toLowerCase()))
+    if (!userdata.parts.includes(inputPartName))
       return await interaction.reply(`You don't have this part!`);
 
-    if (selected[actpart] && selected[actpart] !== null)
-      return await interaction.reply(`This car already has a "${actpart}"!`);
+    if (selected?.[partType])
+      return await interaction.reply(`This car already has a ${partType}!`);
 
-    let partindb = partdb.Parts[realpart.toLowerCase()];
-    if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
-      let newspeed = Number(partindb.AddedSpeed);
+    if (partInLocalDB?.AddedSpeed > 0) {
+      let newspeed = Number(partInLocalDB.AddedSpeed);
       let stat = Number(selected.Speed);
       selected.Speed = stat += newspeed;
     }
-    if (partindb.DecreasedSpeed && partindb.DecreaseSpeed > 0) {
-      let newspeed = Number(partindb.DecreasedSpeed);
+    if (partInLocalDB?.DecreaseSpeed > 0) {
+      let newspeed = Number(partInLocalDB.DecreasedSpeed);
       let stat = Number(selected.Speed);
-
       selected.Speed = stat -= newspeed;
     }
-    if (partindb.AddedSixty && partindb.AddedSixty > 0) {
-      let newspeed = parseFloat(partindb.AddedSixty);
+    if (partInLocalDB?.AddedSixty > 0) {
+      let newspeed = parseFloat(partInLocalDB.AddedSixty);
       let stat = parseFloat(selected.Acceleration);
-
       if (stat > 2) selected.Acceleration = stat -= newspeed;
     }
-    if (partindb.DecreasedSixty && partindb.DecreasedSixty > 0) {
-      let newspeed = parseFloat(partindb.DecreasedSixty);
+    if (partInLocalDB?.DecreasedSixty > 0) {
+      let newspeed = parseFloat(partInLocalDB.DecreasedSixty);
       let stat = parseFloat(selected.Acceleration);
-
       selected.Acceleration = stat += newspeed;
     }
-    if (partindb.AddHandling && partindb.AddHandling > 0) {
-      let newspeed = Number(partindb.AddHandling);
+    if (partInLocalDB?.AddHandling > 0) {
+      let newspeed = Number(partInLocalDB.AddHandling);
       let stat = Number(selected.Handling);
-
       selected.Handling = stat += newspeed;
     }
-    if (partindb.DecreasedHandling && partindb.DecreasedHandling > 0) {
-      let newspeed = Number(partindb.DecreasedHandling);
+    if (partInLocalDB?.DecreasedHandling > 0) {
+      let newspeed = Number(partInLocalDB.DecreasedHandling);
       let stat = Number(selected.Handling);
-
       selected.Handling = stat -= newspeed;
     }
-    if (partindb.AddedDrift && partindb.AddedDrift > 0) {
-      let newspeed = Number(partindb.AddedDrift);
+    if (partInLocalDB?.AddedDrift > 0) {
+      let newspeed = Number(partInLocalDB.AddedDrift);
       let stat = Number(selected.Drift);
-
       selected.Drift = stat += newspeed;
     }
-    if (partindb.DecreasedDrift && partindb.DecreasedDrift > 0) {
-      let newspeed = Number(partindb.DecreasedDrift);
+    if (partInLocalDB?.DecreasedDrift > 0) {
+      let newspeed = Number(partInLocalDB.DecreasedDrift);
       let stat = Number(selected.Drift);
-
       selected.Drift = stat -= newspeed;
     }
-    if (selected.Price && partindb.Price && partindb.Price > 0) {
-      let resale = Number(partindb.Price * 0.35);
-
+    if (selected?.Price && partInLocalDB?.Price > 0) {
+      let resale = Number(partInLocalDB.Price * 0.35);
       let stat = Number(selected.Price);
-
       selected.Price = stat += resale;
     }
 
-    selected[actpart] = partindb.Name;
-
-    let newobj = selected;
+    selected[partType] = partInLocalDB.Name;
 
     await User.findOneAndUpdate(
       {
@@ -187,7 +114,7 @@ module.exports = {
       },
       {
         $set: {
-          "cars.$[car]": newobj,
+          "cars.$[car]": selected,
         },
       },
 
@@ -199,9 +126,11 @@ module.exports = {
         ],
       }
     );
-    userdata.parts.pull(realpart.toLowerCase());
+    userdata.parts.pull(inputPartName);
     userdata.save();
 
-    await interaction.reply(`✅`);
+    await interaction.reply(
+      `Upgraded your ${partType} to ${partInLocalDB?.Name || inputPartName}`
+    );
   },
 };

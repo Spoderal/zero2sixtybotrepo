@@ -2,6 +2,7 @@ const discord = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const { capitalize } = require("lodash");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,9 +25,9 @@ module.exports = {
           { name: "Engine", value: "engine" },
           { name: "Gearbox", value: "gearbox" },
           { name: "Weight", value: "weight" },
-          { name: "Intercooler", value: "intercooler" }
+          { name: "Intercooler", value: "intercooler" },
+          { name: "Nitro", value: "nitro" }
         )
-
         .setRequired(true)
     )
     .addStringOption((option) =>
@@ -40,52 +41,10 @@ module.exports = {
     let userdata = await User.findOne({ id: user1.id });
     let parttoinstall = interaction.options.getString("part");
     let cartoinstall = interaction.options.getString("car");
-    let actpart;
+    let actpart = parttoinstall === "ecu" ? "ECU" : capitalize(parttoinstall);
 
-    switch (parttoinstall) {
-      case "exhaust":
-        actpart = "Exhaust";
-        break;
-      case "intake":
-        actpart = "Intake";
-        break;
-      case "tires":
-        actpart = "Tires";
-        break;
-      case "engine":
-        actpart = "Engine";
-        break;
-      case "turbo":
-        actpart = "Turbo";
-        break;
-      case "weight":
-        actpart = "Weight";
-        break;
-      case "gearbox":
-        actpart = "Gearbox";
-        break;
-      case "body":
-        actpart = "Body";
-        break;
-      case "ecu":
-        actpart = "ECU";
-        break;
-      case "spoiler":
-        actpart = "Spoiler";
-        break;
-      case "suspension":
-        actpart = "Suspension";
-        break;
-      case "intercooler":
-        actpart = "Intercooler";
-        break;
-      case "clutch":
-        actpart = "Clutch";
-        break;
-    }
-
-    let filteredcar = userdata.cars.filter((car) => car.ID == cartoinstall);
-    let selected = filteredcar[0] || "No ID";
+    let filteredcar = userdata.cars.find((car) => car.ID == cartoinstall);
+    let selected = filteredcar || "No ID";
     if (selected == "No ID") {
       let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
@@ -98,6 +57,7 @@ module.exports = {
 
     if (!selected[actpart])
       return await interaction.reply(`This car doesn't have a "${actpart}" !`);
+
     let realpart = selected[actpart];
     let partindb = partdb.Parts[realpart.toLowerCase()];
     if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
@@ -108,55 +68,45 @@ module.exports = {
     if (partindb.DecreasedSpeed && partindb.DecreaseSpeed > 0) {
       let newspeed = Number(partindb.DecreasedSpeed);
       let stat = Number(selected.Speed);
-
       selected.Speed = stat += newspeed;
     }
     if (partindb.AddedSixty && partindb.AddedSixty > 0) {
       let newspeed = parseFloat(partindb.AddedSixty);
       let stat = parseFloat(selected.Acceleration);
-
       selected.Acceleration = stat += newspeed;
     }
     if (partindb.DecreasedSixty && partindb.DecreasedSixty > 0) {
       let newspeed = parseFloat(partindb.DecreasedSixty);
       let stat = parseFloat(selected.Acceleration);
-
       if (stat > 2) selected.Acceleration = stat -= newspeed;
     }
     if (partindb.AddHandling && partindb.AddHandling > 0) {
       let newspeed = Number(partindb.AddHandling);
       let stat = Number(selected.Handling);
-
       selected.Handling = stat -= newspeed;
     }
     if (partindb.DecreasedHandling && partindb.DecreasedHandling > 0) {
       let newspeed = Number(partindb.DecreasedHandling);
       let stat = Number(selected.Handling);
-
       selected.Handling = stat += newspeed;
     }
     if (partindb.AddedDrift && partindb.AddedDrift > 0) {
       let newspeed = Number(partindb.AddedDrift);
       let stat = Number(selected.Drift);
-
       selected.Drift = stat -= newspeed;
     }
     if (partindb.DecreasedDrift && partindb.DecreasedDrift > 0) {
       let newspeed = Number(partindb.DecreasedDrift);
       let stat = Number(selected.Drift);
-
       selected.Drift = stat += newspeed;
     }
     if (selected.Price && partindb.Price && partindb.Price > 0) {
       let resale = Number(partindb.Price * 0.35);
-
       let stat = Number(selected.Price);
-
       selected.Price = stat -= resale;
     }
 
     selected[actpart] = null;
-
     let newobj = selected;
 
     await User.findOneAndUpdate(
@@ -177,9 +127,10 @@ module.exports = {
         ],
       }
     );
+
     userdata.parts.push(`${realpart.toLowerCase()}`);
     userdata.save();
 
-    await interaction.reply(`✅`);
+    await interaction.reply(`Removed ${actpart} from ${selected?.Name}`);
   },
 };
