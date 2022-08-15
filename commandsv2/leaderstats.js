@@ -42,10 +42,18 @@ module.exports = {
     console.log("DEBUG: Fetching user names...");
     let currentUserPosition = 0;
     for (let i = 0; i < filteredUsers?.length; i++) {
-      const user = await interaction.client.users.fetch(filteredUsers[i].id);
+      const user = await interaction.client.users
+        .fetch(filteredUsers[i].id)
+        .catch(() => {});
+      if (!user?.username) continue;
       filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
       currentUserPosition =
         filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
+    }
+
+    const onlyTaggedUsers = filteredUsers.filter((u) => u.tag);
+    if (!onlyTaggedUsers?.length) {
+      return await interaction.editReply("The leaderboard is currently empty!");
     }
 
     if (currentUserPosition > 0) {
@@ -56,9 +64,9 @@ module.exports = {
 
     console.log("DEBUG: Creating the list of users for the description...");
     let desc = "";
-    for (let i = 0; i < filteredUsers.length; i++) {
-      desc += `${i + 1}. ${filteredUsers[i].tag} - ${toCurrency(
-        filteredUsers[i].cash
+    for (let i = 0; i < onlyTaggedUsers.length; i++) {
+      desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${toCurrency(
+        onlyTaggedUsers[i].cash
       )}.00\n`;
     }
 
