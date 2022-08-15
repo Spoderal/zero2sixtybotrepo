@@ -8,6 +8,54 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { tipFooterRandom } = require("../common/tips");
+const { randomRange } = require("../common/utils");
+
+let bot1cars = [
+  "1995 mazda miata",
+  "1991 toyota mr2",
+  "2002 pontiac firebird",
+  "1999 honda civic si",
+  "1997 acura integra",
+  "2002 ford mustang",
+];
+let bot2cars = [
+  "2014 hyundai genesis coupe",
+  "2008 nissan 350z",
+  "2008 nissan 350z",
+  "2010 ford mustang",
+  "1989 chevy camaro",
+  "1996 nissan 300zx twin turbo",
+  "2004 subaru wrx sti",
+];
+let bot3cars = [
+  "2020 porsche 718 cayman",
+  "2015 lotus exige sport",
+  "2011 audi rs5",
+  "2023 nissan z",
+  "2018 kia stinger",
+  "2012 dodge charger srt8",
+];
+let bot4cars = [
+  "2015 mercedes amg gts",
+  "2016 alfa romeo giulia",
+  "2021 porsche 911 gt3",
+  "2017 ford gt",
+  "2021 nissan gtr",
+  "2013 lexus lfa",
+];
+let bot5cars = [
+  "2014 lamborghini huracan",
+  "2014 mclaren 12c",
+  "2018 audi r8",
+  "2020 mclaren 570s",
+  "2020 aston martin vantage",
+];
+let bot6cars = [
+  "2010 ferrari 458 italia",
+  "2018 lamborghini aventador s",
+  "2016 aston martin vulkan",
+  "2013 mclaren p1",
+];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,9 +84,11 @@ module.exports = {
     if (selected == "No ID") {
       let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
-        .setColor("DARK_RED")
+        .setColor(colors.discordTheme.red)
         .setDescription(
-          `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
+          `That car/id isn't selected!
+          Use \`/ids select [id] [car to select]\` to select a car to your specified id!\n
+          Example: \`/ids select 1 1995 mazda miata\``
         );
       return await interaction.reply({ embeds: [errembed] });
     }
@@ -57,52 +107,6 @@ module.exports = {
         `Please wait ${time} before racing in the cash cup again.`
       );
     }
-    let bot1cars = [
-      "1995 mazda miata",
-      "1991 toyota mr2",
-      "2002 pontiac firebird",
-      "1999 honda civic si",
-      "1997 acura integra",
-      "2002 ford mustang",
-    ];
-    let bot2cars = [
-      "2014 hyundai genesis coupe",
-      "2008 nissan 350z",
-      "2008 nissan 350z",
-      "2010 ford mustang",
-      "1989 chevy camaro",
-      "1996 nissan 300zx twin turbo",
-      "2004 subaru wrx sti",
-    ];
-    let bot3cars = [
-      "2020 porsche 718 cayman",
-      "2015 lotus exige sport",
-      "2011 audi rs5",
-      "2023 nissan z",
-      "2018 kia stinger",
-      "2012 dodge charger srt8",
-    ];
-    let bot4cars = [
-      "2015 mercedes amg gts",
-      "2016 alfa romeo giulia",
-      "2021 porsche 911 gt3",
-      "2017 ford gt",
-      "2021 nissan gtr",
-      "2013 lexus lfa",
-    ];
-    let bot5cars = [
-      "2014 lamborghini huracan",
-      "2014 mclaren 12c",
-      "2018 audi r8",
-      "2020 mclaren 570s",
-      "2020 aston martin vantage",
-    ];
-    let bot6cars = [
-      "2010 ferrari 458 italia",
-      "2018 lamborghini aventador s",
-      "2016 aston martin vulkan",
-      "2013 mclaren p1",
-    ];
 
     let botcar;
 
@@ -293,14 +297,13 @@ module.exports = {
           if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
             selected.Wins += 1;
           }
-          userdata.save();
           if (userdata.racexp >= newrankrequired) {
             userdata.racerank += 1;
-            userdata.save();
             interaction.channel.send(
               `${interaction.user}, You just ranked up your race skill to ${userdata.racerank}!`
             );
           }
+          userdata.save();
 
           return;
         } else if (tracklength < tracklength2) {
@@ -335,9 +338,5 @@ module.exports = {
         }
       }
     }, 1000);
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };
