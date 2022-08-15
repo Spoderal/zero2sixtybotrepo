@@ -79,7 +79,7 @@ module.exports = {
     if (selected == "No ID") {
       let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
-        .setColor("DARK_RED")
+        .setColor(colors.discordTheme.red)
         .setDescription(
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
@@ -124,7 +124,7 @@ module.exports = {
       if (selected2 == "No ID") {
         let errembed = new discord.EmbedBuilder()
           .setTitle("Error!")
-          .setColor("DARK_RED")
+          .setColor(colors.discordTheme.red)
           .setDescription(
             `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
           );

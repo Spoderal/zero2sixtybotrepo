@@ -3,6 +3,7 @@ const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const { capitalize } = require("lodash");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -46,7 +47,7 @@ module.exports = {
     if (selected == "No ID") {
       let errembed = new discord.EmbedBuilder()
         .setTitle("Error!")
-        .setColor("DARK_RED").setDescription(`
+        .setColor(colors.discordTheme.red).setDescription(`
           That car/id isn't selected!
           Use \`/ids select [id] [car to select]\` to select a car to your specified id!\n
           **Example: \`/ids select 1 1995 mazda miata\`**
