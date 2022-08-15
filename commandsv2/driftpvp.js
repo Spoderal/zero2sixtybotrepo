@@ -44,7 +44,7 @@ module.exports = {
 
     let moneyearned = 50;
     let idtoselect = interaction.options.getString("car");
-    let user2 = interaction.options.getString("user");
+    let user2 = interaction.options.getUser("user");
     let idtoselect2 = interaction.options.getString("car2");
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -52,6 +52,11 @@ module.exports = {
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
     let userdata2 = await User.findOne({ id: user2.id });
+
+    if (!userdata2) {
+      return await interaction.reply(`The user ${user2} hasn't started yet! They should use \`/start\` to begin!`);
+    }
+
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
