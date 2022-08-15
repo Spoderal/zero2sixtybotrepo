@@ -782,16 +782,16 @@ module.exports = {
 
           return;
         } else if (tracklength < tracklength2) {
-          let moneye = moneyearned / 5
+          let moneye = moneyearned / 5;
           embed.setTitle(`Tier ${classd} bot race lost!`);
-          
+
           embed.addFields([
             {
               name: "Earnings",
               value: `${cemote} $${moneye}`,
             },
           ]);
-          userdata.cash += Number(moneye)
+          userdata.cash += Number(moneye);
 
           clearInterval(x);
           if (range > 0) {
