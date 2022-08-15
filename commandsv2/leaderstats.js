@@ -13,20 +13,10 @@ module.exports = {
     await interaction.deferReply();
 
     let users = await User.find({});
-    let members = [];
-    console.log(`Found ${users?.length} users`);
 
-    for (let user of users) {
-      try {
-        await interaction.client.users.fetch(user.id).then(members.push(user));
-      } catch (err) {
-        // swallow this error
-      }
-    }
+    console.log(`DEBUG: Found ${users?.length} users`);
 
-    console.log(`Created ${members?.length} members`);
-
-    if (!members?.length) {
+    if (!users?.length) {
       return await interaction.editReply("The leaderboard is currently empty!");
     }
 
@@ -34,42 +24,47 @@ module.exports = {
       .setTitle("Cash Leaderboard")
       .setColor(colors.blue);
 
-    console.log("filtering, sorting, and slicing members array");
-    members = members
-      .filter(function BigEnough(value) {
-        return value.cash > 0;
-      })
-      .sort(function (b, a) {
-        return a.cash - b.cash;
-      })
+    console.log("DEBUG: filtering, sorting, and slicing members array");
+    const filteredUsers = users
+      .filter((value) => value.cash > 0)
+      .sort((b, a) => a.cash - b.cash)
       .slice(0, 10);
+    // console.log(filteredUsers);
 
-    console.log(`Members array length is now at ${members?.length}`);
-    
-    console.log("Checking for user in top 10...");
-    const userPositionInTopTen = members?.findIndex(
-      (m) => m.id == interaction.user.id
+    console.log(
+      `DEBUG: Filtered user array length is now at ${filteredUsers?.length}`
     );
 
-    if (userPositionInTopTen >= 0) {
+    if (!filteredUsers?.length) {
+      return await interaction.editReply("The leaderboard is currently empty!");
+    }
+
+    console.log("DEBUG: Fetching user names...");
+    let currentUserPosition = 0;
+    for (let i = 0; i < filteredUsers?.length; i++) {
+      const user = await interaction.client.users.fetch(filteredUsers[i].id);
+      filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
+      currentUserPosition =
+        filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
+    }
+
+    if (currentUserPosition > 0) {
       embed.setFooter({
-        text: `Your position is #${
-          userPositionInTopTen + 1
-        } on the cash leaderboard!`,
+        text: `Your position is #${currentUserPosition} on the cash leaderboard!`,
       });
     }
 
-    console.log("Creating the list of users for the descriptoin...");
+    console.log("DEBUG: Creating the list of users for the description...");
     let desc = "";
-    for (let i = 0; i < members.length; i++) {
-      let user = interaction.client.users.cache.get(members[i].id);
-      if (!user) return;
-      let bal = members[i].cash;
-      desc += `${i + 1}. ${user.tag} - ${toCurrency(bal)}.00\n`;
+    for (let i = 0; i < filteredUsers.length; i++) {
+      desc += `${i + 1}. ${filteredUsers[i].tag} - ${toCurrency(
+        filteredUsers[i].cash
+      )}.00\n`;
     }
 
     embed.setDescription(desc);
 
+    console.log("DEBUG: Replying");
     await interaction.editReply({ embeds: [embed] });
   },
 };
