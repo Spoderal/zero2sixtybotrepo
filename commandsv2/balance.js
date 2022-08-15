@@ -8,6 +8,7 @@ const {
 const { tipFooterRandom } = require("../common/tips");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,9 +44,7 @@ module.exports = {
     } = profile;
 
     if (typeof cash === "undefined") {
-      await interaction.reply(
-        "You haven't started yet! Use `/start` to create a profile and begin!"
-      );
+      await interaction.reply(GET_STARTED_MESSAGE);
     } else {
       let embed = new EmbedBuilder()
         .setTitle(`${user.username}'s Balance`)

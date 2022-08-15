@@ -10,6 +10,7 @@ let parts = require("../data/partsdb.json");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
 const { toCurrency, numberWithCommas } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,9 +33,7 @@ module.exports = {
     const userdata = await User.findOne({ id: interaction.user.id });
 
     if (!userdata?.id) {
-      return await interaction.reply(
-        "You don't have a profile yet! Use `/start` to get started!"
-      );
+      return await interaction.reply(GET_STARTED_MESSAGE);
     }
 
     const global = await Global.findOne({});

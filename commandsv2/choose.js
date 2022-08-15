@@ -4,6 +4,7 @@ const cars = require("../data/cardb.json");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,7 +31,7 @@ module.exports = {
   async execute(interaction) {
     let created = db.fetch(`created_${interaction.user.id}`);
 
-    if (!created) return await interaction.reply(`Use \`/start\` to begin!`);
+    if (!created) return await interaction.reply(GET_STARTED_MESSAGE);
     let squadchose = interaction.options.getString("squad");
     let idchose = interaction.options.getString("car");
     if (!squadchose)
