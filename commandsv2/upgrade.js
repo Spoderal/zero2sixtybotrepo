@@ -75,6 +75,7 @@ module.exports = {
       let newspeed = parseFloat(partInLocalDB.AddedSixty);
       let stat = parseFloat(selected.Acceleration);
       if (stat > 2) selected.Acceleration = stat -= newspeed;
+      if (selected.Acceleration < 2) selected.Acceleration = 2;
     }
     if (partInLocalDB?.DecreasedSixty > 0) {
       let newspeed = parseFloat(partInLocalDB.DecreasedSixty);

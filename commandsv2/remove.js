@@ -80,6 +80,8 @@ module.exports = {
       let newspeed = parseFloat(partindb.DecreasedSixty);
       let stat = parseFloat(selected.Acceleration);
       if (stat > 2) selected.Acceleration = stat -= newspeed;
+      if (selected.Acceleration < 2) selected.Acceleration = 2;
+      
     }
     if (partindb.AddHandling && partindb.AddHandling > 0) {
       let newspeed = Number(partindb.AddHandling);
