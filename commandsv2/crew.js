@@ -56,7 +56,7 @@ module.exports = {
         crew = userdata.crew;
         if (!crew)
           return await interaction.reply(
-            "You're not in a crew! Join one with `/joincrew <crew name>`"
+            "You're not in a crew!\nJoin one with `/crew option join name [crew name]` or create one with `/crew option create name [crew name]`"
           );
         crewname = crew.name;
       }
@@ -73,7 +73,7 @@ module.exports = {
         let userId = rpmembers[i];
         let user = await interaction.client.users.fetch(userId);
         let isOwner = false;
-        if (user.id === crew.owner) isOwner = true;
+        if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
         let rp = newuserdata.rp || 0;
         rparray.push({ rp, user, isOwner });
@@ -101,7 +101,11 @@ module.exports = {
               ${mlength} members\n
               Rank ${crew2.Rank}\n
               RP: ${total}\n
-              Crew Leader: ${owner.user.username}#${owner.user.discriminator}
+              ${
+                owner
+                  ? `Crew Leader: ${owner.user.username}#${owner.user.discriminator}`
+                  : ""
+              }
             `,
             inline: true,
           },
