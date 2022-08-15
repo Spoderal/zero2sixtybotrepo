@@ -190,8 +190,8 @@ module.exports = {
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${namefor} Barn Find`)
       .addFields([
-        { nmw: "Car", value: carobj.Name },
-        { nmw: "ID", value: carobj.ID },
+        { name: "Car", value: carobj.Name },
+        { name: "ID", value: carobj.ID },
       ])
       .setImage(carobj.Livery)
       .setColor(color);
