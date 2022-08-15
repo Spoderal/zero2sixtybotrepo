@@ -118,7 +118,7 @@ module.exports = {
       time: 30000,
     });
 
-    collector.on("collect", async (i, user) => {
+    collector.on("collect", async (i) => {
       if (i.customId.includes("approve")) {
         embed.setTitle("Racing!");
         i.update({ embeds: [embed], components: [] });
@@ -135,11 +135,11 @@ module.exports = {
         }, 1000);
         setTimeout(async () => {
           if (tracklength > tracklength2) {
-            embed.setTitle(`${user.tag} won!`);
+            embed.setTitle(`${user?.tag || user?.username} won!`);
             embed.setImage(carimage1);
             embed.setThumbnail();
           } else if (tracklength < tracklength2) {
-            embed.setTitle(`${user2.tag} won!`);
+            embed.setTitle(`${user2?.tag || user2?.username} won!`);
             embed.setImage(carimage2);
             embed.setThumbnail();
           }
