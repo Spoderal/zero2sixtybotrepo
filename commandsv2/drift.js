@@ -301,7 +301,7 @@ module.exports = {
       canshift = true;
       setTimeout(() => {
         canshift = false;
-      }, 4000);
+      }, 2000);
 
       collector.on("end", async (collected) => {
         if (collected.size == 0 && canshift == false) {
@@ -334,8 +334,17 @@ module.exports = {
       time -= 1;
     }, 1000);
 
+    let removedShiftButton = false;
     let x = setInterval(() => {
       tracklength -= formula;
+
+      if (!canshift && !removedShiftButton) {
+        removedShiftButton = true;
+        setTimeout(
+          () => interaction.editReply({ embeds: [embed], components: [] }),
+          2000
+        );
+      }
 
       if (time == 0) {
         if (tracklength >= 0) {
