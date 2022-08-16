@@ -42,8 +42,8 @@ module.exports = {
     let finalprice = 0;
     for (let car in cars) {
       let car2 = cars[car];
-      let price = Number(cardb.Cars[car2.Name.toLowerCase()].Price);
-      finalprice += price;
+      let price = cardb.Cars[car2.Name.toLowerCase()]?.Price;
+      if (price) finalprice += Number(price);
     }
 
     let cash = userdata.cash;
