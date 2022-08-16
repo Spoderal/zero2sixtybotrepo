@@ -290,6 +290,7 @@ module.exports = {
 
     let randomnum = lodash.sample(rns);
     let canshift = false;
+    let showedShiftButton = false;
     const collector = interaction.channel.createMessageComponentCollector({
       filter,
       time: 10000,
@@ -299,6 +300,7 @@ module.exports = {
       embed.addFields([{ name: invisibleSpace, value: "Shift now!" }]);
       interaction.editReply({ embeds: [embed], components: [row] });
       canshift = true;
+      showedShiftButton = true;
       setTimeout(() => {
         canshift = false;
       }, 2000);
@@ -338,7 +340,7 @@ module.exports = {
     let x = setInterval(() => {
       tracklength -= formula;
 
-      if (!canshift && !removedShiftButton) {
+      if (showedShiftButton && !canshift && !removedShiftButton) {
         removedShiftButton = true;
         setTimeout(
           () => interaction.editReply({ embeds: [embed], components: [] }),
