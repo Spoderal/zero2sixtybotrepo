@@ -278,7 +278,7 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("ebrake")
         .setEmoji(emotes.eBrake)
-        .setLabel("Handbrake")
+        .setLabel("Shifter")
         .setStyle("Secondary")
     );
 
@@ -290,6 +290,7 @@ module.exports = {
 
     let randomnum = lodash.sample(rns);
     let canshift = false;
+    let showedShiftButton = false;
     const collector = interaction.channel.createMessageComponentCollector({
       filter,
       time: 10000,
@@ -299,6 +300,7 @@ module.exports = {
       embed.addFields([{ name: invisibleSpace, value: "Shift now!" }]);
       interaction.editReply({ embeds: [embed], components: [row] });
       canshift = true;
+      showedShiftButton = true;
       setTimeout(() => {
         canshift = false;
       }, 2000);
@@ -316,12 +318,14 @@ module.exports = {
         collector.on("collect", async (i) => {
           if (i.customId.includes("ebrake")) {
             if (canshift == false) {
-              interaction.channel.send(
-                `You pulled the handbrake at the wrong time!`
-              );
               formula = formula / 2;
+              embed.setFooter({
+                text: "You failed to shift at the right moment and lost momentum!",
+              });
+              await i.update({ embeds: [originalEmbed], components: [] });
             } else if (canshift == true) {
-              embed.setFooter({ text: "Drifting!!!" });
+              formula = formula * 1.3;
+              embed.setFooter({ text: "Great shift... drifting!!!" });
               await i.update({ embeds: [originalEmbed], components: [] });
             }
           }
@@ -332,12 +336,24 @@ module.exports = {
       time -= 1;
     }, 1000);
 
+    let removedShiftButton = false;
     let x = setInterval(() => {
       tracklength -= formula;
 
+      if (showedShiftButton && !canshift && !removedShiftButton) {
+        removedShiftButton = true;
+        setTimeout(
+          () => interaction.editReply({ embeds: [embed], components: [] }),
+          2000
+        );
+      }
+
       if (time == 0) {
         if (tracklength >= 0) {
-          embed.addFields([{ name: "Results", value: `Failed` }]);
+          embed.addFields([
+            { name: "Results", value: `Failed` },
+            { name: "Earnings", value: "+10 Drift XP" },
+          ]);
           embed.setFooter({ text: invisibleSpace });
           interaction.editReply({ embeds: [embed], components: [] });
           if (range && range >= 0) {
@@ -350,9 +366,7 @@ module.exports = {
             if (userdata.driftrank < 50) {
               userdata.driftrank += 1;
               interaction.channel.send(
-                `${user}, you just ranked up your drift skill to ${db.fetch(
-                  `driftrank_${user.id}`
-                )}!`
+                `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
               );
             }
           }
@@ -370,9 +384,10 @@ module.exports = {
             {
               name: "Earnings",
               value: `
-              $${moneyearned}
-              ${notorietyearned} Notoriety
-              +25 XP
+              ${emotes.cash} $${moneyearned}
+              ${emotes.notoriety} ${notorietyearned} Notoriety
+              ${emotes.rp} ${ticketsearned} RP
+              +25 Drift XP
             `,
             },
           ]);
