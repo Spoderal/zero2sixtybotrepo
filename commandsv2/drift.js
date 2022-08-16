@@ -278,7 +278,7 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("ebrake")
         .setEmoji(emotes.eBrake)
-        .setLabel("Handbrake")
+        .setLabel("Shifter")
         .setStyle("Secondary")
     );
 
