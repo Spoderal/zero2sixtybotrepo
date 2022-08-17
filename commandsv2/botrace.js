@@ -755,7 +755,11 @@ module.exports = {
           userdata.racexp += 25;
           earningsresult.push(`+25 XP`);
 
+<<<<<<< HEAD
           let requiredXP = userdata.racerank * 1000;
+=======
+          let reqxp = racerank2 * 100;
+>>>>>>> 922d53e... Small update: new pet, bug fixes, steal command, xp buff, new item
 
           if (userdata.racexp >= requiredXP) {
             userdata.racerank += 1;

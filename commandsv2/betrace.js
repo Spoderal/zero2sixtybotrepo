@@ -218,7 +218,13 @@ module.exports = {
         if (tracklength > tracklength2) {
           embed.setTitle(`Bet race won!`);
 
+<<<<<<< HEAD
           let earningsresult = [];
+=======
+          let racerank2 = userdata.racerank;
+
+          let reqxp = racerank2 * 100;
+>>>>>>> 922d53e... Small update: new pet, bug fixes, steal command, xp buff, new item
 
           let finalamount = moneyearned + moneyearned * 0.35;
           earningsresult.push(`${toCurrency(finalamount)}`);
