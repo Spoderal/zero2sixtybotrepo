@@ -459,6 +459,7 @@ module.exports = {
             "bank increase",
             "water bottle",
           ];
+          
 
           let ranreward = lodash.sample(rewards);
 
