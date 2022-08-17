@@ -28,10 +28,11 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-    let items = ["🏎️", "💵", "⚙️", "🗺️"];
+    let items = ["🏎️", "💵", "⚙️", "🗺️", "🏦"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
+    let witems = wheelspinrewards.Items;
 
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
@@ -151,6 +152,16 @@ module.exports = {
           }
           embed.setDescription(
             `You won a ${numberWithCommas(reward)} barn map!`
+          );
+          interaction.editReply({ embeds: [embed] });
+        }
+        else if (item == "🏦") {
+          let reward = lodash.sample(witems);
+
+          userdata.items.push(reward.toLowerCase())
+         
+          embed.setDescription(
+            `You won a ${numberWithCommas(reward)}`
           );
           interaction.editReply({ embeds: [embed] });
         }

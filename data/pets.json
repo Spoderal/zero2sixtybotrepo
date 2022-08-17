@@ -14,6 +14,15 @@
       "BlueSpoiler": "https://i.ibb.co/17PK7Ym/miataspoilerblue.png",
       "BlackSpoiler": "https://i.ibb.co/tCsv34p/miatablack.png",
       "WhiteSpoiler": "https://i.ibb.co/BCggZTj/miatawhitespoiler.png"
+    },
+    "pretty porsche": {
+      "Name": "Pretty Porsche",
+      "Colors": ["White"],
+      "Image": "https://i.ibb.co/y4QBWqT/prettyporschewhite.png",
+      "Findables": 2,
+      "Rarity": 5,
+      "NoPaint":true
+    
     }
   }
 }

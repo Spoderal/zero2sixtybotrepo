@@ -2,3 +2,5 @@ node_modules
 VPS STUFF
 
 .env
+commandsv2/contracts.js
+commandsv2/customtrack.js

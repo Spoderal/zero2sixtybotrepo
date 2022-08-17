@@ -97,10 +97,10 @@ module.exports = {
         emote = itemdb.Other[actitem.toLowerCase()].Emote;
         name = itemdb.Other[actitem.toLowerCase()].Name;
         type = itemdb.Other[actitem.toLowerCase()].Type;
-      } else if (itemdb.Collectable[0][actitem.toLowerCase()]) {
-        emote = itemdb.Collectable[0][actitem.toLowerCase()].Emote;
-        name = itemdb.Collectable[0][actitem.toLowerCase()].Name;
-        type = itemdb.Collectable[0][actitem.toLowerCase()].Type;
+      } else if (itemdb.Collectable[actitem.toLowerCase()]) {
+        emote = itemdb.Collectable[actitem.toLowerCase()].Emote;
+        name = itemdb.Collectable[actitem.toLowerCase()].Name;
+        type = itemdb.Collectable[actitem.toLowerCase()].Type;
       }
 
       //Do something

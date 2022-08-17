@@ -6,6 +6,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const lodash  = require('lodash')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -55,26 +56,43 @@ module.exports = {
       }`;
     } else if (
       itemdb.Other[itemtouse.toLowerCase()] ||
-      itemdb.Collectable[0][itemtouse.toLowerCase()]
+      itemdb.Collectable[itemtouse.toLowerCase()]
     ) {
       if (itemtouse.toLowerCase() == "pink slip") {
         userdata.pinkslips += 1;
       } else if (itemtouse.toLowerCase() == "bank increase") {
         let banklimit = userdata.banklimit;
 
-        if (banklimit >= 250000000)
+        if (banklimit >= 2500000)
           return interaction.reply(
-            `The bank limit cap is currently ${toCurrency(250000000)}!`
+            `The bank limit cap is currently ${toCurrency(2500000)} for regular bank increases! Try using a big bank increase`
           );
 
         let finalbanklimit = 5000 * amount2;
         userdata.banklimit += finalbanklimit;
         userdata.update();
 
-        if (userdata.banklimit >= 250000000) {
-          userdata.banklimit = 250000000;
+        if (userdata.banklimit >= 2500000) {
+          userdata.banklimit = 2500000;
         }
-      } else if (itemtouse.toLowerCase() == "super wheelspin") {
+      }
+      else if (itemtouse.toLowerCase() == "big bank increase") {
+        let banklimit = userdata.banklimit;
+
+        if (banklimit >= 10000000)
+          return interaction.reply(
+            `The bank limit cap is currently ${toCurrency(10000000)} for big bank increases!`
+          );
+
+        let finalbanklimit = 25000 * amount2;
+        userdata.banklimit += finalbanklimit;
+        userdata.update();
+
+        if (userdata.banklimit >= 10000000) {
+          userdata.banklimit = 10000000;
+        }
+      }  
+      else if (itemtouse.toLowerCase() == "super wheelspin") {
         let final = 1 * amount2;
 
         userdata.swheelspins += final;
@@ -105,17 +123,39 @@ module.exports = {
             `You already have a vault activated, prestige to deactivate it!`
           );
         userdata.vault = itemtouse.toLowerCase();
-      } else if (itemtouse.toLowerCase() == "pet egg") {
+      }
+      else if (itemtouse.toLowerCase() == "disguise") {
+
+        userdata.using.push("disguise")
+      
+    
+      } 
+      else if (itemtouse.toLowerCase() == "pet egg") {
+        let randcar = lodash.sample(["pretty porsche", "mini miata"])
         let pet = userdata.pet;
-        let petobj = {
-          condition: 100,
-          oil: 100,
-          gas: 100,
-          love: 100,
-          car: "mini miata",
-          tier: 1,
-          color: "Red",
-        };
+        let petobj
+        if(randcar == "pretty porsche"){
+          petobj = {
+            condition: 100,
+            oil: 100,
+            gas: 100,
+            love: 100,
+            car: "pretty porsche",
+            tier: 2,
+            color: "White",
+          };
+        }
+        else {
+          petobj = {
+            condition: 100,
+            oil: 100,
+            gas: 100,
+            love: 100,
+            car: "mini miata",
+            tier: 1,
+            color: "Red",
+          };
+        }
 
         if (pet) return interaction.reply(`You already have a pet!`);
         userdata.pet = petobj;
@@ -150,9 +190,9 @@ module.exports = {
     } else if (itemdb.Other[itemtouse.toLowerCase()]) {
       emote = itemdb.Other[itemtouse.toLowerCase()].Emote;
       name = itemdb.Other[itemtouse.toLowerCase()].Name;
-    } else if (itemdb.Collectable[0][itemtouse.toLowerCase()]) {
-      emote = itemdb.Collectable[0][itemtouse.toLowerCase()].Emote;
-      name = itemdb.Collectable[0][itemtouse.toLowerCase()].Name;
+    } else if (itemdb.Collectable[itemtouse.toLowerCase()]) {
+      emote = itemdb.Collectable[itemtouse.toLowerCase()].Emote;
+      name = itemdb.Collectable[itemtouse.toLowerCase()].Name;
     }
 
     fullname = `${emote} ${name}`;
