@@ -107,6 +107,8 @@ module.exports = {
                 sellprice
               )} instead.`
             );
+            userdata.save()
+            return;
           }
           if (usercars.length >= garagespaces) {
             interaction.channel.send("You garage is full!");
