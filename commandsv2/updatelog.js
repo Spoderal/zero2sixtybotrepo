@@ -18,7 +18,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-<<<<<<< HEAD
+
             label: "8/13/2022",
             description: "Information for the latest update",
             value: "1_update",
@@ -26,8 +26,7 @@ module.exports = {
             emoji: "❓",
           },
           {
-=======
->>>>>>> 922d53e... Small update: new pet, bug fixes, steal command, xp buff, new item
+
             label: "Patch",
             description: "Information for the latest patch (UPDATES REGULARLY)",
             value: "2_update",
@@ -133,13 +132,11 @@ module.exports = {
             });
           } else if (value === "3_update") {
             embed.fields = [];
-<<<<<<< HEAD
             embed.setDescription(`\u200b`);
             embed.setTitle(`Big Update`);
-=======
+
             embed.setDescription("");
             embed.setTitle(`Small Update`);
->>>>>>> 922d53e... Small update: new pet, bug fixes, steal command, xp buff, new item
             embed
               .setDescription(
                 `• New pet: Pretty Porsche\n
