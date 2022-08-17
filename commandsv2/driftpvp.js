@@ -258,7 +258,7 @@ module.exports = {
 
           let racerank2 = (driftrank += 1);
 
-          let reqxp = racerank2 * 1000;
+          let reqxp = racerank2 * 100;
 
           if (userdata.driftxp >= reqxp) {
             userdata.driftrank += 1;
@@ -349,7 +349,7 @@ module.exports = {
 
           let racerank2;
 
-          let reqxp = racerank2 * 1000;
+          let reqxp = racerank2 * 100;
 
           if (userdata2.racexp >= reqxp) {
             userdata2.racerank += 1;

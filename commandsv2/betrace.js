@@ -233,7 +233,7 @@ module.exports = {
 
           let racerank2 = userdata.racerank;
 
-          let reqxp = racerank2 * 1000;
+          let reqxp = racerank2 * 100;
 
           let finalamount = moneyearned + moneyearned * 0.35;
 
