@@ -304,7 +304,7 @@ module.exports = {
         return interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-      let cardata = await Car.findOne({ name: list[car.toLowerCase()].Name });
+      let cardata = await Car.findOne({ name: list[car.toLowerCase()].Name }) || new Car({name: list[car.toLowerCase()].Name});
 
       let liveriesforcar = cardata.liveries;
       if (!liveriesforcar)
