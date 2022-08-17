@@ -61,7 +61,7 @@ module.exports = {
           const value = collected.values[0];
           if (value === "1_update") {
             embed.fields = [];
-            embed.setDescription("");
+            embed.setDescription();
             embed
               .setTitle(`Small Update`)
               .addFields([
@@ -91,7 +91,7 @@ module.exports = {
             });
           } else if (value === "2_update") {
             embed.fields = [];
-            embed.setDescription("");
+            embed.setDescription();
 
             embed.setTitle(`Small Patch`);
             embed
@@ -113,7 +113,7 @@ module.exports = {
             });
           } else if (value === "3_update") {
             embed.fields = [];
-            embed.setDescription("");
+            embed.setDescription();
             embed.setTitle(`Small Update`);
             embed
               .setDescription(
