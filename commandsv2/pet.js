@@ -6,9 +6,9 @@ const lodash = require("lodash");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
 const petdb = require("../data/pets.json");
-const Cooldowns = require("../schema/cooldowns");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
+const Cooldowns = require('../schema/cooldowns')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,14 +16,8 @@ module.exports = {
     .setDescription("View your mini miata"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-
-    let cooldowndata =
-      (await Cooldowns.findOne({ id: interaction.user.id })) ||
-      new Cooldowns({ id: interaction.user.id });
-
-
     let pet = userdata.pet;
-    if (!pet) return await interaction.reply(`You don't have a pet!`);
+    if (!pet) return interaction.reply(`You don't have a pet!`);
     let condition = pet.condition;
     let gas = pet.gas;
     let oil = pet.oil;
@@ -442,11 +436,8 @@ module.exports = {
           userdata.save();
         });
       } else if (i.customId.includes("race")) {
-
-
         let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: interaction.user.id})
         let timetorace = cooldowndata.petracing || 0;
-
         let timeout = 600000;
         if (timetorace !== null && timeout - (Date.now() - timetorace) > 0) {
           let time = ms(timeout - (Date.now() - timetorace));
@@ -470,11 +461,6 @@ module.exports = {
               },
             }
           );
-
-          cooldowndata.pet = Date.now();
-
-          cooldowndata.save();
-
           await Cooldowns.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -485,7 +471,6 @@ module.exports = {
               },
             }
           );
-
 
           let rewardrange = randomRange(0, 5);
 

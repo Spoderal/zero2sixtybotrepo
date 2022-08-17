@@ -12,11 +12,6 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.GuildMessages,
-<<<<<<< HEAD
-    GatewayIntentBits.MessageContent,
-=======
-    GatewayIntentBits.MessageContent
->>>>>>> 6f304cd... New pets and stuff
   ],
   shards: "auto",
 });
