@@ -295,7 +295,6 @@ module.exports = {
         });
         let nametoset;
         collector2.on("collect", async (msg) => {
-          console.log(msg.content)
           nametoset = msg.content;
 
           await User.findOneAndUpdate(
@@ -506,20 +505,15 @@ module.exports = {
               content: `${i.user}, Your pet returned with ${rewardrange} Xessence, and a ${ranreward}`,
             });
             userdata.xessence += rewardrange;
-            console.log(ranreward)
             if (partdb.Parts[ranreward.toLowerCase()]) {
               userdata.parts.push(ranreward.toLowerCase());
               userdata.save();
             } 
-            else if (itemdb.Other[ranreward.toLowerCase()]) {
+            else if (itemdb.Other[ranreward.toLowerCase()] || itemdb.Collectable[ranreward.toLowerCase()]) {
               userdata.items.push(ranreward.toLowerCase());
               userdata.save();
             } 
-            else if (itemdb.Collectable[ranreward.toLowerCase()]) {
-              console.log("collecta")
-              userdata.items.push(ranreward.toLowerCase());
-              userdata.save();
-            }
+           
           }, 10000);
         }
       }

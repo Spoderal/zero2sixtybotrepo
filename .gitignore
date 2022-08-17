@@ -2,15 +2,4 @@ node_modules
 VPS STUFF
 
 .env
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-json.sqlite
-=======
-commandsv2/contracts.js
-commandsv2/customtrack.js
->>>>>>> 6f304cd... New pets and stuff
-=======
-commandsv2/contracts.js
-commandsv2/customtrack.js
->>>>>>> 6f304cd12a00419eadc7858a0d7366f753401a6c
