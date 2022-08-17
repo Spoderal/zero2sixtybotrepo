@@ -165,7 +165,7 @@ module.exports = {
       });
     } else if (
       (trading.endsWith("cash") &&
-        itemdb.Collectable[0][trading2.toLowerCase()]) ||
+        itemdb.Collectable[trading2.toLowerCase()]) ||
       (trading.endsWith("cash") && itemdb.Police[trading2.toLowerCase()]) ||
       (trading.endsWith("cash") && itemdb.Other[trading2.toLowerCase()])
     ) {
@@ -198,7 +198,7 @@ module.exports = {
         return await interaction.reply(`Minimum of $1.5k cash needed.`);
       let itemtype;
 
-      if (itemdb.Collectable[0][trading2.toLowerCase()]) {
+      if (itemdb.Collectable[trading2.toLowerCase()]) {
         itemtype = "Collectable";
       } else if (itemdb.Police[trading2.toLowerCase()]) {
         itemtype = "Police";
@@ -372,7 +372,7 @@ module.exports = {
     // car for item
     else if (
       (cardb.Cars[trading.toLowerCase()] &&
-        itemdb.Collectable[0][trading2.toLowerCase()]) ||
+        itemdb.Collectable[trading2.toLowerCase()]) ||
       (cardb.Cars[trading.toLowerCase()] &&
         itemdb.Other[trading2.toLowerCase()]) ||
       (cardb.Cars[trading.toLowerCase()] &&
@@ -399,7 +399,7 @@ module.exports = {
         return interaction.channel.send(`You don't have this car!`);
       let itemtype;
 
-      if (itemdb.Collectable[0][trading2.toLowerCase()]) {
+      if (itemdb.Collectable[trading2.toLowerCase()]) {
         itemtype = "Collectable";
       } else if (itemdb.Police[trading2.toLowerCase()]) {
         itemtype = "Police";
@@ -916,7 +916,7 @@ module.exports = {
       }
       // part for item
       else if (
-        itemdb.Collectable[0][trading2.toLowerCase()] ||
+        itemdb.Collectable[trading2.toLowerCase()] ||
         itemdb.Police[trading2.toLowerCase()] ||
         itemdb.Other[trading2.toLowerCase()]
       ) {
@@ -961,7 +961,7 @@ module.exports = {
 
         let itemtype;
 
-        if (itemdb.Collectable[0][trading2.toLowerCase()]) {
+        if (itemdb.Collectable[trading2.toLowerCase()]) {
           itemtype = "Collectable";
         } else if (itemdb.Police[trading2.toLowerCase()]) {
           itemtype = "Police";
@@ -1160,7 +1160,7 @@ module.exports = {
         });
       }
     } else if (
-      itemdb.Collectable[0][trading.toLowerCase()] ||
+      itemdb.Collectable[trading.toLowerCase()] ||
       itemdb.Police[trading.toLowerCase()] ||
       itemdb.Other[trading.toLowerCase()]
     ) {
@@ -1195,7 +1195,7 @@ module.exports = {
       // Item for cash
       let itemtype;
 
-      if (itemdb.Collectable[0][trading.toLowerCase()]) {
+      if (itemdb.Collectable[trading.toLowerCase()]) {
         itemtype = "Collectable";
       } else if (itemdb.Police[trading.toLowerCase()]) {
         itemtype = "Police";
@@ -1496,7 +1496,7 @@ module.exports = {
           }
         });
       } else if (
-        itemdb.Collectable[0][trading2.toLowerCase()] ||
+        itemdb.Collectable[trading2.toLowerCase()] ||
         itemdb.Police[trading2.toLowerCase()] ||
         itemdb.Other[trading2.toLowerCase()]
       ) {
@@ -1515,7 +1515,7 @@ module.exports = {
 
         let itemtype2;
 
-        if (itemdb.Collectable[0][trading2.toLowerCase()]) {
+        if (itemdb.Collectable[trading2.toLowerCase()]) {
           itemtype2 = "Collectable";
         } else if (itemdb.Police[trading2.toLowerCase()]) {
           itemtype2 = "Police";

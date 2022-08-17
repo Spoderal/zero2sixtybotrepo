@@ -1,0 +1,10 @@
+{
+    "1":{
+        "Reward":50000,
+        "Task":"Win 10 PVP Races"
+    },
+    "2":{
+        "Reward":25000,
+        "Task":"Win 5 tier 6 bot races"
+    }
+}

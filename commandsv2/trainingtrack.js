@@ -616,7 +616,7 @@ module.exports = {
 
           let racerank2 = userdata.racerank;
 
-          let reqxp = racerank2 * 1000;
+          let reqxp = racerank2 * 100;
 
           if (userdata.racexp >= reqxp) {
             userdata.racerank += 1;

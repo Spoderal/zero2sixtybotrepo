@@ -18,13 +18,6 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "8/13/2022",
-            description: "Information for the latest update",
-            value: "1_update",
-            customId: "up1",
-            emoji: "❓",
-          },
-          {
             label: "Patch",
             description: "Information for the latest patch (UPDATES REGULARLY)",
             value: "2_update",
@@ -32,8 +25,8 @@ module.exports = {
             emoji: "⚙️",
           },
           {
-            label: "7/17/2022",
-            description: "Information for recent big update",
+            label: "8/17/2022",
+            description: "Information for recent small update",
             value: "3_update",
             customId: "up3",
             emoji: "⬆️",
@@ -47,9 +40,8 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⬆️ Update 8/13/2022\n
-            ⚙️ Patch 7/10/2022\n
-            👥 Small Update 6/24/2022\n
+            ⬆️ Small Update 8/17/2022\n
+            ⚙️ Patch 7/10/2022
         `);
 
     embed.setColor(colors.blue);
@@ -69,31 +61,27 @@ module.exports = {
           const value = collected.values[0];
           if (value === "1_update") {
             embed.fields = [];
-            embed.setDescription(`\u200b`);
+            embed.setDescription("");
             embed
               .setTitle(`Small Update`)
               .addFields([
                 {
                   name: `${emotes.featuresUpdate} Features`,
                   value: `
-                    • New and faster response times
-                    • A lot of bug fixes
-                    • Ranks fixed
-                    • Drift revamped
-                    • Unbox command fixed
-                    • Work removed for the time being while we reWORK it
-                    • 5 Gold can now clear all race cooldowns
-                    • Losing bot races gives you some cash
-                  `,
-                },
-                {
-                  name: `${emotes.ckey} New Cars`,
-                  value: `
-                  ${emotes.ferrari} 2023 Ferrari Daytona SP3
+                    • Wrench has been fixed\n
+                    • Liveries now accept IDs for installing and removing\n
+                    • Liveries can be removed easily\n
+                    • Turbos now have new emojis\n
+                    • T4 and T5 Turbo **T4Turbo found in super wheel spins only**\n
+                    • Bet race nerfed heavily - 5 hour cooldown, and 35% cash earnings instead of 50%\n
+                    • Super wheel spin cash rewards buffed\n
+                    • Dealership includes a list of import cars\n
+                    • Ferrari Event\n
+                    • Daily tasks fixed
                   `,
                 },
               ])
-              .setFooter({ text: "8/13/2022" })
+              .setFooter({ text: "6/24/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
@@ -103,7 +91,7 @@ module.exports = {
             });
           } else if (value === "2_update") {
             embed.fields = [];
-            embed.setDescription(`\u200b`);
+            embed.setDescription("");
 
             embed.setTitle(`Small Patch`);
             embed
@@ -125,19 +113,21 @@ module.exports = {
             });
           } else if (value === "3_update") {
             embed.fields = [];
-            embed.setDescription(`\u200b`);
-            embed.setTitle(`Big Update`);
+            embed.setDescription("");
+            embed.setTitle(`Small Update`);
             embed
               .setDescription(
-                `• Garage update, filtering added, and the garage now uses buttons.\n
-                • Pets! Get a pet egg from the item shop and take care of it.\n
-                • Tier X parts, get Xessence from having a pet, and use that with a T5 part to make a Tier X part.\n
-                • 4th item added to the daily item shop\n
-                • Numerous bug fixes\n
-                • New cars\n
+                `• New pet: Pretty Porsche\n
+                • Tons of bug fixes\n
+                • Steal command added with a disguise item\n
+                • XP needed decreased to rank * 100\n
+                • Drift revamp\n
+                • Big bank increase added, find them with your pretty porsche, you can use the big bank increases to go past the bank limit!
+                • Bank limit cap fixed, should've been 2 million, but it was 200 million\n
+
                 `
               )
-              .setFooter({ text: "7/17/2022" })
+              .setFooter({ text: "8/17/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
