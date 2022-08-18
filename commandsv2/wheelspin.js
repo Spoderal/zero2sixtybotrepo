@@ -153,15 +153,10 @@ module.exports = {
             `You won a ${numberWithCommas(reward)} barn map!`
           );
           interaction.editReply({ embeds: [embed] });
-        }
-        else if (item == "🏦") {
+        } else if (item == "🏦") {
           let reward = lodash.sample(witems);
-
-          userdata.items.push(reward.toLowerCase())
-         
-          embed.setDescription(
-            `You won a ${numberWithCommas(reward)}`
-          );
+          userdata.items.push(reward.toLowerCase());
+          embed.setDescription(`You won a ${numberWithCommas(reward)}`);
           interaction.editReply({ embeds: [embed] });
         }
 

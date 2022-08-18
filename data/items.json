@@ -118,7 +118,7 @@
       "Type": "Usable",
       "Emote": "<:ZEGG:998356325857775707>"
     },
-    "disguise":{
+    "disguise": {
       "Price": 75000,
       "Action": "Use this to steal from other users",
       "Name": "Disguise",
@@ -126,46 +126,44 @@
       "Emote": "<:disguise:1008228542208802816>"
     }
   },
-  "Collectable": 
-    {
-      "golden wheel": {
-        "Name": "Golden Wheel",
-        "Type": "Collectable",
-        "id": "golden wheel",
-        "Emote": "<:goldenwheel:977694341634097192>",
-        "chance": 10000,
-        "amount": 500
-      },
-      "golden helmet": {
-        "Name": "Golden Helmet",
-        "Type": "Collectable",
-        "id": "golden helmet",
-        "Emote": "<:goldhelmet:977696175123734549>",
-        "chance": 100000,
-        "amount": 100
-      },
-      "golden exhaust": {
-        "Name": "Golden Exhaust",
-        "Type": "Collectable",
-        "id": "golden exhaust",
-        "Emote": "<:goldhelmet:977696175123734549>",
-        "chance": 1000,
-        "amount": 1000
-      },
-      "bank increase": {
-        "Name": "Bank Increase",
-        "Action": "Increase your bank space by $5k",
-        "Type": "Usable",
-        "Emote": "<:bankupgrade:974153111298007131>",
-        "Items": 10
-      },
-      "big bank increase": {
-        "Name": "Big Bank Increase",
-        "Action": "Increase your bank space by $25k",
-        "Type": "Usable",
-        "Emote": "<:bigbank:1008110998202372170>",
-        "Items": 10
-      }
+  "Collectable": {
+    "golden wheel": {
+      "Name": "Golden Wheel",
+      "Type": "Collectable",
+      "id": "golden wheel",
+      "Emote": "<:goldenwheel:977694341634097192>",
+      "chance": 10000,
+      "amount": 500
+    },
+    "golden helmet": {
+      "Name": "Golden Helmet",
+      "Type": "Collectable",
+      "id": "golden helmet",
+      "Emote": "<:goldhelmet:977696175123734549>",
+      "chance": 100000,
+      "amount": 100
+    },
+    "golden exhaust": {
+      "Name": "Golden Exhaust",
+      "Type": "Collectable",
+      "id": "golden exhaust",
+      "Emote": "<:goldhelmet:977696175123734549>",
+      "chance": 1000,
+      "amount": 1000
+    },
+    "bank increase": {
+      "Name": "Bank Increase",
+      "Action": "Increase your bank space by $5k",
+      "Type": "Usable",
+      "Emote": "<:bankupgrade:974153111298007131>",
+      "Items": 10
+    },
+    "big bank increase": {
+      "Name": "Big Bank Increase",
+      "Action": "Increase your bank space by $25k",
+      "Type": "Usable",
+      "Emote": "<:bigbank:1008110998202372170>",
+      "Items": 10
     }
-  
+  }
 }

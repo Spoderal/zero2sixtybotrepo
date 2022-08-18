@@ -6,7 +6,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-const lodash  = require('lodash')
+const lodash = require("lodash");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -38,7 +38,6 @@ module.exports = {
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
     });
-    console.log(filtereduser);
     if (amount2 > 50)
       return interaction.reply(
         `The max amount you can use in one command is 50!`
@@ -47,7 +46,6 @@ module.exports = {
     if (amount2 > filtereduser.length)
       return interaction.reply("You don't have that many of that item!");
     let fullname;
-    console.log(itemtouse);
 
     if (itemdb.Police[itemtouse.toLowerCase()]) {
       userdata.using.push(itemtouse.toLowerCase());
@@ -65,7 +63,9 @@ module.exports = {
 
         if (banklimit >= 2500000)
           return interaction.reply(
-            `The bank limit cap is currently ${toCurrency(2500000)} for regular bank increases! Try using a big bank increase`
+            `The bank limit cap is currently ${toCurrency(
+              2500000
+            )} for regular bank increases! Try using a big bank increase`
           );
 
         let finalbanklimit = 5000 * amount2;
@@ -75,13 +75,14 @@ module.exports = {
         if (userdata.banklimit >= 2500000) {
           userdata.banklimit = 2500000;
         }
-      }
-      else if (itemtouse.toLowerCase() == "big bank increase") {
+      } else if (itemtouse.toLowerCase() == "big bank increase") {
         let banklimit = userdata.banklimit;
 
         if (banklimit >= 10000000)
           return interaction.reply(
-            `The bank limit cap is currently ${toCurrency(10000000)} for big bank increases!`
+            `The bank limit cap is currently ${toCurrency(
+              10000000
+            )} for big bank increases!`
           );
 
         let finalbanklimit = 25000 * amount2;
@@ -91,8 +92,7 @@ module.exports = {
         if (userdata.banklimit >= 10000000) {
           userdata.banklimit = 10000000;
         }
-      }  
-      else if (itemtouse.toLowerCase() == "super wheelspin") {
+      } else if (itemtouse.toLowerCase() == "super wheelspin") {
         let final = 1 * amount2;
 
         userdata.swheelspins += final;
@@ -123,18 +123,13 @@ module.exports = {
             `You already have a vault activated, prestige to deactivate it!`
           );
         userdata.vault = itemtouse.toLowerCase();
-      }
-      else if (itemtouse.toLowerCase() == "disguise") {
-
-        userdata.using.push("disguise")
-      
-    
-      } 
-      else if (itemtouse.toLowerCase() == "pet egg") {
-        let randcar = lodash.sample(["pretty porsche", "mini miata"])
+      } else if (itemtouse.toLowerCase() == "disguise") {
+        userdata.using.push("disguise");
+      } else if (itemtouse.toLowerCase() == "pet egg") {
+        let randcar = lodash.sample(["pretty porsche", "mini miata"]);
         let pet = userdata.pet;
-        let petobj
-        if(randcar == "pretty porsche"){
+        let petobj;
+        if (randcar == "pretty porsche") {
           petobj = {
             condition: 100,
             oil: 100,
@@ -144,8 +139,7 @@ module.exports = {
             tier: 2,
             color: "White",
           };
-        }
-        else {
+        } else {
           petobj = {
             condition: 100,
             oil: 100,
@@ -201,7 +195,6 @@ module.exports = {
       items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
     userdata.items = items;
 
-    console.log(fullname);
     userdata.save();
     await interaction.reply(`Used x${amount2} ${fullname}!`);
   },

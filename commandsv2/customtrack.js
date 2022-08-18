@@ -25,28 +25,20 @@ module.exports = {
           option
             .setName("weather")
             .setDescription("The track weather")
-            .setRequired(true)          
+            .setRequired(true)
             .addChoices(
-              {name: "Snow", value: "weather_snow"},
-              {name: "Rain", value: "weather_rain"},
-              {name: "Clear", value: "weather_clear"}
+              { name: "Snow", value: "weather_snow" },
+              { name: "Rain", value: "weather_rain" },
+              { name: "Clear", value: "weather_clear" }
             )
         )
-      
     ),
 
   // eslint-disable-next-line no-unused-vars
   async execute(interaction) {
-     let subcommandfetch = interaction.options.getSubcommand();
-     if (subcommandfetch == "create") {
-
-
-       let weatherOption = interaction.options.getString("weather")
-
-       
-
-       
-
-     }
+    let subcommandfetch = interaction.options.getSubcommand();
+    if (subcommandfetch == "create") {
+      let weatherOption = interaction.options.getString("weather");
+    }
   },
 };

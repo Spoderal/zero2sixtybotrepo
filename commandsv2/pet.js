@@ -8,7 +8,7 @@ const itemdb = require("../data/items.json");
 const petdb = require("../data/pets.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const Cooldowns = require('../schema/cooldowns')
+const Cooldowns = require("../schema/cooldowns");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,7 +28,7 @@ module.exports = {
 
     let petimage;
 
-    if (color == "Black" && pet.car == "mini miata")  {
+    if (color == "Black" && pet.car == "mini miata") {
       petimage = petdb.Pets["mini miata"].Black;
 
       if (spoiler) {
@@ -54,8 +54,8 @@ module.exports = {
       }
     }
 
-    if (pet.car == "pretty porsche"){
-      petimage = petdb.Pets["pretty porsche"].Image
+    if (pet.car == "pretty porsche") {
+      petimage = petdb.Pets["pretty porsche"].Image;
     }
 
     let embed = new Discord.EmbedBuilder()
@@ -67,7 +67,7 @@ module.exports = {
         { name: "Gas", value: `${gas}`, inline: true },
         { name: "Oil", value: `${oil}`, inline: true },
         { name: "Love", value: `${love}`, inline: true },
-        {name: "Tier", value: `${pet.tier}`, inline: true}
+        { name: "Tier", value: `${pet.tier}`, inline: true },
       ])
       .setThumbnail(petimage)
       .setColor(colors.blue);
@@ -326,7 +326,8 @@ module.exports = {
           i.update({ content: `You changed your pets name`, embeds: [embed] });
         });
       } else if (i.customId.includes("paint")) {
-        if(petdb.Pets[pet.car].NoPaint) return i.update({content: `This pet is not paintable.`})
+        if (petdb.Pets[pet.car].NoPaint)
+          return i.update({ content: `This pet is not paintable.` });
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("black")
@@ -435,7 +436,9 @@ module.exports = {
           userdata.save();
         });
       } else if (i.customId.includes("race")) {
-        let cooldowndata = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: interaction.user.id})
+        let cooldowndata =
+          (await Cooldowns.findOne({ id: interaction.user.id })) ||
+          new Cooldowns({ id: interaction.user.id });
         let timetorace = cooldowndata.petracing || 0;
         let timeout = 600000;
         if (timetorace !== null && timeout - (Date.now() - timetorace) > 0) {
@@ -444,11 +447,9 @@ module.exports = {
           return i.update({
             content: `You've already sent your pet racing\n\nRace again in ${time}.`,
           });
-          
-        } 
-        else {
+        } else {
           let gas = userdata.pet.gas;
-          if(gas <= 0) return i.update(`Your pet is out of gas!`)
+          if (gas <= 0) return i.update(`Your pet is out of gas!`);
           let lessgas = (gas -= 50);
           await User.findOneAndUpdate(
             {
@@ -466,7 +467,7 @@ module.exports = {
             },
             {
               $set: {
-                "petracing": Date.now(),
+                petracing: Date.now(),
               },
             }
           );
@@ -479,23 +480,16 @@ module.exports = {
             "bank increase",
             "water bottle",
           ];
-          
 
-          let t2rewards = [
-            "t3tires",
-            "big bank increase",
-            "bank increase"
-          ]
+          let t2rewards = ["t3tires", "big bank increase", "bank increase"];
 
-          let ranreward
-          if(pet.tier == 1){
-           ranreward = lodash.sample(rewards);
-            rewardrange = randomRange(0, 5)
-          } 
-          else if (pet.tier == 2){
-            ranreward = lodash.sample(t2rewards)
-            rewardrange = randomRange(2, 10)
-
+          let ranreward;
+          if (pet.tier == 1) {
+            ranreward = lodash.sample(rewards);
+            rewardrange = randomRange(0, 5);
+          } else if (pet.tier == 2) {
+            ranreward = lodash.sample(t2rewards);
+            rewardrange = randomRange(2, 10);
           }
 
           i.update({ content: `You sent your pet racing for 10 minutes` });
@@ -508,16 +502,16 @@ module.exports = {
             if (partdb.Parts[ranreward.toLowerCase()]) {
               userdata.parts.push(ranreward.toLowerCase());
               userdata.save();
-            } 
-            else if (itemdb.Other[ranreward.toLowerCase()] || itemdb.Collectable[ranreward.toLowerCase()]) {
+            } else if (
+              itemdb.Other[ranreward.toLowerCase()] ||
+              itemdb.Collectable[ranreward.toLowerCase()]
+            ) {
               userdata.items.push(ranreward.toLowerCase());
               userdata.save();
-            } 
-           
+            }
           }, 10000);
         }
-      }
-      else if(i.customId.includes("leave")){
+      } else if (i.customId.includes("leave")) {
         await User.findOneAndUpdate(
           {
             id: interaction.user.id,
@@ -528,8 +522,8 @@ module.exports = {
             },
           }
         );
-        
-        i.update({content: `Left your pet :(`, embeds: [], components: []})
+
+        i.update({ content: `Left your pet :(`, embeds: [], components: [] });
       }
     });
   },

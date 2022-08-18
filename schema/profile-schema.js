@@ -268,11 +268,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-  contracts:{
+  contracts: {
     type: Array,
     required: false,
-    default:[]
-  }
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

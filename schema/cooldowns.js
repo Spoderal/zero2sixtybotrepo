@@ -66,7 +66,7 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  petracing:{
+  petracing: {
     type: Number,
     required: false,
     default: 0,

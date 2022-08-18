@@ -54,7 +54,9 @@ module.exports = {
     let userdata2 = await User.findOne({ id: user2.id });
 
     if (!userdata2) {
-      return await interaction.reply(`The user ${user2} hasn't started yet! They should use \`/start\` to begin!`);
+      return await interaction.reply(
+        `The user ${user2} hasn't started yet! They should use \`/start\` to begin!`
+      );
     }
 
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
