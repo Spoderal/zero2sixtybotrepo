@@ -66,9 +66,5 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
     }
   }
 
-  client.on("guildCreate", (guild) => {
-    console.log(`New guild joined! : ${guild.memberCount} members`);
-  });
-
   client.login(process.env.TOKEN);
 }
