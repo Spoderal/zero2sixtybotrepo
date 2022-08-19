@@ -97,11 +97,11 @@ module.exports = {
         name = itemdb.Other[actitem.toLowerCase()].Name;
         type = itemdb.Other[actitem.toLowerCase()].Type;
         price = itemdb.Other[actitem.toLowerCase()].Price;
-      } else if (itemdb.Collectable[0][actitem.toLowerCase()]) {
-        emote = itemdb.Collectable[0][actitem.toLowerCase()].Emote;
-        name = itemdb.Collectable[0][actitem.toLowerCase()].Name;
-        type = itemdb.Collectable[0][actitem.toLowerCase()].Type;
-        price = itemdb.Collectable[0][actitem.toLowerCase()].Price;
+      } else if (itemdb.Collectable[actitem.toLowerCase()]) {
+        emote = itemdb.Collectable[actitem.toLowerCase()].Emote;
+        name = itemdb.Collectable[actitem.toLowerCase()].Name;
+        type = itemdb.Collectable[actitem.toLowerCase()].Type;
+        price = itemdb.Collectable[actitem.toLowerCase()].Price;
       }
 
       if (price) sum += Number(price);

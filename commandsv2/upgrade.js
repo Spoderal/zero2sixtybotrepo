@@ -23,8 +23,7 @@ module.exports = {
     let inputCarIdOrName = interaction.options.getString("car");
     let inputPartName = interaction.options.getString("part").toLowerCase();
     let partInLocalDB = partdb.Parts[inputPartName];
-    let partType =
-      partInLocalDB.Type === "ecu" ? "ECU" : capitalize(partInLocalDB.Type);
+    let partType = partInLocalDB.Type === "ecu" ? "ECU" : capitalize(partInLocalDB.Type);
 
     let user1 = interaction.user;
     let userdata = await User.findOne({ id: user1.id });
