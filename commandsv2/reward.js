@@ -85,17 +85,17 @@ module.exports = {
       ) {
         let amount = item.Item.split(" ")[0];
         await interaction.reply(`Redeemed ${amount} Barn Maps`);
-        userdata.cmaps += amount;
+        userdata.cmaps += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Common Keys")) {
         let amount = item.Item.split(" ")[0];
         await interaction.reply(`Redeemed ${amount} Common Keys`);
-        userdata.ckeys += amount;
+        userdata.ckeys += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Drift Keys")) {
         let amount = item.Item.split(" ")[0];
         await interaction.reply(`Redeemed ${amount} Drift Keys`);
-        userdata.dkeys += amount;
+        userdata.dkeys += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (
         item.Item.endsWith("Garage Space") ||
@@ -104,17 +104,17 @@ module.exports = {
         let amount = item.Item.split(" ")[0];
         await interaction.reply(`Redeemed ${amount} Garage Spaces`);
 
-        userdata.garage += amount;
+        userdata.garageLimit += amount;
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Rare Keys")) {
         let amount = item.Item.split(" ")[0];
         await interaction.reply(`Redeemed ${amount} Rare Keys`);
-        userdata.rkeys += amount;
+        userdata.rkeys += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Exotic Keys")) {
         let amount = item.Item.split(" ")[0];
         await interaction.reply(`Redeemed ${amount} Exotic Keys`);
-        userdata.ekeys += amount;
+        userdata.ekeys += Number(amount);
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Helmet")) {
         await interaction.reply(`Redeemed ${item.Item}`);
