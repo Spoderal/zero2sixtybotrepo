@@ -33,6 +33,21 @@
       "Starter": true,
       "Class": "D"
     },
+    "2022 ferrari 296":{
+      "alias":"2022 296",
+      "Name":"2022 Ferrari 296",
+      "Emote":"<:ferrari:931011838374727730>",
+      "Speed":200,
+
+      "Price":"0",
+      "sellprice":0,
+      "Engine":"V6",
+      "Image":"https://i.ibb.co/ZVnb6dZ/ferrariii.jpg",
+      "0-60":7.3,
+      "Drift":0,
+      "Handling":500,
+      "Obtained":"Crew Season"
+  },
     "2011 scion tc": {
       "alias": "2011 tc",
       "Name": "2011 Scion TC",
@@ -1351,6 +1366,20 @@
       "Rear": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vantage-white-stone-4-min-1588913660.jpg?crop=1.00xw:0.753xh;0,0.237xh&resize=640:*",
       "0-60": 7.7,
       "Drift": 0,
+      "Handling": 500
+    },
+    "wise drift 2020 aston martin vantage": {
+      "alias": "wd 2020 vantage",
+      "Name": "Wise Drift 2020 Aston Martin Vantage",
+      "Emote": "<:aston:931011548682534962>",
+      "Speed": 196,
+      "kmh": 257,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "4.0 L V8",
+      "Image": "https://i.ibb.co/WyT4cYL/cracked-swift.png",
+      "0-60": 7.7,
+      "Drift": 10,
       "Handling": 500
     },
     "1986 toyota ae86": {
