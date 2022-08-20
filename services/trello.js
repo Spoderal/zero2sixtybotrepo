@@ -89,7 +89,7 @@ async function createBugCard({ error, event, command, options, user, guild }) {
 
     // TODO: later we can make this a function that checks various strings
     const errorStackFirstLine = error?.stack?.split("\n")[0];
-    const isInteractionAck = errorStackFirstLine.includes(
+    const isInteractionAck = errorStackFirstLine?.includes(
       "Interaction has already been acknowledged"
     );
     const isInteractionUnknown = errorStackFirstLine?.includes(
