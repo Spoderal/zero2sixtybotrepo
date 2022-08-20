@@ -2,14 +2,36 @@ const TrelloNodeAPI = require("trello-node-api");
 const md5 = require("md5");
 const outdent = require("outdent");
 
-const trello = new TrelloNodeAPI();
-trello.setApiKey(process.env.TRELLO_API_KEY);
-trello.setOauthToken(process.env.TRELLO_OAUTH_TOKEN);
-
+const trelloKey = process?.env?.TRELLO_API_KEY;
+const trelloToken = process?.env?.TRELLO_OAUTH_TOKEN;
 const idBoard = process?.env?.TRELLO_BUG_BOARD_ID;
 const idList = process?.env?.TRELLO_BUG_LIST_ID;
+
+// Instantiate trello api
+const trello = new TrelloNodeAPI();
+trello.setApiKey(trelloKey);
+trello.setOauthToken(trelloToken);
+
+// Check to ensure trello is configured properly
+const isTrelloConfigured =
+  trello && trelloKey && trelloToken && idBoard && idList;
+if (!isTrelloConfigured) {
+  console.log(
+    outdent`
+      [Trello] Integration disabled due to invalid configuration.
+      \t Check \`services/trello.js\` and ensure all environment
+      \t variables are properly set.
+    `
+  );
+} else {
+  console.log(
+    "[Trello] Integration enabled. Errors will automatically create cards."
+  );
+}
+
 const errorHashLineText = "Error hash:";
 
+// Fetch cards in trello to find a matching md5 hash
 async function checkBugCardsForMatch(hash) {
   try {
     const cards = await trello.board.searchCards(idBoard);
@@ -30,6 +52,7 @@ async function checkBugCardsForMatch(hash) {
   }
 }
 
+// Create a formatted row for trello card description using JSON stringify
 function generateCardRow(title, content) {
   return `\n${title}:\n \n\`\`\`\n${JSON.stringify(
     content,
@@ -38,8 +61,9 @@ function generateCardRow(title, content) {
   )}\n\`\`\`\n`;
 }
 
+// Create a trello bug card
 async function createBugCard({ error, event, command, options, user, guild }) {
-  if (!trello || !idList) return;
+  if (!isTrelloConfigured) return;
 
   try {
     const errorToJSON = JSON.stringify(
@@ -100,7 +124,7 @@ async function createBugCard({ error, event, command, options, user, guild }) {
     );
   } catch (error) {
     console.error(
-      "[Trello] There was a problem creating a card for the error shown above]",
+      "[Trello] There was a problem creating a card for the error shown above",
       error
     );
   }
