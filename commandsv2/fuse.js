@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const partdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,6 +33,7 @@ module.exports = {
   async execute(interaction) {
     let user1 = interaction.user;
     let userdata = await User.findOne({ id: user1.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let parts = userdata.parts;
     let parttoinstall = interaction.options.getString("part");

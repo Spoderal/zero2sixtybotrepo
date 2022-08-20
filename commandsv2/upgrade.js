@@ -4,6 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const { capitalize } = require("lodash");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,6 +33,8 @@ module.exports = {
 
     let user1 = interaction.user;
     let userdata = await User.findOne({ id: user1.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let userParts = userdata.parts;
     let userCar = userdata.cars.find(
       (car) => car.ID == inputCarIdOrName || car.Name == inputCarIdOrName

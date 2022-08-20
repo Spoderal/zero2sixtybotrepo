@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,6 +29,7 @@ module.exports = {
     let user = interaction.user;
     let user2 = interaction.options.getUser("target");
     let userdata = await User.findOne({ id: user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     if (!user2) return await interaction.reply("Specify a user to race!");
     let userdata2 = await User.findOne({ id: user2.id });
     let cooldowndata =

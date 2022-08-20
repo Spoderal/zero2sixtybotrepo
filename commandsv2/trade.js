@@ -6,6 +6,7 @@ const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -46,6 +47,8 @@ module.exports = {
     let user2 = interaction.options.getUser("target");
 
     let userdata = await User.findOne({ id: user1.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let userdata2 = await User.findOne({ id: user2.id });
 
     let trading = interaction.options.getString("item").toLowerCase();

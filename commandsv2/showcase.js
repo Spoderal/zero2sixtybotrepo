@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -13,6 +14,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let carsdb = require(`../data/cardb.json`);
 

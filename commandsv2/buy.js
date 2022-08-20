@@ -31,10 +31,7 @@ module.exports = {
     ),
   async execute(interaction) {
     const userdata = await User.findOne({ id: interaction.user.id });
-
-    if (!userdata?.id) {
-      return await interaction.reply(GET_STARTED_MESSAGE);
-    }
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     const global = await Global.findOne({});
     const amount = interaction.options.getNumber("amount");

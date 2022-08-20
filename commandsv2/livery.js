@@ -5,6 +5,7 @@ const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const Car = require("../schema/car");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,6 +43,7 @@ module.exports = {
     let option = interaction.options.getString("option");
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     if (option == "install") {
       let idtoselect = interaction.options.getString("car");

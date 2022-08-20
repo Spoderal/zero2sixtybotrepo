@@ -4,6 +4,7 @@ const { EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { invisibleSpace } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,6 +29,7 @@ module.exports = {
     let list = ["common", "rare", "exotic", "drift", "z crate 1"];
 
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let bought = interaction.options.getString("crate");
     let carsu = userdata.cars;

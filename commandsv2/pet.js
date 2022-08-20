@@ -9,6 +9,7 @@ const petdb = require("../data/pets.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const Cooldowns = require("../schema/cooldowns");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,6 +17,8 @@ module.exports = {
     .setDescription("View your mini miata"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let pet = userdata.pet;
     if (!pet) return interaction.reply(`You don't have a pet!`);
     let condition = pet.condition;

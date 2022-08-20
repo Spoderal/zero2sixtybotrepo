@@ -5,8 +5,8 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
- const { emotes } = require("../common/emotes");
- const User = require("../schema/profile-schema")
+const { GET_STARTED_MESSAGE } = require("../common/constants");
+const User = require("../schema/profile-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,9 +35,10 @@ module.exports = {
         ])
     );
 
-    let udata = await User.findOne({id: interaction.user.id})
+    let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let bwins = udata.bugattiwins || 0
+    let bwins = userdata.bugattiwins || 0;
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -109,7 +110,6 @@ module.exports = {
             );
             embed.setImage();
             embed.setColor(colors.blue);
-            
 
             await interaction.editReply({
               embeds: [embed],

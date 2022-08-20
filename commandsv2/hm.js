@@ -84,10 +84,7 @@ module.exports = {
     let moneyearned = 150;
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
-
-    if (!userdata?.id) {
-      return await interaction.reply(GET_STARTED_MESSAGE);
-    }
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let cooldowndata =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
@@ -435,13 +432,15 @@ module.exports = {
 
             userdata.items.push("bank increase");
           }
-          if(selected.Name.includes("Bugatti") && bot == "6") {
-            userdata.bugattiwins += 1
+          if (selected.Name.includes("Bugatti") && bot == "6") {
+            userdata.bugattiwins += 1;
 
-            let hasbugatti = userdata.cars.filter((car) => car.Name == "2024 Bugatti Mistral");
+            let hasbugatti = userdata.cars.filter(
+              (car) => car.Name == "2024 Bugatti Mistral"
+            );
 
-            if(userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
-              let carindb = cars.Cars["2024 bugatti mistral"]
+            if (userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
+              let carindb = cars.Cars["2024 bugatti mistral"];
               let carobj = {
                 ID: carindb.alias,
                 Name: carindb.Name,
@@ -453,8 +452,10 @@ module.exports = {
                 Livery: carindb.Image,
                 Miles: 0,
               };
-              userdata.cars.push(carobj)
-              earningsresult.push(`<:bugatti:931012624110460979> 2024 Bugatti Mistral`)
+              userdata.cars.push(carobj);
+              earningsresult.push(
+                `<:bugatti:931012624110460979> 2024 Bugatti Mistral`
+              );
             }
           }
 
