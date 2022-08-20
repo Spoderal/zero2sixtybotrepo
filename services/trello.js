@@ -87,6 +87,22 @@ async function createBugCard({ error, event, command, options, user, guild }) {
       return;
     }
 
+    // TODO: later we can make this a function that checks various strings
+    const errorStackFirstLine = error?.stack?.split("\n")[0];
+    const isInteractionAck = errorStackFirstLine.includes(
+      "Interaction has already been acknowledged"
+    );
+    const isInteractionUnknown = errorStackFirstLine?.includes(
+      "Unknown interaction"
+    );
+
+    if (isInteractionAck || isInteractionUnknown) {
+      console.log(
+        "[Trello] The error above is on the ignore list, no card created."
+      );
+      return;
+    }
+
     const errorStack = `
       \nError stack:\n\n\`\`\`\n${error?.stack}\n\`\`\`\n
     `;
