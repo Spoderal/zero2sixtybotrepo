@@ -1,18 +1,24 @@
+const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 
 module.exports = {
   name: "interactionCreate",
   once: false,
   async execute(interaction) {
-    if (interaction.isSelectMenu()) {
-      await interaction.deferUpdate();
-    }
-    if (interaction.isChatInputCommand()) {
-      const command = interaction.client.commands.get(interaction.commandName);
+    let command;
+    let options = interaction.options;
+    let user = interaction.user;
+    let guild = interaction.guild;
 
-      if (!command) return;
+    try {
+      if (interaction.isSelectMenu()) {
+        await interaction.deferUpdate();
+      }
+      if (interaction.isChatInputCommand()) {
+        command = interaction.client.commands.get(interaction.commandName);
 
-      try {
+        if (!command) return;
+
         // Command
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
         console.time(commandExecutionTimeName);
@@ -24,22 +30,32 @@ module.exports = {
         console.time(petExecutionTimeName);
         await updatePetOnCommands(interaction);
         console.timeEnd(petExecutionTimeName);
-      } catch (err) {
-        if (err) console.error({ interactionCreateExecuteError: err });
-        try {
-          await interaction.reply({
-            content:
-              "An error occurred, please contact our support team with the details.",
-            ephemeral: true,
-            fetchReply: true,
-          });
-        } catch (err) {
-          await interaction.channel.send({
-            content:
-              "An error occurred, please contact our support team with the details.",
-            fetchReply: true,
-          });
-        }
+      }
+    } catch (error) {
+      if (error) {
+        console.error({ interactionCreateExecuteError: error });
+        createBugCard({
+          error,
+          event: "interactionCreate",
+          command,
+          options,
+          user,
+          guild,
+        });
+      }
+      try {
+        await interaction.reply({
+          content:
+            "An error occurred, please contact our support team with the details.",
+          ephemeral: true,
+          fetchReply: true,
+        });
+      } catch (error) {
+        await interaction.channel.send({
+          content:
+            "An error occurred, please contact our support team with the details.",
+          fetchReply: true,
+        });
       }
     }
   },
