@@ -1,3 +1,4 @@
+const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 
 module.exports = {
@@ -25,7 +26,10 @@ module.exports = {
         await updatePetOnCommands(interaction);
         console.timeEnd(petExecutionTimeName);
       } catch (err) {
-        if (err) console.error({ interactionCreateExecuteError: err });
+        if (err) {
+          console.error({ interactionCreateExecuteError: err });
+          createBugCard(err);
+        }
         try {
           await interaction.reply({
             content:
