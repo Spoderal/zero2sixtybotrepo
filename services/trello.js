@@ -30,7 +30,15 @@ async function checkBugCardsForMatch(hash) {
   }
 }
 
-async function createBugCard(error) {
+function generateCardRow(title, content) {
+  return `\n${title}:\n \n\`\`\`\n${JSON.stringify(
+    content,
+    null,
+    2
+  )}\n\`\`\`\n`;
+}
+
+async function createBugCard({ error, event, command, options, user, guild }) {
   if (!trello || !idList) return;
 
   try {
@@ -40,6 +48,11 @@ async function createBugCard(error) {
       2
     );
     const errorHash = md5(errorToJSON);
+    const hashText = outdent`
+    DO NOT MODIFY BELOW THIS LINE!
+    \\-----------------------------------------
+    ${errorHashLineText} ${errorHash}
+    `;
 
     const existingErrorCard = await checkBugCardsForMatch(errorHash);
     if (existingErrorCard) {
@@ -50,25 +63,31 @@ async function createBugCard(error) {
       return;
     }
 
-    const commandName = error?.stack
-      ?.split("\n") // split the stack trace into lines
-      ?.find((l) => l.includes("/commands")) // see if it's a command file
-      ?.split("/") // split the path by "/"
-      ?.pop() // get the file name (will be the last item in the path)
-      ?.split(".js")[0]; // split it by extension and grab the first element (name)
+    const errorStack = `
+      \nError stack:\n\n\`\`\`\n${error?.stack}\n\`\`\`\n
+    `;
+    const commandRow = command?.data
+      ? generateCardRow("Command data", command?.data)
+      : "";
+    const optionsRow = options?.data
+      ? generateCardRow("Options data", options?.data)
+      : "";
+    const userRow = user ? generateCardRow("User data", user) : "";
+    const guildRow = guild ? generateCardRow("Guild data", guild) : "";
 
-    var createData = {
-      name: commandName
-        ? `Error in /${commandName}`
+    const createData = {
+      name: command?.data?.name
+        ? `Error in /${command?.data?.name}`
         : `${error?.name}: ${error?.message}`,
-      desc: outdent`
-        \`\`\`
-        ${error?.stack}
-        \`\`\`
-        \n
-        DO NOT MODIFY BELOW THIS LINE!
-        \\-----------------------------------------
-        ${errorHashLineText} ${errorHash}
+      desc: `
+        \nEvent name: \`${event}\`\n
+        \nTimestamp: \`${new Date()}\`\n
+        ${errorStack}
+        ${commandRow}
+        ${optionsRow}
+        ${userRow}
+        ${guildRow}
+        \n${hashText}
       `,
       pos: "top",
       idList,
