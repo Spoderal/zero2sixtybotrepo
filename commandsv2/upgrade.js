@@ -23,7 +23,12 @@ module.exports = {
     let inputCarIdOrName = interaction.options.getString("car");
     let inputPartName = interaction.options.getString("part").toLowerCase();
     let partInLocalDB = partdb.Parts[inputPartName];
-    let partType = partInLocalDB.Type === "ecu" ? "ECU" : capitalize(partInLocalDB.Type);
+    if (!partInLocalDB) {
+      return await interaction.reply("That's not a valid part");
+    }
+
+    let partType =
+      partInLocalDB.Type === "ecu" ? "ECU" : capitalize(partInLocalDB.Type);
 
     let user1 = interaction.user;
     let userdata = await User.findOne({ id: user1.id });
@@ -34,7 +39,7 @@ module.exports = {
 
     if (inputCarIdOrName == "pet") {
       if (!userParts.includes("pet spoiler"))
-        return await interaction.reply(`You don't have a pet spoiler!`);
+        return await interaction.reply("You don't have a pet spoiler!");
       userdata.pet.spoiler = true;
       userdata.save();
 
@@ -55,7 +60,7 @@ module.exports = {
     }
 
     if (!userdata.parts.includes(inputPartName))
-      return await interaction.reply(`You don't have this part!`);
+      return await interaction.reply("You don't have this part!");
 
     if (selected?.[partType])
       return await interaction.reply(`This car already has a ${partType}!`);
