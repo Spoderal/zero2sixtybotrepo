@@ -5,6 +5,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,9 +14,12 @@ module.exports = {
   async execute(interaction) {
     let cash = 750;
     let uid = interaction.user.id;
+    let userdata = await User.findOne({ id: uid });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let cooldowns =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
-    let userdata = await User.findOne({ id: uid });
+
     let daily = cooldowns.weekly;
     let patron = userdata.patron;
     let gold;

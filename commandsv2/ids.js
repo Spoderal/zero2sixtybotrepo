@@ -3,6 +3,7 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,6 +29,7 @@ module.exports = {
     let option = interaction.options.getSubcommand();
 
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let uid = interaction.user.id;
 
     if (option == "select") {

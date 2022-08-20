@@ -3,6 +3,7 @@ const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 let parts = require("../data/partsdb.json");
 let profilestuff = require("../data/pfpsdb.json");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,8 +24,9 @@ module.exports = {
 
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    let userparts = userdata.parts;
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
+    let userparts = userdata.parts;
     let selling = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount") || 1;
 

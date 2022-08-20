@@ -11,6 +11,7 @@ const { emotes } = require("../common/emotes");
 const { randomRange } = require("../common/utils");
 const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 let bot1cars = [
   "1995 mazda miata",
@@ -117,6 +118,7 @@ module.exports = {
     let moneyearned = 50;
     // let moneyearnedtxt = 50;
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
@@ -765,13 +767,15 @@ module.exports = {
             );
           }
 
-          if(selected.Name.includes("Bugatti") && classd == 6) {
-            userdata.bugattiwins += 1
+          if (selected.Name.includes("Bugatti") && classd == 6) {
+            userdata.bugattiwins += 1;
 
-            let hasbugatti = userdata.cars.filter((car) => car.Name == "2024 Bugatti Mistral");
+            let hasbugatti = userdata.cars.filter(
+              (car) => car.Name == "2024 Bugatti Mistral"
+            );
 
-            if(userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
-              let carindb = cars.Cars["2024 bugatti mistral"]
+            if (userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
+              let carindb = cars.Cars["2024 bugatti mistral"];
               let carobj = {
                 ID: carindb.alias,
                 Name: carindb.Name,
@@ -783,8 +787,10 @@ module.exports = {
                 Livery: carindb.Image,
                 Miles: 0,
               };
-              userdata.cars.push(carobj)
-              earningsresult.push(`<:bugatti:931012624110460979> 2024 Bugatti Mistral`)
+              userdata.cars.push(carobj);
+              earningsresult.push(
+                `<:bugatti:931012624110460979> 2024 Bugatti Mistral`
+              );
             }
           }
 

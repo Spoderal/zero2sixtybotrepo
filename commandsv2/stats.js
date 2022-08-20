@@ -7,6 +7,7 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { toCurrency, blankInlineField } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -95,6 +96,8 @@ module.exports = {
     } else if (subcommandfetch == "carid") {
       let idtoselect = interaction.options.getString("id");
       let userdata = await User.findOne({ id: interaction.user.id });
+      if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
 
@@ -205,7 +208,8 @@ module.exports = {
           let engineemote = partindb[engine.toLowerCase()]?.Emote || "🔵";
           let turboemote = partindb[turbo.toLowerCase()]?.Emote || "🔵";
           let nitroemote = partindb[nitro.toLowerCase()]?.Emote || "🔵";
-          let intercooleremote = partindb[intercooler.toLowerCase()]?.Emote || "🔵";
+          let intercooleremote =
+            partindb[intercooler.toLowerCase()]?.Emote || "🔵";
           let gearboxemote = partindb[gearbox.toLowerCase()]?.Emote || "🔵";
 
           let embed = new Discord.EmbedBuilder()
@@ -263,7 +267,7 @@ module.exports = {
                 value: `${intercooleremote} ${intercooler.split(" ")[0]}`,
                 inline: true,
               },
-               {
+              {
                 name: `Gearbox`,
                 value: `${gearboxemote} ${gearbox.split(" ")[0]}`,
                 inline: true,

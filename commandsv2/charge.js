@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const cars = require("../data/cardb.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,6 +17,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let filteredcar = userdata.cars.filter((car) => car.ID == car);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {

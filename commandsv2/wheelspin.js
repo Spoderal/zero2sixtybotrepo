@@ -8,6 +8,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { numberWithCommas, toCurrency } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,6 +17,8 @@ module.exports = {
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let cooldowns =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 

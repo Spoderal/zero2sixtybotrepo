@@ -7,6 +7,7 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,6 +24,8 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });

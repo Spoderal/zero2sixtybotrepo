@@ -10,6 +10,7 @@ const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
 const { doubleCashWeekendField } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,6 +46,8 @@ module.exports = {
     let uid = interaction.user.id;
     let idtoselect = interaction.options.getString("car");
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
@@ -423,13 +426,15 @@ module.exports = {
             earnings.push(`${ekeysearned} ${ekemote} keys`);
             userdata.ekeys += ekeysearned;
           }
-          if(selected.Name.includes("Bugatti") && bot == "6") {
-            userdata.bugattiwins += 1
+          if (selected.Name.includes("Bugatti") && bot == "6") {
+            userdata.bugattiwins += 1;
 
-            let hasbugatti = userdata.cars.filter((car) => car.Name == "2024 Bugatti Mistral");
+            let hasbugatti = userdata.cars.filter(
+              (car) => car.Name == "2024 Bugatti Mistral"
+            );
 
-            if(userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
-              let carindb = cars.Cars["2024 bugatti mistral"]
+            if (userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
+              let carindb = cars.Cars["2024 bugatti mistral"];
               let carobj = {
                 ID: carindb.alias,
                 Name: carindb.Name,
@@ -441,8 +446,10 @@ module.exports = {
                 Livery: carindb.Image,
                 Miles: 0,
               };
-              userdata.cars.push(carobj)
-              earnings.push(`<:bugatti:931012624110460979> 2024 Bugatti Mistral`)
+              userdata.cars.push(carobj);
+              earnings.push(
+                `<:bugatti:931012624110460979> 2024 Bugatti Mistral`
+              );
             }
           }
           embed.addFields([
@@ -464,7 +471,7 @@ module.exports = {
               )}!`
             );
           }
-          
+
           userdata.save();
 
           return;
