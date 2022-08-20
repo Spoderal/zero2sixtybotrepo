@@ -100,7 +100,7 @@ module.exports = {
 
             Bugatti announced that the Mistral will be the last car with its famous W16 engine. So in honor of that, we thought we'd do an event for them!
 
-            Use Bugatti cars on any tier 5 track of your choice to earn points towards the event reward, the 2024 Bugatti Mistral. Win 1K tier 5 races in the bugatti of your choice to earn this limited time car.
+            Use Bugatti cars on any tier 6 track of your choice to earn points towards the event reward, the 2024 Bugatti Mistral. Win 1K tier 6 races in the bugatti of your choice to earn this limited time car.
 
             It'll never be obtainable again after September 15th 2022.
                   `);
