@@ -563,9 +563,9 @@ module.exports = {
                   ${cars.Cars["2013 mclaren p1"].Emote} ${
                   cars.Cars["2013 mclaren p1"].Name
                 } : ${toCurrency(cars.Cars["2013 mclaren p1"].Price)}\n
-                  ${cars.Cars["2021 mclaren gt"].Emote} ${
-                  cars.Cars["2021 mclaren gt"].Name
-                } : ${toCurrency(cars.Cars["2021 mclaren gt"].Price)}\n
+                  ${cars.Cars["2021 mclaren 720s"].Emote} ${
+                  cars.Cars["2021 mclaren 720s"].Name
+                } : ${toCurrency(cars.Cars["2021 mclaren 720s"].Price)}\n
                   ${cars.Cars["2021 ferrari sf90 stradale"].Emote} ${
                   cars.Cars["2021 ferrari sf90 stradale"].Name
                 } : ${toCurrency(

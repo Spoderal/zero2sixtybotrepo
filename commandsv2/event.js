@@ -5,7 +5,8 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-// const { emotes } = require("../common/emotes");
+ const { emotes } = require("../common/emotes");
+ const User = require("../schema/profile-schema")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,13 +20,24 @@ module.exports = {
         .addOptions([
           {
             label: "Summer Event",
-            description: "Information for the Spring Season Event",
+            description: "Information for the Summer Season Event",
             value: "spring_event",
             customId: "spring",
             emoji: "☀️",
           },
+          {
+            label: "End of an Era",
+            description: "Information for the End of an Era Event",
+            value: "event_2",
+            customId: "event_2",
+            emoji: "<:bugatti:931012624110460979>",
+          },
         ])
     );
+
+    let udata = await User.findOne({id: interaction.user.id})
+
+    let bwins = udata.bugattiwins || 0
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -34,6 +46,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Summer Season 2022 ☀️
+          End of an Era <:bugatti:931012624110460979>
         
       `);
 
@@ -80,22 +93,23 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "ferrari") {
-            embed.setTitle("Ferrari Championship");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Race with your favorite Ferrari in bot races to stack up on Ferrari keys!\n
+          } else if (value === "event_2") {
+            embed.setTitle("End of an Era");
+            embed.setFooter({ text: `Your wins: ${bwins}` });
+            embed.setDescription(`The Bugatii W16 is one of the most well known engines. However, all good things must come to an end...
 
-            Only Ferraris are allowed in this event!
+            Bugatti announced that the Mistral will be the last car with its famous W16 engine. So in honor of that, we thought we'd do an event for them!
 
-            The exclusive Ferrari crate includes a new event exclusive Ferrari F40 and the 2013 LaFerrari!
+            Use Bugatti cars on any tier 5 track of your choice to earn points towards the event reward, the 2024 Bugatti Mistral. Win 1K tier 5 races in the bugatti of your choice to earn this limited time car.
 
-            Event Ends **7/31/2022**
+            It'll never be obtainable again after September 15th 2022.
                   `);
             embed.setThumbnail(
-              "https://upload.wikimedia.org/wikipedia/commons/c/cb/F40_Ferrari_20090509.jpg"
+              "https://www.topgear.com/sites/default/files/2022/08/04%20BUGATTI_Roadster_launch-set_dynamic.jpg"
             );
             embed.setImage();
             embed.setColor(colors.blue);
+            
 
             await interaction.editReply({
               embeds: [embed],

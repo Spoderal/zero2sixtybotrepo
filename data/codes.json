@@ -5,25 +5,20 @@
     }
   },
   "Discord": {
-    "SUMMER2022": {
-      "Reward": 1500
-    },
-    "300SERVERS": {
-      "Reward": 5000
+    "BACK2SCHOOL": {
+      "Reward": 10000
     },
     "CARZCA11": {
       "Reward": 2500
-    },
-    "TOOMANYBUGS": {
-      "Reward": 20000
-    },
-    "FIXTHEBUGS": {
-      "Reward": 10000
     }
   },
   "Patreon": {
     "GOLDFOREVER": {
       "Reward": 20,
+      "Gold": true
+    },
+    "GOLDFOREVER2": {
+      "Reward": 40,
       "Gold": true
     },
     "EXCLUSIVEPATREON": {

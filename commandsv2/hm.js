@@ -435,6 +435,28 @@ module.exports = {
 
             userdata.items.push("bank increase");
           }
+          if(selected.Name.includes("Bugatti") && bot == "6") {
+            userdata.bugattiwins += 1
+
+            let hasbugatti = userdata.cars.filter((car) => car.Name == "2024 Bugatti Mistral");
+
+            if(userdata.bugattiwins >= 1000 && !hasbugatti[0]) {
+              let carindb = cars.Cars["2024 bugatti mistral"]
+              let carobj = {
+                ID: carindb.alias,
+                Name: carindb.Name,
+                Speed: carindb.Speed,
+                Acceleration: carindb["0-60"],
+                Handling: carindb.Handling,
+                Parts: [],
+                Emote: carindb.Emote,
+                Livery: carindb.Image,
+                Miles: 0,
+              };
+              userdata.cars.push(carobj)
+              earningsresult.push(`<:bugatti:931012624110460979> 2024 Bugatti Mistral`)
+            }
+          }
 
           embed.addFields([
             {

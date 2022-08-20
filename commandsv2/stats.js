@@ -190,6 +190,8 @@ module.exports = {
           let ecu = selected.ECU || "Stock ECU";
           let turbo = selected.Turbo || "Stock Turbo";
           let nitro = selected.Nitro || "Stock Nitro";
+          let intercooler = selected.Intercooler || "Stock Intercooler";
+          let gearbox = selected.Gearbox || "Stock Gearbox";
 
           let partindb = partdb.Parts;
 
@@ -203,6 +205,8 @@ module.exports = {
           let engineemote = partindb[engine.toLowerCase()]?.Emote || "🔵";
           let turboemote = partindb[turbo.toLowerCase()]?.Emote || "🔵";
           let nitroemote = partindb[nitro.toLowerCase()]?.Emote || "🔵";
+          let intercooleremote = partindb[intercooler.toLowerCase()]?.Emote || "🔵";
+          let gearboxemote = partindb[gearbox.toLowerCase()]?.Emote || "🔵";
 
           let embed = new Discord.EmbedBuilder()
             .setTitle(
@@ -252,6 +256,16 @@ module.exports = {
               {
                 name: `Nitro`,
                 value: `${nitroemote} ${nitro.split(" ")[0]}`,
+                inline: true,
+              },
+              {
+                name: `Intercooler`,
+                value: `${intercooleremote} ${intercooler.split(" ")[0]}`,
+                inline: true,
+              },
+               {
+                name: `Gearbox`,
+                value: `${gearboxemote} ${gearbox.split(" ")[0]}`,
                 inline: true,
               },
               blankInlineField,

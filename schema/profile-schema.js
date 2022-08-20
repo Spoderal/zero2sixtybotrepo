@@ -273,6 +273,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
+  bugattiwins:{
+    type: Number,
+    required: false,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

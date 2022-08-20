@@ -14,7 +14,8 @@
       "Spoiler": "https://i.ibb.co/R7BYr4k/Fu-PGIUy-Y4t.png",
       "0-60": 8.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1995 mazda miata": {
       "alias": "1995 miata",
@@ -314,7 +315,8 @@
       "Rear": "https://cdn.bmwblog.com/wp-content/uploads/2015/08/BMW-M3-GTR-Road-version-1900x1200-images-10.jpg",
       "0-60": 11.7,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2019 chevy camaro zl1": {
       "alias": "2019 camaro zl1",
@@ -330,7 +332,8 @@
       "Rear": "https://s1.cdn.autoevolution.com/images/news/2019-chevrolet-camaro-zl1-1le-gets-750-hp-hennessey-boost-screams-on-dyno-129314_1.jpg",
       "0-60": 9.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2017 ford gt": {
       "alias": "2017 gt",
@@ -346,7 +349,8 @@
       "Rear": "https://media.architecturaldigest.com/photos/59235cfc5048d15bd5b220bc/master/w_2040,h_1360,c_limit/2017-Ford-GT-rear-three-quarter-in-motion-02.jpg",
       "0-60": 8.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2013 mclaren p1": {
       "alias": "2013 p1",
@@ -361,7 +365,8 @@
       "Rear": "https://www.topcarrating.com/mclaren/2013-mclaren-p1-6.jpg",
       "0-60": 5.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2020 mclaren senna": {
       "alias": "2020 senna",
@@ -376,7 +381,8 @@
       "0-60": 4.8,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "S"
     },
     "class 2001 volkswagen bora pd130": {
       "alias": "class 2001 bora",
@@ -406,7 +412,8 @@
       "0-60": 3.6,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Class": "S"
     },
     "1994 mitsubishi 3000gt vr4": {
       "alias": "1994 3000gt vr4",
@@ -421,7 +428,8 @@
       "Rear": "https://mitsubishiforum.com/forum/attachments/mitsubishi-3000gt-12/3529d1445658865-1994-3000gt-vr4-%2410-000-obo-3000gt-vr4-back.jpg",
       "0-60": 11.9,
       "Drift": 2,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2014 hyundai genesis coupe": {
       "alias": "2014 genesis coupe",
@@ -436,7 +444,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2014-hyundai-genesis-coupe-rear-angle-view-carbuzz-546943.jpg",
       "0-60": 12,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2008 nissan 350z": {
       "alias": "2008 350z",
@@ -453,7 +462,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2008-nissan-350z-coupe-rear-view-carbuzz-576988.jpg",
       "0-60": 13,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2000 lexus sc400": {
       "alias": "2000 sc400",
@@ -468,7 +478,8 @@
       "0-60": 12.7,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Common Imports"
+      "Obtained": "Common Imports",
+      "Class": "D"
     },
     "drift 1995 mazda miata": {
       "alias": "drift 1995 miata",
@@ -483,7 +494,8 @@
       "0-60": 13,
       "Drift": 4,
       "Handling": 600,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "D"
     },
     "sil-eighty": {
       "alias": "sil-eighty",
@@ -498,7 +510,8 @@
       "0-60": 12.6,
       "Drift": 5,
       "Handling": 600,
-      "Obtained": "Common Imports"
+      "Obtained": "Common Imports",
+      "Class": "D"
     },
     "drift 2000 lexus sc400": {
       "alias": "drift 2000 sc400",
@@ -513,7 +526,8 @@
       "0-60": 12.7,
       "Drift": 5,
       "Handling": 500,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "D"
     },
     "drift 1998 bmw m3 e36": {
       "alias": "drift 1998 m3 e36",
@@ -528,7 +542,8 @@
       "0-60": 11,
       "Drift": 6,
       "Handling": 600,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "D"
     },
     "drift 2008 nissan 350z": {
       "alias": "drift 2008 350z",
@@ -545,7 +560,8 @@
       "0-60": 13,
       "Drift": 5,
       "Handling": 600,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "D"
     },
     "drift 2002 mazda rx7 fd": {
       "alias": "drift 2002 rx7 fd",
@@ -562,7 +578,8 @@
       "0-60": 11.6,
       "Drift": 8,
       "Handling": 600,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "C"
     },
     "drift 1993 nissan silvia s14": {
       "alias": "drift 1993 silvia s14",
@@ -577,7 +594,8 @@
       "0-60": 10,
       "Drift": 4,
       "Handling": 600,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "C"
     },
     "drift 2002 nissan silvia s15": {
       "alias": "drift 2002 silvia s15",
@@ -606,7 +624,8 @@
       "0-60": 13,
       "Drift": 6,
       "Handling": 500,
-      "Obtained": "Drift Imports"
+      "Obtained": "Drift Imports",
+      "Class": "D"
     },
     "2010 chevy camaro v6": {
       "alias": "2010 camaro v6",
@@ -621,7 +640,8 @@
       "Rear": "http://www.blogcdn.com/www.autoblog.com/media/2009/04/001_camarov6joy_opt.jpg",
       "0-60": 11.5,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2020 chevy corvette c8": {
       "alias": "2020 c8",
@@ -636,7 +656,8 @@
       "Rear": "https://www.automobilemag.com/uploads/sites/5/2019/07/2020-Chevrolet-Corvette-rear.jpg",
       "0-60": 8.4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1989 chevy camaro": {
       "alias": "1989 camaro",
@@ -651,7 +672,8 @@
       "Rear": "https://gmauthority.com/blog/wp-content/uploads/2020/12/1989-Chevrolet-Camaro-IROC-Z-Exterior-003-red-Bring-a-Trailer-rear-three-quarters-1024x768.jpg",
       "0-60": 12,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2000 toyota corolla levin": {
       "alias": "2000 corolla levin",
@@ -681,7 +703,8 @@
       "Rear": "https://www.car-revs-daily.com/wp-content/uploads/2015/11/2016-Alfa-Romeo-GIULIA-Quadrifoglio-12.jpg",
       "0-60": 8.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2020 mclaren 570s": {
       "alias": "2020 570s",
@@ -696,7 +719,8 @@
       "Rear": "https://www.paganiofgreenwich.com/imagetag/3463/6/l/New-2020-McLaren-570S-Coupe.jpg",
       "0-60": 7.5,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2020 porsche 718 cayman": {
       "alias": "2020 718 cayman",
@@ -712,7 +736,8 @@
       "0-60": 10.3,
       "Drift": 0,
       "Handling": 500,
-      "Trims": ["2020 porsche 718 cayman gt4"]
+      "Trims": ["2020 porsche 718 cayman gt4"],
+      "Class": "B"
     },
     "2020 porsche 718 cayman gt4": {
       "alias": "2020 718 cayman gt4",
@@ -726,7 +751,8 @@
       "Image": "https://i.ibb.co/DG0054k/2020-porsche-718-cayman-gt4-017.png",
       "0-60": 8,
       "Drift": 0,
-      "Handling": 550
+      "Handling": 550,
+      "Class": "B"
     },
     "2014 porsche 918 spyder": {
       "alias": "2014 918 spyder",
@@ -740,7 +766,8 @@
       "Image": "https://cdn.motor1.com/images/mgl/8Nj6W/s1/2013-435420-2014-porsche-918-spyder1.jpg",
       "0-60": 5.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2005 porsche carrera gt": {
       "alias": "2005 carrera gt",
@@ -755,7 +782,8 @@
       "0-60": 8.2,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "2004 mercedes-mclaren slr": {
       "alias": "2004 slr",
@@ -770,7 +798,8 @@
       "0-60": 7.6,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "A"
     },
     "2001 lamborghini diablo": {
       "alias": "2001 diablo",
@@ -786,7 +815,8 @@
       "0-60": 8,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "2021 lamborghini urus": {
       "alias": "2021 urus",
@@ -801,7 +831,8 @@
       "0-60": 9,
       "Drift": 0,
       "Handling": 700,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "1990 ferrari testarossa": {
       "alias": "1990 testarossa",
@@ -816,7 +847,8 @@
       "0-60": 8.2,
       "Drift": 0,
       "Handling": 550,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "1965 shelby cobra 427": {
       "alias": "1965 cobra 427",
@@ -831,7 +863,8 @@
       "0-60": 8.2,
       "Drift": 0,
       "Handling": 550,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "1993 nissan silvia s14": {
       "alias": "1993 silvia s14",
@@ -846,7 +879,8 @@
       "0-60": 10,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "2012 mazda rx8": {
       "alias": "2012 rx8",
@@ -861,7 +895,8 @@
       "0-60": 9.8,
       "Drift": 0,
       "Handling": 560,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "2004 porsche 911 turbo": {
       "alias": "2004 911 turbo",
@@ -876,7 +911,8 @@
       "Rear": "https://cdn1.mecum.com/auctions/fl0116/fl0116-230115/images/fl0116-230115_3.jpg?1453311959000",
       "0-60": 8.2,
       "Drift": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2020 audi tt rs": {
       "alias": "2020 tt rs",
@@ -891,7 +927,8 @@
       "Rear": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-audi-tt-rs-mmp-2-1570816455.jpg?crop=0.923xw:1.00xh;0,0&resize=480:*",
       "0-60": 11.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2022 audi rs3 sportback": {
       "alias": "2022 rs3 sportback",
@@ -907,7 +944,8 @@
       "0-60": 11.7,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "2022 bmw m8": {
       "alias": "2022 m8",
@@ -923,7 +961,8 @@
       "0-60": 10.6,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "2022 bmw m4": {
       "alias": "2022 m4",
@@ -938,7 +977,8 @@
       "0-60": 10.5,
       "Drift": 0,
       "Handling": 600,
-      "Obtained": "Super Wheelspin"
+      "Obtained": "Super Wheelspin",
+      "Class": "C"
     },
     "2021 ford mustang mach 1": {
       "alias": "2021 mustang mach 1",
@@ -953,7 +993,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2021-ford-mustang-mach-1-rear-angle-view-carbuzz-720698.jpg",
       "0-60": 9.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2012 dodge challenger srt8": {
       "alias": "2012 challenger srt8",
@@ -968,7 +1009,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2012-dodge-challenger-srt8-rear-angle-view-carbuzz-573757.jpg",
       "0-60": 9.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2017 dodge viper acr": {
       "alias": "2017 viper acr",
@@ -983,7 +1025,8 @@
       "Rear": "https://www.bjmotors.biz/imagetag/13357/10/l/Used-2017-Dodge-Viper-ACR.jpg",
       "0-60": 9.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1989 nissan skyline r32": {
       "alias": "1989 skyline r32",
@@ -998,7 +1041,8 @@
       "Rear": "https://www.supercars.net/blog/wp-content/uploads/2016/02/Nissan_Skyline_R32_GT-R_002.jpg",
       "0-60": 13,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2021 porsche 911 gt3": {
       "alias": "2021 911 gt3",
@@ -1013,7 +1057,8 @@
       "Rear": "https://cdn.motorsportmagazine.com/wp-content/uploads/2021/04/26220055/Porsche-911-GT3-rear.jpg",
       "0-60": 8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "1998 bmw m3 e36": {
       "alias": "1998 m3 e36",
@@ -1028,7 +1073,8 @@
       "Rear": "https://www.bmw-m.com/content/dam/bmw/marketBMW_M/common/topics/magazine-article-pool/2018/bmw-m3-e36/bmw-e36-m3-double-image-foreground.jpg",
       "0-60": 11,
       "Drift": 2,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2005 dodge neon srt4": {
       "alias": "2005 neon srt4",
@@ -1043,7 +1089,8 @@
       "Rear": "http://enthusiastnetwork.s3.amazonaws.com/uploads/sites/11/2005/03/0505_dodge_neon_srt4_84.jpg?fit=around%7C480:270",
       "0-60": 11,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2010 ford mustang": {
       "alias": "2010 mustang",
@@ -1058,7 +1105,8 @@
       "Rear": "http://roadreality.files.wordpress.com/2009/11/2010_mustanggt_rear.jpg",
       "0-60": 11,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1987 ford mustang gt": {
       "alias": "1987 mustang gt",
@@ -1073,7 +1121,8 @@
       "0-60": 10.5,
       "Drift": 0,
       "Handling": 550,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Class": "C"
     },
     "2014 ford mustang gt500": {
       "alias": "2014 mustang gt500",
@@ -1088,7 +1137,8 @@
       "0-60": 10.5,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "2022 shelby super snake": {
       "alias": "2022 super snake",
@@ -1103,7 +1153,8 @@
       "0-60": 7,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "2020 ford f150 raptor": {
       "alias": "2020 f150 raptor",
@@ -1118,7 +1169,8 @@
       "0-60": 12,
       "Drift": 0,
       "Handling": 850,
-      "Obtained": "Wheelspin"
+      "Obtained": "Wheelspin",
+      "Class": "D"
     },
     "1994 porsche 911": {
       "alias": "1994 911",
@@ -1133,7 +1185,8 @@
       "Rear": "https://www.carscoops.com/wp-content/uploads/2020/03/Porsche-911-Turbo-S-3.6-7.jpg",
       "0-60": 12,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2021 ferrari sf90 stradale": {
       "alias": "2021 sf90 stradale",
@@ -1148,7 +1201,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2020-ferrari-sf90-stradale-rear-view-carbuzz-591069.jpg",
       "0-60": 5.5,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "caseys 2021 ferrari sf90 stradale": {
       "alias": "caseys 2021 sf90 stradale",
@@ -1232,7 +1286,8 @@
       "Rear": "https://www.bugatti.com/fileadmin/_processed_/sei/p50/se-image-0b9fc0d5a733a7993d947af570d8b403.jpg",
       "0-60": 4.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2008 bugatti veyron": {
       "alias": "2008 veyron",
@@ -1247,7 +1302,8 @@
       "Rear": "https://www.classicdriver.com/sites/default/files/styles/two_third_slider/public/cars_images/feed_674691/67da74f7d0621b793c1f0a238b97e3e5026c8f29.jpg",
       "0-60": 5.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2020 bugatti divo": {
       "alias": "2020 divo",
@@ -1260,6 +1316,21 @@
       "Engine": "8.0 L W16",
       "Image": "https://cdn.motor1.com/images/mgl/NRK92/s1/bugatti-divo.jpg",
       "Rear": "https://v7n2u8v7.rocketcdn.me/wp-content/uploads/2018/12/Ca-L2.jpg",
+      "0-60": 3,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "U"
+    },
+    "2024 bugatti mistral": {
+      "alias": "2024 mistral",
+      "Name": "2024 Bugatti Mistral",
+      "Emote": "<:bugatti:931012624110460979>",
+      "Speed": 245,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "8.0 L W16",
+      "Image": "https://i.ibb.co/mXGHw0g/05-BUGATTI-Roadster-launch-set-dynamic.jpg",
       "0-60": 3,
       "Drift": 0,
       "Handling": 500
@@ -1276,7 +1347,8 @@
       "Image": "https://s3-prod-europe.autonews.com/s3fs-public/Aston%20Valkyrie%20nice%20web.jpg",
       "0-60": 5.4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2021 nissan gtr": {
       "alias": "2021 gtr",
@@ -1290,7 +1362,8 @@
       "Image": "https://i.pinimg.com/originals/21/c3/46/21c34652896a3871b2162f9777d42dcd.jpg",
       "0-60": 8.1,
       "Drift": 3,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2019 subaru brz": {
       "alias": "2019 brz",
@@ -1307,7 +1380,8 @@
       "Rear": "https://cdn.drivingline.com/media/2316193/2019-subaru-brz-review-photo-benjamin-hunting-driving-line00017.jpg?quality=70&mode=pad&copymetadata=true&w=400",
       "0-60": 12.5,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2016 jaguar f type": {
       "alias": "2016 f type",
@@ -1322,7 +1396,8 @@
       "Rear": "http://o.aolcdn.com/hss/storage/midas/845e66dcd0c93ed4a9fa25137ca06267/201110195/2016-jaguar-f-type-s-convertible-manual-2.jpg",
       "0-60": 8.9,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2009 honda s2000 cr": {
       "alias": "2009 s2000 cr",
@@ -1337,7 +1412,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2009-honda-s2000-rear-view-carbuzz-561430.jpg",
       "0-60": 11.6,
       "Drift": 3,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2006 pontiac gto": {
       "alias": "2006 gto",
@@ -1351,7 +1427,8 @@
       "Image": "https://cdn.dealeraccelerate.com/rock/1/354/21861/1920x1440/2006-pontiac-gto",
       "0-60": 11.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2020 aston martin vantage": {
       "alias": "2020 vantage",
@@ -1366,7 +1443,8 @@
       "Rear": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vantage-white-stone-4-min-1588913660.jpg?crop=1.00xw:0.753xh;0,0.237xh&resize=640:*",
       "0-60": 7.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "wise drift 2020 aston martin vantage": {
       "alias": "wd 2020 vantage",
@@ -1394,7 +1472,8 @@
       "Rear": "https://images.summitmedia-digital.com/topgear/images/2020/07/10/ae86-10-1594356178.jpg",
       "0-60": 15,
       "Drift": 2,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2005 ford gt": {
       "alias": "2005 gt",
@@ -1408,7 +1487,8 @@
       "0-60": 10,
       "Drift": 2,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "2011 bmw m3": {
       "alias": "2011 m3",
@@ -1423,7 +1503,8 @@
       "Rear": "https://s1.cdn.autoevolution.com/images/news/custom-2011-bmw-e92-m3-review-video-57592_1.png",
       "0-60": 11.4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1990 bmw 850i": {
       "alias": "1990 850i",
@@ -1438,7 +1519,8 @@
       "Rear": "https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/8er-ubg-0089.jpg",
       "0-60": 11.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2021 hennessey f5": {
       "alias": "2021 f5",
@@ -1453,7 +1535,8 @@
       "Rear": "https://i.ytimg.com/vi/3Cn8Hj1Phu4/maxresdefault.jpg",
       "0-60": 3.5,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "1991 acura nsx": {
       "alias": "1991 nsx",
@@ -1469,7 +1552,8 @@
       "0-60": 10,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Wheelspin"
+      "Obtained": "Wheelspin",
+      "Class": "C"
     },
     "barn 1969 ford mustang": {
       "alias": "barn 1969 mustang",
@@ -1918,7 +2002,8 @@
       "Junked": true,
       "restored": "1984 audi quattro",
       "Handling": 500,
-      "Obtained": "Rare Barn Find"
+      "Obtained": "Rare Barn Find",
+      "Class": "D"
     },
     "1984 audi quattro": {
       "alias": "1984 quattro",
@@ -1933,7 +2018,8 @@
       "Drift": 0,
       "RestoreOnly": true,
       "Handling": 500,
-      "Obtained": "Rare Barn Find"
+      "Obtained": "Rare Barn Find",
+      "Class": "D"
     },
     "barn 1973 ferrari dino": {
       "alias": "barn 1973 dino",
@@ -2172,7 +2258,8 @@
       "0-60": 10.6,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Legendary Barn Find"
+      "Obtained": "Legendary Barn Find",
+      "Class": "B"
     },
     "barn 1967 ferrari 330 p4": {
       "alias": "barn 1967 330 p4",
@@ -2188,7 +2275,8 @@
       "0-60": 10.6,
       "restored": "1967 ferrari 330 p4",
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1973 plymouth barracuda": {
       "alias": "1973 barracuda",
@@ -2459,7 +2547,8 @@
       "0-60": 11,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Booster Reward"
+      "Obtained": "Booster Reward",
+      "Class": "C"
     },
     "1969 ford gt40": {
       "alias": "1969 gt40",
@@ -2488,7 +2577,8 @@
       "Image": "https://car-images.bauersecure.com/upload/32301/images/480x270/0000c85d25ee-bd3f-441f-a.jpg",
       "0-60": 7.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2021 lamborghini huracan sto": {
       "alias": "2021 huracan sto",
@@ -2503,7 +2593,8 @@
       "0-60": 7.3,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "A"
     },
     "2013 lamborghini veneno": {
       "alias": "2013 veneno",
@@ -2517,7 +2608,8 @@
       "Image": "https://www.topcarrating.com/lamborghini/2013-lamborghini-veneno-19.jpg",
       "0-60": 4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "adris 2013 lamborghini veneno": {
       "alias": "adris 2013 veneno",
@@ -2586,7 +2678,8 @@
       "Image": "https://www.bugatti.com/fileadmin/_processed_/d/a/csm_Desktop_Stage_v4_075c72c979.png",
       "0-60": 3.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "2010 ferrari 458 italia": {
       "alias": "2010 458 italia",
@@ -2601,7 +2694,8 @@
       "Rear": "https://barrettjacksoncdn.azureedge.net/staging/carlist/items/Fullsize/Cars/225646/225646_Rear_3-4_Web.jpg",
       "0-60": 6.4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2023 ferrari daytona sp3": {
       "alias": "2023 daytona sp3",
@@ -2643,7 +2737,8 @@
       "Image": "https://www.supercars.net/blog/wp-content/uploads/2020/11/Pagani-Zonda-760-Venti-Roadster.jpg",
       "0-60": 6.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2012 pagani huayra": {
       "alias": "2012 huayra",
@@ -2656,7 +2751,8 @@
       "Image": "https://i.ibb.co/1bkB6FK/huyara.png",
       "0-60": 6.5,
       "Drift": 0,
-      "Handling": 600
+      "Handling": 600,
+      "Class": "S"
     },
     "2018 ferrari california": {
       "alias": "2018 california",
@@ -2670,7 +2766,8 @@
       "Image": "https://cdn.carbuzz.com/gallery-images/2018-ferrari-california-t-front-angle-view-carbuzz-398446.jpg",
       "0-60": 7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "1998 ferrari f355": {
       "alias": "1998 f355",
@@ -2684,7 +2781,8 @@
       "Image": "https://bringatrailer.com/wp-content/uploads/2018/05/1525851581f9f98764daIMG_2793s-e1526706724785.jpg?fit=940%2C634",
       "0-60": 8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2005 ferrari f430": {
       "alias": "2005 f430",
@@ -2699,7 +2797,8 @@
       "0-60": 7.9,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Ferrari Imports"
+      "Obtained": "Ferrari Imports",
+      "Class": "A"
     },
     "2001 toyota supra mk4": {
       "alias": "2001 supra mk4",
@@ -2714,7 +2813,8 @@
       "Rear": "https://assets.primecreative.com.au/imagegen/cp/black/480/360/s3/cougar-assets/tradeuniquecars/gallery2002/Toyota-Supra-rear-side.jpg",
       "0-60": 11.5,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1992 toyota supra mk3": {
       "alias": "1992 supra mk3",
@@ -2729,7 +2829,8 @@
       "Rear": "https://barrettjacksoncdn.azureedge.net/staging/carlist/items/Fullsize/Cars/235876/235876_Rear_3-4_Web.jpg",
       "0-60": 12,
       "Drift": 2,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2002 mazda rx7 fd": {
       "alias": "2002 rx7 fd",
@@ -2746,7 +2847,8 @@
       "Rear": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Mazda_RX-7_%28FD3S%29_rear.JPG/220px-Mazda_RX-7_%28FD3S%29_rear.JPG",
       "0-60": 11.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1989 mazda rx7 fc": {
       "alias": "1989 rx7 fc",
@@ -2761,7 +2863,8 @@
       "0-60": 11.6,
       "Drift": 3,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "stat track 2005 mazda rx8": {
       "alias": "2005 rx8 stt",
@@ -2777,7 +2880,8 @@
       "0-60": 11.6,
       "Drift": 3,
       "Handling": 600,
-      "Obtained": "Z Crate 1"
+      "Obtained": "Z Crate 1",
+      "Class": "C"
     },
     "stat track 2001 toyota supra mk4": {
       "alias": "2001 supra mk4 stt",
@@ -2808,7 +2912,8 @@
       "0-60": 11.6,
       "Drift": 3,
       "Handling": 600,
-      "Obtained": "Z Crate 1"
+      "Obtained": "Z Crate 1",
+      "Class": "C"
     },
     "stat track 2008 mazda miata": {
       "alias": "2008 miata stt",
@@ -2824,7 +2929,8 @@
       "0-60": 12,
       "Drift": 4,
       "Handling": 650,
-      "Obtained": "Z Crate 1"
+      "Obtained": "Z Crate 1",
+      "Class": "C"
     },
     "2008 mazda miata": {
       "alias": "2008 miata",
@@ -2839,7 +2945,8 @@
       "0-60": 12,
       "Drift": 4,
       "Handling": 650,
-      "Obtained": "Z Crate 1"
+      "Obtained": "Z Crate 1",
+      "Class": "C"
     },
     "2007 mitsubishi evo ix": {
       "alias": "2007 evo ix",
@@ -2854,7 +2961,8 @@
       "Rear": "https://www.carbon-addiction.com/wp-content/uploads/2017/05/2006-2007-Mitsubishi-Evolution-9-JDM-Voltex-Style-Rear-Diffuser-CF-7-copy.jpg",
       "0-60": 12,
       "Drift": 3,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2004 subaru wrx sti": {
       "alias": "2004 wrx sti",
@@ -2870,7 +2978,8 @@
       "0-60": 12,
       "Drift": 2,
       "Rally": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "dales 2004 subaru wrx sti": {
       "alias": "dales 2004 wrx sti",
@@ -2917,7 +3026,8 @@
       "Squad": true,
       "0-60": 10,
       "Drift": 0,
-      "Handling": 610
+      "Handling": 610,
+      "Class": "B"
     },
     "ashleys 2013 mazda speed3": {
       "alias": "ashleys 2013 speed3",
@@ -2964,7 +3074,8 @@
       "Rear": "https://www.automotiveaddicts.com/wp-content/uploads/2015/06/2015-bmw-m3-rear-11.jpg",
       "0-60": 11.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2018 audi r8": {
       "alias": "2018 r8",
@@ -2979,7 +3090,8 @@
       "Rear": "https://images.hgmsites.net/hug/2018-audi-r8_100622010_h.jpg",
       "0-60": 7.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2018 lamborghini aventador s": {
       "alias": "2018 aventador s",
@@ -2994,7 +3106,8 @@
       "Rear": "https://m.economictimes.com/thumb/msid-63845654,width-1200,height-900,resizemode-4,imgsize-265543/at-460247-lamborghinis-2018-aventador-s-roadster-is-messy-angry-passionate-disinclined-to-obey.jpg",
       "0-60": 5.9,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2015 lotus exige sport": {
       "alias": "2015 exige s",
@@ -3009,7 +3122,8 @@
       "Rear": "https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/exigew-350-web-0053.jpg?itok=nN2_KyEg",
       "0-60": 10.1,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2012 lotus evora s": {
       "alias": "2012 evora s",
@@ -3023,7 +3137,8 @@
       "Image": "https://i.ibb.co/NjcxRjY/ndl-Bo-Yf-Jeq.png",
       "0-60": 10.1,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2009 volkswagen golf gti": {
       "alias": "2009 golf gti",
@@ -3037,7 +3152,8 @@
       "Image": "https://car-images.bauersecure.com/upload/28092/images/vwgolfgtimk5.jpg",
       "0-60": 12,
       "Drift": 2,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "madisons 2015 lotus exige sport": {
       "alias": "madisons 2015 exige s",
@@ -3130,7 +3246,8 @@
       "Rear": "https://www.delorean.com/galleria_images/5641/5641_p5_l.jpg",
       "0-60": 6.5,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2018 honda civic type r": {
       "alias": "2018 civic type r",
@@ -3157,7 +3274,8 @@
       "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-lexus-rc-f-mmp-1-1599742801.jpg?crop=0.997xw:0.672xh;0.00321xw,0.130xh&resize=1200:*",
       "0-60": 11,
       "Drift": 2,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2013 lexus lfa": {
       "alias": "2013 lfa",
@@ -3170,7 +3288,8 @@
       "Image": "https://s1.cdn.autoevolution.com/images/gallery/LEXUS-LFA-4155_23.jpg",
       "0-60": 7.9,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2022 toyota gr86": {
       "alias": "2022 gr86",
@@ -3184,7 +3303,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/840x560/864000/700/864730.jpg",
       "0-60": 11.8,
       "Drift": 3,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "1964 aston martin db5": {
       "alias": "1964 db5",
@@ -3213,7 +3333,8 @@
       "0-60": 12.2,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Wheelspin"
+      "Obtained": "Wheelspin",
+      "Class": "D"
     },
     "1987 buick gnx": {
       "alias": "1987 gnx",
@@ -3227,7 +3348,8 @@
       "0-60": 12.3,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Wheelspin"
+      "Obtained": "Wheelspin",
+      "Class": "D"
     },
     "2020 polestar one": {
       "alias": "2020 p one",
@@ -3241,7 +3363,8 @@
       "0-60": 8.9,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "B"
     },
     "bat tumbler": {
       "alias": "bat",
@@ -3254,7 +3377,8 @@
       "Image": "https://static.wikia.nocookie.net/batman/images/5/57/Thedarkknight17po4.jpg/revision/latest?cb=20120113141554",
       "0-60": 8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "the ectomobile": {
       "alias": "ectomobile",
@@ -3268,7 +3392,8 @@
       "Rear": "https://media.vanityfair.com/photos/5dedb10cfae51d0008e9fd41/16:9/w_1280,c_limit/Screen%20Shot%202019-12-08%20at%206.21.32%20PM.png",
       "0-60": 13,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2020 nissan 370z nismo": {
       "alias": "2020 370z nismo",
@@ -3282,7 +3407,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2020-nissan-370z-nismo-rear-angle-view-carbuzz-529352.jpg",
       "0-60": 11,
       "Drift": 6,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2023 nissan z": {
       "alias": "2023 z",
@@ -3296,7 +3422,8 @@
       "Rear": "https://cdn.motor1.com/images/mgl/jb8j7/s3/2023-nissan-z.jpg",
       "0-60": 10.4,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2018 kia stinger": {
       "alias": "2018 stinger",
@@ -3310,7 +3437,8 @@
       "Rear": "https://blogmedia.dealerfire.com/wp-content/uploads/sites/638/2017/11/2018-Kia-Stinger-GT2-AWD_o.jpg",
       "0-60": 11.7,
       "Drift": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2016 aston martin vulkan": {
       "alias": "2016 vulkan",
@@ -3324,7 +3452,8 @@
       "Rear": "http://enthusiastnetwork.s3.amazonaws.com/uploads/sites/11/2015/08/Aston-Martin-Vulcan-rear-three-quarter-in-motion-01.jpg?fit=around%7C480:270",
       "0-60": 5.9,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2021 mclaren 720s": {
       "alias": "2021 720s",
@@ -3338,7 +3467,8 @@
       "Rear": "https://cdn-ds.com/blogs-media/sites/199/2020/05/29151849/E6-McLaren-720S-A_O.jpg",
       "0-60": 5.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2014 mclaren 12c": {
       "alias": "2014 12c",
@@ -3352,7 +3482,8 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2014-mclaren-mp4-12c-coupe-rear-view-carbuzz-585608.jpg",
       "0-60": 7.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2021 mclaren gt": {
       "alias": "2021 m gt",
@@ -3365,7 +3496,8 @@
       "Image": "https://hips.hearstapps.com/hmg-prod/images/2020-mclaren-gt-antonwatts-002-1585157044.jpg?crop=0.670xw:0.502xh;0.176xw,0.156xh&resize=1200:*",
       "0-60": 7.6,
       "Drift": 0,
-      "Handling": 505
+      "Handling": 505,
+      "Class": "A"
     },
     "2013 mazda speed3": {
       "alias": "2013 speed3",
@@ -3379,7 +3511,8 @@
       "Rear": "https://limitedslipblog.files.wordpress.com/2013/08/mazdaspeed-3-6.jpg",
       "0-60": 12,
       "Drift": 3,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1995 nissan skyline r33": {
       "alias": "1995 skyline r33",
@@ -3393,7 +3526,8 @@
       "Rear": "https://www.carscoops.com/wp-content/uploads/2021/05/Nissan-Skyline-R33-GT-R-V-Spec-7.jpg",
       "0-60": 11.8,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1987 nissan skyline r31": {
       "alias": "1987 skyline r31",
@@ -3406,7 +3540,8 @@
       "Image": "https://images.cdn.circlesix.co/image/1/640/0/uploads/posts/2018/03/096a45cfc0bd5a54e6f9cf77095c002f.jpeg",
       "0-60": 12.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2016 alfa romeo 4c spider": {
       "alias": "2016 4c spider",
@@ -3420,7 +3555,8 @@
       "Rear": "https://ccnwordpress.blob.core.windows.net/journal/2016/09/20160818_133830.jpg",
       "0-60": 11.4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1964 peel p50": {
       "alias": "1964 p50",
@@ -3449,7 +3585,8 @@
       "Rear": "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/images/11q1/379498/2012-dodge-charger-srt8-photos-and-info-dodge-charger-news-car-and-driver-photo-384652-s-original.jpg?fill=2:1&resize=1200:*",
       "0-60": 9.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2020 dodge charger hellcat": {
       "alias": "2020 charger hellcat",
@@ -3463,7 +3600,8 @@
       "0-60": 9.7,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Wheelspin"
+      "Obtained": "Wheelspin",
+      "Class": "B"
     },
     "2017 jeep grand cherokee trackhawk": {
       "alias": "2017 trackhawk",
@@ -3477,7 +3615,8 @@
       "0-60": 9.7,
       "Drift": 0,
       "Handling": 505,
-      "Obtained": "Wheelspin"
+      "Obtained": "Wheelspin",
+      "Class": "B"
     },
     "2009 corvette c6": {
       "alias": "2009 c6",
@@ -3491,7 +3630,8 @@
       "Rear": "https://www.corvsport.com/wp-content/uploads/2020/10/IMG_3792_2-scaled.jpg",
       "0-60": 8.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2019 chevy corvette c7": {
       "alias": "2019 c7",
@@ -3505,7 +3645,8 @@
       "0-60": 8.5,
       "Drift": 0,
       "Handling": 500,
-      "Trims": ["2019 chevy corvette c7 zr1"]
+      "Trims": ["2019 chevy corvette c7 zr1"],
+      "Class": "B"
     },
     "2019 chevy corvette c7 zr1": {
       "alias": "2019 c7 zr1",
@@ -3518,7 +3659,8 @@
       "Image": "https://i.ibb.co/QJTj8F7/2019-chevrolet-corvette-zr1.jpg",
       "0-60": 5,
       "Drift": 0,
-      "Handling": 400
+      "Handling": 400,
+      "Class": "A"
     },
     "police 2008 bugatti veyron": {
       "alias": "police 2008 veyron",
@@ -3565,7 +3707,8 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 500,
-      "Trims": ["2006 lamborghini gallardo spyder"]
+      "Trims": ["2006 lamborghini gallardo spyder"],
+      "Class": "A"
     },
     "2006 lamborghini gallardo spyder": {
       "alias": "2006 gallardo s",
@@ -3579,7 +3722,8 @@
       "Image": "https://bringatrailer.com/wp-content/uploads/2020/05/2006_lamborghini_gallardo_1590156717b75fe8d2B4737D0A-EDDE-4AC9-98BE-3D837ED96CB5.jpeg?fit=940%2C627",
       "0-60": 6.3,
       "Drift": 0,
-      "Handling": 700
+      "Handling": 700,
+      "Class": "A"
     },
     "police 1998 ford crown victoria": {
       "alias": "police 1998 crown victoria",
@@ -3611,7 +3755,8 @@
       "Drift": 0,
       "Handling": 500,
       "Police": "2",
-      "Rank": "Cadet 2"
+      "Rank": "Cadet 2",
+      "Class": "B"
     },
     "police 2011 bmw m3": {
       "alias": "police 2011 m3",
@@ -3687,7 +3832,8 @@
       "Drift": 0,
       "Handling": 500,
       "Police": "1",
-      "Rank": "Cadet 1"
+      "Rank": "Cadet 1",
+      "Class": "C"
     },
     "spoders 2022 porsche 718 cayman gt4 rs": {
       "alias": "spoders 2022 718 cayman gt4 rs",
@@ -3758,7 +3904,8 @@
       "0-60": 8,
       "Obtained": "Exotic Imports",
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2022 lamborghini countach": {
       "alias": "2022 countach",
@@ -3773,7 +3920,8 @@
       "0-60": 5,
       "Obtained": "Exotic Imports",
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2011 audi rs5": {
       "alias": "2011 rs5",
@@ -3787,7 +3935,8 @@
       "Rear": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Audi_RS5_%28rear_quarter%29.jpg",
       "0-60": 10,
       "Drift": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2016 bentley continental gt speed": {
       "alias": "2016 continental gt",
@@ -3800,7 +3949,8 @@
       "Image": "https://blog.dupontregistry.com/wp-content/uploads/2016/04/2016-gt-speed-black-edition.jpg",
       "0-60": 8.2,
       "Drift": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "1995 mclaren f1": {
       "alias": "1995 f1",
@@ -3828,7 +3978,8 @@
       "Rear": "https://colinsclassicauto.com/wp-content/uploads/2018/06/Exterior-3.jpeg",
       "0-60": 12,
       "Drift": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2021 toyota supra": {
       "alias": "2021 supra",
@@ -3842,7 +3993,8 @@
       "Rear": "https://www.cnet.com/a/img/dEZIfSsWIitkRvo5JtFmfoD8moE=/940x0/2020/05/11/8ba33e51-e71f-465c-88f4-cff678504df5/2021-toyota-supra-6.jpg",
       "0-60": 11,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1989 nissan silvia s13": {
       "alias": "1989 silvia s13",
@@ -3858,7 +4010,8 @@
       "Rear": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Nissan_SILVIA_Q%27s_%28S13%29_rear.JPG",
       "0-60": 11.9,
       "Drift": 4,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2004 corvette c5": {
       "alias": "2004 c5",
@@ -3871,7 +4024,8 @@
       "Image": "https://aldanamerican.com/wp-content/uploads/2021/10/97-corvette-feature.png",
       "0-60": 11,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1993 porsche 959": {
       "alias": "1993 959",
@@ -3885,7 +4039,8 @@
       "Rear": "https://s3.amazonaws.com/images.wheels.ca/wp-content/uploads/2019/04/1988-Porsche-959-Komfort_4.jpg",
       "0-60": 10.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "1988 porsche 911 turbo": {
       "alias": "1988 911 turbo",
@@ -3899,7 +4054,8 @@
       "0-60": 9,
       "Drift": 0,
       "Handling": 550,
-      "Obtained": "Super Wheelspin"
+      "Obtained": "Super Wheelspin",
+      "Class": "B"
     },
     "2017 lykan hypersport": {
       "alias": "2017 hypersport",
@@ -3913,7 +4069,8 @@
       "0-60": 4,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Super Wheelspin"
+      "Obtained": "Super Wheelspin",
+      "Class": "A"
     },
     "2019 bugatti la voiture noire": {
       "alias": "2019 noire",
@@ -3984,7 +4141,8 @@
       "Rear": "https://cdn1.mecum.com/auctions/fl0121/fl0121-454645/images/3-1608325968638@2x.jpg?1609879705000",
       "0-60": 8.2,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "1967 mini cooper s": {
       "alias": "1967 mc s",
@@ -3999,7 +4157,8 @@
       "Rally": 1,
       "0-60": 13,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "1978 porsche 911 sc": {
       "alias": "1978 911 sc",
@@ -4014,7 +4173,8 @@
       "0-60": 10,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Season"
+      "Obtained": "Season",
+      "Class": "C"
     },
     "2017 ford focus rs": {
       "alias": "2017 focus rs",
@@ -4029,7 +4189,8 @@
       "Rally": 2,
       "0-60": 13,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "1987 ferrari f40": {
       "alias": "1987 f40",
@@ -4043,7 +4204,8 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Class": "A"
     },
     "2013 ferrari laferrari": {
       "alias": "2013 laferrari",
@@ -4057,7 +4219,8 @@
       "0-60": 4,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Class": "S"
     },
     "2022 ferrari roma": {
       "alias": "2022 roma",
@@ -4071,7 +4234,8 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Season"
+      "Obtained": "Season",
+      "Class": "S"
     },
     "1995 ferrari f50": {
       "alias": "1995 f50",
@@ -4086,7 +4250,8 @@
       "0-60": 5.2,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "A"
     },
     "2018 subaru wrx sti we": {
       "alias": "2018 wrx sti we",
@@ -4119,7 +4284,8 @@
       "0-60": 11.9,
       "Drift": 3,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "C"
     },
     "2016 ford focus rs we": {
       "alias": "2016 focus rs we",
@@ -4135,7 +4301,8 @@
       "0-60": 12,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Season"
+      "Obtained": "Season",
+      "Class": "C"
     },
     "2002 nissan skyline r34": {
       "alias": "2002 skyline r34",
@@ -4149,7 +4316,8 @@
       "Rear": "https://prestigemotorsport.com.au/wp-content/uploads/2017/08/2002-R34-GTR-VSpec-2-NUR-with-Z-Tune-bodykit-rear.jpg",
       "0-60": 11.6,
       "Drift": 5,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "bm 2004 corvette c5": {
       "alias": "bm 2004 c5",
@@ -4270,7 +4438,8 @@
       "Rear": "https://www.carscoops.com/wp-content/uploads/2020/06/Koenigsegg-Agera-RSN-7.jpg",
       "0-60": 4.2,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "2020 koenigsegg jesko": {
       "alias": "2020 jesko",
@@ -4284,7 +4453,8 @@
       "Rear": "https://billionairetoys.com/wp-content/uploads/Koenigsegg-Jesko-original-Rear-profile-view-tailights-exhaust-fins.jpg",
       "0-60": 2.7,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "2020 ssc tuatara": {
       "alias": "2020 tuatara",
@@ -4297,7 +4467,8 @@
       "Image": "https://www.carscoops.com/wp-content/uploads/2022/05/SSC-Tuatara-May-2022-Record-Run-main.jpg",
       "0-60": 2.5,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "thrust ssc": {
       "alias": "thrust",
@@ -4311,7 +4482,8 @@
       "Image": "https://media.moneyweek.com/image/private/s--1urbjeGf--/v1602750162/day%20in%20history/201015-thrust-ssc.jpg",
       "0-60": 2.3,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "2021 koenigsegg gemera": {
       "alias": "2021 gemera",
@@ -4324,7 +4496,8 @@
       "Image": "https://www.motortrend.com/uploads/sites/11/2020/03/Koenigsegg-Gemera-in-motion-3.jpg?fit=around%7C875:492",
       "0-60": 3.2,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "2020 koenigsegg regera": {
       "alias": "2020 regera",
@@ -4338,7 +4511,8 @@
       "Rear": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/koenigsegg-regera-mmp-2-1591116009.jpg?crop=1.00xw:0.918xh;0,0.0816xh&resize=480:*",
       "0-60": 3.8,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "U"
     },
     "2018 dodge challenger demon": {
       "alias": "2018 challenger demon",
@@ -4353,7 +4527,8 @@
       "0-60": 6.2,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Season"
+      "Obtained": "Season",
+      "Class": "A"
     },
     "2007 infiniti g35 coupe": {
       "alias": "2007 g35",
@@ -4368,7 +4543,8 @@
       "Rear": "https://i.ytimg.com/vi/f8PnvpRq3jU/maxresdefault.jpg",
       "0-60": 13,
       "Drift": 1,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "D"
     },
     "2005 hyundai tiburon": {
       "alias": "2005 tiburon",
@@ -4384,7 +4560,8 @@
       "0-60": 14,
       "Drift": 0,
       "Handling": 500,
-      "Starter": true
+      "Starter": true,
+      "Class": "D"
     },
     "2017 mercedes amg one": {
       "alias": "2017 amg one",
@@ -4397,7 +4574,8 @@
       "Image": "https://cimg2.ibsrv.net/ibimg/hgm/1920x1080-1/100/622/mercedes-amg-project-one-concept-2017-frankfurt-motor-show_100622198.jpg",
       "0-60": 5.4,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "S"
     },
     "rins 2012 mitsubishi evo x": {
       "alias": "rins 2012 evo x",
@@ -4411,7 +4589,8 @@
       "Rear": "https://collectingcars.imgix.net/images/2020/06/DSC07110.jpg?w=1263&fit=fillmax&crop=edges&auto=format,compress&cs=srgb&q=85",
       "0-60": 9,
       "Drift": 6,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2013 mitsubishi evo x": {
       "alias": "2013 evo x",
@@ -4425,7 +4604,8 @@
       "0-60": 9,
       "Drift": 6,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "B"
     },
     "2000 honda civic type r": {
       "alias": "2000 civic type r",
@@ -4453,7 +4633,8 @@
       "0-60": 10.4,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "D"
     },
     "2021 mercedes amg gt63": {
       "alias": "2021 amg gt63",
@@ -4467,7 +4648,8 @@
       "0-60": 8.4,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "lukes 2000 honda civic type r": {
       "alias": "lukes 2000 civic type r",
@@ -4549,7 +4731,8 @@
       "0-60": 12.5,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Common Imports"
+      "Obtained": "Common Imports",
+      "Class": "D"
     },
     "2019 porsche 911 speedster": {
       "alias": "2019 911 speedster",
@@ -4563,7 +4746,8 @@
       "0-60": 8.9,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Rare Imports"
+      "Obtained": "Rare Imports",
+      "Class": "B"
     },
     "2022 porsche taycan": {
       "alias": "2022 taycan",
@@ -4578,7 +4762,8 @@
       "Drift": 0,
       "Electric": true,
       "Range": "3",
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2020 tesla model s": {
       "alias": "2020 model s",
@@ -4593,7 +4778,8 @@
       "Drift": 0,
       "Electric": true,
       "Range": "2",
-      "Handling": 500
+      "Handling": 500,
+      "Class": "B"
     },
     "2022 rimac nevera": {
       "alias": "2022 nevera",
@@ -4623,7 +4809,8 @@
       "Drift": 0,
       "Electric": true,
       "Range": "4",
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2022 ford mustang mach e": {
       "alias": "2022 mustang mach e",
@@ -4653,7 +4840,8 @@
       "Drift": 0,
       "Electric": true,
       "Range": "8",
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2021 tesla model s plaid": {
       "alias": "2021 model s plaid",
@@ -4683,7 +4871,8 @@
       "Drift": 0,
       "Electric": true,
       "Range": "5",
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2015 hsv gts maloo": {
       "alias": "2015 gts maloo",
@@ -4696,7 +4885,8 @@
       "Image": "https://carsguide-res.cloudinary.com/image/upload/f_auto%2Cfl_lossy%2Cq_auto%2Ct_default/v1/editorial/GTS-Maloo-w.jpg",
       "0-60": 11.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "C"
     },
     "2022 maserati mc20": {
       "alias": "2022 mc20",
@@ -4709,7 +4899,8 @@
       "Image": "https://di-uploads-pod23.dealerinspire.com/maseratisantamonica/uploads/2021/08/Maserati-MC20-1.jpg",
       "0-60": 8.2,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2005 maserati mc12": {
       "alias": "2005 mc12",
@@ -4723,7 +4914,8 @@
       "0-60": 7.2,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Super Wheelspin"
+      "Obtained": "Super Wheelspin",
+      "Class": "A"
     },
     "2016 bmw i8": {
       "alias": "2016 i8",
@@ -4736,7 +4928,8 @@
       "Image": "https://i.gaw.to/vehicles/photos/07/55/075568_2016_bmw_i8.jpg",
       "0-60": 8.1,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "2007 aston martin dbs": {
       "alias": "2007 dbs",
@@ -4750,7 +4943,8 @@
       "0-60": 8,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Exotic Imports"
+      "Obtained": "Exotic Imports",
+      "Class": "B"
     },
     "2011 aston martin one-77": {
       "alias": "2011 one-77",
@@ -4763,7 +4957,8 @@
       "Image": "https://images1.bonhams.com/image?src=Images/live/2016-04/13/24041211-1-45.jpg&top=0.407960199004&left=0.210000000000&bottom=0.935323383084&right=0.890000000000&width=640&height=480&autosizefit=1",
       "0-60": 7.6,
       "Drift": 0,
-      "Handling": 500
+      "Handling": 500,
+      "Class": "A"
     },
     "1994 toyota celica gt4": {
       "alias": "1994 celica gt4",
@@ -4777,7 +4972,8 @@
       "0-60": 12.5,
       "Drift": 0,
       "Handling": 500,
-      "Obtained": "Common Imports"
+      "Obtained": "Common Imports",
+      "Class": "D"
     },
     "1989 toyota celica": {
       "alias": "1989 celica",
@@ -4791,7 +4987,8 @@
       "0-60": 12.4,
       "Drift": 0,
       "Handling": 550,
-      "Obtained": "Common Imports"
+      "Obtained": "Common Imports",
+      "Class": "D"
     },
     "jakes 2015 honda cbr": {
       "alias": "jakes 2015 cbr",
