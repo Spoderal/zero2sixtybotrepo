@@ -118,7 +118,7 @@ module.exports = {
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Helmet")) {
         await interaction.reply(`Redeemed ${item.Item}`);
-        userdata.pfps.push(item.Item);
+        userdata.pfps.push(item.Item.toLowerCase());
 
         userdata.seasonrewards.push(item.Number);
       } else if (item.Item.endsWith("Part")) {
