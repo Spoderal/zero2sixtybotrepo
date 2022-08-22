@@ -36,7 +36,8 @@
     "t4ecu",
     "t4driftsuspension",
     "t4racesuspension",
-    "t4spoiler"
+    "t4spoiler",
+    "t4brakes"
   ],
   "Cash": [1000, 2000, 3000, 4000, 5000, 6000, 7500],
   "Maps": ["Common", "Uncommon"],

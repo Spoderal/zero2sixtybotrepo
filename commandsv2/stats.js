@@ -195,6 +195,7 @@ module.exports = {
           let nitro = selected.Nitro || "Stock Nitro";
           let intercooler = selected.Intercooler || "Stock Intercooler";
           let gearbox = selected.Gearbox || "Stock Gearbox";
+          let brakes = selected.Brakes || "Stock Brakes";
 
           let partindb = partdb.Parts;
 
@@ -211,6 +212,7 @@ module.exports = {
           let intercooleremote =
             partindb[intercooler.toLowerCase()]?.Emote || "🔵";
           let gearboxemote = partindb[gearbox.toLowerCase()]?.Emote || "🔵";
+          let brakesemote = partindb[brakes.toLowerCase()]?.Emote || "🔵";
 
           let embed = new Discord.EmbedBuilder()
             .setTitle(
@@ -272,7 +274,11 @@ module.exports = {
                 value: `${gearboxemote} ${gearbox.split(" ")[0]}`,
                 inline: true,
               },
-              blankInlineField,
+              {
+                name: `Brakes`,
+                value: `${brakesemote} ${brakes.split(" ")[0]}`,
+                inline: true,
+              }
             ])
 
             .setColor(colors.blue)

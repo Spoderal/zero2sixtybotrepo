@@ -167,6 +167,7 @@ module.exports = {
     let ticketsearned;
     // let bankrand;
     let bankinc;
+    let barnmaps
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
@@ -195,6 +196,7 @@ module.exports = {
         botcar = lodash.sample(bot5cars);
         moneyearned += 600;
         ticketsearned = 5;
+        barnmaps = 1
         break;
       }
       case "6": {
@@ -423,6 +425,10 @@ module.exports = {
           if (bot == "6" || bot == "7") {
             earningsresult.push(`Wheel Spin Earned!`);
             userdata.wheelspins += 1;
+          }
+          if(barnmaps == 1){
+            earningsresult.push(`1 ${emotes.barnMapRare}`)
+            userdata.rmaps += 1
           }
           if (bankinc == 1) {
             let itemdb = require("../data/items.json");

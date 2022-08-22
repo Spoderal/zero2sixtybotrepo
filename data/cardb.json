@@ -1603,6 +1603,38 @@
       "Handling": 500,
       "Obtained": "Legendary Barn Find"
     },
+    "barn 2002 koenigsegg cc8s": {
+      "alias": "barn 2002 koenigsegg cc8s",
+      "Name": "Barn 2002 Koenigsegg CC8S",
+      "Emote": "<:koenigsegg:931011849212797029>",
+      "kmh": 265,
+      "Speed": 200,
+      "Price": 0,
+      "sellprice": 18750,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/gdns2m2/3l-Yb-N6-Masz.png",
+      "Junked": true,
+      "restored": "2002 koenigsegg cc8s",
+      "0-60": 7,
+      "Drift": 0,
+      "Handling": 500
+    },
+    "2002 koenigsegg cc8s": {
+      "alias": "2002 cc8s",
+      "Name": "2002 Koenigsegg CC8S",
+      "Emote": "<:koenigsegg:931011849212797029>",
+      "kmh": 265,
+      "Speed": 200,
+      "Price": 0,
+      "sellprice": 18750,
+      "Engine": "V8",
+      "Image": "https://4.bp.blogspot.com/-nGR6ejJpuEs/UODVUR-ET3I/AAAAAAAALhA/Buu1ZcRnIIc/s1600/2002+Koenigsegg+CC8S.jpg",
+      "RestoreOnly": true,
+      "0-60": 7,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Legendary Barn Find"
+    },
     "barn 1969 dodge daytona": {
       "alias": "barn 1969 daytona",
       "Name": "Barn 1969 Dodge Daytona",

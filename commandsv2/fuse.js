@@ -25,7 +25,9 @@ module.exports = {
           { name: "Intercooler", value: "intercooler" },
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
-          { name: "TXExhaust", value: "txexhaust" }
+          {name: "Brakes", value: "brakes"},
+          { name: "TXExhaust", value: "txexhaust" },
+          {name: "TXIntake", value: "txintake"}
         )
         .setRequired(true)
     ),
@@ -57,6 +59,7 @@ module.exports = {
       "turbo",
       "spoiler",
       "txexhaust",
+      "txintake"
     ];
 
     if (!list3.includes(parttoinstall.toLowerCase()))
@@ -105,7 +108,51 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } else {
+    }
+    else  if (parttoinstall == "txintake") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5intake"))
+        return await interaction.reply(`You need a T5Intake to do this fuse!`);
+
+      for (var f = 0; f < 1; f++) parts.splice(parts.indexOf("t5intake"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5intake"].Emote} ${partdb.Parts["t5intake"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txintake"].Emote} ${partdb.Parts["txintake"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txintake");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    } 
+    
+    else {
       let parte = "";
       let partb = "";
       if (parttoinstall == "tires") {
@@ -141,6 +188,10 @@ module.exports = {
       } else if (parttoinstall == "spoiler") {
         parte = "t4spoiler";
         partb = "t5spoiler";
+      }
+      else if (parttoinstall == "brakes") {
+        parte = "t4brakes";
+        partb = "t5brakes";
       }
 
       let filtereduser = parts.filter(function hasmany(part) {

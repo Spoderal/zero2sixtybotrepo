@@ -41,7 +41,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             ⬆️ Small Update 8/17/2022\n
-            ⚙️ Patch 7/10/2022
+            ⚙️ Patch 8/22/2022
         `);
 
     embed.setColor(colors.blue);
@@ -96,14 +96,15 @@ module.exports = {
             embed.setTitle(`Small Patch`);
             embed
               .setDescription(
-                `• Support server cash multiplier for botraces and daily cash\n
-                • Vault items, store some cash before you prestige\n
-                • Trims, view /stats dealership [car] to view trims for cars that have them\n
-                • Multiple bug fixes\n
-                • New cars 7/10/2022
+                `• Rare barn maps can be found at the half mile tier 5\n
+                 • Legendary barn maps can be found by pretty porsche pets\n
+                 • New legendary barn find: 2002 Koenigsegg CC8S\n
+                 • New TX Part: TXIntake\n
+                 • New part: Brakes
+
                 `
               )
-              .setFooter({ text: "7/10/2022" })
+              .setFooter({ text: "8/22/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

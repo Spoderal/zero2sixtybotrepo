@@ -307,7 +307,7 @@ module.exports = {
               },
               {
                 name: `Tier 5`,
-                value: `${cashemote} $750\n${rpemote} 5`,
+                value: `${cashemote} $750\n${rpemote} 5\n${emotes.barnMapRare} 1`,
                 inline: true,
               },
               {

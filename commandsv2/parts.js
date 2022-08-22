@@ -73,6 +73,12 @@ module.exports = {
             emoji: emotes.partsGearBox,
           },
           {
+            label: "Brakes",
+            description: "Select this for the list of brake options",
+            value: "brakes_option",
+            emoji: "<:t1brakes:1011360668533919774>"
+          },
+          {
             label: "Extras",
             description:
               "Select this for the list of clutch/ecus/nitrous/EV Upgrades",
@@ -97,6 +103,7 @@ module.exports = {
           Engines ${emotes.partsEngine}
           Gearboxes ${emotes.partsGearBox}
           Body (REWORKING)
+          Brakes <:t1brakes:1011360668533919774>
           Extras (Clutch, ECU, Nitrous, EV) ${emotes.partsECU}
         `,
           inline: true,
@@ -385,6 +392,30 @@ module.exports = {
                       ${parts.Parts["t3rangeboost"].Emote}  ${
                     parts.Parts["t3rangeboost"].Name
                   } : ${toCurrency(parts.Parts["t3rangeboost"].Price)}\n
+                  **`
+                )
+                .setColor(colors.blue)
+                .setThumbnail("https://i.ibb.co/ctkwJ64/clutch1.png");
+              interaction.editReply({ embeds: [embed2], components: [row] });
+            }
+            else if (value === "brakes_option") {
+              let embed2;
+              embed2 = new EmbedBuilder()
+                .setTitle("Brakes")
+                .setFooter(tipFooterPurchasePart)
+                .setDescription(
+                  `**
+                  Page 1\n
+                      ${parts.Parts["t1brakes"].Emote}  ${
+                    parts.Parts["t1brakes"].Name
+                  } : ${toCurrency(parts.Parts["t1brakes"].Price)}\n
+                      ${parts.Parts["t2brakes"].Emote}  ${
+                    parts.Parts["t2brakes"].Name
+                  } : ${toCurrency(parts.Parts["t2brakes"].Price)}\n
+                      ${parts.Parts["t3brakes"].Emote}  ${
+                    parts.Parts["t3brakes"].Name
+                  } : ${toCurrency(parts.Parts["t3brakes"].Price)}\n
+                    
                   **`
                 )
                 .setColor(colors.blue)

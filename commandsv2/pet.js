@@ -484,7 +484,7 @@ module.exports = {
             "water bottle",
           ];
 
-          let t2rewards = ["t3tires", "big bank increase", "bank increase"];
+          let t2rewards = ["t3tires", "big bank increase", "bank increase", "legendary barn map"];
 
           let ranreward;
           if (pet.tier == 1) {
@@ -510,6 +510,12 @@ module.exports = {
               itemdb.Collectable[ranreward.toLowerCase()]
             ) {
               userdata.items.push(ranreward.toLowerCase());
+              userdata.save();
+            }
+            else if (
+             ranreward == "legendary barn map"
+            ) {
+              userdata.lmaps += 1
               userdata.save();
             }
           }, 10000);
