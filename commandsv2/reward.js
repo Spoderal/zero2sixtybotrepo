@@ -6,6 +6,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,6 +35,8 @@ module.exports = {
     let uid = interaction.user.id;
 
     let userdata = await User.findOne({ id: uid });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let global = await Global.findOne({});
     if (type == "season") {
       let rew = interaction.options.getString("reward");

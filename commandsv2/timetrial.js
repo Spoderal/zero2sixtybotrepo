@@ -6,6 +6,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { randomRange } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,6 +26,8 @@ module.exports = {
     let idtoselect = interaction.options.getString("car");
     let user = interaction.user;
     let userdata = await User.findOne({ id: user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: user.id });

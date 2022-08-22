@@ -10,6 +10,7 @@ const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
 const { invisibleSpace, doubleCashWeekendField } = require("../common/utils");
 const cars = require("../data/cardb.json");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -48,6 +49,7 @@ module.exports = {
     let moneyearned = 200;
     let user = interaction.user;
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: user.id });

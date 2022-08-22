@@ -6,6 +6,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const { tipFooterSeasonPages } = require("../common/tips");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,6 +20,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let seasonrewards = seasons.Seasons.Summer.Rewards;
     let reward = [];

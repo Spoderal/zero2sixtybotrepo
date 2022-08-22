@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 
@@ -31,6 +32,7 @@ module.exports = {
     let toconv = interaction.options.getString("item");
     let toturnin = interaction.options.getNumber("amount");
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let gold = userdata.gold;
 

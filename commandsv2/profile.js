@@ -21,8 +21,7 @@ module.exports = {
   async execute(interaction) {
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = await User.findOne({ id: user.id });
-
-    if (!userdata?.id) await interaction.reply(GET_STARTED_MESSAGE);
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let prestige = userdata.prestige || 0;
     let racerank = userdata.racerank;

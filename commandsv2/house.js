@@ -5,6 +5,7 @@ const housedb = require("../data/houses.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,6 +21,7 @@ module.exports = {
     let user = interaction.user;
     let uid = user.id;
     let userdata = await User.findOne({ id: uid });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let house = userdata.house;
     let selloption = interaction.options.getBoolean("sell");

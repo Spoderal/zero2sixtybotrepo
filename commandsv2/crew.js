@@ -9,6 +9,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const { emotes } = require("../common/emotes");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -40,6 +41,7 @@ module.exports = {
   async execute(interaction) {
     let globalModel = await Global.findOne();
     let userdata = await User.findOne({ id: interaction.user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let option = interaction.options.getString("option");
     const crews = globalModel?.crews;
 

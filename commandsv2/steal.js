@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const lodash = require("lodash");
 const { numberWithCommas } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,6 +17,8 @@ module.exports = {
     let user = interaction.user;
     let usertorob = interaction.options.getUser("user");
     let userdata = await User.findOne({ id: userid });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let user2data = await User.findOne({ id: usertorob.id });
 
     if (userdata.prestige < 4)

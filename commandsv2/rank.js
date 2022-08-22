@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const prestiges = require("../data/prestige.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,8 +11,9 @@ module.exports = {
     .setDescription("See your ranks"),
   async execute(interaction) {
     let user = interaction.user;
-
     let userdata = await User.findOne({ id: user.id });
+    if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
     let prestigerank = userdata.prestige;
     let driftrank = userdata.driftrank;
     let newprestige2 = prestigerank + 1;
