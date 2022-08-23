@@ -73,7 +73,7 @@ module.exports = {
         return await interaction.reply(
           `You need 100 Xessence to fuse this part into a TX!`
         );
-      if (!parts.includes("t5exhaust"))
+      if (!parts.includes("t5exhaust") && !parts.includes("T5Exhaust"))
         return await interaction.reply(`You need a T5Exhaust to do this fuse!`);
 
       for (var i = 0; i < 1; i++) parts.splice(parts.indexOf("t5exhaust"), 1);
@@ -115,7 +115,7 @@ module.exports = {
         return await interaction.reply(
           `You need 100 Xessence to fuse this part into a TX!`
         );
-      if (!parts.includes("t5intake"))
+      if (!parts.includes("t5intake") && !parts.includes("T5Intake"))
         return await interaction.reply(`You need a T5Intake to do this fuse!`);
 
       for (var f = 0; f < 1; f++) parts.splice(parts.indexOf("t5intake"), 1);
