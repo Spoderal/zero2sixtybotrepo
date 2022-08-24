@@ -28,7 +28,8 @@ module.exports = {
           { name: "Gearbox", value: "gearbox" },
           { name: "Weight", value: "weight" },
           { name: "Intercooler", value: "intercooler" },
-          { name: "Nitro", value: "nitro" }
+          { name: "Nitro", value: "nitro" },
+          {name: "Brakes", value: "brakes"}
         )
         .setRequired(true)
     )
