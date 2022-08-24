@@ -177,6 +177,7 @@ module.exports = {
           resale
         )} instead.`
       );
+      userdata.save()
 
       return;
     }
