@@ -23,16 +23,16 @@ module.exports = {
     let daily = cooldowns.weekly;
     let patron = userdata.patron;
     let gold;
-    if (patron && patron.tier == 1) {
+    if (patron && patron.tier == "1") {
       cash *= 2;
     }
-    if (patron && patron.tier == 2) {
+    if (patron && patron.tier == "2") {
       cash *= 3;
     }
-    if (patron && patron.tier == 3) {
+    if (patron && patron.tier == "3") {
       cash *= 5;
     }
-    if (patron && patron.tier == 4) {
+    if (patron && patron.tier == "4") {
       cash *= 6;
       gold = patron.gold;
     }
