@@ -755,6 +755,7 @@ module.exports = {
           userdata.rp += parseInt(ticketsearned);
           userdata.cash += parseInt(moneyearned);
           userdata.racexp += 25;
+          userdata.update()
           earningsresult.push(`+25 XP`);
 
           let requiredXP = userdata.racerank * 1000;

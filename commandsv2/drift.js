@@ -387,7 +387,6 @@ module.exports = {
               name: "Earnings",
               value: `
               ${emotes.cash} $${moneyearned}
-              ${emotes.notoriety} ${notorietyearned} Notoriety
               ${emotes.rp} ${ticketsearned} RP
               +25 Drift XP
             `,
@@ -400,11 +399,12 @@ module.exports = {
           interaction.editReply({ embeds: [embed], components: [] });
           userdata.cash += Number(moneyearned);
           userdata.rp += ticketsearned;
-          userdata.noto += notorietyearned;
 
-          userdata.driftxp += 25;
+          userdata.driftxp += 50;
+          userdata.update()
 
           let driftxp = userdata.driftxp;
+          console.log(requiredrank)
           if (driftxp >= requiredrank) {
             if (userdata.driftrank < 50) {
               userdata.driftrank += 1;
