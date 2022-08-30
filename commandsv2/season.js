@@ -232,6 +232,7 @@ module.exports = {
 
         else if(item.Item.endsWith("Garage Space" || item.Item.endsWith("Garage Spaces"))){
           let amount = Number(item.Item.split(" ")[0])
+          parseInt(amount)
           userdata.garagelimit += amount
           userdata.fallrewards += 1
         }

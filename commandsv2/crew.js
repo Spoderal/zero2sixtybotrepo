@@ -244,6 +244,8 @@ module.exports = {
                 item.Item.endsWith("Garage Spaces")
               ) {
                 let amount = item.Item.split(" ")[0];
+                parseInt(amount)
+
                 userdata.garagelimit += Number(amount);
         
                 
