@@ -177,7 +177,7 @@ module.exports = {
       
       let notor = userdata.notofall
       redeemed = userdata.fallrewards || 1;
-      let rew = redeemed
+      let rew = redeemed || 1
       let item = seasons.Seasons.Fall.Rewards[rew];
       if(item.Required > notor) {
         row.components[0].setStyle(`Danger`)
@@ -197,8 +197,8 @@ module.exports = {
     collector.on('collect', async (i) => {
       if(i.customId.includes("claim")){
          notor = userdata.notofall
-        redeemed = userdata.fallrewards || 1
-         rew = redeemed
+        redeemed = userdata.fallrewards || 1;
+         rew = redeemed || 1
          item = seasons.Seasons.Fall.Rewards[rew];
         if(item.Required > notor) {
            return i.update({content:`You need ${item.Required} notoriety!`})
