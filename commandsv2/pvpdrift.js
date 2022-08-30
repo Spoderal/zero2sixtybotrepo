@@ -248,7 +248,7 @@ module.exports = {
           earningsresult.push(`$${moneyearned}`);
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
 
-          userdata.rp += ticketsearned;
+          userdata.rp2 += ticketsearned;
           userdata.cash += Number(moneyearned);
           userdata.driftxp += 25;
 
@@ -333,7 +333,7 @@ module.exports = {
           earningsresult.push(`$${moneyearned}`);
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
 
-          userdata2.rp += ticketsearned;
+          userdata2.rp2 += ticketsearned;
           userdata2.cash += moneyearned;
           userdata2.racexp += 25;
 

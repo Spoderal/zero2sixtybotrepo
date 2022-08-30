@@ -86,12 +86,12 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-  rp: {
+  rp2: {
     type: Number,
     required: false,
     default: 0,
   },
-  noto: {
+  notofall: {
     type: Number,
     required: false,
     default: 0,
@@ -198,6 +198,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
+  fallrewards: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   tier: {
     type: Number,
     required: false,
@@ -236,10 +241,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
-  crewclaimed: {
-    type: Array,
+  crewseason: {
+    type: Number,
     required: false,
-    default: [],
+    default: 0,
   },
   crew: {
     type: Object,
@@ -248,6 +253,10 @@ const Profile = new mongoose.Schema({
   dailytask: {
     type: Object,
     required: false,
+  },
+  tutorial:{
+    type: Object,
+    required: false
   },
   weeklytask: {
     type: Object,

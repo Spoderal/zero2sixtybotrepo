@@ -26,7 +26,7 @@ const tipFooterSeasonPages = {
 };
 
 const tipFooterPurchaseCar = {
-  text: 'Tip: Purchase a car with /buy [full car name]"',
+  text: 'Tip: Purchase a car with /buy [full car name or id]"',
 };
 
 module.exports = {

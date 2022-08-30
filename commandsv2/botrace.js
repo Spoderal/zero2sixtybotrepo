@@ -194,11 +194,13 @@ module.exports = {
     let barnmaps;
     let ubarnmaps;
     let tracklength = 0;
+    let xpearn
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
         ticketsearned = 1;
         classd = "1";
+        xpearn = 25
         botemote = emotes.botTier1;
         break;
       }
@@ -207,7 +209,7 @@ module.exports = {
         ticketsearned = 1;
         classd = "D";
         botemote = emotes.botTier1;
-
+        
         break;
       }
       case "2": {
@@ -215,6 +217,8 @@ module.exports = {
         moneyearned += 150;
         // moneyearnedtxt += 150;
         ticketsearned = 2;
+        
+        xpearn = 50
         classd = "2";
         botemote = emotes.botTier2;
 
@@ -223,7 +227,7 @@ module.exports = {
       case "3": {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
-        // moneyearnedtxt += 300;
+        xpearn = 100
         ticketsearned = 3;
         classd = "3";
         botemote = emotes.botTier3;
@@ -233,7 +237,7 @@ module.exports = {
       case "4": {
         botcar = lodash.sample(bot4cars);
         moneyearned += 400;
-        // moneyearnedtxt += 400;
+        xpearn = 150
         ticketsearned = 4;
         classd = "4";
         botemote = emotes.botTier4;
@@ -243,6 +247,7 @@ module.exports = {
       case "5": {
         botcar = lodash.sample(bot5cars);
         moneyearned += 500;
+        xpearn = 200
         // moneyearnedtxt += 500;
         ticketsearned = 5;
         classd = "5";
@@ -255,6 +260,7 @@ module.exports = {
       case "6": {
         botcar = lodash.sample(bot6cars);
         moneyearned += 700;
+        xpearn = 250
         // moneyearnedtxt += 700;
         ticketsearned = 10;
         classd = "6";
@@ -267,6 +273,7 @@ module.exports = {
       case "7": {
         botcar = lodash.sample(bot7cars);
         moneyearned += 1000;
+        xpearn = 300
         // moneyearnedtxt += 1000;
         ticketsearned = 20;
         classd = "7";
@@ -278,6 +285,7 @@ module.exports = {
       case "8": {
         botcar = lodash.sample(bot8cars);
         moneyearned += 1300;
+        xpearn = 350
         // moneyearnedtxt += 1300;
         ticketsearned = 30;
         classd = "8";
@@ -622,6 +630,12 @@ module.exports = {
       timer++;
 
       if (timer >= 10) {
+        if(userdata.tutorial && userdata.tutorial.stage == 1){
+          console.log("tutorial")
+          interaction.channel.send({content: `Cool now you know how the bot basics work! Now we'll dive into upgrading, here take this T1Exhaust!\nYou can install it with /upgrade [your car id] t1exhaust`})
+          userdata.parts.push("t1exhaust")
+          userdata.tutorial.stage += 1
+        }
         clearInterval(x);
         clearInterval(y);
         collector2.stop();
@@ -685,27 +699,7 @@ module.exports = {
         }
 
         if (tracklength > tracklength2) {
-          if (userdata.cashgain == "10") {
-            let calccash = moneyearned * 0.1;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "15") {
-            let calccash = moneyearned * 0.15;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "20") {
-            let calccash = moneyearned * 0.2;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "25") {
-            let calccash = moneyearned * 0.25;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "50") {
-            let calccash = moneyearned * 0.5;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          }
+       
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
             // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
@@ -752,11 +746,11 @@ module.exports = {
             userdata.fkeys += 1;
           }
 
-          userdata.rp += parseInt(ticketsearned);
+          userdata.rp2 += parseInt(ticketsearned);
           userdata.cash += parseInt(moneyearned);
-          userdata.racexp += 25;
+          userdata.racexp += xpearn;
           userdata.update()
-          earningsresult.push(`+25 XP`);
+          earningsresult.push(`+${xpearn} Race XP`);
 
           let requiredXP = userdata.racerank * 1000;
 

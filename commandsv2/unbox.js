@@ -18,7 +18,6 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Drift", value: "drift" },
           { name: "Z Crate 1", value: "z crate 1" }
         )
         .setRequired(true)

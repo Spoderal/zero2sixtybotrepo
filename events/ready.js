@@ -86,13 +86,11 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `☀️ Summer ☀️  /season`,
-      `⬆️ BIG UPDATE 6/12`,
-      `Patch 6/28`,
-      `Small Update 6/24`,
+      `🍂 FALL 🍂  /season`,
+      `⬆️ BIG UPDATE 8/22`,
       `Watching ${numberWithCommas(
-        client.guilds.cache.reduce((a, g) => a + g.memberCount, 0)
-      )} racers`,
+        client.guilds.cache.size
+      )} servers race`,
     ];
     if (db.fetch(`doublecash`) == true) {
       randomstatuses.push(`💵 DOUBLE CASH WEEKEND 💵`);

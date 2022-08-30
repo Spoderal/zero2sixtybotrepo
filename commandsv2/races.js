@@ -96,6 +96,12 @@ module.exports = {
             value: "train_race",
             customId: "tr",
           },
+          {
+            label: "trackrace",
+            description:"Information about the track race",
+            value:"track",
+            customId:"track"
+          }
         ])
     );
 
@@ -152,37 +158,37 @@ module.exports = {
             embed.addFields([
               {
                 name: `Tier 1`,
-                value: `${cashemote} $50\n${rpemote} 1`,
+                value: `${cashemote} $50\n${rpemote} 1\n25 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 2`,
-                value: `${cashemote} $150\n${rpemote} 1`,
+                value: `${cashemote} $150\n${rpemote} 1\n50 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 3`,
-                value: `${cashemote} $350\n${rpemote} 2`,
+                value: `${cashemote} $350\n${rpemote} 2\n100 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 4`,
-                value: `${cashemote} $450\n${rpemote} 3`,
+                value: `${cashemote} $450\n${rpemote} 3\n150 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 5`,
-                value: `${cashemote} $550\n${rpemote} 4\n<:zbarns:941571059600195594> 1`,
+                value: `${cashemote} $550\n${rpemote} 4\n<:zbarns:941571059600195594> 1\n200 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 6`,
-                value: `${cashemote} $750\n${rpemote} 5\n<:zbarns:941571059600195594> 2`,
+                value: `${cashemote} $750\n${rpemote} 5\n<:zbarns:941571059600195594> 2\n250 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 7`,
-                value: `${cashemote} $1050\n${rpemote} 10\n<:zbarns_u:958540705964371978> 1`,
+                value: `${cashemote} $1050\n${rpemote} 10\n<:zbarns_u:958540705964371978> 1\n300 Race XP`,
                 inline: true,
               },
             ]);
@@ -367,17 +373,48 @@ module.exports = {
             embed.addFields([
               {
                 name: `Easy`,
-                value: `${cashemote} $200\n${rpemote} 2\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track`,
+                value: `${cashemote} $200\n${rpemote} 2\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track\n25 Drift XP`,
                 inline: true,
               },
               {
                 name: `Medium`,
-                value: `${cashemote} $450\n${rpemote} 4\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track`,
+                value: `${cashemote} $450\n${rpemote} 4\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track\n50 Drift XP`,
                 inline: true,
               },
               {
                 name: `Hard`,
-                value: `${cashemote} $800\n${rpemote} 6\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track`,
+                value: `${cashemote} $800\n${rpemote} 6\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track\n100 Drift XP`,
+                inline: true,
+              },
+            ]);
+
+            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+          else if (value === "track") {
+            embed.fields = [];
+            embed.setTitle("Track Race");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Take your car to the track and test its limits!`);
+            embed.addFields([
+              {
+                name: `Easy`,
+                value: `${cashemote} $200\n${rpemote} 2\n<:zeronotor:962785804202176574> Car Handling / Laps\n100 Race XP`,
+                inline: true,
+              },
+              {
+                name: `Medium`,
+                value: `${cashemote} $500\n${rpemote} 4\n<:zeronotor:962785804202176574> Car Handling / Laps\n250 Race XP`,
+                inline: true,
+              },
+              {
+                name: `Hard`,
+                value: `${cashemote} $1,000\n${rpemote} 6\n<:zeronotor:962785804202176574> Car Handling / Laps\n400 Race XP`,
                 inline: true,
               },
             ]);

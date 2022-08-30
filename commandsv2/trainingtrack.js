@@ -613,7 +613,7 @@ module.exports = {
             earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
             userdata.fkeys += 1;
           }
-          userdata.rp += ticketsearned;
+          userdata.rp2 += ticketsearned;
           userdata.cash += Number(moneyearned);
           userdata.racexp += 25;
 

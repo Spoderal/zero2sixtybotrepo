@@ -25,6 +25,7 @@ module.exports = {
           { name: "Intercooler", value: "intercooler" },
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
+          { name: "Bodykit", value: "bodykit" },
           {name: "Brakes", value: "brakes"},
           { name: "TXExhaust", value: "txexhaust" },
           {name: "TXIntake", value: "txintake"}
@@ -59,7 +60,8 @@ module.exports = {
       "turbo",
       "spoiler",
       "txexhaust",
-      "txintake"
+      "txintake",
+      "bodykit"
     ];
 
     if (!list3.includes(parttoinstall.toLowerCase()))
@@ -192,6 +194,10 @@ module.exports = {
       else if (parttoinstall == "brakes") {
         parte = "t4brakes";
         partb = "t5brakes";
+      }
+      else if (parttoinstall == "bodykit") {
+        parte = "t4bodykit";
+        partb = "t5bodykit";
       }
 
       let filtereduser = parts.filter(function hasmany(part) {

@@ -28,7 +28,7 @@ module.exports = (client) => {
         for (let i in crewmembers) {
           let user = crewmembers[i];
           let rpdata = await User.findOne({ id: user });
-          let userrp = rpdata.rp;
+          let userrp = rpdata.rp2;
 
           totalrp += userrp;
         }

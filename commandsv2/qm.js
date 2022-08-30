@@ -462,7 +462,7 @@ module.exports = {
           }
           userdata.cash += Number(moneyearned);
           userdata.racexp += 10;
-          userdata.rp += ticketsearned;
+          userdata.rp2 += ticketsearned;
           if (userdata.racexp >= newrankrequired) {
             userdata.racerank += 1;
             interaction.channel.send(

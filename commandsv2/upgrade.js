@@ -135,7 +135,12 @@ module.exports = {
         ],
       }
     );
-    userdata.parts.pull(inputPartName);
+    if(userdata.tutorial && userdata.tutorial.stage == 1){
+      console.log("tutorial")
+      interaction.channel.send({content: `Nice! Now your car is even faster! Thats all from the tutorial! If you have any other questions make sure to join the support server!`})
+      userdata.tutorial = null
+    }
+    userdata.parts.splice(userdata.parts.indexOf(partInLocalDB.Name.toLowerCase()), 1);
     userdata.save();
 
     await interaction.reply(

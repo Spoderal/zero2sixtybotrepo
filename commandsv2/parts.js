@@ -178,6 +178,15 @@ module.exports = {
                       ${parts.Parts["t3drifttires"].Emote}  ${
                     parts.Parts["t3drifttires"].Name
                   } : ${toCurrency(parts.Parts["t3drifttires"].Price)}\n
+                      ${parts.Parts["t1tracktires"].Emote}  ${
+                    parts.Parts["t1tracktires"].Name
+                  } : ${toCurrency(parts.Parts["t1tracktires"].Price)}\n
+                      ${parts.Parts["t2tracktires"].Emote}  ${
+                    parts.Parts["t2tracktires"].Name
+                  } : ${toCurrency(parts.Parts["t2tracktires"].Price)}\n
+                      ${parts.Parts["t3tracktires"].Emote}  ${
+                    parts.Parts["t3tracktires"].Name
+                  } : ${toCurrency(parts.Parts["t3tracktires"].Price)}\n
                   **`
                 )
                 .setColor(colors.blue)
@@ -241,6 +250,9 @@ module.exports = {
                   ${parts.Parts["t2bodykit"].Emote}  ${
                     parts.Parts["t2bodykit"].Name
                   } : ${toCurrency(parts.Parts["t2bodykit"].Price)}\n
+                   ${parts.Parts["t3bodykit"].Emote}  ${
+                    parts.Parts["t3bodykit"].Name
+                  } : ${toCurrency(parts.Parts["t3bodykit"].Price)}\n
                   ${parts.Parts["t1spoiler"].Emote}  ${
                     parts.Parts["t1spoiler"].Name
                   } : ${toCurrency(parts.Parts["t1spoiler"].Price)}\n

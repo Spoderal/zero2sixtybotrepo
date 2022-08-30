@@ -251,7 +251,7 @@ module.exports = {
 
             msg2.edit({ embeds: [embed] });
             userdata.racexp += 25;
-            userdata.rp += 10;
+            userdata.rp2 += 10;
 
             userdata.update();
 
@@ -282,7 +282,7 @@ module.exports = {
 
             msg2.edit({ embeds: [embed] });
             userdata.racexp += 25;
-            userdata.rp += 10;
+            userdata.rp2 += 10;
 
             userdata2.update();
 

@@ -26,14 +26,14 @@
       "Price": 500,
       "sellprice": 375,
       "Engine": "1.8 L 4-cylinder",
-      "Image": "https://www.cnet.com/a/img/SE6bJWs47b5YRRhWkTseDLcw_O8=/470x264/2019/02/05/fa75a275-45c4-47f5-a4b7-37296763a071/na-mazda-miata-003.jpg",
-      "Rear": "https://bringatrailer.com/wp-content/uploads/2019/11/1995_mazda_mx-5_miata_r-package_157445739176b6c5e8f9IMG_0669.jpg?fit=940%2C627",
+      "Image": "https://i.imgur.com/6PDC3xV.jpg",
       "0-60": 14.1,
       "Drift": 0,
       "Handling": 500,
       "Starter": true,
       "Class": "D"
     },
+  
     "2022 ferrari 296":{
       "alias":"2022 296",
       "Name":"2022 Ferrari 296",
@@ -1058,6 +1058,21 @@
       "0-60": 8,
       "Drift": 0,
       "Handling": 500,
+      "Class": "A"
+    },
+    "2022 porsche 911 gt3 rs": {
+      "alias": "2022 911 gt3",
+      "Name": "2022 Porsche 911 GT3",
+      "Emote": "<:porsche:931011550880338011>",
+      "Speed": 200,
+      "kmh": 315,
+      "Price": 0,
+      "sellprice": 69750,
+      "Engine": "4.0 L Flat-Six",
+      "Image": "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/pnr/2022/Products/911-GT3-RS-Premiere/Rennstrecke/_BKOS5097_edit_V02_highres.jpeg/jcr:content/_BKOS5097_edit_V02_highres.jpeg",
+      "0-60": 8,
+      "Drift": 0,
+      "Handling": 1000,
       "Class": "A"
     },
     "1998 bmw m3 e36": {
@@ -4266,6 +4281,21 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 500,
+      "Obtained": "Season",
+      "Class": "S"
+    },
+    "2022 lamborghini huracan tecnica": {
+      "alias": "2022 tecnica",
+      "Name": "2022 Lamborghini Huracan Tecnica",
+      "Emote": "<:lamborghini:931011549655617566>",
+      "Speed": 200,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "3.9 L V8",
+      "Image": "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_detail/huracan/tecnica/over/hura_tecnica_over_01_m.jpg",
+      "0-60": 6.3,
+      "Drift": 0,
+      "Handling": 600,
       "Obtained": "Season",
       "Class": "S"
     },

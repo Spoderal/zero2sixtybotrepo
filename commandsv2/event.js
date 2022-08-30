@@ -19,11 +19,11 @@ module.exports = {
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Summer Event",
-            description: "Information for the Summer Season Event",
+            label: "Fall Season",
+            description: "Information for the Fall Season Event",
             value: "spring_event",
             customId: "spring",
-            emoji: "☀️",
+            emoji: "🍂",
           },
           {
             label: "End of an Era",
@@ -46,7 +46,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Summer Season 2022 ☀️
+          Fall Season 2022 🍂
           End of an Era <:bugatti:931012624110460979>
         
       `);
@@ -68,26 +68,26 @@ module.exports = {
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
           if (value === "spring_event") {
-            embed.setTitle("Summer Season");
+            embed.setTitle("Fall Season");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Its time to drift! Get your best set of tires, your favorite car to drift in, and start drifting around different types of tracks!
+            embed.setDescription(`Get your track cars out because its track season!
 
-            There are many different rewards to claim this season, get more garage space, some cool helmets, keys, cash, and more!
+            Choose from a bunch of new parts that help your handling increase, because you'll want to make sure your handling is MAX!
+
+            Test your cars limits on the track with /trackrace and earn notoriety to earn exclusive season rewards, this time DOUBLE the length of last season!
 
             
     
             __Commands__
     
-            /drift [difficulty] [track] [car] - Race with a drift bot on the tracks!
-
-            /reward [reward id] - Claim rewards from the season
+            /tracklength [difficulty] [track] [car] - Race with a drift bot on the tracks!
     
             /season [page] - View the rewards available to claim
     
-            **Ends August 31st 2022**
+            **Ends November 31st 2022**
                   `);
-            embed.setThumbnail("https://i.ibb.co/C0S0bfQ/summericongif.gif");
-            embed.setImage("https://i.ibb.co/XYrY5d6/seasonsummer.png");
+            embed.setThumbnail("https://i.imgur.com/9oPxIib.pngf");
+            embed.setImage("https://i.imgur.com/w6t4kOC.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({

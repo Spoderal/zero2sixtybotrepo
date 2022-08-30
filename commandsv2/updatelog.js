@@ -31,6 +31,13 @@ module.exports = {
             customId: "up3",
             emoji: "⬆️",
           },
+          {
+            label:"8/30/2022",
+            description:"Information for the recent large update, and new season!",
+            value:"4_update",
+            customId:"up4",
+            emoji:"🍂"
+          }
         ])
     );
 
@@ -41,7 +48,8 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             ⬆️ Small Update 8/17/2022\n
-            ⚙️ Patch 8/22/2022
+            ⚙️ Patch 8/22/2022\n
+            🍂 Fall Update 8/30/2022
         `);
 
     embed.setColor(colors.blue);
@@ -129,6 +137,46 @@ module.exports = {
                 `
               )
               .setFooter({ text: "8/17/2022" })
+              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else if (value === "4_update") {
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`Fall Update`);
+            embed
+              .setDescription(
+                `__New parts__
+                • Track Springs\n
+                • Drift Springs\n
+                • Race Springs\n
+                • T1, T2, T3, T4, T5 Track tires\n
+                • T3, T4, T5 BodyKits\n
+
+                __Nerfs and buffs__
+                V8 added to wheelspin, it adds 15 speed to your car.\n
+                T1Exhaust price decreased, added speed and acceleration increased\n
+                T2Exhaust price decreased, added speed and acceleration increased\n
+
+                __Features__
+                •  New season! Check /season for more information. **NOTORIETY AND RP HAS BEEN RESET FOR THE NEW SEASONS**\n
+                • New race! /trackrace\n
+                • Tutorial for new players\n
+                • Season, and crew pages make it easier to claim rewards, having a purely button based system.\n
+                • /reward removed\n
+                • You can buy cars via name **or** ID now
+
+                __Bug Fixes__
+                • Fixed the issue where /upgrade removes all parts instead of 1
+                
+                `
+              )
+              .setFooter({ text: "8/30/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

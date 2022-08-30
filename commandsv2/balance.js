@@ -27,7 +27,7 @@ module.exports = {
     const {
       cash,
       gold,
-      rp,
+      rp2,
       cmaps: barnmaps,
       ucmaps: ubarnmaps,
       rmaps: rbarnmaps,
@@ -35,10 +35,9 @@ module.exports = {
       ckeys,
       rkeys,
       ekeys,
-      dkeys,
       bank,
       banklimit,
-      noto: notoriety,
+      notofall: notoriety,
       wheelspins,
       swheelspins,
     } = profile;
@@ -53,7 +52,7 @@ module.exports = {
           ${emotes.cash} Z Cash: ${toCurrency(cash)}\n
           ${emotes.bank} Bank: ${toCurrency(bank)}/${toCurrency(banklimit)}\n
           ${emotes.gold} Gold: ${gold}\n
-          ${emotes.rp} RP: ${numberWithCommas(rp)}\n
+          ${emotes.rp} RP: ${numberWithCommas(rp2)}\n
           ${emotes.wheelSpin} Wheel spins: ${wheelspins}\n
           ${emotes.superWheel} Super Wheel spins: ${swheelspins}\n
         `
@@ -80,7 +79,6 @@ module.exports = {
               ${emotes.commonKey} Common: ${ckeys}
               ${emotes.rareKey} Rare: ${rkeys}
               ${emotes.exoticKey} Exotic: ${ekeys}
-              ${emotes.dirftKey} Drift: ${dkeys}
             `,
             inline: true,
           },

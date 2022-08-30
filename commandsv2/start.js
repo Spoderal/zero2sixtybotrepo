@@ -19,9 +19,14 @@ module.exports = {
       description:
         "Check out the getting started tutorial on YouTube, Run `/dealer` to buy your first car, and go race with it!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n[YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)",
     });
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({content:`Starting the tutorial, run \`/dealer\` to find and pick your first car! Choose D Class from the selection menu below the message it sends to view the cars.`, embeds: [embed] });
 
     let newuser = await new User({ id: interaction.user.id });
+    newuser.tutorial = {
+      started: true,
+      finished: false,
+      stage: 1
+    }
     newuser.cash += 500;
     newuser.save();
   },

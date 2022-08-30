@@ -10,6 +10,8 @@ const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const cardb = require('../data/cardb.json')
+const partdb = require('../data/partsdb.json')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -77,7 +79,7 @@ module.exports = {
         let isOwner = false;
         if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
-        let rp = newuserdata.rp || 0;
+        let rp = newuserdata.rp2 || 0;
         rparray.push({ rp, user, isOwner });
         newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
@@ -119,7 +121,7 @@ module.exports = {
         new ButtonBuilder()
           .setCustomId("season")
           .setEmoji("💵")
-          .setLabel("Season 1")
+          .setLabel("Season 2")
           .setStyle("Secondary"),
         new ButtonBuilder()
           .setCustomId("stats")
@@ -138,28 +140,38 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
+          let redeemed = userdata.crewseason;
+          let crewseason = require("../data/seasons.json").Seasons.Crew1
 
           collector.on("collect", async (i) => {
             if (i.customId.includes("season")) {
-              let crewseason = require("../data/seasons.json").Seasons.Crew1
+               crewseason = require("../data/seasons.json").Seasons.Crew1
                 .Rewards;
               let reward = [];
+               redeemed = userdata.crewseason;
               for (var w in crewseason) {
                 let item = crewseason[w];
-                let required = item.Number;
+                let  required = item.Number;
                 let emote = "❌";
                 if (required <= crew2.Rank) {
                   emote = "✅";
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
-              embed.setTitle(`Season 1 for ${crew2.crewname}`);
+              embed.setTitle(`Season 2 for ${crew2.name}`);
               embed.fields = [];
               embed.addFields([
                 { name: "Rewards", value: `${reward.join("\n")}` },
               ]);
 
-              await i.update({ embeds: [embed] });
+              row.addComponents(
+                new ButtonBuilder()
+                .setCustomId("claim")
+                .setLabel(`Claim Reward ${redeemed += 1}`)
+                .setStyle(`Success`)
+              )
+
+              await i.update({ embeds: [embed], components: [row] });
             } else if (i.customId.includes("stats")) {
               embed.fields = [];
               embed
@@ -181,6 +193,121 @@ module.exports = {
                 .setColor(colors.blue);
 
               await i.update({ embeds: [embed] });
+            }
+            else if (i.customId.includes("claim")) {
+              let item = crewseason[redeemed]
+              if(item.Number > crew2.Rank) {
+                return;
+                 
+              }
+              console.log(item)
+              if (item.Item.endsWith("Cash")) {
+                let amount = item.Item.split(" ")[0];
+                userdata.cash += Number(amount);
+                userdata.crewseason += 1
+              } else if (item.Item.endsWith("Notoriety")) {
+                let amount = item.Item.split(" ")[0];
+                userdata.notofall += Number(amount);
+                userdata.crewseason += 1
+              } else if (
+                item.Item.endsWith("Legendary Barn Maps") ||
+                item.Item.endsWith("Legendary Barn Map")
+              ) {
+                let amount = item.Item.split(" ")[0];
+                userdata.lmaps += Number(amount);
+                
+                userdata.crewseason += 1
+              } else if (item.Item.endsWith("Bank Increase")) {
+                userdata.items.push("bank increase");
+                
+                userdata.crewseason += 1
+              } else if (
+                item.Item.endsWith("Super wheelspin") ||
+                item.Item.endsWith("Super wheelspins")
+              ) {
+                let amount = item.Item.split(" ")[0];
+                userdata.swheelspins += Number(amount);
+                
+                userdata.crewseason += 1
+              } else if (item.Item.endsWith("Common Keys")) {
+                let amount = item.Item.split(" ")[0];
+                userdata.ckeys += Number(amount);
+                
+                userdata.crewseason += 1
+              } else if (item.Item.endsWith("Drift Keys")) {
+                let amount = item.Item.split(" ")[0];
+                userdata.dkeys += Number(amount);
+                
+                userdata.crewseason += 1
+              } else if (
+                item.Item.endsWith("Garage Space") ||
+                item.Item.endsWith("Garage Spaces")
+              ) {
+                let amount = item.Item.split(" ")[0];
+                userdata.garagelimit += Number(amount);
+        
+                
+                userdata.crewseason += 1
+              } else if (item.Item.endsWith("Rare Keys")) {
+                let amount = item.Item.split(" ")[0];
+                userdata.rkeys += Number(amount);
+                
+                userdata.crewseason += 1
+              } else if (item.Item.endsWith("Exotic Keys")) {
+                let amount = item.Item.split(" ")[0];
+                userdata.ekeys += Number(amount);
+                
+                userdata.crewseason += 1
+              } else if (partdb.Parts[item.Item.toLowerCase()]) {
+             
+        
+                userdata.parts.push(item.Item.toLowerCase());
+                
+                userdata.crewseason += 1
+              } else if(cardb.Cars[item.Item.toLowerCase()]) {
+                let cartogive = cardb.Cars[item.Item.toLowerCase()];
+                let carindb = cartogive;
+                let carobj = {
+                  ID: carindb.alias,
+                  Name: carindb.Name,
+                  Speed: carindb.Speed,
+                  Acceleration: carindb["0-60"],
+                  Handling: carindb.Handling,
+                  Parts: [],
+                  Emote: carindb.Emote,
+                  Livery: carindb.Image,
+                  Miles: 0,
+                };
+                userdata.cars.push(carobj);
+        
+                
+                userdata.crewseason += 1
+        
+              }
+              userdata.save();
+              row = new ActionRowBuilder()
+              .addComponents(
+                new ButtonBuilder()
+                .setCustomId("season")
+                .setEmoji("💵")
+                .setLabel("Season 2")
+                .setStyle("Secondary"),
+              new ButtonBuilder()
+                .setCustomId("stats")
+                .setEmoji("📊")
+                .setLabel("Stats")
+                .setStyle("Secondary"),
+                new ButtonBuilder()
+                .setCustomId("claim")
+                .setLabel(`Claim Reward ${redeemed += 1}`)
+                .setStyle(`Success`)
+              )
+              if(item.Number > crew2.Rank) {
+                row.components[0].setStyle(`Danger`)
+                 
+              }
+        
+              i.update({components: [row]})
             }
           });
         });
@@ -255,7 +382,7 @@ module.exports = {
 
       userdata.crew = crew2[0];
 
-      userdata.rp = 0;
+      userdata.rp2 = 0;
       userdata.joinedcrew = Date.now();
       userdata.save();
 
