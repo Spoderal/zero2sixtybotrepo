@@ -27,7 +27,7 @@ module.exports = {
 
     let seasonrewards = seasons.Seasons.Fall.Rewards;
     let reward = [];
-    let redeemed = userdata.fallrewards;
+    let redeemed = userdata.fallrewards || 1
     let embed
     let page = interaction.options.getString("page");
     for (var i in seasonrewards) {
@@ -197,7 +197,7 @@ module.exports = {
     collector.on('collect', async (i) => {
       if(i.customId.includes("claim")){
          notor = userdata.notofall
-        redeemed = userdata.fallrewards;
+        redeemed = userdata.fallrewards || 1
          rew = redeemed
          item = seasons.Seasons.Fall.Rewards[rew];
         if(item.Required > notor) {
