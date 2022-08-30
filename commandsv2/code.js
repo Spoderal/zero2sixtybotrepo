@@ -53,7 +53,7 @@ module.exports = {
       codesredeemed.push(code);
       userdata.save();
     } else if (codes.Patreon[code]) {
-      let patreontier = userdata.patron;
+      let patreontier = userdata.patron.tier;
 
       if (!patreontier)
         return await interaction.reply(
