@@ -25,16 +25,19 @@ module.exports = {
     let gold;
     if (patron && patron.tier == "1") {
       cash *= 2;
+      gold = 20
     }
     if (patron && patron.tier == "2") {
       cash *= 3;
+      gold = 50
     }
     if (patron && patron.tier == "3") {
       cash *= 5;
+      gold = 100
     }
     if (patron && patron.tier == "4") {
       cash *= 6;
-      gold = patron.gold;
+      gold = 250
     }
     let timeout = 604800000;
     let prestige = userdata.prestige;

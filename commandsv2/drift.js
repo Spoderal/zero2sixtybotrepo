@@ -264,7 +264,6 @@ module.exports = {
 
         break;
     }
-    let notorietyearned = driftscore < 4 ? 5 : driftscore * 5 - time;
 
     let embed = new EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
@@ -390,6 +389,21 @@ module.exports = {
           if (db.fetch(`doublecash`) == true) {
             moneyearned = moneyearned += moneyearned;
             embed.addFields([doubleCashWeekendField]);
+          }
+          if (userdata.patreon && userdata.patreon.tier == 1 || userdata.patreon.tier == 2) {
+            let patronbonus = moneyearned * 1.5
+
+            moneyearned += patronbonus
+          }
+          if (userdata.patreon && userdata.patreon.tier == 3) {
+            let patronbonus = moneyearned * 2
+
+            moneyearned += patronbonus
+          }
+          if (userdata.patreon && userdata.patreon.tier == 4) {
+            let patronbonus = moneyearned * 4
+
+            moneyearned += patronbonus
           }
           embed.addFields([
             {
