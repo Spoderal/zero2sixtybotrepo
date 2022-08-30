@@ -176,7 +176,7 @@ module.exports = {
       )
       
       let notor = userdata.notofall
-      redeemed = userdata.fallrewards;
+      redeemed = userdata.fallrewards || 0;
       let rew = redeemed
       let item = seasons.Seasons.Fall.Rewards[rew];
       if(item.Required > notor) {
