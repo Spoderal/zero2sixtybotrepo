@@ -368,7 +368,7 @@ module.exports = {
           .setLabel("Boost")
           .setStyle("Secondary")
       );
-      msg.edit({ components: [row] });
+      interaction.editReply({ components: [row] });
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
