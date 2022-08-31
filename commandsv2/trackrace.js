@@ -335,7 +335,7 @@ module.exports = {
             moneyearned = moneyearned += moneyearned;
             embed.addFields([doubleCashWeekendField]);
           }
-          if (userdata.patreon && userdata.patreon.tier == 1 || userdata.patreon.tier == 2) {
+          if (userdata.patreon && userdata.patreon.tier == 1 || userdata.patreon && userdata.patreon.tier == 2) {
             let patronbonus = moneyearned * 1.5
 
             moneyearned += patronbonus
