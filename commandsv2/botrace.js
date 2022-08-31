@@ -767,7 +767,7 @@ module.exports = {
           userdata.update()
           earningsresult.push(`+${xpearn} Race XP`);
 
-          let requiredXP = userdata.racerank * 1000;
+          let requiredXP = userdata.racerank * 100;
 
           if (userdata.racexp >= requiredXP) {
             userdata.racerank += 1;
