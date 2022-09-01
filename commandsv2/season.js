@@ -189,51 +189,55 @@ module.exports = {
       if (i.customId.includes("claim")) {
         notor = userdata.notofall;
         redeemed = userdata.fallrewards || 1;
-         rew = redeemed || 1
-         item = seasons.Seasons.Fall.Rewards[rew];
-        if(item.Required > notor) {
-           return i.update({content:`You need ${item.Required} notoriety!`})
+        rew = redeemed || 1;
+        item = seasons.Seasons.Fall.Rewards[rew];
+        if (item.Required > notor) {
+          return i.update({ content: `You need ${item.Required} notoriety!` });
         }
-        if(item.Item.endsWith("Cash")){
-          let amount = Number(item.Item.split(" ")[0])
-          userdata.cash += amount
-          userdata.fallrewards += 1
-        }
-        else if(item.Item.endsWith("Rare Keys")){
-          let amount = Number(item.Item.split(" ")[0])
-          userdata.rkeys += amount
-          userdata.fallrewards += 1
-        }
-        else if(item.Item.endsWith("Exotic Keys")){
-          let amount = Number(item.Item.split(" ")[0])
-          userdata.ekeys += amount
-          userdata.fallrewards += 1
-        }
-        else if(item.Item.endsWith("Barn Map") || item.Item.endsWith("Barn Maps")){
-          let amount = Number(item.Item.split(" ")[0])
-          userdata.cmaps += amount
-          userdata.fallrewards += 1
-        }
-    
-        else if(item.Item.endsWith("Legendary Barn Map") || item.Item.endsWith("Legendary Barn Maps")){
-          let amount = Number(item.Item.split(" ")[0])
-          userdata.lmaps += amount
-          userdata.fallrewards += 1
-        }
-
-        else if(item.Item.endsWith("Garage Space" || item.Item.endsWith("Garage Spaces"))){
-          let amount = Number(item.Item.split(" ")[0])
-          parseInt(amount)
-          userdata.garageLimit += amount
-          userdata.fallrewards += 1
-        }
-        else if(item.Item.endsWith("Helmet")){
-          let helm = item.Item.toLowerCase()
-          userdata.pfps.push(helm)
-          userdata.fallrewards += 1
-        }
-        else if(item.Item.endsWith("Bank Increase") || item.Item.endsWith("Bank Increases")){
-          let amount = item.Item.split(" ")[0]
+        if (item.Item.endsWith("Cash")) {
+          let amount = Number(item.Item.split(" ")[0]);
+          userdata.cash += amount;
+          userdata.fallrewards += 1;
+        } else if (item.Item.endsWith("Rare Keys")) {
+          let amount = Number(item.Item.split(" ")[0]);
+          userdata.rkeys += amount;
+          userdata.fallrewards += 1;
+        } else if (item.Item.endsWith("Exotic Keys")) {
+          let amount = Number(item.Item.split(" ")[0]);
+          userdata.ekeys += amount;
+          userdata.fallrewards += 1;
+        } else if (
+          item.Item.endsWith("Barn Map") ||
+          item.Item.endsWith("Barn Maps")
+        ) {
+          let amount = Number(item.Item.split(" ")[0]);
+          userdata.cmaps += amount;
+          userdata.fallrewards += 1;
+        } else if (
+          item.Item.endsWith("Legendary Barn Map") ||
+          item.Item.endsWith("Legendary Barn Maps")
+        ) {
+          let amount = Number(item.Item.split(" ")[0]);
+          userdata.lmaps += amount;
+          userdata.fallrewards += 1;
+        } else if (
+          item.Item.endsWith(
+            "Garage Space" || item.Item.endsWith("Garage Spaces")
+          )
+        ) {
+          let amount = Number(item.Item.split(" ")[0]);
+          parseInt(amount);
+          userdata.garageLimit += amount;
+          userdata.fallrewards += 1;
+        } else if (item.Item.endsWith("Helmet")) {
+          let helm = item.Item.toLowerCase();
+          userdata.pfps.push(helm);
+          userdata.fallrewards += 1;
+        } else if (
+          item.Item.endsWith("Bank Increase") ||
+          item.Item.endsWith("Bank Increases")
+        ) {
+          let amount = item.Item.split(" ")[0];
           let user1newpart = [];
           for (var b = 0; i < amount; b++) user1newpart.push("bank increase");
           for (i in user1newpart) {
@@ -271,11 +275,10 @@ module.exports = {
           userdata.cars.push(carobj);
           userdata.fallrewards += 1;
         }
-        userdata.notofall -= item.Required
-        userdata.save()
-        console.log(item)
-        row = new ActionRowBuilder()
-        .addComponents(
+        userdata.notofall -= item.Required;
+        userdata.save();
+        console.log(item);
+        row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("claim")
             .setLabel(`Claim Reward ${(redeemed += 1)}`)
