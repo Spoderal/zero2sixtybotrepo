@@ -10,6 +10,9 @@
     },
     "CARZCA11": {
       "Reward": 2500
+    },
+    "ILOVEFALL":{
+      "Reward": 10000
     }
   },
   "Patreon": {
@@ -17,9 +20,7 @@
       "Reward": 20,
       "Gold": true
     },
-    "ILOVEFALL":{
-      "Reward": 10000
-    },
+ 
     "GOLDFOREVER2": {
       "Reward": 40,
       "Gold": true
