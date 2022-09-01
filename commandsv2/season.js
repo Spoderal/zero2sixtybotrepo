@@ -281,6 +281,7 @@ module.exports = {
           userdata.cars.push(carobj)
           userdata.fallrewards += 1
         }
+        userdata.notofall -= item.Required
         userdata.save()
         console.log(item)
         row = new ActionRowBuilder()
