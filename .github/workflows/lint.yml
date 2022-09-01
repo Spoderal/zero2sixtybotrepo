@@ -25,6 +25,6 @@ jobs:
         with:
           auto_fix: true
           eslint: true
-          prettier: true
+          # prettier: true
           commit: true
           commit_message: "Automatically fix code style issues with ${linter}"
