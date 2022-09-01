@@ -1,14 +1,10 @@
-const User = require(`./schema/profile-schema`);
-const Global = require(`./schema/global-schema`);
+const User = require(`../../schema/profile-schema`);
+const Global = require(`../../schema/global-schema`);
 
-module.exports = (client) => {
-  client.on("message", async (message) => {
-    if (message.author.bot) return;
+async function updateCrew(interaction) {
 
-    const { member } = message;
-
-    let usredata = await User.findOne({ id: member.id });
-    if (usredata) {
+    let usredata = await User.findOne({ id: interaction.user.id });
+    if (usredata && usredata.crew) {
       let global = (await Global.findOne({})) || new Global({});
 
       let ucrew = usredata.crew;
@@ -60,5 +56,10 @@ module.exports = (client) => {
       console.log("saved")
       global.save();
     }
-  });
-};
+}
+
+
+
+module.exports = {
+    updateCrew,
+  };
