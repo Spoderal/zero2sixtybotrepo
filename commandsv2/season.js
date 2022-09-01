@@ -210,6 +210,7 @@ module.exports = {
         }
         else if(item.Item.endsWith("Rare Keys")){
           let amount = Number(item.Item.split(" ")[0])
+          Number(amount)
           userdata.rkeys += amount
           userdata.fallrewards += 1
         }
@@ -232,8 +233,9 @@ module.exports = {
 
         else if(item.Item.endsWith("Garage Space" || item.Item.endsWith("Garage Spaces"))){
           let amount = Number(item.Item.split(" ")[0])
-          parseInt(amount)
-          userdata.garagelimit += amount
+          console.log(amount)
+          Number(amount)
+          userdata.garageLimit += amount
           userdata.fallrewards += 1
         }
         else if(item.Item.endsWith("Helmet")){
