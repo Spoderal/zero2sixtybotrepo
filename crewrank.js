@@ -54,10 +54,10 @@ module.exports = (client) => {
                 },
               ],
             }
-            );
-          }
+          );
+        }
       }
-      console.log("saved")
+      console.log("saved");
       global.save();
     }
   });
