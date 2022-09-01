@@ -7,9 +7,9 @@ const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const { tipFooterSeasonPages } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const {ActionRowBuilder, ButtonBuilder} = require('discord.js')
-const partdb = require('../data/partsdb.json')
-const cardb = require('../data/cardb.json')
+const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const partdb = require("../data/partsdb.json");
+const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,8 +27,8 @@ module.exports = {
 
     let seasonrewards = seasons.Seasons.Fall.Rewards;
     let reward = [];
-    let redeemed = userdata.fallrewards || 1
-    let embed
+    let redeemed = userdata.fallrewards || 1;
+    let embed;
     let page = interaction.options.getString("page");
     for (var i in seasonrewards) {
       let item = seasonrewards[i];
@@ -52,7 +52,7 @@ module.exports = {
     let seasonxp = db.fetch(`notoriety3_${interaction.user.id}`) || 0;
 
     if (!page || page == "1") {
-       embed = new discord.EmbedBuilder()
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 1 of 10")
         .setDescription(
           `*Ends November 31st 2022*\nClaim rewards with the button below`
@@ -62,7 +62,7 @@ module.exports = {
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
     } else if (page == "2") {
-       embed = new discord.EmbedBuilder()
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 2 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -73,7 +73,7 @@ module.exports = {
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
     } else if (page == "3") {
-       embed = new discord.EmbedBuilder()
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 3 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -84,7 +84,7 @@ module.exports = {
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
     } else if (page == "4") {
-       embed = new discord.EmbedBuilder()
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 4 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -95,7 +95,7 @@ module.exports = {
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
     } else if (page == "5") {
-       embed = new discord.EmbedBuilder()
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 5 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -105,9 +105,8 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
-    }
-    else if (page == "6") {
-       embed = new discord.EmbedBuilder()
+    } else if (page == "6") {
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 6 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -117,9 +116,8 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
-    }
-    else if (page == "7") {
-       embed = new discord.EmbedBuilder()
+    } else if (page == "7") {
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 7 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -129,9 +127,8 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
-    }
-    else if (page == "8") {
-       embed = new discord.EmbedBuilder()
+    } else if (page == "8") {
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 8 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -141,9 +138,8 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
-    }
-    else if (page == "9") {
-       embed = new discord.EmbedBuilder()
+    } else if (page == "9") {
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 9 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -153,9 +149,8 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
-    }
-    else if (page == "10") {
-       embed = new discord.EmbedBuilder()
+    } else if (page == "10") {
+      embed = new discord.EmbedBuilder()
         .setTitle("Fall Season Page 10 of 10")
         .setDescription(
           "*Ends December 1st 2022*\n**Use `/reward [number]` to redeem rewards.**"
@@ -165,27 +160,23 @@ module.exports = {
         .setColor(colors.blue)
         .setThumbnail("https://i.imgur.com/9oPxIib.png")
         .setFooter(tipFooterSeasonPages);
-        
-      }
-      let row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
+    }
+    let row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setCustomId("claim")
-        .setLabel(`Claim Reward ${redeemed += 1}`)
+        .setLabel(`Claim Reward ${(redeemed += 1)}`)
         .setStyle(`Success`)
-      )
-      
-      let notor = userdata.notofall
-      redeemed = userdata.fallrewards || 1;
-      let rew = redeemed || 1
-      let item = seasons.Seasons.Fall.Rewards[rew];
-      if(item.Required > notor) {
-        row.components[0].setStyle(`Danger`)
-         
-      }
+    );
 
-    let msg =  await interaction.reply({ embeds: [embed], components: [row] });
-      
+    let notor = userdata.notofall;
+    redeemed = userdata.fallrewards || 1;
+    let rew = redeemed || 1;
+    let item = seasons.Seasons.Fall.Rewards[rew];
+    if (item.Required > notor) {
+      row.components[0].setStyle(`Danger`);
+    }
+
+    let msg = await interaction.reply({ embeds: [embed], components: [row] });
 
     let filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
@@ -194,9 +185,9 @@ module.exports = {
       filter: filter,
     });
 
-    collector.on('collect', async (i) => {
-      if(i.customId.includes("claim")){
-         notor = userdata.notofall
+    collector.on("collect", async (i) => {
+      if (i.customId.includes("claim")) {
+        notor = userdata.notofall;
         redeemed = userdata.fallrewards || 1;
          rew = redeemed || 1
          item = seasons.Seasons.Fall.Rewards[rew];
@@ -210,7 +201,6 @@ module.exports = {
         }
         else if(item.Item.endsWith("Rare Keys")){
           let amount = Number(item.Item.split(" ")[0])
-          Number(amount)
           userdata.rkeys += amount
           userdata.fallrewards += 1
         }
@@ -233,9 +223,8 @@ module.exports = {
 
         else if(item.Item.endsWith("Garage Space" || item.Item.endsWith("Garage Spaces"))){
           let amount = Number(item.Item.split(" ")[0])
-          console.log(amount)
-          Number(amount)
-          userdata.garageLimit += amount
+          parseInt(amount)
+          userdata.garagelimit += amount
           userdata.fallrewards += 1
         }
         else if(item.Item.endsWith("Helmet")){
@@ -250,22 +239,23 @@ module.exports = {
           for (i in user1newpart) {
             userdata.parts.push("bank increase");
           }
-          userdata.fallrewards += 1
-        }
-        else if(item.Item.endsWith("Big Bank Increase") || item.Item.endsWith("Big Bank Increases")){
-          let amount = item.Item.split(" ")[0]
+          userdata.fallrewards += 1;
+        } else if (
+          item.Item.endsWith("Big Bank Increase") ||
+          item.Item.endsWith("Big Bank Increases")
+        ) {
+          let amount = item.Item.split(" ")[0];
           let user1newpart = [];
-          for (var c = 0; i < amount; c++) user1newpart.push("big bank increase");
+          for (var c = 0; i < amount; c++)
+            user1newpart.push("big bank increase");
           for (i in user1newpart) {
             userdata.parts.push("big bank increase");
           }
-          userdata.fallrewards += 1
-        }
-        else if(partdb.Parts[item.Item.toLowerCase()]){
-          userdata.parts.push(item.Item.toLowerCase())
-          userdata.fallrewards += 1
-        }
-        else if(cardb.Cars[item.Item.toLowerCase()]){
+          userdata.fallrewards += 1;
+        } else if (partdb.Parts[item.Item.toLowerCase()]) {
+          userdata.parts.push(item.Item.toLowerCase());
+          userdata.fallrewards += 1;
+        } else if (cardb.Cars[item.Item.toLowerCase()]) {
           let carindb = cardb.Cars[item.Item.toLowerCase()];
           let carobj = {
             ID: carindb.alias,
@@ -278,25 +268,21 @@ module.exports = {
             Livery: carindb.Image,
             Miles: 0,
           };
-          userdata.cars.push(carobj)
-          userdata.fallrewards += 1
+          userdata.cars.push(carobj);
+          userdata.fallrewards += 1;
         }
-        userdata.notofall -= item.Required
         userdata.save()
         console.log(item)
         row = new ActionRowBuilder()
         .addComponents(
           new ButtonBuilder()
-          .setCustomId("claim")
-          .setLabel(`Claim Reward ${redeemed += 1}`)
-          .setStyle(`Secondary`)
-        )
+            .setCustomId("claim")
+            .setLabel(`Claim Reward ${(redeemed += 1)}`)
+            .setStyle(`Secondary`)
+        );
 
-
-       i.update({embeds: [embed], components: [row]})
+        i.update({ embeds: [embed], components: [row] });
       }
-    })
-
-
+    });
   },
 };

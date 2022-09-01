@@ -33,22 +33,22 @@
       "Starter": true,
       "Class": "D"
     },
-  
-    "2022 ferrari 296":{
-      "alias":"2022 296",
-      "Name":"2022 Ferrari 296",
-      "Emote":"<:ferrari:931011838374727730>",
-      "Speed":200,
 
-      "Price":"0",
-      "sellprice":0,
-      "Engine":"V6",
-      "Image":"https://i.ibb.co/ZVnb6dZ/ferrariii.jpg",
-      "0-60":7.3,
-      "Drift":0,
-      "Handling":500,
-      "Obtained":"Crew Season"
-  },
+    "2022 ferrari 296": {
+      "alias": "2022 296",
+      "Name": "2022 Ferrari 296",
+      "Emote": "<:ferrari:931011838374727730>",
+      "Speed": 200,
+
+      "Price": "0",
+      "sellprice": 0,
+      "Engine": "V6",
+      "Image": "https://i.ibb.co/ZVnb6dZ/ferrariii.jpg",
+      "0-60": 7.3,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Crew Season"
+    },
     "2011 scion tc": {
       "alias": "2011 tc",
       "Name": "2011 Scion TC",

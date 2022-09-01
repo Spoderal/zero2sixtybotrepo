@@ -254,9 +254,9 @@ const Profile = new mongoose.Schema({
     type: Object,
     required: false,
   },
-  tutorial:{
+  tutorial: {
     type: Object,
-    required: false
+    required: false,
   },
   weeklytask: {
     type: Object,
@@ -282,11 +282,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-  bugattiwins:{
+  bugattiwins: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

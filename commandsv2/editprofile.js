@@ -110,7 +110,9 @@ module.exports = {
       for (var i = 0; i < userpfps.length; i++ && userpfps !== ["None"]) {
         actpfp = userpfps[i];
         userhelmets.push(
-          `${pfpdb.Pfps[actpfp.toLowerCase()].Name} ${pfpdb.Pfps[actpfp.toLowerCase()].Emote}`
+          `${pfpdb.Pfps[actpfp.toLowerCase()].Name} ${
+            pfpdb.Pfps[actpfp.toLowerCase()].Emote
+          }`
         );
       }
       userhelmets = lodash.chunk(

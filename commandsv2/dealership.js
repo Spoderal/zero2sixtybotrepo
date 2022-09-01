@@ -9,7 +9,7 @@ const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { toCurrency } = require("../common/utils");
 const { tipFooterPurchaseCar } = require("../common/tips");
-const User = require('../schema/profile-schema')
+const User = require("../schema/profile-schema");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("dealer")
@@ -122,7 +122,7 @@ module.exports = {
           },
         ])
     );
-        let userdata = await User.findOne({id: interaction.user.id})
+    let userdata = await User.findOne({ id: interaction.user.id });
     let embed = new EmbedBuilder()
       .setTitle("Dealership")
       .setThumbnail("https://i.ibb.co/844BRBp/Logo-Makr-3-V9-MQG-1.png")
@@ -156,11 +156,12 @@ module.exports = {
         const collector = msg.createMessageComponentCollector({
           filter,
         });
-        if(userdata.tutorial && userdata.tutorial.stage == 1){
-          console.log("tutorial")
-          interaction.channel.send({content: `Use the \`/buy [car id]\` command to buy your first car! **Example: /buy 2002 mustang**`})
+        if (userdata.tutorial && userdata.tutorial.stage == 1) {
+          console.log("tutorial");
+          interaction.channel.send({
+            content: `Use the \`/buy [car id]\` command to buy your first car! **Example: /buy 2002 mustang**`,
+          });
         }
-
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
@@ -223,9 +224,7 @@ module.exports = {
                 \`${cars.Cars["1999 mitsubishi eclipse"].alias}\`\n
                 ${cars.Cars["2000 toyota corolla levin"].Emote} ${
                   cars.Cars["2000 toyota corolla levin"].Name
-                } : ${toCurrency(
-                  cars.Cars["2000 toyota corolla levin"].Price
-                )}
+                } : ${toCurrency(cars.Cars["2000 toyota corolla levin"].Price)}
                 \`${cars.Cars["2000 toyota corolla levin"].alias}\`\n
                 ${cars.Cars["2009 volkswagen golf gti"].Emote} ${
                   cars.Cars["2009 volkswagen golf gti"].Name
@@ -267,9 +266,7 @@ module.exports = {
                 \`${cars.Cars["2008 nissan 350z"].alias}\`\n
               ${cars.Cars["2014 hyundai genesis coupe"].Emote} ${
                   cars.Cars["2014 hyundai genesis coupe"].Name
-                } : ${toCurrency(
-                  cars.Cars["2014 hyundai genesis coupe"].Price
-                )}
+                } : ${toCurrency(cars.Cars["2014 hyundai genesis coupe"].Price)}
                 \`${cars.Cars["2014 hyundai genesis coupe"].alias}\`\n
               ${cars.Cars["2019 subaru brz"].Emote} ${
                   cars.Cars["2019 subaru brz"].Name
@@ -339,9 +336,7 @@ module.exports = {
                 \`${cars.Cars["2002 mazda rx7 fd"].alias}\`\n
                 ${cars.Cars["1994 mitsubishi 3000gt vr4"].Emote} ${
                   cars.Cars["1994 mitsubishi 3000gt vr4"].Name
-                } : ${toCurrency(
-                  cars.Cars["1994 mitsubishi 3000gt vr4"].Price
-                )}
+                } : ${toCurrency(cars.Cars["1994 mitsubishi 3000gt vr4"].Price)}
                 \`${cars.Cars["1994 mitsubishi 3000gt vr4"].alias}\`\n
                 ${cars.Cars["2009 honda s2000 cr"].Emote} ${
                   cars.Cars["2009 honda s2000 cr"].Name
@@ -425,10 +420,10 @@ module.exports = {
                 \`${cars.Cars["2021 toyota supra"].alias}\`\n**
                 **${cars.Cars["2020 porsche 718 cayman"].Emote} ${
                   cars.Cars["2020 porsche 718 cayman"].Name
-                } : ${toCurrency(
-                  cars.Cars["2020 porsche 718 cayman"].Price
-                )}
-                \`${cars.Cars["2020 porsche 718 cayman"].alias}\`**\n *TRIMS AVAILABLE*
+                } : ${toCurrency(cars.Cars["2020 porsche 718 cayman"].Price)}
+                \`${
+                  cars.Cars["2020 porsche 718 cayman"].alias
+                }\`**\n *TRIMS AVAILABLE*
                 **${cars.Cars["2023 nissan z"].Emote} ${
                   cars.Cars["2023 nissan z"].Name
                 } : ${toCurrency(cars.Cars["2023 nissan z"].Price)}
@@ -489,10 +484,10 @@ module.exports = {
                 \`${cars.Cars["2009 corvette c6"].alias}\`\n**
                 **${cars.Cars["2019 chevy corvette c7"].Emote} ${
                   cars.Cars["2019 chevy corvette c7"].Name
-                } : ${toCurrency(
-                  cars.Cars["2019 chevy corvette c7"].Price
-                )}
-                \`${cars.Cars["2019 chevy corvette c7"].alias}\`\n** *TRIMS AVAILABLE*
+                } : ${toCurrency(cars.Cars["2019 chevy corvette c7"].Price)}
+                \`${
+                  cars.Cars["2019 chevy corvette c7"].alias
+                }\`\n** *TRIMS AVAILABLE*
                 **${cars.Cars["2020 chevy corvette c8"].Emote} ${
                   cars.Cars["2020 chevy corvette c8"].Name
                 } : ${toCurrency(cars.Cars["2020 chevy corvette c8"].Price)}
@@ -579,9 +574,7 @@ module.exports = {
                 \`${cars.Cars["2016 bentley continental gt speed"].alias}\`\n
                 ${cars.Cars["2020 aston martin vantage"].Emote} ${
                   cars.Cars["2020 aston martin vantage"].Name
-                } : ${toCurrency(
-                  cars.Cars["2020 aston martin vantage"].Price
-                )}
+                } : ${toCurrency(cars.Cars["2020 aston martin vantage"].Price)}
                 \`${cars.Cars["2020 aston martin vantage"].alias}\`\n
                 **`
               )
@@ -611,16 +604,14 @@ module.exports = {
                 \`${cars.Cars["2005 pagani zonda f"].alias}\`\n
                 ${cars.Cars["2010 ferrari 458 italia"].Emote} ${
                   cars.Cars["2010 ferrari 458 italia"].Name
-                } : ${toCurrency(
-                  cars.Cars["2010 ferrari 458 italia"].Price
-                )}
+                } : ${toCurrency(cars.Cars["2010 ferrari 458 italia"].Price)}
                 \`${cars.Cars["2010 ferrari 458 italia"].alias}\`\n**
                 **${cars.Cars["2006 lamborghini gallardo"].Emote} ${
                   cars.Cars["2006 lamborghini gallardo"].Name
-                } : ${toCurrency(
-                  cars.Cars["2006 lamborghini gallardo"].Price
-                )}
-                \`${cars.Cars["2006 lamborghini gallardo"].alias}\`** *TRIMS AVAILABLE*\n
+                } : ${toCurrency(cars.Cars["2006 lamborghini gallardo"].Price)}
+                \`${
+                  cars.Cars["2006 lamborghini gallardo"].alias
+                }\`** *TRIMS AVAILABLE*\n
                 `
               )
               .setColor(colors.blue)
@@ -659,9 +650,7 @@ module.exports = {
                 \`${cars.Cars["2021 mclaren 720s"].alias}\`\n
                   ${cars.Cars["2021 ferrari sf90 stradale"].Emote} ${
                   cars.Cars["2021 ferrari sf90 stradale"].Name
-                } : ${toCurrency(
-                  cars.Cars["2021 ferrari sf90 stradale"].Price
-                )}
+                } : ${toCurrency(cars.Cars["2021 ferrari sf90 stradale"].Price)}
                 \`${cars.Cars["2021 ferrari sf90 stradale"].alias}\`\n
                   ${cars.Cars["2017 mercedes amg one"].Emote} ${
                   cars.Cars["2017 mercedes amg one"].Name
@@ -673,9 +662,7 @@ module.exports = {
                 \`${cars.Cars["2008 bugatti veyron"].alias}\`\n
                   ${cars.Cars["2022 aston martin valkyrie"].Emote} ${
                   cars.Cars["2022 aston martin valkyrie"].Name
-                } : ${toCurrency(
-                  cars.Cars["2022 aston martin valkyrie"].Price
-                )}
+                } : ${toCurrency(cars.Cars["2022 aston martin valkyrie"].Price)}
                 \`${cars.Cars["2022 aston martin valkyrie"].alias}\`\n
                   ${cars.Cars["2016 bugatti chiron"].Emote} ${
                   cars.Cars["2016 bugatti chiron"].Name

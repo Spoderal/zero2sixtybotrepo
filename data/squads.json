@@ -1,35 +1,34 @@
 {
-  "Squads":{
-     "flame house":{
-      "Tier":1,
-      "Class":"D",
-      "Cars":[
-          "Jons 1997 Acura Integra",
-          "Jessicas 2005 Hyundai Tiburon",
-          "Troys 1994 Honda Prelude",
-          "Freds 2002 Ford Mustang",
-          "Heathers 2007 Infiniti G35 Coupe"
+  "Squads": {
+    "flame house": {
+      "Tier": 1,
+      "Class": "D",
+      "Cars": [
+        "Jons 1997 Acura Integra",
+        "Jessicas 2005 Hyundai Tiburon",
+        "Troys 1994 Honda Prelude",
+        "Freds 2002 Ford Mustang",
+        "Heathers 2007 Infiniti G35 Coupe"
       ],
-      "Reward":2000,
-      "BigReward":45000,
-      "Icon":"https://i.ibb.co/GTq0FM1/squad-flamehouse.png",
-      "Name":"Flame House"
-     },
-     "x squad":{
-      "Tier":2,
-      "Class":"C",
-      "Cars":[
-          "Pauls 2007 Mitsubishi Evo IX",
-          "Larrys 2002 Mazda RX7 FD",
-          "Ollies 2009 Honda S2000 CR",
-          "Freds 2002 Ford Mustang",
-          "Heathers 2007 Infiniti G35 Coupe"
+      "Reward": 2000,
+      "BigReward": 45000,
+      "Icon": "https://i.ibb.co/GTq0FM1/squad-flamehouse.png",
+      "Name": "Flame House"
+    },
+    "x squad": {
+      "Tier": 2,
+      "Class": "C",
+      "Cars": [
+        "Pauls 2007 Mitsubishi Evo IX",
+        "Larrys 2002 Mazda RX7 FD",
+        "Ollies 2009 Honda S2000 CR",
+        "Freds 2002 Ford Mustang",
+        "Heathers 2007 Infiniti G35 Coupe"
       ],
-      "Reward":4500,
-      "Icon":"https://i.ibb.co/dpgdJzH/squad-xsquad.png",
-      "BigReward":75000,
-      "Name":"X Squad"
-     }
-
+      "Reward": 4500,
+      "Icon": "https://i.ibb.co/dpgdJzH/squad-xsquad.png",
+      "BigReward": 75000,
+      "Name": "X Squad"
+    }
   }
 }

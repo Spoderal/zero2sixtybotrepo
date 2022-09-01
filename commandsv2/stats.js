@@ -278,7 +278,7 @@ module.exports = {
                 name: `Brakes`,
                 value: `${brakesemote} ${brakes.split(" ")[0]}`,
                 inline: true,
-              }
+              },
             ])
 
             .setColor(colors.blue)

@@ -84,7 +84,7 @@ module.exports = {
           embed.setDescription(
             `You won a ${carsdb.Cars[reward].Emote} ${carsdb.Cars[reward].Name}!`
           );
-          let carname = carsdb.Cars[reward].Name
+          let carname = carsdb.Cars[reward].Name;
           embed.setImage(carsdb.Cars[reward].Image);
           embed.addFields([
             { name: `ID`, value: `${carsdb.Cars[reward.toLowerCase()].alias}` },
@@ -94,9 +94,9 @@ module.exports = {
 
           if (filtered[0]) {
             let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice;
-            parseInt(sellprice)
+            parseInt(sellprice);
             userdata.cash += sellprice;
-             interaction.reply(
+            interaction.reply(
               `You already own this car, so you got $${sellprice} instead.`
             );
             return;

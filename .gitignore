@@ -2,4 +2,5 @@ node_modules
 VPS STUFF
 
 .env
-
+.vscode
+zerotosixty.ovpn

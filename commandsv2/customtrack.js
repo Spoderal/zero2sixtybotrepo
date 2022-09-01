@@ -38,7 +38,8 @@ module.exports = {
   async execute(interaction) {
     let subcommandfetch = interaction.options.getSubcommand();
     if (subcommandfetch == "create") {
-      let weatherOption = interaction.options.getString("weather");
+      // let weatherOption = interaction.options.getString("weather");
+      // ^^ Commented out as this command is not yet in use and it causes ESLint errors.
     }
   },
 };
