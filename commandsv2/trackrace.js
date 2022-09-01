@@ -103,7 +103,6 @@ module.exports = {
     let usercarspeed = selected.Speed;
     let handling = selected.Handling;
 
-
     const timeout = userGetPatreonTimeout(userdata);
 
     let racing = cooldowndata.racing;
@@ -129,23 +128,22 @@ module.exports = {
     }
     let time;
     let ticketsearned;
-    let tracklength
-    let xpearn
+    let tracklength;
+    let xpearn;
     switch (track) {
       case "easy": {
         time = 15;
         ticketsearned = 2;
-        tracklength = 100000
-        xpearn = 100
+        tracklength = 100000;
+        xpearn = 100;
         break;
       }
       case "medium": {
         time = 10;
         moneyearned += 300;
-        ticketsearned = 4
-        ;
-        tracklength = 200000
-        xpearn = 250
+        ticketsearned = 4;
+        tracklength = 200000;
+        xpearn = 250;
 
         break;
       }
@@ -153,8 +151,8 @@ module.exports = {
         time = 5;
         moneyearned += 800;
         ticketsearned = 6;
-        tracklength = 300000
-        xpearn = 400
+        tracklength = 300000;
+        xpearn = 400;
 
         break;
       }
@@ -211,13 +209,13 @@ module.exports = {
     let optiontrack = interaction.options.getString("laps");
 
     let formula = usercarspeed * handling;
-    let laps = Number(optiontrack)
+    let laps = Number(optiontrack);
     formula / laps;
 
+    let trackgif =
+      "https://media1.giphy.com/media/xULW8NCU1Fmmm2iAtq/giphy.gif";
 
-    let trackgif = "https://media1.giphy.com/media/xULW8NCU1Fmmm2iAtq/giphy.gif"
-
-    let notorietyearned = handling / time
+    let notorietyearned = handling / time;
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing around the ${track} track for ${laps} laps`)
@@ -314,16 +312,12 @@ module.exports = {
 
       if (time == 0) {
         if (tracklength >= 0) {
-          embed.addFields([
-            { name: "Results", value: `Failed` },
-          ]);
+          embed.addFields([{ name: "Results", value: `Failed` }]);
           embed.setFooter({ text: invisibleSpace });
           interaction.editReply({ embeds: [embed], components: [] });
           if (range && range >= 0) {
             selected.Range -= 1;
           }
-
-
 
           userdata.save();
           clearInterval(x);
@@ -335,22 +329,25 @@ module.exports = {
             moneyearned = moneyearned += moneyearned;
             embed.addFields([doubleCashWeekendField]);
           }
-          if (userdata.patreon && userdata.patreon.tier == 1 || userdata.patreon && userdata.patreon.tier == 2) {
-            let patronbonus = moneyearned * 1.5
+          if (
+            (userdata.patreon && userdata.patreon.tier == 1) ||
+            (userdata.patreon && userdata.patreon.tier == 2)
+          ) {
+            let patronbonus = moneyearned * 1.5;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           if (userdata.patreon && userdata.patreon.tier == 3) {
-            let patronbonus = moneyearned * 2
+            let patronbonus = moneyearned * 2;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           if (userdata.patreon && userdata.patreon.tier == 4) {
-            let patronbonus = moneyearned * 4
+            let patronbonus = moneyearned * 4;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
-          let notorounded = Math.round(notorietyearned)
+          let notorounded = Math.round(notorietyearned);
           embed.addFields([
             {
               name: "Earnings",
@@ -363,7 +360,7 @@ module.exports = {
             },
           ]);
           userdata.racexp += xpearn;
-          userdata.update()
+          userdata.update();
           let requiredXP = userdata.racerank * 1000;
 
           if (userdata.racexp >= requiredXP) {

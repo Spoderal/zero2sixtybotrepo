@@ -167,7 +167,7 @@ module.exports = {
     let ticketsearned;
     // let bankrand;
     let bankinc;
-    let barnmaps
+    let barnmaps;
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
@@ -196,7 +196,7 @@ module.exports = {
         botcar = lodash.sample(bot5cars);
         moneyearned += 600;
         ticketsearned = 5;
-        barnmaps = 1
+        barnmaps = 1;
         break;
       }
       case "6": {
@@ -411,20 +411,23 @@ module.exports = {
 
       if (timer >= 20) {
         if (tracklength > tracklength2) {
-     if (userdata.patreon && userdata.patreon.tier == 1 || userdata.patreon && userdata.patreon.tier == 2) {
-            let patronbonus = moneyearned * 1.5
+          if (
+            (userdata.patreon && userdata.patreon.tier == 1) ||
+            (userdata.patreon && userdata.patreon.tier == 2)
+          ) {
+            let patronbonus = moneyearned * 1.5;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           if (userdata.patreon && userdata.patreon.tier == 3) {
-            let patronbonus = moneyearned * 2
+            let patronbonus = moneyearned * 2;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           if (userdata.patreon && userdata.patreon.tier == 4) {
-            let patronbonus = moneyearned * 4
+            let patronbonus = moneyearned * 4;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           clearInterval(x);
           embed.addFields([{ name: "Results", value: "Won" }]);
@@ -441,9 +444,9 @@ module.exports = {
             earningsresult.push(`Wheel Spin Earned!`);
             userdata.wheelspins += 1;
           }
-          if(barnmaps == 1){
-            earningsresult.push(`1 ${emotes.barnMapRare}`)
-            userdata.rmaps += 1
+          if (barnmaps == 1) {
+            earningsresult.push(`1 ${emotes.barnMapRare}`);
+            userdata.rmaps += 1;
           }
           if (bankinc == 1) {
             let itemdb = require("../data/items.json");

@@ -11,7 +11,6 @@
     "prettier:fix": "prettier --write .",
     "start-basic": "node .",
     "start": "pm2-runtime start index.js --watch",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "mongodb:mac:install": "brew tap mongodb/brew; brew update; brew install mongodb-community@6.0",
     "mongodb:mac:up": "brew services start mongodb-community@6.0",
     "mongodb:mac:log": "tail -f /usr/local/var/log/mongodb/mongo.log",
@@ -44,7 +43,7 @@
     "trello-node-api": "^0.0.9"
   },
   "devDependencies": {
-    "eslint": "^8.21.0",
+    "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1"

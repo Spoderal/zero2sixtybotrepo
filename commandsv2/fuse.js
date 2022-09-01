@@ -26,9 +26,9 @@ module.exports = {
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
           { name: "Bodykit", value: "bodykit" },
-          {name: "Brakes", value: "brakes"},
+          { name: "Brakes", value: "brakes" },
           { name: "TXExhaust", value: "txexhaust" },
-          {name: "TXIntake", value: "txintake"}
+          { name: "TXIntake", value: "txintake" }
         )
         .setRequired(true)
     ),
@@ -61,7 +61,7 @@ module.exports = {
       "spoiler",
       "txexhaust",
       "txintake",
-      "bodykit"
+      "bodykit",
     ];
 
     if (!list3.includes(parttoinstall.toLowerCase()))
@@ -110,8 +110,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    }
-    else  if (parttoinstall == "txintake") {
+    } else if (parttoinstall == "txintake") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -152,9 +151,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } 
-    
-    else {
+    } else {
       let parte = "";
       let partb = "";
       if (parttoinstall == "tires") {
@@ -190,12 +187,10 @@ module.exports = {
       } else if (parttoinstall == "spoiler") {
         parte = "t4spoiler";
         partb = "t5spoiler";
-      }
-      else if (parttoinstall == "brakes") {
+      } else if (parttoinstall == "brakes") {
         parte = "t4brakes";
         partb = "t5brakes";
-      }
-      else if (parttoinstall == "bodykit") {
+      } else if (parttoinstall == "bodykit") {
         parte = "t4bodykit";
         partb = "t5bodykit";
       }

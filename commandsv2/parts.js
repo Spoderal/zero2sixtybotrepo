@@ -76,7 +76,7 @@ module.exports = {
             label: "Brakes",
             description: "Select this for the list of brake options",
             value: "brakes_option",
-            emoji: "<:t1brakes:1011360668533919774>"
+            emoji: "<:t1brakes:1011360668533919774>",
           },
           {
             label: "Extras",
@@ -409,8 +409,7 @@ module.exports = {
                 .setColor(colors.blue)
                 .setThumbnail("https://i.ibb.co/ctkwJ64/clutch1.png");
               interaction.editReply({ embeds: [embed2], components: [row] });
-            }
-            else if (value === "brakes_option") {
+            } else if (value === "brakes_option") {
               let embed2;
               embed2 = new EmbedBuilder()
                 .setTitle("Brakes")

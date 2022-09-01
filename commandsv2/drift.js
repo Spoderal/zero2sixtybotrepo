@@ -135,7 +135,7 @@ module.exports = {
     let requiredrank = drifttraining * 150;
     let time;
     let ticketsearned;
-    let xpearn
+    let xpearn;
     switch (track) {
       case "easy": {
         time = 15;
@@ -231,8 +231,7 @@ module.exports = {
     switch (optiontrack) {
       case "regular":
         tracklength = 9000;
-        
-      
+
         trackname = "Regular";
         trackgifs = [
           "https://media1.giphy.com/media/o6S51npJYQM48/giphy.gif",
@@ -242,7 +241,7 @@ module.exports = {
         break;
       case "mountain":
         tracklength = 10000;
-        
+
         xpearn += 50;
         trackname = "Mountains";
         trackgifs = [
@@ -254,7 +253,7 @@ module.exports = {
         break;
       case "parking":
         tracklength = 15000;
-        xpearn += 100
+        xpearn += 100;
         trackname = "Parking Lot";
         trackgifs = [
           "https://i.gifer.com/7azI.gif",
@@ -390,20 +389,23 @@ module.exports = {
             moneyearned = moneyearned += moneyearned;
             embed.addFields([doubleCashWeekendField]);
           }
-          if (userdata.patreon && userdata.patreon.tier == 1 || userdata.patreon && userdata.patreon.tier == 2) {
-            let patronbonus = moneyearned * 1.5
+          if (
+            (userdata.patreon && userdata.patreon.tier == 1) ||
+            (userdata.patreon && userdata.patreon.tier == 2)
+          ) {
+            let patronbonus = moneyearned * 1.5;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           if (userdata.patreon && userdata.patreon.tier == 3) {
-            let patronbonus = moneyearned * 2
+            let patronbonus = moneyearned * 2;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           if (userdata.patreon && userdata.patreon.tier == 4) {
-            let patronbonus = moneyearned * 4
+            let patronbonus = moneyearned * 4;
 
-            moneyearned += patronbonus
+            moneyearned += patronbonus;
           }
           embed.addFields([
             {
@@ -424,10 +426,10 @@ module.exports = {
           userdata.rp2 += ticketsearned;
 
           userdata.driftxp += xpearn;
-          userdata.update()
+          userdata.update();
 
           let driftxp = userdata.driftxp;
-          console.log(requiredrank)
+          console.log(requiredrank);
           if (driftxp >= requiredrank) {
             if (userdata.driftrank < 50) {
               userdata.driftrank += 1;

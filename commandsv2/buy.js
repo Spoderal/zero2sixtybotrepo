@@ -51,22 +51,26 @@ module.exports = {
     const carsList = cars.Cars;
     const partsList = parts.Parts;
     const itemsList = items;
-    let carrarray = []
-    for(let car1 in carsList){
-      let caroj = carsList[car1]
-      carrarray.push(caroj)
+    let carrarray = [];
+    for (let car1 in carsList) {
+      let caroj = carsList[car1];
+      carrarray.push(caroj);
+    }
 
+    let boughtCar =
+      carrarray.filter((car) => car.alias == bought.toLowerCase()) || "NO ID";
+    console.log(boughtCar);
+    if (
+      (boughtCar.length == 0 && !boughtCar[0]) ||
+      (boughtCar == [] && !boughtCar[0])
+    ) {
+      boughtCar = carrarray.filter(
+        (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
+      );
     }
-     
-    let boughtCar = carrarray.filter((car) => car.alias == bought.toLowerCase()) || 'NO ID'
-    console.log(boughtCar)
-    if(boughtCar.length == 0 && !boughtCar[0] || boughtCar == [] && !boughtCar[0]){
-      boughtCar = carrarray.filter((car2) => car2.Name.toLowerCase() == bought.toLowerCase()) 
-    }
-    boughtCar = boughtCar[0]
-  
- 
-      console.log(boughtCar)
+    boughtCar = boughtCar[0];
+
+    console.log(boughtCar);
     const boughtPart = partsList[bought];
     const boughtHouse = houses[bought];
     const boughtWarehouse = warehousedb[bought];
@@ -209,8 +213,10 @@ module.exports = {
 
           if (cash < disccarprice)
             return await interaction.reply(`You can't afford this car!`);
-            let filteredcar = carsList.filter((car) => car.ID == bought.toLowerCase());
-            let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
+          let filteredcar = carsList.filter(
+            (car) => car.ID == bought.toLowerCase()
+          );
+          let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
           cash -= disccarprice;
           let idtoset = boughtCar.alias;
           let carobj = {
@@ -257,13 +263,17 @@ module.exports = {
 
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
-            let filteredcar = carrarray.filter((car) => car.alias == bought.toLowerCase()) || 'NO ID'
-            console.log(boughtCar)
-            if(filteredcar.length == 0 || filteredcar == []){
-              filteredcar = carrarray.filter((car2) => car2.Name.toLowerCase() == bought.toLowerCase()) 
-            }
-            
-            let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
+          let filteredcar =
+            carrarray.filter((car) => car.alias == bought.toLowerCase()) ||
+            "NO ID";
+          console.log(boughtCar);
+          if (filteredcar.length == 0 || filteredcar == []) {
+            filteredcar = carrarray.filter(
+              (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
+            );
+          }
+
+          let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
           cash -= boughtCarPrice;
           let idtoset = filteredcar[0].alias;
           let carobj = {
@@ -311,12 +321,13 @@ module.exports = {
             .setThumbnail(`${boughtCar.Image}`);
 
           await interaction.reply({ embeds: [embed] });
-          if(userdata.tutorial && userdata.tutorial.stage == 1){
-            console.log("tutorial")
-            interaction.channel.send({content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/botrace tier 1 ${idtoset}\``})
-            userdata.tutorial.stage += 1
+          if (userdata.tutorial && userdata.tutorial.stage == 1) {
+            console.log("tutorial");
+            interaction.channel.send({
+              content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/botrace tier 1 ${idtoset}\``,
+            });
+            userdata.tutorial.stage += 1;
           }
-  
         }
       }
     } else if (boughtPart) {

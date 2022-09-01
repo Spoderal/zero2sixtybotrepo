@@ -88,9 +88,7 @@ module.exports = {
     let randomstatuses = [
       `🍂 FALL 🍂  /season`,
       `⬆️ BIG UPDATE 8/22`,
-      `Watching ${numberWithCommas(
-        client.guilds.cache.size
-      )} servers race`,
+      `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
     ];
     if (db.fetch(`doublecash`) == true) {
       randomstatuses.push(`💵 DOUBLE CASH WEEKEND 💵`);

@@ -11,7 +11,7 @@
     "CARZCA11": {
       "Reward": 2500
     },
-    "ILOVEFALL":{
+    "ILOVEFALL": {
       "Reward": 10000
     }
   },
@@ -20,7 +20,7 @@
       "Reward": 20,
       "Gold": true
     },
- 
+
     "GOLDFOREVER2": {
       "Reward": 40,
       "Gold": true

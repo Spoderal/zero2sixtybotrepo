@@ -98,10 +98,10 @@ module.exports = {
           },
           {
             label: "trackrace",
-            description:"Information about the track race",
-            value:"track",
-            customId:"track"
-          }
+            description: "Information about the track race",
+            value: "track",
+            customId: "track",
+          },
         ])
     );
 
@@ -395,12 +395,13 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
-          else if (value === "track") {
+          } else if (value === "track") {
             embed.fields = [];
             embed.setTitle("Track Race");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Take your car to the track and test its limits!`);
+            embed.setDescription(
+              `Take your car to the track and test its limits!`
+            );
             embed.addFields([
               {
                 name: `Easy`,
