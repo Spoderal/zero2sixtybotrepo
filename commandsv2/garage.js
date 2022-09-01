@@ -242,9 +242,11 @@ module.exports = {
             10
           );
           let newuserparts = [];
-          for (let p in actuserparts) {
-            let part2 = actuserparts[0][p];
-          }
+          // for (let p in actuserparts) {
+          //   let part2 = actuserparts[0][p];
+          // }
+          // Caused ESLint Errors and was not in use. Leaving code here incase it's needed later on however will leave commented out for now.
+          // Feel free to remove if unneeded.
           var list = actuserparts[0];
 
           var quantities = list.reduce(function (obj, n) {
@@ -288,9 +290,11 @@ module.exports = {
             10
           );
           let newuserparts = [];
-          for (let p in actuserparts) {
-            let part2 = actuserparts[0][p];
-          }
+          // for (let p in actuserparts) {
+          //   let part2 = actuserparts[0][p];
+          // }
+          // Caused ESLint Errors and was not in use. Leaving code here incase it's needed later on however will leave commented out for now.
+          // Feel free to remove if unneeded.
           list = actuserparts[0];
 
           quantities = list.reduce(function (obj, n) {
@@ -334,9 +338,11 @@ module.exports = {
             10
           );
           let newuserparts = [];
-          for (let p in actuserparts) {
-            let part2 = actuserparts[0][p];
-          }
+          // for (let p in actuserparts) {
+          //   let part2 = actuserparts[0][p];
+          // }
+          // Caused ESLint Errors and was not in use. Leaving code here incase it's needed later on however will leave commented out for now.
+          // Feel free to remove if unneeded.
           list = actuserparts[0];
 
           quantities = list.reduce(function (obj, n) {
@@ -381,9 +387,11 @@ module.exports = {
             10
           );
           let newuserparts = [];
-          for (let p in actuserparts) {
-            let part2 = actuserparts[0][p];
-          }
+          // for (let p in actuserparts) {
+          //   let part2 = actuserparts[0][p];
+          // }
+          // Caused ESLint Errors and was not in use. Leaving code here incase it's needed later on however will leave commented out for now.
+          // Feel free to remove if unneeded.
           list = actuserparts[0];
 
           quantities = list.reduce(function (obj, n) {
@@ -426,10 +434,12 @@ module.exports = {
             actuserparts.map((a) => `${a}`),
             10
           );
-          let newuserparts = [];
-          for (let p in actuserparts) {
-            let part2 = actuserparts[0][p];
-          }
+          // let newuserparts = [];
+          // for (let p in actuserparts) {
+          //   let part2 = actuserparts[0][p];
+          // }
+          // Caused ESLint Errors and was not in use. Leaving code here incase it's needed later on however will leave commented out for now.
+          // Feel free to remove if unneeded.
           list = actuserparts[0];
 
           quantities = list.reduce(function (obj, n) {
