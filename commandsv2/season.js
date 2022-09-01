@@ -224,7 +224,7 @@ module.exports = {
         else if(item.Item.endsWith("Garage Space" || item.Item.endsWith("Garage Spaces"))){
           let amount = Number(item.Item.split(" ")[0])
           parseInt(amount)
-          userdata.garagelimit += amount
+          userdata.garageLimit += amount
           userdata.fallrewards += 1
         }
         else if(item.Item.endsWith("Helmet")){
@@ -271,6 +271,7 @@ module.exports = {
           userdata.cars.push(carobj);
           userdata.fallrewards += 1;
         }
+        userdata.notofall -= item.Required
         userdata.save()
         console.log(item)
         row = new ActionRowBuilder()
