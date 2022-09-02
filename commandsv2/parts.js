@@ -305,6 +305,15 @@ module.exports = {
                   ${parts.Parts["t3racesuspension"].Emote}  ${
                     parts.Parts["t3racesuspension"].Name
                   } : ${toCurrency(parts.Parts["t3racesuspension"].Price)}\n
+                  ${parts.Parts["racesprings"].Emote}  ${
+                    parts.Parts["racesprings"].Name
+                  } : ${toCurrency(parts.Parts["racesprings"].Price)}\n
+                  ${parts.Parts["driftsprings"].Emote}  ${
+                    parts.Parts["driftsprings"].Name
+                  } : ${toCurrency(parts.Parts["driftsprings"].Price)}\n
+                  ${parts.Parts["tracksprings"].Emote}  ${
+                    parts.Parts["tracksprings"].Name
+                  } : ${toCurrency(parts.Parts["tracksprings"].Price)}\n
                   **`
                 )
                 .setColor(colors.blue)
