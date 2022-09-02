@@ -2,7 +2,6 @@ const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
 
-
 module.exports = {
   name: "interactionCreate",
   once: false,
@@ -31,7 +30,7 @@ module.exports = {
         const petExecutionTimeName = "Pet update time";
         console.time(petExecutionTimeName);
         await updatePetOnCommands(interaction);
-        await updateCrew(interaction)
+        await updateCrew(interaction);
         console.timeEnd(petExecutionTimeName);
       }
     } catch (error) {
