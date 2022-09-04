@@ -218,8 +218,8 @@ module.exports = {
         embed.addFields([
           {
             name: `${user2.username}'s Offer`,
-            value: `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading2.toLowerCase()].Name
+            value: `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
+              itemdb[itemtype][trading2.toLowerCase()].Name
             } x${actamount}`,
           },
         ]);
@@ -433,8 +433,8 @@ module.exports = {
         embed.addFields([
           {
             name: `${user2.username}'s Offer`,
-            value: `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
-              itemdb[itemtype][0][trading2.toLowerCase()].Name
+            value: `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
+              itemdb[itemtype][trading2.toLowerCase()].Name
             } x${actamount}`,
           },
         ]);
@@ -989,8 +989,8 @@ module.exports = {
           embed.addFields([
             {
               name: `${user2.username}'s Offer`,
-              value: `${itemdb[itemtype][0][trading2.toLowerCase()].Emote} ${
-                itemdb[itemtype][0][trading2.toLowerCase()].Name
+              value: `${itemdb[itemtype][trading2.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading2.toLowerCase()].Name
               } x${actamount}`,
             },
           ]);
@@ -1225,8 +1225,8 @@ module.exports = {
           embed.addFields([
             {
               name: `Your Offer`,
-              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-                itemdb[itemtype][0][trading.toLowerCase()].Name
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
               } x${actamount1}`,
             },
           ]);
@@ -1319,8 +1319,8 @@ module.exports = {
           embed.addFields([
             {
               name: `Your Offer`,
-              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-                itemdb[itemtype][0][trading.toLowerCase()].Name
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
               } x${actamount1}`,
             },
           ]);
@@ -1429,8 +1429,8 @@ module.exports = {
           embed.addFields([
             {
               name: `Your Offer`,
-              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-                itemdb[itemtype][0][trading.toLowerCase()].Name
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
               } x${actamount1}`,
             },
           ]);
@@ -1535,8 +1535,8 @@ module.exports = {
           embed.addFields([
             {
               name: `Your Offer`,
-              value: `${itemdb[itemtype][0][trading.toLowerCase()].Emote} ${
-                itemdb[itemtype][0][trading.toLowerCase()].Name
+              value: `${itemdb[itemtype][trading.toLowerCase()].Emote} ${
+                itemdb[itemtype][trading.toLowerCase()].Name
               } x${actamount1}`,
             },
           ]);
