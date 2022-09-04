@@ -200,7 +200,7 @@ module.exports = {
           userdata.fallrewards += 1;
         } else if (item.Item.endsWith("Rare Keys")) {
           let amount = Number(item.Item.split(" ")[0]);
-          console.log(amount)
+          console.log(amount);
           userdata.rkeys += amount;
           userdata.fallrewards += 1;
         } else if (item.Item.endsWith("Exotic Keys")) {
