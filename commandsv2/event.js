@@ -24,21 +24,13 @@ module.exports = {
             value: "spring_event",
             customId: "spring",
             emoji: "🍂",
-          },
-          {
-            label: "End of an Era",
-            description: "Information for the End of an Era Event",
-            value: "event_2",
-            customId: "event_2",
-            emoji: "<:bugatti:931012624110460979>",
-          },
+          }
         ])
     );
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let bwins = userdata.bugattiwins || 0;
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -94,28 +86,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "event_2") {
-            embed.setTitle("End of an Era");
-            embed.setFooter({ text: `Your wins: ${bwins}` });
-            embed.setDescription(`The Bugatii W16 is one of the most well known engines. However, all good things must come to an end...
-
-            Bugatti announced that the Mistral will be the last car with its famous W16 engine. So in honor of that, we thought we'd do an event for them!
-
-            Use Bugatti cars on any tier 6 track of your choice to earn points towards the event reward, the 2024 Bugatti Mistral. Win 1K tier 6 races in the bugatti of your choice to earn this limited time car.
-
-            It'll never be obtainable again after September 15th 2022.
-                  `);
-            embed.setThumbnail(
-              "https://www.topgear.com/sites/default/files/2022/08/04%20BUGATTI_Roadster_launch-set_dynamic.jpg"
-            );
-            embed.setImage();
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          }
+          } 
         });
       });
   },
