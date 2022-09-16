@@ -24,13 +24,12 @@ module.exports = {
             value: "spring_event",
             customId: "spring",
             emoji: "🍂",
-          }
+          },
         ])
     );
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -86,7 +85,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
+          }
         });
       });
   },

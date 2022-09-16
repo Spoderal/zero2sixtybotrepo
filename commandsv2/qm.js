@@ -444,7 +444,7 @@ module.exports = {
             earnings.push(`${ekeysearned} ${ekemote} keys`);
             userdata.ekeys += ekeysearned;
           }
-      
+
           embed.addFields([
             { name: "Earnings", value: `${earnings.join("\n")}` },
           ]);

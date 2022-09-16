@@ -781,11 +781,6 @@ module.exports = {
             );
           }
 
-
-
-         
-          
-
           embed.addFields([
             {
               name: "Earnings",

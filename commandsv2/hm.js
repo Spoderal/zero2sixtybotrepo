@@ -456,7 +456,6 @@ module.exports = {
 
             userdata.items.push("bank increase");
           }
-  
 
           embed.addFields([
             {
