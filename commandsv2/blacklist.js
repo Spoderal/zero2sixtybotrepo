@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { userGetFromInteraction, blacklistCheck } = require("../common/user");
 const { EmbedBuilder } = require("discord.js");
-const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()

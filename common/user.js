@@ -1,6 +1,5 @@
 const User = require("../schema/profile-schema");
 const { EmbedBuilder } = require("discord.js");
-const colors = require("../common/colors");
 
 function userGetPatreonTimeout(userdata) {
   if (userdata.patron && userdata.patron.tier == 1) return 30000;
@@ -48,7 +47,7 @@ async function blacklistInteractionCheck(userdata, interaction) {
   return 0;
 }
 
-async function blacklistCheck(userdata, interaction) {
+async function blacklistCheck(userdata) {
   let user = await userFindOrCreateInDB(userdata);
   if (user.blacklist) {
     return {

@@ -30,6 +30,7 @@ module.exports = {
         const userdata = userGetFromInteraction(interaction);
         let blacklist = await blacklistInteractionCheck(userdata, interaction);
         if (blacklist == 1) {
+          console.log("A blacklisted user tried to use the bot!")
         } else {
           await command.execute(interaction);
           console.timeEnd(commandExecutionTimeName);
