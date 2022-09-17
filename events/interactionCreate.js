@@ -1,7 +1,10 @@
 const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
-const { blacklistInteractionCheck, userGetFromInteraction } = require("../common/user")
+const {
+  blacklistInteractionCheck,
+  userGetFromInteraction,
+} = require("../common/user");
 
 module.exports = {
   name: "interactionCreate",
@@ -12,17 +15,11 @@ module.exports = {
     let user = interaction.user;
     let guild = interaction.guild;
 
-
-      
-
-
-
     try {
       if (interaction.isSelectMenu()) {
         await interaction.deferUpdate();
       }
       if (interaction.isChatInputCommand()) {
-        
         command = interaction.client.commands.get(interaction.commandName);
 
         if (!command) return;
@@ -31,11 +28,9 @@ module.exports = {
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
         console.time(commandExecutionTimeName);
         const userdata = userGetFromInteraction(interaction);
-        let blacklist = await blacklistInteractionCheck(userdata, interaction)
-        if (blacklist == 1){
-
-        }
-        else{
+        let blacklist = await blacklistInteractionCheck(userdata, interaction);
+        if (blacklist == 1) {
+        } else {
           await command.execute(interaction);
           console.timeEnd(commandExecutionTimeName);
         }

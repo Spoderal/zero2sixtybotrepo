@@ -1,5 +1,5 @@
 const User = require("../schema/profile-schema");
-const { EmbedBuilder } = require('discord.js')
+const { EmbedBuilder } = require("discord.js");
 const colors = require("../common/colors");
 
 function userGetPatreonTimeout(userdata) {
@@ -22,39 +22,44 @@ async function userFindOrCreateInDB(user) {
 }
 
 async function blacklistInteractionCheck(userdata, interaction) {
-  let user = await userFindOrCreateInDB(userdata)
+  let user = await userFindOrCreateInDB(userdata);
   if (user.blacklist) {
-
     const blacklistEmbed = new EmbedBuilder()
-    .setColor(0x0099FF)
-    .setTitle(`You have been __**blacklisted**__ from the bot.`)
-    .addFields(
-      { name: 'Reason:', value: user.blacklist.reason },
-      { name: 'Staff', value: user.blacklist.blacklister},
-      { name: 'Appeal', value: "You can apply here: https://discord.gg/quhZW95DYx"}
-    )
-    .setTimestamp()
-    .setFooter({ text: 'Zero2Sixty', iconURL: 'https://cdn.discordapp.com/avatars/932455367777067079/4f3488204b720ae817770ed61ab6226a.png?size=4096' });
-  
-  await interaction.reply({ embeds: [blacklistEmbed], ephemeral: 1 });
+      .setColor(0x0099ff)
+      .setTitle(`You have been __**blacklisted**__ from the bot.`)
+      .addFields(
+        { name: "Reason:", value: user.blacklist.reason },
+        { name: "Staff", value: user.blacklist.blacklister },
+        {
+          name: "Appeal",
+          value: "You can apply here: https://discord.gg/quhZW95DYx",
+        }
+      )
+      .setTimestamp()
+      .setFooter({
+        text: "Zero2Sixty",
+        iconURL:
+          "https://cdn.discordapp.com/avatars/932455367777067079/4f3488204b720ae817770ed61ab6226a.png?size=4096",
+      });
+
+    await interaction.reply({ embeds: [blacklistEmbed], ephemeral: 1 });
     return 1;
   }
   return 0;
 }
 
 async function blacklistCheck(userdata, interaction) {
-  let user = await userFindOrCreateInDB(userdata)
+  let user = await userFindOrCreateInDB(userdata);
   if (user.blacklist) {
-    return({
-      "blacklist": 1,
-      "reason": user.blacklist.reason,
-      "staff": user.blacklist.blacklister
-    })
-  }
-  else{
-    return({
-      "blacklist": 0
-    })
+    return {
+      blacklist: 1,
+      reason: user.blacklist.reason,
+      staff: user.blacklist.blacklister,
+    };
+  } else {
+    return {
+      blacklist: 0,
+    };
   }
 }
 
