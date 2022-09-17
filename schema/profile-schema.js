@@ -287,6 +287,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  blacklist: {
+    type: Object,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);
