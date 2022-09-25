@@ -198,8 +198,7 @@ module.exports = {
           let amount = Number(item.Item.split(" ")[0]);
           userdata.cash += amount;
           userdata.fallrewards += 1;
-        } 
-        else if (item.Item.endsWith("Rare Keys")) {
+        } else if (item.Item.endsWith("Rare Keys")) {
           let amount = Number(item.Item.split(" ")[0]);
           console.log(amount);
           userdata.rkeys += amount;

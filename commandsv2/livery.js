@@ -199,10 +199,10 @@ module.exports = {
         time: 1000 * 30,
       });
       collector.on("collect", async (msg) => {
-        console.log(msg)
+        console.log(msg);
         let attachment = msg.attachments.first();
         let url = attachment ? attachment.url : null;
-        console.log(url)
+        console.log(url);
         let ImageLink;
         if (msg.attachments.size > 0) {
           msg.attachments.forEach((attachment) => {
@@ -227,7 +227,7 @@ module.exports = {
               { name: "ID", value: `${livobj.id}` },
             ])
             .setColor(colors.blue);
-            msg.reply({ embeds: [embed] });
+          msg.reply({ embeds: [embed] });
           let submitchannel =
             interaction.client.channels.cache.get("931078225021521920");
 

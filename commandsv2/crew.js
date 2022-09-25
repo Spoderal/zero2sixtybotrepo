@@ -440,18 +440,21 @@ module.exports = {
         return await interaction.reply(
           "You're the owner! Run `/crew delete` to delete this crew"
         );
-      let row = new ActionRowBuilder()
-      .addComponents(
+      let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-        .setCustomId("confirm")
-        .setStyle("Secondary")
-        .setEmoji('✅'),
+          .setCustomId("confirm")
+          .setStyle("Secondary")
+          .setEmoji("✅"),
         new ButtonBuilder()
-        .setCustomId("cancel")
-        .setStyle("Secondary")
-        .setEmoji('❌')
-      )
-      let msg = await interaction.reply({content:"Are you sure?", components: [row], fetchReply: true});
+          .setCustomId("cancel")
+          .setStyle("Secondary")
+          .setEmoji("❌")
+      );
+      let msg = await interaction.reply({
+        content: "Are you sure?",
+        components: [row],
+        fetchReply: true,
+      });
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
       };
@@ -461,7 +464,6 @@ module.exports = {
       });
 
       collector.on("collect", async (i) => {
- 
         if (i.customId.includes("confirm")) {
           let actcrew = crew;
           let newmem = actcrew.members;
@@ -488,16 +490,15 @@ module.exports = {
             }
           );
           globalModel.save();
-          row.components[0].setDisabled()
-          row.components[1].setDisabled()
-          i.update({components: [row]})
-
+          row.components[0].setDisabled();
+          row.components[1].setDisabled();
+          i.update({ components: [row] });
         } else {
-          row.components[0].setDisabled()
-          row.components[1].setDisabled()
-          i.update({components: [row]})
+          row.components[0].setDisabled();
+          row.components[1].setDisabled();
+          i.update({ components: [row] });
 
-          return
+          return;
         }
       });
     } else if (option == "icon") {
