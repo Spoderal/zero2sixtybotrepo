@@ -11,6 +11,7 @@ const { numberWithCommas } = require("../common/utils");
 const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
+
 const partdb = require("../data/partsdb.json");
 
 module.exports = {
@@ -439,25 +440,32 @@ module.exports = {
         return await interaction.reply(
           "You're the owner! Run `/crew delete` to delete this crew"
         );
-
-      await interaction.reply(
-        "Are you sure? Say `yes` to confirm, and anything else to cancel."
-      );
-      const filter = (m) => {
-        return m.author.id === interaction.user.id;
+      let row = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+        .setCustomId("confirm")
+        .setStyle("Secondary")
+        .setEmoji('✅'),
+        new ButtonBuilder()
+        .setCustomId("cancel")
+        .setStyle("Secondary")
+        .setEmoji('❌')
+      )
+      let msg = await interaction.reply({content:"Are you sure?", components: [row], fetchReply: true});
+      let filter = (btnInt) => {
+        return interaction.user.id === btnInt.user.id;
       };
 
-      let collector = interaction.channel.createMessageCollector({
-        filter,
-        max: 1,
-        time: 1000 * 30,
+      const collector = msg.createMessageComponentCollector({
+        filter: filter,
       });
 
-      collector.on("collect", async (m) => {
-        if (m.content.toLowerCase() == "yes") {
+      collector.on("collect", async (i) => {
+ 
+        if (i.customId.includes("confirm")) {
           let actcrew = crew;
           let newmem = actcrew.members;
-          for (var i = 0; i < 1; i++) newmem.splice(newmem.indexOf(uid), 1);
+          for (var b = 0; i < 1; b++) newmem.splice(newmem.indexOf(uid), 1);
           actcrew.members = newmem;
 
           userdata.crew = null;
@@ -480,10 +488,16 @@ module.exports = {
             }
           );
           globalModel.save();
+          row.components[0].setDisabled()
+          row.components[1].setDisabled()
+          i.update({components: [row]})
 
-          m.react("✅");
         } else {
-          return interaction.channel.send("❌");
+          row.components[0].setDisabled()
+          row.components[1].setDisabled()
+          i.update({components: [row]})
+
+          return
         }
       });
     } else if (option == "icon") {

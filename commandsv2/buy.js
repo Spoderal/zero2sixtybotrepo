@@ -117,6 +117,7 @@ module.exports = {
           Emote: carindb.Emote,
           Livery: carindb.Image,
           Miles: 0,
+          Drift: 0
         };
         if (boughtCar.Range) {
           carobj = {
@@ -175,6 +176,7 @@ module.exports = {
             Emote: boughtCar.Emote,
             Livery: boughtCar.Image,
             Miles: 0,
+            Drift: 0
           };
 
           if (boughtCar.Range) {
@@ -230,6 +232,7 @@ module.exports = {
             Livery: carindb.Image,
             Miles: 0,
             Resale: sellprice,
+            Drift: 0
           };
 
           if (boughtCar.Range) {

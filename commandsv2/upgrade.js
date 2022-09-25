@@ -101,7 +101,9 @@ module.exports = {
     }
     if (partInLocalDB?.AddedDrift > 0) {
       let newspeed = Number(partInLocalDB.AddedDrift);
-      let stat = Number(selected.Drift);
+      let driftam = selected.Drift || 0
+      let stat = Number(driftam);
+      
       selected.Drift = stat += newspeed;
     }
     if (partInLocalDB?.DecreasedDrift > 0) {

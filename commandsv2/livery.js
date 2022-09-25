@@ -196,13 +196,16 @@ module.exports = {
       };
       let collector = interaction.channel.createMessageCollector({
         filter,
-        max: 1,
         time: 1000 * 30,
       });
-      collector.on("collect", async (m) => {
+      collector.on("collect", async (msg) => {
+        console.log(msg)
+        let attachment = msg.attachments.first();
+        let url = attachment ? attachment.url : null;
+        console.log(url)
         let ImageLink;
-        if (m.attachments.size > 0) {
-          m.attachments.forEach((attachment) => {
+        if (msg.attachments.size > 0) {
+          msg.attachments.forEach((attachment) => {
             ImageLink = attachment.url;
           });
 
@@ -224,13 +227,13 @@ module.exports = {
               { name: "ID", value: `${livobj.id}` },
             ])
             .setColor(colors.blue);
-          m.reply({ embeds: [embed] });
+            msg.reply({ embeds: [embed] });
           let submitchannel =
             interaction.client.channels.cache.get("931078225021521920");
 
           submitchannel.send({ embeds: [embed] });
         } else {
-          return m.reply("Specify an image!");
+          return msg.reply("Specify an image!");
         }
       });
     } else if (option == "approve") {
