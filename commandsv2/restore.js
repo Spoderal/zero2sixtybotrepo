@@ -43,7 +43,7 @@ module.exports = {
     let clutch = selected.Clutch;
     let suspension = selected.Suspension;
     let gearbox = selected.Gearbox;
-
+    let uitems = userdata.items || []
     let body = selected.Body;
 
     if (!cars.Cars[car].Junked)
@@ -57,9 +57,10 @@ module.exports = {
       !suspension &&
       !gearbox &&
       !body
+      && !uitems.includes("toolbox")
     )
       return await interaction.reply(
-        `You haven't completed this restoration! Use /upgrade to restore it.`
+        `You haven't completed this restoration! Use /upgrade to restore it, or buy a toolbox from the item shop!`
       );
 
     let carindb = cars.Cars[selected.Name.toLowerCase()].restored;

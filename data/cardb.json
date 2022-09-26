@@ -3124,6 +3124,38 @@
       "Handling": 500,
       "Class": "C"
     },
+    "2016 bmw m6": {
+      "alias": "2016 m6",
+      "Name": "2016 BMW M6",
+      "Emote": "<:bmw:931011550054056007>",
+      "kmh": 201,
+      "Speed": 160,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "4.4 L V8",
+      "Image": "https://images.hgmsites.net/hug/2015-bmw-m6_100494175_h.jpg",
+      "0-60": 11.7,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "C",
+      "Obtained":"Rare Imports"
+    },
+    "2022 ferrari br20": {
+      "alias": "2022 br20",
+      "Name": "2022 Ferrari BR20",
+      "Emote": "<:ferrari:931011838374727730>",
+      "kmh": 201,
+      "Speed": 200,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "V12",
+      "Image": "https://api.ferrari.com/cms/network/medias//resize/618cdd180b034532a45fc7f4-br20covernew1300x730?apikey=9QscUiwr5n0NhOuQb463QEKghPrVlpaF",
+      "0-60": 11.7,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "C",
+      "Obtained":"Exotic Imports"
+    },
     "2018 audi r8": {
       "alias": "2018 r8",
       "Name": "2018 Audi R8",

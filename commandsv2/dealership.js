@@ -769,9 +769,8 @@ module.exports = {
               .setDescription(
                 `
                 Page 1\n
-                **${cars.Cars["2021 lamborghini huracan sto"].Emote} ${cars.Cars["2021 lamborghini huracan sto"].Name} : ${cars.Cars["2021 lamborghini huracan sto"].Obtained}\n
-                ${cars.Cars["2021 lamborghini urus"].Emote} ${cars.Cars["2021 lamborghini urus"].Name} : ${cars.Cars["2021 lamborghini urus"].Obtained}\n
-                ${cars.Cars["2005 maserati mc12"].Emote} ${cars.Cars["2005 maserati mc12"].Name} : ${cars.Cars["2005 maserati mc12"].Obtained}\n**
+                **${cars.Cars["2016 bmw m6"].Emote} ${cars.Cars["2016 bmw m6"].Name} : ${cars.Cars["2016 bmw m6"].Obtained}\n
+                ${cars.Cars["2022 ferrari br20"].Emote} ${cars.Cars["2022 ferrari br20"].Name} : ${cars.Cars["2022 ferrari br20"].Obtained}\n**
                 `
               )
               .setColor(colors.blue)

@@ -36,6 +36,7 @@ module.exports = {
     let items = userdata.items;
     let emote;
     let name;
+    if(itemdb.Other[itemtouse.toLowerCase()].Type == "Non-Usable") return interaction.reply(`Thats not a usable item!`)
     if (!items.includes(itemtouse.toLowerCase()))
       return interaction.reply("You don't have this item!");
     let filtereduser = items.filter(function hasmany(part) {

@@ -6,7 +6,7 @@ const badges = require("../badges");
 const lodash = require("lodash");
 require("dotenv").config();
 const patron = require("../patreon");
-const items = require("../item");
+const {updateItemShop} = require("./itemshop");
 const double = require("../doublecash");
 const db = require("quick.db");
 const mongoose = require("mongoose");
@@ -38,7 +38,6 @@ module.exports = {
     crews(client);
     dailytasks(client);
     patron(client);
-    items(client);
     double(client);
 
     var express = require("express");
@@ -88,6 +87,7 @@ module.exports = {
     let randomstatuses = [
       `🍂 FALL 🍂  /season`,
       `⬆️ BIG UPDATE 8/22`,
+      `👻 HAPPY HALLOWEEN 🎃`,
       `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
     ];
     if (db.fetch(`doublecash`) == true) {
@@ -100,6 +100,8 @@ module.exports = {
       let randomstatus = lodash.sample(randomstatuses);
       client.user.setActivity(randomstatus);
     }, 20000);
+
+      updateItemShop()
 
     try {
       const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

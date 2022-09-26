@@ -25,7 +25,7 @@ module.exports = {
             emoji: "⚙️",
           },
           {
-            label: "8/17/2022",
+            label: "9/26/2022",
             description: "Information for recent small update",
             value: "3_update",
             customId: "up3",
@@ -48,7 +48,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⬆️ Small Update 8/17/2022\n
+            ⬆️ Small Update 9/26/2022\n
             ⚙️ Patch 8/22/2022\n
             🍂 Fall Update 8/30/2022
         `);
@@ -68,7 +68,7 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-          if (value === "1_update") {
+          if (value === "3_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed
@@ -77,20 +77,15 @@ module.exports = {
                 {
                   name: `${emotes.featuresUpdate} Features`,
                   value: `
-                    • Wrench has been fixed\n
-                    • Liveries now accept IDs for installing and removing\n
-                    • Liveries can be removed easily\n
-                    • Turbos now have new emojis\n
-                    • T4 and T5 Turbo **T4Turbo found in super wheel spins only**\n
-                    • Bet race nerfed heavily - 5 hour cooldown, and 35% cash earnings instead of 50%\n
-                    • Super wheel spin cash rewards buffed\n
-                    • Dealership includes a list of import cars\n
-                    • Ferrari Event\n
-                    • Daily tasks fixed
+                    • Toolbox item added\n
+                    • Cashcup bug fixed\n
+                    • Item information in /stats command shows what an item does.\n
+                    • Item shop expanded and fixed\n
+                    • New cars\n
                   `,
                 },
               ])
-              .setFooter({ text: "6/24/2022" })
+              .setFooter({ text: "9/26/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
@@ -121,31 +116,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "3_update") {
-            embed.fields = [];
-            embed.setDescription("\u200b");
-            embed.setTitle(`Small Update`);
-            embed
-              .setDescription(
-                `• New pet: Pretty Porsche\n
-                • Tons of bug fixes\n
-                • Steal command added with a disguise item\n
-                • XP needed decreased to rank * 100\n
-                • Drift revamp\n
-                • Big bank increase added, find them with your pretty porsche, you can use the big bank increases to go past the bank limit!
-                • Bank limit cap fixed, should've been 2 million, but it was 200 million\n
-
-                `
-              )
-              .setFooter({ text: "8/17/2022" })
-              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
-              .setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "4_update") {
+          }  else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Fall Update`);

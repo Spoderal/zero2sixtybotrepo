@@ -8,7 +8,6 @@ const {
   Client,
   GatewayIntentBits,
   Collection,
-  IntentsBitField,
 } = require("discord.js");
 const path = require("path");
 

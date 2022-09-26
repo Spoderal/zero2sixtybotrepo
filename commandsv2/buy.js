@@ -529,12 +529,9 @@ module.exports = {
       itemsList.Multiplier[bought]
     ) {
       let itemshop = global.itemshop;
-      let filtereditem = itemshop.filter(
-        (item) => item.Name.toLowerCase() == bought
-      );
-      let itemindb = filtereditem[0] || "No ID";
+      let itemindb = itemsList.Other[bought]
 
-      if (itemindb == "No ID")
+      if (!itemshop.includes(itemindb.Name))
         return await interaction.reply(
           `That item isn't in the shop today, check back tomorrow!`
         );

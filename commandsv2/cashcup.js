@@ -255,24 +255,7 @@ module.exports = {
         clearInterval(x);
 
         if (tracklength > tracklength2) {
-          if (
-            (userdata.patreon && userdata.patreon.tier == 1) ||
-            userdata.patreon.tier == 2
-          ) {
-            let patronbonus = moneyearned * 1.5;
-
-            moneyearned += patronbonus;
-          }
-          if (userdata.patreon && userdata.patreon.tier == 3) {
-            let patronbonus = moneyearned * 2;
-
-            moneyearned += patronbonus;
-          }
-          if (userdata.patreon && userdata.patreon.tier == 4) {
-            let patronbonus = moneyearned * 4;
-
-            moneyearned += patronbonus;
-          }
+     
           embed.setTitle(`Tier ${newcashcuptier} cash cup race won!`);
           let earningsresult = [];
 
