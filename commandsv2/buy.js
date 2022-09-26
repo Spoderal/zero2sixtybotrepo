@@ -529,7 +529,7 @@ module.exports = {
       itemsList.Multiplier[bought]
     ) {
       let itemshop = global.itemshop;
-      let itemindb = itemsList.Other[bought]
+      let itemindb = itemsList.Other[bought];
 
       if (!itemshop.includes(itemindb.Name))
         return await interaction.reply(

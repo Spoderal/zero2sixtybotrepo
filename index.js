@@ -4,11 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-const {
-  Client,
-  GatewayIntentBits,
-  Collection,
-} = require("discord.js");
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const path = require("path");
 
 const client = new Client({

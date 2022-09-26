@@ -119,7 +119,6 @@ module.exports = {
         .setColor(colors.blue);
 
       let row = new ActionRowBuilder().addComponents(
-
         new ButtonBuilder()
           .setCustomId("stats")
           .setEmoji("📊")
@@ -127,14 +126,14 @@ module.exports = {
           .setStyle("Secondary")
       );
 
-      if(crew && crew.name == crew2.name ){
+      if (crew && crew.name == crew2.name) {
         row.addComponents(
           new ButtonBuilder()
-          .setCustomId("season")
-          .setEmoji("💵")
-          .setLabel("Season 2")
-          .setStyle("Secondary"),
-        )
+            .setCustomId("season")
+            .setEmoji("💵")
+            .setLabel("Season 2")
+            .setStyle("Secondary")
+        );
       }
 
       interaction
