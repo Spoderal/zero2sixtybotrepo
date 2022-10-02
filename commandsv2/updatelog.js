@@ -122,6 +122,8 @@ module.exports = {
                     • Item shop is no longer daily, it shows all items.\n
                     • Super wheel spin removed from item shop.\n
                     • Super wheel spin can be earned from regular wheel spins
+
+                    [Please give feedback here!](https://forms.gle/gebEz2h1jGJzUYsC9)
                   `,
                 },
               ])

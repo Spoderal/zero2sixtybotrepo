@@ -88,6 +88,7 @@ module.exports = {
       `🍂 FALL 🍂  /season`,
       `⬆️ BIG UPDATE 8/22`,
       `👻 HAPPY HALLOWEEN 🎃`,
+      "HUGE OVERHAUL 10/2",
       `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
     ];
     if (db.fetch(`doublecash`) == true) {
