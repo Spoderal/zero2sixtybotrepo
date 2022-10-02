@@ -142,7 +142,7 @@ module.exports = {
           { name: "Earnings", value: `${rewards.join("\n")}` },
         ]);
         interaction.editReply({ embeds: [embed] });
-        userdata.cash += Number(moneyearned);
+        userdata.candy += Number(moneyearned);
         userdata.save();
 
         return;
