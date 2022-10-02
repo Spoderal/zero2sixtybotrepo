@@ -6,7 +6,7 @@ const badges = require("../badges");
 const lodash = require("lodash");
 require("dotenv").config();
 const patron = require("../patreon");
-const {updateItemShop} = require("./itemshop");
+const { updateItemShop } = require("./itemshop");
 const double = require("../doublecash");
 const db = require("quick.db");
 const mongoose = require("mongoose");
@@ -101,7 +101,7 @@ module.exports = {
       client.user.setActivity(randomstatus);
     }, 20000);
 
-      updateItemShop()
+    updateItemShop();
 
     try {
       const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

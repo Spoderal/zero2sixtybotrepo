@@ -3,8 +3,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-const itemsdb = require("../data/items.json")
-const ms = require("pretty-ms")
+const itemsdb = require("../data/items.json");
+const ms = require("pretty-ms");
 
 module.exports = {
   data: new SlashCommandBuilder()

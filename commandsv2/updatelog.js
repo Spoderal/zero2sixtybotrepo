@@ -157,7 +157,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          }  else if (value === "4_update") {
+          } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Fall Update`);

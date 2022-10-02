@@ -134,7 +134,7 @@
       "Type": "Usable",
       "Emote": "<:disguise:1008228542208802816>"
     },
-    "toolbox":{
+    "toolbox": {
       "Price": 25000,
       "Action": "Use this to restore a car automatically",
       "Name": "Toolbox",

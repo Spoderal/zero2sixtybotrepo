@@ -255,7 +255,6 @@ module.exports = {
         clearInterval(x);
 
         if (tracklength > tracklength2) {
-     
           embed.setTitle(`Tier ${newcashcuptier} cash cup race won!`);
           let earningsresult = [];
 

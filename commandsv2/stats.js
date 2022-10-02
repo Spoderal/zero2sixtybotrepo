@@ -8,7 +8,7 @@ const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { toCurrency, blankInlineField } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const itemdb = require("../data/items.json")
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -360,20 +360,21 @@ module.exports = {
         .setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });
-    }
-    else if (subcommandfetch == "car_part" &&
-    itemdb.Other[item.toLowerCase()]){
-      let itemindb = itemdb.Other[item.toLowerCase()]
+    } else if (
+      subcommandfetch == "car_part" &&
+      itemdb.Other[item.toLowerCase()]
+    ) {
+      let itemindb = itemdb.Other[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
-      .setTitle(`Information for ${itemindb.Emote} ${itemindb.Name}`)
-      .setDescription(itemindb.Action)
-      .addFields({
-        name:"Type",
-        value:`${itemindb.Type}`
-      })
-      .setColor(colors.blue);
+        .setTitle(`Information for ${itemindb.Emote} ${itemindb.Name}`)
+        .setDescription(itemindb.Action)
+        .addFields({
+          name: "Type",
+          value: `${itemindb.Type}`,
+        })
+        .setColor(colors.blue);
 
-      interaction.reply({embeds: [embed]})
+      interaction.reply({ embeds: [embed] });
     }
   },
 };
