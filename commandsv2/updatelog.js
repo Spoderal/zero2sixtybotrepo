@@ -39,6 +39,14 @@ module.exports = {
             customId: "up4",
             emoji: "🍂",
           },
+          {
+            label: "10/2/2022",
+            description:
+              "Information for the recent large update, and new season!",
+            value: "5_update",
+            customId: "up5",
+            emoji: "🍬",
+          },
         ])
     );
 
@@ -50,6 +58,7 @@ module.exports = {
             **__Updates__**
             ⬆️ Small Update 9/26/2022\n
             ⚙️ Patch 8/22/2022\n
+            🍬 Halloween Big Update 10/2/2022\n
             🍂 Fall Update 8/30/2022
         `);
 
@@ -93,7 +102,39 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "2_update") {
+      
+          } 
+          else if (value === "5_update") {
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed
+              .setTitle(`Huge Update`)
+              .addFields([
+                {
+                  name: `${emotes.featuresUpdate} Features`,
+                  value: `
+                    • Halloween event! View in \`/events\`\n
+                    • **Squads overhaul, you need to beat a squad before advancing to the next car class, more information in the community server**\n
+                    • Ranks increase every race/drift now\n
+                    • Nothing reward removed from super wheel spin\n
+                    • New cars\n
+                    • New parts\n
+                    • Item shop is no longer daily, it shows all items.\n
+                    • Super wheel spin removed from item shop.\n
+                    • Super wheel spin can be earned from regular wheel spins
+                  `,
+                },
+              ])
+              .setFooter({ text: "10/2/2022" })
+              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+          else if (value === "2_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
 

@@ -25,6 +25,13 @@ module.exports = {
             customId: "spring",
             emoji: "🍂",
           },
+          {
+            label: "Trick or Speed",
+            description: "Information for the Trick or Speed Event",
+            value: "halloween_event",
+            customId: "halloween",
+            emoji: "🍬",
+          },
         ])
     );
 
@@ -37,8 +44,8 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Fall Season 2022 🍂
-          End of an Era <:bugatti:931012624110460979>
+          Fall Season 2022 🍂\n
+          Trick or Speed 🍬
         
       `);
 
@@ -79,6 +86,29 @@ module.exports = {
                   `);
             embed.setThumbnail("https://i.imgur.com/9oPxIib.pngf");
             embed.setImage("https://i.imgur.com/w6t4kOC.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else  if (value === "halloween_event") {
+            embed.setTitle("Trick or Speed");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Its Halloween in Zero City! You know what that means, candy!!!
+
+            Race to get sweets in the new \`/trickortreat\` command! 
+
+            You can also get the brand new Zero Bar! A brand new candy bar that gives some spooky effects!
+
+            Use those candies to get spooky wheel spins and get exclusive cars that are a little...scary!
+
+            **Ends November 1st 2022**
+            
+                  `);
+            embed.setThumbnail("https://i.ibb.co/1RLHhVP/logo-halloween.png");
+            embed.setImage("https://i.ibb.co/yWWWXx9/halloweeeen.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({

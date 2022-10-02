@@ -10,8 +10,8 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("timetrial")
-    .setDescription("Race against the clock")
+    .setName("trickortreat")
+    .setDescription("Get as much candy as you can!")
     .addStringOption((option) =>
       option
         .setName("car")
@@ -21,8 +21,9 @@ module.exports = {
 
   async execute(interaction) {
     const cars = require("../data/cardb.json");
-    let moneyearnedtxt = 300;
-    let moneyearned = 300;
+    let moneyearnedtxt = 50;
+    let moneyearned = 50;
+    let zerobars = 0
     let idtoselect = interaction.options.getString("car");
     let user = interaction.user;
     let userdata = await User.findOne({ id: user.id });
@@ -89,7 +90,7 @@ module.exports = {
     }, 1000);
 
     let embed = new discord.EmbedBuilder()
-      .setTitle("Going around the track...")
+      .setTitle("Trick or treating...")
       .addFields([
         {
           name: `Your ${carInLocalDB.Emote} ${carInLocalDB.Name}`,
@@ -101,7 +102,7 @@ module.exports = {
         },
       ])
       .setColor(colors.blue)
-      .setThumbnail("https://i.ibb.co/Wfk7s36/timer1.png");
+      .setThumbnail("https://i.ibb.co/3fwT2CR/spookyrace.png");
 
     interaction.reply({ embeds: [embed] });
 
@@ -110,25 +111,35 @@ module.exports = {
     if (randomnum == 2) {
       setTimeout(() => {
         embed.setDescription("Great launch!");
-        embed.addFields([{ name: "Bonus", value: "$100" }]);
-        moneyearnedtxt += 100;
-        userdata.cash += 100;
+        embed.addFields([{ name: "Bonus", value: "5 Candy" }]);
+        moneyearnedtxt += 5;
+        userdata.candy += 5;
         interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
 
+    if(randomnum == 3){
+        zerobars = 1
+    }
     let tracklength = 5000 - launchperc;
 
     let x = setInterval(() => {
       tracklength -= hp;
-
+        
       if (tracklength <= 0) {
+        let rewards = []
+        if(zerobars > 0){
+            rewards.push(`<:zerobar:1025128975216947210> ${zerobars}`)
+            userdata.items.push("zero bar")
+        }
+        rewards.push(`🍬 ${moneyearned}`)
+
         moneyearned -= timernum;
         moneyearnedtxt + moneyearned;
         clearInterval(x, timer);
         embed.addFields([
           { name: "Results", value: `Finished in ${timernum}s` },
-          { name: "Earnings", value: `${emotes.cash} $${moneyearned}` },
+          { name: "Earnings", value: `${rewards.join('\n')}` },
         ]);
         interaction.editReply({ embeds: [embed] });
         userdata.cash += Number(moneyearned);

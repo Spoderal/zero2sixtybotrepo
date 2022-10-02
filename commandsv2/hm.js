@@ -440,6 +440,7 @@ module.exports = {
           }
           earningsresult.push(toCurrency(moneyearned));
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
+          
           if (bot == "6" || bot == "7") {
             earningsresult.push(`Wheel Spin Earned!`);
             userdata.wheelspins += 1;
@@ -470,15 +471,10 @@ module.exports = {
           }
 
           userdata.cash += parseInt(moneyearned);
-          userdata.racexp += 25;
-          userdata.cash += parseInt(ticketsearned);
-          if (userdata.racexp >= newrankrequired) {
+          userdata.rp2 += parseInt(ticketsearned);
+          earningsresult.push(`+1Race Rank`);
+
             userdata.racerank += 1;
-            earningsresult.push(
-              `Ranked up your race rank to ${userdata.racerank}`
-            );
-            userdata.racexp = 0;
-          }
 
           userdata.save();
 

@@ -40,9 +40,9 @@ module.exports = {
     const gold = userdata.gold;
     const usercars = userdata.cars;
     const garagelimit = userdata.garageLimit;
-
+    let tier = userdata.tier
     const bought = interaction.options.getString("item").toLowerCase();
-
+    
     if (!bought)
       return await interaction.reply(
         "To use this command, specify the car or part you want to buy. Example: /buy 1995 Mazda Miata"
@@ -264,8 +264,6 @@ module.exports = {
         } else {
           let sellprice = boughtCarPrice * 0.65;
 
-          if (cash < boughtCarPrice)
-            return await interaction.reply("You don't have enough cash!");
           let filteredcar =
             carrarray.filter((car) => car.alias == bought.toLowerCase()) ||
             "NO ID";
@@ -275,8 +273,13 @@ module.exports = {
               (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
             );
           }
-
           let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
+          if(cars.Tiers[carindb.Class].level > tier) return interaction.reply(`Your tier is not high enough! You need to beat the **Tier ${cars.Tiers[carindb.Class].level} Squad** to unlock this car!`)
+
+          if (cash < boughtCarPrice)
+            return await interaction.reply("You don't have enough cash!");
+            
+
           cash -= boughtCarPrice;
           let idtoset = filteredcar[0].alias;
           let carobj = {
@@ -528,13 +531,9 @@ module.exports = {
       itemsList.Other[bought] ||
       itemsList.Multiplier[bought]
     ) {
-      let itemshop = global.itemshop;
       let itemindb = itemsList.Other[bought]
 
-      if (!itemshop.includes(itemindb.Name))
-        return await interaction.reply(
-          `That item isn't in the shop today, check back tomorrow!`
-        );
+      if(itemindb.Price == 0) return interaction.reply("This item isn't purchasable!")
 
       let pricing = parseInt(itemindb.Price) * amount2;
       if (userdata.cash < pricing)

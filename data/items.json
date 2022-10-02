@@ -84,25 +84,34 @@
       "Emote": "<:largevault:995502550855991298>"
     },
     "for sale sign": {
-      "Price": 5000,
+      "Price": 50000,
       "Action": "Use this to sell your house",
       "Name": "For Sale Sign",
       "Type": "Usable",
       "Emote": "<:forsalesign:978883306940674078>"
     },
-    "super wheelspin": {
-      "Price": 250000,
-      "Action": "Use this to spin the super wheel",
-      "Name": "Super Wheelspin",
-      "Type": "Usable",
-      "Emote": "<a:superwheel:985049981482311740>"
-    },
+  
     "energy drink": {
       "Price": 25000,
       "Action": "2x RP for 10 minutes",
       "Name": "Energy Drink",
       "Type": "Usable",
       "Emote": "<:energydrink:982468472787329095>"
+    },
+    "zero bar": {
+      "Price": 0,
+      "Action": "No idea",
+      "Name": "Zero Bar",
+      "Type": "Usable",
+      "Emote": "<:zerobar:1025128975216947210>",
+      "Effects":[
+        "One of your cars just got +1 speed",
+        "One of your cars just got +1 acceleration",
+        "One of your cars just got -20 handling",
+        "You stink, no effect for you",
+        "One of your cars just got +5 speed",
+        "You just got your weekly reward now!"
+      ]
     },
     "sponsor": {
       "Price": 50000,

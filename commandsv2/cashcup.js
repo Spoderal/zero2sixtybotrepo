@@ -261,6 +261,9 @@ module.exports = {
 
           earningsresult.push(`$${moneyearned}`);
           earningsresult.push(`New cash cup tier: ${(newcashcuptier += 1)}`);
+          earningsresult.push(`+1Race Rank`);
+
+          userdata.racerank += 1;
           embed.addFields([
             {
               name: "Earnings",
@@ -281,12 +284,6 @@ module.exports = {
           }
           if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
             selected.Wins += 1;
-          }
-          if (userdata.racexp >= newrankrequired) {
-            userdata.racerank += 1;
-            interaction.channel.send(
-              `${interaction.user}, You just ranked up your race skill to ${userdata.racerank}!`
-            );
           }
           userdata.save();
 

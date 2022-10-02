@@ -12,21 +12,11 @@ module.exports = {
     .setDescription("Check the item shop"),
   async execute(interaction) {
     let global = await Global.findOne();
-    let itemshop = global.itemshop;
-    let timeout = 86400000
-    let itemcooldown = global.itemshopcooldown;
-    let time = ms(timeout - (Date.now() - itemcooldown));
-    if (!itemshop?.length) {
-      await interaction.reply({
-        content: "There are no items in the item shop.",
-      });
-      return;
-    }
 
     let items = [];
-    for (let i in itemshop) {
-      i = itemshop[i]
-      let item = itemsdb.Other[i.toLowerCase()]
+    for (let i in itemsdb.Other) {
+      i = itemsdb.Other[i]
+      let item = i
       console.log(item)
 
       items.push(`${item.Emote} ${item.Name} : **${toCurrency(item.Price)}**`);
@@ -35,7 +25,6 @@ module.exports = {
     let embed = new Discord.EmbedBuilder()
       .setTitle("Daily Item Shop")
       .setDescription(`${items.join("\n\n")}`)
-      .setFooter({text: `New items in ${time}`})
       .setColor(colors.blue);
 
     await interaction.reply({ embeds: [embed] });

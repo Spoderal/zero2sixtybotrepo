@@ -2,8 +2,7 @@ const Discord = require("discord.js");
 const carsdb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
-const wheelspinrewards = require("../data/superwheelspinrewards.json");
-const partsdb = require("../data/partsdb.json");
+const wheelspinrewards = require("../data/spookywheelspin.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
@@ -12,8 +11,8 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("superwheelspin")
-    .setDescription("Spin the super wheel for super prizes!"),
+    .setName("spookywheelspin")
+    .setDescription("Spin the spooky wheel for spooky prizes!"),
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
@@ -22,33 +21,32 @@ module.exports = {
     let cooldowndata =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 
-    let wheelspincool = cooldowndata.swheelspin || 0;
+    let wheelspincool = cooldowndata.spwheelspin || 0;
     let timeout = 5000;
     if (wheelspincool !== null && timeout - (Date.now() - wheelspincool) > 0)
       return await interaction.reply(
         "Please wait 5 seconds before using this command again."
       );
-    let wheelspins = userdata.swheelspins;
-    if (wheelspins <= 0)
-      return await interaction.reply("You're out of super wheel spins!");
-    let items = ["🏎️", "💵", "⚙️"];
+    let wheelspins = userdata.candy;
+    if (wheelspins < 50)
+      return await interaction.reply("Not enough candy! You need 50");
+    let items = ["🏎️", "💵"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
 
-    let parts = wheelspinrewards.Parts;
     let garagespaces = userdata.garagelimit;
 
     let usercars = userdata.cars;
-    userdata.swheelspins -= 1;
+    userdata.candy -= 50;
     userdata.update();
-    cooldowndata.swheelspin = Date.now();
+    cooldowndata.spwheelspin = Date.now();
     cooldowndata.save();
     let embed = new Discord.EmbedBuilder()
-      .setTitle("Super Wheel Spin!")
+      .setTitle("Spooky Wheel Spin!")
       .setDescription(`${item}`)
       .setColor(colors.blue)
-      .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
+      .setThumbnail("https://i.ibb.co/r64PfMQ/spookyspin.png");
     await interaction.reply({ embeds: [embed] });
     setTimeout(() => {
       let item = lodash.sample(items);
@@ -65,13 +63,7 @@ module.exports = {
       embed.setDescription(`${item}`);
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
-        if (item == "⚙️") {
-          let reward = lodash.sample(parts);
-          userdata.parts.push(reward.toLowerCase());
-
-          embed.setDescription(`You won a ${partsdb.Parts[reward].Name}!`);
-          interaction.editReply({ embeds: [embed] });
-        } else if (item == "🏎️") {
+         if (item == "🏎️") {
           let randomnum = lodash.random(20);
           let reward;
           if (randomnum == 2) {
@@ -130,7 +122,10 @@ module.exports = {
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
-        } 
+        } else if (item == "❓") {
+          embed.setDescription(`You won nothing lol`);
+          interaction.editReply({ embeds: [embed] });
+        }
         userdata.save();
       }, 500);
     }, 3000);

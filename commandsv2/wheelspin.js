@@ -31,7 +31,7 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-    let items = ["🏎️", "💵", "⚙️", "🗺️"];
+    let items = ["🏎️", "💵", "⚙️", "🗺️", "🛞"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
@@ -73,7 +73,13 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🏎️") {
+        }
+        else if(item == "🛞"){
+          userdata.cash += 1;
+          embed.setDescription(`You won 1 super wheel spin!`);
+          interaction.editReply({ embeds: [embed] });
+        }
+        else if (item == "🏎️") {
           let randomnum = lodash.random(5);
           let reward;
           if (randomnum == 2) {

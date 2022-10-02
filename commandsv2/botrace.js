@@ -769,17 +769,12 @@ module.exports = {
           userdata.cash += parseInt(moneyearned);
           userdata.racexp += xpearn;
           userdata.update();
-          earningsresult.push(`+${xpearn} Race XP`);
+          earningsresult.push(`+1Race Rank`);
 
-          let requiredXP = userdata.racerank * 100;
-
-          if (userdata.racexp >= requiredXP) {
             userdata.racerank += 1;
-            userdata.racexp = 0;
-            earningsresult.push(
-              `Ranked up your race rank to ${userdata.racerank}`
-            );
-          }
+       
+      
+          
 
           embed.addFields([
             {

@@ -413,7 +413,7 @@ module.exports = {
               value: `
               ${emotes.cash} $${moneyearned}
               ${emotes.rp} ${ticketsearned} RP
-              +${xpearn} Drift XP
+              +1 Drift Rank
             `,
             },
           ]);
@@ -424,21 +424,10 @@ module.exports = {
           interaction.editReply({ embeds: [embed], components: [] });
           userdata.cash += Number(moneyearned);
           userdata.rp2 += ticketsearned;
-
-          userdata.driftxp += xpearn;
+          userdata.driftrank += 1
           userdata.update();
 
-          let driftxp = userdata.driftxp;
-          console.log(requiredrank);
-          if (driftxp >= requiredrank) {
-            if (userdata.driftrank < 50) {
-              userdata.driftrank += 1;
-              userdata.driftxp = 0;
-              interaction.channel.send(
-                `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
-              );
-            }
-          }
+   
           userdata.save();
 
           clearInterval(x);

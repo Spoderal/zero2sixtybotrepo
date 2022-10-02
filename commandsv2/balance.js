@@ -40,6 +40,7 @@ module.exports = {
       notofall: notoriety,
       wheelspins,
       swheelspins,
+      candy
     } = profile;
 
     if (typeof cash === "undefined") {
@@ -55,8 +56,8 @@ module.exports = {
           ${emotes.rp} RP: ${numberWithCommas(rp2)}\n
           ${emotes.wheelSpin} Wheel spins: ${wheelspins}\n
           ${emotes.superWheel} Super Wheel spins: ${swheelspins}\n
-        `
-        )
+          `
+          )
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
         .setFooter(tipFooterRandom)
@@ -76,16 +77,17 @@ module.exports = {
           {
             name: "Keys",
             value: `
-              ${emotes.commonKey} Common: ${ckeys}
-              ${emotes.rareKey} Rare: ${rkeys}
-              ${emotes.exoticKey} Exotic: ${ekeys}
+            ${emotes.commonKey} Common: ${ckeys}
+            ${emotes.rareKey} Rare: ${rkeys}
+            ${emotes.exoticKey} Exotic: ${ekeys}
             `,
             inline: true,
           },
           {
             name: "Event Items",
             value: `
-              ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
+            ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}\n
+            🍬 Candy ${candy}
             `,
             inline: true,
           },

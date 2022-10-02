@@ -81,6 +81,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  spwheelspin: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   wheelspin: {
     type: Number,
     required: false,

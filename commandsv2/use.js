@@ -178,6 +178,158 @@ module.exports = {
 
         cooldowndata.waterbottle = Date.now();
       }
+
+      else if(itemtouse.toLowerCase() == "zero bar"){
+        let effects =  itemdb.Other["zero bar"].Effects
+
+
+
+        let randomeffect = lodash.sample(effects)
+
+        if(randomeffect == "One of your cars just got +1 speed"){
+          let randomcar = lodash.sample(userdata.cars)
+          console.log(randomcar)
+          randomcar.Speed += 1
+          console.log(randomcar)
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        }
+        else if(randomeffect == "One of your cars just got +1 acceleration"){
+          let randomcar = lodash.sample(userdata.cars)
+          console.log(randomcar)
+          randomcar.Acceleration += 1
+          console.log(randomcar)
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        }
+        else if(randomeffect == "One of your cars just got -20 handling"){
+          let randomcar = lodash.sample(userdata.cars)
+          console.log(randomcar)
+          randomcar.Handling -= 20
+          console.log(randomcar)
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        }
+        else if(randomeffect == "One of your cars just got +5 speed"){
+          let randomcar = lodash.sample(userdata.cars)
+          console.log(randomcar)
+          randomcar.Speed += 5
+          console.log(randomcar)
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        }
+        else if(randomeffect == "You stink, no effect for you"){
+
+          return interaction.reply(`${randomeffect}`)
+
+        }
+        else if(randomeffect == "You just got your weekly reward now!"){
+          let cash = 750;
+          let patron = userdata.patron
+          let prestige = userdata.prestige
+          if (patron && patron.tier == "1") {
+            cash *= 2;
+          }
+          if (patron && patron.tier == "2") {
+            cash *= 3;
+          }
+          if (patron && patron.tier == "3") {
+            cash *= 5;
+          }
+          if (patron && patron.tier == "4") {
+            cash *= 6;
+    
+          }
+          if (prestige > 0) {
+            let mult = require("../data/prestige.json")[prestige].Mult;
+      
+            let multy = mult * cash;
+      
+            cash = cash += multy;
+          }
+         userdata.cash += cash
+          userdata.update()
+        }
+        for (var i = 0; i < amount2; i++)
+        items.splice(items.indexOf("zero bar"), 1);
+      userdata.items = items;
+      userdata.save()
+        interaction.reply(`${randomeffect}`)
+        
+        return;
+      }
     }
     if (itemdb.Police[itemtouse.toLowerCase()]) {
       emote = itemdb.Police[itemtouse.toLowerCase()].Emote;
