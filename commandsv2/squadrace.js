@@ -11,8 +11,7 @@ const { randomRange } = require("../common/utils");
 const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const squadsdb = require("../data/squads.json")
-
+const squadsdb = require("../data/squads.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,7 +24,6 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-
     const cars = require("../data/cardb.json");
 
     // let moneyearnedtxt = 50;
@@ -65,12 +63,11 @@ module.exports = {
     let zemote = emotes.zero2sixty;
     let cemote = emotes.cash;
     let rpemote = emotes.rp;
-    let tier = userdata.tier || 1
+    let tier = userdata.tier || 1;
     let botdupgrades = randomRange(5, 25);
     let botemote;
 
     let prestige = userdata.prestige;
-
 
     let range = selected.Range;
     if (cars.Cars[selected.Name.toLowerCase()].Electric) {
@@ -78,46 +75,49 @@ module.exports = {
         return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
-    }
-}
-
-let ticketsearned;
-let classd;
-
-let tracklength = 0;
-
-
-let squadsarr = []
-for(let s in squadsdb.Squads) {
-    let sq = squadsdb.Squads[s]
-    squadsarr.push(sq)
+      }
     }
 
+    let ticketsearned;
+    let classd;
 
-    let squadfiltered = squadsarr.filter((squad) => squad.Tier == tier)
-    let sqlevels = userdata.squads || [{name: "flame squad", car: 0}, {name: "x squad", car: 0}]
-    console.log(squadfiltered[0])
-    let sqlevelfiltered = sqlevels.filter((sqt) => sqt.name == squadfiltered[0].Name.toLowerCase())
+    let tracklength = 0;
+
+    let squadsarr = [];
+    for (let s in squadsdb.Squads) {
+      let sq = squadsdb.Squads[s];
+      squadsarr.push(sq);
+    }
+
+    let squadfiltered = squadsarr.filter((squad) => squad.Tier == tier);
+    let sqlevels = userdata.squads || [
+      { name: "flame squad", car: 0 },
+      { name: "x squad", car: 0 },
+    ];
+    console.log(squadfiltered[0]);
+    let sqlevelfiltered = sqlevels.filter(
+      (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
+    );
     let moneyearned = squadfiltered[0].Reward;
-    if(sqlevelfiltered[0].car >= 4){
-        moneyearned = squadfiltered[0].BigReward
+    if (sqlevelfiltered[0].car >= 4) {
+      moneyearned = squadfiltered[0].BigReward;
     }
     if (prestige) {
-        let mult = require("../data/prestige.json")[prestige].Mult;
-        
-        let multy = mult * moneyearned;
-        
-        moneyearned = moneyearned += multy;
+      let mult = require("../data/prestige.json")[prestige].Mult;
+
+      let multy = mult * moneyearned;
+
+      moneyearned = moneyearned += multy;
     }
-    let squadinfo = squadfiltered[0]
-    let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car]
-    let botcarindb = cars.Cars[botcar.toLowerCase()]
-    botemote = squadinfo.Emote
+    let squadinfo = squadfiltered[0];
+    let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
+    let botcarindb = cars.Cars[botcar.toLowerCase()];
+    botemote = squadinfo.Emote;
     let usables = userdata.using;
-    
+
     let energytimer = cooldowndata.energydrink;
     if (usables.includes("energy drink")) {
-        let timeout = 600000;
+      let timeout = 600000;
       if (timeout - (Date.now() - energytimer) > 0) {
         // do nothing?
       } else {
@@ -184,9 +184,13 @@ for(let s in squadsdb.Squads) {
     let driftscore = selected.Drift;
     let botspeed = parseInt(cars.Cars[botcarindb.Name.toLowerCase()].Speed);
     let zero2sixtycar = parseInt(selected.Acceleration);
-    let otherzero2sixty = parseInt(cars.Cars[botcarindb.Name.toLowerCase()]["0-60"]);
+    let otherzero2sixty = parseInt(
+      cars.Cars[botcarindb.Name.toLowerCase()]["0-60"]
+    );
     let newhandling = user1carhandling / 20;
-    let bothandling = parseInt(cars.Cars[botcarindb.Name.toLowerCase()].Handling);
+    let bothandling = parseInt(
+      cars.Cars[botcarindb.Name.toLowerCase()].Handling
+    );
     let othernewhandling = bothandling / 20;
     let new60 = user1carspeed / zero2sixtycar;
     let new62 = botspeed / otherzero2sixty;
@@ -214,9 +218,9 @@ for(let s in squadsdb.Squads) {
           inline: true,
         },
         {
-          name: `${botemote} ${cars.Cars[botcarindb.Name.toLowerCase()].Emote} ${
-            cars.Cars[botcarindb.Name.toLowerCase()].Name
-          }`,
+          name: `${botemote} ${
+            cars.Cars[botcarindb.Name.toLowerCase()].Emote
+          } ${cars.Cars[botcarindb.Name.toLowerCase()].Name}`,
           value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcarindb.Name.toLowerCase()].Handling
           }`,
@@ -226,12 +230,11 @@ for(let s in squadsdb.Squads) {
       .setColor(colors.blue)
       .setFooter(tipFooterRandom)
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-   
+
     let msg = await interaction.reply({
       embeds: [embed],
-      fetchReply: true
+      fetchReply: true,
     });
- 
 
     let randomnum = randomRange(1, 4);
     if (randomnum == 2) {
@@ -260,10 +263,8 @@ for(let s in squadsdb.Squads) {
       timer++;
 
       if (timer >= 10) {
-    
         clearInterval(x);
         clearInterval(y);
-   
 
         if (tracklength > tracklength2) {
           if (using.includes("trophy")) {
@@ -300,7 +301,7 @@ for(let s in squadsdb.Squads) {
 
             moneyearned += patronbonus;
           }
-          let newnum = sqlevelfiltered[0].car += 1
+          let newnum = (sqlevelfiltered[0].car += 1);
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -310,7 +311,7 @@ for(let s in squadsdb.Squads) {
                 "squads.$[squad].car": newnum,
               },
             },
-      
+
             {
               arrayFilters: [
                 {
@@ -322,13 +323,14 @@ for(let s in squadsdb.Squads) {
 
           let earningsresult = [];
           earningsresult.push(`$${moneyearned}`);
-        
 
           userdata.cash += parseInt(moneyearned);
           userdata.update();
-         let newlevel = sqlevels.filter((sqt) => sqt.name == squadfiltered[0].Name.toLowerCase())
-          if(newlevel[0].car > 4){
-            userdata.tier += 1
+          let newlevel = sqlevels.filter(
+            (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
+          );
+          if (newlevel[0].car > 4) {
+            userdata.tier += 1;
           }
           userdata.update();
 

@@ -771,10 +771,7 @@ module.exports = {
           userdata.update();
           earningsresult.push(`+1Race Rank`);
 
-            userdata.racerank += 1;
-       
-      
-          
+          userdata.racerank += 1;
 
           embed.addFields([
             {

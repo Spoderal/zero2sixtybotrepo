@@ -73,13 +73,11 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        }
-        else if(item == "🛞"){
+        } else if (item == "🛞") {
           userdata.cash += 1;
           embed.setDescription(`You won 1 super wheel spin!`);
           interaction.editReply({ embeds: [embed] });
-        }
-        else if (item == "🏎️") {
+        } else if (item == "🏎️") {
           let randomnum = lodash.random(5);
           let reward;
           if (randomnum == 2) {

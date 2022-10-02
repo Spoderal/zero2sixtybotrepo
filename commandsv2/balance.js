@@ -40,7 +40,7 @@ module.exports = {
       notofall: notoriety,
       wheelspins,
       swheelspins,
-      candy
+      candy,
     } = profile;
 
     if (typeof cash === "undefined") {
@@ -57,7 +57,7 @@ module.exports = {
           ${emotes.wheelSpin} Wheel spins: ${wheelspins}\n
           ${emotes.superWheel} Super Wheel spins: ${swheelspins}\n
           `
-          )
+        )
         .setColor(colors.blue)
         .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
         .setFooter(tipFooterRandom)

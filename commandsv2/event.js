@@ -92,8 +92,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          }
-          else  if (value === "halloween_event") {
+          } else if (value === "halloween_event") {
             embed.setTitle("Trick or Speed");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Its Halloween in Zero City! You know what that means, candy!!!

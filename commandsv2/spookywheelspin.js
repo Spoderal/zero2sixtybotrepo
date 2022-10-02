@@ -63,7 +63,7 @@ module.exports = {
       embed.setDescription(`${item}`);
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
-         if (item == "🏎️") {
+        if (item == "🏎️") {
           let randomnum = lodash.random(20);
           let reward;
           if (randomnum == 2) {

@@ -90,7 +90,7 @@
       "Type": "Usable",
       "Emote": "<:forsalesign:978883306940674078>"
     },
-  
+
     "energy drink": {
       "Price": 25000,
       "Action": "2x RP for 10 minutes",
@@ -104,7 +104,7 @@
       "Name": "Zero Bar",
       "Type": "Usable",
       "Emote": "<:zerobar:1025128975216947210>",
-      "Effects":[
+      "Effects": [
         "One of your cars just got +1 speed",
         "One of your cars just got +1 acceleration",
         "One of your cars just got -20 handling",

@@ -1,21 +1,21 @@
 {
-  "Tiers":{
-    "D":{
+  "Tiers": {
+    "D": {
       "level": 1
     },
-    "C":{
+    "C": {
       "level": 2
     },
-    "B":{
+    "B": {
       "level": 3
     },
-    "A":{
+    "A": {
       "level": 4
     },
-    "S":{
+    "S": {
       "level": 5
     },
-    "U":{
+    "U": {
       "level": 5
     }
   },
@@ -194,7 +194,7 @@
       "0-60": 11.5,
       "Drift": 0,
       "Handling": 500,
-      "Class":"D"
+      "Class": "D"
     },
     "freds 2002 ford mustang": {
       "alias": "freds 2002 mustang",
@@ -364,7 +364,6 @@
       "Class": "B"
     },
 
-    
     "nathans 2022 shelby super snake": {
       "alias": "nathans 2022 super snake",
       "Name": "Nathans 2022 Shelby Super Snake",
@@ -380,7 +379,7 @@
       "Handling": 500,
       "Class": "B"
     },
-    
+
     "alexs 2017 ford gt": {
       "alias": "alexs 2017 gt",
       "Name": "Alexs 2017 Ford GT",
@@ -508,7 +507,7 @@
     "kevins 2013 mclaren p1": {
       "alias": "kevins 2013 p1",
       "Name": "Kevins 2013 McLaren P1",
-      "Emote":"<:mclaren:931011546354692137>",
+      "Emote": "<:mclaren:931011546354692137>",
       "Speed": 245,
       "kmh": 289,
       "Price": 0,
@@ -523,7 +522,7 @@
     "walters 2012 pagani huayra": {
       "alias": "walters 2012 huayra",
       "Name": "Walters 2012 Pagani Huayra",
-      "Emote":"<:pagani:933622884126056498>",
+      "Emote": "<:pagani:933622884126056498>",
       "Speed": 250,
       "kmh": 289,
       "Price": 0,
@@ -5302,7 +5301,7 @@
       "Drift": 0,
       "Handling": 800
     },
-   
+
     "1984 porsche 944": {
       "alias": "1984 944",
       "Name": "1984 Porsche 944",

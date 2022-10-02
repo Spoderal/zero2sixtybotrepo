@@ -91,20 +91,20 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  candy:{
+  candy: {
     type: Number,
     required: false,
     default: 0,
   },
-  squads:{
+  squads: {
     type: Array,
     required: false,
     default: [
-      {name: "flame house", "car": 0},
-      {name: "x squad", "car": 0},
-      {name: "muscle brains", "car": 0},
-      {name: "cool cobras", "car": 0},
-      {name: "the ws", "car": 0}
+      { name: "flame house", car: 0 },
+      { name: "x squad", car: 0 },
+      { name: "muscle brains", car: 0 },
+      { name: "cool cobras", car: 0 },
+      { name: "the ws", car: 0 },
     ],
   },
   notofall: {
