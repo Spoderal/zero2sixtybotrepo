@@ -102,9 +102,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-      
-          } 
-          else if (value === "5_update") {
+          } else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed
@@ -135,8 +133,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
-          else if (value === "2_update") {
+          } else if (value === "2_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
 

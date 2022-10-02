@@ -15,9 +15,9 @@ module.exports = {
 
     let items = [];
     for (let i in itemsdb.Other) {
-      i = itemsdb.Other[i]
-      let item = i
-      console.log(item)
+      i = itemsdb.Other[i];
+      let item = i;
+      console.log(item);
 
       items.push(`${item.Emote} ${item.Name} : **${toCurrency(item.Price)}**`);
     }

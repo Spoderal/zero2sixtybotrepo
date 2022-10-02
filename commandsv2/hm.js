@@ -440,7 +440,7 @@ module.exports = {
           }
           earningsresult.push(toCurrency(moneyearned));
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
-          
+
           if (bot == "6" || bot == "7") {
             earningsresult.push(`Wheel Spin Earned!`);
             userdata.wheelspins += 1;
@@ -474,7 +474,7 @@ module.exports = {
           userdata.rp2 += parseInt(ticketsearned);
           earningsresult.push(`+1Race Rank`);
 
-            userdata.racerank += 1;
+          userdata.racerank += 1;
 
           userdata.save();
 

@@ -40,9 +40,9 @@ module.exports = {
     const gold = userdata.gold;
     const usercars = userdata.cars;
     const garagelimit = userdata.garageLimit;
-    let tier = userdata.tier
+    let tier = userdata.tier;
     const bought = interaction.options.getString("item").toLowerCase();
-    
+
     if (!bought)
       return await interaction.reply(
         "To use this command, specify the car or part you want to buy. Example: /buy 1995 Mazda Miata"
@@ -274,11 +274,15 @@ module.exports = {
             );
           }
           let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
-          if(cars.Tiers[carindb.Class].level > tier) return interaction.reply(`Your tier is not high enough! You need to beat the **Tier ${cars.Tiers[carindb.Class].level} Squad** to unlock this car!`)
+          if (cars.Tiers[carindb.Class].level > tier)
+            return interaction.reply(
+              `Your tier is not high enough! You need to beat the **Tier ${
+                cars.Tiers[carindb.Class].level
+              } Squad** to unlock this car!`
+            );
 
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
-            
 
           cash -= boughtCarPrice;
           let idtoset = filteredcar[0].alias;
@@ -531,9 +535,10 @@ module.exports = {
       itemsList.Other[bought] ||
       itemsList.Multiplier[bought]
     ) {
-      let itemindb = itemsList.Other[bought]
+      let itemindb = itemsList.Other[bought];
 
-      if(itemindb.Price == 0) return interaction.reply("This item isn't purchasable!")
+      if (itemindb.Price == 0)
+        return interaction.reply("This item isn't purchasable!");
 
       let pricing = parseInt(itemindb.Price) * amount2;
       if (userdata.cash < pricing)

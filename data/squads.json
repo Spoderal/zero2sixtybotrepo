@@ -14,7 +14,7 @@
       "BigReward": 4500,
       "Icon": "https://i.ibb.co/GTq0FM1/squad-flamehouse.png",
       "Name": "Flame House",
-      "Emote":"<:squad_flamehouse:1025142698807668736>"
+      "Emote": "<:squad_flamehouse:1025142698807668736>"
     },
     "x squad": {
       "Tier": 2,
@@ -30,7 +30,7 @@
       "Icon": "https://i.ibb.co/dpgdJzH/squad-xsquad.png",
       "BigReward": 7500,
       "Name": "X Squad",
-      "Emote":"<:squad_xsquad:1025142697553563649>"
+      "Emote": "<:squad_xsquad:1025142697553563649>"
     },
     "muscle brains": {
       "Tier": 3,
@@ -46,7 +46,7 @@
       "Icon": "https://i.ibb.co/DR3C0G2/squad-muscleheads.png",
       "BigReward": 10000,
       "Name": "Muscle Brains",
-      "Emote":"<:squad_muscleheads:1025581852683153428>"
+      "Emote": "<:squad_muscleheads:1025581852683153428>"
     },
     "cool cobras": {
       "Tier": 4,
@@ -62,7 +62,7 @@
       "Icon": "https://i.ibb.co/dKnKg4s/squad-cobras.png",
       "BigReward": 15000,
       "Name": "Cool Cobras",
-      "Emote":"<:squad_cobras:1025856889730379776>"
+      "Emote": "<:squad_cobras:1025856889730379776>"
     },
     "the ws": {
       "Tier": 5,
@@ -78,7 +78,7 @@
       "Icon": "https://i.ibb.co/3mt2RZD/squad-w.png",
       "BigReward": 100000,
       "Name": "The Ws",
-      "Emote":"<:squad_w:1026222214648963152>"
+      "Emote": "<:squad_w:1026222214648963152>"
     }
   }
 }

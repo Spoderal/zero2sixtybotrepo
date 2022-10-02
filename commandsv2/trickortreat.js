@@ -23,7 +23,7 @@ module.exports = {
     const cars = require("../data/cardb.json");
     let moneyearnedtxt = 50;
     let moneyearned = 50;
-    let zerobars = 0
+    let zerobars = 0;
     let idtoselect = interaction.options.getString("car");
     let user = interaction.user;
     let userdata = await User.findOne({ id: user.id });
@@ -118,28 +118,28 @@ module.exports = {
       }, 2000);
     }
 
-    if(randomnum == 3){
-        zerobars = 1
+    if (randomnum == 3) {
+      zerobars = 1;
     }
     let tracklength = 5000 - launchperc;
 
     let x = setInterval(() => {
       tracklength -= hp;
-        
+
       if (tracklength <= 0) {
-        let rewards = []
-        if(zerobars > 0){
-            rewards.push(`<:zerobar:1025128975216947210> ${zerobars}`)
-            userdata.items.push("zero bar")
+        let rewards = [];
+        if (zerobars > 0) {
+          rewards.push(`<:zerobar:1025128975216947210> ${zerobars}`);
+          userdata.items.push("zero bar");
         }
-        rewards.push(`🍬 ${moneyearned}`)
+        rewards.push(`🍬 ${moneyearned}`);
 
         moneyearned -= timernum;
         moneyearnedtxt + moneyearned;
         clearInterval(x, timer);
         embed.addFields([
           { name: "Results", value: `Finished in ${timernum}s` },
-          { name: "Earnings", value: `${rewards.join('\n')}` },
+          { name: "Earnings", value: `${rewards.join("\n")}` },
         ]);
         interaction.editReply({ embeds: [embed] });
         userdata.cash += Number(moneyearned);
