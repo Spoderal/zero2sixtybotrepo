@@ -74,7 +74,7 @@ module.exports = {
           );
           interaction.editReply({ embeds: [embed] });
         } else if (item == "🛞") {
-          userdata.cash += 1;
+          userdata.swheelspins += 1;
           embed.setDescription(`You won 1 super wheel spin!`);
           interaction.editReply({ embeds: [embed] });
         } else if (item == "🏎️") {
