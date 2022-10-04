@@ -98,6 +98,13 @@
       "Type": "Usable",
       "Emote": "<:energydrink:982468472787329095>"
     },
+    "super wheelspin": {
+      "Price": 0,
+      "Action": "Super wheelspin, /use",
+      "Name": "Super Wheelspin",
+      "Type": "Usable",
+      "Emote": "🟣"
+    },
     "zero bar": {
       "Price": 0,
       "Action": "No idea",
