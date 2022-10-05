@@ -72,7 +72,7 @@ module.exports = {
               2500000
             )} for regular bank increases! Try using a big bank increase`
           );
-              
+
         let finalbanklimit = 5000 * amount2;
         await User.findOneAndUpdate(
           {
@@ -80,7 +80,7 @@ module.exports = {
           },
           {
             $set: {
-              "banklimit": banklimit += finalbanklimit,
+              banklimit: (banklimit += finalbanklimit),
             },
           }
         );
@@ -106,7 +106,7 @@ module.exports = {
           },
           {
             $set: {
-              "banklimit": banklimit += finalbanklimit,
+              banklimit: (banklimit += finalbanklimit),
             },
           }
         );
