@@ -64,7 +64,7 @@ module.exports = {
       if (itemtouse.toLowerCase() == "pink slip") {
         userdata.pinkslips += 1;
       } else if (itemtouse.toLowerCase() == "bank increase") {
-        let banklimit = userdata.banklimit;
+        let banklimit = userdata.banklimit || 0;
 
         if (banklimit >= 2500000)
           return interaction.reply(
@@ -72,9 +72,18 @@ module.exports = {
               2500000
             )} for regular bank increases! Try using a big bank increase`
           );
-
+              
         let finalbanklimit = 5000 * amount2;
-        userdata.banklimit += finalbanklimit;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "banklimit": banklimit += finalbanklimit,
+            },
+          }
+        );
         userdata.update();
 
         if (userdata.banklimit >= 2500000) {
@@ -91,7 +100,16 @@ module.exports = {
           );
 
         let finalbanklimit = 25000 * amount2;
-        userdata.banklimit += finalbanklimit;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "banklimit": banklimit += finalbanklimit,
+            },
+          }
+        );
         userdata.update();
 
         if (userdata.banklimit >= 10000000) {
@@ -313,7 +331,7 @@ module.exports = {
           userdata.cash += cash;
           userdata.update();
         }
-        for (var i = 0; i < amount2; i++)
+        for (var b = 0; i < amount2; b++)
           items.splice(items.indexOf("zero bar"), 1);
         userdata.items = items;
         userdata.save();

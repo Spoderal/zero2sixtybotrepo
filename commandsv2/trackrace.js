@@ -105,7 +105,7 @@ module.exports = {
 
     const timeout = userGetPatreonTimeout(userdata);
 
-    let racing = cooldowndata.racing;
+    let racing = cooldowndata.track;
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
@@ -114,7 +114,7 @@ module.exports = {
       );
     }
 
-    cooldowndata.drift = Date.now();
+    cooldowndata.track = Date.now();
     cooldowndata.save();
     let drifttraining = userdata.driftrank;
 
