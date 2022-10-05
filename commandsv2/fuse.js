@@ -62,7 +62,7 @@ module.exports = {
       "txexhaust",
       "txintake",
       "bodykit",
-      "brakes"
+      "brakes",
     ];
 
     if (!list3.includes(parttoinstall.toLowerCase()))
