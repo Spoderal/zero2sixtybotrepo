@@ -11,6 +11,7 @@ const { userGetPatreonTimeout } = require("../common/user");
 const { invisibleSpace, doubleCashWeekendField } = require("../common/utils");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const cooldowns = require("../schema/cooldowns");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -114,8 +115,17 @@ module.exports = {
       );
     }
 
-    cooldowndata.track = Date.now();
-    cooldowndata.save();
+  
+    await cooldowns.findOneAndUpdate(
+      {
+        id: interaction.user.id,
+      },
+      {
+        $set: {
+          track: Date.now()
+        },
+      }
+    );
     let drifttraining = userdata.driftrank;
 
     let range = selected.Range;
