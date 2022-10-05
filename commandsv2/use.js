@@ -199,12 +199,12 @@ module.exports = {
               hm: 0,
               qm: 0,
               drifting: 0,
-              waterbottle: Date.now()
+              waterbottle: Date.now(),
             },
           }
         );
 
-        cooldowndata.update()
+        cooldowndata.update();
       } else if (itemtouse.toLowerCase() == "zero bar") {
         let effects = itemdb.Other["zero bar"].Effects;
 
