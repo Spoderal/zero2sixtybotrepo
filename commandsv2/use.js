@@ -189,13 +189,22 @@ module.exports = {
             .setDescription(`You can use a water bottle again in ${time}.`);
           return await interaction.reply({ embeds: [timeEmbed] });
         }
-        cooldowndata.racing = 0;
-        cooldowndata.betracing = 0;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              racing: 0,
+              hm: 0,
+              qm: 0,
+              drifting: 0,
+              waterbottle: Date.now()
+            },
+          }
+        );
 
-        cooldowndata.cashcup = 0;
-        cooldowndata.hm = 0;
-
-        cooldowndata.waterbottle = Date.now();
+        cooldowndata.update()
       } else if (itemtouse.toLowerCase() == "zero bar") {
         let effects = itemdb.Other["zero bar"].Effects;
 
