@@ -115,14 +115,13 @@ module.exports = {
       );
     }
 
-  
     await cooldowns.findOneAndUpdate(
       {
         id: interaction.user.id,
       },
       {
         $set: {
-          track: Date.now()
+          track: Date.now(),
         },
       }
     );
