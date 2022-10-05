@@ -49,7 +49,7 @@ module.exports = {
     let itemrewards9 = reward.slice(80, 90);
     let itemrewards10 = reward.slice(90, 100);
 
-    let seasonxp = userdata.notofall
+    let seasonxp = userdata.notofall;
 
     if (!page || page == "1") {
       embed = new discord.EmbedBuilder()
@@ -220,23 +220,23 @@ module.exports = {
         ) {
           let amount = Number(item.Item.split(" ")[0]);
           userdata.lmaps += amount;
-        } else if ( item.Item.endsWith("Garage Spaces")) {
-          console.log("garage")
+        } else if (item.Item.endsWith("Garage Spaces")) {
+          console.log("garage");
           let amount = Number(item.Item.split(" ")[0]);
-          console.log(amount)
+          console.log(amount);
           parseInt(amount);
-          userdata.garageLimit += amount
+          userdata.garageLimit += amount;
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
             },
             {
               $set: {
-                "fallrewards": userdata.fallrewards += 1
+                fallrewards: (userdata.fallrewards += 1),
               },
             }
           );
-          userdata.update()
+          userdata.update();
         } else if (item.Item.endsWith("Helmet")) {
           let helm = item.Item.toLowerCase();
           userdata.pfps.push(helm);
