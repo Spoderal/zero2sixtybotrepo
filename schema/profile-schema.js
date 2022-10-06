@@ -241,8 +241,7 @@ const Profile = new mongoose.Schema({
   },
   work: {
     type: Object,
-    required: false
-
+    required: false,
   },
   showcase: {
     type: String,
