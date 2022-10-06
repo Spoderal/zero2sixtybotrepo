@@ -239,9 +239,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: "Default",
   },
-  job: {
+  work: {
     type: Object,
-    required: false,
+    required: false
+
   },
   showcase: {
     type: String,

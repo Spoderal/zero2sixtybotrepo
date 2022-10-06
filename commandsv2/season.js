@@ -203,7 +203,13 @@ module.exports = {
           console.log(amount);
           userdata.rkeys += amount;
           userdata.fallrewards += 1;
-        } else if (item.Item.endsWith("Exotic Keys")) {
+        } else  if (item.Item.endsWith("RP")) {
+          let amount = Number(item.Item.split(" ")[0]);
+          userdata.rp += amount;
+          userdata.fallrewards += 1;
+        }  
+        
+        else if (item.Item.endsWith("Exotic Keys")) {
           let amount = Number(item.Item.split(" ")[0]);
           userdata.ekeys += amount;
           userdata.fallrewards += 1;
