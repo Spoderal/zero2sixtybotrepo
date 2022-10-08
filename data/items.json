@@ -71,7 +71,7 @@
     },
     "bank increase": {
       "Name": "Bank Increase",
-      "Price":0,
+      "Price": 0,
       "Action": "Increase your bank space by $5k",
       "Type": "Usable",
       "Emote": "<:bankupgrade:974153111298007131>",
@@ -81,7 +81,7 @@
       "Name": "Big Bank Increase",
       "Action": "Increase your bank space by $25k",
       "Type": "Usable",
-      "Price":0,
+      "Price": 0,
       "Emote": "<:bigbank:1008110998202372170>",
       "Items": 10
     },
