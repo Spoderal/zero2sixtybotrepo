@@ -1,20 +1,17 @@
 {
-  "zuber":{
-    "prestige":0,
-    "salary":50,
-    "name":"Zuber"
-
+  "zuber": {
+    "prestige": 0,
+    "salary": 50,
+    "name": "Zuber"
   },
-  "pizza delivery":{
-    "prestige":1,
-    "salary":100,
-    "name":"Pizza Delivery"
+  "pizza delivery": {
+    "prestige": 1,
+    "salary": 100,
+    "name": "Pizza Delivery"
   },
-  "police":{
-    "prestige":2,
-    "salary":200,
-    "name":"Police"
-     
+  "police": {
+    "prestige": 2,
+    "salary": 200,
+    "name": "Police"
   }
-  
 }
