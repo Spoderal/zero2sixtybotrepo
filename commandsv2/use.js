@@ -204,7 +204,7 @@ module.exports = {
           }
         );
 
-        cooldowndata.update();
+        cooldowndata.save();
       } else if (itemtouse.toLowerCase() == "zero bar") {
         let effects = itemdb.Other["zero bar"].Effects;
 
