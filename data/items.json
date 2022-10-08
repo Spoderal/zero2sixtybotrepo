@@ -69,6 +69,22 @@
       "Type": "Usable",
       "Emote": "<:smallvault:995501944456089640>"
     },
+    "bank increase": {
+      "Name": "Bank Increase",
+      "Price":0,
+      "Action": "Increase your bank space by $5k",
+      "Type": "Usable",
+      "Emote": "<:bankupgrade:974153111298007131>",
+      "Items": 10
+    },
+    "big bank increase": {
+      "Name": "Big Bank Increase",
+      "Action": "Increase your bank space by $25k",
+      "Type": "Usable",
+      "Price":0,
+      "Emote": "<:bigbank:1008110998202372170>",
+      "Items": 10
+    },
     "medium vault": {
       "Price": "100000",
       "Name": "Medium Vault",
