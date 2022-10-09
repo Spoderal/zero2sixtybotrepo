@@ -204,7 +204,7 @@ module.exports = {
           }
         );
 
-        cooldowndata.markModified()
+        cooldowndata.markModified();
 
         cooldowndata.save();
       } else if (itemtouse.toLowerCase() == "zero bar") {
