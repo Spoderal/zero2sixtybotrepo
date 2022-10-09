@@ -189,7 +189,7 @@ module.exports = {
             .setDescription(`You can use a water bottle again in ${time}.`);
           return await interaction.reply({ embeds: [timeEmbed] });
         }
-        await User.findOneAndUpdate(
+        await Cooldowns.findOneAndUpdate(
           {
             id: interaction.user.id,
           },
@@ -203,6 +203,8 @@ module.exports = {
             },
           }
         );
+
+        cooldowndata.markModified()
 
         cooldowndata.save();
       } else if (itemtouse.toLowerCase() == "zero bar") {
