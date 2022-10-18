@@ -7,7 +7,7 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { randomRange } = require("../common/utils");
+const { randomRange, convertMPHtoKPH } = require("../common/utils");
 const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
@@ -209,19 +209,28 @@ module.exports = {
     let policeuser;
     let policelen;
     let itemusedp;
+    let settings = userdata.settings
+
+    let speed = `${user1carspeed} MPH`
+    let speed2 = `${botspeed} MPH`
+
+      if(settings.ph == "KMH"){
+        speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`
+        speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`
+      }
     let embed = new discord.EmbedBuilder()
       .setTitle(`${squadinfo.Name} race in progress...`)
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
           inline: true,
         },
         {
           name: `${botemote} ${
             cars.Cars[botcarindb.Name.toLowerCase()].Emote
           } ${cars.Cars[botcarindb.Name.toLowerCase()].Name}`,
-          value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Speed: ${speed2} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcarindb.Name.toLowerCase()].Handling
           }`,
           inline: true,

@@ -27,6 +27,28 @@ const doubleCashWeekendField = {
   name: "Double Cash Weekend!",
   value: invisibleSpace,
 };
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+const formatDate = function(date) {
+  return (
+    [
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+      date.getFullYear(),
+    ].join('/') +
+    ' ' +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(':')
+  );
+}
+
+function convertMPHtoKPH(mph) {
+  return mph * 1.60934;
+}
 
 module.exports = {
   numberWithCommas,
@@ -37,4 +59,6 @@ module.exports = {
   blankInlineField,
   doubleCashWeekendField,
   wait,
+  formatDate,
+  convertMPHtoKPH
 };

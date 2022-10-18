@@ -5,7 +5,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, formatDate } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,6 +21,29 @@ module.exports = {
 
     let daily = cooldowndata.daily;
     let patreon = userdata.patron;
+    let lastDaily = cooldowndata.lastDaily;
+    let streak = userdata.settings.dailyStreak || 0
+
+    let lastDailyTime = new Date(lastDaily);
+
+    let timestamp = lastDailyTime.getTime()
+    let now = new Date(Date.now()).getTime()
+
+    console.log(now)
+
+    let delta = now - timestamp
+
+    console.log(delta)
+
+    let time = 172800000
+    if(delta > time){
+      userdata.settings.dailyStreak = 1
+    }
+    else {
+      userdata.settings.dailyStreak += 1
+    }
+
+    userdata.markModified("settings")
 
     let house = userdata.house;
     if (house && house.perks.includes("Daily $300")) {
@@ -66,10 +89,11 @@ module.exports = {
         .setDescription(
           `You've already collected your daily cash\n\nCollect it again in ${time}.`
         );
-      await interaction.reply({ embeds: [timeEmbed] });
+      await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     } else {
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
+      cooldowndata.lastDaily = Date.now();
       userdata.save();
       cooldowndata.save();
 

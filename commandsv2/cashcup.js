@@ -8,7 +8,7 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { tipFooterRandom } = require("../common/tips");
-const { randomRange } = require("../common/utils");
+const { randomRange, convertMPHtoKPH } = require("../common/utils");
 
 let bot1cars = [
   "1995 mazda miata",
@@ -174,6 +174,15 @@ module.exports = {
     let hemote = emotes.handling;
     let zemote = emotes.zero2sixty;
     let cemote = emotes.cash;
+    let settings = userdata.settings
+
+    let speed = `${user1carspeed} MPH`
+    let speed2 = `${botspeed} MPH`
+
+      if(settings.ph == "KMH"){
+        speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`
+        speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`
+      }
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${newcashcuptier} cash cup race in progress...`)
       .addFields([
@@ -181,14 +190,14 @@ module.exports = {
           name: `${actualhelmet.Emote} ${
             cars.Cars[selected.Name.toLowerCase()].Emote
           } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
-          value: `${semote} Speed: ${selected.Speed} MPH\n\n${zemote} 0-60: ${selected.Acceleration}s\n\n${hemote} Handling: ${handling}`,
+          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${selected.Acceleration}s\n\n${hemote} Handling: ${handling}`,
           inline: true,
         },
         {
           name: `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Speed: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,

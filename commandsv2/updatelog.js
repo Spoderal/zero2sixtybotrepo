@@ -32,12 +32,12 @@ module.exports = {
             emoji: "⬆️",
           },
           {
-            label: "8/30/2022",
+            label: "10/18/2022",
             description:
-              "Information for the recent large update, and new season!",
+              "Information for the recent update!",
             value: "4_update",
             customId: "up4",
-            emoji: "🍂",
+            emoji: "🏆",
           },
           {
             label: "10/2/2022",
@@ -59,7 +59,7 @@ module.exports = {
             ⬆️ Small Update 9/26/2022\n
             ⚙️ Patch 8/22/2022\n
             🍬 Halloween Big Update 10/2/2022\n
-            🍂 Fall Update 8/30/2022
+            🏆 QA Update 10/18/2022
         `);
 
     embed.setColor(colors.blue);
@@ -159,35 +159,19 @@ module.exports = {
           } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Fall Update`);
+            embed.setTitle(`QA Update`);
             embed
               .setDescription(
-                `__New parts__
-                • Track Springs\n
-                • Drift Springs\n
-                • Race Springs\n
-                • T1, T2, T3, T4, T5 Track tires\n
-                • T3, T4, T5 BodyKits\n
-
-                __Nerfs and buffs__
-                V8 added to wheelspin, it adds 15 speed to your car.\n
-                T1Exhaust price decreased, added speed and acceleration increased\n
-                T2Exhaust price decreased, added speed and acceleration increased\n
-
-                __Features__
-                •  New season! Check /season for more information. **NOTORIETY AND RP HAS BEEN RESET FOR THE NEW SEASONS**\n
-                • New race! /trackrace\n
-                • Tutorial for new players\n
-                • Season, and crew pages make it easier to claim rewards, having a purely button based system.\n
-                • /reward removed\n
-                • You can buy cars via name **or** ID now
-
-                __Bug Fixes__
-                • Fixed the issue where /upgrade removes all parts instead of 1
-                
+                `• Improved the dealership design, easier to read and includes more details.\n
+                 • New /settings command! Turn on tips that help you better understand the game (for new players), accessibility, set daily reminders for voting, and claiming your daily reward! More settings coming soon.\n
+                 • Achievements! Say goodbye to badges, and hello to achievements you can show off and get rewarded from completing! Check /help for more information.
+                 • Bug fixes\n
+                 __New Cars__
+                 <:ford:931012624152399902> 2024 Ford Mustang\n
+                 <:ferrari:931011838374727730> 2017 Ferrari 812 Superfast
                 `
               )
-              .setFooter({ text: "8/30/2022" })
+              .setFooter({ text: "10/18/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

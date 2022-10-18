@@ -2,7 +2,6 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const dailytasks = require("../dailytasks");
 const crews = require("../crewrank");
-const badges = require("../badges");
 const lodash = require("lodash");
 require("dotenv").config();
 const patron = require("../patreon");
@@ -34,7 +33,6 @@ module.exports = {
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
 
-    badges(client);
     crews(client);
     dailytasks(client);
     patron(client);

@@ -4,6 +4,8 @@ const partdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const achievementsdb = require("../data/achievements.json")
+const {toCurrency} = require("../common/utils")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -213,7 +215,31 @@ module.exports = {
       embed.setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });
+      let achievements = userdata.achievements || ["None"]
+      if(achievements){
+        let fusionFiltered = achievements.filter((achievement) => achievement.name == "Fusion Master")
+        if(fusionFiltered.length == 0) {
+          console.log("none")
+          achievements.push({name: "Fusion Master", amount: 0, id:"fusion master", completed: false})
+          userdata.markModified("achievements")
+          userdata.update()
+        }
+        fusionFiltered = achievements.filter((achievement) => achievement.name == "Fusion Master")
+        fusionFiltered[0].amount += 1
+        userdata.markModified("achievements")
 
+        userdata.update()
+        userdata.markModified("achievements")
+
+        if(fusionFiltered[0].amount >= 50 && fusionFiltered[0].completed !== true){
+          embed.setDescription(`New achievement! <:ach_fusionmaster:1028936494783676416> You received ${toCurrency(achievementsdb.Achievements["fusion master"].Reward)}`)
+          fusionFiltered[0].completed = true
+          userdata.cash += achievementsdb.Achievements["fusion master"].Reward
+          userdata.update()
+          userdata.markModified("achievements")
+        }
+        
+      }
       setTimeout(() => {
         embed.setTitle("Fused!");
         embed.fields = [];

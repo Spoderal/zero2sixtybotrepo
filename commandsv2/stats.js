@@ -6,7 +6,7 @@ const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { toCurrency, blankInlineField } = require("../common/utils");
+const { toCurrency, blankInlineField, convertMPHtoKPH } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const itemdb = require("../data/items.json");
 
@@ -47,6 +47,8 @@ module.exports = {
     let subcommandfetch = interaction.options.getSubcommand();
     var list = cars.Cars;
     var item = interaction.options.getString("item");
+    let userdata = await User.findOne({ id: interaction.user.id });
+    let settings = userdata.settings
 
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
       let handlingemote = emotes.handling;
@@ -54,6 +56,12 @@ module.exports = {
       let accelerationemote = emotes.zero2sixty;
       let car = item.toLowerCase();
       let carindb = list[car];
+
+      let speed = `${carindb.Speed} MPH`
+
+      if(settings.ph == "KMH"){
+        speed = `${Math.floor(convertMPHtoKPH(carindb.Speed))} KMH`
+      }
 
       if (!carindb) return await interaction.reply(`Thats not a car!`);
 
@@ -65,7 +73,7 @@ module.exports = {
         .addFields([
           {
             name: `Speed`,
-            value: `${speedemote} ${carindb.Speed}`,
+            value: `${speedemote} ${speed}`,
             inline: true,
           },
           {
@@ -96,7 +104,7 @@ module.exports = {
       await interaction.reply({ embeds: [embed] });
     } else if (subcommandfetch == "carid") {
       let idtoselect = interaction.options.getString("id");
-      let userdata = await User.findOne({ id: interaction.user.id });
+     
       if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
@@ -120,7 +128,11 @@ module.exports = {
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
+      let speed = `${carindb.Speed} MPH`
 
+      if(settings.ph == "KMH"){
+        speed = `${Math.floor(convertMPHtoKPH(carindb.Speed))} KMH`
+      }
       let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
@@ -128,7 +140,7 @@ module.exports = {
         .addFields([
           {
             name: `Speed`,
-            value: `${speedemote} ${carindb.Speed} MPH`,
+            value: `${speedemote} ${speed}`,
             inline: true,
           },
           {

@@ -58,9 +58,12 @@ module.exports = {
     if (cars == null || cars == [] || cars.length <= 0 || !cars.length)
       return await interaction.reply("You dont own any cars!");
     let parts = userdata.parts;
-    let badges = userdata.badges;
     let garagelimit = userdata.garageLimit;
     var userparts = [];
+
+
+    
+
     var actpart;
     let items = userdata.items;
     var actitems = [];
@@ -103,6 +106,8 @@ module.exports = {
         type = itemdb.Collectable[actitem.toLowerCase()].Type;
         price = itemdb.Collectable[actitem.toLowerCase()].Price;
       }
+
+      
 
       if (price) sum += Number(price);
 
@@ -714,12 +719,6 @@ module.exports = {
         }
       });
     }
-    if (sum >= 50000000 && !badges.includes("carrich")) {
-      badges.push(`badges_${targetId}`, "carrich");
-      userdata.save();
-      interaction.channel.send(
-        `${target}, You just earned the "Car Rich" badge for having a total garage value of $50M!`
-      );
-    }
+    
   },
 };

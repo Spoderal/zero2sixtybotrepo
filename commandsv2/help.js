@@ -6,6 +6,7 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
+const achievementdb = require("../data/achievements.json").Achievements
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,7 +29,11 @@ module.exports = {
       new ButtonBuilder()
         .setStyle("Link")
         .setLabel("🧡 Patreon")
-        .setURL("https://www.patreon.com/zero2sixtybot")
+        .setURL("https://www.patreon.com/zero2sixtybot"),
+        new ButtonBuilder()
+        .setStyle("Secondary")
+        .setLabel("🏆Achievements")
+        .setCustomId("achievements")
     );
 
     const row2 = new ActionRowBuilder().addComponents(
@@ -98,8 +103,13 @@ module.exports = {
       interaction.customId == "select";
 
     const collector = interaction.channel.createMessageComponentCollector({
-      filter,
-      time: 1000 * 30,
+      filter
+    });
+    let filter2 = (btnInt) => {
+      return interaction.user.id === btnInt.user.id;
+    };
+    const collector2 = interaction.channel.createMessageComponentCollector({
+      filter: filter2
     });
 
     let pageEmbed;
@@ -217,5 +227,22 @@ module.exports = {
         components: [row2, row],
       });
     });
+    collector2.on('collect', async (i) => {
+        if(i.customId.includes("achievements")){
+
+
+          let embed = new EmbedBuilder();
+          for(let ach in achievementdb){
+            let achievement = achievementdb[ach]
+
+            embed.setColor(colors.blue);
+            embed.addFields({name: `${achievement.Emote} ${achievement.Name}`, value: `${achievement.Task}`})
+          }
+          await i.update({
+            embeds: [embed],
+            components: [row2, row],
+          });
+        }
+    })
   },
 };

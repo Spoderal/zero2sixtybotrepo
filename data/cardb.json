@@ -1527,6 +1527,21 @@
       "Handling": 500,
       "Class": "C"
     },
+    "2024 ford mustang": {
+      "alias": "2024 mustang",
+      "Name": "2024 Ford Mustang",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 175,
+      "kmh": 249,
+      "Price": 110000,
+      "sellprice": 12000,
+      "Engine": "V8",
+      "Image": "https://images.cars.com/cldstatic/wp-content/uploads/ford-mustang-gt-2024-01-exterior-front-angle-scaled.jpg",
+      "0-60": 9.5,
+      "Drift": 0,
+      "Handling": 510,
+      "Class": "B"
+    },
     "1987 ford mustang gt": {
       "alias": "1987 mustang gt",
       "Name": "1987 Ford Mustang GT",
@@ -1738,7 +1753,7 @@
       "0-60": 3,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "2024 bugatti mistral": {
       "alias": "2024 mistral",
@@ -1955,7 +1970,7 @@
       "0-60": 3.5,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "1991 acura nsx": {
       "alias": "1991 nsx",
@@ -3060,7 +3075,7 @@
       "0-60": 4,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "adris 2013 lamborghini veneno": {
       "alias": "adris 2013 veneno",
@@ -3130,7 +3145,7 @@
       "0-60": 3.8,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "2010 ferrari 458 italia": {
       "alias": "2010 458 italia",
@@ -3144,6 +3159,21 @@
       "Image": "https://www.topcarrating.com/ferrari/2010-ferrari-458-italia.jpg",
       "Rear": "https://barrettjacksoncdn.azureedge.net/staging/carlist/items/Fullsize/Cars/225646/225646_Rear_3-4_Web.jpg",
       "0-60": 6.4,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "A"
+    },
+    "2017 ferrari 812 superfast": {
+      "alias": "2017 812 superfast",
+      "Name": "2017 Ferrari 812 Superfast",
+      "Emote": "<:ferrari:931011838374727730>",
+      "Speed": 199,
+      "kmh": 321,
+      "Price": 345000,
+      "sellprice": 150000,
+      "Engine": "V12",
+      "Image": "https://s1.cdn.autoevolution.com/images/gallery/FERRARI-812-Superfast-5926_6.jpg",
+      "0-60": 6.3,
       "Drift": 0,
       "Handling": 500,
       "Class": "A"
@@ -5036,7 +5066,7 @@
       "0-60": 2.7,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "2020 ssc tuatara": {
       "alias": "2020 tuatara",
@@ -5050,7 +5080,7 @@
       "0-60": 2.5,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "thrust ssc": {
       "alias": "thrust",
@@ -5065,7 +5095,7 @@
       "0-60": 2.3,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "2021 koenigsegg gemera": {
       "alias": "2021 gemera",
@@ -5079,7 +5109,7 @@
       "0-60": 3.2,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "2020 koenigsegg regera": {
       "alias": "2020 regera",
@@ -5094,7 +5124,7 @@
       "0-60": 3.8,
       "Drift": 0,
       "Handling": 500,
-      "Class": "U"
+      "Class": "S"
     },
     "2018 dodge challenger demon": {
       "alias": "2018 challenger demon",

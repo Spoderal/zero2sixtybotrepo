@@ -9,7 +9,7 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
-const { doubleCashWeekendField } = require("../common/utils");
+const { doubleCashWeekendField, convertMPHtoKPH } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
@@ -317,13 +317,21 @@ module.exports = {
     let zemote = emotes.zero2sixty;
     let cemote = emotes.cash;
     let rpemote = emotes.rp;
+    let settings = userdata.settings
 
+    let speed = `${user1carspeed} MPH`
+    let speed2 = `${cars.Cars[botcar.toLowerCase()].Speed} MPH`
+
+      if(settings.ph == "KMH"){
+        speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`
+        speed2 = `${Math.floor(convertMPHtoKPH(cars.Cars[botcar.toLowerCase()].Speed))} KMH`
+      }
     let embed = new EmbedBuilder()
       .setTitle("3...2...1....GO!")
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
+          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
           inline: true,
         },
         {
@@ -331,8 +339,8 @@ module.exports = {
             cars.Cars[botcar.toLowerCase()].Name
           }`,
           value: `${semote} Speed: ${
-            cars.Cars[botcar.toLowerCase()].Speed
-          } MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+            speed2
+          }\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,
