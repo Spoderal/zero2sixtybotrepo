@@ -314,7 +314,7 @@ const Profile = new mongoose.Schema({
     default: {
       vote: false,
       daily: false,
-      tips:true,
+      tips: true,
       voteStreak: 0,
       dailyStreak: 0,
       ph: "MPH",
