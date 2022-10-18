@@ -330,7 +330,7 @@ module.exports = {
         page = 1;
       } else if (i.customId.includes("classS")) {
         classpage = carclassSarr;
-        embed = new EmbedBuilder().setTitle("Class A Dealership");
+        embed = new EmbedBuilder().setTitle("Class S Dealership");
         let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("previous")
@@ -350,7 +350,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png")
+          .setThumbnail("https://i.ibb.co/JckVDtN/CLASS-S.png")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
         console.dir(carclassSarr[0]);
