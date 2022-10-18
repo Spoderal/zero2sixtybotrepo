@@ -33,8 +33,7 @@ module.exports = {
           },
           {
             label: "10/18/2022",
-            description:
-              "Information for the recent update!",
+            description: "Information for the recent update!",
             value: "4_update",
             customId: "up4",
             emoji: "🏆",

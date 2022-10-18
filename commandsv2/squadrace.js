@@ -209,15 +209,15 @@ module.exports = {
     let policeuser;
     let policelen;
     let itemusedp;
-    let settings = userdata.settings
+    let settings = userdata.settings;
 
-    let speed = `${user1carspeed} MPH`
-    let speed2 = `${botspeed} MPH`
+    let speed = `${user1carspeed} MPH`;
+    let speed2 = `${botspeed} MPH`;
 
-      if(settings.ph == "KMH"){
-        speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`
-        speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`
-      }
+    if (settings.ph == "KMH") {
+      speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`;
+      speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`;
+    }
     let embed = new discord.EmbedBuilder()
       .setTitle(`${squadinfo.Name} race in progress...`)
       .addFields([

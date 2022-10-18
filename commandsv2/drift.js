@@ -8,7 +8,11 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
-const { invisibleSpace, doubleCashWeekendField, convertMPHtoKPH } = require("../common/utils");
+const {
+  invisibleSpace,
+  doubleCashWeekendField,
+  convertMPHtoKPH,
+} = require("../common/utils");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
@@ -263,13 +267,13 @@ module.exports = {
 
         break;
     }
-    let settings = userdata.settings
+    let settings = userdata.settings;
 
-    let speed = `${usercarspeed} MPH`
+    let speed = `${usercarspeed} MPH`;
 
-      if(settings.ph == "KMH"){
-        speed = `${Math.floor(convertMPHtoKPH(usercarspeed))} KMH`
-      }
+    if (settings.ph == "KMH") {
+      speed = `${Math.floor(convertMPHtoKPH(usercarspeed))} KMH`;
+    }
     let embed = new EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
       .setDescription(`You have ${time}s to complete the track`)

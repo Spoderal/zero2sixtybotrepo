@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const {convertMPHtoKPH} = require("../common/utils")
+const { convertMPHtoKPH } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -97,11 +97,19 @@ module.exports = {
       .addFields([
         {
           name: `${user.username}'s car`,
-          value: `${carindb1.Emote} ${carindb1.Name}\n\nSpeed: ${u1speed} MPH\n${convertMPHtoKPH(u1speed)}\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
+          value: `${carindb1.Emote} ${
+            carindb1.Name
+          }\n\nSpeed: ${u1speed} MPH\n${convertMPHtoKPH(
+            u1speed
+          )}\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
         },
         {
           name: `${user2.username}'s car`,
-          value: `${carindb2.Emote} ${carindb2.Name}\n\nSpeed: ${u2speed} MPH\n${convertMPHtoKPH(u2speed)}\n0-60: ${u2acc}s\nHandling: ${u2handling}`,
+          value: `${carindb2.Emote} ${
+            carindb2.Name
+          }\n\nSpeed: ${u2speed} MPH\n${convertMPHtoKPH(
+            u2speed
+          )}\n0-60: ${u2acc}s\nHandling: ${u2handling}`,
         },
       ])
       .setImage(carimage1)

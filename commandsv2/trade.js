@@ -284,7 +284,7 @@ module.exports = {
       partdb.Parts[trading2.toLowerCase()]
     ) {
       let user2parts = userdata2.parts;
-      let amount2 = interaction.options.getNumber("amount2") || 1
+      let amount2 = interaction.options.getNumber("amount2") || 1;
       let actamount;
       if (amount2 > 1) {
         actamount = amount2;
@@ -300,9 +300,7 @@ module.exports = {
           `${user2} doesn't have ${actamount} ${trading2}!`
         );
 
-      let filteredcar = userdata.cars.filter(
-        (car) => car.ID == trading
-      );
+      let filteredcar = userdata.cars.filter((car) => car.ID == trading);
       let selected = filteredcar[0] || "No ID";
 
       if (selected == "No ID") {
@@ -398,7 +396,7 @@ module.exports = {
         return await interaction.reply(
           `${user2} doesn't have ${amount2} ${trading2}!`
         );
-   
+
       let itemtype;
 
       if (itemdb.Collectable[trading2.toLowerCase()]) {

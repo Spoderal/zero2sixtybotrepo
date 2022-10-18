@@ -9,8 +9,8 @@ const { tipFooterRandom } = require("../common/tips");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const achievementsdb = require("../data/achievements.json")
-const User = require("../schema/profile-schema")
+const achievementsdb = require("../data/achievements.json");
+const User = require("../schema/profile-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,9 +43,9 @@ module.exports = {
       wheelspins,
       swheelspins,
       candy,
-      achievements
+      achievements,
     } = profile;
-    let userdata = await User.findOne({id: interaction.user.id})
+    let userdata = await User.findOne({ id: interaction.user.id });
 
     if (typeof cash === "undefined") {
       await interaction.reply(GET_STARTED_MESSAGE);
@@ -98,65 +98,98 @@ module.exports = {
         ]);
 
       await interaction.reply({ embeds: [embed] });
-      if(!achievements) {
-        achievements = ["None"]
+      if (!achievements) {
+        achievements = ["None"];
       }
 
-        let richFiltered = userdata.achievements.filter((achievement) => achievement.name == "Rich")
-        if(richFiltered.length == 0) {
-          console.log("none")
-          userdata.achievements.push({name: "Rich", id:"rich", completed: false})
-          userdata.markModified("achievements")
-          userdata.update()
-        }
-        let richFiltered2 = userdata.achievements.filter((achievement) => achievement.name == "Richer")
-        if(richFiltered2.length == 0) {
-          console.log("none")
-          userdata.achievements.push({name: "Richer", id:"richer", completed: false})
-          userdata.markModified("achievements")
-          userdata.update()
-        }
-        let richFiltered3 = userdata.achievements.filter((achievement) => achievement.name == "Richest")
-        if(richFiltered3.length == 0) {
-          console.log("none")
-          userdata.achievements.push({name: "Richest",  id:"richest", completed: false})
-          userdata.markModified("achievements")
-          userdata.update()
-        }
-
-        if(richFiltered.length !== 0 && cash >= 100000 && richFiltered[0].completed !== true){
-         
-            interaction.followUp(`New achievement! <:achievement_rich:1031826566151409715> You received ${toCurrency(achievementsdb.Achievements["rich"].Reward)}`)
-            richFiltered[0].completed = true
-            userdata.cash += achievementsdb.Achievements["rich"].Reward
-            userdata.update()
-            userdata.markModified("achievements")
-          
-        }
-
-        
-        if(richFiltered2.length !== 0 && cash >= 1000000 && richFiltered2[0].completed !== true){
-         
-          interaction.followUp(`New achievement! <:achievement_richer:1031826565207707648> You received ${toCurrency(achievementsdb.Achievements["richer"].Reward)}`)
-          richFiltered2[0].completed = true
-          userdata.cash += achievementsdb.Achievements["richer"].Reward
-          userdata.update()
-          userdata.markModified("achievements")
-        
+      let richFiltered = userdata.achievements.filter(
+        (achievement) => achievement.name == "Rich"
+      );
+      if (richFiltered.length == 0) {
+        console.log("none");
+        userdata.achievements.push({
+          name: "Rich",
+          id: "rich",
+          completed: false,
+        });
+        userdata.markModified("achievements");
+        userdata.update();
       }
-      if(richFiltered3.length !== 0 && cash >= 1000000000 && richFiltered3[0].completed !== true){
-         
-        interaction.followUp(`New achievement! <:achievement_richest:1031826564050071603> You received ${toCurrency(achievementsdb.Achievements["richest"].Reward)}`)
-        richFiltered3[0].completed = true
-        userdata.cash += achievementsdb.Achievements["richest"].Reward
-        userdata.update()
-        userdata.markModified("achievements")
-      
-    }
-    
-    
-  
-  userdata.save()
+      let richFiltered2 = userdata.achievements.filter(
+        (achievement) => achievement.name == "Richer"
+      );
+      if (richFiltered2.length == 0) {
+        console.log("none");
+        userdata.achievements.push({
+          name: "Richer",
+          id: "richer",
+          completed: false,
+        });
+        userdata.markModified("achievements");
+        userdata.update();
+      }
+      let richFiltered3 = userdata.achievements.filter(
+        (achievement) => achievement.name == "Richest"
+      );
+      if (richFiltered3.length == 0) {
+        console.log("none");
+        userdata.achievements.push({
+          name: "Richest",
+          id: "richest",
+          completed: false,
+        });
+        userdata.markModified("achievements");
+        userdata.update();
+      }
+
+      if (
+        richFiltered.length !== 0 &&
+        cash >= 100000 &&
+        richFiltered[0].completed !== true
+      ) {
+        interaction.followUp(
+          `New achievement! <:achievement_rich:1031826566151409715> You received ${toCurrency(
+            achievementsdb.Achievements["rich"].Reward
+          )}`
+        );
+        richFiltered[0].completed = true;
+        userdata.cash += achievementsdb.Achievements["rich"].Reward;
+        userdata.update();
+        userdata.markModified("achievements");
+      }
+
+      if (
+        richFiltered2.length !== 0 &&
+        cash >= 1000000 &&
+        richFiltered2[0].completed !== true
+      ) {
+        interaction.followUp(
+          `New achievement! <:achievement_richer:1031826565207707648> You received ${toCurrency(
+            achievementsdb.Achievements["richer"].Reward
+          )}`
+        );
+        richFiltered2[0].completed = true;
+        userdata.cash += achievementsdb.Achievements["richer"].Reward;
+        userdata.update();
+        userdata.markModified("achievements");
+      }
+      if (
+        richFiltered3.length !== 0 &&
+        cash >= 1000000000 &&
+        richFiltered3[0].completed !== true
+      ) {
+        interaction.followUp(
+          `New achievement! <:achievement_richest:1031826564050071603> You received ${toCurrency(
+            achievementsdb.Achievements["richest"].Reward
+          )}`
+        );
+        richFiltered3[0].completed = true;
+        userdata.cash += achievementsdb.Achievements["richest"].Reward;
+        userdata.update();
+        userdata.markModified("achievements");
+      }
+
+      userdata.save();
     }
   },
 };

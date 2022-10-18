@@ -96,11 +96,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  lastDaily:{
+  lastDaily: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("cooldowns", Cooldowns);

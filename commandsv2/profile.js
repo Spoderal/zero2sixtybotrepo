@@ -7,7 +7,7 @@ const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const prestigedb = require(`../data/prestige.json`);
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const achievementsdb = require("../data/achievements.json")
+const achievementsdb = require("../data/achievements.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,23 +28,20 @@ module.exports = {
     let racerank = userdata.racerank;
     let driftrank = userdata.driftrank;
     let helmet = userdata.helmet;
-    let achievements = userdata.achievements
-    let acharray = []
-    if(achievements && achievements.length !== 0){
-      for(let a in achievements){
-        let achievement = achievements[a]
+    let achievements = userdata.achievements;
+    let acharray = [];
+    if (achievements && achievements.length !== 0) {
+      for (let a in achievements) {
+        let achievement = achievements[a];
 
-        if(achievement.completed == true){
-          let achindb = achievementsdb.Achievements[achievement.id.toLowerCase()]
-          acharray.push(`${achindb.Emote} ${achindb.Name}`)
-
+        if (achievement.completed == true) {
+          let achindb =
+            achievementsdb.Achievements[achievement.id.toLowerCase()];
+          acharray.push(`${achindb.Emote} ${achindb.Name}`);
         }
-
-        
       }
-    }
-    else {
-      acharray ["None"]
+    } else {
+      acharray["None"];
     }
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
     let title = userdata.title;
@@ -66,7 +63,7 @@ module.exports = {
 
     let cash = userdata.cash;
     finalprice += cash;
-    
+
     const fields = [
       {
         name: `Progress`,
@@ -76,19 +73,21 @@ module.exports = {
           Drift Rank: ${driftrank}
           Prestige: ${prestige}
           Tier: ${userdata.tier}
-        `, inline: true
-        
+        `,
+        inline: true,
       },
       {
         name: `Achievements`,
         value: `
-          ${acharray.join('\n')}
-        `, inline: true
+          ${acharray.join("\n")}
+        `,
+        inline: true,
       },
       {
         name: `\u200b`,
-        value: `\u200b`, inline: true
-      }
+        value: `\u200b`,
+        inline: true,
+      },
     ];
 
     let bestcar = cars[0];

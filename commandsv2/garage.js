@@ -61,9 +61,6 @@ module.exports = {
     let garagelimit = userdata.garageLimit;
     var userparts = [];
 
-
-    
-
     var actpart;
     let items = userdata.items;
     var actitems = [];
@@ -106,8 +103,6 @@ module.exports = {
         type = itemdb.Collectable[actitem.toLowerCase()].Type;
         price = itemdb.Collectable[actitem.toLowerCase()].Price;
       }
-
-      
 
       if (price) sum += Number(price);
 
@@ -719,6 +714,5 @@ module.exports = {
         }
       });
     }
-    
   },
 };

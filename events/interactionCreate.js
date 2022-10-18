@@ -1,7 +1,7 @@
 const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
-const {dailyCheck} = require("./daily")
+const { dailyCheck } = require("./daily");
 
 module.exports = {
   name: "interactionCreate",
