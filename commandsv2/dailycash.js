@@ -22,28 +22,27 @@ module.exports = {
     let daily = cooldowndata.daily;
     let patreon = userdata.patron;
     let lastDaily = cooldowndata.lastDaily;
-    let streak = userdata.settings.dailyStreak || 0
+    let streak = userdata.settings.dailyStreak || 0;
 
     let lastDailyTime = new Date(lastDaily);
 
-    let timestamp = lastDailyTime.getTime()
-    let now = new Date(Date.now()).getTime()
+    let timestamp = lastDailyTime.getTime();
+    let now = new Date(Date.now()).getTime();
 
-    console.log(now)
+    console.log(now);
 
-    let delta = now - timestamp
+    let delta = now - timestamp;
 
-    console.log(delta)
+    console.log(delta);
 
-    let time = 172800000
-    if(delta > time){
-      userdata.settings.dailyStreak = 1
+    let time = 172800000;
+    if (delta > time) {
+      userdata.settings.dailyStreak = 1;
+    } else {
+      userdata.settings.dailyStreak += 1;
     }
-    else {
-      userdata.settings.dailyStreak += 1
-    }
 
-    userdata.markModified("settings")
+    userdata.markModified("settings");
 
     let house = userdata.house;
     if (house && house.perks.includes("Daily $300")) {

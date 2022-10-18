@@ -14,9 +14,9 @@
     "salary": 200,
     "name": "Police"
   },
-  "criminal":{
-    "prestige":5,
-    "salary":"N/A",
-    "name":"Criminal"
+  "criminal": {
+    "prestige": 5,
+    "salary": "N/A",
+    "name": "Criminal"
   }
 }

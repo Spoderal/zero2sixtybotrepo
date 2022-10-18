@@ -31,7 +31,6 @@ module.exports = {
           { name: "Nitro", value: "nitro" },
           { name: "Brakes", value: "brakes" },
           { name: "Springs", value: "springs" }
-
         )
         .setRequired(true)
     )

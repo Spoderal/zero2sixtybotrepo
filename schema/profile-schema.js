@@ -141,10 +141,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 10000,
   },
-  achievements:{
+  achievements: {
     type: Array,
     required: false,
-    default: []
+    default: [],
   },
   items: {
     type: Array,
@@ -308,7 +308,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  settings:{
+  settings: {
     type: Object,
     required: false,
     default: {
@@ -316,9 +316,9 @@ const Profile = new mongoose.Schema({
       daily: false,
       voteStreak: 0,
       dailyStreak: 0,
-      ph:"MPH"
-    }
-  }
+      ph: "MPH",
+    },
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

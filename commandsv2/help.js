@@ -6,7 +6,7 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const achievementdb = require("../data/achievements.json").Achievements
+const achievementdb = require("../data/achievements.json").Achievements;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,7 +30,7 @@ module.exports = {
         .setStyle("Link")
         .setLabel("🧡 Patreon")
         .setURL("https://www.patreon.com/zero2sixtybot"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setStyle("Secondary")
         .setLabel("🏆Achievements")
         .setCustomId("achievements")
@@ -103,13 +103,13 @@ module.exports = {
       interaction.customId == "select";
 
     const collector = interaction.channel.createMessageComponentCollector({
-      filter
+      filter,
     });
     let filter2 = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
     };
     const collector2 = interaction.channel.createMessageComponentCollector({
-      filter: filter2
+      filter: filter2,
     });
 
     let pageEmbed;
@@ -227,22 +227,23 @@ module.exports = {
         components: [row2, row],
       });
     });
-    collector2.on('collect', async (i) => {
-        if(i.customId.includes("achievements")){
+    collector2.on("collect", async (i) => {
+      if (i.customId.includes("achievements")) {
+        let embed = new EmbedBuilder();
+        for (let ach in achievementdb) {
+          let achievement = achievementdb[ach];
 
-
-          let embed = new EmbedBuilder();
-          for(let ach in achievementdb){
-            let achievement = achievementdb[ach]
-
-            embed.setColor(colors.blue);
-            embed.addFields({name: `${achievement.Emote} ${achievement.Name}`, value: `${achievement.Task}`})
-          }
-          await i.update({
-            embeds: [embed],
-            components: [row2, row],
+          embed.setColor(colors.blue);
+          embed.addFields({
+            name: `${achievement.Emote} ${achievement.Name}`,
+            value: `${achievement.Task}`,
           });
         }
-    })
+        await i.update({
+          embeds: [embed],
+          components: [row2, row],
+        });
+      }
+    });
   },
 };
