@@ -356,7 +356,7 @@ module.exports = {
     }, 1000);
 
     let removedShiftButton = false;
-    let x = setInterval(() => {
+    let x = setInterval(async () => {
       tracklength -= formula;
 
       if (showedShiftButton && !canshift && !removedShiftButton) {
@@ -416,6 +416,11 @@ module.exports = {
             let patronbonus = moneyearned * 4;
 
             moneyearned += patronbonus;
+          }
+          let Global = require("../schema/global-schema")
+          let global = await Global.findOne()
+          if(global.zeroplus.includes(interaction.guild.id)){
+            moneyearned = moneyearned * 2
           }
           embed.addFields([
             {

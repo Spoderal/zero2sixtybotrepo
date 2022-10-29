@@ -26,6 +26,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: "#60b0f4",
   },
+  zeroplus:{
+    type:Array,
+    required:false,
+    default:[]
+  }
 });
 
 module.exports = mongoose.model("global", Global);

@@ -398,7 +398,7 @@ module.exports = {
     }
 
     let timer = 0;
-    let x = setInterval(() => {
+    let x = setInterval(async () => {
       tracklength += hp;
       tracklength2 += hp2;
       timer++;
@@ -423,6 +423,11 @@ module.exports = {
             let patronbonus = moneyearned * 4;
 
             moneyearned += patronbonus;
+          }
+          let Global = require("../schema/global-schema")
+          let global = await Global.findOne()
+          if(global.zeroplus.includes(interaction.guild.id)){
+            moneyearned = moneyearned * 2
           }
           embed.addFields([{ name: "Results", value: "Won" }]);
           if (global.double == true) {

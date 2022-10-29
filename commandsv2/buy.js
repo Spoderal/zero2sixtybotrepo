@@ -121,7 +121,16 @@ module.exports = {
         };
         if (boughtCar.Range) {
           carobj = {
-            ...carobj,
+            ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+          Drift: 0,
             Range: carindb.Range,
             MaxRange: carindb.Range,
           };
@@ -181,9 +190,18 @@ module.exports = {
 
           if (boughtCar.Range) {
             carobj = {
-              ...carobj,
-              Range: boughtCar.Range,
-              MaxRange: boughtCar.Range,
+              ID: boughtCar.alias,
+              Name: boughtCar.Name,
+              Speed: boughtCar.Speed,
+              Acceleration: boughtCar["0-60"],
+              Handling: boughtCar.Handling,
+              Parts: [],
+              Emote: boughtCar.Emote,
+              Livery: boughtCar.Image,
+              Miles: 0,
+              Drift: 0,
+                Range: boughtCar.Range,
+                MaxRange: boughtCar.Range,
             };
           }
 
@@ -237,7 +255,17 @@ module.exports = {
 
           if (boughtCar.Range) {
             carobj = {
-              ...carobj,
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+              Resale: sellprice,
+              Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
             };
@@ -300,6 +328,17 @@ module.exports = {
           };
           if (boughtCar.Range) {
             carobj = {
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+              Resale: sellprice,
+              Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
             };

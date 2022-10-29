@@ -142,9 +142,7 @@ module.exports = {
       botcar = lodash.sample(bot6cars);
     }
 
-    let racelevel = userdata.racerank;
 
-    let newrankrequired = racelevel * 200;
     let nitro = selected.Nitro;
 
     let user1carspeed = selected.Speed;
@@ -255,7 +253,7 @@ module.exports = {
     }
 
     let timer = 0;
-    let x = setInterval(() => {
+    let x = setInterval(async () => {
       tracklength += hp;
       tracklength2 += hp2;
       timer++;
@@ -280,7 +278,11 @@ module.exports = {
           ]);
 
           interaction.editReply({ embeds: [embed] });
-
+          let Global = require("../schema/global-schema")
+          let global = await Global.findOne()
+          if(global.zeroplus.includes(interaction.guild.id)){
+            moneyearned = moneyearned * 2
+          }
           userdata.cashcuptier += 1;
           userdata.cash += Number(moneyearned);
 
