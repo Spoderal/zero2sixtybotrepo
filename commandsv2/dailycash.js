@@ -69,14 +69,14 @@ module.exports = {
     if (patreon && patreon.tier == 4) {
       dcash *= 5;
     }
-    
+
     if (interaction.guild.id == "931004190149460048") {
       dcash += 500;
     }
-    let Global = require("../schema/global-schema")
-    let global = await Global.findOne()
-    if(global.zeroplus.includes(interaction.guild.id)){
-      dcash = dcash * 1.5
+    let Global = require("../schema/global-schema");
+    let global = await Global.findOne();
+    if (global.zeroplus.includes(interaction.guild.id)) {
+      dcash = dcash * 1.5;
     }
     let timeout = 86400000;
     let prestige = userdata.prestige;

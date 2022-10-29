@@ -417,10 +417,10 @@ module.exports = {
 
             moneyearned += patronbonus;
           }
-          let Global = require("../schema/global-schema")
-          let global = await Global.findOne()
-          if(global.zeroplus.includes(interaction.guild.id)){
-            moneyearned = moneyearned * 2
+          let Global = require("../schema/global-schema");
+          let global = await Global.findOne();
+          if (global.zeroplus.includes(interaction.guild.id)) {
+            moneyearned = moneyearned * 2;
           }
           embed.addFields([
             {

@@ -19,11 +19,8 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("job")
     .setDescription("Manage your job, work, etc")
-    .addSubcommand((cmd) => cmd
-
-    .setName("work")
-    .setDescription("Work at your job")
-
+    .addSubcommand((cmd) =>
+      cmd.setName("work").setDescription("Work at your job")
     )
     .addSubcommand((cmd) =>
       cmd
@@ -55,8 +52,8 @@ module.exports = {
         rank: 1,
         rating: 0,
         ratings: [],
-        cooldown:0,
-        shifts:0
+        cooldown: 0,
+        shifts: 0,
       };
       userdata.work = jobtoset;
       userdata.save();
@@ -66,24 +63,24 @@ module.exports = {
       if (!userdata.work) return interaction.reply("You don't have a job.");
 
       let jobtowork = userdata.work;
-      
-      let timeout = 28800000
-      if (userdata.work.cooldown !== null && timeout - (Date.now() - userdata.work.cooldown) > 0) {
+
+      let timeout = 28800000;
+      if (
+        userdata.work.cooldown !== null &&
+        timeout - (Date.now() - userdata.work.cooldown) > 0
+      ) {
         let time = ms(timeout - (Date.now() - userdata.work.cooldown));
         let timeEmbed = new Discord.EmbedBuilder()
           .setColor(colors.blue)
-          .setDescription(
-            `You've already worked\n\nWork again in ${time}.`
-          );
+          .setDescription(`You've already worked\n\nWork again in ${time}.`);
         await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
         return;
       }
-      
-      
+
       if (jobtowork.name == "zuber") {
-        userdata.work.cooldown = Date.now()
-        userdata.markModified("work")
-         userdata.save()
+        userdata.work.cooldown = Date.now();
+        userdata.markModified("work");
+        userdata.save();
         let locations = [
           { name: "Zero City", miles: 50 },
           { name: "Zero Shores", miles: 30 },
@@ -136,10 +133,10 @@ module.exports = {
 
         collector.on("collect", async (i) => {
           if (i.customId == "yes") {
-            userdata.work.cooldown = Date.now()
-            userdata.markModified("work")
-            userdata.update()
-            msg.edit({components: []})
+            userdata.work.cooldown = Date.now();
+            userdata.markModified("work");
+            userdata.update();
+            msg.edit({ components: [] });
             let msg2 = await i.update({
               content: `Please send the car id you wish to use to transport ${person.name}`,
               fetchReply: true,
@@ -194,11 +191,14 @@ module.exports = {
               if (userdata.settings.ph == "KMH") {
                 speed = `${Math.floor(convertMPHtoKPH(selected.Speed))} KMH`;
               }
-              embed.setTitle(`Transporting ${person.name} to ${location.name}`)
-              embed.addFields(
-                {name:`${carsdb.Cars[selected.Name.toLowerCase()].Emote} ${selected.Name}`, value: `Speed: ${speed2}\nAcceleration: ${selected.Acceleration}s\nComfort: ${comfort}`}
-              )
-              msg2.edit({embeds: [embed], components: []})
+              embed.setTitle(`Transporting ${person.name} to ${location.name}`);
+              embed.addFields({
+                name: `${carsdb.Cars[selected.Name.toLowerCase()].Emote} ${
+                  selected.Name
+                }`,
+                value: `Speed: ${speed2}\nAcceleration: ${selected.Acceleration}s\nComfort: ${comfort}`,
+              });
+              msg2.edit({ embeds: [embed], components: [] });
 
               let x = setInterval(async () => {
                 miles += score;
@@ -235,19 +235,19 @@ module.exports = {
                     }
 
                     console.log(`score: ${finalsc}`);
-                    await msg2.edit(`Success! you got a rating of ${Math.floor(rating)}/10`);
-                    let salary = rating * 100
+                    await msg2.edit(
+                      `Success! you got a rating of ${Math.floor(rating)}/10`
+                    );
+                    let salary = rating * 100;
 
-                    userdata.cash += salary
-                    userdata.work.ratings.push(rating)
-                    userdata.markModified("work")
-                    let avg = mode(userdata.work.ratings)
-                    userdata.work.rating = avg
-                    userdata.markModified("work")
+                    userdata.cash += salary;
+                    userdata.work.ratings.push(rating);
+                    userdata.markModified("work");
+                    let avg = mode(userdata.work.ratings);
+                    userdata.work.rating = avg;
+                    userdata.markModified("work");
 
-                    userdata.save()
-
-                    
+                    userdata.save();
 
                     clearInterval(x);
                   } else {
@@ -264,10 +264,11 @@ module.exports = {
   },
 };
 
-function mode(arr){
-  return arr.sort((a,b) =>
-        arr.filter(v => v===a).length
-      - arr.filter(v => v===b).length
-  ).pop();
+function mode(arr) {
+  return arr
+    .sort(
+      (a, b) =>
+        arr.filter((v) => v === a).length - arr.filter((v) => v === b).length
+    )
+    .pop();
 }
-

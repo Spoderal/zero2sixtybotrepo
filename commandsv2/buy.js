@@ -122,15 +122,15 @@ module.exports = {
         if (boughtCar.Range) {
           carobj = {
             ID: carindb.alias,
-          Name: carindb.Name,
-          Speed: carindb.Speed,
-          Acceleration: carindb["0-60"],
-          Handling: carindb.Handling,
-          Parts: [],
-          Emote: carindb.Emote,
-          Livery: carindb.Image,
-          Miles: 0,
-          Drift: 0,
+            Name: carindb.Name,
+            Speed: carindb.Speed,
+            Acceleration: carindb["0-60"],
+            Handling: carindb.Handling,
+            Parts: [],
+            Emote: carindb.Emote,
+            Livery: carindb.Image,
+            Miles: 0,
+            Drift: 0,
             Range: carindb.Range,
             MaxRange: carindb.Range,
           };
@@ -200,8 +200,8 @@ module.exports = {
               Livery: boughtCar.Image,
               Miles: 0,
               Drift: 0,
-                Range: boughtCar.Range,
-                MaxRange: boughtCar.Range,
+              Range: boughtCar.Range,
+              MaxRange: boughtCar.Range,
             };
           }
 
