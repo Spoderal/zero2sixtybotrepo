@@ -121,8 +121,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          }
-          else if (value === "time_event") {
+          } else if (value === "time_event") {
             embed.setTitle("Time Champions");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`People are competing to get the best time on /timetrial! Can you beat everyone and get the best time!

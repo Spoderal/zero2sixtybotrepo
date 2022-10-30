@@ -31,11 +31,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
-  trialtimes:{
-    type:Array,
+  trialtimes: {
+    type: Array,
     required: false,
-    default: []
-  }
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("global", Global);
