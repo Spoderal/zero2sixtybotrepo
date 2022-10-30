@@ -4101,6 +4101,20 @@
       "Handling": 500,
       "Class": "B"
     },
+    "2010 dodge charger": {
+      "alias": "2010 charger",
+      "Name": "2010 Dodge Charger",
+      "Emote": "<:dodge:931011880040951828>",
+      "Speed": 150,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "V6",
+      "Image": "https://www.vehiclehistory.com/uploads/2010-Dodge-Charger-1.jpg",
+      "0-60": 11,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "C"
+    },
     "2020 dodge charger hellcat": {
       "alias": "2020 charger hellcat",
       "Name": "2020 Dodge Charger Hellcat",

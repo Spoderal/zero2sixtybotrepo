@@ -30,6 +30,11 @@ const Global = new mongoose.Schema({
     type:Array,
     required:false,
     default:[]
+  },
+  trialtimes:{
+    type:Array,
+    required:false,
+    default: []
   }
 });
 

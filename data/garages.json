@@ -1,0 +1,47 @@
+{
+    "common garage":{
+        "Name":"Common Garage",
+        "Contents":[
+            "t1intercooler",
+            "t2clutch",
+            "t1tires",
+            "$5,000",
+            "1969 ford mustang",
+            "1969 volkswagen beetle",
+            "1973 plymouth barracuda"
+        ],
+        "Emoji":"<:commongarage:1036380413695897651>",
+        "Image":"https://i.ibb.co/9HP0hRC/commongarage.png",
+        "Rarity":50
+    },
+    "rare garage":{
+        "Name":"Rare Garage",
+        "Contents":[
+            "t3intercooler",
+            "t3clutch",
+            "t3tires",
+            "$10,000",
+            "1992 dodge viper",
+            "1969 dodge daytona",
+            "1973 pontiac trans am"
+        ],
+        "Emoji":"<:raregarage:1036380412940918944>",
+        "Image":"https://i.ibb.co/S7ydkYT/raregarage.png",
+        "Rarity":25
+    },
+    "legendary garage":{
+        "Name":"Legendary Garage",
+        "Contents":[
+            "t4intercooler",
+            "t5clutch",
+            "t4tires",
+            "$100,000",
+            "1967 330 p4",
+            "1966 lamborghini miura",
+            "1989 lotus esprit"
+        ],
+        "Emoji":"<:legendarygarage:1036380411942670458>",
+        "Image":"https://i.ibb.co/1GkR0Fz/legendarygarage.png",
+        "Rarity":5
+    }
+}

@@ -32,6 +32,13 @@ module.exports = {
             customId: "halloween",
             emoji: "🍬",
           },
+          {
+            label: "Time Champions",
+            description: "Information for the Time Champions Event",
+            value: "time_event",
+            customId: "time",
+            emoji: "⏱️",
+          },
         ])
     );
 
@@ -45,8 +52,8 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Fall Season 2022 🍂\n
-          Trick or Speed 🍬
-        
+          Trick or Speed 🍬\n
+          Time Champions ⏱️
       `);
 
     embed.setColor(colors.blue);
@@ -108,6 +115,27 @@ module.exports = {
                   `);
             embed.setThumbnail("https://i.ibb.co/1RLHhVP/logo-halloween.png");
             embed.setImage("https://i.ibb.co/yWWWXx9/halloweeeen.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else if (value === "time_event") {
+            embed.setTitle("Time Champions");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`People are competing to get the best time on /timetrial! Can you beat everyone and get the best time!
+
+            Race against the clock in timetrial with /timetrial race
+            Check the leaderboard and top 3 users with /timetrial leaderboard
+
+            1st place wins an exclusive 2010 Dodge Viper SRT10 and an exclusive badge\n
+            2nd place wins $1M, and an exclusive badge\n
+            3rd place wins $500K and an exclusive badge\n
+            
+                  `);
+            embed.setThumbnail("https://i.ibb.co/Fng0cKF/timetrialevent.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
