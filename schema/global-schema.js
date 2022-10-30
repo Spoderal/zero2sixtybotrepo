@@ -26,14 +26,14 @@ const Global = new mongoose.Schema({
     required: false,
     default: "#60b0f4",
   },
-  zeroplus:{
-    type:Array,
-    required:false,
-    default:[]
+  zeroplus: {
+    type: Array,
+    required: false,
+    default: [],
   },
   trialtimes:{
     type:Array,
-    required:false,
+    required: false,
     default: []
   }
 });

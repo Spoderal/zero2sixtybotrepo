@@ -13,7 +13,6 @@ const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
-
 let bot1cars = [
   "1995 mazda miata",
   "1991 toyota mr2",
@@ -744,11 +743,11 @@ module.exports = {
 
             moneyearned += patronbonus;
           }
-          console.log(moneyearned)
-          let Global = require("../schema/global-schema")
-          let global = await Global.findOne()
-          if(global.zeroplus.includes(interaction.guild.id)){
-            moneyearned = moneyearned * 2
+          console.log(moneyearned);
+          let Global = require("../schema/global-schema");
+          let global = await Global.findOne();
+          if (global.zeroplus.includes(interaction.guild.id)) {
+            moneyearned = moneyearned * 2;
           }
 
           let earningsresult = [];

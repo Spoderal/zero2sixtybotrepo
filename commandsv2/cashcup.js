@@ -142,7 +142,6 @@ module.exports = {
       botcar = lodash.sample(bot6cars);
     }
 
-
     let nitro = selected.Nitro;
 
     let user1carspeed = selected.Speed;
@@ -278,10 +277,10 @@ module.exports = {
           ]);
 
           interaction.editReply({ embeds: [embed] });
-          let Global = require("../schema/global-schema")
-          let global = await Global.findOne()
-          if(global.zeroplus.includes(interaction.guild.id)){
-            moneyearned = moneyearned * 2
+          let Global = require("../schema/global-schema");
+          let global = await Global.findOne();
+          if (global.zeroplus.includes(interaction.guild.id)) {
+            moneyearned = moneyearned * 2;
           }
           userdata.cashcuptier += 1;
           userdata.cash += Number(moneyearned);
