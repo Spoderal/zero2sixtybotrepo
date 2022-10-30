@@ -1432,6 +1432,21 @@
       "Handling": 500,
       "Class": "B"
     },
+    "2010 dodge viper srt10": {
+      "alias": "2010 viper srt10",
+      "Name": "2010 Dodge Viper SRT10",
+      "Emote": "<:dodge:931011880040951828>",
+      "Speed": 200,
+      "kmh": 286,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "8.4 L V10",
+      "Image": "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/images/10q2/339152/2010-dodge-viper-srt10-acr-x-photo-354005-s-original.jpg?crop=0.962xw:0.787xh;0.0401xw,0.142xh&resize=1200:*",
+      "0-60": 9.3,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "A"
+    },
     "1989 nissan skyline r32": {
       "alias": "1989 skyline r32",
       "Name": "1989 Nissan Skyline R32",
