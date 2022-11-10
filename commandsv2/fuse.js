@@ -28,11 +28,11 @@ module.exports = {
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
           { name: "Bodykit", value: "bodykit" },
-          {name: "Weight", value: "weight"},
+          { name: "Weight", value: "weight" },
           { name: "Brakes", value: "brakes" },
           { name: "TXExhaust", value: "txexhaust" },
           { name: "TXIntake", value: "txintake" },
-          { name: "TXClutch", value: "txclutch" },
+          { name: "TXClutch", value: "txclutch" }
         )
         .setRequired(true)
     ),
@@ -51,7 +51,6 @@ module.exports = {
       );
 
     if (!parts) return await interaction.reply("You dont have any parts!");
-
 
     if (parttoinstall == "txexhaust") {
       let xessence = userdata.xessence;
@@ -135,8 +134,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } 
-    else if (parttoinstall == "txclutch") {
+    } else if (parttoinstall == "txclutch") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -219,8 +217,7 @@ module.exports = {
       } else if (parttoinstall == "bodykit") {
         parte = "t4bodykit";
         partb = "t5bodykit";
-      }
-      else if (parttoinstall == "weight") {
+      } else if (parttoinstall == "weight") {
         parte = "t4weightreduction";
         partb = "t5weightreduction";
       }

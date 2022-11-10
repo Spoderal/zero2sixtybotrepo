@@ -117,7 +117,7 @@
       "Type": "clutch",
       "AddedHandling": 50,
       "DecreasedSpeed": "0",
-      "Image":"https://i.ibb.co/my2w1K5/txclutch.png",
+      "Image": "https://i.ibb.co/my2w1K5/txclutch.png",
       "AddHandling": 100
     },
     "t1intercooler": {

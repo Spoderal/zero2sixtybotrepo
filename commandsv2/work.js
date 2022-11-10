@@ -259,9 +259,8 @@ module.exports = {
             });
           }
         });
-      }
-      else if(jobtowork.name == "police") {
-       interaction.reply()
+      } else if (jobtowork.name == "police") {
+        interaction.reply();
       }
     }
   },
