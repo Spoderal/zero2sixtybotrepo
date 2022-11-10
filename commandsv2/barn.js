@@ -45,8 +45,6 @@ module.exports = {
     if (!barnmaps && rarity2 == "common")
       return await interaction.reply("You don't have any common barn maps!");
 
-  
-
     if (!rbarnmaps && rarity2 == "rare")
       return await interaction.reply("You don't have any rare barn maps!");
 

@@ -30,7 +30,7 @@ module.exports = {
             value: "4_update",
             customId: "up4",
             emoji: "🏆",
-          }
+          },
         ])
     );
 
@@ -59,7 +59,7 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-     if (value === "3_update") {
+          if (value === "3_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
 

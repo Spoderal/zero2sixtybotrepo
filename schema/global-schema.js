@@ -41,11 +41,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
-  marketId:{
+  marketId: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("global", Global);

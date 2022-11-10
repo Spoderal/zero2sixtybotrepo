@@ -9,7 +9,7 @@
       "1969 volkswagen beetle",
       "1973 plymouth barracuda"
     ],
-    "MaxCash":10000,
+    "MaxCash": 10000,
     "Emoji": "<:commongarage:1036380413695897651>",
     "Image": "https://i.ibb.co/9HP0hRC/commongarage.png",
     "Rarity": 50
@@ -25,7 +25,7 @@
       "1973 pontiac trans am"
     ],
     "Emoji": "<:raregarage:1036380412940918944>",
-    "MaxCash":100000,
+    "MaxCash": 100000,
     "Image": "https://i.ibb.co/S7ydkYT/raregarage.png",
     "Rarity": 24
   },
@@ -40,7 +40,7 @@
       "1966 lamborghini miura",
       "1989 lotus esprit"
     ],
-    "MaxCash":100000,
+    "MaxCash": 100000,
     "Emoji": "<:legendarygarage:1036380411942670458>",
     "Image": "https://i.ibb.co/1GkR0Fz/legendarygarage.png",
     "Rarity": 5

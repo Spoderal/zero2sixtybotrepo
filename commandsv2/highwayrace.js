@@ -161,7 +161,7 @@ module.exports = {
         );
       }
     }
-    let lockpicks
+    let lockpicks;
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
@@ -441,12 +441,11 @@ module.exports = {
 
           earnings.push(`${cemote} $${moneyearnedtxt}`);
           earnings.push(`${rpemote} ${ticketsearned} RP`);
-          let ckemote = "<:lockpick:1040384727691051170>"
+          let ckemote = "<:lockpick:1040384727691051170>";
           if (lockpicks >= 1) {
             earnings.push(`${lockpicks} ${ckemote} lockpicks`);
             userdata.lockpicks += lockpicks;
           }
-      
 
           embed.addFields([
             { name: "Earnings", value: `${earnings.join("\n")}` },
