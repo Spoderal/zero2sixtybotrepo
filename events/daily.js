@@ -7,14 +7,16 @@ async function dailyCheck(interaction) {
   let userdata = await User.findOne({ id: interaction.user.id });
   let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
 
-  let settings = userdata.settings;
-  let votetimer = userdata.votetimer;
-  let dailytimer = cooldowns.daily;
-  let tips = settings.tips;
+  if(cooldowns){
+    let settings = userdata.settings;
+    let votetimer = userdata.votetimer;
+    let dailytimer = cooldowns.daily;
+    let tips = settings.tips;
 
-  let hours12 = 43200000;
+    
+    let hours12 = 43200000;
   let hours24 = 86400000;
-
+  
   let tipslist = [
     "You can run /parts to view a variety of parts to upgrade on your car!",
     "There is a community server with a bunch of giveaways for cash!",
@@ -54,6 +56,7 @@ async function dailyCheck(interaction) {
       console.log("cant dm");
     }
   }
+}
 }
 
 module.exports = {

@@ -36,6 +36,16 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  market: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  marketId:{
+    type: Number,
+    required: false,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("global", Global);

@@ -260,6 +260,9 @@ module.exports = {
           }
         });
       }
+      else if(jobtowork.name == "police") {
+       interaction.reply()
+      }
     }
   },
 };

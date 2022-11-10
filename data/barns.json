@@ -8,15 +8,6 @@
       "barn 1970 chevy chevelle ss",
       "barn 1969 volkswagen beetle"
     ],
-    "uncommon": [
-      "barn 1990 bmw m3",
-      "barn 1971 chevy corvette",
-      "barn 1972 datsun 240z",
-      "barn 1954 mercedes 300sl",
-      "barn 1973 pontiac trans am",
-      "barn 1982 porsche 924",
-      "barn 1973 nissan skyline"
-    ],
     "rare": [
       "barn 1965 porsche 911",
       "barn 1970 dodge challenger",
@@ -25,7 +16,14 @@
       "barn 1979 aston martin v8 vantage",
       "barn 1969 toyota 2000gt",
       "barn 1969 dodge daytona",
-      "barn 1984 audi quattro"
+      "barn 1984 audi quattro",
+      "barn 1990 bmw m3",
+      "barn 1971 chevy corvette",
+      "barn 1972 datsun 240z",
+      "barn 1954 mercedes 300sl",
+      "barn 1973 pontiac trans am",
+      "barn 1982 porsche 924",
+      "barn 1973 nissan skyline"
     ],
     "legendary": [
       "barn 1973 ferrari dino",

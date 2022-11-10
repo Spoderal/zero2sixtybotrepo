@@ -19,7 +19,6 @@ module.exports = {
         .setDescription("The barn you want to search")
         .addChoices(
           { name: "Common", value: "common" },
-          { name: "Uncommon", value: "uncommon" },
           { name: "Rare", value: "rare" },
           { name: "Legendary", value: "legendary" }
         )
@@ -46,8 +45,7 @@ module.exports = {
     if (!barnmaps && rarity2 == "common")
       return await interaction.reply("You don't have any common barn maps!");
 
-    if (!ubarnmaps && rarity2 == "uncommon")
-      return await interaction.reply("You don't have any uncommon barn maps!");
+  
 
     if (!rbarnmaps && rarity2 == "rare")
       return await interaction.reply("You don't have any rare barn maps!");

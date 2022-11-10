@@ -308,6 +308,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  lockpicks:{
+    type: Number,
+    required: false,
+    default: 0
+  },
   settings: {
     type: Object,
     required: false,
@@ -319,6 +324,7 @@ const Profile = new mongoose.Schema({
       dailyStreak: 0,
       ph: "MPH",
     },
+
   },
 });
 

@@ -41,6 +41,7 @@ module.exports = {
       banklimit,
       notofall: notoriety,
       wheelspins,
+      lockpicks: lockpicks,
       swheelspins,
       candy,
       achievements,
@@ -70,7 +71,6 @@ module.exports = {
             name: "Barn Maps",
             value: `
               ${emotes.barnMapCommon} Common: ${numberWithCommas(barnmaps)}
-              ${emotes.barnMapUncommon} Uncommon: ${numberWithCommas(ubarnmaps)}
               ${emotes.barnMapRare} Rare: ${numberWithCommas(rbarnmaps)}
               ${emotes.barnMapLegendary} Legendary: ${numberWithCommas(
               lbarnmaps
@@ -84,6 +84,7 @@ module.exports = {
             ${emotes.commonKey} Common: ${ckeys}
             ${emotes.rareKey} Rare: ${rkeys}
             ${emotes.exoticKey} Exotic: ${ekeys}
+            <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
             `,
             inline: true,
           },

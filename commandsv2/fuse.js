@@ -28,9 +28,11 @@ module.exports = {
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
           { name: "Bodykit", value: "bodykit" },
+          {name: "Weight", value: "weight"},
           { name: "Brakes", value: "brakes" },
           { name: "TXExhaust", value: "txexhaust" },
-          { name: "TXIntake", value: "txintake" }
+          { name: "TXIntake", value: "txintake" },
+          { name: "TXClutch", value: "txclutch" },
         )
         .setRequired(true)
     ),
@@ -49,28 +51,7 @@ module.exports = {
       );
 
     if (!parts) return await interaction.reply("You dont have any parts!");
-    let list3 = [
-      "exhaust",
-      "tires",
-      "intake",
-      "clutch",
-      "gearbox",
-      "ecu",
-      "intercooler",
-      "dsuspension",
-      "rsuspension",
-      "turbo",
-      "spoiler",
-      "txexhaust",
-      "txintake",
-      "bodykit",
-      "brakes",
-    ];
 
-    if (!list3.includes(parttoinstall.toLowerCase()))
-      return await interaction.reply(
-        "Thats not an available fuse part! Try: Exhaust, Tires, Intercooler, Clutch, Gearbox, ECU, Drift Suspension, Race Suspension, or Intake"
-      );
 
     if (parttoinstall == "txexhaust") {
       let xessence = userdata.xessence;
@@ -154,6 +135,48 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
+    } 
+    else if (parttoinstall == "txclutch") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5clutch") && !parts.includes("T5Clutch"))
+        return await interaction.reply(`You need a T5Clutch to do this fuse!`);
+
+      for (var e = 0; e < 1; e++) parts.splice(parts.indexOf("t5clutch"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5clutch"].Emote} ${partdb.Parts["t5clutch"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txclutch"].Emote} ${partdb.Parts["txclutch"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txclutch");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
     } else {
       let parte = "";
       let partb = "";
@@ -196,6 +219,10 @@ module.exports = {
       } else if (parttoinstall == "bodykit") {
         parte = "t4bodykit";
         partb = "t5bodykit";
+      }
+      else if (parttoinstall == "weight") {
+        parte = "t4weightreduction";
+        partb = "t5weightreduction";
       }
 
       let filtereduser = parts.filter(function hasmany(part) {
