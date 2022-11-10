@@ -84,8 +84,7 @@ module.exports = {
 
     let randomstatuses = [
       `🍂 FALL 🍂  /season`,
-      `⬆️ BIG UPDATE 8/22`,
-      `👻 HAPPY HALLOWEEN 🎃`,
+      `⬆️ BIG UPDATE 11/10`,
       "🏆 ACHIEVEMENTS",
       `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
     ];
