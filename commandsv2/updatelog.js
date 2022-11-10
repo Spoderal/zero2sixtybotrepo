@@ -67,7 +67,7 @@ module.exports = {
             embed
               .setDescription(
                 `• Highway race for lockpicks!\n
-                • Find old garages filled with loot with lockpicks!\n
+                • Find old garages filled with loot like restored barn cars, cash, and parts with lockpicks! [BETA]\n
                 • The user market is back! Its economy will be controlled by the users, you can list currencies, cars, parts, and items!\n
                 • Added TXClutch\n
                 • Added T4 and T5WeightReduction\n
