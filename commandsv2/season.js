@@ -211,8 +211,7 @@ module.exports = {
           let amount = Number(item.Item.split(" ")[0]);
           userdata.ekeys += amount;
           userdata.fallrewards += 1;
-        } 
-        else if (item.Item.endsWith("Common Keys")) {
+        } else if (item.Item.endsWith("Common Keys")) {
           let amount = Number(item.Item.split(" ")[0]);
           userdata.ckeys += amount;
           userdata.fallrewards += 1;
