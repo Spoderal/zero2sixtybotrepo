@@ -59,7 +59,9 @@ module.exports = {
         return await interaction.reply({ embeds: [errembed] });
       }
       let livid = interaction.options.getString("id");
-      let cardata = await Car.findOne({ name: selected.Name }) || new Car({name: selected.Name});
+      let cardata =
+        (await Car.findOne({ name: selected.Name })) ||
+        new Car({ name: selected.Name });
       if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
       if (!list[selected.Name.toLowerCase()])
