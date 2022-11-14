@@ -273,7 +273,7 @@ module.exports = {
           }
           userdata.fallrewards += 1;
         } else if (partdb.Parts[item.Item.toLowerCase()]) {
-          console.log("part")
+          console.log("part");
           userdata.parts.push(item.Item.toLowerCase());
           userdata.fallrewards += 1;
         } else if (cardb.Cars[item.Item.toLowerCase()]) {
