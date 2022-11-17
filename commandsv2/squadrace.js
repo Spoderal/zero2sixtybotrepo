@@ -80,7 +80,7 @@ module.exports = {
 
     let ticketsearned;
     let classd;
-
+    if(tier == 6) return interaction.reply("You've beaten all the squads!")
     let tracklength = 0;
 
     let squadsarr = [];
@@ -94,6 +94,8 @@ module.exports = {
       { name: "flame squad", car: 0 },
       { name: "x squad", car: 0 },
     ];
+
+
     console.log(squadfiltered[0]);
     let sqlevelfiltered = sqlevels.filter(
       (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
