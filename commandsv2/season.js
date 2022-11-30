@@ -488,7 +488,8 @@ module.exports = {
           } else if (partdb.Parts[item.Item.toLowerCase()]) {
             console.log("part");
             userdata.parts.push(item.Item.toLowerCase());
-            userdata.winterrewards += 1;
+            userdata.spacerewards += 1;
+            
           } else if (cardb.Cars[item.Item.toLowerCase()]) {
             let carindb = cardb.Cars[item.Item.toLowerCase()];
             let carobj = {
