@@ -19,7 +19,10 @@ async function updateCrew(interaction) {
 
       let crewmembers = crew2.members;
       let crewrank = crew2.Rank2;
-
+      if(!crew2.Rank2) {
+        crew2.Rank2 = 1;
+        global.update()
+      }
       for (let i in crewmembers) {
         let user = crewmembers[i];
         let rpdata = await User.findOne({ id: user });

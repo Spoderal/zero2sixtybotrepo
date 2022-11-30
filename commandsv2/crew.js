@@ -96,6 +96,10 @@ module.exports = {
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
       let owner = newrparray.find((u) => u?.isOwner);
+      if(!crew2.Rank2) {
+        crew2.Rank2 = 1;
+        global.update()
+      }
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
         .setThumbnail(icon)
@@ -405,7 +409,7 @@ module.exports = {
         members: [interaction.user.id],
         owner: interaction.user,
         icon: icons.Icons.default,
-        Rank: 1,
+        Rank2: 1,
         RP: 0,
       };
 
@@ -574,11 +578,11 @@ module.exports = {
       }
 
       members = members.sort(function (b, a) {
-        return a.Rank - b.Rank;
+        return a.Rank2 - b.Rank2;
       });
 
       members = members.filter(function BigEnough(value) {
-        return value.Rank > 0;
+        return value.Rank2 > 0;
       });
 
       members = members.slice(0, 10);
@@ -588,7 +592,7 @@ module.exports = {
       for (let i = 0; i < members.length; i++) {
         let user = members[i].name;
         if (!user) return;
-        let bal = members[i].Rank;
+        let bal = members[i].Rank2;
         desc += `${i + 1}. ${user} - Rank ${numberWithCommas(bal)}\n`;
       }
       let embed = new Discord.EmbedBuilder()
