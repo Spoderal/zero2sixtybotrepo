@@ -104,7 +104,7 @@ module.exports = {
             name: "Information",
             value: `
               ${mlength} members\n
-              Rank ${crew2.Rank}\n
+              Rank ${crew2.Rank2}\n
               RP: ${total}\n
               ${
                 owner
@@ -159,7 +159,7 @@ module.exports = {
                 let item = crewseason[w];
                 let required = item.Number;
                 let emote = "❌";
-                if (required <= crew2.Rank) {
+                if (required <= crew2.Rank2) {
                   emote = "✅";
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
@@ -188,7 +188,7 @@ module.exports = {
                   name: "Information",
                   value: `
                       ${crew2.members.length} members\n
-                      Rank ${crew2.Rank}\n
+                      Rank ${crew2.Rank2}\n
                       RP: ${total}\n
                       Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
                     `,
@@ -200,7 +200,7 @@ module.exports = {
               await i.update({ embeds: [embed], components: [row] });
             } else if (i.customId.includes("claim")) {
               let item = crewseason[redeemed];
-              if (item.Number > crew2.Rank) {
+              if (item.Number > crew2.Rank2) {
                 return;
               }
               console.log(item);
@@ -301,7 +301,7 @@ module.exports = {
                   .setLabel(`Claim Reward ${(redeemed += 1)}`)
                   .setStyle(`Success`)
               );
-              if (item.Number > crew2.Rank) {
+              if (item.Number > crew2.Rank2) {
                 row.components[0].setStyle(`Danger`);
               }
 

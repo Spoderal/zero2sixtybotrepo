@@ -18,7 +18,7 @@ async function updateCrew(interaction) {
       let totalrp = 0;
 
       let crewmembers = crew2.members;
-      let crewrank = crew2.Rank;
+      let crewrank = crew2.Rank2;
 
       for (let i in crewmembers) {
         let user = crewmembers[i];
@@ -29,7 +29,7 @@ async function updateCrew(interaction) {
       }
       let requiredrp = crewrank * 1000;
       if (parseInt(totalrp) >= parseInt(requiredrp)) {
-        let rank = crew2.Rank;
+        let rank = crew2.Rank2;
 
         let newrank = (rank += 1);
 
