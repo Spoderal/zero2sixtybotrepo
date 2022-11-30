@@ -21,6 +21,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  goldclear:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
   daily: {
     type: Number,
     required: false,

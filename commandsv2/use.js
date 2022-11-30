@@ -36,19 +36,19 @@ module.exports = {
     let items = userdata.items;
     let emote;
     let name;
-    if (itemdb.Other[itemtouse.toLowerCase()].Type == "Non-Usable")
+    if (itemtouse.toLowerCase() !== "gold" && itemdb.Other[itemtouse.toLowerCase()].Type == "Non-Usable" )
       return interaction.reply(`Thats not a usable item!`);
-    if (!items.includes(itemtouse.toLowerCase()))
+    if (!items.includes(itemtouse.toLowerCase()) && itemtouse.toLowerCase() !== "gold")
       return interaction.reply("You don't have this item!");
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
     });
-    if (amount2 > 50)
+    if (amount2 > 50 && itemtouse.toLowerCase() !== "gold")
       return interaction.reply(
         `The max amount you can use in one command is 50!`
       );
 
-    if (amount2 > filtereduser.length)
+    if (amount2 > filtereduser.length && itemtouse.toLowerCase() !== "gold")
       return interaction.reply("You don't have that many of that item!");
     let fullname;
 
@@ -364,6 +364,7 @@ module.exports = {
       emote = itemdb.Collectable[itemtouse.toLowerCase()].Emote;
       name = itemdb.Collectable[itemtouse.toLowerCase()].Name;
     }
+
 
     fullname = `${emote} ${name}`;
 

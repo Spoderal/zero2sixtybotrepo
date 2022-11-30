@@ -93,6 +93,7 @@ module.exports = {
                 • Dealership now has a new cars section\n
                 • The first garage exclusive car is here! Check the new cars in the dealership.\n
                 • New winter tires, can be found in wheelspins, and garages\n
+                • Gold can now be used to purchase notoriety and clear cooldowns\n
                 • Bug fixes
                 `
               )
