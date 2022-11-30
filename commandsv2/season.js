@@ -264,9 +264,7 @@ module.exports = {
               }
             );
             userdata.update();
-          }
-         
-          else if (
+          } else if (
             item.Item.endsWith("Bank Increase") ||
             item.Item.endsWith("Bank Increases")
           ) {
@@ -338,7 +336,7 @@ module.exports = {
       let eventrewards2 = reward2.slice(10, 20);
       let eventrewards3 = reward2.slice(20, 25);
 
-      console.log(eventrewards2)
+      console.log(eventrewards2);
 
       if (!page || page == "1") {
         embed = new discord.EmbedBuilder()
@@ -364,8 +362,7 @@ module.exports = {
           ])
           .setColor(colors.blue)
           .setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png");
-      }
-      else if (page == "3") {
+      } else if (page == "3") {
         embed = new discord.EmbedBuilder()
           .setTitle("Space Race Page 3 of 3")
           .setDescription(
