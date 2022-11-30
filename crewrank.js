@@ -31,7 +31,6 @@ module.exports = (client) => {
           let rpdata = await User.findOne({ id: user });
           let userrp = rpdata.rp2;
           totalrp += userrp;
-         
         }
         if (parseInt(totalrp) >= parseInt(requiredrp)) {
           let rank = crew2.Rank2;
