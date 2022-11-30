@@ -434,7 +434,10 @@ module.exports = {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.lmaps += amount;
             userdata.spacerewards += 1;
-          } else if (item.Item.endsWith("Super wheelspin") || item.Item.endsWith("Super wheelspins")) {
+          } else if (
+            item.Item.endsWith("Super wheelspin") ||
+            item.Item.endsWith("Super wheelspins")
+          ) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.swheelspins += amount;
             userdata.spacerewards += 1;
