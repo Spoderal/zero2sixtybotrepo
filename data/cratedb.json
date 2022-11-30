@@ -20,14 +20,30 @@
     },
     "seasonal": {
       "Contents": [
-        "stig helmet",
         "beach helmet",
         "sunrise helmet",
-        "discord helmet",
         "grass helmet",
-        "dark mode helmet"
+        "dark mode helmet",
+        "bluer helmet"
       ],
       "Price": 800
-    }
+    },
+    "prestige":{
+      "Contents":[
+        "100000 Cash",
+        "dark mode helmet",     
+        "dark mode helmet",
+        "stig helmet",
+        "vibrant helmet",
+        "50000 Cash",
+        "50000 Cash",
+        "50000 Cash",
+        "T5Clutch",
+        "T5Exhaust",
+        "25000 Cash"
+      ]
+    },
+    "Emote":"<:supplydropprestige:1044404462581719041>",
+    "Image":"https://i.ibb.co/bvzk1VL/supplydropprestige.png"
   }
 }

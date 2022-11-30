@@ -36,6 +36,7 @@
     "t4ecu",
     "t4driftsuspension",
     "t4racesuspension",
+    "t4wintertires",
     "t4spoiler",
     "t4bodykit",
     "t4brakes",
@@ -43,7 +44,7 @@
     "v8"
   ],
   "Cash": [1000, 2000, 3000, 4000, 5000, 6000, 7500],
-  "Maps": ["Common", "Uncommon"],
+  "Maps": ["Common", "Common", "Rare"],
   "Items": ["big bank increase", "bank increase"],
   "Helmets": [
     "platinum helmet",

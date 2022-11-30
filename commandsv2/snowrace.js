@@ -6,17 +6,31 @@ const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
-const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const { randomRange, convertMPHtoKPH } = require("../common/utils");
+const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
-const { doubleCashWeekendField } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+
+let bot1cars = [
+  "2018 subaru wrx sti we",
+  "2020 toyota gr yaris we"
+];
+let bot2cars = [
+  "2015 mitsubishi lancer evolution we",
+  "2016 mercedes benz g63 we"
+];
+let bot3cars = [
+  "2016 ford focus rs we",
+  "2017 ford fiesta st we"
+];
+
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("training")
-    .setDescription("Train your driving skills")
+    .setName("snowrace")
+    .setDescription("Race a bot in the snow! (SEASONAL)")
     .addStringOption((option) =>
       option
         .setName("tier")
@@ -25,7 +39,7 @@ module.exports = {
         .addChoices(
           { name: "Tier 1", value: "1" },
           { name: "Tier 2", value: "2" },
-          { name: "Tier 3", value: "3" }
+          { name: "Tier 3", value: "3" },
         )
     )
     .addStringOption((option) =>
@@ -34,6 +48,7 @@ module.exports = {
         .setDescription("The car id to use")
         .setRequired(true)
     ),
+
   async execute(interaction) {
     const db = require("quick.db");
 
@@ -43,11 +58,9 @@ module.exports = {
     // let moneyearnedtxt = 50;
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
-
     let idtoselect = interaction.options.getString("car");
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
@@ -62,10 +75,11 @@ module.exports = {
     }
     let bot = interaction.options.getString("tier");
     let botlist = ["1", "2", "3"];
-    let timeout = 45000;
+
+    const timeout = userGetPatreonTimeout(userdata);
+
     let botcar = null;
     let racing = cooldowndata.racing;
-
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
@@ -73,14 +87,11 @@ module.exports = {
         `Please wait ${time} before racing again.`
       );
     }
+
     let semote = emotes.speed;
     let hemote = emotes.handling;
     let zemote = emotes.zero2sixty;
     let cemote = emotes.cash;
-    let rpemote = emotes.rp;
-    let bot1cars = ["1995 mazda miata", "1995 mazda miata"];
-    let bot2cars = ["2014 hyundai genesis coupe", "2008 nissan 350z"];
-    let bot3cars = ["2020 porsche 718 cayman", "2015 lotus exige sport"];
 
     let botdupgrades = randomRange(5, 25);
     let botemote;
@@ -115,25 +126,28 @@ module.exports = {
       }
     }
     let weekytask1 = userdata.weeklytask;
-    let ticketsearned;
     let classd;
-    let barnmaps;
-    let ubarnmaps;
     let tracklength = 0;
+    let rpearn
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
-        ticketsearned = 1;
         classd = "1";
+        rpearn = 25;
         botemote = emotes.botTier1;
         break;
       }
+      case "dclass": {
+        botcar = lodash.sample(bot1cars);
+        classd = "D";
+        botemote = emotes.botTier1;
 
+        break;
+      }
       case "2": {
         botcar = lodash.sample(bot2cars);
         moneyearned += 150;
-        // moneyearnedtxt += 150;
-        ticketsearned = 2;
+        rpearn = 100;
         classd = "2";
         botemote = emotes.botTier2;
 
@@ -142,9 +156,8 @@ module.exports = {
       case "3": {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
-        // moneyearnedtxt += 300;
-        ticketsearned = 3;
         classd = "3";
+        rpearn = 500;
         botemote = emotes.botTier3;
 
         break;
@@ -182,7 +195,8 @@ module.exports = {
       userdata.save();
     }
     if (usables.includes("energy drink")) {
-      ticketsearned = ticketsearned * 2;
+      
+        rpearn = rpearn * 2;
     }
     let sponsortimer = cooldowndata.sponsor;
     if (usables.includes("sponsor")) {
@@ -205,34 +219,36 @@ module.exports = {
     }
     if (usables.includes("sponsor")) {
       moneyearned = moneyearned * 2;
+      // moneyearnedtxt = moneyearnedtxt * 2;
     }
 
     let racelevel = userdata.racerank;
 
     cooldowndata.racing = Date.now();
     cooldowndata.save();
+
     let newrankrequired = racelevel * 200;
     if (prestige >= 3) {
       newrankrequired * 2;
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    let user1carspeed = selected.Speed;
-    let user1carzerosixty = selected.Acceleration;
-    let user1carhandling = selected.Handling;
+    let user1carspeed = parseInt(selected.Speed);
+    let user1carzerosixty = parseInt(selected.Acceleration);
+    let user1carhandling = parseInt(selected.Handling);
 
     let userhelmet = userdata.helmet;
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    let driftscore = selected.Drift;
-    let botspeed = cars.Cars[botcar.toLowerCase()].Speed;
-    let zero2sixtycar = selected.Acceleration;
-    let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"];
-    let newhandling = user1carhandling / 20;
-    let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20;
+    let botspeed = parseInt(cars.Cars[botcar.toLowerCase()].Speed);
+    let zero2sixtycar = parseInt(selected.Acceleration);
+    let otherzero2sixty = parseInt(cars.Cars[botcar.toLowerCase()]["0-60"]);
+    let newhandling = user1carhandling / 10;
+    let bothandling = parseInt(cars.Cars[botcar.toLowerCase()].Handling);
+    let othernewhandling = bothandling / 10;
     let new60 = user1carspeed / zero2sixtycar;
-    let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
+    let new62 = botspeed / otherzero2sixty;
     let using = userdata.using;
     Number(user1carspeed);
     Number(botspeed);
@@ -242,33 +258,43 @@ module.exports = {
       botspeed += botdupgrades;
     }
     let hp = user1carspeed + newhandling;
-    hp - driftscore;
+    hp - (user1carspeed / 2);
     let hp2 = botspeed + othernewhandling;
+    hp2 - (botspeed / 2);
     let y;
     let policeuser;
     let policelen;
     let itemusedp;
+    let settings = userdata.settings;
+
+    let speed = `${user1carspeed} MPH`;
+    let speed2 = `${botspeed} MPH`;
+
+    if (settings.ph == "KMH") {
+      speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`;
+      speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`;
+    }
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${classd} bot race in progress...`)
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
           inline: true,
         },
         {
           name: `${botemote} ${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Speed: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,
         },
       ])
       .setColor(colors.blue)
-
       .setFooter(tipFooterRandom)
+      .setImage("https://i.gifer.com/1jxk.gif")
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -312,7 +338,6 @@ module.exports = {
       collector.on("collect", async (i) => {
         if (i.customId.includes("boost")) {
           let boost = partdb.Parts.t1nitro.AddedBoost;
-
           tracklength += parseInt(boost);
           i.update({ content: "Boosting!", embeds: [embed] });
           selected.Nitro = null;
@@ -372,7 +397,10 @@ module.exports = {
                   .setTitle("Error!")
                   .setColor(colors.discordTheme.red)
                   .setDescription(
-                    `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
+                    `
+                    That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n
+                    **Example: /ids Select 1 1995 mazda miata**
+                    `
                   );
                 return await interaction.reply({ embeds: [errembed] });
               }
@@ -479,8 +507,11 @@ module.exports = {
       tracklength += hp;
       tracklength2 += hp2;
       timer++;
+      console.log(tracklength)
+      console.log(tracklength2)
 
       if (timer >= 10) {
+
         clearInterval(x);
         clearInterval(y);
         collector2.stop();
@@ -495,9 +526,7 @@ module.exports = {
 
             interaction.editReply({ embeds: [embed] });
           } else if (policelen > tracklength) {
-            let userid = interaction.user.id;
-            let userdatacop = await User.findOne({ id: userid });
-            let job = userdatacop.job;
+            let job = userdata.job;
             let jobsdb = require("../data/jobs.json");
             let num = job.Number;
             let salary = job.Salary;
@@ -536,8 +565,8 @@ module.exports = {
                 Job: actjob,
               });
             }
-            userdatacop.cash += salary;
-            userdatacop.save();
+            userdata.cash += salary;
+            userdata.save();
             msg.reply(
               `You've completed your job duties and earned yourself $${salary}, and ${xp2} XP`
             );
@@ -546,27 +575,6 @@ module.exports = {
         }
 
         if (tracklength > tracklength2) {
-          if (userdata.cashgain == "10") {
-            let calccash = moneyearned * 0.1;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "15") {
-            let calccash = moneyearned * 0.15;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "20") {
-            let calccash = moneyearned * 0.2;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "25") {
-            let calccash = moneyearned * 0.25;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          } else if (userdata.cashgain == "50") {
-            let calccash = moneyearned * 0.5;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          }
           if (using.includes("trophy")) {
             moneyearned = moneyearned * 2;
             // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
@@ -578,19 +586,39 @@ module.exports = {
             selected.Wins += 1;
             userdata.save();
           }
-          let earningsresult = [];
           if (interaction.guild.id == "931004190149460048") {
             let calccash = moneyearned * 0.05;
             // moneyearnedtxt += calccash;
             moneyearned += calccash;
           }
-          earningsresult.push(`$${moneyearned}`);
-          earningsresult.push(`${rpemote} ${ticketsearned} RP`);
-          if (barnmaps) {
-            earningsresult.push(`${barnmaps} Common Barn Maps`);
-            userdata.cmaps += barnmaps;
+          if (
+            (userdata.patreon && userdata.patreon.tier == 1) ||
+            (userdata.patreon && userdata.patreon.tier == 2)
+          ) {
+            let patronbonus = moneyearned * 1.5;
+
+            moneyearned += patronbonus;
           }
-    
+          if (userdata.patreon && userdata.patreon.tier == 3) {
+            let patronbonus = moneyearned * 2;
+
+            moneyearned += patronbonus;
+          }
+          if (userdata.patreon && userdata.patreon.tier == 4) {
+            let patronbonus = moneyearned * 4;
+
+            moneyearned += patronbonus;
+          }
+          console.log(moneyearned);
+          let Global = require("../schema/global-schema");
+          let global = await Global.findOne();
+          if (global.zeroplus.includes(interaction.guild.id)) {
+            moneyearned = moneyearned * 2;
+          }
+
+          let earningsresult = [];
+          earningsresult.push(`$${moneyearned}`);
+      
           if (
             weekytask1 &&
             !weekytask1.completed &&
@@ -604,26 +632,14 @@ module.exports = {
             userdata.cash += userdata.weeklytask.reward;
             userdata.save();
           }
+          
 
-          if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.ferrari) {
-            earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
-            userdata.fkeys += 1;
-          }
-          userdata.rp2 += ticketsearned;
-          userdata.cash += Number(moneyearned);
-          userdata.racexp += 25;
+          userdata.noto5 += parseInt(rpearn);
+          userdata.cash += parseInt(moneyearned);
+          userdata.update();
+          earningsresult.push(`${emotes.notoriety} ${rpearn} Notoriety`);
 
-          let racerank2 = userdata.racerank;
-
-          let reqxp = racerank2 * 100;
-
-          if (userdata.racexp >= reqxp) {
-            userdata.racerank += 1;
-            earningsresult.push(
-              `Ranked up your race rank to ${userdata.racerank}`
-            );
-            userdata.racexp = 0;
-          }
+          userdata.racerank += 1;
 
           embed.addFields([
             {
@@ -632,31 +648,32 @@ module.exports = {
             },
           ]);
 
-          let globalvars = await Global.findOne();
-
-          if (globalvars.double == true) {
-            moneyearned = moneyearned += moneyearned;
-            embed.addFields([doubleCashWeekendField]);
-            // moneyearnedtxt = `$${moneyearned}`;
-          }
           interaction.editReply({ embeds: [embed] });
-
-          userdata.save();
 
           if (range > 0) {
             selected.Range -= 1;
-            userdata.save();
           }
+
+          userdata.save();
 
           return;
         } else if (tracklength < tracklength2) {
+          let moneye = moneyearned / 5;
           embed.setTitle(`Tier ${classd} bot race lost!`);
+
+          embed.addFields([
+            {
+              name: "Earnings",
+              value: `${cemote} $${moneye}`,
+            },
+          ]);
+          userdata.cash += Number(moneye);
 
           clearInterval(x);
           if (range > 0) {
             selected.Range -= 1;
-            userdata.save();
           }
+          userdata.save();
           interaction.editReply({ embeds: [embed] });
           return;
         } else if (tracklength == tracklength2) {
@@ -672,9 +689,5 @@ module.exports = {
         }
       }
     }, 1000);
-
-    function randomRange(min, max) {
-      return Math.round(Math.random() * (max - min)) + min;
-    }
   },
 };

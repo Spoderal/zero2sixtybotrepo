@@ -180,19 +180,19 @@ module.exports = {
       }
       case "2": {
         botcar = lodash.sample(bot2cars);
-        moneyearned += 150;
+        moneyearned += 50;
         ticketsearned = 3;
         break;
       }
       case "3": {
         botcar = lodash.sample(bot3cars);
-        moneyearned += 300;
+        moneyearned += 150;
         ticketsearned = 4;
         break;
       }
       case "4": {
         botcar = lodash.sample(bot4cars);
-        moneyearned += 500;
+        moneyearned += 400;
         ticketsearned = 4;
         break;
       }

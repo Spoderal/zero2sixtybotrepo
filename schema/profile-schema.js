@@ -86,7 +86,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-  rp2: {
+  rp3: {
     type: Number,
     required: false,
     default: 0,
@@ -107,11 +107,12 @@ const Profile = new mongoose.Schema({
       { name: "the ws", car: 0 },
     ],
   },
-  notofall: {
+  noto5: {
     type: Number,
     required: false,
     default: 0,
   },
+
   dkeys: {
     type: Number,
     required: false,
@@ -224,6 +225,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  winterrewards: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  spacerewards: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   tier: {
     type: Number,
     required: false,
@@ -304,6 +315,11 @@ const Profile = new mongoose.Schema({
     default: [],
   },
   bugattiwins: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  moontokens: {
     type: Number,
     required: false,
     default: 0,

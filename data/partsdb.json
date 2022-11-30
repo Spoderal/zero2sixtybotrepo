@@ -872,6 +872,24 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
+      "DecreaseHandling": "100",
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png"
+    },
+    "super rocket engine": {
+      "Name": "Super Rocket Engine",
+      "AddedSpeed": "60",
+      "AddedSixty": "7",
+      "AddedSnow": 0,
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:rocketengine:985992825411866695>",
+      "Tier": "5",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "DecreaseHandling": "200",
+      "Type": "engine",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png"
     },
@@ -1561,9 +1579,9 @@
       "DecreasedDrift": "1",
       "DecreasedSixty": "0",
       "Type": "tires",
-      "DecreasedSpeed": "2",
+      "DecreasedSpeed": 2,
       "AddedSpeed": "0",
-      "DecreaseHandling": "2"
+      "AddHandling": 50
     },
     "t2wintertires": {
       "Name": "T2WinterTires",
@@ -1577,10 +1595,59 @@
       "DecreasedDrift": "1",
       "DecreasedSixty": "0",
       "Type": "tires",
+      "DecreasedSpeed": 2,
       "AddedSpeed": "0",
-      "DecreasedSpeed": "3",
-      "DecreaseHandling": "2"
+      "AddHandling": 100
     },
+    "t3wintertires": {
+      "Name": "T3WinterTires",
+      "AddedSixty": "0",
+      "AddedSnow": 10,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:tires3:932046342442864650>",
+      "Tier": "3",
+      "AddedDrift": "0",
+      "DecreasedDrift": "1",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "DecreasedSpeed": 5,
+      "AddedSpeed": "0",
+      "AddHandling": 150
+    },
+    "t4wintertires": {
+      "Name": "T4WinterTires",
+      "AddedSixty": "0",
+      "AddedSnow": 10,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:t4tires:988981449883533332>",
+      "Tier": "4",
+      "AddedDrift": "0",
+      "DecreasedDrift": "1",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "DecreasedSpeed": 10,
+      "AddedSpeed": "0",
+      "AddHandling": 250
+    },
+    "t5wintertires": {
+      "Name": "T5WinterTires",
+      "AddedSixty": "0",
+      "AddedSnow": 10,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:t5tires:988981451603181569>",
+      "Tier": "5",
+      "AddedDrift": "0",
+      "DecreasedDrift": "1",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "DecreasedSpeed": 15,
+      "AddedSpeed": "0",
+      "AddHandling": 500
+    },
+    
     "t1winterweight": {
       "Name": "T1WinterWeight",
       "AddedSixty": "0",

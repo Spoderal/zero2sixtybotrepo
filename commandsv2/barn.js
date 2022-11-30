@@ -37,7 +37,6 @@ module.exports = {
 
     let barntimer = cooldowns.barn;
     let barnmaps = userdata.cmaps;
-    let ubarnmaps = userdata.ucmaps;
     let rbarnmaps = userdata.rmaps;
     let lbarnmaps = userdata.lmaps;
     let rarity2 = interaction.options.getString("rarity");

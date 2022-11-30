@@ -19,25 +19,18 @@ module.exports = {
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Fall Season",
-            description: "Information for the Fall Season Event",
-            value: "spring_event",
-            customId: "spring",
-            emoji: "🍂",
+            label: "Winter Season",
+            description: "Information for the Winter Season Event",
+            value: "winter_event",
+            customId: "winter",
+            emoji: "❄️",
           },
           {
-            label: "Trick or Speed",
-            description: "Information for the Trick or Speed Event",
-            value: "halloween_event",
-            customId: "halloween",
-            emoji: "🍬",
-          },
-          {
-            label: "Time Champions",
-            description: "Information for the Time Champions Event",
-            value: "time_event",
-            customId: "time",
-            emoji: "⏱️",
+            label: "Space Race",
+            description: "Information for the Space Race Event",
+            value: "space_event",
+            customId: "space",
+            emoji: "🚀",
           },
         ])
     );
@@ -51,9 +44,8 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Fall Season 2022 🍂\n
-          Trick or Speed 🍬\n
-          Time Champions ⏱️
+          Winter Season 2022 ❄️\n
+          Space Race 🚀
       `);
 
     embed.setColor(colors.blue);
@@ -72,69 +64,48 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-          if (value === "spring_event") {
-            embed.setTitle("Fall Season");
+          if (value === "winter_event") {
+            embed.setTitle("Winter Season");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Get your track cars out because its track season!
+            embed.setDescription(`Sometimes, too much speed is a bad thing.
 
-            Choose from a bunch of new parts that help your handling increase, because you'll want to make sure your handling is MAX!
+            The snow has returned on Zero2Sixty!
 
-            Test your cars limits on the track with /trackrace and earn notoriety to earn exclusive season rewards, this time DOUBLE the length of last season!
-
+            Make sure you max out your handling, but make sure your speed is low, because too much speed will make you spin out and lose!
             
-    
-            __Commands__
-    
-            /tracklength [difficulty] [track] [car] - Race with a drift bot on the tracks!
-    
-            /season [page] - View the rewards available to claim
-    
-            **Ends November 31st 2022**
+            Race bots for notoriety in /snowrace
+
+            Use notoriety to redeem rewards from /season
+
+            This winter will bring a lot of new things!
+
+            **Ends March 1st 2023**
+
                   `);
-            embed.setThumbnail("https://i.imgur.com/9oPxIib.pngf");
-            embed.setImage("https://i.imgur.com/w6t4kOC.png");
+            embed.setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "halloween_event") {
-            embed.setTitle("Trick or Speed");
+          } else if (value === "space_event") {
+            embed.setTitle("Space Race");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Its Halloween in Zero City! You know what that means, candy!!!
+            embed.setDescription(`We're in space now!
 
-            Race to get sweets in the new \`/trickortreat\` command! 
+            Race other bots on the moon with /moonrace for moon tokens and use those tokens to get rewards from the space race season! 
 
-            You can also get the brand new Zero Bar! A brand new candy bar that gives some spooky effects!
+            The final reward is something really special.
 
-            Use those candies to get spooky wheel spins and get exclusive cars that are a little...scary!
+            Bots will have better stats than you, but both of your stats will be halved on the moon!
 
-            **Ends November 1st 2022**
+            Make sure to use your best cars.
+
+            **Ends January 31st 2023**
             
                   `);
-            embed.setThumbnail("https://i.ibb.co/1RLHhVP/logo-halloween.png");
-            embed.setImage("https://i.ibb.co/yWWWXx9/halloweeeen.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "time_event") {
-            embed.setTitle("Time Champions");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`People are competing to get the best time on /timetrial! Can you beat everyone and get the best time!
-
-            Race against the clock in timetrial with /timetrial race
-            Check the leaderboard and top 3 users with /timetrial leaderboard
-
-            1st place wins an exclusive 2010 Dodge Viper SRT10 and an exclusive badge\n
-            2nd place wins $1M, and an exclusive badge\n
-            3rd place wins $500K and an exclusive badge\n
-            
-                  `);
-            embed.setThumbnail("https://i.ibb.co/Fng0cKF/timetrialevent.png");
+            embed.setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({

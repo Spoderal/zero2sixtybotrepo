@@ -29,9 +29,8 @@ module.exports = {
     let {
       cash,
       gold,
-      rp2,
+      rp3,
       cmaps: barnmaps,
-      ucmaps: ubarnmaps,
       rmaps: rbarnmaps,
       lmaps: lbarnmaps,
       ckeys,
@@ -39,11 +38,11 @@ module.exports = {
       ekeys,
       bank,
       banklimit,
-      notofall: notoriety,
+      noto5: notoriety,
       wheelspins,
       lockpicks: lockpicks,
       swheelspins,
-      candy,
+      moontokens,
       achievements,
     } = profile;
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -58,7 +57,7 @@ module.exports = {
           ${emotes.cash} Z Cash: ${toCurrency(cash)}\n
           ${emotes.bank} Bank: ${toCurrency(bank)}/${toCurrency(banklimit)}\n
           ${emotes.gold} Gold: ${gold}\n
-          ${emotes.rp} RP: ${numberWithCommas(rp2)}\n
+          ${emotes.rp} RP: ${numberWithCommas(rp3)}\n
           ${emotes.wheelSpin} Wheel spins: ${wheelspins}\n
           ${emotes.superWheel} Super Wheel spins: ${swheelspins}\n
           `
@@ -91,14 +90,14 @@ module.exports = {
           {
             name: "Event Items",
             value: `
-            ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}\n
-            🍬 Candy ${candy}
+            ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
+            <:moontokens:1044726056680161371> Moon Tokens ${moontokens}
             `,
             inline: true,
           },
         ]);
 
-      await interaction.reply({ embeds: [embed] });
+      await interaction.reply({ embeds: [embed], content: "Make sure to check out the 2 seasonal events with /events!" });
       if (!achievements) {
         achievements = ["None"];
       }

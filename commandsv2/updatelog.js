@@ -25,11 +25,11 @@ module.exports = {
             emoji: "⬆️",
           },
           {
-            label: "10/18/2022",
-            description: "Information for the recent update!",
+            label: "11/30/2022",
+            description: "Information for the recent winter season update!",
             value: "4_update",
             customId: "up4",
-            emoji: "🏆",
+            emoji: "❄️",
           },
         ])
     );
@@ -41,7 +41,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             🏪 Big Update 11/10/2022\n
-            🏆 QA Update 10/18/2022
+            ❄️ Winter Update 11/30/2022
         `);
 
     embed.setColor(colors.blue);
@@ -85,19 +85,18 @@ module.exports = {
           } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`QA Update`);
+            embed.setTitle(`Winter Update`);
             embed
               .setDescription(
-                `• Improved the dealership design, easier to read and includes more details.\n
-                 • New /settings command! Turn on tips that help you better understand the game (for new players), accessibility, set daily reminders for voting, and claiming your daily reward! More settings coming soon.\n
-                 • Achievements! Say goodbye to badges, and hello to achievements you can show off and get rewarded from completing! Check /help for more information.
-                 • Bug fixes\n
-                 __New Cars__
-                 <:ford:931012624152399902> 2024 Ford Mustang\n
-                 <:ferrari:931011838374727730> 2017 Ferrari 812 Superfast
+                `• New season! The leaves fade away, here comes the snow! Get out your best off road vehicles and go at it! Make sure to view the season information in /events\n
+                • Another new season! Its an event! Go to the moon and race your car in low gravity environments, view /events for more!\n
+                • Dealership now has a new cars section\n
+                • The first garage exclusive car is here! Check the new cars in the dealership.\n
+                • New winter tires, can be found in wheelspins, and garages\n
+                • Bug fixes
                 `
               )
-              .setFooter({ text: "10/18/2022" })
+              .setFooter({ text: "11/30/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

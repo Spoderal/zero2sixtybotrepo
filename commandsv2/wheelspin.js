@@ -154,8 +154,8 @@ module.exports = {
             case "Common":
               userdata.cmaps += 1;
               break;
-            case "Uncommon":
-              userdata.ucmaps += 1;
+            case "Rare":
+              userdata.rmaps += 1;
               break;
           }
           embed.setDescription(

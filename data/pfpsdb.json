@@ -283,6 +283,21 @@
       "Name": "Cat Helmet",
       "Image": "https://i.imgur.com/dfT04si.png",
       "Emote": "<:catgirl2sixty:1012138000374841424>"
+    },
+    "vibrant helmet": {
+      "Name": "Vibrant Helmet",
+      "Image": "https://i.ibb.co/HYr7v8m/helmet-vibrant.png",
+      "Emote": "<:helmet_vibrant:1044407040862339112>"
+    }, 
+    "bluer helmet": {
+      "Name": "Bluer Helmet",
+      "Image": "https://i.ibb.co/qpRmSM4/helmet-blued.png",
+      "Emote": "<:helmet_blued:1044407038719049748>"
+    },
+    "darker helmet": {
+      "Name": "Darker Helmet",
+      "Image": "https://i.ibb.co/vxJzR5h/helmet-darkness.png",
+      "Emote": "<:helmet_darkness:1044407039679549520>"
     }
   }
 }

@@ -68,15 +68,7 @@ module.exports = {
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} exotic keys`
       );
-    } else if (toconv == "ubmaps") {
-      let finalamount = toturnin * 5;
-      userdata.gold -= toturnin;
-      userdata.ucmaps += finalamount;
-      userdata.save();
-      await interaction.reply(
-        `Converted ${toturnin} gold into ${finalamount} uncommon barn maps`
-      );
-    } else if (toconv == "rbmaps") {
+    }  else if (toconv == "rbmaps") {
       let finalamount = toturnin * 2;
       userdata.gold -= toturnin;
       userdata.rmaps += finalamount;

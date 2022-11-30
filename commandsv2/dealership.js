@@ -25,6 +25,7 @@ module.exports = {
     let carclassBarr = [];
     let carclassAarr = [];
     let carclassSarr = [];
+    let newcars = [cars.Cars["2021 ford bronco"], cars.Cars["2021 porsche cayenne coupe"], cars.Cars["2010 jeep wrangler"], cars.Cars["2020 lamborghini aventador svj"], cars.Cars["2021 lamborghini sc20"]]
 
     for (let c in cars.Cars) {
       let car = cars.Cars[c];
@@ -130,19 +131,27 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("classS")
         .setEmoji("<:CLASS_S:1030953020806152222>")
-        .setStyle("Secondary")
+        .setStyle("Secondary"),
     );
+    let row3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("classN")
+      .setLabel("Newly added")
+      .setEmoji("⭐")
+      .setStyle("Secondary")
+
+    )
 
     let embed = new EmbedBuilder()
       .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png")
       .setColor(colors.blue)
       .setDescription(
-        `Welcome to the dealership! Click on a class to begin looking through the cars we have available.`
+        `Welcome to the dealership! Click on a class to begin looking through the cars we have available.\n\nIts Winter! Meaning new exclusive cars and new features! Check /season to find out more!`
       );
 
     let msg = await interaction.reply({
       embeds: [embed],
-      components: [row2],
+      components: [row2, row3],
       fetchReply: true,
     });
 
@@ -194,7 +203,7 @@ module.exports = {
         }
         await i.update({
           embeds: [embed],
-          components: [row, row2],
+          components: [row, row2, row3, row3],
           fetchReply: true,
         });
 
@@ -237,7 +246,7 @@ module.exports = {
         }
         await i.update({
           embeds: [embed],
-          components: [row, row2],
+          components: [row, row2, row3],
           fetchReply: true,
         });
 
@@ -280,7 +289,7 @@ module.exports = {
         }
         await i.update({
           embeds: [embed],
-          components: [row, row2],
+          components: [row, row2, row3],
           fetchReply: true,
         });
 
@@ -323,7 +332,7 @@ module.exports = {
         }
         await i.update({
           embeds: [embed],
-          components: [row, row2],
+          components: [row, row2, row3],
           fetchReply: true,
         });
 
@@ -365,12 +374,52 @@ module.exports = {
         }
         await i.update({
           embeds: [embed],
-          components: [row, row2],
+          components: [row, row2, row3],
           fetchReply: true,
         });
 
         page = 1;
-      } else {
+      }
+
+      else if (i.customId.includes("classN")) {
+ 
+        classpage = carclassSarr;
+        embed = new EmbedBuilder().setTitle("New Cars");
+        
+     
+        embed = new EmbedBuilder()
+          .setThumbnail("https://i.ibb.co/MBtYRYz/NEWCARS.png")
+          .setColor(colors.blue);
+        embed.setFooter({ text: `Pages 1/${classpage.length}` });
+        for (let b in newcars) {
+          let car = newcars[b];
+          console.dir(car);
+          if(car.Obtained){
+            embed.addFields({
+              name: `${car.Emote} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nObtained: ${car.Obtained}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.Emote} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
+        }
+        await i.update({
+          embeds: [embed],
+          components: [row2, row3],
+          fetchReply: true,
+        });
+
+        page = 1;
+      }
+      
+      else {
         console.log(page);
         let current = page;
         if (i.customId.includes("previous") && page !== 1) {
@@ -393,11 +442,7 @@ module.exports = {
         for (let e in classpage[page - 1]) {
           let car = classpage[page - 1][e];
           console.log(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+       
         }
 
         if (current !== page) {

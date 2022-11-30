@@ -80,7 +80,7 @@ module.exports = {
         let isOwner = false;
         if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
-        let rp = newuserdata.rp2 || 0;
+        let rp = newuserdata.rp3 || 0;
         rparray.push({ rp, user, isOwner });
         newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
@@ -131,7 +131,7 @@ module.exports = {
           new ButtonBuilder()
             .setCustomId("season")
             .setEmoji("💵")
-            .setLabel("Season 2")
+            .setLabel("Season 3")
             .setStyle("Secondary")
         );
       }
@@ -164,11 +164,13 @@ module.exports = {
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
-              embed.setTitle(`Season 2 for ${crew2.name}`);
-              embed.fields = [];
-              embed.addFields([
+              let embed2 = new Discord.EmbedBuilder()
+              .setTitle(`Season 2 for ${crew2.name}`)
+              .addFields([
                 { name: "Rewards", value: `${reward.join("\n")}` },
-              ]);
+              ])
+              .setThumbnail(icon)
+              .setColor(colors.blue)
 
               row.addComponents(
                 new ButtonBuilder()
@@ -177,13 +179,13 @@ module.exports = {
                   .setStyle(`Success`)
               );
 
-              await i.update({ embeds: [embed], components: [row] });
+              await i.update({ embeds: [embed2], components: [row] });
             } else if (i.customId.includes("stats")) {
-              embed.fields = [];
               embed
                 .setTitle(`Info for ${crew2.name}`)
                 .setThumbnail(icon)
-                .addFields([
+                .setColor(colors.blue)
+                embed.fields = [
                   {
                     name: "Information",
                     value: `
@@ -195,10 +197,10 @@ module.exports = {
                     inline: true,
                   },
                   { name: "Leaderboard", value: `${finalLb}`, inline: true },
-                ])
-                .setColor(colors.blue);
+                ]
+                
 
-              await i.update({ embeds: [embed] });
+              await i.update({ embeds: [embed], components: [row] });
             } else if (i.customId.includes("claim")) {
               let item = crewseason[redeemed];
               if (item.Number > crew2.Rank) {
@@ -381,7 +383,7 @@ module.exports = {
 
       userdata.crew = crew2[0];
 
-      userdata.rp2 = 0;
+      userdata.rp3 = 0;
       userdata.joinedcrew = Date.now();
       userdata.save();
 

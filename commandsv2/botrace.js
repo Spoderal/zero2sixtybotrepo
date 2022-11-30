@@ -191,7 +191,6 @@ module.exports = {
     let ticketsearned;
     let classd;
     let barnmaps;
-    let ubarnmaps;
     let tracklength = 0;
     let xpearn;
     switch (bot) {
@@ -213,7 +212,7 @@ module.exports = {
       }
       case "2": {
         botcar = lodash.sample(bot2cars);
-        moneyearned += 150;
+        moneyearned = 100;
         // moneyearnedtxt += 150;
         ticketsearned = 2;
 
@@ -225,7 +224,7 @@ module.exports = {
       }
       case "3": {
         botcar = lodash.sample(bot3cars);
-        moneyearned += 300;
+        moneyearned = 200;
         xpearn = 100;
         ticketsearned = 3;
         classd = "3";
@@ -235,7 +234,7 @@ module.exports = {
       }
       case "4": {
         botcar = lodash.sample(bot4cars);
-        moneyearned += 400;
+        moneyearned = 300;
         xpearn = 150;
         ticketsearned = 4;
         classd = "4";
@@ -245,7 +244,7 @@ module.exports = {
       }
       case "5": {
         botcar = lodash.sample(bot5cars);
-        moneyearned += 500;
+        moneyearned = 400;
         xpearn = 200;
         // moneyearnedtxt += 500;
         ticketsearned = 5;
@@ -258,7 +257,7 @@ module.exports = {
       }
       case "6": {
         botcar = lodash.sample(bot6cars);
-        moneyearned += 700;
+        moneyearned = 500;
         xpearn = 250;
         // moneyearnedtxt += 700;
         ticketsearned = 10;
@@ -271,26 +270,24 @@ module.exports = {
       }
       case "7": {
         botcar = lodash.sample(bot7cars);
-        moneyearned += 1000;
+        moneyearned = 1000;
         xpearn = 300;
         // moneyearnedtxt += 1000;
         ticketsearned = 20;
         classd = "7";
         botemote = emotes.botTier7;
 
-        ubarnmaps = 1;
         break;
       }
       case "8": {
         botcar = lodash.sample(bot8cars);
-        moneyearned += 1300;
+        moneyearned = 1300;
         xpearn = 350;
         // moneyearnedtxt += 1300;
         ticketsearned = 30;
         classd = "8";
         botemote = emotes.botTier8;
 
-        ubarnmaps = 2;
         break;
       }
     }
@@ -424,6 +421,7 @@ module.exports = {
       ])
       .setColor(colors.blue)
       .setFooter(tipFooterRandom)
+      .setDescription("Its Winter! Meaning new exclusive cars and new features! Check /season to find out more!")
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -757,10 +755,7 @@ module.exports = {
             earningsresult.push(`${barnmaps} Common Barn Maps`);
             userdata.cmaps += barnmaps;
           }
-          if (ubarnmaps) {
-            earningsresult.push(`${ubarnmaps} Uncommon Barn Maps`);
-            userdata.ucmaps += ubarnmaps;
-          }
+     
           if (
             weekytask1 &&
             !weekytask1.completed &&
@@ -779,7 +774,7 @@ module.exports = {
             userdata.fkeys += 1;
           }
 
-          userdata.rp2 += parseInt(ticketsearned);
+          userdata.rp3 += parseInt(ticketsearned);
           userdata.cash += parseInt(moneyearned);
           userdata.racexp += xpearn;
           userdata.update();

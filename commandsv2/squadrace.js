@@ -47,7 +47,7 @@ module.exports = {
     }
     let bot = interaction.options.getString("tier");
 
-    const timeout = userGetPatreonTimeout(userdata);
+    let timeout = userGetPatreonTimeout(userdata);
 
     let racing = cooldowndata.racing;
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
