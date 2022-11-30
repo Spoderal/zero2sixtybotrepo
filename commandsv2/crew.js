@@ -98,7 +98,7 @@ module.exports = {
       let owner = newrparray.find((u) => u?.isOwner);
       if(!crew2.Rank2) {
         crew2.Rank2 = 1;
-        global.update()
+        globalModel.update()
       }
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
