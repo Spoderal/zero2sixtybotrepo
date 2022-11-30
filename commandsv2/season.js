@@ -22,16 +22,15 @@ module.exports = {
         .setRequired(false)
     )
     .addStringOption((option) =>
-    option
-      .setName("event")
-      .setDescription("View the season type")
-      .addChoices(
-        {name: "Winter Season", value: "winter"},
-        {name: "Space Race", value: "space"}
-      )
-      .setRequired(false)
-  )
-    ,
+      option
+        .setName("event")
+        .setDescription("View the season type")
+        .addChoices(
+          { name: "Winter Season", value: "winter" },
+          { name: "Space Race", value: "space" }
+        )
+        .setRequired(false)
+    ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -43,8 +42,7 @@ module.exports = {
     let embed;
     let page = interaction.options.getString("page");
     let type = interaction.options.getString("event");
-    if(type == "winter" || !type){
-
+    if (type == "winter" || !type) {
       for (var i in seasonrewards) {
         let item = seasonrewards[i];
         reward.push(
@@ -63,9 +61,9 @@ module.exports = {
       let itemrewards8 = reward.slice(70, 80);
       let itemrewards9 = reward.slice(80, 90);
       let itemrewards10 = reward.slice(90, 100);
-  
+
       let seasonxp = userdata.noto5;
-  
+
       if (!page || page == "1") {
         embed = new discord.EmbedBuilder()
           .setTitle("Winter Season Page 1 of 10")
@@ -171,7 +169,9 @@ module.exports = {
             `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
           )
           .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards10.join("\n")}` }])
+          .addFields([
+            { name: "Rewards", value: `${itemrewards10.join("\n")}` },
+          ])
           .setColor(colors.blue)
           .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
           .setFooter(tipFooterSeasonPages);
@@ -182,7 +182,7 @@ module.exports = {
           .setLabel(`Claim Reward ${(redeemed += 1)}`)
           .setStyle(`Success`)
       );
-  
+
       let notor = userdata.noto5;
       redeemed = userdata.winterrewards || 1;
       let rew = redeemed || 1;
@@ -190,16 +190,16 @@ module.exports = {
       if (item.Required > notor) {
         row.components[0].setStyle(`Danger`);
       }
-  
+
       let msg = await interaction.reply({ embeds: [embed], components: [row] });
-  
+
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
       };
       let collector = msg.createMessageComponentCollector({
         filter: filter,
       });
-  
+
       collector.on("collect", async (i) => {
         if (i.customId.includes("claim")) {
           notor = userdata.noto5;
@@ -207,7 +207,9 @@ module.exports = {
           rew = redeemed || 1;
           item = seasons.Seasons.Winter.Rewards[rew];
           if (item.Required > notor) {
-            return i.update({ content: `You need ${item.Required} notoriety!` });
+            return i.update({
+              content: `You need ${item.Required} notoriety!`,
+            });
           }
           if (item.Item.endsWith("Cash")) {
             let amount = Number(item.Item.split(" ")[0]);
@@ -237,13 +239,9 @@ module.exports = {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.cmaps += amount;
             userdata.winterrewards += 1;
-          } 
-          else if (
-            item.Item.endsWith("Helmet")
-          ) {
-            userdata.pfps.push(item.Item.toLowerCase())
-          } 
-          else if (
+          } else if (item.Item.endsWith("Helmet")) {
+            userdata.pfps.push(item.Item.toLowerCase());
+          } else if (
             item.Item.endsWith("Legendary Barn Map") ||
             item.Item.endsWith("Legendary Barn Maps")
           ) {
@@ -322,17 +320,16 @@ module.exports = {
               .setLabel(`Claim Reward ${(redeemed += 1)}`)
               .setStyle(`Secondary`)
           );
-  
+
           i.update({ embeds: [embed], components: [row] });
         }
       });
-    }
-    else if(type == "space"){
-      let reward2 = []
-      let redeemed2 = userdata.spacerewards
+    } else if (type == "space") {
+      let reward2 = [];
+      let redeemed2 = userdata.spacerewards;
       for (var b in eventrewards) {
         let item = eventrewards[b];
-        let required = item.Number * 10
+        let required = item.Number * 10;
         reward2.push(
           `**${item.Number}** : ${item.Item} **Required : ${numberWithCommas(
             required
@@ -348,10 +345,12 @@ module.exports = {
           .setDescription(
             `*Ends January 31st 2022*\nClaim rewards with the button below`
           )
-          .addFields([{ name: "Rewards", value: `${eventrewards1.join("\n")}` }])
+          .addFields([
+            { name: "Rewards", value: `${eventrewards1.join("\n")}` },
+          ])
           .setColor(colors.blue)
           .setFooter({ text: `Your Moon Tokens: ${userdata.moontokens}` })
-          .setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png")
+          .setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png");
       } else if (page == "2") {
         embed = new discord.EmbedBuilder()
           .setTitle("Space Race Page 2 of 2")
@@ -359,9 +358,11 @@ module.exports = {
             `*Ends January 31st 2022*\nClaim rewards with the button below`
           )
           .setFooter({ text: `Your Moon Tokens: ${userdata.moontokens}` })
-          .addFields([{ name: "Rewards", value: `${eventrewards2.join("\n")}` }])
+          .addFields([
+            { name: "Rewards", value: `${eventrewards2.join("\n")}` },
+          ])
           .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png")
+          .setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png");
       }
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -381,9 +382,9 @@ module.exports = {
           let tokens = userdata.moontokens;
           redeemed = userdata.spacerewards || 1;
           let rew2 = redeemed || 1;
-          
-          let item = seasons.Seasons["Space Race"].Rewards[rew2]
-          let required = item.Number * 10
+
+          let item = seasons.Seasons["Space Race"].Rewards[rew2];
+          let required = item.Number * 10;
           if (required > tokens) {
             return i.update({ content: `You need ${required} Moon Tokens!` });
           }
@@ -494,7 +495,7 @@ module.exports = {
               .setLabel(`Claim Reward ${(redeemed += 1)}`)
               .setStyle(`Secondary`)
           );
-  
+
           i.update({ embeds: [embed], components: [row] });
         }
       });

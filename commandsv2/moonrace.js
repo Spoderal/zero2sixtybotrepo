@@ -424,7 +424,9 @@ module.exports = {
       ])
       .setColor(colors.blue)
       .setFooter(tipFooterRandom)
-      .setDescription("Its Winter! Meaning new exclusive cars and new features! Check /season to find out more!")
+      .setDescription(
+        "Its Winter! Meaning new exclusive cars and new features! Check /season to find out more!"
+      )
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -639,7 +641,6 @@ module.exports = {
       timer++;
 
       if (timer >= 10) {
-
         clearInterval(x);
         clearInterval(y);
         collector2.stop();
@@ -747,8 +748,7 @@ module.exports = {
           let earningsresult = [];
           earningsresult.push(`$${moneyearned}`);
           earningsresult.push(`${rpemote} ${ticketsearned} RP`);
-     
-     
+
           if (
             weekytask1 &&
             !weekytask1.completed &&
@@ -762,13 +762,14 @@ module.exports = {
             userdata.cash += userdata.weeklytask.reward;
             userdata.save();
           }
-        
 
           userdata.rp2 += parseInt(ticketsearned);
           userdata.cash += parseInt(moneyearned);
           userdata.moontokens += xpearn;
           userdata.update();
-          earningsresult.push(`${xpearn} <:moontokens:1044726056680161371> Moon Tokens`);
+          earningsresult.push(
+            `${xpearn} <:moontokens:1044726056680161371> Moon Tokens`
+          );
 
           userdata.racerank += 1;
 

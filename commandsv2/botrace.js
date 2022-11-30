@@ -421,7 +421,9 @@ module.exports = {
       ])
       .setColor(colors.blue)
       .setFooter(tipFooterRandom)
-      .setDescription("Its Winter! Meaning new exclusive cars and new features! Check /season to find out more!")
+      .setDescription(
+        "Its Winter! Meaning new exclusive cars and new features! Check /season to find out more!"
+      )
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -755,7 +757,7 @@ module.exports = {
             earningsresult.push(`${barnmaps} Common Barn Maps`);
             userdata.cmaps += barnmaps;
           }
-     
+
           if (
             weekytask1 &&
             !weekytask1.completed &&

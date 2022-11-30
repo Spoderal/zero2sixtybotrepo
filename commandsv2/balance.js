@@ -97,7 +97,10 @@ module.exports = {
           },
         ]);
 
-      await interaction.reply({ embeds: [embed], content: "Make sure to check out the 2 seasonal events with /events!" });
+      await interaction.reply({
+        embeds: [embed],
+        content: "Make sure to check out the 2 seasonal events with /events!",
+      });
       if (!achievements) {
         achievements = ["None"];
       }

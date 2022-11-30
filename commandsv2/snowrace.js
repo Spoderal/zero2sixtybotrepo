@@ -13,19 +13,12 @@ const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
-let bot1cars = [
-  "2018 subaru wrx sti we",
-  "2020 toyota gr yaris we"
-];
+let bot1cars = ["2018 subaru wrx sti we", "2020 toyota gr yaris we"];
 let bot2cars = [
   "2015 mitsubishi lancer evolution we",
-  "2016 mercedes benz g63 we"
+  "2016 mercedes benz g63 we",
 ];
-let bot3cars = [
-  "2016 ford focus rs we",
-  "2017 ford fiesta st we"
-];
-
+let bot3cars = ["2016 ford focus rs we", "2017 ford fiesta st we"];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -39,7 +32,7 @@ module.exports = {
         .addChoices(
           { name: "Tier 1", value: "1" },
           { name: "Tier 2", value: "2" },
-          { name: "Tier 3", value: "3" },
+          { name: "Tier 3", value: "3" }
         )
     )
     .addStringOption((option) =>
@@ -128,7 +121,7 @@ module.exports = {
     let weekytask1 = userdata.weeklytask;
     let classd;
     let tracklength = 0;
-    let rpearn
+    let rpearn;
     switch (bot) {
       case "1": {
         botcar = lodash.sample(bot1cars);
@@ -195,8 +188,7 @@ module.exports = {
       userdata.save();
     }
     if (usables.includes("energy drink")) {
-      
-        rpearn = rpearn * 2;
+      rpearn = rpearn * 2;
     }
     let sponsortimer = cooldowndata.sponsor;
     if (usables.includes("sponsor")) {
@@ -258,9 +250,9 @@ module.exports = {
       botspeed += botdupgrades;
     }
     let hp = user1carspeed + newhandling;
-    hp - (user1carspeed / 2);
+    hp - user1carspeed / 2;
     let hp2 = botspeed + othernewhandling;
-    hp2 - (botspeed / 2);
+    hp2 - botspeed / 2;
     let y;
     let policeuser;
     let policelen;
@@ -507,11 +499,10 @@ module.exports = {
       tracklength += hp;
       tracklength2 += hp2;
       timer++;
-      console.log(tracklength)
-      console.log(tracklength2)
+      console.log(tracklength);
+      console.log(tracklength2);
 
       if (timer >= 10) {
-
         clearInterval(x);
         clearInterval(y);
         collector2.stop();
@@ -618,7 +609,7 @@ module.exports = {
 
           let earningsresult = [];
           earningsresult.push(`$${moneyearned}`);
-      
+
           if (
             weekytask1 &&
             !weekytask1.completed &&
@@ -632,7 +623,6 @@ module.exports = {
             userdata.cash += userdata.weeklytask.reward;
             userdata.save();
           }
-          
 
           userdata.noto5 += parseInt(rpearn);
           userdata.cash += parseInt(moneyearned);
