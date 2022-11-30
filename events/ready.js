@@ -83,9 +83,9 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `🍂 FALL 🍂  /season`,
+      `❄️ WINTER ❄️  /season`,
       `⬆️ BIG UPDATE 11/10`,
-      "🏆 ACHIEVEMENTS",
+      "🪙 GOLD STARTS AT $0.99",
       `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
     ];
     if (db.fetch(`doublecash`) == true) {
