@@ -150,7 +150,7 @@ module.exports = {
         botcar = lodash.sample(bot3cars);
         moneyearned += 300;
         classd = "3";
-        rpearn = 500;
+        rpearn = 250;
         botemote = emotes.botTier3;
 
         break;

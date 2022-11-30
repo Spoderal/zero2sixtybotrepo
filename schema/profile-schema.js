@@ -273,7 +273,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
-  crewseason: {
+  crewseason2: {
     type: Number,
     required: false,
     default: 0,
