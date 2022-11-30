@@ -433,15 +433,13 @@ module.exports = {
           ) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.lmaps += amount;
-          } 
-          else if (
+          } else if (
             item.Item.endsWith("Super wheelspin") ||
             item.Item.endsWith("Super wheelspins")
           ) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.swheelspins += amount;
-          } 
-          else if (item.Item.endsWith("Garage Spaces")) {
+          } else if (item.Item.endsWith("Garage Spaces")) {
             console.log("garage");
             let amount = Number(item.Item.split(" ")[0]);
             console.log(amount);
@@ -462,8 +460,7 @@ module.exports = {
             let helm = item.Item.toLowerCase();
             userdata.pfps.push(helm);
             userdata.spacerewards += 1;
-          } 
-          else if (
+          } else if (
             item.Item.endsWith("Bank Increase") ||
             item.Item.endsWith("Bank Increases")
           ) {
