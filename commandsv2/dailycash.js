@@ -101,15 +101,14 @@ module.exports = {
       cooldowndata.lastDaily = Date.now();
       userdata.save();
       cooldowndata.save();
-      
+
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Daily Cash ${interaction.user.username}`)
         .addFields([{ name: "Earned Cash", value: `${toCurrency(dcash)}` }]);
       embed.setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });
-      console.log(userdata.settings.dailyStreak)
-
+      console.log(userdata.settings.dailyStreak);
     }
   },
 };

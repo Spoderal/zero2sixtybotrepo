@@ -22,8 +22,14 @@ module.exports = {
     let raceprestige = newprestige2 * 100;
     let driftprestige = newprestige2 * 100;
 
-    if (driftrank < driftprestige) return await interaction.reply(`Your drift rank needs to be ${raceprestige}!`);
-    if (racerank < raceprestige) return await interaction.reply(`Your race rank needs to be ${driftprestige}!`);
+    if (driftrank < driftprestige)
+      return await interaction.reply(
+        `Your drift rank needs to be ${raceprestige}!`
+      );
+    if (racerank < raceprestige)
+      return await interaction.reply(
+        `Your race rank needs to be ${driftprestige}!`
+      );
 
     userdata.prestige += 1;
     await User.findOneAndUpdate(

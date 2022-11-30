@@ -590,7 +590,7 @@ module.exports = {
             earningsresult.push(`${barnmaps} Common Barn Maps`);
             userdata.cmaps += barnmaps;
           }
-    
+
           if (
             weekytask1 &&
             !weekytask1.completed &&

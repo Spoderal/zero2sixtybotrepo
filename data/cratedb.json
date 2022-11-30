@@ -28,10 +28,10 @@
       ],
       "Price": 800
     },
-    "prestige":{
-      "Contents":[
+    "prestige": {
+      "Contents": [
         "100000 Cash",
-        "dark mode helmet",     
+        "dark mode helmet",
         "dark mode helmet",
         "stig helmet",
         "vibrant helmet",
@@ -43,7 +43,7 @@
         "25000 Cash"
       ]
     },
-    "Emote":"<:supplydropprestige:1044404462581719041>",
-    "Image":"https://i.ibb.co/bvzk1VL/supplydropprestige.png"
+    "Emote": "<:supplydropprestige:1044404462581719041>",
+    "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
   }
 }

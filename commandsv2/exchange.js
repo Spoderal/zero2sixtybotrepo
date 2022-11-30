@@ -16,7 +16,7 @@ module.exports = {
           { name: "Rare Keys", value: "rkeys" },
           { name: "Exotic Keys", value: "ekeys" },
           { name: "Uncommon Barn Maps", value: "ubmaps" },
-          {name: "Notoriety", value: "notoriety"},
+          { name: "Notoriety", value: "notoriety" },
           { name: "Rare Barn Maps", value: "rbmaps" },
           { name: "Legendary Barn Maps", value: "lbmaps" },
           { name: "Super Wheel Spins", value: "swspins" }
@@ -61,8 +61,7 @@ module.exports = {
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} rare keys`
       );
-    } 
-    else if (toconv == "notoriety") {
+    } else if (toconv == "notoriety") {
       let finalamount = toturnin * 100;
       userdata.gold -= toturnin;
       userdata.noto5 += finalamount;
@@ -70,7 +69,7 @@ module.exports = {
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} notoriety`
       );
-    }else if (toconv == "ekeys") {
+    } else if (toconv == "ekeys") {
       let finalamount = toturnin * 0.5;
       userdata.gold -= toturnin;
       userdata.ekeys += finalamount;
@@ -78,7 +77,7 @@ module.exports = {
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} exotic keys`
       );
-    }  else if (toconv == "rbmaps") {
+    } else if (toconv == "rbmaps") {
       let finalamount = toturnin * 2;
       userdata.gold -= toturnin;
       userdata.rmaps += finalamount;

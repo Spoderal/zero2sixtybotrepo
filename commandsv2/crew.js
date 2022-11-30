@@ -165,12 +165,10 @@ module.exports = {
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
               let embed2 = new Discord.EmbedBuilder()
-              .setTitle(`Season 2 for ${crew2.name}`)
-              .addFields([
-                { name: "Rewards", value: `${reward.join("\n")}` },
-              ])
-              .setThumbnail(icon)
-              .setColor(colors.blue)
+                .setTitle(`Season 2 for ${crew2.name}`)
+                .addFields([{ name: "Rewards", value: `${reward.join("\n")}` }])
+                .setThumbnail(icon)
+                .setColor(colors.blue);
 
               row.addComponents(
                 new ButtonBuilder()
@@ -184,21 +182,20 @@ module.exports = {
               embed
                 .setTitle(`Info for ${crew2.name}`)
                 .setThumbnail(icon)
-                .setColor(colors.blue)
-                embed.fields = [
-                  {
-                    name: "Information",
-                    value: `
+                .setColor(colors.blue);
+              embed.fields = [
+                {
+                  name: "Information",
+                  value: `
                       ${crew2.members.length} members\n
                       Rank ${crew2.Rank}\n
                       RP: ${total}\n
                       Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
                     `,
-                    inline: true,
-                  },
-                  { name: "Leaderboard", value: `${finalLb}`, inline: true },
-                ]
-                
+                  inline: true,
+                },
+                { name: "Leaderboard", value: `${finalLb}`, inline: true },
+              ];
 
               await i.update({ embeds: [embed], components: [row] });
             } else if (i.customId.includes("claim")) {
