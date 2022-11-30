@@ -433,12 +433,11 @@ module.exports = {
           ) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.lmaps += amount;
-          } else if (
-            item.Item.endsWith("Super wheelspin") ||
-            item.Item.endsWith("Super wheelspins")
-          ) {
+            userdata.spacerewards += 1;
+          } else if (item.Item.endsWith("Super wheelspin") || item.Item.endsWith("Super wheelspins")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.swheelspins += amount;
+            userdata.spacerewards += 1;
           } else if (item.Item.endsWith("Garage Spaces")) {
             console.log("garage");
             let amount = Number(item.Item.split(" ")[0]);
