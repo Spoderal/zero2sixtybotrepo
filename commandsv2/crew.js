@@ -96,9 +96,9 @@ module.exports = {
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
       let owner = newrparray.find((u) => u?.isOwner);
-      if(!crew2.Rank2) {
+      if (!crew2.Rank2) {
         crew2.Rank2 = 1;
-        global.update()
+        global.update();
       }
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
