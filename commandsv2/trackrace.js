@@ -367,7 +367,6 @@ module.exports = {
               name: "Earnings",
               value: `
               ${emotes.cash} $${moneyearned}
-              ${emotes.notoriety} ${notorounded} Notoriety
               ${emotes.rp} ${ticketsearned} RP
               +${xpearn} Race XP
             `,
