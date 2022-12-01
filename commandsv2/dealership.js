@@ -391,7 +391,7 @@ module.exports = {
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/MBtYRYz/NEWCARS.png")
           .setColor(colors.blue);
-        embed.setFooter({ text: `Pages 1/${classpage.length}` });
+        embed.setFooter({ text: `Pages 1/1` });
         for (let b in newcars) {
           let car = newcars[b];
           console.dir(car);
@@ -442,7 +442,7 @@ module.exports = {
         }
 
         if (current !== page) {
-          embed.setFooter({ text: `Pages ${page}/${classpage.length}` });
+          embed.setFooter({ text: `Pages 1/1` });
           i.update({ embeds: [embed], fetchReply: true });
         } else {
           return i.update({ content: "No pages left!" });
