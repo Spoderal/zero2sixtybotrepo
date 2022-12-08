@@ -85,8 +85,8 @@ let bot8cars = [
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("botrace")
-    .setDescription("Race a bot")
+    .setName("streetrace")
+    .setDescription("Race a bot in a street race")
     .addStringOption((option) =>
       option
         .setName("tier")
@@ -392,28 +392,22 @@ module.exports = {
     let policeuser;
     let policelen;
     let itemusedp;
-    let settings = userdata.settings;
+    let speed = `${user1carspeed}`;
+    let speed2 = `${botspeed}`;
 
-    let speed = `${user1carspeed} MPH`;
-    let speed2 = `${botspeed} MPH`;
-
-    if (settings.ph == "KMH") {
-      speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`;
-      speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`;
-    }
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${classd} bot race in progress...`)
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          value: `${semote} Power: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
           inline: true,
         },
         {
           name: `${botemote} ${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Power: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,
@@ -482,7 +476,7 @@ module.exports = {
 
         let userdatacop = await User.findOne({ id: userid });
 
-        let job = userdatacop.job;
+        let job = userdatacop.work;
 
         if (!job || job.Type !== "police") {
           // do nothing?
@@ -561,7 +555,7 @@ module.exports = {
                     name: `🚨${user.username}'s ${
                       cars.Cars[selected2.toLowerCase()].Emote
                     } ${cars.Cars[selected2.toLowerCase()].Name}`,
-                    value: `Speed: ${policespeed}\n\n0-60: ${police60}s`,
+                    value: `Power: ${policespeed}\n\n0-60: ${police60}s`,
                     inline: true,
                   },
                 ]);
@@ -661,48 +655,18 @@ module.exports = {
             interaction.editReply({ embeds: [embed] });
           } else if (policelen > tracklength) {
             let job = userdata.job;
-            let jobsdb = require("../data/jobs.json");
-            let num = job.Number;
-            let salary = job.Salary;
-            let actjob = job.Job;
-            let addednum = (num += 1);
-            let requiredxp;
-            let jobdb = jobsdb.Jobs[actjob.toLowerCase()];
-            if (jobsdb.Jobs[actjob].Ranks[addednum]) {
-              requiredxp = jobsdb.Jobs[actjob].Ranks[addednum].XP;
-            } else {
-              requiredxp = "MAX";
-            }
-            let xp2 = randomRange(15, 25);
+            let salary = 1000;
+       
 
             embed.addFields([
               { name: `Busted!`, value: `No earnings from this race` },
             ]);
 
-            if (requiredxp !== "MAX") {
-              db.add(`job_${policeuser.id}.EXP`, xp2);
-            }
-
-            if (
-              requiredxp !== "MAX" &&
-              db.fetch(`job_${policeuser.id}.EXP`) >= requiredxp
-            ) {
-              msg.channel.send(
-                `You just ranked up to ${jobsdb.Jobs[actjob].Ranks[addednum].Name}!`
-              );
-              db.set(`job_${policeuser.id}`, {
-                Number: addednum,
-                Rank: jobdb.Ranks[`${addednum}`].Name,
-                EXP: 0,
-                Salary: jobdb.Ranks[`${addednum}`].Salary,
-                Timeout: jobdb.Ranks[`${addednum}`].Time,
-                Job: actjob,
-              });
-            }
+      
             userdata.cash += salary;
             userdata.save();
             msg.reply(
-              `You've completed your job duties and earned yourself $${salary}, and ${xp2} XP`
+              `You've completed your job duties and earned yourself $1,000`
             );
             return interaction.editReply({ embeds: [embed] });
           }
@@ -774,6 +738,11 @@ module.exports = {
           if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.ferrari) {
             earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
             userdata.fkeys += 1;
+          }
+          let filteredhouse = userdata.houses.filter((house) => house.Name == "Buone Vedute")
+          if(filteredhouse[0]){
+            moneyearned += (moneyearned * 0.05);
+            console.log(moneyearned)
           }
 
           userdata.rp3 += parseInt(ticketsearned);

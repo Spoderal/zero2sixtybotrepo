@@ -253,14 +253,14 @@ module.exports = {
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          value: `${semote} Power: ${user1carspeed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
           inline: true,
         },
         {
           name: `${botemote} ${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Power: ${botspeed}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,

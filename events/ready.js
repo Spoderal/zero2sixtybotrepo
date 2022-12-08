@@ -88,9 +88,7 @@ module.exports = {
       "🪙 GOLD STARTS AT $0.99",
       `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
     ];
-    if (db.fetch(`doublecash`) == true) {
-      randomstatuses.push(`💵 DOUBLE CASH WEEKEND 💵`);
-    }
+
     let randomstatus = lodash.sample(randomstatuses);
     client.user.setActivity(randomstatus);
 

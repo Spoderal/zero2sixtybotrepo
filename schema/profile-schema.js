@@ -81,6 +81,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
+  houses: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   parts: {
     type: Array,
     required: false,

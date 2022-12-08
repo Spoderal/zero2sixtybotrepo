@@ -58,10 +58,9 @@ module.exports = {
     let timeout = 18000000;
     let racing = cooldowns.betracing;
     let prestige = userdata.prestige;
-    if (prestige < 5)
-      return await interaction.reply(
-        "You need to be prestige 5 to do this race!"
-      );
+    let betlimit = prestige * 10000
+    if (moneyearned > betlimit) return interaction.reply(`Your bet limit is ${betlimit}!`)
+   
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
@@ -143,14 +142,14 @@ module.exports = {
           name: `${actualhelmet.Emote} ${
             cars.Cars[selected.Name.toLowerCase()].Emote
           } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${zero2sixtycar}s\n\n${hemote} Handling: ${handling}`,
+          value: `${semote} Power: ${user1carspeed}\n\n${zemote} 0-60: ${zero2sixtycar}s\n\n${hemote} Handling: ${handling}`,
           inline: true,
         },
         {
           name: `🤖 ${cars.Cars[botcar.Name.toLowerCase()].Emote} ${
             cars.Cars[botcar.Name.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${botspeed} MPH\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Power: ${botspeed}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.Name.toLowerCase()].Handling
           }`,
           inline: true,

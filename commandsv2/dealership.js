@@ -26,6 +26,7 @@ module.exports = {
       let carclassBarr = []
       let carclassAarr = []
       let carclassSarr = []
+      let carclassParr = []
       let newcars = [
         cars.Cars["2021 ford bronco"],
         cars.Cars["2021 porsche cayenne coupe"],
@@ -56,6 +57,10 @@ module.exports = {
           carclassSarr.push({Name: car.Name, Price: car.Price, alias: car.alias, icon: car.Emote})
 
         }
+        else if(car.Police && car.Price > 0){
+          carclassParr.push({Name: car.Name, Price: car.Price, alias: car.alias, icon: car.Emote})
+
+        }
       }
       carclassDarr = carclassDarr.sort((a, b) => {
         return a.Price - b.Price;
@@ -73,6 +78,9 @@ carclassAarr = carclassAarr.sort((a, b) => {
 });
 
 carclassSarr = carclassSarr.sort((a, b) => {
+  return a.Price - b.Price;
+});
+carclassParr = carclassParr.sort((a, b) => {
   return a.Price - b.Price;
 });
 
@@ -102,6 +110,11 @@ carclassSarr = carclassSarr.sort((a, b) => {
         10
       );
 
+      carclassParr = lodash.chunk(
+        carclassParr.map((a) => a),
+        10
+      );
+
 
       let row2 = new ActionRowBuilder()
       .addComponents(
@@ -125,21 +138,34 @@ carclassSarr = carclassSarr.sort((a, b) => {
         .setCustomId("classS")
         .setEmoji("<:CLASS_S:1030953020806152222>")
         .setStyle("Secondary"),
+ 
       )
 
       let row3 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
+        .setCustomId("classP")
+        .setEmoji("🚨")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
           .setCustomId("classN")
           .setLabel("Newly added")
           .setEmoji("⭐")
-          .setStyle("Secondary")
+          .setStyle("Secondary"),
       );
   
 
       let embed = new EmbedBuilder()
       .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png")
       .setColor(colors.blue)
-      .setDescription(`Welcome to the dealership! Click on a class to begin looking through the cars we have available.`)
+      .setDescription(`Welcome to the dealership! Click on a class to begin looking through the cars we have available
+      
+      <:class_d:1030953018591559720> D Class
+      <:class_c:1030953017249386546> C Class
+      <:class_b:1030953016204996678> B Class
+      <:class_a:1030953021678567554> A Class
+      <:CLASS_S:1030953020806152222> S Class
+      🚨 Police Class
+      `)
       
       
       let msg = await interaction.reply({embeds: [embed], components: [row2, row3], fetchReply: true})
@@ -182,10 +208,8 @@ carclassSarr = carclassSarr.sort((a, b) => {
           .setColor(colors.blue)
           embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
-          console.dir(carclassDarr[0])
           for(let b in carclassDarr[0]){
             let car = carclassDarr[0][b]
-            console.dir(car)
             embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
           }
            await i.update({embeds: [embed], components: [row, row2, row3], fetchReply: true})
@@ -221,11 +245,8 @@ carclassSarr = carclassSarr.sort((a, b) => {
             .setColor(colors.blue)
             embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
-      
-            console.dir(carclassCarr[0])
             for(let b in carclassCarr[0]){
               let car = carclassCarr[0][b]
-              console.dir(car)
               embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
             }
              await i.update({embeds: [embed], components: [row, row2, row3], fetchReply: true})
@@ -261,10 +282,8 @@ carclassSarr = carclassSarr.sort((a, b) => {
               .setColor(colors.blue)
               embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
-              console.dir(carclassBarr[0])
               for(let b in carclassBarr[0]){
                 let car = carclassBarr[0][b]
-                console.dir(car)
                 embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
               }
                await i.update({embeds: [embed], components: [row, row2, row3], fetchReply: true})
@@ -300,10 +319,8 @@ carclassSarr = carclassSarr.sort((a, b) => {
                 .setColor(colors.blue)
                 embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
-                console.dir(carclassAarr[0])
                 for(let b in carclassAarr[0]){
                   let car = carclassAarr[0][b]
-                  console.dir(car)
                   embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
                 }
                  await i.update({embeds: [embed], components: [row, row2, row3], fetchReply: true})
@@ -316,7 +333,7 @@ carclassSarr = carclassSarr.sort((a, b) => {
                 else if(i.customId.includes("classS")){
                   classpage = carclassSarr
                   embed = new EmbedBuilder()
-                  .setTitle("Class A Dealership")
+                  .setTitle("Class S Dealership")
                   let row = new ActionRowBuilder().addComponents(
                     new ButtonBuilder()
                       .setCustomId("previous")
@@ -336,13 +353,11 @@ carclassSarr = carclassSarr.sort((a, b) => {
                       .setStyle("Secondary")
                   );
                    embed = new EmbedBuilder()
-                  .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png")
+                  .setThumbnail("https://i.ibb.co/DrzXrQf/CLASS-S.png")
                   .setColor(colors.blue)
                   embed.setFooter({ text: `Pages 1/${classpage.length}` });
-                  console.dir(carclassSarr[0])
                   for(let b in carclassSarr[0]){
                     let car = carclassSarr[0][b]
-                    console.dir(car)
                     embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
                   }
                    await i.update({embeds: [embed], components: [row, row2, row3], fetchReply: true})
@@ -351,9 +366,46 @@ carclassSarr = carclassSarr.sort((a, b) => {
         
                    
                   }
+                  else if(i.customId.includes("classP")){
+                    classpage = carclassParr
+                    embed = new EmbedBuilder()
+                    .setTitle("Class Police Dealership")
+                    let row = new ActionRowBuilder().addComponents(
+                      new ButtonBuilder()
+                        .setCustomId("previous")
+                        .setEmoji("◀️")
+                        .setStyle("Secondary"),
+                      new ButtonBuilder()
+                        .setCustomId("next")
+                        .setEmoji("▶️")
+                        .setStyle("Secondary"),
+                      new ButtonBuilder()
+                        .setCustomId("first")
+                        .setEmoji("⏮️")
+                        .setStyle("Secondary"),
+                      new ButtonBuilder()
+                        .setCustomId("last")
+                        .setEmoji("⏭️")
+                        .setStyle("Secondary")
+                    );
+                     embed = new EmbedBuilder()
+                    .setThumbnail("https://i.ibb.co/5YyD6nT/wanted.png")
+                    .setColor(colors.blue)
+                    embed.setFooter({ text: `Pages 1/${classpage.length}` });
+                    console.dir(carclassParr[0])
+                    for(let b in carclassParr[0]){
+                      let car = carclassParr[0][b]
+                      embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
+                    }
+                     await i.update({embeds: [embed], components: [row, row2, row3], fetchReply: true})
+          
+                      page = 1;
+          
+                     
+                    }
 
                   else if (i.customId.includes("classN")) {
-                    classpage = carclassSarr;
+                    classpage = newcars;
                     embed = new EmbedBuilder().setTitle("New Cars");
             
                     embed = new EmbedBuilder()
@@ -362,7 +414,6 @@ carclassSarr = carclassSarr.sort((a, b) => {
                     embed.setFooter({ text: `Pages 1/1` });
                     for (let b in newcars) {
                       let car = newcars[b];
-                      console.dir(car);
                       if (car.Obtained) {
                         embed.addFields({
                           name: `${car.Emote} ${car.Name}`,
@@ -388,7 +439,6 @@ carclassSarr = carclassSarr.sort((a, b) => {
 
           else {
             
-            console.log(page)
           let current = page;
           if (i.customId.includes("previous") && page !== 1) {
             embed.data.fields = null;
@@ -413,7 +463,6 @@ carclassSarr = carclassSarr.sort((a, b) => {
           } 
           for(let e in classpage[page - 1]){
             let car = classpage[page - 1][e]
-            console.log(car)
             embed.addFields({name: `${car.icon} ${car.Name}`, value:`\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`, inline: true})
           }
   
@@ -429,7 +478,6 @@ carclassSarr = carclassSarr.sort((a, b) => {
 
       })
       if (userdata.tutorial && userdata.tutorial.stage == 1) {
-        console.log("tutorial");
         interaction.channel.send({
           content: `You can buy a car with /buy [car id], or the full name, the car id is listed next to \`ID:\`, an example would be /buy \`2002 mustang\``,
         });

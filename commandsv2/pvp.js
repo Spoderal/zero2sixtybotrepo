@@ -99,15 +99,13 @@ module.exports = {
           name: `${user.username}'s car`,
           value: `${carindb1.Emote} ${
             carindb1.Name
-          }\n\nSpeed: ${u1speed} MPH\n${convertMPHtoKPH(
-            u1speed
-          )}\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
+          }\nPower: ${u1speed}\n${u1speed}\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
         },
         {
           name: `${user2.username}'s car`,
           value: `${carindb2.Emote} ${
             carindb2.Name
-          }\n\nSpeed: ${u2speed} MPH\n${convertMPHtoKPH(
+          }\nPower: ${u2speed}\n${convertMPHtoKPH(
             u2speed
           )}\n0-60: ${u2acc}s\nHandling: ${u2handling}`,
         },

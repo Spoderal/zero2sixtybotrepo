@@ -5,7 +5,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-const prestigedb = require(`../data/prestige.json`);
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 
@@ -46,8 +45,24 @@ module.exports = {
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
     let title = userdata.title;
 
-    if (prestige == 0) title = "Noob Racer";
-    else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
+    if(prestige >= 5){
+      title = "Novice Racer"
+    }
+    else if(prestige >= 10){
+      title = "Decent Racer"
+    }
+    else if(prestige >= 25){
+      title = "Good Racer"
+    }
+    else if(prestige >= 50){
+      title = "Pro Racer"
+    }
+    else if(prestige >= 100){
+      title = "Stig Racer"
+    }
+    else if(prestige >= 500){
+      title = "No Life Racer"
+    }
 
     let cars = userdata.cars;
     cars = cars.sort(function (b, a) {
@@ -96,7 +111,7 @@ module.exports = {
         name: `Best Car`,
         value: `
           ${bestcar.Emote} ${bestcar.Name}\n
-          Speed: ${bestcar.Speed}MPH
+          Power: ${bestcar.Speed}
           0-60: ${bestcar.Acceleration}s
           Handling: ${bestcar.Handling}
         `,
@@ -110,7 +125,7 @@ module.exports = {
     });
 
     let embed = new Discord.EmbedBuilder()
-      .setTitle(title)
+      .setTitle(`${title}`)
       .setAuthor({ name: `${user.username} - Profile` })
       .setColor(colors.blue)
       .setThumbnail(acthelmet)

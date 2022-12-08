@@ -173,14 +173,14 @@ module.exports = {
       .addFields([
         {
           name: `${user.username} ${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${user1carspeed} MPH\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}\n\n Drift: ${driftscore}`,
+          value: `${semote} Power: ${user1carspeed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}\n\n Drift: ${driftscore}`,
           inline: true,
         },
         {
           name: `${user2.username} ${actualhelmet2.Emote} ${
             cars.Cars[botcar.toLowerCase()].Emote
           } ${cars.Cars[botcar.toLowerCase()].Name}`,
-          value: `${semote} Speed: ${user2carspeed} MPH\n\n${zemote} 0-60: ${user2carzerosixty}s\n\n${hemote} Handling: ${user2carhandling}\n\n Drift: ${driftscore}`,
+          value: `${semote} Power: ${user2carspeed}\n\n${zemote} 0-60: ${user2carzerosixty}s\n\n${hemote} Handling: ${user2carhandling}\n\n Drift: ${driftscore}`,
           inline: true,
         },
       ])

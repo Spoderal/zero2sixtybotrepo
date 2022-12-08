@@ -267,13 +267,10 @@ module.exports = {
 
         break;
     }
-    let settings = userdata.settings;
 
-    let speed = `${usercarspeed} MPH`;
+    let speed = `${usercarspeed}`;
 
-    if (settings.ph == "KMH") {
-      speed = `${Math.floor(convertMPHtoKPH(usercarspeed))} KMH`;
-    }
+
     let embed = new EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
       .setDescription(`You have ${time}s to complete the track`)
@@ -281,7 +278,7 @@ module.exports = {
         {
           name: `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
           value: `
-            Speed: ${speed}
+            Power: ${speed}
             Drift Rating: ${driftscore}
           `,
         },

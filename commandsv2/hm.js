@@ -324,22 +324,18 @@ module.exports = {
     userhelmet = userhelmet.toLowerCase();
     let helmets = require("../data/pfpsdb.json");
     let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    let settings = userdata.settings;
 
-    let speed = `${user1carspeed} MPH`;
-    let speed2 = `${selectedBotCar.Speed} MPH`;
+    let speed = `${user1carspeed}`;
+    let speed2 = `${selectedBotCar.Speed}`;
 
-    if (settings.ph == "KMH") {
-      speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`;
-      speed2 = `${Math.floor(convertMPHtoKPH(selectedBotCar.Speed))} KMH`;
-    }
+
     let embed = new discord.EmbedBuilder()
       .setTitle("3...2...1....GO!")
       .addFields([
         {
           name: `
             ${actualhelmet.Emote} ${selectedCarInfo.Emote} ${selectedCarInfo.Name}`,
-          value: `${semote} Speed: ${speed}\n
+          value: `${semote} Power: ${speed}\n
             ${zemote} 0-60: ${user1carzerosixty}s\n
             ${hemote} Handling: ${user1carhandling}
           `,
@@ -347,7 +343,7 @@ module.exports = {
         },
         {
           name: `🤖 ${selectedBotCar.Emote} ${selectedBotCar.Name}`,
-          value: `${semote} Speed: ${speed2}\n
+          value: `${semote} Power: ${speed2}\n
           ${zemote} 0-60: ${otherzero2sixty}s\n
           ${hemote} Handling: ${selectedBotCar.Handling}`,
           inline: true,

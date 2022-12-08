@@ -33,7 +33,6 @@ module.exports = {
             .setRequired(true)
             .addChoices(
               { name: "Zuber", value: "zuber" },
-              { name: "Pizza Delivery", value: "pizza delivery" },
               { name: "Police", value: "police" }
             )
         )
@@ -186,17 +185,15 @@ module.exports = {
               console.log(score);
 
               let miles = 0;
-              let speed2 = `${selected.Speed} MPH`;
+              let speed2 = `${selected.Speed}`;
 
-              if (userdata.settings.ph == "KMH") {
-                speed = `${Math.floor(convertMPHtoKPH(selected.Speed))} KMH`;
-              }
+          
               embed.setTitle(`Transporting ${person.name} to ${location.name}`);
               embed.addFields({
                 name: `${carsdb.Cars[selected.Name.toLowerCase()].Emote} ${
                   selected.Name
                 }`,
-                value: `Speed: ${speed2}\nAcceleration: ${selected.Acceleration}s\nComfort: ${comfort}`,
+                value: `Power: ${speed2}\nAcceleration: ${selected.Acceleration}s\nComfort: ${comfort}`,
               });
               msg2.edit({ embeds: [embed], components: [] });
 
@@ -260,7 +257,7 @@ module.exports = {
           }
         });
       } else if (jobtowork.name == "police") {
-        interaction.reply();
+        interaction.reply(`Chase other players using /streetrace, or use \`/wanted\` to work on your police job!`);
       }
     }
   },

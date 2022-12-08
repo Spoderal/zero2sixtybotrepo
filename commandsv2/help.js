@@ -175,7 +175,6 @@ module.exports = {
             **profile - View your profile**\n
             **racetypes - View all of the race types and their rewards**\n
             **rank - Check your rank**\n
-            **remove - Remove a part from your car**\n
             **restore - Restore a barn find**\n
             **reward - Claim a crew season reward, or a season reward**\n
             **season - View the current season**\n

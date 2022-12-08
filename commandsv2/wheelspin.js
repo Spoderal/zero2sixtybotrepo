@@ -145,6 +145,12 @@ module.exports = {
           }
         } else if (item == "💵") {
           let reward = lodash.sample(cash);
+          reward = Number(reward)
+          let filteredhouse = userdata.houses.filter((house) => house.Name == "Il Maniero")
+          if(filteredhouse[0]){
+            reward += (reward * 0.10);
+            console.log(reward)
+          }
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });

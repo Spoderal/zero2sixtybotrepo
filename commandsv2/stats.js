@@ -61,11 +61,8 @@ module.exports = {
       let car = item.toLowerCase();
       let carindb = list[car];
 
-      let speed = `${carindb.Speed} MPH`;
+      let speed = `${carindb.Speed}`;
 
-      if (settings.ph == "KMH") {
-        speed = `${Math.floor(convertMPHtoKPH(carindb.Speed))} KMH`;
-      }
 
       if (!carindb) return await interaction.reply(`Thats not a car!`);
 
@@ -76,7 +73,7 @@ module.exports = {
         .setTitle(`Stats for ${carindb.Emote} ${carindb.Name}`)
         .addFields([
           {
-            name: `Speed`,
+            name: `Power`,
             value: `${speedemote} ${speed}`,
             inline: true,
           },
@@ -132,18 +129,16 @@ module.exports = {
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
-      let speed = `${carindb.Speed} MPH`;
+      let speed = `${carindb.Speed}`;
 
-      if (settings.ph == "KMH") {
-        speed = `${Math.floor(convertMPHtoKPH(carindb.Speed))} KMH`;
-      }
+    
       let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
         )
         .addFields([
           {
-            name: `Speed`,
+            name: `Power`,
             value: `${speedemote} ${speed}`,
             inline: true,
           },

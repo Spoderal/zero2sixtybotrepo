@@ -57,7 +57,7 @@ const emotes = {
   classRecentlyReleased: "<:zero2sixty:966453514425495602>",
 
   // Car Properties
-  speed: "<:speedemote:983963212393357322>",
+  speed: "<:newspeedemote:1049569265730195466>",
   handling: "<:handling:983963211403505724>",
   none: "<:z_none:898352936785178645>",
   spoiler: "<:spoilerdefault:932419391868526612>",

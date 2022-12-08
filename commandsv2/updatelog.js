@@ -31,6 +31,13 @@ module.exports = {
             customId: "up4",
             emoji: "❄️",
           },
+          {
+            label: "12/8/2022",
+            description: "Information for the recent revamp update!",
+            value: "5_update",
+            customId: "up5",
+            emoji: "🔃",
+          },
         ])
     );
 
@@ -41,7 +48,8 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             🏪 Big Update 11/10/2022\n
-            ❄️ Winter Update 11/30/2022
+            ❄️ Winter Update 11/30/2022\n
+            🔃 Revamp Update 12/8/2022
         `);
 
     embed.setColor(colors.blue);
@@ -98,6 +106,32 @@ module.exports = {
                 `
               )
               .setFooter({ text: "11/30/2022" })
+              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else if (value === "5_update") {
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`Revamp Update`);
+            embed
+              .setDescription(
+                `• Bot race is renamed to street race\n
+                • Upgrade command has a new look, and feel! You don't need to remove parts to add them now.\n
+                • Prestige overhaul, no more max prestige, qm, and bet race no longer prestige limited\n
+                • Bet race bets are capped depending on your prestige level.\n
+                • Houses are back with a new function! Get different perks and own multiple houses!\n
+                • Garage has a brand new look, all you need to do is run /garage now.\n
+                • Speed has been renamed to Power, a universal value.\n
+                • Titles are based on prestige level now, prestige 5+ will get you new titles. (MORE SOON)\n
+                • Police (BETA) is back! Use /job hire to get hired!
+                `
+              )
+              .setFooter({ text: "12/8/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

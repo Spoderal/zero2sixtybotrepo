@@ -170,11 +170,8 @@ module.exports = {
 
         let carob = marketfiltered[0].carobj;
         if (!carob) return interaction.reply("This id isn't a car!");
-        let speed = `${carob.Speed} MPH`;
-        let settings = userdata.settings;
-        if (settings.ph == "KMH") {
-          speed = `${Math.floor(convertMPHtoKPH(carob.Speed))} KMH`;
-        }
+        let speed = `${carob.Speed}`;
+     
         let exhaust = carob.Exhaust || "Stock Exhaust";
         let intake = carob.Intake || "Stock Intake";
         let suspension = carob.Suspension || "Stock Suspension";
@@ -203,7 +200,7 @@ module.exports = {
         let brakesemote = partdb.Parts[brakes.toLowerCase()]?.Emote || "🔵";
         let embed = new EmbedBuilder()
           .setTitle(`Stats for ${carob.Name}`)
-          .setDescription(`Speed: ${speed}\n0-60: ${carob.Acceleration}s`)
+          .setDescription(`Power: ${speed}\n0-60: ${carob.Acceleration}s`)
           .setImage(`${carob.Livery}`)
           .setColor(colors.blue)
           .addFields([

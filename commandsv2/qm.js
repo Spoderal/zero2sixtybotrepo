@@ -9,8 +9,9 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
-const { doubleCashWeekendField, convertMPHtoKPH } = require("../common/utils");
+const { doubleCashWeekendField, convertMPHtoKPHm, toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const houses = require("../data/houses.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -74,10 +75,7 @@ module.exports = {
     let botcar = null;
     let racing = cooldowndata.racing;
     let prestige = userdata.prestige;
-    if (prestige < 1)
-      return await interaction.reply(
-        "You need to be prestige 1 to do this race!"
-      );
+  
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
@@ -219,8 +217,9 @@ module.exports = {
         break;
       }
     }
-    if (prestige) {
-      let mult = require("../data/prestige.json")[prestige].Mult;
+  
+    if (prestige && prestige > 0) {
+      let mult = prestige * 0.05
 
       let multy = mult * moneyearned;
 
@@ -317,30 +316,24 @@ module.exports = {
     let zemote = emotes.zero2sixty;
     let cemote = emotes.cash;
     let rpemote = emotes.rp;
-    let settings = userdata.settings;
 
-    let speed = `${user1carspeed} MPH`;
-    let speed2 = `${cars.Cars[botcar.toLowerCase()].Speed} MPH`;
+    let speed = `${user1carspeed}`;
+    let speed2 = `${cars.Cars[botcar.toLowerCase()].Speed}`;
 
-    if (settings.ph == "KMH") {
-      speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`;
-      speed2 = `${Math.floor(
-        convertMPHtoKPH(cars.Cars[botcar.toLowerCase()].Speed)
-      )} KMH`;
-    }
+
     let embed = new EmbedBuilder()
       .setTitle("3...2...1....GO!")
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
+          value: `${semote} Power: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${handling}`,
           inline: true,
         },
         {
           name: `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Power: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,
@@ -406,6 +399,11 @@ module.exports = {
       if (timer >= 15) {
         if (tracklength > tracklength2) {
           clearInterval(x);
+          let filteredhouse = userdata.houses.filter((house) => house.Name == "Casa Tranquilla")
+          if(filteredhouse[0]){
+            moneyearned += (moneyearned * 0.05);
+            console.log(moneyearned)
+          }
           if (
             (userdata.patreon && userdata.patreon.tier == 1) ||
             (userdata.patreon && userdata.patreon.tier == 2)
@@ -440,7 +438,7 @@ module.exports = {
           }
           let earnings = [];
 
-          earnings.push(`${cemote} $${moneyearnedtxt}`);
+          earnings.push(`${cemote} ${toCurrency(moneyearned)}`);
           earnings.push(`${rpemote} ${ticketsearned} RP`);
           let ckemote = emotes.ckey;
           let rkemote = emotes.rkey;

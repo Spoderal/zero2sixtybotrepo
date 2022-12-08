@@ -24,8 +24,8 @@ module.exports = {
             customId: "pvp",
           },
           {
-            label: "botrace",
-            description: "Information about bot racing",
+            label: "streetrace",
+            description: "Information about street racing",
             value: "bot_race",
             customId: "botrace",
           },
@@ -150,7 +150,7 @@ module.exports = {
             });
           } else if (value === "bot_race") {
             embed.fields = [];
-            embed.setTitle("Bot Racing");
+            embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
               `Race against bots for practice!\n<:boost:983813400289234978>`

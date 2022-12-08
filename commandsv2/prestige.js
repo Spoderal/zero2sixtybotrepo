@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
-const prestiges = require("../data/prestige.json");
 const User = require("../schema/profile-schema");
 
 module.exports = {
@@ -147,14 +146,6 @@ module.exports = {
 
     userdata.save();
 
-    await interaction.reply(
-      `Prestiged to rank ${
-        userdata.prestige
-      }! Your bank limit is now increased by ${toCurrency(
-        upgrade
-      )} and you've unlocked the following: ${prestiges[
-        userdata.prestige
-      ].Unlocks.join(", ")}`
-    );
+    await interaction.reply(`Prestiged to rank ${userdata.prestige}! Your bank limit is now increased by ${toCurrency(upgrade)}`);
   },
 };

@@ -69,6 +69,11 @@ module.exports = {
     if (patreon && patreon.tier == 4) {
       dcash *= 5;
     }
+    let filteredhouse = userdata.houses.filter((house) => house.Name == "Albergo Delle Meraviglie")
+    if(filteredhouse[0]){
+      userdata.swheelspins += 1
+      interaction.channel.send("+1 Super Wheelspin")
+    }
 
     if (interaction.guild.id == "931004190149460048") {
       dcash += 500;
@@ -81,7 +86,7 @@ module.exports = {
     let timeout = 86400000;
     let prestige = userdata.prestige;
     if (prestige) {
-      let mult = require("../data/prestige.json")[prestige].Mult;
+      let mult = prestige
 
       let multy = mult * dcash;
 

@@ -6,11 +6,12 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const emotes = require("../common/emotes").emotes
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("wanted")
-    .setDescription("Get away from the cops! (PRESTIGE 2)")
+    .setDescription("Get away from the cops!")
     .addStringOption((option) =>
       option
         .setName("tier")
@@ -89,12 +90,12 @@ module.exports = {
     let bot3cars = ["police 2008 bugatti veyron"];
     let job;
     if (chase == "chase") {
-      job = userdata.job;
-
-      if (job.Job !== "police" || !job)
+      job = userdata.work;
+      if(!selected.police) return interaction.reply(`Your car isn't a police car!`)
+      if (job.name !== "police" || !job)
         return await interaction.reply(`You're not a cop!`);
-      let worked = job.worked;
-      let timeoutj = job.Timeout;
+      let worked = job.cooldown;
+      let timeoutj = 10800000;
       if (worked !== null && timeoutj - (Date.now() - worked) > 0) {
         let time = ms(timeoutj - (Date.now() - worked));
         let timeEmbed = new discord.EmbedBuilder()
@@ -112,36 +113,6 @@ module.exports = {
       .setColor(colors.blue);
     if (!user1cars) {
       errorembed.setDescription("You dont have any cars!");
-      return await interaction.reply({ embeds: [errorembed] });
-    }
-
-    if (!botlist.includes(bot.toLowerCase())) {
-      errorembed.setDescription(
-        "Thats not a tier! The available tiers are: 1, 2, and 3"
-      );
-      return await interaction.reply({ embeds: [errorembed] });
-    }
-    if (!botlist.includes(bot.toLowerCase()) && !cars.Cars[selected]) {
-      errorembed.setDescription(
-        "Thats not a tier! The available tiers are: 1, 2, and 3"
-      );
-      return await interaction.reply({ embeds: [errorembed] });
-    }
-    if (!botlist.includes(bot.toLowerCase()) && user1cars.includes(selected)) {
-      errorembed.setDescription(
-        "Thats not a tier! The available tiers are: 1, 2, and 3"
-      );
-      return await interaction.reply({ embeds: [errorembed] });
-    }
-    if (!botlist.includes(bot.toLowerCase()) && !selected) {
-      errorembed.setDescription(
-        "Thats not a tier! The available tiers are: 1, 2, and 3"
-      );
-      return await interaction.reply({ embeds: [errorembed] });
-    }
-
-    if (!cars.Cars[selected.toLowerCase()]) {
-      errorembed.setDescription("Thats not an available car!");
       return await interaction.reply({ embeds: [errorembed] });
     }
 
@@ -211,33 +182,35 @@ module.exports = {
       .setTitle(`🚨Tier ${bot} chase in progress...🚨`)
       .addFields([
         {
-          name: `Your ${cars.Cars[selected.toLowerCase()].Emote} ${
-            cars.Cars[selected.toLowerCase()].Name
+          name: `Your ${cars.Cars[selected.Name.toLowerCase()].Emote} ${
+            cars.Cars[selected.Name.toLowerCase()].Name
           }`,
-          value: `Speed: ${user1carspeed}\n\n0-60: ${selected.Acceleration}`,
+          value: `${emotes.speed} Power: ${user1carspeed}\n\n${emotes.zero2sixty} 0-60: ${selected.Acceleration}\n\n${emotes.handling} ${handling}`,
+          inline: true
         },
         {
           name: `🚨${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `Speed: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n0-60: ${
-            cars.Cars[botcar.toLowerCase()]["0-60"]
-          }`,
+          value: `${emotes.speed} Power: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n${emotes.zero2sixty} 0-60: ${cars.Cars[botcar.toLowerCase()]["0-60"]}\n\n${emotes.handling} ${cars.Cars[botcar.toLowerCase()].Handling}`,
+          inline: true
         },
       ])
       .setColor(colors.blue)
-      .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+      .setThumbnail("https://i.ibb.co/5YyD6nT/wanted.png");
+
+      interaction.reply({embeds: [embed]})
     let randomobstacle = randomRange(1, 3);
     let randomnum = randomRange(2, 4);
     let timeobs = randomobstacle * 1000;
     if (randomnum == 2) {
-      setTimeout(() => {
+      setTimeout(async () => {
         embed.setDescription("Great launch!");
         embed.addFields([{ name: "Bonus", value: "$100" }]);
         moneyearnedtxt += 100;
         userdata.cash += 100;
         hp += 1;
-        interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
       }, 2000);
     }
     setTimeout(() => {
@@ -251,6 +224,12 @@ module.exports = {
           "https://c.tenor.com/vBzDM0XpZVEAAAAC/crash-flip.gif",
           "https://bestanimations.com/media/police/1287902099police-animated-gif-21.gif",
         ];
+        if(chase == "chase"){
+          gifs = [
+            "https://media.tenor.com/GalEl2qzbuEAAAAC/police-chase.gif",
+            "https://media.tenor.com/a4fSQZ1w-BoAAAAM/police-cars-police-chase.gif"
+          ]
+        }
         collector.on("collect", async (r, user) => {
           emb.reactions.cache.get(r.emoji.name).users.remove(user.id);
           emb.reactions.cache
@@ -265,7 +244,7 @@ module.exports = {
           if (r.emoji.name === "🟢") {
             embed.setImage(lodash.sample(gifs));
             emb.edit("✅ Avoided obstacle!");
-            interaction.editReply({ embeds: [embed] });
+            await interaction.editReply({ embeds: [embed] });
           }
         });
         collector.on("end", async (collected) => {
@@ -317,33 +296,13 @@ module.exports = {
           clearInterval(x);
           embed.setTitle(`Got away from Tier ${bot} police!`);
           if (chase == "chase") {
-            userdata.job.worked = Date.now();
+            userdata.work.cooldown = Date.now();
             embed.setTitle(`Caught Tier ${bot} racer!`);
-            let job = userdata.job;
-            let jobsdb = require("../data/jobs.json");
-            let num = job.Number;
-            let salary = job.Salary;
-            let actjob = job.Job;
-            let addednum = (num += 1);
-            let requiredxp;
-            if (jobsdb.Jobs[actjob].Ranks[addednum]) {
-              requiredxp = jobsdb.Jobs[actjob].Ranks[addednum].XP;
-            } else {
-              requiredxp = "MAX";
-            }
-            let xp2 = randomRange(15, 25);
-
-            embed.addFields([
-              { name: `Busted!`, value: `No earnings from this race` },
-            ]);
-
-            if (requiredxp !== "MAX") {
-              job.EXP += 10;
-            }
-
+            let salary = 1000;
+     
             userdata.cash += salary;
             interaction.channel.send(
-              `You've completed your job duties and earned yourself $${salary}, and ${xp2} XP`
+              `You've completed your job duties and earned yourself $1,000`
             );
             return interaction.editReply({ embeds: [embed] });
           }

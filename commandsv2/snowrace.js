@@ -250,35 +250,30 @@ module.exports = {
       botspeed += botdupgrades;
     }
     let hp = user1carspeed + newhandling;
-    hp - user1carspeed / 2;
+    hp - user1carspeed / 3;
     let hp2 = botspeed + othernewhandling;
-    hp2 - botspeed / 2;
+    hp2 - botspeed / 3;
     let y;
     let policeuser;
     let policelen;
     let itemusedp;
-    let settings = userdata.settings;
 
-    let speed = `${user1carspeed} MPH`;
-    let speed2 = `${botspeed} MPH`;
+    let speed = `${user1carspeed}`;
+    let speed2 = `${botspeed}`;
 
-    if (settings.ph == "KMH") {
-      speed = `${Math.floor(convertMPHtoKPH(user1carspeed))} KMH`;
-      speed2 = `${Math.floor(convertMPHtoKPH(botspeed))} KMH`;
-    }
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${classd} bot race in progress...`)
       .addFields([
         {
           name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Speed: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
+          value: `${semote} Power: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
           inline: true,
         },
         {
           name: `${botemote} ${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Speed: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
+          value: `${semote} Power: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
             cars.Cars[botcar.toLowerCase()].Handling
           }`,
           inline: true,
@@ -288,13 +283,7 @@ module.exports = {
       .setFooter(tipFooterRandom)
       .setImage("https://i.gifer.com/1jxk.gif")
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-    let row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("chase")
-        .setEmoji("🚔")
-        .setLabel("Chase")
-        .setStyle("Secondary")
-    );
+    let row = new ActionRowBuilder()
     let msg = await interaction.reply({
       embeds: [embed],
       fetchReply: true,

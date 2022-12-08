@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const prestiges = require("../data/prestige.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
@@ -38,8 +37,7 @@ module.exports = {
       .addFields(
         { name: "Daily Reward Reminder", value: `${demote}` },
         { name: "Top.gg Vote Reminder", value: `${vemote}` },
-        { name: "Tips", value: `${temote}` },
-        { name: "Unit", value: `${kmhormph}` }
+        { name: "Tips", value: `${temote}` }
       )
       .setColor(colors.blue);
 
@@ -56,10 +54,7 @@ module.exports = {
         .setCustomId("tips")
         .setLabel("Enable Tips")
         .setStyle("Success"),
-      new Discord.ButtonBuilder()
-        .setCustomId("kmh")
-        .setLabel("Set to KMH")
-        .setStyle("Success")
+    
     );
 
     if (voteenabled == true) {
@@ -74,10 +69,7 @@ module.exports = {
       row.components[2].setStyle("Danger");
       row.components[2].setLabel("Disable Tips");
     }
-    if (kmhormph == "KMH") {
-      row.components[3].setStyle("Danger");
-      row.components[3].setLabel("Set to MPH");
-    }
+
 
     let msg = await interaction.reply({
       embeds: [embed],
@@ -186,35 +178,7 @@ module.exports = {
           components: [row],
           fetchReply: true,
         });
-      } else if (i.customId.includes("kmh")) {
-        if (userdata.settings.ph == "MPH") {
-          userdata.settings.ph = "KMH";
-          row.components[3].setStyle("Danger");
-          row.components[3].setLabel("Set to MPH");
-        } else if (userdata.settings.ph == "KMH") {
-          userdata.settings.ph = "MPH";
-          row.components[3].setStyle("Success");
-          row.components[3].setLabel("Set to KMH");
-        }
-        userdata.markModified("settings");
-        userdata.save();
-
-        kmhormph = userdata.settings.ph;
-        embed = new Discord.EmbedBuilder()
-          .setTitle(`Settings for ${user.username}`)
-          .addFields(
-            { name: "Daily Reward Reminder", value: `${demote}` },
-            { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` },
-            { name: "Unit", value: `${kmhormph}` }
-          )
-          .setColor(colors.blue);
-        await i.update({
-          embeds: [embed],
-          components: [row],
-          fetchReply: true,
-        });
-      }
+      } 
     });
   },
 };
