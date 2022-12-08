@@ -270,7 +270,6 @@ module.exports = {
 
     let speed = `${usercarspeed}`;
 
-
     let embed = new EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
       .setDescription(`You have ${time}s to complete the track`)

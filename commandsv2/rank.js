@@ -19,8 +19,8 @@ module.exports = {
 
     let racerank = userdata.racerank;
 
-    let required1 = newprestige2 * 100
-    let required2 = newprestige2 * 100
+    let required1 = newprestige2 * 100;
+    let required2 = newprestige2 * 100;
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${user.username}'s ranks`)
@@ -32,7 +32,6 @@ module.exports = {
         Multiplier: 5%
         `
       )
-    
 
       .setColor(colors.blue);
 

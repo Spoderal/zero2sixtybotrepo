@@ -4,32 +4,34 @@ const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
-const cardb = require("../data/cardb.json")
+const cardb = require("../data/cardb.json");
 const colors = require("../common/colors");
 const { toCurrency, blankField } = require("../common/utils");
-const emotes = require("../common/emotes")
+const emotes = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("garage")
     .setDescription("Check your garage")
-    .addStringOption((option) => option
-    .setName("user")
-    .setRequired(false)
-    .setDescription("The user to view the garage of")),
-    async execute(interaction) {
-      let user = interaction.options.getString("user") || interaction.user
+    .addStringOption((option) =>
+      option
+        .setName("user")
+        .setRequired(false)
+        .setDescription("The user to view the garage of")
+    ),
+  async execute(interaction) {
+    let user = interaction.options.getString("user") || interaction.user;
 
-    let udata = await User.findOne({id: user.id})
+    let udata = await User.findOne({ id: user.id });
 
-    let cars = udata.cars
-    let parts = udata.parts
-    let items = udata.items
-    
-    let displayparts = []
-    let displayitems = []
-    let page = 1
-    
+    let cars = udata.cars;
+    let parts = udata.parts;
+    let items = udata.items;
+
+    let displayparts = [];
+    let displayitems = [];
+    let page = 1;
+
     cars = lodash.chunk(
       cars.map((a) => a),
       6
@@ -38,21 +40,22 @@ module.exports = {
       parts.map((a) => a),
       10
     );
-    let itempage = cars
+    let itempage = cars;
     let embed = new EmbedBuilder()
-    .setTitle(`Displaying cars for ${user.username}`)
-    .setImage("https://i.ibb.co/pf4vwHC/istockphoto-521421426-612x612.jpg")
-    .setColor(colors.blue)
-    .setFooter({ text: `Pages ${page}/${itempage.length}` });
-    if(udata.showcase){
-      embed.setThumbnail(`${udata.showcase}`)
-
+      .setTitle(`Displaying cars for ${user.username}`)
+      .setImage("https://i.ibb.co/pf4vwHC/istockphoto-521421426-612x612.jpg")
+      .setColor(colors.blue)
+      .setFooter({ text: `Pages ${page}/${itempage.length}` });
+    if (udata.showcase) {
+      embed.setThumbnail(`${udata.showcase}`);
     }
-    for(let car in cars[0]){
-      car = cars[0][car]
-      embed.addFields(
-        {name: `${car.Emote} ${car.Name}`, value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``, inline: true}
-      )
+    for (let car in cars[0]) {
+      car = cars[0][car];
+      embed.addFields({
+        name: `${car.Emote} ${car.Name}`,
+        value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+        inline: true,
+      });
     }
 
     let row = new ActionRowBuilder().addComponents(
@@ -89,153 +92,148 @@ module.exports = {
         .setCustomId("items")
         .setEmoji("🪛")
         .setLabel("Items")
-        .setStyle("Secondary"),
+        .setStyle("Secondary")
     );
-    let msg = await interaction.reply({embeds: [embed], components: [row, row2], fetchReply: true})
+    let msg = await interaction.reply({
+      embeds: [embed],
+      components: [row, row2],
+      fetchReply: true,
+    });
 
-            
     let filter2 = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
     };
     let collector2 = msg.createMessageComponentCollector({
       filter: filter2,
     });
-    
-    collector2.on('collect', async (i) => {
-      if(i.customId == "cars"){
-        itempage = cars
-        
-         embed = new EmbedBuilder()
-    .setTitle(`Displaying cars for ${user.username}`)
-    .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
-    .setColor(colors.blue)
-    .setFooter({ text: `Pages ${page}/${itempage.length}` });
-    for(let car in cars[0]){
-      car = cars[0][car]
-      embed.addFields(
-        {name: `${car.Emote} ${car.Name}`, value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``, inline: true}
-      )
-    }
 
-    await i.update({
-      embeds: [embed],
-      components: [row, row2],
-      fetchReply: true,
-    });
+    collector2.on("collect", async (i) => {
+      if (i.customId == "cars") {
+        itempage = cars;
 
+        embed = new EmbedBuilder()
+          .setTitle(`Displaying cars for ${user.username}`)
+          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
+          .setColor(colors.blue)
+          .setFooter({ text: `Pages ${page}/${itempage.length}` });
+        for (let car in cars[0]) {
+          car = cars[0][car];
+          embed.addFields({
+            name: `${car.Emote} ${car.Name}`,
+            value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+            inline: true,
+          });
+        }
 
-      }
-      else if(i.customId.includes("parts")){
-        itempage = parts
-         embed = new EmbedBuilder()
-        .setTitle(`Displaying parts for ${user.username}`)
-        .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
-        .setColor(colors.blue)
-        .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(parts)
-        
-        for(let part in parts[0]){
-          part = parts[0][part]
-          let partindb = partdb.Parts[part.toLowerCase()]
-          displayparts.push(`${partindb.Emote} ${partindb.Name}`)
+        await i.update({
+          embeds: [embed],
+          components: [row, row2],
+          fetchReply: true,
+        });
+      } else if (i.customId.includes("parts")) {
+        itempage = parts;
+        embed = new EmbedBuilder()
+          .setTitle(`Displaying parts for ${user.username}`)
+          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
+          .setColor(colors.blue)
+          .setFooter({ text: `Pages ${page}/${itempage.length}` });
+        console.log(parts);
+
+        for (let part in parts[0]) {
+          part = parts[0][part];
+          let partindb = partdb.Parts[part.toLowerCase()];
+          displayparts.push(`${partindb.Emote} ${partindb.Name}`);
         }
         var list = displayparts;
-        let displayparts2 = []
+        let displayparts2 = [];
         var quantities = list.reduce(function (obj, n) {
           if (obj[n]) obj[n]++;
           else obj[n] = 1;
-    
+
           return obj;
         }, {});
-    
+
         for (let n in quantities) {
           displayparts2.push(`${n} x${quantities[n]}`);
         }
-        embed.setDescription(`${displayparts2.join('\n')}`)
+        embed.setDescription(`${displayparts2.join("\n")}`);
         await i.update({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
         });
-      }
-      else if(i.customId.includes("items")){
-        itempage = parts
-         embed = new EmbedBuilder()
-        .setTitle(`Displaying items for ${user.username}`)
-        .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
-        .setColor(colors.blue)
-        .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(parts)
-        
-        for(let item in items[0]){
-          item = items[0][item]
-          let itemindb = partdb.Parts[item.toLowerCase()]
-          displayitems.push(`${itemindb.Emote} ${itemindb.Name}`)
+      } else if (i.customId.includes("items")) {
+        itempage = parts;
+        embed = new EmbedBuilder()
+          .setTitle(`Displaying items for ${user.username}`)
+          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
+          .setColor(colors.blue)
+          .setFooter({ text: `Pages ${page}/${itempage.length}` });
+        console.log(parts);
+
+        for (let item in items[0]) {
+          item = items[0][item];
+          let itemindb = partdb.Parts[item.toLowerCase()];
+          displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
         }
         var list2 = displayitems;
-        let displayitems2 = []
+        let displayitems2 = [];
         var quantities2 = list2.reduce(function (obj, n) {
           if (obj[n]) obj[n]++;
           else obj[n] = 1;
-    
+
           return obj;
         }, {});
-    
+
         for (let n in quantities2) {
           displayitems2.push(`${n} x${quantities2[n]}`);
         }
-        if(displayitems2.length == 0) embed.setDescription(`No Items`)
+        if (displayitems2.length == 0) embed.setDescription(`No Items`);
         else {
-          embed.setDescription(`${displayitems2.join('\n')}`)
-
+          embed.setDescription(`${displayitems2.join("\n")}`);
         }
         await i.update({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
         });
-      }
-
-      else {
-            
-        console.log(page)
-      let current = page;
-      if (i.customId.includes("previous") && page !== 1) {
-        embed.data.fields = null;
-
-        page--;
-      }
-      else if (i.customId.includes("next") && page !== itempage.length){
-        embed.data.fields = null;
-
-        page++;
-
-      }
-      else if (i.customId.includes("first")){
-        embed.data.fields = null;
-
-        page = 1;
-      } 
-      else if (i.customId.includes("last")){
-        embed.data.fields = null;
-
-        page = itempage.length;
-      } 
-      for(let e in itempage[page - 1]){
-        let car = itempage[page - 1][e]
-        console.log(car)
-        embed.addFields(   {name: `${car.Emote} ${car.Name}`, value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``, inline: true})
-      }
-
-      if (current !== page) {
-        embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
-       i.update({ embeds: [embed], fetchReply: true });
       } else {
-        return i.update({ content: "No pages left!" });
-      }
-      }
+        console.log(page);
+        let current = page;
+        if (i.customId.includes("previous") && page !== 1) {
+          embed.data.fields = null;
 
-    })
+          page--;
+        } else if (i.customId.includes("next") && page !== itempage.length) {
+          embed.data.fields = null;
 
+          page++;
+        } else if (i.customId.includes("first")) {
+          embed.data.fields = null;
+
+          page = 1;
+        } else if (i.customId.includes("last")) {
+          embed.data.fields = null;
+
+          page = itempage.length;
+        }
+        for (let e in itempage[page - 1]) {
+          let car = itempage[page - 1][e];
+          console.log(car);
+          embed.addFields({
+            name: `${car.Emote} ${car.Name}`,
+            value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+            inline: true,
+          });
+        }
+
+        if (current !== page) {
+          embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
+          i.update({ embeds: [embed], fetchReply: true });
+        } else {
+          return i.update({ content: "No pages left!" });
+        }
+      }
+    });
   },
 };

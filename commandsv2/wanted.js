@@ -6,7 +6,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const emotes = require("../common/emotes").emotes
+const emotes = require("../common/emotes").emotes;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -91,7 +91,8 @@ module.exports = {
     let job;
     if (chase == "chase") {
       job = userdata.work;
-      if(!selected.police) return interaction.reply(`Your car isn't a police car!`)
+      if (!selected.police)
+        return interaction.reply(`Your car isn't a police car!`);
       if (job.name !== "police" || !job)
         return await interaction.reply(`You're not a cop!`);
       let worked = job.cooldown;
@@ -186,20 +187,24 @@ module.exports = {
             cars.Cars[selected.Name.toLowerCase()].Name
           }`,
           value: `${emotes.speed} Power: ${user1carspeed}\n\n${emotes.zero2sixty} 0-60: ${selected.Acceleration}\n\n${emotes.handling} ${handling}`,
-          inline: true
+          inline: true,
         },
         {
           name: `🚨${cars.Cars[botcar.toLowerCase()].Emote} ${
             cars.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${emotes.speed} Power: ${cars.Cars[botcar.toLowerCase()].Speed}\n\n${emotes.zero2sixty} 0-60: ${cars.Cars[botcar.toLowerCase()]["0-60"]}\n\n${emotes.handling} ${cars.Cars[botcar.toLowerCase()].Handling}`,
-          inline: true
+          value: `${emotes.speed} Power: ${
+            cars.Cars[botcar.toLowerCase()].Speed
+          }\n\n${emotes.zero2sixty} 0-60: ${
+            cars.Cars[botcar.toLowerCase()]["0-60"]
+          }\n\n${emotes.handling} ${cars.Cars[botcar.toLowerCase()].Handling}`,
+          inline: true,
         },
       ])
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/5YyD6nT/wanted.png");
 
-      interaction.reply({embeds: [embed]})
+    interaction.reply({ embeds: [embed] });
     let randomobstacle = randomRange(1, 3);
     let randomnum = randomRange(2, 4);
     let timeobs = randomobstacle * 1000;
@@ -224,11 +229,11 @@ module.exports = {
           "https://c.tenor.com/vBzDM0XpZVEAAAAC/crash-flip.gif",
           "https://bestanimations.com/media/police/1287902099police-animated-gif-21.gif",
         ];
-        if(chase == "chase"){
+        if (chase == "chase") {
           gifs = [
             "https://media.tenor.com/GalEl2qzbuEAAAAC/police-chase.gif",
-            "https://media.tenor.com/a4fSQZ1w-BoAAAAM/police-cars-police-chase.gif"
-          ]
+            "https://media.tenor.com/a4fSQZ1w-BoAAAAM/police-cars-police-chase.gif",
+          ];
         }
         collector.on("collect", async (r, user) => {
           emb.reactions.cache.get(r.emoji.name).users.remove(user.id);
@@ -299,7 +304,7 @@ module.exports = {
             userdata.work.cooldown = Date.now();
             embed.setTitle(`Caught Tier ${bot} racer!`);
             let salary = 1000;
-     
+
             userdata.cash += salary;
             interaction.channel.send(
               `You've completed your job duties and earned yourself $1,000`

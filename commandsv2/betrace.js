@@ -58,9 +58,10 @@ module.exports = {
     let timeout = 18000000;
     let racing = cooldowns.betracing;
     let prestige = userdata.prestige;
-    let betlimit = prestige * 10000
-    if (moneyearned > betlimit) return interaction.reply(`Your bet limit is ${betlimit}!`)
-   
+    let betlimit = prestige * 10000;
+    if (moneyearned > betlimit)
+      return interaction.reply(`Your bet limit is ${betlimit}!`);
+
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 

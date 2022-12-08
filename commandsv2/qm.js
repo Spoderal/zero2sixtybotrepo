@@ -9,9 +9,13 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
-const { doubleCashWeekendField, convertMPHtoKPHm, toCurrency } = require("../common/utils");
+const {
+  doubleCashWeekendField,
+  convertMPHtoKPHm,
+  toCurrency,
+} = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const houses = require("../data/houses.json")
+const houses = require("../data/houses.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -75,7 +79,7 @@ module.exports = {
     let botcar = null;
     let racing = cooldowndata.racing;
     let prestige = userdata.prestige;
-  
+
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
 
@@ -217,9 +221,9 @@ module.exports = {
         break;
       }
     }
-  
+
     if (prestige && prestige > 0) {
-      let mult = prestige * 0.05
+      let mult = prestige * 0.05;
 
       let multy = mult * moneyearned;
 
@@ -320,7 +324,6 @@ module.exports = {
     let speed = `${user1carspeed}`;
     let speed2 = `${cars.Cars[botcar.toLowerCase()].Speed}`;
 
-
     let embed = new EmbedBuilder()
       .setTitle("3...2...1....GO!")
       .addFields([
@@ -399,10 +402,12 @@ module.exports = {
       if (timer >= 15) {
         if (tracklength > tracklength2) {
           clearInterval(x);
-          let filteredhouse = userdata.houses.filter((house) => house.Name == "Casa Tranquilla")
-          if(filteredhouse[0]){
-            moneyearned += (moneyearned * 0.05);
-            console.log(moneyearned)
+          let filteredhouse = userdata.houses.filter(
+            (house) => house.Name == "Casa Tranquilla"
+          );
+          if (filteredhouse[0]) {
+            moneyearned += moneyearned * 0.05;
+            console.log(moneyearned);
           }
           if (
             (userdata.patreon && userdata.patreon.tier == 1) ||

@@ -283,7 +283,7 @@ module.exports = {
       .setFooter(tipFooterRandom)
       .setImage("https://i.gifer.com/1jxk.gif")
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-    let row = new ActionRowBuilder()
+    let row = new ActionRowBuilder();
     let msg = await interaction.reply({
       embeds: [embed],
       fetchReply: true,

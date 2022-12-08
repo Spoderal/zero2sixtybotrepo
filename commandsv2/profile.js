@@ -45,23 +45,18 @@ module.exports = {
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
     let title = userdata.title;
 
-    if(prestige >= 5){
-      title = "Novice Racer"
-    }
-    else if(prestige >= 10){
-      title = "Decent Racer"
-    }
-    else if(prestige >= 25){
-      title = "Good Racer"
-    }
-    else if(prestige >= 50){
-      title = "Pro Racer"
-    }
-    else if(prestige >= 100){
-      title = "Stig Racer"
-    }
-    else if(prestige >= 500){
-      title = "No Life Racer"
+    if (prestige >= 5) {
+      title = "Novice Racer";
+    } else if (prestige >= 10) {
+      title = "Decent Racer";
+    } else if (prestige >= 25) {
+      title = "Good Racer";
+    } else if (prestige >= 50) {
+      title = "Pro Racer";
+    } else if (prestige >= 100) {
+      title = "Stig Racer";
+    } else if (prestige >= 500) {
+      title = "No Life Racer";
     }
 
     let cars = userdata.cars;

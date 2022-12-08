@@ -656,13 +656,11 @@ module.exports = {
           } else if (policelen > tracklength) {
             let job = userdata.job;
             let salary = 1000;
-       
 
             embed.addFields([
               { name: `Busted!`, value: `No earnings from this race` },
             ]);
 
-      
             userdata.cash += salary;
             userdata.save();
             msg.reply(
@@ -739,10 +737,12 @@ module.exports = {
             earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
             userdata.fkeys += 1;
           }
-          let filteredhouse = userdata.houses.filter((house) => house.Name == "Buone Vedute")
-          if(filteredhouse[0]){
-            moneyearned += (moneyearned * 0.05);
-            console.log(moneyearned)
+          let filteredhouse = userdata.houses.filter(
+            (house) => house.Name == "Buone Vedute"
+          );
+          if (filteredhouse[0]) {
+            moneyearned += moneyearned * 0.05;
+            console.log(moneyearned);
           }
 
           userdata.rp3 += parseInt(ticketsearned);
