@@ -399,7 +399,6 @@ module.exports = {
     let speed = `${user1carspeed}`;
     let speed2 = `${botspeed}`;
 
-  
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${classd} bot race in progress...`)
       .addFields([
@@ -424,7 +423,7 @@ module.exports = {
         "Its Winter! Meaning new exclusive cars and new features! Check /season to find out more!"
       )
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-    let row = new ActionRowBuilder()
+    let row = new ActionRowBuilder();
     let msg = await interaction.reply({
       embeds: [embed],
       fetchReply: true,

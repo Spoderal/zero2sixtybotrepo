@@ -1,46 +1,46 @@
 {
-  "casa tranquilla":{
-    "id":"ct",
-    "Name":"Casa Tranquilla",
-    "Price":500000,
-    "Perk":"Earn 5% more cash when racing on quarter mile tracks.",
-    "Image":"https://track-pm.s3.amazonaws.com/vacationperfect/image/16cd275a-4132-4f5b-96f9-84e3f562a703",
-    "Emote":"<:housecasa:1049184066567688222>",
-    "Type":"House",
-    "Space":5, 
-    "Prestige":1
+  "casa tranquilla": {
+    "id": "ct",
+    "Name": "Casa Tranquilla",
+    "Price": 500000,
+    "Perk": "Earn 5% more cash when racing on quarter mile tracks.",
+    "Image": "https://track-pm.s3.amazonaws.com/vacationperfect/image/16cd275a-4132-4f5b-96f9-84e3f562a703",
+    "Emote": "<:housecasa:1049184066567688222>",
+    "Type": "House",
+    "Space": 5,
+    "Prestige": 1
   },
-  "buone vedute":{
-    "id":"bv",
-    "Name":"Buone Vedute",
-    "Price":750000,
-    "Perk":"Earn 5% more cash when racing in /streetrace.",
-    "Image":"https://i.ibb.co/YXXLDF7/1cb9f46d-5556-481e-963b-ab7eb48f08b4-austrailia-house-exterior-close.jpg",
-    "Emote":"<:houseview:1050305264701669416>",
-    "Type":"House",
-    "Space":5, 
-    "Prestige":5
+  "buone vedute": {
+    "id": "bv",
+    "Name": "Buone Vedute",
+    "Price": 750000,
+    "Perk": "Earn 5% more cash when racing in /streetrace.",
+    "Image": "https://i.ibb.co/YXXLDF7/1cb9f46d-5556-481e-963b-ab7eb48f08b4-austrailia-house-exterior-close.jpg",
+    "Emote": "<:houseview:1050305264701669416>",
+    "Type": "House",
+    "Space": 5,
+    "Prestige": 5
   },
-  "il maniero":{
-    "id":"im",
-    "Name":"Il Maniero",
-    "Price":1200000,
-    "Perk":"Earn 10% more cash in wheelspins and superwheelspins.",
-    "Image":"https://i.ibb.co/4gnCc9B/gallery-manor-house-01.jpg",
-    "Emote":"<:themanor:1050481110569730099>",
-    "Type":"House",
-    "Space":10, 
-    "Prestige":6
+  "il maniero": {
+    "id": "im",
+    "Name": "Il Maniero",
+    "Price": 1200000,
+    "Perk": "Earn 10% more cash in wheelspins and superwheelspins.",
+    "Image": "https://i.ibb.co/4gnCc9B/gallery-manor-house-01.jpg",
+    "Emote": "<:themanor:1050481110569730099>",
+    "Type": "House",
+    "Space": 10,
+    "Prestige": 6
   },
-  "albergo delle meraviglie":{
-    "id":"adm",
-    "Name":"Albergo Delle Meraviglie",
-    "Price":1500000,
-    "Perk":"Earn 1 free super wheel spin every day",
-    "Image":"https://i.ibb.co/sWPhPmj/luxury-hotel-monastero-santa-rosa-pool-night-622.jpg",
-    "Emote":"<:hotelwonders:1050484410778132500>",
-    "Type":"House",
-    "Space":10, 
-    "Prestige":10
+  "albergo delle meraviglie": {
+    "id": "adm",
+    "Name": "Albergo Delle Meraviglie",
+    "Price": 1500000,
+    "Perk": "Earn 1 free super wheel spin every day",
+    "Image": "https://i.ibb.co/sWPhPmj/luxury-hotel-monastero-santa-rosa-pool-night-622.jpg",
+    "Emote": "<:hotelwonders:1050484410778132500>",
+    "Type": "House",
+    "Space": 10,
+    "Prestige": 10
   }
 }

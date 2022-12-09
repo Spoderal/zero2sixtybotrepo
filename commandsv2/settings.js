@@ -53,8 +53,7 @@ module.exports = {
       new Discord.ButtonBuilder()
         .setCustomId("tips")
         .setLabel("Enable Tips")
-        .setStyle("Success"),
-    
+        .setStyle("Success")
     );
 
     if (voteenabled == true) {
@@ -69,7 +68,6 @@ module.exports = {
       row.components[2].setStyle("Danger");
       row.components[2].setLabel("Disable Tips");
     }
-
 
     let msg = await interaction.reply({
       embeds: [embed],
@@ -178,7 +176,7 @@ module.exports = {
           components: [row],
           fetchReply: true,
         });
-      } 
+      }
     });
   },
 };

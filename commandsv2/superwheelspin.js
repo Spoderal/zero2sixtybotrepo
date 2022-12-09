@@ -122,7 +122,7 @@ module.exports = {
         } else if (item == "💵") {
           let randomnum = lodash.random(10);
           let reward;
-          
+
           if (randomnum == 2) {
             reward = lodash.sample(wheelspinrewards.RareCash);
           } else {

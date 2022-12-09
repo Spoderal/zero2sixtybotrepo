@@ -7,46 +7,47 @@ const warehousedb = require("../data/warehouses.json");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const { emotes } = require("../common/emotes");
-const User = require("../schema/profile-schema")
+const User = require("../schema/profile-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("houses")
     .setDescription("View houses for sale")
-    .addSubcommand((cmd) => cmd
-    .setDescription("View the stats of a house")
-    .setName("stats")
-    .addStringOption((option) => option
-    .setName("house")
-    .setRequired(true)
-    .setDescription("The house to view")
+    .addSubcommand((cmd) =>
+      cmd
+        .setDescription("View the stats of a house")
+        .setName("stats")
+        .addStringOption((option) =>
+          option
+            .setName("house")
+            .setRequired(true)
+            .setDescription("The house to view")
+        )
     )
+    .addSubcommand((cmd) =>
+      cmd.setDescription("View the list of houses").setName("list")
     )
-    .addSubcommand((cmd) => cmd
-    .setDescription("View the list of houses")
-    .setName("list")
-    )
-    .addSubcommand((cmd) => cmd
-    .setDescription("View your houses")
-    .setName("view")
+    .addSubcommand((cmd) =>
+      cmd.setDescription("View your houses").setName("view")
     ),
 
   async execute(interaction) {
-    let subcommand = interaction.options.getSubcommand()
-    let userdata = await User.findOne({id: interaction.user.id})
-    let housearray = []
-    let housearr = []
+    let subcommand = interaction.options.getSubcommand();
+    let userdata = await User.findOne({ id: interaction.user.id });
+    let housearray = [];
+    let housearr = [];
 
-    for(let house in housedb){
-      house = housedb[house]
-      housearr.push(house)
-      housearray.push(`${house.Emote} ${house.Name} : ${toCurrency(house.Price)} \`ID: ${house.id}\``)
+    for (let house in housedb) {
+      house = housedb[house];
+      housearr.push(house);
+      housearray.push(
+        `${house.Emote} ${house.Name} : ${toCurrency(house.Price)} \`ID: ${
+          house.id
+        }\``
+      );
     }
 
-    if(subcommand == "list"){
-
-  
-  
+    if (subcommand == "list") {
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Warehouses")
@@ -54,17 +55,16 @@ module.exports = {
           .setCustomId("warehouse")
           .setStyle("Secondary")
       );
-  
-  
+
       let embed = new Discord.EmbedBuilder()
         .setTitle("Houses For Sale")
         .setDescription(
           `
-          ${housearray.join('\n')}
+          ${housearray.join("\n")}
           `
         )
-        .setColor(colors.blue)
-  
+        .setColor(colors.blue);
+
       let msg = await interaction.reply({
         embeds: [embed],
         fetchReply: true,
@@ -73,12 +73,12 @@ module.exports = {
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
       };
-  
+
       const collector = msg.createMessageComponentCollector({
         filter: filter,
         time: 10000,
       });
-  
+
       collector.on("collect", async (i) => {
         if (i.customId.includes("warehouse")) {
           embed.setTitle("Warehouses for sale").setDescription(
@@ -96,39 +96,50 @@ module.exports = {
           i.update({ embeds: [embed] });
         }
       });
-    }
-    else if(subcommand == "stats"){
-      let housetoview = interaction.options.getString("house").toLowerCase()
-      let filteredhouse = housearr.filter((house) => house.Name == housetoview.toLowerCase() || house.id == housetoview.toLowerCase())
+    } else if (subcommand == "stats") {
+      let housetoview = interaction.options.getString("house").toLowerCase();
+      let filteredhouse = housearr.filter(
+        (house) =>
+          house.Name == housetoview.toLowerCase() ||
+          house.id == housetoview.toLowerCase()
+      );
 
       let embed = new Discord.EmbedBuilder()
-      .setTitle(`Stats for ${filteredhouse[0].Name}`)
-      .setImage(filteredhouse[0].Image)
-      .setDescription(`Price: ${toCurrency(filteredhouse[0].Price)}\n\nPerk: ${filteredhouse[0].Perk}\n\nGarage Space: ${filteredhouse[0].Space}\n\nUnlocks at prestige: ${filteredhouse[0].Prestige}`)
-      .setColor(colors.blue)
+        .setTitle(`Stats for ${filteredhouse[0].Name}`)
+        .setImage(filteredhouse[0].Image)
+        .setDescription(
+          `Price: ${toCurrency(filteredhouse[0].Price)}\n\nPerk: ${
+            filteredhouse[0].Perk
+          }\n\nGarage Space: ${
+            filteredhouse[0].Space
+          }\n\nUnlocks at prestige: ${filteredhouse[0].Prestige}`
+        )
+        .setColor(colors.blue);
 
-      interaction.reply({embeds: [embed]})
-    }
-    else if(subcommand == "view"){
-      let uhouses = userdata.houses
-      let houseuserarr = []
+      interaction.reply({ embeds: [embed] });
+    } else if (subcommand == "view") {
+      let uhouses = userdata.houses;
+      let houseuserarr = [];
 
-      if(!uhouses || uhouses.length == 0) return interaction.reply("You don't own any houses!")
+      if (!uhouses || uhouses.length == 0)
+        return interaction.reply("You don't own any houses!");
 
-      for(let h in uhouses){
-        houseuserarr.push(`${uhouses[h].Emote} ${uhouses[h].Name}`)
+      for (let h in uhouses) {
+        houseuserarr.push(`${uhouses[h].Emote} ${uhouses[h].Name}`);
       }
 
-      let filteredprice = uhouses.sort((house, house2) => house2.Price - house.Price)
-      console.log(filteredprice[0])
+      let filteredprice = uhouses.sort(
+        (house, house2) => house2.Price - house.Price
+      );
+      console.log(filteredprice[0]);
 
       let embed = new Discord.EmbedBuilder()
-      .setTitle(`Houses for ${interaction.user.username}`)
-      .setDescription(`${houseuserarr.join('\n')}`)
-      .setColor(colors.blue)
-      .setThumbnail(filteredprice[0].Image)
+        .setTitle(`Houses for ${interaction.user.username}`)
+        .setDescription(`${houseuserarr.join("\n")}`)
+        .setColor(colors.blue)
+        .setThumbnail(filteredprice[0].Image);
 
-      interaction.reply({embeds: [embed]})
+      interaction.reply({ embeds: [embed] });
     }
   },
 };

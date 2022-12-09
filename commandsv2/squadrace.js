@@ -214,7 +214,6 @@ module.exports = {
     let speed = `${user1carspeed}`;
     let speed2 = `${botspeed}`;
 
-
     let embed = new discord.EmbedBuilder()
       .setTitle(`${squadinfo.Name} race in progress...`)
       .addFields([

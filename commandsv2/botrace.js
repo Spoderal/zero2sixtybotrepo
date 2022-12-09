@@ -656,13 +656,11 @@ module.exports = {
           } else if (policelen > tracklength) {
             let job = userdata.job;
             let salary = 1000;
-       
 
             embed.addFields([
               { name: `Busted!`, value: `No earnings from this race` },
             ]);
 
-      
             userdata.cash += salary;
             userdata.save();
             msg.reply(

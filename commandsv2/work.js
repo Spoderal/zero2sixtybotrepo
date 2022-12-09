@@ -187,7 +187,6 @@ module.exports = {
               let miles = 0;
               let speed2 = `${selected.Speed}`;
 
-          
               embed.setTitle(`Transporting ${person.name} to ${location.name}`);
               embed.addFields({
                 name: `${carsdb.Cars[selected.Name.toLowerCase()].Emote} ${
@@ -257,7 +256,9 @@ module.exports = {
           }
         });
       } else if (jobtowork.name == "police") {
-        interaction.reply(`Chase other players using /streetrace, or use \`/wanted\` to work on your police job!`);
+        interaction.reply(
+          `Chase other players using /streetrace, or use \`/wanted\` to work on your police job!`
+        );
       }
     }
   },

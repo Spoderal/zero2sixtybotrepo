@@ -63,7 +63,6 @@ module.exports = {
 
       let speed = `${carindb.Speed}`;
 
-
       if (!carindb) return await interaction.reply(`Thats not a car!`);
 
       let trims = carindb.Trims || ["❌ No Trims"];
@@ -131,7 +130,6 @@ module.exports = {
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       let speed = `${carindb.Speed}`;
 
-    
       let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`

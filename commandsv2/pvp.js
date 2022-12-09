@@ -97,9 +97,7 @@ module.exports = {
       .addFields([
         {
           name: `${user.username}'s car`,
-          value: `${carindb1.Emote} ${
-            carindb1.Name
-          }\nPower: ${u1speed}\n${u1speed}\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
+          value: `${carindb1.Emote} ${carindb1.Name}\nPower: ${u1speed}\n${u1speed}\n0-60: ${u1acc}s\nHandling: ${u1handling}`,
         },
         {
           name: `${user2.username}'s car`,

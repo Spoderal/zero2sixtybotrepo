@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const { capitalize } = require("lodash");
 const colors = require("../common/colors");
-const emotes = require("../common/emotes").emotes
+const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
@@ -65,24 +65,22 @@ module.exports = {
 
     if (!userdata.parts.includes(inputPartName))
       return await interaction.reply("You don't have this part!");
-      let realpart = selected[partType]
-      let partindb
-      if(realpart !== undefined){
+    let realpart = selected[partType];
+    let partindb;
+    if (realpart !== undefined) {
+      partindb = partdb.Parts[realpart.toLowerCase()];
+    } else {
+      partindb = "None";
+    }
+    console.log(partindb);
 
-         partindb = partdb.Parts[realpart.toLowerCase()]
-      }
-      else {
-        partindb = "None"
-      }
-      console.log(partindb)
-      
-    let oldspeed = selected.Speed
-    let oldhandling = selected.Handling
-    let old060 = selected.Acceleration
-    if(partindb !== "None"){
-      console.log("not none")
+    let oldspeed = selected.Speed;
+    let oldhandling = selected.Handling;
+    let old060 = selected.Acceleration;
+    if (partindb !== "None") {
+      console.log("not none");
 
-      userdata.parts.push(partindb.Name.toLowerCase())
+      userdata.parts.push(partindb.Name.toLowerCase());
       if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
         let newspeed = Number(partindb.AddedSpeed);
         let stat = Number(selected.Speed);
@@ -129,8 +127,7 @@ module.exports = {
         let stat = Number(selected.Price);
         selected.Price = stat -= resale;
       }
-      userdata.update()
-
+      userdata.update();
     }
 
     if (partInLocalDB?.AddedSpeed > 0) {
@@ -182,11 +179,10 @@ module.exports = {
       selected.Price = stat += resale;
     }
 
-
     selected[partType] = partInLocalDB.Name;
-    let newspeed = selected.Speed
-    let newhandling = selected.Handling
-    let new060 = selected.Acceleration
+    let newspeed = selected.Speed;
+    let newhandling = selected.Handling;
+    let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
         id: user1.id,
@@ -218,24 +214,44 @@ module.exports = {
     );
     userdata.save();
 
-    if(partindb.Name == undefined){
+    if (partindb.Name == undefined) {
       partindb = {
         Name: "None",
-        Emote: ""
-      }
+        Emote: "",
+      };
     }
     let embed = new discord.EmbedBuilder()
-    .setTitle(`Upgraded ${partType} on your ${selected.Emote} ${selected.Name}`)
-    .addFields(
-      {name: "Old Part", value: `${partindb.Emote} ${partindb.Name}`, inline: true},
-      {name: "New Part", value: `${partInLocalDB.Emote} ${partInLocalDB?.Name || inputPartName}`, inline: true},
-      {name: "\u200b", value: "\u200b"},
-      {name: "Old Stats", value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhandling}`, inline: true},
-      {name: `New Stats`, value: `${emotes.speed} Power: ${newspeed}\n${emotes.zero2sixty} Acceleration: ${new060}s\n${emotes.handling} Handling: ${newhandling}`, inline: true}
+      .setTitle(
+        `Upgraded ${partType} on your ${selected.Emote} ${selected.Name}`
+      )
+      .addFields(
+        {
+          name: "Old Part",
+          value: `${partindb.Emote} ${partindb.Name}`,
+          inline: true,
+        },
+        {
+          name: "New Part",
+          value: `${partInLocalDB.Emote} ${
+            partInLocalDB?.Name || inputPartName
+          }`,
+          inline: true,
+        },
+        { name: "\u200b", value: "\u200b" },
+        {
+          name: "Old Stats",
+          value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhandling}`,
+          inline: true,
+        },
+        {
+          name: `New Stats`,
+          value: `${emotes.speed} Power: ${newspeed}\n${emotes.zero2sixty} Acceleration: ${new060}s\n${emotes.handling} Handling: ${newhandling}`,
+          inline: true,
+        }
       )
       .setColor(colors.blue)
-      .setThumbnail(`${selected.Livery}`)
+      .setThumbnail(`${selected.Livery}`);
 
-    await interaction.reply({embeds: [embed]});
+    await interaction.reply({ embeds: [embed] });
   },
 };

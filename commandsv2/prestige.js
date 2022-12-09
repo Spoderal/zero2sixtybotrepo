@@ -146,6 +146,10 @@ module.exports = {
 
     userdata.save();
 
-    await interaction.reply(`Prestiged to rank ${userdata.prestige}! Your bank limit is now increased by ${toCurrency(upgrade)}`);
+    await interaction.reply(
+      `Prestiged to rank ${
+        userdata.prestige
+      }! Your bank limit is now increased by ${toCurrency(upgrade)}`
+    );
   },
 };
