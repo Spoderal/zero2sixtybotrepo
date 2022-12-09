@@ -70,7 +70,7 @@ module.exports = {
       dcash *= 5;
     }
     let filteredhouse = userdata.houses.filter((house) => house.Name == "Albergo Delle Meraviglie")
-    if(filteredhouse[0]){
+    if(userdata.houses && filteredhouse[0]){
       userdata.swheelspins += 1
       interaction.channel.send("+1 Super Wheelspin")
     }

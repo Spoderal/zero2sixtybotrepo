@@ -740,7 +740,7 @@ module.exports = {
             userdata.fkeys += 1;
           }
           let filteredhouse = userdata.houses.filter((house) => house.Name == "Buone Vedute")
-          if(filteredhouse[0]){
+          if(userdata.houses && filteredhouse[0]){
             moneyearned += (moneyearned * 0.05);
             console.log(moneyearned)
           }
