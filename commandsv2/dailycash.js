@@ -88,7 +88,7 @@ module.exports = {
     let timeout = 86400000;
     let prestige = userdata.prestige;
     if (prestige) {
-      let mult = prestige;
+      let mult = prestige * 0.05;
 
       let multy = mult * dcash;
 

@@ -104,7 +104,7 @@ module.exports = {
       moneyearned = squadfiltered[0].BigReward;
     }
     if (prestige) {
-      let mult = require("../data/prestige.json")[prestige].Mult;
+      let mult = prestige * 0.05
 
       let multy = mult * moneyearned;
 
