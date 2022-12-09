@@ -67,7 +67,7 @@ module.exports = {
       return await interaction.reply("You don't have this part!");
     let realpart = selected[partType];
     let partindb;
-    if (realpart !== undefined) {
+    if (realpart !== undefined && realpart !== null) {
       partindb = partdb.Parts[realpart.toLowerCase()];
     } else {
       partindb = "None";
