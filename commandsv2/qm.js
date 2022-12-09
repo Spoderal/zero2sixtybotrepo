@@ -402,10 +402,12 @@ module.exports = {
       if (timer >= 15) {
         if (tracklength > tracklength2) {
           clearInterval(x);
-          let filteredhouse = userdata.houses.filter((house) => house.Name == "Casa Tranquilla")
-          if(userdata.houses && filteredhouse[0]){
-            moneyearned += (moneyearned * 0.05);
-            console.log(moneyearned)
+          let filteredhouse = userdata.houses.filter(
+            (house) => house.Name == "Casa Tranquilla"
+          );
+          if (userdata.houses && filteredhouse[0]) {
+            moneyearned += moneyearned * 0.05;
+            console.log(moneyearned);
           }
           if (
             (userdata.patreon && userdata.patreon.tier == 1) ||

@@ -293,7 +293,7 @@ module.exports = {
     }
 
     if (prestige) {
-      let mult = prestige * 0.05
+      let mult = prestige * 0.05;
 
       let multy = mult * moneyearned;
 
@@ -737,10 +737,12 @@ module.exports = {
             earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
             userdata.fkeys += 1;
           }
-          let filteredhouse = userdata.houses.filter((house) => house.Name == "Buone Vedute")
-          if(userdata.houses && filteredhouse[0]){
-            moneyearned += (moneyearned * 0.05);
-            console.log(moneyearned)
+          let filteredhouse = userdata.houses.filter(
+            (house) => house.Name == "Buone Vedute"
+          );
+          if (userdata.houses && filteredhouse[0]) {
+            moneyearned += moneyearned * 0.05;
+            console.log(moneyearned);
           }
 
           userdata.rp3 += parseInt(ticketsearned);
