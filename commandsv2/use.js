@@ -339,7 +339,7 @@ module.exports = {
             cash *= 6;
           }
           if (prestige > 0) {
-            let mult = prestige * 0.05
+            let mult = prestige * 0.05;
 
             let multy = mult * cash;
 
