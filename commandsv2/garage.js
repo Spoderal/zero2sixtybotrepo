@@ -46,8 +46,8 @@ module.exports = {
       10
     );
 
-    console.log(parts)
-    
+    console.log(parts);
+
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
@@ -147,8 +147,6 @@ module.exports = {
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
 
-   
- 
         embed.setDescription(`${displayparts[0].join("\n")}`);
         await i.update({
           embeds: [embed],
@@ -210,15 +208,13 @@ module.exports = {
         }
         for (let e in itempage[page - 1]) {
           let car = itempage[page - 1][e];
-          if(itempage == cars){
+          if (itempage == cars) {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
               value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
               inline: true,
             });
-
-          }
-          else if(itempage == displayparts){
+          } else if (itempage == displayparts) {
             embed.setDescription(`${displayparts[page - 1].join("\n")}`);
           }
         }
