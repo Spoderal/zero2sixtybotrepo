@@ -283,11 +283,10 @@ module.exports = {
       .setFooter(tipFooterRandom)
       .setImage("https://i.gifer.com/1jxk.gif")
       .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-    let row = new ActionRowBuilder();
+    let row
     let msg = await interaction.reply({
       embeds: [embed],
-      fetchReply: true,
-      components: [row],
+      fetchReply: true
     });
     let filter2 = (btnInt) => {
       return interaction.user.id !== btnInt.user.id;
@@ -298,6 +297,7 @@ module.exports = {
     });
 
     if (selected.Nitro) {
+       row = new ActionRowBuilder();
       row.addComponents(
         new ButtonBuilder()
           .setCustomId("boost")
