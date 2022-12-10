@@ -36,10 +36,18 @@ module.exports = {
       cars.map((a) => a),
       6
     );
-    parts = lodash.chunk(
-      parts.map((a) => a),
+    for (let part in parts) {
+      part = parts[part];
+      let partindb = partdb.Parts[part.toLowerCase()];
+      displayparts.push(`${partindb.Emote} ${partindb.Name}`);
+    }
+    displayparts = lodash.chunk(
+      displayparts.map((a) => a),
       10
     );
+
+    console.log(parts)
+    
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
@@ -131,7 +139,7 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId.includes("parts")) {
-        itempage = parts;
+        itempage = displayparts;
         embed = new EmbedBuilder()
           .setTitle(`Displaying parts for ${user.username}`)
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
@@ -139,37 +147,21 @@ module.exports = {
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
 
-        for (let part in parts[0]) {
-          part = parts[0][part];
-          let partindb = partdb.Parts[part.toLowerCase()];
-          displayparts.push(`${partindb.Emote} ${partindb.Name}`);
-        }
-        var list = displayparts;
-        let displayparts2 = [];
-        var quantities = list.reduce(function (obj, n) {
-          if (obj[n]) obj[n]++;
-          else obj[n] = 1;
-
-          return obj;
-        }, {});
-
-        for (let n in quantities) {
-          displayparts2.push(`${n} x${quantities[n]}`);
-        }
-        embed.setDescription(`${displayparts2.join("\n")}`);
+   
+ 
+        embed.setDescription(`${displayparts[0].join("\n")}`);
         await i.update({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
         });
       } else if (i.customId.includes("items")) {
-        itempage = parts;
+        itempage = items;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(parts);
 
         for (let item in items[0]) {
           item = items[0][item];
@@ -198,7 +190,6 @@ module.exports = {
           fetchReply: true,
         });
       } else {
-        console.log(page);
         let current = page;
         if (i.customId.includes("previous") && page !== 1) {
           embed.data.fields = null;
@@ -219,12 +210,17 @@ module.exports = {
         }
         for (let e in itempage[page - 1]) {
           let car = itempage[page - 1][e];
-          console.log(car);
-          embed.addFields({
-            name: `${car.Emote} ${car.Name}`,
-            value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
-            inline: true,
-          });
+          if(itempage == cars){
+            embed.addFields({
+              name: `${car.Emote} ${car.Name}`,
+              value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+              inline: true,
+            });
+
+          }
+          else if(itempage == displayparts){
+            embed.setDescription(`${displayparts[page - 1].join("\n")}`);
+          }
         }
 
         if (current !== page) {
