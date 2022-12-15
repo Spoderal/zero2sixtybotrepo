@@ -23,13 +23,13 @@
       "Rarity": 5,
       "NoPaint": true
     },
-    "mini mini cooper":{
-      "Name":"Mini Mini Cooper",
-      "Colors":["White"],
-      "Image":"https://i.ibb.co/NZQbf20/miniminicooper.png",
-      "Findables":2,
-      "Rarity":5,
-      "NoPaint":true
+    "mini mini cooper": {
+      "Name": "Mini Mini Cooper",
+      "Colors": ["White"],
+      "Image": "https://i.ibb.co/NZQbf20/miniminicooper.png",
+      "Findables": 2,
+      "Rarity": 5,
+      "NoPaint": true
     }
   }
 }

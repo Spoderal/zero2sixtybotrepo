@@ -128,8 +128,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          }
-          else if (value === "mclaren_event") {
+          } else if (value === "mclaren_event") {
             embed.setTitle("McLaren Event");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Bring out your best McLaren, because its time to race with it!
@@ -147,15 +146,16 @@ module.exports = {
             **Ends Febuary 31st 2023**
             
                   `);
-            embed.setThumbnail("https://www.topgear.com/sites/default/files/images/news-article/2018/07/06ba2b96a4ea4fa5d86b083bd8ab42ba/dsc03169.jpg");
+            embed.setThumbnail(
+              "https://www.topgear.com/sites/default/files/images/news-article/2018/07/06ba2b96a4ea4fa5d86b083bd8ab42ba/dsc03169.jpg"
+            );
             embed.setColor(colors.blue);
 
             await interaction.editReply({
               embeds: [embed],
               components: [row2],
             });
-          }
-          else if (value === "christmas_event") {
+          } else if (value === "christmas_event") {
             embed.setTitle("Christmas Event");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Merry Christmas from Zero2Sixty! 🎅
