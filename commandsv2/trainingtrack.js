@@ -238,9 +238,7 @@ module.exports = {
     Number(botspeed);
     Number(new60);
     Number(new62);
-    setInterval(() => {
-      
-    }, interval);
+    setInterval(() => {}, interval);
     if (bot == "dclass") {
       botspeed += botdupgrades;
     }

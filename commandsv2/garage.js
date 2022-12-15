@@ -31,7 +31,7 @@ module.exports = {
     let displayparts = [];
     let displayitems = [];
     let page = 1;
-    let displayparts2 = []
+    let displayparts2 = [];
     cars = lodash.chunk(
       cars.map((a) => a),
       6

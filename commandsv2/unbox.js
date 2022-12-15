@@ -19,7 +19,7 @@ module.exports = {
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
           { name: "Z Crate 1", value: "z crate 1" },
-          {name: "McLaren", value: "mclaren"}
+          { name: "McLaren", value: "mclaren" }
         )
         .setRequired(true)
     ),
@@ -87,11 +87,9 @@ module.exports = {
       userdata.ekeys -= 20;
     } else if (bought == "drift") {
       userdata.dkeys -= 5;
-    }
-    else if (bought == "mclaren") {
+    } else if (bought == "mclaren") {
       userdata.fkeys -= 100;
-    }
-    else if (bought == "z crate 1") {
+    } else if (bought == "z crate 1") {
       userdata.gold -= 20;
     }
 

@@ -53,7 +53,7 @@ module.exports = {
     var item = interaction.options.getString("item");
     let userdata = await User.findOne({ id: interaction.user.id });
     let settings = userdata.settings;
-    let weightemote = emotes.weight
+    let weightemote = emotes.weight;
 
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
       let handlingemote = emotes.handling;
@@ -133,7 +133,8 @@ module.exports = {
       let carindb = selected;
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
-      let carweight = selected.Weight || list[selected.Name.toLowerCase()].Weight
+      let carweight =
+        selected.Weight || list[selected.Name.toLowerCase()].Weight;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       let speed = `${carindb.Speed}`;
 
@@ -235,7 +236,7 @@ module.exports = {
             partindb[intercooler.toLowerCase()]?.Emote || "🔵";
           let gearboxemote = partindb[gearbox.toLowerCase()]?.Emote || "🔵";
           let brakesemote = partindb[brakes.toLowerCase()]?.Emote || "🔵";
-          
+
           let embed = new Discord.EmbedBuilder()
             .setTitle(
               `Parts for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
