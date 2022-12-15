@@ -18,11 +18,11 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "11/10/2022",
-            description: "Information for recent small update",
+            label: "12/15/2022",
+            description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
-            emoji: "⬆️",
+            emoji: "⚙️",
           },
           {
             label: "11/30/2022",
@@ -47,7 +47,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            🏪 Big Update 11/10/2022\n
+            ⚙️ Latest Patch 12/15/2022\n
             ❄️ Winter Update 11/30/2022\n
             🔃 Revamp Update 12/8/2022
         `);
@@ -71,15 +71,13 @@ module.exports = {
             embed.fields = [];
             embed.setDescription("\u200b");
 
-            embed.setTitle(`Big Update`);
+            embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• Highway race for lockpicks!\n
-                • Find old garages filled with loot like restored barn cars, cash, and parts with lockpicks! [BETA]\n
-                • The user market is back! Its economy will be controlled by the users, you can list currencies, cars, parts, and items!\n
-                • Added TXClutch\n
-                • Added T4 and T5WeightReduction\n
-                • Uncommon barn maps removed, joined with rare barn maps
+                `• Christmas event! Check \`/events\`\n
+                 • Garage bug fixes, parts now show in quantities.\n
+                 • New barn finds and imports! Check \`/dealer\`\n
+                 • McLaren event! Check \`/events\`
                 `
               )
               .setFooter({ text: "11/10/2022" })

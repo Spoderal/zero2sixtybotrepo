@@ -59,6 +59,7 @@ const emotes = {
   // Car Properties
   speed: "<:newspeedemote:1049569265730195466>",
   handling: "<:handling:983963211403505724>",
+  weight:"<:weighticon:1052742413963243520>",
   none: "<:z_none:898352936785178645>",
   spoiler: "<:spoilerdefault:932419391868526612>",
   spoilerRestored: "<:spoilerrestored:941546331716063232>",
@@ -74,6 +75,7 @@ const emotes = {
 
   // Cars
   ferrari: "<:ferrari:931011838374727730>",
+  mclaren:"<:mclaren:931011546354692137>",
 
   // Parts
   partsExhaust: "<:exhaustdefault:968751109252448256>",

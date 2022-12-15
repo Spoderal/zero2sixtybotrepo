@@ -8,10 +8,11 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { randomRange, convertMPHtoKPH } = require("../common/utils");
+const { randomRange, convertMPHtoKPH, toCurrency } = require("../common/utils");
 const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const presentdb = require("../data/presents.json")
 
 let bot1cars = [
   "1995 mazda miata",
@@ -733,9 +734,10 @@ module.exports = {
             userdata.cash += userdata.weeklytask.reward;
             userdata.save();
           }
-          if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.ferrari) {
-            earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
-            userdata.fkeys += 1;
+          if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.mclaren) {
+            let randomkeysm = lodash.random(5)
+            earningsresult.push(`${randomkeysm} ${emotes.mclaren} McLaren Keys`);
+            userdata.fkeys += randomkeysm;
           }
           let filteredhouse = userdata.houses.filter(
             (house) => house.Name == "Buone Vedute"
@@ -744,12 +746,34 @@ module.exports = {
             moneyearned += moneyearned * 0.05;
             console.log(moneyearned);
           }
-
+          let randompresent = lodash.sample(presentdb)
           userdata.rp3 += parseInt(ticketsearned);
           userdata.cash += parseInt(moneyearned);
           userdata.racexp += xpearn;
           userdata.update();
           earningsresult.push(`+1 Race Rank`);
+          let randompresentrewards = ["Cash", "Helmet", "Car"]
+          let randompresentreward = lodash.sample(randompresentrewards)
+          let rewardpresent
+          if(randompresentreward == "Cash"){
+            let cashrewards = lodash.random(10000)
+            rewardpresent = `${toCurrency(cashrewards)}`
+            userdata.cash += cashrewards
+          }
+          else if(randompresentreward == "Helmet"){
+            let helmetreward = lodash.sample(randompresent.Helmets)
+            console.log(helmetreward)
+            rewardpresent = `${helmets.Pfps[helmetreward].Emote} ${helmets.Pfps[helmetreward].Name}`
+            userdata.pfps.push(helmetreward)
+          }
+          else if(randompresentreward == "Car"){
+            let carreward = lodash.sample(randompresent.Cars)
+            console.log(carreward)
+            rewardpresent = `${cars.Cars[carreward].Emote} ${cars.Cars[carreward].Name}`
+            userdata.cars.push(cars.Cars[carreward])
+            
+          }
+          earningsresult.push(`${randompresent.Emote} ${randompresent.Name}\nOpened: ${rewardpresent}`)
 
           userdata.racerank += 1;
 

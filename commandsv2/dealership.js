@@ -27,11 +27,12 @@ module.exports = {
     let carclassSarr = [];
     let carclassParr = [];
     let newcars = [
-      cars.Cars["2021 ford bronco"],
-      cars.Cars["2021 porsche cayenne coupe"],
-      cars.Cars["2010 jeep wrangler"],
-      cars.Cars["2020 lamborghini aventador svj"],
-      cars.Cars["2021 lamborghini sc20"],
+      cars.Cars["1967 chevy impala"], 
+      cars.Cars["1977 chevy camaro"], 
+      cars.Cars["2017 mclaren 650s"],
+      cars.Cars["2018 mclaren p1 gt"],
+      cars.Cars["2021 mclaren 765lt"],
+      cars.Cars["2021 acura tlx type s"]
     ];
 
     for (let c in cars.Cars) {

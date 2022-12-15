@@ -31,7 +31,7 @@ module.exports = {
     let displayparts = [];
     let displayitems = [];
     let page = 1;
-
+    let displayparts2 = []
     cars = lodash.chunk(
       cars.map((a) => a),
       6
@@ -41,8 +41,21 @@ module.exports = {
       let partindb = partdb.Parts[part.toLowerCase()];
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
-    displayparts = lodash.chunk(
-      displayparts.map((a) => a),
+
+    var list = displayparts;
+    var quantities = list.reduce(function (obj, n) {
+      if (obj[n]) obj[n]++;
+      else obj[n] = 1;
+
+      return obj;
+    }, {});
+
+    for (let n in quantities) {
+      displayparts2.push(`${n} x${quantities[n]}`);
+    }
+
+    displayparts2 = lodash.chunk(
+      displayparts2.map((a) => a),
       10
     );
 
@@ -139,7 +152,7 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId.includes("parts")) {
-        itempage = displayparts;
+        itempage = displayparts2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying parts for ${user.username}`)
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
@@ -147,7 +160,7 @@ module.exports = {
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
 
-        embed.setDescription(`${displayparts[0].join("\n")}`);
+        embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
           embeds: [embed],
           components: [row, row2],
@@ -214,8 +227,8 @@ module.exports = {
               value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
               inline: true,
             });
-          } else if (itempage == displayparts) {
-            embed.setDescription(`${displayparts[page - 1].join("\n")}`);
+          } else if (itempage == displayparts2) {
+            embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
         }
 

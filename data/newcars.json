@@ -8,7 +8,7 @@
       "Alias": "1995 miata",
       "HP": 128,
       "Speed": 125,
-      "Acceleration": 14.1,
+      "Acceleration": 3,
       "Grip": 2000,
       "Price": 500,
       "Engine": "1.8 L 4-cylinder",
@@ -17,6 +17,7 @@
       "Handling": 500,
       "Weight": 2300,
       "Starter": true,
+      "RPM":,
       "Class": "D"
     },
     {
@@ -27,7 +28,7 @@
       "Alias": "1991 mr2",
       "HP": 200,
       "Speed": 130,
-      "Acceleration": 14.5,
+      "Acceleration": 3,
       "Grip": 2200,
       "Price": 500,
       "Engine": "2.0L 3S-GTE",

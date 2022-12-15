@@ -12,7 +12,7 @@ module.exports = {
     let key1emote = emotes.commonKey;
     let key2emote = emotes.rareKey;
     let key3emote = emotes.exoticKey;
-    let key4emote = emotes.drfitKey;
+    let key4emote = emotes.mclaren;
     let goldemote = emotes.gold;
 
     let embed = new Discord.EmbedBuilder()
@@ -24,7 +24,7 @@ module.exports = {
             Common Import Crate: 50 ${key1emote} Keys
             Rare Import Crate : 25 ${key2emote} Keys
             Exotic Import Crate : 20 ${key3emote} Keys
-            Drift Import Crate : 5 ${key4emote} **LIMITED**
+            McLaren Import Crate : 100 ${key4emote} **LIMITED**
             Z Crate 1 : 5 ${goldemote}
           `,
         },

@@ -298,6 +298,41 @@
       "Name": "Darker Helmet",
       "Image": "https://i.ibb.co/vxJzR5h/helmet-darkness.png",
       "Emote": "<:helmet_darkness:1044407039679549520>"
+    },
+    "ginger helmet": {
+      "Name": "Ginger Helmet",
+      "Image": "https://i.ibb.co/YBCqNFd/helmet-ginger-small.png",
+      "Emote": "<:helmet_ginger_small:1052975941539864607>"
+    },
+    "robot helmet": {
+      "Name": "Robot Helmet",
+      "Image": "https://i.ibb.co/B67XQ2t/helmet-robot-small.png",
+      "Emote": "<:helmet_robot_small:1052975945876775005>"
+    },
+    "ocean helmet": {
+      "Name": "Ocean Helmet",
+      "Image": "https://i.ibb.co/kM3MJ2h/helmet-ocean-small.png",
+      "Emote": "<:helmet_ocean_small:1052975946715643996>"
+    },
+    "reverse vibrant helmet": {
+      "Name": "Reverse Vibrant Helmet",
+      "Image": "https://i.ibb.co/gSRjgTh/helmet-vibe-small.png",
+      "Emote": "<:helmet_vibe_small:1052975947739037707>"
+    },
+    "snowing helmet": {
+      "Name": "Snowing Helmet",
+      "Image": "https://i.ibb.co/SyQFyH0/helmet-snowing-small.png",
+      "Emote": "<:helmet_snowing_small:1052975942580056135>"
+    },
+    "coacoa helmet": {
+      "Name": "Coacoa Helmet",
+      "Image": "https://i.ibb.co/GdwG90k/helmet-hotcoco-small.png",
+      "Emote": "<:helmet_hotcoco_small:1052975944345866280>"
+    },
+    "winter helmet": {
+      "Name": "Winter Helmet",
+      "Image": "https://i.ibb.co/tCHHzz1/z2swinter.png",
+      "Emote": "<:z2swinter:1052975949622280293>"
     }
   }
 }

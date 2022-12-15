@@ -36,6 +36,7 @@ module.exports = {
       ckeys,
       rkeys,
       ekeys,
+      fkeys,
       bank,
       banklimit,
       noto5: notoriety,
@@ -83,6 +84,7 @@ module.exports = {
             ${emotes.commonKey} Common: ${ckeys}
             ${emotes.rareKey} Rare: ${rkeys}
             ${emotes.exoticKey} Exotic: ${ekeys}
+            ${emotes.mclaren} McLaren: ${fkeys}
             <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
             `,
             inline: true,

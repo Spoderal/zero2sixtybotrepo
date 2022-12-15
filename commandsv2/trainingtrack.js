@@ -238,6 +238,9 @@ module.exports = {
     Number(botspeed);
     Number(new60);
     Number(new62);
+    setInterval(() => {
+      
+    }, interval);
     if (bot == "dclass") {
       botspeed += botdupgrades;
     }
@@ -605,8 +608,8 @@ module.exports = {
             userdata.save();
           }
 
-          if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.ferrari) {
-            earningsresult.push(`1 <:ferrari:931011838374727730> Ferrari Key`);
+          if (cars.Cars[selected.Name.toLowerCase()].Emote == emotes.mclaren) {
+            earningsresult.push(`1 ${emotes.mclaren} McLaren Key`);
             userdata.fkeys += 1;
           }
           userdata.rp2 += ticketsearned;

@@ -18,14 +18,15 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Z Crate 1", value: "z crate 1" }
+          { name: "Z Crate 1", value: "z crate 1" },
+          {name: "McLaren", value: "mclaren"}
         )
         .setRequired(true)
     ),
   async execute(interaction) {
     let crates = require("../data/imports.json");
     let cars = require("../data/cardb.json");
-    let list = ["common", "rare", "exotic", "drift", "z crate 1"];
+    let list = ["common", "rare", "exotic", "drift", "z crate 1", "mclaren"];
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -51,7 +52,7 @@ module.exports = {
 
     let driftkeys = userdata.dkeys || 0;
     let gold = userdata.gold;
-    let ferrarikeys = userdata.ferrarikeys;
+    let ferrarikeys = userdata.fkeys;
 
     if (bought == "common" && commonkeys < 50)
       return await interaction.reply(
@@ -73,9 +74,9 @@ module.exports = {
       return await interaction.reply(
         `You dont have enough gold! This crate costs 5 gold`
       );
-    if (bought == "ferrari" && ferrarikeys < 100)
+    if (bought == "mclaren" && ferrarikeys < 100)
       return await interaction.reply(
-        `You dont have enough keys! This crate costs 100 ferrari keys`
+        `You dont have enough keys! This crate costs 100 McLaren keys`
       );
 
     if (bought == "common") {
@@ -86,7 +87,11 @@ module.exports = {
       userdata.ekeys -= 20;
     } else if (bought == "drift") {
       userdata.dkeys -= 5;
-    } else if (bought == "z crate 1") {
+    }
+    else if (bought == "mclaren") {
+      userdata.fkeys -= 100;
+    }
+    else if (bought == "z crate 1") {
       userdata.gold -= 20;
     }
 
