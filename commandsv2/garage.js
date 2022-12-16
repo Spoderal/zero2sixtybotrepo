@@ -24,11 +24,11 @@ module.exports = {
 
     let udata = await User.findOne({ id: user.id });
 
-    let ucars = udata.cars
+    let ucars = udata.cars;
     let cars = udata.cars;
     let parts = udata.parts;
     let items = udata.items;
-    let garagelimit = udata.garageLimit
+    let garagelimit = udata.garageLimit;
 
     let displayparts = [];
     let displayitems = [];
