@@ -770,7 +770,19 @@ module.exports = {
             let carreward = lodash.sample(randompresent.Cars);
             console.log(carreward);
             rewardpresent = `${cars.Cars[carreward].Emote} ${cars.Cars[carreward].Name}`;
-            userdata.cars.push(cars.Cars[carreward]);
+            let carobj = {
+              ID: cars.Cars[carreward].alias,
+              Name: cars.Cars[carreward].Name,
+              Speed: cars.Cars[carreward].Speed,
+              Acceleration: cars.Cars[carreward]["0-60"],
+              Handling: cars.Cars[carreward].Handling,
+              Parts: [],
+              Emote: cars.Cars[carreward].Emote,
+              Livery: cars.Cars[carreward].Image,
+              Miles: 0,
+              Drift: 0,
+            };
+            userdata.cars.push(carobj);
           }
           earningsresult.push(
             `${randompresent.Emote} ${randompresent.Name}\nOpened: ${rewardpresent}`
