@@ -426,8 +426,7 @@ module.exports = {
     let row = new ActionRowBuilder();
     let msg = await interaction.reply({
       embeds: [embed],
-      fetchReply: true,
-      components: [row],
+      fetchReply: true
     });
     let filter2 = (btnInt) => {
       return interaction.user.id !== btnInt.user.id;
