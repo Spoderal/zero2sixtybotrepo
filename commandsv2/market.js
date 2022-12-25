@@ -104,7 +104,6 @@ module.exports = {
           carobj: filteredcar[0],
           type: "cars",
         };
-        console.log(obj);
         userdata.cars.pull(filteredcar[0]);
       } else if (partdb.Parts[item.toLowerCase()]) {
         obj = {
@@ -116,7 +115,6 @@ module.exports = {
           type: "parts",
         };
 
-        console.log(obj);
         userdata.parts.pull(item, amount);
       } else if (itemdb.Other[item.toLowerCase()]) {
         obj = {
@@ -128,7 +126,6 @@ module.exports = {
           type: "items",
         };
 
-        console.log(obj);
         userdata.items.pull(item, amount);
       } else if (currencies[item.toLowerCase()]) {
         obj = {
@@ -142,7 +139,6 @@ module.exports = {
         };
         let currency = currencies[item.toLowerCase()].nameindb;
 
-        console.log(obj);
         userdata[currency] -= amount;
       } else
         return interaction.reply(
@@ -154,8 +150,6 @@ module.exports = {
 
       global.save();
       userdata.save();
-      console.log(obj);
-      console.log(amount);
 
       let embed = new EmbedBuilder()
         .setTitle("Listed!")
@@ -279,7 +273,6 @@ module.exports = {
         let marketdisplay = [];
         for (let m in market) {
           let listing = market[m];
-          console.log(listing);
 
           if (cardb.Cars[listing.item]) {
             marketdisplay.push(
@@ -313,7 +306,7 @@ module.exports = {
             );
           }
         }
-        console.log(marketdisplay);
+
 
         marketdisplay = lodash.chunk(
           marketdisplay.map((a) => `${a}`),
@@ -322,7 +315,6 @@ module.exports = {
         if (marketdisplay == undefined || !marketdisplay[0]) {
           marketdisplay = [["Nothing yet!"]];
         }
-        console.log(marketdisplay);
         let embed1 = new EmbedBuilder()
           .setTitle(`User Market`)
           .setDescription(`${marketdisplay[0].join("\n")}`);
@@ -413,6 +405,7 @@ module.exports = {
       userdata.cash -= parseInt(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
       udata2.cash += parseInt(itemtobuy.price);
+      udata2.save()
       userdata.save();
       try {
         let userfromitem = await interaction.client.users.fetch(
