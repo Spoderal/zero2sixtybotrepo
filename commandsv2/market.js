@@ -307,7 +307,6 @@ module.exports = {
           }
         }
 
-
         marketdisplay = lodash.chunk(
           marketdisplay.map((a) => `${a}`),
           10
@@ -405,7 +404,7 @@ module.exports = {
       userdata.cash -= parseInt(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
       udata2.cash += parseInt(itemtobuy.price);
-      udata2.save()
+      udata2.save();
       userdata.save();
       try {
         let userfromitem = await interaction.client.users.fetch(
