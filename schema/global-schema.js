@@ -41,10 +41,20 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  newmarket: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   marketId: {
     type: Number,
     required: false,
     default: 0,
+  },
+  pvpqueue: {
+    type: Array,
+    required: false,
+    default: [],
   },
 });
 
