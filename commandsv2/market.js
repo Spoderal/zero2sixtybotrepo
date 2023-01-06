@@ -81,8 +81,11 @@ module.exports = {
       let amount = interaction.options.getString("amount") || 1;
       let obj;
 
-      if (price <= 0) {
-        return interaction.reply("Your price needs to be above 0.");
+      if(price <= 0){
+        return interaction.reply("Your price needs to be above 0.")
+      }
+      if(price >= 1000000000){
+        return interaction.reply(`Your price needs to be below ${toCurrency(1000000000)}.`)
       }
 
       if (cardb.Cars[item.toLowerCase()]) {
@@ -312,6 +315,7 @@ module.exports = {
           }
         }
 
+
         marketdisplay = lodash.chunk(
           marketdisplay.map((a) => `${a}`),
           10
@@ -409,7 +413,7 @@ module.exports = {
       userdata.cash -= parseInt(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
       udata2.cash += parseInt(itemtobuy.price);
-      udata2.save();
+      udata2.save()
       userdata.save();
       try {
         let userfromitem = await interaction.client.users.fetch(
@@ -425,3 +429,5 @@ module.exports = {
     }
   },
 };
+
+
