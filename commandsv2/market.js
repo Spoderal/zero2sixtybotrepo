@@ -80,7 +80,6 @@ module.exports = {
       let price = interaction.options.getNumber("price");
       let amount = interaction.options.getString("amount") || 1;
       let obj;
-      let maxprice = 
 
       if(price <= 0){
         return interaction.reply("Your price needs to be above 0.")
