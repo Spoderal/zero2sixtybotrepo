@@ -32,8 +32,8 @@ module.exports = {
             emoji: "❄️",
           },
           {
-            label: "12/8/2022",
-            description: "Information for the recent revamp update!",
+            label: "1/6/2022",
+            description: "Information for the recent overhaul!",
             value: "5_update",
             customId: "up5",
             emoji: "🔃",
@@ -49,7 +49,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 12/15/2022\n
             ❄️ Winter Update 11/30/2022\n
-            🔃 Revamp Update 12/8/2022
+            🔃 Overhaul Update 1/6/2022
         `);
 
     embed.setColor(colors.blue);
@@ -114,21 +114,20 @@ module.exports = {
           } else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Revamp Update`);
+            embed.setTitle(`Overhaul Update`);
             embed
               .setDescription(
-                `• Bot race is renamed to street race\n
-                • Upgrade command has a new look, and feel! You don't need to remove parts to add them now.\n
-                • Prestige overhaul, no more max prestige, qm, and bet race no longer prestige limited\n
-                • Bet race bets are capped depending on your prestige level.\n
-                • Houses are back with a new function! Get different perks and own multiple houses!\n
-                • Garage has a brand new look, all you need to do is run /garage now.\n
-                • Speed has been renamed to Power, a universal value.\n
-                • Titles are based on prestige level now, prestige 5+ will get you new titles. (MORE SOON)\n
-                • Police (BETA) is back! Use /job hire to get hired!
+                `• Racing as a whole has a huge overhaul with new visuals, how it works, etc. **Join the support server if you'd like an in depth guide to how it works**\n
+                •  PVP Revamp is finally here! With competitive ranking, dedicated rewards per win, earning gold, and more, there's no way you'll get bored with it!\n
+                • Barn maps can no longer be obtained via racing, but now wheelspins drop all rarities!\n
+                • Bet racing removed to comply with Discords gambling regulations.\n
+                • Car packs are now live, buy exclusive cars with gold!\n
+                • qm and hm have been joined into one command **/dragrace**\n
+                • New houses!\n
+                • Weight stat now has effect everywhere.
                 `
               )
-              .setFooter({ text: "12/8/2022" })
+              .setFooter({ text: "1/6/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

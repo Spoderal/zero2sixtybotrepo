@@ -5,28 +5,30 @@
         "green helmet",
         "red helmet",
         "blue helmet",
-        "yellow helmet"
+        "yellow helmet",
+        "5000 Cash",
+        "2500 Cash",
+        "2500 Cash",
+        "2500 Cash"
       ],
-      "Price": 450
+      "Emote":"<:supplydrop:1044404467119960085>",
+      "Image":"https://i.ibb.co/dQ2D2yT/supplydrop.png"
     },
     "rare": {
       "Contents": [
         "flame helmet",
         "purple helmet",
         "rainbow helmet",
-        "turqoise helmet"
+        "turqoise helmet",
+        "10000 Cash",
+        "10000 Cash",
+        "10000 Cash",
+        "t3clutch",
+        "15000 Cash",
+        "t3tires"
       ],
-      "Price": 750
-    },
-    "seasonal": {
-      "Contents": [
-        "beach helmet",
-        "sunrise helmet",
-        "grass helmet",
-        "dark mode helmet",
-        "bluer helmet"
-      ],
-      "Price": 800
+      "Emote":"<:supplydroprare:1044404466096537731>",
+      "Image":"https://i.ibb.co/r4QY55b/supplydroprare.png"
     },
     "prestige": {
       "Contents": [
@@ -38,8 +40,8 @@
         "50000 Cash",
         "50000 Cash",
         "50000 Cash",
-        "T5Clutch",
-        "T5Exhaust",
+        "t5clutch",
+        "t5exhaust",
         "25000 Cash"
       ]
     },

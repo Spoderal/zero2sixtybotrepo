@@ -4,12 +4,13 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { tipFooterRandom } = require("../common/tips");
-const { randomRange, convertMPHtoKPH } = require("../common/utils");
-
+const { toCurrency } = require("../common/utils");
+const {AttachmentBuilder} = require("discord.js")
+const { createCanvas, loadImage } = require('canvas')
+const helmetdb = require("../data/pfpsdb.json")
 let bot1cars = [
   "1995 mazda miata",
   "1991 toyota mr2",
@@ -70,7 +71,7 @@ module.exports = {
   async execute(interaction) {
     let user = interaction.user;
 
-    const cars = require("../data/cardb.json");
+    const cardb = require("../data/cardb.json");
     let userdata =
       (await User.findOne({ id: interaction.user.id })) ||
       new User({ id: user.id });
@@ -92,13 +93,18 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
+    let car2
+
+
+let tracklength = 600
+let tracklength2 = 600
 
     let timeout = 7200000;
     let racing = cooldowndata.cashcup || 0;
 
     let newcashcuptier = userdata.cashcuptier;
 
-    let moneyearned = 75 * newcashcuptier;
+    let cashwon = 75 * newcashcuptier;
 
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
       let time = ms(timeout - (Date.now() - racing), { compact: true });
@@ -110,22 +116,26 @@ module.exports = {
 
     let botcar;
 
-    if (cars.Cars[selected.Name.toLowerCase()].Junked) {
+    if (cardb.Cars[selected.Name.toLowerCase()].Junked) {
       return await interaction.reply("This car is too junked to race, sorry!");
     }
 
     let range = selected.Range;
-    if (cars.Cars[selected.Name.toLowerCase()].Electric) {
+    if (cardb.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
         return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
         );
       }
     }
+    interaction.reply("Revving engines...")
 
     cooldowndata.cashcup = Date.now();
     cooldowndata.save();
-
+    const canvas = createCanvas(1280, 720)
+const ctx = canvas.getContext('2d')
+const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
+const vsimg = await loadImage('https://i.ibb.co/Hz6rgNv/vscc.png')
     if (newcashcuptier <= 5) {
       botcar = lodash.sample(bot1cars);
     } else if (newcashcuptier <= 15) {
@@ -141,188 +151,175 @@ module.exports = {
     } else if (newcashcuptier >= 70) {
       botcar = lodash.sample(bot6cars);
     }
+    car2 = cardb.Cars[botcar.toLowerCase()]
+    let selected1image = await loadImage(`${selected.Livery}`)
+    let selected2image = await loadImage(`${car2.Image}`)
+    let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+    ctx.save();
+roundedImage(ctx, 640, 200, 640, 360, 20);
+ctx.stroke()
+ctx.clip();
+ctx.drawImage(selected2image, 640, 200, 640, 360);
+ctx.restore();
 
-    let nitro = selected.Nitro;
+ctx.save();
+roundedImage(ctx, 0, 200, 640, 360, 20);
+ctx.stroke()
+ctx.clip();
+ctx.drawImage(selected1image, 0, 200, 640, 360);
+ctx.restore();
+ctx.font = '40px sans-serif';
+ctx.fillStyle = '#ffffff';
 
-    let user1carspeed = selected.Speed;
+ctx.fillText(selected.Name, 75, 180);
+ctx.fillText(car2.Name, 845, 180);
+ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
+let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
 
-    let handling = selected.Handling;
-    let botspeed = cars.Cars[botcar.toLowerCase()].Speed;
-    let zero2sixtycar = selected.Acceleration;
-    let otherzero2sixty = cars.Cars[botcar.toLowerCase()]["0-60"];
-    let newhandling = handling / 20;
-    let othernewhandling = cars.Cars[botcar.toLowerCase()].Handling / 20;
-    let new60 = user1carspeed / zero2sixtycar;
-    let new62 = cars.Cars[botcar.toLowerCase()].Speed / otherzero2sixty;
-    let driftscore = selected.Drift;
+    let mph = selected.Speed
+    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
+    let acceleration = selected.Acceleration
+    let handling = selected.Handling
 
-    Number(user1carspeed);
-    Number(botspeed);
-    Number(new60);
-    Number(new62);
-    let hp = user1carspeed + newhandling;
-    hp - driftscore;
-    let hp2 = botspeed + othernewhandling;
-    let userhelmet = userdata.helmet;
-    userhelmet = userhelmet.toLowerCase();
-    let helmets = require("../data/pfpsdb.json");
-    let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    let semote = emotes.speed;
-    let hemote = emotes.handling;
-    let zemote = emotes.zero2sixty;
-    let cemote = emotes.cash;
+    if(!selected.Weight){
+      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+    }
 
-    let speed = `${user1carspeed}`;
-    let speed2 = `${botspeed}`;
 
+    let mph2 = car2.Speed
+    let weight2 = car2.Weight
+    let acceleration2 = car2["0-60"]
+    let handling2 = car2.Handling
+  
+
+    let speed = 0
+    let speed2 = 0
+    
+    let x = setInterval(() => {
+        if(speed < mph){
+            speed++
+
+        }
+        else {
+            clearInterval(x)
+        }
+    }, 30);
+    let x2 = setInterval(() => {
+        if(speed2 < mph2){
+            speed2++
+
+        }
+        else {
+            clearInterval(x2)
+        }
+    }, 30);
+    let sec
+    let sec2
+    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()]
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${newcashcuptier} cash cup race in progress...`)
       .addFields([
         {
-          name: `${actualhelmet.Emote} ${
-            cars.Cars[selected.Name.toLowerCase()].Emote
-          } ${cars.Cars[selected.Name.toLowerCase()].Name}`,
-          value: `${semote} Power: ${speed}\n\n${zemote} 0-60: ${selected.Acceleration}s\n\n${hemote} Handling: ${handling}`,
+          name: `${helmet.Emote} ${
+            cardb.Cars[selected.Name.toLowerCase()].Emote
+          } ${cardb.Cars[selected.Name.toLowerCase()].Name}`,
+          value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
           inline: true,
         },
         {
-          name: `🤖 ${cars.Cars[botcar.toLowerCase()].Emote} ${
-            cars.Cars[botcar.toLowerCase()].Name
+          name: `🤖 ${cardb.Cars[botcar.toLowerCase()].Emote} ${
+            cardb.Cars[botcar.toLowerCase()].Name
           }`,
-          value: `${semote} Power: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
-            cars.Cars[botcar.toLowerCase()].Handling
-          }`,
+          value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} 0-60: ${acceleration2}s\n\n${emotes.handling} Handling: ${handling2}\n\n${emotes.weight} Weight: ${weight2}`,
           inline: true,
         },
       ])
       .setColor(colors.blue)
 
       .setFooter(tipFooterRandom)
-      .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-    let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
+      .setImage('attachment://profile-image.png')
+  
+     interaction.editReply({embeds: [embed], files:[attachment], fetchReply: true})
 
-    let randomnum = randomRange(1, 4);
-    if (randomnum == 2) {
-      setTimeout(() => {
-        embed.setDescription("Great launch!");
-        embed.addFields([{ name: "Bonus", value: "$100" }]);
-        hp += 1;
-        userdata.cash += 100;
-        interaction.editReply({ embeds: [embed] });
-      }, 2000);
-    }
+   
 
-    let tracklength = 0;
-    tracklength += new62;
-    let tracklength2 = 0;
-    tracklength2 += new60;
-    if (nitro) {
-      let row = new discord.ActionRowBuilder();
-      row.addComponents(
-        new discord.ButtonBuilder()
-          .setCustomId("boost")
-          .setEmoji(emotes.boost)
-          .setLabel("Boost")
-          .setStyle("Secondary")
-      );
-      msg.edit({ components: [row] });
+     let i2 = setInterval(async () => {
+      console.log(speed)
+      let calc = handling * (speed / 50) 
+      calc = calc / acceleration
+      sec = 6.3 * (weight / calc) / acceleration
+      calc = calc / sec
+      console.log(`calc: ${calc}`)
+      console.log(`sec: ${sec}`)
+      // car 2
+      console.log(speed2)
+      let calc2 = handling2 * (speed / 50) 
+      calc2 = calc2 / acceleration2
+      sec2 = 6.3 * (weight2 / calc2) / acceleration2
+      console.log(`sec2: ${sec2}`)
+      
+      calc2 = calc2 / sec2
+      console.log(`calc2: ${calc2}`)
+      tracklength -= calc
+      tracklength2 -= calc2
 
-      let filter = (btnInt) => {
-        return interaction.user.id === btnInt.user.id;
-      };
+      if(tracklength <= 0){
+        ctx.save();
+        roundedImage(ctx, 640, 200, 640, 360, 20);
+        ctx.stroke()
+        ctx.clip();
+        
 
-      const collector = msg.createMessageComponentCollector({
-        filter: filter,
-        time: 10000,
-      });
-
-      collector.on("collect", async (i) => {
-        if (i.customId.includes("boost")) {
-          let boost = partdb.Parts[nitro.toLowerCase()].AddedBoost;
-          tracklength += parseInt(boost);
-          i.update({ content: "Boosting!", embeds: [embed] });
-          selected.Nitro = null;
+ctx.restore();
+ctx.drawImage(cupimg, 200, 50, 100, 100)
+attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
+        let earnings = []
+        let filteredhouse = userdata.houses.filter(
+          (house) => house.Name == "Buone Vedute"
+        );
+        if (userdata.houses && filteredhouse[0]) {
+          cashwon = cashwon += (cashwon * 0.05)
         }
-      });
-    }
+        earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`)
+     
+        userdata.cash += cashwon
+        embed.setDescription(`${earnings.join('\n')}`)
+        embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race won!`)
+        embed.setImage(`attachment://profile-image.png`)
 
-    let timer = 0;
-    let x = setInterval(async () => {
-      tracklength += hp;
-      tracklength2 += hp2;
-      timer++;
-
-      if (timer >= 10) {
-        clearInterval(x);
-
-        if (tracklength > tracklength2) {
-          embed.setTitle(`Tier ${newcashcuptier} cash cup race won!`);
-          let earningsresult = [];
-
-          earningsresult.push(`$${moneyearned}`);
-          earningsresult.push(`New cash cup tier: ${(newcashcuptier += 1)}`);
-          earningsresult.push(`+1Race Rank`);
-
-          userdata.racerank += 1;
-          embed.addFields([
-            {
-              name: "Earnings",
-              value: `${cemote} ${earningsresult.join("\n")}`,
-            },
-          ]);
-
-          interaction.editReply({ embeds: [embed] });
-          let Global = require("../schema/global-schema");
-          let global = await Global.findOne();
-          if (global.zeroplus.includes(interaction.guild.id)) {
-            moneyearned = moneyearned * 2;
-          }
-          userdata.cashcuptier += 1;
-          userdata.cash += Number(moneyearned);
-
-          userdata.racexp += 25;
-          if (cars.Cars[selected.Name.toLowerCase()].Electric) {
-            if (range > 0) {
-              selected.Range -= 1;
-            }
-          }
-          if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
-            selected.Wins += 1;
-          }
-          userdata.save();
-
-          return;
-        } else if (tracklength < tracklength2) {
-          embed.setTitle(`Tier ${newcashcuptier} cash cup race lost!`);
-          if (newcashcuptier > 1) {
-            embed.setDescription(
-              `You got set back to tier ${newcashcuptier - 1}`
-            );
-            userdata.cashcuptier -= 1;
-          }
-          userdata.save();
-
-          clearInterval(x);
-          if (cars.Cars[selected.Name.toLowerCase()].Electric) {
-            if (range > 0) {
-              selected.Range -= 1;
-            }
-          }
-          interaction.editReply({ embeds: [embed] });
-          return;
-        } else if (tracklength == tracklength2) {
-          embed.setTitle(`Tier ${newcashcuptier} bot race tied!`);
-          clearInterval(x);
-          if (cars.Cars[selected.Name.toLowerCase()].Electric) {
-            if (range > 0) {
-              selected.Range -= 1;
-            }
-          }
-          userdata.save();
-          interaction.editReply({ embeds: [embed] });
-          return;
-        }
+        await interaction.editReply({embeds: [embed], files: [attachment]})
+          clearInterval(i2)
       }
-    }, 1000);
+      // lost
+      else if(tracklength2 <= 0){
+ctx.drawImage(cupimg, 960, 50, 100, 100)
+attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
+        embed.setImage(`attachment://profile-image.png`)
+        
+        embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race lost!`)
+        await interaction.editReply({embeds: [embed], files: [attachment]})
+          clearInterval(i2)
+      }
+     
+      console.log(`track length ${tracklength}`)
+      console.log(`track length 2 ${tracklength2}`)
+      userdata.save()
+  }, 1000);
   },
 };
+
+
+function roundedImage(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}

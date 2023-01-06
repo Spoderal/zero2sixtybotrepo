@@ -8,12 +8,16 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const helmetdb = require("../data/pfpsdb.json")
 const { emotes } = require("../common/emotes");
+const { userGetPatreonTimeout } = require("../common/user");
 const { createCanvas, loadImage } = require('canvas')
 
 const {
+  doubleCashWeekendField,
+  convertMPHtoKPHm,
   toCurrency,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const houses = require("../data/houses.json");
 const cardb = require("../data/cardb.json");
 
 let bot1cars = [
@@ -74,8 +78,18 @@ let bot7cars = [
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("highway")
-    .setDescription("Race a bot on the highway")
+    .setName("dragrace")
+    .setDescription("Race a bot on the quarter mile or half mile")
+    .addStringOption((option) =>
+    option
+      .setName("type")
+      .setDescription("Half or quarter mile")
+      .setRequired(true)
+      .addChoices(
+        { name: "Quarter Mile", value: "qm" },
+        { name: "Half Mile", value: "hm" }
+      )
+  )
     .addStringOption((option) =>
       option
         .setName("tier")
@@ -99,9 +113,28 @@ module.exports = {
     ),
   async execute(interaction) {
     let user = interaction.user
-    let tracklength = 1000
-    let tracklength2 = 1000
+    let length = interaction.options.getString("type")
+    let tracklength
+    let tracklength2
+    let lengthname
+    
 
+
+    let bot = interaction.options.getString("tier");
+    let cashwon 
+
+    if(length == "qm"){
+       tracklength = 400
+       tracklength2 = 400
+       lengthname = "Quarter Mile"
+       cashwon = parseInt(bot) * 200
+    }
+    else if(length == "hm"){
+      tracklength = 800
+      tracklength2 = 800
+      lengthname = "Half Mile"
+      cashwon = parseInt(bot) * 250
+    }
 
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -128,42 +161,48 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    let bot = interaction.options.getString("tier");
     interaction.reply("Revving engines...")
     let car2
     const canvas = createCanvas(1280, 720)
 const ctx = canvas.getContext('2d')
 const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
-const vsimg = await loadImage('https://i.ibb.co/CvTKrv4/vshw.png')
-let cashwon = parseInt(bot) * 150
-let lockpicks
+const vsimg = await loadImage('https://i.ibb.co/tZghwkJ/vsdrag.png')
+let ckeys = 0
+let rkeys = 0
+let ekeys = 0
 if(bot == "1"){
   car2 = cardb.Cars[lodash.sample(bot1cars)]
-  lockpicks = 1
+  ckeys = 2
 }
 else if(bot == "2"){
   car2 = cardb.Cars[lodash.sample(bot2cars)]
-  lockpicks = 2
+  ckeys = 4
 }
 else if(bot == "3"){
   car2 = cardb.Cars[lodash.sample(bot3cars)]
-  lockpicks = 3
+  rkeys = 2
 }
 else if(bot == "4"){
   car2 = cardb.Cars[lodash.sample(bot4cars)]
-  lockpicks = 4
+  rkeys = 4
 }
 else if(bot == "5"){
   car2 = cardb.Cars[lodash.sample(bot5cars)]
-  lockpicks = 5
+  rkeys = 6
 }
 else if(bot == "6"){
   car2 = cardb.Cars[lodash.sample(bot6cars)]
-  lockpicks = 7
+  ekeys = 1
 }
 else if(bot == "7"){
   car2 = cardb.Cars[lodash.sample(bot7cars)]
-  lockpicks = 10
+  ekeys = 2
+}
+
+if(length == "hm"){
+  ckeys = ckeys * 2
+  rkeys = rkeys * 2
+  ekeys = ekeys * 2
 }
 
 let selected1image = await loadImage(`${selected.Livery}`)
@@ -196,8 +235,8 @@ let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile
 
 console.log(attachment)
     
-cooldowndata.racing = Date.now()
-cooldowndata.save()
+    cooldowndata.racing = Date.now()
+    cooldowndata.save()
     let mph = selected.Speed
     let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
     let acceleration = selected.Acceleration
@@ -241,7 +280,7 @@ cooldowndata.save()
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()]
 
     let embed = new EmbedBuilder()
-    .setTitle(`Racing Tier ${bot} Street Race`)
+    .setTitle(`Racing Tier ${bot} on ${lengthname}`)
     
     .setAuthor({ name: `${user.username}`, iconURL:`${helmet.Image}` })
     .addFields(
@@ -266,17 +305,17 @@ cooldowndata.save()
 
     let i2 = setInterval(async () => {
         console.log(speed)
-        let calc = handling * (speed / 50) 
+        let calc = weight * (speed / 234)
         calc = calc / acceleration
-        sec = 6.3 * (weight / calc) / acceleration
+        sec = 6.290 * (weight / calc) / acceleration
         calc = calc / sec
         console.log(`calc: ${calc}`)
         console.log(`sec: ${sec}`)
         // car 2
         console.log(speed2)
-        let calc2 = handling2 * (speed / 50) 
+        let calc2 = weight2 * (speed2 / 234)
         calc2 = calc2 / acceleration2
-        sec2 = 6.3 * (weight2 / calc2) / acceleration2
+        sec2 = 6.290 * (weight2 / calc2) / acceleration2
         console.log(`sec2: ${sec2}`)
         
         calc2 = calc2 / sec2
@@ -285,23 +324,32 @@ cooldowndata.save()
         tracklength2 -= calc2
 
         if(tracklength <= 0){
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke()
-          ctx.clip();
-          
-
-ctx.restore();
+      
 ctx.drawImage(cupimg, 200, 50, 100, 100)
 attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
           let earnings = []
+          let filteredhouse = userdata.houses.filter(
+            (house) => house.Name == "Casa Tranquilla"
+          );
+          if (userdata.houses && filteredhouse[0]) {
+            cashwon = cashwon += (cashwon * 0.05)
+          }
           earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`)
-          earnings.push(`${emotes.lockpicks} +${toCurrency(lockpicks)}`)
-
+          if(ckeys > 0){
+            earnings.push(`${emotes.ckey} +${ckeys}`)
+            userdata.ckeys += ckeys
+          }
+          if(rkeys > 0){
+            earnings.push(`${emotes.rkey} +${rkeys}`)
+            userdata.rkeys += rkeys
+          }
+          if(ekeys > 0){
+            earnings.push(`${emotes.ekey} +${ekeys}`)
+            userdata.ekeys += ekeys
+          }
           userdata.cash += cashwon
-          userdata.lockpicks += lockpicks
           embed.setDescription(`${earnings.join('\n')}`)
-          embed.setTitle(`Tier ${bot} Street Race won!`)
+          embed.setTitle(`Tier ${bot} ${lengthname} won!`)
           embed.setImage(`attachment://profile-image.png`)
 
           await interaction.editReply({embeds: [embed], files: [attachment]})
@@ -313,7 +361,7 @@ ctx.drawImage(cupimg, 960, 50, 100, 100)
 attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
           embed.setImage(`attachment://profile-image.png`)
           
-          embed.setTitle(`Tier ${bot} Street Race lost!`)
+          embed.setTitle(`Tier ${bot} ${lengthname} lost!`)
           await interaction.editReply({embeds: [embed], files: [attachment]})
             clearInterval(i2)
         }

@@ -31,8 +31,8 @@ module.exports = {
     )
     .addSubcommand((subcommand) =>
       subcommand
-        .setName("carid")
-        .setDescription("Get the stats and parts of your car")
+        .setName("id")
+        .setDescription("Get the stats and parts of your car by ID")
         .addStringOption((option) =>
           option
             .setName("id")

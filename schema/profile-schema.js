@@ -31,6 +31,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  pvprank:{
+    type: Object,
+    required: false,
+    default: {
+      Wins: 0,
+      Rank:"Silver",
+      Losses:0,
+      Rewards:0
+    },
+  },
   wheelspins: {
     type: Number,
     required: false,

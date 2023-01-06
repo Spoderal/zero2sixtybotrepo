@@ -1,17 +1,18 @@
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const {AttachmentBuilder, EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { randomRange, convertMPHtoKPH } = require("../common/utils");
 const { userGetPatreonTimeout } = require("../common/user");
-const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const squadsdb = require("../data/squads.json");
+const cardb = require("../data/cardb.json")
+const helmetdb = require("../data/pfpsdb.json")
+
+const { createCanvas, loadImage } = require('canvas')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,7 +46,6 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    let bot = interaction.options.getString("tier");
 
     let timeout = userGetPatreonTimeout(userdata);
 
@@ -57,15 +57,11 @@ module.exports = {
         `Please wait ${time} before racing again.`
       );
     }
-
-    let semote = emotes.speed;
-    let hemote = emotes.handling;
-    let zemote = emotes.zero2sixty;
+    let tracklength = 600
+    let tracklength2 = 600
     let cemote = emotes.cash;
-    let rpemote = emotes.rp;
     let tier = userdata.tier || 1;
-    let botdupgrades = randomRange(5, 25);
-    let botemote;
+    let user = interaction.user
 
     let prestige = userdata.prestige;
 
@@ -77,12 +73,14 @@ module.exports = {
         );
       }
     }
-
-    let ticketsearned;
-    let classd;
     if (tier == 6) return interaction.reply("You've beaten all the squads!");
-    let tracklength = 0;
+    interaction.reply(`Revving engines...`)
+    const canvas = createCanvas(1280, 720)
+    const ctx = canvas.getContext('2d')
+    const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
+    const vsimg = await loadImage('https://i.ibb.co/XSrdHPd/vssq.png')
 
+    
     let squadsarr = [];
     for (let s in squadsdb.Squads) {
       let sq = squadsdb.Squads[s];
@@ -113,55 +111,37 @@ module.exports = {
     let squadinfo = squadfiltered[0];
     let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
     let botcarindb = cars.Cars[botcar.toLowerCase()];
-    botemote = squadinfo.Emote;
-    let usables = userdata.using;
+    let car2 = botcarindb
+    let selected1image = await loadImage(`${selected.Livery}`)
+    let selected2image = await loadImage(`${car2.Image}`)
+    let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+    const squadimg = await loadImage(squadfiltered[0].Icon)
 
-    let energytimer = cooldowndata.energydrink;
-    if (usables.includes("energy drink")) {
-      let timeout = 600000;
-      if (timeout - (Date.now() - energytimer) > 0) {
-        // do nothing?
-      } else {
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $pull: {
-              using: "energy drink",
-            },
-          }
-        );
-      }
+    ctx.save();
+    roundedImage(ctx, 640, 200, 640, 360, 20);
+    ctx.stroke()
+    ctx.clip();
+    ctx.drawImage(selected2image, 640, 200, 640, 360);
+    ctx.restore();
+    
+    ctx.save();
+    roundedImage(ctx, 0, 200, 640, 360, 20);
+    ctx.stroke()
+    ctx.clip();
+    ctx.drawImage(selected1image, 0, 200, 640, 360);
+    ctx.restore();
+    ctx.font = '40px sans-serif';
+    ctx.fillStyle = '#ffffff';
+    
+    ctx.fillText(selected.Name, 75, 180);
+    
+    ctx.fillText(car2.Name, 845, 180);
+    ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
-      userdata.save();
-    }
-    if (usables.includes("energy drink")) {
-      ticketsearned = ticketsearned * 2;
-    }
-    let sponsortimer = cooldowndata.sponsor;
-    if (usables.includes("sponsor")) {
-      let timeout = 600000;
-      if (timeout - (Date.now() - sponsortimer) > 0) {
-        // do nothing?
-      } else {
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $pull: {
-              using: "sponsor",
-            },
-          }
-        );
-        userdata.save();
-      }
-    }
-    if (usables.includes("sponsor")) {
-      moneyearned = moneyearned * 2;
-      // moneyearnedtxt = moneyearnedtxt * 2;
-    }
+    ctx.drawImage(squadimg, 540, 50, 200, 200);
+    let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
+
 
     let racelevel = userdata.racerank;
 
@@ -174,108 +154,97 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    let user1carspeed = parseInt(selected.Speed);
-    let user1carzerosixty = parseInt(selected.Acceleration);
-    let user1carhandling = parseInt(selected.Handling);
+    let mph = selected.Speed
+    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
+    let acceleration = selected.Acceleration
+    let handling = selected.Handling
 
-    let userhelmet = userdata.helmet;
-    userhelmet = userhelmet.toLowerCase();
-    let helmets = require("../data/pfpsdb.json");
-    let actualhelmet = helmets.Pfps[userhelmet.toLowerCase()];
-    let driftscore = selected.Drift;
-    let botspeed = parseInt(cars.Cars[botcarindb.Name.toLowerCase()].Speed);
-    let zero2sixtycar = parseInt(selected.Acceleration);
-    let otherzero2sixty = parseInt(
-      cars.Cars[botcarindb.Name.toLowerCase()]["0-60"]
-    );
-    let newhandling = user1carhandling / 20;
-    let bothandling = parseInt(
-      cars.Cars[botcarindb.Name.toLowerCase()].Handling
-    );
-    let othernewhandling = bothandling / 20;
-    let new60 = user1carspeed / zero2sixtycar;
-    let new62 = botspeed / otherzero2sixty;
-    let using = userdata.using;
-    Number(user1carspeed);
-    Number(botspeed);
-    Number(new60);
-    Number(new62);
-    if (bot == "dclass") {
-      botspeed += botdupgrades;
-    }
-    let hp = user1carspeed + newhandling;
-    hp - driftscore;
-    let hp2 = botspeed + othernewhandling;
-    let y;
-    let policeuser;
-    let policelen;
-    let itemusedp;
-
-    let speed = `${user1carspeed}`;
-    let speed2 = `${botspeed}`;
-
-    let embed = new discord.EmbedBuilder()
-      .setTitle(`${squadinfo.Name} race in progress...`)
-      .addFields([
-        {
-          name: `${actualhelmet.Emote} ${selected.Emote} ${selected.Name}`,
-          value: `${semote} Power: ${speed}\n\n${zemote} 0-60: ${user1carzerosixty}s\n\n${hemote} Handling: ${user1carhandling}`,
-          inline: true,
-        },
-        {
-          name: `${botemote} ${
-            cars.Cars[botcarindb.Name.toLowerCase()].Emote
-          } ${cars.Cars[botcarindb.Name.toLowerCase()].Name}`,
-          value: `${semote} Power: ${speed2}\n\n${zemote} 0-60: ${otherzero2sixty}s\n\n${hemote} Handling: ${
-            cars.Cars[botcarindb.Name.toLowerCase()].Handling
-          }`,
-          inline: true,
-        },
-      ])
-      .setColor(colors.blue)
-      .setFooter(tipFooterRandom)
-      .setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-
-    let msg = await interaction.reply({
-      embeds: [embed],
-      fetchReply: true,
-    });
-
-    let randomnum = randomRange(1, 4);
-    if (randomnum == 2) {
-      setTimeout(() => {
-        embed.setDescription("Great launch!");
-        embed.addFields([{ name: "Bonus", value: "$100" }]);
-        hp += 1;
-        // moneyearnedtxt += 100;
-        userdata.cash += 100;
-        interaction.editReply({ embeds: [embed] });
-      }, 2000);
+    if(!selected.Weight){
+      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
     }
 
-    tracklength += new62;
-    let tracklength2 = 0;
-    tracklength2 += new60;
-    if (itemusedp == true) {
-      itemusedp = false;
-      tracklength - 20;
-    }
 
-    let timer = 0;
-    let x = setInterval(async () => {
-      tracklength += hp;
-      tracklength2 += hp2;
-      timer++;
+    let mph2 = car2.Speed
+    let weight2 = car2.Weight
+    let acceleration2 = car2["0-60"]
+    let handling2 = car2.Handling
+  
 
-      if (timer >= 10) {
-        clearInterval(x);
-        clearInterval(y);
+    let speed = 0
+    let speed2 = 0
+    
+    let x = setInterval(() => {
+        if(speed < mph){
+            speed++
 
-        if (tracklength > tracklength2) {
-          if (using.includes("trophy")) {
-            moneyearned = moneyearned * 2;
-            // moneyearnedtxt = `${moneyearned} *with x2 multiplier*`;
-          }
+        }
+        else {
+            clearInterval(x)
+        }
+    }, 30);
+    let x2 = setInterval(() => {
+        if(speed2 < mph2){
+            speed2++
+
+        }
+        else {
+            clearInterval(x2)
+        }
+    }, 30);
+    let sec
+    let sec2
+    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()]
+
+    let embed = new EmbedBuilder()
+    .setTitle(`Racing Squad ${squadfiltered[0].Name}`)
+    
+    .setAuthor({ name: `${user.username}`, iconURL:`${helmet.Image}` })
+    .addFields(
+      {
+        name:`${selected.Emote} ${selected.Name}`,
+        value:`${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
+        
+        inline: true
+      },
+      {
+        name:`${car2.Emote} ${car2.Name}`,
+        value:`${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
+        inline: true
+      }
+    )
+    .setColor(colors.blue)
+    .setImage('attachment://profile-image.png')
+
+    
+
+    interaction.editReply({embeds: [embed], files:[attachment], fetchReply: true})
+
+
+
+
+
+    let i2 = setInterval(async () => {
+      console.log(speed)
+      let calc = weight * (speed / 234)
+      calc = calc / acceleration
+      sec = 6.290 * (weight / calc) / acceleration
+      calc = calc / sec
+      console.log(`calc: ${calc}`)
+      console.log(`sec: ${sec}`)
+      // car 2
+      console.log(speed2)
+      let calc2 = weight2 * (speed2 / 234)
+      calc2 = calc2 / acceleration2
+      sec2 = 6.290 * (weight2 / calc2) / acceleration2
+      console.log(`sec2: ${sec2}`)
+      
+      calc2 = calc2 / sec2
+      console.log(`calc2: ${calc2}`)
+      tracklength -= calc
+      tracklength2 -= calc2
+
+      if(tracklength <= 0){
+       
 
           embed.setTitle(`${squadinfo.Name} race won!`);
 
@@ -353,9 +322,8 @@ module.exports = {
           }
 
           userdata.save();
-
-          return;
-        } else if (tracklength < tracklength2) {
+          clearInterval(i2);
+        } else  if(tracklength2 <= 0){
           let moneye = moneyearned / 5;
           embed.setTitle(`Race lost!`);
 
@@ -367,25 +335,31 @@ module.exports = {
           ]);
           userdata.cash += Number(moneye);
 
-          clearInterval(x);
+          clearInterval(i2);
           if (range > 0) {
             selected.Range -= 1;
           }
           userdata.save();
           interaction.editReply({ embeds: [embed] });
           return;
-        } else if (tracklength == tracklength2) {
-          embed.setTitle(`Tier ${classd} bot race tied!`);
-          clearInterval(x);
-          if (range > 0) {
-            selected.Range -= 1;
-            userdata.save();
-          }
-
-          interaction.editReply({ embeds: [embed] });
-          return;
         }
-      }
+
+        console.log(tracklength)
+        console.log(tracklength2)
+      
     }, 1000);
   },
 };
+function roundedImage(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}

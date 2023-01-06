@@ -80,6 +80,16 @@ module.exports = {
       let price = interaction.options.getNumber("price");
       let amount = interaction.options.getString("amount") || 1;
       let obj;
+
+      if(price <= 0){
+        return interaction.reply("Your price needs to be above 0.")
+      }
+      if(price >= 1000000000){
+        return interaction.reply(`Your price needs to be below ${toCurrency(1000000000)}.`)
+      }
+
+
+
       if (cardb.Cars[item.toLowerCase()]) {
         let filteredcar = userdata.cars.filter(
           (car) =>
@@ -89,12 +99,18 @@ module.exports = {
         if (!filteredcar[0])
           return interaction.reply("You don't have this car!");
         let sellprice = cardb.Cars[item.toLowerCase()].Price * 0.65;
+        let sellpricemax = sellprice * 10
         if (sellprice > price)
           return interaction.reply(
             `Your price must at least be ${toCurrency(
               sellprice
             )}, this is to prevent things getting undervalued.`
           );
+          if(price >= sellpricemax){
+            `Your price must at least be below ${toCurrency(
+              sellpricemax
+            )}, this is to prevent things getting overvalued.`
+          }
         obj = {
           item: cardb.Cars[item.toLowerCase()].Name.toLowerCase(),
           price: price,
@@ -104,9 +120,23 @@ module.exports = {
           carobj: filteredcar[0],
           type: "cars",
         };
-        console.log(obj);
         userdata.cars.pull(filteredcar[0]);
       } else if (partdb.Parts[item.toLowerCase()]) {
+        let sellprice = partdb.Parts[item.toLowerCase()].Price * 10 || 0
+
+        if(sellprice !== 0 && price >= sellprice ){
+          `Your price must at least be below ${toCurrency(
+            sellpricemax
+          )}, this is to prevent things getting overvalued.`
+        }
+
+        if(sellprice == 0){
+          if(price >= 1000000 ){
+            `Your price must at least be below ${toCurrency(
+              1000000
+            )}, this is to prevent things getting overvalued.`
+          }
+        }
         obj = {
           item: partdb.Parts[item.toLowerCase()].Name.toLowerCase(),
           price: price,
@@ -116,7 +146,6 @@ module.exports = {
           type: "parts",
         };
 
-        console.log(obj);
         userdata.parts.pull(item, amount);
       } else if (itemdb.Other[item.toLowerCase()]) {
         obj = {
@@ -128,7 +157,6 @@ module.exports = {
           type: "items",
         };
 
-        console.log(obj);
         userdata.items.pull(item, amount);
       } else if (currencies[item.toLowerCase()]) {
         obj = {
@@ -142,7 +170,6 @@ module.exports = {
         };
         let currency = currencies[item.toLowerCase()].nameindb;
 
-        console.log(obj);
         userdata[currency] -= amount;
       } else
         return interaction.reply(
@@ -150,12 +177,10 @@ module.exports = {
         );
 
       global.marketId += 1;
-      global.market.push(obj);
+      global.newmarket.push(obj);
 
       global.save();
       userdata.save();
-      console.log(obj);
-      console.log(amount);
 
       let embed = new EmbedBuilder()
         .setTitle("Listed!")
@@ -166,7 +191,7 @@ module.exports = {
     } else if (subcommand == "view") {
       if (interaction.options.getString("id")) {
         let findid = interaction.options.getString("id");
-        let marketfiltered = global.market.filter((item) => item.id == findid);
+        let marketfiltered = global.newmarket.filter((item) => item.id == findid);
 
         let carob = marketfiltered[0].carobj;
         if (!carob) return interaction.reply("This id isn't a car!");
@@ -271,15 +296,14 @@ module.exports = {
         let filt = interaction.options.getString("filter");
         let market;
         if (filt) {
-          market = global.market.filter((item) => item.type == filt);
+          market = global.newmarket.filter((item) => item.type == filt);
         } else {
-          market = global.market;
+          market = global.newmarket;
         }
 
         let marketdisplay = [];
         for (let m in market) {
           let listing = market[m];
-          console.log(listing);
 
           if (cardb.Cars[listing.item]) {
             marketdisplay.push(
@@ -313,7 +337,7 @@ module.exports = {
             );
           }
         }
-        console.log(marketdisplay);
+
 
         marketdisplay = lodash.chunk(
           marketdisplay.map((a) => `${a}`),
@@ -322,7 +346,6 @@ module.exports = {
         if (marketdisplay == undefined || !marketdisplay[0]) {
           marketdisplay = [["Nothing yet!"]];
         }
-        console.log(marketdisplay);
         let embed1 = new EmbedBuilder()
           .setTitle(`User Market`)
           .setDescription(`${marketdisplay[0].join("\n")}`);
@@ -382,7 +405,7 @@ module.exports = {
         });
       }
     } else if (subcommand == "buy") {
-      let gmarket = global.market;
+      let gmarket = global.newmarket;
 
       if (!gmarket)
         return interaction.reply("There isn't anything listed at the moment!");
@@ -413,6 +436,7 @@ module.exports = {
       userdata.cash -= parseInt(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
       udata2.cash += parseInt(itemtobuy.price);
+      udata2.save()
       userdata.save();
       try {
         let userfromitem = await interaction.client.users.fetch(
@@ -423,8 +447,10 @@ module.exports = {
         console.log(err);
       }
       interaction.reply(`Successfully bought!`);
-      global.market.pull(itemtobuy);
+      global.newmarket.pull(itemtobuy);
       global.save();
     }
   },
 };
+
+

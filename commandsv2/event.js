@@ -33,13 +33,6 @@ module.exports = {
             emoji: "🚀",
           },
           {
-            label: "Christmas Event",
-            description: "Information for the Christmas Event",
-            value: "christmas_event",
-            customId: "christmas",
-            emoji: "🎄",
-          },
-          {
             label: "McLaren Event",
             description: "Information for the McLaren Event",
             value: "mclaren_event",
@@ -60,7 +53,6 @@ module.exports = {
           **__Events__**
           Winter Season 2022 ❄️\n
           Space Race 🚀\n
-          Christmas Event🎄\n
           McLaren Event <:mclaren:931011546354692137>
       `);
 
@@ -143,7 +135,7 @@ module.exports = {
             2017 McLaren 650S
             2018 McLaren P1 GT
 
-            **Ends Febuary 31st 2023**
+            **Ends Febuary 28th 2023**
             
                   `);
             embed.setThumbnail(
@@ -155,26 +147,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "christmas_event") {
-            embed.setTitle("Christmas Event");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Merry Christmas from Zero2Sixty! 🎅
-
-            Join the server here for giveaways for prizes like cash, barn maps, and more!\n
-
-            Presents also will be dropping in street races, where they open automatically gifting you with items such as exclusive vehicles, helmets, and more!
-
-            **Ends December 31st 2022**
-            
-                  `);
-            embed.setThumbnail("https://i.ibb.co/tCHHzz1/z2swinter.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          }
+          } 
         });
       });
   },

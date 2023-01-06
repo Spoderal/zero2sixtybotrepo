@@ -72,6 +72,7 @@ const emotes = {
   boost: "<:boost:983813400289234978>",
   speedometer: "<:speedometer3:1002856993075249162>",
   eBrake: "<:ebrake:969671303961387050>",
+  lockpicks: "<:lockpick:1040384727691051170>",
 
   // Cars
   ferrari: "<:ferrari:931011838374727730>",

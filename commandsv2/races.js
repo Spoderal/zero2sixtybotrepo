@@ -30,16 +30,10 @@ module.exports = {
             customId: "botrace",
           },
           {
-            label: "qm",
-            description: "Information about quarter mile racing",
+            label: "dragrace",
+            description: "Information about drag racing",
             value: "qm_race",
             customId: "qmrace",
-          },
-          {
-            label: "hm",
-            description: "Information about half mile racing",
-            value: "hm_race",
-            customId: "hmrace",
           },
           {
             label: "squadrace",
@@ -54,16 +48,10 @@ module.exports = {
             customId: "ttrace",
           },
           {
-            label: "drift (EVENT)",
+            label: "drift",
             description: "Information about drifting",
             value: "driftrace",
             customId: "drift",
-          },
-          {
-            label: "driftpvp (EVENT)",
-            description: "Information about drifting against players",
-            value: "dpvp_race",
-            customId: "driftpvp",
           },
           {
             label: "wanted",
@@ -83,25 +71,7 @@ module.exports = {
             description: "Information about cashcup races",
             value: "cash_race",
             customId: "cash",
-          },
-          {
-            label: "betrace",
-            description: "Information about bet racing",
-            value: "bet_race",
-            customId: "bet",
-          },
-          {
-            label: "trainrace",
-            description: "Information about the race for new players",
-            value: "train_race",
-            customId: "tr",
-          },
-          {
-            label: "trackrace",
-            description: "Information about the track race",
-            value: "track",
-            customId: "track",
-          },
+          }
         ])
     );
 

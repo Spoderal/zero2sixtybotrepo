@@ -7,7 +7,7 @@ const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
@@ -31,11 +31,11 @@ module.exports = {
     let wheelspins = userdata.swheelspins;
     if (wheelspins <= 0)
       return await interaction.reply("You're out of super wheel spins!");
-    let items = ["💵", "🏎️", "⚙️"];
+    let items = ["💵", "🏎️", "⚙️", "🗺️"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
-
+    let maps = wheelspinrewards.Maps;
     let parts = wheelspinrewards.Parts;
     let garagespaces = userdata.garagelimit;
 
@@ -138,6 +138,24 @@ module.exports = {
           }
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
+          interaction.editReply({ embeds: [embed] });
+        }
+        else if(item == "🗺️"){
+          let reward = lodash.sample(maps);
+          switch (reward) {
+            case "Common":
+              userdata.cmaps += 1;
+              break;
+            case "Rare":
+              userdata.rmaps += 1;
+              break;
+              case "Legendary":
+                userdata.lmaps += 1;
+                break;
+          }
+          embed.setDescription(
+            `You won a ${numberWithCommas(reward)} barn map!`
+          );
           interaction.editReply({ embeds: [embed] });
         }
         userdata.save();

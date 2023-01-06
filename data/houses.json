@@ -42,5 +42,16 @@
     "Type": "House",
     "Space": 10,
     "Prestige": 10
+  },
+  "casa sul lago": {
+    "id": "sul",
+    "Name": "Casa Sul Lago",
+    "Price": 2000000,
+    "Perk": "Earn 2x notoriety for seasons",
+    "Image": "https://i.ibb.co/VNQ2X96/photo-1559767949-0faa5c7e9992.jpg",
+    "Emote": "<:houselake:1058653878863802412>",
+    "Type": "House",
+    "Space": 5,
+    "Prestige": 7
   }
 }
