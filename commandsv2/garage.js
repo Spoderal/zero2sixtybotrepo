@@ -28,13 +28,8 @@ module.exports = {
     let cars = udata.cars;
     let parts = udata.parts;
     let items = udata.items;
-<<<<<<< HEAD
     let garagelimit = udata.garageLimit
     let xessence = udata.xessence
-=======
-    let garagelimit = udata.garageLimit;
-    let xessence = udata.xessence;
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
 
     let displayparts = [];
     let displayitems = [];
@@ -72,13 +67,7 @@ module.exports = {
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
-<<<<<<< HEAD
       .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`)
-=======
-      .setDescription(
-        `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
-      )
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
       .setImage("https://i.ibb.co/pf4vwHC/istockphoto-521421426-612x612.jpg")
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
@@ -149,13 +138,7 @@ module.exports = {
 
         embed = new EmbedBuilder()
           .setTitle(`Displaying cars for ${user.username}`)
-<<<<<<< HEAD
           .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`)
-=======
-          .setDescription(
-            `Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`
-          )
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });

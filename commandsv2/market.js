@@ -81,7 +81,6 @@ module.exports = {
       let amount = interaction.options.getString("amount") || 1;
       let obj;
 
-<<<<<<< HEAD
       if(price <= 0){
         return interaction.reply("Your price needs to be above 0.")
       }
@@ -91,17 +90,6 @@ module.exports = {
 
 
 
-=======
-      if (price <= 0) {
-        return interaction.reply("Your price needs to be above 0.");
-      }
-      if (price >= 1000000000) {
-        return interaction.reply(
-          `Your price needs to be below ${toCurrency(1000000000)}.`
-        );
-      }
-
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
       if (cardb.Cars[item.toLowerCase()]) {
         let filteredcar = userdata.cars.filter(
           (car) =>
@@ -111,30 +99,18 @@ module.exports = {
         if (!filteredcar[0])
           return interaction.reply("You don't have this car!");
         let sellprice = cardb.Cars[item.toLowerCase()].Price * 0.65;
-<<<<<<< HEAD
         let sellpricemax = sellprice * 10
-=======
-        let sellpricemax = sellprice * 10;
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
         if (sellprice > price)
           return interaction.reply(
             `Your price must at least be ${toCurrency(
               sellprice
             )}, this is to prevent things getting undervalued.`
           );
-<<<<<<< HEAD
           if(price >= sellpricemax){
             `Your price must at least be below ${toCurrency(
               sellpricemax
             )}, this is to prevent things getting overvalued.`
           }
-=======
-        if (price >= sellpricemax) {
-          `Your price must at least be below ${toCurrency(
-            sellpricemax
-          )}, this is to prevent things getting overvalued.`;
-        }
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
         obj = {
           item: cardb.Cars[item.toLowerCase()].Name.toLowerCase(),
           price: price,
@@ -146,7 +122,6 @@ module.exports = {
         };
         userdata.cars.pull(filteredcar[0]);
       } else if (partdb.Parts[item.toLowerCase()]) {
-<<<<<<< HEAD
         let sellprice = partdb.Parts[item.toLowerCase()].Price * 10 || 0
 
         if(sellprice !== 0 && price >= sellprice ){
@@ -160,21 +135,6 @@ module.exports = {
             `Your price must at least be below ${toCurrency(
               1000000
             )}, this is to prevent things getting overvalued.`
-=======
-        let sellprice = partdb.Parts[item.toLowerCase()].Price * 10 || 0;
-
-        if (sellprice !== 0 && price >= sellprice) {
-          `Your price must at least be below ${toCurrency(
-            sellpricemax
-          )}, this is to prevent things getting overvalued.`;
-        }
-
-        if (sellprice == 0) {
-          if (price >= 1000000) {
-            `Your price must at least be below ${toCurrency(
-              1000000
-            )}, this is to prevent things getting overvalued.`;
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
           }
         }
         obj = {
@@ -231,13 +191,7 @@ module.exports = {
     } else if (subcommand == "view") {
       if (interaction.options.getString("id")) {
         let findid = interaction.options.getString("id");
-<<<<<<< HEAD
         let marketfiltered = global.newmarket.filter((item) => item.id == findid);
-=======
-        let marketfiltered = global.newmarket.filter(
-          (item) => item.id == findid
-        );
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
 
         let carob = marketfiltered[0].carobj;
         if (!carob) return interaction.reply("This id isn't a car!");
@@ -383,10 +337,6 @@ module.exports = {
             );
           }
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
 
         marketdisplay = lodash.chunk(
           marketdisplay.map((a) => `${a}`),
@@ -485,11 +435,7 @@ module.exports = {
       userdata.cash -= parseInt(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
       udata2.cash += parseInt(itemtobuy.price);
-<<<<<<< HEAD
       udata2.save()
-=======
-      udata2.save();
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
       userdata.save();
       try {
         let userfromitem = await interaction.client.users.fetch(
