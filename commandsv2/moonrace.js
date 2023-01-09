@@ -426,11 +426,7 @@ module.exports = {
     let row = new ActionRowBuilder();
     let msg = await interaction.reply({
       embeds: [embed],
-<<<<<<< HEAD
-      fetchReply: true
-=======
       fetchReply: true,
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
     });
     let filter2 = (btnInt) => {
       return interaction.user.id !== btnInt.user.id;
