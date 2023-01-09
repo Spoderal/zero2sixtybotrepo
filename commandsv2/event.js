@@ -147,7 +147,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
+          }
         });
       });
   },

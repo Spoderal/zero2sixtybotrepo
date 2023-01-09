@@ -6,10 +6,10 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const helmetdb = require("../data/pfpsdb.json")
+const helmetdb = require("../data/pfpsdb.json");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
-const { createCanvas, loadImage } = require('canvas')
+const { createCanvas, loadImage } = require("canvas");
 
 const {
   doubleCashWeekendField,
@@ -75,21 +75,20 @@ let bot7cars = [
   "2020 bugatti divo",
 ];
 
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("dragrace")
     .setDescription("Race a bot on the quarter mile or half mile")
     .addStringOption((option) =>
-    option
-      .setName("type")
-      .setDescription("Half or quarter mile")
-      .setRequired(true)
-      .addChoices(
-        { name: "Quarter Mile", value: "qm" },
-        { name: "Half Mile", value: "hm" }
-      )
-  )
+      option
+        .setName("type")
+        .setDescription("Half or quarter mile")
+        .setRequired(true)
+        .addChoices(
+          { name: "Quarter Mile", value: "qm" },
+          { name: "Half Mile", value: "hm" }
+        )
+    )
     .addStringOption((option) =>
       option
         .setName("tier")
@@ -112,41 +111,41 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    let user = interaction.user
-    let length = interaction.options.getString("type")
-    let tracklength
-    let tracklength2
-    let lengthname
-    
-
+    let user = interaction.user;
+    let length = interaction.options.getString("type");
+    let tracklength;
+    let tracklength2;
+    let lengthname;
 
     let bot = interaction.options.getString("tier");
-    let cashwon 
+    let cashwon;
 
-    if(length == "qm"){
-       tracklength = 400
-       tracklength2 = 400
-       lengthname = "Quarter Mile"
-       cashwon = parseInt(bot) * 200
-    }
-    else if(length == "hm"){
-      tracklength = 800
-      tracklength2 = 800
-      lengthname = "Half Mile"
-      cashwon = parseInt(bot) * 250
+    if (length == "qm") {
+      tracklength = 400;
+      tracklength2 = 400;
+      lengthname = "Quarter Mile";
+      cashwon = parseInt(bot) * 200;
+    } else if (length == "hm") {
+      tracklength = 800;
+      tracklength2 = 800;
+      lengthname = "Half Mile";
+      cashwon = parseInt(bot) * 250;
     }
 
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let cooldowndata = (await Cooldowns.findOne({ id: user.id })) || new Cooldowns({ id: user.id });
-    let timeout = 45 * 1000
-    if (cooldowndata.racing !== null && timeout - (Date.now() - cooldowndata.racing) > 0) {
+    let cooldowndata =
+      (await Cooldowns.findOne({ id: user.id })) ||
+      new Cooldowns({ id: user.id });
+    let timeout = 45 * 1000;
+    if (
+      cooldowndata.racing !== null &&
+      timeout - (Date.now() - cooldowndata.racing) > 0
+    ) {
       let time = ms(timeout - (Date.now() - cooldowndata.racing));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(
-          `You can race again in ${time}`
-        );
+        .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
     let idtoselect = interaction.options.getString("car");
@@ -161,218 +160,214 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    interaction.reply("Revving engines...")
-    let car2
-    const canvas = createCanvas(1280, 720)
-const ctx = canvas.getContext('2d')
-const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
-const vsimg = await loadImage('https://i.ibb.co/tZghwkJ/vsdrag.png')
-let ckeys = 0
-let rkeys = 0
-let ekeys = 0
-if(bot == "1"){
-  car2 = cardb.Cars[lodash.sample(bot1cars)]
-  ckeys = 2
-}
-else if(bot == "2"){
-  car2 = cardb.Cars[lodash.sample(bot2cars)]
-  ckeys = 4
-}
-else if(bot == "3"){
-  car2 = cardb.Cars[lodash.sample(bot3cars)]
-  rkeys = 2
-}
-else if(bot == "4"){
-  car2 = cardb.Cars[lodash.sample(bot4cars)]
-  rkeys = 4
-}
-else if(bot == "5"){
-  car2 = cardb.Cars[lodash.sample(bot5cars)]
-  rkeys = 6
-}
-else if(bot == "6"){
-  car2 = cardb.Cars[lodash.sample(bot6cars)]
-  ekeys = 1
-}
-else if(bot == "7"){
-  car2 = cardb.Cars[lodash.sample(bot7cars)]
-  ekeys = 2
-}
-
-if(length == "hm"){
-  ckeys = ckeys * 2
-  rkeys = rkeys * 2
-  ekeys = ekeys * 2
-}
-
-let selected1image = await loadImage(`${selected.Livery}`)
-let selected2image = await loadImage(`${car2.Image}`)
-let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
-ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-
-ctx.save();
-roundedImage(ctx, 640, 200, 640, 360, 20);
-ctx.stroke()
-ctx.clip();
-ctx.drawImage(selected2image, 640, 200, 640, 360);
-ctx.restore();
-
-ctx.save();
-roundedImage(ctx, 0, 200, 640, 360, 20);
-ctx.stroke()
-ctx.clip();
-ctx.drawImage(selected1image, 0, 200, 640, 360);
-ctx.restore();
-ctx.font = '40px sans-serif';
-ctx.fillStyle = '#ffffff';
-
-ctx.fillText(selected.Name, 75, 180);
-
-ctx.fillText(car2.Name, 845, 180);
-ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-
-console.log(attachment)
-    
-    cooldowndata.racing = Date.now()
-    cooldowndata.save()
-    let mph = selected.Speed
-    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
-    let acceleration = selected.Acceleration
-    let handling = selected.Handling
-
-    if(!selected.Weight){
-      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+    interaction.reply("Revving engines...");
+    let car2;
+    const canvas = createCanvas(1280, 720);
+    const ctx = canvas.getContext("2d");
+    const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
+    const vsimg = await loadImage("https://i.ibb.co/tZghwkJ/vsdrag.png");
+    let ckeys = 0;
+    let rkeys = 0;
+    let ekeys = 0;
+    if (bot == "1") {
+      car2 = cardb.Cars[lodash.sample(bot1cars)];
+      ckeys = 2;
+    } else if (bot == "2") {
+      car2 = cardb.Cars[lodash.sample(bot2cars)];
+      ckeys = 4;
+    } else if (bot == "3") {
+      car2 = cardb.Cars[lodash.sample(bot3cars)];
+      rkeys = 2;
+    } else if (bot == "4") {
+      car2 = cardb.Cars[lodash.sample(bot4cars)];
+      rkeys = 4;
+    } else if (bot == "5") {
+      car2 = cardb.Cars[lodash.sample(bot5cars)];
+      rkeys = 6;
+    } else if (bot == "6") {
+      car2 = cardb.Cars[lodash.sample(bot6cars)];
+      ekeys = 1;
+    } else if (bot == "7") {
+      car2 = cardb.Cars[lodash.sample(bot7cars)];
+      ekeys = 2;
     }
 
+    if (length == "hm") {
+      ckeys = ckeys * 2;
+      rkeys = rkeys * 2;
+      ekeys = ekeys * 2;
+    }
 
-    let mph2 = car2.Speed
-    let weight2 = car2.Weight
-    let acceleration2 = car2["0-60"]
-    let handling2 = car2.Handling
-  
+    let selected1image = await loadImage(`${selected.Livery}`);
+    let selected2image = await loadImage(`${car2.Image}`);
+    let cupimg = await loadImage(
+      `https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`
+    );
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-    let speed = 0
-    let speed2 = 0
-    
+    ctx.save();
+    roundedImage(ctx, 640, 200, 640, 360, 20);
+    ctx.stroke();
+    ctx.clip();
+    ctx.drawImage(selected2image, 640, 200, 640, 360);
+    ctx.restore();
+
+    ctx.save();
+    roundedImage(ctx, 0, 200, 640, 360, 20);
+    ctx.stroke();
+    ctx.clip();
+    ctx.drawImage(selected1image, 0, 200, 640, 360);
+    ctx.restore();
+    ctx.font = "40px sans-serif";
+    ctx.fillStyle = "#ffffff";
+
+    ctx.fillText(selected.Name, 75, 180);
+
+    ctx.fillText(car2.Name, 845, 180);
+    ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
+    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+      name: "profile-image.png",
+    });
+
+    console.log(attachment);
+
+    cooldowndata.racing = Date.now();
+    cooldowndata.save();
+    let mph = selected.Speed;
+    let weight =
+      selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let acceleration = selected.Acceleration;
+    let handling = selected.Handling;
+
+    if (!selected.Weight) {
+      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight;
+    }
+
+    let mph2 = car2.Speed;
+    let weight2 = car2.Weight;
+    let acceleration2 = car2["0-60"];
+    let handling2 = car2.Handling;
+
+    let speed = 0;
+    let speed2 = 0;
+
     let x = setInterval(() => {
-        if(speed < mph){
-            speed++
-
-        }
-        else {
-            clearInterval(x)
-        }
+      if (speed < mph) {
+        speed++;
+      } else {
+        clearInterval(x);
+      }
     }, 30);
     let x2 = setInterval(() => {
-        if(speed2 < mph2){
-            speed2++
-
-        }
-        else {
-            clearInterval(x2)
-        }
+      if (speed2 < mph2) {
+        speed2++;
+      } else {
+        clearInterval(x2);
+      }
     }, 30);
-    let sec
-    let sec2
+    let sec;
+    let sec2;
 
-    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()]
+    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
-    .setTitle(`Racing Tier ${bot} on ${lengthname}`)
-    
-    .setAuthor({ name: `${user.username}`, iconURL:`${helmet.Image}` })
-    .addFields(
-      {
-        name:`${selected.Emote} ${selected.Name}`,
-        value:`${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-        
-        inline: true
-      },
-      {
-        name:`${car2.Emote} ${car2.Name}`,
-        value:`${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-        inline: true
-      }
-    )
-    .setColor(colors.blue)
-    .setImage('attachment://profile-image.png')
+      .setTitle(`Racing Tier ${bot} on ${lengthname}`)
 
-    
+      .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
+      .addFields(
+        {
+          name: `${selected.Emote} ${selected.Name}`,
+          value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
 
-    interaction.editReply({embeds: [embed], files:[attachment], fetchReply: true})
+          inline: true,
+        },
+        {
+          name: `${car2.Emote} ${car2.Name}`,
+          value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
+          inline: true,
+        }
+      )
+      .setColor(colors.blue)
+      .setImage("attachment://profile-image.png");
+
+    interaction.editReply({
+      embeds: [embed],
+      files: [attachment],
+      fetchReply: true,
+    });
 
     let i2 = setInterval(async () => {
-        console.log(speed)
-        let calc = weight * (speed / 234)
-        calc = calc / acceleration
-        sec = 6.290 * (weight / calc) / acceleration
-        calc = calc / sec
-        console.log(`calc: ${calc}`)
-        console.log(`sec: ${sec}`)
-        // car 2
-        console.log(speed2)
-        let calc2 = weight2 * (speed2 / 234)
-        calc2 = calc2 / acceleration2
-        sec2 = 6.290 * (weight2 / calc2) / acceleration2
-        console.log(`sec2: ${sec2}`)
-        
-        calc2 = calc2 / sec2
-        console.log(`calc2: ${calc2}`)
-        tracklength -= calc
-        tracklength2 -= calc2
+      console.log(speed);
+      let calc = weight * (speed / 234);
+      calc = calc / acceleration;
+      sec = (6.29 * (weight / calc)) / acceleration;
+      calc = calc / sec;
+      console.log(`calc: ${calc}`);
+      console.log(`sec: ${sec}`);
+      // car 2
+      console.log(speed2);
+      let calc2 = weight2 * (speed2 / 234);
+      calc2 = calc2 / acceleration2;
+      sec2 = (6.29 * (weight2 / calc2)) / acceleration2;
+      console.log(`sec2: ${sec2}`);
 
-        if(tracklength <= 0){
-      
-ctx.drawImage(cupimg, 200, 50, 100, 100)
-attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-          let earnings = []
-          let filteredhouse = userdata.houses.filter(
-            (house) => house.Name == "Casa Tranquilla"
-          );
-          if (userdata.houses && filteredhouse[0]) {
-            cashwon = cashwon += (cashwon * 0.05)
-          }
-          earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`)
-          if(ckeys > 0){
-            earnings.push(`${emotes.ckey} +${ckeys}`)
-            userdata.ckeys += ckeys
-          }
-          if(rkeys > 0){
-            earnings.push(`${emotes.rkey} +${rkeys}`)
-            userdata.rkeys += rkeys
-          }
-          if(ekeys > 0){
-            earnings.push(`${emotes.ekey} +${ekeys}`)
-            userdata.ekeys += ekeys
-          }
-          userdata.cash += cashwon
-          embed.setDescription(`${earnings.join('\n')}`)
-          embed.setTitle(`Tier ${bot} ${lengthname} won!`)
-          embed.setImage(`attachment://profile-image.png`)
+      calc2 = calc2 / sec2;
+      console.log(`calc2: ${calc2}`);
+      tracklength -= calc;
+      tracklength2 -= calc2;
 
-          await interaction.editReply({embeds: [embed], files: [attachment]})
-            clearInterval(i2)
+      if (tracklength <= 0) {
+        ctx.drawImage(cupimg, 200, 50, 100, 100);
+        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        let earnings = [];
+        let filteredhouse = userdata.houses.filter(
+          (house) => house.Name == "Casa Tranquilla"
+        );
+        if (userdata.houses && filteredhouse[0]) {
+          cashwon = cashwon += cashwon * 0.05;
         }
-        // lost
-        else if(tracklength2 <= 0){
-ctx.drawImage(cupimg, 960, 50, 100, 100)
-attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-          embed.setImage(`attachment://profile-image.png`)
-          
-          embed.setTitle(`Tier ${bot} ${lengthname} lost!`)
-          await interaction.editReply({embeds: [embed], files: [attachment]})
-            clearInterval(i2)
+        earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+        if (ckeys > 0) {
+          earnings.push(`${emotes.ckey} +${ckeys}`);
+          userdata.ckeys += ckeys;
         }
-       
-        console.log(`track length ${tracklength}`)
-        console.log(`track length 2 ${tracklength2}`)
-        userdata.save()
+        if (rkeys > 0) {
+          earnings.push(`${emotes.rkey} +${rkeys}`);
+          userdata.rkeys += rkeys;
+        }
+        if (ekeys > 0) {
+          earnings.push(`${emotes.ekey} +${ekeys}`);
+          userdata.ekeys += ekeys;
+        }
+        userdata.cash += cashwon;
+        embed.setDescription(`${earnings.join("\n")}`);
+        embed.setTitle(`Tier ${bot} ${lengthname} won!`);
+        embed.setImage(`attachment://profile-image.png`);
+
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        clearInterval(i2);
+      }
+      // lost
+      else if (tracklength2 <= 0) {
+        ctx.drawImage(cupimg, 960, 50, 100, 100);
+        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        embed.setImage(`attachment://profile-image.png`);
+
+        embed.setTitle(`Tier ${bot} ${lengthname} lost!`);
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        clearInterval(i2);
+      }
+
+      console.log(`track length ${tracklength}`);
+      console.log(`track length 2 ${tracklength2}`);
+      userdata.save();
     }, 1000);
   },
 };
-
 
 function roundedImage(ctx, x, y, width, height, radius) {
   ctx.beginPath();

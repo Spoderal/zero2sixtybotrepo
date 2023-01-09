@@ -1,18 +1,16 @@
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const {AttachmentBuilder} = require("discord.js");
+const { AttachmentBuilder } = require("discord.js");
 const Cooldowns = require("../schema/cooldowns");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const Global = require("../schema/global-schema");
-const cardb = require("../data/cardb.json")
-const {
-  toCurrency,
-} = require("../common/utils");
-const { createCanvas, loadImage } = require('canvas')
+const cardb = require("../data/cardb.json");
+const { toCurrency } = require("../common/utils");
+const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -92,61 +90,58 @@ module.exports = {
       cooldowndata.timetrial = Date.now();
       cooldowndata.save();
 
-      interaction.reply({content: "Revving engines...", fetchReply: true})
+      interaction.reply({ content: "Revving engines...", fetchReply: true });
 
-      const canvas = createCanvas(1280, 720)
-      const ctx = canvas.getContext('2d')
-      const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
-      const vsimg = await loadImage('https://i.ibb.co/MShN8pn/vstime.png')
+      const canvas = createCanvas(1280, 720);
+      const ctx = canvas.getContext("2d");
+      const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
+      const vsimg = await loadImage("https://i.ibb.co/MShN8pn/vstime.png");
 
-      let selected1image = await loadImage(`${selected.Livery}`)
-let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
-ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+      let selected1image = await loadImage(`${selected.Livery}`);
+      let cupimg = await loadImage(
+        `https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`
+      );
+      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
+      ctx.save();
+      roundedImage(ctx, 320, 200, 640, 360, 20);
+      ctx.stroke();
+      ctx.clip();
+      ctx.drawImage(selected1image, 320, 200, 640, 360);
+      ctx.restore();
 
+      ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
+      let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+        name: "profile-image.png",
+      });
 
-ctx.save();
-roundedImage(ctx, 320, 200, 640, 360, 20);
-ctx.stroke()
-ctx.clip();
-ctx.drawImage(selected1image, 320, 200, 640, 360);
-ctx.restore();
+      console.log(attachment);
 
+      let mph = selected.Speed;
+      let weight =
+        selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight;
+      let acceleration = selected.Acceleration;
+      let handling = selected.Handling;
 
-ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
+      if (!selected.Weight) {
+        selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight;
+      }
 
-console.log(attachment)
+      let speed = 0;
+      let speed2 = 0;
+      let time = 0;
 
-
-let mph = selected.Speed
-let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
-let acceleration = selected.Acceleration
-let handling = selected.Handling
-
-if(!selected.Weight){
-  selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
-}
-
-
-
-let speed = 0
-let speed2 = 0
-let time = 0
-
-let x = setInterval(() => {
-    if(speed < mph){
-        speed++
-
-    }
-    else {
-        clearInterval(x)
-    }
-}, 30);
-let timeint = setInterval(() => {
-  time ++
-}, 1000);
-let sec
+      let x = setInterval(() => {
+        if (speed < mph) {
+          speed++;
+        } else {
+          clearInterval(x);
+        }
+      }, 30);
+      let timeint = setInterval(() => {
+        time++;
+      }, 1000);
+      let sec;
 
       let embed = new discord.EmbedBuilder()
         .setTitle("Going around the track...")
@@ -162,62 +157,68 @@ let sec
           },
         ])
         .setColor(colors.blue)
-        .setImage('attachment://profile-image.png')
+        .setImage("attachment://profile-image.png");
 
-        interaction.editReply({embeds: [embed], files:[attachment], fetchReply: true})
-      
+      interaction.editReply({
+        embeds: [embed],
+        files: [attachment],
+        fetchReply: true,
+      });
 
       let tracklength = 600;
 
       let i2 = setInterval(async () => {
-        console.log(speed)
-        let calc = handling * (speed / 25) 
-        calc = calc / acceleration
-        sec = 6.5 * (weight / calc) / acceleration
-        calc = calc / sec
-        
-        tracklength -= calc
-        console.log(`calc: ${calc}`)
-        console.log(`sec: ${sec}`)
+        console.log(speed);
+        let calc = handling * (speed / 25);
+        calc = calc / acceleration;
+        sec = (6.5 * (weight / calc)) / acceleration;
+        calc = calc / sec;
+
+        tracklength -= calc;
+        console.log(`calc: ${calc}`);
+        console.log(`sec: ${sec}`);
         // car 2
 
-        if(tracklength <= 0){
+        if (tracklength <= 0) {
           ctx.save();
           roundedImage(ctx, 320, 200, 640, 360, 20);
-          ctx.stroke()
+          ctx.stroke();
           ctx.clip();
-          
 
-ctx.restore();
-attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-          let earnings = []
-          
-          clearInterval(timeint)
-          let cashwon = 5000 / time
-          earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`)
+          ctx.restore();
+          attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+            name: "profile-image.png",
+          });
+          let earnings = [];
 
-          userdata.cash += cashwon
+          clearInterval(timeint);
+          let cashwon = 5000 / time;
+          earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
 
-          embed.setDescription(`${earnings.join('\n')}`)
-          embed.setTitle(`Finished time trial in ${time}s!`)
-          embed.setImage(`attachment://profile-image.png`)
+          userdata.cash += cashwon;
 
-          await interaction.editReply({embeds: [embed], files: [attachment]})
-            clearInterval(i2)
+          embed.setDescription(`${earnings.join("\n")}`);
+          embed.setTitle(`Finished time trial in ${time}s!`);
+          embed.setImage(`attachment://profile-image.png`);
+
+          await interaction.editReply({ embeds: [embed], files: [attachment] });
+          clearInterval(i2);
         }
 
-        let timeuser = global.trialtimes.filter(user => user.user.id == interaction.user.id)
+        let timeuser = global.trialtimes.filter(
+          (user) => user.user.id == interaction.user.id
+        );
 
-        if(timeuser.length == 0 || time > timeuser.time){
-          timeuser.time = time
-          timeuser.user = interaction.user
+        if (timeuser.length == 0 || time > timeuser.time) {
+          timeuser.time = time;
+          timeuser.user = interaction.user;
         }
-        global.markModified()
-        global.save()
-       
-        console.log(`track length ${tracklength}`)
-        userdata.save()
-    }, 1000);
+        global.markModified();
+        global.save();
+
+        console.log(`track length ${tracklength}`);
+        userdata.save();
+      }, 1000);
     } else if (interaction.options.getSubcommand() == "leaderboard") {
       let lb = global.trialtimes.sort(function (x, y) {
         return x.time - y.time;

@@ -8,9 +8,9 @@ const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { tipFooterRandom } = require("../common/tips");
 const { toCurrency } = require("../common/utils");
-const {AttachmentBuilder} = require("discord.js")
-const { createCanvas, loadImage } = require('canvas')
-const helmetdb = require("../data/pfpsdb.json")
+const { AttachmentBuilder } = require("discord.js");
+const { createCanvas, loadImage } = require("canvas");
+const helmetdb = require("../data/pfpsdb.json");
 let bot1cars = [
   "1995 mazda miata",
   "1991 toyota mr2",
@@ -93,11 +93,10 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    let car2
+    let car2;
 
-
-let tracklength = 600
-let tracklength2 = 600
+    let tracklength = 600;
+    let tracklength2 = 600;
 
     let timeout = 7200000;
     let racing = cooldowndata.cashcup || 0;
@@ -128,14 +127,14 @@ let tracklength2 = 600
         );
       }
     }
-    interaction.reply("Revving engines...")
+    interaction.reply("Revving engines...");
 
     cooldowndata.cashcup = Date.now();
     cooldowndata.save();
-    const canvas = createCanvas(1280, 720)
-const ctx = canvas.getContext('2d')
-const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
-const vsimg = await loadImage('https://i.ibb.co/Hz6rgNv/vscc.png')
+    const canvas = createCanvas(1280, 720);
+    const ctx = canvas.getContext("2d");
+    const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
+    const vsimg = await loadImage("https://i.ibb.co/Hz6rgNv/vscc.png");
     if (newcashcuptier <= 5) {
       botcar = lodash.sample(bot1cars);
     } else if (newcashcuptier <= 15) {
@@ -151,72 +150,71 @@ const vsimg = await loadImage('https://i.ibb.co/Hz6rgNv/vscc.png')
     } else if (newcashcuptier >= 70) {
       botcar = lodash.sample(bot6cars);
     }
-    car2 = cardb.Cars[botcar.toLowerCase()]
-    let selected1image = await loadImage(`${selected.Livery}`)
-    let selected2image = await loadImage(`${car2.Image}`)
-    let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
+    car2 = cardb.Cars[botcar.toLowerCase()];
+    let selected1image = await loadImage(`${selected.Livery}`);
+    let selected2image = await loadImage(`${car2.Image}`);
+    let cupimg = await loadImage(
+      `https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`
+    );
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     ctx.save();
-roundedImage(ctx, 640, 200, 640, 360, 20);
-ctx.stroke()
-ctx.clip();
-ctx.drawImage(selected2image, 640, 200, 640, 360);
-ctx.restore();
+    roundedImage(ctx, 640, 200, 640, 360, 20);
+    ctx.stroke();
+    ctx.clip();
+    ctx.drawImage(selected2image, 640, 200, 640, 360);
+    ctx.restore();
 
-ctx.save();
-roundedImage(ctx, 0, 200, 640, 360, 20);
-ctx.stroke()
-ctx.clip();
-ctx.drawImage(selected1image, 0, 200, 640, 360);
-ctx.restore();
-ctx.font = '40px sans-serif';
-ctx.fillStyle = '#ffffff';
+    ctx.save();
+    roundedImage(ctx, 0, 200, 640, 360, 20);
+    ctx.stroke();
+    ctx.clip();
+    ctx.drawImage(selected1image, 0, 200, 640, 360);
+    ctx.restore();
+    ctx.font = "40px sans-serif";
+    ctx.fillStyle = "#ffffff";
 
-ctx.fillText(selected.Name, 75, 180);
-ctx.fillText(car2.Name, 845, 180);
-ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
+    ctx.fillText(selected.Name, 75, 180);
+    ctx.fillText(car2.Name, 845, 180);
+    ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
+    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+      name: "profile-image.png",
+    });
 
-    let mph = selected.Speed
-    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
-    let acceleration = selected.Acceleration
-    let handling = selected.Handling
+    let mph = selected.Speed;
+    let weight =
+      selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let acceleration = selected.Acceleration;
+    let handling = selected.Handling;
 
-    if(!selected.Weight){
-      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+    if (!selected.Weight) {
+      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
 
+    let mph2 = car2.Speed;
+    let weight2 = car2.Weight;
+    let acceleration2 = car2["0-60"];
+    let handling2 = car2.Handling;
 
-    let mph2 = car2.Speed
-    let weight2 = car2.Weight
-    let acceleration2 = car2["0-60"]
-    let handling2 = car2.Handling
-  
+    let speed = 0;
+    let speed2 = 0;
 
-    let speed = 0
-    let speed2 = 0
-    
     let x = setInterval(() => {
-        if(speed < mph){
-            speed++
-
-        }
-        else {
-            clearInterval(x)
-        }
+      if (speed < mph) {
+        speed++;
+      } else {
+        clearInterval(x);
+      }
     }, 30);
     let x2 = setInterval(() => {
-        if(speed2 < mph2){
-            speed2++
-
-        }
-        else {
-            clearInterval(x2)
-        }
+      if (speed2 < mph2) {
+        speed2++;
+      } else {
+        clearInterval(x2);
+      }
     }, 30);
-    let sec
-    let sec2
-    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()]
+    let sec;
+    let sec2;
+    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
     let embed = new discord.EmbedBuilder()
       .setTitle(`Tier ${newcashcuptier} cash cup race in progress...`)
       .addFields([
@@ -238,77 +236,81 @@ let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile
       .setColor(colors.blue)
 
       .setFooter(tipFooterRandom)
-      .setImage('attachment://profile-image.png')
-  
-     interaction.editReply({embeds: [embed], files:[attachment], fetchReply: true})
+      .setImage("attachment://profile-image.png");
 
-   
+    interaction.editReply({
+      embeds: [embed],
+      files: [attachment],
+      fetchReply: true,
+    });
 
-     let i2 = setInterval(async () => {
-      console.log(speed)
-      let calc = handling * (speed / 50) 
-      calc = calc / acceleration
-      sec = 6.3 * (weight / calc) / acceleration
-      calc = calc / sec
-      console.log(`calc: ${calc}`)
-      console.log(`sec: ${sec}`)
+    let i2 = setInterval(async () => {
+      console.log(speed);
+      let calc = handling * (speed / 50);
+      calc = calc / acceleration;
+      sec = (6.3 * (weight / calc)) / acceleration;
+      calc = calc / sec;
+      console.log(`calc: ${calc}`);
+      console.log(`sec: ${sec}`);
       // car 2
-      console.log(speed2)
-      let calc2 = handling2 * (speed / 50) 
-      calc2 = calc2 / acceleration2
-      sec2 = 6.3 * (weight2 / calc2) / acceleration2
-      console.log(`sec2: ${sec2}`)
-      
-      calc2 = calc2 / sec2
-      console.log(`calc2: ${calc2}`)
-      tracklength -= calc
-      tracklength2 -= calc2
+      console.log(speed2);
+      let calc2 = handling2 * (speed / 50);
+      calc2 = calc2 / acceleration2;
+      sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
+      console.log(`sec2: ${sec2}`);
 
-      if(tracklength <= 0){
+      calc2 = calc2 / sec2;
+      console.log(`calc2: ${calc2}`);
+      tracklength -= calc;
+      tracklength2 -= calc2;
+
+      if (tracklength <= 0) {
         ctx.save();
         roundedImage(ctx, 640, 200, 640, 360, 20);
-        ctx.stroke()
+        ctx.stroke();
         ctx.clip();
-        
 
-ctx.restore();
-ctx.drawImage(cupimg, 200, 50, 100, 100)
-attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-        let earnings = []
+        ctx.restore();
+        ctx.drawImage(cupimg, 200, 50, 100, 100);
+        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        let earnings = [];
         let filteredhouse = userdata.houses.filter(
           (house) => house.Name == "Buone Vedute"
         );
         if (userdata.houses && filteredhouse[0]) {
-          cashwon = cashwon += (cashwon * 0.05)
+          cashwon = cashwon += cashwon * 0.05;
         }
-        earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`)
-     
-        userdata.cash += cashwon
-        embed.setDescription(`${earnings.join('\n')}`)
-        embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race won!`)
-        embed.setImage(`attachment://profile-image.png`)
+        earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
 
-        await interaction.editReply({embeds: [embed], files: [attachment]})
-          clearInterval(i2)
+        userdata.cash += cashwon;
+        embed.setDescription(`${earnings.join("\n")}`);
+        embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race won!`);
+        embed.setImage(`attachment://profile-image.png`);
+
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        clearInterval(i2);
       }
       // lost
-      else if(tracklength2 <= 0){
-ctx.drawImage(cupimg, 960, 50, 100, 100)
-attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-        embed.setImage(`attachment://profile-image.png`)
-        
-        embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race lost!`)
-        await interaction.editReply({embeds: [embed], files: [attachment]})
-          clearInterval(i2)
+      else if (tracklength2 <= 0) {
+        ctx.drawImage(cupimg, 960, 50, 100, 100);
+        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        embed.setImage(`attachment://profile-image.png`);
+
+        embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race lost!`);
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        clearInterval(i2);
       }
-     
-      console.log(`track length ${tracklength}`)
-      console.log(`track length 2 ${tracklength2}`)
-      userdata.save()
-  }, 1000);
+
+      console.log(`track length ${tracklength}`);
+      console.log(`track length 2 ${tracklength2}`);
+      userdata.save();
+    }, 1000);
   },
 };
-
 
 function roundedImage(ctx, x, y, width, height, radius) {
   ctx.beginPath();
