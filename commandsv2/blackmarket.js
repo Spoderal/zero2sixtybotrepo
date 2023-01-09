@@ -10,6 +10,7 @@ const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const { tipFooterPurchasePart } = require("../common/tips");
 const carpacks = require("../data/carpacks.json")
+//comment
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("blackmarket")
