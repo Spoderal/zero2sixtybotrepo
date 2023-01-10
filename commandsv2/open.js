@@ -1,9 +1,12 @@
 const lodash = require("lodash");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+
+const { createCanvas, loadImage } = require('canvas')
+
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,47 +31,106 @@ module.exports = {
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let bought = interaction.options.getString("crate");
-    let cash = userdata.cash;
-    if (!bought)
-      return await interaction.reply(
-        "**To use this command, specify the crate you want to buy. To check what crates are available check the crates shop by sending /crates.**"
-      );
-    if (!crates.Crates[bought.toLowerCase()])
-      return await interaction.reply(
-        "**That crate isn't available yet, suggest it in the support server! In the meantime, check how to use the command by running /open.**"
-      );
-    if (!crates.Crates[bought.toLowerCase()].Price)
-      return await interaction.reply("Thats not a purchasable crate!");
+    let inv = userdata.items;
 
-    if (cash < crates.Crates[bought.toLowerCase()].Price)
-      return await interaction.reply(
-        `You dont have enough cash! This crate costs $${
-          crates.Crates[bought.toLowerCase()].Price
-        }`
-      );
-    let cratecontents = crates.Crates[bought.toLowerCase()].Contents;
-    let randomitem = lodash.sample(cratecontents);
-    userdata.cash -= crates.Crates[bought.toLowerCase()].Price;
-    let embed = new EmbedBuilder();
+    let boughtindb = crates.Crates[bought.toLowerCase()]
 
-    if (pfps.Pfps[randomitem]) {
-      let helmets = userdata.pfps;
-      if (helmets.includes(pfps.Pfps[randomitem].Name.toLowerCase())) {
-        userdata.cash += crates.Crates[bought.toLowerCase()].Price;
-        await interaction.reply(
-          `You already have the helmet you won, so you've received a full refund!`
-        );
-        return;
+    if(!inv.includes(bought)) return interaction.reply(`You don't have a ${boughtindb.Emote} ${boughtindb.Name}!`)
+
+    
+    
+    let embed = new EmbedBuilder()
+    .setTitle(`Unboxing ${boughtindb.Emote} ${boughtindb.Name}...`)
+    .setColor(`#60b0f4`);
+    
+    interaction.reply({embeds: [embed]})
+    
+
+    const canvas = createCanvas(1280, 720)
+    const ctx = canvas.getContext('2d')
+    const bg = await loadImage('https://i.ibb.co/6WwF0gJ/crateunbox.png')
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+    let x = 0
+    let rewards = []
+    let i = setInterval(() => {
+      x++
+      let reward = lodash.sample(boughtindb.Contents)
+      rewards.push(reward)
+
+      if(x == 3){
+        clearInterval(i)
+      }
+    }, 1000);
+
+
+    
+    setTimeout(async () => {
+      let reward1 = rewards[0]
+      let reward2 = rewards[1]
+      let reward3 = rewards[2]
+
+      let name1
+      let name2
+      let name3
+      if(pfps.Pfps[reward1]){
+        let helmetimg = pfps.Pfps[reward1].Image
+        name1 = pfps.Pfps[reward1].Name
+       let loadedhelm = await loadImage(helmetimg)
+
+       ctx.drawImage(loadedhelm, 150, 200, 150, 150);
+       ctx.save()
+      }
+      if(pfps.Pfps[reward2]){
+        let helmetimg = pfps.Pfps[reward2].Image
+        name2 = pfps.Pfps[reward2].Name
+       let loadedhelm = await loadImage(helmetimg)
+
+       ctx.drawImage(loadedhelm, 570, 200, 150, 150);
+       ctx.save()
+      }
+      if(pfps.Pfps[reward3]){
+        let helmetimg = pfps.Pfps[reward3].Image
+        name3 = pfps.Pfps[reward3].Name
+       let loadedhelm = await loadImage(helmetimg)
+
+       ctx.drawImage(loadedhelm, 970, 200, 150, 150);
+       ctx.save()
       }
 
-      userdata.pfps.push(randomitem);
-      userdata.save();
-      embed.setTitle("Preview");
-      embed.setThumbnail(pfps.Pfps[randomitem].Image).setColor(colors.blue);
-      await interaction.reply({
-        content: `You opened a ${bought} and won a ${randomitem} profile image!`,
-        embeds: [embed],
-      });
+      ctx.restore();
+ctx.font = '40px sans-serif';
+ctx.fillStyle = '#00000';
+let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png")
+
+if(reward1.endsWith(`Cash`)){
+  let amount = Number(reward1.split(" ")[0]);
+  name1 = `${amount} Cash`
+  ctx.drawImage(imageload, 150, 200, 150, 150);
+}
+
+if(reward2.endsWith(`Cash`)){
+  let amount2 = Number(reward2.split(" ")[0]);
+  name2 = `${amount2} Cash`
+  ctx.drawImage(imageload, 570, 200, 150, 150);
+}
+
+if(reward3.endsWith(`Cash`)){
+  let amount3 = Number(reward3.split(" ")[0]);
+  name3 = `${amount3} Cash`
+  ctx.drawImage(imageload, 970, 200, 150, 150);
+}
+
+
+ctx.fillText(name1, 100, 565);
+ctx.fillText(name2, 520, 565);
+ctx.fillText(name3, 920, 565);
+
+      let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
+      embed.setImage(`attachment://profile-image.png`)
+      console.log(rewards)
+      await interaction.editReply({embeds: [embed], files: [attachment]})
+    }, 5000);
+
+
     }
-  },
-};
+  }

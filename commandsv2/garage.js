@@ -3,10 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
-const itemdb = require("../data/items.json");
-const cardb = require("../data/cardb.json");
 const colors = require("../common/colors");
-const { toCurrency, blankField } = require("../common/utils");
 const emotes = require("../common/emotes");
 
 module.exports = {

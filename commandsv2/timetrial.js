@@ -100,7 +100,6 @@ module.exports = {
       const vsimg = await loadImage('https://i.ibb.co/MShN8pn/vstime.png')
 
       let selected1image = await loadImage(`${selected.Livery}`)
-let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
 ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
 
@@ -120,18 +119,17 @@ console.log(attachment)
 
 
 let mph = selected.Speed
-let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
+let weight = selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight
 let acceleration = selected.Acceleration
 let handling = selected.Handling
 
-if(!selected.Weight){
-  selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+if(!selected.WeightStat){
+  selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight
 }
 
 
 
 let speed = 0
-let speed2 = 0
 let time = 0
 
 let x = setInterval(() => {

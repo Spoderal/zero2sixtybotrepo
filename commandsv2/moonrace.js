@@ -8,7 +8,7 @@ const Cooldowns = require("../schema/cooldowns");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { randomRange, convertMPHtoKPH } = require("../common/utils");
+const { randomRange } = require("../common/utils");
 const { userGetPatreonTimeout } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
@@ -190,8 +190,6 @@ module.exports = {
     let weekytask1 = userdata.weeklytask;
     let ticketsearned;
     let classd;
-    let barnmaps;
-    let ubarnmaps;
     let tracklength = 0;
     let xpearn;
     switch (bot) {
@@ -251,9 +249,6 @@ module.exports = {
         ticketsearned = 5;
         classd = "5";
         botemote = emotes.botTier5;
-
-        barnmaps = 1;
-
         break;
       }
       case "6": {
@@ -265,7 +260,6 @@ module.exports = {
         classd = "6";
         botemote = emotes.botTier6;
 
-        barnmaps = 2;
 
         break;
       }
@@ -278,7 +272,6 @@ module.exports = {
         classd = "7";
         botemote = emotes.botTier7;
 
-        ubarnmaps = 1;
         break;
       }
       case "8": {
@@ -290,7 +283,6 @@ module.exports = {
         classd = "8";
         botemote = emotes.botTier8;
 
-        ubarnmaps = 2;
         break;
       }
     }
@@ -426,11 +418,7 @@ module.exports = {
     let row = new ActionRowBuilder();
     let msg = await interaction.reply({
       embeds: [embed],
-<<<<<<< HEAD
       fetchReply: true
-=======
-      fetchReply: true,
->>>>>>> 9bdb92d3f0d43de5d0d8c589987297be877d0908
     });
     let filter2 = (btnInt) => {
       return interaction.user.id !== btnInt.user.id;

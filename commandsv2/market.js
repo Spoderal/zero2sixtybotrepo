@@ -5,7 +5,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const cardb = require("../data/cardb.json");
 const Global = require("../schema/global-schema");
-const { toCurrency, convertMPHtoKPH } = require("../common/utils");
+const { toCurrency } = require("../common/utils");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
 
@@ -126,7 +126,7 @@ module.exports = {
 
         if(sellprice !== 0 && price >= sellprice ){
           `Your price must at least be below ${toCurrency(
-            sellpricemax
+            sellprice
           )}, this is to prevent things getting overvalued.`
         }
 

@@ -5,7 +5,6 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()

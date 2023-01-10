@@ -11,6 +11,7 @@
         "2500 Cash",
         "2500 Cash"
       ],
+      "Name":"Common",
       "Emote":"<:supplydrop:1044404467119960085>",
       "Image":"https://i.ibb.co/dQ2D2yT/supplydrop.png"
     },
@@ -27,6 +28,7 @@
         "15000 Cash",
         "t3tires"
       ],
+      "Name":"Rare",
       "Emote":"<:supplydroprare:1044404466096537731>",
       "Image":"https://i.ibb.co/r4QY55b/supplydroprare.png"
     },
@@ -45,6 +47,7 @@
         "25000 Cash"
       ]
     },
+    "Name":"Prestige",
     "Emote": "<:supplydropprestige:1044404462581719041>",
     "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
   }

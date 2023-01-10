@@ -15,7 +15,6 @@ module.exports = {
 
     let dailyenabled = userdata.settings.daily;
     let tipsenabled = userdata.settings.tips;
-    let kmhormph = userdata.settings.ph;
 
     let voteenabled = userdata.settings.vote;
     let demote = "❌";

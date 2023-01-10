@@ -69,7 +69,6 @@ module.exports = {
       return await interaction.reply(
         "You need to be prestige 2 to do this race!"
       );
-    let botlist = ["1", "2", "3"];
     let timeout = 45000;
     let botcar = null;
     let racing = cooldowndata.racing;

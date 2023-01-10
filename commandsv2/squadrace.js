@@ -114,7 +114,6 @@ module.exports = {
     let car2 = botcarindb
     let selected1image = await loadImage(`${selected.Livery}`)
     let selected2image = await loadImage(`${car2.Image}`)
-    let cupimg = await loadImage(`https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`)
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     const squadimg = await loadImage(squadfiltered[0].Icon)
 
@@ -155,12 +154,12 @@ module.exports = {
       newrankrequired * 3;
     }
     let mph = selected.Speed
-    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
+    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight
     let acceleration = selected.Acceleration
     let handling = selected.Handling
 
-    if(!selected.Weight){
-      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+    if(!selected.WeightStat){
+      selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight
     }
 
 

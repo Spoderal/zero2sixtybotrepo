@@ -178,12 +178,12 @@ ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
 
     let mph = selected.Speed
-    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
+    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight
     let acceleration = selected.Acceleration
     let handling = selected.Handling
 
-    if(!selected.Weight){
-      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+    if(!selected.WeightStat){
+      selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight
     }
 
 

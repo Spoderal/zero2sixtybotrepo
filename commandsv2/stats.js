@@ -134,7 +134,7 @@ module.exports = {
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
       let carweight =
-        selected.Weight || list[selected.Name.toLowerCase()].Weight;
+        selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       let speed = `${carindb.Speed}`;
 

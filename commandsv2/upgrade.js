@@ -62,7 +62,7 @@ module.exports = {
         `);
       return await interaction.reply({ embeds: [errembed] });
     }
-
+    
     if (!userdata.parts.includes(inputPartName))
       return await interaction.reply("You don't have this part!");
     let realpart = selected[partType];
@@ -178,7 +178,7 @@ module.exports = {
       let stat = Number(selected.Price);
       selected.Price = stat += resale;
     }
-
+    userdata.update();
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = selected.Handling;

@@ -113,7 +113,6 @@ module.exports = {
    //  if(rrank !== rrank2 && user1num !== rrank2 && user2num !== rrank) return interaction.reply(`You need to be at least the same rank, or 1 rank above the other user to race them!`)
 
 
-    let cashwon = 1000
 
     let carindb1 = cars.Cars[selected.Name.toLowerCase()];
     let carindb2 = cars.Cars[selected2.Name.toLowerCase()];
@@ -159,12 +158,12 @@ ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
 
 
-if(!selected.Weight){
-  selected.Weight = cars.Cars[selected.Name.toLowerCase()].Weight
+if(!selected.WeightStat){
+  selected.WeightStat = cars.Cars[selected.Name.toLowerCase()].Weight
 }
 
     let mph = selected.Speed
-    let weight = selected.Weight || cars.Cars[selected.Name.toLowerCase()].Weight
+    let weight = selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight
     let acceleration = selected.Acceleration
     let handling = selected.Handling
 

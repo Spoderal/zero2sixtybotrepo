@@ -8,16 +8,12 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const helmetdb = require("../data/pfpsdb.json")
 const { emotes } = require("../common/emotes");
-const { userGetPatreonTimeout } = require("../common/user");
 const { createCanvas, loadImage } = require('canvas')
 
 const {
-  doubleCashWeekendField,
-  convertMPHtoKPHm,
   toCurrency,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const houses = require("../data/houses.json");
 const cardb = require("../data/cardb.json");
 
 let bot1cars = [
@@ -238,12 +234,12 @@ console.log(attachment)
     cooldowndata.racing = Date.now()
     cooldowndata.save()
     let mph = selected.Speed
-    let weight = selected.Weight || cardb.Cars[selected.Name.toLowerCase()].Weight
+    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight
     let acceleration = selected.Acceleration
     let handling = selected.Handling
 
-    if(!selected.Weight){
-      selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight
+    if(!selected.WeightStat){
+      selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight
     }
 
 
