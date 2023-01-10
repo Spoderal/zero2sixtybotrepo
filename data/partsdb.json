@@ -1660,7 +1660,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "1",
       "DecreasedSixty": "0",
-      "Type": "weight",
+      "Type": "weight reduction",
       "DecreasedSpeed": "4"
     },
     "driftsuspension": {
@@ -1767,7 +1767,7 @@
       "AddedDrift": "3",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight",
+      "Type": "weight reduction",
       "DecreasedSpeed": "0"
     },
     "t2weightreduction": {
@@ -1783,7 +1783,7 @@
       "AddedDrift": "4",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight",
+      "Type": "weight reduction",
       "DecreasedSpeed": "0"
     },
     "t3weightreduction": {
@@ -1799,7 +1799,7 @@
       "AddedDrift": "5",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight",
+      "Type": "weight reduction",
       "DecreasedSpeed": "0"
     },
     "t4weightreduction": {
@@ -1815,7 +1815,7 @@
       "AddedDrift": "5",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight",
+      "Type": "weight reduction",
       "DecreasedSpeed": "0"
     },
     "t5weightreduction": {
@@ -1831,7 +1831,7 @@
       "AddedDrift": "5",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight",
+      "Type": "weight reduction",
       "DecreasedSpeed": "0"
     },
     "racesuspension": {
