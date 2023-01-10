@@ -1,39 +1,37 @@
 {
   "Cars": {
-      
     "1995 mazda miata": {
-        "alias": "1995 miata",
-        "Name": "1995 Mazda Miata",
-        "Emote": "<:mazda:931011549680779364>",
-        "Speed": 132,
-        "kmh": 201,
-        "Price": 500,
-        "sellprice": 375,
-        "Engine": "1.8 L 4-cylinder",
-        "Image": "https://i.ibb.co/Z86Thy9/1995-mazda-miata.png",
-        "0-60": 14.1,
-        "Drift": 0,
-        "Handling": 500,
-        "Starter": true,
-        "Weight": 2200,
-        "Class": "D",
-        "Colors":[
-          {
-            "color":"black",
-            "image":"https://i.ibb.co/BC7dfkr/1995-mazda-miata-black.png"
-          },
-          {
-            "color":"red",
-            "image":"https://i.ibb.co/Z86Thy9/1995-mazda-miata.png"
-          }
-        ],
-        "Parts":{
-          "Exhaust":{
-            "PositionX":0,
-            "PositionY":0
-          }
+      "alias": "1995 miata",
+      "Name": "1995 Mazda Miata",
+      "Emote": "<:mazda:931011549680779364>",
+      "Speed": 132,
+      "kmh": 201,
+      "Price": 500,
+      "sellprice": 375,
+      "Engine": "1.8 L 4-cylinder",
+      "Image": "https://i.ibb.co/Z86Thy9/1995-mazda-miata.png",
+      "0-60": 14.1,
+      "Drift": 0,
+      "Handling": 500,
+      "Starter": true,
+      "Weight": 2200,
+      "Class": "D",
+      "Colors": [
+        {
+          "color": "black",
+          "image": "https://i.ibb.co/BC7dfkr/1995-mazda-miata-black.png"
+        },
+        {
+          "color": "red",
+          "image": "https://i.ibb.co/Z86Thy9/1995-mazda-miata.png"
+        }
+      ],
+      "Parts": {
+        "Exhaust": {
+          "PositionX": 0,
+          "PositionY": 0
         }
       }
-  
-}
+    }
+  }
 }

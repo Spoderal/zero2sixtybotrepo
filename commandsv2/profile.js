@@ -7,7 +7,7 @@ const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
-const pvpranks = require("../data/ranks.json")
+const pvpranks = require("../data/ranks.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -84,7 +84,9 @@ module.exports = {
           Drift Rank: ${driftrank}
           Prestige: ${prestige}
           Tier: ${userdata.tier}
-          PVP Rank: ${pvpranks[userdata.pvprank.Rank.toLowerCase()].emote} ${userdata.pvprank.Rank} ${userdata.pvprank.Wins}
+          PVP Rank: ${pvpranks[userdata.pvprank.Rank.toLowerCase()].emote} ${
+          userdata.pvprank.Rank
+        } ${userdata.pvprank.Wins}
         `,
         inline: true,
       },

@@ -139,8 +139,7 @@ module.exports = {
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
-        }
-        else if(item == "🗺️"){
+        } else if (item == "🗺️") {
           let reward = lodash.sample(maps);
           switch (reward) {
             case "Common":
@@ -149,9 +148,9 @@ module.exports = {
             case "Rare":
               userdata.rmaps += 1;
               break;
-              case "Legendary":
-                userdata.lmaps += 1;
-                break;
+            case "Legendary":
+              userdata.lmaps += 1;
+              break;
           }
           embed.setDescription(
             `You won a ${numberWithCommas(reward)} barn map!`

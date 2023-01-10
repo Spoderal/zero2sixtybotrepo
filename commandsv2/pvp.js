@@ -63,7 +63,7 @@ module.exports = {
 
     let idtoselect = car;
     let idtoselect2 = car2;
-
+    if(user2.id == interaction.user.id) return interaction.reply("You cant race yourself!")
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {

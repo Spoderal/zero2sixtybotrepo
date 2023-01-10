@@ -10,7 +10,7 @@ function tipGetRandom() {
     "Notoriety is used for seasons, check the current season with /season",
     "Use keys to purchase import crates with exclusive cars",
     "View events with /events",
-    "View the blackmarket with /blackmarket for exclusive cars and parts"
+    "View the blackmarket with /blackmarket for exclusive cars and parts",
   ]);
 }
 

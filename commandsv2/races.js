@@ -71,7 +71,7 @@ module.exports = {
             description: "Information about cashcup races",
             value: "cash_race",
             customId: "cash",
-          }
+          },
         ])
     );
 

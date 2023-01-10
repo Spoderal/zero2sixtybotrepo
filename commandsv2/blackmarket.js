@@ -9,7 +9,8 @@ const cars = require("../data/cardb.json");
 const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const { tipFooterPurchasePart } = require("../common/tips");
-const carpacks = require("../data/carpacks.json")
+const carpacks = require("../data/carpacks.json");
+//comment
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("blackmarket")
@@ -143,10 +144,18 @@ module.exports = {
                   )}\n
                   
                   Car Packs
-                   __${carpacks.roadsters.Name} : 🪙 ${carpacks.roadsters.Gold}__
-                   ${cars.Cars["2017 pagani huayra roadster"].Emote} ${cars.Cars["2017 pagani huayra roadster"].Name}
-                   ${cars.Cars["2021 aston martin vantage roadster"].Emote} ${cars.Cars["2021 aston martin vantage roadster"].Name}
-                   ${cars.Cars["2022 bmw z4 roadster"].Emote} ${cars.Cars["2022 bmw z4 roadster"].Name}
+                   __${carpacks.roadsters.Name} : 🪙 ${
+                    carpacks.roadsters.Gold
+                  }__
+                   ${cars.Cars["2017 pagani huayra roadster"].Emote} ${
+                    cars.Cars["2017 pagani huayra roadster"].Name
+                  }
+                   ${cars.Cars["2021 aston martin vantage roadster"].Emote} ${
+                    cars.Cars["2021 aston martin vantage roadster"].Name
+                  }
+                   ${cars.Cars["2022 bmw z4 roadster"].Emote} ${
+                    cars.Cars["2022 bmw z4 roadster"].Name
+                  }
                   **`
                 )
                 .setColor(colors.blue)

@@ -25,8 +25,8 @@ module.exports = {
     let cars = udata.cars;
     let parts = udata.parts;
     let items = udata.items;
-    let garagelimit = udata.garageLimit
-    let xessence = udata.xessence
+    let garagelimit = udata.garageLimit;
+    let xessence = udata.xessence;
 
     let displayparts = [];
     let displayitems = [];
@@ -64,7 +64,9 @@ module.exports = {
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
-      .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`)
+      .setDescription(
+        `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
+      )
       .setImage("https://i.ibb.co/pf4vwHC/istockphoto-521421426-612x612.jpg")
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
@@ -135,7 +137,9 @@ module.exports = {
 
         embed = new EmbedBuilder()
           .setTitle(`Displaying cars for ${user.username}`)
-          .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`)
+          .setDescription(
+            `Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`
+          )
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });

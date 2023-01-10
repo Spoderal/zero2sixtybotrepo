@@ -106,7 +106,7 @@ module.exports = {
       if (!achievements) {
         achievements = ["None"];
       }
-      
+
       let richFiltered = userdata.achievements.filter(
         (achievement) => achievement.name == "Rich"
       );
