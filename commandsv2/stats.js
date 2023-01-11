@@ -108,14 +108,14 @@ module.exports = {
         .setImage(carindb.Image);
 
       await interaction.reply({ embeds: [embed] });
-    } else if (subcommandfetch == "carid") {
+    } else if (subcommandfetch == "id") {
       let idtoselect = interaction.options.getString("id");
 
       if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
       let selected = filteredcar[0] || "No ID";
-      carindb = list[selected.Name.toLowerCase()];
+      carindb = list[selected.Name.toLowerCase()]
       if (selected == "No ID") {
         let errembed = new Discord.EmbedBuilder()
           .setTitle("Error!")
@@ -133,16 +133,15 @@ module.exports = {
       let carindb = selected;
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
-      let carweight =
-        selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
+      let carweight = selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
 
-      if (!selected.WeightStat || selected.WeightStat == null) {
-        selected.WeightStat = list[selected.Name.toLowerCase()].Weight;
-        userdata.markModified();
-        userdata.save();
+      if(!selected.WeightStat || selected.WeightStat == null) {
+        selected.WeightStat = list[selected.Name.toLowerCase()].Weight
+        userdata.markModified()
+        userdata.save()
+
       }
-      carweight =
-        selected.WeightStat || list[selected.Name.toLowerCase()].Weight || 0;
+      carweight = selected.WeightStat || list[selected.Name.toLowerCase()].Weight || 0
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       let speed = `${carindb.Speed}`;
       //weight
