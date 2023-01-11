@@ -133,11 +133,18 @@ module.exports = {
       let carindb = selected;
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
-      let carweight =
-        selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
+      let carweight = selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
+
+      if(!selected.WeightStat || selected.WeightStat == null) {
+        selected.WeightStat = list[selected.Name.toLowerCase()].Weight
+        userdata.markModified()
+        userdata.save()
+
+      }
+      carweight = selected.WeightStat || list[selected.Name.toLowerCase()].Weight || 0
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       let speed = `${carindb.Speed}`;
-
+      //weight
       let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
