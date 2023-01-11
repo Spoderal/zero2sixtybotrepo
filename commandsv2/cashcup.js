@@ -180,11 +180,11 @@ module.exports = {
       name: "profile-image.png",
     });
 
-    let mph = selected.Speed
-    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight
-    let acceleration = selected.Acceleration
-    let handling = selected.Handling
-
+    let mph = selected.Speed;
+    let weight =
+      selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let acceleration = selected.Acceleration;
+    let handling = selected.Handling;
 
     if (!selected.WeightStat) {
       selected.Weight = cardb.Cars[selected.Name.toLowerCase()].Weight;

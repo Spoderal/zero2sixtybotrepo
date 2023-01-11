@@ -62,7 +62,7 @@ module.exports = {
         `);
       return await interaction.reply({ embeds: [errembed] });
     }
-    
+
     if (!userdata.parts.includes(inputPartName))
       return await interaction.reply("You don't have this part!");
     let realpart = selected[partType];

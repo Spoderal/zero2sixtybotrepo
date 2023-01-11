@@ -191,17 +191,18 @@ module.exports = {
 
     console.log(attachment);
 
-console.log(attachment)
-    
-cooldowndata.racing = Date.now()
-cooldowndata.save()
-    let mph = selected.Speed
-    let weight = selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight
-    let acceleration = selected.Acceleration
-    let handling = selected.Handling
+    console.log(attachment);
 
-    if(!selected.WeightStatStat){
-      selected.WeightStatStat = cardb.Cars[selected.Name.toLowerCase()].Weight
+    cooldowndata.racing = Date.now();
+    cooldowndata.save();
+    let mph = selected.Speed;
+    let weight =
+      selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let acceleration = selected.Acceleration;
+    let handling = selected.Handling;
+
+    if (!selected.WeightStatStat) {
+      selected.WeightStatStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
 
     let mph2 = car2.Speed;
@@ -209,7 +210,6 @@ cooldowndata.save()
     let acceleration2 = car2["0-60"];
     let handling2 = car2.Handling;
 
-  
     let speed = 0;
     let speed2 = 0;
 

@@ -1,7 +1,7 @@
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const {AttachmentBuilder, EmbedBuilder } = require("discord.js");
+const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
@@ -9,10 +9,10 @@ const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const squadsdb = require("../data/squads.json");
-const cardb = require("../data/cardb.json")
-const helmetdb = require("../data/pfpsdb.json")
+const cardb = require("../data/cardb.json");
+const helmetdb = require("../data/pfpsdb.json");
 
-const { createCanvas, loadImage } = require('canvas')
+const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -57,11 +57,11 @@ module.exports = {
         `Please wait ${time} before racing again.`
       );
     }
-    let tracklength = 600
-    let tracklength2 = 600
+    let tracklength = 600;
+    let tracklength2 = 600;
     let cemote = emotes.cash;
     let tier = userdata.tier || 1;
-    let user = interaction.user
+    let user = interaction.user;
 
     let prestige = userdata.prestige;
 
@@ -74,13 +74,12 @@ module.exports = {
       }
     }
     if (tier == 6) return interaction.reply("You've beaten all the squads!");
-    interaction.reply(`Revving engines...`)
-    const canvas = createCanvas(1280, 720)
-    const ctx = canvas.getContext('2d')
-    const bg = await loadImage('https://i.ibb.co/b7WGPX2/bgqm.png')
-    const vsimg = await loadImage('https://i.ibb.co/XSrdHPd/vssq.png')
+    interaction.reply(`Revving engines...`);
+    const canvas = createCanvas(1280, 720);
+    const ctx = canvas.getContext("2d");
+    const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
+    const vsimg = await loadImage("https://i.ibb.co/XSrdHPd/vssq.png");
 
-    
     let squadsarr = [];
     for (let s in squadsdb.Squads) {
       let sq = squadsdb.Squads[s];
@@ -111,36 +110,37 @@ module.exports = {
     let squadinfo = squadfiltered[0];
     let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
     let botcarindb = cars.Cars[botcar.toLowerCase()];
-    let car2 = botcarindb
-    let selected1image = await loadImage(`${selected.Livery}`)
-    let selected2image = await loadImage(`${car2.Image}`)
+    let car2 = botcarindb;
+    let selected1image = await loadImage(`${selected.Livery}`);
+    let selected2image = await loadImage(`${car2.Image}`);
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-    const squadimg = await loadImage(squadfiltered[0].Icon)
+    const squadimg = await loadImage(squadfiltered[0].Icon);
 
     ctx.save();
     roundedImage(ctx, 640, 200, 640, 360, 20);
-    ctx.stroke()
+    ctx.stroke();
     ctx.clip();
     ctx.drawImage(selected2image, 640, 200, 640, 360);
     ctx.restore();
-    
+
     ctx.save();
     roundedImage(ctx, 0, 200, 640, 360, 20);
-    ctx.stroke()
+    ctx.stroke();
     ctx.clip();
     ctx.drawImage(selected1image, 0, 200, 640, 360);
     ctx.restore();
-    ctx.font = '40px sans-serif';
-    ctx.fillStyle = '#ffffff';
-    
+    ctx.font = "40px sans-serif";
+    ctx.fillStyle = "#ffffff";
+
     ctx.fillText(selected.Name, 75, 180);
-    
+
     ctx.fillText(car2.Name, 845, 180);
     ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
     ctx.drawImage(squadimg, 540, 50, 200, 200);
-    let attachment = new AttachmentBuilder(await canvas.toBuffer(), { name: 'profile-image.png' });
-
+    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+      name: "profile-image.png",
+    });
 
     let racelevel = userdata.racerank;
 
@@ -153,199 +153,189 @@ module.exports = {
     } else if (prestige >= 5) {
       newrankrequired * 3;
     }
-    let mph = selected.Speed
-    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight
-    let acceleration = selected.Acceleration
-    let handling = selected.Handling
+    let mph = selected.Speed;
+    let weight =
+      selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let acceleration = selected.Acceleration;
+    let handling = selected.Handling;
 
-    if(!selected.WeightStat){
-      selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight
+    if (!selected.WeightStat) {
+      selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
 
+    let mph2 = car2.Speed;
+    let weight2 = car2.Weight;
+    let acceleration2 = car2["0-60"];
+    let handling2 = car2.Handling;
 
-    let mph2 = car2.Speed
-    let weight2 = car2.Weight
-    let acceleration2 = car2["0-60"]
-    let handling2 = car2.Handling
-  
+    let speed = 0;
+    let speed2 = 0;
 
-    let speed = 0
-    let speed2 = 0
-    
     let x = setInterval(() => {
-        if(speed < mph){
-            speed++
-
-        }
-        else {
-            clearInterval(x)
-        }
+      if (speed < mph) {
+        speed++;
+      } else {
+        clearInterval(x);
+      }
     }, 30);
     let x2 = setInterval(() => {
-        if(speed2 < mph2){
-            speed2++
-
-        }
-        else {
-            clearInterval(x2)
-        }
+      if (speed2 < mph2) {
+        speed2++;
+      } else {
+        clearInterval(x2);
+      }
     }, 30);
-    let sec
-    let sec2
-    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()]
+    let sec;
+    let sec2;
+    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
-    .setTitle(`Racing Squad ${squadfiltered[0].Name}`)
-    
-    .setAuthor({ name: `${user.username}`, iconURL:`${helmet.Image}` })
-    .addFields(
-      {
-        name:`${selected.Emote} ${selected.Name}`,
-        value:`${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-        
-        inline: true
-      },
-      {
-        name:`${car2.Emote} ${car2.Name}`,
-        value:`${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-        inline: true
-      }
-    )
-    .setColor(colors.blue)
-    .setImage('attachment://profile-image.png')
+      .setTitle(`Racing Squad ${squadfiltered[0].Name}`)
 
-    
+      .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
+      .addFields(
+        {
+          name: `${selected.Emote} ${selected.Name}`,
+          value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
 
-    interaction.editReply({embeds: [embed], files:[attachment], fetchReply: true})
+          inline: true,
+        },
+        {
+          name: `${car2.Emote} ${car2.Name}`,
+          value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
+          inline: true,
+        }
+      )
+      .setColor(colors.blue)
+      .setImage("attachment://profile-image.png");
 
-
-
-
+    interaction.editReply({
+      embeds: [embed],
+      files: [attachment],
+      fetchReply: true,
+    });
 
     let i2 = setInterval(async () => {
-      console.log(speed)
-      let calc = weight * (speed / 234)
-      calc = calc / acceleration
-      sec = 6.290 * (weight / calc) / acceleration
-      calc = calc / sec
-      console.log(`calc: ${calc}`)
-      console.log(`sec: ${sec}`)
+      console.log(speed);
+      let calc = weight * (speed / 234);
+      calc = calc / acceleration;
+      sec = (6.29 * (weight / calc)) / acceleration;
+      calc = calc / sec;
+      console.log(`calc: ${calc}`);
+      console.log(`sec: ${sec}`);
       // car 2
-      console.log(speed2)
-      let calc2 = weight2 * (speed2 / 234)
-      calc2 = calc2 / acceleration2
-      sec2 = 6.290 * (weight2 / calc2) / acceleration2
-      console.log(`sec2: ${sec2}`)
-      
-      calc2 = calc2 / sec2
-      console.log(`calc2: ${calc2}`)
-      tracklength -= calc
-      tracklength2 -= calc2
+      console.log(speed2);
+      let calc2 = weight2 * (speed2 / 234);
+      calc2 = calc2 / acceleration2;
+      sec2 = (6.29 * (weight2 / calc2)) / acceleration2;
+      console.log(`sec2: ${sec2}`);
 
-      if(tracklength <= 0){
-       
+      calc2 = calc2 / sec2;
+      console.log(`calc2: ${calc2}`);
+      tracklength -= calc;
+      tracklength2 -= calc2;
 
-          embed.setTitle(`${squadinfo.Name} race won!`);
+      if (tracklength <= 0) {
+        embed.setTitle(`${squadinfo.Name} race won!`);
 
-          if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
-            selected.Wins += 1;
-            userdata.save();
-          }
-          if (interaction.guild.id == "931004190149460048") {
-            let calccash = moneyearned * 0.05;
-            // moneyearnedtxt += calccash;
-            moneyearned += calccash;
-          }
-          if (
-            (userdata.patreon && userdata.patreon.tier == 1) ||
-            (userdata.patreon && userdata.patreon.tier == 2)
-          ) {
-            let patronbonus = moneyearned * 1.5;
+        if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
+          selected.Wins += 1;
+          userdata.save();
+        }
+        if (interaction.guild.id == "931004190149460048") {
+          let calccash = moneyearned * 0.05;
+          // moneyearnedtxt += calccash;
+          moneyearned += calccash;
+        }
+        if (
+          (userdata.patreon && userdata.patreon.tier == 1) ||
+          (userdata.patreon && userdata.patreon.tier == 2)
+        ) {
+          let patronbonus = moneyearned * 1.5;
 
-            moneyearned += patronbonus;
-          }
-          if (userdata.patreon && userdata.patreon.tier == 3) {
-            let patronbonus = moneyearned * 2;
+          moneyearned += patronbonus;
+        }
+        if (userdata.patreon && userdata.patreon.tier == 3) {
+          let patronbonus = moneyearned * 2;
 
-            moneyearned += patronbonus;
-          }
-          if (userdata.patreon && userdata.patreon.tier == 4) {
-            let patronbonus = moneyearned * 4;
+          moneyearned += patronbonus;
+        }
+        if (userdata.patreon && userdata.patreon.tier == 4) {
+          let patronbonus = moneyearned * 4;
 
-            moneyearned += patronbonus;
-          }
-          let newnum = (sqlevelfiltered[0].car += 1);
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
+          moneyearned += patronbonus;
+        }
+        let newnum = (sqlevelfiltered[0].car += 1);
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "squads.$[squad].car": newnum,
             },
-            {
-              $set: {
-                "squads.$[squad].car": newnum,
+          },
+
+          {
+            arrayFilters: [
+              {
+                "squad.name": squadinfo.Name.toLowerCase(),
               },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "squad.name": squadinfo.Name.toLowerCase(),
-                },
-              ],
-            }
-          );
-
-          let earningsresult = [];
-          earningsresult.push(`$${moneyearned}`);
-
-          userdata.cash += parseInt(moneyearned);
-          userdata.update();
-          let newlevel = sqlevels.filter(
-            (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
-          );
-          if (newlevel[0].car > 4) {
-            userdata.tier += 1;
+            ],
           }
-          userdata.update();
+        );
 
-          embed.addFields([
-            {
-              name: "Earnings",
-              value: `${cemote} ${earningsresult.join("\n")}`,
-            },
-          ]);
+        let earningsresult = [];
+        earningsresult.push(`$${moneyearned}`);
 
-          interaction.editReply({ embeds: [embed] });
+        userdata.cash += parseInt(moneyearned);
+        userdata.update();
+        let newlevel = sqlevels.filter(
+          (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
+        );
+        if (newlevel[0].car > 4) {
+          userdata.tier += 1;
+        }
+        userdata.update();
 
-          if (range > 0) {
-            selected.Range -= 1;
-          }
+        embed.addFields([
+          {
+            name: "Earnings",
+            value: `${cemote} ${earningsresult.join("\n")}`,
+          },
+        ]);
 
-          userdata.save();
-          clearInterval(i2);
-        } else  if(tracklength2 <= 0){
-          let moneye = moneyearned / 5;
-          embed.setTitle(`Race lost!`);
+        interaction.editReply({ embeds: [embed] });
 
-          embed.addFields([
-            {
-              name: "Earnings",
-              value: `${cemote} $${moneye}`,
-            },
-          ]);
-          userdata.cash += Number(moneye);
-
-          clearInterval(i2);
-          if (range > 0) {
-            selected.Range -= 1;
-          }
-          userdata.save();
-          interaction.editReply({ embeds: [embed] });
-          return;
+        if (range > 0) {
+          selected.Range -= 1;
         }
 
-        console.log(tracklength)
-        console.log(tracklength2)
-      
+        userdata.save();
+        clearInterval(i2);
+      } else if (tracklength2 <= 0) {
+        let moneye = moneyearned / 5;
+        embed.setTitle(`Race lost!`);
+
+        embed.addFields([
+          {
+            name: "Earnings",
+            value: `${cemote} $${moneye}`,
+          },
+        ]);
+        userdata.cash += Number(moneye);
+
+        clearInterval(i2);
+        if (range > 0) {
+          selected.Range -= 1;
+        }
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+        return;
+      }
+
+      console.log(tracklength);
+      console.log(tracklength2);
     }, 1000);
   },
 };
