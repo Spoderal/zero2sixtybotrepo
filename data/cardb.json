@@ -4203,6 +4203,22 @@
       "Class": "B",
       "Weight": 3000
     },
+    "2021 lotus evora gt": {
+      "alias": "2021 evora gt",
+      "Name": "2021 Lotus Evora GT",
+      "Emote": "<:lotus:931011548317642814>",
+      "kmh": 201,
+      "Speed": 180,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "3.5 L V6",
+      "Image": "https://images.hgmsites.net/hug/2021-lotus-evora-gt_100805725_h.jpg",
+      "0-60": 9.8,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "B",
+      "Weight": 2900
+    },
     "2009 volkswagen golf gti": {
       "alias": "2009 golf gti",
       "Name": "2009 Volkswagen Golf GTI",
