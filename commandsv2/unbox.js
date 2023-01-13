@@ -162,6 +162,7 @@ module.exports = {
         await interaction.reply(
           "You already own this car, so you got $500k instead."
         );
+        userdata.save()
         return;
       }
 
@@ -198,6 +199,8 @@ module.exports = {
         await interaction.reply(
           "You already own this car, so you got $3k instead."
         );
+        
+        userdata.save()
         return;
       }
 

@@ -24,7 +24,7 @@
       "AddedSpeed": "1",
       "sellprice": 1350,
       "Price": 3500,
-      "Emote": "<:clutch1:934333313970241566>",
+      "Emote": "<:clutch1:1063291889282990171>",
       "Tier": "1",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
@@ -32,7 +32,8 @@
       "Type": "clutch",
       "AddedHandling": 10,
       "DecreasedSpeed": "0",
-      "AddHandling": "3"
+      "AddHandling": "3",
+      "Image":"https://i.ibb.co/6nVJ6fc/clutch1.png"
     },
     "t2clutch": {
       "Name": "T2Clutch",
@@ -41,7 +42,7 @@
       "AddedSpeed": "1",
       "sellprice": 5250,
       "Price": 7000,
-      "Emote": "<:clutch2:963300407789125662>",
+      "Emote": "<:clutch2:1063291891644370985>",
       "Tier": "2",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
@@ -49,7 +50,8 @@
       "Type": "clutch",
       "AddedHandling": 15,
       "DecreasedSpeed": "0",
-      "AddHandling": "15"
+      "AddHandling": "15",
+      "Image":"https://i.ibb.co/pJFC2dJ/clutch2.png"
     },
     "t3clutch": {
       "Name": "T3Clutch",
@@ -58,7 +60,7 @@
       "AddedSpeed": "2",
       "sellprice": 1350,
       "Price": 8000,
-      "Emote": "<:clutch3:965039095774576710>",
+      "Emote": "<:t3clutch:1063291086317027419>",
       "Tier": "3",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
@@ -66,7 +68,8 @@
       "Type": "clutch",
       "AddedHandling": 25,
       "DecreasedSpeed": "0",
-      "AddHandling": "25"
+      "AddHandling": "25",
+      "Image":"https://i.ibb.co/TRp102m/t3clutch.png"
     },
     "t4clutch": {
       "Name": "T4Clutch",
@@ -75,7 +78,7 @@
       "AddedSpeed": "3",
       "sellprice": 0,
       "Price": 0,
-      "Emote": "<:clutch4:965039095728439296>",
+      "Emote": "<:t4clutch:1063291084039532615>",
       "Tier": "4",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
@@ -83,7 +86,8 @@
       "Type": "clutch",
       "AddedHandling": 30,
       "DecreasedSpeed": "0",
-      "AddHandling": "30"
+      "AddHandling": "30",
+      "Image":"https://i.ibb.co/d7rNWfD/t4clutch.png"
     },
     "t5clutch": {
       "Name": "T5Clutch",
@@ -92,7 +96,7 @@
       "AddedSpeed": "5",
       "sellprice": 0,
       "Price": 0,
-      "Emote": "<:clutch5:965039095476801608>",
+      "Emote": "<:t5clutch:1063291797037662218>",
       "Tier": "5",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
@@ -100,7 +104,8 @@
       "Type": "clutch",
       "AddedHandling": 50,
       "DecreasedSpeed": "0",
-      "AddHandling": "50"
+      "AddHandling": "50",
+      "Image":"https://i.ibb.co/MP4zKZc/t5clutch.png"
     },
     "txclutch": {
       "Name": "TXClutch",

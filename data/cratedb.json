@@ -1,6 +1,6 @@
 {
   "Crates": {
-    "common": {
+    "common crate": {
       "Contents": [
         "green helmet",
         "red helmet",
@@ -9,13 +9,14 @@
         "5000 Cash",
         "2500 Cash",
         "2500 Cash",
-        "2500 Cash"
+        "2500 Cash",
+        "spark plug"
       ],
-      "Name": "Common",
+      "Name": "Common Crate",
       "Emote": "<:supplydrop:1044404467119960085>",
       "Image": "https://i.ibb.co/dQ2D2yT/supplydrop.png"
     },
-    "rare": {
+    "rare crate": {
       "Contents": [
         "flame helmet",
         "purple helmet",
@@ -26,13 +27,14 @@
         "10000 Cash",
         "t3clutch",
         "15000 Cash",
-        "t3tires"
+        "t3tires",
+        "accelerator"
       ],
-      "Name": "Rare",
+      "Name": "Rare Crate",
       "Emote": "<:supplydroprare:1044404466096537731>",
       "Image": "https://i.ibb.co/r4QY55b/supplydroprare.png"
     },
-    "prestige": {
+    "prestige crate": {
       "Contents": [
         "100000 Cash",
         "dark mode helmet",
@@ -45,10 +47,10 @@
         "t5clutch",
         "t5exhaust",
         "25000 Cash"
-      ]
-    },
-    "Name": "Prestige",
-    "Emote": "<:supplydropprestige:1044404462581719041>",
-    "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
+      ],
+      "Name": "Prestige Crate",
+      "Emote": "<:supplydropprestige:1044404462581719041>",
+      "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
+    }
   }
 }

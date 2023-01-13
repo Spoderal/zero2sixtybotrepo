@@ -5,12 +5,12 @@
   },
   "accelerator": {
     "Title": "Accelerator",
-    "Achieve": "Seasonal Crate",
+    "Achieve": "Crate",
     "Crate": true
   },
   "spark plug": {
     "Title": "Spark Plug",
-    "Achieve": "Seasonal Crate",
+    "Achieve": "Crate",
     "Crate": true
   }
 }

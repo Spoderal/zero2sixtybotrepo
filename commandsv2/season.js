@@ -240,7 +240,9 @@ module.exports = {
             userdata.cmaps += amount;
             userdata.winterrewards += 1;
           } else if (item.Item.endsWith("Helmet")) {
-            userdata.pfps.push(item.Item.toLowerCase());
+            let helm = item.Item.toLowerCase();
+            userdata.pfps.push(helm);
+            userdata.winterrewards += 1;
           } else if (
             item.Item.endsWith("Legendary Barn Map") ||
             item.Item.endsWith("Legendary Barn Maps")

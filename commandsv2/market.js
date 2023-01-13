@@ -145,8 +145,9 @@ module.exports = {
           user: interaction.user,
           type: "parts",
         };
-
-        userdata.parts.pull(item, amount);
+        let userparts = userdata.parts
+        for (var i = 0; i < amount; i++) userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
+      userdata.parts = userparts;
       } else if (itemdb.Other[item.toLowerCase()]) {
         obj = {
           item: itemdb.Other[item.toLowerCase()].Name.toLowerCase(),

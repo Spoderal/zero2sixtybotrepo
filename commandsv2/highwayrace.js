@@ -135,6 +135,7 @@ module.exports = {
     const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
     const vsimg = await loadImage("https://i.ibb.co/CvTKrv4/vshw.png");
     let cashwon = parseInt(bot) * 150;
+    let wheelspinswon = parseInt(bot) * 1
     let lockpicks;
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
@@ -291,9 +292,12 @@ module.exports = {
         let earnings = [];
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
         earnings.push(`${emotes.lockpicks} +${toCurrency(lockpicks)}`);
+        earnings.push(`${emotes.wheelSpin} +${wheelspinswon}`)
 
         userdata.cash += cashwon;
         userdata.lockpicks += lockpicks;
+        userdata.wheelspins += wheelspinswon
+      
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Street Race won!`);
         embed.setImage(`attachment://profile-image.png`);

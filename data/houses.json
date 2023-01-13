@@ -53,5 +53,16 @@
     "Type": "House",
     "Space": 5,
     "Prestige": 7
+  },
+  "casa della pace": {
+    "id": "pace",
+    "Name": "Casa Della Pace",
+    "Price": 1000000,
+    "Perk": "Earn 2x RP per race",
+    "Image": "https://www.designboom.com/wp-content/uploads/2013/08/studio-gaon-peaceful-house-on-the-hill-geochang-designboom-01.jpg",
+    "Emote": "🏠",
+    "Type": "House",
+    "Space": 3,
+    "Prestige": 2
   }
 }

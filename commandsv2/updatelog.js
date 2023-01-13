@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "12/15/2022",
+            label: "1/12/2022",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -73,13 +73,19 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• Christmas event! Check \`/events\`\n
-                 • Garage bug fixes, parts now show in quantities.\n
-                 • New barn finds and imports! Check \`/dealer\`\n
-                 • McLaren event! Check \`/events\`
+                `• Season reward 21 bug fixed\n
+                • Unboxing glitch where it didn't give you the cash if you had the car fixed.\n
+                • Items not displaying in garage fixed\n
+                • McLaren keys fixed\n
+                • Market listing bugs fixed\n
+                • Hoonigan event\n
+                • Wheelspins added to highway race rewards\n
+                • Bunch of new cars\n
+                • New house
+
                 `
               )
-              .setFooter({ text: "11/10/2022" })
+              .setFooter({ text: "1/12/2022" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

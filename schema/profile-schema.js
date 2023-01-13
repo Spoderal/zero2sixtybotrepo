@@ -344,6 +344,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  titles: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   settings: {
     type: Object,
     required: false,

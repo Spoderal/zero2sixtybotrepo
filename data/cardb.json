@@ -246,7 +246,7 @@
       "Price": 500,
       "sellprice": 375,
       "Engine": "1.6 L 4-cylinder",
-      "Image": "https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/800x450/format/jpg/quality/85/https://s.aolcdn.com/os/ab/_cms/2020/07/20193336/1999-Honda-Civic-Si-front-341.jpg",
+      "Image": "https://file.kelleybluebookimages.com/kbb/base/house/1997/1997-Acura-Integra-FrontSide_ACINTGSRCPE974_506x371.jpg",
       "Rear": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-si-vs-1999-honda-civic-si-112-1567109120.jpg?crop=1xw:1xh;center,top&resize=480:*",
       "0-60": 14,
       "Drift": 0,
@@ -264,8 +264,7 @@
       "Price": 500,
       "sellprice": 375,
       "Engine": "1.8 L 4-cylinder",
-      "Image": "https://bringatrailer.com/wp-content/uploads/2020/08/1610507134f66e7dff9f98764daT_R50447_PC_rev1-scaled.jpg?fit=940%2C627",
-      "Rear": "https://barrettjacksoncdn.azureedge.net/staging/carlist/items/Fullsize/Cars/222422/222422_Rear_3-4_Web.jpg",
+      "Image": "https://file.kelleybluebookimages.com/kbb/base/house/1997/1997-Acura-Integra-FrontSide_ACINTGSRCPE974_506x371.jpg",
       "0-60": 13,
       "Drift": 0,
       "Handling": 500,
@@ -273,6 +272,25 @@
       "Class": "D",
       "Weight": 2500
     },
+    "1997 acura integra type r": {
+      "alias": "1997 integra type r",
+      "Name": "1997 Acura Integra Type R",
+      "Emote": "<:acura:931012624164978728>",
+      "Speed": 160,
+      "kmh": 209,
+      "Price": 0,
+      "sellprice": 375,
+      "Engine": "1.8 L 4-cylinder",
+      "Image": "https://bringatrailer.com/wp-content/uploads/2021/09/1997_acura_integra-type-r_431A3106-scaled.jpg?fit=940%2C627",
+      "0-60": 11,
+      "Drift": 0,
+      "Handling": 500,
+      "Starter": true,
+      "Class": "D",
+      "Weight": 2400,
+      "Obtained":"Rare Barn Find"
+    },
+    
     "jons 1997 acura integra": {
       "alias": "jons 1997 integra",
       "Name": "Jons 1997 Acura Integra",
@@ -4217,7 +4235,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 2900
+      "Weight": 2900,
+      "Obtained":"Rare Garage"
     },
     "2009 volkswagen golf gti": {
       "alias": "2009 golf gti",
@@ -4234,6 +4253,23 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 3100
+    },
+    "2015 volkswagen golf gti": {
+      "alias": "2015 golf gti",
+      "Name": "2015 Volkswagen Golf GTI",
+      "Emote": "<:vw:931011548372168714>",
+      "kmh": 201,
+      "Speed": 145,
+      "Price": 0,
+      "sellprice": 5250,
+      "Engine": "1.4 L I4",
+      "Image": "https://www.gannett-cdn.com/-mm-/91c3cdb8e8b5b8231315e615331aeed132eb062b/c=0-405-3949-2636/local/-/media/Indianapolis/Indianapolis/2014/12/03/635532041205916420-2015-golf-gti-4213.jpg",
+      "0-60": 11,
+      "Drift": 2,
+      "Handling": 500,
+      "Class": "D",
+      "Weight": 2900,
+      "Obtained":"Rare Garage"
     },
     "madisons 2015 lotus exige sport": {
       "alias": "madisons 2015 exige s",
@@ -5197,6 +5233,23 @@
       "Class": "B",
       "Weight": 3800
     },
+    "2018 audi rs5": {
+      "alias": "2018 rs5",
+      "Name": "2018 Audi RS5",
+      "Emote": "<:audi:931011548758048828>",
+      "Speed": 178,
+      "Price": 0,
+      "sellprice": 32625,
+      "Engine": "4.2 L V8",
+      "Image": "https://cdn.motor1.com/images/mgl/m9oWe/s1/2018-audi-rs5-coupe-first-drive.jpg",
+      "0-60": 10,
+      "Drift": 1,
+      "Handling": 500,
+      "Class": "B",
+      "Weight": 3200,
+      "Obtained":"Wheelspin"
+    },
+ 
     "2016 bentley continental gt speed": {
       "alias": "2016 continental gt",
       "Name": "2016 Bentley Continental GT Speed",
@@ -6019,6 +6072,22 @@
       "Class": "D",
       "Weight": 3500
     },
+    "2018 infiniti q60": {
+      "alias": "2007 q60",
+      "Name": "2007 Infiniti Q60",
+      "Emote": "<:infiniti:933637817370824724>",
+      "Speed": 160,
+      "kmh": 209,
+      "Price": 65000,
+      "sellprice": 3937,
+      "Engine": "3.5 L V6",
+      "Image": "https://cdn.motor1.com/images/mgl/PRXvW/s1/2018-infiniti-q60s-review.jpg",
+      "0-60": 11.5,
+      "Drift": 1,
+      "Handling": 500,
+      "Class": "C",
+      "Weight": 4000
+    },
     "2005 hyundai tiburon": {
       "alias": "2005 tiburon",
       "Name": "2005 Hyundai Tiburon",
@@ -6130,6 +6199,54 @@
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 4700
+    },
+    "1991 hoonigan porsche 911 turbo": {
+      "alias": "1991 h 911 turbo",
+      "Name": "1991 Hoonigan Porsche 911 Turbo",
+      "Emote": "<:porsche:931011550880338011>",
+      "Speed": 190,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "4.0 L V8",
+      "Image": "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/wp-content/uploads/2011/11/Rauh-Welt-Hoonigan-1991-Porsche-911-Turbo-2-626x398.jpg?fill=2:1&resize=640:*",
+      "0-60": 8.4,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Exotic Imports (LIMITED)",
+      "Class": "B",
+      "Weight": 3000
+    },
+    "1965 hoonigan ford mustang hoonicorn": {
+      "alias": "1965 mustang hoonicorn",
+      "Name": "1965 Hoonigan Ford Mustang Hoonicorn",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 200,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "4.0 L V8",
+      "Image": "https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/800x450/format/jpg/quality/85/http://o.aolcdn.com/hss/storage/midas/12f10d33d00d4848eb06a71eda0d5ee3/201039660/ken-block-hoonicorn-mustang.jpg",
+      "0-60": 9,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Exotic Imports (LIMITED)",
+      "Class": "B",
+      "Weight": 3500
+    },
+    "1978 hoonigan ford escort mk2 rs1800": {
+      "alias": "1978 hoonigan mk2",
+      "Name": "1978 Hoonigan Ford Escort Mk2 RS1800",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 180,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "4.0 L V8",
+      "Image": "https://images.hgmsites.net/lrg/ford_100531436_l.jpg",
+      "0-60": 8.5,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Exotic Imports (LIMITED)",
+      "Class": "B",
+      "Weight": 3100
     },
     "lukes 2000 honda civic type r": {
       "alias": "lukes 2000 civic type r",
