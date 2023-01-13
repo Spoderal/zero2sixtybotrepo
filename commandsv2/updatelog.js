@@ -78,7 +78,7 @@ module.exports = {
                 • Items not displaying in garage fixed\n
                 • McLaren keys fixed\n
                 • Market listing bugs fixed\n
-                • Hoonigan event\n
+                • Hoonigan limited exotic imports\n
                 • Wheelspins added to highway race rewards\n
                 • Bunch of new cars\n
                 • New house\n
