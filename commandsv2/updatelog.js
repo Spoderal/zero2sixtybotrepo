@@ -81,7 +81,8 @@ module.exports = {
                 • Hoonigan event\n
                 • Wheelspins added to highway race rewards\n
                 • Bunch of new cars\n
-                • New house
+                • New house\n
+                • Crates revamp
 
                 `
               )
