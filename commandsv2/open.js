@@ -4,9 +4,9 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const titledb = require("../data/titles.json")
+const titledb = require("../data/titles.json");
 const { createCanvas, loadImage } = require("canvas");
-const partdb = require("../data/partsdb.json")
+const partdb = require("../data/partsdb.json");
 
 const ms = require("ms");
 const Cooldowns = require("../schema/cooldowns");
@@ -32,23 +32,23 @@ module.exports = {
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let cooldowndata = (await Cooldowns.findOne({ id: interaction.user.id })) ||  new Cooldowns({ id: interaction.user.id });
+    let cooldowndata =
+      (await Cooldowns.findOne({ id: interaction.user.id })) ||
+      new Cooldowns({ id: interaction.user.id });
     let bought = interaction.options.getString("crate");
     let inv = userdata.items;
-    let cooldown = 10000
-    let cratecool = cooldowndata.crate
+    let cooldown = 10000;
+    let cratecool = cooldowndata.crate;
     if (cratecool !== null && cooldown - (Date.now() - cratecool) > 0) {
       let time = ms(cooldown - (Date.now() - cratecool));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(
-          `Please wait ${time} before opening another crate.`
-        );
+        .setDescription(`Please wait ${time} before opening another crate.`);
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
       return;
-    } 
+    }
     let boughtindb = crates.Crates[bought.toLowerCase()];
-    console.log(boughtindb)
+    console.log(boughtindb);
 
     if (!inv.includes(bought))
       return interaction.reply(
@@ -61,11 +61,11 @@ module.exports = {
 
     interaction.reply({ embeds: [embed] });
     for (var c = 0; c < 1; c++)
-    inv.splice(inv.indexOf(bought.toLowerCase()), 1);
-  userdata.items = inv;
-  userdata.update()
-  cooldowndata.crate = Date.now()
-  cooldowndata.save()
+      inv.splice(inv.indexOf(bought.toLowerCase()), 1);
+    userdata.items = inv;
+    userdata.update();
+    cooldowndata.crate = Date.now();
+    cooldowndata.save();
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage("https://i.ibb.co/6WwF0gJ/crateunbox.png");
@@ -97,7 +97,7 @@ module.exports = {
 
         ctx.drawImage(loadedhelm, 150, 200, 150, 150);
         ctx.save();
-        userdata.pfps.push(name1.toLowerCase())
+        userdata.pfps.push(name1.toLowerCase());
       }
       if (pfps.Pfps[reward2]) {
         let helmetimg = pfps.Pfps[reward2].Image;
@@ -106,7 +106,7 @@ module.exports = {
 
         ctx.drawImage(loadedhelm, 570, 200, 150, 150);
         ctx.save();
-        userdata.pfps.push(name2.toLowerCase())
+        userdata.pfps.push(name2.toLowerCase());
       }
       if (pfps.Pfps[reward3]) {
         let helmetimg = pfps.Pfps[reward3].Image;
@@ -115,7 +115,7 @@ module.exports = {
 
         ctx.drawImage(loadedhelm, 970, 200, 150, 150);
         ctx.save();
-        userdata.pfps.push(name3.toLowerCase())
+        userdata.pfps.push(name3.toLowerCase());
       }
 
       ctx.restore();
@@ -127,36 +127,34 @@ module.exports = {
         let amount = Number(reward1.split(" ")[0]);
         name1 = `${amount} Cash`;
         ctx.drawImage(imageload, 150, 200, 150, 150);
-        userdata.cash += amount
+        userdata.cash += amount;
       }
 
       if (reward2.endsWith(`Cash`)) {
         let amount2 = Number(reward2.split(" ")[0]);
         name2 = `${amount2} Cash`;
         ctx.drawImage(imageload, 570, 200, 150, 150);
-        userdata.cash += amount2
+        userdata.cash += amount2;
       }
 
       if (reward3.endsWith(`Cash`)) {
         let amount3 = Number(reward3.split(" ")[0]);
         name3 = `${amount3} Cash`;
         ctx.drawImage(imageload, 970, 200, 150, 150);
-        userdata.cash += amount3
+        userdata.cash += amount3;
       }
-
-
 
       if (titledb[reward1]) {
         name1 = titledb[reward1].Name;
-        userdata.titles.push(name1.toLowerCase())
+        userdata.titles.push(name1.toLowerCase());
       }
       if (titledb[reward2]) {
         name2 = titledb[reward2].Name;
-        userdata.titles.push(name2.toLowerCase())
+        userdata.titles.push(name2.toLowerCase());
       }
       if (titledb[reward3]) {
         name3 = titledb[reward3].Name;
-        userdata.titles.push(name3.toLowerCase())
+        userdata.titles.push(name3.toLowerCase());
       }
 
       if (partdb.Parts[reward1]) {
@@ -166,7 +164,7 @@ module.exports = {
 
         ctx.drawImage(loadedpart, 150, 200, 150, 150);
         ctx.save();
-        userdata.parts.push(name1.toLowerCase())
+        userdata.parts.push(name1.toLowerCase());
       }
       if (partdb.Parts[reward2]) {
         let partimg = partdb.Parts[reward2].Image;
@@ -175,7 +173,7 @@ module.exports = {
 
         ctx.drawImage(loadedpart, 570, 200, 150, 150);
         ctx.save();
-        userdata.parts.push(name2.toLowerCase())
+        userdata.parts.push(name2.toLowerCase());
       }
       if (partdb.Parts[reward3]) {
         let partimg = partdb.Parts[reward3].Image;
@@ -184,10 +182,10 @@ module.exports = {
 
         ctx.drawImage(loadedpart, 970, 200, 150, 150);
         ctx.save();
-        userdata.parts.push(name3.toLowerCase())
+        userdata.parts.push(name3.toLowerCase());
       }
 
-      userdata.save()
+      userdata.save();
       ctx.fillText(name1, 100, 565);
       ctx.fillText(name2, 520, 565);
       ctx.fillText(name3, 920, 565);
@@ -198,7 +196,6 @@ module.exports = {
       embed.setImage(`attachment://profile-image.png`);
       console.log(rewards);
       await interaction.editReply({ embeds: [embed], files: [attachment] });
-      
     }, 5000);
   },
 };

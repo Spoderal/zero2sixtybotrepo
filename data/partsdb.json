@@ -33,7 +33,7 @@
       "AddedHandling": 10,
       "DecreasedSpeed": "0",
       "AddHandling": "3",
-      "Image":"https://i.ibb.co/6nVJ6fc/clutch1.png"
+      "Image": "https://i.ibb.co/6nVJ6fc/clutch1.png"
     },
     "t2clutch": {
       "Name": "T2Clutch",
@@ -51,7 +51,7 @@
       "AddedHandling": 15,
       "DecreasedSpeed": "0",
       "AddHandling": "15",
-      "Image":"https://i.ibb.co/pJFC2dJ/clutch2.png"
+      "Image": "https://i.ibb.co/pJFC2dJ/clutch2.png"
     },
     "t3clutch": {
       "Name": "T3Clutch",
@@ -69,7 +69,7 @@
       "AddedHandling": 25,
       "DecreasedSpeed": "0",
       "AddHandling": "25",
-      "Image":"https://i.ibb.co/TRp102m/t3clutch.png"
+      "Image": "https://i.ibb.co/TRp102m/t3clutch.png"
     },
     "t4clutch": {
       "Name": "T4Clutch",
@@ -87,7 +87,7 @@
       "AddedHandling": 30,
       "DecreasedSpeed": "0",
       "AddHandling": "30",
-      "Image":"https://i.ibb.co/d7rNWfD/t4clutch.png"
+      "Image": "https://i.ibb.co/d7rNWfD/t4clutch.png"
     },
     "t5clutch": {
       "Name": "T5Clutch",
@@ -105,7 +105,7 @@
       "AddedHandling": 50,
       "DecreasedSpeed": "0",
       "AddHandling": "50",
-      "Image":"https://i.ibb.co/MP4zKZc/t5clutch.png"
+      "Image": "https://i.ibb.co/MP4zKZc/t5clutch.png"
     },
     "txclutch": {
       "Name": "TXClutch",

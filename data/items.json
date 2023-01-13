@@ -164,21 +164,21 @@
       "Type": "Non-Usable",
       "Emote": "<:item_toolbox:972207018045759549>"
     },
-    "common crate":{
+    "common crate": {
       "Price": 0,
       "Action": "Open a common crate to get cosmetics, cash, and more!",
       "Name": "Common Crate",
       "Type": "Non-Usable",
       "Emote": "<:supplydrop:1044404467119960085>"
     },
-    "rare crate":{
+    "rare crate": {
       "Price": 0,
       "Action": "Open a rare crate to get cosmetics, cash, and more!",
       "Name": "Rare Crate",
       "Type": "Non-Usable",
       "Emote": "<:supplydroprare:1044404466096537731>"
     },
-    "prestige crate":{
+    "prestige crate": {
       "Price": 0,
       "Action": "Open a prestige crate to get cosmetics, cash, and more!",
       "Name": "Prestige Crate",

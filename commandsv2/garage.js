@@ -5,7 +5,7 @@ const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes");
-const itemdb = require('../data/items.json')
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -180,10 +180,10 @@ module.exports = {
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(items)
+        console.log(items);
         for (let item in items) {
           item = items[item];
-          let itemindb = itemdb.Other[item.toLowerCase()]
+          let itemindb = itemdb.Other[item.toLowerCase()];
           displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
         }
         var list2 = displayitems;

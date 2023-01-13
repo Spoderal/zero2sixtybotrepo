@@ -288,9 +288,9 @@
       "Starter": true,
       "Class": "D",
       "Weight": 2400,
-      "Obtained":"Rare Barn Find"
+      "Obtained": "Rare Barn Find"
     },
-    
+
     "jons 1997 acura integra": {
       "alias": "jons 1997 integra",
       "Name": "Jons 1997 Acura Integra",
@@ -4236,7 +4236,7 @@
       "Handling": 500,
       "Class": "B",
       "Weight": 2900,
-      "Obtained":"Rare Garage"
+      "Obtained": "Rare Garage"
     },
     "2009 volkswagen golf gti": {
       "alias": "2009 golf gti",
@@ -4269,7 +4269,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 2900,
-      "Obtained":"Rare Garage"
+      "Obtained": "Rare Garage"
     },
     "madisons 2015 lotus exige sport": {
       "alias": "madisons 2015 exige s",
@@ -5247,9 +5247,9 @@
       "Handling": 500,
       "Class": "B",
       "Weight": 3200,
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
- 
+
     "2016 bentley continental gt speed": {
       "alias": "2016 continental gt",
       "Name": "2016 Bentley Continental GT Speed",
