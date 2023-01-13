@@ -141,7 +141,7 @@ module.exports = {
     const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
     const vsimg = await loadImage("https://i.ibb.co/jrPF08J/vsstreet.png");
     let cashwon = parseInt(bot) * 150;
-    let rpwon = parseInt(bot) * 2
+    let rpwon = parseInt(bot) * 2;
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
     } else if (bot == "2") {
@@ -305,15 +305,15 @@ module.exports = {
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
         earnings.push(`${emotes.rp} +${rpwon}`);
 
-        let carinlocal = cardb.Cars[selected.Name.toLowerCase()]
+        let carinlocal = cardb.Cars[selected.Name.toLowerCase()];
 
-        if(carinlocal.Emote == emotes.mclaren){
+        if (carinlocal.Emote == emotes.mclaren) {
           earnings.push(`${emotes.mclaren} +1`);
-          userdata.fkeys += 1
+          userdata.fkeys += 1;
         }
 
         userdata.cash += cashwon;
-        userdata.rp3 += rpwon
+        userdata.rp3 += rpwon;
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Street Race won!`);
         embed.setImage(`attachment://profile-image.png`);

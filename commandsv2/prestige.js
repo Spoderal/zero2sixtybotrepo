@@ -141,7 +141,7 @@ module.exports = {
     userdata.swheelspins += 1;
 
     let upgrade = prestigerank * 1000;
-    userdata.items.push("prestige crate")
+    userdata.items.push("prestige crate");
     userdata.banklimit += upgrade;
 
     userdata.save();
@@ -149,7 +149,9 @@ module.exports = {
     await interaction.reply(
       `Prestiged to rank ${
         userdata.prestige
-      }! Your bank limit is now increased by ${toCurrency(upgrade)}\n\n+1 <:supplydropprestige:1044404462581719041> Prestige Crate`
+      }! Your bank limit is now increased by ${toCurrency(
+        upgrade
+      )}\n\n+1 <:supplydropprestige:1044404462581719041> Prestige Crate`
     );
   },
 };

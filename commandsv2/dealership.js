@@ -34,7 +34,7 @@ module.exports = {
       cars.Cars["2018 infiniti q60"],
       cars.Cars["2018 audi rs5"],
       cars.Cars["1997 acura integra type r"],
-      cars.Cars["2015 volkswagen golf gti"]
+      cars.Cars["2015 volkswagen golf gti"],
     ];
 
     for (let c in cars.Cars) {
