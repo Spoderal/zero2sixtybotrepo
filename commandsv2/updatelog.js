@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "1/12/2022",
+            label: "1/12/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -31,7 +31,7 @@ module.exports = {
             emoji: "❄️",
           },
           {
-            label: "1/6/2022",
+            label: "1/6/2023",
             description: "Information for the recent overhaul!",
             value: "5_update",
             customId: "up5",
@@ -46,9 +46,9 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 12/15/2022\n
+            ⚙️ Latest Patch 1/13/2023\n
             ❄️ Winter Update 11/30/2022\n
-            🔃 Overhaul Update 1/6/2022
+            🔃 Overhaul Update 1/6/2023
         `);
 
     embed.setColor(colors.blue);
@@ -86,7 +86,7 @@ module.exports = {
 
                 `
               )
-              .setFooter({ text: "1/12/2022" })
+              .setFooter({ text: "1/13/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
