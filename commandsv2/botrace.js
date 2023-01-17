@@ -315,7 +315,7 @@ module.exports = {
 
         userdata.cash += cashwon;
         userdata.rp3 += rpwon;
-        userdata.racerank += 1
+        userdata.racerank += 1;
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Street Race won!`);
         embed.setImage(`attachment://profile-image.png`);

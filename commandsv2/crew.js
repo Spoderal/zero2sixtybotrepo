@@ -100,8 +100,8 @@ module.exports = {
         crew2.Rank2 = 1;
 
         globalModel.update();
-        globalModel.markModified("crews")
-        globalModel.save()
+        globalModel.markModified("crews");
+        globalModel.save();
       }
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
@@ -158,7 +158,8 @@ module.exports = {
 
           collector.on("collect", async (i) => {
             if (i.customId.includes("season")) {
-              crewseason = require("../data/seasons.json").Seasons.Crew1.Rewards;
+              crewseason = require("../data/seasons.json").Seasons.Crew1
+                .Rewards;
               let reward = [];
               redeemed = userdata.crewseason3;
               for (var w in crewseason) {
