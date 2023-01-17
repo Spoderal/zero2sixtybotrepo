@@ -100,6 +100,8 @@ module.exports = {
         crew2.Rank2 = 1;
 
         globalModel.update();
+        globalModel.markModified("crews")
+        globalModel.save()
       }
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
@@ -151,15 +153,14 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let redeemed = userdata.crewseason2;
+          let redeemed = userdata.crewseason3;
           let crewseason = require("../data/seasons.json").Seasons.Crew1;
 
           collector.on("collect", async (i) => {
             if (i.customId.includes("season")) {
-              crewseason = require("../data/seasons.json").Seasons.Crew1
-                .Rewards;
+              crewseason = require("../data/seasons.json").Seasons.Crew1.Rewards;
               let reward = [];
-              redeemed = userdata.crewseason2;
+              redeemed = userdata.crewseason3;
               for (var w in crewseason) {
                 let item = crewseason[w];
                 let required = item.Number;
@@ -212,11 +213,11 @@ module.exports = {
               if (item.Item.endsWith("Cash")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.cash += Number(amount);
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (item.Item.endsWith("Notoriety")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.notofall += Number(amount);
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (
                 item.Item.endsWith("Legendary Barn Maps") ||
                 item.Item.endsWith("Legendary Barn Map")
@@ -224,11 +225,11 @@ module.exports = {
                 let amount = item.Item.split(" ")[0];
                 userdata.lmaps += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (item.Item.endsWith("Bank Increase")) {
                 userdata.items.push("bank increase");
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (
                 item.Item.endsWith("Super wheelspin") ||
                 item.Item.endsWith("Super wheelspins")
@@ -236,17 +237,17 @@ module.exports = {
                 let amount = item.Item.split(" ")[0];
                 userdata.swheelspins += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (item.Item.endsWith("Common Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.ckeys += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (item.Item.endsWith("Drift Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.dkeys += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (
                 item.Item.endsWith("Garage Space") ||
                 item.Item.endsWith("Garage Spaces")
@@ -256,21 +257,21 @@ module.exports = {
 
                 userdata.garagelimit += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (item.Item.endsWith("Rare Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.rkeys += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (item.Item.endsWith("Exotic Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.ekeys += Number(amount);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (partdb.Parts[item.Item.toLowerCase()]) {
                 userdata.parts.push(item.Item.toLowerCase());
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               } else if (cardb.Cars[item.Item.toLowerCase()]) {
                 let cartogive = cardb.Cars[item.Item.toLowerCase()];
                 let carindb = cartogive;
@@ -287,7 +288,7 @@ module.exports = {
                 };
                 userdata.cars.push(carobj);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
               }
               userdata.save();
               row = new ActionRowBuilder().addComponents(

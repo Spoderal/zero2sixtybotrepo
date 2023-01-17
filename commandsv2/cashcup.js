@@ -285,6 +285,7 @@ module.exports = {
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
 
         userdata.cash += cashwon;
+        userdata.cashcuptier += 1
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race won!`);
         embed.setImage(`attachment://profile-image.png`);
@@ -300,6 +301,7 @@ module.exports = {
         });
         embed.setImage(`attachment://profile-image.png`);
 
+        userdata.cashcuptier -= 1
         embed.setTitle(`Tier ${newcashcuptier} Cash Cup Race lost!`);
         await interaction.editReply({ embeds: [embed], files: [attachment] });
         clearInterval(i2);

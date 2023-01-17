@@ -335,6 +335,8 @@ module.exports = {
           earnings.push(`${emotes.ekey} +${ekeys}`);
           userdata.ekeys += ekeys;
         }
+        
+        userdata.racerank += 1
         userdata.cash += cashwon;
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} ${lengthname} won!`);
