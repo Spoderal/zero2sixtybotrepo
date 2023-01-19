@@ -153,7 +153,7 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let redeemed = userdata.crewseason2 || 0
+          let redeemed = userdata.crewseason2 || 0;
           let crewseason = require("../data/seasons.json").Seasons.Crew1;
 
           collector.on("collect", async (i) => {
@@ -215,7 +215,7 @@ module.exports = {
                 let amount = item.Item.split(" ")[0];
                 userdata.cash += Number(amount);
                 userdata.crewseason2 += 1;
-                console.log("done")
+                console.log("done");
                 userdata.save();
               } else if (item.Item.endsWith("Notoriety")) {
                 let amount = item.Item.split(" ")[0];
@@ -303,7 +303,7 @@ module.exports = {
                 userdata.crewseason2 += 1;
                 userdata.save();
               }
-             
+
               row = new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
                   .setCustomId("season")
