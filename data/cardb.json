@@ -4386,6 +4386,7 @@
       "Handling": 500,
       "Weight": 3100
     },
+
     "2021 lexus rc f": {
       "alias": "2021 rc f",
       "Name": "2021 Lexus RC F",
@@ -5264,6 +5265,70 @@
       "Handling": 500,
       "Class": "A",
       "Weight": 5000
+    },
+    "2021 bentley continental gt": {
+      "alias": "2021 continental gt",
+      "Name": "2021 Bentley Continental GT",
+      "Emote": "<:bently:979618638539669505>",
+      "Speed": 202,
+      "Price": 250000,
+      "sellprice": 32625,
+      "Engine": " 6.0 L V12",
+      "Image": "https://vossenwheels.com/wp-content/uploads/2021/03/Bentley-Continental-GT-Urban-Automotive-x-Vossen-UV-1-%C2%A9-Vossen-Wheels-2021-208.jpg",
+      "0-60": 7.9,
+      "Drift": 1,
+      "Handling": 700,
+      "Class": "A",
+      "Weight": 4700,
+      "Stock":50
+    },
+    "2023 honda civic type r": {
+      "alias": "2023 civic type r",
+      "Name": "2023 Honda Civic Type R",
+      "Emote": "<:honda:931011549705957397>",
+      "Speed": 165,
+      "Price": 67000,
+      "sellprice": 14625,
+      "Engine": "2.0 L 4-cylinder",
+      "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/img-7295-10-1666813703.jpg",
+      "0-60": 11.5,
+      "Drift": 2,
+      "Handling": 600,
+      "Weight": 3100,
+      "Stock":100,
+      "Class":"C"
+    },
+    "1990 mercedes 190e": {
+      "alias": "1990 190e",
+      "Name": "1990 Mercedes 190E",
+      "Emote": "<:mercedes_z:973000364410404924>",
+      "Speed": 155,
+      "Price": 50000,
+      "sellprice": 14625,
+      "Engine": "2.0 L 4-cylinder",
+      "Image": "https://www.motortrend.com/uploads/sites/11/2020/02/1990-Mercedes-Benz-190E-2.5-16-Evolution-II-Exterior-Front-3-4-1.jpg",
+      "0-60": 10.9,
+      "Drift": 0,
+      "Handling": 600,
+      "Weight": 3100,
+      "Stock":25,
+      "Class":"D"
+    },
+    "1987 ferrari f40 competizione": {
+      "alias": "1987 f40 c",
+      "Name": "1987 Ferrari F40 Competizione",
+      "Emote": "<:ferrari:931011838374727730>",
+      "Speed": 215,
+      "Price": 2000000,
+      "sellprice": 0,
+      "Engine": "2.9 L twin-turbocharged V8",
+      "Image": "https://www.topgear.com/sites/default/files/2022/08/1989-Ferrari-F40--Competizione-1282781_.jpg",
+      "0-60": 6.3,
+      "Drift": 0,
+      "Handling": 700,
+      "Class": "A",
+      "Weight": 2700,
+      "Stock":10
     },
     "1995 mclaren f1": {
       "alias": "1995 f1",

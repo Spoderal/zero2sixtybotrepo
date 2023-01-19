@@ -110,7 +110,7 @@ module.exports = {
       let richFiltered = userdata.achievements.filter(
         (achievement) => achievement.name == "Rich"
       );
-      if (richFiltered.length == 0) {
+      if (richFiltered.length == 0 && interaction.user.id == userdata.id) {
         console.log("none");
         userdata.achievements.push({
           name: "Rich",
@@ -123,7 +123,7 @@ module.exports = {
       let richFiltered2 = userdata.achievements.filter(
         (achievement) => achievement.name == "Richer"
       );
-      if (richFiltered2.length == 0) {
+      if (richFiltered2.length == 0  && interaction.user.id == userdata.id) {
         console.log("none");
         userdata.achievements.push({
           name: "Richer",
@@ -136,7 +136,7 @@ module.exports = {
       let richFiltered3 = userdata.achievements.filter(
         (achievement) => achievement.name == "Richest"
       );
-      if (richFiltered3.length == 0) {
+      if (richFiltered3.length == 0  && interaction.user.id == userdata.id) {
         console.log("none");
         userdata.achievements.push({
           name: "Richest",
@@ -150,7 +150,7 @@ module.exports = {
       if (
         richFiltered.length !== 0 &&
         cash >= 100000 &&
-        richFiltered[0].completed !== true
+        richFiltered[0].completed !== true  && interaction.user.id == userdata.id
       ) {
         interaction.followUp(
           `New achievement! <:achievement_rich:1031826566151409715> You received ${toCurrency(
@@ -166,7 +166,7 @@ module.exports = {
       if (
         richFiltered2.length !== 0 &&
         cash >= 1000000 &&
-        richFiltered2[0].completed !== true
+        richFiltered2[0].completed !== true  && interaction.user.id == userdata.id
       ) {
         interaction.followUp(
           `New achievement! <:achievement_richer:1031826565207707648> You received ${toCurrency(
@@ -181,7 +181,7 @@ module.exports = {
       if (
         richFiltered3.length !== 0 &&
         cash >= 1000000000 &&
-        richFiltered3[0].completed !== true
+        richFiltered3[0].completed !== true  && interaction.user.id == userdata.id
       ) {
         interaction.followUp(
           `New achievement! <:achievement_richest:1031826564050071603> You received ${toCurrency(

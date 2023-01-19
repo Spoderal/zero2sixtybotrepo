@@ -41,40 +41,99 @@ module.exports = {
       let car = cars.Cars[c];
 
       if (car.Class == "D" && car.Price > 0 && !car.Police) {
-        carclassDarr.push({
-          Name: car.Name,
-          Price: car.Price,
-          alias: car.alias,
-          icon: car.Emote,
-        });
-      } else if (car.Class == "C" && car.Price > 0 && !car.Police) {
-        carclassCarr.push({
-          Name: car.Name,
-          Price: car.Price,
-          alias: car.alias,
-          icon: car.Emote,
-        });
+
+        if(car.Stock){
+          carclassDarr.push({
+            Name: car.Name,
+            Price: car.Price,
+            alias: car.alias,
+            icon: car.Emote,
+            Stock: car.Stock
+          })
+        }
+          else {
+            carclassDarr.push({
+              Name: car.Name,
+              Price: car.Price,
+              alias: car.alias,
+              icon: car.Emote,
+            });
+          }
+        
+      } 
+      else if (car.Class == "C" && car.Price > 0 && !car.Police) {
+        if(car.Stock){
+          carclassCarr.push({
+            Name: car.Name,
+            Price: car.Price,
+            alias: car.alias,
+            icon: car.Emote,
+            Stock: car.Stock
+          })
+        }
+          else {
+            carclassCarr.push({
+              Name: car.Name,
+              Price: car.Price,
+              alias: car.alias,
+              icon: car.Emote,
+            });
+          }
       } else if (car.Class == "B" && car.Price > 0 && !car.Police) {
-        carclassBarr.push({
-          Name: car.Name,
-          Price: car.Price,
-          alias: car.alias,
-          icon: car.Emote,
-        });
+        if(car.Stock){
+          carclassBarr.push({
+            Name: car.Name,
+            Price: car.Price,
+            alias: car.alias,
+            icon: car.Emote,
+            Stock: car.Stock
+          })
+        }
+          else {
+            carclassBarr.push({
+              Name: car.Name,
+              Price: car.Price,
+              alias: car.alias,
+              icon: car.Emote,
+            });
+          }
       } else if (car.Class == "A" && car.Price > 0 && !car.Police) {
-        carclassAarr.push({
-          Name: car.Name,
-          Price: car.Price,
-          alias: car.alias,
-          icon: car.Emote,
-        });
+        if(car.Stock){
+          carclassAarr.push({
+            Name: car.Name,
+            Price: car.Price,
+            alias: car.alias,
+            icon: car.Emote,
+            Stock: car.Stock
+          })
+        }
+          else {
+            carclassAarr.push({
+              Name: car.Name,
+              Price: car.Price,
+              alias: car.alias,
+              icon: car.Emote,
+            });
+          }
+        
       } else if (car.Class == "S" && car.Price > 0 && !car.Police) {
-        carclassSarr.push({
-          Name: car.Name,
-          Price: car.Price,
-          alias: car.alias,
-          icon: car.Emote,
-        });
+        if(car.Stock){
+          carclassSarr.push({
+            Name: car.Name,
+            Price: car.Price,
+            alias: car.alias,
+            icon: car.Emote,
+            Stock: car.Stock
+          })
+        }
+          else {
+            carclassSarr.push({
+              Name: car.Name,
+              Price: car.Price,
+              alias: car.alias,
+              icon: car.Emote,
+            });
+          }
       }
     }
     carclassDarr = carclassDarr.sort((a, b) => {
@@ -205,11 +264,21 @@ module.exports = {
         for (let b in carclassDarr[0]) {
           let car = carclassDarr[0][b];
           console.dir(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+          if(car.Stock){
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nStock: ${car.Stock}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
         }
         await i.update({
           embeds: [embed],
@@ -248,11 +317,21 @@ module.exports = {
         for (let b in carclassCarr[0]) {
           let car = carclassCarr[0][b];
           console.dir(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+          if(car.Stock){
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nStock: ${car.Stock}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
         }
         await i.update({
           embeds: [embed],
@@ -291,11 +370,21 @@ module.exports = {
         for (let b in carclassBarr[0]) {
           let car = carclassBarr[0][b];
           console.dir(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+          if(car.Stock){
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nStock: ${car.Stock}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
         }
         await i.update({
           embeds: [embed],
@@ -334,11 +423,21 @@ module.exports = {
         for (let b in carclassAarr[0]) {
           let car = carclassAarr[0][b];
           console.dir(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+          if(car.Stock){
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nStock: ${car.Stock}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
         }
         await i.update({
           embeds: [embed],
@@ -376,11 +475,21 @@ module.exports = {
         for (let b in carclassSarr[0]) {
           let car = carclassSarr[0][b];
           console.dir(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+          if(car.Stock){
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nStock: ${car.Stock}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
         }
         await i.update({
           embeds: [embed],
@@ -444,11 +553,21 @@ module.exports = {
         for (let e in classpage[page - 1]) {
           let car = classpage[page - 1][e];
           console.log(car);
-          embed.addFields({
-            name: `${car.icon} ${car.Name}`,
-            value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
-            inline: true,
-          });
+          if(car.Stock){
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nStock: ${car.Stock}`,
+              inline: true,
+            });
+
+          }
+          else {
+            embed.addFields({
+              name: `${car.icon} ${car.Name}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              inline: true,
+            });
+          }
         }
 
         if (current !== page) {

@@ -434,7 +434,7 @@ module.exports = {
           }
           interaction.editReply({ embeds: [embed], components: [] });
           userdata.cash += Number(moneyearned);
-          userdata.rp2 += ticketsearned;
+          userdata.rp3 += ticketsearned;
           userdata.driftrank += 1;
           userdata.update();
 
