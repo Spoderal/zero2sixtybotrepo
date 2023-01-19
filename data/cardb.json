@@ -5280,7 +5280,7 @@
       "Handling": 700,
       "Class": "A",
       "Weight": 4700,
-      "Stock":50
+      "Stock": 50
     },
     "2023 honda civic type r": {
       "alias": "2023 civic type r",
@@ -5295,8 +5295,8 @@
       "Drift": 2,
       "Handling": 600,
       "Weight": 3100,
-      "Stock":100,
-      "Class":"C"
+      "Stock": 100,
+      "Class": "C"
     },
     "1990 mercedes 190e": {
       "alias": "1990 190e",
@@ -5311,8 +5311,8 @@
       "Drift": 0,
       "Handling": 600,
       "Weight": 3100,
-      "Stock":25,
-      "Class":"D"
+      "Stock": 25,
+      "Class": "D"
     },
     "1987 ferrari f40 competizione": {
       "alias": "1987 f40 c",
@@ -5328,7 +5328,7 @@
       "Handling": 700,
       "Class": "A",
       "Weight": 2700,
-      "Stock":10
+      "Stock": 10
     },
     "1995 mclaren f1": {
       "alias": "1995 f1",
