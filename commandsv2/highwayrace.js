@@ -298,7 +298,7 @@ module.exports = {
         userdata.lockpicks += lockpicks;
         userdata.wheelspins += wheelspinswon;
 
-        userdata.racerank += 1
+        userdata.racerank += 1;
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Street Race won!`);
         embed.setImage(`attachment://profile-image.png`);
