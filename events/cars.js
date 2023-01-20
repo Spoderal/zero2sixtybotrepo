@@ -36,7 +36,7 @@ async function carfix() {
             let gearbox = cars[car].Gearbox;
             let intercooler = cars[car].Intercooler;
             let spoiler = cars[car].Spoiler;
-
+            
             if (exhaust) {
               carspeed += parseInt(partdb.Parts[exhaust.toLowerCase()].AddedSpeed)
               let newacc =  caracc -= parseFloat(partdb.Parts[exhaust.toLowerCase()].AddedSixty);
@@ -157,8 +157,10 @@ async function carfix() {
       } catch (err) {
         console.log(err);
       }
+    
     }
   }
+  console.log("done")
 }
 
 module.exports = {
