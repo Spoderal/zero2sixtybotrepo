@@ -33,7 +33,7 @@ module.exports = {
   once: true,
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
- 
+
     crews(client);
     dailytasks(client);
     patron(client);
@@ -97,7 +97,7 @@ module.exports = {
       let randomstatus = lodash.sample(randomstatuses);
       client.user.setActivity(randomstatus);
     }, 20000);
-  
+
     updateItemShop();
 
     try {
