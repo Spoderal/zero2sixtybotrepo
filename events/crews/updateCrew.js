@@ -27,23 +27,22 @@ async function updateCrew(interaction) {
         let user = crewmembers[i];
         let rpdata = await User.findOne({ id: user });
         let userrp = rpdata.rp3;
-        console.log(userrp)
+        console.log(userrp);
         totalrp += userrp;
       }
-      console.log(totalrp)
+      console.log(totalrp);
       let requiredrp = crewrank * 1000;
       if (parseInt(totalrp) >= parseInt(requiredrp)) {
         let rank = crew2.Rank2;
 
         let newrank = (rank += 1);
 
-        crew2.Rank2 = newrank
-        console.log("ranked")
+        crew2.Rank2 = newrank;
+        console.log("ranked");
       }
-      
     }
     console.log(crew2);
-    global.markModified("crews")
+    global.markModified("crews");
     global.save();
   }
 }
