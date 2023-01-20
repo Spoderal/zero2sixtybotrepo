@@ -3,11 +3,16 @@ const cardb = require("../data/cardb.json");
 const partdb = require("../data/partsdb.json");
 
 async function carfix() {
-  let users = await User.find()
+  let users = await User.find();
 
   for (let u in users) {
     let userdata = users[u];
-    if ( userdata !== undefined && userdata !== null && userdata.id && userdata.id !== null ) {
+    if (
+      userdata !== undefined &&
+      userdata !== null &&
+      userdata.id &&
+      userdata.id !== null
+    ) {
       try {
         let udata = await User.findOne({ id: userdata.id });
         console.log(udata);
