@@ -14,7 +14,7 @@ const fs = require("fs");
 const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
-const cars = require("./cars").carfix
+const cars = require("./cars").carfix;
 
 let mongoConfig = {
   keepAlive: true,

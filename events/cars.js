@@ -1,9 +1,9 @@
 const User = require(`../schema/profile-schema`);
-const cardb = require('../data/cardb.json')
-const partdb = require("../data/partsdb.json")
+const cardb = require("../data/cardb.json");
+const partdb = require("../data/partsdb.json");
 
-async function carfix(){
-    let users = await User.findOne();
+async function carfix() {
+  let users = await User.findOne();
 
     for(let u in users){
         let userdata = users[u]
@@ -95,11 +95,12 @@ async function carfix(){
             }
                 
         }
-    }
+     
+      }
+    
+  
 }
 
-
 module.exports = {
-    carfix,
-  };
-  
+  carfix,
+};
