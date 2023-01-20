@@ -1346,7 +1346,7 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling":15
+      "AddHandling": 15
     },
     "t5racesuspension": {
       "Name": "T5RaceSuspension",
@@ -1490,7 +1490,7 @@
     "t3intake": {
       "Name": "T3Intake",
       "AddedSpeed": 4,
-      "AddedSixty":0.4,
+      "AddedSixty": 0.4,
       "sellprice": 4500,
       "AddedSnow": 0,
       "Price": 15000,
@@ -1506,7 +1506,7 @@
     "t4intake": {
       "Name": "T4Intake",
       "AddedSpeed": 6,
-      "AddedSixty":0.5,
+      "AddedSixty": 0.5,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1774,7 +1774,7 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":100
+      "DecreaseWeight": 100
     },
     "t2weightreduction": {
       "Name": "T2WeightReduction",
@@ -1791,7 +1791,7 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":200
+      "DecreaseWeight": 200
     },
     "t3weightreduction": {
       "Name": "T3WeightReduction",
@@ -1808,7 +1808,7 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":300
+      "DecreaseWeight": 300
     },
     "t4weightreduction": {
       "Name": "T4WeightReduction",
@@ -1825,7 +1825,7 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":400
+      "DecreaseWeight": 400
     },
     "t5weightreduction": {
       "Name": "T5WeightReduction",
@@ -1842,7 +1842,7 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":500
+      "DecreaseWeight": 500
     },
     "racesuspension": {
       "Name": "RaceSuspension",
@@ -2040,7 +2040,7 @@
       "DecreasedSixty": "0",
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":100
+      "DecreaseWeight": 100
     },
     "ls2": {
       "Name": "LS2",
@@ -2056,7 +2056,7 @@
       "DecreasedSixty": "0",
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "DecreaseWeight":100
+      "DecreaseWeight": 100
     },
     "ls3": {
       "Name": "LS3",
