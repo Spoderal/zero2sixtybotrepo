@@ -33,60 +33,60 @@ async function carfix() {
             let spoiler = cars[car].Spoiler;
 
             if (exhaust) {
-              carspeed += partdb.Parts[exhaust.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[exhaust.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[exhaust.toLowerCase()].AddedSixty
               );
             }
             if (intake) {
-              carspeed += partdb.Parts[intake.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[intake.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[intake.toLowerCase()].AddedSixty
               );
             }
             if (turbo) {
-              carspeed += partdb.Parts[turbo.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[turbo.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[turbo.toLowerCase()].AddedSixty
               );
             }
             if (suspension) {
-              carspeed += partdb.Parts[suspension.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[suspension.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[suspension.toLowerCase()].AddedSixty
               );
             }
             if (clutch) {
-              carspeed += partdb.Parts[clutch.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[clutch.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[clutch.toLowerCase()].AddedSixty
               );
             }
             if (ecu) {
-              carspeed += partdb.Parts[ecu.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[ecu.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(partdb.Parts[ecu.toLowerCase()].AddedSixty);
             }
             if (tires) {
-              carspeed += partdb.Parts[tires.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[tires.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[tires.toLowerCase()].AddedSixty
               );
             }
 
             if (gearbox) {
-              carspeed += partdb.Parts[gearbox.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[gearbox.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[gearbox.toLowerCase()].AddedSixty
               );
             }
             if (intercooler) {
-              carspeed += partdb.Parts[intercooler.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[intercooler.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[intercooler.toLowerCase()].AddedSixty
               );
             }
             if (spoiler) {
-              carspeed += partdb.Parts[spoiler.toLowerCase()].AddedSpeed;
+              carspeed += parseInt(partdb.Parts[spoiler.toLowerCase()].AddedSpeed)
               caracc -= parseFloat(
                 partdb.Parts[spoiler.toLowerCase()].AddedSixty
               );

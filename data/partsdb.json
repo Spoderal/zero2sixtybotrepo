@@ -21,7 +21,7 @@
       "Name": "T1Clutch",
       "AddedSixty": 0.1,
       "AddedSnow": 0,
-      "AddedSpeed": "1",
+      "AddedSpeed": 1,
       "sellprice": 1350,
       "Price": 3500,
       "Emote": "<:clutch1:1063291889282990171>",
@@ -39,7 +39,7 @@
       "Name": "T2Clutch",
       "AddedSixty": 0.2,
       "AddedSnow": 0,
-      "AddedSpeed": "1",
+      "AddedSpeed": 1,
       "sellprice": 5250,
       "Price": 7000,
       "Emote": "<:clutch2:1063291891644370985>",
@@ -57,7 +57,7 @@
       "Name": "T3Clutch",
       "AddedSixty": 0.3,
       "AddedSnow": 0,
-      "AddedSpeed": "2",
+      "AddedSpeed": 2,
       "sellprice": 1350,
       "Price": 8000,
       "Emote": "<:t3clutch:1063291086317027419>",
@@ -75,7 +75,7 @@
       "Name": "T4Clutch",
       "AddedSixty": 0.5,
       "AddedSnow": 0,
-      "AddedSpeed": "3",
+      "AddedSpeed": 3,
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:t4clutch:1063291084039532615>",
@@ -86,14 +86,14 @@
       "Type": "clutch",
       "AddedHandling": 30,
       "DecreasedSpeed": "0",
-      "AddHandling": "30",
+      "AddHandling": 30,
       "Image": "https://i.ibb.co/d7rNWfD/t4clutch.png"
     },
     "t5clutch": {
       "Name": "T5Clutch",
       "AddedSixty": 1,
       "AddedSnow": 0,
-      "AddedSpeed": "5",
+      "AddedSpeed": 5,
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:t5clutch:1063291797037662218>",
@@ -257,7 +257,7 @@
       "Name": "T4ECU",
       "AddedSixty": 0.5,
       "AddedSnow": 0,
-      "AddedSpeed": "4",
+      "AddedSpeed": 4,
       "sellprice": 1200,
       "Price": 0,
       "Emote": "<:ecu4:978448907556237332>",
@@ -273,7 +273,7 @@
       "Name": "T5ECU",
       "AddedSixty": 1,
       "AddedSnow": 0,
-      "AddedSpeed": "6",
+      "AddedSpeed": 6,
       "sellprice": 1200,
       "Price": 0,
       "Emote": "<:ecu5:978448907531083886>",
@@ -283,13 +283,13 @@
       "DecreasedSixty": "0",
       "Type": "ecu",
       "DecreasedSpeed": "0",
-      "AddHandling": "12"
+      "AddHandling": 12
     },
     "t1nitro": {
       "Name": "T1Nitro",
       "AddedSixty": "0",
       "AddedSnow": 0,
-      "AddedSpeed": "0",
+      "AddedSpeed": 0,
       "sellprice": 1500,
       "Price": 2000,
       "Emote": "<:nitro1:945187912738295818>",
@@ -299,7 +299,7 @@
       "DecreasedSixty": "0",
       "Type": "nitro",
       "DecreasedSpeed": "0",
-      "AddedBoost": "5"
+      "AddedBoost": 5
     },
     "turbo": {
       "Name": "Turbo",
@@ -316,7 +316,7 @@
       "Type": "turbo",
       "DecreasedHandling": 10,
       "DecreasedSpeed": "0",
-      "DecreaseHandling": "4",
+      "DecreaseHandling": 4,
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
     },
     "dualturbo": {
@@ -333,7 +333,7 @@
       "DecreasedSixty": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": "5",
+      "DecreaseHandling": 5,
       "Image": "https://i.ibb.co/Qb9Hc0N/t2turbo.png"
     },
     "supercharger": {
