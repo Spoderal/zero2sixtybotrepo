@@ -14,6 +14,7 @@ const fs = require("fs");
 const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
+const cars = require("./cars").carfix
 
 let mongoConfig = {
   keepAlive: true,
@@ -32,7 +33,7 @@ module.exports = {
   once: true,
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
-
+    cars();
     crews(client);
     dailytasks(client);
     patron(client);

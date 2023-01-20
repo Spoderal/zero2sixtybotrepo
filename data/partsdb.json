@@ -4,7 +4,7 @@
       "Name": "T1Exhaust",
       "AddedSpeed": 2,
       "AddedSnow": 0,
-      "AddedSixty": 0.3,
+      "AddedSixty": 0.1,
       "sellprice": 900,
       "Price": 2700,
       "Emote": "<:t1exhaust:984249122477453393>",
@@ -19,7 +19,7 @@
     },
     "t1clutch": {
       "Name": "T1Clutch",
-      "AddedSixty": 0.3,
+      "AddedSixty": 0.1,
       "AddedSnow": 0,
       "AddedSpeed": "1",
       "sellprice": 1350,
@@ -37,7 +37,7 @@
     },
     "t2clutch": {
       "Name": "T2Clutch",
-      "AddedSixty": 0.5,
+      "AddedSixty": 0.2,
       "AddedSnow": 0,
       "AddedSpeed": "1",
       "sellprice": 5250,
@@ -55,7 +55,7 @@
     },
     "t3clutch": {
       "Name": "T3Clutch",
-      "AddedSixty": 1,
+      "AddedSixty": 0.3,
       "AddedSnow": 0,
       "AddedSpeed": "2",
       "sellprice": 1350,
@@ -73,7 +73,7 @@
     },
     "t4clutch": {
       "Name": "T4Clutch",
-      "AddedSixty": 1.5,
+      "AddedSixty": 0.5,
       "AddedSnow": 0,
       "AddedSpeed": "3",
       "sellprice": 0,
@@ -91,7 +91,7 @@
     },
     "t5clutch": {
       "Name": "T5Clutch",
-      "AddedSixty": 2,
+      "AddedSixty": 1,
       "AddedSnow": 0,
       "AddedSpeed": "5",
       "sellprice": 0,
@@ -109,7 +109,7 @@
     },
     "txclutch": {
       "Name": "TXClutch",
-      "AddedSixty": 3,
+      "AddedSixty": 2,
       "AddedSnow": 0,
       "AddedSpeed": 6,
       "sellprice": 0,
@@ -127,7 +127,7 @@
     },
     "t1intercooler": {
       "Name": "T1Intercooler",
-      "AddedSpeed": 3,
+      "AddedSpeed": 0.1,
       "AddedSnow": 0,
       "AddedSixty": "0.5",
       "sellprice": 900,
@@ -143,9 +143,9 @@
     },
     "t2intercooler": {
       "Name": "T2Intercooler",
-      "AddedSpeed": 5,
+      "AddedSpeed": 1,
       "AddedSnow": 0,
-      "AddedSixty": "0.6",
+      "AddedSixty": 0.1,
       "sellprice": 900,
       "Price": 0,
       "Emote": "<:intercooler2:978875555489386516>",
@@ -159,9 +159,9 @@
     },
     "t3intercooler": {
       "Name": "T3Intercooler",
-      "AddedSpeed": 7,
+      "AddedSpeed": 2,
       "AddedSnow": 0,
-      "AddedSixty": "0.8",
+      "AddedSixty": 0.1,
       "sellprice": 900,
       "Price": 0,
       "Emote": "<:intercooler3:978875555300671488>",
@@ -175,9 +175,9 @@
     },
     "t4intercooler": {
       "Name": "T4Intercooler",
-      "AddedSpeed": 8,
+      "AddedSpeed": 3,
       "AddedSnow": 0,
-      "AddedSixty": 1,
+      "AddedSixty": 0.1,
       "sellprice": 900,
       "Price": 0,
       "Emote": "<:intercooler4:978875553916534825>",
@@ -191,9 +191,9 @@
     },
     "t5intercooler": {
       "Name": "T5Intercooler",
-      "AddedSpeed": 10,
+      "AddedSpeed": 5,
       "AddedSnow": 0,
-      "AddedSixty": 1,
+      "AddedSixty": 0.2,
       "sellprice": 900,
       "Price": 0,
       "Emote": "<:intercooler5:978875586040709140>",
@@ -207,7 +207,7 @@
     },
     "t1ecu": {
       "Name": "T1ECU",
-      "AddedSixty": 0.4,
+      "AddedSixty": 0.1,
       "AddedSnow": 0,
       "AddedSpeed": 1,
       "sellprice": 1200,
@@ -223,7 +223,7 @@
     },
     "t2ecu": {
       "Name": "T2ECU",
-      "AddedSixty": 0.5,
+      "AddedSixty": 0.3,
       "AddedSnow": 0,
       "AddedSpeed": 2,
       "sellprice": 1200,
@@ -239,7 +239,7 @@
     },
     "t3ecu": {
       "Name": "T3ECU",
-      "AddedSixty": 0.8,
+      "AddedSixty": 0.4,
       "AddedSnow": 0,
       "AddedSpeed": "3",
       "sellprice": 1200,
@@ -255,7 +255,7 @@
     },
     "t4ecu": {
       "Name": "T4ECU",
-      "AddedSixty": 1,
+      "AddedSixty": 0.5,
       "AddedSnow": 0,
       "AddedSpeed": "4",
       "sellprice": 1200,
@@ -271,7 +271,7 @@
     },
     "t5ecu": {
       "Name": "T5ECU",
-      "AddedSixty": 2,
+      "AddedSixty": 1,
       "AddedSnow": 0,
       "AddedSpeed": "6",
       "sellprice": 1200,
@@ -303,9 +303,9 @@
     },
     "turbo": {
       "Name": "Turbo",
-      "AddedSpeed": "5",
+      "AddedSpeed": 5,
       "AddedSnow": 0,
-      "AddedSixty": "2",
+      "AddedSixty": 0.5,
       "sellprice": 7500,
       "Price": 15000,
       "Emote": "<:t1turbo:989758553340383272>",
@@ -321,9 +321,9 @@
     },
     "dualturbo": {
       "Name": "DualTurbo",
-      "AddedSpeed": "8",
+      "AddedSpeed": 10,
       "AddedSnow": 0,
-      "AddedSixty": "2.5",
+      "AddedSixty": 0.2,
       "sellprice": 9000,
       "Price": 20000,
       "Emote": "<:t2turbo:989758549330649118>",
@@ -338,8 +338,8 @@
     },
     "supercharger": {
       "Name": "SuperCharger",
-      "AddedSpeed": "10",
-      "AddedSixty": "3",
+      "AddedSpeed": 5,
+      "AddedSixty": 2,
       "sellprice": 11250,
       "Price": 30000,
       "AddedSnow": 0,
@@ -355,8 +355,8 @@
     },
     "t4turbo": {
       "Name": "T4Turbo",
-      "AddedSpeed": "12",
-      "AddedSixty": "4",
+      "AddedSpeed": 7,
+      "AddedSixty": 3,
       "sellprice": 11250,
       "Price": 0,
       "AddedSnow": 0,
@@ -372,8 +372,8 @@
     },
     "t5turbo": {
       "Name": "T5Turbo",
-      "AddedSpeed": "15",
-      "AddedSixty": "5",
+      "AddedSpeed": 10,
+      "AddedSixty": 3,
       "sellprice": 11250,
       "Price": 0,
       "AddedSnow": 0,
@@ -389,9 +389,9 @@
     },
     "t1tires": {
       "Name": "T1Tires",
-      "AddedSpeed": "1",
+      "AddedSpeed": 1,
       "AddedSnow": 0,
-      "AddedSixty": "0.2",
+      "AddedSixty": 0.1,
       "sellprice": 562,
       "Price": 3000,
       "Emote": "<:t1tires:988981443109740586>",
@@ -406,9 +406,9 @@
     },
     "t1brakes": {
       "Name": "T1Brakes",
-      "AddedSpeed": "0",
+      "AddedSpeed": 0,
       "AddedSnow": 0,
-      "AddedSixty": "0",
+      "AddedSixty": 0,
       "sellprice": 562,
       "Price": 1000,
       "Emote": "<:t1brakes:1011360668533919774>",
@@ -418,7 +418,7 @@
       "DecreasedSixty": "0",
       "Type": "brakes",
       "DecreasedSpeed": "0",
-      "AddHandling": "5",
+      "AddHandling": 5,
       "Image": "https://i.ibb.co/G761vwM/t1brakes.png"
     },
 
@@ -436,7 +436,7 @@
       "DecreasedSixty": "0",
       "Type": "brakes",
       "DecreasedSpeed": "0",
-      "AddHandling": "10",
+      "AddHandling": 10,
       "Image": "https://i.ibb.co/c8dzzYc/t2brakes.png"
     },
     "t3brakes": {
@@ -453,7 +453,7 @@
       "DecreasedSixty": "0",
       "Type": "brakes",
       "DecreasedSpeed": "0",
-      "AddHandling": "20",
+      "AddHandling": 15,
       "Image": "https://i.ibb.co/b6m8TmJ/t3brakes.png"
     },
     "t4brakes": {
@@ -470,7 +470,7 @@
       "DecreasedSixty": "0",
       "Type": "brakes",
       "DecreasedSpeed": "0",
-      "AddHandling": "50",
+      "AddHandling": 20,
       "Image": "https://i.ibb.co/gWLfY9S/t4brakes.png"
     },
     "t5brakes": {
@@ -487,7 +487,7 @@
       "DecreasedSixty": "0",
       "Type": "brakes",
       "DecreasedSpeed": "0",
-      "AddHandling": "100",
+      "AddHandling": 25,
       "Image": "https://i.ibb.co/V2841yC/t5brakes.png"
     },
     "t1tracktires": {
@@ -504,7 +504,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "2",
-      "AddHandling": "20",
+      "AddHandling": 20,
       "Image": "https://i.ibb.co/y8nncpf/t1tracktires.png"
     },
     "t2tracktires": {
@@ -521,7 +521,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "3",
-      "AddHandling": "30",
+      "AddHandling": 30,
       "Image": "https://i.ibb.co/JxNxX67/t2tracktires.png"
     },
     "t3tracktires": {
@@ -538,7 +538,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "3",
-      "AddHandling": "45",
+      "AddHandling": 45,
       "Image": "https://i.ibb.co/7jG3Rch/t3tracktires.png"
     },
     "t4tracktires": {
@@ -555,7 +555,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "3",
-      "AddHandling": "60",
+      "AddHandling": 60,
       "Image": "https://i.ibb.co/YTjkPw0/t4tracktires.png"
     },
     "t5tracktires": {
@@ -572,7 +572,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "3",
-      "AddHandling": "100",
+      "AddHandling": 75,
       "Image": "https://i.ibb.co/q1tJWfr/t5tracktires.png"
     },
     "txtracktires": {
@@ -589,12 +589,12 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "3",
-      "AddHandling": "200",
+      "AddHandling": 100,
       "Image": "https://i.ibb.co/d0q2zy2/txtracktires.png"
     },
     "racesprings": {
       "Name": "RaceSprings",
-      "AddedSpeed": 5,
+      "AddedSpeed": 2,
       "AddedSnow": 0,
       "AddedSixty": "0",
       "sellprice": 562,
@@ -645,7 +645,7 @@
     },
     "t1intake": {
       "Name": "T1Intake",
-      "AddedSpeed": "1",
+      "AddedSpeed": 1,
       "AddedSnow": 0,
       "AddedSixty": "0",
       "sellprice": 700,
@@ -660,8 +660,8 @@
     },
     "2jz-gte": {
       "Name": "2JZ-GTE",
-      "AddedSpeed": "12",
-      "AddedSixty": "2.5",
+      "AddedSpeed": 5,
+      "AddedSixty": 0.2,
       "AddedSnow": 0,
       "sellprice": 18750,
       "Price": 35000,
@@ -676,9 +676,9 @@
 
     "v8": {
       "Name": "V8",
-      "AddedSpeed": "15",
+      "AddedSpeed": 6,
       "AddedSnow": 0,
-      "AddedSixty": 2,
+      "AddedSixty": 0.2,
       "sellprice": 100,
       "Price": 0,
       "Emote": "<:enginerestored:941546331808333864>",
@@ -836,8 +836,8 @@
     },
     "v10": {
       "Name": "V10",
-      "AddedSpeed": "14",
-      "AddedSixty": "3",
+      "AddedSpeed": 7,
+      "AddedSixty": 0.3,
       "AddedSnow": 0,
       "sellprice": 37500,
       "Price": 100000,
@@ -851,8 +851,8 @@
     },
     "v12": {
       "Name": "V12",
-      "AddedSpeed": "20",
-      "AddedSixty": "3.2",
+      "AddedSpeed": 10,
+      "AddedSixty": 0.5,
       "AddedSnow": 0,
       "sellprice": 112500,
       "Price": 200000,
@@ -866,8 +866,8 @@
     },
     "rocket engine": {
       "Name": "Rocket Engine",
-      "AddedSpeed": "45",
-      "AddedSixty": "5",
+      "AddedSpeed": 25,
+      "AddedSixty": 1,
       "AddedSnow": 0,
       "sellprice": 112500,
       "Price": 200000000,
@@ -883,8 +883,8 @@
     },
     "super rocket engine": {
       "Name": "Super Rocket Engine",
-      "AddedSpeed": "60",
-      "AddedSixty": "7",
+      "AddedSpeed": 50,
+      "AddedSixty": 2,
       "AddedSnow": 0,
       "sellprice": 0,
       "Price": 0,
@@ -900,7 +900,7 @@
     },
     "t2exhaust": {
       "Name": "T2Exhaust",
-      "AddedSpeed": 4,
+      "AddedSpeed": 3,
       "AddedSixty": 0.5,
       "AddedSnow": 0,
       "sellprice": 4500,
@@ -913,12 +913,12 @@
       "Type": "exhaust",
       "Image": "https://i.ibb.co/KL7vYnT/t2exhaust.png",
       "DecreasedSpeed": "0",
-      "AddHandling": "2"
+      "AddHandling": 2
     },
     "t2intake": {
       "Name": "T2Intake",
-      "AddedSixty": "0.3",
-      "AddedSpeed": "2",
+      "AddedSixty": 0.1,
+      "AddedSpeed": 2,
       "sellprice": 1875,
       "AddedSnow": 0,
       "Price": 4000,
@@ -929,40 +929,40 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": "2"
+      "AddHandling": 2
     },
     "t2tires": {
       "Name": "T2Tires",
-      "AddedSpeed": "2",
+      "AddedSpeed": 2,
       "AddedSnow": 0,
-      "AddedSixty": "0.4",
+      "AddedSixty": 0.2,
       "sellprice": 3750,
       "Price": 7000,
       "Emote": "<:t2tires:988981445802479677>",
       "Tier": "2",
       "AddedDrift": "0",
-      "DecreasedDrift": "4",
+      "DecreasedDrift": 4,
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "0",
-      "AddHandling": "4",
+      "AddHandling": 4,
       "Image": "https://i.ibb.co/C1Ls718/t2tires.png"
     },
     "t3tires": {
       "Name": "T3Tires",
-      "AddedSpeed": "4",
+      "AddedSpeed": 3,
       "AddedSnow": 0,
-      "AddedSixty": "1",
+      "AddedSixty": 0.3,
       "sellprice": 8625,
       "Price": 15500,
       "Emote": "<:t3tires:988981447840919613>",
       "Tier": "3",
       "AddedDrift": "0",
-      "DecreasedDrift": "6",
+      "DecreasedDrift": 6,
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "0",
-      "AddHandling": "10",
+      "AddHandling": 10,
       "Image": "https://i.ibb.co/DpVg3zk/t3tires.png"
     },
     "t1rallytires": {
@@ -979,7 +979,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "0",
-      "AddHandling": "15"
+      "AddHandling": 15
     },
     "t2rallytires": {
       "Name": "T2RallyTires",
@@ -995,7 +995,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "0",
-      "AddHandling": "20"
+      "AddHandling": 20
     },
     "t3rallytires": {
       "Name": "T3RallyTires",
@@ -1011,7 +1011,7 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "0",
-      "AddHandling": "25"
+      "AddHandling": 25
     },
     "t2drifttires": {
       "Name": "T2DriftTires",
@@ -1023,14 +1023,14 @@
       "Emote": "<:t2dtires:988981444506431588>",
       "Tier": "2",
       "Tread": 200,
-      "AddedDrift": "5",
+      "AddedDrift": 5,
       "DecreasedDrift": "0",
-      "DecreasedSixty": "0.5",
-      "DriftScore": "5",
+      "DecreasedSixty": 0.2,
+      "DriftScore": 5,
       "Type": "tires",
-      "DecreasedSpeed": "3",
-      "DecreaseSpeed": "3",
-      "DecreaseHandling": "3",
+      "DecreasedSpeed": 5,
+      "DecreaseSpeed": 5,
+      "DecreaseHandling": 5,
       "Image": "https://i.ibb.co/2FHgqCd/t2dtires.png"
     },
     "t3drifttires": {
@@ -1044,12 +1044,12 @@
       "Price": 18000,
       "Emote": "<:t3dtires:988981446863618119>",
       "Tier": "3",
-      "AddedDrift": "7",
+      "AddedDrift": 10,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "tires",
-      "DecreasedSpeed": "3",
-      "DecreaseHandling": "4",
+      "DecreasedSpeed": 5,
+      "DecreaseHandling": 5,
       "Image": "https://i.ibb.co/12Dc8KQ/t3dtires.png"
     },
     "t4drifttires": {
@@ -1063,12 +1063,12 @@
       "Price": 0,
       "Emote": "<:t4dtires:988981448923033651>",
       "Tier": "4",
-      "AddedDrift": "10",
+      "AddedDrift": 10,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "tires",
-      "DecreasedSpeed": "2",
-      "DecreaseHandling": "3"
+      "DecreasedSpeed": 2,
+      "DecreaseHandling": 2
     },
     "bm1drifttires": {
       "Name": "BM1DriftTires",
@@ -1082,7 +1082,7 @@
       "Emote": "<:tires_bm1:965028719385272362>",
       "Tier": "BM1",
       "DriftScore": 6,
-      "AddedDrift": "6",
+      "AddedDrift": 10,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "tires",
@@ -1091,9 +1091,9 @@
     },
     "bm1turbo": {
       "Name": "BM1Turbo",
-      "AddedSpeed": "15",
+      "AddedSpeed": 15,
       "AddedSnow": 0,
-      "AddedSixty": "2.5",
+      "AddedSixty": 2,
       "sellprice": 0,
       "Price": 10,
       "Emote": "<:turbo_bm1:965042368531284058>",
@@ -1107,9 +1107,9 @@
     },
     "bm1exhaust": {
       "Name": "BM1Exhaust",
-      "AddedSpeed": "10",
+      "AddedSpeed": 5,
       "AddedSnow": 0,
-      "AddedSixty": "1.5",
+      "AddedSixty": 0.5,
       "sellprice": 0,
       "Price": 8,
       "Emote": "<:exhaustbm1:979830768836681738>",
@@ -1123,9 +1123,9 @@
     },
     "ludicrous": {
       "Name": "Ludicrous",
-      "AddedSpeed": "40",
+      "AddedSpeed": 25,
       "AddedSnow": 0,
-      "AddedSixty": "3.5",
+      "AddedSixty": 0.5,
       "sellprice": 0,
       "Price": 150,
       "Emote": "<:turbo_bm1:965042368531284058>",
@@ -1142,13 +1142,13 @@
       "DecreaseSpeed": 0,
       "AddedSixty": "0",
       "AddedSpeed": "0",
-      "DriftScore": 12,
+      "DriftScore": 15,
       "AddedSnow": 0,
       "sellprice": 0,
       "Price": 7,
       "Emote": "<:suspension_bm1:965028698552168518>",
       "Tier": "BM1",
-      "AddedDrift": "12",
+      "AddedDrift": 15,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "suspension",
@@ -1157,8 +1157,8 @@
     },
     "bm1racesuspension": {
       "Name": "BM1RaceSuspension",
-      "AddedSixty": "2",
-      "AddedSpeed": "8",
+      "AddedSixty": 1.5,
+      "AddedSpeed": 5,
       "sellprice": 3000,
       "AddedSnow": 0,
       "Price": 8,
@@ -1182,11 +1182,11 @@
       "Emote": "<:suspension1:932046370725044335>",
       "Tier": "1",
       "AddedDrift": "0",
-      "DecreasedDrift": "1",
+      "DecreasedDrift": 5,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "10"
+      "AddHandling": 10
     },
     "t2offroadsuspension": {
       "Name": "T2OffroadSuspension",
@@ -1198,176 +1198,176 @@
       "Emote": "<:suspension2:932046370930581535>",
       "Tier": "2",
       "AddedDrift": "0",
-      "DecreasedDrift": "2",
+      "DecreasedDrift": 5,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "12"
+      "AddHandling": 15
     },
     "t3offroadsuspension": {
       "Name": "T3OffroadSuspension",
       "AddedSpeed": 0,
       "AddedSixty": "0",
       "sellprice": 0,
-      "AddedOffRoad": 6,
+      "AddedOffRoad": 7,
       "Price": 0,
       "Emote": "<:suspension2:932046370930581535>",
       "Tier": "3",
       "AddedDrift": "0",
-      "DecreasedDrift": "1",
+      "DecreasedDrift": 0,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "14"
+      "AddHandling": 15
     },
     "t2racesuspension": {
       "Name": "T2RaceSuspension",
-      "AddedSpeed": 4,
-      "AddedSixty": "1",
+      "AddedSpeed": 5,
+      "AddedSixty": 0,
       "sellprice": 4125,
       "AddedSnow": 0,
       "Price": 15750,
       "Emote": "<:suspension2:932046370930581535>",
       "Tier": "2",
       "AddedDrift": "0",
-      "DecreasedDrift": "2",
+      "DecreasedDrift": 5,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "5"
+      "AddHandling": 5
     },
     "t1gearbox": {
       "Name": "T1Gearbox",
-      "AddedSpeed": 5,
-      "AddedSixty": "1.2",
+      "AddedSpeed": 2,
+      "AddedSixty": 0.1,
       "sellprice": 4125,
       "AddedSnow": 0,
       "Price": 25000,
       "Emote": "<:gearbox1:968730774402646067>",
       "Tier": "1",
-      "AddedDrift": "3",
+      "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": "7"
+      "AddHandling": 5
     },
     "t2gearbox": {
       "Name": "T2Gearbox",
-      "AddedSpeed": 6,
-      "AddedSixty": "1.5",
+      "AddedSpeed": 4,
+      "AddedSixty": 0.2,
       "sellprice": 4125,
       "AddedSnow": 0,
       "Price": 35000,
       "Emote": "<:gearbox2:968730567006904350>",
       "Tier": "2",
-      "AddedDrift": "4",
+      "AddedDrift": 5,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": "9"
+      "AddHandling": 10
     },
     "t3gearbox": {
       "Name": "T3Gearbox",
-      "AddedSpeed": 9,
-      "AddedSixty": "2",
+      "AddedSpeed": 6,
+      "AddedSixty": 0.3,
       "sellprice": 4125,
       "AddedSnow": 0,
       "Price": 50000,
       "Emote": "<:gearbox3:968749212596584518>",
       "Tier": "3",
-      "AddedDrift": "5",
+      "AddedDrift": 10,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": "11"
+      "AddHandling": 15
     },
     "t4gearbox": {
       "Name": "T4Gearbox",
-      "AddedSpeed": 10,
-      "AddedSixty": "2.1",
+      "AddedSpeed": 8,
+      "AddedSixty": 0.4,
       "sellprice": 4125,
       "AddedSnow": 0,
       "Price": 0,
       "Emote": "<:gearbox4:968749212466565153>",
       "Tier": "4",
-      "AddedDrift": "8",
+      "AddedDrift": 10,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": "15"
+      "AddHandling": 15
     },
     "t5gearbox": {
       "Name": "T5Gearbox",
-      "AddedSpeed": 12,
-      "AddedSixty": "2.3",
+      "AddedSpeed": 10,
+      "AddedSixty": 0.5,
       "sellprice": 4125,
       "AddedSnow": 0,
       "Price": 0,
       "Emote": "<:gearbox5:968749212529467423>",
       "Tier": "5",
-      "AddedDrift": "10",
+      "AddedDrift": 10,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": "20"
+      "AddHandling": 20
     },
     "t3racesuspension": {
       "Name": "T3RaceSuspension",
-      "AddedSpeed": 6,
-      "AddedSixty": "1",
+      "AddedSpeed": 10,
+      "AddedSixty": 0,
       "sellprice": 14000,
       "AddedSnow": 0,
       "Price": 25000,
       "Emote": "<:suspension3:932046370997686282>",
       "Tier": "3",
       "AddedDrift": "0",
-      "DecreasedDrift": "2",
+      "DecreasedDrift": 5,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "10"
+      "AddHandling": 10
     },
     "t4racesuspension": {
       "Name": "T4RaceSuspension",
-      "AddedSpeed": 8,
-      "AddedSixty": "2",
+      "AddedSpeed": 12,
+      "AddedSixty": 0,
       "sellprice": 14000,
       "AddedSnow": 0,
       "Price": 0,
       "Emote": "<:suspension4:974458572031291443>",
       "Tier": "4",
       "AddedDrift": "0",
-      "DecreasedDrift": "3",
+      "DecreasedDrift": 5,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "15"
+      "AddHandling":15
     },
     "t5racesuspension": {
       "Name": "T5RaceSuspension",
-      "AddedSpeed": 9,
-      "AddedSixty": "3",
+      "AddedSpeed": 15,
+      "AddedSixty": 0,
       "sellprice": 14000,
       "AddedSnow": 0,
       "Price": 0,
       "Emote": "<:suspension5:978451603113779220>",
       "Tier": "5",
       "AddedDrift": "0",
-      "DecreasedDrift": "3",
+      "DecreasedDrift": 5,
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": "25"
+      "AddHandling": 25
     },
     "t3exhaust": {
       "Name": "T3Exhaust",
-      "AddedSpeed": "6",
-      "AddedSixty": "1.2",
+      "AddedSpeed": 7,
+      "AddedSixty": 0.7,
       "sellprice": 6750,
       "AddedSnow": 0,
       "Price": 20000,
@@ -1379,12 +1379,12 @@
       "Type": "exhaust",
       "Image": "https://i.ibb.co/TLsc2ss/t3exhaust.png",
       "DecreasedSpeed": "0",
-      "AddHandling": "4"
+      "AddHandling": 5
     },
     "t4exhaust": {
       "Name": "T4Exhaust",
-      "AddedSpeed": "8",
-      "AddedSixty": "1.5",
+      "AddedSpeed": 8,
+      "AddedSixty": 1,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1396,12 +1396,12 @@
       "Type": "exhaust",
       "Image": "https://i.ibb.co/93HnWJ9/t4exhaust.png",
       "DecreasedSpeed": "0",
-      "AddHandling": "4"
+      "AddHandling": 5
     },
     "t5exhaust": {
       "Name": "T5Exhaust",
-      "AddedSpeed": "10",
-      "AddedSixty": "2.1",
+      "AddedSpeed": 10,
+      "AddedSixty": 1.5,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1413,13 +1413,13 @@
       "Type": "exhaust",
       "Image": "https://i.ibb.co/fGqKL3g/t5exhausted.png",
       "DecreasedSpeed": "0",
-      "AddHandling": "6",
+      "AddHandling": 5,
       "Color": "#1859d0"
     },
     "txexhaust": {
       "Name": "TXExhaust",
-      "AddedSpeed": "15",
-      "AddedSixty": "3",
+      "AddedSpeed": 15,
+      "AddedSixty": 2,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1431,13 +1431,13 @@
       "Type": "exhaust",
       "Image": "https://i.ibb.co/2NYPqJc/TXEXHAUST.png",
       "DecreasedSpeed": "0",
-      "AddHandling": "10",
+      "AddHandling": 10,
       "Color": "#ffffff"
     },
     "txintake": {
       "Name": "TXIntake",
-      "AddedSpeed": "12",
-      "AddedSixty": "2",
+      "AddedSpeed": 10,
+      "AddedSixty": 1.5,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1454,8 +1454,8 @@
     },
     "t4tires": {
       "Name": "T4Tires",
-      "AddedSpeed": "8",
-      "AddedSixty": "1",
+      "AddedSpeed": 5,
+      "AddedSixty": 0.3,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1466,13 +1466,13 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": "0",
-      "AddHandling": "6",
+      "AddHandling": 10,
       "Image": "https://i.ibb.co/Xk0xpq2/t4tires.png"
     },
     "t5slicks": {
       "Name": "T5Slicks",
-      "AddedSpeed": "9",
-      "AddedSixty": "2",
+      "AddedSpeed": 10,
+      "AddedSixty": 0.5,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1489,8 +1489,8 @@
     },
     "t3intake": {
       "Name": "T3Intake",
-      "AddedSpeed": "4",
-      "AddedSixty": "1",
+      "AddedSpeed": 4,
+      "AddedSixty":0.4,
       "sellprice": 4500,
       "AddedSnow": 0,
       "Price": 15000,
@@ -1501,12 +1501,12 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": "4"
+      "AddHandling": 5
     },
     "t4intake": {
       "Name": "T4Intake",
-      "AddedSpeed": "6",
-      "AddedSixty": "1.5",
+      "AddedSpeed": 6,
+      "AddedSixty":0.5,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1517,12 +1517,12 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": "5"
+      "AddHandling": 5
     },
     "t5intake": {
       "Name": "T5Intake",
-      "AddedSpeed": "8",
-      "AddedSixty": "1.7",
+      "AddedSpeed": 8,
+      "AddedSixty": 0.8,
       "sellprice": 0,
       "AddedSnow": 0,
       "Price": 0,
@@ -1533,7 +1533,7 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": "5",
+      "AddHandling": 5,
       "Color": "#00ae00"
     },
     "t1drifttires": {
@@ -1550,7 +1550,7 @@
       "Tier": "1",
       "AddedDrift": "2",
       "DecreasedDrift": "0",
-      "DecreasedSixty": "0.5",
+      "DecreasedSixty": 0.5,
       "Type": "tires",
       "DecreasedSpeed": "2",
       "DecreaseHandling": "2",
@@ -1586,7 +1586,7 @@
       "Type": "tires",
       "DecreasedSpeed": 2,
       "AddedSpeed": "0",
-      "AddHandling": 50
+      "AddHandling": 25
     },
     "t2wintertires": {
       "Name": "T2WinterTires",
@@ -1602,7 +1602,7 @@
       "Type": "tires",
       "DecreasedSpeed": 2,
       "AddedSpeed": "0",
-      "AddHandling": 100
+      "AddHandling": 50
     },
     "t3wintertires": {
       "Name": "T3WinterTires",
@@ -1618,7 +1618,7 @@
       "Type": "tires",
       "DecreasedSpeed": 5,
       "AddedSpeed": "0",
-      "AddHandling": 150
+      "AddHandling": 75
     },
     "t4wintertires": {
       "Name": "T4WinterTires",
@@ -1634,7 +1634,7 @@
       "Type": "tires",
       "DecreasedSpeed": 10,
       "AddedSpeed": "0",
-      "AddHandling": 250
+      "AddHandling": 100
     },
     "t5wintertires": {
       "Name": "T5WinterTires",
@@ -1650,7 +1650,7 @@
       "Type": "tires",
       "DecreasedSpeed": 15,
       "AddedSpeed": "0",
-      "AddHandling": 500
+      "AddHandling": 150
     },
 
     "t1winterweight": {
@@ -1666,7 +1666,7 @@
       "DecreasedDrift": "1",
       "DecreasedSixty": "0",
       "Type": "weight reduction",
-      "DecreasedSpeed": "4"
+      "DecreasedSpeed": 4
     },
     "driftsuspension": {
       "Name": "DriftSuspension",
@@ -1677,11 +1677,11 @@
       "Price": 10000,
       "Emote": "<:suspension1:932046370725044335>",
       "Tier": "1",
-      "AddedDrift": "4",
+      "AddedDrift": 5,
       "DecreasedDrift": "0",
       "DecreasedSixty": "1",
       "Type": "suspension",
-      "DecreasedSpeed": "7"
+      "DecreasedSpeed": 5
     },
     "t2driftsuspension": {
       "Name": "T2DriftSuspension",
@@ -1692,13 +1692,13 @@
       "Price": 15000,
       "Emote": "<:suspension2:932046370930581535>",
       "Tier": "2",
-      "AddedDrift": "6",
+      "AddedDrift": 10,
       "DriftScore": "6",
       "DecreasedDrift": "0",
-      "DecreasedSixty": "1",
+      "DecreasedSixty": 0.1,
       "Type": "suspension",
-      "DecreaseSpeed": "9",
-      "DecreasedSpeed": "9"
+      "DecreaseSpeed": 5,
+      "DecreasedSpeed": 5
     },
     "t3driftsuspension": {
       "Name": "T3DriftSuspension",
@@ -1709,13 +1709,13 @@
       "Price": 25000,
       "Emote": "<:suspension3:932046370997686282>",
       "Tier": "3",
-      "AddedDrift": "8",
-      "DriftScore": "8",
+      "AddedDrift": 15,
+      "DriftScore": 15,
       "DecreasedDrift": "0",
       "DecreasedSixty": 0.5,
       "Type": "suspension",
-      "DecreaseSpeed": "7",
-      "DecreasedSpeed": "7"
+      "DecreaseSpeed": 5,
+      "DecreasedSpeed": 5
     },
     "t4driftsuspension": {
       "Name": "T4DriftSuspension",
@@ -1726,14 +1726,14 @@
       "Price": 0,
       "Emote": "<:suspension4:974458572031291443>",
       "Tier": "4",
-      "AddedDrift": "10",
-      "DriftScore": "10",
+      "AddedDrift": 15,
+      "DriftScore": 15,
       "DecreasedDrift": "0",
       "DecreasedSixty": 0.5,
       "Type": "suspension",
-      "DecreaseSpeed": "5",
-      "DecreasedSpeed": "5",
-      "AddHandling": "15"
+      "DecreaseSpeed": 5,
+      "DecreasedSpeed": 5,
+      "AddHandling": 15
     },
     "t5driftsuspension": {
       "Name": "T5DriftSuspension",
@@ -1744,14 +1744,14 @@
       "Price": 0,
       "Emote": "<:suspension5:978451603113779220>",
       "Tier": "5",
-      "AddedDrift": "15",
-      "DriftScore": "15",
+      "AddedDrift": 20,
+      "DriftScore": 20,
       "DecreasedDrift": "0",
       "DecreasedSixty": 0.5,
       "Type": "suspension",
-      "DecreaseSpeed": "5",
-      "DecreasedSpeed": "5",
-      "AddHandling": "20"
+      "DecreaseSpeed": 5,
+      "DecreasedSpeed": 5,
+      "AddHandling": 20
     },
     "pet spoiler": {
       "Name": "Pet Spoiler",
@@ -1761,83 +1761,88 @@
     },
     "t1weightreduction": {
       "Name": "T1WeightReduction",
-      "AddedSpeed": "2",
-      "DriftScore": 3,
-      "AddedSixty": "0.7",
-      "AddedOffRoad": 2,
+      "AddedSpeed": 0,
+      "DriftScore": 0,
+      "AddedSixty": 0,
+      "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 10000,
       "Emote": "<:spoiler1:932197371624947722>",
       "Tier": "1",
-      "AddedDrift": "3",
+      "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weight reduction",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":100
     },
     "t2weightreduction": {
       "Name": "T2WeightReduction",
-      "AddedSpeed": "3",
-      "DriftScore": 4,
-      "AddedSixty": "1",
-      "AddedOffRoad": 3,
+      "AddedSpeed": 0,
+      "DriftScore": 0,
+      "AddedSixty": 0,
+      "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 14000,
       "Emote": "<:spoiler2:932197371721441311>",
       "Tier": "2",
-      "AddedDrift": "4",
+      "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weight reduction",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":200
     },
     "t3weightreduction": {
       "Name": "T3WeightReduction",
-      "AddedSpeed": 5,
-      "DriftScore": 5,
-      "AddedSixty": 1,
-      "AddedOffRoad": 3,
+      "AddedSpeed": 0,
+      "DriftScore": 0,
+      "AddedSixty": 0,
+      "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 24000,
       "Emote": "<:spoiler3:932197371683700817>",
       "Tier": "3",
-      "AddedDrift": "5",
+      "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weight reduction",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":300
     },
     "t4weightreduction": {
       "Name": "T4WeightReduction",
-      "AddedSpeed": 7,
-      "DriftScore": 7,
-      "AddedSixty": 2,
-      "AddedOffRoad": 4,
+      "AddedSpeed": 0,
+      "DriftScore": 0,
+      "AddedSixty": 0,
+      "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 0,
       "Emote": "<:t4spoiler:993025605014671412>",
       "Tier": "4",
-      "AddedDrift": "5",
+      "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weight reduction",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":400
     },
     "t5weightreduction": {
       "Name": "T5WeightReduction",
-      "AddedSpeed": 10,
-      "DriftScore": 10,
-      "AddedSixty": 3,
-      "AddedOffRoad": 5,
+      "AddedSpeed": 0,
+      "DriftScore": 0,
+      "AddedSixty": 0,
+      "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 0,
       "Emote": "<:t5spoiler:993025603546665001>",
       "Tier": "5",
-      "AddedDrift": "5",
+      "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weight reduction",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":500
     },
     "racesuspension": {
       "Name": "RaceSuspension",
@@ -1946,7 +1951,7 @@
       "AddedSpeed": 1,
       "AddedSixty": "0",
       "AddedSnow": 0,
-      "AddHandling": 7,
+      "AddHandling": 10,
       "sellprice": 5250,
       "Price": 7000,
       "Emote": "<:spoiler2:932197371721441311>",
@@ -1962,7 +1967,7 @@
       "AddedSpeed": 2,
       "AddedSixty": "0",
       "AddedSnow": 0,
-      "AddHandling": 10,
+      "AddHandling": 15,
       "sellprice": 5250,
       "Price": 12000,
       "Emote": "<:spoiler3:932197371683700817>",
@@ -1978,7 +1983,7 @@
       "AddedSpeed": 3,
       "AddedSixty": "0",
       "AddedSnow": 0,
-      "AddHandling": 12,
+      "AddHandling": 20,
       "sellprice": 5250,
       "Price": 0,
       "Emote": "<:t4spoiler:993025605014671412>",
@@ -1991,10 +1996,10 @@
     },
     "t5spoiler": {
       "Name": "T5Spoiler",
-      "AddedSpeed": 4,
+      "AddedSpeed": 3,
       "AddedSixty": "0",
       "AddedSnow": 0,
-      "AddHandling": 20,
+      "AddHandling": 25,
       "sellprice": 5250,
       "Price": 0,
       "Emote": "<:t5spoiler:993025603546665001>",
@@ -2010,7 +2015,7 @@
       "AddedSpeed": 4,
       "AddedSixty": "0",
       "AddedSnow": 0,
-      "AddHandling": 10,
+      "AddHandling": 35,
       "sellprice": 5250,
       "Price": 5,
       "Emote": "<:spoiler2:932197371721441311>",
@@ -2023,8 +2028,8 @@
     },
     "ls1": {
       "Name": "LS1",
-      "AddedSpeed": "10",
-      "AddedSixty": "1.7",
+      "AddedSpeed": 5,
+      "AddedSixty": 0.1,
       "sellprice": 10125,
       "AddedSnow": 0,
       "Price": 30000,
@@ -2034,14 +2039,15 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":100
     },
     "ls2": {
       "Name": "LS2",
-      "AddedSpeed": "12",
+      "AddedSpeed": 10,
       "sellprice": 13125,
       "AddedSnow": 0,
-      "AddedSixty": "1.9",
+      "AddedSixty": 0.1,
       "Price": 33000,
       "Emote": "<:engine2:932046487653842954>",
       "Tier": "2",
@@ -2049,14 +2055,15 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "DecreaseWeight":100
     },
     "ls3": {
       "Name": "LS3",
-      "AddedSpeed": "13",
+      "AddedSpeed": 15,
       "sellprice": 17250,
       "AddedSnow": 0,
-      "AddedSixty": "2",
+      "AddedSixty": 0.2,
       "Price": 36000,
       "Emote": "<:engine3:932046487930679326>",
       "Tier": "3",
