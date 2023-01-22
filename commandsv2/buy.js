@@ -175,6 +175,8 @@ module.exports = {
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
+            
+
           let idtoset = boughtCar.alias;
           let carobj = {
             ID: boughtCar.alias,
@@ -294,7 +296,7 @@ module.exports = {
           await interaction.reply({ embeds: [embed] });
         } else {
           let sellprice = boughtCarPrice * 0.65;
-
+          let carstock = global.stock
           let filteredcar =
             carrarray.filter((car) => car.alias == bought.toLowerCase()) ||
             "NO ID";
@@ -315,7 +317,18 @@ module.exports = {
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
 
+
           cash -= boughtCarPrice;
+
+          if(carindb.Stock){
+            if(carstock[carindb.Name.toLowerCase()].Stock <= 0){
+              return interaction.reply("This car is out of stock!")
+            }
+            carstock[carindb.Name.toLowerCase()].Stock -= 1
+            global.markModified("stock")
+            global.save()
+          }
+
           let idtoset = filteredcar[0].alias;
           let carobj = {
             ID: carindb.alias,

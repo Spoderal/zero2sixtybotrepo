@@ -361,6 +361,11 @@ const Profile = new mongoose.Schema({
       ph: "MPH",
     },
   },
+  marketlimit:{
+    type: Number,
+    required: false,
+    default: 5,
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

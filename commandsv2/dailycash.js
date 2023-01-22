@@ -72,9 +72,16 @@ module.exports = {
     let filteredhouse = userdata.houses.filter(
       (house) => house.Name == "Albergo Delle Meraviglie"
     );
+    let filteredhouse2 = userdata.houses.filter(
+      (house) => house.Name == "Cabina Accogliente"
+    );
     if (userdata.houses && filteredhouse[0]) {
       userdata.swheelspins += 1;
       interaction.channel.send("+1 Super Wheelspin");
+    }
+    if (userdata.houses && filteredhouse2[0]) {
+      userdata.lmaps += 1;
+      interaction.channel.send("+1 Legendary Barn Map");
     }
 
     if (interaction.guild.id == "931004190149460048") {

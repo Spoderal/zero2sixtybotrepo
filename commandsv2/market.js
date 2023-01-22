@@ -79,6 +79,10 @@ module.exports = {
       let item = interaction.options.getString("item");
       let price = interaction.options.getNumber("price");
       let amount = interaction.options.getString("amount") || 1;
+      let limit = userdata.marketlimit 
+
+    
+      if (limit == 0) return interaction.reply("You already have 5 items listed!")
       let obj;
 
       if (price <= 0) {
@@ -96,8 +100,7 @@ module.exports = {
             car.ID.toLowerCase() == item.toLowerCase() ||
             car.Name.toLowerCase() == item.toLowerCase()
         );
-        if (!filteredcar[0])
-          return interaction.reply("You don't have this car!");
+        if (!filteredcar[0]) return interaction.reply("You don't have this car!");
         let sellprice = cardb.Cars[item.toLowerCase()].Price * 0.65;
         let sellpricemax = sellprice * 10;
         if (sellprice > price)
@@ -180,6 +183,7 @@ module.exports = {
 
       global.marketId += 1;
       global.newmarket.push(obj);
+      userdata.marketlimit -= 1
 
       global.save();
       userdata.save();
@@ -190,6 +194,7 @@ module.exports = {
         .setDescription(`${obj.item}\nYou'll be notified if this item sells!`);
 
       interaction.reply({ embeds: [embed] });
+    
     } else if (subcommand == "view") {
       if (interaction.options.getString("id")) {
         let findid = interaction.options.getString("id");
@@ -439,6 +444,10 @@ module.exports = {
       userdata.cash -= parseInt(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
       udata2.cash += parseInt(itemtobuy.price);
+      if(udata2.marketlimit < 5){
+        udata2.marketlimit += 1
+
+      }
       udata2.save();
       userdata.save();
       try {

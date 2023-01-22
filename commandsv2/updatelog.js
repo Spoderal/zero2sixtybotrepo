@@ -31,11 +31,11 @@ module.exports = {
             emoji: "❄️",
           },
           {
-            label: "1/6/2023",
-            description: "Information for the recent overhaul!",
+            label: "1/22/2023",
+            description: "Information for the recent small update!",
             value: "5_update",
             customId: "up5",
-            emoji: "🔃",
+            emoji: "⬆️",
           },
         ])
     );
@@ -48,7 +48,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 1/13/2023\n
             ❄️ Winter Update 11/30/2022\n
-            🔃 Overhaul Update 1/6/2023
+            ⬆️ Small Update 1/22/2023
         `);
 
     embed.setColor(colors.blue);
@@ -120,17 +120,14 @@ module.exports = {
           } else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Overhaul Update`);
+            embed.setTitle(`Small Update`);
             embed
               .setDescription(
-                `• Racing as a whole has a huge overhaul with new visuals, how it works, etc. **Join the support server if you'd like an in depth guide to how it works**\n
-                •  PVP Revamp is finally here! With competitive ranking, dedicated rewards per win, earning gold, and more, there's no way you'll get bored with it!\n
-                • Barn maps can no longer be obtained via racing, but now wheelspins drop all rarities!\n
-                • Bet racing removed to comply with Discords gambling regulations.\n
-                • Car packs are now live, buy exclusive cars with gold!\n
-                • qm and hm have been joined into one command **/dragrace**\n
-                • New houses!\n
-                • Weight stat now has effect everywhere.
+                `• Limited stock cars! Check the dealership and get these cars fast before they're off sale forever!\n
+                • New house\n
+                • Market listing limits, you may only have 5 items listed at once\n
+                • Bug fixes
+                • 
                 `
               )
               .setFooter({ text: "1/6/2022" })

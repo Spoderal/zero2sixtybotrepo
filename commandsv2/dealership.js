@@ -13,6 +13,7 @@ const { toCurrency } = require("../common/utils");
 const { tipFooterPurchaseCar } = require("../common/tips");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
+const Global = require("../schema/global-schema")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("dealer")
@@ -27,16 +28,14 @@ module.exports = {
     let carclassSarr = [];
     let carclassParr = [];
     let newcars = [
-      cars.Cars["1991 hoonigan porsche 911 turbo"],
-      cars.Cars["1978 hoonigan ford escort mk2 rs1800"],
-      cars.Cars["1965 hoonigan ford mustang hoonicorn"],
-      cars.Cars["2021 lotus evora gt"],
-      cars.Cars["2018 infiniti q60"],
-      cars.Cars["2018 audi rs5"],
-      cars.Cars["1997 acura integra type r"],
-      cars.Cars["2015 volkswagen golf gti"],
+      cars.Cars["1990 mercedes 190e"],
+      cars.Cars["2023 honda civic type r"],
+      cars.Cars["2021 bentley continental gt"],
+      cars.Cars["1987 ferrari f40 competizione"],
+      cars.Cars["2019 apollo ie"],
     ];
-
+    let global = await Global.findOne();
+    let carstock = global.stock
     for (let c in cars.Cars) {
       let car = cars.Cars[c];
 
@@ -47,7 +46,7 @@ module.exports = {
             Price: car.Price,
             alias: car.alias,
             icon: car.Emote,
-            Stock: car.Stock,
+            Stock: carstock[car.Name.toLowerCase()].Stock,
           });
         } else {
           carclassDarr.push({
@@ -64,7 +63,7 @@ module.exports = {
             Price: car.Price,
             alias: car.alias,
             icon: car.Emote,
-            Stock: car.Stock,
+            Stock: carstock[car.Name.toLowerCase()].Stock,
           });
         } else {
           carclassCarr.push({
@@ -81,7 +80,7 @@ module.exports = {
             Price: car.Price,
             alias: car.alias,
             icon: car.Emote,
-            Stock: car.Stock,
+            Stock: carstock[car.Name.toLowerCase()].Stock,
           });
         } else {
           carclassBarr.push({
@@ -98,7 +97,7 @@ module.exports = {
             Price: car.Price,
             alias: car.alias,
             icon: car.Emote,
-            Stock: car.Stock,
+            Stock: carstock[car.Name.toLowerCase()].Stock,
           });
         } else {
           carclassAarr.push({
@@ -115,7 +114,7 @@ module.exports = {
             Price: car.Price,
             alias: car.alias,
             icon: car.Emote,
-            Stock: car.Stock,
+            Stock: carstock[car.Name.toLowerCase()].Stock,
           });
         } else {
           carclassSarr.push({
@@ -247,7 +246,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png")
+          .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png").setTitle("Class D Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -300,7 +299,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/kGT51Gh/class-c.png")
+          .setThumbnail("https://i.ibb.co/kGT51Gh/class-c.png").setTitle("Class C Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -353,7 +352,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/r52rPJ5/class-b.png")
+          .setThumbnail("https://i.ibb.co/r52rPJ5/class-b.png").setTitle("Class B Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -386,7 +385,7 @@ module.exports = {
         page = 1;
       } else if (i.customId.includes("classA")) {
         classpage = carclassAarr;
-        embed = new EmbedBuilder().setTitle("Class A Dealership");
+        embed = new EmbedBuilder()
         let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("previous")
@@ -406,7 +405,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png")
+          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png").setTitle("Class A Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -439,7 +438,7 @@ module.exports = {
         page = 1;
       } else if (i.customId.includes("classS")) {
         classpage = carclassSarr;
-        embed = new EmbedBuilder().setTitle("Class A Dealership");
+        embed = new EmbedBuilder().setTitle("Class S Dealership")
         let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("previous")
@@ -459,7 +458,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png")
+          .setThumbnail("https://i.ibb.co/WnSVK05/CLASS-S.png").setTitle("Class S Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
         console.dir(carclassSarr[0]);

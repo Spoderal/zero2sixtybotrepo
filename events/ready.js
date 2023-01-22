@@ -119,7 +119,6 @@ module.exports = {
         console.log(`Registered ${commands.length} commands locally.`);
       }
       console.log("Zero2Sixty is ready.");
-      cars();
     } catch (err) {
       if (err) console.error(err);
     }
