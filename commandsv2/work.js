@@ -22,9 +22,7 @@ module.exports = {
     .addSubcommand((cmd) =>
       cmd.setName("work").setDescription("Work at your job")
     )
-    .addSubcommand((cmd) =>
-    cmd.setName("quit").setDescription("Quit your job")
-  )
+    .addSubcommand((cmd) => cmd.setName("quit").setDescription("Quit your job"))
     .addSubcommand((cmd) =>
       cmd
         .setName("hire")
@@ -61,17 +59,13 @@ module.exports = {
       userdata.save();
       console.log(jobtoset);
       interaction.reply(`Hired for ${job}`);
-    }
-    
-    else if (subcommand == "quit") {
+    } else if (subcommand == "quit") {
       if (!userdata.work) return interaction.reply("You don't have a job!");
-  
+
       userdata.work = null;
       userdata.save();
       interaction.reply(`You quit your job!`);
-    } 
-    
-    else if (subcommand == "work") {
+    } else if (subcommand == "work") {
       if (!userdata.work) return interaction.reply("You don't have a job.");
 
       let jobtowork = userdata.work;

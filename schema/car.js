@@ -16,7 +16,6 @@ const Car = new mongoose.Schema({
     required: false,
     default: [],
   },
-
 });
 
 module.exports = mongoose.model("car", Car);
