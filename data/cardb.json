@@ -5330,22 +5330,6 @@
       "Weight": 2700,
       "Stock": 10
     },
-    "2019 apollo ie": {
-      "alias": "2019 ie",
-      "Name": "2019 Apollo IE",
-      "Emote": "<:apollo:1066081882896351332>",
-      "Speed": 237,
-      "Price": 20000000,
-      "sellprice": 0,
-      "Engine": "2.9 L twin-turbocharged V8",
-      "Image": "https://www.miamilusso.com/wp-content/uploads/2018/12/apollo-2-1024x576.jpg",
-      "0-60": 3,
-      "Drift": 0,
-      "Handling": 700,
-      "Class": "S",
-      "Weight": 2700,
-      "Stock": 10
-    },
     "1995 mclaren f1": {
       "alias": "1995 f1",
       "Name": "1995 McLaren F1",

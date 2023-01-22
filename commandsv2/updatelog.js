@@ -130,7 +130,7 @@ module.exports = {
                 • 
                 `
               )
-              .setFooter({ text: "1/6/2022" })
+              .setFooter({ text: "1/22/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
