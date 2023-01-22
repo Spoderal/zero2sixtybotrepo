@@ -50,7 +50,7 @@ let bot5cars = [
   "2010 ferrari 458 italia",
   "2005 pagani zonda f",
   "2020 aston martin vantage",
-  "2020 mclaren 570s"
+  "2020 mclaren 570s",
 ];
 let bot6cars = [
   "2021 ferrari sf90 stradale",

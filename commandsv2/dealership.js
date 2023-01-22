@@ -13,7 +13,7 @@ const { toCurrency } = require("../common/utils");
 const { tipFooterPurchaseCar } = require("../common/tips");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
-const Global = require("../schema/global-schema")
+const Global = require("../schema/global-schema");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("dealer")
@@ -35,7 +35,7 @@ module.exports = {
       cars.Cars["2019 apollo ie"],
     ];
     let global = await Global.findOne();
-    let carstock = global.stock
+    let carstock = global.stock;
     for (let c in cars.Cars) {
       let car = cars.Cars[c];
 
@@ -246,7 +246,8 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png").setTitle("Class D Dealership")
+          .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png")
+          .setTitle("Class D Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -299,7 +300,8 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/kGT51Gh/class-c.png").setTitle("Class C Dealership")
+          .setThumbnail("https://i.ibb.co/kGT51Gh/class-c.png")
+          .setTitle("Class C Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -352,7 +354,8 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/r52rPJ5/class-b.png").setTitle("Class B Dealership")
+          .setThumbnail("https://i.ibb.co/r52rPJ5/class-b.png")
+          .setTitle("Class B Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -385,7 +388,7 @@ module.exports = {
         page = 1;
       } else if (i.customId.includes("classA")) {
         classpage = carclassAarr;
-        embed = new EmbedBuilder()
+        embed = new EmbedBuilder();
         let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("previous")
@@ -405,7 +408,8 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png").setTitle("Class A Dealership")
+          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png")
+          .setTitle("Class A Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
 
@@ -438,7 +442,7 @@ module.exports = {
         page = 1;
       } else if (i.customId.includes("classS")) {
         classpage = carclassSarr;
-        embed = new EmbedBuilder().setTitle("Class S Dealership")
+        embed = new EmbedBuilder().setTitle("Class S Dealership");
         let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("previous")
@@ -458,7 +462,8 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/WnSVK05/CLASS-S.png").setTitle("Class S Dealership")
+          .setThumbnail("https://i.ibb.co/WnSVK05/CLASS-S.png")
+          .setTitle("Class S Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
         console.dir(carclassSarr[0]);
