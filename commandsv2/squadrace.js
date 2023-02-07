@@ -91,10 +91,10 @@ module.exports = {
       { name: "flame squad", car: 0 },
       { name: "x squad", car: 0 },
     ];
-    if(!sqlevels.includes( { name: "double 0", car: 0 },)){
-      sqlevels.push( { name: "double 0", car: 0 },)
-      userdata.markModified("squads")
-      userdata.update()
+    if (!sqlevels.includes({ name: "double 0", car: 0 })) {
+      sqlevels.push({ name: "double 0", car: 0 });
+      userdata.markModified("squads");
+      userdata.update();
     }
     console.log(squadfiltered[0]);
     let sqlevelfiltered = sqlevels.filter(
