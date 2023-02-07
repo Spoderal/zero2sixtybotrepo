@@ -15,11 +15,17 @@ module.exports = {
 
     let dailyenabled = userdata.settings.daily;
     let tipsenabled = userdata.settings.tips;
-
+    let tradesenabled = userdata.settings.trades;
+    if(!userdata.settings.trades || userdata.settings.trades == null){
+      userdata.settings.trades = true
+      userdata.update()
+    }
     let voteenabled = userdata.settings.vote;
     let demote = "❌";
     let vemote = "❌";
     let temote = "❌";
+    let tremote = "❌"
+
 
     if (dailyenabled == true) {
       demote = "✅";
@@ -30,13 +36,17 @@ module.exports = {
     if (tipsenabled == true) {
       temote = "✅";
     }
+    if (tradesenabled == true) {
+      tremote = "✅";
+    }
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Settings for ${user.username}`)
       .addFields(
         { name: "Daily Reward Reminder", value: `${demote}` },
         { name: "Top.gg Vote Reminder", value: `${vemote}` },
-        { name: "Tips", value: `${temote}` }
+        { name: "Tips", value: `${temote}` },
+        { name: "Trade Requests", value: `${tremote}` }
       )
       .setColor(colors.blue);
 
@@ -52,6 +62,10 @@ module.exports = {
       new Discord.ButtonBuilder()
         .setCustomId("tips")
         .setLabel("Enable Tips")
+        .setStyle("Success"),
+      new Discord.ButtonBuilder()
+        .setCustomId("trades")
+        .setLabel("Enable Trade Requests")
         .setStyle("Success")
     );
 
@@ -66,6 +80,10 @@ module.exports = {
     if (tipsenabled == true) {
       row.components[2].setStyle("Danger");
       row.components[2].setLabel("Disable Tips");
+    }
+    if (tradesenabled == true) {
+      row.components[3].setStyle("Danger");
+      row.components[3].setLabel("Disable Trade Requests");
     }
 
     let msg = await interaction.reply({
@@ -105,7 +123,8 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` }
+            { name: "Tips", value: `${temote}` },
+            { name: "Trade Requests", value: `${tremote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -136,7 +155,8 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` }
+            { name: "Tips", value: `${temote}` },
+            { name: "Trade Requests", value: `${tremote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -167,7 +187,42 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` }
+            { name: "Tips", value: `${temote}` },
+            { name: "Trade Requests", value: `${tremote}` }
+          )
+          .setColor(colors.blue);
+        await i.update({
+          embeds: [embed],
+          components: [row],
+          fetchReply: true,
+        });
+      }
+      else if (i.customId.includes("trades")) {
+        if (tradesenabled == true) {
+          userdata.settings.trades = false;
+          row.components[3].setStyle("Success");
+          row.components[3].setLabel("Enable Trade Requests");
+        } else if (tradesenabled == false) {
+          userdata.settings.trades = true;
+          row.components[3].setStyle("Danger");
+          row.components[3].setLabel("Disable Trade Requests");
+        }
+        userdata.markModified("settings");
+        userdata.save();
+        if (userdata.settings.trades == true) {
+          tremote = "✅";
+        } else {
+          tremote = "❌";
+        }
+        console.log(`${userdata.settings.trades}`)
+
+        embed = new Discord.EmbedBuilder()
+          .setTitle(`Settings for ${user.username}`)
+          .addFields(
+            { name: "Daily Reward Reminder", value: `${demote}` },
+            { name: "Top.gg Vote Reminder", value: `${vemote}` },
+            { name: "Tips", value: `${temote}` },
+            { name: "Trade Requests", value: `${tremote}` }
           )
           .setColor(colors.blue);
         await i.update({
