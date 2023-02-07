@@ -120,6 +120,7 @@ const Profile = new mongoose.Schema({
       { name: "muscle brains", car: 0 },
       { name: "cool cobras", car: 0 },
       { name: "the ws", car: 0 },
+      { name: "double 0", car: 0 },
     ],
   },
   noto5: {

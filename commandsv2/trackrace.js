@@ -61,10 +61,10 @@ module.exports = {
       new Cooldowns({ id: user.id });
     let timeout = 1800000;
     if (
-      cooldowndata.racing !== null &&
-      timeout - (Date.now() - cooldowndata.racing) > 0
+      cooldowndata.trackracing !== null &&
+      timeout - (Date.now() - cooldowndata.trackracing) > 0
     ) {
-      let time = ms(timeout - (Date.now() - cooldowndata.racing));
+      let time = ms(timeout - (Date.now() - cooldowndata.trackracing));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
         .setDescription(`You can race again in ${time}`);
@@ -150,7 +150,7 @@ module.exports = {
 
     console.log(attachment);
 
-    cooldowndata.racing = Date.now();
+    cooldowndata.trackracing = Date.now();
     cooldowndata.save();
     let mph = selected.Speed;
     let weight =

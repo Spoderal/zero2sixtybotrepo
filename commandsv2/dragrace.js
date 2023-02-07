@@ -324,10 +324,10 @@ module.exports = {
       let calc2 = weight2 * (speed2 / 234);
       calc2 = calc2 / acceleration2;
       sec2 = (6.29 * (weight2 / calc2)) / acceleration2;
-      console.log(`sec2: ${sec2}`);
-
       calc2 = calc2 / sec2;
+      
       console.log(`calc2: ${calc2}`);
+      console.log(`sec2: ${sec2}`);
       tracklength -= calc;
       tracklength2 -= calc2;
 

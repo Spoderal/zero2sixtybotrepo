@@ -73,7 +73,7 @@ module.exports = {
         );
       }
     }
-    if (tier == 6) return interaction.reply("You've beaten all the squads!");
+    if (tier == 7) return interaction.reply("You've beaten all the squads!");
     interaction.reply(`Revving engines...`);
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
@@ -91,7 +91,11 @@ module.exports = {
       { name: "flame squad", car: 0 },
       { name: "x squad", car: 0 },
     ];
-
+    if(!sqlevels.includes( { name: "double 0", car: 0 },)){
+      sqlevels.push( { name: "double 0", car: 0 },)
+      userdata.markModified("squads")
+      userdata.update()
+    }
     console.log(squadfiltered[0]);
     let sqlevelfiltered = sqlevels.filter(
       (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()

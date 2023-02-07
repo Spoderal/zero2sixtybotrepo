@@ -124,6 +124,7 @@ module.exports = {
             interaction.channel.send(
               `You already own this car, so you got $${sellprice} instead.`
             );
+            userdata.save()
             return;
           }
           collector.on("collect", async (i) => {
