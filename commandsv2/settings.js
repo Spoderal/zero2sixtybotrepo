@@ -16,16 +16,15 @@ module.exports = {
     let dailyenabled = userdata.settings.daily;
     let tipsenabled = userdata.settings.tips;
     let tradesenabled = userdata.settings.trades;
-    if(!userdata.settings.trades || userdata.settings.trades == null){
-      userdata.settings.trades = true
-      userdata.update()
+    if (!userdata.settings.trades || userdata.settings.trades == null) {
+      userdata.settings.trades = true;
+      userdata.update();
     }
     let voteenabled = userdata.settings.vote;
     let demote = "❌";
     let vemote = "❌";
     let temote = "❌";
-    let tremote = "❌"
-
+    let tremote = "❌";
 
     if (dailyenabled == true) {
       demote = "✅";
@@ -196,8 +195,7 @@ module.exports = {
           components: [row],
           fetchReply: true,
         });
-      }
-      else if (i.customId.includes("trades")) {
+      } else if (i.customId.includes("trades")) {
         if (tradesenabled == true) {
           userdata.settings.trades = false;
           row.components[3].setStyle("Success");
@@ -214,7 +212,7 @@ module.exports = {
         } else {
           tremote = "❌";
         }
-        console.log(`${userdata.settings.trades}`)
+        console.log(`${userdata.settings.trades}`);
 
         embed = new Discord.EmbedBuilder()
           .setTitle(`Settings for ${user.username}`)

@@ -1,7 +1,12 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 // const discord = require("discord.js");
-const { EmbedBuilder, AttachmentBuilder,  ButtonBuilder, ActionRowBuilder} = require("discord.js");
+const {
+  EmbedBuilder,
+  AttachmentBuilder,
+  ButtonBuilder,
+  ActionRowBuilder,
+} = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
@@ -9,31 +14,17 @@ const colors = require("../common/colors");
 const helmetdb = require("../data/pfpsdb.json");
 const { emotes } = require("../common/emotes");
 const { createCanvas, loadImage } = require("canvas");
-const {
-  toCurrency,
-} = require("../common/utils");
+const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 
-let bot1cars = [
-  "2019 mazda miata",
-  "2020 subaru brz ts",
-  "2021 bmw m2"
-];
-let bot2cars = [
-  "2020 hyundai i30 n",
-  "2020 mini",
-  "2022 ford fiesta st"
-];
-let bot3cars = [
-  "2019 jaguar xe sv",
-  "2021 bac mono",
-  "2021 nissan gtr nismo",
-];
+let bot1cars = ["2019 mazda miata", "2020 subaru brz ts", "2021 bmw m2"];
+let bot2cars = ["2020 hyundai i30 n", "2020 mini", "2022 ford fiesta st"];
+let bot3cars = ["2019 jaguar xe sv", "2021 bac mono", "2021 nissan gtr nismo"];
 let bot4cars = [
   "2023 porsche 911 gt3 rs",
   "2021 mercedes amg gt black series",
-  "2020 ferrari f8 tributo"
+  "2020 ferrari f8 tributo",
 ];
 
 module.exports = {
@@ -102,26 +93,26 @@ module.exports = {
     let cashwon = parseInt(bot) * 150;
     let rpwon = parseInt(bot) * 2;
     let eventkeys = parseInt(bot) * 1;
-    let lostcash
+    let lostcash;
     if (bot == "1") {
-      lostcash = 5000
+      lostcash = 5000;
       car2 = cardb.Cars[lodash.sample(bot1cars)];
     } else if (bot == "2") {
-      lostcash = 10000
+      lostcash = 10000;
       car2 = cardb.Cars[lodash.sample(bot2cars)];
     } else if (bot == "3") {
-      lostcash = 15000
+      lostcash = 15000;
       car2 = cardb.Cars[lodash.sample(bot3cars)];
     } else if (bot == "4") {
-      lostcash = 20000
+      lostcash = 20000;
       car2 = cardb.Cars[lodash.sample(bot4cars)];
     }
 
-    if(userdata.cash < lostcash){
-      return interaction.reply(`You need at least ${lostcash} to race this tier! Just in case you lose it...`)
+    if (userdata.cash < lostcash) {
+      return interaction.reply(
+        `You need at least ${lostcash} to race this tier! Just in case you lose it...`
+      );
     }
-
-  
 
     let selected1image = await loadImage(`${selected.Livery}`);
     let selected2image = await loadImage(`${car2.Image}`);
@@ -161,7 +152,8 @@ module.exports = {
     cooldowndata.racing = Date.now();
     cooldowndata.save();
     let mph = selected.Speed;
-    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let weight =
+      selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
     let handling = selected.Handling;
 
@@ -171,7 +163,7 @@ module.exports = {
 
     let mph2 = car2.Speed;
     let weight2 = car2.Weight;
-    let acceleration2 = 2.5
+    let acceleration2 = 2.5;
     let handling2 = car2.Handling;
 
     let speed = 0;
@@ -216,7 +208,7 @@ module.exports = {
       .setColor(colors.blue)
       .setImage("attachment://profile-image.png");
 
-    let msg =  await interaction.editReply({
+    let msg = await interaction.editReply({
       content: "GO!",
       embeds: [embed],
       files: [attachment],
@@ -224,64 +216,60 @@ module.exports = {
     });
 
     let i2 = setInterval(async () => {
-        let calc = (weight / 3) + (speed / 75);
+      let calc = weight / 3 + speed / 75;
 
-          calc = calc / acceleration;
+      calc = calc / acceleration;
 
-    
-        sec = (7.3 * (handling / calc)) / 5;
-        calc = calc / sec;
-        // car 2
-        let calc2 = (weight2 / 3) + (speed2 / 75);
-     
-        calc2 = calc2 / acceleration2;
+      sec = (7.3 * (handling / calc)) / 5;
+      calc = calc / sec;
+      // car 2
+      let calc2 = weight2 / 3 + speed2 / 75;
 
-  
+      calc2 = calc2 / acceleration2;
+
       sec2 = (7.3 * (handling2 / calc2)) / 5;
       calc2 = calc2 / sec2;
-        console.log(`sec2: ${sec2}`);
-  
-        console.log(`calc: ${calc}`);
+      console.log(`sec2: ${sec2}`);
 
-        console.log(`calc2: ${calc2}`);
-        tracklength -= calc;
-        tracklength2 -= calc2;
-        if (tracklength2 <= 0 && i2 !== null) {
-          clearInterval(i2);
+      console.log(`calc: ${calc}`);
 
-          tracklength = 800
-          tracklength2 = 800
-            ctx.drawImage(cupimg, 960, 50, 100, 100);
-            attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-              name: "profile-image.png",
-            });
-            embed.setImage(`attachment://profile-image.png`);
-    
-            embed.setTitle(`Tier ${bot} Track Race lost!`);
-            await interaction.editReply({ embeds: [embed], files: [attachment] });
-            userdata.cash -= lostcash
-            userdata.save()
-            return
-          }
-
-      else if (tracklength <= 0 && i2 !== null) {
+      console.log(`calc2: ${calc2}`);
+      tracklength -= calc;
+      tracklength2 -= calc2;
+      if (tracklength2 <= 0 && i2 !== null) {
         clearInterval(i2);
 
-        tracklength = 800
-        tracklength2 = 800
+        tracklength = 800;
+        tracklength2 = 800;
+        ctx.drawImage(cupimg, 960, 50, 100, 100);
+        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        embed.setImage(`attachment://profile-image.png`);
+
+        embed.setTitle(`Tier ${bot} Track Race lost!`);
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        userdata.cash -= lostcash;
+        userdata.save();
+        return;
+      } else if (tracklength <= 0 && i2 !== null) {
+        clearInterval(i2);
+
+        tracklength = 800;
+        tracklength2 = 800;
 
         let row = new ActionRowBuilder().addComponents(
-            new ButtonBuilder()
+          new ButtonBuilder()
             .setCustomId("keep")
             .setEmoji(car2.Emote)
             .setLabel("Keep Car")
             .setStyle("Secondary"),
-            new ButtonBuilder()
+          new ButtonBuilder()
             .setCustomId("sell")
             .setEmoji(`💲`)
             .setLabel("Sell Car")
             .setStyle("Success")
-        )
+        );
         ctx.save();
         roundedImage(ctx, 640, 200, 640, 360, 20);
         ctx.stroke();
@@ -308,8 +296,6 @@ module.exports = {
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
         earnings.push(`${emotes.rp} +${rpwon}`);
 
-
-
         userdata.cash += cashwon;
         userdata.rp3 += rpwon;
         userdata.racerank += 1;
@@ -317,25 +303,25 @@ module.exports = {
         embed.setTitle(`Tier ${bot} Track Race won!`);
         embed.setImage(`attachment://profile-image.png`);
         let botfiltered = userdata.cars.filter((car) => car.Name == car2.Name);
-        if(botfiltered[0]){
-            await interaction.editReply({ embeds: [embed], files: [attachment]});
-           await interaction.channel.send(`Sold car for ${toCurrency(car2.sellprice)}`)
-           userdata.cash += car2.sellprice
-           userdata.save()
-           return;
+        if (botfiltered[0]) {
+          await interaction.editReply({ embeds: [embed], files: [attachment] });
+          await interaction.channel.send(
+            `Sold car for ${toCurrency(car2.sellprice)}`
+          );
+          userdata.cash += car2.sellprice;
+          userdata.save();
+          return;
+        } else {
+          await interaction.editReply({
+            embeds: [embed],
+            files: [attachment],
+            components: [row],
+            fetchReply: true,
+          });
         }
-        else {
-            await interaction.editReply({ embeds: [embed], files: [attachment], components: [row], fetchReply: true });
-        }
-
       }
       // lost
 
-    
-      
-
-      
-      
       console.log(`track length ${tracklength}`);
       console.log(`track length 2 ${tracklength2}`);
     }, 1000);
@@ -345,17 +331,14 @@ module.exports = {
     let collector = msg.createMessageComponentCollector({
       filter: filter2,
     });
-    collector.once('collect', async (i) => {
-      
-      if(i.customId.includes("sell")){
-         userdata.cash += car2.sellprice
-         embed.setTitle("✅")
-         userdata.save()
+    collector.once("collect", async (i) => {
+      if (i.customId.includes("sell")) {
+        userdata.cash += car2.sellprice;
+        embed.setTitle("✅");
+        userdata.save();
 
-        return await i.update({embeds: [embed], fetchReply: true})
-        
-      }
-      else if(i.customId.includes("keep")){
+        return await i.update({ embeds: [embed], fetchReply: true });
+      } else if (i.customId.includes("keep")) {
         let carindb = cardb.Cars[car2.Name.toLowerCase()];
         let carobj = {
           ID: carindb.alias,
@@ -370,13 +353,12 @@ module.exports = {
         };
 
         userdata.cars.push(carobj);
-        embed.setTitle("✅")
-        userdata.save()
+        embed.setTitle("✅");
+        userdata.save();
 
-        return await i.update({embeds: [embed], fetchReply: true})
-        
+        return await i.update({ embeds: [embed], fetchReply: true });
       }
-    })
+    });
   },
 };
 

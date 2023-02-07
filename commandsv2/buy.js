@@ -125,7 +125,7 @@ module.exports = {
           Livery: carindb.Image,
           Miles: 0,
           Drift: 0,
-          Weight:carindb.Weight
+          Weight: carindb.Weight,
         };
         if (boughtCar.Range) {
           carobj = {
@@ -141,7 +141,7 @@ module.exports = {
             Drift: 0,
             Range: carindb.Range,
             MaxRange: carindb.Range,
-            Weight:carindb.Weight
+            Weight: carindb.Weight,
           };
         }
 
@@ -190,7 +190,7 @@ module.exports = {
             Miles: 0,
             Drift: 0,
             police: true,
-            Weight:boughtCar.Weight
+            Weight: boughtCar.Weight,
           };
 
           if (boughtCar.Range) {
@@ -208,7 +208,7 @@ module.exports = {
               Range: boughtCar.Range,
               MaxRange: boughtCar.Range,
               police: true,
-              Weight:boughtCar.Weight
+              Weight: boughtCar.Weight,
             };
           }
 
@@ -258,7 +258,7 @@ module.exports = {
             Miles: 0,
             Resale: sellprice,
             Drift: 0,
-            Weight:carindb.Weight
+            Weight: carindb.Weight,
           };
 
           if (boughtCar.Range) {
@@ -276,7 +276,7 @@ module.exports = {
               Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
-              Weight:carindb.Weight
+              Weight: carindb.Weight,
             };
           }
 

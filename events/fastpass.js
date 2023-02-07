@@ -1,11 +1,5 @@
-
-async function fastpass(client) {
-
-    
-
-}
+async function fastpass(client) {}
 
 module.exports = {
-    fastpass,
-  };
-  
+  fastpass,
+};

@@ -46,7 +46,7 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  dragracing:{
+  dragracing: {
     type: Number,
     required: false,
     default: 0,
@@ -121,7 +121,6 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
-
 });
 
 module.exports = mongoose.model("cooldowns", Cooldowns);

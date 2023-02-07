@@ -49,7 +49,7 @@ module.exports = {
       .setDescription(`${item}`)
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
-      let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
+    let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
     setTimeout(() => {
       let item = lodash.sample(items);
       embed.setDescription(`${item}`);
@@ -105,7 +105,11 @@ module.exports = {
           embed.addFields([
             { name: `ID`, value: `${carsdb.Cars[reward.toLowerCase()].alias}` },
           ]);
-         interaction.editReply({ embeds: [embed], components: [row], fetchReply: true });
+          interaction.editReply({
+            embeds: [embed],
+            components: [row],
+            fetchReply: true,
+          });
           let filter2 = (btnInt) => {
             return interaction.user.id === btnInt.user.id;
           };
@@ -122,14 +126,14 @@ module.exports = {
             );
             return;
           }
-          collector.on('collect', async (i) => {
-            if(i.customId.includes("keep")){
+          collector.on("collect", async (i) => {
+            if (i.customId.includes("keep")) {
               if (usercars.length >= garagespaces) {
                 interaction.channel.send("You garage is full!");
                 return;
               } else {
                 let carindb = carsdb.Cars[reward];
-    
+
                 let ecarobj = {
                   ID: carindb.alias,
                   Name: carindb.Name,
@@ -143,7 +147,7 @@ module.exports = {
                   MaxRange: carindb.Range,
                   Miles: 0,
                 };
-    
+
                 let carobj = {
                   ID: carindb.alias,
                   Name: carindb.Name,
@@ -155,28 +159,25 @@ module.exports = {
                   Livery: carindb.Image,
                   Miles: 0,
                 };
-    
+
                 if (carsdb.Cars[reward.toLowerCase()].Range) {
                   userdata.cars.push(ecarobj);
                 } else {
                   userdata.cars.push(carobj);
                 }
               }
-              userdata.save()
-              embed.setTitle("✅")
-              await i.update({embeds: [embed]})
-              return 
-            }
-            else if(i.customId.includes("sell")){
+              userdata.save();
+              embed.setTitle("✅");
+              await i.update({ embeds: [embed] });
+              return;
+            } else if (i.customId.includes("sell")) {
               userdata.cash += sellprice;
-              userdata.save()
-              embed.setTitle("✅")
-              await i.update({embeds: [embed]})
-              return 
+              userdata.save();
+              embed.setTitle("✅");
+              await i.update({ embeds: [embed] });
+              return;
             }
-          })
-
-    
+          });
         } else if (item == "💵") {
           let reward = lodash.sample(cash);
           reward = Number(reward);
