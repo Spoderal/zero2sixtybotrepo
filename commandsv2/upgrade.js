@@ -190,8 +190,8 @@ module.exports = {
       let stat = Number(oldweight);
       selected.WeightStat = stat -= newspeed;
     }
-    if (partindb.AddWeight && partindb.AddWeight > 0) {
-      let newspeed = Number(partindb.AddWeight);
+    if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
+      let newspeed = Number(partInLocalDB?.AddWeight);
       let stat = Number(oldweight);
       selected.WeightStat = stat += newspeed;
     }
