@@ -68,7 +68,7 @@ module.exports = {
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: user.id });
-    let timeout = 45 * 1000;
+    let timeout = 1800000;
     if (
       cooldowndata.racing !== null &&
       timeout - (Date.now() - cooldowndata.racing) > 0
