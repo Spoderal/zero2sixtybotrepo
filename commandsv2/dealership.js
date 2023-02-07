@@ -20,7 +20,7 @@ module.exports = {
     .setDescription("The car dealership"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    let usercars = userdata.cars
+    let usercars = userdata.cars;
     let carclassDarr = [];
     let carclassCarr = [];
     let carclassBarr = [];
@@ -39,7 +39,6 @@ module.exports = {
       cars.Cars["2021 bac mono"],
       cars.Cars["2019 mazda miata"],
       cars.Cars["2021 bmw m2"],
-
     ];
     let global = await Global.findOne();
     let carstock = global.stock;
@@ -48,235 +47,211 @@ module.exports = {
 
       if (car.Class == "D" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
-      
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassDarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
-          }
-          else {
+          } else {
             carclassDarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
           }
         } else {
-       
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassDarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
             });
-          }
-          else {
+          } else {
             carclassDarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
             });
           }
         }
-      }   
-      else if (car.Class == "C" && car.Price > 0 && !car.Police) {
+      } else if (car.Class == "C" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
-         
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassCarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
-          }
-          else {
+          } else {
             carclassCarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
           }
         } else {
-       
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassCarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
             });
-          }
-          else {
+          } else {
             carclassCarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
             });
           }
         }
-      }
-      else if (car.Class == "B" && car.Price > 0 && !car.Police) {
+      } else if (car.Class == "B" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
-         
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassBarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
-          }
-          else {
+          } else {
             carclassBarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
           }
         } else {
-       
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassBarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
             });
-          }
-          else {
+          } else {
             carclassBarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
             });
           }
         }
-      }
-      else if (car.Class == "A" && car.Price > 0 && !car.Police) {
+      } else if (car.Class == "A" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
-         
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassAarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
-          }
-          else {
+          } else {
             carclassAarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
           }
         } else {
-       
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassAarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
             });
-          }
-          else {
+          } else {
             carclassAarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
             });
           }
         }
-      }
-      else if (car.Class == "S" && car.Price > 0 && !car.Police) {
+      } else if (car.Class == "S" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
-         
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassSarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
-          }
-          else {
+          } else {
             carclassSarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
               Stock: carstock[car.Name.toLowerCase()].Stock,
             });
           }
         } else {
-       
-          let owned2 = usercars.filter((caru) => caru.Name == car.Name)
-          if(owned2[0]){
+          let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+          if (owned2[0]) {
             carclassSarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '✅',
+              owned: "✅",
             });
-          }
-          else {
+          } else {
             carclassSarr.push({
               Name: car.Name,
               Price: car.Price,
               alias: car.alias,
               Emote: car.Emote,
-              owned: '❌',
+              owned: "❌",
             });
           }
         }
@@ -342,31 +317,25 @@ module.exports = {
         .setCustomId("classC")
         .setEmoji("<:class_c:1030953017249386546>")
         .setStyle("Secondary")
+    );
 
-    )
-        
-        let row5 = new ActionRowBuilder().addComponents(
-          
-          new ButtonBuilder()
-            .setCustomId("classB")
-            .setEmoji("<:class_b:1030953016204996678>")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("classA")
-            .setEmoji("<:class_a:1030953021678567554>")
-            .setStyle("Secondary"),
+    let row5 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("classB")
+        .setEmoji("<:class_b:1030953016204996678>")
+        .setStyle("Secondary"),
+      new ButtonBuilder()
+        .setCustomId("classA")
+        .setEmoji("<:class_a:1030953021678567554>")
+        .setStyle("Secondary")
+    );
 
-
-            )
-
-        
-        
-        let row3 = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("classS")
-            .setEmoji("<:CLASS_S:1030953020806152222>")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
+    let row3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("classS")
+        .setEmoji("<:CLASS_S:1030953020806152222>")
+        .setStyle("Secondary"),
+      new ButtonBuilder()
         .setCustomId("classN")
         .setLabel("New")
         .setEmoji("⭐")
@@ -392,7 +361,7 @@ module.exports = {
     );
 
     let embed = new EmbedBuilder()
-    .setTitle("Dealership")
+      .setTitle("Dealership")
       .setThumbnail("https://i.ibb.co/GWcwXNX/dealership.png")
       .setColor(colors.blue)
       .setDescription(
@@ -418,7 +387,7 @@ module.exports = {
       if (i.customId.includes("classD")) {
         classpage = carclassDarr;
         embed = new EmbedBuilder().setTitle("Class D Dealership");
-      
+
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png")
           .setTitle("Class D Dealership")
@@ -441,7 +410,9 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -495,7 +466,9 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -549,7 +522,9 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -603,7 +578,9 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -656,7 +633,9 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -671,7 +650,7 @@ module.exports = {
       } else if (i.customId.includes("classN")) {
         classpage = newcars;
         embed = new EmbedBuilder().setTitle("New Cars");
-      
+
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/MBtYRYz/NEWCARS.png")
           .setColor(colors.blue);
@@ -731,18 +710,18 @@ module.exports = {
               )}\nStock: ${car.Stock}\nOwned: ${car.owned}`,
               inline: true,
             });
-          }
-          else if(car.Obtained){
+          } else if (car.Obtained) {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nObtained: ${car.Obtained}\nOwned: ${car.owned}`,
               inline: true,
             });
-          } 
-          else {
+          } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }

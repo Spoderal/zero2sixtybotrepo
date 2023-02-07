@@ -1,7 +1,11 @@
 const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { ActionRowBuilder, ButtonBuilder, AttachmentBuilder } = require("discord.js");
+const {
+  ActionRowBuilder,
+  ButtonBuilder,
+  AttachmentBuilder,
+} = require("discord.js");
 const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
@@ -13,7 +17,7 @@ const {
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const itemdb = require("../data/items.json");
-const StackBlur = require("stackblur-canvas")
+const StackBlur = require("stackblur-canvas");
 
 const { createCanvas, loadImage } = require("canvas");
 module.exports = {
@@ -58,8 +62,10 @@ module.exports = {
     let weightemote = emotes.weight;
 
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
-
-      let initialmsg = await interaction.reply({content:"Please wait...", fetchReply: true})
+      let initialmsg = await interaction.reply({
+        content: "Please wait...",
+        fetchReply: true,
+      });
       let handlingemote = emotes.handling;
       let speedemote = emotes.speed;
       let accelerationemote = emotes.zero2sixty;
@@ -67,9 +73,9 @@ module.exports = {
       let carindb = list[car];
 
       let speed = `${carindb.Speed}`;
-      let acceleration = carindb["0-60"]
-      let handling = `${carindb.Handling}`
-      let weight = `${carindb.Weight}`
+      let acceleration = carindb["0-60"];
+      let handling = `${carindb.Handling}`;
+      let weight = `${carindb.Weight}`;
 
       if (!carindb) return await interaction.reply(`Thats not a car!`);
 
@@ -79,37 +85,32 @@ module.exports = {
       const canvas = createCanvas(1280, 720);
       const ctx = canvas.getContext("2d");
       const bg = await loadImage(carindb.Image);
-      let rounded = Math.round(acceleration * 10) / 10
+      let rounded = Math.round(acceleration * 10) / 10;
 
       ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = "bold 48px Ariel"
-      ctx.fillStyle = 'white';
+      ctx.font = "bold 48px Ariel";
+      ctx.fillStyle = "white";
 
-      ctx.fillText(`${speed}`, 15, 110)
-      ctx.fillText(`${rounded}`, 165, 110)
-      ctx.fillText(`${handling}`, 300, 110)
-      
-      ctx.font = "bold 38px Ariel"
-      ctx.fillText(`${weight}`, 435, 110)
-      ctx.font = "bold 50px Ariel"
+      ctx.fillText(`${speed}`, 15, 110);
+      ctx.fillText(`${rounded}`, 165, 110);
+      ctx.fillText(`${handling}`, 300, 110);
 
-      ctx.fillText(`${toCurrency(carindb.Price)}`, 570, 80)
-      
+      ctx.font = "bold 38px Ariel";
+      ctx.fillText(`${weight}`, 435, 110);
+      ctx.font = "bold 50px Ariel";
+
+      ctx.fillText(`${toCurrency(carindb.Price)}`, 570, 80);
+
       let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
         name: "profile-image.png",
       });
-      
+
       await interaction.editReply({
-        content:"",
+        content: "",
         files: [attachment],
         fetchReply: true,
       });
-  
-
-
-
-
     } else if (subcommandfetch == "id") {
       let idtoselect = interaction.options.getString("id");
 
@@ -129,7 +130,7 @@ module.exports = {
         return await interaction.reply({ embeds: [errembed] });
       }
 
-      let initialmsg = await interaction.reply("Please wait...")
+      let initialmsg = await interaction.reply("Please wait...");
 
       let handlingemote = emotes.handling;
       let speedemote = emotes.speed;
@@ -149,32 +150,30 @@ module.exports = {
         selected.WeightStat || list[selected.Name.toLowerCase()].Weight || 0;
       let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
       let speed = `${carindb.Speed}`;
-      let acceleration = carindb.Acceleration
-      let handling = `${carindb.Handling}`
-      let weight = carindb.Weight || list[selected.Name.toLowerCase()].Weight
+      let acceleration = carindb.Acceleration;
+      let handling = `${carindb.Handling}`;
+      let weight = carindb.Weight || list[selected.Name.toLowerCase()].Weight;
 
-      speed = Math.round(speed)
-     
+      speed = Math.round(speed);
+
       const canvas = createCanvas(1280, 720);
       const ctx = canvas.getContext("2d");
       const bg = await loadImage(cars.Cars[carindb.Name.toLowerCase()].Image);
-      let rounded = Math.round(acceleration * 10) / 10
+      let rounded = Math.round(acceleration * 10) / 10;
 
       ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = "bold 48px Ariel"
-      ctx.fillStyle = 'white';
+      ctx.font = "bold 48px Ariel";
+      ctx.fillStyle = "white";
 
-      ctx.fillText(`${speed}`, 15, 110)
-      ctx.fillText(`${rounded}`, 165, 110)
-      ctx.fillText(`${handling}`, 300, 110)
-      
-      ctx.font = "bold 38px Ariel"
-      ctx.fillText(`${weight}`, 435, 110)
-      ctx.font = "bold 50px Ariel"
+      ctx.fillText(`${speed}`, 15, 110);
+      ctx.fillText(`${rounded}`, 165, 110);
+      ctx.fillText(`${handling}`, 300, 110);
 
+      ctx.font = "bold 38px Ariel";
+      ctx.fillText(`${weight}`, 435, 110);
+      ctx.font = "bold 50px Ariel";
 
-      
       let exhaust = selected.Exhaust || "Stock";
       let intake = selected.Intake || "Stock";
       let suspension = selected.Suspension || "Stock";
@@ -190,115 +189,110 @@ module.exports = {
 
       let partindb = partdb.Parts;
 
-      let exhaustemote = partindb[exhaust.toLowerCase()].Image || undefined
-      let intakeemote = partindb[intake.toLowerCase()].Image || undefined
-      let suspensionemote = partindb[suspension.toLowerCase()].Image || undefined
-      let tiresemote = partindb[tires.toLowerCase()].Image || undefined
-      let clutchemote = partindb[clutch.toLowerCase()].Image || undefined
-      let ecuemote = partindb[ecu.toLowerCase()].Image || undefined
-      let engineemote = partindb[engine.toLowerCase()].Image || undefined
-      let turboemote = partindb[turbo.toLowerCase()].Image  || undefined
-      let intercooleremote = partindb[intercooler.toLowerCase()].Image || undefined
-      let gearboxemote = partindb[gearbox.toLowerCase()].Image || undefined
-      let brakesemote = partindb[brakes.toLowerCase()].Image || undefined
-
+      let exhaustemote = partindb[exhaust.toLowerCase()].Image || undefined;
+      let intakeemote = partindb[intake.toLowerCase()].Image || undefined;
+      let suspensionemote =
+        partindb[suspension.toLowerCase()].Image || undefined;
+      let tiresemote = partindb[tires.toLowerCase()].Image || undefined;
+      let clutchemote = partindb[clutch.toLowerCase()].Image || undefined;
+      let ecuemote = partindb[ecu.toLowerCase()].Image || undefined;
+      let engineemote = partindb[engine.toLowerCase()].Image || undefined;
+      let turboemote = partindb[turbo.toLowerCase()].Image || undefined;
+      let intercooleremote =
+        partindb[intercooler.toLowerCase()].Image || undefined;
+      let gearboxemote = partindb[gearbox.toLowerCase()].Image || undefined;
+      let brakesemote = partindb[brakes.toLowerCase()].Image || undefined;
 
       ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-      ctx.font = "bold 48px Ariel"
-      ctx.fillStyle = 'white';
+      ctx.font = "bold 48px Ariel";
+      ctx.fillStyle = "white";
 
-      ctx.fillText(`${speed}`, 15, 110)
-      ctx.fillText(`${rounded}`, 165, 110)
-      ctx.fillText(`${handling}`, 300, 110)
-      
-      ctx.font = "bold 38px Ariel"
-      ctx.fillText(`${weight}`, 435, 110)
-      ctx.font = "bold 50px Ariel"
+      ctx.fillText(`${speed}`, 15, 110);
+      ctx.fillText(`${rounded}`, 165, 110);
+      ctx.fillText(`${handling}`, 300, 110);
 
-    
-      if(exhaustemote !== undefined){
-        let exhaustimg = await loadImage(exhaustemote)
-        ctx.drawImage(exhaustimg, 1150, 180, 75, 75)
-        ctx.font = "bold 20px Ariel"
-        ctx.fillText(`${exhaust}`, 1132, 180)
-      }
-      if(tiresemote !== undefined){
-        let tiresimg = await loadImage(tiresemote)
-        ctx.drawImage(tiresimg, 1150, 290, 75, 75)
-        ctx.font = "bold 20px Ariel"
-        ctx.fillText(`${tires}`, 1132, 280)
-      }
-      if(suspensionemote !== undefined){
-        let suspensionimg = await loadImage(suspensionemote)
-        ctx.drawImage(suspensionimg, 1150, 390, 75, 75)
-        ctx.font = "bold 18px Ariel"
-        ctx.fillText(`${suspension}`, 1132, 390)
-      }
-      if(gearboxemote !== undefined){
-        let gearboximg = await loadImage(gearboxemote)
-        ctx.drawImage(gearboximg, 1150, 480, 75, 75)
-        ctx.font = "bold 20px Ariel"
-        ctx.fillText(`${gearbox}`, 1132, 480)
-      }
-      if(engineemote !== undefined){
-        ctx.fillText(`Engine`, 1150, 580)
-        ctx.font = "bold 18px Ariel"
-        ctx.fillText(`${engine}`, 1165, 600)
-      }
+      ctx.font = "bold 38px Ariel";
+      ctx.fillText(`${weight}`, 435, 110);
+      ctx.font = "bold 50px Ariel";
 
-      if(brakesemote !== undefined){
-        let brakesimg = await loadImage(brakesemote)
-        ctx.drawImage(brakesimg, 560, 20, 75, 75)
-        ctx.font = "bold 15px Ariel"
-        ctx.fillText(`${brakes}`, 565, 30)
+      if (exhaustemote !== undefined) {
+        let exhaustimg = await loadImage(exhaustemote);
+        ctx.drawImage(exhaustimg, 1150, 180, 75, 75);
+        ctx.font = "bold 20px Ariel";
+        ctx.fillText(`${exhaust}`, 1132, 180);
+      }
+      if (tiresemote !== undefined) {
+        let tiresimg = await loadImage(tiresemote);
+        ctx.drawImage(tiresimg, 1150, 290, 75, 75);
+        ctx.font = "bold 20px Ariel";
+        ctx.fillText(`${tires}`, 1132, 280);
+      }
+      if (suspensionemote !== undefined) {
+        let suspensionimg = await loadImage(suspensionemote);
+        ctx.drawImage(suspensionimg, 1150, 390, 75, 75);
+        ctx.font = "bold 18px Ariel";
+        ctx.fillText(`${suspension}`, 1132, 390);
+      }
+      if (gearboxemote !== undefined) {
+        let gearboximg = await loadImage(gearboxemote);
+        ctx.drawImage(gearboximg, 1150, 480, 75, 75);
+        ctx.font = "bold 20px Ariel";
+        ctx.fillText(`${gearbox}`, 1132, 480);
+      }
+      if (engineemote !== undefined) {
+        ctx.fillText(`Engine`, 1150, 580);
+        ctx.font = "bold 18px Ariel";
+        ctx.fillText(`${engine}`, 1165, 600);
       }
 
-      if(clutchemote !== undefined){
-        let clutchimg = await loadImage(clutchemote)
-        ctx.drawImage(clutchimg, 650, 35, 50, 50)
-        ctx.font = "bold 15px Ariel"
-        ctx.fillText(`${clutch}`, 645, 30)
-      }
-      if(intakeemote !== undefined){
-        let intakeimg = await loadImage(intakeemote)
-        ctx.drawImage(intakeimg, 720, 35, 75, 75)
-        ctx.font = "bold 15px Ariel"
-        ctx.fillText(`${intake}`, 725, 30)
-      }
-      if(turboemote !== undefined){
-        let turboimg = await loadImage(turboemote)
-        ctx.drawImage(turboimg, 800, 35, 75, 75)
-        ctx.font = "bold 15px Ariel"
-        ctx.fillText(`${turbo}`, 805, 30)
-      }
-      if(ecuemote !== undefined){
-        let ecuimg = await loadImage(ecuemote)
-        ctx.drawImage(ecuimg, 875, 35, 75, 75)
-        ctx.font = "bold 15px Ariel"
-        ctx.fillText(`${ecu}`, 875, 30)
-      }
-      if(intercooleremote !== undefined){
-        let intercoolerimg = await loadImage(intercooleremote)
-        ctx.drawImage(intercoolerimg, 980, 35, 75, 75)
-        ctx.font = "bold 15px Ariel"
-        ctx.fillText(`${intercooler}`, 975, 30)
+      if (brakesemote !== undefined) {
+        let brakesimg = await loadImage(brakesemote);
+        ctx.drawImage(brakesimg, 560, 20, 75, 75);
+        ctx.font = "bold 15px Ariel";
+        ctx.fillText(`${brakes}`, 565, 30);
       }
 
-      
+      if (clutchemote !== undefined) {
+        let clutchimg = await loadImage(clutchemote);
+        ctx.drawImage(clutchimg, 650, 35, 50, 50);
+        ctx.font = "bold 15px Ariel";
+        ctx.fillText(`${clutch}`, 645, 30);
+      }
+      if (intakeemote !== undefined) {
+        let intakeimg = await loadImage(intakeemote);
+        ctx.drawImage(intakeimg, 720, 35, 75, 75);
+        ctx.font = "bold 15px Ariel";
+        ctx.fillText(`${intake}`, 725, 30);
+      }
+      if (turboemote !== undefined) {
+        let turboimg = await loadImage(turboemote);
+        ctx.drawImage(turboimg, 800, 35, 75, 75);
+        ctx.font = "bold 15px Ariel";
+        ctx.fillText(`${turbo}`, 805, 30);
+      }
+      if (ecuemote !== undefined) {
+        let ecuimg = await loadImage(ecuemote);
+        ctx.drawImage(ecuimg, 875, 35, 75, 75);
+        ctx.font = "bold 15px Ariel";
+        ctx.fillText(`${ecu}`, 875, 30);
+      }
+      if (intercooleremote !== undefined) {
+        let intercoolerimg = await loadImage(intercooleremote);
+        ctx.drawImage(intercoolerimg, 980, 35, 75, 75);
+        ctx.font = "bold 15px Ariel";
+        ctx.fillText(`${intercooler}`, 975, 30);
+      }
+
       let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
         name: "profile-image.png",
       });
-      
 
       await interaction.editReply({
-        content:"",
+        content: "",
         files: [attachment],
-        fetchReply: true
+        fetchReply: true,
       });
-
-
-
     } else if (
       subcommandfetch == "car_part" &&
       partdb.Parts[item.toLowerCase()]

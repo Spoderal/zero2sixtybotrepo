@@ -9,7 +9,7 @@ const colors = require("../common/colors");
 const helmetdb = require("../data/pfpsdb.json");
 const { emotes } = require("../common/emotes");
 const { createCanvas, loadImage } = require("canvas");
-const partdb = require("../data/partsdb.json")
+const partdb = require("../data/partsdb.json");
 const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
@@ -190,30 +190,27 @@ module.exports = {
       rkeys = rkeys * 2;
       ekeys = ekeys * 2;
     }
-    let usertier = userdata.tier
+    let usertier = userdata.tier;
 
-    if(usertier >= 5){
-      car2.Speed = car2.Speed += partdb.Parts.txexhaust.AddedSpeed
-      car2.Speed = car2.Speed += partdb.Parts.txclutch.AddedSpeed
-      car2.Speed = car2.Speed += partdb.Parts.txintake.AddedSpeed
-      let newzero = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty
-      let newzero2 = newzero -= partdb.Parts.txexhaust.AddedSixty
-      let newzero3 = newzero2 -= partdb.Parts.txexhaust.AddedSixty
-      if(newzero > 2){
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty
-
+    if (usertier >= 5) {
+      car2.Speed = car2.Speed += partdb.Parts.txexhaust.AddedSpeed;
+      car2.Speed = car2.Speed += partdb.Parts.txclutch.AddedSpeed;
+      car2.Speed = car2.Speed += partdb.Parts.txintake.AddedSpeed;
+      let newzero = (car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty);
+      let newzero2 = (newzero -= partdb.Parts.txexhaust.AddedSixty);
+      let newzero3 = (newzero2 -= partdb.Parts.txexhaust.AddedSixty);
+      if (newzero > 2) {
+        car2["0-60"] = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty;
       }
-      if(newzero2 > 2){
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txclutch.AddedSixty
-
+      if (newzero2 > 2) {
+        car2["0-60"] = car2["0-60"] -= partdb.Parts.txclutch.AddedSixty;
       }
-      if(newzero3 > 2){
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txintake.AddedSixty
-
+      if (newzero3 > 2) {
+        car2["0-60"] = car2["0-60"] -= partdb.Parts.txintake.AddedSixty;
       }
 
-      if(car2["0-60"] < 2){
-        car2["0-60"]  = 2
+      if (car2["0-60"] < 2) {
+        car2["0-60"] = 2;
       }
     }
     let selected1image = await loadImage(`${selected.Livery}`);

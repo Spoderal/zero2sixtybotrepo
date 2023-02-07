@@ -6,7 +6,7 @@ const { capitalize } = require("lodash");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const cardb = require("../data/cardb.json").Cars
+const cardb = require("../data/cardb.json").Cars;
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("upgrade")
@@ -75,7 +75,8 @@ module.exports = {
     console.log(partindb);
 
     let oldspeed = selected.Speed;
-    let oldweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight
+    let oldweight =
+      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let oldhandling = selected.Handling;
     let old060 = selected.Acceleration;
     if (partindb !== "None") {
@@ -184,7 +185,7 @@ module.exports = {
       let stat = Number(oldweight);
       selected.WeightStat = stat -= newspeed;
     }
-    
+
     if (selected?.Price && partInLocalDB?.Price > 0) {
       let resale = Number(partInLocalDB.Price * 0.35);
       let stat = Number(selected.Price);
@@ -194,7 +195,8 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = selected.Handling;
-    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight
+    let newweight =
+      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {

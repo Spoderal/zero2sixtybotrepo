@@ -20,8 +20,6 @@
     }
   },
   "Cars": {
-
-
     "2015 mercedes amg gts": {
       "alias": "2015 amg gts",
       "Name": "2015 Mercedes AMG GTS",
@@ -1263,7 +1261,7 @@
       "Class": "S",
       "Weight": 3700
     },
-  
+
     "2005 porsche carrera gt": {
       "alias": "2005 carrera gt",
       "Name": "2005 Porsche Carrera GT",
@@ -1926,7 +1924,7 @@
       "Handling": 500,
       "Class": "S",
       "Weight": 2200,
-      "Obtained":"Exotic Imports"
+      "Obtained": "Exotic Imports"
     },
     "2024 aston martin valhalla": {
       "alias": "2024 valhalla",
@@ -6823,7 +6821,7 @@
       "Emote": "<:nissan:931011548678352916>",
       "Speed": 190,
       "kmh": 305,
-      "Price":0,
+      "Price": 0,
       "sellprice": 25000,
       "Engine": "VR38DETT V6",
       "Image": "https://media.ed.edmunds-media.com/nissan/gt-r/2021/oem/2021_nissan_gt-r_coupe_nismo_fq_oem_1_1600.jpg",
@@ -6831,7 +6829,7 @@
       "Handling": 1500,
       "Class": "A",
       "Weight": 4000,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2023 porsche 911 gt3 rs": {
       "alias": "2023 911 gt3",
@@ -6848,7 +6846,7 @@
       "Handling": 1800,
       "Class": "A",
       "Weight": 4000,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2019 jaguar xe sv": {
       "alias": "2019 xe sv",
@@ -6865,7 +6863,7 @@
       "Handling": 1000,
       "Class": "B",
       "Weight": 3500,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2021 bmw m2": {
       "alias": "2021 m2",
@@ -6882,7 +6880,7 @@
       "Handling": 1200,
       "Class": "B",
       "Weight": 3500,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2020 subaru brz ts": {
       "alias": "2020 brz ts",
@@ -6899,7 +6897,7 @@
       "Handling": 1100,
       "Class": "B",
       "Weight": 3300,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2019 mazda miata": {
       "alias": "2019 miata",
@@ -6916,7 +6914,7 @@
       "Handling": 1000,
       "Class": "B",
       "Weight": 3200,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2021 bac mono": {
       "alias": "2021 mono",
@@ -6933,7 +6931,7 @@
       "Handling": 1200,
       "Class": "B",
       "Weight": 3500,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2020 mini": {
       "alias": "2020 mini",
@@ -6950,7 +6948,7 @@
       "Handling": 1500,
       "Class": "B",
       "Weight": 3500,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2020 hyundai i30 n": {
       "alias": "2020 i30 n",
@@ -6967,7 +6965,7 @@
       "Handling": 1250,
       "Class": "C",
       "Weight": 3400,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2022 ford fiesta st": {
       "alias": "2022 fiesta st",
@@ -6984,7 +6982,7 @@
       "Handling": 1250,
       "Class": "C",
       "Weight": 3300,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2020 ferrari f8 tributo": {
       "alias": "2020 tributo",
@@ -7001,7 +6999,7 @@
       "Handling": 2200,
       "Class": "S",
       "Weight": 4300,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2021 mercedes amg gt black series": {
       "alias": "2021 amg gt black",
@@ -7018,7 +7016,7 @@
       "Handling": 1800,
       "Class": "S",
       "Weight": 4100,
-      "Obtained":"Event"
+      "Obtained": "Event"
     }
   }
 }
