@@ -114,7 +114,7 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` },
+            { name: "Tips", value: `${temote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -145,7 +145,7 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` },
+            { name: "Tips", value: `${temote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -176,7 +176,7 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` },
+            { name: "Tips", value: `${temote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -184,7 +184,7 @@ module.exports = {
           components: [row],
           fetchReply: true,
         });
-      } 
+      }
     });
   },
 };
