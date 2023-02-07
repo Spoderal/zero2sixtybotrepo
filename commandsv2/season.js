@@ -25,9 +25,7 @@ module.exports = {
       option
         .setName("event")
         .setDescription("View the season type")
-        .addChoices(
-          { name: "Winter Season", value: "winter" },
-        )
+        .addChoices({ name: "Winter Season", value: "winter" })
         .setRequired(false)
     ),
   async execute(interaction) {
@@ -321,6 +319,6 @@ module.exports = {
           i.update({ embeds: [embed], components: [row] });
         }
       });
-    } 
+    }
   },
 };
