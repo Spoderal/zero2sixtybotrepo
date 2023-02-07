@@ -107,6 +107,16 @@ module.exports = {
       let stat = Number(selected.Drift);
       selected.Drift = stat += newspeed;
     }
+    if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
+      let newspeed = Number(partindb.DecreaseWeight);
+      let stat = Number(selected.WeightStat);
+      selected.WeightStat = stat += newspeed;
+    }
+    if (partindb.AddWeight && partindb.AddWeight > 0) {
+      let newspeed = Number(partindb.AddWeight);
+      let stat = Number(selected.WeightStat);
+      selected.WeightStat = stat -= newspeed;
+    }
     if (selected.Price && partindb.Price && partindb.Price > 0) {
       let resale = Number(partindb.Price * 0.35);
       let stat = Number(selected.Price);

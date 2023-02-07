@@ -41,7 +41,8 @@
     "t4bodykit",
     "t4brakes",
     "t4weightreduction",
-    "v8"
+    "v8",
+    "t4weight"
   ],
   "Cash": [1000, 2000, 3000, 4000, 5000, 6000, 7500],
   "Maps": ["Common", "Common", "Rare"],
