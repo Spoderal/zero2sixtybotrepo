@@ -51,7 +51,7 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  trackracing:{
+  trackracing: {
     type: Number,
     required: false,
     default: 0,

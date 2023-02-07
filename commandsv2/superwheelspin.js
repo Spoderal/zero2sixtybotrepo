@@ -31,7 +31,7 @@ module.exports = {
     let wheelspins = userdata.swheelspins;
     if (wheelspins <= 0)
       return await interaction.reply("You're out of super wheel spins!");
-    let items = [ "🏎️"];
+    let items = ["🏎️"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
@@ -118,7 +118,7 @@ module.exports = {
             interaction.channel.send(
               `You already own this car, so you got $${sellprice} instead.`
             );
-            userdata.save()
+            userdata.save();
             return;
           }
           collector.on("collect", async (i) => {
