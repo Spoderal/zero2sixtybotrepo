@@ -13,7 +13,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "exhaust",
-      "Image": "https://i.ibb.co/xqcRTJJ/t1exhaust.png",
+      "Image": "https://i.ibb.co/t8dxk6C/t1exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": "2"
     },
@@ -139,7 +139,8 @@
       "DecreasedSixty": "0",
       "Type": "intercooler",
       "DecreasedSpeed": "0",
-      "AddHandling": "5"
+      "AddHandling": "5",
+      "Image": "https://i.ibb.co/pJTLWSJ/t1intercooler.png"
     },
     "t2intercooler": {
       "Name": "T2Intercooler",
@@ -155,7 +156,8 @@
       "DecreasedSixty": "0",
       "Type": "intercooler",
       "DecreasedSpeed": "0",
-      "AddHandling": "10"
+      "AddHandling": "10",
+      "Image": "https://i.ibb.co/ZXyNFQs/t2intercooler.png"
     },
     "t3intercooler": {
       "Name": "T3Intercooler",
@@ -171,7 +173,8 @@
       "DecreasedSixty": "0",
       "Type": "intercooler",
       "DecreasedSpeed": "0",
-      "AddHandling": "12"
+      "AddHandling": "12",
+      "Image": "https://i.ibb.co/Tgy17WV/t3intercooler.png"
     },
     "t4intercooler": {
       "Name": "T4Intercooler",
@@ -187,7 +190,8 @@
       "DecreasedSixty": "0",
       "Type": "intercooler",
       "DecreasedSpeed": "0",
-      "AddHandling": "13"
+      "AddHandling": "13",
+      "Image": "https://i.ibb.co/8mXVRh1/t4intercooler.png"
     },
     "t5intercooler": {
       "Name": "T5Intercooler",
@@ -203,7 +207,8 @@
       "DecreasedSixty": "0",
       "Type": "intercooler",
       "DecreasedSpeed": "0",
-      "AddHandling": "15"
+      "AddHandling": "15",
+      "Image": "https://i.ibb.co/sb522Gt/t5intercooler.png"
     },
     "t1ecu": {
       "Name": "T1ECU",
@@ -219,7 +224,8 @@
       "DecreasedSixty": "0",
       "Type": "ecu",
       "DecreasedSpeed": "0",
-      "AddHandling": "1"
+      "AddHandling": "1",
+      "Image":"https://i.ibb.co/L5fMSbL/t1ecu.png"
     },
     "t2ecu": {
       "Name": "T2ECU",
@@ -235,7 +241,8 @@
       "DecreasedSixty": "0",
       "Type": "ecu",
       "DecreasedSpeed": "0",
-      "AddHandling": 2
+      "AddHandling": 2,
+      "Image":"https://i.ibb.co/BsyZsYw/t2ecu.png"
     },
     "t3ecu": {
       "Name": "T3ECU",
@@ -251,7 +258,8 @@
       "DecreasedSixty": "0",
       "Type": "ecu",
       "DecreasedSpeed": "0",
-      "AddHandling": "5"
+      "AddHandling": "5",
+      "Image":"https://i.ibb.co/K7Nr1G0/t3ecu.png"
     },
     "t4ecu": {
       "Name": "T4ECU",
@@ -267,7 +275,8 @@
       "DecreasedSixty": "0",
       "Type": "ecu",
       "DecreasedSpeed": "0",
-      "AddHandling": "8"
+      "AddHandling": "8",
+      "Image":"https://i.ibb.co/VQ45YZk/t4ecu.png"
     },
     "t5ecu": {
       "Name": "T5ECU",
@@ -283,7 +292,8 @@
       "DecreasedSixty": "0",
       "Type": "ecu",
       "DecreasedSpeed": "0",
-      "AddHandling": 12
+      "AddHandling": 12,
+      "Image":"https://i.ibb.co/C6GTX0D/t5ecu.png"
     },
     "t1nitro": {
       "Name": "T1Nitro",
@@ -474,7 +484,7 @@
       "Image": "https://i.ibb.co/gWLfY9S/t4brakes.png"
     },
     "t5brakes": {
-      "Name": "T4Brakes",
+      "Name": "T5Brakes",
       "AddedSpeed": "0",
       "AddedSnow": 0,
       "AddedSixty": "0",
@@ -656,7 +666,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "intake",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/L5XjpDf/t1intake.png"
     },
     "2jz-gte": {
       "Name": "2JZ-GTE",
@@ -665,13 +676,14 @@
       "AddedSnow": 0,
       "sellprice": 18750,
       "Price": 35000,
-      "Emote": "<:engine1:932046487427371059>",
+      "Emote": "<:2jz:1069491175586795610>",
       "Tier": "1",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/P14CH3W/2jz.png"
     },
 
     "v8": {
@@ -841,13 +853,14 @@
       "AddedSnow": 0,
       "sellprice": 37500,
       "Price": 100000,
-      "Emote": "<:engine2:932046487653842954>",
+      "Emote": "<:v10:1069491172889862194>",
       "Tier": "2",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/BsBFbT0/v10.png"
     },
     "v12": {
       "Name": "V12",
@@ -856,13 +869,14 @@
       "AddedSnow": 0,
       "sellprice": 112500,
       "Price": 200000,
-      "Emote": "<:engine3:932046487930679326>",
+      "Emote": "<:v12:1069491173850353684>",
       "Tier": "3",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/3Bg38LF/v12.png"
     },
     "rocket engine": {
       "Name": "Rocket Engine",
@@ -911,7 +925,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "exhaust",
-      "Image": "https://i.ibb.co/KL7vYnT/t2exhaust.png",
+      "Image": "https://i.ibb.co/rbPs4zC/t2exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 2
     },
@@ -929,7 +943,8 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": 2
+      "AddHandling": 2,
+      "Image":"https://i.ibb.co/3vYQrQD/t2intake.png"
     },
     "t2tires": {
       "Name": "T2Tires",
@@ -1234,7 +1249,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 5
+      "AddHandling": 5,
+      "Image":"https://i.ibb.co/Gkj9spW/t2suspension.png"
     },
     "t1gearbox": {
       "Name": "T1Gearbox",
@@ -1250,7 +1266,8 @@
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": 5
+      "AddHandling": 5,
+      "Image":"https://i.ibb.co/HKC3rKk/t1gearbox.png"
     },
     "t2gearbox": {
       "Name": "T2Gearbox",
@@ -1266,7 +1283,8 @@
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": 10
+      "AddHandling": 10,
+      "Image":"https://i.ibb.co/7zrxf8c/t2gearbox.png"
     },
     "t3gearbox": {
       "Name": "T3Gearbox",
@@ -1282,7 +1300,8 @@
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": 15
+      "AddHandling": 15,
+      "Image":"https://i.ibb.co/Jc8216s/t3gearbox.png"
     },
     "t4gearbox": {
       "Name": "T4Gearbox",
@@ -1298,7 +1317,8 @@
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": 15
+      "AddHandling": 15,
+      "Image":"https://i.ibb.co/r37MWrY/t4gearbox.png"
     },
     "t5gearbox": {
       "Name": "T5Gearbox",
@@ -1314,7 +1334,8 @@
       "DecreasedSixty": "0",
       "Type": "gearbox",
       "DecreasedSpeed": "0",
-      "AddHandling": 20
+      "AddHandling": 20,
+      "Image":"https://i.ibb.co/12PFpY9/t5gearbox.png"
     },
     "t3racesuspension": {
       "Name": "T3RaceSuspension",
@@ -1330,7 +1351,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 10
+      "AddHandling": 10,
+      "Image":"https://i.ibb.co/MNr8FKN/t3racesuspension.png"
     },
     "t4racesuspension": {
       "Name": "T4RaceSuspension",
@@ -1346,7 +1368,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 15
+      "AddHandling": 15,
+      "Image":"https://i.ibb.co/tCRKMLL/t4racesuspension.png"
     },
     "t5racesuspension": {
       "Name": "T5RaceSuspension",
@@ -1362,7 +1385,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 25
+      "AddHandling": 25,
+      "Image":"https://i.ibb.co/bRHYcLz/t5racesuspension.png"
     },
     "t3exhaust": {
       "Name": "T3Exhaust",
@@ -1377,7 +1401,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "exhaust",
-      "Image": "https://i.ibb.co/TLsc2ss/t3exhaust.png",
+      "Image": "https://i.ibb.co/xLCx81d/t3exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5
     },
@@ -1394,7 +1418,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "exhaust",
-      "Image": "https://i.ibb.co/93HnWJ9/t4exhaust.png",
+      "Image": "https://i.ibb.co/CJxfNMD/t4exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5
     },
@@ -1411,7 +1435,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "exhaust",
-      "Image": "https://i.ibb.co/fGqKL3g/t5exhausted.png",
+      "Image": "https://i.ibb.co/SyCkPnt/t5exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5,
       "Color": "#1859d0"
@@ -1429,7 +1453,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "exhaust",
-      "Image": "https://i.ibb.co/2NYPqJc/TXEXHAUST.png",
+      "Image": "https://i.ibb.co/K5dTKK0/TXEXHAUST.png",
       "DecreasedSpeed": "0",
       "AddHandling": 10,
       "Color": "#ffffff"
@@ -1447,7 +1471,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "intake",
-      "Image": "https://i.ibb.co/SPf71yJ/txintake.png",
+      "Image": "https://i.ibb.co/VD7zXyT/txintake.png",
       "DecreasedSpeed": "0",
       "AddHandling": "5",
       "Color": "#ffffff"
@@ -1501,7 +1525,8 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": 5
+      "AddHandling": 5,
+      "Image":"https://i.ibb.co/yR8SpCm/t3intake.png"
     },
     "t4intake": {
       "Name": "T4Intake",
@@ -1517,7 +1542,8 @@
       "DecreasedSixty": "0",
       "Type": "intake",
       "DecreasedSpeed": "0",
-      "AddHandling": 5
+      "AddHandling": 5,
+      "Image":"https://i.ibb.co/S0nRbsr/t4intake.png"
     },
     "t5intake": {
       "Name": "T5Intake",
@@ -1534,7 +1560,8 @@
       "Type": "intake",
       "DecreasedSpeed": "0",
       "AddHandling": 5,
-      "Color": "#00ae00"
+      "Color": "#00ae00",
+      "Image":"https://i.ibb.co/47FdHB5/t5intake.png"
     },
     "t1drifttires": {
       "Name": "T1DriftTires",
@@ -1681,7 +1708,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "1",
       "Type": "suspension",
-      "DecreasedSpeed": 5
+      "DecreasedSpeed": 5,
+      "Image":"https://i.ibb.co/ZWsD2v7/t1driftsuspension.png"
     },
     "t2driftsuspension": {
       "Name": "T2DriftSuspension",
@@ -1698,7 +1726,8 @@
       "DecreasedSixty": 0.1,
       "Type": "suspension",
       "DecreaseSpeed": 5,
-      "DecreasedSpeed": 5
+      "DecreasedSpeed": 5,
+      "Image":"https://i.ibb.co/C1kBcs9/t2driftsuspension.png"
     },
     "t3driftsuspension": {
       "Name": "T3DriftSuspension",
@@ -1715,7 +1744,8 @@
       "DecreasedSixty": 0.5,
       "Type": "suspension",
       "DecreaseSpeed": 5,
-      "DecreasedSpeed": 5
+      "DecreasedSpeed": 5,
+      "Image":"https://i.ibb.co/DQS6YXm/t3driftsuspension.png"
     },
     "t4driftsuspension": {
       "Name": "T4DriftSuspension",
@@ -1733,7 +1763,8 @@
       "Type": "suspension",
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
-      "AddHandling": 15
+      "AddHandling": 15,
+      "Image":"https://i.ibb.co/2N1rGBh/t4driftsuspension.png"
     },
     "t5driftsuspension": {
       "Name": "T5DriftSuspension",
@@ -1751,7 +1782,8 @@
       "Type": "suspension",
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
-      "AddHandling": 20
+      "AddHandling": 20,
+      "Image":"https://i.ibb.co/1LwD7kj/t5driftsuspension.png"
     },
     "pet spoiler": {
       "Name": "Pet Spoiler",
@@ -1857,7 +1889,8 @@
       "DecreasedDrift": "2",
       "DecreasedSixty": "0",
       "Type": "suspension",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/Wtft3SN/t1racesuspension.png"
     },
     "bodykit": {
       "Name": "BodyKit",
@@ -2033,14 +2066,15 @@
       "sellprice": 10125,
       "AddedSnow": 0,
       "Price": 30000,
-      "Emote": "<:engine1:932046487427371059>",
+      "Emote": "<:ls1:1069491171656732712>",
       "Tier": "1",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 100
+      "DecreaseWeight": 100,
+      "Image":"https://i.ibb.co/HFBFNPh/ls1.png"
     },
     "ls2": {
       "Name": "LS2",
@@ -2049,14 +2083,15 @@
       "AddedSnow": 0,
       "AddedSixty": 0.1,
       "Price": 33000,
-      "Emote": "<:engine2:932046487653842954>",
+      "Emote": "<:ls2:1069491170444595240>",
       "Tier": "2",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 100
+      "DecreaseWeight": 100,
+      "Image":"https://i.ibb.co/fdn3fxR/ls2.png"
     },
     "ls3": {
       "Name": "LS3",
@@ -2065,13 +2100,14 @@
       "AddedSnow": 0,
       "AddedSixty": 0.2,
       "Price": 36000,
-      "Emote": "<:engine3:932046487930679326>",
+      "Emote": "<:ls3:1069491168380985455>",
       "Tier": "3",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "engine",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/bF2Kp5L/ls3.png"
     },
     "t1rangeboost": {
       "Name": "T1RangeBoost",
@@ -2208,6 +2244,9 @@
     },
     "flat": {
       "Emote": "<:empty_1:932046438328856646>"
+    },
+    "stock":{
+      "Name":"Stock"
     }
   }
 }

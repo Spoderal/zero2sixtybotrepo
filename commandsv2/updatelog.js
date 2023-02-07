@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "1/12/2023",
+            label: "2/6/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -73,20 +73,17 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• Season reward 21 bug fixed\n
-                • Unboxing glitch where it didn't give you the cash if you had the car fixed.\n
-                • Items not displaying in garage fixed\n
-                • McLaren keys fixed\n
-                • Market listing bugs fixed\n
-                • Hoonigan limited exotic imports\n
-                • Wheelspins added to highway race rewards\n
-                • Bunch of new cars\n
-                • New house\n
-                • Crates revamp
-
+                `• Squad race bug fixed\n
+                • Wheelspin and lockpick cars can be sold easier now\n
+                • New event, track legends!\n
+                • Races are now harder for people who have beaten all squads\n
+                • New squad: Double 0\n
+                • Dealership shows if you own a car or not\n
+                • Drag race cooldown is different from street racing cooldown\n
+                • New cars
                 `
               )
-              .setFooter({ text: "1/13/2023" })
+              .setFooter({ text: "2/6/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

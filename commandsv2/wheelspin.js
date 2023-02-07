@@ -49,7 +49,7 @@ module.exports = {
       .setDescription(`${item}`)
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
-    await interaction.reply({ embeds: [embed] });
+      let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
     setTimeout(() => {
       let item = lodash.sample(items);
       embed.setDescription(`${item}`);
@@ -85,6 +85,18 @@ module.exports = {
           } else {
             reward = lodash.sample(cars);
           }
+          let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice;
+
+          let row = new Discord.ActionRowBuilder().addComponents(
+            new Discord.ButtonBuilder()
+              .setCustomId("keep")
+              .setLabel("Keep")
+              .setStyle("Success"),
+            new Discord.ButtonBuilder()
+              .setCustomId("sell")
+              .setLabel(`Sell for ${toCurrency(sellprice)}`)
+              .setStyle("Danger")
+          );
           embed.setDescription(
             `You won a ${carsdb.Cars[reward].Emote} ${carsdb.Cars[reward].Name}!`
           );
@@ -93,56 +105,78 @@ module.exports = {
           embed.addFields([
             { name: `ID`, value: `${carsdb.Cars[reward.toLowerCase()].alias}` },
           ]);
-          interaction.editReply({ embeds: [embed] });
+         interaction.editReply({ embeds: [embed], components: [row], fetchReply: true });
+          let filter2 = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          };
+          let collector = msg.createMessageComponentCollector({
+            filter: filter2,
+          });
           let filtered = usercars.filter((car) => car.Name == carname);
 
           if (filtered[0]) {
-            let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice;
             parseInt(sellprice);
             userdata.cash += sellprice;
-            interaction.reply(
+            interaction.channel.send(
               `You already own this car, so you got $${sellprice} instead.`
             );
             return;
           }
-          if (usercars.length >= garagespaces) {
-            interaction.channel.send("You garage is full!");
-            return;
-          } else {
-            let carindb = carsdb.Cars[reward];
-
-            let ecarobj = {
-              ID: carindb.alias,
-              Name: carindb.Name,
-              Speed: carindb.Speed,
-              Acceleration: carindb["0-60"],
-              Handling: carindb.Handling,
-              Parts: [],
-              Emote: carindb.Emote,
-              Livery: carindb.Image,
-              Range: carindb.Range,
-              MaxRange: carindb.Range,
-              Miles: 0,
-            };
-
-            let carobj = {
-              ID: carindb.alias,
-              Name: carindb.Name,
-              Speed: carindb.Speed,
-              Acceleration: carindb["0-60"],
-              Handling: carindb.Handling,
-              Parts: [],
-              Emote: carindb.Emote,
-              Livery: carindb.Image,
-              Miles: 0,
-            };
-
-            if (carsdb.Cars[reward.toLowerCase()].Range) {
-              userdata.cars.push(ecarobj);
-            } else {
-              userdata.cars.push(carobj);
+          collector.on('collect', async (i) => {
+            if(i.customId.includes("keep")){
+              if (usercars.length >= garagespaces) {
+                interaction.channel.send("You garage is full!");
+                return;
+              } else {
+                let carindb = carsdb.Cars[reward];
+    
+                let ecarobj = {
+                  ID: carindb.alias,
+                  Name: carindb.Name,
+                  Speed: carindb.Speed,
+                  Acceleration: carindb["0-60"],
+                  Handling: carindb.Handling,
+                  Parts: [],
+                  Emote: carindb.Emote,
+                  Livery: carindb.Image,
+                  Range: carindb.Range,
+                  MaxRange: carindb.Range,
+                  Miles: 0,
+                };
+    
+                let carobj = {
+                  ID: carindb.alias,
+                  Name: carindb.Name,
+                  Speed: carindb.Speed,
+                  Acceleration: carindb["0-60"],
+                  Handling: carindb.Handling,
+                  Parts: [],
+                  Emote: carindb.Emote,
+                  Livery: carindb.Image,
+                  Miles: 0,
+                };
+    
+                if (carsdb.Cars[reward.toLowerCase()].Range) {
+                  userdata.cars.push(ecarobj);
+                } else {
+                  userdata.cars.push(carobj);
+                }
+              }
+              userdata.save()
+              embed.setTitle("✅")
+              await i.update({embeds: [embed]})
+              return 
             }
-          }
+            else if(i.customId.includes("sell")){
+              userdata.cash += sellprice;
+              userdata.save()
+              embed.setTitle("✅")
+              await i.update({embeds: [embed]})
+              return 
+            }
+          })
+
+    
         } else if (item == "💵") {
           let reward = lodash.sample(cash);
           reward = Number(reward);

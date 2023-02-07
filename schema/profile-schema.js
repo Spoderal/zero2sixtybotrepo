@@ -359,7 +359,13 @@ const Profile = new mongoose.Schema({
       voteStreak: 0,
       dailyStreak: 0,
       ph: "MPH",
+      autosell:false,
+      trades: true
     },
+  },
+  tradeid: {
+    type: Number,
+    required: false
   },
   marketlimit: {
     type: Number,

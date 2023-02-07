@@ -6,7 +6,7 @@ const { capitalize } = require("lodash");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-
+const cardb = require("../data/cardb.json").Cars
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("upgrade")
@@ -75,6 +75,7 @@ module.exports = {
     console.log(partindb);
 
     let oldspeed = selected.Speed;
+    let oldweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight
     let oldhandling = selected.Handling;
     let old060 = selected.Acceleration;
     if (partindb !== "None") {
@@ -121,6 +122,11 @@ module.exports = {
         let newspeed = Number(partindb.DecreasedDrift);
         let stat = Number(selected.Drift);
         selected.Drift = stat += newspeed;
+      }
+      if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
+        let newspeed = Number(partindb.DecreaseWeight);
+        let stat = Number(oldweight);
+        selected.WeightStat = stat += newspeed;
       }
       if (selected.Price && partindb.Price && partindb.Price > 0) {
         let resale = Number(partindb.Price * 0.35);
@@ -173,6 +179,12 @@ module.exports = {
       let stat = Number(selected.Drift);
       selected.Drift = stat -= newspeed;
     }
+    if (partInLocalDB?.DecreaseWeight && partInLocalDB?.DecreaseWeight > 0) {
+      let newspeed = Number(partInLocalDB?.DecreaseWeight);
+      let stat = Number(oldweight);
+      selected.WeightStat = stat -= newspeed;
+    }
+    
     if (selected?.Price && partInLocalDB?.Price > 0) {
       let resale = Number(partInLocalDB.Price * 0.35);
       let stat = Number(selected.Price);
@@ -182,6 +194,7 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = selected.Handling;
+    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
@@ -240,12 +253,12 @@ module.exports = {
         { name: "\u200b", value: "\u200b" },
         {
           name: "Old Stats",
-          value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhandling}`,
+          value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhandling}\n${emotes.weight} Weight: ${oldweight}`,
           inline: true,
         },
         {
           name: `New Stats`,
-          value: `${emotes.speed} Power: ${newspeed}\n${emotes.zero2sixty} Acceleration: ${new060}s\n${emotes.handling} Handling: ${newhandling}`,
+          value: `${emotes.speed} Power: ${newspeed}\n${emotes.zero2sixty} Acceleration: ${new060}s\n${emotes.handling} Handling: ${newhandling}\n${emotes.weight} Weight: ${newweight}`,
           inline: true,
         }
       )

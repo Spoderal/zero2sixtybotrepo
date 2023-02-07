@@ -1,84 +1,45 @@
 const lodash = require("lodash");
 const ms = require("pretty-ms");
 // const discord = require("discord.js");
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder,  ButtonBuilder, ActionRowBuilder} = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const helmetdb = require("../data/pfpsdb.json");
 const { emotes } = require("../common/emotes");
-const { userGetPatreonTimeout } = require("../common/user");
 const { createCanvas, loadImage } = require("canvas");
-const partdb = require("../data/partsdb.json")
 const {
-  doubleCashWeekendField,
-  convertMPHtoKPHm,
   toCurrency,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const houses = require("../data/houses.json");
 const cardb = require("../data/cardb.json");
 
 let bot1cars = [
-  "1995 mazda miata",
-  "1991 toyota mr2",
-  "2002 pontiac firebird",
-  "2005 hyundai tiburon",
-  "1999 honda civic si",
+  "2019 mazda miata",
+  "2020 subaru brz ts",
+  "2021 bmw m2"
 ];
 let bot2cars = [
-  "2014 hyundai genesis coupe",
-  "2008 nissan 350z",
-  "2010 chevy camaro v6",
-  "2010 ford mustang",
-  "2004 subaru wrx sti",
-  "2013 mazda speed3",
-  "2001 toyota supra mk4",
+  "2020 hyundai i30 n",
+  "2020 mini",
+  "2022 ford fiesta st"
 ];
 let bot3cars = [
-  "2020 porsche 718 cayman",
-  "2015 lotus exige sport",
-  "2011 audi rs5",
-  "2021 toyota supra",
-  "2011 bmw m3",
-  "2021 lexus rc f",
+  "2019 jaguar xe sv",
+  "2021 bac mono",
+  "2021 nissan gtr nismo",
 ];
 let bot4cars = [
-  "2013 lexus lfa",
-  "1993 jaguar xj220",
-  "2021 porsche 911 gt3",
-  "2017 ford gt",
-  "2014 lamborghini huracan",
-  "2018 audi r8",
-];
-let bot5cars = [
-  "2010 ferrari 458 italia",
-  "2005 pagani zonda f",
-  "2020 aston martin vantage",
-  "2020 mclaren 570s",
-  "2005 Pagani Zonda F",
-];
-let bot6cars = [
-  "2021 ferrari sf90 stradale",
-  "2022 aston martin valkyrie",
-  "2016 bugatti chiron",
-  "2008 bugatti veyron",
-  "2021 mclaren 720s",
-  "2016 aston martin vulkan",
-  "2013 mclaren p1",
-];
-let bot7cars = [
-  "2021 bugatti bolide",
-  "2013 lamborghini veneno",
-  "2020 koenigsegg regera",
-  "2020 bugatti divo",
+  "2023 porsche 911 gt3 rs",
+  "2021 mercedes amg gt black series",
+  "2020 ferrari f8 tributo"
 ];
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("streetrace")
-    .setDescription("Race a bot on the street")
+    .setName("trackrace")
+    .setDescription("Race a bot on the track")
     .addStringOption((option) =>
       option
         .setName("tier")
@@ -88,10 +49,7 @@ module.exports = {
           { name: "Tier 1", value: "1" },
           { name: "Tier 2", value: "2" },
           { name: "Tier 3", value: "3" },
-          { name: "Tier 4", value: "4" },
-          { name: "Tier 5", value: "5" },
-          { name: "Tier 6", value: "6" },
-          { name: "Tier 7", value: "7" }
+          { name: "Tier 4", value: "4" }
         )
     )
     .addStringOption((option) =>
@@ -102,8 +60,8 @@ module.exports = {
     ),
   async execute(interaction) {
     let user = interaction.user;
-    let tracklength = 600;
-    let tracklength2 = 600;
+    let tracklength = 800;
+    let tracklength2 = 800;
 
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -133,57 +91,37 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
+
     let bot = interaction.options.getString("tier");
     await interaction.reply("Revving engines...");
     let car2;
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-    const vsimg = await loadImage("https://i.ibb.co/jrPF08J/vsstreet.png");
+    const vsimg = await loadImage("https://i.ibb.co/wc6pt53/vstrack.png");
     let cashwon = parseInt(bot) * 150;
     let rpwon = parseInt(bot) * 2;
     let eventkeys = parseInt(bot) * 1;
+    let lostcash
     if (bot == "1") {
+      lostcash = 5000
       car2 = cardb.Cars[lodash.sample(bot1cars)];
     } else if (bot == "2") {
+      lostcash = 10000
       car2 = cardb.Cars[lodash.sample(bot2cars)];
     } else if (bot == "3") {
+      lostcash = 15000
       car2 = cardb.Cars[lodash.sample(bot3cars)];
     } else if (bot == "4") {
+      lostcash = 20000
       car2 = cardb.Cars[lodash.sample(bot4cars)];
-    } else if (bot == "5") {
-      car2 = cardb.Cars[lodash.sample(bot5cars)];
-    } else if (bot == "6") {
-      car2 = cardb.Cars[lodash.sample(bot6cars)];
-    } else if (bot == "7") {
-      car2 = cardb.Cars[lodash.sample(bot7cars)];
     }
-    let usertier = userdata.tier
 
-    if(usertier >= 5){
-      car2.Speed = car2.Speed += partdb.Parts.txexhaust.AddedSpeed
-      car2.Speed = car2.Speed += partdb.Parts.txclutch.AddedSpeed
-      car2.Speed = car2.Speed += partdb.Parts.txintake.AddedSpeed
-      let newzero = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty
-      let newzero2 = newzero -= partdb.Parts.txexhaust.AddedSixty
-      let newzero3 = newzero2 -= partdb.Parts.txexhaust.AddedSixty
-      if(newzero > 2){
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty
-
-      }
-      if(newzero2 > 2){
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txclutch.AddedSixty
-
-      }
-      if(newzero3 > 2){
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txintake.AddedSixty
-
-      }
-
-      if(car2["0-60"] < 2){
-        car2["0-60"]  = 2
-      }
+    if(userdata.cash < lostcash){
+      return interaction.reply(`You need at least ${lostcash} to race this tier! Just in case you lose it...`)
     }
+
+  
 
     let selected1image = await loadImage(`${selected.Livery}`);
     let selected2image = await loadImage(`${car2.Image}`);
@@ -223,18 +161,17 @@ module.exports = {
     cooldowndata.racing = Date.now();
     cooldowndata.save();
     let mph = selected.Speed;
-    let weight =
-      selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
     let handling = selected.Handling;
 
-    if (!selected.WeightStatStat) {
-      selected.WeightStatStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
+    if (!selected.WeightStat) {
+      selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
 
     let mph2 = car2.Speed;
     let weight2 = car2.Weight;
-    let acceleration2 = car2["0-60"];
+    let acceleration2 = 2.5
     let handling2 = car2.Handling;
 
     let speed = 0;
@@ -279,33 +216,72 @@ module.exports = {
       .setColor(colors.blue)
       .setImage("attachment://profile-image.png");
 
-    interaction.editReply({
+    let msg =  await interaction.editReply({
+      content: "GO!",
       embeds: [embed],
       files: [attachment],
       fetchReply: true,
     });
 
     let i2 = setInterval(async () => {
-      console.log(speed);
-      let calc = handling * (speed / 50);
-      calc = calc / acceleration;
-      sec = (6.3 * (weight / calc)) / acceleration;
-      calc = calc / sec;
-      console.log(`calc: ${calc}`);
-      console.log(`sec: ${sec}`);
-      // car 2
-      console.log(speed2);
-      let calc2 = handling2 * (speed / 50);
-      calc2 = calc2 / acceleration2;
-      sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
-      console.log(`sec2: ${sec2}`);
+        let calc = (weight / 3) + (speed / 75);
 
+          calc = calc / acceleration;
+
+    
+        sec = (7.3 * (handling / calc)) / 5;
+        calc = calc / sec;
+        // car 2
+        let calc2 = (weight2 / 3) + (speed2 / 75);
+     
+        calc2 = calc2 / acceleration2;
+
+  
+      sec2 = (7.3 * (handling2 / calc2)) / 5;
       calc2 = calc2 / sec2;
-      console.log(`calc2: ${calc2}`);
-      tracklength -= calc;
-      tracklength2 -= calc2;
+        console.log(`sec2: ${sec2}`);
+  
+        console.log(`calc: ${calc}`);
 
-      if (tracklength <= 0) {
+        console.log(`calc2: ${calc2}`);
+        tracklength -= calc;
+        tracklength2 -= calc2;
+        if (tracklength2 <= 0 && i2 !== null) {
+          clearInterval(i2);
+
+          tracklength = 800
+          tracklength2 = 800
+            ctx.drawImage(cupimg, 960, 50, 100, 100);
+            attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+              name: "profile-image.png",
+            });
+            embed.setImage(`attachment://profile-image.png`);
+    
+            embed.setTitle(`Tier ${bot} Track Race lost!`);
+            await interaction.editReply({ embeds: [embed], files: [attachment] });
+            userdata.cash -= lostcash
+            userdata.save()
+            return
+          }
+
+      else if (tracklength <= 0 && i2 !== null) {
+        clearInterval(i2);
+
+        tracklength = 800
+        tracklength2 = 800
+
+        let row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+            .setCustomId("keep")
+            .setEmoji(car2.Emote)
+            .setLabel("Keep Car")
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId("sell")
+            .setEmoji(`💲`)
+            .setLabel("Sell Car")
+            .setStyle("Success")
+        )
         ctx.save();
         roundedImage(ctx, 640, 200, 640, 360, 20);
         ctx.stroke();
@@ -332,40 +308,75 @@ module.exports = {
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
         earnings.push(`${emotes.rp} +${rpwon}`);
 
-        let carinlocal = cardb.Cars[selected.Name.toLowerCase()];
 
-        if (carinlocal.Emote == emotes.mclaren) {
-          earnings.push(`${emotes.mclaren} +${eventkeys}`);
-          userdata.fkeys += eventkeys;
-        }
 
         userdata.cash += cashwon;
         userdata.rp3 += rpwon;
         userdata.racerank += 1;
         embed.setDescription(`${earnings.join("\n")}`);
-        embed.setTitle(`Tier ${bot} Street Race won!`);
+        embed.setTitle(`Tier ${bot} Track Race won!`);
         embed.setImage(`attachment://profile-image.png`);
+        let botfiltered = userdata.cars.filter((car) => car.Name == car2.Name);
+        if(botfiltered[0]){
+            await interaction.editReply({ embeds: [embed], files: [attachment]});
+           await interaction.channel.send(`Sold car for ${toCurrency(car2.sellprice)}`)
+           userdata.cash += car2.sellprice
+           userdata.save()
+           return;
+        }
+        else {
+            await interaction.editReply({ embeds: [embed], files: [attachment], components: [row], fetchReply: true });
+        }
 
-        await interaction.editReply({ embeds: [embed], files: [attachment] });
-        clearInterval(i2);
       }
       // lost
-      else if (tracklength2 <= 0) {
-        ctx.drawImage(cupimg, 960, 50, 100, 100);
-        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-          name: "profile-image.png",
-        });
-        embed.setImage(`attachment://profile-image.png`);
 
-        embed.setTitle(`Tier ${bot} Street Race lost!`);
-        await interaction.editReply({ embeds: [embed], files: [attachment] });
-        clearInterval(i2);
-      }
+    
+      
 
+      
+      
       console.log(`track length ${tracklength}`);
       console.log(`track length 2 ${tracklength2}`);
-      userdata.save();
     }, 1000);
+    let filter2 = (btnInt) => {
+      return interaction.user.id === btnInt.user.id;
+    };
+    let collector = msg.createMessageComponentCollector({
+      filter: filter2,
+    });
+    collector.once('collect', async (i) => {
+      
+      if(i.customId.includes("sell")){
+         userdata.cash += car2.sellprice
+         embed.setTitle("✅")
+         userdata.save()
+
+        return await i.update({embeds: [embed], fetchReply: true})
+        
+      }
+      else if(i.customId.includes("keep")){
+        let carindb = cardb.Cars[car2.Name.toLowerCase()];
+        let carobj = {
+          ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+        };
+
+        userdata.cars.push(carobj);
+        embed.setTitle("✅")
+        userdata.save()
+
+        return await i.update({embeds: [embed], fetchReply: true})
+        
+      }
+    })
   },
 };
 

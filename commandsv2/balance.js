@@ -37,8 +37,6 @@ module.exports = {
       rkeys,
       ekeys,
       fkeys,
-      bank,
-      banklimit,
       noto5: notoriety,
       wheelspins,
       lockpicks: lockpicks,
@@ -56,7 +54,6 @@ module.exports = {
         .setDescription(
           `
           ${emotes.cash} Z Cash: ${toCurrency(cash)}\n
-          ${emotes.bank} Bank: ${toCurrency(bank)}/${toCurrency(banklimit)}\n
           ${emotes.gold} Gold: ${gold}\n
           ${emotes.rp} RP: ${numberWithCommas(rp3)}\n
           ${emotes.wheelSpin} Wheel spins: ${wheelspins}\n

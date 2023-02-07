@@ -85,9 +85,10 @@ module.exports = {
 
     let randomstatuses = [
       `❄️ WINTER ❄️  /season`,
-      `⚙️ PATCH 1/13/2023`,
+      `⚙️ PATCH 2/6/2023`,
       "🪙 GOLD STARTS AT $0.99",
-      `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
+      "🛞 TRACK LEGENDS EVENT",
+      `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
     ];
 
     let randomstatus = lodash.sample(randomstatuses);

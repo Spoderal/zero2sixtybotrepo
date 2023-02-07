@@ -79,6 +79,22 @@
       "BigReward": 100000,
       "Name": "The Ws",
       "Emote": "<:squad_w:1026222214648963152>"
+    },
+    "double 0": {
+      "Tier": 6,
+      "Class": "S",
+      "Cars": [
+        "Colsons 2014 Porsche 918 Spyder",
+        "Destinys 2020 McLaren Speedtail",
+        "Angels 2019 Apollo IE",
+        "Madisons 2020 Koenigsegg Jesko",
+        "Spoders 2005 Porsche Carrera GT"
+      ],
+      "Reward": 50000,
+      "Icon": "https://i.ibb.co/ckk8Xpz/squad-0.png",
+      "BigReward": 1000000,
+      "Name": "Double 0",
+      "Emote": "<:squad_0:1067616351579033600>"
     }
   }
 }

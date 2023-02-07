@@ -26,11 +26,11 @@ module.exports = {
             emoji: "❄️",
           },
           {
-            label: "Space Race",
-            description: "Information for the Space Race Event",
-            value: "space_event",
-            customId: "space",
-            emoji: "🚀",
+            label: "Track Legends",
+            description: "Information for the Track Legends Event",
+            value: "track_event",
+            customId: "track",
+            emoji: "🏁",
           },
           {
             label: "McLaren Event",
@@ -52,7 +52,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Winter Season 2022 ❄️\n
-          Space Race 🚀\n
+          Track Legends 🏁\n
           McLaren Event <:mclaren:931011546354692137>
       `);
 
@@ -97,23 +97,26 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "space_event") {
-            embed.setTitle("Space Race");
+          } else if (value === "track_event") {
+            embed.setTitle("Track Legends");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`We're in space now!
+            embed.setDescription(`Its track day baby! Bring out your best cars for the track and race for the best track cars in history!
 
-            Race other bots on the moon with /moonrace for moon tokens and use those tokens to get rewards from the space race season! 
+            **Beat the car you're racing, and you keep the car**! However, if you lose, **you lose a heafty amount of cash**... Depending on the difficulty you choose of course!
+            
+            **Speed is the least of your worries, sometimes it may be the most because you may crash and lose!**
 
-            The final reward is something really special.
+            The event goes up to tier 4 in \`/trackrace\`!
 
-            Bots will have better stats than you, but both of your stats will be halved on the moon!
+            Tier 4: -$20K
+            Tier 3: $-15K
+            Tier 2: $-10K
+            Tier 1: $-5K
 
-            Make sure to use your best cars.
-
-            **Ends January 31st 2023**
+            **Ends March 31st 2023**
             
                   `);
-            embed.setThumbnail("https://i.ibb.co/L5D1zDK/moontokensicon.png");
+            embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
