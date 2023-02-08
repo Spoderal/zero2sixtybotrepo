@@ -60,8 +60,9 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    console.log(actpart)
-    if (!selected[actpart]) return await interaction.reply(`This car doesn't have a "${actpart}" !`);
+    console.log(actpart);
+    if (!selected[actpart])
+      return await interaction.reply(`This car doesn't have a "${actpart}" !`);
 
     let realpart = selected[actpart];
     let partindb = partdb.Parts[realpart.toLowerCase()];
