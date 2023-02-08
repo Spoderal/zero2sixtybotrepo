@@ -268,6 +268,18 @@ module.exports = {
                   ${parts.Parts["t2weightreduction"].Emote}  ${
                     parts.Parts["t2weightreduction"].Name
                   } : ${toCurrency(parts.Parts["t2weightreduction"].Price)}\n
+                  ${parts.Parts["t3weightreduction"].Emote}  ${
+                    parts.Parts["t3weightreduction"].Name
+                  } : ${toCurrency(parts.Parts["t3weightreduction"].Price)}\n
+                  ${parts.Parts["t1weight"].Emote}  ${
+                    parts.Parts["t1weight"].Name
+                  } : ${toCurrency(parts.Parts["t1weight"].Price)}\n
+                  ${parts.Parts["t2weight"].Emote}  ${
+                    parts.Parts["t2weight"].Name
+                  } : ${toCurrency(parts.Parts["t2weight"].Price)}\n
+                  ${parts.Parts["t3weight"].Emote}  ${
+                    parts.Parts["t3weight"].Name
+                  } : ${toCurrency(parts.Parts["t3weight"].Price)}\n
                   **`
                 )
                 .setColor(colors.blue)
