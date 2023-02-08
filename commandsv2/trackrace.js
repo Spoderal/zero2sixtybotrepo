@@ -153,7 +153,8 @@ module.exports = {
     cooldowndata.trackracing = Date.now();
     cooldowndata.save();
     let mph = selected.Speed;
-    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let weight =
+      selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
     let handling = selected.Handling;
 
