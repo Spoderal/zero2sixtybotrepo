@@ -107,12 +107,12 @@ module.exports = {
       if (partindb.AddHandling && partindb.AddHandling > 0) {
         let newspeed = Number(partindb.AddHandling);
         let stat = Number(selected.Handling);
-        selected.Handling = stat -= newspeed;
+        oldhandling = stat -= newspeed;
       }
       if (partindb.DecreasedHandling && partindb.DecreasedHandling > 0) {
         let newspeed = Number(partindb.DecreasedHandling);
         let stat = Number(selected.Handling);
-        selected.Handling = stat += newspeed;
+        oldhandling = stat += newspeed;
       }
       if (partindb.AddedDrift && partindb.AddedDrift > 0) {
         let newspeed = Number(partindb.AddedDrift);
@@ -127,19 +127,19 @@ module.exports = {
       if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
         let newspeed = Number(partindb.DecreaseWeight);
         let stat = Number(oldweight);
-        selected.WeightStat = stat += newspeed;
+        oldweight = stat += newspeed;
       }
       if (partindb.AddWeight && partindb.AddWeight > 0) {
         let newspeed = Number(partindb.AddWeight);
         let stat = Number(oldweight);
-        selected.WeightStat = stat -= newspeed;
+        oldweight = stat -= newspeed;
       }
       if (selected.Price && partindb.Price && partindb.Price > 0) {
         let resale = Number(partindb.Price * 0.35);
         let stat = Number(selected.Price);
         selected.Price = stat -= resale;
       }
-      userdata.update();
+     
     }
 
     if (partInLocalDB?.AddedSpeed > 0) {
@@ -166,12 +166,12 @@ module.exports = {
     if (partInLocalDB?.AddHandling > 0) {
       let newspeed = Number(partInLocalDB.AddHandling);
       let stat = Number(selected.Handling);
-      selected.Handling = stat += newspeed;
+      oldhandling = stat += newspeed;
     }
     if (partInLocalDB?.DecreasedHandling > 0) {
       let newspeed = Number(partInLocalDB.DecreasedHandling);
       let stat = Number(selected.Handling);
-      selected.Handling = stat -= newspeed;
+      oldhandling = stat -= newspeed;
     }
     if (partInLocalDB?.AddedDrift > 0) {
       let newspeed = Number(partInLocalDB.AddedDrift);
@@ -188,13 +188,15 @@ module.exports = {
     if (partInLocalDB?.DecreaseWeight && partInLocalDB?.DecreaseWeight > 0) {
       let newspeed = Number(partInLocalDB?.DecreaseWeight);
       let stat = Number(oldweight);
-      selected.WeightStat = stat -= newspeed;
+      oldweight = stat -= newspeed;
     }
     if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
       let newspeed = Number(partInLocalDB?.AddWeight);
       let stat = Number(oldweight);
-      selected.WeightStat = stat += newspeed;
+      oldweight = stat += newspeed;
     }
+    selected.WeightStat = oldweight
+    selected.Handling = oldhandling
 
     if (selected?.Price && partInLocalDB?.Price > 0) {
       let resale = Number(partInLocalDB.Price * 0.35);
@@ -205,8 +207,7 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = selected.Handling;
-    let newweight =
-      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {

@@ -26,7 +26,7 @@ module.exports = {
           { name: "Clutch", value: "clutch" },
           { name: "Engine", value: "engine" },
           { name: "Gearbox", value: "gearbox" },
-          { name: "Weight", value: "weight" },
+          { name: "Weight reduction", value: "Weight reduction" },
           { name: "Intercooler", value: "intercooler" },
           { name: "Nitro", value: "nitro" },
           { name: "Brakes", value: "brakes" },
@@ -60,9 +60,8 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-
-    if (!selected[actpart])
-      return await interaction.reply(`This car doesn't have a "${actpart}" !`);
+    console.log(actpart)
+    if (!selected[actpart]) return await interaction.reply(`This car doesn't have a "${actpart}" !`);
 
     let realpart = selected[actpart];
     let partindb = partdb.Parts[realpart.toLowerCase()];
