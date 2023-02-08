@@ -139,7 +139,6 @@ module.exports = {
         let stat = Number(selected.Price);
         selected.Price = stat -= resale;
       }
-     
     }
 
     if (partInLocalDB?.AddedSpeed > 0) {
@@ -195,8 +194,8 @@ module.exports = {
       let stat = Number(oldweight);
       oldweight = stat += newspeed;
     }
-    selected.WeightStat = oldweight
-    selected.Handling = oldhandling
+    selected.WeightStat = oldweight;
+    selected.Handling = oldhandling;
 
     if (selected?.Price && partInLocalDB?.Price > 0) {
       let resale = Number(partInLocalDB.Price * 0.35);
@@ -207,7 +206,8 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = selected.Handling;
-    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight =
+      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
