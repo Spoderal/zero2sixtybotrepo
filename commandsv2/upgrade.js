@@ -78,6 +78,7 @@ module.exports = {
     let oldweight =
       selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let oldhandling = selected.Handling;
+    let oldhand = selected.Handling
     let old060 = selected.Acceleration;
     if (partindb !== "None") {
       console.log("not none");
@@ -107,12 +108,12 @@ module.exports = {
       if (partindb.AddHandling && partindb.AddHandling > 0) {
         let newspeed = Number(partindb.AddHandling);
         let stat = Number(selected.Handling);
-        oldhandling = stat -= newspeed;
+        oldhandling = oldhandling -= newspeed;
       }
       if (partindb.DecreasedHandling && partindb.DecreasedHandling > 0) {
         let newspeed = Number(partindb.DecreasedHandling);
         let stat = Number(selected.Handling);
-        oldhandling = stat += newspeed;
+        oldhandling = oldhandling += newspeed;
       }
       if (partindb.AddedDrift && partindb.AddedDrift > 0) {
         let newspeed = Number(partindb.AddedDrift);
@@ -127,12 +128,12 @@ module.exports = {
       if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
         let newspeed = Number(partindb.DecreaseWeight);
         let stat = Number(oldweight);
-        oldweight = stat += newspeed;
+        oldweight = oldweight += newspeed;
       }
       if (partindb.AddWeight && partindb.AddWeight > 0) {
         let newspeed = Number(partindb.AddWeight);
         let stat = Number(oldweight);
-        oldweight = stat -= newspeed;
+        oldweight = oldweight -= newspeed;
       }
       if (selected.Price && partindb.Price && partindb.Price > 0) {
         let resale = Number(partindb.Price * 0.35);
@@ -162,15 +163,15 @@ module.exports = {
       let stat = parseFloat(selected.Acceleration);
       selected.Acceleration = stat += newspeed;
     }
-    if (partInLocalDB?.AddHandling > 0) {
+    if (partInLocalDB?.AddHandling && partInLocalDB?.AddHandling > 0) {
       let newspeed = Number(partInLocalDB.AddHandling);
       let stat = Number(selected.Handling);
-      oldhandling = stat += newspeed;
+      oldhandling = oldhandling += newspeed;
     }
-    if (partInLocalDB?.DecreasedHandling > 0) {
+    if (partInLocalDB?.DecreasedHandling && partInLocalDB?.DecreasedHandling > 0) {
       let newspeed = Number(partInLocalDB.DecreasedHandling);
       let stat = Number(selected.Handling);
-      oldhandling = stat -= newspeed;
+      oldhandling = oldhandling -= newspeed;
     }
     if (partInLocalDB?.AddedDrift > 0) {
       let newspeed = Number(partInLocalDB.AddedDrift);
@@ -187,15 +188,16 @@ module.exports = {
     if (partInLocalDB?.DecreaseWeight && partInLocalDB?.DecreaseWeight > 0) {
       let newspeed = Number(partInLocalDB?.DecreaseWeight);
       let stat = Number(oldweight);
-      oldweight = stat -= newspeed;
+      oldweight = oldweight -= newspeed;
     }
     if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
       let newspeed = Number(partInLocalDB?.AddWeight);
       let stat = Number(oldweight);
-      oldweight = stat += newspeed;
+      oldweight = oldweight += newspeed;
     }
     selected.WeightStat = oldweight;
     selected.Handling = oldhandling;
+    console.log(oldhandling)
 
     if (selected?.Price && partInLocalDB?.Price > 0) {
       let resale = Number(partInLocalDB.Price * 0.35);
@@ -205,9 +207,8 @@ module.exports = {
     userdata.update();
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
-    let newhandling = selected.Handling;
-    let newweight =
-      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newhandling = oldhandling;
+    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
@@ -266,7 +267,7 @@ module.exports = {
         { name: "\u200b", value: "\u200b" },
         {
           name: "Old Stats",
-          value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhandling}\n${emotes.weight} Weight: ${oldweight}`,
+          value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhand}\n${emotes.weight} Weight: ${oldweight}`,
           inline: true,
         },
         {
