@@ -78,7 +78,7 @@ module.exports = {
     let oldweight =
       selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let oldhandling = selected.Handling;
-    let oldhand = selected.Handling
+    let oldhand = selected.Handling;
     let old060 = selected.Acceleration;
     if (partindb !== "None") {
       console.log("not none");
@@ -168,7 +168,10 @@ module.exports = {
       let stat = Number(selected.Handling);
       oldhandling = oldhandling += newspeed;
     }
-    if (partInLocalDB?.DecreasedHandling && partInLocalDB?.DecreasedHandling > 0) {
+    if (
+      partInLocalDB?.DecreasedHandling &&
+      partInLocalDB?.DecreasedHandling > 0
+    ) {
       let newspeed = Number(partInLocalDB.DecreasedHandling);
       let stat = Number(selected.Handling);
       oldhandling = oldhandling -= newspeed;
@@ -197,7 +200,7 @@ module.exports = {
     }
     selected.WeightStat = oldweight;
     selected.Handling = oldhandling;
-    console.log(oldhandling)
+    console.log(oldhandling);
 
     if (selected?.Price && partInLocalDB?.Price > 0) {
       let resale = Number(partInLocalDB.Price * 0.35);
@@ -208,7 +211,8 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = oldhandling;
-    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight =
+      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
