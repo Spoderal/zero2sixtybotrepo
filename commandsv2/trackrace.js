@@ -110,10 +110,11 @@ module.exports = {
     }
 
     if (userdata.cash < lostcash) {
-      return interaction.reply(
+      return interaction.channel.send(
         `You need at least ${lostcash} to race this tier! Just in case you lose it...`
       );
     }
+
 
     let selected1image = await loadImage(`${selected.Livery}`);
     let selected2image = await loadImage(`${car2.Image}`);
