@@ -115,7 +115,6 @@ module.exports = {
       );
     }
 
-
     let selected1image = await loadImage(`${selected.Livery}`);
     let selected2image = await loadImage(`${car2.Image}`);
     let cupimg = await loadImage(
