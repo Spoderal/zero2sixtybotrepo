@@ -15,12 +15,12 @@ const {
   doubleCashWeekendField,
   convertMPHtoKPHm,
   toCurrency,
-  randomRange
+  randomRange,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const houses = require("../data/houses.json");
 const cardb = require("../data/cardb.json");
-const weather = require("../data/weather.json")
+const weather = require("../data/weather.json");
 
 let bot1cars = [
   "1995 mazda miata",
@@ -136,9 +136,9 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
     let bot = interaction.options.getString("tier");
-     await interaction.reply("Revving engines...");
-    let weather2 = lodash.sample(weather)
-    console.log(weather2)
+    await interaction.reply("Revving engines...");
+    let weather2 = lodash.sample(weather);
+    console.log(weather2);
     let car2;
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
@@ -164,8 +164,8 @@ module.exports = {
     }
     let usertier = userdata.tier;
 
-    let botspeed = car2.Speed
-    let bot060 = car2["0-60"]
+    let botspeed = car2.Speed;
+    let bot060 = car2["0-60"];
     if (usertier >= 5) {
       botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
       botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
@@ -230,13 +230,13 @@ module.exports = {
       name: "profile-image.png",
     });
 
-  
     // let slipchance = weather2.Slip
     // let speedreduce = weather2.SpeedReduce
     cooldowndata.racing = Date.now();
     cooldowndata.save();
-    let mph = selected.Speed
-    let weight = selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let mph = selected.Speed;
+    let weight =
+      selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
     let handling = selected.Handling;
 
@@ -268,13 +268,13 @@ module.exports = {
     }, 30);
     let sec;
     let sec2;
-    handling = Math.floor(handling)
-    handling2 = Math.floor(handling2)
+    handling = Math.floor(handling);
+    handling2 = Math.floor(handling2);
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing Tier ${bot} Street Race`)
-      
+
       .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
       .addFields(
         {
@@ -293,7 +293,7 @@ module.exports = {
       .setImage("attachment://profile-image.png");
 
     interaction.editReply({
-      content: '',
+      content: "",
       embeds: [embed],
       files: [attachment],
       fetchReply: true,
@@ -343,7 +343,7 @@ module.exports = {
         if (userdata.houses && filteredhouse2[0]) {
           rpwon = rpwon * 2;
         }
-      
+
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
         earnings.push(`${emotes.rp} +${rpwon}`);
 

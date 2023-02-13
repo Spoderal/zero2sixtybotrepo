@@ -192,8 +192,8 @@ module.exports = {
     }
     let usertier = userdata.tier;
 
-    let botspeed = car2.Speed
-    let bot060 = car2["0-60"]
+    let botspeed = car2.Speed;
+    let bot060 = car2["0-60"];
     if (usertier >= 5) {
       botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
       botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
