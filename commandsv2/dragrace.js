@@ -192,25 +192,27 @@ module.exports = {
     }
     let usertier = userdata.tier;
 
+    let botspeed = car2.Speed
+    let bot060 = car2["0-60"]
     if (usertier >= 5) {
-      car2.Speed = car2.Speed += partdb.Parts.txexhaust.AddedSpeed;
-      car2.Speed = car2.Speed += partdb.Parts.txclutch.AddedSpeed;
-      car2.Speed = car2.Speed += partdb.Parts.txintake.AddedSpeed;
-      let newzero = (car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty);
+      botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
+      botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
+      botspeed = botspeed += partdb.Parts.txintake.AddedSpeed;
+      let newzero = (bot060 -= partdb.Parts.txexhaust.AddedSixty);
       let newzero2 = (newzero -= partdb.Parts.txexhaust.AddedSixty);
       let newzero3 = (newzero2 -= partdb.Parts.txexhaust.AddedSixty);
       if (newzero > 2) {
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty;
+        bot060 = bot060 -= partdb.Parts.txexhaust.AddedSixty;
       }
       if (newzero2 > 2) {
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txclutch.AddedSixty;
+        bot060 = bot060 -= partdb.Parts.txclutch.AddedSixty;
       }
       if (newzero3 > 2) {
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txintake.AddedSixty;
+        bot060 = bot060 -= partdb.Parts.txintake.AddedSixty;
       }
 
-      if (car2["0-60"] < 2) {
-        car2["0-60"] = 2;
+      if (bot060 < 2) {
+        bot060 = 2;
       }
     }
     let selected1image = await loadImage(`${selected.Livery}`);
@@ -258,7 +260,7 @@ module.exports = {
       selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
 
-    let mph2 = car2.Speed;
+    let mph2 = botspeed;
     let weight2 = car2.Weight;
     let acceleration2 = car2["0-60"];
     let handling2 = car2.Handling;
