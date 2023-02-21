@@ -6,6 +6,7 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const { toCurrency } = require("../common/utils");
+const lodash = require("lodash")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -279,6 +280,9 @@ module.exports = {
           userdata.markModified("achievements");
         }
       }
+      let yesno = ["yes", "no", "no"]
+      let randomblueprint = lodash.sample(yesno)
+      
       setTimeout(() => {
         embed.setTitle("Fused!");
         embed.fields = [];
@@ -295,6 +299,10 @@ module.exports = {
         userdata.parts = parts;
 
         userdata.parts.push(partb);
+        if(randomblueprint == "yes"){
+          userdata.blueprints += 1
+          interaction.channel.send("<:blueprint:1076026198171328562> +1 Blueprint!")
+        }
         userdata.save();
       }, 2000);
     }
