@@ -84,7 +84,7 @@ module.exports = {
 
     let randomstatuses = [
       `❄️ WINTER ❄️  /season`,
-      `⚙️ PATCH 2/6/2023`,
+      `⚙️ PATCH 2/20/2023`,
       "🪙 GOLD STARTS AT $0.99",
       "🛞 TRACK LEGENDS EVENT",
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
