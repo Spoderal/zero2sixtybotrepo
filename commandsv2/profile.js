@@ -31,18 +31,17 @@ module.exports = {
     let racerank = userdata.racerank;
     let prestige = userdata.prestige;
     let tier = userdata.tier;
-    let cars = userdata.cars
+    let cars = userdata.cars;
     let finalprice = 0;
     for (let car in cars) {
       let car2 = cars[car];
       let price = cardb.Cars[car2.Name.toLowerCase()]?.Price;
       if (price) finalprice += Number(price);
     }
-    let pvprank = userdata.pvprank
-    let pvpname = pvprank.Rank || "Silver"
+    let pvprank = userdata.pvprank;
+    let pvpname = pvprank.Rank || "Silver";
 
-    let pvpindb = pvpranks[pvpname.toLowerCase()]
-    
+    let pvpindb = pvpranks[pvpname.toLowerCase()];
 
     let cash = userdata.cash;
     finalprice += cash;
@@ -53,58 +52,78 @@ module.exports = {
     const bg = await loadImage("https://i.ibb.co/LSzX4my/profile-ocean.png");
     const helmetimg = await loadImage(acthelmet);
     const pvpimg = await loadImage(pvpindb.icon);
-    let showcased = userdata.showcase
+    let showcased = userdata.showcase;
 
-    let achievements = userdata.achievements
+    let achievements = userdata.achievements;
 
-    await interaction.reply({content:"Please wait...", fetchReply: true})
+    await interaction.reply({ content: "Please wait...", fetchReply: true });
 
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-    if(showcased){
+    if (showcased) {
       let showcaseimg = await loadImage(showcased);
-   
+
       ctx.drawImage(showcaseimg, 825, 440, 370, 180);
     }
-    let filteredachrich = achievements.filter((ach) => ach.name == "Rich" || ach.Name == "Rich")
-    let filteredachricher = achievements.filter((ach) => ach.name == "Richer" || ach.Name == "Richer")
-    let filteredachrichest = achievements.filter((ach) => ach.name == "Richest" || ach.Name == "Richest")
-    let filteredachbug = achievements.filter((ach) => ach.name == "Bug Smasher" || ach.Name == "Bug Smasher")
-    let filteredachtime = achievements.filter((ach) => ach.name == "Time Master" || ach.Name == "Time Master")
+    let filteredachrich = achievements.filter(
+      (ach) => ach.name == "Rich" || ach.Name == "Rich"
+    );
+    let filteredachricher = achievements.filter(
+      (ach) => ach.name == "Richer" || ach.Name == "Richer"
+    );
+    let filteredachrichest = achievements.filter(
+      (ach) => ach.name == "Richest" || ach.Name == "Richest"
+    );
+    let filteredachbug = achievements.filter(
+      (ach) => ach.name == "Bug Smasher" || ach.Name == "Bug Smasher"
+    );
+    let filteredachtime = achievements.filter(
+      (ach) => ach.name == "Time Master" || ach.Name == "Time Master"
+    );
 
-    if(filteredachrich[0]){
-      let achievement = filteredachrich[0]
-      console.log(achievement)
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
-   
+    if (filteredachrich[0]) {
+      let achievement = filteredachrich[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
       ctx.drawImage(achimg, 35, 400, 60, 60);
     }
-    if(filteredachricher[0]){
-      let achievement = filteredachricher[0]
-      console.log(achievement)
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
-   
+    if (filteredachricher[0]) {
+      let achievement = filteredachricher[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
       ctx.drawImage(achimg, 100, 400, 60, 60);
     }
-    if(filteredachrichest[0]){
-      let achievement = filteredachrichest[0]
-      console.log(achievement)
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
-   
+    if (filteredachrichest[0]) {
+      let achievement = filteredachrichest[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
       ctx.drawImage(achimg, 165, 400, 60, 60);
     }
-    if(filteredachbug[0]){
-      let achievement = filteredachbug[0]
-      console.log(achievement)
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
-   
+    if (filteredachbug[0]) {
+      let achievement = filteredachbug[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
       ctx.drawImage(achimg, 230, 400, 60, 60);
     }
-    if(filteredachtime[0]){
-      let achievement = filteredachtime[0]
-      console.log(achievement)
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
-   
+    if (filteredachtime[0]) {
+      let achievement = filteredachtime[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
       ctx.drawImage(achimg, 295, 400, 60, 60);
     }
     ctx.drawImage(helmetimg, 35, 35, 250, 250);
@@ -132,16 +151,11 @@ module.exports = {
       name: "profile-image.png",
     });
 
-    await interaction.editReply(
-      {
-        content:'',
-        fetchReply:true,
-        files:[attachment]
-      }
-    )
-
-
-   
+    await interaction.editReply({
+      content: "",
+      fetchReply: true,
+      files: [attachment],
+    });
   },
 };
 function roundedImage(ctx, x, y, width, height, radius) {

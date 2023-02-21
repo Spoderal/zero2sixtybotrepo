@@ -11,7 +11,7 @@ const Global = require("../schema/global-schema");
 const cardb = require("../data/cardb.json");
 const { toCurrency } = require("../common/utils");
 const { createCanvas, loadImage } = require("canvas");
-const achievementdb = require("../data/achievements.json")
+const achievementdb = require("../data/achievements.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -199,13 +199,15 @@ module.exports = {
           embed.setTitle(`Finished time trial in ${time}s!`);
           embed.setImage(`attachment://profile-image.png`);
 
-          if(time <= 2){
-            interaction.channel.send("You just earned the \"Time Master\" achievement!")
+          if (time <= 2) {
+            interaction.channel.send(
+              'You just earned the "Time Master" achievement!'
+            );
             userdata.achievements.push({
               name: achievementdb.Achievements["time master"].Name,
               id: achievementdb.Achievements["time master"].Name.toLowerCase(),
-              completed: true
-            })
+              completed: true,
+            });
           }
 
           await interaction.editReply({ embeds: [embed], files: [attachment] });

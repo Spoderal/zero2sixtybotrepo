@@ -19,59 +19,59 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 
 let bot1cars = [
-    "1995 mazda miata",
-    "1991 toyota mr2",
-    "2002 pontiac firebird",
-    "2005 hyundai tiburon",
-    "1999 honda civic si",
-  ];
-  let bot2cars = [
-    "2014 hyundai genesis coupe",
-    "2008 nissan 350z",
-    "2010 chevy camaro v6",
-    "2010 ford mustang",
-    "2004 subaru wrx sti",
-    "2013 mazda speed3",
-    "2001 toyota supra mk4",
-  ];
-  let bot3cars = [
-    "2020 porsche 718 cayman",
-    "2015 lotus exige sport",
-    "2011 audi rs5",
-    "2021 toyota supra",
-    "2011 bmw m3",
-    "2021 lexus rc f",
-  ];
-  let bot4cars = [
-    "2013 lexus lfa",
-    "1993 jaguar xj220",
-    "2021 porsche 911 gt3",
-    "2017 ford gt",
-    "2014 lamborghini huracan",
-    "2018 audi r8",
-  ];
-  let bot5cars = [
-    "2010 ferrari 458 italia",
-    "2005 pagani zonda f",
-    "2020 aston martin vantage",
-    "2020 mclaren 570s",
-    "2005 Pagani Zonda F",
-  ];
-  let bot6cars = [
-    "2021 ferrari sf90 stradale",
-    "2022 aston martin valkyrie",
-    "2016 bugatti chiron",
-    "2008 bugatti veyron",
-    "2021 mclaren 720s",
-    "2016 aston martin vulkan",
-    "2013 mclaren p1",
-  ];
-  let bot7cars = [
-    "2021 bugatti bolide",
-    "2013 lamborghini veneno",
-    "2020 koenigsegg regera",
-    "2020 bugatti divo",
-  ];
+  "1995 mazda miata",
+  "1991 toyota mr2",
+  "2002 pontiac firebird",
+  "2005 hyundai tiburon",
+  "1999 honda civic si",
+];
+let bot2cars = [
+  "2014 hyundai genesis coupe",
+  "2008 nissan 350z",
+  "2010 chevy camaro v6",
+  "2010 ford mustang",
+  "2004 subaru wrx sti",
+  "2013 mazda speed3",
+  "2001 toyota supra mk4",
+];
+let bot3cars = [
+  "2020 porsche 718 cayman",
+  "2015 lotus exige sport",
+  "2011 audi rs5",
+  "2021 toyota supra",
+  "2011 bmw m3",
+  "2021 lexus rc f",
+];
+let bot4cars = [
+  "2013 lexus lfa",
+  "1993 jaguar xj220",
+  "2021 porsche 911 gt3",
+  "2017 ford gt",
+  "2014 lamborghini huracan",
+  "2018 audi r8",
+];
+let bot5cars = [
+  "2010 ferrari 458 italia",
+  "2005 pagani zonda f",
+  "2020 aston martin vantage",
+  "2020 mclaren 570s",
+  "2005 Pagani Zonda F",
+];
+let bot6cars = [
+  "2021 ferrari sf90 stradale",
+  "2022 aston martin valkyrie",
+  "2016 bugatti chiron",
+  "2008 bugatti veyron",
+  "2021 mclaren 720s",
+  "2016 aston martin vulkan",
+  "2013 mclaren p1",
+];
+let bot7cars = [
+  "2021 bugatti bolide",
+  "2013 lamborghini veneno",
+  "2020 koenigsegg regera",
+  "2020 bugatti divo",
+];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -83,7 +83,7 @@ module.exports = {
         .setDescription("The bot tier to race")
         .setRequired(true)
         .addChoices(
-            { name: "Tier 1", value: "1" },
+          { name: "Tier 1", value: "1" },
           { name: "Tier 2", value: "2" },
           { name: "Tier 3", value: "3" },
           { name: "Tier 4", value: "4" },
@@ -133,8 +133,24 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
 
-    if(selected.Speed > 200) return interaction.reply("Your cars power is too high! The max power is 200 for this race.")
-    if(selected.Exhaust || selected.Intake || selected.Turbo || selected.Tires || selected.Suspension || selected.Brakes || selected.Springs || selected.Clutch || selected.ECU || selected.Intercooler || selected["Weight reduction"]) return interaction.reply("Your car isn't stock!")
+    if (selected.Speed > 200)
+      return interaction.reply(
+        "Your cars power is too high! The max power is 200 for this race."
+      );
+    if (
+      selected.Exhaust ||
+      selected.Intake ||
+      selected.Turbo ||
+      selected.Tires ||
+      selected.Suspension ||
+      selected.Brakes ||
+      selected.Springs ||
+      selected.Clutch ||
+      selected.ECU ||
+      selected.Intercooler ||
+      selected["Weight reduction"]
+    )
+      return interaction.reply("Your car isn't stock!");
 
     let bot = interaction.options.getString("tier");
     await interaction.reply("Revving engines...");
@@ -146,23 +162,23 @@ module.exports = {
     let cashwon = parseInt(bot) * 150;
     let rpwon = parseInt(bot) * 2;
     let eventkeys = parseInt(bot) * 1;
-    let stockpoints = parseInt(bot) * 1
+    let stockpoints = parseInt(bot) * 1;
     let lostcash;
     if (bot == "1") {
-        car2 = cardb.Cars[lodash.sample(bot1cars)];
-      } else if (bot == "2") {
-        car2 = cardb.Cars[lodash.sample(bot2cars)];
-      } else if (bot == "3") {
-        car2 = cardb.Cars[lodash.sample(bot3cars)];
-      } else if (bot == "4") {
-        car2 = cardb.Cars[lodash.sample(bot4cars)];
-      } else if (bot == "5") {
-        car2 = cardb.Cars[lodash.sample(bot5cars)];
-      } else if (bot == "6") {
-        car2 = cardb.Cars[lodash.sample(bot6cars)];
-      } else if (bot == "7") {
-        car2 = cardb.Cars[lodash.sample(bot7cars)];
-      }
+      car2 = cardb.Cars[lodash.sample(bot1cars)];
+    } else if (bot == "2") {
+      car2 = cardb.Cars[lodash.sample(bot2cars)];
+    } else if (bot == "3") {
+      car2 = cardb.Cars[lodash.sample(bot3cars)];
+    } else if (bot == "4") {
+      car2 = cardb.Cars[lodash.sample(bot4cars)];
+    } else if (bot == "5") {
+      car2 = cardb.Cars[lodash.sample(bot5cars)];
+    } else if (bot == "6") {
+      car2 = cardb.Cars[lodash.sample(bot6cars)];
+    } else if (bot == "7") {
+      car2 = cardb.Cars[lodash.sample(bot7cars)];
+    }
 
     if (userdata.cash < lostcash) {
       return interaction.channel.send(
@@ -272,24 +288,24 @@ module.exports = {
     });
 
     let i2 = setInterval(async () => {
-        let calc = handling * (speed / 25);
-        calc = calc / acceleration;
-        sec = (6.3 * (weight / calc)) / acceleration;
-        calc = calc / sec;
-        console.log(`calc: ${calc}`);
-        console.log(`sec: ${sec}`);
-        // car 2
-        console.log(speed2);
-        let calc2 = handling2 * (speed / 25);
-        calc2 = calc2 / acceleration2;
-        sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
-        console.log(`sec2: ${sec2}`);
-  
-        calc2 = calc2 / sec2;
-        console.log(`calc2: ${calc2}`);
-        tracklength -= calc;
-        tracklength2 -= calc2;
-  
+      let calc = handling * (speed / 25);
+      calc = calc / acceleration;
+      sec = (6.3 * (weight / calc)) / acceleration;
+      calc = calc / sec;
+      console.log(`calc: ${calc}`);
+      console.log(`sec: ${sec}`);
+      // car 2
+      console.log(speed2);
+      let calc2 = handling2 * (speed / 25);
+      calc2 = calc2 / acceleration2;
+      sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
+      console.log(`sec2: ${sec2}`);
+
+      calc2 = calc2 / sec2;
+      console.log(`calc2: ${calc2}`);
+      tracklength -= calc;
+      tracklength2 -= calc2;
+
       if (tracklength2 <= 0 && i2 !== null) {
         clearInterval(i2);
 
@@ -312,7 +328,6 @@ module.exports = {
         tracklength = 800;
         tracklength2 = 800;
 
-    
         ctx.save();
         roundedImage(ctx, 640, 200, 640, 360, 20);
         ctx.stroke();
@@ -343,25 +358,22 @@ module.exports = {
         userdata.cash += cashwon;
         userdata.rp3 += rpwon;
         userdata.racerank += 1;
-        userdata.stockpoints += stockpoints
+        userdata.stockpoints += stockpoints;
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Stock Race won!`);
         embed.setImage(`attachment://profile-image.png`);
-        userdata.save()
-          await interaction.editReply({
-            embeds: [embed],
-            files: [attachment],
-            fetchReply: true,
-          });
-        
+        userdata.save();
+        await interaction.editReply({
+          embeds: [embed],
+          files: [attachment],
+          fetchReply: true,
+        });
       }
       // lost
 
       console.log(`track length ${tracklength}`);
       console.log(`track length 2 ${tracklength2}`);
     }, 1000);
-
-
   },
 };
 

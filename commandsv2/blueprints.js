@@ -1,5 +1,10 @@
 const lodash = require("lodash");
-const { EmbedBuilder, AttachmentBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const {
+  EmbedBuilder,
+  AttachmentBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+} = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
@@ -7,7 +12,7 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const titledb = require("../data/titles.json");
 const { createCanvas, loadImage } = require("canvas");
 const partdb = require("../data/partsdb.json");
-const cardb = require("../data/cardb.json")
+const cardb = require("../data/cardb.json");
 const ms = require("ms");
 const Cooldowns = require("../schema/cooldowns");
 
@@ -17,7 +22,7 @@ module.exports = {
     .setDescription("Use a blueprint!"),
   async execute(interaction) {
     let pfps = require("../data/pfpsdb.json");
-    let blueprints = require("../data/imports.json").blueprints
+    let blueprints = require("../data/imports.json").blueprints;
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -30,23 +35,23 @@ module.exports = {
       let time = ms(cooldown - (Date.now() - cratecool));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(`Please wait ${time} before revealing another blueprint.`);
+        .setDescription(
+          `Please wait ${time} before revealing another blueprint.`
+        );
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
       return;
     }
     let boughtindb = blueprints;
-    
+
     if (userdata.blueprints <= 0)
-      return interaction.reply(
-        `You don't have any blueprints!`
-      );
-    userdata.blueprints -= 1
+      return interaction.reply(`You don't have any blueprints!`);
+    userdata.blueprints -= 1;
     let embed = new EmbedBuilder()
       .setTitle(`Revealing blueprint...`)
       .setColor(`#60b0f4`);
 
-   let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
-  
+    let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
+
     userdata.update();
     cooldowndata.blueprint = Date.now();
     cooldowndata.save();
@@ -122,8 +127,6 @@ module.exports = {
         ctx.drawImage(imageload, 970, 200, 150, 150);
       }
 
-
-
       if (partdb.Parts[reward1]) {
         let partimg = partdb.Parts[reward1].Image;
         name1 = partdb.Parts[reward1].Name;
@@ -149,14 +152,14 @@ module.exports = {
         ctx.save();
       }
 
-      console.log(reward1)
-      console.log(reward2)
-      console.log(reward3)
+      console.log(reward1);
+      console.log(reward2);
+      console.log(reward3);
       if (cardb.Cars[reward1]) {
         let carimg = cardb.Cars[reward1].Image;
         name1 = cardb.Cars[reward1].Name;
         let loadedpart = await loadImage(carimg);
-        console.log(`name ${name1}`)
+        console.log(`name ${name1}`);
 
         ctx.drawImage(loadedpart, 80, 200, 320, 180);
         ctx.save();
@@ -165,7 +168,7 @@ module.exports = {
         let carimg = cardb.Cars[reward2].Image;
         name2 = cardb.Cars[reward2].Name;
         let loadedpart = await loadImage(carimg);
-        console.log(`name ${name2}`)
+        console.log(`name ${name2}`);
         ctx.drawImage(loadedpart, 500, 200, 320, 180);
         ctx.save();
       }
@@ -173,29 +176,27 @@ module.exports = {
         let carimg = cardb.Cars[reward3].Image;
         name3 = cardb.Cars[reward3].Name;
         let loadedpart = await loadImage(carimg);
-        console.log(`name ${name3}`)
+        console.log(`name ${name3}`);
 
         ctx.drawImage(loadedpart, 900, 200, 320, 180);
         ctx.save();
       }
-
 
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("reward1")
           .setLabel("Reward 1")
           .setStyle("Primary"),
-          new ButtonBuilder()
+        new ButtonBuilder()
           .setCustomId("reward2")
           .setLabel("Reward 2")
           .setStyle("Primary"),
-          new ButtonBuilder()
+        new ButtonBuilder()
           .setCustomId("reward3")
           .setLabel("Reward 3")
-          .setStyle("Primary"),
-     
+          .setStyle("Primary")
       );
-      
+
       ctx.fillText(name1, 100, 565);
       ctx.fillText(name2, 520, 565);
       ctx.fillText(name3, 920, 565);
@@ -204,115 +205,115 @@ module.exports = {
         name: "profile-image.png",
       });
       embed.setImage(`attachment://profile-image.png`);
-      embed.setTitle("Choose 1 reward from the choices below!")
+      embed.setTitle("Choose 1 reward from the choices below!");
 
-      await interaction.editReply({ embeds: [embed], files: [attachment], components: [row] });
+      await interaction.editReply({
+        embeds: [embed],
+        files: [attachment],
+        components: [row],
+      });
 
       let filter2 = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
       };
       let collector = msg.createMessageComponentCollector({
         filter: filter2,
-        time: 25000
+        time: 25000,
       });
 
-      collector.on('collect', async (i) => {
-        if(i.customId.endsWith("reward1")){
-            if (cardb.Cars[reward1]) {
-                let carindb = cardb.Cars[reward1.toLowerCase()]
-                let carobj = {
-                    ID: carindb.alias,
-                    Name: carindb.Name,
-                    Speed: carindb.Speed,
-                    Acceleration: carindb["0-60"],
-                    Handling: carindb.Handling,
-                    Parts: [],
-                    Emote: carindb.Emote,
-                    Livery: carindb.Image,
-                    Miles: 0,
-                  };
+      collector.on("collect", async (i) => {
+        if (i.customId.endsWith("reward1")) {
+          if (cardb.Cars[reward1]) {
+            let carindb = cardb.Cars[reward1.toLowerCase()];
+            let carobj = {
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+            };
 
-                  userdata.cars.push(carobj)
-                  userdata.save()
-                  await i.update({content: '✅'})
-                  collector.stop()
-                  return;
-              }
-              if (reward1.endsWith(`Cash`)) {
-                let amount = Number(reward1.split(" ")[0]);
-            
-                userdata.cash += parseInt(amount)
-                userdata.save()
-                  await i.update({content: '✅'})
-                  collector.stop()
-                  return;
-              }
+            userdata.cars.push(carobj);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
+          if (reward1.endsWith(`Cash`)) {
+            let amount = Number(reward1.split(" ")[0]);
+
+            userdata.cash += parseInt(amount);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
+        } else if (i.customId.endsWith("reward2")) {
+          if (cardb.Cars[reward2]) {
+            let carindb = cardb.Cars[reward2.toLowerCase()];
+            let carobj = {
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+            };
+
+            userdata.cars.push(carobj);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
+          if (reward2.endsWith(`Cash`)) {
+            let amount = Number(reward2.split(" ")[0]);
+
+            userdata.cash += parseInt(amount);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
+        } else if (i.customId.endsWith("reward3")) {
+          if (cardb.Cars[reward3]) {
+            let carindb = cardb.Cars[reward3.toLowerCase()];
+            let carobj = {
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+            };
+
+            userdata.cars.push(carobj);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
+          if (reward3.endsWith(`Cash`)) {
+            let amount = Number(reward3.split(" ")[0]);
+
+            userdata.cash += parseInt(amount);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
         }
-        else if(i.customId.endsWith("reward2")){
-            if (cardb.Cars[reward2]) {
-                let carindb = cardb.Cars[reward2.toLowerCase()]
-                let carobj = {
-                    ID: carindb.alias,
-                    Name: carindb.Name,
-                    Speed: carindb.Speed,
-                    Acceleration: carindb["0-60"],
-                    Handling: carindb.Handling,
-                    Parts: [],
-                    Emote: carindb.Emote,
-                    Livery: carindb.Image,
-                    Miles: 0,
-                  };
-
-                  userdata.cars.push(carobj)
-                  userdata.save()
-                  await i.update({content: '✅'})
-                  collector.stop()
-                  return;
-              }
-              if (reward2.endsWith(`Cash`)) {
-                let amount = Number(reward2.split(" ")[0]);
-            
-                userdata.cash += parseInt(amount)
-                userdata.save()
-                  await i.update({content: '✅'})
-                  collector.stop()
-                  return;
-              }
-        }
-        else if(i.customId.endsWith("reward3")){
-            if (cardb.Cars[reward3]) {
-                let carindb = cardb.Cars[reward3.toLowerCase()]
-                let carobj = {
-                    ID: carindb.alias,
-                    Name: carindb.Name,
-                    Speed: carindb.Speed,
-                    Acceleration: carindb["0-60"],
-                    Handling: carindb.Handling,
-                    Parts: [],
-                    Emote: carindb.Emote,
-                    Livery: carindb.Image,
-                    Miles: 0,
-                  };
-
-                  userdata.cars.push(carobj)
-                  userdata.save()
-                  await i.update({content: '✅'})
-                  collector.stop()
-                  return;
-              }
-              if (reward3.endsWith(`Cash`)) {
-                let amount = Number(reward3.split(" ")[0]);
-            
-                userdata.cash += parseInt(amount)
-                userdata.save()
-                  await i.update({content: '✅'})
-                  collector.stop()
-                  return;
-              }
-        }
-      })
-
-
+      });
 
       console.log(rewards);
     }, 5000);

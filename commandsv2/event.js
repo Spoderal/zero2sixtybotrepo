@@ -158,8 +158,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          }
-          else if (value === "stock_event") {
+          } else if (value === "stock_event") {
             embed.setTitle("Stock Champions Event");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Bring out your best stock car, there's no parts allowed!
