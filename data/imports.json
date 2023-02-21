@@ -67,6 +67,22 @@
       "drift 1995 mazda miata"
     ]
   },
+  "blueprints": {
+    "Contents": [
+      "2021 pagani huayra r",
+      "50000 Cash",
+      "2020 audi rs q3",
+        "25000 Cash",
+        "25000 Cash",
+        "25000 Cash",
+        "2006 saleen s7",
+        "2015 honda civic type r",
+        "25000 Cash",
+        "50000 Cash",
+        "t4exhaust",
+        "t5intake"
+    ]
+  },
   "z crate": {
     "common": ["2005 mazda rx8", "2001 toyota supra mk4"],
     "uncommon": ["2008 mazda miata", "2001 toyota supra mk4"],

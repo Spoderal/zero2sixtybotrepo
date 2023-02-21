@@ -10,10 +10,11 @@ const helmetdb = require("../data/pfpsdb.json");
 const { emotes } = require("../common/emotes");
 const { createCanvas, loadImage } = require("canvas");
 const partdb = require("../data/partsdb.json");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 
+const weather = require("../data/weather.json")
 let bot1cars = [
   "1995 mazda miata",
   "1991 toyota mr2",
@@ -155,6 +156,7 @@ module.exports = {
     }
     interaction.reply("Revving engines...");
     let car2;
+    let weather2 = lodash.sample(weather)
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
@@ -192,25 +194,27 @@ module.exports = {
     }
     let usertier = userdata.tier;
 
+    let botspeed = car2.Speed
+    let bot060 = car2["0-60"]
     if (usertier >= 5) {
-      car2.Speed = car2.Speed += partdb.Parts.txexhaust.AddedSpeed;
-      car2.Speed = car2.Speed += partdb.Parts.txclutch.AddedSpeed;
-      car2.Speed = car2.Speed += partdb.Parts.txintake.AddedSpeed;
-      let newzero = (car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty);
+      botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
+      botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
+      botspeed = botspeed += partdb.Parts.txintake.AddedSpeed;
+      let newzero = (bot060 -= partdb.Parts.txexhaust.AddedSixty);
       let newzero2 = (newzero -= partdb.Parts.txexhaust.AddedSixty);
       let newzero3 = (newzero2 -= partdb.Parts.txexhaust.AddedSixty);
       if (newzero > 2) {
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txexhaust.AddedSixty;
+        bot060 = bot060 -= partdb.Parts.txexhaust.AddedSixty;
       }
       if (newzero2 > 2) {
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txclutch.AddedSixty;
+        bot060 = bot060 -= partdb.Parts.txclutch.AddedSixty;
       }
       if (newzero3 > 2) {
-        car2["0-60"] = car2["0-60"] -= partdb.Parts.txintake.AddedSixty;
+        bot060 = bot060 -= partdb.Parts.txintake.AddedSixty;
       }
 
-      if (car2["0-60"] < 2) {
-        car2["0-60"] = 2;
+      if (bot060 < 2) {
+        bot060 = 2;
       }
     }
     let selected1image = await loadImage(`${selected.Livery}`);
@@ -240,6 +244,14 @@ module.exports = {
 
     ctx.fillText(car2.Name, 845, 180);
     ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
+    if(weather2.Emote == "🌧️"){
+      let weatherimg = await loadImage("https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png")
+      ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
+    }
+    else if(weather2.Emote == "🌨️"){
+      let weatherimg = await loadImage("https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png")
+      ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
+    }
     let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
       name: "profile-image.png",
     });
@@ -248,21 +260,27 @@ module.exports = {
 
     cooldowndata.dragracing = Date.now();
     cooldowndata.save();
-    let mph = selected.Speed;
-    let weight =
-      selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let slipchance = weather2.Slip
+    let speedreduce = weather2.SpeedReduce
+    let mph = selected.Speed -= speedreduce
+    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
-    let handling = selected.Handling;
+    let handling = selected.Handling / weather2.Grip
 
     if (!selected.WeightStat) {
       selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
-
-    let mph2 = car2.Speed;
+    let mph2 = botspeed -= speedreduce
     let weight2 = car2.Weight;
     let acceleration2 = car2["0-60"];
-    let handling2 = car2.Handling;
+    let handling2 = car2.Handling / weather2.Grip
+    if(slipchance > 0){
+      let slip = randomRange(1, slipchance)
+      if(slip >= 2){
+        mph -= 10
 
+      }
+    }
     let speed = 0;
     let speed2 = 0;
 
@@ -286,7 +304,7 @@ module.exports = {
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
-      .setTitle(`Racing Tier ${bot} on ${lengthname}`)
+      .setTitle(`Racing Tier ${bot} on ${lengthname} ${weather2.Emote}`)
 
       .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
       .addFields(
@@ -360,7 +378,7 @@ module.exports = {
         userdata.racerank += 1;
         userdata.cash += cashwon;
         embed.setDescription(`${earnings.join("\n")}`);
-        embed.setTitle(`Tier ${bot} ${lengthname} won!`);
+        embed.setTitle(`Tier ${bot} ${lengthname} won! ${weather2.Emote}`);
         embed.setImage(`attachment://profile-image.png`);
 
         await interaction.editReply({ embeds: [embed], files: [attachment] });
@@ -374,7 +392,7 @@ module.exports = {
         });
         embed.setImage(`attachment://profile-image.png`);
 
-        embed.setTitle(`Tier ${bot} ${lengthname} lost!`);
+        embed.setTitle(`Tier ${bot} ${lengthname} lost! ${weather2.Emote}`);
         await interaction.editReply({ embeds: [embed], files: [attachment] });
         clearInterval(i2);
       }

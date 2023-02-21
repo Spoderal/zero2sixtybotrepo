@@ -4,26 +4,44 @@
       "Name": "Fusion Master",
       "Emote": "<:ach_fusionmaster:1028936494783676416>",
       "Reward": 50000,
-      "Task": "Fuse 50 parts"
+      "Task": "Fuse 50 parts",
+      "Image":"https://i.ibb.co/4fTVjPX/ach-fusionmaster.png"
     },
 
     "rich": {
       "Emote": "<:achievement_rich:1031826566151409715>",
       "Task": "Reach 100K cash",
       "Name": "Rich",
-      "Reward": 75000
+      "Reward": 75000,
+      "Image":"https://i.ibb.co/Zf8bGrN/achievement-rich.png"
     },
     "richer": {
       "Emote": "<:achievement_richer:1031826565207707648>",
       "Task": "Reach 1M cash",
       "Name": "Richer",
-      "Reward": 100000
+      "Reward": 100000,
+      "Image":"https://i.ibb.co/4Py8NZ6/achievement-richer.png"
     },
     "richest": {
       "Emote": "<:achievement_richest:1031826564050071603>",
       "Task": "Reach 1B cash",
       "Name": "Richest",
-      "Reward": 1000000
+      "Reward": 1000000,
+      "Image":"https://i.ibb.co/ZK046Gf/achievement-richest.png"
+    },
+    "time master": {
+      "Emote": "<:ach_timemaster:1073840454111604807>",
+      "Task": "Finish the Time Trial in under 2 seconds",
+      "Name": "Time Master",
+      "Reward": 50000,
+      "Image":"https://i.ibb.co/n3XDmjg/ach-timemaster.png"
+    },
+    "bug smasher": {
+      "Emote": "<:achievement_bugsmasher:1074597420131942490>",
+      "Task": "Find a bug",
+      "Name": "Bug Smasher",
+      "Reward": 0,
+      "Image":"https://i.ibb.co/5GxBJbp/achievement-bugsmasher.png"
     }
   },
   "Soon": {

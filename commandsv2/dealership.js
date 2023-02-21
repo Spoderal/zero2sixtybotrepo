@@ -28,17 +28,11 @@ module.exports = {
     let carclassSarr = [];
     let carclassParr = [];
     let newcars = [
-      cars.Cars["2023 porsche 911 gt3 rs"],
-      cars.Cars["2021 nissan gtr nismo"],
-      cars.Cars["2020 ferrari f8 tributo"],
-      cars.Cars["2020 mini"],
-      cars.Cars["2020 subaru brz ts"],
-      cars.Cars["2020 hyundai i30 n"],
-      cars.Cars["2019 jaguar xe sv"],
-      cars.Cars["2022 ford fiesta st"],
-      cars.Cars["2021 bac mono"],
-      cars.Cars["2019 mazda miata"],
-      cars.Cars["2021 bmw m2"],
+      cars.Cars["2021 pagani huayra r"],
+      cars.Cars["2020 audi rs q3"],
+      cars.Cars["2015 honda civic type r"],
+      cars.Cars["2006 saleen s7"],
+      cars.Cars["1987 ruf ctr yellowbird"],
     ];
     let global = await Global.findOne();
     let carstock = global.stock;

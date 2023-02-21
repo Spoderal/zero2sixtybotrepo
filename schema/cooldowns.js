@@ -56,6 +56,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  stockracing: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  blueprint: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   cashcup: {
     type: Number,
     required: false,

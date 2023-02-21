@@ -18,7 +18,6 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Z Crate 1", value: "z crate 1" },
           { name: "McLaren", value: "mclaren" }
         )
         .setRequired(true)
@@ -70,10 +69,7 @@ module.exports = {
       return await interaction.reply(
         `You dont have enough keys! This crate costs 5 drift keys`
       );
-    if (bought == "z crate 1" && gold < 5)
-      return await interaction.reply(
-        `You dont have enough gold! This crate costs 5 gold`
-      );
+  
     if (bought == "mclaren" && ferrarikeys < 100)
       return await interaction.reply(
         `You dont have enough keys! This crate costs 100 McLaren keys`
@@ -89,9 +85,7 @@ module.exports = {
       userdata.dkeys -= 5;
     } else if (bought == "mclaren") {
       userdata.fkeys -= 100;
-    } else if (bought == "z crate 1") {
-      userdata.gold -= 20;
-    }
+    } 
 
     let result;
     let rarity;
@@ -192,6 +186,20 @@ module.exports = {
         Livery: carindb.Image,
         Miles: 0,
       };
+      if(carindb.Obtained == "Blueprints"){
+        carobj = {
+          ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+          Blueprints: 0
+        };
+      }
       let filtered = usercars.filter((car) => car.Name == carobj.Name);
 
       if (filtered[0]) {

@@ -7,7 +7,6 @@ require("dotenv").config();
 const patron = require("../patreon");
 const { updateItemShop } = require("./itemshop");
 const double = require("../doublecash");
-const db = require("quick.db");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");

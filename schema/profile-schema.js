@@ -111,6 +111,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  blueprints: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   squads: {
     type: Array,
     required: false,
@@ -124,6 +129,11 @@ const Profile = new mongoose.Schema({
     ],
   },
   noto5: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  stockpoints: {
     type: Number,
     required: false,
     default: 0,

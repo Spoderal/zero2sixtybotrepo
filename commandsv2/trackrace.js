@@ -110,7 +110,7 @@ module.exports = {
     }
 
     if (userdata.cash < lostcash) {
-      return interaction.reply(
+      return interaction.channel.send(
         `You need at least ${lostcash} to race this tier! Just in case you lose it...`
       );
     }
@@ -190,7 +190,7 @@ module.exports = {
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
-      .setTitle(`Racing Tier ${bot} Street Race`)
+      .setTitle(`Racing Tier ${bot} Track Race`)
 
       .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
       .addFields(

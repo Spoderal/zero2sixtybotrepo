@@ -18,8 +18,8 @@ module.exports = {
 
     let newprestige2 = (prestigerank += 1);
 
-    let raceprestige = newprestige2 * 100;
-    let driftprestige = newprestige2 * 100;
+    let raceprestige = newprestige2 * 50;
+    let driftprestige = newprestige2 * 50;
 
     if (driftrank < driftprestige)
       return await interaction.reply(

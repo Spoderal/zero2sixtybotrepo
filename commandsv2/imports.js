@@ -14,6 +14,7 @@ module.exports = {
     let key3emote = emotes.exoticKey;
     let key4emote = emotes.mclaren;
     let goldemote = emotes.gold;
+    
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Import Crates")
@@ -25,7 +26,7 @@ module.exports = {
             Rare Import Crate : 25 ${key2emote} Keys
             Exotic Import Crate : 20 ${key3emote} Keys
             McLaren Import Crate : 100 ${key4emote} **LIMITED**
-            Z Crate 1 : 5 ${goldemote}
+            Blueprint Import Crate : 50 ${emotes.blueprints}
           `,
         },
       ])

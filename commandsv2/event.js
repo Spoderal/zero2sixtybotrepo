@@ -39,6 +39,13 @@ module.exports = {
             customId: "mclaren",
             emoji: "<:mclaren:931011546354692137>",
           },
+          {
+            label: "Stock Champions",
+            description: "Information for the Stock Champions Event",
+            value: "stock_event",
+            customId: "stock",
+            emoji: "🎈",
+          },
         ])
     );
 
@@ -54,6 +61,7 @@ module.exports = {
           Winter Season 2022 ❄️\n
           Track Legends 🏁\n
           McLaren Event <:mclaren:931011546354692137>
+          Stock Champions 🎈
       `);
 
     embed.setColor(colors.blue);
@@ -143,6 +151,32 @@ module.exports = {
                   `);
             embed.setThumbnail(
               "https://www.topgear.com/sites/default/files/images/news-article/2018/07/06ba2b96a4ea4fa5d86b083bd8ab42ba/dsc03169.jpg"
+            );
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else if (value === "stock_event") {
+            embed.setTitle("Stock Champions Event");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Bring out your best stock car, there's no parts allowed!
+
+            Race to be on top of the leaderboard in /stockrace to win prizes!
+
+            1st: 1987 RUF CTR Yellowbird\n
+            2nd: $10M Cash\n
+            3rd: $5M Cash\n
+            4th: $1M Cash\n
+            5th: $500K Cash\n
+
+            **Ends March 31st 2023**
+            
+                  `);
+            embed.setImage(
+              "https://www.ruf-automobile.de/site/assets/files/1093/scr-generationen.1920x720.jpg"
             );
             embed.setColor(colors.blue);
 

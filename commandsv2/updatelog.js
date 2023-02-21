@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "2/6/2023",
+            label: "2/20/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -46,7 +46,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 1/13/2023\n
+            ⚙️ Latest Patch 2/20/2023\n
             ❄️ Winter Update 11/30/2022\n
             ⬆️ Small Update 1/22/2023
         `);
@@ -73,17 +73,18 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• Squad race bug fixed\n
-                • Wheelspin and lockpick cars can be sold easier now\n
-                • New event, track legends!\n
-                • Races are now harder for people who have beaten all squads\n
-                • New squad: Double 0\n
-                • Dealership shows if you own a car or not\n
-                • Drag race cooldown is different from street racing cooldown\n
-                • New cars
+                `• New blueprints feature, get blueprints from fusing parts together (random drop)! Use blueprints with /blueprint and pick from 3 exclusive rewards that rotate every month!\n
+                • Visual updates to emojis, and the profile command\n
+                • New Car card designs are gonna be seen for **SOME** cars, most cars don't have this feature yet.\n
+                • Weather!\n
+                • Prestige requirements lowered to next prestige * 50 instead of * 100\n
+                • Stock Championship event to celebrate 1,000 servers!\n
+                • Other small changes\n
+                • New cars\n
+                • New achievements (time master, bug smasher)
                 `
               )
-              .setFooter({ text: "2/6/2023" })
+              .setFooter({ text: "2/20/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

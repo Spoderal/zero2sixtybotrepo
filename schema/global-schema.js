@@ -56,6 +56,9 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  events:{
+
+  },
   stock: {
     type: Object,
     required: false,
