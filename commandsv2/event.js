@@ -164,7 +164,7 @@ module.exports = {
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Bring out your best stock car, there's no parts allowed!
 
-            Race to be on top of the leaderboard in /stockrace to win prizes!
+            Race to be on top of the leaderboard in /stockrace to win prizes! View the leaderboard with /leaderboard
 
             1st: 1987 RUF CTR Yellowbird\n
             2nd: $10M Cash\n
