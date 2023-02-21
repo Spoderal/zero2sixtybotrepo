@@ -69,7 +69,7 @@ module.exports = {
       return await interaction.reply(
         `You dont have enough keys! This crate costs 5 drift keys`
       );
-  
+
     if (bought == "mclaren" && ferrarikeys < 100)
       return await interaction.reply(
         `You dont have enough keys! This crate costs 100 McLaren keys`
@@ -85,7 +85,7 @@ module.exports = {
       userdata.dkeys -= 5;
     } else if (bought == "mclaren") {
       userdata.fkeys -= 100;
-    } 
+    }
 
     let result;
     let rarity;
@@ -186,7 +186,7 @@ module.exports = {
         Livery: carindb.Image,
         Miles: 0,
       };
-      if(carindb.Obtained == "Blueprints"){
+      if (carindb.Obtained == "Blueprints") {
         carobj = {
           ID: carindb.alias,
           Name: carindb.Name,
@@ -197,7 +197,7 @@ module.exports = {
           Emote: carindb.Emote,
           Livery: carindb.Image,
           Miles: 0,
-          Blueprints: 0
+          Blueprints: 0,
         };
       }
       let filtered = usercars.filter((car) => car.Name == carobj.Name);

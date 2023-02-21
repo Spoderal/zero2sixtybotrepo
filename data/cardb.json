@@ -7053,7 +7053,7 @@
       "Weight": 2900,
       "Obtained": "Blueprints"
     },
-     "2020 audi rs q3": {
+    "2020 audi rs q3": {
       "alias": "2020 rs q3",
       "Name": "2020 Audi RS Q3",
       "Emote": "<:audi:931011548758048828>",
@@ -7069,8 +7069,8 @@
       "Class": "B",
       "Weight": 3900,
       "Obtained": "Blueprints"
-     },
-     "2015 honda civic type r": {
+    },
+    "2015 honda civic type r": {
       "alias": "2015 civic type r",
       "Name": "2015 Honda Civic Type R",
       "Emote": "<:honda:931011549705957397>",

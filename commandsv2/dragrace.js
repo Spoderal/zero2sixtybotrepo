@@ -14,7 +14,7 @@ const { toCurrency, randomRange } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 
-const weather = require("../data/weather.json")
+const weather = require("../data/weather.json");
 let bot1cars = [
   "1995 mazda miata",
   "1991 toyota mr2",
@@ -156,7 +156,7 @@ module.exports = {
     }
     interaction.reply("Revving engines...");
     let car2;
-    let weather2 = lodash.sample(weather)
+    let weather2 = lodash.sample(weather);
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
@@ -194,8 +194,8 @@ module.exports = {
     }
     let usertier = userdata.tier;
 
-    let botspeed = car2.Speed
-    let bot060 = car2["0-60"]
+    let botspeed = car2.Speed;
+    let bot060 = car2["0-60"];
     if (usertier >= 5) {
       botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
       botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
@@ -244,12 +244,15 @@ module.exports = {
 
     ctx.fillText(car2.Name, 845, 180);
     ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-    if(weather2.Emote == "🌧️"){
-      let weatherimg = await loadImage("https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png")
+    if (weather2.Emote == "🌧️") {
+      let weatherimg = await loadImage(
+        "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
+      );
       ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-    }
-    else if(weather2.Emote == "🌨️"){
-      let weatherimg = await loadImage("https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png")
+    } else if (weather2.Emote == "🌨️") {
+      let weatherimg = await loadImage(
+        "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
+      );
       ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
     }
     let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
@@ -260,25 +263,25 @@ module.exports = {
 
     cooldowndata.dragracing = Date.now();
     cooldowndata.save();
-    let slipchance = weather2.Slip
-    let speedreduce = weather2.SpeedReduce
-    let mph = selected.Speed -= speedreduce
-    let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let slipchance = weather2.Slip;
+    let speedreduce = weather2.SpeedReduce;
+    let mph = (selected.Speed -= speedreduce);
+    let weight =
+      selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
-    let handling = selected.Handling / weather2.Grip
+    let handling = selected.Handling / weather2.Grip;
 
     if (!selected.WeightStat) {
       selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
-    let mph2 = botspeed -= speedreduce
+    let mph2 = (botspeed -= speedreduce);
     let weight2 = car2.Weight;
     let acceleration2 = car2["0-60"];
-    let handling2 = car2.Handling / weather2.Grip
-    if(slipchance > 0){
-      let slip = randomRange(1, slipchance)
-      if(slip >= 2){
-        mph -= 10
-
+    let handling2 = car2.Handling / weather2.Grip;
+    if (slipchance > 0) {
+      let slip = randomRange(1, slipchance);
+      if (slip >= 2) {
+        mph -= 10;
       }
     }
     let speed = 0;

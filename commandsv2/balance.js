@@ -44,7 +44,7 @@ module.exports = {
       moontokens,
       stockpoints,
       achievements,
-      blueprints
+      blueprints,
     } = profile;
     let userdata = await User.findOne({ id: interaction.user.id });
 
@@ -55,7 +55,9 @@ module.exports = {
         .setTitle(`${user.username}'s Balance`)
         .setDescription(
           `
-          ${emotes.cash} Z Cash: ${toCurrency(cash)} \u200b ${emotes.gold} Gold: ${gold} 
+          ${emotes.cash} Z Cash: ${toCurrency(cash)} \u200b ${
+            emotes.gold
+          } Gold: ${gold} 
 
           ${emotes.wheelSpin} Wheel spins: ${wheelspins}  
           

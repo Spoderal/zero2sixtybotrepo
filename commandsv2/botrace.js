@@ -15,13 +15,13 @@ const {
   doubleCashWeekendField,
   convertMPHtoKPHm,
   toCurrency,
-  randomRange
+  randomRange,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const houses = require("../data/houses.json");
 const cardb = require("../data/cardb.json");
-const weather = require("../data/weather.json")
-const cratedb = require("../data/cratedb.json")
+const weather = require("../data/weather.json");
+const cratedb = require("../data/cratedb.json");
 
 let bot1cars = [
   "1995 mazda miata",
@@ -137,9 +137,9 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
     let bot = interaction.options.getString("tier");
-     await interaction.reply("Revving engines...");
-    let weather2 = lodash.sample(weather)
-    console.log(weather2)
+    await interaction.reply("Revving engines...");
+    let weather2 = lodash.sample(weather);
+    console.log(weather2);
     let car2;
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
@@ -147,7 +147,7 @@ module.exports = {
     const vsimg = await loadImage("https://i.ibb.co/jrPF08J/vsstreet.png");
     let cashwon = parseInt(bot) * 150;
     let rpwon = parseInt(bot) * 2;
-    let cashlost = parseInt(bot) * 20
+    let cashlost = parseInt(bot) * 20;
     let eventkeys = parseInt(bot) * 1;
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
@@ -166,8 +166,8 @@ module.exports = {
     }
     let usertier = userdata.tier;
 
-    let botspeed = car2.Speed
-    let bot060 = car2["0-60"]
+    let botspeed = car2.Speed;
+    let bot060 = car2["0-60"];
     if (usertier >= 5) {
       botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
       botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
@@ -189,17 +189,15 @@ module.exports = {
         bot060 = 2;
       }
     }
-    let craterare = randomRange(1, 3)
+    let craterare = randomRange(1, 3);
 
-    let crateearned
+    let crateearned;
 
-   if(craterare == 2){
-      crateearned = "common crate"
+    if (craterare == 2) {
+      crateearned = "common crate";
+    } else if (craterare == 3) {
+      crateearned = "rare crate";
     }
-    else if(craterare == 3){
-      crateearned = "rare crate"
-    }
-
 
     let selected1image = await loadImage(`${selected.Livery}`);
     let selected2image = await loadImage(`${car2.Image}`);
@@ -230,12 +228,15 @@ module.exports = {
     ctx.fillText(car2.Name, 845, 180);
     ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
-    if(weather2.Emote == "🌧️"){
-      let weatherimg = await loadImage("https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png")
+    if (weather2.Emote == "🌧️") {
+      let weatherimg = await loadImage(
+        "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
+      );
       ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-    }
-    else if(weather2.Emote == "🌨️"){
-      let weatherimg = await loadImage("https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png")
+    } else if (weather2.Emote == "🌨️") {
+      let weatherimg = await loadImage(
+        "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
+      );
       ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
     }
 
@@ -243,13 +244,13 @@ module.exports = {
       name: "profile-image.png",
     });
 
-  
-    let slipchance = weather2.Slip
-    let speedreduce = weather2.SpeedReduce
+    let slipchance = weather2.Slip;
+    let speedreduce = weather2.SpeedReduce;
     cooldowndata.racing = Date.now();
     cooldowndata.save();
-    let mph = selected.Speed -= speedreduce
-    let weight = selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+    let mph = (selected.Speed -= speedreduce);
+    let weight =
+      selected.WeightStatStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
     let acceleration = selected.Acceleration;
     let handling = selected.Handling / weather2.Grip;
 
@@ -257,15 +258,14 @@ module.exports = {
       selected.WeightStatStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
     }
 
-    let mph2 = botspeed -= speedreduce;
+    let mph2 = (botspeed -= speedreduce);
     let weight2 = car2.Weight;
     let acceleration2 = car2["0-60"];
     let handling2 = car2.Handling / weather2.Grip;
-    if(slipchance > 0){
-      let slip = randomRange(1, slipchance)
-      if(slip >= 2){
-        mph -= 10
-
+    if (slipchance > 0) {
+      let slip = randomRange(1, slipchance);
+      if (slip >= 2) {
+        mph -= 10;
       }
     }
     let speed = 0;
@@ -287,13 +287,13 @@ module.exports = {
     }, 30);
     let sec;
     let sec2;
-    handling = Math.floor(handling)
-    handling2 = Math.floor(handling2)
+    handling = Math.floor(handling);
+    handling2 = Math.floor(handling2);
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing Tier ${bot} Street Race ${weather2.Emote}`)
-      
+
       .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
       .addFields(
         {
@@ -312,7 +312,7 @@ module.exports = {
       .setImage("attachment://profile-image.png");
 
     interaction.editReply({
-      content: '',
+      content: "",
       embeds: [embed],
       files: [attachment],
       fetchReply: true,
@@ -362,8 +362,8 @@ module.exports = {
         if (userdata.houses && filteredhouse2[0]) {
           rpwon = rpwon * 2;
         }
-        if(weather2.Reward > 0){
-          cashwon = cashwon += weather2.Reward
+        if (weather2.Reward > 0) {
+          cashwon = cashwon += weather2.Reward;
         }
         earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
         earnings.push(`${emotes.rp} +${rpwon}`);
@@ -373,10 +373,11 @@ module.exports = {
           earnings.push(`${emotes.mclaren} +${eventkeys}`);
           userdata.fkeys += eventkeys;
         }
-        if(crateearned !== undefined){
-          userdata.items.push(crateearned)
-        earnings.push(`${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`)
-
+        if (crateearned !== undefined) {
+          userdata.items.push(crateearned);
+          earnings.push(
+            `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
+          );
         }
 
         userdata.cash += cashwon;
@@ -397,7 +398,7 @@ module.exports = {
           name: "profile-image.png",
         });
         embed.setImage(`attachment://profile-image.png`);
-        userdata.cash += cashlost
+        userdata.cash += cashlost;
         embed.setTitle(`Tier ${bot} Street Race lost! ${weather2.Emote}`);
         embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
         await interaction.editReply({ embeds: [embed], files: [attachment] });
@@ -407,7 +408,6 @@ module.exports = {
 
       console.log(`track length ${tracklength}`);
       console.log(`track length 2 ${tracklength2}`);
-    
     }, 1000);
   },
 };
