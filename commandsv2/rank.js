@@ -19,8 +19,8 @@ module.exports = {
 
     let racerank = userdata.racerank;
 
-    let required1 = newprestige2 * 100;
-    let required2 = newprestige2 * 100;
+    let required1 = newprestige2 * 50;
+    let required2 = newprestige2 * 50;
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${user.username}'s ranks`)
