@@ -1,0 +1,11 @@
+{
+  "roadsters": {
+    "cars": [
+      "2017 pagani huayra roadster",
+      "2022 bmw z4 roadster",
+      "2021 aston martin vantage roadster"
+    ],
+    "Gold": 500,
+    "Name": "Rad Roadsters"
+  }
+}

@@ -36,17 +36,25 @@ module.exports = {
     let items = userdata.items;
     let emote;
     let name;
-    if (!items.includes(itemtouse.toLowerCase()))
+    if (
+      itemtouse.toLowerCase() !== "gold" &&
+      itemdb.Other[itemtouse.toLowerCase()].Type == "Non-Usable"
+    )
+      return interaction.reply(`Thats not a usable item!`);
+    if (
+      !items.includes(itemtouse.toLowerCase()) &&
+      itemtouse.toLowerCase() !== "gold"
+    )
       return interaction.reply("You don't have this item!");
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
     });
-    if (amount2 > 50)
+    if (amount2 > 50 && itemtouse.toLowerCase() !== "gold")
       return interaction.reply(
         `The max amount you can use in one command is 50!`
       );
 
-    if (amount2 > filtereduser.length)
+    if (amount2 > filtereduser.length && itemtouse.toLowerCase() !== "gold")
       return interaction.reply("You don't have that many of that item!");
     let fullname;
 
@@ -62,7 +70,7 @@ module.exports = {
       if (itemtouse.toLowerCase() == "pink slip") {
         userdata.pinkslips += 1;
       } else if (itemtouse.toLowerCase() == "bank increase") {
-        let banklimit = userdata.banklimit;
+        let banklimit = userdata.banklimit || 0;
 
         if (banklimit >= 2500000)
           return interaction.reply(
@@ -72,7 +80,16 @@ module.exports = {
           );
 
         let finalbanklimit = 5000 * amount2;
-        userdata.banklimit += finalbanklimit;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              banklimit: (banklimit += finalbanklimit),
+            },
+          }
+        );
         userdata.update();
 
         if (userdata.banklimit >= 2500000) {
@@ -89,7 +106,16 @@ module.exports = {
           );
 
         let finalbanklimit = 25000 * amount2;
-        userdata.banklimit += finalbanklimit;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              banklimit: (banklimit += finalbanklimit),
+            },
+          }
+        );
         userdata.update();
 
         if (userdata.banklimit >= 10000000) {
@@ -169,13 +195,166 @@ module.exports = {
             .setDescription(`You can use a water bottle again in ${time}.`);
           return await interaction.reply({ embeds: [timeEmbed] });
         }
-        cooldowndata.racing = 0;
-        cooldowndata.betracing = 0;
+        await Cooldowns.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              racing: 0,
+              hm: 0,
+              qm: 0,
+              drifting: 0,
+              waterbottle: Date.now(),
+            },
+          }
+        );
 
-        cooldowndata.cashcup = 0;
-        cooldowndata.hm = 0;
+        cooldowndata.markModified();
 
-        cooldowndata.waterbottle = Date.now();
+        cooldowndata.save();
+      } else if (itemtouse.toLowerCase() == "zero bar") {
+        let effects = itemdb.Other["zero bar"].Effects;
+
+        let randomeffect = lodash.sample(effects);
+
+        if (randomeffect == "One of your cars just got +1 speed") {
+          let randomcar = lodash.sample(userdata.cars);
+          console.log(randomcar);
+          randomcar.Speed += 1;
+          console.log(randomcar);
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        } else if (
+          randomeffect == "One of your cars just got +1 acceleration"
+        ) {
+          let randomcar = lodash.sample(userdata.cars);
+          console.log(randomcar);
+          randomcar.Acceleration += 1;
+          console.log(randomcar);
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        } else if (randomeffect == "One of your cars just got -20 handling") {
+          let randomcar = lodash.sample(userdata.cars);
+          console.log(randomcar);
+          randomcar.Handling -= 20;
+          console.log(randomcar);
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        } else if (randomeffect == "One of your cars just got +5 speed") {
+          let randomcar = lodash.sample(userdata.cars);
+          console.log(randomcar);
+          randomcar.Speed += 5;
+          console.log(randomcar);
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": randomcar,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": randomcar.Name,
+                },
+              ],
+            }
+          );
+
+          userdata.update();
+        } else if (randomeffect == "You stink, no effect for you") {
+          return interaction.reply(`${randomeffect}`);
+        } else if (randomeffect == "You just got your weekly reward now!") {
+          let cash = 750;
+          let patron = userdata.patron;
+          let prestige = userdata.prestige;
+          if (patron && patron.tier == "1") {
+            cash *= 2;
+          }
+          if (patron && patron.tier == "2") {
+            cash *= 3;
+          }
+          if (patron && patron.tier == "3") {
+            cash *= 5;
+          }
+          if (patron && patron.tier == "4") {
+            cash *= 6;
+          }
+          if (prestige > 0) {
+            let mult = prestige * 0.05;
+
+            let multy = mult * cash;
+
+            cash = cash += multy;
+          }
+          userdata.cash += cash;
+          userdata.update();
+        }
+        for (var b = 0; i < amount2; b++)
+          items.splice(items.indexOf("zero bar"), 1);
+        userdata.items = items;
+        userdata.save();
+        interaction.reply(`${randomeffect}`);
+
+        return;
       }
     }
     if (itemdb.Police[itemtouse.toLowerCase()]) {

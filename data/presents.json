@@ -1,0 +1,20 @@
+{
+  "jolly": {
+    "Helmets": ["reverse vibrant helmet", "ocean helmet", "robot helmet"],
+    "Cars": ["toy train", "toy car"],
+    "Name": "Jolly Present",
+    "Emote": "<:present1:1052980073369698427>"
+  },
+  "festive": {
+    "Helmets": ["coacoa helmet", "ginger helmet"],
+    "Cars": ["christmas tree beetle", "generic rudolph car"],
+    "Name": "Festive Present",
+    "Emote": "<:present2:1052980075336843275>"
+  },
+  "frosty": {
+    "Helmets": ["winter helmet", "snowing helmet"],
+    "Cars": ["2018 dodge challenger sleigh", "christmas car"],
+    "Name": "Frosty Present",
+    "Emote": "<:present3:1052980072681840672>"
+  }
+}

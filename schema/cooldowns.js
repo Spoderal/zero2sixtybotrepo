@@ -11,7 +11,17 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  sqracing: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   energydrink: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  goldclear: {
     type: Number,
     required: false,
     default: 0,
@@ -32,6 +42,26 @@ const Cooldowns = new mongoose.Schema({
     default: 0,
   },
   betracing: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  dragracing: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  trackracing: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  stockracing: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  blueprint: {
     type: Number,
     required: false,
     default: 0,
@@ -81,12 +111,27 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  spwheelspin: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   wheelspin: {
     type: Number,
     required: false,
     default: 0,
   },
   timetrial: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  lastDaily: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  crate: {
     type: Number,
     required: false,
     default: 0,

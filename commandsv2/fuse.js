@@ -4,6 +4,9 @@ const partdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const achievementsdb = require("../data/achievements.json");
+const { toCurrency } = require("../common/utils");
+const lodash = require("lodash");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -26,9 +29,11 @@ module.exports = {
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
           { name: "Bodykit", value: "bodykit" },
+          { name: "Weight", value: "weight" },
           { name: "Brakes", value: "brakes" },
           { name: "TXExhaust", value: "txexhaust" },
-          { name: "TXIntake", value: "txintake" }
+          { name: "TXIntake", value: "txintake" },
+          { name: "TXClutch", value: "txclutch" }
         )
         .setRequired(true)
     ),
@@ -47,27 +52,6 @@ module.exports = {
       );
 
     if (!parts) return await interaction.reply("You dont have any parts!");
-    let list3 = [
-      "exhaust",
-      "tires",
-      "intake",
-      "clutch",
-      "gearbox",
-      "ecu",
-      "intercooler",
-      "dsuspension",
-      "rsuspension",
-      "turbo",
-      "spoiler",
-      "txexhaust",
-      "txintake",
-      "bodykit",
-    ];
-
-    if (!list3.includes(parttoinstall.toLowerCase()))
-      return await interaction.reply(
-        "Thats not an available fuse part! Try: Exhaust, Tires, Intercooler, Clutch, Gearbox, ECU, Drift Suspension, Race Suspension, or Intake"
-      );
 
     if (parttoinstall == "txexhaust") {
       let xessence = userdata.xessence;
@@ -151,6 +135,47 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
+    } else if (parttoinstall == "txclutch") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5clutch") && !parts.includes("T5Clutch"))
+        return await interaction.reply(`You need a T5Clutch to do this fuse!`);
+
+      for (var e = 0; e < 1; e++) parts.splice(parts.indexOf("t5clutch"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5clutch"].Emote} ${partdb.Parts["t5clutch"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txclutch"].Emote} ${partdb.Parts["txclutch"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txclutch");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
     } else {
       let parte = "";
       let partb = "";
@@ -193,6 +218,9 @@ module.exports = {
       } else if (parttoinstall == "bodykit") {
         parte = "t4bodykit";
         partb = "t5bodykit";
+      } else if (parttoinstall == "weight") {
+        parte = "t4weightreduction";
+        partb = "t5weightreduction";
       }
 
       let filtereduser = parts.filter(function hasmany(part) {
@@ -212,6 +240,48 @@ module.exports = {
       embed.setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });
+      let achievements = userdata.achievements || ["None"];
+      if (achievements) {
+        let fusionFiltered = achievements.filter(
+          (achievement) => achievement.name == "Fusion Master"
+        );
+        if (fusionFiltered.length == 0) {
+          console.log("none");
+          achievements.push({
+            name: "Fusion Master",
+            amount: 0,
+            id: "fusion master",
+            completed: false,
+          });
+          userdata.markModified("achievements");
+          userdata.update();
+        }
+        fusionFiltered = achievements.filter(
+          (achievement) => achievement.name == "Fusion Master"
+        );
+        fusionFiltered[0].amount += 1;
+        userdata.markModified("achievements");
+
+        userdata.update();
+        userdata.markModified("achievements");
+
+        if (
+          fusionFiltered[0].amount >= 50 &&
+          fusionFiltered[0].completed !== true
+        ) {
+          embed.setDescription(
+            `New achievement! <:ach_fusionmaster:1028936494783676416> You received ${toCurrency(
+              achievementsdb.Achievements["fusion master"].Reward
+            )}`
+          );
+          fusionFiltered[0].completed = true;
+          userdata.cash += achievementsdb.Achievements["fusion master"].Reward;
+          userdata.update();
+          userdata.markModified("achievements");
+        }
+      }
+      let yesno = ["yes", "no", "no"];
+      let randomblueprint = lodash.sample(yesno);
 
       setTimeout(() => {
         embed.setTitle("Fused!");
@@ -229,6 +299,12 @@ module.exports = {
         userdata.parts = parts;
 
         userdata.parts.push(partb);
+        if (randomblueprint == "yes") {
+          userdata.blueprints += 1;
+          interaction.channel.send(
+            "<:blueprint:1076026198171328562> +1 Blueprint!"
+          );
+        }
         userdata.save();
       }, 2000);
     }

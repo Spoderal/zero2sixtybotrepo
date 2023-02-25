@@ -10,7 +10,7 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("house")
-    .setDescription("View your house and its perks")
+    .setDescription("View your houses and their perks")
     .addBooleanOption((option) =>
       option
         .setName("sell")

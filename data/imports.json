@@ -22,7 +22,9 @@
       "2020 polestar one",
       "2013 mitsubishi evo x",
       "2014 ford mustang gt500",
-      "2012 mazda rx8"
+      "2012 mazda rx8",
+      "2016 bmw m6",
+      "2021 acura tlx type s"
     ]
   },
   "exotic": {
@@ -43,7 +45,14 @@
       "2020 mclaren senna",
       "2021 lamborghini huracan sto",
       "2021 lamborghini urus",
-      "2023 ferrari daytona sp3"
+      "2023 ferrari daytona sp3",
+      "2022 ferrari br20",
+      "2024 aston martin valhalla",
+      "1991 hoonigan porsche 911 turbo",
+      "1965 hoonigan ford mustang hoonicorn",
+      "1978 hoonigan ford escort mk2 rs1800",
+      "2017 mercedes amg one",
+      "2022 aston martin valkyrie"
     ]
   },
   "drift": {
@@ -56,6 +65,22 @@
       "drift 1998 bmw m3 e36",
       "drift 2000 lexus sc400",
       "drift 1995 mazda miata"
+    ]
+  },
+  "blueprints": {
+    "Contents": [
+      "2021 pagani huayra r",
+      "50000 Cash",
+      "2020 audi rs q3",
+      "25000 Cash",
+      "25000 Cash",
+      "25000 Cash",
+      "2006 saleen s7",
+      "2015 honda civic type r",
+      "25000 Cash",
+      "50000 Cash",
+      "t4exhaust",
+      "t5intake"
     ]
   },
   "z crate": {
@@ -71,14 +96,14 @@
       "stat track 2019 bugatti la voiture noire"
     ]
   },
-  "ferrari": {
+  "mclaren": {
     "Contents": [
-      "1987 ferrari f40",
-      "1990 ferrari testarossa",
-      "1995 ferrari f50",
-      "1998 ferrari f355",
-      "2013 ferrari laferrari",
-      "2005 ferrari f430"
+      "2020 mclaren speedtail",
+      "1995 mclaren f1",
+      "2020 mclaren 570s",
+      "2021 mclaren 765lt",
+      "2017 mclaren 650s",
+      "2018 mclaren p1 gt"
     ]
   }
 }

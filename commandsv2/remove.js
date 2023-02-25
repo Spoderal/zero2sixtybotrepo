@@ -26,10 +26,11 @@ module.exports = {
           { name: "Clutch", value: "clutch" },
           { name: "Engine", value: "engine" },
           { name: "Gearbox", value: "gearbox" },
-          { name: "Weight", value: "weight" },
+          { name: "Weight reduction", value: "Weight reduction" },
           { name: "Intercooler", value: "intercooler" },
           { name: "Nitro", value: "nitro" },
-          { name: "Brakes", value: "brakes" }
+          { name: "Brakes", value: "brakes" },
+          { name: "Springs", value: "springs" }
         )
         .setRequired(true)
     )
@@ -59,7 +60,7 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-
+    console.log(actpart);
     if (!selected[actpart])
       return await interaction.reply(`This car doesn't have a "${actpart}" !`);
 
@@ -105,6 +106,16 @@ module.exports = {
       let newspeed = Number(partindb.DecreasedDrift);
       let stat = Number(selected.Drift);
       selected.Drift = stat += newspeed;
+    }
+    if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
+      let newspeed = Number(partindb.DecreaseWeight);
+      let stat = Number(selected.WeightStat);
+      selected.WeightStat = stat += newspeed;
+    }
+    if (partindb.AddWeight && partindb.AddWeight > 0) {
+      let newspeed = Number(partindb.AddWeight);
+      let stat = Number(selected.WeightStat);
+      selected.WeightStat = stat -= newspeed;
     }
     if (selected.Price && partindb.Price && partindb.Price > 0) {
       let resale = Number(partindb.Price * 0.35);

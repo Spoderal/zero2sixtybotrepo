@@ -40,7 +40,7 @@ module.exports = {
     const gold = userdata.gold;
     const usercars = userdata.cars;
     const garagelimit = userdata.garageLimit;
-
+    let tier = userdata.tier;
     const bought = interaction.options.getString("item").toLowerCase();
 
     if (!bought)
@@ -52,9 +52,14 @@ module.exports = {
     const partsList = parts.Parts;
     const itemsList = items;
     let carrarray = [];
+    let housearry = [];
     for (let car1 in carsList) {
       let caroj = carsList[car1];
       carrarray.push(caroj);
+    }
+    for (let house1 in houses) {
+      let houseobj = houses[house1];
+      housearry.push(houseobj);
     }
 
     let boughtCar =
@@ -72,7 +77,9 @@ module.exports = {
 
     console.log(boughtCar);
     const boughtPart = partsList[bought];
-    const boughtHouse = houses[bought];
+    const boughtHouse = housearry.filter(
+      (house) => house.id == bought.toLowerCase()
+    );
     const boughtWarehouse = warehousedb[bought];
 
     if (
@@ -117,12 +124,24 @@ module.exports = {
           Emote: carindb.Emote,
           Livery: carindb.Image,
           Miles: 0,
+          Drift: 0,
+          Weight: carindb.Weight,
         };
         if (boughtCar.Range) {
           carobj = {
-            ...carobj,
+            ID: carindb.alias,
+            Name: carindb.Name,
+            Speed: carindb.Speed,
+            Acceleration: carindb["0-60"],
+            Handling: carindb.Handling,
+            Parts: [],
+            Emote: carindb.Emote,
+            Livery: carindb.Image,
+            Miles: 0,
+            Drift: 0,
             Range: carindb.Range,
             MaxRange: carindb.Range,
+            Weight: carindb.Weight,
           };
         }
 
@@ -151,19 +170,13 @@ module.exports = {
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
 
-          let job = userdata.job;
+          let job = userdata.work;
           if (!job) return await interaction.reply("You don't have a job!");
-          if (job.Job !== "police")
+          if (job.name !== "police")
             return await interaction.reply(
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
-          let num = job.Number;
-
-          if (num < boughtCar.Police)
-            return await interaction.reply(
-              `You need the rank "${boughtCar.Rank}" to buy this car!`
-            );
           let idtoset = boughtCar.alias;
           let carobj = {
             ID: boughtCar.alias,
@@ -175,13 +188,27 @@ module.exports = {
             Emote: boughtCar.Emote,
             Livery: boughtCar.Image,
             Miles: 0,
+            Drift: 0,
+            police: true,
+            Weight: boughtCar.Weight,
           };
 
           if (boughtCar.Range) {
             carobj = {
-              ...carobj,
+              ID: boughtCar.alias,
+              Name: boughtCar.Name,
+              Speed: boughtCar.Speed,
+              Acceleration: boughtCar["0-60"],
+              Handling: boughtCar.Handling,
+              Parts: [],
+              Emote: boughtCar.Emote,
+              Livery: boughtCar.Image,
+              Miles: 0,
+              Drift: 0,
               Range: boughtCar.Range,
               MaxRange: boughtCar.Range,
+              police: true,
+              Weight: boughtCar.Weight,
             };
           }
 
@@ -230,13 +257,26 @@ module.exports = {
             Livery: carindb.Image,
             Miles: 0,
             Resale: sellprice,
+            Drift: 0,
+            Weight: carindb.Weight,
           };
 
           if (boughtCar.Range) {
             carobj = {
-              ...carobj,
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+              Resale: sellprice,
+              Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
+              Weight: carindb.Weight,
             };
           }
 
@@ -260,9 +300,7 @@ module.exports = {
           await interaction.reply({ embeds: [embed] });
         } else {
           let sellprice = boughtCarPrice * 0.65;
-
-          if (cash < boughtCarPrice)
-            return await interaction.reply("You don't have enough cash!");
+          let carstock = global.stock;
           let filteredcar =
             carrarray.filter((car) => car.alias == bought.toLowerCase()) ||
             "NO ID";
@@ -272,9 +310,28 @@ module.exports = {
               (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
             );
           }
-
           let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
+          if (cars.Tiers[carindb.Class].level > tier)
+            return interaction.reply(
+              `Your tier is not high enough! You need to beat the **Tier ${
+                cars.Tiers[carindb.Class].level
+              } Squad** to unlock this car!`
+            );
+
+          if (cash < boughtCarPrice)
+            return await interaction.reply("You don't have enough cash!");
+
           cash -= boughtCarPrice;
+
+          if (carindb.Stock) {
+            if (carstock[carindb.Name.toLowerCase()].Stock <= 0) {
+              return interaction.reply("This car is out of stock!");
+            }
+            carstock[carindb.Name.toLowerCase()].Stock -= 1;
+            global.markModified("stock");
+            global.save();
+          }
+
           let idtoset = filteredcar[0].alias;
           let carobj = {
             ID: carindb.alias,
@@ -290,6 +347,17 @@ module.exports = {
           };
           if (boughtCar.Range) {
             carobj = {
+              ID: carindb.alias,
+              Name: carindb.Name,
+              Speed: carindb.Speed,
+              Acceleration: carindb["0-60"],
+              Handling: carindb.Handling,
+              Parts: [],
+              Emote: carindb.Emote,
+              Livery: carindb.Image,
+              Miles: 0,
+              Resale: sellprice,
+              Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
             };
@@ -324,7 +392,7 @@ module.exports = {
           if (userdata.tutorial && userdata.tutorial.stage == 1) {
             console.log("tutorial");
             interaction.channel.send({
-              content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/botrace tier 1 ${idtoset}\``,
+              content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/streetrace tier 1 ${idtoset}\``,
             });
             userdata.tutorial.stage += 1;
           }
@@ -433,69 +501,31 @@ module.exports = {
           await interaction.reply({ embeds: [embed] });
         }
       }
-    } else if (boughtHouse) {
-      const boughtHousePrice = parseInt(boughtHouse.Price);
+    } else if (boughtHouse[0]) {
+      let boughtHousePrice = boughtHouse[0].Price;
       if (cash < boughtHousePrice)
         return await interaction.reply("You don't have enough cash!");
+      if (userdata.prestige < boughtHouse[0].Prestige)
+        return await interaction.reply(
+          "Your prestige is not high enough to buy this house!"
+        );
 
-      // let house = userdata.house;
-      // let garagelimit = userdata.garageLimit;
-      if (bought !== "yacht") {
-        // if (house) {
-        //   if (house.perks.includes("+2 Garage spaces")) {
-        //     garagelimit -= 2;
-        //   } else if (house.perks.includes("+3 Garage spaces")) {
-        //     garagelimit -= 3;
-        //   } else if (house.perks.includes("+4 Garage spaces")) {
-        //     garagelimit -= 4;
-        //   } else if (house.perks.includes("+6 Garage spaces")) {
-        //     garagelimit -= 6;
-        //   } else if (house.perks.includes("+15 Garage spaces")) {
-        //     garagelimit -= 15;
-        //   }
-        // }
+      let houseobj = boughtHouse[0];
+      if (userdata.houses.includes(houseobj))
+        return interaction.reply("You already own this house!");
 
-        if (boughtHouse.Rewards.includes("10% Discount on parts")) {
-          userdata.discountparts = 0.1;
-        } else if (boughtHouse.Rewards.includes("15% Discount on parts")) {
-          userdata.discountparts = 0.15;
-        } else if (boughtHouse.Rewards.includes("20% Discount on parts")) {
-          userdata.discountparts = 0.2;
-        }
-        if (boughtHouse.Rewards.includes("20% Discount on parts AND cars")) {
-          userdata.discountparts = 0.2;
-          userdata.discountcars = 0.2;
-        } else if (
-          boughtHouse.Rewards.includes("25% Discount on parts AND cars")
-        ) {
-          userdata.discountparts = 0.2;
-          userdata.discountcars = 0.2;
-        }
+      console.log(houseobj);
+      userdata.garageLimit += houseobj.Space;
+      userdata.houses.push(houseobj);
 
-        if (boughtHouse.Rewards.includes("+2 Garage spaces")) {
-          userdata.garageLimit += 2;
-        } else if (boughtHouse.Rewards.includes("+3 Garage spaces")) {
-          userdata.garageLimit += 3;
-        } else if (boughtHouse.Rewards.includes("+4 Garage spaces")) {
-          userdata.garageLimit += 4;
-        } else if (boughtHouse.Rewards.includes("+6 Garage spaces")) {
-          userdata.garageLimit += 6;
-        } else if (boughtHouse.Rewards.includes("+15 Garage spaces")) {
-          userdata.garageLimit += 15;
-        }
-        let houseobj = {
-          name: boughtHouse.Name,
-          perks: boughtHouse.Rewards,
-        };
-        userdata.house = houseobj;
-      } else {
-        userdata.yacht = true;
-      }
       userdata.cash -= boughtHousePrice;
       await userdata.save();
-      await interaction.reply(
-        `You bought ${boughtHouse.Name} for ${toCurrency(boughtHousePrice)}`
-      );
+      let embed = new EmbedBuilder()
+        .setTitle(`Bought ${houseobj.Name}`)
+        .setImage(`${houseobj.Image}`)
+        .setColor(colors.blue)
+        .setDescription(`Price: ${toCurrency(houseobj.Price)}`);
+      await interaction.reply({ embeds: [embed] });
     } else if (boughtWarehouse) {
       let warehouses = userdata.warehouses;
       let prestige = userdata.prestige;
@@ -525,16 +555,10 @@ module.exports = {
       itemsList.Other[bought] ||
       itemsList.Multiplier[bought]
     ) {
-      let itemshop = global.itemshop;
-      let filtereditem = itemshop.filter(
-        (item) => item.Name.toLowerCase() == bought
-      );
-      let itemindb = filtereditem[0] || "No ID";
+      let itemindb = itemsList.Other[bought];
 
-      if (itemindb == "No ID")
-        return await interaction.reply(
-          `That item isn't in the shop today, check back tomorrow!`
-        );
+      if (itemindb.Price == 0)
+        return interaction.reply("This item isn't purchasable!");
 
       let pricing = parseInt(itemindb.Price) * amount2;
       if (userdata.cash < pricing)

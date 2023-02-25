@@ -24,22 +24,16 @@ module.exports = {
             customId: "pvp",
           },
           {
-            label: "botrace",
-            description: "Information about bot racing",
+            label: "streetrace",
+            description: "Information about street racing",
             value: "bot_race",
             customId: "botrace",
           },
           {
-            label: "qm",
-            description: "Information about quarter mile racing",
+            label: "dragrace",
+            description: "Information about drag racing",
             value: "qm_race",
             customId: "qmrace",
-          },
-          {
-            label: "hm",
-            description: "Information about half mile racing",
-            value: "hm_race",
-            customId: "hmrace",
           },
           {
             label: "squadrace",
@@ -54,16 +48,10 @@ module.exports = {
             customId: "ttrace",
           },
           {
-            label: "drift (EVENT)",
+            label: "drift",
             description: "Information about drifting",
             value: "driftrace",
             customId: "drift",
-          },
-          {
-            label: "driftpvp (EVENT)",
-            description: "Information about drifting against players",
-            value: "dpvp_race",
-            customId: "driftpvp",
           },
           {
             label: "wanted",
@@ -83,24 +71,6 @@ module.exports = {
             description: "Information about cashcup races",
             value: "cash_race",
             customId: "cash",
-          },
-          {
-            label: "betrace",
-            description: "Information about bet racing",
-            value: "bet_race",
-            customId: "bet",
-          },
-          {
-            label: "trainrace",
-            description: "Information about the race for new players",
-            value: "train_race",
-            customId: "tr",
-          },
-          {
-            label: "trackrace",
-            description: "Information about the track race",
-            value: "track",
-            customId: "track",
           },
         ])
     );
@@ -150,7 +120,7 @@ module.exports = {
             });
           } else if (value === "bot_race") {
             embed.fields = [];
-            embed.setTitle("Bot Racing");
+            embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
               `Race against bots for practice!\n<:boost:983813400289234978>`

@@ -1,33 +1,56 @@
 {
   "Crates": {
-    "common": {
+    "common crate": {
       "Contents": [
         "green helmet",
         "red helmet",
         "blue helmet",
-        "yellow helmet"
+        "yellow helmet",
+        "5000 Cash",
+        "2500 Cash",
+        "2500 Cash",
+        "2500 Cash",
+        "spark plug"
       ],
-      "Price": 450
+      "Name": "Common Crate",
+      "Emote": "<:supplydrop:1044404467119960085>",
+      "Image": "https://i.ibb.co/dQ2D2yT/supplydrop.png"
     },
-    "rare": {
+    "rare crate": {
       "Contents": [
         "flame helmet",
         "purple helmet",
         "rainbow helmet",
-        "turqoise helmet"
+        "turqoise helmet",
+        "10000 Cash",
+        "10000 Cash",
+        "10000 Cash",
+        "t3clutch",
+        "15000 Cash",
+        "t3tires",
+        "accelerator"
       ],
-      "Price": 750
+      "Name": "Rare Crate",
+      "Emote": "<:supplydroprare:1044404466096537731>",
+      "Image": "https://i.ibb.co/r4QY55b/supplydroprare.png"
     },
-    "seasonal": {
+    "prestige crate": {
       "Contents": [
+        "100000 Cash",
+        "dark mode helmet",
+        "dark mode helmet",
         "stig helmet",
-        "beach helmet",
-        "sunrise helmet",
-        "discord helmet",
-        "grass helmet",
-        "dark mode helmet"
+        "vibrant helmet",
+        "50000 Cash",
+        "50000 Cash",
+        "50000 Cash",
+        "t5clutch",
+        "t5exhaust",
+        "25000 Cash"
       ],
-      "Price": 800
+      "Name": "Prestige Crate",
+      "Emote": "<:supplydropprestige:1044404462581719041>",
+      "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
     }
   }
 }

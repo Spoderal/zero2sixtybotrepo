@@ -36,13 +36,16 @@
     "t4ecu",
     "t4driftsuspension",
     "t4racesuspension",
+    "t4wintertires",
     "t4spoiler",
     "t4bodykit",
     "t4brakes",
-    "v8"
+    "t4weightreduction",
+    "v8",
+    "t4weight"
   ],
   "Cash": [1000, 2000, 3000, 4000, 5000, 6000, 7500],
-  "Maps": ["Common", "Uncommon"],
+  "Maps": ["Common", "Common", "Rare"],
   "Items": ["big bank increase", "bank increase"],
   "Helmets": [
     "platinum helmet",
@@ -59,6 +62,7 @@
     "1991 acura nsx",
     "1964 aston martin db5",
     "2020 dodge charger hellcat",
-    "2017 jeep grand cherokee trackhawk"
+    "2017 jeep grand cherokee trackhawk",
+    "2018 audi rs5"
   ]
 }

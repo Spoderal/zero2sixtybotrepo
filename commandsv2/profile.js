@@ -5,8 +5,11 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-const prestigedb = require(`../data/prestige.json`);
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const achievementsdb = require("../data/achievements.json");
+const pvpranks = require("../data/ranks.json");
+
+const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -22,71 +25,149 @@ module.exports = {
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-
-    let prestige = userdata.prestige || 0;
-    let racerank = userdata.racerank;
-    let driftrank = userdata.driftrank;
     let helmet = userdata.helmet;
-    let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
     let title = userdata.title;
-
-    if (prestige == 0) title = "Noob Racer";
-    else if (prestige > 0) title = prestigedb[`${prestige}`].Title;
-
+    let driftrank = userdata.driftrank;
+    let racerank = userdata.racerank;
+    let prestige = userdata.prestige;
+    let tier = userdata.tier;
     let cars = userdata.cars;
-    cars = cars.sort(function (b, a) {
-      return a.Speed - b.Speed;
-    });
-
     let finalprice = 0;
     for (let car in cars) {
       let car2 = cars[car];
       let price = cardb.Cars[car2.Name.toLowerCase()]?.Price;
       if (price) finalprice += Number(price);
     }
+    let pvprank = userdata.pvprank;
+    let pvpname = pvprank.Rank || "Silver";
+
+    let pvpindb = pvpranks[pvpname.toLowerCase()];
 
     let cash = userdata.cash;
     finalprice += cash;
 
-    const fields = [
-      {
-        name: `Progress`,
-        value: `
-          Race Rank: ${racerank}
-          XP: ${userdata.racexp}
-          Drift Rank: ${driftrank}
-          Prestige: ${prestige}
-          Tier: ${userdata.tier}
-        `,
-      },
-    ];
+    let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
+    const canvas = createCanvas(1280, 720);
+    const ctx = canvas.getContext("2d");
+    const bg = await loadImage("https://i.ibb.co/LSzX4my/profile-ocean.png");
+    const helmetimg = await loadImage(acthelmet);
+    const pvpimg = await loadImage(pvpindb.icon);
+    let showcased = userdata.showcase;
 
-    let bestcar = cars[0];
-    if (bestcar) {
-      fields.push({
-        name: `Best Car`,
-        value: `
-          ${bestcar.Emote} ${bestcar.Name}\n
-          Speed: ${bestcar.Speed}MPH
-          0-60: ${bestcar.Acceleration}s
-          Handling: ${bestcar.Handling}
-        `,
-        inline: true,
-      });
+    let achievements = userdata.achievements;
+
+    await interaction.reply({ content: "Please wait...", fetchReply: true });
+
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+
+    if (showcased) {
+      let showcaseimg = await loadImage(showcased);
+
+      ctx.drawImage(showcaseimg, 825, 440, 370, 180);
     }
-    fields.push({
-      name: `Networth`,
-      value: `${toCurrency(finalprice)}`,
-      inline: true,
+    let filteredachrich = achievements.filter(
+      (ach) => ach.name == "Rich" || ach.Name == "Rich"
+    );
+    let filteredachricher = achievements.filter(
+      (ach) => ach.name == "Richer" || ach.Name == "Richer"
+    );
+    let filteredachrichest = achievements.filter(
+      (ach) => ach.name == "Richest" || ach.Name == "Richest"
+    );
+    let filteredachbug = achievements.filter(
+      (ach) => ach.name == "Bug Smasher" || ach.Name == "Bug Smasher"
+    );
+    let filteredachtime = achievements.filter(
+      (ach) => ach.name == "Time Master" || ach.Name == "Time Master"
+    );
+
+    if (filteredachrich[0]) {
+      let achievement = filteredachrich[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
+      ctx.drawImage(achimg, 35, 400, 60, 60);
+    }
+    if (filteredachricher[0]) {
+      let achievement = filteredachricher[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
+      ctx.drawImage(achimg, 100, 400, 60, 60);
+    }
+    if (filteredachrichest[0]) {
+      let achievement = filteredachrichest[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
+      ctx.drawImage(achimg, 165, 400, 60, 60);
+    }
+    if (filteredachbug[0]) {
+      let achievement = filteredachbug[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
+      ctx.drawImage(achimg, 230, 400, 60, 60);
+    }
+    if (filteredachtime[0]) {
+      let achievement = filteredachtime[0];
+      console.log(achievement);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
+
+      ctx.drawImage(achimg, 295, 400, 60, 60);
+    }
+    ctx.drawImage(helmetimg, 35, 35, 250, 250);
+    ctx.drawImage(pvpimg, 355, 185, 60, 60);
+    ctx.font = "25px sans-serif";
+    ctx.fillStyle = "#ffffff";
+
+    ctx.fillText(title, 470, 50);
+    ctx.font = "bold 28px sans-serif";
+    ctx.fillText(user.username, 355, 135);
+
+    ctx.font = "bold 28px sans-serif";
+    ctx.fillText(driftrank, 940, 160);
+    ctx.fillText(racerank, 940, 215);
+    ctx.fillText(prestige, 915, 270);
+    ctx.fillText(tier, 855, 328);
+
+    ctx.font = "bold 25px sans-serif";
+
+    ctx.fillText(toCurrency(finalprice), 900, 680);
+    ctx.font = "bold 35px sans-serif";
+
+    ctx.fillText(pvprank.Wins, 430, 227);
+    let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
+      name: "profile-image.png",
     });
 
-    let embed = new Discord.EmbedBuilder()
-      .setTitle(title)
-      .setAuthor({ name: `${user.username} - Profile` })
-      .setColor(colors.blue)
-      .setThumbnail(acthelmet)
-      .addFields(fields);
-
-    await interaction.reply({ embeds: [embed] });
+    await interaction.editReply({
+      content: "",
+      fetchReply: true,
+      files: [attachment],
+    });
   },
 };
+function roundedImage(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}

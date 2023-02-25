@@ -1,10 +1,14 @@
 const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
+
 const {
   blacklistInteractionCheck,
   userGetFromInteraction,
 } = require("../common/user");
+=======
+const { dailyCheck } = require("./daily");
+
 
 module.exports = {
   name: "interactionCreate",
@@ -41,6 +45,7 @@ module.exports = {
         console.time(petExecutionTimeName);
         await updatePetOnCommands(interaction);
         await updateCrew(interaction);
+        await dailyCheck(interaction);
         console.timeEnd(petExecutionTimeName);
       }
     } catch (error) {

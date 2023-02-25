@@ -11,6 +11,7 @@ const { numberWithCommas } = require("../common/utils");
 const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
+
 const partdb = require("../data/partsdb.json");
 
 module.exports = {
@@ -79,7 +80,7 @@ module.exports = {
         let isOwner = false;
         if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
-        let rp = newuserdata.rp2 || 0;
+        let rp = newuserdata.rp3 || 0;
         rparray.push({ rp, user, isOwner });
         newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
@@ -95,6 +96,13 @@ module.exports = {
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
       let owner = newrparray.find((u) => u?.isOwner);
+      if (!crew2.Rank2) {
+        crew2.Rank2 = 1;
+
+        globalModel.update();
+        globalModel.markModified("crews");
+        globalModel.save();
+      }
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Info for ${crew2.name}`)
         .setThumbnail(icon)
@@ -103,7 +111,7 @@ module.exports = {
             name: "Information",
             value: `
               ${mlength} members\n
-              Rank ${crew2.Rank}\n
+              Rank ${crew2.Rank2}\n
               RP: ${total}\n
               ${
                 owner
@@ -119,16 +127,21 @@ module.exports = {
 
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-          .setCustomId("season")
-          .setEmoji("💵")
-          .setLabel("Season 2")
-          .setStyle("Secondary"),
-        new ButtonBuilder()
           .setCustomId("stats")
           .setEmoji("📊")
           .setLabel("Stats")
           .setStyle("Secondary")
       );
+
+      if (crew && crew.name == crew2.name) {
+        row.addComponents(
+          new ButtonBuilder()
+            .setCustomId("season")
+            .setEmoji("💵")
+            .setLabel("Season 3")
+            .setStyle("Secondary")
+        );
+      }
 
       interaction
         .reply({ embeds: [embed], components: [row], fetchReply: true })
@@ -140,7 +153,7 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let redeemed = userdata.crewseason;
+          let redeemed = userdata.crewseason2 || 0;
           let crewseason = require("../data/seasons.json").Seasons.Crew1;
 
           collector.on("collect", async (i) => {
@@ -148,21 +161,21 @@ module.exports = {
               crewseason = require("../data/seasons.json").Seasons.Crew1
                 .Rewards;
               let reward = [];
-              redeemed = userdata.crewseason;
+              redeemed = userdata.crewseason2 || 0;
               for (var w in crewseason) {
                 let item = crewseason[w];
                 let required = item.Number;
                 let emote = "❌";
-                if (required <= crew2.Rank) {
+                if (required <= crew2.Rank2) {
                   emote = "✅";
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
-              embed.setTitle(`Season 2 for ${crew2.name}`);
-              embed.fields = [];
-              embed.addFields([
-                { name: "Rewards", value: `${reward.join("\n")}` },
-              ]);
+              let embed2 = new Discord.EmbedBuilder()
+                .setTitle(`Season 2 for ${crew2.name}`)
+                .addFields([{ name: "Rewards", value: `${reward.join("\n")}` }])
+                .setThumbnail(icon)
+                .setColor(colors.blue);
 
               row.addComponents(
                 new ButtonBuilder()
@@ -171,42 +184,44 @@ module.exports = {
                   .setStyle(`Success`)
               );
 
-              await i.update({ embeds: [embed], components: [row] });
+              await i.update({ embeds: [embed2], components: [row] });
             } else if (i.customId.includes("stats")) {
-              embed.fields = [];
               embed
                 .setTitle(`Info for ${crew2.name}`)
                 .setThumbnail(icon)
-                .addFields([
-                  {
-                    name: "Information",
-                    value: `
+                .setColor(colors.blue);
+              embed.fields = [
+                {
+                  name: "Information",
+                  value: `
                       ${crew2.members.length} members\n
-                      Rank ${crew2.Rank}\n
+                      Rank ${crew2.Rank2}\n
                       RP: ${total}\n
                       Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
                     `,
-                    inline: true,
-                  },
-                  { name: "Leaderboard", value: `${finalLb}`, inline: true },
-                ])
-                .setColor(colors.blue);
+                  inline: true,
+                },
+                { name: "Leaderboard", value: `${finalLb}`, inline: true },
+              ];
 
-              await i.update({ embeds: [embed] });
+              await i.update({ embeds: [embed], components: [row] });
             } else if (i.customId.includes("claim")) {
               let item = crewseason[redeemed];
-              if (item.Number > crew2.Rank) {
+              if (item.Number > crew2.Rank2) {
                 return;
               }
               console.log(item);
               if (item.Item.endsWith("Cash")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.cash += Number(amount);
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                console.log("done");
+                userdata.save();
               } else if (item.Item.endsWith("Notoriety")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.notofall += Number(amount);
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (
                 item.Item.endsWith("Legendary Barn Maps") ||
                 item.Item.endsWith("Legendary Barn Map")
@@ -214,11 +229,13 @@ module.exports = {
                 let amount = item.Item.split(" ")[0];
                 userdata.lmaps += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (item.Item.endsWith("Bank Increase")) {
                 userdata.items.push("bank increase");
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (
                 item.Item.endsWith("Super wheelspin") ||
                 item.Item.endsWith("Super wheelspins")
@@ -226,17 +243,19 @@ module.exports = {
                 let amount = item.Item.split(" ")[0];
                 userdata.swheelspins += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (item.Item.endsWith("Common Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.ckeys += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (item.Item.endsWith("Drift Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.dkeys += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
               } else if (
                 item.Item.endsWith("Garage Space") ||
                 item.Item.endsWith("Garage Spaces")
@@ -246,21 +265,25 @@ module.exports = {
 
                 userdata.garagelimit += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (item.Item.endsWith("Rare Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.rkeys += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (item.Item.endsWith("Exotic Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.ekeys += Number(amount);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (partdb.Parts[item.Item.toLowerCase()]) {
                 userdata.parts.push(item.Item.toLowerCase());
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               } else if (cardb.Cars[item.Item.toLowerCase()]) {
                 let cartogive = cardb.Cars[item.Item.toLowerCase()];
                 let carindb = cartogive;
@@ -277,9 +300,10 @@ module.exports = {
                 };
                 userdata.cars.push(carobj);
 
-                userdata.crewseason += 1;
+                userdata.crewseason2 += 1;
+                userdata.save();
               }
-              userdata.save();
+
               row = new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
                   .setCustomId("season")
@@ -296,7 +320,7 @@ module.exports = {
                   .setLabel(`Claim Reward ${(redeemed += 1)}`)
                   .setStyle(`Success`)
               );
-              if (item.Number > crew2.Rank) {
+              if (item.Number > crew2.Rank2) {
                 row.components[0].setStyle(`Danger`);
               }
 
@@ -375,7 +399,7 @@ module.exports = {
 
       userdata.crew = crew2[0];
 
-      userdata.rp2 = 0;
+      userdata.rp3 = 0;
       userdata.joinedcrew = Date.now();
       userdata.save();
 
@@ -400,7 +424,7 @@ module.exports = {
         members: [interaction.user.id],
         owner: interaction.user,
         icon: icons.Icons.default,
-        Rank: 1,
+        Rank2: 1,
         RP: 0,
       };
 
@@ -439,25 +463,34 @@ module.exports = {
         return await interaction.reply(
           "You're the owner! Run `/crew delete` to delete this crew"
         );
-
-      await interaction.reply(
-        "Are you sure? Say `yes` to confirm, and anything else to cancel."
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("confirm")
+          .setStyle("Secondary")
+          .setEmoji("✅"),
+        new ButtonBuilder()
+          .setCustomId("cancel")
+          .setStyle("Secondary")
+          .setEmoji("❌")
       );
-      const filter = (m) => {
-        return m.author.id === interaction.user.id;
+      let msg = await interaction.reply({
+        content: "Are you sure?",
+        components: [row],
+        fetchReply: true,
+      });
+      let filter = (btnInt) => {
+        return interaction.user.id === btnInt.user.id;
       };
 
-      let collector = interaction.channel.createMessageCollector({
-        filter,
-        max: 1,
-        time: 1000 * 30,
+      const collector = msg.createMessageComponentCollector({
+        filter: filter,
       });
 
-      collector.on("collect", async (m) => {
-        if (m.content.toLowerCase() == "yes") {
+      collector.on("collect", async (i) => {
+        if (i.customId.includes("confirm")) {
           let actcrew = crew;
           let newmem = actcrew.members;
-          for (var i = 0; i < 1; i++) newmem.splice(newmem.indexOf(uid), 1);
+          for (var b = 0; i < 1; b++) newmem.splice(newmem.indexOf(uid), 1);
           actcrew.members = newmem;
 
           userdata.crew = null;
@@ -480,10 +513,15 @@ module.exports = {
             }
           );
           globalModel.save();
-
-          m.react("✅");
+          row.components[0].setDisabled();
+          row.components[1].setDisabled();
+          i.update({ components: [row] });
         } else {
-          return interaction.channel.send("❌");
+          row.components[0].setDisabled();
+          row.components[1].setDisabled();
+          i.update({ components: [row] });
+
+          return;
         }
       });
     } else if (option == "icon") {
@@ -555,11 +593,11 @@ module.exports = {
       }
 
       members = members.sort(function (b, a) {
-        return a.Rank - b.Rank;
+        return a.Rank2 - b.Rank2;
       });
 
       members = members.filter(function BigEnough(value) {
-        return value.Rank > 0;
+        return value.Rank2 > 0;
       });
 
       members = members.slice(0, 10);
@@ -569,7 +607,7 @@ module.exports = {
       for (let i = 0; i < members.length; i++) {
         let user = members[i].name;
         if (!user) return;
-        let bal = members[i].Rank;
+        let bal = members[i].Rank2;
         desc += `${i + 1}. ${user} - Rank ${numberWithCommas(bal)}\n`;
       }
       let embed = new Discord.EmbedBuilder()

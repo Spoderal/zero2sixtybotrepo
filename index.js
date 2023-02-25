@@ -3,15 +3,17 @@ const fs = require("fs");
 require("dotenv").config();
 const express = require("express");
 const app = express();
+
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const path = require("path");
 
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.GuildMessages,
   ],
   shards: "auto",
 });

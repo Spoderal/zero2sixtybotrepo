@@ -23,18 +23,17 @@ module.exports = (client) => {
         let totalrp = 0;
 
         let crewmembers = crew2.members;
-        let crewrank = crew2.Rank;
+        let crewrank = crew2.Rank2;
 
+        let requiredrp = crewrank * 1000;
         for (let i in crewmembers) {
           let user = crewmembers[i];
           let rpdata = await User.findOne({ id: user });
           let userrp = rpdata.rp2;
-
           totalrp += userrp;
         }
-        let requiredrp = crewrank * 1000;
         if (parseInt(totalrp) >= parseInt(requiredrp)) {
-          let rank = crew2.Rank;
+          let rank = crew2.Rank2;
 
           let newrank = (rank += 1);
 
@@ -43,7 +42,7 @@ module.exports = (client) => {
 
             {
               $set: {
-                "crews.$[crew].Rank": newrank,
+                "crews.$[crew].Rank2": newrank,
               },
             },
 

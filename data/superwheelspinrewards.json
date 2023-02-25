@@ -16,12 +16,14 @@
     "t3drifttires",
     "t3intake",
     "t4turbo",
-    "t4drifttires"
+    "t4drifttires",
+    "t4weightreduction"
   ],
   "Cash": [
     10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000,
     150000, 200000, 250000, 300000
   ],
+  "Maps": ["Common", "Common", "Rare", "Legendary"],
   "RareCash": [500000, 750000, 1000000, 2000000],
   "SuperRare": [
     "2022 bmw m4",

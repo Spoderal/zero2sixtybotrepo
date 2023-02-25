@@ -69,6 +69,22 @@
       "Type": "Usable",
       "Emote": "<:smallvault:995501944456089640>"
     },
+    "bank increase": {
+      "Name": "Bank Increase",
+      "Price": 0,
+      "Action": "Increase your bank space by $5k",
+      "Type": "Usable",
+      "Emote": "<:bankupgrade:974153111298007131>",
+      "Items": 10
+    },
+    "big bank increase": {
+      "Name": "Big Bank Increase",
+      "Action": "Increase your bank space by $25k",
+      "Type": "Usable",
+      "Price": 0,
+      "Emote": "<:bigbank:1008110998202372170>",
+      "Items": 10
+    },
     "medium vault": {
       "Price": "100000",
       "Name": "Medium Vault",
@@ -84,25 +100,41 @@
       "Emote": "<:largevault:995502550855991298>"
     },
     "for sale sign": {
-      "Price": 5000,
+      "Price": 50000,
       "Action": "Use this to sell your house",
       "Name": "For Sale Sign",
       "Type": "Usable",
       "Emote": "<:forsalesign:978883306940674078>"
     },
-    "super wheelspin": {
-      "Price": 250000,
-      "Action": "Use this to spin the super wheel",
-      "Name": "Super Wheelspin",
-      "Type": "Usable",
-      "Emote": "<a:superwheel:985049981482311740>"
-    },
+
     "energy drink": {
       "Price": 25000,
       "Action": "2x RP for 10 minutes",
       "Name": "Energy Drink",
       "Type": "Usable",
       "Emote": "<:energydrink:982468472787329095>"
+    },
+    "super wheelspin": {
+      "Price": 0,
+      "Action": "Super wheelspin, /use",
+      "Name": "Super Wheelspin",
+      "Type": "Usable",
+      "Emote": "🟣"
+    },
+    "zero bar": {
+      "Price": 0,
+      "Action": "No idea",
+      "Name": "Zero Bar",
+      "Type": "Usable",
+      "Emote": "<:zerobar:1025128975216947210>",
+      "Effects": [
+        "One of your cars just got +1 speed",
+        "One of your cars just got +1 acceleration",
+        "One of your cars just got -20 handling",
+        "You stink, no effect for you",
+        "One of your cars just got +5 speed",
+        "You just got your weekly reward now!"
+      ]
     },
     "sponsor": {
       "Price": 50000,
@@ -124,6 +156,34 @@
       "Name": "Disguise",
       "Type": "Usable",
       "Emote": "<:disguise:1008228542208802816>"
+    },
+    "toolbox": {
+      "Price": 25000,
+      "Action": "Use this to restore a car automatically",
+      "Name": "Toolbox",
+      "Type": "Non-Usable",
+      "Emote": "<:item_toolbox:972207018045759549>"
+    },
+    "common crate": {
+      "Price": 0,
+      "Action": "Open a common crate to get cosmetics, cash, and more!",
+      "Name": "Common Crate",
+      "Type": "Non-Usable",
+      "Emote": "<:supplydrop:1044404467119960085>"
+    },
+    "rare crate": {
+      "Price": 0,
+      "Action": "Open a rare crate to get cosmetics, cash, and more!",
+      "Name": "Rare Crate",
+      "Type": "Non-Usable",
+      "Emote": "<:supplydroprare:1044404466096537731>"
+    },
+    "prestige crate": {
+      "Price": 0,
+      "Action": "Open a prestige crate to get cosmetics, cash, and more!",
+      "Name": "Prestige Crate",
+      "Type": "Non-Usable",
+      "Emote": "<:supplydropprestige:1044404462581719041>"
     }
   },
   "Collectable": {

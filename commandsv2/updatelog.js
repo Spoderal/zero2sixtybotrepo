@@ -5,7 +5,6 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -18,26 +17,25 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "Patch",
-            description: "Information for the latest patch (UPDATES REGULARLY)",
-            value: "2_update",
-            customId: "up2",
+            label: "2/20/2023",
+            description: "Information for the latest patch",
+            value: "3_update",
+            customId: "up3",
             emoji: "⚙️",
           },
           {
-            label: "8/17/2022",
-            description: "Information for recent small update",
-            value: "3_update",
-            customId: "up3",
-            emoji: "⬆️",
-          },
-          {
-            label: "8/30/2022",
-            description:
-              "Information for the recent large update, and new season!",
+            label: "11/30/2022",
+            description: "Information for the recent winter season update!",
             value: "4_update",
             customId: "up4",
-            emoji: "🍂",
+            emoji: "❄️",
+          },
+          {
+            label: "1/22/2023",
+            description: "Information for the recent small update!",
+            value: "5_update",
+            customId: "up5",
+            emoji: "⬆️",
           },
         ])
     );
@@ -48,9 +46,9 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⬆️ Small Update 8/17/2022\n
-            ⚙️ Patch 8/22/2022\n
-            🍂 Fall Update 8/30/2022
+            ⚙️ Latest Patch 2/20/2023\n
+            ❄️ Winter Update 11/30/2022\n
+            ⬆️ Small Update 1/22/2023
         `);
 
     embed.setColor(colors.blue);
@@ -68,76 +66,25 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-          if (value === "1_update") {
-            embed.fields = [];
-            embed.setDescription("\u200b");
-            embed
-              .setTitle(`Small Update`)
-              .addFields([
-                {
-                  name: `${emotes.featuresUpdate} Features`,
-                  value: `
-                    • Wrench has been fixed\n
-                    • Liveries now accept IDs for installing and removing\n
-                    • Liveries can be removed easily\n
-                    • Turbos now have new emojis\n
-                    • T4 and T5 Turbo **T4Turbo found in super wheel spins only**\n
-                    • Bet race nerfed heavily - 5 hour cooldown, and 35% cash earnings instead of 50%\n
-                    • Super wheel spin cash rewards buffed\n
-                    • Dealership includes a list of import cars\n
-                    • Ferrari Event\n
-                    • Daily tasks fixed
-                  `,
-                },
-              ])
-              .setFooter({ text: "6/24/2022" })
-              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
-              .setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "2_update") {
+          if (value === "3_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
 
-            embed.setTitle(`Small Patch`);
+            embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• Rare barn maps can be found at the half mile tier 5\n
-                 • Legendary barn maps can be found by pretty porsche pets\n
-                 • New legendary barn find: 2002 Koenigsegg CC8S\n
-                 • New TX Part: TXIntake\n
-                 • New part: Brakes
-
+                `• New blueprints feature, get blueprints from fusing parts together (random drop)! Use blueprints with /blueprint and pick from 3 exclusive rewards that rotate every month!\n
+                • Visual updates to emojis, and the profile command\n
+                • New Car card designs are gonna be seen for **SOME** cars, most cars don't have this feature yet.\n
+                • Weather!\n
+                • Prestige requirements lowered to next prestige * 50 instead of * 100\n
+                • Stock Championship event to celebrate 1,000 servers!\n
+                • Other small changes\n
+                • New cars\n
+                • New achievements (time master, bug smasher)
                 `
               )
-              .setFooter({ text: "8/22/2022" })
-              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
-              .setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "3_update") {
-            embed.fields = [];
-            embed.setDescription("\u200b");
-            embed.setTitle(`Small Update`);
-            embed
-              .setDescription(
-                `• New pet: Pretty Porsche\n
-                • Tons of bug fixes\n
-                • Steal command added with a disguise item\n
-                • XP needed decreased to rank * 100\n
-                • Drift revamp\n
-                • Big bank increase added, find them with your pretty porsche, you can use the big bank increases to go past the bank limit!
-                • Bank limit cap fixed, should've been 2 million, but it was 200 million\n
-
-                `
-              )
-              .setFooter({ text: "8/17/2022" })
+              .setFooter({ text: "2/20/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
@@ -148,35 +95,40 @@ module.exports = {
           } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Fall Update`);
+            embed.setTitle(`Winter Update`);
             embed
               .setDescription(
-                `__New parts__
-                • Track Springs\n
-                • Drift Springs\n
-                • Race Springs\n
-                • T1, T2, T3, T4, T5 Track tires\n
-                • T3, T4, T5 BodyKits\n
-
-                __Nerfs and buffs__
-                V8 added to wheelspin, it adds 15 speed to your car.\n
-                T1Exhaust price decreased, added speed and acceleration increased\n
-                T2Exhaust price decreased, added speed and acceleration increased\n
-
-                __Features__
-                •  New season! Check /season for more information. **NOTORIETY AND RP HAS BEEN RESET FOR THE NEW SEASONS**\n
-                • New race! /trackrace\n
-                • Tutorial for new players\n
-                • Season, and crew pages make it easier to claim rewards, having a purely button based system.\n
-                • /reward removed\n
-                • You can buy cars via name **or** ID now
-
-                __Bug Fixes__
-                • Fixed the issue where /upgrade removes all parts instead of 1
-                
+                `• New season! The leaves fade away, here comes the snow! Get out your best off road vehicles and go at it! Make sure to view the season information in /events\n
+                • Another new season! Its an event! Go to the moon and race your car in low gravity environments, view /events for more!\n
+                • Dealership now has a new cars section\n
+                • The first garage exclusive car is here! Check the new cars in the dealership.\n
+                • New winter tires, can be found in wheelspins, and garages\n
+                • Gold can now be used to purchase notoriety and clear cooldowns\n
+                • Bug fixes
                 `
               )
-              .setFooter({ text: "8/30/2022" })
+              .setFooter({ text: "11/30/2022" })
+              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } else if (value === "5_update") {
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`Small Update`);
+            embed
+              .setDescription(
+                `• Limited stock cars! Check the dealership and get these cars fast before they're off sale forever!\n
+                • New house\n
+                • Market listing limits, you may only have 5 items listed at once\n
+                • Bug fixes
+                • 
+                `
+              )
+              .setFooter({ text: "1/22/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

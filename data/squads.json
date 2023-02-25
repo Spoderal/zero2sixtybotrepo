@@ -11,9 +11,10 @@
         "Heathers 2007 Infiniti G35 Coupe"
       ],
       "Reward": 2000,
-      "BigReward": 45000,
+      "BigReward": 4500,
       "Icon": "https://i.ibb.co/GTq0FM1/squad-flamehouse.png",
-      "Name": "Flame House"
+      "Name": "Flame House",
+      "Emote": "<:squad_flamehouse:1025142698807668736>"
     },
     "x squad": {
       "Tier": 2,
@@ -22,13 +23,78 @@
         "Pauls 2007 Mitsubishi Evo IX",
         "Larrys 2002 Mazda RX7 FD",
         "Ollies 2009 Honda S2000 CR",
-        "Freds 2002 Ford Mustang",
-        "Heathers 2007 Infiniti G35 Coupe"
+        "Kaylas 2010 Ford Mustang",
+        "Toms 1994 Porsche 911"
       ],
       "Reward": 4500,
       "Icon": "https://i.ibb.co/dpgdJzH/squad-xsquad.png",
-      "BigReward": 75000,
-      "Name": "X Squad"
+      "BigReward": 7500,
+      "Name": "X Squad",
+      "Emote": "<:squad_xsquad:1025142697553563649>"
+    },
+    "muscle brains": {
+      "Tier": 3,
+      "Class": "B",
+      "Cars": [
+        "Felixs 2021 Ford Mustang Mach 1",
+        "Marks 2012 Dodge Challenger SRT8",
+        "Joys 2017 Dodge Viper ACR",
+        "Ians 2005 Ford GT",
+        "Nathans 2022 Shelby Super Snake"
+      ],
+      "Reward": 7500,
+      "Icon": "https://i.ibb.co/DR3C0G2/squad-muscleheads.png",
+      "BigReward": 10000,
+      "Name": "Muscle Brains",
+      "Emote": "<:squad_muscleheads:1025581852683153428>"
+    },
+    "cool cobras": {
+      "Tier": 4,
+      "Class": "A",
+      "Cars": [
+        "Alexs 2017 Ford GT",
+        "Candices 2020 McLaren 570S",
+        "Jordans 2021 Nissan GTR",
+        "Mikes 2021 Lamborghini Huracan STO",
+        "Cobras 2005 Pagani Zonda F"
+      ],
+      "Reward": 10000,
+      "Icon": "https://i.ibb.co/dKnKg4s/squad-cobras.png",
+      "BigReward": 15000,
+      "Name": "Cool Cobras",
+      "Emote": "<:squad_cobras:1025856889730379776>"
+    },
+    "the ws": {
+      "Tier": 5,
+      "Class": "S",
+      "Cars": [
+        "Donnas 2021 McLaren 720S",
+        "Steves 2017 Mercedes AMG One",
+        "Lukes 2018 Lamborghini Aventador S",
+        "Kevins 2013 McLaren P1",
+        "Walters 2012 Pagani Huayra"
+      ],
+      "Reward": 25000,
+      "Icon": "https://i.ibb.co/3mt2RZD/squad-w.png",
+      "BigReward": 100000,
+      "Name": "The Ws",
+      "Emote": "<:squad_w:1026222214648963152>"
+    },
+    "double 0": {
+      "Tier": 6,
+      "Class": "S",
+      "Cars": [
+        "Colsons 2014 Porsche 918 Spyder",
+        "Destinys 2020 McLaren Speedtail",
+        "Angels 2019 Apollo IE",
+        "Madisons 2020 Koenigsegg Jesko",
+        "Spoders 2005 Porsche Carrera GT"
+      ],
+      "Reward": 50000,
+      "Icon": "https://i.ibb.co/ckk8Xpz/squad-0.png",
+      "BigReward": 1000000,
+      "Name": "Double 0",
+      "Emote": "<:squad_0:1067616351579033600>"
     }
   }
 }

@@ -26,7 +26,7 @@ module.exports = {
     let embed2 = new Discord.EmbedBuilder()
       .setThumbnail("https://i.ibb.co/JjrvkQs/smalllogo.png")
       .setDescription(
-        "Thank you for voting! Here's $1k cash, and a wheelspin! 💙"
+        "Thank you for voting! Here's $1k cash, and a wheelspin! 💙\n\nTip: Support us even more by purchasing gold! Join the support server to learn more."
       );
     embed.setColor(colors.blue);
 

@@ -31,6 +31,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  pvprank: {
+    type: Object,
+    required: false,
+    default: {
+      Wins: 0,
+      Rank: "Silver",
+      Losses: 0,
+      Rewards: 0,
+    },
+  },
   wheelspins: {
     type: Number,
     required: false,
@@ -81,21 +91,54 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
+  houses: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   parts: {
     type: Array,
     required: false,
     default: [],
   },
-  rp2: {
+  rp3: {
     type: Number,
     required: false,
     default: 0,
   },
-  notofall: {
+  candy: {
     type: Number,
     required: false,
     default: 0,
   },
+  blueprints: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  squads: {
+    type: Array,
+    required: false,
+    default: [
+      { name: "flame house", car: 0 },
+      { name: "x squad", car: 0 },
+      { name: "muscle brains", car: 0 },
+      { name: "cool cobras", car: 0 },
+      { name: "the ws", car: 0 },
+      { name: "double 0", car: 0 },
+    ],
+  },
+  noto5: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  stockpoints: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+
   dkeys: {
     type: Number,
     required: false,
@@ -124,6 +167,11 @@ const Profile = new mongoose.Schema({
     type: Number,
     required: false,
     default: 10000,
+  },
+  achievements: {
+    type: Array,
+    required: false,
+    default: [],
   },
   items: {
     type: Array,
@@ -203,6 +251,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  winterrewards: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  spacerewards: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   tier: {
     type: Number,
     required: false,
@@ -223,7 +281,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: "Default",
   },
-  job: {
+  work: {
     type: Object,
     required: false,
   },
@@ -241,7 +299,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
-  crewseason: {
+  crewseason2: {
     type: Number,
     required: false,
     default: 0,
@@ -287,9 +345,49 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+
   blacklist: {
     type: Object,
     required: false,
+
+  moontokens: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  lockpicks: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  titles: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  settings: {
+    type: Object,
+    required: false,
+    default: {
+      vote: false,
+      daily: false,
+      tips: true,
+      voteStreak: 0,
+      dailyStreak: 0,
+      ph: "MPH",
+      autosell: false,
+      trades: true,
+    },
+  },
+  tradeid: {
+    type: Number,
+    required: false,
+  },
+  marketlimit: {
+    type: Number,
+    required: false,
+    default: 5,
+
   },
 });
 

@@ -8,7 +8,11 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
-const { invisibleSpace, doubleCashWeekendField } = require("../common/utils");
+const {
+  invisibleSpace,
+  doubleCashWeekendField,
+  convertMPHtoKPH,
+} = require("../common/utils");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
@@ -264,6 +268,8 @@ module.exports = {
         break;
     }
 
+    let speed = `${usercarspeed}`;
+
     let embed = new EmbedBuilder()
       .setTitle(`Drifting around the ${track} ${trackname} track`)
       .setDescription(`You have ${time}s to complete the track`)
@@ -271,7 +277,7 @@ module.exports = {
         {
           name: `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
           value: `
-            Speed: ${usercarspeed}
+            Power: ${speed}
             Drift Rating: ${driftscore}
           `,
         },
@@ -346,7 +352,7 @@ module.exports = {
     }, 1000);
 
     let removedShiftButton = false;
-    let x = setInterval(() => {
+    let x = setInterval(async () => {
       tracklength -= formula;
 
       if (showedShiftButton && !canshift && !removedShiftButton) {
@@ -407,13 +413,18 @@ module.exports = {
 
             moneyearned += patronbonus;
           }
+          let Global = require("../schema/global-schema");
+          let global = await Global.findOne();
+          if (global.zeroplus.includes(interaction.guild.id)) {
+            moneyearned = moneyearned * 2;
+          }
           embed.addFields([
             {
               name: "Earnings",
               value: `
               ${emotes.cash} $${moneyearned}
               ${emotes.rp} ${ticketsearned} RP
-              +${xpearn} Drift XP
+              +1 Drift Rank
             `,
             },
           ]);
@@ -423,22 +434,10 @@ module.exports = {
           }
           interaction.editReply({ embeds: [embed], components: [] });
           userdata.cash += Number(moneyearned);
-          userdata.rp2 += ticketsearned;
-
-          userdata.driftxp += xpearn;
+          userdata.rp3 += ticketsearned;
+          userdata.driftrank += 1;
           userdata.update();
 
-          let driftxp = userdata.driftxp;
-          console.log(requiredrank);
-          if (driftxp >= requiredrank) {
-            if (userdata.driftrank < 50) {
-              userdata.driftrank += 1;
-              userdata.driftxp = 0;
-              interaction.channel.send(
-                `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
-              );
-            }
-          }
           userdata.save();
 
           clearInterval(x);

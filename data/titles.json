@@ -1,0 +1,16 @@
+{
+  "rich racer": {
+    "Title": "Rich Racer",
+    "Achieve": "Have a balance of $1M+"
+  },
+  "accelerator": {
+    "Title": "Accelerator",
+    "Achieve": "Crate",
+    "Crate": true
+  },
+  "spark plug": {
+    "Title": "Spark Plug",
+    "Achieve": "Crate",
+    "Crate": true
+  }
+}

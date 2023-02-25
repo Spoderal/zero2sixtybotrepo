@@ -2,19 +2,18 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const dailytasks = require("../dailytasks");
 const crews = require("../crewrank");
-const badges = require("../badges");
 const lodash = require("lodash");
 require("dotenv").config();
 const patron = require("../patreon");
-const items = require("../item");
+const { updateItemShop } = require("./itemshop");
 const double = require("../doublecash");
-const db = require("quick.db");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
+const cars = require("./cars").carfix;
 
 let mongoConfig = {
   keepAlive: true,
@@ -34,11 +33,9 @@ module.exports = {
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
 
-    badges(client);
     crews(client);
     dailytasks(client);
     patron(client);
-    items(client);
     double(client);
 
     var express = require("express");
@@ -86,13 +83,13 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `🍂 FALL 🍂  /season`,
-      `⬆️ BIG UPDATE 8/22`,
-      `Watching ${numberWithCommas(client.guilds.cache.size)} servers race`,
+      `❄️ WINTER ❄️  /season`,
+      `⚙️ PATCH 2/20/2023`,
+      "🪙 GOLD STARTS AT $0.99",
+      "🛞 TRACK LEGENDS EVENT",
+      `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
     ];
-    if (db.fetch(`doublecash`) == true) {
-      randomstatuses.push(`💵 DOUBLE CASH WEEKEND 💵`);
-    }
+
     let randomstatus = lodash.sample(randomstatuses);
     client.user.setActivity(randomstatus);
 
@@ -100,6 +97,8 @@ module.exports = {
       let randomstatus = lodash.sample(randomstatuses);
       client.user.setActivity(randomstatus);
     }, 20000);
+
+    updateItemShop();
 
     try {
       const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

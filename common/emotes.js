@@ -1,7 +1,7 @@
 const emotes = {
   // General / Random
   zero2sixty: "<:zerosixtyemote:983963210304614410>",
-  rp: "<:rp:983968476060336168>",
+  rp: "<:rp:1077420588185956434>",
   zerorp: "<:zerorp:939078761234698290>",
   featuresUpdate: "<:features_update:974452301920104509>",
   x: "❌",
@@ -13,12 +13,13 @@ const emotes = {
   bank: "🏦",
 
   // Player specific
-  notoriety: "<:zeronotor:962785804202176574>",
+  notoriety: "<:notoriety:1077420597388247170>",
   warehouse: "<:Warehouse1:985014760884019202>",
 
   // Rewards
-  wheelSpin: "<:wheelspin:985048616865517578>",
-  superWheel: "<a:superwheel:985049981482311740>",
+  wheelSpin: "<:wheelspin:1077421778625896478>",
+  superWheel: "<:superwheelspin:1077421774750371850>",
+  blueprints: "<:blueprint:1076026198171328562>",
 
   // Keys
   ckey: "<:ckey:993011409132728370>",
@@ -57,8 +58,9 @@ const emotes = {
   classRecentlyReleased: "<:zero2sixty:966453514425495602>",
 
   // Car Properties
-  speed: "<:speedemote:983963212393357322>",
+  speed: "<:newspeedemote:1049569265730195466>",
   handling: "<:handling:983963211403505724>",
+  weight: "<:weighticon:1052742413963243520>",
   none: "<:z_none:898352936785178645>",
   spoiler: "<:spoilerdefault:932419391868526612>",
   spoilerRestored: "<:spoilerrestored:941546331716063232>",
@@ -71,9 +73,11 @@ const emotes = {
   boost: "<:boost:983813400289234978>",
   speedometer: "<:speedometer3:1002856993075249162>",
   eBrake: "<:ebrake:969671303961387050>",
+  lockpicks: "<:lockpick:1040384727691051170>",
 
   // Cars
   ferrari: "<:ferrari:931011838374727730>",
+  mclaren: "<:mclaren:931011546354692137>",
 
   // Parts
   partsExhaust: "<:exhaustdefault:968751109252448256>",

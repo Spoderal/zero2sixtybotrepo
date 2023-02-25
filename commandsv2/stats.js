@@ -6,8 +6,13 @@ const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { toCurrency, blankInlineField } = require("../common/utils");
+const {
+  toCurrency,
+  blankInlineField,
+  convertMPHtoKPH,
+} = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -26,8 +31,8 @@ module.exports = {
     )
     .addSubcommand((subcommand) =>
       subcommand
-        .setName("carid")
-        .setDescription("Get the stats and parts of your car")
+        .setName("id")
+        .setDescription("Get the stats and parts of your car by ID")
         .addStringOption((option) =>
           option
             .setName("id")
@@ -46,6 +51,9 @@ module.exports = {
     let subcommandfetch = interaction.options.getSubcommand();
     var list = cars.Cars;
     var item = interaction.options.getString("item");
+    let userdata = await User.findOne({ id: interaction.user.id });
+    let settings = userdata.settings;
+    let weightemote = emotes.weight;
 
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
       let handlingemote = emotes.handling;
@@ -53,6 +61,8 @@ module.exports = {
       let accelerationemote = emotes.zero2sixty;
       let car = item.toLowerCase();
       let carindb = list[car];
+
+      let speed = `${carindb.Speed}`;
 
       if (!carindb) return await interaction.reply(`Thats not a car!`);
 
@@ -63,8 +73,8 @@ module.exports = {
         .setTitle(`Stats for ${carindb.Emote} ${carindb.Name}`)
         .addFields([
           {
-            name: `Speed`,
-            value: `${speedemote} ${carindb.Speed}`,
+            name: `Power`,
+            value: `${speedemote} ${speed}`,
             inline: true,
           },
           {
@@ -75,6 +85,11 @@ module.exports = {
           {
             name: `Handling`,
             value: `${handlingemote} ${carindb.Handling}`,
+            inline: true,
+          },
+          {
+            name: `Weight`,
+            value: `${weightemote} ${carindb.Weight}`,
             inline: true,
           },
           {
@@ -93,9 +108,9 @@ module.exports = {
         .setImage(carindb.Image);
 
       await interaction.reply({ embeds: [embed] });
-    } else if (subcommandfetch == "carid") {
+    } else if (subcommandfetch == "id") {
       let idtoselect = interaction.options.getString("id");
-      let userdata = await User.findOne({ id: interaction.user.id });
+
       if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
@@ -118,16 +133,27 @@ module.exports = {
       let carindb = selected;
       let sellprice = selected.Resale || 0;
       let cardrift = selected.Drift || 0;
-      let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
+      let carweight =
+        selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
 
+      if (!selected.WeightStat || selected.WeightStat == null) {
+        selected.WeightStat = list[selected.Name.toLowerCase()].Weight;
+        userdata.markModified();
+        userdata.save();
+      }
+      carweight =
+        selected.WeightStat || list[selected.Name.toLowerCase()].Weight || 0;
+      let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
+      let speed = `${carindb.Speed}`;
+      //weight
       let embed = new Discord.EmbedBuilder()
         .setTitle(
           `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
         )
         .addFields([
           {
-            name: `Speed`,
-            value: `${speedemote} ${carindb.Speed} MPH`,
+            name: `Power`,
+            value: `${speedemote} ${speed}`,
             inline: true,
           },
           {
@@ -138,6 +164,11 @@ module.exports = {
           {
             name: `Handling`,
             value: `${handlingemote} ${carindb.Handling}`,
+            inline: true,
+          },
+          {
+            name: `Weight`,
+            value: `${weightemote} ${carweight}`,
             inline: true,
           },
           {
@@ -306,6 +337,11 @@ module.exports = {
                 inline: true,
               },
               {
+                name: `Weight`,
+                value: `${weightemote} ${carweight}`,
+                inline: true,
+              },
+              {
                 name: `Drift`,
                 value: `${handlingemote} ${cardrift}`,
                 inline: true,
@@ -359,6 +395,21 @@ module.exports = {
         .setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });
+    } else if (
+      subcommandfetch == "car_part" &&
+      itemdb.Other[item.toLowerCase()]
+    ) {
+      let itemindb = itemdb.Other[item.toLowerCase()];
+      let embed = new Discord.EmbedBuilder()
+        .setTitle(`Information for ${itemindb.Emote} ${itemindb.Name}`)
+        .setDescription(itemindb.Action)
+        .addFields({
+          name: "Type",
+          value: `${itemindb.Type}`,
+        })
+        .setColor(colors.blue);
+
+      interaction.reply({ embeds: [embed] });
     }
   },
 };

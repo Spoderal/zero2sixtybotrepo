@@ -19,11 +19,32 @@ module.exports = {
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Fall Season",
-            description: "Information for the Fall Season Event",
-            value: "spring_event",
-            customId: "spring",
-            emoji: "🍂",
+            label: "Winter Season",
+            description: "Information for the Winter Season Event",
+            value: "winter_event",
+            customId: "winter",
+            emoji: "❄️",
+          },
+          {
+            label: "Track Legends",
+            description: "Information for the Track Legends Event",
+            value: "track_event",
+            customId: "track",
+            emoji: "🏁",
+          },
+          {
+            label: "McLaren Event",
+            description: "Information for the McLaren Event",
+            value: "mclaren_event",
+            customId: "mclaren",
+            emoji: "<:mclaren:931011546354692137>",
+          },
+          {
+            label: "Stock Champions",
+            description: "Information for the Stock Champions Event",
+            value: "stock_event",
+            customId: "stock",
+            emoji: "🎈",
           },
         ])
     );
@@ -37,9 +58,10 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Fall Season 2022 🍂
-          End of an Era <:bugatti:931012624110460979>
-        
+          Winter Season 2022 ❄️\n
+          Track Legends 🏁\n
+          McLaren Event <:mclaren:931011546354692137>
+          Stock Champions 🎈
       `);
 
     embed.setColor(colors.blue);
@@ -58,27 +80,103 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-          if (value === "spring_event") {
-            embed.setTitle("Fall Season");
+          if (value === "winter_event") {
+            embed.setTitle("Winter Season");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Get your track cars out because its track season!
+            embed.setDescription(`Sometimes, too much speed is a bad thing.
 
-            Choose from a bunch of new parts that help your handling increase, because you'll want to make sure your handling is MAX!
+            The snow has returned on Zero2Sixty!
 
-            Test your cars limits on the track with /trackrace and earn notoriety to earn exclusive season rewards, this time DOUBLE the length of last season!
-
+            Make sure you max out your handling, but make sure your speed is low, because too much speed will make you spin out and lose!
             
-    
-            __Commands__
-    
-            /tracklength [difficulty] [track] [car] - Race with a drift bot on the tracks!
-    
-            /season [page] - View the rewards available to claim
-    
-            **Ends November 31st 2022**
+            Race bots for notoriety in /snowrace
+
+            Use notoriety to redeem rewards from /season
+
+            This winter will bring a lot of new things!
+
+            **Ends March 1st 2023**
+
                   `);
-            embed.setThumbnail("https://i.imgur.com/9oPxIib.pngf");
-            embed.setImage("https://i.imgur.com/w6t4kOC.png");
+            embed.setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } else if (value === "track_event") {
+            embed.setTitle("Track Legends");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Its track day baby! Bring out your best cars for the track and race for the best track cars in history!
+
+            **Beat the car you're racing, and you keep the car**! However, if you lose, **you lose a heafty amount of cash**... Depending on the difficulty you choose of course!
+            
+            **Speed is the least of your worries, sometimes it may be the most because you may crash and lose!**
+
+            The event goes up to tier 4 in \`/trackrace\`!
+
+            Tier 4: -$20K
+            Tier 3: $-15K
+            Tier 2: $-10K
+            Tier 1: $-5K
+
+            **Ends March 31st 2023**
+            
+                  `);
+            embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } else if (value === "mclaren_event") {
+            embed.setTitle("McLaren Event");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Bring out your best McLaren, because its time to race with it!
+
+            Race for McLaren keys in \`/streetrace\`, and use them towards a McLaren import crate with \`/unbox\`
+
+            Get any of the following from the crate:
+            2020 McLaren Speedtail
+            1995 McLaren F1
+            2020 McLaren 570S
+            2021 McLaren 765LT
+            2017 McLaren 650S
+            2018 McLaren P1 GT
+
+            **Ends Febuary 28th 2023**
+            
+                  `);
+            embed.setThumbnail(
+              "https://www.topgear.com/sites/default/files/images/news-article/2018/07/06ba2b96a4ea4fa5d86b083bd8ab42ba/dsc03169.jpg"
+            );
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } else if (value === "stock_event") {
+            embed.setTitle("Stock Champions Event");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Bring out your best stock car, there's no parts allowed!
+
+            Race to be on top of the leaderboard in /stockrace to win prizes! View the leaderboard with /leaderboard
+
+            1st: 1987 RUF CTR Yellowbird\n
+            2nd: $10M Cash\n
+            3rd: $5M Cash\n
+            4th: $1M Cash\n
+            5th: $500K Cash\n
+
+            **Ends March 31st 2023**
+            
+                  `);
+            embed.setImage(
+              "https://www.ruf-automobile.de/site/assets/files/1093/scr-generationen.1920x720.jpg"
+            );
             embed.setColor(colors.blue);
 
             await interaction.editReply({

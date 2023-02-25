@@ -1,0 +1,37 @@
+{
+  "common keys": {
+    "Emote": "<:ckey:993011409132728370>",
+    "Name": "Common Keys",
+    "nameindb": "ckeys"
+  },
+  "rare keys": {
+    "Emote": "<:rkey:993011407681486868>",
+    "Name": "Rare Keys",
+    "nameindb": "rkeys"
+  },
+  "exotic keys": {
+    "Emote": "<:ekey:993011410210672671>",
+    "Name": "Exotic Keys",
+    "nameindb": "ekeys"
+  },
+  "common barn maps": {
+    "Emote": "<:zbarns:941571059600195594>",
+    "Name": "Common Barn Maps",
+    "nameindb": "cmaps"
+  },
+  "rare barn maps": {
+    "Emote": "<:zbarns_r:958539547828965406>",
+    "Name": "Rare Barn Maps",
+    "nameindb": "rmaps"
+  },
+  "legendary barn maps": {
+    "Emote": "<:zbarns_l:958539547736674314>",
+    "Name": "Legendary Barn Maps",
+    "nameindb": "lmaps"
+  },
+  "lockpicks": {
+    "Emote": "<:lockpick:1040384727691051170>",
+    "Name": "Lockpicks",
+    "nameindb": "lockpicks"
+  }
+}
