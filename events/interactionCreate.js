@@ -1,7 +1,14 @@
 const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
+
+const {
+  blacklistInteractionCheck,
+  userGetFromInteraction,
+} = require("../common/user");
+=======
 const { dailyCheck } = require("./daily");
+
 
 module.exports = {
   name: "interactionCreate",
@@ -24,8 +31,14 @@ module.exports = {
         // Command
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
         console.time(commandExecutionTimeName);
-        await command.execute(interaction);
-        console.timeEnd(commandExecutionTimeName);
+        const userdata = userGetFromInteraction(interaction);
+        let blacklist = await blacklistInteractionCheck(userdata, interaction);
+        if (blacklist == 1) {
+          console.log("A blacklisted user tried to use the bot!");
+        } else {
+          await command.execute(interaction);
+          console.timeEnd(commandExecutionTimeName);
+        }
 
         // Pets
         const petExecutionTimeName = "Pet update time";
