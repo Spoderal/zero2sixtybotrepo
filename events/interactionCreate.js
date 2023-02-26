@@ -9,7 +9,6 @@ const {
 
 const { dailyCheck } = require("./daily");
 
-
 module.exports = {
   name: "interactionCreate",
   once: false,

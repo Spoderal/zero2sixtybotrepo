@@ -388,10 +388,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 5,
   },
-    blacklist: {
+  blacklist: {
     type: Object,
-    required: false
-  }
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);
