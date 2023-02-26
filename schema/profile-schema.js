@@ -133,6 +133,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  noto6: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   stockpoints: {
     type: Number,
     required: false,
@@ -345,11 +350,6 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-
-  blacklist: {
-    type: Object,
-    required: false,
-
   moontokens: {
     type: Number,
     required: false,
@@ -387,8 +387,11 @@ const Profile = new mongoose.Schema({
     type: Number,
     required: false,
     default: 5,
-
   },
+    blacklist: {
+    type: Object,
+    required: false
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);
