@@ -108,7 +108,8 @@ module.exports = {
                  • Profile backgrounds, make your profile look snazzy\n
                  • /stats fixed, now shows the correct information for parts\n
                  • View the new cars with /dealer\n
-                 • View cars in crates with the new list option in /unbox!
+                 • View cars in crates with the new list option in /unbox!\n
+                 • Remove all parts with /remove!
                 `
               )
               .setFooter({ text: "3/1/2023" })
