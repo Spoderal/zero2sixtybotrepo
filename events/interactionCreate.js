@@ -23,17 +23,16 @@ module.exports = {
 
         // Command
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
-        console.time(commandExecutionTimeName);
+        
         await command.execute(interaction);
-        console.timeEnd(commandExecutionTimeName);
 
         // Pets
         const petExecutionTimeName = "Pet update time";
-        console.time(petExecutionTimeName);
+        
         await updatePetOnCommands(interaction);
         await updateCrew(interaction);
         await dailyCheck(interaction);
-        console.timeEnd(petExecutionTimeName);
+        
       }
     } catch (error) {
       if (error) {

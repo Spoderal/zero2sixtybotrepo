@@ -37,7 +37,8 @@ module.exports = {
       rkeys,
       ekeys,
       fkeys,
-      noto5: notoriety,
+      dkeys2: dkeys,
+      noto6: notoriety,
       wheelspins,
       lockpicks: lockpicks,
       swheelspins,
@@ -87,7 +88,6 @@ module.exports = {
             ${emotes.commonKey} Common: ${ckeys}
             ${emotes.rareKey} Rare: ${rkeys}
             ${emotes.exoticKey} Exotic: ${ekeys}
-            ${emotes.mclaren} McLaren: ${fkeys}
             <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
             `,
             inline: true,
@@ -96,7 +96,8 @@ module.exports = {
             name: "Event Items",
             value: `
             ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
-            ${emotes.rp}  RP: ${numberWithCommas(rp3)}\n
+            ${emotes.rp}  RP: ${numberWithCommas(rp3)}
+            ${emotes.dirftKey} Drift Keys: ${numberWithCommas(dkeys)}
             <:STOCKPOINTS:1077426546077347871> Stock Points: ${stockpoints}
             `,
             inline: true,

@@ -42,6 +42,20 @@
       "Name": "Bug Smasher",
       "Reward": 0,
       "Image": "https://i.ibb.co/5GxBJbp/achievement-bugsmasher.png"
+    },
+    "drift king": {
+      "Emote": "<:achievement_bugsmasher:1074597420131942490>",
+      "Task": "Complete 20 drifts on master difficulty",
+      "Name": "Bug Smasher",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/vkfr887/ACH-driftking.png"
+    },
+    "spring s1": {
+      "Emote": "<:badge_springs1:1078234569972666421>",
+      "Task": "Complete the S1 Spring season",
+      "Name": "Spring S1",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/VJ736t0/badge-springs1.png"
     }
   },
   "Soon": {

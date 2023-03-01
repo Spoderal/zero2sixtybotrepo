@@ -32,7 +32,7 @@
       "Type": "clutch",
       "AddedHandling": 10,
       "DecreasedSpeed": "0",
-      "AddHandling": "3",
+      "AddHandling": 10,
       "Image": "https://i.ibb.co/6nVJ6fc/clutch1.png"
     },
     "t2clutch": {
@@ -50,7 +50,7 @@
       "Type": "clutch",
       "AddedHandling": 15,
       "DecreasedSpeed": "0",
-      "AddHandling": "15",
+      "AddHandling": 15,
       "Image": "https://i.ibb.co/pJFC2dJ/clutch2.png"
     },
     "t3clutch": {
@@ -68,7 +68,7 @@
       "Type": "clutch",
       "AddedHandling": 25,
       "DecreasedSpeed": "0",
-      "AddHandling": "25",
+      "AddHandling": 25,
       "Image": "https://i.ibb.co/TRp102m/t3clutch.png"
     },
     "t4clutch": {
@@ -104,7 +104,7 @@
       "Type": "clutch",
       "AddedHandling": 50,
       "DecreasedSpeed": "0",
-      "AddHandling": "50",
+      "AddHandling": 50,
       "Image": "https://i.ibb.co/MP4zKZc/t5clutch.png"
     },
     "txclutch": {
@@ -120,7 +120,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "clutch",
-      "AddedHandling": 50,
+      "AddedHandling": 100,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/my2w1K5/txclutch.png",
       "AddHandling": 100
@@ -396,6 +396,23 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "Image": "https://i.ibb.co/yQGswVn/t5turbo.png"
+    },
+    "txturbo": {
+      "Name": "TXTurbo",
+      "AddedSpeed": 15,
+      "AddedSixty": 3,
+      "sellprice": 11250,
+      "Price": 0,
+      "AddedSnow": 0,
+      "Emote": "<:txturbo:1078223286976118784>",
+      "Tier": "5",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "turbo",
+      "DecreasedSpeed": "0",
+      "DecreaseHandling": "8",
+      "Image": "https://i.ibb.co/88DJqtL/txturbo.png"
     },
     "t1tires": {
       "Name": "T1Tires",
@@ -1028,6 +1045,26 @@
       "DecreasedSpeed": "0",
       "AddHandling": 25
     },
+    "t1drifttires": {
+      "Name": "T1DriftTires",
+      "DecreaseSpeed": 5,
+      "DriftScore": 5,
+      "AddedSnow": 0,
+      "AddedSpeed": "0",
+      "AddedSixty": "0",
+      "sellprice": 1500,
+      "Tread": 100,
+      "Price": 4500,
+      "Emote": "<:t1dtires:988981442161811507>",
+      "Tier": "1",
+      "AddedDrift": "2",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": 0.5,
+      "Type": "tires",
+      "Image": "https://i.ibb.co/SyGFb0c/t1dtires.png",
+      "AddedHandling":10,
+      "AddHandling":10
+    },
     "t2drifttires": {
       "Name": "T2DriftTires",
       "AddedSixty": "0",
@@ -1045,8 +1082,9 @@
       "Type": "tires",
       "DecreasedSpeed": 5,
       "DecreaseSpeed": 5,
-      "DecreaseHandling": 5,
-      "Image": "https://i.ibb.co/2FHgqCd/t2dtires.png"
+      "Image": "https://i.ibb.co/2FHgqCd/t2dtires.png",
+      "AddedHandling":20,
+      "AddHandling":20
     },
     "t3drifttires": {
       "Name": "T3DriftTires",
@@ -1064,8 +1102,9 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": 5,
-      "DecreaseHandling": 5,
-      "Image": "https://i.ibb.co/12Dc8KQ/t3dtires.png"
+      "Image": "https://i.ibb.co/12Dc8KQ/t3dtires.png",
+      "AddedHandling":30,
+      "AddHandling":30
     },
     "t4drifttires": {
       "Name": "T4DriftTires",
@@ -1083,7 +1122,86 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": 2,
-      "DecreaseHandling": 2
+      "AddedHandling":40,
+      "AddHandling":40,
+      "Image":"https://i.ibb.co/hZdMFK5/t4dtires.png"
+    },
+    "t5drifttires": {
+      "Name": "T5DriftTires",
+      "DecreaseSpeed": 2,
+      "AddedSixty": "0",
+      "AddedSpeed": "0",
+      "Tread": 300,
+      "AddedSnow": 0,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:t5dtires:1078220774801936434>",
+      "Tier": "5",
+      "AddedDrift": 10,
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "DecreasedSpeed": 2,
+      "AddedHandling":50,
+      "AddHandling":50,
+      "Image":"https://i.ibb.co/8DG2rzf/t5dtires.png"
+    },
+    "t1driftspoiler": {
+      "Name": "T1DriftSpoiler",
+      "DecreaseSpeed": 2,
+      "AddedSixty": "0",
+      "AddedSpeed": "0",
+      "AddedSnow": 0,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:t1ducktail:1079950253773574174>",
+      "Tier": 1,
+      "AddedDrift": 10,
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "spoiler",
+      "DecreasedSpeed": 3,
+      "AddedHandling":100,
+      "AddHandling":100,
+      "Image":"https://i.ibb.co/SQm6cs0/t1ducktail.png"
+    },
+    "t2driftspoiler": {
+      "Name": "T2DriftSpoiler",
+      "DecreaseSpeed": 2,
+      "AddedSixty": "0",
+      "AddedSpeed": "0",
+      "AddedSnow": 0,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:t1dspoiler:1079950255157694545>",
+      "Tier": 1,
+      "AddedDrift": 10,
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "spoiler",
+      "DecreasedSpeed": 3,
+      "AddedHandling":100,
+      "AddHandling":100,
+      "Image":"https://i.ibb.co/1JvyK0V/t1dspoiler.png"
+    },
+    "t3driftspoiler": {
+      "Name": "T3DriftSpoiler",
+      "DecreaseSpeed": 2,
+      "AddedSixty": "0",
+      "AddedSpeed": "0",
+      "AddedSnow": 0,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:t3dspoiler:1079950251819020340>",
+      "Tier": 1,
+      "AddedDrift": 10,
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "spoiler",
+      "DecreasedSpeed": 3,
+      "AddedHandling":100,
+      "AddHandling":100,
+      "Image":"https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },
     "bm1drifttires": {
       "Name": "BM1DriftTires",
@@ -1563,26 +1681,7 @@
       "Color": "#00ae00",
       "Image": "https://i.ibb.co/47FdHB5/t5intake.png"
     },
-    "t1drifttires": {
-      "Name": "T1DriftTires",
-      "DecreaseSpeed": 5,
-      "DriftScore": 5,
-      "AddedSnow": 0,
-      "AddedSpeed": "0",
-      "AddedSixty": "0",
-      "sellprice": 1500,
-      "Tread": 100,
-      "Price": 4500,
-      "Emote": "<:t1dtires:988981442161811507>",
-      "Tier": "1",
-      "AddedDrift": "2",
-      "DecreasedDrift": "0",
-      "DecreasedSixty": 0.5,
-      "Type": "tires",
-      "DecreasedSpeed": "2",
-      "DecreaseHandling": "2",
-      "Image": "https://i.ibb.co/SyGFb0c/t1dtires.png"
-    },
+ 
     "wintertires": {
       "Name": "WinterTires",
       "AddedSixty": "0",
@@ -1763,7 +1862,7 @@
       "Type": "suspension",
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
-      "AddHandling": 15,
+      "AddHandling": 40,
       "Image": "https://i.ibb.co/2N1rGBh/t4driftsuspension.png"
     },
     "t5driftsuspension": {
@@ -1782,7 +1881,7 @@
       "Type": "suspension",
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
-      "AddHandling": 20,
+      "AddHandling": 50,
       "Image": "https://i.ibb.co/1LwD7kj/t5driftsuspension.png"
     },
     "pet spoiler": {

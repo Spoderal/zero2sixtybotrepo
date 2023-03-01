@@ -133,13 +133,18 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  noto6: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   stockpoints: {
     type: Number,
     required: false,
     default: 0,
   },
 
-  dkeys: {
+  dkeys2: {
     type: Number,
     required: false,
     default: 0,
@@ -261,6 +266,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  springrewards:{
+    type: Number,
+    required: false,
+    default: 0
+  },
   tier: {
     type: Number,
     required: false,
@@ -276,10 +286,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: "No Description",
   },
-  background: {
+  pbackground: {
     type: String,
     required: false,
-    default: "Default",
+    default: "https://i.ibb.co/HxX0Q2z/profilepage.png",
   },
   work: {
     type: Object,
@@ -345,6 +355,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+
   moontokens: {
     type: Number,
     required: false,
@@ -378,11 +389,21 @@ const Profile = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  code: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
   marketlimit: {
     type: Number,
     required: false,
     default: 5,
   },
+  masterwins: {
+    type: Number,
+    required: false,
+    default: 0,
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

@@ -1,32 +1,42 @@
 {
-  "flames": {
-    "Image": "https://i.ibb.co/NjDZBLW/bg-flames.png",
-    "Name": "Flames",
+  "red": {
+    "Image": "https://i.ibb.co/djjBk7x/profile-red.png",
+    "Name": "Red",
     "Emote": "🔥"
   },
   "ocean": {
-    "Image": "https://i.ibb.co/dB2yjQ0/bg-ocean.png",
+    "Image": "https://i.ibb.co/pQZpfcP/profile-ocean.png",
     "Name": "Ocean",
     "Emote": "🌊"
   },
-  "finish line": {
-    "Image": "https://i.ibb.co/hWxRvTX/bg-flag.png",
-    "Name": "Finish Line",
-    "Emote": "🏁"
+  "purple": {
+    "Image": "https://i.ibb.co/2qv9rbQ/profile-purple.png",
+    "Name": "Purple",
+    "Emote": "🟣"
   },
   "default": {
-    "Image": "https://i.ibb.co/r55tw6R/background4.png",
+    "Image": "https://i.ibb.co/HxX0Q2z/profilepage.png",
     "Name": "Default",
     "Emote": "🔵"
   },
   "police": {
-    "Image": "https://i.ibb.co/4d4mLH1/bg-police.png",
+    "Image": "https://i.ibb.co/tz5qbpB/profile-police.png",
     "Name": "Police",
     "Emote": "🚔"
   },
-  "space": {
-    "Image": "https://i.ibb.co/jJdZGNT/bg-space.png",
-    "Name": "Space",
+  "silver": {
+    "Image": "https://i.ibb.co/n6BpGdH/profile-silver.png",
+    "Name": "Silver",
     "Emote": "🚀"
+  },
+  "cherry": {
+    "Image": "https://i.ibb.co/xGhYVFT/profile-cherry.png",
+    "Name": "Cherry",
+    "Emote": "🌸"
+  },
+  "drift": {
+    "Image": "https://i.ibb.co/r7Mmqq7/profile-drift.png",
+    "Name": "Silver",
+    "Emote": "🚗"
   }
 }

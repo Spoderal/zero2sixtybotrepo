@@ -24,6 +24,7 @@ module.exports = {
           { name: "Gearbox", value: "gearbox" },
           { name: "ECU", value: "ecu" },
           { name: "Drift Suspension", value: "dsuspension" },
+          { name: "Drift Tires", value: "dtires" },
           { name: "Race Suspension", value: "rsuspension" },
           { name: "Intercooler", value: "intercooler" },
           { name: "Turbo", value: "turbo" },
@@ -33,6 +34,7 @@ module.exports = {
           { name: "Brakes", value: "brakes" },
           { name: "TXExhaust", value: "txexhaust" },
           { name: "TXIntake", value: "txintake" },
+          { name: "TXTurbo", value: "txturbo" },
           { name: "TXClutch", value: "txclutch" }
         )
         .setRequired(true)
@@ -135,7 +137,50 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } else if (parttoinstall == "txclutch") {
+    }
+    else if (parttoinstall == "txturbo") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5turbo") && !parts.includes("T5Turbo"))
+        return await interaction.reply(`You need a T5Turbo to do this fuse!`);
+
+      for (var t = 0; t < 1; t++) parts.splice(parts.indexOf("t5turbo"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5turbo"].Emote} ${partdb.Parts["t5turbo"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txturbo"].Emote} ${partdb.Parts["txturbo"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txturbo");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    }  
+    else if (parttoinstall == "txclutch") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -200,7 +245,12 @@ module.exports = {
       } else if (parttoinstall == "dsuspension") {
         parte = "t4driftsuspension";
         partb = "t5driftsuspension";
-      } else if (parttoinstall == "rsuspension") {
+      }
+      else if (parttoinstall == "dtires") {
+        parte = "t4drifttires";
+        partb = "t5drifttires";
+      }  
+      else if (parttoinstall == "rsuspension") {
         parte = "t4racesuspension";
         partb = "t5racesuspension";
       } else if (parttoinstall == "intercooler") {

@@ -5,7 +5,7 @@ const User = require("../schema/profile-schema");
 const { capitalize } = require("lodash");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-
+const cardb = require("../data/cardb.json")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("remove")
@@ -30,7 +30,8 @@ module.exports = {
           { name: "Intercooler", value: "intercooler" },
           { name: "Nitro", value: "nitro" },
           { name: "Brakes", value: "brakes" },
-          { name: "Springs", value: "springs" }
+          { name: "Springs", value: "springs" },
+          {name: "All", value: "all"}
         )
         .setRequired(true)
     )
@@ -61,8 +62,54 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
     console.log(actpart);
-    if (!selected[actpart])
-      return await interaction.reply(`This car doesn't have a "${actpart}" !`);
+    if (!selected[actpart] && actpart !== "All")  return await interaction.reply(`This car doesn't have a "${actpart}" !`);
+
+    if(actpart == "All"){
+      let carindb = cardb.Cars[selected.Name.toLowerCase()]
+      selected.Exhaust = null
+      selected.Tires = null
+      selected.Intake = null
+      selected.Turbo = null
+      selected.Suspension = null
+      selected.Spoiler = null
+      selected.Body = null
+      selected.ECU = null
+      selected.Clutch = null
+      selected.Engine = null
+      selected.Gearbox = null
+      selected.Intercooler = null
+      selected["Weight reduction"] = null
+      selected.Brakes = null
+      selected.Springs = null
+      selected.Speed = carindb.Speed
+      selected.Acceleration = carindb["0-60"]
+      selected.Weight = carindb.Weight
+      selected.Handling = carindb.Handling
+      let newobj = selected
+      await User.findOneAndUpdate(
+        {
+          id: user1.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": newobj,
+          },
+        },
+  
+        {
+          arrayFilters: [
+            {
+              "car.Name": selected.Name,
+            },
+          ],
+        }
+      );
+
+      userdata.save()
+
+      return interaction.reply("Removed all parts from your car!")
+  
+    }
 
     let realpart = selected[actpart];
     let partindb = partdb.Parts[realpart.toLowerCase()];

@@ -1,21 +1,20 @@
-const db = require("quick.db");
-const lodash = require("lodash");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { userGetPatreonTimeout } = require("../common/user");
 const {
-  invisibleSpace,
-  doubleCashWeekendField,
-  convertMPHtoKPH,
+  toCurrency,
 } = require("../common/utils");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const lodash = require("lodash")
+const cratedb = require("../data/cratedb.json")
 
+const { createCanvas, loadImage } = require("canvas");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("drift")
@@ -28,7 +27,8 @@ module.exports = {
         .addChoices(
           { name: "Easy", value: "easy" },
           { name: "Medium", value: "medium" },
-          { name: "Hard", value: "hard" }
+          { name: "Hard", value: "hard" },
+          { name: "Master", value: "master" },
         )
     )
     .addStringOption((option) =>
@@ -39,7 +39,7 @@ module.exports = {
         .addChoices(
           { name: "Regular", value: "regular" },
           { name: "Mountain", value: "mountain" },
-          { name: "Parking Lot", value: "parking" }
+          { name: "Parking Garage", value: "parking garage" }
         )
     )
     .addStringOption((option) =>
@@ -49,42 +49,18 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    let tracks = ["easy", "medium", "hard"];
-    let moneyearned = 200;
     let user = interaction.user;
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let cooldowndata =
-      (await Cooldowns.findOne({ id: interaction.user.id })) ||
-      new Cooldowns({ id: user.id });
-
-    let track = interaction.options.getString("difficulty");
-    if (!track)
-      return await interaction.reply(
-        "You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard"
-      );
-    if (!tracks.includes(track.toLowerCase()))
-      return await interaction.reply(
-        "You need to select a track! Example: /drift [id] [difficulty]. The current difficulties are: Easy, Medium, Hard"
-      );
+    let cooldowndata = (await Cooldowns.findOne({ id: interaction.user.id })) || new Cooldowns({ id: user.id });
+    let driftcooldown = cooldowndata.drift
+    let track = interaction.options.getString("track");
+    let difficulty = interaction.options.getString("difficulty");
+    let timeout = 45000
     let idtoselect = interaction.options.getString("car");
 
-    let selected = userdata.cars.find((car) => car.ID == idtoselect);
-
-    // This will auto-correct a database issue when a user purchased a vehicle
-    // and ".Drift" value was set to an object with NaN due to strings in data
-    if (Number.isNaN(selected?.Drift)) {
-      const carInLocalDB = cars.Cars[selected.Name.toLowerCase()];
-      await User.updateOne(
-        { id: interaction.user.id, "cars.Name": carInLocalDB.Name },
-        {
-          $set: {
-            "cars.$.Drift": carInLocalDB.Drift,
-          },
-        }
-      );
-      selected.Drift = carInLocalDB.Drift;
-    }
+    let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
+    let selected = filteredcar[0] || "No ID";
 
     if (selected == "No ID") {
       let errembed = new EmbedBuilder()
@@ -95,357 +71,247 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    let car = selected;
-    if (!car)
-      return await interaction.reply(
-        "You need to select a car! Example: /ids select [car]"
-      );
-    let user1cars = userdata.cars;
-    if (!user1cars) await interaction.reply("You dont have any cars!");
-    if (!cars.Cars[car.Name.toLowerCase()])
-      return await interaction.reply("Thats not a car!");
-    let driftscore = selected.Drift;
-    let usercarspeed = selected.Speed;
-    let handling = selected.Handling;
+    if (
+      driftcooldown !== null &&
+      timeout - (Date.now() - driftcooldown) > 0
+    ) {
+      let timel = ms(timeout - (Date.now() - driftcooldown));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`You can race again in ${timel}`);
+      return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+    }
+    let velocity = selected.Speed
 
-    if (driftscore <= 0)
-      return await interaction.reply(
-        "You try drifting but your drift rating is too low, so you swerve out and crash."
-      );
+    if(velocity >= 300) return interaction.reply("Your car is too fast so it crashed!")
 
-    const timeout = userGetPatreonTimeout(userdata);
+    let acc = selected.Acceleration
 
-    let racing = cooldowndata.drift;
-    if (racing !== null && timeout - (Date.now() - racing) > 0) {
-      let time = ms(timeout - (Date.now() - racing), { compact: true });
+    let weight = selected.Weight || cars.Cars[selected.Name.toLowerCase()].Weight
+    
+    let handling = selected.Handling
 
-      return await interaction.reply(
-        `Please wait ${time} before drifting again.`
-      );
+    let time
+
+    let timelimit 
+
+    let notorietyreward
+
+    let cashreward
+    let crater
+    let cratereward = lodash.sample(["yes", "no", "no"])
+    if(cratereward == "yes"){
+      crater = true
+    }
+    let keysreward
+    let dranks
+    if(difficulty == "easy"){
+      time = 100
+      timelimit = 15
+      notorietyreward = 50
+      cashreward = 100
+      keysreward = 2
+      dranks = 1
+    }
+    else if(difficulty == "medium"){
+      time = 250
+      timelimit = 10
+      notorietyreward = 100
+      cashreward = 250
+      keysreward = 3
+      dranks = 2
+    }
+    else if(difficulty == "hard"){
+      time = 500
+      timelimit = 5
+      
+      notorietyreward = 200
+      cashreward = 500
+      keysreward = 5
+      dranks = 2
+    }
+    else if(difficulty == "master"){
+      time = 600
+      timelimit = 5
+      
+      notorietyreward = 300
+      cashreward = 600
+      keysreward = 6
+      dranks = 3
     }
 
-    cooldowndata.drift = Date.now();
-    cooldowndata.save();
-    let drifttraining = userdata.driftrank;
+    let tracklength 
 
-    let range = selected.Range;
-    if (cars.Cars[selected.Name.toLowerCase()].Electric) {
-      if (range <= 0) {
-        return await interaction.reply(
-          "Your EV is out of range! Run /charge to charge it!"
-        );
+    if(track == "regular"){
+      tracklength = 10000
+      notorietyreward = notorietyreward * 1
+      cashreward = cashreward * 1
+    }
+    else if(track == "mountain"){
+      tracklength = 20000
+      notorietyreward = notorietyreward * 1.5
+      cashreward = cashreward * 2
+    }
+    else if(track == "parking garage"){
+      tracklength = 30000
+      notorietyreward = notorietyreward * 2
+      cashreward = cashreward * 3
+    }
+
+
+    let speed = velocity / 3
+    let momentum = speed * weight
+
+    momentum = momentum / acc
+
+    momentum = momentum * handling
+
+    momentum = momentum / time
+
+    
+    let driftscore = momentum / velocity
+    interaction.reply("Revving engines...")
+
+    let trackimg 
+    let trackemote
+
+    if(track == "regular"){
+      trackemote = "🛣️"
+      if(difficulty == "easy"){
+        trackimg = "https://i.ibb.co/mtbZtS8/track-regular.png"
+      }
+      else if(difficulty == "medium"){
+        trackimg = "https://i.ibb.co/YpzH8gZ/track-regular-medium.png"
+      }
+      else if(difficulty == "hard"){
+        trackimg = "https://i.ibb.co/7bVpDKp/track-regular-hard.png"
+      }
+      else if(difficulty == "master"){
+        trackimg = "https://i.ibb.co/YjXsvc2/track-regular-master.png"
       }
     }
-    let requiredrank = drifttraining * 150;
-    let time;
-    let ticketsearned;
-    let xpearn;
-    switch (track) {
-      case "easy": {
-        time = 15;
-        ticketsearned = 2;
-        xpearn = 25;
-        break;
+    else if(track == "mountain"){
+      trackemote = "🏔️"
+      if(difficulty == "easy"){
+        trackimg = "https://i.ibb.co/yRH20Hs/track-mountains.png"
       }
-      case "medium": {
-        time = 10;
-        moneyearned += 250;
-        ticketsearned = 4;
-        xpearn = 50;
-        break;
+      else if(difficulty == "medium"){
+        trackimg = "https://i.ibb.co/mqvt9Hw/track-mountains-medium.png"
       }
-      case "hard": {
-        time = 5;
-        moneyearned += 500;
-        ticketsearned = 6;
-        xpearn = 100;
-        break;
+      else if(difficulty == "hard"){
+        trackimg = "https://i.ibb.co/sKsTTFD/track-mountains-hard.png"
+      }
+      else if(difficulty == "master"){
+        trackimg = "https://i.ibb.co/ZWg8Z83/track-mountains-master.png"
       }
     }
-    let usables = userdata.using;
-
-    let energytimer = cooldowndata.energydrink;
-    if (usables.includes("energy drink")) {
-      let timeout = 600000;
-      if (timeout - (Date.now() - energytimer) > 0) {
-        // do nothing?
-      } else {
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $pull: {
-              using: "energy drink",
-            },
-          }
-        );
+    else if(track == "parking garage"){
+      trackemote = "🅿️"
+      if(difficulty == "easy"){
+        trackimg = "https://i.ibb.co/4Jb4Pqn/track-parking.png"
       }
-
-      userdata.save();
-    }
-    if (usables.includes("energy drink")) {
-      ticketsearned = ticketsearned * 2;
-    }
-    let sponsortimer = cooldowndata.sponsor;
-    if (usables.includes("sponsor")) {
-      let timeout = 600000;
-      if (timeout - (Date.now() - sponsortimer) > 0) {
-        // do nothing?
-      } else {
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $pull: {
-              using: "sponsor",
-            },
-          }
-        );
-        userdata.save();
+      else if(difficulty == "medium"){
+        trackimg = "https://i.ibb.co/zHKLphZ/track-parking-medium.png"
+      }
+      else if(difficulty == "hard"){
+        trackimg = "https://i.ibb.co/WBkQHvm/track-parking-hard.png"
+      }
+      else if(difficulty == "master"){
+        trackimg = "https://i.ibb.co/F00h1Rv/track-parking-master.png"
       }
     }
-    if (usables.includes("sponsor")) {
-      moneyearned = moneyearned * 2;
-      let moneyearnedtxt = moneyearnedtxt * 2;
-    }
 
-    let tires = selected.Tires;
+    const canvas = createCanvas(1280, 720);
+    const ctx = canvas.getContext("2d");
+    const bg = await loadImage(trackimg);
 
-    let drifttires = [
-      "T1DriftTires",
-      "T2DriftTires",
-      "T3DriftTires",
-      "BM1DriftTires",
-      "T4DriftTires",
-      "T5DriftTires",
-    ];
-    if (!drifttires.includes(tires))
-      return await interaction.reply("Your car needs drift tires to drift!");
+    let selected1image = await loadImage(`${selected.Livery}`);
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-    let formula = driftscore * drifttraining;
-    formula += handling;
+    ctx.save();
+    roundedImage(ctx, 320, 200, 640, 360, 20);
+    ctx.stroke();
+    ctx.clip();
+    ctx.drawImage(selected1image, 320, 200, 640, 360);
+    ctx.restore();
 
-    let tracklength;
-    let trackname;
-    let trackgifs;
-    let trackgif;
-    let optiontrack = interaction.options.getString("track");
-    switch (optiontrack) {
-      case "regular":
-        tracklength = 9000;
-
-        trackname = "Regular";
-        trackgifs = [
-          "https://media1.giphy.com/media/o6S51npJYQM48/giphy.gif",
-          "https://c.tenor.com/BMmhBsA6GgUAAAAd/drift-drifting.gif",
-        ];
-        trackgif = lodash.sample(trackgifs);
-        break;
-      case "mountain":
-        tracklength = 10000;
-
-        xpearn += 50;
-        trackname = "Mountains";
-        trackgifs = [
-          "https://i.makeagif.com/media/3-16-2016/IAMsw-.gif",
-          "https://c.tenor.com/NhopGWhSG0AAAAAC/mustang-drift.gif",
-        ];
-        trackgif = lodash.sample(trackgifs);
-
-        break;
-      case "parking":
-        tracklength = 15000;
-        xpearn += 100;
-        trackname = "Parking Lot";
-        trackgifs = [
-          "https://i.gifer.com/7azI.gif",
-          "https://c.tenor.com/bxYLMS8pmqAAAAAC/dk-nissan.gif",
-        ];
-        trackgif = lodash.sample(trackgifs);
-
-        break;
-    }
-
-    let speed = `${usercarspeed}`;
-
-    let embed = new EmbedBuilder()
-      .setTitle(`Drifting around the ${track} ${trackname} track`)
-      .setDescription(`You have ${time}s to complete the track`)
-      .addFields([
-        {
-          name: `Your ${cars.Cars[selected.Name.toLowerCase()].Name}'s Stats`,
-          value: `
-            Power: ${speed}
-            Drift Rating: ${driftscore}
-          `,
-        },
-        { name: "Your Drift Rank", value: `${drifttraining}` },
-      ])
-      .setColor(colors.blue)
-      .setImage(`${trackgif}`)
-      .setThumbnail("https://i.ibb.co/XzW37RH/drifticon.png");
-
-    const originalEmbed = embed;
-
-    let row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("ebrake")
-        .setEmoji(emotes.eBrake)
-        .setLabel("Shifter")
-        .setStyle("Secondary")
-    );
-
-    const filter = (btnInt) => {
-      return interaction.user.id === btnInt.user.id;
-    };
-
-    let rns = [1000, 2000, 3000, 4000];
-
-    let randomnum = lodash.sample(rns);
-    let canshift = false;
-    let showedShiftButton = false;
-    const collector = interaction.channel.createMessageComponentCollector({
-      filter,
-      time: 10000,
+    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+      name: "profile-image.png",
     });
+    let embed = new EmbedBuilder()
+    .setTitle(`Drifting on the ${trackemote} ${difficulty} ${track} track!`)
+    .addFields(
+      {
+        name: `${selected.Emote} ${selected.Name}`,
+        value: `${emotes.speed} Power: ${velocity}\n\n${emotes.zero2sixty} Acceleration: ${acc}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
 
-    setTimeout(() => {
-      embed.addFields([{ name: invisibleSpace, value: "Shift now!" }]);
-      interaction.editReply({ embeds: [embed], components: [row] });
-      canshift = true;
-      showedShiftButton = true;
-      setTimeout(() => {
-        canshift = false;
-      }, 2000);
-
-      collector.on("end", async (collected) => {
-        if (collected.size == 0 && canshift == false) {
-          formula = formula / 2;
+        inline: true,
+      })
+      .setColor(colors.blue)
+      .setImage("attachment://profile-image.png");
+    
+    await interaction.editReply({embeds: [embed], files: [attachment], fetchReply: true})
+    cooldowndata.drift = Date.now()
+    cooldowndata.save()
+   let x = setInterval(async () => {
+      timelimit -= 1
+      tracklength -= driftscore
+      console.log(timelimit)
+      console.log(tracklength)
+      if(timelimit <= 0){
+        if (tracklength > 0){
+          embed.setTitle(`${trackemote} ${difficulty} ${track} track lost.`)
+           await interaction.editReply({embeds: [embed]})
         }
-      });
-    }, randomnum);
-
-    await interaction
-      .reply({ embeds: [embed], components: [] })
-      .then(async () => {
-        collector.on("collect", async (i) => {
-          if (i.customId.includes("ebrake")) {
-            if (canshift == false) {
-              formula = formula / 2;
-              embed.setFooter({
-                text: "You failed to shift at the right moment and lost momentum!",
-              });
-              await i.update({ embeds: [originalEmbed], components: [] });
-            } else if (canshift == true) {
-              formula = formula * 1.3;
-              embed.setFooter({ text: "Great shift... drifting!!!" });
-              await i.update({ embeds: [originalEmbed], components: [] });
+        else if(tracklength <= 0){
+          console.log(crater)
+          console.log(cratereward)
+          let earnings = []
+          earnings.push(`${emotes.notoriety} +${notorietyreward}`)
+          earnings.push(`${emotes.cash} +${cashreward}`)
+          earnings.push(`${emotes.dirftKey} +${keysreward}`)
+          earnings.push(`+${dranks} Drift Rank`)
+          userdata.driftrank += dranks
+          userdata.noto6 += notorietyreward
+          userdata.cash += cashreward
+          userdata.dkeys2 += keysreward
+          if(crater == true){
+            earnings.push(`+ ${cratedb.Crates["seasonal crate"].Emote} ${cratedb.Crates["seasonal crate"].Name}`)
+            userdata.items.push("seasonal crate")
+          }
+          if(difficulty == "master"){
+            let filteredach = userdata.achievements.filter((ach) => ach.name == "Drift King")
+            userdata.masterwins += 1
+            if(userdata.masterwins == 20 && !filteredach[0]){
+              userdata.achievements.push(
+                {
+                  name: "Drift King"
+                }
+              )
             }
           }
-        });
-      });
-
-    let y = setInterval(() => {
-      time -= 1;
-    }, 1000);
-
-    let removedShiftButton = false;
-    let x = setInterval(async () => {
-      tracklength -= formula;
-
-      if (showedShiftButton && !canshift && !removedShiftButton) {
-        removedShiftButton = true;
-        setTimeout(
-          () => interaction.editReply({ embeds: [embed], components: [] }),
-          2000
-        );
-      }
-
-      if (time == 0) {
-        if (tracklength >= 0) {
-          embed.addFields([
-            { name: "Results", value: `Failed` },
-            { name: "Earnings", value: "+10 Drift XP" },
-          ]);
-          embed.setFooter({ text: invisibleSpace });
-          interaction.editReply({ embeds: [embed], components: [] });
-          if (range && range >= 0) {
-            selected.Range -= 1;
-          }
-          userdata.driftxp += 10;
-
-          let driftxp = userdata.driftxp;
-          if (driftxp >= requiredrank) {
-            if (userdata.driftrank < 50) {
-              userdata.driftrank += 1;
-              interaction.channel.send(
-                `${user}, you just ranked up your drift skill to ${userdata.driftrank}!`
-              );
-            }
-          }
-          userdata.save();
-          clearInterval(x);
-          clearInterval(y);
-
-          return;
-        } else if (tracklength <= 0) {
-          if (db.fetch(`doublecash`) == true) {
-            moneyearned = moneyearned += moneyearned;
-            embed.addFields([doubleCashWeekendField]);
-          }
-          if (
-            (userdata.patreon && userdata.patreon.tier == 1) ||
-            (userdata.patreon && userdata.patreon.tier == 2)
-          ) {
-            let patronbonus = moneyearned * 1.5;
-
-            moneyearned += patronbonus;
-          }
-          if (userdata.patreon && userdata.patreon.tier == 3) {
-            let patronbonus = moneyearned * 2;
-
-            moneyearned += patronbonus;
-          }
-          if (userdata.patreon && userdata.patreon.tier == 4) {
-            let patronbonus = moneyearned * 4;
-
-            moneyearned += patronbonus;
-          }
-          let Global = require("../schema/global-schema");
-          let global = await Global.findOne();
-          if (global.zeroplus.includes(interaction.guild.id)) {
-            moneyearned = moneyearned * 2;
-          }
-          embed.addFields([
-            {
-              name: "Earnings",
-              value: `
-              ${emotes.cash} $${moneyearned}
-              ${emotes.rp} ${ticketsearned} RP
-              +1 Drift Rank
-            `,
-            },
-          ]);
-          embed.setFooter({ text: invisibleSpace });
-          if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
-            selected.Wins += 1;
-          }
-          interaction.editReply({ embeds: [embed], components: [] });
-          userdata.cash += Number(moneyearned);
-          userdata.rp3 += ticketsearned;
-          userdata.driftrank += 1;
-          userdata.update();
-
-          userdata.save();
-
-          clearInterval(x);
-          clearInterval(y);
-
-          return;
+          userdata.save()
+          embed.setDescription(`${earnings.join('\n')}`)
+          embed.setTitle(`${trackemote} ${difficulty} ${track} track won!`)
+          await interaction.editReply({embeds: [embed]})
         }
+         clearInterval(x);
+        return
       }
     }, 1000);
+
   },
 };
+function roundedImage(ctx, x, y, width, height, radius) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}

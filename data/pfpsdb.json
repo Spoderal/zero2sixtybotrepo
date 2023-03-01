@@ -2,7 +2,8 @@
   "Pfps": {
     "default": {
       "Image": "https://i.ibb.co/vjFfBwj/newdefault.png",
-      "Emote": "<:default_helmet:985041491133095966>"
+      "Emote": "<:default_helmet:985041491133095966>",
+      "Name":"Default"
     },
     "red helmet": {
       "Name": "Red Helmet",
@@ -333,6 +334,56 @@
       "Name": "Winter Helmet",
       "Image": "https://i.ibb.co/tCHHzz1/z2swinter.png",
       "Emote": "<:z2swinter:1052975949622280293>"
+    },
+    "dark matter helmet": {
+      "Name": "Dark Matter Helmet",
+      "Image": "https://i.ibb.co/N98L5nQ/helmet-darkmatter.png",
+      "Emote": "<:helmet_darkmatter:1079970951225147494>"
+    },
+    "trillionaire helmet": {
+      "Name": "Trillionaire Helmet",
+      "Image": "https://i.ibb.co/F6vspGt/helmet-trillionaire.png",
+      "Emote": "<:helmet_trillionaire:1079970955025199255>"
+    },
+    "cherry blossom helmet": {
+      "Name": "Cherry Blossom Helmet",
+      "Image": "https://i.ibb.co/N61pSmV/helmet-cherryblossom.png",
+      "Emote": "<:helmet_cherryblossom:1079970881683587192>"
+    },
+    "saturn helmet": {
+      "Name": "Saturn Helmet",
+      "Image": "https://i.ibb.co/sWdwsrp/helmet-saturn.png",
+      "Emote": "<:helmet_saturn:1079970952999342091>"
+    },
+    "abstract helmet": {
+      "Name": "Abstract Helmet",
+      "Image": "https://i.ibb.co/QXHqmN5/helmet-abstract.png",
+      "Emote": "<:helmet_abstract:1080280723996545044>"
+    },
+    "darkest helmet": {
+      "Name": "Darkest Helmet",
+      "Image": "https://i.ibb.co/m4RjWCy/helmet-darker.png",
+      "Emote": "<:helmet_darker:1080280725602971698>"
+    },
+    "touch grass helmet": {
+      "Name": "Touch Grass Helmet",
+      "Image": "https://i.ibb.co/X5DgSw8/helmet-touchgrass.png",
+      "Emote": "<:helmet_touchgrass:1080280722700509276>"
+    },
+    "glitch helmet": {
+      "Name": "Glitch Helmet",
+      "Image": "https://i.ibb.co/SsM8RVJ/helmet-glitch.png",
+      "Emote": "<:helmet_glitch:1080280720959877151>"
+    },
+    "evil helmet": {
+      "Name": "Evil Helmet",
+      "Image": "https://i.ibb.co/kx6jmQH/helmet-evil.png",
+      "Emote": "<:helmet_evil:1080280719336677425>"
+    },
+    "rave helmet": {
+      "Name": "Rave Helmet",
+      "Image": "https://i.ibb.co/v1rgxQ6/helmet-rave.png",
+      "Emote": "<:helmet_rave:1080285108264771734>"
     }
   }
 }

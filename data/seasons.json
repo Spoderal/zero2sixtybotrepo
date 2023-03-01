@@ -504,7 +504,7 @@
         }
       }
     },
-    "Spring": {
+    "Summer": {
       "Rewards": {
         "1": {
           "Number": 1,
@@ -758,152 +758,152 @@
         }
       }
     },
-    "Summer": {
+    "Spring": {
       "Rewards": {
         "1": {
           "Number": 1,
           "Item": "2000 Cash",
-          "Required": 250
+          "Required": 100
         },
         "2": {
           "Number": 2,
           "Item": "1500 Cash",
-          "Required": 500
+          "Required": 200
         },
         "3": {
           "Number": 3,
           "Item": "2000 Cash",
-          "Required": 1000
+          "Required": 300
         },
         "4": {
           "Number": 4,
           "Item": "2500 Cash",
-          "Required": 2000
+          "Required": 400
         },
         "5": {
           "Number": 5,
           "Item": "3000 Cash",
-          "Required": 2500
+          "Required": 500
         },
         "6": {
           "Number": 6,
           "Item": "3500 Cash",
-          "Required": 3000
+          "Required": 600
         },
         "7": {
           "Number": 7,
           "Item": "2 Rare Keys",
-          "Required": 3500
+          "Required": 700
         },
         "8": {
           "Number": 8,
           "Item": "1 Garage Spaces",
-          "Required": 4000
+          "Required": 800
         },
         "9": {
           "Number": 9,
           "Item": "Japan Helmet",
-          "Required": 4500
+          "Required": 900
         },
         "10": {
           "Number": 10,
           "Item": "1 Garage Spaces",
-          "Required": 5000
+          "Required": 1000
         },
         "11": {
           "Number": 11,
           "Item": "5 Drift Keys",
-          "Required": 5500
+          "Required": 1100
         },
         "12": {
           "Number": 12,
           "Item": "5000 Cash",
-          "Required": 6000
+          "Required": 1200
         },
         "13": {
           "Number": 13,
           "Item": "5000 Cash",
-          "Required": 6500
+          "Required": 1300
         },
         "14": {
           "Number": 14,
           "Item": "T4DriftTires",
-          "Required": 7000
+          "Required": 1400
         },
         "15": {
           "Number": 15,
           "Item": "5000 Cash",
-          "Required": 7500
+          "Required": 1500
         },
         "16": {
           "Number": 16,
           "Item": "2000 Cash",
-          "Required": 8000
+          "Required": 1600
         },
         "17": {
           "Number": 17,
           "Item": "Underwater Helmet",
-          "Required": 8500
+          "Required": 1700
         },
         "18": {
           "Number": 18,
           "Item": "2500 Cash",
-          "Required": 9000
+          "Required": 1800
         },
         "19": {
           "Number": 19,
           "Item": "Silvia Helmet",
-          "Required": 9500
+          "Required": 1900
         },
         "20": {
           "Number": 20,
           "Item": "2 Barn Maps",
-          "Required": 10000
+          "Required": 2000
         },
         "21": {
           "Number": 21,
           "Item": "Lemon Helmet",
-          "Required": 10100
+          "Required": 2100
         },
         "22": {
           "Number": 22,
-          "Item": "3000 Cash",
-          "Required": 10200
+          "Item": "T1DriftSpoiler",
+          "Required": 2200
         },
         "23": {
           "Number": 23,
           "Item": "T3DriftSuspension ",
-          "Required": 10300
+          "Required": 2600
         },
         "24": {
           "Number": 24,
           "Item": "2000 Cash",
-          "Required": 10400
+          "Required": 2700
         },
         "25": {
           "Number": 25,
           "Item": "1 Garage Spaces",
-          "Required": 10500
+          "Required": 2800
         },
         "26": {
           "Number": 26,
           "Item": "5 Drift Keys",
-          "Required": 10600
+          "Required": 3000
         },
         "27": {
           "Number": 27,
           "Item": "T4DriftSuspension ",
-          "Required": 10700
+          "Required": 3200
         },
         "28": {
           "Number": 28,
           "Item": "200 RP",
-          "Required": 10800
+          "Required": 3400
         },
         "29": {
           "Number": 29,
           "Item": "5 Drift Keys",
-          "Required": 10900
+          "Required": 3600
         },
         "30": {
           "Number": 30,
@@ -922,7 +922,7 @@
         },
         "33": {
           "Number": 33,
-          "Item": "2000 Cash",
+          "Item": "T1DriftSpoiler",
           "Required": 14000
         },
         "34": {
@@ -962,7 +962,7 @@
         },
         "41": {
           "Number": 41,
-          "Item": "2500 Cash",
+          "Item": "T2DriftSpoiler",
           "Required": 16500
         },
         "42": {
@@ -1007,7 +1007,257 @@
         },
         "50": {
           "Number": 50,
-          "Item": "Summer Badge",
+          "Item": "25000 Cash",
+          "Required": 30000
+        },
+        "51": {
+          "Number": 51,
+          "Item": "2000 Cash",
+          "Required": 100
+        },
+        "52": {
+          "Number": 52,
+          "Item": "1500 Cash",
+          "Required": 200
+        },
+        "53": {
+          "Number": 53,
+          "Item": "2000 Cash",
+          "Required": 300
+        },
+        "54": {
+          "Number": 54,
+          "Item": "2500 Cash",
+          "Required": 400
+        },
+        "55": {
+          "Number": 55,
+          "Item": "3000 Cash",
+          "Required": 500
+        },
+        "56": {
+          "Number": 56,
+          "Item": "3500 Cash",
+          "Required": 600
+        },
+        "57": {
+          "Number": 57,
+          "Item": "T2DriftSpoiler",
+          "Required": 700
+        },
+        "58": {
+          "Number": 58,
+          "Item": "1 Garage Spaces",
+          "Required": 800
+        },
+        "59": {
+          "Number": 59,
+          "Item": "Japan Helmet",
+          "Required": 900
+        },
+        "60": {
+          "Number": 60,
+          "Item": "1 Garage Spaces",
+          "Required": 1000
+        },
+        "61": {
+          "Number": 61,
+          "Item": "5 Drift Keys",
+          "Required": 1100
+        },
+        "62": {
+          "Number": 62,
+          "Item": "5000 Cash",
+          "Required": 1200
+        },
+        "63": {
+          "Number": 63,
+          "Item": "5000 Cash",
+          "Required": 1300
+        },
+        "64": {
+          "Number": 64,
+          "Item": "T4DriftTires",
+          "Required": 1400
+        },
+        "65": {
+          "Number": 65,
+          "Item": "5000 Cash",
+          "Required": 1500
+        },
+        "66": {
+          "Number": 66,
+          "Item": "T3DriftSpoiler",
+          "Required": 1600
+        },
+        "67": {
+          "Number": 67,
+          "Item": "Underwater Helmet",
+          "Required": 1700
+        },
+        "68": {
+          "Number": 68,
+          "Item": "2500 Cash",
+          "Required": 1800
+        },
+        "69": {
+          "Number": 69,
+          "Item": "Silvia Helmet",
+          "Required": 1900
+        },
+        "70": {
+          "Number": 70,
+          "Item": "2 Barn Maps",
+          "Required": 2000
+        },
+        "71": {
+          "Number": 71,
+          "Item": "Lemon Helmet",
+          "Required": 2100
+        },
+        "72": {
+          "Number": 72,
+          "Item": "3000 Cash",
+          "Required": 2200
+        },
+        "73": {
+          "Number": 73,
+          "Item": "T3DriftSuspension ",
+          "Required": 2600
+        },
+        "74": {
+          "Number": 74,
+          "Item": "2000 Cash",
+          "Required": 2700
+        },
+        "75": {
+          "Number": 75,
+          "Item": "1 Garage Spaces",
+          "Required": 2800
+        },
+        "76": {
+          "Number": 76,
+          "Item": "5 Drift Keys",
+          "Required": 3000
+        },
+        "77": {
+          "Number": 77,
+          "Item": "T4DriftSuspension",
+          "Required": 3200
+        },
+        "78": {
+          "Number": 78,
+          "Item": "200 RP",
+          "Required": 3400
+        },
+        "79": {
+          "Number": 79,
+          "Item": "5 Drift Keys",
+          "Required": 3600
+        },
+        "80": {
+          "Number": 80,
+          "Item": "T4DriftTires",
+          "Required": 11000
+        },
+        "81": {
+          "Number": 81,
+          "Item": "Watermelon Helmet",
+          "Required": 12000
+        },
+        "82": {
+          "Number": 82,
+          "Item": "RX7 Helmet",
+          "Required": 13000
+        },
+        "83": {
+          "Number": 83,
+          "Item": "2000 Cash",
+          "Required": 14000
+        },
+        "84": {
+          "Number": 84,
+          "Item": "5 Drift Keys",
+          "Required": 15000
+        },
+        "85": {
+          "Number": 85,
+          "Item": "Flamingo Helmet",
+          "Required": 15500
+        },
+        "86": {
+          "Number": 86,
+          "Item": "1 Garage Spaces",
+          "Required": 15600
+        },
+        "87": {
+          "Number": 87,
+          "Item": "5 Drift Keys",
+          "Required": 15700
+        },
+        "88": {
+          "Number": 88,
+          "Item": "Drift Helmet",
+          "Required": 15800
+        },
+        "89": {
+          "Number": 89,
+          "Item": "5000 Cash",
+          "Required": 15900
+        },
+        "90": {
+          "Number": 90,
+          "Item": "25 Common Keys",
+          "Required": 16000
+        },
+        "91": {
+          "Number": 91,
+          "Item": "2500 Cash",
+          "Required": 16500
+        },
+        "92": {
+          "Number": 92,
+          "Item": "10 Drift Keys",
+          "Required": 17000
+        },
+        "93": {
+          "Number": 93,
+          "Item": "2 Barn Maps",
+          "Required": 17500
+        },
+        "94": {
+          "Number": 94,
+          "Item": "Cocktail Helmet",
+          "Required": 18000
+        },
+        "95": {
+          "Number": 95,
+          "Item": "10 Drift Keys",
+          "Required": 18500
+        },
+        "96": {
+          "Number": 96,
+          "Item": "2 Barn Maps",
+          "Required": 19000
+        },
+        "97": {
+          "Number": 97,
+          "Item": "20000 Cash",
+          "Required": 19500
+        },
+        "98": {
+          "Number": 98,
+          "Item": "10 Rare Keys",
+          "Required": 20000
+        },
+        "99": {
+          "Number": 99,
+          "Item": "Drift 2014 Lamborghini Huracan",
+          "Required": 25000
+        },
+        "100": {
+          "Number": 100,
+          "Item": "S1 Spring Badge",
           "Required": 30000
         }
       }

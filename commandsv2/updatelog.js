@@ -24,11 +24,11 @@ module.exports = {
             emoji: "⚙️",
           },
           {
-            label: "11/30/2022",
-            description: "Information for the recent winter season update!",
+            label: "3/1/2023",
+            description: "Information for the recent spring season update!",
             value: "4_update",
             customId: "up4",
-            emoji: "❄️",
+            emoji: "🌸",
           },
           {
             label: "1/22/2023",
@@ -98,16 +98,20 @@ module.exports = {
             embed.setTitle(`Winter Update`);
             embed
               .setDescription(
-                `• New season! The leaves fade away, here comes the snow! Get out your best off road vehicles and go at it! Make sure to view the season information in /events\n
-                • Another new season! Its an event! Go to the moon and race your car in low gravity environments, view /events for more!\n
-                • Dealership now has a new cars section\n
-                • The first garage exclusive car is here! Check the new cars in the dealership.\n
-                • New winter tires, can be found in wheelspins, and garages\n
-                • Gold can now be used to purchase notoriety and clear cooldowns\n
-                • Bug fixes
+                `• New season! The snow melts, and everyone starts drifting! Featuring a brand new season with never seen before rewards! Check /season for more information and use /drift to earn notoriety!\n
+                 • Drift mechanics revamp, no more drift stat, handling and weight matter the most in drifting! The more weight and the more handling, the better chance you have\n
+                 • Master drift difficulty with a badge for winning 20 times on it!\n
+                 • New parts, featuring drift spoilers, a new TXTurbo, and T5DriftTires!\n
+                 • New seasonal crate featuring new helmets, and drift spoilers\n
+                 • The drift crate returns with more drift cars than ever!\n
+                 • Referrals, make a code and give it to your friends who sign up so you both get $10K!\n
+                 • Profile backgrounds, make your profile look snazzy\n
+                 • /stats fixed, now shows the correct information for parts\n
+                 • View the new cars with /dealer\n
+                 • View cars in crates with the new list option in /unbox!
                 `
               )
-              .setFooter({ text: "11/30/2022" })
+              .setFooter({ text: "3/1/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

@@ -69,25 +69,16 @@ module.exports = {
       let pfp = interaction.options.getString("item");
       if (!pfp)
         return await interaction.reply(
-          "Specify a background! The available backgrounds are: Space, Flames, Police, Finish Line, Ocean, and Default"
+          "Specify a background! The available backgrounds are: Silver, Red, Police, Purple, Ocean, Drift, Cherry, and Default"
         );
       if (!bgdb[pfp.toLowerCase()])
         return await interaction.reply(
-          "Thats not a profile background! The available backgrounds are: Space, Flames, Police, Finish Line, Ocean, and Default"
+          "Thats not a profile background! The available backgrounds are: Silver, Red, Police, Purple, Ocean, Drift, Cherry, and Default"
         );
 
-      userdata.background = pfp;
-      let dailytask = userdata.dailytask;
-      if (
-        dailytask &&
-        !dailytask.completed &&
-        dailytask.task == "Change your profile background"
-      ) {
-        interaction.channel.send(`Task completed!`);
-        dailytask.completed = true;
-
-        userdata.cash += dailytask.reward;
-      }
+      userdata.pbackground = bgdb[pfp.toLowerCase()].Image;
+      
+        userdata.save()
       await interaction.reply(`Set your profile background to "${pfp}"`);
     } else if (option == "vbackground") {
       var bgs = [];

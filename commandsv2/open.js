@@ -22,7 +22,8 @@ module.exports = {
         .addChoices(
           { name: "Common Crate", value: "common crate" },
           { name: "Rare Crate", value: "rare crate" },
-          { name: "Prestige Crate", value: "prestige crate" }
+          { name: "Prestige Crate", value: "prestige crate" },
+          { name: "Seasonal Crate", value: "seasonal crate" }
         )
         .setRequired(true)
     ),
@@ -60,8 +61,7 @@ module.exports = {
       .setColor(`#60b0f4`);
 
     interaction.reply({ embeds: [embed] });
-    for (var c = 0; c < 1; c++)
-      inv.splice(inv.indexOf(bought.toLowerCase()), 1);
+    for (var s = 0; s < 1; s++) inv.splice(inv.indexOf(bought.toLowerCase()), 1);
     userdata.items = inv;
     userdata.update();
     cooldowndata.crate = Date.now();

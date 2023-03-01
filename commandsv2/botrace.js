@@ -149,6 +149,7 @@ module.exports = {
     let rpwon = parseInt(bot) * 2;
     let cashlost = parseInt(bot) * 20;
     let eventkeys = parseInt(bot) * 1;
+    
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
     } else if (bot == "2") {
@@ -369,10 +370,7 @@ module.exports = {
         earnings.push(`${emotes.rp} +${rpwon}`);
 
         let carinlocal = cardb.Cars[selected.Name.toLowerCase()];
-        if (carinlocal.Emote == emotes.mclaren) {
-          earnings.push(`${emotes.mclaren} +${eventkeys}`);
-          userdata.fkeys += eventkeys;
-        }
+  
         if (crateearned !== undefined) {
           userdata.items.push(crateearned);
           earnings.push(

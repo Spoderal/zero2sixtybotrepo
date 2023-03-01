@@ -132,7 +132,6 @@ module.exports = {
       let accelerationemote = emotes.zero2sixty;
       let carindb = selected;
       let sellprice = selected.Resale || 0;
-      let cardrift = selected.Drift || 0;
       let carweight =
         selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
 
@@ -169,11 +168,6 @@ module.exports = {
           {
             name: `Weight`,
             value: `${weightemote} ${carweight}`,
-            inline: true,
-          },
-          {
-            name: `Drift`,
-            value: `${handlingemote} ${cardrift}`,
             inline: true,
           },
           {
@@ -227,7 +221,7 @@ module.exports = {
           let intercooler = selected.Intercooler || "Stock Intercooler";
           let gearbox = selected.Gearbox || "Stock Gearbox";
           let brakes = selected.Brakes || "Stock Brakes";
-
+          let spoiler = selected.Spoiler || "No Spoiler";
           let partindb = partdb.Parts;
 
           let exhaustemote = partindb[exhaust.toLowerCase()]?.Emote || "🔵";
@@ -244,6 +238,8 @@ module.exports = {
             partindb[intercooler.toLowerCase()]?.Emote || "🔵";
           let gearboxemote = partindb[gearbox.toLowerCase()]?.Emote || "🔵";
           let brakesemote = partindb[brakes.toLowerCase()]?.Emote || "🔵";
+          let spoileremote = partindb[spoiler.toLowerCase()]?.Emote || "🔵";
+
 
           let embed = new Discord.EmbedBuilder()
             .setTitle(
@@ -310,6 +306,11 @@ module.exports = {
                 value: `${brakesemote} ${brakes.split(" ")[0]}`,
                 inline: true,
               },
+              {
+                name: `Spoiler`,
+                value: `${spoileremote} ${spoiler}`,
+                inline: true,
+              },
             ])
 
             .setColor(colors.blue)
@@ -342,11 +343,6 @@ module.exports = {
                 inline: true,
               },
               {
-                name: `Drift`,
-                value: `${handlingemote} ${cardrift}`,
-                inline: true,
-              },
-              {
                 name: `Sell Price`,
                 value: `${toCurrency(sellprice)}`,
                 inline: true,
@@ -369,23 +365,37 @@ module.exports = {
       if (!partindb) return await interaction.reply(`Thats not a part!`);
       let stats = [];
 
-      if (partindb.AddedSpeed) {
-        stats.push(`Speed: +${partindb.AddedSpeed}`);
+      if (partindb.AddedSpeed > 0) {
+        stats.push(`${emotes.speed} Speed: +${partindb.AddedSpeed}`);
       }
-      if (partindb.AddedDrift) {
-        stats.push(`Drift: +${partindb.AddedDrift}`);
+      if (partindb.DecreaseWeight> 0) {
+        stats.push(`${emotes.weight} Weight: -${partindb.DecreaseWeight}`);
       }
-      if (partindb.DecreasedDrift) {
-        stats.push(`Drift: -${partindb.DecreasedDrift}`);
+    
+      if (partindb.AddWeight> 0) {
+        stats.push(`${emotes.weight} Weight: +${partindb.AddWeight}`);
       }
-      if (partindb.AddHandling) {
-        stats.push(
-          `<:handling:983963211403505724> Handling: +${partindb.AddHandling}`
-        );
-      }
-      if (partindb.DecreaseHandling) {
+
+      if (partindb.DecreaseHandling> 0) {
         stats.push(
           `<:handling:983963211403505724> Handling: -${partindb.DecreaseHandling}`
+        );
+      }
+
+       if(partindb.AddedHandling> 0){
+        stats.push(
+          `<:handling:983963211403505724> Handling: +${partindb.AddedHandling}`
+        );
+      }
+
+         if(partindb.AddedSixty> 0){
+        stats.push(
+          `${emotes.zero2sixty} Acceleration: -${partindb.AddedSixty}`
+        );
+      }
+      if(partindb.DecreasedSixty > 0){
+        stats.push(
+          `${emotes.zero2sixty} Acceleration: +${partindb.DecreasedSixty}`
         );
       }
 

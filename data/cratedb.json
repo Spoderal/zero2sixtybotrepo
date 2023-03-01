@@ -6,6 +6,8 @@
         "red helmet",
         "blue helmet",
         "yellow helmet",
+        "dark matter helmet",
+        "cherry blossom helmet",
         "5000 Cash",
         "2500 Cash",
         "2500 Cash",
@@ -22,6 +24,8 @@
         "purple helmet",
         "rainbow helmet",
         "turqoise helmet",
+        "saturn helmet",
+        "trillionaire helmet",
         "10000 Cash",
         "10000 Cash",
         "10000 Cash",
@@ -51,6 +55,27 @@
       "Name": "Prestige Crate",
       "Emote": "<:supplydropprestige:1044404462581719041>",
       "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
+    },
+    "seasonal crate": {
+      "Contents": [
+        "100000 Cash",
+        "darkest helmet",
+        "evil helmet",
+        "abstract helmet",
+        "glitch helmet",
+        "10000 Cash",
+        "10000 Cash",
+        "10000 Cash",
+        "t3driftspoiler",
+        "t2driftspoiler",
+        "t1driftspoiler",
+        "t1driftspoiler",
+        "rave helmet",
+        "touch grass helmet"
+      ],
+      "Name": "Seasonal Crate",
+      "Emote": "<:crate_seasonal:1080285947733737483>",
+      "Image": "https://i.ibb.co/0nJBs61/crate-seasonal.png"
     }
   }
 }

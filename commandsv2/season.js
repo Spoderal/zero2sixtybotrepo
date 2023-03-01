@@ -10,41 +10,37 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
+const lodash = require('lodash')
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("season")
-    .setDescription("Check the winter season rewards page")
-    .addStringOption((option) =>
-      option
-        .setName("page")
-        .setDescription("View a page of the season")
-        .setRequired(false)
-    )
+    .setDescription("Check the spring season rewards page")
     .addStringOption((option) =>
       option
         .setName("event")
         .setDescription("View the season type")
-        .addChoices({ name: "Winter Season", value: "winter" })
+        .addChoices({ name: "Spring Season", value: "spring" })
         .setRequired(false)
     ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let seasonrewards = seasons.Seasons.Winter.Rewards;
+    let seasonrewards = seasons.Seasons.Spring.Rewards;
     let eventrewards = seasons.Seasons["Space Race"].Rewards;
     let reward = [];
-    let redeemed = userdata.winterrewards || 1;
+    let redeemed = userdata.springrewards || 1;
     let embed;
     let page = interaction.options.getString("page");
     let type = interaction.options.getString("event");
-    if (type == "winter" || !type) {
+    if (type == "spring" || !type) {
       for (var i in seasonrewards) {
         let item = seasonrewards[i];
+        let requirednot = item.Number * 100
         reward.push(
           `**${item.Number}** : ${item.Item} **Required : ${numberWithCommas(
-            item.Required
+            requirednot
           )} Notoriety**`
         );
       }
@@ -58,137 +54,54 @@ module.exports = {
       let itemrewards8 = reward.slice(70, 80);
       let itemrewards9 = reward.slice(80, 90);
       let itemrewards10 = reward.slice(90, 100);
+      let currentpage = [itemrewards1, itemrewards2, itemrewards3, itemrewards4, itemrewards5, itemrewards6, itemrewards7, itemrewards8, itemrewards9, itemrewards10]
+      let row9 = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("previous")
+          .setEmoji("◀️")
+          .setStyle("Secondary"),
+        new ButtonBuilder()
+          .setCustomId("next")
+          .setEmoji("▶️")
+          .setStyle("Secondary"),
+        new ButtonBuilder()
+          .setCustomId("first")
+          .setEmoji("⏮️")
+          .setStyle("Secondary"),
+        new ButtonBuilder()
+          .setCustomId("last")
+          .setEmoji("⏭️")
+          .setStyle("Secondary")
+      );
 
-      let seasonxp = userdata.noto5;
+      let seasonxp = userdata.noto6;
 
       if (!page || page == "1") {
         embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 1 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .addFields([{ name: "Rewards", value: `${itemrewards1.join("\n")}` }])
+          .setTitle("Spring Season Page 1 of 10")
+          .setDescription(`${itemrewards1.join("\n")}`)
           .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
+          .setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png")
           .setFooter(tipFooterSeasonPages);
-      } else if (page == "2") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 2 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards2.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "3") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 3 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards3.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "4") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 4 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards4.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "5") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 5 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards5.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "6") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 6 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards6.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "7") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 7 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards7.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "8") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 8 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards8.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "9") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 9 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([{ name: "Rewards", value: `${itemrewards9.join("\n")}` }])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      } else if (page == "10") {
-        embed = new discord.EmbedBuilder()
-          .setTitle("Winter Season Page 10 of 10")
-          .setDescription(
-            `*Ends Febuary 31st 2022*\nClaim rewards with the button below`
-          )
-          .setFooter({ text: `Your notoriety: ${seasonxp}` })
-          .addFields([
-            { name: "Rewards", value: `${itemrewards10.join("\n")}` },
-          ])
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png")
-          .setFooter(tipFooterSeasonPages);
-      }
+          
+      } 
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("claim")
-          .setLabel(`Claim Reward ${(redeemed += 1)}`)
+          .setLabel(`Claim Reward ${(redeemed)}`)
           .setStyle(`Success`)
       );
 
-      let notor = userdata.noto5;
-      redeemed = userdata.winterrewards || 1;
+      let notor = userdata.noto6;
+      redeemed = userdata.springrewards || 1;
       let rew = redeemed || 1;
-      let item = seasons.Seasons.Winter.Rewards[rew];
-      if (item.Required > notor) {
+      let item = seasons.Seasons.Spring.Rewards[rew];
+      let requirednot = item.Number * 100
+      if (requirednot > notor) {
         row.components[0].setStyle(`Danger`);
       }
 
-      let msg = await interaction.reply({ embeds: [embed], components: [row] });
+      let msg = await interaction.reply({ embeds: [embed], components: [row, row9] });
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
@@ -199,47 +112,54 @@ module.exports = {
 
       collector.on("collect", async (i) => {
         if (i.customId.includes("claim")) {
-          notor = userdata.noto5;
-          redeemed = userdata.winterrewards || 1;
+          notor = userdata.noto6;
+          redeemed = userdata.springrewards || 1;
           rew = redeemed || 1;
-          item = seasons.Seasons.Winter.Rewards[rew];
-          if (item.Required > notor) {
+          item = seasons.Seasons.Spring.Rewards[rew];
+           requirednot = item.Number * 100
+          if (requirednot > notor) {
             return i.update({
-              content: `You need ${item.Required} notoriety!`,
+              content: `You need ${requirednot} notoriety!`,
             });
           }
           if (item.Item.endsWith("Cash")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.cash += amount;
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (item.Item.endsWith("Rare Keys")) {
             let amount = Number(item.Item.split(" ")[0]);
             console.log(amount);
             userdata.rkeys += amount;
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (item.Item.endsWith("RP")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.rp += amount;
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (item.Item.endsWith("Exotic Keys")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.ekeys += amount;
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (item.Item.endsWith("Common Keys")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.ckeys += amount;
-            userdata.winterrewards += 1;
-          } else if (
+            userdata.springrewards += 1;
+          }
+          else if (item.Item.endsWith("Drift Keys")) {
+            let amount = Number(item.Item.split(" ")[0]);
+            userdata.dkeys += amount;
+            userdata.springrewards += 1;
+          }  
+          else if (
             item.Item.endsWith("Barn Map") ||
             item.Item.endsWith("Barn Maps")
           ) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.cmaps += amount;
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (item.Item.endsWith("Helmet")) {
             let helm = item.Item.toLowerCase();
             userdata.pfps.push(helm);
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (
             item.Item.endsWith("Legendary Barn Map") ||
             item.Item.endsWith("Legendary Barn Maps")
@@ -258,7 +178,7 @@ module.exports = {
               },
               {
                 $set: {
-                  winterrewards: (userdata.winterrewards += 1),
+                  springrewards: (userdata.springrewards += 1),
                 },
               }
             );
@@ -273,7 +193,7 @@ module.exports = {
             for (i in user1newpart) {
               userdata.parts.push("bank increase");
             }
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (
             item.Item.endsWith("Big Bank Increase") ||
             item.Item.endsWith("Big Bank Increases")
@@ -285,11 +205,11 @@ module.exports = {
             for (i in user1newpart) {
               userdata.parts.push("big bank increase");
             }
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (partdb.Parts[item.Item.toLowerCase()]) {
             console.log("part");
             userdata.parts.push(item.Item.toLowerCase());
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           } else if (cardb.Cars[item.Item.toLowerCase()]) {
             let carindb = cardb.Cars[item.Item.toLowerCase()];
             let carobj = {
@@ -304,21 +224,72 @@ module.exports = {
               Miles: 0,
             };
             userdata.cars.push(carobj);
-            userdata.winterrewards += 1;
+            userdata.springrewards += 1;
           }
-          userdata.noto5 -= item.Required;
+          else if (
+            item.Item == "S1 Spring Badge" || item.Item == "s1 spring badge"
+          ) {
+            userdata.achievements.push(
+              {
+                name: "S1 Spring Badge",
+                id:"s1 spring badge"
+              }
+            )
+          }
+          userdata.noto6 -= requirednot;
           userdata.save();
           console.log(item);
           row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
               .setCustomId("claim")
-              .setLabel(`Claim Reward ${(redeemed += 1)}`)
+              .setLabel(`Claim Reward ${(redeemed)}`)
               .setStyle(`Secondary`)
           );
 
-          i.update({ embeds: [embed], components: [row] });
+          i.update({ embeds: [embed], components: [row, row9] });
         }
+        else {
+      
+  
+            
+          let current = page;
+        if (i.customId.includes("previous") && page !== 1) {
+          embed.data.fields = null;
+
+          page--;
+        } else if (i.customId.includes("next") && page !== currentpage.length) {
+          embed.data.fields = null;
+
+          page++;
+        } else if (i.customId.includes("first")) {
+          embed.data.fields = null;
+
+          page = 1;
+        } else if (i.customId.includes("last")) {
+          embed.data.fields = null;
+
+          page = currentpage.length;
+        }
+        embed.setTitle(`Spring Season Page ${page} of 10`)
+        embed.setDescription(`${currentpage[page].join('\n')}`)
+
+        if (current !== page) {
+          embed.setFooter({ text: `Pages ${page}/${currentpage.length}` });
+          i.update({ embeds: [embed], fetchReply: true });
+        } else {
+          return i.update({ content: "No pages left!" });
+        }
+      }
+    });
+    if (userdata.tutorial && userdata.tutorial.stage == 1) {
+      console.log("tutorial");
+      interaction.channel.send({
+        content: `You can buy a car with /buy [car id], or the full name, the car id is listed next to \`ID:\`, an example would be /buy \`2002 mustang\``,
       });
+    }
+         
+        
+      
     }
   },
 };

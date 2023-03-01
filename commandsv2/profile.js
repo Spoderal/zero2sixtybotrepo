@@ -25,7 +25,7 @@ module.exports = {
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let helmet = userdata.helmet;
+    let helmet = userdata.helmet || "default"
     let title = userdata.title;
     let driftrank = userdata.driftrank;
     let racerank = userdata.racerank;
@@ -45,11 +45,11 @@ module.exports = {
 
     let cash = userdata.cash;
     finalprice += cash;
-
-    let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
+    let profileimage = userdata.pbackground || "https://i.ibb.co/HxX0Q2z/profilepage.png"
+    let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
-    const bg = await loadImage("https://i.ibb.co/LSzX4my/profile-ocean.png");
+    const bg = await loadImage(profileimage);
     const helmetimg = await loadImage(acthelmet);
     const pvpimg = await loadImage(pvpindb.icon);
     let showcased = userdata.showcase;
@@ -79,6 +79,15 @@ module.exports = {
     );
     let filteredachtime = achievements.filter(
       (ach) => ach.name == "Time Master" || ach.Name == "Time Master"
+    );
+    let filteredachspring = achievements.filter(
+      (ach) => ach.name == "Spring S1" || ach.Name == "Spring S1"
+    );
+    let filteredachfuse = achievements.filter(
+      (ach) => ach.name == "Fusion Master" || ach.Name == "Fusion Master"
+    );
+    let filteredachdrift = achievements.filter(
+      (ach) => ach.name == "Drift King" || ach.Name == "Drift King"
     );
 
     if (filteredachrich[0]) {
@@ -125,6 +134,28 @@ module.exports = {
       );
 
       ctx.drawImage(achimg, 295, 400, 60, 60);
+    }
+
+    if (filteredachfuse[0]) {
+      let achievement = filteredachfuse[0];
+      console.log(achievement);
+      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
+
+      ctx.drawImage(achimg, 355, 400, 60, 60);
+    }
+    if (filteredachdrift[0]) {
+      let achievement = filteredachdrift[0];
+      console.log(achievement);
+      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
+
+      ctx.drawImage(achimg, 420, 400, 60, 60);
+    }
+    if (filteredachspring[0]) {
+      let achievement = filteredachspring[0];
+      console.log(achievement);
+      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
+
+      ctx.drawImage(achimg, 35, 625, 60, 60);
     }
     ctx.drawImage(helmetimg, 35, 35, 250, 250);
     ctx.drawImage(pvpimg, 355, 185, 60, 60);

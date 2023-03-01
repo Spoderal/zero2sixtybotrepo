@@ -485,7 +485,7 @@ module.exports = {
             .addFields([
               {
                 name: `Price`,
-                value: `${emotes.cash} ${toCurrency(boughtPartPrice)}`,
+                value: `${emotes.cash} ${toCurrency(newprice)}`,
               },
               {
                 name: "New cash balance",
