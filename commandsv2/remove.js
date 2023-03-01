@@ -67,50 +67,50 @@ module.exports = {
 
     if (actpart == "All") {
       let carindb = cardb.Cars[selected.Name.toLowerCase()];
-      if(selected.Exhaust !== null){
-        userdata.parts.push(selected.Exhaust.toLowerCase())
+      if (selected.Exhaust !== null) {
+        userdata.parts.push(selected.Exhaust.toLowerCase());
       }
-      if(selected.Tires !== null){
-        userdata.parts.push(selected.Tires.toLowerCase())
+      if (selected.Tires !== null) {
+        userdata.parts.push(selected.Tires.toLowerCase());
       }
-      if(selected.Intake !== null){
-        userdata.parts.push(selected.Intake.toLowerCase())
+      if (selected.Intake !== null) {
+        userdata.parts.push(selected.Intake.toLowerCase());
       }
-      if(selected.Turbo !== null){
-        userdata.parts.push(selected.Turbo.toLowerCase())
+      if (selected.Turbo !== null) {
+        userdata.parts.push(selected.Turbo.toLowerCase());
       }
-      if(selected.Suspension !== null){
-        userdata.parts.push(selected.Suspension.toLowerCase())
+      if (selected.Suspension !== null) {
+        userdata.parts.push(selected.Suspension.toLowerCase());
       }
-      if(selected.Spoiler !== null){
-        userdata.parts.push(selected.Spoiler.toLowerCase())
+      if (selected.Spoiler !== null) {
+        userdata.parts.push(selected.Spoiler.toLowerCase());
       }
-      if(selected.Body !== null){
-        userdata.parts.push(selected.Body.toLowerCase())
+      if (selected.Body !== null) {
+        userdata.parts.push(selected.Body.toLowerCase());
       }
-         if(selected.ECU !== null){
-        userdata.parts.push(selected.ECU.toLowerCase())
+      if (selected.ECU !== null) {
+        userdata.parts.push(selected.ECU.toLowerCase());
       }
-      if(selected.Clutch !== null){
-        userdata.parts.push(selected.Clutch.toLowerCase())
+      if (selected.Clutch !== null) {
+        userdata.parts.push(selected.Clutch.toLowerCase());
       }
-      if(selected.Engine !== null){
-        userdata.parts.push(selected.Engine.toLowerCase())
+      if (selected.Engine !== null) {
+        userdata.parts.push(selected.Engine.toLowerCase());
       }
-      if(selected.Gearbox !== null){
-        userdata.parts.push(selected.Gearbox.toLowerCase())
+      if (selected.Gearbox !== null) {
+        userdata.parts.push(selected.Gearbox.toLowerCase());
       }
-      if(selected.Intercooler !== null){
-        userdata.parts.push(selected.Intercooler.toLowerCase())
+      if (selected.Intercooler !== null) {
+        userdata.parts.push(selected.Intercooler.toLowerCase());
       }
-      if(selected.Springs !== null){
-        userdata.parts.push(selected.Springs.toLowerCase())
+      if (selected.Springs !== null) {
+        userdata.parts.push(selected.Springs.toLowerCase());
       }
-      if(selected.Brakes !== null){
-        userdata.parts.push(selected.Brakes.toLowerCase())
+      if (selected.Brakes !== null) {
+        userdata.parts.push(selected.Brakes.toLowerCase());
       }
-      if(selected["Weight reduction"] !== null){
-        userdata.parts.push(selected["Weight reduction"].toLowerCase())
+      if (selected["Weight reduction"] !== null) {
+        userdata.parts.push(selected["Weight reduction"].toLowerCase());
       }
       selected.Exhaust = null;
       selected.Tires = null;
