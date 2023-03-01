@@ -89,7 +89,7 @@ module.exports = {
 
       if (!page || page == "1") {
         embed = new discord.EmbedBuilder()
-          .setTitle("Spring Season Page 1 of 10")
+          .setTitle("Spring Season Page 1 of 9")
           .setDescription(`${itemrewards1.join("\n")}`)
           .setColor(colors.blue)
           .setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png")
@@ -276,7 +276,7 @@ module.exports = {
           } else if (i.customId.includes("last")) {
             embed.data.fields = null;
 
-            page = currentpage.length;
+            page = 9;
           }
           embed.setTitle(`Spring Season Page ${page} of 10`);
           embed.setDescription(`${currentpage[page].join("\n")}`);
