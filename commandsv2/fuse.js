@@ -137,8 +137,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    }
-    else if (parttoinstall == "txturbo") {
+    } else if (parttoinstall == "txturbo") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -179,8 +178,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    }  
-    else if (parttoinstall == "txclutch") {
+    } else if (parttoinstall == "txclutch") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -245,12 +243,10 @@ module.exports = {
       } else if (parttoinstall == "dsuspension") {
         parte = "t4driftsuspension";
         partb = "t5driftsuspension";
-      }
-      else if (parttoinstall == "dtires") {
+      } else if (parttoinstall == "dtires") {
         parte = "t4drifttires";
         partb = "t5drifttires";
-      }  
-      else if (parttoinstall == "rsuspension") {
+      } else if (parttoinstall == "rsuspension") {
         parte = "t4racesuspension";
         partb = "t5racesuspension";
       } else if (parttoinstall == "intercooler") {

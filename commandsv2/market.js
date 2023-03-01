@@ -435,9 +435,11 @@ module.exports = {
       if (itemtobuy.type == "cars") {
         userdata.cars.push(itemtobuy.carobj);
       } else if (itemtobuy.type == "items") {
-        for (let i = 0; i < itemtobuy.amount; i++) userdata.items.push(itemtobuy.item);
+        for (let i = 0; i < itemtobuy.amount; i++)
+          userdata.items.push(itemtobuy.item);
       } else if (itemtobuy.type == "parts") {
-        for (let i = 0; i < itemtobuy.amount; i++) userdata.parts.push(itemtobuy.item);
+        for (let i = 0; i < itemtobuy.amount; i++)
+          userdata.parts.push(itemtobuy.item);
       } else if (itemtobuy.type == "currencies") {
         userdata[itemtobuy.nameindb] += parseInt(itemtobuy.amount);
       }

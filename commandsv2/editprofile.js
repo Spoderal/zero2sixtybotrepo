@@ -77,8 +77,8 @@ module.exports = {
         );
 
       userdata.pbackground = bgdb[pfp.toLowerCase()].Image;
-      
-        userdata.save()
+
+      userdata.save();
       await interaction.reply(`Set your profile background to "${pfp}"`);
     } else if (option == "vbackground") {
       var bgs = [];

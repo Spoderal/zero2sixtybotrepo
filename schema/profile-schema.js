@@ -266,10 +266,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  springrewards:{
+  springrewards: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   tier: {
     type: Number,
@@ -392,7 +392,7 @@ const Profile = new mongoose.Schema({
   code: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
   marketlimit: {
     type: Number,
@@ -403,7 +403,7 @@ const Profile = new mongoose.Schema({
     type: Number,
     required: false,
     default: 0,
-  }
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

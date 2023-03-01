@@ -10,7 +10,7 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
-const lodash = require('lodash')
+const lodash = require("lodash");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -37,7 +37,7 @@ module.exports = {
     if (type == "spring" || !type) {
       for (var i in seasonrewards) {
         let item = seasonrewards[i];
-        let requirednot = item.Number * 100
+        let requirednot = item.Number * 100;
         reward.push(
           `**${item.Number}** : ${item.Item} **Required : ${numberWithCommas(
             requirednot
@@ -54,7 +54,18 @@ module.exports = {
       let itemrewards8 = reward.slice(70, 80);
       let itemrewards9 = reward.slice(80, 90);
       let itemrewards10 = reward.slice(90, 100);
-      let currentpage = [itemrewards1, itemrewards2, itemrewards3, itemrewards4, itemrewards5, itemrewards6, itemrewards7, itemrewards8, itemrewards9, itemrewards10]
+      let currentpage = [
+        itemrewards1,
+        itemrewards2,
+        itemrewards3,
+        itemrewards4,
+        itemrewards5,
+        itemrewards6,
+        itemrewards7,
+        itemrewards8,
+        itemrewards9,
+        itemrewards10,
+      ];
       let row9 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("previous")
@@ -83,12 +94,11 @@ module.exports = {
           .setColor(colors.blue)
           .setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png")
           .setFooter(tipFooterSeasonPages);
-          
-      } 
+      }
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("claim")
-          .setLabel(`Claim Reward ${(redeemed)}`)
+          .setLabel(`Claim Reward ${redeemed}`)
           .setStyle(`Success`)
       );
 
@@ -96,12 +106,15 @@ module.exports = {
       redeemed = userdata.springrewards || 1;
       let rew = redeemed || 1;
       let item = seasons.Seasons.Spring.Rewards[rew];
-      let requirednot = item.Number * 100
+      let requirednot = item.Number * 100;
       if (requirednot > notor) {
         row.components[0].setStyle(`Danger`);
       }
 
-      let msg = await interaction.reply({ embeds: [embed], components: [row, row9] });
+      let msg = await interaction.reply({
+        embeds: [embed],
+        components: [row, row9],
+      });
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
@@ -116,7 +129,7 @@ module.exports = {
           redeemed = userdata.springrewards || 1;
           rew = redeemed || 1;
           item = seasons.Seasons.Spring.Rewards[rew];
-           requirednot = item.Number * 100
+          requirednot = item.Number * 100;
           if (requirednot > notor) {
             return i.update({
               content: `You need ${requirednot} notoriety!`,
@@ -143,13 +156,11 @@ module.exports = {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.ckeys += amount;
             userdata.springrewards += 1;
-          }
-          else if (item.Item.endsWith("Drift Keys")) {
+          } else if (item.Item.endsWith("Drift Keys")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.dkeys += amount;
             userdata.springrewards += 1;
-          }  
-          else if (
+          } else if (
             item.Item.endsWith("Barn Map") ||
             item.Item.endsWith("Barn Maps")
           ) {
@@ -225,16 +236,14 @@ module.exports = {
             };
             userdata.cars.push(carobj);
             userdata.springrewards += 1;
-          }
-          else if (
-            item.Item == "S1 Spring Badge" || item.Item == "s1 spring badge"
+          } else if (
+            item.Item == "S1 Spring Badge" ||
+            item.Item == "s1 spring badge"
           ) {
-            userdata.achievements.push(
-              {
-                name: "S1 Spring Badge",
-                id:"s1 spring badge"
-              }
-            )
+            userdata.achievements.push({
+              name: "S1 Spring Badge",
+              id: "s1 spring badge",
+            });
           }
           userdata.noto6 -= requirednot;
           userdata.save();
@@ -242,54 +251,50 @@ module.exports = {
           row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
               .setCustomId("claim")
-              .setLabel(`Claim Reward ${(redeemed)}`)
+              .setLabel(`Claim Reward ${redeemed}`)
               .setStyle(`Secondary`)
           );
 
           i.update({ embeds: [embed], components: [row, row9] });
-        }
-        else {
-      
-  
-            
-          let current = page;
-        if (i.customId.includes("previous") && page !== 1) {
-          embed.data.fields = null;
-
-          page--;
-        } else if (i.customId.includes("next") && page !== currentpage.length) {
-          embed.data.fields = null;
-
-          page++;
-        } else if (i.customId.includes("first")) {
-          embed.data.fields = null;
-
-          page = 1;
-        } else if (i.customId.includes("last")) {
-          embed.data.fields = null;
-
-          page = currentpage.length;
-        }
-        embed.setTitle(`Spring Season Page ${page} of 10`)
-        embed.setDescription(`${currentpage[page].join('\n')}`)
-
-        if (current !== page) {
-          embed.setFooter({ text: `Pages ${page}/${currentpage.length}` });
-          i.update({ embeds: [embed], fetchReply: true });
         } else {
-          return i.update({ content: "No pages left!" });
+          let current = page;
+          if (i.customId.includes("previous") && page !== 1) {
+            embed.data.fields = null;
+
+            page--;
+          } else if (
+            i.customId.includes("next") &&
+            page !== currentpage.length
+          ) {
+            embed.data.fields = null;
+
+            page++;
+          } else if (i.customId.includes("first")) {
+            embed.data.fields = null;
+
+            page = 1;
+          } else if (i.customId.includes("last")) {
+            embed.data.fields = null;
+
+            page = currentpage.length;
+          }
+          embed.setTitle(`Spring Season Page ${page} of 10`);
+          embed.setDescription(`${currentpage[page].join("\n")}`);
+
+          if (current !== page) {
+            embed.setFooter({ text: `Pages ${page}/${currentpage.length}` });
+            i.update({ embeds: [embed], fetchReply: true });
+          } else {
+            return i.update({ content: "No pages left!" });
+          }
         }
-      }
-    });
-    if (userdata.tutorial && userdata.tutorial.stage == 1) {
-      console.log("tutorial");
-      interaction.channel.send({
-        content: `You can buy a car with /buy [car id], or the full name, the car id is listed next to \`ID:\`, an example would be /buy \`2002 mustang\``,
       });
-    }
-         
-        
-      
+      if (userdata.tutorial && userdata.tutorial.stage == 1) {
+        console.log("tutorial");
+        interaction.channel.send({
+          content: `You can buy a car with /buy [car id], or the full name, the car id is listed next to \`ID:\`, an example would be /buy \`2002 mustang\``,
+        });
+      }
     }
   },
 };
