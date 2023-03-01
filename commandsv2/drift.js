@@ -162,7 +162,10 @@ module.exports = {
     momentum = momentum / time;
 
     let driftscore = momentum / velocity;
-    await interaction.reply({content:"Revving engines...", fetchReply: true});
+    await interaction.reply({
+      content: "Revving engines...",
+      fetchReply: true,
+    });
 
     let trackimg;
     let trackemote;
