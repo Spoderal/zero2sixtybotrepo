@@ -33,13 +33,6 @@ module.exports = {
             emoji: "🏁",
           },
           {
-            label: "McLaren Event",
-            description: "Information for the McLaren Event",
-            value: "mclaren_event",
-            customId: "mclaren",
-            emoji: "<:mclaren:931011546354692137>",
-          },
-          {
             label: "Stock Champions",
             description: "Information for the Stock Champions Event",
             value: "stock_event",
@@ -60,7 +53,6 @@ module.exports = {
           **__Events__**
           Winter Season 2022 ❄️\n
           Track Legends 🏁\n
-          McLaren Event <:mclaren:931011546354692137>
           Stock Champions 🎈
       `);
 
@@ -125,33 +117,6 @@ module.exports = {
             
                   `);
             embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "mclaren_event") {
-            embed.setTitle("McLaren Event");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Bring out your best McLaren, because its time to race with it!
-
-            Race for McLaren keys in \`/streetrace\`, and use them towards a McLaren import crate with \`/unbox\`
-
-            Get any of the following from the crate:
-            2020 McLaren Speedtail
-            1995 McLaren F1
-            2020 McLaren 570S
-            2021 McLaren 765LT
-            2017 McLaren 650S
-            2018 McLaren P1 GT
-
-            **Ends Febuary 28th 2023**
-            
-                  `);
-            embed.setThumbnail(
-              "https://www.topgear.com/sites/default/files/images/news-article/2018/07/06ba2b96a4ea4fa5d86b083bd8ab42ba/dsc03169.jpg"
-            );
             embed.setColor(colors.blue);
 
             await interaction.editReply({

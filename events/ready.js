@@ -83,7 +83,7 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `❄️ WINTER ❄️  /season`,
+      `🌸 SPRING 🌸  /season`,
       `⚙️ PATCH 2/20/2023`,
       "🪙 GOLD STARTS AT $0.99",
       "🛞 TRACK LEGENDS EVENT",
