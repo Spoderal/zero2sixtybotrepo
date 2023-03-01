@@ -23,7 +23,7 @@ module.exports = {
             description: "Information for the Spring Season Event",
             value: "spring_event",
             customId: "spring",
-            emoji: "❄️",
+            emoji: "🌸",
           },
           {
             label: "Track Legends",
