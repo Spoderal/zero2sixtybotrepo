@@ -47,7 +47,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             ⚙️ Latest Patch 2/20/2023\n
-            ❄️ Winter Update 11/30/2022\n
+            🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 1/22/2023
         `);
 
@@ -95,7 +95,7 @@ module.exports = {
           } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Winter Update`);
+            embed.setTitle(`Spring Update`);
             embed
               .setDescription(
                 `• New season! The snow melts, and everyone starts drifting! Featuring a brand new season with never seen before rewards! Check /season for more information and use /drift to earn notoriety!\n

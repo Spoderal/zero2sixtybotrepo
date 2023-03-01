@@ -19,10 +19,10 @@ module.exports = {
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Winter Season",
-            description: "Information for the Winter Season Event",
-            value: "winter_event",
-            customId: "winter",
+            label: "Spring Season",
+            description: "Information for the Spring Season Event",
+            value: "spring_event",
+            customId: "spring",
             emoji: "❄️",
           },
           {
@@ -51,7 +51,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Winter Season 2022 ❄️\n
+          Spring Season 2023 🌸\n
           Track Legends 🏁\n
           Stock Champions 🎈
       `);
@@ -72,25 +72,25 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-          if (value === "winter_event") {
-            embed.setTitle("Winter Season");
+          if (value === "spring_event") {
+            embed.setTitle("Spring Season");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Sometimes, too much speed is a bad thing.
+            embed.setDescription(`Welcome to the drifting season!
 
-            The snow has returned on Zero2Sixty!
+            The snow has melted in Zero2Sixty!
 
-            Make sure you max out your handling, but make sure your speed is low, because too much speed will make you spin out and lose!
+            Make sure you max out your handling and weight, drifting is revamped and master difficulty is the hardest drift you'll ever face!
             
-            Race bots for notoriety in /snowrace
+            Drift for notoriety in /drift
 
             Use notoriety to redeem rewards from /season
 
-            This winter will bring a lot of new things!
+            This spring will bring a lot of new things!
 
-            **Ends March 1st 2023**
+            **Ends May 31st 2023**
 
                   `);
-            embed.setThumbnail("https://i.ibb.co/F8jDWw2/winterseason.png");
+            embed.setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
