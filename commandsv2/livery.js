@@ -12,81 +12,93 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("livery")
     .setDescription("View, install, or submit a livery for your car")
-    .addSubcommand((cmd) => cmd
-    .setName("submit")
-    .setDescription("Submit a livery")
-    .addStringOption((option) => option
-    .setName("car")
-    .setDescription("The car you want to submit a livery for")
-    .setRequired(true)
+    .addSubcommand((cmd) =>
+      cmd
+        .setName("submit")
+        .setDescription("Submit a livery")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car you want to submit a livery for")
+            .setRequired(true)
+        )
+
+        .addStringOption((option) =>
+          option
+            .setName("liverylink")
+            .setDescription(
+              "The link to the image for the livery you want to submit"
+            )
+            .setRequired(true)
+        )
     )
- 
-  .addStringOption((option) =>
-  option
-    .setName("liverylink")
-    .setDescription("The link to the image for the livery you want to submit")
-    .setRequired(true)
-)
+    .addSubcommand((cmd) =>
+      cmd
+        .setName("view")
+        .setDescription("View a livery")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car you want to view a livery for")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("id")
+            .setDescription("The id of the livery you want to view")
+            .setRequired(true)
+        )
     )
-    .addSubcommand((cmd) => cmd
-    .setName("view")
-    .setDescription("View a livery")
-    .addStringOption((option) => option
-    .setName("car")
-    .setDescription("The car you want to view a livery for")
-    .setRequired(true)
-    ) 
-    .addStringOption((option) =>
-    option
-      .setName("id")
-      .setDescription("The id of the livery you want to view")
-      .setRequired(true)
-  )
+    .addSubcommand((cmd) =>
+      cmd
+        .setName("install")
+        .setDescription("Install a livery")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car you want to install a livery for")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("id")
+            .setDescription("The id of the livery you want to install")
+            .setRequired(true)
+        )
     )
-    .addSubcommand((cmd) => cmd
-    .setName("install")
-    .setDescription("Install a livery")
-    .addStringOption((option) => option
-    .setName("car")
-    .setDescription("The car you want to install a livery for")
-    .setRequired(true)
-    ) 
-    .addStringOption((option) =>
-    option
-      .setName("id")
-      .setDescription("The id of the livery you want to install")
-      .setRequired(true)
-  )
+    .addSubcommand((cmd) =>
+      cmd
+        .setName("approve")
+        .setDescription("Approve a livery (BOT SUPPORT ONLY)")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car you want to approve a livery for")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("id")
+            .setDescription("The id of the livery you want to approve")
+            .setRequired(true)
+        )
     )
-    .addSubcommand((cmd) => cmd
-    .setName("approve")
-    .setDescription("Approve a livery (BOT SUPPORT ONLY)")
-    .addStringOption((option) => option
-    .setName("car")
-    .setDescription("The car you want to approve a livery for")
-    .setRequired(true)
-    ) 
-    .addStringOption((option) =>
-    option
-      .setName("id")
-      .setDescription("The id of the livery you want to approve")
-      .setRequired(true)
-  )
-    )
-    .addSubcommand((cmd) => cmd
-    .setName("list")
-    .setDescription("List the available liveries for a car")
-    .addStringOption((option) => option
-    .setName("car")
-    .setDescription("The car you want to view liveries for")
-    .setRequired(true)
-    ) 
+    .addSubcommand((cmd) =>
+      cmd
+        .setName("list")
+        .setDescription("List the available liveries for a car")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car you want to view liveries for")
+            .setRequired(true)
+        )
     ),
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let subcommand = interaction.options.getSubcommand()
+    let subcommand = interaction.options.getSubcommand();
     if (subcommand == "install") {
       let idtoselect = interaction.options.getString("car");
       let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
@@ -101,20 +113,23 @@ module.exports = {
         return await interaction.reply({ embeds: [errembed] });
       }
       let livid = interaction.options.getString("id");
-      let global = await Global.findOne()
-      let liverieslist = global.liveries
-      let carindb = selected
-      let cardata = liverieslist.filter((car) => car.Name == carindb.Name.toLowerCase())
-      console.log(cardata)
+      let global = await Global.findOne();
+      let liverieslist = global.liveries;
+      let carindb = selected;
+      let cardata = liverieslist.filter(
+        (car) => car.Name == carindb.Name.toLowerCase()
+      );
+      console.log(cardata);
       if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
       if (!list[selected.Name.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
 
-      if (!liverieslist[0]) return await interaction.reply("This car doesn't have any livery id's");
+      if (!liverieslist[0])
+        return await interaction.reply("This car doesn't have any livery id's");
 
       let filtered = cardata.filter((e) => e.id == livid && e.approved == true);
-      console.log(filtered)
+      console.log(filtered);
       if (!filtered[0]) return await interaction.reply("Thats not a valid ID!");
       await User.findOneAndUpdate(
         {
@@ -143,14 +158,14 @@ module.exports = {
     } else if (subcommand == "view") {
       let car = interaction.options.getString("car").toLowerCase();
       let livid = interaction.options.getString("id");
-      let global = await Global.findOne()
-      let liverieslist = global.liveries
+      let global = await Global.findOne();
+      let liverieslist = global.liveries;
       if (!car) return await interaction.reply("Specify a car!");
       if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
       if (!list[car.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
-      let cardata = liverieslist.filter((car) => car.Name.toLowerCase() == car)
+      let cardata = liverieslist.filter((car) => car.Name.toLowerCase() == car);
 
       if (!cardata[0])
         return await interaction.reply("This car doesn't have any livery id's");
@@ -171,52 +186,48 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "submit") {
-      let global = await Global.findOne()
-      let liverieslist = global.liveries
+      let global = await Global.findOne();
+      let liverieslist = global.liveries;
       let cartosubmit = interaction.options.getString("car");
-      let liverylink = interaction.options.getString("liverylink")
+      let liverylink = interaction.options.getString("liverylink");
       if (!cartosubmit)
         return await interaction.reply("Usage: /livery submit (car)");
       let list = cars.Cars;
 
       if (!list[cartosubmit.toLowerCase()])
-        return await interaction.reply(
-          "That isnt an available car yet!"
-        );
-      let cardata = liverieslist.filter((car) => car.Name.toLowerCase() == cartosubmit.toLowerCase()) || []
+        return await interaction.reply("That isnt an available car yet!");
+      let cardata =
+        liverieslist.filter(
+          (car) => car.Name.toLowerCase() == cartosubmit.toLowerCase()
+        ) || [];
 
-          console.log(cardata)
+      console.log(cardata);
 
-       
+      let livobj = {
+        image: liverylink,
+        id: (cardata.length += 1),
+        user: interaction.user.id,
+        approved: false,
+        Name: cartosubmit,
+      };
 
-   
+      liverieslist.push(livobj);
 
-          let livobj = {
-            image: liverylink,
-            id: (cardata.length += 1),
-            user: interaction.user.id,
-            approved: false,
-            Name: cartosubmit
-          };
+      global.save();
 
-          liverieslist.push(livobj);
+      let embed = new Discord.EmbedBuilder()
+        .setImage(liverylink)
+        .setDescription("Submitted for review!")
+        .addFields([
+          { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
+          { name: "ID", value: `${livobj.id}` },
+        ])
+        .setColor(colors.blue);
+      interaction.reply({ embeds: [embed] });
+      let submitchannel =
+        interaction.client.channels.cache.get("931078225021521920");
 
-          global.save();
-
-          let embed = new Discord.EmbedBuilder()
-            .setImage(liverylink)
-            .setDescription("Submitted for review!")
-            .addFields([
-              { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
-              { name: "ID", value: `${livobj.id}` },
-            ])
-            .setColor(colors.blue);
-          interaction.reply({ embeds: [embed] });
-          let submitchannel =
-            interaction.client.channels.cache.get("931078225021521920");
-
-          submitchannel.send({ embeds: [embed] });
-        
+      submitchannel.send({ embeds: [embed] });
     } else if (subcommand == "approve") {
       let whitelist = [
         "275419902381260802",
@@ -236,8 +247,8 @@ module.exports = {
           content: `You don't have permission to use this command!`,
           ephemeral: true,
         });
-        let global = await Global.findOne()
-        let liverieslist = global.liveries
+      let global = await Global.findOne();
+      let liverieslist = global.liveries;
       let idtoapprove = interaction.options.getString("id");
       let cartoapprove = interaction.options.getString("car");
       if (!idtoapprove) return await interaction.reply("Specify an id!");
@@ -245,25 +256,31 @@ module.exports = {
       let list = cars.Cars;
       if (!list[cartoapprove.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
-      let cardata = liverieslist.filter((car) => car.Name.toLowerCase() == cartoapprove.toLowerCase())
-      console.log(cardata)
-      let idfiltered = cardata.filter((id) => id.id == idtoapprove)
+      let cardata = liverieslist.filter(
+        (car) => car.Name.toLowerCase() == cartoapprove.toLowerCase()
+      );
+      console.log(cardata);
+      let idfiltered = cardata.filter((id) => id.id == idtoapprove);
 
-      if (idfiltered && idfiltered.approved == true) return await interaction.reply("This car livery is already approved or this ID doesn't exist");
+      if (idfiltered && idfiltered.approved == true)
+        return await interaction.reply(
+          "This car livery is already approved or this ID doesn't exist"
+        );
 
-      console.log(idfiltered)
+      console.log(idfiltered);
 
-      if (idfiltered.length == 0) return await interaction.reply("Thats not a valid ID!");
+      if (idfiltered.length == 0)
+        return await interaction.reply("Thats not a valid ID!");
       let livobj2 = {
         image: idfiltered[0].image,
         id: idfiltered[0].id,
         user: idfiltered[0].user,
         approved: true,
-        Name: idfiltered[0].Name
+        Name: idfiltered[0].Name,
       };
 
-      global.liveries.pull(idfiltered[0])
-      global.liveries.push(livobj2)
+      global.liveries.pull(idfiltered[0]);
+      global.liveries.push(livobj2);
       global.save();
       let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Approved ${idtoapprove}`)

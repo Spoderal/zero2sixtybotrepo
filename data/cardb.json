@@ -1013,7 +1013,7 @@
       "sellprice": 10000,
       "Engine": "SOHC KA24E",
       "Bodykit": "https://i0.wp.com/ideal.media/wp-content/uploads/2021/02/nissan-240sx-drift-build.jpg?fit=1280%2C720&ssl=1",
-      "Image":"https://i.ibb.co/TvW0hCV/card-240sx.png",
+      "Image": "https://i.ibb.co/TvW0hCV/card-240sx.png",
       "0-60": 13,
       "Drift": 2,
       "Handling": 700,
@@ -1080,7 +1080,7 @@
       "Class": "D",
       "Weight": 4100
     },
-    
+
     "sil-eighty": {
       "alias": "sil-eighty",
       "Name": "Sil-Eighty",
@@ -1958,7 +1958,7 @@
       "Class": "S",
       "Weight": 4500
     },
-    
+
     "2008 bugatti veyron": {
       "alias": "2008 veyron",
       "Name": "2008 Bugatti Veyron",

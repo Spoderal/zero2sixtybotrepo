@@ -148,16 +148,16 @@ const Global = new mongoose.Schema({
       },
     },
   },
-  liveries:{
+  liveries: {
     type: Array,
     required: false,
     default: [],
   },
-  referrals:{
+  referrals: {
     type: Array,
     required: false,
     default: [],
-  }
+  },
 });
 
 module.exports = mongoose.model("global", Global);

@@ -240,7 +240,6 @@ module.exports = {
           let brakesemote = partindb[brakes.toLowerCase()]?.Emote || "🔵";
           let spoileremote = partindb[spoiler.toLowerCase()]?.Emote || "🔵";
 
-
           let embed = new Discord.EmbedBuilder()
             .setTitle(
               `Parts for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
@@ -368,32 +367,32 @@ module.exports = {
       if (partindb.AddedSpeed > 0) {
         stats.push(`${emotes.speed} Speed: +${partindb.AddedSpeed}`);
       }
-      if (partindb.DecreaseWeight> 0) {
+      if (partindb.DecreaseWeight > 0) {
         stats.push(`${emotes.weight} Weight: -${partindb.DecreaseWeight}`);
       }
-    
-      if (partindb.AddWeight> 0) {
+
+      if (partindb.AddWeight > 0) {
         stats.push(`${emotes.weight} Weight: +${partindb.AddWeight}`);
       }
 
-      if (partindb.DecreaseHandling> 0) {
+      if (partindb.DecreaseHandling > 0) {
         stats.push(
           `<:handling:983963211403505724> Handling: -${partindb.DecreaseHandling}`
         );
       }
 
-       if(partindb.AddedHandling> 0){
+      if (partindb.AddedHandling > 0) {
         stats.push(
           `<:handling:983963211403505724> Handling: +${partindb.AddedHandling}`
         );
       }
 
-         if(partindb.AddedSixty> 0){
+      if (partindb.AddedSixty > 0) {
         stats.push(
           `${emotes.zero2sixty} Acceleration: -${partindb.AddedSixty}`
         );
       }
-      if(partindb.DecreasedSixty > 0){
+      if (partindb.DecreasedSixty > 0) {
         stats.push(
           `${emotes.zero2sixty} Acceleration: +${partindb.DecreasedSixty}`
         );

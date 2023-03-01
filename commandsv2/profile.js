@@ -25,7 +25,7 @@ module.exports = {
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let helmet = userdata.helmet || "default"
+    let helmet = userdata.helmet || "default";
     let title = userdata.title;
     let driftrank = userdata.driftrank;
     let racerank = userdata.racerank;
@@ -45,8 +45,9 @@ module.exports = {
 
     let cash = userdata.cash;
     finalprice += cash;
-    let profileimage = userdata.pbackground || "https://i.ibb.co/HxX0Q2z/profilepage.png"
-    let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image
+    let profileimage =
+      userdata.pbackground || "https://i.ibb.co/HxX0Q2z/profilepage.png";
+    let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage(profileimage);
@@ -139,21 +140,27 @@ module.exports = {
     if (filteredachfuse[0]) {
       let achievement = filteredachfuse[0];
       console.log(achievement);
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
 
       ctx.drawImage(achimg, 355, 400, 60, 60);
     }
     if (filteredachdrift[0]) {
       let achievement = filteredachdrift[0];
       console.log(achievement);
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
 
       ctx.drawImage(achimg, 420, 400, 60, 60);
     }
     if (filteredachspring[0]) {
       let achievement = filteredachspring[0];
       console.log(achievement);
-      let achimg = await loadImage(achievementsdb.Achievements[achievement.name.toLowerCase()].Image);
+      let achimg = await loadImage(
+        achievementsdb.Achievements[achievement.name.toLowerCase()].Image
+      );
 
       ctx.drawImage(achimg, 35, 625, 60, 60);
     }

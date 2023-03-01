@@ -1062,8 +1062,8 @@
       "DecreasedSixty": 0.5,
       "Type": "tires",
       "Image": "https://i.ibb.co/SyGFb0c/t1dtires.png",
-      "AddedHandling":10,
-      "AddHandling":10
+      "AddedHandling": 10,
+      "AddHandling": 10
     },
     "t2drifttires": {
       "Name": "T2DriftTires",
@@ -1083,8 +1083,8 @@
       "DecreasedSpeed": 5,
       "DecreaseSpeed": 5,
       "Image": "https://i.ibb.co/2FHgqCd/t2dtires.png",
-      "AddedHandling":20,
-      "AddHandling":20
+      "AddedHandling": 20,
+      "AddHandling": 20
     },
     "t3drifttires": {
       "Name": "T3DriftTires",
@@ -1103,8 +1103,8 @@
       "Type": "tires",
       "DecreasedSpeed": 5,
       "Image": "https://i.ibb.co/12Dc8KQ/t3dtires.png",
-      "AddedHandling":30,
-      "AddHandling":30
+      "AddedHandling": 30,
+      "AddHandling": 30
     },
     "t4drifttires": {
       "Name": "T4DriftTires",
@@ -1122,9 +1122,9 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": 2,
-      "AddedHandling":40,
-      "AddHandling":40,
-      "Image":"https://i.ibb.co/hZdMFK5/t4dtires.png"
+      "AddedHandling": 40,
+      "AddHandling": 40,
+      "Image": "https://i.ibb.co/hZdMFK5/t4dtires.png"
     },
     "t5drifttires": {
       "Name": "T5DriftTires",
@@ -1142,9 +1142,9 @@
       "DecreasedSixty": "0",
       "Type": "tires",
       "DecreasedSpeed": 2,
-      "AddedHandling":50,
-      "AddHandling":50,
-      "Image":"https://i.ibb.co/8DG2rzf/t5dtires.png"
+      "AddedHandling": 50,
+      "AddHandling": 50,
+      "Image": "https://i.ibb.co/8DG2rzf/t5dtires.png"
     },
     "t1driftspoiler": {
       "Name": "T1DriftSpoiler",
@@ -1161,9 +1161,9 @@
       "DecreasedSixty": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling":100,
-      "AddHandling":100,
-      "Image":"https://i.ibb.co/SQm6cs0/t1ducktail.png"
+      "AddedHandling": 100,
+      "AddHandling": 100,
+      "Image": "https://i.ibb.co/SQm6cs0/t1ducktail.png"
     },
     "t2driftspoiler": {
       "Name": "T2DriftSpoiler",
@@ -1180,9 +1180,9 @@
       "DecreasedSixty": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling":100,
-      "AddHandling":100,
-      "Image":"https://i.ibb.co/1JvyK0V/t1dspoiler.png"
+      "AddedHandling": 100,
+      "AddHandling": 100,
+      "Image": "https://i.ibb.co/1JvyK0V/t1dspoiler.png"
     },
     "t3driftspoiler": {
       "Name": "T3DriftSpoiler",
@@ -1199,9 +1199,9 @@
       "DecreasedSixty": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling":100,
-      "AddHandling":100,
-      "Image":"https://i.ibb.co/PzpqNLj/t3dspoiler.png"
+      "AddedHandling": 100,
+      "AddHandling": 100,
+      "Image": "https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },
     "bm1drifttires": {
       "Name": "BM1DriftTires",
@@ -1681,7 +1681,7 @@
       "Color": "#00ae00",
       "Image": "https://i.ibb.co/47FdHB5/t5intake.png"
     },
- 
+
     "wintertires": {
       "Name": "WinterTires",
       "AddedSixty": "0",

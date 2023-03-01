@@ -29,16 +29,15 @@ module.exports = {
 
         // Command
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
-        
+
         await command.execute(interaction);
 
         // Pets
         const petExecutionTimeName = "Pet update time";
-        
+
         await updatePetOnCommands(interaction);
         await updateCrew(interaction);
         await dailyCheck(interaction);
-        
       }
     } catch (error) {
       if (error) {

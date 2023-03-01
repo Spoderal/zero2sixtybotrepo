@@ -116,7 +116,9 @@ module.exports = {
       console.log(attachment);
 
       let mph = selected.Speed;
-      let weight = selected.WeightStatStat ||  cardb.Cars[selected.Name.toLowerCase()].Weight;
+      let weight =
+        selected.WeightStatStat ||
+        cardb.Cars[selected.Name.toLowerCase()].Weight;
       let acceleration = selected.Acceleration;
       let handling = selected.Handling;
 
