@@ -28,11 +28,12 @@ module.exports = {
     let carclassSarr = [];
     let carclassParr = [];
     let newcars = [
-      cars.Cars["drift 1993 nissan silvia s13"],
+      cars.Cars["drift 1989 nissan silvia s13"],
       cars.Cars["drift 1990 nissan 240sx"],
       cars.Cars["drift 1993 bmw m3 e30"],
       cars.Cars["drift 2008 nissan 350z"],
       cars.Cars["drift 2001 lexus is300"],
+      cars.Cars["drift 1989 nissan skyline r32"],
       cars.Cars["drift 2014 lamborghini huracan"],
       cars.Cars["2015 koenigsegg one:1"],
       cars.Cars["2001 lexus is300"],

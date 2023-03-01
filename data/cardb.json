@@ -1031,6 +1031,7 @@
       "Image": "https://i.ibb.co/hZz3R68/card-s13.png",
       "0-60": 11.9,
       "Drift": 4,
+      "Obtained": "Drift Imports",
       "Handling": 750,
       "Class": "D",
       "Weight": 3200
@@ -1047,6 +1048,7 @@
       "0-60": 11.9,
       "Drift": 4,
       "Handling": 760,
+      "Obtained": "Drift Imports",
       "Class": "D",
       "Weight": 3100
     },
@@ -1062,6 +1064,7 @@
       "0-60": 12,
       "Drift": 4,
       "Handling": 780,
+      "Obtained": "Drift Imports",
       "Class": "D",
       "Weight": 3600
     },
@@ -1075,6 +1078,7 @@
       "Engine": "1.8 L CA18DE I4",
       "Image": "https://i.ibb.co/xqn57NB/card-huracandrift.png",
       "0-60": 7.7,
+      "Obtained": "Season",
       "Drift": 4,
       "Handling": 3000,
       "Class": "D",
@@ -1231,6 +1235,7 @@
       "0-60": 11,
       "Drift": 4,
       "Handling": 800,
+      "Obtained": "Drift Imports",
       "Class": "D",
       "Weight": 3600
     },
