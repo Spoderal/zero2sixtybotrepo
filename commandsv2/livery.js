@@ -155,7 +155,6 @@ module.exports = {
       if (!cardata[0])
         return await interaction.reply("This car doesn't have any livery id's");
 
-
       let filtered = cardata.filter((e) => e.id == livid);
 
       if (
