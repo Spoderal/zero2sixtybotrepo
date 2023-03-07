@@ -892,7 +892,7 @@
         },
         "27": {
           "Number": 27,
-          "Item": "T4DriftSuspension ",
+          "Item": "T4DriftSuspension",
           "Required": 3200
         },
         "28": {
@@ -1122,7 +1122,7 @@
         },
         "73": {
           "Number": 73,
-          "Item": "T3DriftSuspension ",
+          "Item": "T3DriftSuspension",
           "Required": 2600
         },
         "74": {
