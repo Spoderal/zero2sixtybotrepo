@@ -138,7 +138,7 @@ module.exports = {
     }
     let bot = interaction.options.getString("tier");
     await interaction.reply("Revving engines...");
-    setTimeout(() => {
+    setTimeout(async () => {
       
 
     let weather2 = lodash.sample(weather);
