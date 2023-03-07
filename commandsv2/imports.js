@@ -26,7 +26,6 @@ module.exports = {
             Exotic Import Crate : 20 ${key3emote} Keys
             McLaren Import Crate : 100 ${key4emote} **LIMITED**
             Drift Import Crate : 100 ${emotes.dirftKey} **LIMITED**
-            Blueprint Import Crate : 50 ${emotes.blueprints}
           `,
         },
       ])
