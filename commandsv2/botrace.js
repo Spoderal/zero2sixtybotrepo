@@ -135,7 +135,6 @@ module.exports = {
           `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
         );
       return await interaction.reply({ embeds: [errembed] });
-      
     }
     let bot = interaction.options.getString("tier");
     await interaction.deferReply();
