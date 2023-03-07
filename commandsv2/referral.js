@@ -16,10 +16,9 @@ module.exports = {
         .setDescription("Create a referral code")
         .addStringOption((option) =>
           option
-          .setName("code")
-          .setDescription("The code name you want")
-          .setRequired(true)
-          
+            .setName("code")
+            .setDescription("The code name you want")
+            .setRequired(true)
         )
     )
     .addSubcommand((cmd) =>
