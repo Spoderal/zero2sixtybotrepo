@@ -269,8 +269,7 @@ module.exports = {
 
       console.log(idfiltered);
 
-      if (idfiltered.length == 0)
-        return await interaction.reply("Thats not a valid ID!");
+      if (idfiltered.length == 0) return await interaction.reply("Thats not a valid ID!");
       let livobj2 = {
         image: idfiltered[0].image,
         id: idfiltered[0].id,

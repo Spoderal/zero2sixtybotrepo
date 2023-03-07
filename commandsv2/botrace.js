@@ -138,6 +138,9 @@ module.exports = {
     }
     let bot = interaction.options.getString("tier");
     await interaction.reply("Revving engines...");
+    setTimeout(() => {
+      
+
     let weather2 = lodash.sample(weather);
     console.log(weather2);
     let car2;
@@ -407,6 +410,7 @@ module.exports = {
       console.log(`track length ${tracklength}`);
       console.log(`track length 2 ${tracklength2}`);
     }, 1000);
+  }, 3000);
   },
 };
 
