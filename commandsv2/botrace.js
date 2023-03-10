@@ -105,8 +105,8 @@ module.exports = {
     ),
   async execute(interaction) {
     let user = interaction.user;
-    let tracklength = 600;
-    let tracklength2 = 600;
+    let tracklength = 0;
+    let tracklength2 = 0;
 
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -139,7 +139,7 @@ module.exports = {
     let bot = interaction.options.getString("tier");
     await interaction.deferReply();
     await interaction.editReply("Revving engines...");
-    setTimeout(async () => {
+  
       let weather2 = lodash.sample(weather);
       console.log(weather2);
       let car2;
@@ -151,6 +151,14 @@ module.exports = {
       let rpwon = parseInt(bot) * 2;
       let cashlost = parseInt(bot) * 20;
       let eventkeys = parseInt(bot) * 1;
+
+      const { time } = require('discord.js');
+let date = new Date();
+date.setSeconds(date.getSeconds() + 10);
+
+const relative = time(date, 'R');
+
+
 
       if (bot == "1") {
         car2 = cardb.Cars[lodash.sample(bot1cars)];
@@ -276,20 +284,7 @@ module.exports = {
       let speed = 0;
       let speed2 = 0;
 
-      let x = setInterval(() => {
-        if (speed < mph) {
-          speed++;
-        } else {
-          clearInterval(x);
-        }
-      }, 30);
-      let x2 = setInterval(() => {
-        if (speed2 < mph2) {
-          speed2++;
-        } else {
-          clearInterval(x2);
-        }
-      }, 30);
+  
       let sec;
       let sec2;
       handling = Math.floor(handling);
@@ -298,7 +293,7 @@ module.exports = {
 
       let embed = new EmbedBuilder()
         .setTitle(`Racing Tier ${bot} Street Race ${weather2.Emote}`)
-
+        .setDescription(`Race estimated to end in ${relative}`)
         .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
         .addFields(
           {
@@ -322,9 +317,24 @@ module.exports = {
         files: [attachment],
         fetchReply: true,
       });
-
+      let x = setInterval(() => {
+        if (speed < mph) {
+          speed++;
+        } else {
+          clearInterval(x);
+        }
+      }, 30);
+      let x2 = setInterval(() => {
+        if (speed2 < mph2) {
+          speed2++;
+        } else {
+          clearInterval(x2);
+        }
+      }, 30);
+      let timer = 0
       let i2 = setInterval(async () => {
-        console.log(speed);
+        timer++
+        console.log(timer);
         let calc = handling * (speed / 50);
         calc = calc / acceleration;
         sec = (6.3 * (weight / calc)) / acceleration;
@@ -340,10 +350,10 @@ module.exports = {
 
         calc2 = calc2 / sec2;
         console.log(`calc2: ${calc2}`);
-        tracklength -= calc;
-        tracklength2 -= calc2;
+        tracklength += calc;
+        tracklength2 += calc2;
 
-        if (tracklength <= 0) {
+        if (tracklength > tracklength2 && timer == 10) {
           ctx.save();
           roundedImage(ctx, 640, 200, 640, 360, 20);
           ctx.stroke();
@@ -390,11 +400,21 @@ module.exports = {
           embed.setImage(`attachment://profile-image.png`);
 
           await interaction.editReply({ embeds: [embed], files: [attachment] });
+
+          if (userdata.tutorial && userdata.tutorial.stage == 2) {
+            userdata.parts.push("t1exhaust")
+            interaction.channel.send(`You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`)
+            interaction.channel.send("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif")
+            userdata.tutorial.stage += 1
+            userdata.markModified("tutorial")
+
+          }
           clearInterval(i2);
           userdata.save();
+          
         }
         // lost
-        else if (tracklength2 <= 0) {
+        else if (tracklength2 > tracklength && timer == 10) {
           ctx.drawImage(cupimg, 960, 50, 100, 100);
           attachment = new AttachmentBuilder(await canvas.toBuffer(), {
             name: "profile-image.png",
@@ -403,7 +423,15 @@ module.exports = {
           userdata.cash += cashlost;
           embed.setTitle(`Tier ${bot} Street Race lost! ${weather2.Emote}`);
           embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
+          
           await interaction.editReply({ embeds: [embed], files: [attachment] });
+          if (userdata.tutorial && userdata.tutorial.stage == 2) {
+            userdata.parts.push("t1exhaust")
+            interaction.channel.send(`You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`)
+            interaction.channel.send("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif")
+            userdata.tutorial.stage += 1
+            userdata.markModified("tutorial")
+          }
           clearInterval(i2);
           userdata.save();
         }
@@ -411,7 +439,6 @@ module.exports = {
         console.log(`track length ${tracklength}`);
         console.log(`track length 2 ${tracklength2}`);
       }, 1000);
-    }, 3000);
   },
 };
 

@@ -44,45 +44,7 @@ module.exports = {
 
     userdata.markModified("settings");
 
-    let house = userdata.house;
-    if (house && house.perks.includes("Daily $300")) {
-      dcash += 300;
-    }
-    if (house && house.perks.includes("Daily $500")) {
-      dcash += 500;
-    }
-    if (house && house.perks.includes("Daily $1000")) {
-      dcash += 1000;
-    }
-    if (house && house.perks.includes("Daily $1500")) {
-      dcash += 1500;
-    }
-    if (patreon && patreon.tier == 1) {
-      dcash *= 2;
-    }
-    if (patreon && patreon.tier == 2) {
-      dcash *= 3;
-    }
-    if (patreon && patreon.tier == 3) {
-      dcash *= 5;
-    }
-    if (patreon && patreon.tier == 4) {
-      dcash *= 5;
-    }
-    let filteredhouse = userdata.houses.filter(
-      (house) => house.Name == "Albergo Delle Meraviglie"
-    );
-    let filteredhouse2 = userdata.houses.filter(
-      (house) => house.Name == "Cabina Accogliente"
-    );
-    if (userdata.houses && filteredhouse[0]) {
-      userdata.swheelspins += 1;
-      interaction.channel.send("+1 Super Wheelspin");
-    }
-    if (userdata.houses && filteredhouse2[0]) {
-      userdata.lmaps += 1;
-      interaction.channel.send("+1 Legendary Barn Map");
-    }
+
 
     if (interaction.guild.id == "931004190149460048") {
       dcash += 500;
@@ -102,6 +64,7 @@ module.exports = {
       dcash = dcash += multy;
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
+      
       let time = ms(timeout - (Date.now() - daily));
       let timeEmbed = new Discord.EmbedBuilder()
         .setColor(colors.blue)
@@ -110,6 +73,49 @@ module.exports = {
         );
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     } else {
+      let house = userdata.house;
+      if (house && house.perks.includes("Daily $300")) {
+        dcash += 300;
+      }
+      if (house && house.perks.includes("Daily $500")) {
+        dcash += 500;
+      }
+      if (house && house.perks.includes("Daily $1000")) {
+        dcash += 1000;
+      }
+      if (house && house.perks.includes("Daily $1500")) {
+        dcash += 1500;
+      }
+      if (patreon && patreon.tier == 1) {
+        dcash *= 2;
+      }
+      if (patreon && patreon.tier == 2) {
+        dcash *= 3;
+      }
+      if (patreon && patreon.tier == 3) {
+        dcash *= 5;
+      }
+      if (patreon && patreon.tier == 4) {
+        dcash *= 5;
+      }
+      let filteredhouse = userdata.houses.filter(
+        (house) => house.Name == "Albergo Delle Meraviglie"
+      );
+      let filteredhouse2 = userdata.houses.filter(
+        (house) => house.Name == "Cabina Accogliente"
+      );
+      if (userdata.houses && filteredhouse[0]) {
+        userdata.swheelspins += 1;
+        interaction.channel.send("+1 Super Wheelspin");
+      }
+      if (userdata.houses && filteredhouse2[0]) {
+        userdata.lmaps += 1;
+        interaction.channel.send("+1 Legendary Barn Map");
+      }
+      let dailystre = streak
+      if(streak > 1){
+        dcash = dcash * (dailystre -= 0.5)
+      }
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
       cooldowndata.lastDaily = Date.now();
@@ -119,6 +125,9 @@ module.exports = {
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Daily Cash ${interaction.user.username}`)
         .addFields([{ name: "Earned Cash", value: `${toCurrency(dcash)}` }]);
+        if(streak > 1){
+          embed.addFields([{ name: "Streak", value: `${streak += 1}` }]);
+        }
       embed.setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });

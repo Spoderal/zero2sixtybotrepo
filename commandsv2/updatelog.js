@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "2/20/2023",
+            label: "3/10/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -46,7 +46,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 2/20/2023\n
+            ⚙️ Latest Patch 3/10/2023\n
             🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 1/22/2023
         `);
@@ -73,18 +73,16 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• New blueprints feature, get blueprints from fusing parts together (random drop)! Use blueprints with /blueprint and pick from 3 exclusive rewards that rotate every month!\n
-                • Visual updates to emojis, and the profile command\n
-                • New Car card designs are gonna be seen for **SOME** cars, most cars don't have this feature yet.\n
-                • Weather!\n
-                • Prestige requirements lowered to next prestige * 50 instead of * 100\n
-                • Stock Championship event to celebrate 1,000 servers!\n
-                • Other small changes\n
-                • New cars\n
-                • New achievements (time master, bug smasher)
+                `• New tutorial system for new players\n
+                • The bot sends a message apon joining a server now, helping new users\n
+                • New blueprint cars in rotation!\n
+                • Daily reward streaks (EXPIREMENTAL)\n
+                • New job for new players, tire changer!\n
+                • Tips now show a way to turn them off\n
+                • Multiple bug fixes
                 `
               )
-              .setFooter({ text: "2/20/2023" })
+              .setFooter({ text: "3/10/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

@@ -184,6 +184,13 @@
       "Name": "Prestige Crate",
       "Type": "Non-Usable",
       "Emote": "<:supplydropprestige:1044404462581719041>"
+    },
+    "seasonal crate": {
+      "Price": 0,
+      "Action": "Open a prestige crate to get cosmetics, cash, and more!",
+      "Name": "Seasonal Crate",
+      "Type": "Non-Usable",
+      "Emote": "<:crate_seasonal:1080285947733737483>"
     }
   },
   "Collectable": {

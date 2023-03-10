@@ -2,15 +2,15 @@ const { sample } = require("lodash");
 
 function tipGetRandom() {
   return sample([
-    "Try buying gold to support us! Starting at $0.99 for 20, and you can do so much with it!",
-    "You can upgrade cars with /upgrade",
-    "Join the support server to get a boost in streetrace earnings",
-    "Create a crew and get benefits such as cash bonuses!",
-    "Use /weekly, /daily, and /vote to get a small cash boost!",
-    "Notoriety is used for seasons, check the current season with /season",
-    "Use keys to purchase import crates with exclusive cars",
-    "View events with /events",
-    "View the blackmarket with /blackmarket for exclusive cars and parts",
+    "Try buying gold to support us! Starting at $0.99 for 20, and you can do so much with it! **Turn off tips in /settings**",
+    "You can upgrade cars with /upgrade **Turn off tips in /settings**",
+    "Join the support server to get a boost in streetrace earnings **Turn off tips in /settings**",
+    "Create a crew and get benefits such as cash bonuses! **Turn off tips in /settings**",
+    "Use /weekly, /daily, and /vote to get a small cash boost! **Turn off tips in /settings**",
+    "Notoriety is used for seasons, check the current season with /season **Turn off tips in /settings**",
+    "Use keys to purchase import crates with exclusive cars **Turn off tips in /settings**",
+    "View events with /events **Turn off tips in /settings**",
+    "View the blackmarket with /blackmarket for exclusive cars and parts **Turn off tips in /settings**",
   ]);
 }
 

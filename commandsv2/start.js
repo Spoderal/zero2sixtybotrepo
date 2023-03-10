@@ -20,9 +20,10 @@ module.exports = {
         "Check out the getting started tutorial on YouTube, Run `/dealer` to buy your first car, and go race with it!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n[YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)",
     });
     await interaction.reply({
-      content: `Starting the tutorial, run \`/dealer\` to find and pick your first car! Choose D Class from the selection menu below the message it sends to view the cars.`,
+      content: `Starting the tutorial, run \`/dealer\` to find and pick your first car! Click the **D Class** button from the menu below the message it sends to view the cars.`,
       embeds: [embed],
     });
+    await interaction.channel.send("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDg4Mjk2ZTY2ZDkwNDRlZWEyY2U4Mzk4ODQ2YmNmZjJmYzg5Zjk5OSZjdD1n/OfB8WvjTmlILKTs7to/giphy.gif")
 
     let newuser = await new User({ id: interaction.user.id });
     newuser.tutorial = {
