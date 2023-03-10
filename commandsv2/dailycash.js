@@ -44,8 +44,6 @@ module.exports = {
 
     userdata.markModified("settings");
 
-
-
     if (interaction.guild.id == "931004190149460048") {
       dcash += 500;
     }
@@ -64,7 +62,6 @@ module.exports = {
       dcash = dcash += multy;
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
-      
       let time = ms(timeout - (Date.now() - daily));
       let timeEmbed = new Discord.EmbedBuilder()
         .setColor(colors.blue)
@@ -112,9 +109,9 @@ module.exports = {
         userdata.lmaps += 1;
         interaction.channel.send("+1 Legendary Barn Map");
       }
-      let dailystre = streak
-      if(streak > 1){
-        dcash = dcash * (dailystre -= 0.5)
+      let dailystre = streak;
+      if (streak > 1) {
+        dcash = dcash * (dailystre -= 0.5);
       }
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
@@ -125,9 +122,9 @@ module.exports = {
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Daily Cash ${interaction.user.username}`)
         .addFields([{ name: "Earned Cash", value: `${toCurrency(dcash)}` }]);
-        if(streak > 1){
-          embed.addFields([{ name: "Streak", value: `${streak += 1}` }]);
-        }
+      if (streak > 1) {
+        embed.addFields([{ name: "Streak", value: `${(streak += 1)}` }]);
+      }
       embed.setColor(colors.blue);
 
       await interaction.reply({ embeds: [embed] });

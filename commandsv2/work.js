@@ -267,19 +267,21 @@ module.exports = {
         interaction.reply(
           `Chase other players using /streetrace, or use \`/wanted\` to work on your police job!`
         );
-      }
-      else if (jobtowork.name == "tire changer") {
+      } else if (jobtowork.name == "tire changer") {
         userdata.work.cooldown = Date.now();
-        userdata.markModified("work")
-        let salary = 300
-        let motions = ["right", "left"]
-        let motion1 = lodash.sample(motions)
-        let motion2 = lodash.sample(motions)
+        userdata.markModified("work");
+        let salary = 300;
+        let motions = ["right", "left"];
+        let motion1 = lodash.sample(motions);
+        let motion2 = lodash.sample(motions);
         let embed = new Discord.EmbedBuilder()
-        .setTitle("Remember this combination to rotate the tire:")
-        .setDescription(`Rotate the tire: **${motion1}, ${motion2}**`)
-        .setColor(colors.blue)
-        let msg = await interaction.reply({embeds: [embed], fetchReply: true})
+          .setTitle("Remember this combination to rotate the tire:")
+          .setDescription(`Rotate the tire: **${motion1}, ${motion2}**`)
+          .setColor(colors.blue);
+        let msg = await interaction.reply({
+          embeds: [embed],
+          fetchReply: true,
+        });
         let row2 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("right")
@@ -293,8 +295,8 @@ module.exports = {
             .setEmoji("↩️")
         );
         setTimeout(() => {
-          embed.setDescription("What was the first rotation direction?")
-         interaction.editReply({embeds: [embed], components: [row2]})
+          embed.setDescription("What was the first rotation direction?");
+          interaction.editReply({ embeds: [embed], components: [row2] });
 
           let filter2 = (btnInt) => {
             return interaction.user.id === btnInt.user.id;
@@ -302,99 +304,105 @@ module.exports = {
           let collector = msg.createMessageComponentCollector({
             filter: filter2,
           });
-  
+
           collector.on("collect", async (i) => {
-            if(i.customId.includes("right")){
-              if(motion1 !== "right"){
-                collector.stop()
-                return i.update("Wrong!")
+            if (i.customId.includes("right")) {
+              if (motion1 !== "right") {
+                collector.stop();
+                return i.update("Wrong!");
+              } else {
+                collector.stop();
+                embed.setDescription("What was the second rotation direction?");
+                i.update({
+                  embeds: [embed],
+                  content: "Correct!",
+                  components: [row2],
+                  fetchReply: true,
+                });
+
+                let filter2 = (btnInt) => {
+                  return interaction.user.id === btnInt.user.id;
+                };
+                let collector2 = msg.createMessageComponentCollector({
+                  filter: filter2,
+                });
+
+                collector2.on("collect", async (i) => {
+                  if (i.customId.includes("right")) {
+                    if (motion2 !== "right") {
+                      return i.update("Wrong!");
+                    } else {
+                      userdata.cash += salary;
+                      userdata.save();
+                      return interaction.channel.send({
+                        content: `Correct! You've earned $${salary} for your hard work!`,
+                        fetchReply: true,
+                      });
+                    }
+                  } else if (i.customId.includes("left")) {
+                    if (motion2 !== "left") {
+                      return i.update("Wrong!");
+                    } else {
+                      userdata.cash += salary;
+                      userdata.save();
+                      return interaction.channel.send({
+                        content: `Correct! You've earned $${salary} for your hard work!`,
+                        fetchReply: true,
+                      });
+                    }
+                  }
+                });
               }
-              else {
-                
-                collector.stop()
-                embed.setDescription("What was the second rotation direction?")
-               i.update({embeds: [embed],content:"Correct!", components: [row2], fetchReply: true})
+            } else if (i.customId.includes("left")) {
+              if (motion1 !== "left") {
+                collector.stop();
+                return i.update("Wrong!");
+              } else {
+                collector.stop();
+                embed.setDescription("What was the second rotation direction?");
+                i.update({
+                  embeds: [embed],
+                  content: "Correct!",
+                  components: [row2],
+                  fetchReply: true,
+                });
 
-               let filter2 = (btnInt) => {
-                return interaction.user.id === btnInt.user.id;
-              };
-              let collector2 = msg.createMessageComponentCollector({
-                filter: filter2,
-              });
+                let filter2 = (btnInt) => {
+                  return interaction.user.id === btnInt.user.id;
+                };
+                let collector2 = msg.createMessageComponentCollector({
+                  filter: filter2,
+                });
 
-              collector2.on("collect", async (i) => {
-                if(i.customId.includes("right")){
-                  if(motion2 !== "right"){
-                    return i.update("Wrong!")
-                  }
-                  else {
-                    userdata.cash += salary
-                    userdata.save()
-                  return interaction.channel.send({content:`Correct! You've earned $${salary} for your hard work!`, fetchReply: true})
-                  }
-                }
-                else if(i.customId.includes("left")){
-                  if(motion2 !== "left"){
-                    return i.update("Wrong!")
-                    
-                  }
-                  else {
-                    userdata.cash += salary
-                    userdata.save()
-                  return interaction.channel.send({content:`Correct! You've earned $${salary} for your hard work!`, fetchReply: true})
-                  }
-                }
+                collector2.on("collect", async (i) => {
+                  if (i.customId.includes("right")) {
+                    if (motion2 !== "right") {
+                      return i.update("Wrong!");
+                    } else {
+                      userdata.cash += salary;
+                      userdata.save();
+                      return interaction.channel.send({
+                        content: `Correct! You've earned $${salary} for your hard work!`,
+                        fetchReply: true,
+                      });
+                    }
+                  } else if (i.customId.includes("left")) {
+                    if (motion2 !== "left") {
+                      return i.update("Wrong!");
+                    } else {
+                      userdata.cash += salary;
 
-              })
+                      userdata.save();
+                      return interaction.channel.send({
+                        content: `Correct! You've earned $${salary} for your hard work!`,
+                        fetchReply: true,
+                      });
+                    }
+                  }
+                });
               }
             }
-            else  if(i.customId.includes("left")){
-              if(motion1 !== "left"){
-                
-                collector.stop()
-                return i.update("Wrong!")
-              }
-              else {
-                
-                collector.stop()
-                embed.setDescription("What was the second rotation direction?")
-               i.update({embeds: [embed],content:"Correct!", components: [row2], fetchReply: true})
-
-               let filter2 = (btnInt) => {
-                return interaction.user.id === btnInt.user.id;
-              };
-              let collector2 = msg.createMessageComponentCollector({
-                filter: filter2,
-              });
-
-              collector2.on("collect", async (i) => {
-                if(i.customId.includes("right")){
-                  if(motion2 !== "right"){
-                    return i.update("Wrong!")
-                  }
-                  else {
-                    userdata.cash += salary
-                    userdata.save()
-                  return interaction.channel.send({content:`Correct! You've earned $${salary} for your hard work!`, fetchReply: true})
-                  }
-                }
-                else if(i.customId.includes("left")){
-                  if(motion2 !== "left"){
-                    return i.update("Wrong!")
-                  }
-                  else {
-                    userdata.cash += salary
-                   
-                    userdata.save()
-                  return interaction.channel.send({content:`Correct! You've earned $${salary} for your hard work!`, fetchReply: true})
-                  }
-                }
-
-              })
-              }
-            }
-
-          })
+          });
         }, 2000);
       }
     }

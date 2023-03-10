@@ -394,10 +394,12 @@ module.exports = {
             interaction.channel.send({
               content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/streetrace tier 1 ${idtoset}\``,
             });
-            interaction.channel.send("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWFlN2IwYmU3ZDVhZWQzZGJiNzVlNmFkYzkzOGFmZjUxYTQzOTZjNSZjdD1n/INnXFdQ3uXnb2LM1dY/giphy.gif")
+            interaction.channel.send(
+              "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWFlN2IwYmU3ZDVhZWQzZGJiNzVlNmFkYzkzOGFmZjUxYTQzOTZjNSZjdD1n/INnXFdQ3uXnb2LM1dY/giphy.gif"
+            );
             userdata.tutorial.stage = 2;
-            userdata.markModified("tutorial")
-            userdata.save()
+            userdata.markModified("tutorial");
+            userdata.save();
             return;
           }
         }
