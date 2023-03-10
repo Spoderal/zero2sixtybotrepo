@@ -23,7 +23,9 @@ module.exports = {
       content: `Starting the tutorial, run \`/dealer\` to find and pick your first car! Click the **D Class** button from the menu below the message it sends to view the cars.`,
       embeds: [embed],
     });
-    await interaction.channel.send("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDg4Mjk2ZTY2ZDkwNDRlZWEyY2U4Mzk4ODQ2YmNmZjJmYzg5Zjk5OSZjdD1n/OfB8WvjTmlILKTs7to/giphy.gif")
+    await interaction.channel.send(
+      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDg4Mjk2ZTY2ZDkwNDRlZWEyY2U4Mzk4ODQ2YmNmZjJmYzg5Zjk5OSZjdD1n/OfB8WvjTmlILKTs7to/giphy.gif"
+    );
 
     let newuser = await new User({ id: interaction.user.id });
     newuser.tutorial = {
