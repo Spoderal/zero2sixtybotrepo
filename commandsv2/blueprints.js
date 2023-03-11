@@ -252,6 +252,15 @@ module.exports = {
             collector.stop();
             return;
           }
+          if (partdb.Parts[reward1.toLowerCase()]) {
+            
+
+            userdata.parts.push(reward1.toLowerCase())
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
         } else if (i.customId.endsWith("reward2")) {
           if (cardb.Cars[reward2]) {
             let carindb = cardb.Cars[reward2.toLowerCase()];
@@ -282,6 +291,15 @@ module.exports = {
             collector.stop();
             return;
           }
+          if (partdb.Parts[reward2.toLowerCase()]) {
+            
+
+            userdata.parts.push(reward2.toLowerCase())
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
         } else if (i.customId.endsWith("reward3")) {
           if (cardb.Cars[reward3]) {
             let carindb = cardb.Cars[reward3.toLowerCase()];
@@ -307,6 +325,15 @@ module.exports = {
             let amount = Number(reward3.split(" ")[0]);
 
             userdata.cash += parseInt(amount);
+            userdata.save();
+            await i.update({ content: "✅" });
+            collector.stop();
+            return;
+          }
+          if (partdb.Parts[reward3.toLowerCase()]) {
+            
+
+            userdata.parts.push(reward3.toLowerCase())
             userdata.save();
             await i.update({ content: "✅" });
             collector.stop();
