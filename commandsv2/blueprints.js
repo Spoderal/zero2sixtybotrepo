@@ -253,9 +253,7 @@ module.exports = {
             return;
           }
           if (partdb.Parts[reward1.toLowerCase()]) {
-            
-
-            userdata.parts.push(reward1.toLowerCase())
+            userdata.parts.push(reward1.toLowerCase());
             userdata.save();
             await i.update({ content: "✅" });
             collector.stop();
@@ -292,9 +290,7 @@ module.exports = {
             return;
           }
           if (partdb.Parts[reward2.toLowerCase()]) {
-            
-
-            userdata.parts.push(reward2.toLowerCase())
+            userdata.parts.push(reward2.toLowerCase());
             userdata.save();
             await i.update({ content: "✅" });
             collector.stop();
@@ -331,9 +327,7 @@ module.exports = {
             return;
           }
           if (partdb.Parts[reward3.toLowerCase()]) {
-            
-
-            userdata.parts.push(reward3.toLowerCase())
+            userdata.parts.push(reward3.toLowerCase());
             userdata.save();
             await i.update({ content: "✅" });
             collector.stop();
