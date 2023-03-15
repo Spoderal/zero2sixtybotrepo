@@ -34,8 +34,7 @@ module.exports = {
     let car = selected;
 
     var usercars = userdata.cars;
-    if (!cars.Cars[selected.Name.toLowerCase()])
-      return await interaction.reply("Thats not a car!");
+    if (!cars.Cars[selected.Name.toLowerCase()]) return await interaction.reply("Thats not a car!");
     car = car.Name.toLowerCase();
     let exhaust = selected.Exhaust;
     let tires = selected.Tires;
