@@ -51,6 +51,7 @@ module.exports = {
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
       return;
     }
+    //fix
     if(type == "blueprints"){
 
       let boughtindb = blueprints;
