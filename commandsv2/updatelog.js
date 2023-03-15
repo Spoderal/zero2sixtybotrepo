@@ -31,7 +31,7 @@ module.exports = {
             emoji: "🌸",
           },
           {
-            label: "1/22/2023",
+            label: "3/15/2023",
             description: "Information for the recent small update!",
             value: "5_update",
             customId: "up5",
@@ -129,7 +129,6 @@ module.exports = {
                 • World Championship event is back!\n
                 • Prestige requirements nerfed, you need less drift than race wins\n
                 • Bug fixes
-                • 
                 `
               )
               .setFooter({ text: "3/15/2023" })
