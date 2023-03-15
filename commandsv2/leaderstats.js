@@ -136,7 +136,7 @@ module.exports = {
       let desc = "";
       for (let i = 0; i < onlyTaggedUsers.length; i++) {
         desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${
-          onlyTaggedUsers[i].worldpoints
+          onlyTaggedUsers[i].worldwins
         }\n`;
       }
       embed.setDescription(desc);
