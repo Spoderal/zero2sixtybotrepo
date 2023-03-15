@@ -136,10 +136,9 @@ module.exports = {
       let desc = "";
       for (let i = 0; i < onlyTaggedUsers.length; i++) {
         desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${
-          onlyTaggedUsers[i].stockpoints
+          onlyTaggedUsers[i].worldpoints
         }\n`;
       }
-      embed.setThumbnail("https://i.ibb.co/tZ1qs7K/STOCKPOINTS.png");
       embed.setDescription(desc);
 
       await interaction.editReply({ embeds: [embed] });
