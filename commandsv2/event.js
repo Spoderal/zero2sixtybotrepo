@@ -219,7 +219,6 @@ module.exports = {
 
             And of course there's other F1 cars to obtain, for every lap you complete you'll obtain 1 F1 Blueprint, you can redeem 25 of those for a blueprint that could include an exclusive F1 car!
 
-            F1 Cars cannot have their speed upgraded! So good luck!
 
             __List of obtainable F1 Cars__
             ${cardb.Cars["2023 alfa romeo c38"].Emote} ${cardb.Cars["2023 alfa romeo c38"].Name}

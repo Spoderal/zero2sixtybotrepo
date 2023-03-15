@@ -115,11 +115,7 @@ module.exports = {
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
       car3 = cardb.Cars[lodash.sample(bot1cars)];
-    } else if (bot == "2") {
-      car2 = cardb.Cars[lodash.sample(bot2cars)];
-    } else if (bot == "3") {
-      car2 = cardb.Cars[lodash.sample(bot3cars)];
-    }
+    } 
     let usertier = userdata.tier;
 
     let botspeed = car2.Speed;
