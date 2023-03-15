@@ -40,9 +40,7 @@ module.exports = {
         .setName("tier")
         .setDescription("The bot tier to race")
         .setRequired(true)
-        .addChoices(
-          { name: "Tier 1", value: "1" },
-        )
+        .addChoices({ name: "Tier 1", value: "1" })
     )
     .addStringOption((option) =>
       option
