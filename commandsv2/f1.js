@@ -109,6 +109,7 @@ module.exports = {
     let rpwon = parseInt(bot) * 2;
     let cashlost = parseInt(bot) * 20;
     let eventkeys = parseInt(bot) * 1;
+    let blueprintsearned = parseInt(laps)
 
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
@@ -394,12 +395,12 @@ module.exports = {
         embed.setTitle(`Winner: ${firstplace}`);
         let rewards = [`Your lap time: ${lapt}s`];
         if (firstplace == `${user.username}`) {
-          userdata.f1blueprints += 1;
+          userdata.f1blueprints += blueprintsearned;
           userdata.cash += cashwon;
           userdata.save();
 
           rewards.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-          rewards.push(`${emotes.f1blueprint} +1`);
+          rewards.push(`${emotes.f1blueprint} +${blueprintsearned}`);
         }
         embed.setDescription(`${rewards.join("\n")}`);
         await interaction.editReply({ embeds: [embed] });
