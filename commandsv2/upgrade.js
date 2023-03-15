@@ -63,7 +63,8 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
 
-    if (!userdata.parts.includes(inputPartName))  return await interaction.reply("You don't have this part!");
+    if (!userdata.parts.includes(inputPartName))
+      return await interaction.reply("You don't have this part!");
     let realpart = selected[partType];
     let partindb;
     if (realpart !== undefined && realpart !== null) {
@@ -72,7 +73,8 @@ module.exports = {
       partindb = "None";
     }
     console.log(partindb);
-    if(cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0) return interaction.reply("F1 Cars cant have their speed upgraded.") 
+    if (cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0)
+      return interaction.reply("F1 Cars cant have their speed upgraded.");
     let oldspeed = selected.Speed;
     let oldweight =
       selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;

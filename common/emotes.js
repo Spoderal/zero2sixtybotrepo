@@ -29,7 +29,7 @@ const emotes = {
   rareKey: "<:rarekey:938734258367918120>",
   exoticKey: "<:exotickey:938734258275631164>",
   dirftKey: "<:driftkey:970486254896570469>",
-  f1blueprint:"<:blueprintf1:1085013478420525136>",
+  f1blueprint: "<:blueprintf1:1085013478420525136>",
 
   // Bot tiers
   botTier1: "<:bottier1:983973330921074739>",

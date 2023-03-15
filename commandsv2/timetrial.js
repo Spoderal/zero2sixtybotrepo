@@ -211,21 +211,19 @@ module.exports = {
             });
           }
 
-          let taskfilter = userdata.tasks.filter((task) => task.Task == "Get under 5 seconds in the time trial")
-      
-          
-              if(taskfilter[0] && time < 5){
-                
-                userdata.cash += taskfilter[0].Reward
-                userdata.tasks.pull(taskfilter[0])
-                userdata.tasks.push({ID: "T3", Time: Date.now()})
-                interaction.channel.send(`You just completed your task!`)
-              }
-              
-              
-              await interaction.editReply({ embeds: [embed], files: [attachment] });
-              userdata.save();
-             
+          let taskfilter = userdata.tasks.filter(
+            (task) => task.Task == "Get under 5 seconds in the time trial"
+          );
+
+          if (taskfilter[0] && time < 5) {
+            userdata.cash += taskfilter[0].Reward;
+            userdata.tasks.pull(taskfilter[0]);
+            userdata.tasks.push({ ID: "T3", Time: Date.now() });
+            interaction.channel.send(`You just completed your task!`);
+          }
+
+          await interaction.editReply({ embeds: [embed], files: [attachment] });
+          userdata.save();
         }
 
         let timeuser = global.trialtimes.filter(

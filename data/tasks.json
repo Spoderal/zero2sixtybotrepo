@@ -1,22 +1,22 @@
 {
-  "1":{
-    "Task":"Win 10 street races",
-    "Reward":10000,
-    "Time":86400000,
-    "Race":true,
-    "ID":"1"
+  "1": {
+    "Task": "Win 10 street races",
+    "Reward": 10000,
+    "Time": 86400000,
+    "Race": true,
+    "ID": "1"
   },
-  "2":{
-    "Task":"Win 10 highway races",
-    "Reward":15000,
-    "Time":86400000,
-    "Race":true,
-    "ID":"2"
+  "2": {
+    "Task": "Win 10 highway races",
+    "Reward": 15000,
+    "Time": 86400000,
+    "Race": true,
+    "ID": "2"
   },
-  "3":{
-    "Task":"Get under 5 seconds in the time trial",
-    "Reward":5000,
-    "Time":86400000,
-    "ID":"3"
+  "3": {
+    "Task": "Get under 5 seconds in the time trial",
+    "Reward": 5000,
+    "Time": 86400000,
+    "ID": "3"
   }
 }

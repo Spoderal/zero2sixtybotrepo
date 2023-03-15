@@ -46,7 +46,7 @@ module.exports = {
       stockpoints,
       achievements,
       blueprints,
-      f1blueprints
+      f1blueprints,
     } = profile;
     let userdata = await User.findOne({ id: interaction.user.id });
 
