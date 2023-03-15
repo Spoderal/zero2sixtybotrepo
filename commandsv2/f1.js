@@ -30,23 +30,6 @@ let bot1cars = [
   "2023 ferrari sf23",
   "2021 red bull rb18",
 ];
-let bot2cars = [
-  "2014 hyundai genesis coupe",
-  "2008 nissan 350z",
-  "2010 chevy camaro v6",
-  "2010 ford mustang",
-  "2004 subaru wrx sti",
-  "2013 mazda speed3",
-  "2001 toyota supra mk4",
-];
-let bot3cars = [
-  "2020 porsche 718 cayman",
-  "2015 lotus exige sport",
-  "2011 audi rs5",
-  "2021 toyota supra",
-  "2011 bmw m3",
-  "2021 lexus rc f",
-];
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -59,8 +42,6 @@ module.exports = {
         .setRequired(true)
         .addChoices(
           { name: "Tier 1", value: "1" },
-          { name: "Tier 2", value: "2" },
-          { name: "Tier 3", value: "3" }
         )
     )
     .addStringOption((option) =>
