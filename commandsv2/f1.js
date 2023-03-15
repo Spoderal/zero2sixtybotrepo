@@ -28,7 +28,7 @@ let bot1cars = [
   "2023 aston martin amr23",
   "2023 mercedes w14 e",
   "2023 ferrari sf23",
-  "2021 red bull rb18"
+  "2021 red bull rb18",
 ];
 let bot2cars = [
   "2014 hyundai genesis coupe",
@@ -64,16 +64,16 @@ module.exports = {
         )
     )
     .addStringOption((option) =>
-    option
-      .setName("laps")
-      .setDescription("The amount of laps")
-      .setRequired(true)
-      .addChoices(
-        { name: "1 Lap", value: "1" },
-        { name: "3 Laps", value: "3" },
-        { name: "5 Laps", value: "5" }
-      )
-  )
+      option
+        .setName("laps")
+        .setDescription("The amount of laps")
+        .setRequired(true)
+        .addChoices(
+          { name: "1 Lap", value: "1" },
+          { name: "3 Laps", value: "3" },
+          { name: "5 Laps", value: "5" }
+        )
+    )
     .addStringOption((option) =>
       option
         .setName("car")
@@ -84,8 +84,8 @@ module.exports = {
     let user = interaction.user;
     let tracklength = 3000;
     let tracklength2 = 3000;
-    let tracklength3 = 3000
-    let laps = interaction.options.getString("laps")
+    let tracklength3 = 3000;
+    let laps = interaction.options.getString("laps");
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata =
@@ -130,8 +130,6 @@ module.exports = {
     let cashlost = parseInt(bot) * 20;
     let eventkeys = parseInt(bot) * 1;
 
- 
-
     if (bot == "1") {
       car2 = cardb.Cars[lodash.sample(bot1cars)];
       car3 = cardb.Cars[lodash.sample(bot1cars)];
@@ -139,7 +137,7 @@ module.exports = {
       car2 = cardb.Cars[lodash.sample(bot2cars)];
     } else if (bot == "3") {
       car2 = cardb.Cars[lodash.sample(bot3cars)];
-    } 
+    }
     let usertier = userdata.tier;
 
     let botspeed = car2.Speed;
@@ -186,7 +184,6 @@ module.exports = {
     ctx.clip();
     ctx.drawImage(selected3image, 470, 490, 370, 180);
     ctx.restore();
-
 
     ctx.font = "40px sans-serif";
     ctx.fillStyle = "#ffffff";
@@ -253,8 +250,7 @@ module.exports = {
         mph3 -= 10;
       }
     }
- 
- 
+
     handling = Math.floor(handling);
     handling2 = Math.floor(handling2);
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
@@ -290,142 +286,149 @@ module.exports = {
       fetchReply: true,
     });
 
-    let laptime = 0
-    let laptime2 = 0
-    let laptime3 = 0
+    let laptime = 0;
+    let laptime2 = 0;
+    let laptime3 = 0;
 
-    let weightst = weight / 10
-    let handlingst = handling / 10
-    let weightst2 = weight2 / 10
-    let handlingst2 = handling2 / 10
-    let weightst3 = weight3 / 10
-    let handlingst3 = handling3 / 10
-    let formula1 = (mph / acceleration) + (weightst + handlingst)
-    let formula2 = (mph2 / acceleration2) + (weightst2 + handlingst2)
-    let formula3 = (mph3 / acceleration3) + (weightst3 + handlingst3)
-    laps = Number(laps)
-    let laps2 = Number(laps)
-    let laps3 = Number(laps)
-     let firstplace
-     let secondplace
-     let thirdplace
-     let lapt
-     let firstplaced = false
-       let x = setInterval(async () => {
-      
-            
-                console.log(`laps ${laps}`)
-                tracklength -= formula1
-                console.log(`1: ${tracklength}`)
-                laptime++
-                if(tracklength <= 0){
-                  if(laps > 0){
-                    if(tracklength < tracklength2 && tracklength < tracklength3 && firstplaced !== true){
-                      firstplace = `${user.username}`
-                      firstplaced = true
-                    }
-                    else if(tracklength2 < tracklength && tracklength2 < tracklength3 && firstplaced !== true){
-                      firstplace = "bot 2"
-                      firstplaced = true
-                    }
-                    else if(tracklength3 < tracklength2 && tracklength3 < tracklength && firstplaced !== true){
-                      firstplace = "bot 3"
-                      firstplaced = true
-                    }
-                    lapt = laptime
-                    laps -= 1
-                    await console.log(`Lap time: ${laptime}s`)
-                    laptime = 0
-                    tracklength = 2000
-  
-                }
-         
-            }
-            if(laps2 > 0){
-              
-                console.log(`laps ${laps2}`)
-                tracklength2 -= formula2
-                console.log(`2: ${tracklength2}`)
-                laptime2++
-                if(tracklength2 <= 0){
-              if(tracklength < tracklength2 && tracklength < tracklength3 && firstplaced !== true){
-                firstplace = `${user.username}`
-                firstplaced = true
-              }
-              else if(tracklength2 < tracklength && tracklength2 < tracklength3 && firstplaced !== true){
-                firstplace = "bot 2"
-                firstplaced = true
-              }
-              else if(tracklength3 < tracklength2 && tracklength3 < tracklength && firstplaced !== true){
-                firstplace = "bot 3"
-                firstplaced = true
-              }
-                    laps2 -= 1
-                    laptime2 = 0
-                    tracklength2 = 2000
-                    await console.log(`Lap time 2: ${laptime2}s`)
-  
-                }
-              }
-              if(laps3 > 0){
-                console.log(`laps ${laps3}`)
-                tracklength3 -= formula3
-                console.log(`3: ${tracklength3}`)
-                laptime3++
-                  if(tracklength3 <= 0){
-                if(tracklength < tracklength2 && tracklength < tracklength3 && firstplaced !== true){
-                  firstplace = `${user.username}`
-                  firstplaced = true
-                }
-                else if(tracklength2 < tracklength && tracklength2 < tracklength3 && firstplaced !== true){
-                  firstplace = "bot 2"
-                  firstplaced = true
-                }
-                else if(tracklength3 < tracklength2 && tracklength3 < tracklength && firstplaced !== true){
-                  firstplace = "bot 3"
-                  firstplaced = true
-                }
-      
-                      laps3 -= 1
-                      laptime3 = 0
-                      tracklength3 = 2000
-                      await console.log(`Lap time 3: ${laptime3}s`)
-      
-                  }
-           
-              }
-            else {
- 
-              console.log(`first: ${firstplace}`)
-                clearInterval(x)
+    let weightst = weight / 10;
+    let handlingst = handling / 10;
+    let weightst2 = weight2 / 10;
+    let handlingst2 = handling2 / 10;
+    let weightst3 = weight3 / 10;
+    let handlingst3 = handling3 / 10;
+    let formula1 = mph / acceleration + (weightst + handlingst);
+    let formula2 = mph2 / acceleration2 + (weightst2 + handlingst2);
+    let formula3 = mph3 / acceleration3 + (weightst3 + handlingst3);
+    laps = Number(laps);
+    let laps2 = Number(laps);
+    let laps3 = Number(laps);
+    let firstplace;
+    let secondplace;
+    let thirdplace;
+    let lapt;
+    let firstplaced = false;
+    let x = setInterval(async () => {
+      console.log(`laps ${laps}`);
+      tracklength -= formula1;
+      console.log(`1: ${tracklength}`);
+      laptime++;
+      if (tracklength <= 0) {
+        if (laps > 0) {
+          if (
+            tracklength < tracklength2 &&
+            tracklength < tracklength3 &&
+            firstplaced !== true
+          ) {
+            firstplace = `${user.username}`;
+            firstplaced = true;
+          } else if (
+            tracklength2 < tracklength &&
+            tracklength2 < tracklength3 &&
+            firstplaced !== true
+          ) {
+            firstplace = "bot 2";
+            firstplaced = true;
+          } else if (
+            tracklength3 < tracklength2 &&
+            tracklength3 < tracklength &&
+            firstplaced !== true
+          ) {
+            firstplace = "bot 3";
+            firstplaced = true;
+          }
+          lapt = laptime;
+          laps -= 1;
+          await console.log(`Lap time: ${laptime}s`);
+          laptime = 0;
+          tracklength = 2000;
+        }
+      }
+      if (laps2 > 0) {
+        console.log(`laps ${laps2}`);
+        tracklength2 -= formula2;
+        console.log(`2: ${tracklength2}`);
+        laptime2++;
+        if (tracklength2 <= 0) {
+          if (
+            tracklength < tracklength2 &&
+            tracklength < tracklength3 &&
+            firstplaced !== true
+          ) {
+            firstplace = `${user.username}`;
+            firstplaced = true;
+          } else if (
+            tracklength2 < tracklength &&
+            tracklength2 < tracklength3 &&
+            firstplaced !== true
+          ) {
+            firstplace = "bot 2";
+            firstplaced = true;
+          } else if (
+            tracklength3 < tracklength2 &&
+            tracklength3 < tracklength &&
+            firstplaced !== true
+          ) {
+            firstplace = "bot 3";
+            firstplaced = true;
+          }
+          laps2 -= 1;
+          laptime2 = 0;
+          tracklength2 = 2000;
+          await console.log(`Lap time 2: ${laptime2}s`);
+        }
+      }
+      if (laps3 > 0) {
+        console.log(`laps ${laps3}`);
+        tracklength3 -= formula3;
+        console.log(`3: ${tracklength3}`);
+        laptime3++;
+        if (tracklength3 <= 0) {
+          if (
+            tracklength < tracklength2 &&
+            tracklength < tracklength3 &&
+            firstplaced !== true
+          ) {
+            firstplace = `${user.username}`;
+            firstplaced = true;
+          } else if (
+            tracklength2 < tracklength &&
+            tracklength2 < tracklength3 &&
+            firstplaced !== true
+          ) {
+            firstplace = "bot 2";
+            firstplaced = true;
+          } else if (
+            tracklength3 < tracklength2 &&
+            tracklength3 < tracklength &&
+            firstplaced !== true
+          ) {
+            firstplace = "bot 3";
+            firstplaced = true;
+          }
 
-                embed.setTitle(`Winner: ${firstplace}`)
-                let rewards = [`Your lap time: ${lapt}s`]
-              if(firstplace == `${user.username}`){
-                userdata.f1blueprints += 1
-                userdata.cash += cashwon
-                userdata.save()
+          laps3 -= 1;
+          laptime3 = 0;
+          tracklength3 = 2000;
+          await console.log(`Lap time 3: ${laptime3}s`);
+        }
+      } else {
+        console.log(`first: ${firstplace}`);
+        clearInterval(x);
 
+        embed.setTitle(`Winner: ${firstplace}`);
+        let rewards = [`Your lap time: ${lapt}s`];
+        if (firstplace == `${user.username}`) {
+          userdata.f1blueprints += 1;
+          userdata.cash += cashwon;
+          userdata.save();
 
-                rewards.push(`${emotes.cash} +${toCurrency(cashwon)}`)
-                rewards.push(`${emotes.f1blueprint} +1`)
-                
-              }
-              embed.setDescription(`${rewards.join('\n')}`)
-              await interaction.editReply({embeds: [embed]})
-            }
-
-
-     
-         }, 1000);
-
-     
-       
-
-
-
-
-    
+          rewards.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+          rewards.push(`${emotes.f1blueprint} +1`);
+        }
+        embed.setDescription(`${rewards.join("\n")}`);
+        await interaction.editReply({ embeds: [embed] });
+      }
+    }, 1000);
   },
 };
 

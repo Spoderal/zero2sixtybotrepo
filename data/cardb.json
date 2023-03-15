@@ -7318,7 +7318,7 @@
       "Class": "S",
       "Weight": 1800,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "2023 mercedes w14 e": {
       "alias": "2023 w14 e",
@@ -7336,7 +7336,7 @@
       "Class": "S",
       "Weight": 1800,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "2023 aston martin amr23": {
       "alias": "2023 amr23",
@@ -7354,7 +7354,7 @@
       "Class": "S",
       "Weight": 1800,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "2023 alfa romeo c38": {
       "alias": "2023 c38",
@@ -7372,9 +7372,9 @@
       "Class": "S",
       "Weight": 1800,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
-   "2021 red bull rb18": {
+    "2021 red bull rb18": {
       "alias": "2021 c38",
       "Name": "2021 Red Bull RB18",
       "Emote": "<:RedBulllogo:1084695048681164850>",
@@ -7390,7 +7390,7 @@
       "Class": "S",
       "Weight": 1900,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "2022 mclaren mcl36": {
       "alias": "2022 mcl36",
@@ -7408,7 +7408,7 @@
       "Class": "S",
       "Weight": 1900,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "1988 mclaren mp4/4": {
       "alias": "1988 mp4/4",
@@ -7426,7 +7426,7 @@
       "Class": "S",
       "Weight": 1700,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "2006 bmw sauber f106": {
       "alias": "2006 f106",
@@ -7444,7 +7444,7 @@
       "Class": "S",
       "Weight": 1900,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     },
     "2022 haas vf22": {
       "alias": "2022 vf22",
@@ -7462,7 +7462,7 @@
       "Class": "S",
       "Weight": 1900,
       "Obtained": "Event",
-      "F1":true
+      "F1": true
     }
   }
 }

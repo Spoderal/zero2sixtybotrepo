@@ -2,13 +2,13 @@ const {
   ActionRowBuilder,
   EmbedBuilder,
   SelectMenuBuilder,
-  ButtonBuilder
+  ButtonBuilder,
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
-const cardb = require("../data/cardb.json")
+const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -76,23 +76,26 @@ module.exports = {
 
     embed.setColor(colors.blue);
 
-    let msg = await interaction
-      .reply({ embeds: [embed], components: [row2], fetchReply: true })
-        const filter = (interaction2) =>
-          interaction2.isSelectMenu() &&
-          interaction2.user.id === interaction.user.id;
+    let msg = await interaction.reply({
+      embeds: [embed],
+      components: [row2],
+      fetchReply: true,
+    });
+    const filter = (interaction2) =>
+      interaction2.isSelectMenu() &&
+      interaction2.user.id === interaction.user.id;
 
-        const collector = msg.createMessageComponentCollector({
-          filter,
-          time: 1000 * 15,
-        });
+    const collector = msg.createMessageComponentCollector({
+      filter,
+      time: 1000 * 15,
+    });
 
-        collector.on("collect", async (collected) => {
-          const value = collected.values[0];
-          if (value === "spring_event") {
-            embed.setTitle("Spring Season");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Welcome to the drifting season!
+    collector.on("collect", async (collected) => {
+      const value = collected.values[0];
+      if (value === "spring_event") {
+        embed.setTitle("Spring Season");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Welcome to the drifting season!
 
             The snow has melted in Zero2Sixty!
 
@@ -107,17 +110,17 @@ module.exports = {
             **Ends May 31st 2023**
 
                   `);
-            embed.setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png");
-            embed.setColor(colors.blue);
+        embed.setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png");
+        embed.setColor(colors.blue);
 
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "track_event") {
-            embed.setTitle("Track Legends");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Its track day baby! Bring out your best cars for the track and race for the best track cars in history!
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } else if (value === "track_event") {
+        embed.setTitle("Track Legends");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Its track day baby! Bring out your best cars for the track and race for the best track cars in history!
 
             **Beat the car you're racing, and you keep the car**! However, if you lose, **you lose a heafty amount of cash**... Depending on the difficulty you choose of course!
             
@@ -133,17 +136,17 @@ module.exports = {
             **Ends March 31st 2023**
             
                   `);
-            embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
-            embed.setColor(colors.blue);
+        embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
+        embed.setColor(colors.blue);
 
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "stock_event") {
-            embed.setTitle("Stock Champions Event");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Bring out your best stock car, there's no parts allowed!
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } else if (value === "stock_event") {
+        embed.setTitle("Stock Champions Event");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Bring out your best stock car, there's no parts allowed!
 
             Race to be on top of the leaderboard in /stockrace to win prizes! View the leaderboard with /leaderboard
 
@@ -156,20 +159,19 @@ module.exports = {
             **Ends March 31st 2023**
             
                   `);
-            embed.setImage(
-              "https://www.ruf-automobile.de/site/assets/files/1093/scr-generationen.1920x720.jpg"
-            );
-            embed.setColor(colors.blue);
+        embed.setImage(
+          "https://www.ruf-automobile.de/site/assets/files/1093/scr-generationen.1920x720.jpg"
+        );
+        embed.setColor(colors.blue);
 
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          }
-          else if (value === "world_championship") {
-            embed.setTitle("World Championship Event");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Bring out your best car, and be the best for the 2023 World Championship!
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } else if (value === "world_championship") {
+        embed.setTitle("World Championship Event");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Bring out your best car, and be the best for the 2023 World Championship!
 
             Race to be on top of the leaderboard in /streetrace to win huge prizes! View the leaderboard with /leaderboard
 
@@ -184,37 +186,34 @@ module.exports = {
             **Ends May 31st 2023**
             
                   `);
-            embed.setImage(
-              "https://i.ibb.co/jvXzrB0/worldchampionship.png"
-            );
-            embed.setColor(colors.blue);
+        embed.setImage("https://i.ibb.co/jvXzrB0/worldchampionship.png");
+        embed.setColor(colors.blue);
 
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          }
-          else if (value === "f1_icons") {
-            let row3 = new ActionRowBuilder().addComponents(
-              new ButtonBuilder()
-              .setLabel("2023 Ferrari SF23")
-              .setEmoji("<:ferrari:931011838374727730>")
-              .setStyle("Secondary")
-              .setCustomId("ferrari"),
-              new ButtonBuilder()
-              .setLabel("2023 Mercedes W14 E")
-              .setEmoji("<:mercedes_z:973000364410404924>")
-              .setStyle("Secondary")
-              .setCustomId("mercedes"),
-              new ButtonBuilder()
-              .setLabel("2023 Aston Martin AMR23")
-              .setEmoji("<:aston:931011548682534962>")
-              .setStyle("Secondary")
-              .setCustomId("aston")
-            )
-            embed.setTitle("F1 Icons Event");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`You can only pick 1 F1 Starter car, so make sure you check that its the one for your style!
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } else if (value === "f1_icons") {
+        let row3 = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setLabel("2023 Ferrari SF23")
+            .setEmoji("<:ferrari:931011838374727730>")
+            .setStyle("Secondary")
+            .setCustomId("ferrari"),
+          new ButtonBuilder()
+            .setLabel("2023 Mercedes W14 E")
+            .setEmoji("<:mercedes_z:973000364410404924>")
+            .setStyle("Secondary")
+            .setCustomId("mercedes"),
+          new ButtonBuilder()
+            .setLabel("2023 Aston Martin AMR23")
+            .setEmoji("<:aston:931011548682534962>")
+            .setStyle("Secondary")
+            .setCustomId("aston")
+        );
+        embed.setTitle("F1 Icons Event");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`You can only pick 1 F1 Starter car, so make sure you check that its the one for your style!
 
             Introducing the first ever F1 cars to Zero2Sixty, you'll be racing on the F1 track to get to 1st place! Multiple laps, and a leaderboard for laps of course!
 
@@ -237,91 +236,85 @@ module.exports = {
             **Ends April 31st 2023**
             
                   `);
-            embed.setImage(
-              "https://i.ibb.co/N60pqYw/event-f1.png"
-            );
-            embed.setColor(colors.blue);
+        embed.setImage("https://i.ibb.co/N60pqYw/event-f1.png");
+        embed.setColor(colors.blue);
 
-           await interaction.editReply({
-              embeds: [embed],
-              components: [row2, row3],
-              fetchReply: true
-            });
-
-            if(userdata.chosef1 !== true){
-
-            
-            let filter2 = (btnInt) => {
-              return interaction.user.id === btnInt.user.id;
-            };
-            let collector2 = msg.createMessageComponentCollector({
-              filter: filter2,
-            });
-            let carobj = {}
-            collector2.on('collect', async (i) => {
-              if(i.customId == "ferrari"){
-                let carindb = cardb.Cars["2023 ferrari sf23"]
-                carobj = {
-                  ID: carindb.alias,
-                  Name: carindb.Name,
-                  Speed: carindb.Speed,
-                  Acceleration: carindb["0-60"],
-                  Handling: carindb.Handling,
-                  Parts: [],
-                  Emote: carindb.Emote,
-                  Livery: carindb.Image,
-                  Miles: 0,
-                  Resale: 1000000,
-                }
-                userdata.cars.push(carobj)
-                userdata.chosef1 = true
-                userdata.save()
-                await i.update('✅')
-                collector2.stop()
-              }
-              else if(i.customId == "mercedes"){
-                let carindb = cardb.Cars["2023 mercedes w14 e"]
-                carobj = {
-                  ID: carindb.alias,
-                  Name: carindb.Name,
-                  Speed: carindb.Speed,
-                  Acceleration: carindb["0-60"],
-                  Handling: carindb.Handling,
-                  Parts: [],
-                  Emote: carindb.Emote,
-                  Livery: carindb.Image,
-                  Miles: 0,
-                  Resale: 1000000,
-                }
-                userdata.cars.push(carobj)
-                userdata.chosef1 = true
-                userdata.save()
-                await i.update('✅')
-                collector2.stop()
-              }
-              else if(i.customId == "aston"){
-                let carindb = cardb.Cars["2023 aston martin amr23"]
-                carobj = {
-                  ID: carindb.alias,
-                  Name: carindb.Name,
-                  Speed: carindb.Speed,
-                  Acceleration: carindb["0-60"],
-                  Handling: carindb.Handling,
-                  Parts: [],
-                  Emote: carindb.Emote,
-                  Livery: carindb.Image,
-                  Miles: 0,
-                  Resale: 1000000,
-                }
-                userdata.cars.push(carobj)
-                userdata.chosef1 = true
-                userdata.save()
-                await i.update('✅')
-                collector2.stop()
-              }
-            })
-          }
-          }
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2, row3],
+          fetchReply: true,
         });
+
+        if (userdata.chosef1 !== true) {
+          let filter2 = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          };
+          let collector2 = msg.createMessageComponentCollector({
+            filter: filter2,
+          });
+          let carobj = {};
+          collector2.on("collect", async (i) => {
+            if (i.customId == "ferrari") {
+              let carindb = cardb.Cars["2023 ferrari sf23"];
+              carobj = {
+                ID: carindb.alias,
+                Name: carindb.Name,
+                Speed: carindb.Speed,
+                Acceleration: carindb["0-60"],
+                Handling: carindb.Handling,
+                Parts: [],
+                Emote: carindb.Emote,
+                Livery: carindb.Image,
+                Miles: 0,
+                Resale: 1000000,
+              };
+              userdata.cars.push(carobj);
+              userdata.chosef1 = true;
+              userdata.save();
+              await i.update("✅");
+              collector2.stop();
+            } else if (i.customId == "mercedes") {
+              let carindb = cardb.Cars["2023 mercedes w14 e"];
+              carobj = {
+                ID: carindb.alias,
+                Name: carindb.Name,
+                Speed: carindb.Speed,
+                Acceleration: carindb["0-60"],
+                Handling: carindb.Handling,
+                Parts: [],
+                Emote: carindb.Emote,
+                Livery: carindb.Image,
+                Miles: 0,
+                Resale: 1000000,
+              };
+              userdata.cars.push(carobj);
+              userdata.chosef1 = true;
+              userdata.save();
+              await i.update("✅");
+              collector2.stop();
+            } else if (i.customId == "aston") {
+              let carindb = cardb.Cars["2023 aston martin amr23"];
+              carobj = {
+                ID: carindb.alias,
+                Name: carindb.Name,
+                Speed: carindb.Speed,
+                Acceleration: carindb["0-60"],
+                Handling: carindb.Handling,
+                Parts: [],
+                Emote: carindb.Emote,
+                Livery: carindb.Image,
+                Miles: 0,
+                Resale: 1000000,
+              };
+              userdata.cars.push(carobj);
+              userdata.chosef1 = true;
+              userdata.save();
+              await i.update("✅");
+              collector2.stop();
+            }
+          });
+        }
+      }
+    });
   },
 };

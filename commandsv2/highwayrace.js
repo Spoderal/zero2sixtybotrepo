@@ -295,12 +295,12 @@ module.exports = {
       calc2 = calc2 / acceleration2;
       sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
       console.log(`sec2: ${sec2}`);
-      
+
       calc2 = calc2 / sec2;
       console.log(`calc2: ${calc2}`);
       tracklength -= calc;
       tracklength2 -= calc2;
-      
+
       if (tracklength <= 0) {
         clearInterval(i2);
         ctx.save();
@@ -322,10 +322,12 @@ module.exports = {
         userdata.lockpicks += lockpicks;
         userdata.wheelspins += wheelspinswon;
 
-        userdata.racerank ++;
-        let taskfilter = userdata.tasks.filter((task) => task.Task == "Win 10 highway races")
-        if(taskfilter[0]){
-          taskfilter[0].Races += 1
+        userdata.racerank++;
+        let taskfilter = userdata.tasks.filter(
+          (task) => task.Task == "Win 10 highway races"
+        );
+        if (taskfilter[0]) {
+          taskfilter[0].Races += 1;
           await User.findOneAndUpdate(
             {
               id: user.id,
@@ -335,7 +337,7 @@ module.exports = {
                 "tasks.$[task]": taskfilter[0],
               },
             },
-      
+
             {
               arrayFilters: [
                 {
@@ -343,22 +345,21 @@ module.exports = {
                 },
               ],
             }
-            );
-            console.log(taskfilter[0])
-            if(taskfilter[0].Races >= 10){
-              
-              userdata.cash += taskfilter[0].Reward
-              userdata.tasks.pull(taskfilter[0])
-              userdata.tasks.push({ID: "T2", Time: Date.now()})
-              interaction.channel.send(`You just completed your task!`)
-            }
+          );
+          console.log(taskfilter[0]);
+          if (taskfilter[0].Races >= 10) {
+            userdata.cash += taskfilter[0].Reward;
+            userdata.tasks.pull(taskfilter[0]);
+            userdata.tasks.push({ ID: "T2", Time: Date.now() });
+            interaction.channel.send(`You just completed your task!`);
           }
+        }
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Highway Race won!`);
         embed.setImage(`attachment://profile-image.png`);
-          userdata.save()
+        userdata.save();
         await interaction.editReply({ embeds: [embed], files: [attachment] });
-        return
+        return;
       }
       // lost
       else if (tracklength2 <= 0) {
@@ -371,7 +372,7 @@ module.exports = {
 
         embed.setTitle(`Tier ${bot} Highway Race lost!`);
         await interaction.editReply({ embeds: [embed], files: [attachment] });
-        return
+        return;
       }
 
       console.log(`track length ${tracklength}`);

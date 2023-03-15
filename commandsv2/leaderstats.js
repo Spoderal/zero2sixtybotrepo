@@ -14,15 +14,15 @@ module.exports = {
 
         .setRequired(false)
         .setName("leaderboard")
-        .addChoices({
-          name: "Stock Event",
-          value: "stock event",
-        },
-        {
-          name: "World Championship",
-          value: "world",
-        }
-        
+        .addChoices(
+          {
+            name: "Stock Event",
+            value: "stock event",
+          },
+          {
+            name: "World Championship",
+            value: "world",
+          }
         )
     ),
 
@@ -86,8 +86,7 @@ module.exports = {
       embed.setDescription(desc);
 
       await interaction.editReply({ embeds: [embed] });
-    } 
-    else if (leaderboardtype == "world") {
+    } else if (leaderboardtype == "world") {
       let users = await User.find({});
       if (!users?.length) {
         return await interaction.editReply(
@@ -144,8 +143,7 @@ module.exports = {
       embed.setDescription(desc);
 
       await interaction.editReply({ embeds: [embed] });
-    }
-    else {
+    } else {
       let users = await User.find({});
       if (!users?.length) {
         return await interaction.editReply(

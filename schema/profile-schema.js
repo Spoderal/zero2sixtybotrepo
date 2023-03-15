@@ -404,26 +404,26 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  tasks:{
+  tasks: {
     type: Array,
     required: false,
-    default: []
+    default: [],
   },
-  f1blueprints:{
+  f1blueprints: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
-  chosef1:{
+  chosef1: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
-  worldwins:{
+  worldwins: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);
