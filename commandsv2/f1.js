@@ -117,7 +117,7 @@ module.exports = {
     let bot = interaction.options.getString("tier");
     await interaction.deferReply();
     await interaction.editReply("Revving engines...");
-
+    if(!cardb.Cars[selected.Name.toLowerCase()].F1) return interaction.reply("Your car isn't an F1 car!")
     let weather2 = lodash.sample(weather);
     console.log(weather2);
     let car2;

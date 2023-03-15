@@ -215,7 +215,7 @@ module.exports = {
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`You can only pick 1 F1 Starter car, so make sure you check that its the one for your style!
 
-            Introducing the first ever F1 cars to Zero2Sixty, you'll be racing on the F1 track to get to 1st place! Multiple laps, and a leaderboard for laps of course!
+            Introducing the first ever F1 cars to Zero2Sixty, you'll be racing on the F1 track to get to 1st place! Multiple laps, and a leaderboard for laps of course! Use /f1race
 
             And of course there's other F1 cars to obtain, for every lap you complete you'll obtain 1 F1 Blueprint, you can redeem 25 of those for a blueprint that could include an exclusive F1 car!
 
