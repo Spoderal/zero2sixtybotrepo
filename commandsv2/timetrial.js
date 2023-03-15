@@ -178,6 +178,7 @@ module.exports = {
         // car 2
 
         if (tracklength <= 0) {
+          clearInterval(i2);
           ctx.save();
           roundedImage(ctx, 320, 200, 640, 360, 20);
           ctx.stroke();
@@ -210,8 +211,21 @@ module.exports = {
             });
           }
 
-          await interaction.editReply({ embeds: [embed], files: [attachment] });
-          clearInterval(i2);
+          let taskfilter = userdata.tasks.filter((task) => task.Task == "Get under 5 seconds in the time trial")
+      
+          
+              if(taskfilter[0] && time < 5){
+                
+                userdata.cash += taskfilter[0].Reward
+                userdata.tasks.pull(taskfilter[0])
+                userdata.tasks.push({ID: "T3", Time: Date.now()})
+                interaction.channel.send(`You just completed your task!`)
+              }
+              
+              
+              await interaction.editReply({ embeds: [embed], files: [attachment] });
+              userdata.save();
+             
         }
 
         let timeuser = global.trialtimes.filter(
@@ -226,7 +240,6 @@ module.exports = {
         global.save();
 
         console.log(`track length ${tracklength}`);
-        userdata.save();
       }, 1000);
     } else if (interaction.options.getSubcommand() == "leaderboard") {
       let lb = global.trialtimes.sort(function (x, y) {

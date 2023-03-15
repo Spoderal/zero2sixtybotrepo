@@ -48,7 +48,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 3/10/2023\n
             🌸 Spring Update 3/1/2023\n
-            ⬆️ Small Update 1/22/2023
+            ⬆️ Small Update 3/15/2023
         `);
 
     embed.setColor(colors.blue);
@@ -124,14 +124,15 @@ module.exports = {
             embed.setTitle(`Small Update`);
             embed
               .setDescription(
-                `• Limited stock cars! Check the dealership and get these cars fast before they're off sale forever!\n
-                • New house\n
-                • Market listing limits, you may only have 5 items listed at once\n
+                `• Tasks are back! View them with /tasks list\n
+                • F1 Event! F1 Cars are here! Check it out with /events\n
+                • World Championship event is back!\n
+                • Prestige requirements nerfed, you need less drift than race wins\n
                 • Bug fixes
                 • 
                 `
               )
-              .setFooter({ text: "1/22/2023" })
+              .setFooter({ text: "3/15/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

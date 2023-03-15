@@ -102,6 +102,32 @@
       "t5intake"
     ]
   },
+  "f1blueprints": {
+    "Contents": [
+      "25000 Cash",
+      "25000 Cash",
+      "25000 Cash",
+      "25000 Cash",
+      "25000 Cash",
+      "25000 Cash",
+      "25000 Cash",
+      "2006 bmw sauber f106",
+      "25000 Cash",
+      "25000 Cash",
+      "2022 mclaren mcl36",
+      "25000 Cash",
+      "1988 mclaren mp4/4",
+      "25000 Cash",
+      "2021 red bull rb18",
+      "25000 Cash",
+      "25000 Cash",
+      "2022 haas vf22",
+      "50000 Cash",
+      "2023 alfa romeo c38",
+
+      "50000 Cash"
+    ]
+  },
   "z crate": {
     "common": ["2005 mazda rx8", "2001 toyota supra mk4"],
     "uncommon": ["2008 mazda miata", "2001 toyota supra mk4"],

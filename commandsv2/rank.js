@@ -19,8 +19,8 @@ module.exports = {
 
     let racerank = userdata.racerank;
 
-    let required1 = newprestige2 * 50;
-    let required2 = newprestige2 * 50;
+    let required1 = newprestige2 * 30;
+    let required2 = newprestige2 * 20;
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${user.username}'s ranks`)
@@ -28,8 +28,7 @@ module.exports = {
         `
         **Prestige**: ${prestigerank}\n
         Race Rank: ${racerank}/${required1}\n
-        Drift Rank: ${driftrank}/${required2}\n
-        Multiplier: 5%
+        Drift Rank: ${driftrank}/${required2}
         `
       )
 

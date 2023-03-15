@@ -46,6 +46,7 @@ module.exports = {
       stockpoints,
       achievements,
       blueprints,
+      f1blueprints
     } = profile;
     let userdata = await User.findOne({ id: interaction.user.id });
 
@@ -99,6 +100,7 @@ module.exports = {
             ${emotes.rp}  RP: ${numberWithCommas(rp3)}
             ${emotes.dirftKey} Drift Keys: ${numberWithCommas(dkeys)}
             <:STOCKPOINTS:1077426546077347871> Stock Points: ${stockpoints}
+            ${emotes.f1blueprint} F1 Blueprints: ${f1blueprints}
             `,
             inline: true,
           },

@@ -84,6 +84,7 @@ module.exports = {
 
     let randomstatuses = [
       `🌸 SPRING 🌸  /season`,
+      `🏎️ F1 Event 🏎️  /events`,
       `⚙️ PATCH 3/10/2023`,
       "🪙 GOLD STARTS AT $0.99",
       "🛞 TRACK LEGENDS EVENT",

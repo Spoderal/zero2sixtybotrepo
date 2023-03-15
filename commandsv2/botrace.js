@@ -390,6 +390,35 @@ module.exports = {
         userdata.cash += cashwon;
         userdata.rp3 += rpwon;
         userdata.racerank += 1;
+        userdata.worldwins += 1
+        let taskfilter = userdata.tasks.filter((task) => task.Task == "Win 10 street races")
+        if(taskfilter[0]){
+          taskfilter[0].Races += 1
+          await User.findOneAndUpdate(
+            {
+              id: user.id,
+            },
+            {
+              $set: {
+                "tasks.$[task]": taskfilter[0],
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "task.Task": "Win 10 street races",
+                },
+              ],
+            }
+            );
+            if(taskfilter[0].Races >= 10){
+              userdata.cash += taskfilter[0].Reward
+              userdata.tasks.pull(taskfilter[0])
+              userdata.tasks.push({ID: "T1", Time: Date.now()})
+              interaction.channel.send(`You just completed your task!`)
+            }
+          }
         embed.setDescription(`${earnings.join("\n")}`);
         embed.setTitle(`Tier ${bot} Street Race won! ${weather2.Emote}`);
         embed.setImage(`attachment://profile-image.png`);
