@@ -253,10 +253,17 @@ module.exports = {
           console.log(crater);
           console.log(cratereward);
           let earnings = [];
+          let filteredhouse = userdata.houses.filter(
+            (house) => house.Name == "Casa Sul Lago"
+          );
+          if (userdata.houses && filteredhouse[0]) {
+            notorietyreward = notorietyreward * 2;
+          }
           earnings.push(`${emotes.notoriety} +${notorietyreward}`);
           earnings.push(`${emotes.cash} +${cashreward}`);
           earnings.push(`${emotes.dirftKey} +${keysreward}`);
           earnings.push(`+${dranks} Drift Rank`);
+          
           userdata.driftrank += dranks;
           userdata.noto6 += notorietyreward;
           userdata.cash += cashreward;
