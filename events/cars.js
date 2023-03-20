@@ -24,10 +24,8 @@ async function carfix() {
             let carf = cars[car].Name;
 
             let carindb = ocardb.Cars[carf.toLowerCase()];
-            let carname = cars[car].Name
-              let newname = cardb.Cars[carname.toLowerCase()].Name
-
-            
+            let carname = cars[car].Name;
+            let newname = cardb.Cars[carname.toLowerCase()].Name;
 
             let carspeed = carindb.Speed;
             let caracc = carindb["0-60"];
@@ -174,7 +172,7 @@ async function carfix() {
             }
             cars[car].Speed = carspeed;
             cars[car].Acceleration = caracc;
-            cars[car].Name = newname
+            cars[car].Name = newname;
           }
           udata.markModified("cars");
           udata.save();

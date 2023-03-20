@@ -1,4 +1,9 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ActionRow } = require("discord.js");
+const {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ActionRow,
+} = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { numberWithCommas, toCurrency } = require("../common/utils");
 const {
@@ -11,7 +16,6 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const User = require("../schema/profile-schema");
-
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -106,13 +110,13 @@ module.exports = {
             inline: true,
           },
         ]);
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setStyle("Link")
           .setEmoji("🪙")
           .setLabel("Buy Gold")
           .setURL("https://zero2sixty-store.tebex.io/")
-        )
+      );
 
       await interaction.reply({
         embeds: [embed],
