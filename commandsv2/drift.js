@@ -263,7 +263,7 @@ module.exports = {
           earnings.push(`${emotes.cash} +${cashreward}`);
           earnings.push(`${emotes.dirftKey} +${keysreward}`);
           earnings.push(`+${dranks} Drift Rank`);
-          
+
           userdata.driftrank += dranks;
           userdata.noto6 += notorietyreward;
           userdata.cash += cashreward;
