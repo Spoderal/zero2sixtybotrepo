@@ -36,9 +36,10 @@ module.exports = {
     ];
     let global = await Global.findOne();
     let carstock = global.stock;
+    let carsarray = []
     for (let c in cars.Cars) {
       let car = cars.Cars[c];
-
+      carsarray.push(car)
       if (car.Class == "D" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
           let owned2 = usercars.filter((caru) => caru.Name == car.Name);
@@ -302,6 +303,8 @@ module.exports = {
       10
     );
 
+    let carslist = carsarray.filter((car) => car.Price > 0)
+    let randomcar = lodash.sample(carslist)
     let row2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("classD")
@@ -333,7 +336,12 @@ module.exports = {
         .setCustomId("classN")
         .setLabel("New")
         .setEmoji("⭐")
-        .setStyle("Secondary")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
+        .setStyle("Link")
+        .setEmoji("🪙")
+        .setLabel("Buy Gold")
+        .setURL("https://zero2sixty-store.tebex.io/")
     );
     let row9 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -356,10 +364,17 @@ module.exports = {
 
     let embed = new EmbedBuilder()
       .setTitle("Dealership")
-      .setThumbnail("https://i.ibb.co/GWcwXNX/dealership.png")
+      .setThumbnail("https://i.ibb.co/n8NJdD9/dealerico.png")
+      .setImage(randomcar.Image)
       .setColor(colors.blue)
       .setDescription(
-        `Welcome to the dealership! Click on a class to begin looking through the cars we have available.`
+        `Welcome to the dealership! Click on a class to begin looking through the cars we have available.\n\n
+        **__Featured car__**
+        ${randomcar.Emote} ${randomcar.Name}\n
+        ${emotes.cash} Price: ${toCurrency(randomcar.Price)}
+        ${emotes.speed} Power: ${randomcar.Speed}
+        ${emotes.zero2sixty} Acceleration: ${randomcar["0-60"]}
+        ${emotes.handling} Handling: ${randomcar.Handling}`
       );
 
     let msg = await interaction.reply({
@@ -406,7 +421,8 @@ module.exports = {
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
                 car.Price
-              )}\nOwned: ${car.owned}`,
+              )}
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -462,7 +478,8 @@ module.exports = {
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
                 car.Price
-              )}\nOwned: ${car.owned}`,
+              )}
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -518,7 +535,8 @@ module.exports = {
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
                 car.Price
-              )}\nOwned: ${car.owned}`,
+              )}
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -574,7 +592,8 @@ module.exports = {
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
                 car.Price
-              )}\nOwned: ${car.owned}`,
+              )}
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -629,7 +648,8 @@ module.exports = {
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
                 car.Price
-              )}\nOwned: ${car.owned}`,
+              )}
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -661,7 +681,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
+                car.Price
+              )}
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -715,7 +738,8 @@ module.exports = {
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
                 car.Price
-              )}\nOwned: ${car.owned}`,
+              )}
+              Gold Price: ${emotes.gold} ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
               inline: true,
             });
           }

@@ -1,6 +1,7 @@
 const User = require(`../schema/profile-schema`);
 const cardb = require("../data/cardb.json");
 const partdb = require("../data/partsdb.json");
+const ocardb = require("../data/oldcars.json");
 
 async function carfix() {
   let users = await User.find();
@@ -21,7 +22,12 @@ async function carfix() {
 
           for (let car in cars) {
             let carf = cars[car].Name;
-            let carindb = cardb.Cars[carf.toLowerCase()];
+
+            let carindb = ocardb.Cars[carf.toLowerCase()];
+            let carname = cars[car].Name
+              let newname = cardb.Cars[carname.toLowerCase()].Name
+
+            
 
             let carspeed = carindb.Speed;
             let caracc = carindb["0-60"];
@@ -168,6 +174,7 @@ async function carfix() {
             }
             cars[car].Speed = carspeed;
             cars[car].Acceleration = caracc;
+            cars[car].Name = newname
           }
           udata.markModified("cars");
           udata.save();

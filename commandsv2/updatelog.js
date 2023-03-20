@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "3/10/2023",
+            label: "3/20/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -46,7 +46,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 3/10/2023\n
+            ⚙️ Latest Patch 3/20/2023\n
             🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 3/15/2023
         `);
@@ -73,16 +73,17 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• New tutorial system for new players\n
-                • The bot sends a message apon joining a server now, helping new users\n
-                • New blueprint cars in rotation!\n
-                • Daily reward streaks (EXPIREMENTAL)\n
-                • New job for new players, tire changer!\n
-                • Tips now show a way to turn them off\n
-                • Multiple bug fixes
+                `• New trade system, removing all previous bugs\n
+                 • Fixed bug where it showed you the wrong required rank to prestige\n
+                 • Fixed bug where a house perk that gave 2x notoriety, didn't give 2x notoriety\n
+                 • Gold is now easier to purchase, giving you a link to purchase on balance commands, and dealership commands\n
+                 • Dealership has a featured car whenever you open it\n
+                 • Voting now gives a common crate, 1 wheelspin, and $2K\n
+                 • All cars can be purchased with gold
+
                 `
               )
-              .setFooter({ text: "3/10/2023" })
+              .setFooter({ text: "3/15/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

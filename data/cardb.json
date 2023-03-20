@@ -22,7 +22,7 @@
   "Cars": {
     "2015 mercedes amg gts": {
       "alias": "2015 amg gts",
-      "Name": "2015 Mercedes AMG GTS",
+      "Name": "2015 Mercy AMG GTS",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 185,
       "kmh": 297,
@@ -35,7 +35,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 2000
+      "Weight": 2000,
+      "newName":"2015 Mercy AMG GTS"
     },
     "2021 acura tlx type s": {
       "alias": "2021 tlx type s",
@@ -537,7 +538,7 @@
     },
     "steves 2017 mercedes amg one": {
       "alias": "steves 2017 amg one",
-      "Name": "Steves 2017 Mercedes AMG One",
+      "Name": "Steves 2017 Mercy AMG One",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 225,
       "kmh": 289,
@@ -1390,7 +1391,7 @@
     },
     "2004 mercedes-mclaren slr": {
       "alias": "2004 slr",
-      "Name": "2004 Mercedes-Mclaren SLR",
+      "Name": "2004 Mercy-Mclaren SLR",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 190,
       "kmh": 297,
@@ -2657,7 +2658,7 @@
     },
     "1954 mercedes 300sl": {
       "alias": "1954 300sl",
-      "Name": "1954 Mercedes 300SL",
+      "Name": "1954 Mercy 300SL",
       "Emote": "<:mercedes_z:973000364410404924>",
       "kmh": 265,
       "Speed": 121,
@@ -2674,7 +2675,7 @@
     },
     "barn 1954 mercedes 300sl": {
       "alias": "barn 1954 300sl",
-      "Name": "Barn 1954 Mercedes 300SL",
+      "Name": "Barn 1954 Mercy 300SL",
       "Emote": "<:mercedes_z:973000364410404924>",
       "kmh": 265,
       "Speed": 121,
@@ -5351,7 +5352,7 @@
     },
     "1990 mercedes 190e": {
       "alias": "1990 190e",
-      "Name": "1990 Mercedes 190E",
+      "Name": "1990 Mercy 190E",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 155,
       "Price": 0,
@@ -5860,7 +5861,7 @@
     },
     "2016 mercedes benz g63 we": {
       "alias": "2016 g63 we",
-      "Name": "2016 Mercedes Benz G63 WE",
+      "Name": "2016 Mercy Benz G63 WE",
       "Emote": "<:mercedes_z:973000364410404924>",
       "kmh": 201,
       "Speed": 175,
@@ -6254,7 +6255,7 @@
     },
     "2017 mercedes amg one": {
       "alias": "2017 amg one",
-      "Name": "2017 Mercedes AMG One",
+      "Name": "2017 Mercy AMG One",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 215,
       "Price": 620000,
@@ -6332,7 +6333,7 @@
     },
     "2021 mercedes amg gt63": {
       "alias": "2021 amg gt63",
-      "Name": "2021 Mercedes AMG GT63",
+      "Name": "2021 Mercy AMG GT63",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 180,
       "Price": 0,
@@ -7117,7 +7118,7 @@
     },
     "2021 mercedes amg gt black series": {
       "alias": "2021 amg gt black",
-      "Name": "2021 Mercedes AMG GT Black Series",
+      "Name": "2021 Mercy AMG GT Black Series",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 190,
       "kmh": 315,
@@ -7322,7 +7323,7 @@
     },
     "2023 mercedes w14 e": {
       "alias": "2023 w14 e",
-      "Name": "2023 Mercedes W14 E",
+      "Name": "2023 Mercy W14 E",
       "Emote": "<:mercedes_z:973000364410404924>",
       "Speed": 206,
       "kmh": 315,

@@ -73,7 +73,7 @@ module.exports = {
         );
       }
     }
-    if (tier == 7) return interaction.reply("You've beaten all the squads!");
+    if (tier >= 7) return interaction.reply("You've beaten all the squads!");
     interaction.reply(`Revving engines...`);
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
