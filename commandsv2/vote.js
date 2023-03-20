@@ -21,7 +21,7 @@ module.exports = {
 
     userdata.cash += 2000;
     userdata.wheelspins += 1;
-    userdata.items.push("common crate")
+    userdata.items.push("common crate");
     userdata.hasvoted = false;
 
     let embed2 = new Discord.EmbedBuilder()

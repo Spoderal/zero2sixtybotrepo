@@ -36,10 +36,10 @@ module.exports = {
     ];
     let global = await Global.findOne();
     let carstock = global.stock;
-    let carsarray = []
+    let carsarray = [];
     for (let c in cars.Cars) {
       let car = cars.Cars[c];
-      carsarray.push(car)
+      carsarray.push(car);
       if (car.Class == "D" && car.Price > 0 && !car.Police) {
         if (car.Stock) {
           let owned2 = usercars.filter((caru) => caru.Name == car.Name);
@@ -303,8 +303,8 @@ module.exports = {
       10
     );
 
-    let carslist = carsarray.filter((car) => car.Price > 0)
-    let randomcar = lodash.sample(carslist)
+    let carslist = carsarray.filter((car) => car.Price > 0);
+    let randomcar = lodash.sample(carslist);
     let row2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("classD")
@@ -337,7 +337,7 @@ module.exports = {
         .setLabel("New")
         .setEmoji("⭐")
         .setStyle("Secondary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setStyle("Link")
         .setEmoji("🪙")
         .setLabel("Buy Gold")
@@ -419,10 +419,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -476,10 +476,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -533,10 +533,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -590,10 +590,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -646,10 +646,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -681,10 +681,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }
@@ -736,10 +736,10 @@ module.exports = {
           } else {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
-              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(
-                car.Price
-              )}
-              Gold Price: ${emotes.gold} ${emotes.gold} ${Math.round(car.Price / 150)}\nOwned: ${car.owned}`,
+              value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
+              Gold Price: ${emotes.gold} ${emotes.gold} ${Math.round(
+                car.Price / 150
+              )}\nOwned: ${car.owned}`,
               inline: true,
             });
           }

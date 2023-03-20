@@ -30,11 +30,11 @@ module.exports = {
         .setRequired(false)
     )
     .addBooleanOption((option) =>
-    option
-      .setName("gold")
-      .setDescription("Purchase car with gold")
-      .setRequired(false)
-  ),
+      option
+        .setName("gold")
+        .setDescription("Purchase car with gold")
+        .setRequired(false)
+    ),
   async execute(interaction) {
     const userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -69,7 +69,8 @@ module.exports = {
       housearry.push(houseobj);
     }
 
-    let boughtCar = carrarray.filter((car) => car.alias == bought.toLowerCase()) || "NO ID";
+    let boughtCar =
+      carrarray.filter((car) => car.alias == bought.toLowerCase()) || "NO ID";
     console.log(boughtCar);
     if (
       (boughtCar.length == 0 && !boughtCar[0]) ||
@@ -106,21 +107,23 @@ module.exports = {
         return await interaction.reply(
           "Your spaces are already filled. Sell a car or get more garage space!"
         );
-        let boughtCarPrice = parseInt(boughtCar.Price);
-        if (cash < boughtCarPrice) return await interaction.reply("You don't have enough cash!");
-        let cargoldprice = Math.round(boughtCarPrice / 150)
-        if(goldpurchase && cargoldprice > gold) return await interaction.reply("You don't have enough gold!");
-        
-        if (boughtCarPrice == 0)
+      let boughtCarPrice = parseInt(boughtCar.Price);
+      if (cash < boughtCarPrice)
+        return await interaction.reply("You don't have enough cash!");
+      let cargoldprice = Math.round(boughtCarPrice / 150);
+      if (goldpurchase && cargoldprice > gold)
+        return await interaction.reply("You don't have enough gold!");
+
+      if (boughtCarPrice == 0)
         return await interaction.reply("This car is not purchasable.");
-        
-        if (usercars.find((c) => c.Name == boughtCar.Name))
+
+      if (usercars.find((c) => c.Name == boughtCar.Name))
         return await interaction.reply("You already own this car!");
-        
-        if (boughtCar.Blackmarket) {
-          if (gold < boughtCarPrice)
+
+      if (boughtCar.Blackmarket) {
+        if (gold < boughtCarPrice)
           return await interaction.reply("You don't have enough gold!");
-          
+
         let idtoset = boughtCar.alias;
         let carindb = boughtCar;
         let carobj = {
@@ -172,9 +175,11 @@ module.exports = {
 
         return;
       } else {
-        let cargoldprice = Math.round(boughtCarPrice / 150)
-        if (cash < boughtCarPrice) return await interaction.reply("You don't have enough cash!");
-        if(goldpurchase && cargoldprice > gold) return await interaction.reply("You don't have enough gold!");
+        let cargoldprice = Math.round(boughtCarPrice / 150);
+        if (cash < boughtCarPrice)
+          return await interaction.reply("You don't have enough cash!");
+        if (goldpurchase && cargoldprice > gold)
+          return await interaction.reply("You don't have enough gold!");
         if (boughtCar.Police) {
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
@@ -221,12 +226,10 @@ module.exports = {
             };
           }
 
-          if(!goldpurchase){
+          if (!goldpurchase) {
             userdata.cash -= boughtCarPrice;
-
-          }
-          else if(goldpurchase){
-            userdata.gold -= cargoldprice
+          } else if (goldpurchase) {
+            userdata.gold -= cargoldprice;
           }
           userdata.cars.push(carobj);
           await userdata.save();
@@ -236,18 +239,25 @@ module.exports = {
             .addFields([
               {
                 name: "Price",
-                value: `${toCurrency(boughtCarPrice)} (${cargoldprice} if you bought it with gold)`,
+                value: `${toCurrency(
+                  boughtCarPrice
+                )} (${cargoldprice} if you bought it with gold)`,
               },
               { name: `ID`, value: `${idtoset}` },
-              { name: "New cash balance", value: `${emotes.cash} ${toCurrency(cash)}` },
-              { name: "New gold balance", value: `${emotes.gold} ${toCurrency(gold)}` },
+              {
+                name: "New cash balance",
+                value: `${emotes.cash} ${toCurrency(cash)}`,
+              },
+              {
+                name: "New gold balance",
+                value: `${emotes.gold} ${toCurrency(gold)}`,
+              },
             ])
             .setColor(colors.blue)
             .setThumbnail(`${boughtCar.Image}`);
 
           return await interaction.reply({ embeds: [embed] });
-        }
-         else {
+        } else {
           let sellprice = boughtCarPrice * 0.65;
           let carstock = global.stock;
           let filteredcar =
@@ -311,13 +321,11 @@ module.exports = {
               MaxRange: carindb.Range,
             };
           }
-          
-          if(goldpurchase == true){
-             userdata.gold -= cargoldprice
-           }
-          else {
-            userdata.cash -= boughtCarPrice;
 
+          if (goldpurchase == true) {
+            userdata.gold -= cargoldprice;
+          } else {
+            userdata.cash -= boughtCarPrice;
           }
           userdata.cars.push(carobj);
           await userdata.save();
@@ -334,7 +342,7 @@ module.exports = {
                 name: `ID`,
                 value: `\`${idtoset}\``,
                 inline: true,
-              }
+              },
             ])
             .setColor(colors.blue)
             .setImage(`${boughtCar.Image}`);
@@ -351,7 +359,7 @@ module.exports = {
             userdata.tutorial.stage = 2;
             userdata.markModified("tutorial");
             userdata.save();
-            
+
             return;
           }
         }
@@ -378,46 +386,45 @@ module.exports = {
           )}`
         );
       } else {
-          if (boughtPartPrice == 0)
-            return await interaction.reply("This part is not purchasable.");
+        if (boughtPartPrice == 0)
+          return await interaction.reply("This part is not purchasable.");
 
-          let newprice = boughtPartPrice * amount2;
-          if (userdata.cash < newprice)
-            return await interaction.reply(
-              `You cant afford this! You need ${toCurrency(newprice)}`
-            );
+        let newprice = boughtPartPrice * amount2;
+        if (userdata.cash < newprice)
+          return await interaction.reply(
+            `You cant afford this! You need ${toCurrency(newprice)}`
+          );
 
-          let user1newpart = [];
-          for (let i = 0; i < amount2; i++) user1newpart.push(bought);
-          for (i in user1newpart) {
-            userdata.parts.push(bought);
-          }
-
-          cash -= newprice;
-          userdata.cash -= newprice;
-          await userdata.save();
-
-          let embed = new EmbedBuilder()
-            .setTitle(`✅ Bought x${amount2} ${boughtPart.Name}`)
-            .addFields([
-              {
-                name: `Price`,
-                value: `${emotes.cash} ${toCurrency(newprice)}`,
-              },
-              {
-                name: "New cash balance",
-                value: `${emotes.cash} ${toCurrency(cash)}`,
-              },
-            ])
-            .setColor(colors.blue);
-
-          if (boughtPart.Image) {
-            embed.setThumbnail(boughtPart.Image);
-          }
-
-          await interaction.reply({ embeds: [embed] });
+        let user1newpart = [];
+        for (let i = 0; i < amount2; i++) user1newpart.push(bought);
+        for (i in user1newpart) {
+          userdata.parts.push(bought);
         }
-      
+
+        cash -= newprice;
+        userdata.cash -= newprice;
+        await userdata.save();
+
+        let embed = new EmbedBuilder()
+          .setTitle(`✅ Bought x${amount2} ${boughtPart.Name}`)
+          .addFields([
+            {
+              name: `Price`,
+              value: `${emotes.cash} ${toCurrency(newprice)}`,
+            },
+            {
+              name: "New cash balance",
+              value: `${emotes.cash} ${toCurrency(cash)}`,
+            },
+          ])
+          .setColor(colors.blue);
+
+        if (boughtPart.Image) {
+          embed.setThumbnail(boughtPart.Image);
+        }
+
+        await interaction.reply({ embeds: [embed] });
+      }
     } else if (boughtHouse[0]) {
       let boughtHousePrice = boughtHouse[0].Price;
       if (cash < boughtHousePrice)

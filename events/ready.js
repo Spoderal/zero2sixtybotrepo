@@ -13,7 +13,7 @@ const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
 const cars = require("./cars").carfix;
-const gold = require("../gold")
+const gold = require("../gold");
 
 let mongoConfig = {
   keepAlive: true,
@@ -36,7 +36,7 @@ module.exports = {
     crews(client);
     patron(client);
     double(client);
-    gold(client)
+    gold(client);
 
     var express = require("express");
     var app = express();
