@@ -6549,7 +6549,7 @@
       "Electric": true,
       "Range": "7",
       "Handling": 500,
-      "Class":"S",
+      "Class": "S",
       "Weight": 4500
     },
     "2022 audi e tron gt": {
@@ -6583,7 +6583,7 @@
       "Electric": true,
       "Range": "1",
       "Handling": 500,
-      "Class":"C",
+      "Class": "C",
       "Weight": 4500
     },
     "2023 tesla roadster": {
@@ -6617,7 +6617,7 @@
       "Electric": true,
       "Range": "5",
       "Handling": 500,
-      "Class":"B",
+      "Class": "B",
       "Weight": 4500
     },
     "2020 lotus evija": {
