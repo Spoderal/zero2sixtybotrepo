@@ -44,7 +44,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let user1 = interaction.user;
-    let user2 = interaction.options.getUser("target");
+    let user2 = interaction.options.getUser("user");
 
     let userdata = await User.findOne({ id: user1.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
