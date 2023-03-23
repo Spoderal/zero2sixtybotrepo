@@ -487,11 +487,11 @@ module.exports = {
       let rrank = userrank[0].rank;
       let nextnum = (rrank += 1);
       let nextrank = rankslist.filter((r) => r.rank == nextnum);
-      nextrank = nextrank[0] || {wins: 0, name: 'Onyx'}
+      nextrank = nextrank[0] || { wins: 0, name: "Onyx" };
       let newwins = nextrank.wins || 0;
 
-      if(userdata.pvprank.Name == "Onyx"){
-        newwins = 0
+      if (userdata.pvprank.Name == "Onyx") {
+        newwins = 0;
       }
 
       console.log(nextrank);
