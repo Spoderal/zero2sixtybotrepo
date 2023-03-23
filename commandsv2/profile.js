@@ -82,7 +82,7 @@ module.exports = {
       (ach) => ach.name == "Time Master" || ach.Name == "Time Master"
     );
     let filteredachspring = achievements.filter(
-      (ach) => ach.name == "Spring S1" || ach.Name == "Spring S1"
+      (ach) => ach.name == "S1 Spring Badge" || ach.Name == "S1 Spring Badge"
     );
     let filteredachfuse = achievements.filter(
       (ach) => ach.name == "Fusion Master" || ach.Name == "Fusion Master"
