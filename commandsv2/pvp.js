@@ -332,7 +332,10 @@ module.exports = {
               });
               console.log(nextuser1rank[0]);
               userdata.update();
-              if (userdata.pvprank.Wins >= nextuser1rank[0].wins && userdata.pvprank.Name !== "Onyx") {
+              if (
+                userdata.pvprank.Wins >= nextuser1rank[0].wins &&
+                userdata.pvprank.Name !== "Onyx"
+              ) {
                 console.log("ranked up");
                 userdata.pvprank.Wins = 0;
                 userdata.pvprank.Losses = 0;
@@ -343,12 +346,20 @@ module.exports = {
                 userdata.pvprank.Losses = 0;
               }
 
-              if (userdata2.pvprank.Wins >= nextuser2rank[0].wins && userdata.pvprank.Name !== "Onyx") {
+              if (
+                userdata2.pvprank.Wins >= nextuser2rank[0].wins &&
+                userdata.pvprank.Name !== "Onyx"
+              ) {
                 userdata2.pvprank.Wins = 0;
                 userdata2.pvprank.Losses = 0;
-                userdata2.pvprank.Rank = `${nextuser2rank[0].name && userdata.pvprank.Name !== "Onyx"}`;
+                userdata2.pvprank.Rank = `${
+                  nextuser2rank[0].name && userdata.pvprank.Name !== "Onyx"
+                }`;
               }
-              if (userdata2.pvprank.Losses >= 20 && userdata.pvprank.Name !== "Onyx") {
+              if (
+                userdata2.pvprank.Losses >= 20 &&
+                userdata.pvprank.Name !== "Onyx"
+              ) {
                 userdata2.pvprank.Wins = 0;
                 userdata2.pvprank.Losses = 0;
               }
