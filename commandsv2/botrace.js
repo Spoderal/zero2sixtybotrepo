@@ -177,27 +177,7 @@ module.exports = {
 
     let botspeed = car2.Speed;
     let bot060 = car2["0-60"];
-    if (usertier >= 5) {
-      botspeed = botspeed += partdb.Parts.txexhaust.AddedSpeed;
-      botspeed = botspeed += partdb.Parts.txclutch.AddedSpeed;
-      botspeed = botspeed += partdb.Parts.txintake.AddedSpeed;
-      let newzero = (bot060 -= partdb.Parts.txexhaust.AddedSixty);
-      let newzero2 = (newzero -= partdb.Parts.txexhaust.AddedSixty);
-      let newzero3 = (newzero2 -= partdb.Parts.txexhaust.AddedSixty);
-      if (newzero > 2) {
-        bot060 = bot060 -= partdb.Parts.txexhaust.AddedSixty;
-      }
-      if (newzero2 > 2) {
-        bot060 = bot060 -= partdb.Parts.txclutch.AddedSixty;
-      }
-      if (newzero3 > 2) {
-        bot060 = bot060 -= partdb.Parts.txintake.AddedSixty;
-      }
-
-      if (bot060 < 2) {
-        bot060 = 2;
-      }
-    }
+  
     let craterare = randomRange(1, 3);
 
     let crateearned;
@@ -348,7 +328,37 @@ module.exports = {
       tracklength += calc;
       tracklength2 += calc2;
 
-      if (tracklength < tracklength2 && timer == 10) {
+      if (tracklength > tracklength2 && timer == 10) {
+        ctx.drawImage(cupimg, 960, 50, 100, 100);
+        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        embed.setImage(`attachment://profile-image.png`);
+        userdata.cash += cashlost;
+        embed.setTitle(`Tier ${bot} Street Race won! ${weather2.Emote}`);
+        embed.setDescription(
+          `${emotes.cash} +${toCurrency(
+            cashlost
+          )}\n**APRIL FOOLS EVENT, YOU NEED TO LOSE TO WIN! VIEW /EVENTS FOR MORE INFORMATION!**`
+        );
+
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        if (userdata.tutorial && userdata.tutorial.stage == 2) {
+          userdata.parts.push("t1exhaust");
+          interaction.channel.send(
+            `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
+          );
+          interaction.channel.send(
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
+          );
+          userdata.tutorial.stage += 1;
+          userdata.markModified("tutorial");
+        }
+        clearInterval(i2);
+        userdata.save();
+      }
+      // lost
+      else if (tracklength2 > tracklength && timer == 10) {
         ctx.save();
         roundedImage(ctx, 640, 200, 640, 360, 20);
         ctx.stroke();
@@ -446,36 +456,7 @@ module.exports = {
         }
         clearInterval(i2);
         userdata.save();
-      }
-      // lost
-      else if (tracklength2 < tracklength && timer == 10) {
-        ctx.drawImage(cupimg, 960, 50, 100, 100);
-        attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-          name: "profile-image.png",
-        });
-        embed.setImage(`attachment://profile-image.png`);
-        userdata.cash += cashlost;
-        embed.setTitle(`Tier ${bot} Street Race won! ${weather2.Emote}`);
-        embed.setDescription(
-          `${emotes.cash} +${toCurrency(
-            cashlost
-          )}\n**APRIL FOOLS EVENT, YOU NEED TO LOSE TO WIN! VIEW /EVENTS FOR MORE INFORMATION!**`
-        );
-
-        await interaction.editReply({ embeds: [embed], files: [attachment] });
-        if (userdata.tutorial && userdata.tutorial.stage == 2) {
-          userdata.parts.push("t1exhaust");
-          interaction.channel.send(
-            `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-          );
-          interaction.channel.send(
-            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-          );
-          userdata.tutorial.stage += 1;
-          userdata.markModified("tutorial");
-        }
-        clearInterval(i2);
-        userdata.save();
+    
       }
 
       console.log(`track length ${tracklength}`);
