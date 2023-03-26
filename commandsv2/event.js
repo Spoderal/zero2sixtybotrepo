@@ -78,7 +78,8 @@ module.exports = {
           World Championship 2023 🏆\n
           Track Legends 🏁\n
           Stock Champions 🎈\n
-          F1 Icons 🏎️
+          F1 Icons 🏎️\n
+          April Fools 🎉
       `);
 
     embed.setColor(colors.blue);
