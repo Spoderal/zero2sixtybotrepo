@@ -1,0 +1,12 @@
+[
+    {
+        "name":"streetrace",
+        "tiers":7,
+        "reward":150
+    },
+    {
+        "name":"highwayrace",
+        "tiers":7,
+        "reward":250
+    }
+]

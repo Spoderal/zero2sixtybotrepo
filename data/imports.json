@@ -24,7 +24,8 @@
       "2014 ford mustang gt500",
       "2012 mazda rx8",
       "2016 bmw m6",
-      "2021 acura tlx type s"
+      "2021 acura tlx type s",
+      "1998 mitsubishi lancer evolution"
     ]
   },
   "exotic": {
@@ -53,6 +54,15 @@
       "1978 hoonigan ford escort mk2 rs1800",
       "2017 mercedes amg one",
       "2022 aston martin valkyrie"
+    ]
+  },
+  "fools": {
+    "Contents": [
+      "1973 buick riviera",
+      "2023 jeep gladiator",
+      "2020 kawasaki z900",
+      "2020 porsche 718 boxster",
+      "horse"
     ]
   },
   "drift": {

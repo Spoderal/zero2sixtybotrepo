@@ -55,6 +55,13 @@ module.exports = {
             customId: "f1",
             emoji: "🏎️",
           },
+          {
+            label: "April Fools",
+            description: "Information for the April Fools Event",
+            value: "april_fools",
+            customId: "april",
+            emoji: "🎉",
+          },
         ])
     );
 
@@ -193,7 +200,77 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "f1_icons") {
+      } 
+      
+      else if (value === "april_fools") {
+        let row4 = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setLabel("Horse Carriage")
+            .setEmoji("🐎")
+            .setStyle("Secondary")
+            .setCustomId("horse"),
+        );
+        embed.setTitle("APRIL FOOLS!");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Bring out your WORST car, and be the WORST for this event!
+
+            Until April 1st, street race will tell you that you've won if you lose!
+
+            This event only happens once a year!
+
+            Claim your free April Fools car below as well!
+
+            You can obtain Fools Keys to get april fools cars from LOSING street races, use /unbox to unbox a fools crate!
+
+            There aren't just funny cars, but there's some exclusive cars as well!
+
+
+
+            **Ends April 1st 2023**
+            
+                  `);
+        embed.setImage("https://i.ibb.co/jvXzrB0/worldchampionship.png");
+        embed.setColor(colors.blue);
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2, row4],
+          fetchReply: true
+        });
+
+        if (userdata.choseapril !== true) {
+          let filter2 = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          };
+          let collector2 = msg.createMessageComponentCollector({
+            filter: filter2,
+          });
+          let carobj = {};
+          collector2.on("collect", async (i) => {
+            if (i.customId == "horse") {
+              let carindb = cardb.Cars["horse carriage"];
+              carobj = {
+                ID: carindb.alias,
+                Name: carindb.Name,
+                Speed: carindb.Speed,
+                Acceleration: carindb["0-60"],
+                Handling: carindb.Handling,
+                Parts: [],
+                Emote: carindb.Emote,
+                Livery: carindb.Image,
+                Miles: 0,
+                Resale: 1000000,
+              };
+              userdata.cars.push(carobj);
+              userdata.choseapril = true;
+              userdata.save();
+              await i.update("✅");
+              collector2.stop();
+            } 
+          });
+        }
+      }
+      else if (value === "f1_icons") {
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setLabel("2023 Ferrari SF23")

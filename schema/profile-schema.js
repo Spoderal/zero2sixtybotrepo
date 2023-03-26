@@ -414,7 +414,17 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  foolskeys: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   chosef1: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  choseapril: {
     type: Boolean,
     required: false,
     default: false,
