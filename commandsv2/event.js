@@ -228,7 +228,6 @@ module.exports = {
             **Ends April 1st 2023**
             
                   `);
-        embed.setImage("https://i.ibb.co/jvXzrB0/worldchampionship.png");
         embed.setColor(colors.blue);
 
         await interaction.editReply({
