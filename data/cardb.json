@@ -7529,9 +7529,9 @@
       "Handling": 600,
       "Class": "B",
       "Weight": 2500,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
-     "2020 kawasaki z900": {
+    "2020 kawasaki z900": {
       "alias": "2020 z900",
       "Name": "2020 Kawasaki Z900",
       "Emote": "<:logo_kawasaki:1089402371580379148>",
@@ -7545,7 +7545,7 @@
       "Handling": 1000,
       "Bike": true,
       "Weight": 2100,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2023 jeep gladiator": {
       "alias": "2023 gladiator",
@@ -7595,7 +7595,5 @@
       "Class": "D",
       "Weight": 2800
     }
-
-    
   }
 }

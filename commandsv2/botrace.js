@@ -392,7 +392,7 @@ module.exports = {
         userdata.rp3 += rpwon;
         userdata.racerank += 1;
         userdata.worldwins += 1;
-        userdata.foolskeys += 1
+        userdata.foolskeys += 1;
         let taskfilter = userdata.tasks.filter(
           (task) => task.Task == "Win 10 street races"
         );
@@ -423,7 +423,11 @@ module.exports = {
             interaction.channel.send(`You just completed your task!`);
           }
         }
-        embed.setDescription(`${earnings.join("\n")}\n**APRIL FOOLS EVENT, YOU NEED TO LOSE TO WIN! VIEW /EVENTS FOR MORE INFORMATION!**`);
+        embed.setDescription(
+          `${earnings.join(
+            "\n"
+          )}\n**APRIL FOOLS EVENT, YOU NEED TO LOSE TO WIN! VIEW /EVENTS FOR MORE INFORMATION!**`
+        );
         embed.setTitle(`Tier ${bot} Street Race lost! ${weather2.Emote}`);
         embed.setImage(`attachment://profile-image.png`);
 
@@ -452,7 +456,11 @@ module.exports = {
         embed.setImage(`attachment://profile-image.png`);
         userdata.cash += cashlost;
         embed.setTitle(`Tier ${bot} Street Race won! ${weather2.Emote}`);
-        embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}\n**APRIL FOOLS EVENT, YOU NEED TO LOSE TO WIN! VIEW /EVENTS FOR MORE INFORMATION!**`);
+        embed.setDescription(
+          `${emotes.cash} +${toCurrency(
+            cashlost
+          )}\n**APRIL FOOLS EVENT, YOU NEED TO LOSE TO WIN! VIEW /EVENTS FOR MORE INFORMATION!**`
+        );
 
         await interaction.editReply({ embeds: [embed], files: [attachment] });
         if (userdata.tutorial && userdata.tutorial.stage == 2) {

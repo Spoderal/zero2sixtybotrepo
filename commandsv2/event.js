@@ -200,15 +200,13 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
-      
-      else if (value === "april_fools") {
+      } else if (value === "april_fools") {
         let row4 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setLabel("Horse Carriage")
             .setEmoji("🐎")
             .setStyle("Secondary")
-            .setCustomId("horse"),
+            .setCustomId("horse")
         );
         embed.setTitle("APRIL FOOLS!");
         embed.setFooter({ text: 'Prefix is "/"' });
@@ -235,7 +233,7 @@ module.exports = {
         await interaction.editReply({
           embeds: [embed],
           components: [row2, row4],
-          fetchReply: true
+          fetchReply: true,
         });
 
         if (userdata.choseapril !== true) {
@@ -266,11 +264,10 @@ module.exports = {
               userdata.save();
               await i.update("✅");
               collector2.stop();
-            } 
+            }
           });
         }
-      }
-      else if (value === "f1_icons") {
+      } else if (value === "f1_icons") {
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setLabel("2023 Ferrari SF23")
