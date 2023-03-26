@@ -123,7 +123,7 @@ module.exports = {
       } else if (bought == "mclaren") {
         userdata.fkeys -= 100;
       } else if (bought == "fools") {
-        userdata.foolskeys -= 100;
+        userdata.foolskeys -= 25;
       }
 
       let cratecontents = crates[bought].Contents;
