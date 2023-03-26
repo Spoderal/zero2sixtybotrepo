@@ -52,7 +52,7 @@ module.exports = {
       achievements,
       blueprints,
       f1blueprints,
-      foolskeys
+      foolskeys,
     } = profile;
     let userdata = await User.findOne({ id: interaction.user.id });
 
