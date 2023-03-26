@@ -177,7 +177,7 @@ module.exports = {
 
     let botspeed = car2.Speed;
     let bot060 = car2["0-60"];
-  
+
     let craterare = randomRange(1, 3);
 
     let crateearned;
@@ -456,7 +456,6 @@ module.exports = {
         }
         clearInterval(i2);
         userdata.save();
-    
       }
 
       console.log(`track length ${tracklength}`);
