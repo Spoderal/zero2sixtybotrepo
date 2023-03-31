@@ -35,20 +35,6 @@ module.exports = {
             emoji: "🏆",
           },
           {
-            label: "Track Legends",
-            description: "Information for the Track Legends Event",
-            value: "track_event",
-            customId: "track",
-            emoji: "🏁",
-          },
-          {
-            label: "Stock Champions",
-            description: "Information for the Stock Champions Event",
-            value: "stock_event",
-            customId: "stock",
-            emoji: "🎈",
-          },
-          {
             label: "F1 Icons",
             description: "Information for the F1 Icons Event",
             value: "f1_icons",
@@ -76,8 +62,6 @@ module.exports = {
           **__Events__**
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
-          Track Legends 🏁\n
-          Stock Champions 🎈\n
           F1 Icons 🏎️\n
           April Fools 🎉
       `);
@@ -119,57 +103,6 @@ module.exports = {
 
                   `);
         embed.setThumbnail("https://i.ibb.co/h9TxV6B/springicon.png");
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "track_event") {
-        embed.setTitle("Track Legends");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Its track day baby! Bring out your best cars for the track and race for the best track cars in history!
-
-            **Beat the car you're racing, and you keep the car**! However, if you lose, **you lose a heafty amount of cash**... Depending on the difficulty you choose of course!
-            
-            **Speed is the least of your worries, sometimes it may be the most because you may crash and lose!**
-
-            The event goes up to tier 4 in \`/trackrace\`!
-
-            Tier 4: -$20K
-            Tier 3: $-15K
-            Tier 2: $-10K
-            Tier 1: $-5K
-
-            **Ends March 31st 2023**
-            
-                  `);
-        embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "stock_event") {
-        embed.setTitle("Stock Champions Event");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Bring out your best stock car, there's no parts allowed!
-
-            Race to be on top of the leaderboard in /stockrace to win prizes! View the leaderboard with /leaderboard
-
-            1st: 1987 RUF CTR Yellowbird\n
-            2nd: $10M Cash\n
-            3rd: $5M Cash\n
-            4th: $1M Cash\n
-            5th: $500K Cash\n
-
-            **Ends March 31st 2023**
-            
-                  `);
-        embed.setImage(
-          "https://www.ruf-automobile.de/site/assets/files/1093/scr-generationen.1920x720.jpg"
-        );
         embed.setColor(colors.blue);
 
         await interaction.editReply({
