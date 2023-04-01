@@ -19,7 +19,7 @@ module.exports = {
     .setName("dealer")
     .setDescription("The car dealership"),
   async execute(interaction) {
-    let userdata = await User.findOne({ id: interaction.user.id }); || await new User({ id: interaction.user.id });
+    let userdata = await User.findOne({ id: interaction.user.id }) || await new User({ id: interaction.user.id });
     let usercars = userdata.cars || []
     let carclassDarr = [];
     let carclassCarr = [];
