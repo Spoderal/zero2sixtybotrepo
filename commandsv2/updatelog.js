@@ -127,8 +127,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
-          else if (value === "6_update") {
+          } else if (value === "6_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Big Update`);
@@ -151,9 +150,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
-
-          else if (value === "5_update") {
+          } else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Small Update`);

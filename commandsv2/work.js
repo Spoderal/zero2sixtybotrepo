@@ -264,9 +264,7 @@ module.exports = {
           }
         });
       } else if (jobtowork.name == "police") {
-        interaction.reply(
-          `Use \`/wanted\` to work on your police job!`
-        );
+        interaction.reply(`Use \`/wanted\` to work on your police job!`);
       } else if (jobtowork.name == "tire changer") {
         userdata.work.cooldown = Date.now();
         userdata.markModified("work");

@@ -158,7 +158,7 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
-  drops:{
+  drops: {
     type: Array,
     required: false,
     default: [],

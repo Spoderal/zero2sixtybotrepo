@@ -65,7 +65,7 @@ module.exports = {
             value: "cash_race",
             customId: "cash",
           },
-          
+
           {
             label: "crosscountry",
             description: "Information about crosscountry races",
@@ -306,9 +306,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          }
-          
-          else if (value === "cross_race") {
+          } else if (value === "cross_race") {
             embed.fields = [];
             embed.setTitle("Cross Country Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
@@ -360,9 +358,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } 
-          
-          else if (value === "squad_race") {
+          } else if (value === "squad_race") {
             embed.fields = [];
             embed.setTitle("Squad Racing");
             embed.setFooter({ text: 'Prefix is "/"' });

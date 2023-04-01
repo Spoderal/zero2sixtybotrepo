@@ -4090,7 +4090,7 @@
       "Handling": 500,
       "Class": "C",
       "Weight": 3500,
-      "Obtained":"Rare Garage"
+      "Obtained": "Rare Garage"
     },
     "2016 bmw m6": {
       "alias": "2016 m6",
@@ -6264,7 +6264,7 @@
       "Class": "D",
       "Weight": 3500
     },
-    
+
     "2018 infiniti q60": {
       "alias": "2007 q60",
       "Name": "2007 Infiniti Q60",
@@ -7708,7 +7708,7 @@
       "Handling": 500,
       "Class": "A",
       "Weight": 3800,
-      "Obtained":"Blueprints"
+      "Obtained": "Blueprints"
     },
     "2023 acura integra": {
       "alias": "2023 integra",

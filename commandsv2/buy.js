@@ -303,7 +303,7 @@ module.exports = {
             Livery: carindb.Image,
             Miles: 0,
             Resale: sellprice,
-            Weight: carindb.Weight
+            Weight: carindb.Weight,
           };
           if (boughtCar.Range) {
             carobj = {
@@ -320,7 +320,7 @@ module.exports = {
               Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
-              Weight: carindb.Weight
+              Weight: carindb.Weight,
             };
           }
 
