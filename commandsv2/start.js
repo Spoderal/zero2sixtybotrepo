@@ -34,6 +34,5 @@ module.exports = {
     await interaction.channel.send(
       "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDg4Mjk2ZTY2ZDkwNDRlZWEyY2U4Mzk4ODQ2YmNmZjJmYzg5Zjk5OSZjdD1n/OfB8WvjTmlILKTs7to/giphy.gif"
     );
-
   },
 };
