@@ -42,7 +42,7 @@ module.exports = {
             description: "Information for the recent big update!",
             value: "6_update",
             customId: "up6",
-            emoji: "⬆🎉",
+            emoji: "🎉",
           },
         ])
     );
