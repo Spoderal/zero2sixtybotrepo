@@ -288,7 +288,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(`${selected.Livery}`);
+          let selected1image = await loadImage(`${cardb.Cars[selected.Name.toLowerCase()].Image}`);
           let selected2image = await loadImage(`${car2.Image}`);
 
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
@@ -626,7 +626,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(`${selected.Livery}`);
+          let selected1image = await loadImage(`${cardb.Cars[selected.Name.toLowerCase()].Image}`);
           let selected2image = await loadImage(`${car2.Image}`);
 
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
@@ -932,7 +932,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(`${selected.Livery}`);
+          let selected1image = await loadImage(`${cardb.Cars[selected.Name.toLowerCase()].Image}`);
           let selected2image = await loadImage(`${car2.Image}`);
 
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
@@ -1247,7 +1247,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(`${selected.Livery}`);
+          let selected1image = await loadImage(`${cardb.Cars[selected.Name.toLowerCase()].Image}`);
           let selected2image = await loadImage(`${car2.Image}`);
 
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
@@ -1573,7 +1573,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(`${selected.Livery}`);
+          let selected1image = await loadImage(`${cardb.Cars[selected.Name.toLowerCase()].Image}`);
           let selected2image = await loadImage(`${car2.Image}`);
 
           ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
