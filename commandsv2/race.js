@@ -152,7 +152,7 @@ module.exports = {
         "**Select a race from the menu below**\n\nDifferent races have different difficulties, and rewards"
       )
       .setColor(colors.blue)
-      .setThumbnail(`${selected.Livery}`)
+      .setThumbnail(`${cardb.Cars[selected.Name.toLowerCase()].Image}`)
       .addFields({
         name: "Your car",
         value: `${selected.Emote} ${selected.Name}`,
