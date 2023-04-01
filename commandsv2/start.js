@@ -12,6 +12,14 @@ module.exports = {
 
     if (userdata) return await interaction.reply("You have an account!");
 
+    let newuser = await new User({ id: interaction.user.id });
+    newuser.tutorial = {
+      started: true,
+      finished: false,
+      stage: 1,
+    };
+    newuser.cash += 500;
+    newuser.save();
     let embed = new discord.EmbedBuilder({
       title: "You've started your journey!",
       color: 3447003,
@@ -27,13 +35,5 @@ module.exports = {
       "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDg4Mjk2ZTY2ZDkwNDRlZWEyY2U4Mzk4ODQ2YmNmZjJmYzg5Zjk5OSZjdD1n/OfB8WvjTmlILKTs7to/giphy.gif"
     );
 
-    let newuser = await new User({ id: interaction.user.id });
-    newuser.tutorial = {
-      started: true,
-      finished: false,
-      stage: 1,
-    };
-    newuser.cash += 500;
-    newuser.save();
   },
 };

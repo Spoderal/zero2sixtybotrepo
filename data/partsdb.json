@@ -2144,7 +2144,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/SQm6cs0/t1ducktail.png"
     },
     "t2spoiler": {
       "Name": "T2Spoiler",
@@ -2160,7 +2161,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/1JvyK0V/t1dspoiler.png"
     },
     "t3spoiler": {
       "Name": "T3Spoiler",
@@ -2176,7 +2178,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },
     "t4spoiler": {
       "Name": "T4Spoiler",
@@ -2192,7 +2195,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t5spoiler": {
       "Name": "T5Spoiler",
@@ -2208,7 +2212,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/Sys5bWY/t5spoilerr.png"
     },
     "bm1spoiler": {
       "Name": "BM1Spoiler",
@@ -2224,7 +2229,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },
     "ls1": {
       "Name": "LS1",
@@ -2338,7 +2344,8 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "spoiler",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Image":"https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },
     "t1nitrous": {
       "Name": "T1Nitrous",
@@ -2348,71 +2355,93 @@
       "Tier": "1"
     },
     "cracked exhaust": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:exhaustdefault:932419391650418709>"
     },
     "flat tires": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:exhaustdefault:932419391650418709>"
     },
     "rusted": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:spoilerdefault:932419391868526612>"
     },
     "broken suspension": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:suspensiondefault:932419391847563314>"
     },
     "no clutch": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:defaultclutch:935084786748370954>"
     },
     "no gearbox": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:enginedefault:932419391587483688>"
     },
     "no engine": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:enginedefault:932419391587483688>"
     },
     "no parts": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Name": "No Parts",
       "Emote": "<:empty_1:932046438328856646>"
     },
     "no intake": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:intakedefault:932419391734292561>"
     },
     "no turbo": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:turbodefault:932419392145354814>"
     },
     "stock engine": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:enginedefault:932419391587483688>"
     },
     "stock intake": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:intakedefault:932419391734292561>"
     },
     "stock exhaust": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:exhaustdefault:932419391650418709>"
     },
     "stock tires": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Name": "Stock Tires",
       "Emote": "<:tiresdefault:932419392036306954>"
     },
     "stock suspension": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:suspensiondefault:932419391847563314>"
     },
     "stock ecu": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:defaultecu:935084786341543977>"
     },
     "stock clutch": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:defaultclutch:935084786748370954>"
     },
     "stock turbo": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:turbodefault:932419392145354814>"
     },
     "broken": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:empty_1:932046438328856646>"
     },
     "missing": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:empty_1:932046438328856646>"
     },
     "flat": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:empty_1:932046438328856646>"
     },
     "stock": {
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Name": "Stock"
     }
   }

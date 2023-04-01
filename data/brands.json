@@ -78,6 +78,12 @@
     "name": "Ferrari",
     "country": "https://i.ibb.co/120BJky/flag-italy.png"
   },
+  "haas": {
+    "image": "https://i.ibb.co/ypF0MNw/Logo-Haas-F1.png",
+    "emote": "<:haas:1085065203659587584>",
+    "name": "Haas",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
   "honda": {
     "image": "https://i.ibb.co/1TsQK54/logo-honda.png",
     "emote": "<:honda:931011549705957397>",
@@ -85,189 +91,189 @@
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "hyundai": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/27pHtjJ/logo-hyundai.png",
+    "emote": "<:hyundai:931015215447941200>",
+    "name": "Hyundai",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "hsv": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/XLDXzQw/logo-hsv.png",
+    "emote": "<:hsv:964231712357879818>",
+    "name": "HSV",
+    "country": "https://i.ibb.co/1nWVZZw/flag-aus.png"
   },
   "infiniti": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/Ybh5Vjf/logo-infiniti.png",
+    "emote": "<:infiniti:933637817370824724>",
+    "name": "Infiniti",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "jaguar": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/znHcBQr/logo-jaguar.png",
+    "emote": "<:jaguar:931011547826913330>",
+    "name": "Jaguar",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
   "jeep": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/chjNZHn/logo-jeep.png",
+    "emote": "<:jeep:979619771064647700>",
+    "name": "Jeep",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "kia": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/6BjTwrc/KIA-logo2-svg-1.png",
+    "emote": "<:kia:937123149596745780>",
+    "name": "KIA",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "koenigsegg": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/5hzvcMh/logo-koenigsegg.png",
+    "emote": "<:koenigsegg:931011849212797029>",
+    "name": "Koenigsegg",
+    "country": "https://i.ibb.co/tcVzQ2d/Flag-of-Sweden-svg.png"
   },
   "lamborghini": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/cT0G74R/logo-lamborghini.png",
+    "emote": "<:lamborghini:931011549655617566>",
+    "name": "Lamborghini",
+    "country": "https://i.ibb.co/120BJky/flag-italy.png"
   },
   "lotus": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/WsP5bfh/logo-lotus.png",
+    "emote": "<:lotus_z:931068220222349332>",
+    "name": "Lotus",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
   "lexus": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/P6n4cbj/logo-lexus.png",
+    "emote": "<:lexus:932776357124001823>",
+    "name": "Lexus",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "maserati": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/0F7xq9Y/logo-masterati.png",
+    "emote": "<:maserati:961332832767184987>",
+    "name": "Maserati",
+    "country": "https://i.ibb.co/120BJky/flag-italy.png"
   },
   "mazda": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/S0BgpdN/logo-mazda.png",
+    "emote": "<:mazda:931011549680779364>",
+    "name": "Mazda",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "mclaren": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/RYfgjgD/logo-mclaren.png",
+    "emote": "<:mclaren:931011546354692137>",
+    "name": "McLaren",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
   "mercedes": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/b5BYpRh/logo-mercedes.png",
+    "emote": "<:mercedes_z:973000364410404924>",
+    "name": "Mercedes",
+    "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
   "mitsubishi": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/fxyJgvv/logo-mitsubishi.png",
+    "emote": "<:mitsubishi_z:931068489844789248>",
+    "name": "Mitsubishi",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "nissan": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/m85p50b/logo-nissan.png",
+    "emote": "<:nissan:931011548678352916>",
+    "name": "Nissan",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "pagani": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/tccJCS2/logo-pagani.png",
+    "emote": "<:pagani:933622884126056498>",
+    "name": "Pagani",
+    "country": "https://i.ibb.co/120BJky/flag-italy.png"
   },
   "plymouth": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/Gvxdbp2/logo-plymouth.png",
+    "emote": "<:pagani:933622884126056498>",
+    "name": "<:plymouth:965096601829916672>",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "pontiac": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/jR89t5t/logo-pontiac.png",
+    "emote": "<:pontiac:931012413984223313>",
+    "name": "Pontiac",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "porsche": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/80KKXBS/logo-porsche.png",
+    "emote": "<:porsche:931011550880338011>",
+    "name": "Porsche",
+    "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
   "polestar": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/FsnD07K/logo-polestar.png",
+    "emote": "<:polestar:963145703968890930>",
+    "name": "Polestar",
+    "country": "https://i.ibb.co/tcVzQ2d/Flag-of-Sweden-svg.png"
   },
   "renault": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/kQt8z8b/logo-renault.png",
+    "emote": "<:renault:1083645583782330388>",
+    "name": "Renault",
+    "country": "https://i.ibb.co/XzPKrPq/flag-french.png"
   },
   "ruf": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/YTyx5df/logo-ruf.png",
+    "emote": "<:ruf:1077395490380992603>",
+    "name": "RUF",
+    "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
   "rimac": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/Zdz91Zp/rimac-logo.png",
+    "emote": "<:rimac:962776154761216050>",
+    "name": "Rimac",
+    "country": "https://i.ibb.co/Rvf0Fr2/flag-crotia.png"
   },
   "saleen": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/4RP7TDf/logo-saleen.png",
+    "emote": "<:saleen:1077410030116147311>",
+    "name": "Saleen",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "scion": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/9h46vbw/logo-scion.png",
+    "emote": "<:scion:985075909230997564>",
+    "name": "Scion",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "ssc": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/JzHS64F/logo-ssc.png",
+    "emote": "<:ssc:979620786757337098>",
+    "name": "SSC",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "subaru": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/wRsvYvL/logo-subaru.png",
+    "emote": "<:subaru:931011550418976808>",
+    "name": "Subaru",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "tesla": {
-    "image": "",
-    "emote": "",
-    "name": "",
+    "image": "https://i.ibb.co/Yjh0pSg/logo-tesla.png",
+    "emote": "<:tesla:953428671446810634>",
+    "name": "Tesla",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "toyota": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/k8XgL8L/logo-toyota.png",
+    "emote": "<:toyota:931012829283233883>",
+    "name": "Toyota",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
   "volkswagen": {
-    "image": "",
-    "emote": "",
-    "name": "",
-    "country": ""
+    "image": "https://i.ibb.co/FzJrYW7/logo-vw.png",
+    "emote": "<:vw:931011548372168714>",
+    "name": "Volkswagen",
+    "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   }
 }

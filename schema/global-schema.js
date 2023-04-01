@@ -158,6 +158,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  drops:{
+    type: Array,
+    required: false,
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("global", Global);

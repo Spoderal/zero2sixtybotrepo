@@ -125,7 +125,7 @@ module.exports = {
             **bank deposit - Deposit money to your bank for bet racing**\n
             **bank withdraw - Withdraw money from your bank**\n
             **barn - Search for barn finds, these are restorable cars**\n
-            **betrace - Race against the odds and race any car in the game**\n
+            **race - Race your car in multiple races**\n
             **blackmarket - View cars that are only on the black market**\n
             **boost - Claim your boost earnings for boosting the community server**\n
             **buy - Buy a car, item, house, etc**\n
@@ -173,7 +173,7 @@ module.exports = {
             **prestige - Prestige your rank when you feel ready**\n
             **privacypolicy** - View the privacy policy\n
             **profile - View your profile**\n
-            **racetypes - View all of the race types and their rewards**\n
+            **races - View all of the race types and their rewards**\n
             **rank - Check your rank**\n
             **restore - Restore a barn find**\n
             **reward - Claim a crew season reward, or a season reward**\n
@@ -214,7 +214,8 @@ module.exports = {
             **daily - Claim your daily cash**\n
             **garage - View your cars, parts, and items**\n
             **stats - View stats of cars and parts**\n
-            **racetypes - View all the current race modes**\n
+            **race - Race your car in numerous races**\n
+            **races - View all the current race modes**\n
             **upgrade - Upgrade parts on your car**\n
           `);
           break;

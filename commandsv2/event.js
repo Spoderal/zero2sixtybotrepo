@@ -35,32 +35,11 @@ module.exports = {
             emoji: "🏆",
           },
           {
-            label: "Track Legends",
-            description: "Information for the Track Legends Event",
-            value: "track_event",
-            customId: "track",
-            emoji: "🏁",
-          },
-          {
-            label: "Stock Champions",
-            description: "Information for the Stock Champions Event",
-            value: "stock_event",
-            customId: "stock",
-            emoji: "🎈",
-          },
-          {
             label: "F1 Icons",
             description: "Information for the F1 Icons Event",
             value: "f1_icons",
             customId: "f1",
             emoji: "🏎️",
-          },
-          {
-            label: "April Fools",
-            description: "Information for the April Fools Event",
-            value: "april_fools",
-            customId: "april",
-            emoji: "🎉",
           },
         ])
     );
@@ -76,10 +55,7 @@ module.exports = {
           **__Events__**
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
-          Track Legends 🏁\n
-          Stock Champions 🎈\n
           F1 Icons 🏎️\n
-          April Fools 🎉
       `);
 
     embed.setColor(colors.blue);
@@ -125,57 +101,6 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "track_event") {
-        embed.setTitle("Track Legends");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Its track day baby! Bring out your best cars for the track and race for the best track cars in history!
-
-            **Beat the car you're racing, and you keep the car**! However, if you lose, **you lose a heafty amount of cash**... Depending on the difficulty you choose of course!
-            
-            **Speed is the least of your worries, sometimes it may be the most because you may crash and lose!**
-
-            The event goes up to tier 4 in \`/trackrace\`!
-
-            Tier 4: -$20K
-            Tier 3: $-15K
-            Tier 2: $-10K
-            Tier 1: $-5K
-
-            **Ends March 31st 2023**
-            
-                  `);
-        embed.setThumbnail("https://i.ibb.co/XYNrhZr/event-track.png");
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "stock_event") {
-        embed.setTitle("Stock Champions Event");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Bring out your best stock car, there's no parts allowed!
-
-            Race to be on top of the leaderboard in /stockrace to win prizes! View the leaderboard with /leaderboard
-
-            1st: 1987 RUF CTR Yellowbird\n
-            2nd: $10M Cash\n
-            3rd: $5M Cash\n
-            4th: $1M Cash\n
-            5th: $500K Cash\n
-
-            **Ends March 31st 2023**
-            
-                  `);
-        embed.setImage(
-          "https://www.ruf-automobile.de/site/assets/files/1093/scr-generationen.1920x720.jpg"
-        );
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
       } else if (value === "world_championship") {
         embed.setTitle("World Championship Event");
         embed.setFooter({ text: 'Prefix is "/"' });
@@ -201,72 +126,6 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "april_fools") {
-        let row4 = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setLabel("Horse Carriage")
-            .setEmoji("🐎")
-            .setStyle("Secondary")
-            .setCustomId("horse")
-        );
-        embed.setTitle("APRIL FOOLS!");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Bring out your WORST car, and be the WORST for this event!
-
-            Until April 1st, street race will tell you that you've won if you lose!
-
-            This event only happens once a year!
-
-            Claim your free April Fools car below as well!
-
-            You can obtain Fools Keys to get april fools cars from LOSING street races, use /unbox to unbox a fools crate!
-
-            There aren't just funny cars, but there's some exclusive cars as well!
-
-
-
-            **Ends April 1st 2023**
-            
-                  `);
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2, row4],
-          fetchReply: true,
-        });
-
-        if (userdata.choseapril !== true) {
-          let filter2 = (btnInt) => {
-            return interaction.user.id === btnInt.user.id;
-          };
-          let collector2 = msg.createMessageComponentCollector({
-            filter: filter2,
-          });
-          let carobj = {};
-          collector2.on("collect", async (i) => {
-            if (i.customId == "horse") {
-              let carindb = cardb.Cars["horse carriage"];
-              carobj = {
-                ID: carindb.alias,
-                Name: carindb.Name,
-                Speed: carindb.Speed,
-                Acceleration: carindb["0-60"],
-                Handling: carindb.Handling,
-                Parts: [],
-                Emote: carindb.Emote,
-                Livery: carindb.Image,
-                Miles: 0,
-                Resale: 1000000,
-              };
-              userdata.cars.push(carobj);
-              userdata.choseapril = true;
-              userdata.save();
-              await i.update("✅");
-              collector2.stop();
-            }
-          });
-        }
       } else if (value === "f1_icons") {
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()

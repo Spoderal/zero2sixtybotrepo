@@ -60,17 +60,17 @@ module.exports = {
             customId: "police",
           },
           {
-            label: "pinkslips",
-            description:
-              "Information about betting your car against other users",
-            value: "pinkslip_race",
-            customId: "pinkslip",
-          },
-          {
             label: "cashcup",
             description: "Information about cashcup races",
             value: "cash_race",
             customId: "cash",
+          },
+          
+          {
+            label: "crosscountry",
+            description: "Information about crosscountry races",
+            value: "cross_race",
+            customId: "cross",
           },
         ])
     );
@@ -85,7 +85,8 @@ module.exports = {
           
           <:boost:983813400289234978> = You can use nitrous in this race
 
-          Choose an item from the drop down menu below, there are many different types such as drifting, pink slips, and more!
+          Choose an item from the drop down menu below, there are many different types such as drifting, pink slips, and more!\n
+          Use /race to race in any of these races!
 
        `);
 
@@ -283,7 +284,7 @@ module.exports = {
               },
               {
                 name: `Tier 5`,
-                value: `${cashemote} $750\n${rpemote} 5\n${emotes.barnMapRare} 1`,
+                value: `${cashemote} $750\n${rpemote} 5`,
                 inline: true,
               },
               {
@@ -305,7 +306,63 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "squad_race") {
+          }
+          
+          else if (value === "cross_race") {
+            embed.fields = [];
+            embed.setTitle("Cross Country Racing");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(
+              `Race bots around the world!\n<:boost:983813400289234978>`
+            );
+            embed.addFields([
+              {
+                name: `Tier 1`,
+                value: `${cashemote} $350\n${rpemote} 2\n${emotes.barnMapCommon} 1`,
+                inline: true,
+              },
+              {
+                name: `Tier 2`,
+                value: `${cashemote} $700\n${rpemote} 3 ${rpemote}\n${emotes.barnMapCommon} 2`,
+                inline: true,
+              },
+              {
+                name: `Tier 3`,
+                value: `${cashemote} $1050\n${rpemote} 4\n${emotes.barnMapRare} 1`,
+                inline: true,
+              },
+              {
+                name: `Tier 4`,
+                value: `${cashemote} $1400\n${rpemote} 4\n${emotes.barnMapRare} 2`,
+                inline: true,
+              },
+              {
+                name: `Tier 5`,
+                value: `${cashemote} $1750\n${rpemote} 5\n${emotes.barnMapLegendary} 1`,
+                inline: true,
+              },
+              {
+                name: `Tier 6`,
+                value: `${cashemote} $2100\n${rpemote} 6\n${emotes.barnMapLegendary} 2`,
+                inline: true,
+              },
+              {
+                name: `Tier 7`,
+                value: `${cashemote} $2450\n${rpemote} 10\n${emotes.barnMapLegendary} 3`,
+                inline: true,
+              },
+            ]);
+
+            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+          
+          else if (value === "squad_race") {
             embed.fields = [];
             embed.setTitle("Squad Racing");
             embed.setFooter({ text: 'Prefix is "/"' });

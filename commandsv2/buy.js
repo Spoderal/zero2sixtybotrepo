@@ -303,6 +303,7 @@ module.exports = {
             Livery: carindb.Image,
             Miles: 0,
             Resale: sellprice,
+            Weight: carindb.Weight
           };
           if (boughtCar.Range) {
             carobj = {
@@ -319,6 +320,7 @@ module.exports = {
               Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
+              Weight: carindb.Weight
             };
           }
 
@@ -351,10 +353,10 @@ module.exports = {
           if (userdata.tutorial && userdata.tutorial.stage == 1) {
             console.log("tutorial");
             interaction.channel.send({
-              content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/streetrace tier 1 ${idtoset}\``,
+              content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/race ${idtoset}\`, and **select street race**, then **select tier 1**`,
             });
             interaction.channel.send(
-              "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWFlN2IwYmU3ZDVhZWQzZGJiNzVlNmFkYzkzOGFmZjUxYTQzOTZjNSZjdD1n/INnXFdQ3uXnb2LM1dY/giphy.gif"
+              "https://i.ibb.co/ZM9c9Q8/7-A2-Xv-QKrrv.gif"
             );
             userdata.tutorial.stage = 2;
             userdata.markModified("tutorial");

@@ -1,6 +1,6 @@
 const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder, EmbedBuilder } = require("@discordjs/builders");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
@@ -13,6 +13,8 @@ const {
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const itemdb = require("../data/items.json");
+const { createCanvas, loadImage } = require("canvas");
+const brands = require("../data/brands.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -51,309 +53,237 @@ module.exports = {
     let subcommandfetch = interaction.options.getSubcommand();
     var list = cars.Cars;
     var item = interaction.options.getString("item");
-    let userdata = await User.findOne({ id: interaction.user.id });
+    let id = interaction.options.getString("id");
+    let user = interaction.options.getString("user") || interaction.user
+    let userdata = await User.findOne({ id: user.id });
     let settings = userdata.settings;
+    let brandsarr = []
+    for(let b in brands){
+      brandsarr.push(brands[b])
+    }
     let weightemote = emotes.weight;
 
+
     if (subcommandfetch == "car_part" && item && list[item.toLowerCase()]) {
-      let handlingemote = emotes.handling;
-      let speedemote = emotes.speed;
-      let accelerationemote = emotes.zero2sixty;
-      let car = item.toLowerCase();
-      let carindb = list[car];
+      let canvas = createCanvas(1280, 720);
+      let ctx = canvas.getContext("2d");
+      await interaction.deferReply();
+      let carindb = list[item.toLowerCase()]
 
-      let speed = `${carindb.Speed}`;
+      let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png"); 
+      let carimg = await loadImage(carindb.Image)
+      let brand = brandsarr.filter((br) => br.emote == carindb.Emote)
+      let brimg = await loadImage(brand[0].image)
+      let flag = await loadImage(brand[0].country)
+      ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(brimg, 15, 620, 100, 100);
+      ctx.drawImage(flag, 1120, 620, 180, 100);
 
-      if (!carindb) return await interaction.reply(`Thats not a car!`);
+      ctx.font = "bold 54px sans-serif";
+      ctx.fillStyle = "#ffffff";
+      
+  
+      ctx.fillText(carindb.Name, 125, 690);
 
-      let trims = carindb.Trims || ["❌ No Trims"];
-      let sellprice = carindb.Price * 0.65;
+      ctx.font = "bold 45px sans-serif";
 
-      let embed = new Discord.EmbedBuilder()
-        .setTitle(`Stats for ${carindb.Emote} ${carindb.Name}`)
-        .addFields([
-          {
-            name: `Power`,
-            value: `${speedemote} ${speed}`,
-            inline: true,
-          },
-          {
-            name: `Acceleration`,
-            value: `${accelerationemote} ${carindb["0-60"]}`,
-            inline: true,
-          },
-          {
-            name: `Handling`,
-            value: `${handlingemote} ${carindb.Handling}`,
-            inline: true,
-          },
-          {
-            name: `Weight`,
-            value: `${weightemote} ${carindb.Weight}`,
-            inline: true,
-          },
-          {
-            name: `Price`,
-            value: `${toCurrency(carindb.Price)}`,
-            inline: true,
-          },
-          {
-            name: `Sell Price`,
-            value: `${toCurrency(sellprice)}`,
-            inline: true,
-          },
-          { name: `Trims`, value: `${trims.join("\n")}`, inline: true },
-        ])
-        .setColor(colors.blue)
-        .setImage(carindb.Image);
+      ctx.fillText(carindb.Speed, 15, 105);
+      ctx.fillText(carindb["0-60"], 170, 105);
+      ctx.fillText(carindb.Handling, 300, 105);
+      
+      ctx.font = "bold 35px sans-serif";
+      ctx.fillText(carindb.Weight, 435, 105);
 
-      await interaction.reply({ embeds: [embed] });
-    } else if (subcommandfetch == "id") {
-      let idtoselect = interaction.options.getString("id");
+      ctx.font = "bold 110px sans-serif";
 
-      if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+      ctx.fillText(carindb.Class, 1160, 110);
 
-      let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
-      let selected = filteredcar[0] || "No ID";
+      ctx.font = "bold 30px sans-serif";
+      let price = `${toCurrency(carindb.Price)}` 
 
-      if (selected == "No ID") {
-        let errembed = new Discord.EmbedBuilder()
-          .setTitle("Error!")
-          .setColor(colors.discordTheme.red).setDescription(`
-            That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n
-            **Example: /ids Select 1 1995 mazda miata**
-          `);
-
-        return await interaction.reply({ embeds: [errembed] });
+      if(carindb.Price <= 0){
+        price = `Obtained: ${carindb.Obtained}`
+      }
+      else if(carindb.Squad){
+        price = `Obtained: Squad`
       }
 
-      let handlingemote = emotes.handling;
-      let speedemote = emotes.speed;
-      let accelerationemote = emotes.zero2sixty;
-      let carindb = selected;
-      let sellprice = selected.Resale || 0;
-      let carweight =
-        selected.WeightStat || list[selected.Name.toLowerCase()].Weight;
+      ctx.fillText(price, 760, 680);
 
-      if (!selected.WeightStat || selected.WeightStat == null) {
-        selected.WeightStat = list[selected.Name.toLowerCase()].Weight;
-        userdata.markModified();
-        userdata.save();
-      }
-      carweight =
-        selected.WeightStat || list[selected.Name.toLowerCase()].Weight || 0;
-      let carimage = carindb.Livery || list[selected.Name.toLowerCase()].Image;
-      let speed = `${carindb.Speed}`;
-      //weight
-      let embed = new Discord.EmbedBuilder()
-        .setTitle(
-          `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
-        )
-        .addFields([
-          {
-            name: `Power`,
-            value: `${speedemote} ${speed}`,
-            inline: true,
-          },
-          {
-            name: `Acceleration`,
-            value: `${accelerationemote} ${carindb.Acceleration}s`,
-            inline: true,
-          },
-          {
-            name: `Handling`,
-            value: `${handlingemote} ${carindb.Handling}`,
-            inline: true,
-          },
-          {
-            name: `Weight`,
-            value: `${weightemote} ${carweight}`,
-            inline: true,
-          },
-          {
-            name: `Sell Price`,
-            value: `${toCurrency(sellprice)}`,
-            inline: true,
-          },
-          blankInlineField,
-        ])
-        .setColor(colors.blue)
-        .setImage(carimage);
+      let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
+        name: "stats-image.png",
+      });
 
-      let row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("parts")
-          .setEmoji("⚙️")
-          .setLabel("Parts")
-          .setStyle("Secondary"),
-        new ButtonBuilder()
-          .setCustomId("stats")
-          .setEmoji("📈")
-          .setLabel("Stats")
-          .setStyle("Secondary")
-      );
 
-      let msg = await interaction.reply({
-        embeds: [embed],
-        components: [row],
+     await interaction.editReply({
+        files: [attachment],
         fetchReply: true,
       });
+      
+    } else if (subcommandfetch == "id") {
+      let canvas = createCanvas(1280, 720);
+      let ctx = canvas.getContext("2d");
+      await interaction.reply("Please wait...");
+      let ucars = userdata.cars
+      let carindb = ucars.filter((c) => c.ID == id)
+      if(carindb.length == 0){
+        return interaction.reply("Thats not an ID!")
+      }
 
-      let filter = (btnInt) => {
-        return interaction.user.id === btnInt.user.id;
-      };
+      console.log(carindb)
+      let ogcar = cars.Cars[carindb[0].Name.toLowerCase()].Image
+      let weight = carindb[0].WeightStat
+      if (!weight) {
+        weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
+      }
+      
+      let exhaust = carindb[0].Exhaust
+      let intake = carindb[0].Intake
+      let tires = carindb[0].Tires
+      let turbo = carindb[0].Turbo
+      let suspension = carindb[0].Suspension
+      let engine = carindb[0].Engine
+      let gearbox = carindb[0].Gearbox
+      let clutch = carindb[0].Clutch
+      let ecu = carindb[0].ECU
+      let brakes = carindb[0].Brakes
+      let spoiler = carindb[0].Spoiler
+      let intercooler = carindb[0].Intercooler
+      
 
-      const collector2 = msg.createMessageComponentCollector({
-        filter,
+     
+      
+
+      // let suspensionimg = await loadImage(partdb.Parts[suspension.toLowerCase()].Image)
+      // let engineimg = await loadImage(partdb.Parts[engine.toLowerCase()].Image)
+      // let gearboximg = await loadImage(partdb.Parts[gearbox.toLowerCase()].Image)
+      // let intercoolerimg = await loadImage(partdb.Parts[intercooler.toLowerCase()].Image)
+
+      let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png"); 
+      let carimg = await loadImage(ogcar)
+      let brand = brandsarr.filter((br) => br.emote == carindb[0].Emote)
+      let brimg = await loadImage(brand[0].image)
+      let flag = await loadImage(brand[0].country)
+      ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
+      console.log("car done")
+      ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
+      console.log("bg done")
+      ctx.drawImage(brimg, 15, 620, 100, 100);
+      console.log("br done")
+      ctx.drawImage(flag, 1120, 620, 180, 100);
+      console.log("flag done")
+
+
+
+      ctx.font = "bold 54px sans-serif";
+      ctx.fillStyle = "#ffffff";
+      
+  
+      ctx.fillText(carindb[0].Name, 125, 690);
+      console.log("name done")
+
+      ctx.font = "bold 45px sans-serif";
+
+      ctx.fillText(carindb[0].Speed, 15, 105);
+      console.log("speed done")
+      ctx.fillText(`${carindb[0].Acceleration.toFixed(1)}`, 170, 105);
+      console.log("acc done")
+      ctx.fillText(carindb[0].Handling, 300, 105);
+      console.log("hand done")
+      
+      ctx.font = "bold 35px sans-serif";
+      console.log("done")
+      ctx.fillText(weight, 435, 105);
+      
+      ctx.font = "bold 20px sans-serif";
+      
+      if(exhaust){
+        let exhaustimg = await loadImage(partdb.Parts[exhaust.toLowerCase()].Image)
+        ctx.drawImage(exhaustimg, 595, 10, 75, 75)
+        ctx.fillText(exhaust, 585, 105);
+      }
+      
+      if(intake){
+        let intakeimg = await loadImage(partdb.Parts[intake.toLowerCase()].Image)
+        ctx.drawImage(intakeimg, 710, 10, 75, 75)
+        ctx.fillText(intake, 700, 105);
+      }
+
+      if(tires){
+        let tiresimg = await loadImage(partdb.Parts[tires.toLowerCase()].Image)
+        ctx.drawImage(tiresimg, 815, 10, 75, 75)
+        ctx.fillText(tires, 815, 105);
+      }
+
+      if(turbo){
+        let turboimg = await loadImage(partdb.Parts[turbo.toLowerCase()].Image)
+        ctx.drawImage(turboimg, 930, 10, 75, 75)
+        ctx.fillText(turbo, 930, 105);
+      }
+
+      if(clutch){
+        let clutchimg = await loadImage(partdb.Parts[clutch.toLowerCase()].Image)
+        ctx.drawImage(clutchimg, 1045, 10, 75, 75)
+        ctx.fillText(clutch, 1045, 105);
+      }
+
+      if(ecu){
+        let ecuimg = await loadImage(partdb.Parts[ecu.toLowerCase()].Image)
+        ctx.drawImage(ecuimg, 1160, 10, 75, 75)
+        ctx.fillText(ecu, 1160, 105);
+      }
+
+      if(brakes){
+        let brakesimg = await loadImage(partdb.Parts[brakes.toLowerCase()].Image)
+        ctx.drawImage(brakesimg, 1160, 115, 75, 75)
+        ctx.fillText(brakes, 1160, 215);
+      }
+
+      if(spoiler){
+        let spoilerimg = await loadImage(partdb.Parts[spoiler.toLowerCase()].Image)
+        ctx.drawImage(spoilerimg, 1160, 215, 75, 75)
+        ctx.fillText(spoiler, 1160, 315);
+      }
+      if(intercooler){
+        let intercoolerimg = await loadImage(partdb.Parts[intercooler.toLowerCase()].Image)
+        ctx.drawImage(intercoolerimg, 1160, 315, 75, 75)
+        ctx.fillText(intercooler, 1140, 415);
+      }
+
+      if(suspension){
+        let suspensionimg = await loadImage(partdb.Parts[suspension.toLowerCase()].Image)
+        ctx.drawImage(suspensionimg, 1160, 415, 75, 75)
+        ctx.fillText(suspension, 1140, 515);
+      }
+
+      if(engine){
+        let engineimg = await loadImage(partdb.Parts[engine.toLowerCase()].Image)
+        ctx.drawImage(engineimg, 790, 640, 75, 75)
+        ctx.fillText("Engine", 800, 650);
+      }
+
+      if(gearbox){
+        let gearboximg = await loadImage(partdb.Parts[gearbox.toLowerCase()].Image)
+        ctx.drawImage(gearboximg, 890, 640, 75, 75)
+        ctx.fillText(gearbox, 900, 650);
+      }
+   
+   
+      console.log("done")
+      let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
+        name: "car-image.png",
       });
 
-      collector2.on("collect", async (i) => {
-        if (i.customId.includes("parts")) {
-          let exhaust = selected.Exhaust || "Stock Exhaust";
-          let intake = selected.Intake || "Stock Intake";
-          let suspension = selected.Suspension || "Stock Suspension";
-          let tires = selected.Tires || "Stock Tires";
-          let engine = selected.Engine || "Stock Engine";
-          let clutch = selected.Clutch || "Stock Clutch";
-          let ecu = selected.ECU || "Stock ECU";
-          let turbo = selected.Turbo || "Stock Turbo";
-          let nitro = selected.Nitro || "Stock Nitro";
-          let intercooler = selected.Intercooler || "Stock Intercooler";
-          let gearbox = selected.Gearbox || "Stock Gearbox";
-          let brakes = selected.Brakes || "Stock Brakes";
-          let spoiler = selected.Spoiler || "No Spoiler";
-          let partindb = partdb.Parts;
 
-          let exhaustemote = partindb[exhaust.toLowerCase()]?.Emote || "🔵";
-          let intakeemote = partindb[intake.toLowerCase()]?.Emote || "🔵";
-          let suspensionemote =
-            partindb[suspension.toLowerCase()]?.Emote || "🔵";
-          let tiresemote = partindb[tires.toLowerCase()]?.Emote || "🔵";
-          let clutchemote = partindb[clutch.toLowerCase()]?.Emote || "🔵";
-          let ecuemote = partindb[ecu.toLowerCase()]?.Emote || "🔵";
-          let engineemote = partindb[engine.toLowerCase()]?.Emote || "🔵";
-          let turboemote = partindb[turbo.toLowerCase()]?.Emote || "🔵";
-          let nitroemote = partindb[nitro.toLowerCase()]?.Emote || "🔵";
-          let intercooleremote =
-            partindb[intercooler.toLowerCase()]?.Emote || "🔵";
-          let gearboxemote = partindb[gearbox.toLowerCase()]?.Emote || "🔵";
-          let brakesemote = partindb[brakes.toLowerCase()]?.Emote || "🔵";
-          let spoileremote = partindb[spoiler.toLowerCase()]?.Emote || "🔵";
 
-          let embed = new Discord.EmbedBuilder()
-            .setTitle(
-              `Parts for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
-            )
-            .addFields([
-              {
-                name: `Exhaust`,
-                value: `${exhaustemote} ${exhaust.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Intake`,
-                value: `${intakeemote} ${intake.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Tires`,
-                value: `${tiresemote} ${tires.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Turbo`,
-                value: `${turboemote} ${turbo.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Suspension`,
-                value: `${suspensionemote} ${suspension.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Clutch`,
-                value: `${clutchemote} ${clutch.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `ECU`,
-                value: `${ecuemote} ${ecu.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Engine`,
-                value: `${engineemote} ${engine.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Nitro`,
-                value: `${nitroemote} ${nitro.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Intercooler`,
-                value: `${intercooleremote} ${intercooler.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Gearbox`,
-                value: `${gearboxemote} ${gearbox.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Brakes`,
-                value: `${brakesemote} ${brakes.split(" ")[0]}`,
-                inline: true,
-              },
-              {
-                name: `Spoiler`,
-                value: `${spoileremote} ${spoiler}`,
-                inline: true,
-              },
-            ])
 
-            .setColor(colors.blue)
-            .setImage(carimage);
-          i.update({ embeds: [embed] });
-        } else if (i.customId.includes("stats")) {
-          let embed = new Discord.EmbedBuilder()
-            .setTitle(
-              `Stats for ${interaction.user.username}'s ${carindb.Emote} ${carindb.Name}`
-            )
-            .addFields([
-              {
-                name: `Speed`,
-                value: `${speedemote} ${carindb.Speed}`,
-                inline: true,
-              },
-              {
-                name: `Acceleration`,
-                value: `${accelerationemote} ${carindb.Acceleration}`,
-                inline: true,
-              },
-              {
-                name: `Handling`,
-                value: `${handlingemote} ${carindb.Handling}`,
-                inline: true,
-              },
-              {
-                name: `Weight`,
-                value: `${weightemote} ${carweight}`,
-                inline: true,
-              },
-              {
-                name: `Sell Price`,
-                value: `${toCurrency(sellprice)}`,
-                inline: true,
-              },
-              blankInlineField,
-            ])
-            .setColor(colors.blue)
-            .setImage(carimage);
-          i.update({ embeds: [embed] });
-        }
+     await interaction.channel.send({
+        files: [attachment],
+        fetchReply: true,
       });
-    } else if (
+      }
+     else if (
       subcommandfetch == "car_part" &&
       partdb.Parts[item.toLowerCase()]
     ) {

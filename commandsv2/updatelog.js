@@ -37,6 +37,13 @@ module.exports = {
             customId: "up5",
             emoji: "⬆️",
           },
+          {
+            label: "4/1/2023",
+            description: "Information for the recent big update!",
+            value: "6_update",
+            customId: "up6",
+            emoji: "⬆🎉",
+          },
         ])
     );
 
@@ -48,7 +55,8 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 3/20/2023\n
             🌸 Spring Update 3/1/2023\n
-            ⬆️ Small Update 3/15/2023
+            ⬆️ Small Update 3/15/2023\n
+            🎉 Big Update 4/1/2023\n
         `);
 
     embed.setColor(colors.blue);
@@ -119,7 +127,33 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "5_update") {
+          } 
+          else if (value === "6_update") {
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`Big Update`);
+            embed
+              .setDescription(
+                `• New race system, use /race to find most races in one place! The only one's not there are drift, squadrace, timetrial, and cashcup\n
+                • New stats cards are finally here! New designs for cars make showing cars stats a lot better!\n
+                • New race: cross country, you can earn barn maps and $350 * the bot tier!
+                • Race rewards adjusted\n
+                • New cars, check /dealer\n
+                • New codes\n
+                
+                `
+              )
+              .setFooter({ text: "4/1/2023" })
+              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+
+          else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Small Update`);

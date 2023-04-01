@@ -19,8 +19,8 @@ module.exports = {
     .setName("dealer")
     .setDescription("The car dealership"),
   async execute(interaction) {
-    let userdata = await User.findOne({ id: interaction.user.id });
-    let usercars = userdata.cars;
+    let userdata = await User.findOne({ id: interaction.user.id }); || await new User({ id: interaction.user.id });
+    let usercars = userdata.cars || []
     let carclassDarr = [];
     let carclassCarr = [];
     let carclassBarr = [];
@@ -28,12 +28,13 @@ module.exports = {
     let carclassSarr = [];
     let carclassParr = [];
     let newcars = [
-      cars.Cars["horse"],
-      cars.Cars["2020 kawasaki z900"],
-      cars.Cars["2023 jeep gladiator"],
-      cars.Cars["1973 buick riviera"],
-      cars.Cars["2020 porsche 718 boxster"],
-      cars.Cars["1998 mitsubishi lancer evolution"],
+      cars.Cars["2008 porsche 911 gt2"],
+      cars.Cars["2013 porsche 911 turbo"],
+      cars.Cars["1996 corvette c4"],
+      cars.Cars["2010 ferrari california"],
+      cars.Cars["2023 acura integra"],
+      cars.Cars["1969 toyota corolla"],
+      cars.Cars["2015 mercedes c class"],
     ];
     let global = await Global.findOne();
     let carstock = global.stock;

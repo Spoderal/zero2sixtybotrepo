@@ -8,5 +8,26 @@
     "name": "highwayrace",
     "tiers": 7,
     "reward": 250
+  },
+  {
+    "name": "quartermile",
+    "tiers": 7,
+    "reward": 200
+  },
+  {
+    "name": "halfmile",
+    "tiers": 7,
+    "reward": 250
+  },
+  {
+    "name": "squadrace",
+    "tiers": 7,
+    "reward": 250
+  },
+  
+  {
+    "name": "crossrace",
+    "tiers": 7,
+    "reward": 350
   }
 ]

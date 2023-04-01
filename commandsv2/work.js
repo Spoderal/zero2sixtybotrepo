@@ -265,7 +265,7 @@ module.exports = {
         });
       } else if (jobtowork.name == "police") {
         interaction.reply(
-          `Chase other players using /streetrace, or use \`/wanted\` to work on your police job!`
+          `Use \`/wanted\` to work on your police job!`
         );
       } else if (jobtowork.name == "tire changer") {
         userdata.work.cooldown = Date.now();
