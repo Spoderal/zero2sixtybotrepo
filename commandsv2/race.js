@@ -183,7 +183,7 @@ module.exports = {
       "halfmile",
       "quartermile",
       "crossrace",
-      "eggrace"
+      "eggrace",
     ];
     collector.on("collect", async (i) => {
       console.log(i.customId);
