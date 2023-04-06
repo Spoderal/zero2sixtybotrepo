@@ -7,6 +7,10 @@ async function dailyCheck(interaction) {
   let userdata = await User.findOne({ id: interaction.user.id });
   let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
 
+  if(userdata){
+
+  
+
   if (cooldowns) {
     let settings = userdata.settings;
     let votetimer = userdata.votetimer;
@@ -56,6 +60,8 @@ async function dailyCheck(interaction) {
       }
     }
   }
+}
+
 }
 
 module.exports = {

@@ -32,7 +32,8 @@ module.exports = {
             )
           )} users\n\n🏓 Ping: ${Math.round(
             interaction.client.ws.ping
-          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds`,
+          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n
+          🥚 SPACE EGG MOBILE: ONESMALLSTEPFOREGGS`,
           inline: true,
         },
         {

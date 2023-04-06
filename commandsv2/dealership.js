@@ -757,14 +757,6 @@ module.exports = {
         }
       }
     });
-    if (userdata.tutorial && userdata.tutorial.stage == 1) {
-      console.log("tutorial");
-      interaction.channel.send({
-        content: `You can buy a car with /buy [car id], or the full name, the car id is listed next to \`ID:\`, an example would be /buy \`2002 mustang\``,
-      });
-      interaction.channel.send(
-        "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWQ2ZjA4Y2RjMWI2MmRhMGExYzM4ODA3MjZiYzZkOWViMjU4NGFkMiZjdD1n/re1Ayg7aiFCSKYkNys/giphy.gif"
-      );
-    }
+
   },
 };

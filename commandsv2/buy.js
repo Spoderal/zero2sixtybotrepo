@@ -350,20 +350,7 @@ module.exports = {
             .setImage(`${boughtCar.Image}`);
 
           await interaction.reply({ embeds: [embed] });
-          if (userdata.tutorial && userdata.tutorial.stage == 1) {
-            console.log("tutorial");
-            interaction.channel.send({
-              content: `Now that you've bought your first car, you can race with it! See the ID field? Thats what you're going to type in the box when it asks for the car, go ahead and try running \`/race ${idtoset}\`, and **select street race**, then **select tier 1**`,
-            });
-            interaction.channel.send(
-              "https://i.ibb.co/ZM9c9Q8/7-A2-Xv-QKrrv.gif"
-            );
-            userdata.tutorial.stage = 2;
-            userdata.markModified("tutorial");
-            userdata.save();
-
-            return;
-          }
+      
         }
       }
     } else if (boughtPart) {

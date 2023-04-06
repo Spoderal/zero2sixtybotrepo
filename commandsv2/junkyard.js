@@ -7,6 +7,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
+const cardb = require("../data/cardb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -72,12 +73,35 @@ module.exports = {
       cooldowndata.junk = Date.now();
       await cooldowndata.save();
       userdata.parts.push(part.Name.toLowerCase());
+      let filteredegg = userdata.cars.filter((car) => car.Name == "2023 Steam Egg Mobile")
+
+      if(!filteredegg[0]){
+        let carindb = cardb.Cars["2023 steam egg mobile"]
+        let eggobj = {
+          ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+          Resale: 0,
+          Weight: carindb.Weight,
+        }
+        userdata.cars.push(eggobj)
+      }
+
       await userdata.save();
       let embed = new Discord.EmbedBuilder()
         .setTitle(`${rarity.type} Part Find`)
         .addFields([{ name: `Part`, value: `${part.Name}` }])
+        .setDescription("Found 🥚 2023 Steam Egg Mobile")
         .setColor(colors.blue);
       await interaction.reply({ embeds: [embed] });
+
+      
     }
 
     pickRandom();

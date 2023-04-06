@@ -44,7 +44,7 @@ module.exports = {
     ),
   async execute(interaction) {
     let user1 = interaction.user;
-    let user2 = interaction.options.getUser("user");
+    let user2 = interaction.options.getUser("user")
 
     let userdata = await User.findOne({ id: user1.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -96,10 +96,12 @@ module.exports = {
 
     if (trading.endsWith("cash")) {
       let cashamount = Number(trading.split(" ")[0]);
-      item = `${toCurrency(cashamount)}`;
+      let newamount = Math.round(cashamount -= (cashamount * 0.01))
+      console.log(newamount)
+      item = `${toCurrency(newamount)}`;
       if (cashamount > userdata.cash)
         return interaction.reply("You don't have enough cash!");
-      userdata2.cash += cashamount;
+      userdata2.cash += newamount;
       userdata.cash -= cashamount;
     }
     if (partdb.Parts[trading]) {
@@ -135,10 +137,11 @@ module.exports = {
 
     if (trading2.endsWith("cash")) {
       let cashamount = Number(trading2.split(" ")[0]);
-      item2 = `${toCurrency(cashamount)}`;
+      let newamount = Math.round(cashamount -= (cashamount * 0.01))
+      item2 = `${toCurrency(newamount)}`;
       if (cashamount > userdata2.cash)
         return interaction.reply("You don't have enough cash!");
-      userdata.cash += cashamount;
+      userdata.cash += newamount;
       userdata2.cash -= cashamount;
     }
     if (partdb.Parts[trading2]) {
@@ -185,7 +188,8 @@ module.exports = {
         }
       )
       .setColor(colors.blue)
-      .setThumbnail("https://i.ibb.co/tqytBYD/tradeimg.png");
+      .setThumbnail("https://i.ibb.co/tqytBYD/tradeimg.png")
+      .setDescription("Trade tax: 1%")
     let msg = await interaction.reply({
       content: `<@${user2.id}> Trade Request`,
       embeds: [embed],

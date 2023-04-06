@@ -23,11 +23,11 @@ module.exports = {
 
     if (driftrank < driftprestige)
       return await interaction.reply(
-        `Your drift rank needs to be ${raceprestige}!`
+        `Your drift rank needs to be ${driftprestige}!`
       );
     if (racerank < raceprestige)
       return await interaction.reply(
-        `Your race rank needs to be ${driftprestige}!`
+        `Your race rank needs to be ${raceprestige}!`
       );
 
     userdata.prestige += 1;
