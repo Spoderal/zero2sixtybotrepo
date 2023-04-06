@@ -29,5 +29,10 @@
     "name": "crossrace",
     "tiers": 7,
     "reward": 350
+  },
+  {
+    "name": "eggrace",
+    "tiers": 7,
+    "reward": 150
   }
 ]

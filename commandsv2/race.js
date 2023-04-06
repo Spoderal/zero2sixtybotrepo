@@ -108,7 +108,7 @@ module.exports = {
       new ButtonBuilder()
         .setLabel("Egg Race")
         .setEmoji("🥚")
-        .setCustomId("egg")
+        .setCustomId("eggrace")
         .setStyle("Secondary")
     );
     const tierrow = new ActionRowBuilder().addComponents(
@@ -183,6 +183,7 @@ module.exports = {
       "halfmile",
       "quartermile",
       "crossrace",
+      "eggrace"
     ];
     collector.on("collect", async (i) => {
       console.log(i.customId);
