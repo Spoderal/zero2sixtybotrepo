@@ -350,7 +350,6 @@ module.exports = {
             .setImage(`${boughtCar.Image}`);
 
           await interaction.reply({ embeds: [embed] });
-      
         }
       }
     } else if (boughtPart) {

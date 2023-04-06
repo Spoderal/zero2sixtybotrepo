@@ -105,7 +105,7 @@ module.exports = {
         .setEmoji("<:logo_cr:1090120001744281742>")
         .setCustomId("crossrace")
         .setStyle("Secondary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("Egg Race")
         .setEmoji("🥚")
         .setCustomId("egg")
@@ -348,11 +348,14 @@ module.exports = {
           } else {
             mph = selected.Speed;
           }
-          let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let weight =
+            selected.WeightStat ||
+            cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling / weather2.Grip;
           if (!selected.WeightStat) {
-            selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
+            selected.WeightStat =
+              cardb.Cars[selected.Name.toLowerCase()].Weight;
           }
 
           let mph2;
@@ -877,10 +880,12 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        } 
-        
-        else if (race[0].name == "eggrace") {
-          if(!selected.Name.includes("Egg")) return await i.update({ content: "You need an egg to race in the egg race!", components: [] }); 
+        } else if (race[0].name == "eggrace") {
+          if (!selected.Name.includes("Egg"))
+            return await i.update({
+              content: "You need an egg to race in the egg race!",
+              components: [],
+            });
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({ content: "Please wait...", components: [] });
@@ -898,10 +903,8 @@ module.exports = {
           let cashlost = parseInt(bot) * 20;
           let lockpicks = parseInt(bot) * 1;
           let wheelspins = parseInt(bot) * 1;
-          car2 = carsarray.filter(
-            (car) => car.Engine == "Egg Engine"
-          );
-          
+          car2 = carsarray.filter((car) => car.Engine == "Egg Engine");
+
           car2 = lodash.sample(car2);
 
           console.log(car2);
@@ -1099,10 +1102,12 @@ module.exports = {
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.ferrari} 2023 Ferrari Egg Mobile`);
 
-              let filteredegg = userdata.cars.filter((car) => car.Name == "2023 Ferrari Egg Mobile")
+              let filteredegg = userdata.cars.filter(
+                (car) => car.Name == "2023 Ferrari Egg Mobile"
+              );
 
-              if(!filteredegg[0]){
-                let carindb = cardb.Cars["2023 ferrari egg mobile"]
+              if (!filteredegg[0]) {
+                let carindb = cardb.Cars["2023 ferrari egg mobile"];
                 let eggobj = {
                   ID: carindb.alias,
                   Name: carindb.Name,
@@ -1115,13 +1120,11 @@ module.exports = {
                   Miles: 0,
                   Resale: 0,
                   Weight: carindb.Weight,
-                }
-                userdata.cars.push(eggobj)
+                };
+                userdata.cars.push(eggobj);
               }
 
-
               userdata.cash += cashwon;
-           
 
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Egg Race won! ${weather2.Emote}`);
@@ -1163,9 +1166,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-
-        else if (race[0].name == "halfmile") {
+        } else if (race[0].name == "halfmile") {
           let tracklength = 800;
           let tracklength2 = 800;
           await i.update({ content: "Please wait...", components: [] });

@@ -134,9 +134,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
-      
-      else if (value === "egg") {
+      } else if (value === "egg") {
         embed.setTitle("Easter Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Egg mobiles are back with a brand new look!
@@ -162,8 +160,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
-      else if (value === "f1_icons") {
+      } else if (value === "f1_icons") {
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setLabel("2023 Ferrari SF23")
