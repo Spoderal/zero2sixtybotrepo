@@ -194,10 +194,12 @@ module.exports = {
           let cashwon = 5000 / time;
           earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
           earnings.push(`⌚ 2023 Time Egg Mobile`);
-          let filteredegg = userdata.cars.filter((car) => car.Name == "2023 Time Egg Mobile")
+          let filteredegg = userdata.cars.filter(
+            (car) => car.Name == "2023 Time Egg Mobile"
+          );
 
-          if(!filteredegg[0]){
-            let carindb = cardb.Cars["2023 time egg mobile"]
+          if (!filteredegg[0]) {
+            let carindb = cardb.Cars["2023 time egg mobile"];
             let eggobj = {
               ID: carindb.alias,
               Name: carindb.Name,
@@ -210,8 +212,8 @@ module.exports = {
               Miles: 0,
               Resale: 0,
               Weight: carindb.Weight,
-            }
-            userdata.cars.push(eggobj)
+            };
+            userdata.cars.push(eggobj);
           }
 
           userdata.cash += cashwon;

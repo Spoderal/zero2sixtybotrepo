@@ -7,7 +7,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const cardb = require("../data/cardb.json")
+const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -73,10 +73,12 @@ module.exports = {
       cooldowndata.junk = Date.now();
       await cooldowndata.save();
       userdata.parts.push(part.Name.toLowerCase());
-      let filteredegg = userdata.cars.filter((car) => car.Name == "2023 Steam Egg Mobile")
+      let filteredegg = userdata.cars.filter(
+        (car) => car.Name == "2023 Steam Egg Mobile"
+      );
 
-      if(!filteredegg[0]){
-        let carindb = cardb.Cars["2023 steam egg mobile"]
+      if (!filteredegg[0]) {
+        let carindb = cardb.Cars["2023 steam egg mobile"];
         let eggobj = {
           ID: carindb.alias,
           Name: carindb.Name,
@@ -89,8 +91,8 @@ module.exports = {
           Miles: 0,
           Resale: 0,
           Weight: carindb.Weight,
-        }
-        userdata.cars.push(eggobj)
+        };
+        userdata.cars.push(eggobj);
       }
 
       await userdata.save();
@@ -100,8 +102,6 @@ module.exports = {
         .setDescription("Found 🥚 2023 Steam Egg Mobile")
         .setColor(colors.blue);
       await interaction.reply({ embeds: [embed] });
-
-      
     }
 
     pickRandom();

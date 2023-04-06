@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const lodash = require("lodash")
+const lodash = require("lodash");
 const User = require("../schema/profile-schema");
-const cardb = require("../data/cardb.json")
+const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,14 +10,11 @@ module.exports = {
     .setDescription("View gold pricing and what it can buy"),
 
   async execute(interaction) {
-
     let userdata = await User.findOne({ id: interaction.user.id });
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Gold Pricing")
-      .setDescription(
-        `Buy gold [here!](https://zero2sixty-store.tebex.io/)`
-      )
+      .setDescription(`Buy gold [here!](https://zero2sixty-store.tebex.io/)`)
       .addFields([
         {
           name: `Exchange Rate`,
@@ -46,13 +43,15 @@ module.exports = {
 
     await interaction.reply({ embeds: [embed] });
 
-    let randgold = lodash.random(0, 100)
+    let randgold = lodash.random(0, 100);
 
-    if(randgold == 6){
-      let filteredegg = userdata.cars.filter((car) => car.Name == "2023 Gold Egg Mobile")
+    if (randgold == 6) {
+      let filteredegg = userdata.cars.filter(
+        (car) => car.Name == "2023 Gold Egg Mobile"
+      );
 
-      if(!filteredegg[0]){
-        let carindb = cardb.Cars["2023 gold egg mobile"]
+      if (!filteredegg[0]) {
+        let carindb = cardb.Cars["2023 gold egg mobile"];
         let eggobj = {
           ID: carindb.alias,
           Name: carindb.Name,
@@ -65,13 +64,12 @@ module.exports = {
           Miles: 0,
           Resale: 0,
           Weight: carindb.Weight,
-        }
-        userdata.cars.push(eggobj)
-        userdata.save()
+        };
+        userdata.cars.push(eggobj);
+        userdata.save();
       }
 
-      interaction.channel.send("You found the gold egg mobile!")
-
+      interaction.channel.send("You found the gold egg mobile!");
     }
   },
 };
