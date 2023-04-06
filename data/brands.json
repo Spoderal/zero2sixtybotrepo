@@ -276,10 +276,10 @@
     "name": "Volkswagen",
     "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
-  "egg":{
-    "image":"https://i.ibb.co/rmfcxKD/brand-egg.png",
-    "emote":"🥚",
-    "name":"Egg",
-    "country":"https://i.ibb.co/rmfcxKD/brand-egg.png"
+  "egg": {
+    "image": "https://i.ibb.co/rmfcxKD/brand-egg.png",
+    "emote": "🥚",
+    "name": "Egg",
+    "country": "https://i.ibb.co/rmfcxKD/brand-egg.png"
   }
 }
