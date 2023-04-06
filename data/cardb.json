@@ -277,6 +277,23 @@
       "Class": "N",
       "Weight": 900
     },
+    "2023 space egg mobile": {
+      "alias": "2023 sp egg",
+      "Name": "2023 Space Egg Mobile",
+      "Emote": "<:egg_zero:964250156746834011>",
+      "Speed": 90,
+      "kmh": 201,
+      "Price": 0,
+      "sellprice": 100000,
+      "Engine": "Egg Engine",
+      "Image": "https://i.ibb.co/9G0Y21D/egg-space.png",
+      "0-60": 15,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Event",
+      "Class": "N",
+      "Weight": 900
+    },
     "2023 gold egg mobile": {
       "alias": "2023 go egg",
       "Name": "2023 Gold Egg Mobile",

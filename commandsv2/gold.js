@@ -62,7 +62,7 @@ module.exports = {
           Emote: carindb.Emote,
           Livery: carindb.Image,
           Miles: 0,
-          Resale: 0,
+          Resale: 10000000,
           Weight: carindb.Weight,
         };
         userdata.cars.push(eggobj);
