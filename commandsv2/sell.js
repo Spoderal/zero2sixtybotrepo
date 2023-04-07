@@ -4,7 +4,7 @@ const User = require("../schema/profile-schema");
 let parts = require("../data/partsdb.json");
 let profilestuff = require("../data/pfpsdb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const cardb = require("../data/cardb.json")
+const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,8 +43,8 @@ module.exports = {
     if (selected !== "No ID") {
       let price = selected.Resale || selected.Price || 0;
 
-      if(selected.Resale == 0 || !selected.Resale){
-        price = cardb.Cars[selected.Name.toLowerCase()].sellprice
+      if (selected.Resale == 0 || !selected.Resale) {
+        price = cardb.Cars[selected.Name.toLowerCase()].sellprice;
       }
 
       userdata.cars.pull(selected);
