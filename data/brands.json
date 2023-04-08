@@ -281,5 +281,11 @@
     "emote": "<:egg_zero:964250156746834011>",
     "name": "Egg",
     "country": "https://i.ibb.co/rmfcxKD/brand-egg.png"
+  },
+  "apollo": {
+    "image": "https://i.ibb.co/bbkmXjs/logo-apollo.png",
+    "emote": "<:apollo:1066081882896351332>",
+    "name": "Apollo",
+    "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   }
 }
