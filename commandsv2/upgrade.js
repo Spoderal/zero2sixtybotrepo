@@ -63,8 +63,9 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
 
+    
     if (!userdata.parts.includes(inputPartName))
-      return await interaction.reply("You don't have this part!");
+    return await interaction.reply("You don't have this part!");
     let realpart = selected[partType];
     let partindb;
     if (realpart !== undefined && realpart !== null) {
@@ -72,6 +73,7 @@ module.exports = {
     } else {
       partindb = "None";
     }
+      if(partindb.Type == "engine" || partindb.Type == "turbo" || partindb.Type == "intake" && cardb.Cars[selected.Name.toLowerCase()].Electric) return interaction.reply('EVs cant have engines, turbos, or intakes!')
     console.log(partindb);
     if (cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0)
       return interaction.reply("F1 Cars cant have their speed upgraded.");
