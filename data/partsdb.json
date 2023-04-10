@@ -1236,7 +1236,8 @@
       "DecreasedSixty": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": "0"
+      "DecreaseHandling": "0",
+      "Image":"https://i.ibb.co/88DJqtL/txturbo.png"
     },
     "bm1exhaust": {
       "Name": "BM1Exhaust",
@@ -1252,7 +1253,8 @@
       "DecreasedSixty": "0",
       "Type": "exhaust",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": "0"
+      "DecreaseHandling": "0",
+      "Image":"https://i.ibb.co/SyCkPnt/t5exhaust.png"
     },
     "ludicrous": {
       "Name": "Ludicrous",
@@ -1905,7 +1907,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 100
+      "DecreaseWeight": 100,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t2weightreduction": {
       "Name": "T2WeightReduction",
@@ -1922,7 +1925,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 200
+      "DecreaseWeight": 200,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t3weightreduction": {
       "Name": "T3WeightReduction",
@@ -1939,7 +1943,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 300
+      "DecreaseWeight": 300,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t4weightreduction": {
       "Name": "T4WeightReduction",
@@ -1956,7 +1961,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 400
+      "DecreaseWeight": 400,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t5weightreduction": {
       "Name": "T5WeightReduction",
@@ -1973,7 +1979,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 500
+      "DecreaseWeight": 500,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t1weight": {
       "Name": "T1Weight",
@@ -1990,7 +1997,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "AddWeight": 100
+      "AddWeight": 100,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t2weight": {
       "Name": "T2Weight",
@@ -2007,7 +2015,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "AddWeight": 200
+      "AddWeight": 200,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t3weight": {
       "Name": "T3Weight",
@@ -2024,7 +2033,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "AddWeight": 300
+      "AddWeight": 300,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t4weight": {
       "Name": "T4Weight",
@@ -2041,7 +2051,8 @@
       "DecreasedSixty": "0",
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
-      "AddWeight": 400
+      "AddWeight": 400,
+      "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "racesuspension": {
       "Name": "RaceSuspension",
