@@ -343,9 +343,9 @@ module.exports = {
         .setDescription(`${stats.join("\n")}`)
         .setColor(colors.blue);
 
-        if(partindb.Image){
-          embed.setThumbnail(`${partindb.Image}`)
-        }
+      if (partindb.Image) {
+        embed.setThumbnail(`${partindb.Image}`);
+      }
 
       await interaction.reply({ embeds: [embed] });
     } else if (
@@ -355,16 +355,18 @@ module.exports = {
       let itemindb = itemdb.Other[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Information for ${itemindb.Emote} ${itemindb.Name}`)
-        .setDescription(`${itemindb.Action}\n\nPrice: ${toCurrency(itemindb.Price)}`)
+        .setDescription(
+          `${itemindb.Action}\n\nPrice: ${toCurrency(itemindb.Price)}`
+        )
         .addFields({
           name: "Type",
           value: `${itemindb.Type}`,
         })
         .setColor(colors.blue);
-        
-        if(itemindb.Image){
-          embed.setThumbnail(`${itemindb.Image}`)
-        }
+
+      if (itemindb.Image) {
+        embed.setThumbnail(`${itemindb.Image}`);
+      }
 
       interaction.reply({ embeds: [embed] });
     }

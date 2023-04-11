@@ -467,9 +467,12 @@ module.exports = {
       itemsList.Other[bought] ||
       itemsList.Multiplier[bought]
     ) {
-      let itemshopweek = global.itemshop
+      let itemshopweek = global.itemshop;
       let itemindb = itemsList.Other[bought];
-      if(!itemshopweek.includes(itemindb.Name)) return interaction.reply("That item isn't purchasable today! Check back tomorrow **THE SHOP REFRESHES WEEKLY**")
+      if (!itemshopweek.includes(itemindb.Name))
+        return interaction.reply(
+          "That item isn't purchasable today! Check back tomorrow **THE SHOP REFRESHES WEEKLY**"
+        );
       if (itemindb.Price == 0)
         return interaction.reply("This item isn't purchasable!");
 

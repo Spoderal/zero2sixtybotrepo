@@ -16,7 +16,7 @@ module.exports = {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-//test
+    //test
     let cooldowns =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 

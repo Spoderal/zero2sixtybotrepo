@@ -26,29 +26,29 @@ module.exports = {
     let love = pet.love;
     let name = pet.name || "N/A";
 
-    let petimage = petdb[pet.pet].Image
-    let petemote = petdb[pet.pet].Emote
-    let petbreed = petdb[pet.pet].Breed
+    let petimage = petdb[pet.pet].Image;
+    let petemote = petdb[pet.pet].Emote;
+    let petbreed = petdb[pet.pet].Breed;
 
-    if(love < 75){
-      petimage = petdb[pet.pet].Sad
+    if (love < 75) {
+      petimage = petdb[pet.pet].Sad;
     }
 
-     if(love < 50){
-      petimage = petdb[pet.pet].Saddest
+    if (love < 50) {
+      petimage = petdb[pet.pet].Saddest;
     }
 
-    console.log(pet)
-    console.log(petimage)
+    console.log(pet);
+    console.log(petimage);
 
     let embed = new Discord.EmbedBuilder()
-      .setAuthor({name: `${petbreed}`, iconURL: petimage})
+      .setAuthor({ name: `${petbreed}`, iconURL: petimage })
       .addFields([
         { name: "Name", value: `${name}`, inline: true },
         { name: "Status", value: "Looking for xessence", inline: true },
         { name: "Hunger", value: `${hunger}`, inline: true },
         { name: "Thirst", value: `${thirst}`, inline: true },
-        { name: "Love", value: `${love}`, inline: true }
+        { name: "Love", value: `${love}`, inline: true },
       ])
       .setThumbnail(petimage)
       .setColor(colors.blue);
@@ -77,15 +77,12 @@ module.exports = {
     );
 
     let row2 = new ActionRowBuilder().addComponents(
-
       new ButtonBuilder()
-      .setLabel("Abandon")
-      .setEmoji("❌")
-      .setCustomId("leave")
-      .setStyle("Secondary"),
-    )
-
-   
+        .setLabel("Abandon")
+        .setEmoji("❌")
+        .setCustomId("leave")
+        .setStyle("Secondary")
+    );
 
     let msg = await interaction.reply({
       embeds: [embed],
@@ -120,18 +117,18 @@ module.exports = {
         userdata = await User.findOne({ id: i.user.id });
         userdata.save();
         let newlove = await userdata.newpet.love;
-        petimage = petdb[pet.pet].Image
+        petimage = petdb[pet.pet].Image;
         let embed = new Discord.EmbedBuilder()
-        .setAuthor({name: `${petbreed}`, iconURL: petimage})
-        .addFields([
-          { name: "Name", value: `${name}`, inline: true },
-          { name: "Status", value: "Looking for xessence", inline: true },
-          { name: "Hunger", value: `${hunger}`, inline: true },
-          { name: "Thirst", value: `${thirst}`, inline: true },
-          { name: "Love", value: `${newlove}`, inline: true }
-        ])
-        .setThumbnail(petimage)
-        .setColor(colors.blue);
+          .setAuthor({ name: `${petbreed}`, iconURL: petimage })
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Hunger", value: `${hunger}`, inline: true },
+            { name: "Thirst", value: `${thirst}`, inline: true },
+            { name: "Love", value: `${newlove}`, inline: true },
+          ])
+          .setThumbnail(petimage)
+          .setColor(colors.blue);
         i.update({
           content: `You pet your ${petbreed}!`,
           embeds: [embed],
@@ -157,16 +154,16 @@ module.exports = {
         let newhunger = await userdata.newpet.hunger;
 
         let embed = new Discord.EmbedBuilder()
-        .setAuthor({name: `${petbreed}`, iconURL: petimage})
-        .addFields([
-          { name: "Name", value: `${name}`, inline: true },
-          { name: "Status", value: "Looking for xessence", inline: true },
-          { name: "Hunger", value: `${newhunger}`, inline: true },
-          { name: "Thirst", value: `${thirst}`, inline: true },
-          { name: "Love", value: `${love}`, inline: true }
-        ])
-        .setThumbnail(petimage)
-        .setColor(colors.blue);
+          .setAuthor({ name: `${petbreed}`, iconURL: petimage })
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Hunger", value: `${newhunger}`, inline: true },
+            { name: "Thirst", value: `${thirst}`, inline: true },
+            { name: "Love", value: `${love}`, inline: true },
+          ])
+          .setThumbnail(petimage)
+          .setColor(colors.blue);
         i.update({
           content: `You fed your ${petbreed} costing you $2,000`,
           embeds: [embed],
@@ -193,16 +190,16 @@ module.exports = {
         let newthirst = await userdata.newpet.thirst;
 
         let embed = new Discord.EmbedBuilder()
-        .setAuthor({name: `${petbreed}`, iconURL: petimage})
-        .addFields([
-          { name: "Name", value: `${name}`, inline: true },
-          { name: "Status", value: "Looking for xessence", inline: true },
-          { name: "Hunger", value: `${hunger}`, inline: true },
-          { name: "Thirst", value: `${newthirst}`, inline: true },
-          { name: "Love", value: `${love}`, inline: true }
-        ])
-        .setThumbnail(petimage)
-        .setColor(colors.blue);
+          .setAuthor({ name: `${petbreed}`, iconURL: petimage })
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Hunger", value: `${hunger}`, inline: true },
+            { name: "Thirst", value: `${newthirst}`, inline: true },
+            { name: "Love", value: `${love}`, inline: true },
+          ])
+          .setThumbnail(petimage)
+          .setColor(colors.blue);
         i.update({
           content: `You gave your ${petbreed} water costing you $500`,
           embeds: [embed],
@@ -242,19 +239,19 @@ module.exports = {
 
           name = userdata.newpet.name;
           let embed = new Discord.EmbedBuilder()
-          .setAuthor({name: `${petbreed}`, iconURL: petimage})
-          .addFields([
-            { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for xessence", inline: true },
-            { name: "Hunger", value: `${hunger}`, inline: true },
-            { name: "Thirst", value: `${thirst}`, inline: true },
-            { name: "Love", value: `${love}`, inline: true }
-          ])
-          .setThumbnail(petimage)
-          .setColor(colors.blue);
+            .setAuthor({ name: `${petbreed}`, iconURL: petimage })
+            .addFields([
+              { name: "Name", value: `${name}`, inline: true },
+              { name: "Status", value: "Looking for xessence", inline: true },
+              { name: "Hunger", value: `${hunger}`, inline: true },
+              { name: "Thirst", value: `${thirst}`, inline: true },
+              { name: "Love", value: `${love}`, inline: true },
+            ])
+            .setThumbnail(petimage)
+            .setColor(colors.blue);
           i.update({ content: `You changed your pets name`, embeds: [embed] });
         });
-      }  else if (i.customId.includes("leave")) {
+      } else if (i.customId.includes("leave")) {
         await User.findOneAndUpdate(
           {
             id: interaction.user.id,
@@ -266,7 +263,11 @@ module.exports = {
           }
         );
 
-        i.update({ content: `Left your ${petbreed} :(`, embeds: [], components: [] });
+        i.update({
+          content: `Left your ${petbreed} :(`,
+          embeds: [],
+          components: [],
+        });
       }
     });
   },
