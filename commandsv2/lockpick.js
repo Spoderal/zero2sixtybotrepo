@@ -16,7 +16,7 @@ module.exports = {
     let udata = await User.findOne({ id: interaction.user.id });
     let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
     let lockpicks = udata.lockpicks;
-    let using = udata.using
+    let using = udata.using;
     if (lockpicks == 0) return interaction.reply(`You're out of lockpicks!`);
     let trypick = lodash.sample([true, false, true]);
     udata.lockpicks -= 1;
@@ -35,42 +35,36 @@ module.exports = {
     }
 
     let rarity;
-    let fil = 200
-    if(using.includes("grape juice") || using.includes("Grape Juice")){
-      let cooldown = cooldowns.grapejuice
-      let timeout = 900000
-      console.log(timeout - (Date.now() - cooldown))
-      if(cooldown !== null && timeout - (Date.now() - cooldown) < 0){
-        console.log("pulled")
-        udata.using.pull("grape juice")
-        udata.update()
-        interaction.channel.send("Your grape juice ran out! :(")
+    let fil = 200;
+    if (using.includes("grape juice") || using.includes("Grape Juice")) {
+      let cooldown = cooldowns.grapejuice;
+      let timeout = 900000;
+      console.log(timeout - (Date.now() - cooldown));
+      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
+        console.log("pulled");
+        udata.using.pull("grape juice");
+        udata.update();
+        interaction.channel.send("Your grape juice ran out! :(");
       }
-      fil = 50
+      fil = 50;
     }
-    console.log(fil)
+    console.log(fil);
 
-    let garagepicked
-      // Calculate chances for common
-      let chance = Math.floor(Math.random() * fil)
+    let garagepicked;
+    // Calculate chances for common
+    let chance = Math.floor(Math.random() * fil);
 
-      if(chance >= garagedb["common garage"].Rarity){
-        garagepicked = "common garage"
+    if (chance >= garagedb["common garage"].Rarity) {
+      garagepicked = "common garage";
+    } else if (chance >= garagedb["rare garage"].Rarity) {
+      garagepicked = "rare garage";
+    } else if (chance >= garagedb["legendary garage"].Rarity) {
+      garagepicked = "legendary garage";
+    } else {
+      garagepicked = "legendary garage";
+    }
 
-      }
-     else if(chance >= garagedb["rare garage"].Rarity){
-        garagepicked = "rare garage"
-
-      }
-    else if(chance >= garagedb["legendary garage"].Rarity){
-        garagepicked = "legendary garage"
-
-      }
-      else{
-        garagepicked = "legendary garage"
-      }
-    
-      console.log(chance)
+    console.log(chance);
 
     let garageindb = garagedb[garagepicked];
     let rand1 = lodash.sample(garageindb.Contents);

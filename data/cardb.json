@@ -6337,7 +6337,7 @@
       "Class": "S",
       "Weight": 2000
     },
-      "2020 koenigsegg jesko absolut": {
+    "2020 koenigsegg jesko absolut": {
       "alias": "2020 jesko a",
       "Name": "2020 Koenigsegg Jesko Absolut",
       "Emote": "<:koenigsegg:931011849212797029>",
@@ -7957,9 +7957,9 @@
       "Handling": 1000,
       "Class": "S",
       "Weight": 3200,
-      "Stock":10
+      "Stock": 10
     },
-       "2019 ferrari p80": {
+    "2019 ferrari p80": {
       "alias": "2019 p80",
       "Name": "2019 Ferrari P80",
       "Emote": "<:ferrari:931011838374727730>",
@@ -7974,7 +7974,7 @@
       "Handling": 1200,
       "Class": "S",
       "Weight": 3200,
-      "Stock":15
+      "Stock": 15
     },
     "2008 gumpert apollo s": {
       "alias": "2008 apollo s",

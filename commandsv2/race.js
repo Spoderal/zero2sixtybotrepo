@@ -12,7 +12,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 let cardb = require("../data/cardb.json");
 const lodash = require("lodash");
-const petdb = require("../data/pets.json")
+const petdb = require("../data/pets.json");
 const squadsdb = require("../data/squads.json");
 const {
   doubleCashWeekendField,
@@ -49,10 +49,10 @@ module.exports = {
       let caroj = cardb.Cars[car1];
       carsarray.push(caroj);
     }
-    
+
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let pet = userdata.newpet
+    let pet = userdata.newpet;
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: user.id });
@@ -325,8 +325,8 @@ module.exports = {
           ctx.fillText(car2.Name, 845, 180);
           ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
-          if(pet.name){
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image)
+          if (pet.name) {
+            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
 
             ctx.drawImage(petimage, 200, 200, 200, 200);
           }
@@ -337,10 +337,8 @@ module.exports = {
 
           console.log(weather2);
 
-       
-          
-          let mph = selected.Speed
-       
+          let mph = selected.Speed;
+
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -353,13 +351,12 @@ module.exports = {
 
           let mph2;
 
-       
-            mph2 = car2.Speed;
-          
+          mph2 = car2.Speed;
+
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling / weather2.Grip;
-        
+
           let speed = 0;
           let speed2 = 0;
 
@@ -415,7 +412,7 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = handling += (speed / 50);
+            let calc = (handling += speed / 50);
             calc = calc / acceleration;
             sec = (6.3 * (weight / calc)) / acceleration;
             calc = calc / sec;
@@ -423,7 +420,7 @@ module.exports = {
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = handling2 += (speed / 50);
+            let calc2 = (handling2 += speed / 50);
             calc2 = calc2 / acceleration2;
             sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
             console.log(`sec2: ${sec2}`);
@@ -460,30 +457,33 @@ module.exports = {
                 cashwon = cashwon += weather2.Reward;
               }
 
-              if(pet.name){
-                let xessneceearn = lodash.random(pet.xessence)
+              if (pet.name) {
+                let xessneceearn = lodash.random(pet.xessence);
 
+                earnings.push(
+                  `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
+                );
+                userdata.xessence += xessneceearn;
+                userdata.newpet.love -= 5;
+                userdata.newpet.hunger -= 5;
+                userdata.newpet.thirst -= 3;
 
-                earnings.push(`${petdb[pet.pet].Emote} +${xessneceearn} Xessence`)
-                userdata.xessence += xessneceearn
-                userdata.newpet.love -= 5
-                userdata.newpet.hunger -= 5
-                userdata.newpet.thirst -= 3
-
-                if(userdata.newpet.hunger <= 0){
-                  interaction.channel.send("Your pet died of hunger :(")
-                  userdata.newpet = {}
+                if (userdata.newpet.hunger <= 0) {
+                  interaction.channel.send("Your pet died of hunger :(");
+                  userdata.newpet = {};
                 }
-                if(userdata.newpet.thirst <= 0){
-                  interaction.channel.send("Your pet died of thirst :(")
-                  userdata.newpet = {}
+                if (userdata.newpet.thirst <= 0) {
+                  interaction.channel.send("Your pet died of thirst :(");
+                  userdata.newpet = {};
                 }
-                if(userdata.newpet.love <= 0){
-                  interaction.channel.send("Your pet left because it wasn't loved enough :(")
-                  userdata.newpet = {}
+                if (userdata.newpet.love <= 0) {
+                  interaction.channel.send(
+                    "Your pet left because it wasn't loved enough :("
+                  );
+                  userdata.newpet = {};
                 }
 
-                userdata.markModified("newpet")
+                userdata.markModified("newpet");
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
@@ -1225,7 +1225,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 

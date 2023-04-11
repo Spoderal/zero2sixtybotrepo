@@ -8,7 +8,7 @@ const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const petdb = require("../data/pets.json")
+const petdb = require("../data/pets.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -129,16 +129,13 @@ module.exports = {
       } else if (itemtouse.toLowerCase() == "energy drink") {
         userdata.using.push(`energy drink`);
         cooldowndata.energydrink = Date.now();
-      }
-      else if (itemtouse.toLowerCase() == "grape juice") {
+      } else if (itemtouse.toLowerCase() == "grape juice") {
         userdata.using.push(`grape juice`);
         cooldowndata.grapejuice = Date.now();
-      }  
-      else if (itemtouse.toLowerCase() == "apple juice") {
+      } else if (itemtouse.toLowerCase() == "apple juice") {
         userdata.using.push(`apple juice`);
         cooldowndata.applejuice = Date.now();
-      }  
-      else if (itemtouse.toLowerCase() == "sponsor") {
+      } else if (itemtouse.toLowerCase() == "sponsor") {
         userdata.using.push(`sponsor`);
         cooldowndata.sponsor = Date.now();
       } else if (itemtouse.toLowerCase() == "small vault") {
@@ -168,24 +165,24 @@ module.exports = {
         let randcat = lodash.sample(["orange cat", "white cat"]);
         let pet = userdata.newpet;
         if (pet.name) return interaction.reply(`You already have a pet!`);
-        let petindb = petdb[randcat]
-        let randname = lodash.sample(petindb.Names)
+        let petindb = petdb[randcat];
+        let randname = lodash.sample(petindb.Names);
 
-         let petobj = {
-            name: randname,
-            hunger: 100,
-            thirst: 100,
-            love: 100,
-            pet: randcat,
-            xessence:5
-          };
-        
+        let petobj = {
+          name: randname,
+          hunger: 100,
+          thirst: 100,
+          love: 100,
+          pet: randcat,
+          xessence: 5,
+        };
 
         userdata.newpet = petobj;
-        userdata.save()
+        userdata.save();
 
-        return await interaction.reply(`You found a ${petindb.Breed} named ${randname}!`)
-
+        return await interaction.reply(
+          `You found a ${petindb.Breed} named ${randname}!`
+        );
       } else if (itemtouse.toLowerCase() == "water bottle") {
         let watercooldown = cooldowndata.waterbottle;
         let timeout = 18000000;
@@ -372,7 +369,7 @@ module.exports = {
     for (var i = 0; i < amount2; i++)
       items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
     userdata.items = items;
-    cooldowndata.save()
+    cooldowndata.save();
     userdata.save();
     await interaction.reply(`Used x${amount2} ${fullname}!`);
   },
