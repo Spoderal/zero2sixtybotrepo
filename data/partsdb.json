@@ -1815,7 +1815,7 @@
       "DecreasedSpeed": 10,
       "AddedSpeed": "0",
       "AddHandling": 100,
-      "Image":"https://i.ibb.co/Xk0xpq2/t4tires.png"
+      "Image": "https://i.ibb.co/Xk0xpq2/t4tires.png"
     },
     "t5wintertires": {
       "Name": "T5WinterTires",
