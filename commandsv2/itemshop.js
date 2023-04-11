@@ -31,7 +31,7 @@ module.exports = {
     }
 
     let embed = new Discord.EmbedBuilder()
-      .setTitle("Daily Item Shop")
+      .setTitle("Weekly Item Shop")
       .setDescription(`${items.join("\n\n")}`)
       .setColor(colors.blue)
       .setFooter({text: `${cool} until the shop resets`})
