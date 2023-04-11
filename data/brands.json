@@ -53,6 +53,12 @@
     "name": "Chevy",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
+  "cadillac": {
+    "image": "https://i.ibb.co/wwckDF8/cadillac.png",
+    "emote": "<:logo_cadillac:1094883208170049646>",
+    "name": "Cadillac",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
 
   "dmc": {
     "image": "https://i.ibb.co/fSCFjJg/logo-dmc.png",

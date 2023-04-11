@@ -46,7 +46,7 @@ module.exports = {
       color: 3447003,
       thumbnail: { url: "https://i.ibb.co/5n1ts36/newlogoshadow.png" },
       description:
-        "Check out the getting started tutorial on YouTube, Run `/dealer` to buy your first car, and go race with it!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n[YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)",
+        "Check out the [getting started tutorial](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty) on YouTube, to start your racing journey, choose a car below!\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!",
     });
     let msg = await interaction.reply({
       content: `Starting the tutorial, pick a car from the buttons below to choose a car!`,
@@ -143,7 +143,7 @@ module.exports = {
       }
 
       await i.update(
-        `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, run /garage to see your cars ID, go ahead and try running \`/race car: ${carobj.ID}\`, and **select street race**, then **select Tier 1*`
+        `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, run /garage to see your cars ID, go ahead and try running \`/race car: ${carobj.ID}\`, and **select street race**, then **select Tier 1**`
       );
     });
   },

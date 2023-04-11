@@ -21,6 +21,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  grapejuice: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  applejuice: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   goldclear: {
     type: Number,
     required: false,

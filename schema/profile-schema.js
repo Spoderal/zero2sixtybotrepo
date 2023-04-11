@@ -434,6 +434,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  newpet: {
+    type: Object,
+    required: false,
+    default: {},
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

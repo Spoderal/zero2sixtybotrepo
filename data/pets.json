@@ -1,35 +1,48 @@
 {
-  "Pets": {
-    "mini miata": {
-      "Name": "Mini Miata",
-      "Colors": ["Red", "Blue", "Black"],
-      "Image": "https://i.ibb.co/3f76980/minimiata2.png",
-      "Findables": 1,
-      "Rarity": 20,
-      "Blue": "https://i.ibb.co/d6k0WpZ/bluemiata.png",
-      "Red": "https://i.ibb.co/sQdRkqz/minimiata2.png",
-      "Black": "https://i.ibb.co/9nXY3B8/miatablacknospoiler.png",
-      "White": "https://i.ibb.co/R4S5kd1/miatawhite.png",
-      "RedSpoiler": "https://i.ibb.co/9nBcCpN/miataspoiler.png",
-      "BlueSpoiler": "https://i.ibb.co/17PK7Ym/miataspoilerblue.png",
-      "BlackSpoiler": "https://i.ibb.co/tCsv34p/miatablack.png",
-      "WhiteSpoiler": "https://i.ibb.co/BCggZTj/miatawhitespoiler.png"
+    "orange cat":{
+      "Image":"https://i.ibb.co/PMWtcGs/pet-cat.png",
+      "Emote":"<:pet_cat:1095141553632186479>",
+      "Names":["Tigger", "Milo", "Oliver", "Z", "Milly"],
+      "Xessence":5,
+      "Breed":"Orange Cat",
+      "Sad":"https://i.ibb.co/ygWds3L/pet-cat-orange-sad.png",
+      "Saddest":"https://i.ibb.co/J7hcxxB/pet-cat-orange-sadder.png"
     },
-    "pretty porsche": {
-      "Name": "Pretty Porsche",
-      "Colors": ["White"],
-      "Image": "https://i.ibb.co/y4QBWqT/prettyporschewhite.png",
-      "Findables": 2,
-      "Rarity": 5,
-      "NoPaint": true
+    "white cat":{
+      "Image":"https://i.ibb.co/PzQ1WrQ/pet-cat-white.png",
+      "Emote":"<:pet_cat_white:1095141555871952896>",
+      "Names":["George", "Milky", "Z", "Oscar", "Molly"],
+      "Xessence":5,
+      "Breed":"White Cat",
+      "Sad":"https://i.ibb.co/tsQyK0P/pet-cat-white-sad.png",
+      "Saddest":"https://i.ibb.co/swwhvX8/pet-cat-white-saddest.png"
     },
-    "mini mini cooper": {
-      "Name": "Mini Mini Cooper",
-      "Colors": ["White"],
-      "Image": "https://i.ibb.co/NZQbf20/miniminicooper.png",
-      "Findables": 2,
-      "Rarity": 5,
-      "NoPaint": true
+    "black cat":{
+      "Image":"https://i.ibb.co/TMczcb2/pet-cat-black.png",
+      "Emote":"<:pet_cat_black:1095166771465568287>",
+      "Names":["Crow", "Winnie", "Z", "Pluto", "Luna"],
+      "Xessence":10,
+      "Breed":"Black Cat",
+      "Sad":"https://i.ibb.co/LQw5D3b/pet-cat-black-sad.png",
+      "Saddest":"https://i.ibb.co/XWC3frr/pet-cat-black-saddest.png"
+    },
+    "green snake":{
+      "Image":"https://i.ibb.co/rmmfJdG/pet-snake.png",
+      "Emote":"<:pet_snake:1095256976889491546>",
+      "Names":["Snakey", "Spike", "Z", "Pluto", "Luna"],
+      "Xessence":10,
+      "Breed":"Green Snake",
+      "Sad":"https://i.ibb.co/60MXh3N/pet-snake-sad.png",
+      "Saddest":"https://i.ibb.co/1RrFr7G/pet-snake-saddest.png"
+    },
+    "rattle snake":{
+      "Image":"https://i.ibb.co/GFLgMgw/pet-snake-rattle.png",
+      "Emote":"<:pet_snake_rattle:1095256985542340648>",
+      "Names":["Snakey", "Spike", "Z", "Pluto", "Luna"],
+      "Xessence":15,
+      "Breed":"Rattle Snake",
+      "Sad":"https://i.ibb.co/2Fx2yqc/pet-snake-rattle-sad.png",
+      "Saddest":"https://i.ibb.co/cLZdYsh/pet-snake-rattle-saddest.png"
     }
-  }
+  
 }

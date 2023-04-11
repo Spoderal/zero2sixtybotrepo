@@ -240,7 +240,7 @@ module.exports = {
         ],
       }
     );
-    if (userdata.tutorial && userdata.tutorial.stage == 3) {
+    if (userdata.tutorial && userdata.tutorial.stage == 2) {
       console.log("tutorial");
       interaction.channel.send({
         content: `Nice! Now your car is even faster! Thats all from the tutorial! If you have any other questions make sure to join the support server!`,

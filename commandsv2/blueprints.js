@@ -53,7 +53,25 @@ module.exports = {
     }
     //fix
     if (type == "blueprints") {
+      let using = userdata.using
       let boughtindb = blueprints;
+
+      if(using.includes("apple juice")){
+        let cooldown = cooldowndata.applejuice
+        let timeout = 900000
+        console.log(timeout - (Date.now() - cooldown))
+        if(cooldown !== null && timeout - (Date.now() - cooldown) < 0){
+          console.log("pulled")
+          userdata.using.pull("apple juice")
+          userdata.update()
+          interaction.channel.send("Your apple juice ran out! :(")
+        }
+        else {
+
+          boughtindb = require('../data/imports.json').carsblueprints
+        }
+
+      }
 
       if (userdata.blueprints <= 0)
         return interaction.reply(`You don't have any blueprints!`);

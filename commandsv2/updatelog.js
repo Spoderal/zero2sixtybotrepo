@@ -31,7 +31,7 @@ module.exports = {
             emoji: "🌸",
           },
           {
-            label: "3/15/2023",
+            label: "4/11/2023",
             description: "Information for the recent small update!",
             value: "5_update",
             customId: "up5",
@@ -55,7 +55,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 3/20/2023\n
             🌸 Spring Update 3/1/2023\n
-            ⬆️ Small Update 3/15/2023\n
+            ⬆️ Small Update 4/11/2023\n
             🎉 Big Update 4/1/2023\n
         `);
 
@@ -156,14 +156,17 @@ module.exports = {
             embed.setTitle(`Small Update`);
             embed
               .setDescription(
-                `• Tasks are back! View them with /tasks list\n
-                • F1 Event! F1 Cars are here! Check it out with /events\n
-                • World Championship event is back!\n
-                • Prestige requirements nerfed, you need less drift than race wins\n
-                • Bug fixes
+                `• Garage filtering by power!\n
+                • Drivetrains! View /parts and select suspension to swap your drivetrain!\n
+                • New starting tutorial\n
+                • Weekly item shop instead of all items being purchasable\n
+                • New items, Apple juice <:item_applejuice:1094894556983611423>  and Grape juice <:item_grapejuice:1094894554097909760>\n
+                • Pets overhaul, new pets, get xessence by racing /streetrace with a pet\n
+                • Stats for items updated\n
+                • New limited stock cars
                 `
               )
-              .setFooter({ text: "3/15/2023" })
+              .setFooter({ text: "4/11/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

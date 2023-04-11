@@ -14,87 +14,60 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pet")
-    .setDescription("View your mini miata"),
+    .setDescription("View your pet"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let pet = userdata.pet;
-    if (!pet) return interaction.reply(`You don't have a pet!`);
-    let condition = pet.condition;
-    let gas = pet.gas;
-    let oil = pet.oil;
+    let pet = userdata.newpet;
+    if (!pet.name) return interaction.reply(`You don't have a pet!`);
+    let hunger = pet.hunger;
+    let thirst = pet.thirst;
     let love = pet.love;
-    let color = pet.color || "Red";
-    let spoiler = pet.spoiler;
     let name = pet.name || "N/A";
 
-    let petimage;
+    let petimage = petdb[pet.pet].Image
+    let petemote = petdb[pet.pet].Emote
+    let petbreed = petdb[pet.pet].Breed
 
-    if (color == "Black" && pet.car == "mini miata") {
-      petimage = petdb.Pets["mini miata"].Black;
-
-      if (spoiler) {
-        petimage = petdb.Pets["mini miata"].BlackSpoiler;
-      }
-    } else if (color == "Blue" && pet.car == "mini miata") {
-      petimage = petdb.Pets["mini miata"].Blue;
-
-      if (spoiler) {
-        petimage = petdb.Pets["mini miata"].BlueSpoiler;
-      }
-    } else if (color == "Red" && pet.car == "mini miata") {
-      petimage = petdb.Pets["mini miata"].Red;
-
-      if (spoiler && pet.car == "mini miata") {
-        petimage = petdb.Pets["mini miata"].RedSpoiler;
-      }
-    } else if (color == "White" && pet.car == "mini miata") {
-      petimage = petdb.Pets["mini miata"].White;
-
-      if (spoiler && pet.car == "mini miata") {
-        petimage = petdb.Pets["mini miata"].WhiteSpoiler;
-      }
+    if(love < 75){
+      petimage = petdb[pet.pet].Sad
     }
 
-    if (pet.car == "pretty porsche") {
-      petimage = petdb.Pets["pretty porsche"].Image;
+     if(love < 50){
+      petimage = petdb[pet.pet].Saddest
     }
+
+    console.log(pet)
+    console.log(petimage)
 
     let embed = new Discord.EmbedBuilder()
-      .setTitle(`Your ${petdb.Pets[pet.car].Name}`)
+      .setAuthor({name: `${petbreed}`, iconURL: petimage})
       .addFields([
         { name: "Name", value: `${name}`, inline: true },
-        { name: "Status", value: "Looking for items", inline: true },
-        { name: "Condition", value: `${condition}`, inline: true },
-        { name: "Gas", value: `${gas}`, inline: true },
-        { name: "Oil", value: `${oil}`, inline: true },
-        { name: "Love", value: `${love}`, inline: true },
-        { name: "Tier", value: `${pet.tier}`, inline: true },
+        { name: "Status", value: "Looking for xessence", inline: true },
+        { name: "Hunger", value: `${hunger}`, inline: true },
+        { name: "Thirst", value: `${thirst}`, inline: true },
+        { name: "Love", value: `${love}`, inline: true }
       ])
       .setThumbnail(petimage)
       .setColor(colors.blue);
 
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setLabel("Drive")
-        .setEmoji("🚗")
-        .setCustomId("drive")
+        .setLabel("Love")
+        .setEmoji("💖")
+        .setCustomId("love")
         .setStyle("Secondary"),
       new ButtonBuilder()
-        .setLabel("Change Oil")
-        .setEmoji("🛢️")
-        .setCustomId("oil")
+        .setLabel("Water")
+        .setEmoji("💧")
+        .setCustomId("water")
         .setStyle("Secondary"),
       new ButtonBuilder()
-        .setLabel("Fill Gas")
-        .setEmoji("⛽")
-        .setCustomId("gas")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("Wash")
-        .setEmoji("🧼")
-        .setCustomId("wash")
+        .setLabel("Feed")
+        .setEmoji("🥘")
+        .setCustomId("feed")
         .setStyle("Secondary"),
       new ButtonBuilder()
         .setLabel("Change Name")
@@ -104,22 +77,15 @@ module.exports = {
     );
 
     let row2 = new ActionRowBuilder().addComponents(
+
       new ButtonBuilder()
-        .setLabel("Paint")
-        .setEmoji("🖌️")
-        .setCustomId("paint")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("Send Racing")
-        .setEmoji("🏁")
-        .setCustomId("race")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("Abandon")
-        .setEmoji("👋")
-        .setCustomId("leave")
-        .setStyle("Secondary")
-    );
+      .setLabel("Abandon")
+      .setEmoji("❌")
+      .setCustomId("leave")
+      .setStyle("Secondary"),
+    )
+
+   
 
     let msg = await interaction.reply({
       embeds: [embed],
@@ -136,11 +102,10 @@ module.exports = {
     });
 
     collector.on("collect", async (i) => {
-      if (i.customId.includes("drive")) {
-        let pet = userdata.pet;
-        let condition = pet.condition;
-        let gas = pet.gas;
-        let oil = pet.oil;
+      if (i.customId.includes("love")) {
+        let pet = userdata.newpet;
+        let hunger = pet.hunger;
+        let thirst = pet.thirst;
 
         await User.findOneAndUpdate(
           {
@@ -148,34 +113,33 @@ module.exports = {
           },
           {
             $set: {
-              "pet.love": 100,
+              "newpet.love": 100,
             },
           }
         );
         userdata = await User.findOne({ id: i.user.id });
         userdata.save();
-        let newlove = await userdata.pet.love;
-
+        let newlove = await userdata.newpet.love;
+        petimage = petdb[pet.pet].Image
         let embed = new Discord.EmbedBuilder()
-          .setTitle(`Your Pet`)
-          .addFields([
-            { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for items", inline: true },
-            { name: "Condition", value: `${condition}`, inline: true },
-            { name: "Gas", value: `${gas}`, inline: true },
-            { name: "Oil", value: `${oil}`, inline: true },
-            { name: "Love", value: `${newlove}`, inline: true },
-          ])
-          .setThumbnail(petimage)
-          .setColor(colors.blue);
+        .setAuthor({name: `${petbreed}`, iconURL: petimage})
+        .addFields([
+          { name: "Name", value: `${name}`, inline: true },
+          { name: "Status", value: "Looking for xessence", inline: true },
+          { name: "Hunger", value: `${hunger}`, inline: true },
+          { name: "Thirst", value: `${thirst}`, inline: true },
+          { name: "Love", value: `${newlove}`, inline: true }
+        ])
+        .setThumbnail(petimage)
+        .setColor(colors.blue);
         i.update({
-          content: `You drove your pet car and gave it love!`,
+          content: `You pet your ${petbreed}!`,
           embeds: [embed],
         });
-      } else if (i.customId.includes("gas")) {
-        let pet = userdata.pet;
-        let condition = pet.condition;
-        let oil = pet.oil;
+      } else if (i.customId.includes("feed")) {
+        let pet = userdata.newpet;
+        let hunger = pet.hunger;
+        let thirst = pet.thirst;
         let love = pet.love;
         await User.findOneAndUpdate(
           {
@@ -183,36 +147,34 @@ module.exports = {
           },
           {
             $set: {
-              "pet.gas": 100,
+              "newpet.hunger": 100,
             },
           }
         );
         userdata = await User.findOne({ id: i.user.id });
         userdata.cash -= 2000;
         userdata.save();
-        let newgas = await userdata.pet.gas;
+        let newhunger = await userdata.newpet.hunger;
 
         let embed = new Discord.EmbedBuilder()
-          .setTitle(`Your Pet`)
-          .addFields([
-            { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for items", inline: true },
-
-            { name: "Condition", value: `${condition}`, inline: true },
-            { name: "Gas", value: `${newgas}`, inline: true },
-            { name: "Oil", value: `${oil}`, inline: true },
-            { name: "Love", value: `${love}`, inline: true },
-          ])
-          .setThumbnail(petimage)
-          .setColor(colors.blue);
+        .setAuthor({name: `${petbreed}`, iconURL: petimage})
+        .addFields([
+          { name: "Name", value: `${name}`, inline: true },
+          { name: "Status", value: "Looking for xessence", inline: true },
+          { name: "Hunger", value: `${newhunger}`, inline: true },
+          { name: "Thirst", value: `${thirst}`, inline: true },
+          { name: "Love", value: `${love}`, inline: true }
+        ])
+        .setThumbnail(petimage)
+        .setColor(colors.blue);
         i.update({
-          content: `You filled your pets gas costing you $2,000`,
+          content: `You fed your ${petbreed} costing you $2,000`,
           embeds: [embed],
         });
-      } else if (i.customId.includes("oil")) {
-        let pet = userdata.pet;
-        let condition = pet.condition;
-        let gas = pet.gas;
+      } else if (i.customId.includes("water")) {
+        let pet = userdata.newpet;
+        let thirst = pet.thirst;
+        let hunger = pet.hunger;
         let love = pet.love;
 
         await User.findOneAndUpdate(
@@ -221,69 +183,34 @@ module.exports = {
           },
           {
             $set: {
-              "pet.oil": 100,
+              "newpet.thirst": 100,
             },
           }
         );
         userdata = await User.findOne({ id: i.user.id });
         userdata.cash -= 500;
         userdata.save();
-        let newoil = await userdata.pet.oil;
+        let newthirst = await userdata.newpet.thirst;
 
         let embed = new Discord.EmbedBuilder()
-          .setTitle(`Your Pet`)
-          .addFields([
-            { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for items", inline: true },
-            { name: "Condition", value: `${condition}`, inline: true },
-            { name: "Gas", value: `${gas}`, inline: true },
-            { name: "Oil", value: `${newoil}`, inline: true },
-            { name: "Love", value: `${love}`, inline: true },
-          ])
-          .setThumbnail(petimage)
-          .setColor(colors.blue);
+        .setAuthor({name: `${petbreed}`, iconURL: petimage})
+        .addFields([
+          { name: "Name", value: `${name}`, inline: true },
+          { name: "Status", value: "Looking for xessence", inline: true },
+          { name: "Hunger", value: `${hunger}`, inline: true },
+          { name: "Thirst", value: `${newthirst}`, inline: true },
+          { name: "Love", value: `${love}`, inline: true }
+        ])
+        .setThumbnail(petimage)
+        .setColor(colors.blue);
         i.update({
-          content: `You changed your pets oil costing you $500`,
+          content: `You gave your ${petbreed} water costing you $500`,
           embeds: [embed],
         });
-      } else if (i.customId.includes("wash")) {
-        let pet = userdata.pet;
-        let gas = pet.gas;
-        let oil = pet.oil;
-        let love = pet.love;
-
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $set: {
-              "pet.condition": 100,
-            },
-          }
-        );
-        userdata = await User.findOne({ id: i.user.id });
-        userdata.save();
-        let newcond = await userdata.pet.condition;
-
-        let embed = new Discord.EmbedBuilder()
-          .setTitle(`Your Pet`)
-          .addFields([
-            { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for items", inline: true },
-            { name: "Condition", value: `${newcond}`, inline: true },
-            { name: "Gas", value: `${gas}`, inline: true },
-            { name: "Oil", value: `${oil}`, inline: true },
-            { name: "Love", value: `${love}`, inline: true },
-          ])
-          .setThumbnail(petimage)
-          .setColor(colors.blue);
-        i.update({ content: `You washed your pet`, embeds: [embed] });
       } else if (i.customId.includes("name")) {
-        let pet = userdata.pet;
-        let condition = pet.condition;
-        let gas = pet.gas;
-        let oil = pet.oil;
+        let pet = userdata.newpet;
+        let hunger = pet.hunger;
+        let thirst = pet.thirst;
         let love = pet.love;
 
         i.channel.send(`Type the name you want to set`);
@@ -306,235 +233,40 @@ module.exports = {
             },
             {
               $set: {
-                "pet.name": nametoset,
+                "newpet.name": nametoset,
               },
             }
           );
           userdata = await User.findOne({ id: i.user.id });
           userdata.save();
 
-          name = userdata.pet.name;
+          name = userdata.newpet.name;
           let embed = new Discord.EmbedBuilder()
-            .setTitle(`Your Pet`)
-            .addFields([
-              { name: "Name", value: `${nametoset}`, inline: true },
-              { name: "Status", value: "Looking for items", inline: true },
-              { name: "Condition", value: `${condition}`, inline: true },
-              { name: "Gas", value: `${gas}`, inline: true },
-              { name: "Oil", value: `${oil}`, inline: true },
-              { name: "Love", value: `${love}`, inline: true },
-            ])
-            .setThumbnail(petimage)
-            .setColor(colors.blue);
+          .setAuthor({name: `${petbreed}`, iconURL: petimage})
+          .addFields([
+            { name: "Name", value: `${name}`, inline: true },
+            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Hunger", value: `${hunger}`, inline: true },
+            { name: "Thirst", value: `${thirst}`, inline: true },
+            { name: "Love", value: `${love}`, inline: true }
+          ])
+          .setThumbnail(petimage)
+          .setColor(colors.blue);
           i.update({ content: `You changed your pets name`, embeds: [embed] });
         });
-      } else if (i.customId.includes("paint")) {
-        if (petdb.Pets[pet.car].NoPaint)
-          return i.update({ content: `This pet is not paintable.` });
-        let row3 = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("black")
-            .setEmoji("⚫")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("red")
-            .setEmoji("🔴")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("white")
-            .setEmoji("⚪")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("blue")
-            .setEmoji("🔵")
-            .setStyle("Secondary")
-        );
-
-        let msg = await i.update({ components: [row, row3], fetchReply: true });
-
-        let filter3 = (btnInt) => {
-          return interaction.user.id === btnInt.user.id;
-        };
-
-        let collector3 = msg.createMessageComponentCollector({
-          filter: filter3,
-        });
-
-        collector3.on("collect", async (i) => {
-          userdata = await User.findOne({ id: i.user.id });
-
-          if (i.customId.includes("black")) {
-            await User.findOneAndUpdate(
-              {
-                id: interaction.user.id,
-              },
-              {
-                $set: {
-                  "pet.color": "Black",
-                },
-              }
-            );
-            let spoiler = userdata.pet.spoiler;
-            if (!spoiler) {
-              embed.setThumbnail(petdb.Pets["mini miata"].Black);
-            } else {
-              embed.setThumbnail(petdb.Pets["mini miata"].BlackSpoiler);
-            }
-            i.update({ embeds: [embed] });
-          } else if (i.customId.includes("red")) {
-            await User.findOneAndUpdate(
-              {
-                id: interaction.user.id,
-              },
-              {
-                $set: {
-                  "pet.color": "Red",
-                },
-              }
-            );
-            let spoiler = userdata.pet.spoiler;
-            if (!spoiler) {
-              embed.setThumbnail(petdb.Pets["mini miata"].Red);
-            } else {
-              embed.setThumbnail(petdb.Pets["mini miata"].RedSpoiler);
-            }
-            i.update({ embeds: [embed] });
-          } else if (i.customId.includes("blue")) {
-            await User.findOneAndUpdate(
-              {
-                id: interaction.user.id,
-              },
-              {
-                $set: {
-                  "pet.color": "Blue",
-                },
-              }
-            );
-            let spoiler = userdata.pet.spoiler;
-            if (!spoiler) {
-              embed.setThumbnail(petdb.Pets["mini miata"].Blue);
-            } else {
-              embed.setThumbnail(petdb.Pets["mini miata"].BlueSpoiler);
-            }
-            i.update({ embeds: [embed] });
-          } else if (i.customId.includes("white")) {
-            await User.findOneAndUpdate(
-              {
-                id: interaction.user.id,
-              },
-              {
-                $set: {
-                  "pet.color": "White",
-                },
-              }
-            );
-            let spoiler = userdata.pet.spoiler;
-            if (!spoiler) {
-              embed.setThumbnail(petdb.Pets["mini miata"].White);
-            } else {
-              embed.setThumbnail(petdb.Pets["mini miata"].WhiteSpoiler);
-            }
-            i.update({ embeds: [embed] });
-          }
-          userdata.save();
-        });
-      } else if (i.customId.includes("race")) {
-        let cooldowndata =
-          (await Cooldowns.findOne({ id: interaction.user.id })) ||
-          new Cooldowns({ id: interaction.user.id });
-        let timetorace = cooldowndata.petracing || 0;
-        let timeout = 600000;
-        if (timetorace !== null && timeout - (Date.now() - timetorace) > 0) {
-          let time = ms(timeout - (Date.now() - timetorace));
-
-          return i.update({
-            content: `You've already sent your pet racing\n\nRace again in ${time}.`,
-          });
-        } else {
-          let gas = userdata.pet.gas;
-          if (gas <= 0) return i.update(`Your pet is out of gas!`);
-          let lessgas = (gas -= 50);
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "pet.gas": lessgas,
-              },
-            }
-          );
-          await Cooldowns.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                petracing: Date.now(),
-              },
-            }
-          );
-
-          let rewardrange = randomRange(0, 5);
-
-          let rewards = [
-            "t2tires",
-            "pet spoiler",
-            "bank increase",
-            "water bottle",
-          ];
-
-          let t2rewards = [
-            "t3tires",
-            "big bank increase",
-            "bank increase",
-            "legendary barn map",
-          ];
-
-          let ranreward;
-          if (pet.tier == 1) {
-            ranreward = lodash.sample(rewards);
-            rewardrange = randomRange(0, 5);
-          } else if (pet.tier == 2) {
-            ranreward = lodash.sample(t2rewards);
-            rewardrange = randomRange(2, 10);
-          }
-
-          i.update({ content: `You sent your pet racing for 10 minutes` });
-
-          setTimeout(() => {
-            i.channel.send({
-              content: `${i.user}, Your pet returned with ${rewardrange} Xessence, and a ${ranreward}`,
-            });
-            userdata.xessence += rewardrange;
-            if (partdb.Parts[ranreward.toLowerCase()]) {
-              userdata.parts.push(ranreward.toLowerCase());
-              userdata.save();
-            } else if (
-              itemdb.Other[ranreward.toLowerCase()] ||
-              itemdb.Collectable[ranreward.toLowerCase()]
-            ) {
-              userdata.items.push(ranreward.toLowerCase());
-              userdata.save();
-            } else if (ranreward == "legendary barn map") {
-              userdata.lmaps += 1;
-              userdata.save();
-            }
-          }, 10000);
-        }
-      } else if (i.customId.includes("leave")) {
+      }  else if (i.customId.includes("leave")) {
         await User.findOneAndUpdate(
           {
             id: interaction.user.id,
           },
           {
             $unset: {
-              pet: "",
+              newpet: "",
             },
           }
         );
 
-        i.update({ content: `Left your pet :(`, embeds: [], components: [] });
+        i.update({ content: `Left your ${petbreed} :(`, embeds: [], components: [] });
       }
     });
   },

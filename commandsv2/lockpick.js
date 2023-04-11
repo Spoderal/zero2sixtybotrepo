@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const garagedb = require("../data/garages.json");
 const { toCurrency } = require("../common/utils");
@@ -13,11 +14,11 @@ module.exports = {
     .setDescription("Lockpick a random garage for rewards"),
   async execute(interaction) {
     let udata = await User.findOne({ id: interaction.user.id });
+    let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
     let lockpicks = udata.lockpicks;
-    console.log(udata);
-    console.log(lockpicks);
+    let using = udata.using
     if (lockpicks == 0) return interaction.reply(`You're out of lockpicks!`);
-    let trypick = lodash.sample([true, false]);
+    let trypick = lodash.sample([true, false, true]);
     udata.lockpicks -= 1;
     udata.update();
     if (trypick == false) {
@@ -34,32 +35,42 @@ module.exports = {
     }
 
     let rarity;
-
-    function pickRandom(rarities) {
-      // Calculate chances for common
-      var filler =
-        80 -
-        rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
-
-      if (filler <= 0) {
-        console.log("chances sum is higher than 80!");
-        return;
+    let fil = 200
+    if(using.includes("grape juice") || using.includes("Grape Juice")){
+      let cooldown = cooldowns.grapejuice
+      let timeout = 900000
+      console.log(timeout - (Date.now() - cooldown))
+      if(cooldown !== null && timeout - (Date.now() - cooldown) < 0){
+        console.log("pulled")
+        udata.using.pull("grape juice")
+        udata.update()
+        interaction.channel.send("Your grape juice ran out! :(")
       }
-
-      // Create an array of 100 elements, based on the chances field
-      var probability = rarities
-        .map((r, i) => Array(r.chance === 0 ? filler : r.chance).fill(i))
-        .reduce((c, v) => c.concat(v), []);
-
-      // Pick one
-      var pIndex = Math.floor(Math.random() * 80);
-      rarity = rarities[probability[pIndex]];
-
-      console.log(rarity.type);
+      fil = 50
     }
-    pickRandom(garages);
+    console.log(fil)
 
-    let garagepicked = rarity.type;
+    let garagepicked
+      // Calculate chances for common
+      let chance = Math.floor(Math.random() * fil)
+
+      if(chance >= garagedb["common garage"].Rarity){
+        garagepicked = "common garage"
+
+      }
+     else if(chance >= garagedb["rare garage"].Rarity){
+        garagepicked = "rare garage"
+
+      }
+    else if(chance >= garagedb["legendary garage"].Rarity){
+        garagepicked = "legendary garage"
+
+      }
+      else{
+        garagepicked = "legendary garage"
+      }
+    
+      console.log(chance)
 
     let garageindb = garagedb[garagepicked];
     let rand1 = lodash.sample(garageindb.Contents);

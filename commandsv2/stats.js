@@ -106,7 +106,7 @@ module.exports = {
         price = `Obtained: Squad`;
       }
 
-      ctx.fillText(price, 760, 680);
+      ctx.fillText(price, 600, 75);
 
       let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
         name: "stats-image.png",
@@ -145,6 +145,8 @@ module.exports = {
       let brakes = carindb[0].Brakes;
       let spoiler = carindb[0].Spoiler;
       let intercooler = carindb[0].Intercooler;
+
+      let drivetrain = carindb[0].Drivetrain;
 
       // let suspensionimg = await loadImage(partdb.Parts[suspension.toLowerCase()].Image)
       // let engineimg = await loadImage(partdb.Parts[engine.toLowerCase()].Image)
@@ -258,6 +260,13 @@ module.exports = {
         ctx.drawImage(suspensionimg, 1160, 415, 75, 75);
         ctx.fillText(suspension, 1140, 515);
       }
+      if (drivetrain) {
+        let drivetrainimg = await loadImage(
+          partdb.Parts[drivetrain.toLowerCase()].Image
+        );
+        ctx.drawImage(drivetrainimg, 1170, 515, 75, 75);
+        ctx.fillText(drivetrain, 1170, 615);
+      }
 
       if (engine) {
         let engineimg = await loadImage(
@@ -334,6 +343,10 @@ module.exports = {
         .setDescription(`${stats.join("\n")}`)
         .setColor(colors.blue);
 
+        if(partindb.Image){
+          embed.setThumbnail(`${partindb.Image}`)
+        }
+
       await interaction.reply({ embeds: [embed] });
     } else if (
       subcommandfetch == "car_part" &&
@@ -342,12 +355,16 @@ module.exports = {
       let itemindb = itemdb.Other[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Information for ${itemindb.Emote} ${itemindb.Name}`)
-        .setDescription(itemindb.Action)
+        .setDescription(`${itemindb.Action}\n\nPrice: ${toCurrency(itemindb.Price)}`)
         .addFields({
           name: "Type",
           value: `${itemindb.Type}`,
         })
         .setColor(colors.blue);
+        
+        if(itemindb.Image){
+          embed.setThumbnail(`${itemindb.Image}`)
+        }
 
       interaction.reply({ embeds: [embed] });
     }

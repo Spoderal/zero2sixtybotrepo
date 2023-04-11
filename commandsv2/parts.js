@@ -326,6 +326,15 @@ module.exports = {
                   ${parts.Parts["tracksprings"].Emote}  ${
                     parts.Parts["tracksprings"].Name
                   } : ${toCurrency(parts.Parts["tracksprings"].Price)}\n
+                  ${parts.Parts["rwd"].Emote}  ${
+                    parts.Parts["rwd"].Name
+                  } : ${toCurrency(parts.Parts["rwd"].Price)}\n
+                  ${parts.Parts["fwd"].Emote}  ${
+                    parts.Parts["fwd"].Name
+                  } : ${toCurrency(parts.Parts["fwd"].Price)}\n
+                  ${parts.Parts["awd"].Emote}  ${
+                    parts.Parts["awd"].Name
+                  } : ${toCurrency(parts.Parts["awd"].Price)}\n
                   **`
                 )
                 .setColor(colors.blue)

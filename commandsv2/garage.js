@@ -99,7 +99,12 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("last")
         .setEmoji("⏭️")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
+        .setCustomId("filter")
+        .setEmoji("🔍")
         .setStyle("Secondary")
+        .setLabel("Filter")
     );
 
     let row2 = new ActionRowBuilder().addComponents(
@@ -131,7 +136,8 @@ module.exports = {
     let collector2 = msg.createMessageComponentCollector({
       filter: filter2,
     });
-
+    
+let filtereddcars 
     collector2.on("collect", async (i) => {
       if (i.customId == "cars") {
         itempage = cars;
@@ -166,7 +172,7 @@ module.exports = {
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
-
+        if(displayparts2.length == 0) return i.update("You don't have any parts!")
         embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
           embeds: [embed],
@@ -207,7 +213,149 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      } else {
+      } 
+      
+      if(i.customId.includes("filter")){
+        let rowf = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+          .setCustomId("reset")
+          .setLabel("All")
+          .setEmoji("🚗")
+          .setStyle("Secondary"),
+         new ButtonBuilder()
+           .setCustomId("fpower200")
+           .setLabel("Power > 200")
+           .setEmoji("<:newspeedemote:1049569265730195466>")
+           .setStyle("Secondary"),
+           new ButtonBuilder()
+           .setCustomId("fpower250")
+           .setLabel("Power > 250")
+           .setEmoji("<:newspeedemote:1049569265730195466>")
+           .setStyle("Secondary"),
+           new ButtonBuilder()
+           .setCustomId("fpower300")
+           .setLabel("Power > 300")
+           .setEmoji("<:newspeedemote:1049569265730195466>")
+           .setStyle("Secondary"),
+           
+       );
+       
+
+       await i.update({
+        embeds: [embed],
+        components: [rowf],
+        fetchReply: true,
+      });
+     }
+
+     else if(i.customId.includes("fpower200")){
+      console.log("power")
+      embed.data.fields = null;
+       filtereddcars = udata.cars.filter((car2) => car2.Speed >= 200)
+      filtereddcars = lodash.chunk(
+        filtereddcars.map((a) => a),
+        6
+        );
+        let filter = filtereddcars[0]
+      itempage = filtereddcars;
+      for (let car in filter) {
+        car = filter[car];
+        embed.addFields({
+          name: `${car.Emote} ${car.Name}`,
+          value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+          inline: true,
+        });
+      }
+
+      embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
+
+      await i.update({
+        embeds: [embed],
+        components: [row, row2],
+        fetchReply: true,
+      });
+
+     }
+     else if(i.customId.includes("fpower250")){
+      console.log("power")
+      embed.data.fields = null;
+       filtereddcars = udata.cars.filter((car2) => car2.Speed >= 250)
+      filtereddcars = lodash.chunk(
+        filtereddcars.map((a) => a),
+        6
+        );
+        let filter = filtereddcars[0]
+      itempage = filtereddcars;
+      for (let car in filter) {
+        car = filter[car];
+        embed.addFields({
+          name: `${car.Emote} ${car.Name}`,
+          value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+          inline: true,
+        });
+      }
+
+      embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
+
+      await i.update({
+        embeds: [embed],
+        components: [row, row2],
+        fetchReply: true,
+      });
+
+     }
+     else if(i.customId.includes("fpower300")){
+      console.log("power")
+      embed.data.fields = null;
+       filtereddcars = udata.cars.filter((car2) => car2.Speed >= 300)
+      filtereddcars = lodash.chunk(
+        filtereddcars.map((a) => a),
+        6
+        );
+        let filter = filtereddcars[0]
+      itempage = filtereddcars;
+      for (let car in filter) {
+        car = filter[car];
+        embed.addFields({
+          name: `${car.Emote} ${car.Name}`,
+          value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+          inline: true,
+        });
+      }
+
+      embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
+
+      await i.update({
+        embeds: [embed],
+        components: [row, row2],
+        fetchReply: true,
+      });
+
+     }
+     else if(i.customId.includes("reset")){
+       embed.data.fields = null;
+      itempage = cars;
+    
+      for (let car in cars[0]) {
+        car = cars[0][car];
+        embed.addFields({
+          name: `${car.Emote} ${car.Name}`,
+          value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+          inline: true,
+        });
+      }
+
+      await i.update({
+        embeds: [embed],
+        components: [row, row2],
+        fetchReply: true,
+      });
+
+     }
+
+
+
+      else {
         let current = page;
         if (i.customId.includes("previous") && page !== 1) {
           embed.data.fields = null;
@@ -226,6 +374,10 @@ module.exports = {
 
           page = itempage.length;
         }
+
+
+    
+
         for (let e in itempage[page - 1]) {
           let car = itempage[page - 1][e];
           if (itempage == cars) {
@@ -234,7 +386,16 @@ module.exports = {
               value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
               inline: true,
             });
-          } else if (itempage == displayparts2) {
+          }
+           else if (itempage == filtereddcars) {
+            embed.addFields({
+              name: `${car.Emote} ${car.Name}`,
+              value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+              inline: true,
+            });
+          }
+          
+          else if (itempage == displayparts2) {
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
         }

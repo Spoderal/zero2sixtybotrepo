@@ -8,6 +8,7 @@ const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const petdb = require("../data/pets.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -128,7 +129,16 @@ module.exports = {
       } else if (itemtouse.toLowerCase() == "energy drink") {
         userdata.using.push(`energy drink`);
         cooldowndata.energydrink = Date.now();
-      } else if (itemtouse.toLowerCase() == "sponsor") {
+      }
+      else if (itemtouse.toLowerCase() == "grape juice") {
+        userdata.using.push(`grape juice`);
+        cooldowndata.grapejuice = Date.now();
+      }  
+      else if (itemtouse.toLowerCase() == "apple juice") {
+        userdata.using.push(`apple juice`);
+        cooldowndata.applejuice = Date.now();
+      }  
+      else if (itemtouse.toLowerCase() == "sponsor") {
         userdata.using.push(`sponsor`);
         cooldowndata.sponsor = Date.now();
       } else if (itemtouse.toLowerCase() == "small vault") {
@@ -155,33 +165,27 @@ module.exports = {
       } else if (itemtouse.toLowerCase() == "disguise") {
         userdata.using.push("disguise");
       } else if (itemtouse.toLowerCase() == "pet egg") {
-        let randcar = lodash.sample(["pretty porsche", "mini miata"]);
-        let pet = userdata.pet;
-        let petobj;
-        if (randcar == "pretty porsche") {
-          petobj = {
-            condition: 100,
-            oil: 100,
-            gas: 100,
-            love: 100,
-            car: "pretty porsche",
-            tier: 2,
-            color: "White",
-          };
-        } else {
-          petobj = {
-            condition: 100,
-            oil: 100,
-            gas: 100,
-            love: 100,
-            car: "mini miata",
-            tier: 1,
-            color: "Red",
-          };
-        }
+        let randcat = lodash.sample(["orange cat", "white cat"]);
+        let pet = userdata.newpet;
+        if (pet.name) return interaction.reply(`You already have a pet!`);
+        let petindb = petdb[randcat]
+        let randname = lodash.sample(petindb.Names)
 
-        if (pet) return interaction.reply(`You already have a pet!`);
-        userdata.pet = petobj;
+         let petobj = {
+            name: randname,
+            hunger: 100,
+            thirst: 100,
+            love: 100,
+            pet: randcat,
+            xessence:5
+          };
+        
+
+        userdata.newpet = petobj;
+        userdata.save()
+
+        return await interaction.reply(`You found a ${petindb.Breed} named ${randname}!`)
+
       } else if (itemtouse.toLowerCase() == "water bottle") {
         let watercooldown = cooldowndata.waterbottle;
         let timeout = 18000000;
@@ -220,9 +224,7 @@ module.exports = {
 
         if (randomeffect == "One of your cars just got +1 speed") {
           let randomcar = lodash.sample(userdata.cars);
-          console.log(randomcar);
           randomcar.Speed += 1;
-          console.log(randomcar);
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -247,9 +249,7 @@ module.exports = {
           randomeffect == "One of your cars just got +1 acceleration"
         ) {
           let randomcar = lodash.sample(userdata.cars);
-          console.log(randomcar);
           randomcar.Acceleration += 1;
-          console.log(randomcar);
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -272,9 +272,7 @@ module.exports = {
           userdata.update();
         } else if (randomeffect == "One of your cars just got -20 handling") {
           let randomcar = lodash.sample(userdata.cars);
-          console.log(randomcar);
           randomcar.Handling -= 20;
-          console.log(randomcar);
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -297,9 +295,7 @@ module.exports = {
           userdata.update();
         } else if (randomeffect == "One of your cars just got +5 speed") {
           let randomcar = lodash.sample(userdata.cars);
-          console.log(randomcar);
           randomcar.Speed += 5;
-          console.log(randomcar);
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -376,7 +372,7 @@ module.exports = {
     for (var i = 0; i < amount2; i++)
       items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
     userdata.items = items;
-
+    cooldowndata.save()
     userdata.save();
     await interaction.reply(`Used x${amount2} ${fullname}!`);
   },

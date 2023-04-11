@@ -84,10 +84,10 @@
   },
   "blueprints": {
     "Contents": [
-      "2015 mercedes c class",
+      "1981 dmc delorean",
       "50000 Cash",
-      "2013 porsche 911 turbo",
-      "1969 toyota corolla",
+      "2021 pagani huayra r",
+      "1987 toyota corolla",
       "25000 Cash",
       "25000 Cash",
       "25000 Cash",
@@ -108,6 +108,15 @@
       "t4exhaust",
       "t4exhaust",
       "t5intake"
+    ]
+  },
+  "carsblueprints": {
+    "Contents": [
+      "1981 dmc delorean",
+     
+      "2021 pagani huayra r",
+      "1987 toyota corolla",
+      "2010 ferrari california"
     ]
   },
   "f1blueprints": {

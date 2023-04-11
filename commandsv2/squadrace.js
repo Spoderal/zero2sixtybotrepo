@@ -221,7 +221,7 @@ module.exports = {
 
     let i2 = setInterval(async () => {
       console.log(speed);
-      let calc = weight * (speed / 234);
+      let calc = weight += (speed / 234);
       calc = calc / acceleration;
       sec = (6.29 * (weight / calc)) / acceleration;
       calc = calc / sec;
@@ -229,7 +229,7 @@ module.exports = {
       console.log(`sec: ${sec}`);
       // car 2
       console.log(speed2);
-      let calc2 = weight2 * (speed2 / 234);
+      let calc2 = weight2 += (speed2 / 234);
       calc2 = calc2 / acceleration2;
       sec2 = (6.29 * (weight2 / calc2)) / acceleration2;
       console.log(`sec2: ${sec2}`);

@@ -12,6 +12,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 let cardb = require("../data/cardb.json");
 const lodash = require("lodash");
+const petdb = require("../data/pets.json")
 const squadsdb = require("../data/squads.json");
 const {
   doubleCashWeekendField,
@@ -48,9 +49,10 @@ module.exports = {
       let caroj = cardb.Cars[car1];
       carsarray.push(caroj);
     }
-
+    
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+    let pet = userdata.newpet
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: user.id });
@@ -323,16 +325,10 @@ module.exports = {
           ctx.fillText(car2.Name, 845, 180);
           ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
-          if (weather2.Emote == "🌧️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          } else if (weather2.Emote == "🌨️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
+          if(pet.name){
+            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image)
+
+            ctx.drawImage(petimage, 200, 200, 200, 200);
           }
 
           let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
@@ -341,14 +337,10 @@ module.exports = {
 
           console.log(weather2);
 
-          let slipchance = weather2.Slip;
-          let speedreduce = weather2.SpeedReduce;
-          let mph;
-          if (speedreduce > 0) {
-            mph = selected.Speed -= speedreduce;
-          } else {
-            mph = selected.Speed;
-          }
+       
+          
+          let mph = selected.Speed
+       
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -361,20 +353,13 @@ module.exports = {
 
           let mph2;
 
-          if (speedreduce > 0) {
-            mph2 = car2.Speed -= speedreduce;
-          } else {
+       
             mph2 = car2.Speed;
-          }
+          
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling / weather2.Grip;
-          if (slipchance > 0) {
-            let slip = randomRange(1, slipchance);
-            if (slip >= 2) {
-              mph -= 10;
-            }
-          }
+        
           let speed = 0;
           let speed2 = 0;
 
@@ -385,7 +370,7 @@ module.exports = {
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
           let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Street Race ${weather2.Emote}`)
+            .setTitle(`Racing Tier ${bot} Street Race`)
 
             .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
             .addFields(
@@ -430,7 +415,7 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = handling * (speed / 50);
+            let calc = handling += (speed / 50);
             calc = calc / acceleration;
             sec = (6.3 * (weight / calc)) / acceleration;
             calc = calc / sec;
@@ -438,7 +423,7 @@ module.exports = {
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = handling2 * (speed / 50);
+            let calc2 = handling2 += (speed / 50);
             calc2 = calc2 / acceleration2;
             sec2 = (6.3 * (weight2 / calc2)) / acceleration2;
             console.log(`sec2: ${sec2}`);
@@ -474,9 +459,35 @@ module.exports = {
               if (weather2.Reward > 0) {
                 cashwon = cashwon += weather2.Reward;
               }
+
+              if(pet.name){
+                let xessneceearn = lodash.random(pet.xessence)
+
+
+                earnings.push(`${petdb[pet.pet].Emote} +${xessneceearn} Xessence`)
+                userdata.xessence += xessneceearn
+                userdata.newpet.love -= 5
+                userdata.newpet.hunger -= 5
+                userdata.newpet.thirst -= 3
+
+                if(userdata.newpet.hunger <= 0){
+                  interaction.channel.send("Your pet died of hunger :(")
+                  userdata.newpet = {}
+                }
+                if(userdata.newpet.thirst <= 0){
+                  interaction.channel.send("Your pet died of thirst :(")
+                  userdata.newpet = {}
+                }
+                if(userdata.newpet.love <= 0){
+                  interaction.channel.send("Your pet left because it wasn't loved enough :(")
+                  userdata.newpet = {}
+                }
+
+                userdata.markModified("newpet")
+              }
+
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
-              earnings.push(`Fools Keys 🔑 +1`);
 
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
@@ -489,7 +500,6 @@ module.exports = {
               userdata.rp3 += rpwon;
               userdata.racerank += 1;
               userdata.worldwins += 1;
-              userdata.foolskeys += 1;
               let taskfilter = userdata.tasks.filter(
                 (task) => task.Task == "Win 10 street races"
               );
@@ -521,12 +531,12 @@ module.exports = {
                 }
               }
               embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Street Race won! ${weather2.Emote}`);
+              embed.setTitle(`Tier ${bot} Street Race won!`);
               embed.setImage(`attachment://profile-image.png`);
 
               await i.editReply({ embeds: [embed], files: [attachment] });
 
-              if (userdata.tutorial && userdata.tutorial.stage == 2) {
+              if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
                   `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
@@ -550,11 +560,11 @@ module.exports = {
               });
               embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Street Race lost! ${weather2.Emote}`);
+              embed.setTitle(`Tier ${bot} Street Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-              if (userdata.tutorial && userdata.tutorial.stage == 2) {
+              if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
                   `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
@@ -1216,8 +1226,6 @@ module.exports = {
 
           console.log(car2);
 
-          let botspeed = car2.Speed;
-          let bot060 = car2["0-60"];
 
           let craterare = randomRange(1, 3);
 
