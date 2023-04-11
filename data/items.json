@@ -137,73 +137,11 @@
       "Action": "Only get cars in blueprints for 15 minutes",
       "Name": "Apple Juice",
       "Type": "Usable",
-      "Emote": "<:item_applejuice:1094894556983611423>",
+      "Emote": "<:item_applejuice:1094894556983611423> ",
       "Shop": true,
       "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png"
     },
-    "orange juice": {
-      "Price": 60000,
-      "Action": "Only get t4parts in wheelspins for 60 seconds",
-      "Name": "Orange Juice",
-      "Type": "Usable",
-      "Emote": "<:item_orangejuice:1095474854775508993>",
-      "Shop": true,
-      "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png"
-    },
-    "fruit punch": {
-      "Price": 0,
-      "Action": "Receive x2 ranks when racing or drifting **USE /FUSE WITH ALL 3 OTHER JUICES**",
-      "Name": "Fruit Punch",
-      "Type": "Usable",
-      "Emote": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png",
-      "Shop": false,
-      "Image": "<:item_fruitpunch:1095474852997120010>"
-    },
-    "flat tire": {
-      "Price": 50000,
-      "Action": "Receive a 5% boost in cash when street racing",
-      "Name": "Flat Tire",
-      "Type": "Usable",
-      "Emote": "<:item_flattire:1095474856306417756>",
-      "Shop": true,
-      "Image": ""
-    },
-    "oil": {
-      "Price": 200000,
-      "Action": "Allows all your cars to have 1.5s acceleration for 60 seconds",
-      "Name": "Oil",
-      "Type": "Usable",
-      "Emote": "<:item_oil:1095474850098843689>",
-      "Shop": true,
-      "Image": ""
-    },
-    "epic lockpick": {
-      "Price": 450000,
-      "Action": "While active (10 minutes), your lockpicks will not break",
-      "Name": "Epic Lockpick",
-      "Type": "Usable",
-      "Emote": "<:item_stronglockpick:1095474858328064065>",
-      "Shop": false,
-      "Image": ""
-    },
-    "pet treats": {
-      "Price": 75000,
-      "Action": "Use these to make the random xessence cap on your pet higher by **1** for 10 minutes **USING MULTIPLE STACKS UP TO 20**",
-      "Name": "Pet Treats",
-      "Type": "Usable",
-      "Emote": "<:item_treats:1095474851046752327>",
-      "Shop": true,
-      "Image": "https://i.ibb.co/5MTkjcf/item-treats.png"
-    },
-    "blueberry": {
-      "Price": 350000,
-      "Action": "Eat a blueberry to increase your race rank by 1",
-      "Name": "Blueberry",
-      "Type": "Usable",
-      "Emote": "<:item_blueberry:1095474857514385480>",
-      "Shop": true,
-      "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png"
-    },
+    
 
     "energy drink": {
       "Price": 25000,
