@@ -25,9 +25,7 @@ module.exports = {
             Rare Import Crate : 25 ${key2emote} Keys
             Exotic Import Crate : 20 ${key3emote} Keys
             Drift Import Crate : 100 ${emotes.dirftKey} **LIMITED**
-            F1 Blueprints : 25 ${emotes.f1blueprint} **LIMITED**\n
-
-            🥚 PINKY: PINK EGG MOBILE
+            F1 Blueprints : 25 ${emotes.f1blueprint} **LIMITED**
           `,
         },
       ])

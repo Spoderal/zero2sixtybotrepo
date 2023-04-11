@@ -134,32 +134,6 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "egg") {
-        embed.setTitle("Easter Event");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Egg mobiles are back with a brand new look!
-
-        Collect multiple egg mobiles, and find the ultra rare golden egg mobile in \`/gold\` to sell it for $10M Cash!
-
-        These are one of a kind, so make sure you stock up this year, they wont be returning! 
-
-        You can find egg mobiles in random commands, doing tasks, etc! Just hunt for them and you're bound to find one!
-
-        Hint: Check the junkyard\n
-
-        Run /code **CODE** if you find any eggs!\n
-
-        *There are 9 eggs to collect in total!*
-
-        **Ends April 12th 2023**
-                  `);
-        embed.setImage("https://i.ibb.co/ryz6ty3/EASTER.png");
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
       } else if (value === "f1_icons") {
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()

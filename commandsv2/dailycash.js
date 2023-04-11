@@ -66,8 +66,7 @@ module.exports = {
       let timeEmbed = new Discord.EmbedBuilder()
         .setColor(colors.blue)
         .setDescription(
-          `You've already collected your daily cash\n\nCollect it again in ${time}.\n\n
-          🥚 OOPS: CRACKED EGG MOBILE`
+          `You've already collected your daily cash\n\nCollect it again in ${time}.`
         );
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     } else {

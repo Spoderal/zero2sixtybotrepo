@@ -90,9 +90,7 @@ module.exports = {
         Invite the bot to your server by using this [link.](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=321600&scope=bot%20applications.commands)\n
         \`Command Example\`\n
         [Support Server](https://discord.gg/5j8SYkrf4z)\n
-        *Need some extra cash? Join the support server for many more options for earning cash including a multiplier for running commands in the server, QOTD with prizes, regular giveaways, and more!*\n
-
-        🥚 RED EGG MOBILE: REDSTARS
+        *Need some extra cash? Join the support server for many more options for earning cash including a multiplier for running commands in the server, QOTD with prizes, regular giveaways, and more!*
         `
       )
       .setFooter({ text: "Slash Commands Only" });

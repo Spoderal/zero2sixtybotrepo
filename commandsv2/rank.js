@@ -29,8 +29,6 @@ module.exports = {
         **Prestige**: ${prestigerank}\n
         Race Rank: ${racerank}/${required1}\n
         Drift Rank: ${driftrank}/${required2}\n
-        
-        🥚 SAVETHEEARTH: GREEN EGG MOBILE
         `
       )
 

@@ -13,25 +13,8 @@
     },
     "APRILFIRST": {
       "Reward": 10000
-    },
-    "REDSTARS": {
-      "Reward": "2023 Red Egg Mobile"
-    },
-    "ONESMALLSTEPFOREGGS": {
-      "Reward": "2023 Space Egg Mobile"
-    },
-    "PINKY": {
-      "Reward": "2023 Pink Egg Mobile"
-    },
-    "SAVETHEEARTH": {
-      "Reward": "2023 Green Egg Mobile"
-    },
-    "OOPS": {
-      "Reward": "2023 Cracked Egg Mobile"
-    },
-    "EGG": {
-      "Reward": "2023 Egg Mobile"
     }
+   
   },
   "Patreon": {
     "GOLDFOREVER": {

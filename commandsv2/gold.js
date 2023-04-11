@@ -43,33 +43,6 @@ module.exports = {
 
     await interaction.reply({ embeds: [embed] });
 
-    let randgold = lodash.random(0, 100);
 
-    if (randgold == 6) {
-      let filteredegg = userdata.cars.filter(
-        (car) => car.Name == "2023 Gold Egg Mobile"
-      );
-
-      if (!filteredegg[0]) {
-        let carindb = cardb.Cars["2023 gold egg mobile"];
-        let eggobj = {
-          ID: carindb.alias,
-          Name: carindb.Name,
-          Speed: carindb.Speed,
-          Acceleration: carindb["0-60"],
-          Handling: carindb.Handling,
-          Parts: [],
-          Emote: carindb.Emote,
-          Livery: carindb.Image,
-          Miles: 0,
-          Resale: 10000000,
-          Weight: carindb.Weight,
-        };
-        userdata.cars.push(eggobj);
-        userdata.save();
-      }
-
-      interaction.channel.send("You found the gold egg mobile!");
-    }
   },
 };
