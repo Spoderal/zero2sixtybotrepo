@@ -42,7 +42,5 @@ module.exports = {
       .setThumbnail("https://i.ibb.co/zXDct3P/goldpile.png");
 
     await interaction.reply({ embeds: [embed] });
-
-
   },
 };

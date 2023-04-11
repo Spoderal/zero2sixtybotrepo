@@ -354,7 +354,10 @@ module.exports = {
     ) {
       let itemindb = itemdb.Other[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
-        .setAuthor({name: `Information for ${itemindb.Name}`, iconURL:itemindb.Image })
+        .setAuthor({
+          name: `Information for ${itemindb.Name}`,
+          iconURL: itemindb.Image,
+        })
         .setDescription(
           `${itemindb.Action}\n\nPrice: ${toCurrency(itemindb.Price)}`
         )

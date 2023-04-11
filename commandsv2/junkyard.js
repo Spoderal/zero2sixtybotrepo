@@ -73,7 +73,6 @@ module.exports = {
       cooldowndata.junk = Date.now();
       await cooldowndata.save();
       userdata.parts.push(part.Name.toLowerCase());
-      
 
       await userdata.save();
       let embed = new Discord.EmbedBuilder()
