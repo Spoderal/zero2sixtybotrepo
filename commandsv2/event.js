@@ -41,13 +41,6 @@ module.exports = {
             customId: "f1",
             emoji: "🏎️",
           },
-          {
-            label: "Easter 2023",
-            description: "Information for the Easter Event",
-            value: "egg",
-            customId: "egg",
-            emoji: "🐣",
-          },
         ])
     );
 
@@ -62,8 +55,7 @@ module.exports = {
           **__Events__**
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
-          F1 Icons 🏎️\n
-          Easter 2023 🐣
+          F1 Icons 🏎️
       `);
 
     embed.setColor(colors.blue);
