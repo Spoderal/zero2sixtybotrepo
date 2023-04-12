@@ -162,7 +162,13 @@ module.exports = {
       } else if (itemtouse.toLowerCase() == "disguise") {
         userdata.using.push("disguise");
       } else if (itemtouse.toLowerCase() == "pet egg") {
-        let randcat = lodash.sample(["orange cat", "white cat", "black cat", "green snake", "rattle snake"]);
+        let randcat = lodash.sample([
+          "orange cat",
+          "white cat",
+          "black cat",
+          "green snake",
+          "rattle snake",
+        ]);
         let pet = userdata.newpet;
         if (pet.name) return interaction.reply(`You already have a pet!`);
         let petindb = petdb[randcat];
