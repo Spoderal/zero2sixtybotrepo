@@ -7,7 +7,8 @@ async function updateItemShop() {
   let items = [];
   let timeout = 604800000;
   let itemshopalr = global.itemshop;
-  if (!itemshopalr || itemshopalr.length == 0) {
+  setInterval(async () => {
+  if (itemshopalr.length == 0) {
     items = [];
     let itemarr = [];
     for (let i in itemsdb) {
@@ -42,7 +43,7 @@ async function updateItemShop() {
 
     global.save();
   } else {
-    setInterval(async () => {
+  
       items = [];
       let itemarr = [];
       for (let i in itemsdb) {
@@ -80,9 +81,9 @@ async function updateItemShop() {
 
         console.log(item1);
       }
-    }, 300000);
+    }
+  }, 300000);
   }
-}
 
 module.exports = {
   updateItemShop,
