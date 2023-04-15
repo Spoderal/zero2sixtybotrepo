@@ -122,6 +122,7 @@ module.exports = {
       let nextuser2rank = urankslist.filter((r) => r.rank == user2num);
 
       //  if(rrank !== rrank2 && user1num !== rrank2 && user2num !== rrank) return interaction.reply(`You need to be at least the same rank, or 1 rank above the other user to race them!`)
+      await interaction.reply("Revving engines...");
 
       let carindb1 = cars.Cars[selected.Name.toLowerCase()];
       let carindb2 = cars.Cars[selected2.Name.toLowerCase()];
@@ -140,7 +141,6 @@ module.exports = {
           .setStyle("Danger")
           .setEmoji("✖️")
       );
-      interaction.reply("Revving engines...");
       let selected1image = await loadImage(`${selected.Livery}`);
       let selected2image = await loadImage(`${selected2.Livery}`);
       let cupimg = await loadImage(
