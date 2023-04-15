@@ -293,5 +293,11 @@
     "emote": "<:apollo:1066081882896351332>",
     "name": "Apollo",
     "country": "https://i.ibb.co/MMctwtD/flag-german.png"
+  },
+    "peel":{
+    "image": "https://i.ibb.co/wCMkcFK/logo-peel.png",
+    "emote": "<:peel:941833943278297108>",
+    "name": "Peel",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   }
 }
