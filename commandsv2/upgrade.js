@@ -72,13 +72,7 @@ module.exports = {
     } else {
       partindb = "None";
     }
-    if (
-      partindb.Type == "engine" ||
-      partindb.Type == "turbo" ||
-      (partindb.Type == "intake" &&
-        cardb.Cars[selected.Name.toLowerCase()].Electric)
-    )
-      return interaction.reply("EVs cant have engines, turbos, or intakes!");
+    if (partindb.Type == "engine" || partindb.Type == "turbo" ||  partindb.Type == "intake" && cardb.Cars[selected.Name.toLowerCase()].Electric) return interaction.reply("EVs cant have engines, turbos, or intakes!");
     console.log(partindb);
     if (cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0)
       return interaction.reply("F1 Cars cant have their speed upgraded.");
@@ -219,8 +213,7 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = oldhandling;
-    let newweight =
-      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight = selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {

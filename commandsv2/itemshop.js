@@ -20,7 +20,7 @@ module.exports = {
     cool = ms(cool);
     for (let i in itemshop) {
       i = itemshop[i];
-      let item = itemsdb.Other[i.toLowerCase()];
+      let item = itemsdb[i.toLowerCase()];
       console.log(item);
 
       if (!item.Price == 0) {

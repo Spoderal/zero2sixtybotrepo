@@ -153,9 +153,9 @@ module.exports = {
         for (var i = 0; i < amount; i++)
           userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
         userdata.parts = userparts;
-      } else if (itemdb.Other[item.toLowerCase()]) {
+      } else if (itemdb[item.toLowerCase()]) {
         obj = {
-          item: itemdb.Other[item.toLowerCase()].Name.toLowerCase(),
+          item: itemdb[item.toLowerCase()].Name.toLowerCase(),
           price: price,
           amount: amount,
           id: global.marketId,
@@ -328,11 +328,11 @@ module.exports = {
                 listing.price
               )} **x${listing.amount}**`
             );
-          } else if (itemdb.Other[listing.item.toLowerCase()]) {
+          } else if (itemdb[listing.item.toLowerCase()]) {
             marketdisplay.push(
               `\`ID ${listing.id}\`: ${
-                itemdb.Other[listing.item.toLowerCase()].Emote
-              } ${itemdb.Other[listing.item.toLowerCase()].Name} - ${toCurrency(
+                itemdb[listing.item.toLowerCase()].Emote
+              } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
                 listing.price
               )} **x${listing.amount}**`
             );

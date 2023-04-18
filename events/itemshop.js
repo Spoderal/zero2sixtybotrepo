@@ -1,5 +1,5 @@
 const Global = require(`../schema/global-schema`);
-const itemsdb = require("../data/items.json").Other;
+const itemsdb = require("../data/items.json")
 const lodash = require("lodash");
 async function updateItemShop() {
   let global = await Global.findOne();
@@ -7,7 +7,8 @@ async function updateItemShop() {
   let items = [];
   let timeout = 604800000;
   let itemshopalr = global.itemshop;
-  if (!itemshopalr || itemshopalr.length == 0) {
+  setInterval(async () => {
+  if (itemshopalr.length == 0) {
     items = [];
     let itemarr = [];
     for (let i in itemsdb) {
@@ -21,6 +22,7 @@ async function updateItemShop() {
     let randitem3 = lodash.sample(filtereditems);
     let randitem4 = lodash.sample(filtereditems);
     let randitem5 = lodash.sample(filtereditems);
+    let randitem6 = lodash.sample(filtereditems);
 
     let item1 = randitem1.Name;
 
@@ -31,18 +33,21 @@ async function updateItemShop() {
     let item4 = randitem4.Name;
     let item5 = randitem5.Name;
 
+    let item6 = randitem6.Name;
+
     items.push(item1);
     items.push(item2);
     items.push(item3);
     items.push(item4);
     items.push(item5);
+    items.push(item6);
 
     global.itemshop = items;
     global.itemshopcooldown = Date.now();
 
     global.save();
   } else {
-    setInterval(async () => {
+  
       items = [];
       let itemarr = [];
       for (let i in itemsdb) {
@@ -56,6 +61,7 @@ async function updateItemShop() {
       let randitem3 = lodash.sample(filtereditems);
       let randitem4 = lodash.sample(filtereditems);
       let randitem5 = lodash.sample(filtereditems);
+      let randitem6 = lodash.sample(filtereditems);
 
       let item1 = randitem1.Name;
 
@@ -65,6 +71,7 @@ async function updateItemShop() {
 
       let item4 = randitem4.Name;
       let item5 = randitem5.Name;
+    let item6 = randitem6.Name;
 
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
         items.push(item1);
@@ -72,6 +79,7 @@ async function updateItemShop() {
         items.push(item3);
         items.push(item4);
         items.push(item5);
+        items.push(item6);
 
         global.itemshop = items;
         global.itemshopcooldown = Date.now();
@@ -80,9 +88,9 @@ async function updateItemShop() {
 
         console.log(item1);
       }
-    }, 300000);
+    }
+  }, 300000);
   }
-}
 
 module.exports = {
   updateItemShop,

@@ -12,5 +12,9 @@
     "Title": "Spark Plug",
     "Achieve": "Crate",
     "Crate": true
+  }, 
+  "astronomical racer":{
+    "Title": "Astronomical Racer",
+    "Achieve": "Event"
   }
 }

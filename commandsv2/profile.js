@@ -8,6 +8,7 @@ const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
+const titledb = require("../data/titles.json")
 
 const { createCanvas, loadImage } = require("canvas");
 
@@ -169,7 +170,7 @@ module.exports = {
     ctx.font = "25px sans-serif";
     ctx.fillStyle = "#ffffff";
 
-    ctx.fillText(title, 470, 50);
+    ctx.fillText(titledb[title].Title, 430, 50);
     ctx.font = "bold 28px sans-serif";
     ctx.fillText(user.username, 355, 135);
 

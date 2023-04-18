@@ -124,8 +124,8 @@ module.exports = {
       userdata2.cars.push(carobj);
       userdata.cars.pull(carobj);
     }
-    if (itemdb.Other[trading]) {
-      item = `${itemdb.Other[trading].Emote} ${itemdb.Other[trading].Name} x${amount}`;
+    if (itemdb[trading]) {
+      item = `${itemdb[trading].Emote} ${itemdb[trading].Name} x${amount}`;
       if (!userdata.items.includes(trading))
         return interaction.reply("You don't have this item!");
       for (var p2 = 0; p2 < amount; p2++) user2items.push(trading);
@@ -165,8 +165,8 @@ module.exports = {
       userdata2.cars.pull(carobj);
       userdata.cars.push(carobj);
     }
-    if (itemdb.Other[trading2]) {
-      item2 = `${itemdb.Other[trading2].Emote} ${itemdb.Other[trading2].Name} x${amount2}`;
+    if (itemdb[trading2]) {
+      item2 = `${itemdb[trading2].Emote} ${itemdb[trading2].Name} x${amount2}`;
       if (!userdata2.items.includes(trading2))
         return interaction.reply("You don't have this item!");
       for (var p1 = 0; p1 < amount2; p1++) user1items.push(trading2);

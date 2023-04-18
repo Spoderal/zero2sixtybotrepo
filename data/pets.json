@@ -43,5 +43,14 @@
     "Breed": "Rattle Snake",
     "Sad": "https://i.ibb.co/2Fx2yqc/pet-snake-rattle-sad.png",
     "Saddest": "https://i.ibb.co/cLZdYsh/pet-snake-rattle-saddest.png"
+  },
+  "alien": {
+    "Image": "https://i.ibb.co/gvJ3JNj/pet-alien.png",
+    "Emote": "<:pet_alien:1096357037916569651>",
+    "Names": ["ET", "George", "Weirdo", "Thing 1"],
+    "Xessence": 20,
+    "Breed": "Alien",
+    "Sad": "https://i.ibb.co/5Lmb9GV/pet-alien-sad.png",
+    "Saddest": "https://i.ibb.co/nPHHXqK/pet-alien-sadder.png"
   }
 }

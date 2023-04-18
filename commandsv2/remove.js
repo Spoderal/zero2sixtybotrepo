@@ -31,6 +31,7 @@ module.exports = {
           { name: "Nitro", value: "nitro" },
           { name: "Brakes", value: "brakes" },
           { name: "Springs", value: "springs" },
+          { name: "Drivetrain", value: "drivetrain" },
           { name: "All", value: "all" }
         )
         .setRequired(true)
@@ -109,6 +110,9 @@ module.exports = {
       if (selected.Brakes !== null) {
         userdata.parts.push(selected.Brakes.toLowerCase());
       }
+      if (selected.Drivetrain !== null) {
+        userdata.parts.push(selected.Drivetrain.toLowerCase());
+      }
       if (selected["Weight reduction"] !== null) {
         userdata.parts.push(selected["Weight reduction"].toLowerCase());
       }
@@ -126,6 +130,7 @@ module.exports = {
       selected.Intercooler = null;
       selected["Weight reduction"] = null;
       selected.Brakes = null;
+      selected.Drivetrain = null;
       selected.Springs = null;
       selected.Speed = carindb.Speed;
       selected.Acceleration = carindb["0-60"];

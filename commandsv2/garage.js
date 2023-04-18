@@ -62,6 +62,8 @@ module.exports = {
 
     console.log(parts);
 
+  
+
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
@@ -76,8 +78,12 @@ module.exports = {
     }
     for (let car in cars[0]) {
       car = cars[0][car];
+      let favorite = ""
+      if(car.Favorite == true){
+        favorite = "⭐"
+      }
       embed.addFields({
-        name: `${car.Emote} ${car.Name}`,
+        name: `${car.Emote} ${car.Name} ${favorite}`,
         value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
         inline: true,
       });
@@ -145,7 +151,7 @@ module.exports = {
         embed = new EmbedBuilder()
           .setTitle(`Displaying cars for ${user.username}`)
           .setDescription(
-            `Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`
+            `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
           )
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
@@ -172,8 +178,7 @@ module.exports = {
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
-        if (displayparts2.length == 0)
-          return i.update("You don't have any parts!");
+        if (displayparts2.length == 0)  return i.update("You don't have any parts!");
         embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
           embeds: [embed],
@@ -190,7 +195,7 @@ module.exports = {
         console.log(items);
         for (let item in items) {
           item = items[item];
-          let itemindb = itemdb.Other[item.toLowerCase()];
+          let itemindb = itemdb[item.toLowerCase()];
           displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
         }
         var list2 = displayitems;
@@ -257,8 +262,12 @@ module.exports = {
         itempage = filtereddcars;
         for (let car in filter) {
           car = filter[car];
+          let favorite = ""
+          if(car.Favorite == true){
+            favorite = "⭐"
+          }
           embed.addFields({
-            name: `${car.Emote} ${car.Name}`,
+            name: `${car.Emote} ${car.Name} ${favorite}`,
             value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
             inline: true,
           });
@@ -282,9 +291,13 @@ module.exports = {
         let filter = filtereddcars[0];
         itempage = filtereddcars;
         for (let car in filter) {
-          car = filter[car];
+          car = filter[car];         
+           let favorite = ""
+          if(car.Favorite == true){
+            favorite = "⭐"
+          }
           embed.addFields({
-            name: `${car.Emote} ${car.Name}`,
+            name: `${car.Emote} ${car.Name} ${favorite}`,
             value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
             inline: true,
           });
@@ -309,8 +322,12 @@ module.exports = {
         itempage = filtereddcars;
         for (let car in filter) {
           car = filter[car];
+          let favorite = ""
+          if(car.Favorite == true){
+            favorite = "⭐"
+          }
           embed.addFields({
-            name: `${car.Emote} ${car.Name}`,
+            name: `${car.Emote} ${car.Name} ${favorite}`,
             value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
             inline: true,
           });
@@ -329,8 +346,12 @@ module.exports = {
 
         for (let car in cars[0]) {
           car = cars[0][car];
+          let favorite = ""
+          if(car.Favorite == true){
+            favorite = "⭐"
+          }
           embed.addFields({
-            name: `${car.Emote} ${car.Name}`,
+            name: `${car.Emote} ${car.Name} ${favorite}`,
             value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
             inline: true,
           });
@@ -360,18 +381,27 @@ module.exports = {
 
           page = itempage.length;
         }
-
+        console.log(itempage)
+        console.log(displayparts2)
         for (let e in itempage[page - 1]) {
           let car = itempage[page - 1][e];
           if (itempage == cars) {
+            let favorite = ""
+            if(car.Favorite == true){
+              favorite = "⭐"
+            }
             embed.addFields({
-              name: `${car.Emote} ${car.Name}`,
+              name: `${car.Emote} ${car.Name} ${favorite}`,
               value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
               inline: true,
             });
           } else if (itempage == filtereddcars) {
+               let favorite = ""
+            if(car.Favorite == true){
+              favorite = "⭐"
+            }
             embed.addFields({
-              name: `${car.Emote} ${car.Name}`,
+              name: `${car.Emote} ${car.Name}  ${favorite}`,
               value: `${emotes.emotes.speed} P: ${car.Speed}\n${emotes.emotes.zero2sixty} A: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
               inline: true,
             });
@@ -382,7 +412,7 @@ module.exports = {
 
         if (current !== page) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
-          i.update({ embeds: [embed], fetchReply: true });
+         await i.update({ embeds: [embed], fetchReply: true });
         } else {
           return i.update({ content: "No pages left!" });
         }

@@ -33,12 +33,28 @@ module.exports = {
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
     let items = ["🏎️", "💵", "⚙️", "🗺️", "🛞"];
     let item = lodash.sample(items);
+    let using = userdata.using;
+
+    if (using.includes("orange juice")) {
+      let cooldown = cooldowns.applejuice;
+      let timeout = 60000;
+      console.log(timeout - (Date.now() - cooldown));
+      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
+        console.log("pulled");
+        userdata.using.pull("orange juice");
+        userdata.update();
+        interaction.channel.send("Your orange juice ran out! :(");
+      } else {
+        item = "🪛"
+      }
+    }
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
     let witems = wheelspinrewards.Items;
 
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
+    let tier4 = wheelspinrewards.Tier4
     let garagespaces = userdata.garageLimit;
 
     let usercars = userdata.cars;
@@ -73,7 +89,17 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🛞") {
+        }
+        else if (item == "🪛") {
+          let reward = lodash.sample(tier4);
+          userdata.parts.push(reward.toLowerCase());
+
+          embed.setDescription(
+            `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
+          );
+          interaction.editReply({ embeds: [embed] });
+        } 
+        else if (item == "🛞") {
           userdata.swheelspins += 1;
           embed.setDescription(`You won 1 super wheel spin!`);
           interaction.editReply({ embeds: [embed] });

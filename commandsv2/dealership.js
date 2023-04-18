@@ -30,13 +30,15 @@ module.exports = {
     let carclassSarr = [];
     let carclassParr = [];
     let newcars = [
-      cars.Cars["2008 gumpert apollo s"],
-      cars.Cars["2019 ferrari p80"],
-      cars.Cars["2019 cadillac ats"],
-      cars.Cars["2010 ferrari 599xx"],
-      cars.Cars["2022 ferrari 812 competizione"],
-      cars.Cars["1987 toyota corolla"],
-      cars.Cars["2020 koenigsegg jesko absolut"],
+      cars.Cars["mars rover"],
+      cars.Cars["2007 koenigsegg ccgt"],
+      cars.Cars["2006 koenigsegg ccx"],
+      cars.Cars["2015 mazda cx5"],
+      cars.Cars["2022 porsche cayenne coupe"],
+      cars.Cars["2023 mercedes glc coupe"],
+      cars.Cars["2023 bmw x4"],
+      cars.Cars["2006 lamborghini murcielago"],
+      cars.Cars["2020 aston martin victor"],
     ];
     let global = await Global.findOne();
     let carstock = global.stock;
@@ -688,7 +690,7 @@ module.exports = {
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
               Gold Price: ${emotes.gold} ${Math.round(
                 car.Price / 150
-              )}\nOwned: ${car.owned}`,
+              )}`,
               inline: true,
             });
           }

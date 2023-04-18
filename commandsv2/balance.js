@@ -52,6 +52,7 @@ module.exports = {
       achievements,
       blueprints,
       f1blueprints,
+      spacetokens,
       foolskeys,
     } = profile;
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -106,6 +107,7 @@ module.exports = {
             ${emotes.rp}  RP: ${numberWithCommas(rp3)}
             ${emotes.dirftKey} Drift Keys: ${numberWithCommas(dkeys)}
             ${emotes.f1blueprint} F1 Blueprints: ${f1blueprints}
+            <:moontokens:1044726056680161371> Space Tokens: ${spacetokens}
             `,
             inline: true,
           },

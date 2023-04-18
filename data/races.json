@@ -31,7 +31,27 @@
     "reward": 350
   },
   {
-    "name": "eggrace",
+    "name": "venusrace",
+    "tiers": 7,
+    "reward": 150
+  },
+  {
+    "name": "marsrace",
+    "tiers": 7,
+    "reward": 150
+  },
+  {
+    "name": "moonrace",
+    "tiers": 7,
+    "reward": 150
+  },
+  {
+    "name": "saturnrace",
+    "tiers": 7,
+    "reward": 150
+  },
+  {
+    "name": "plutorace",
     "tiers": 7,
     "reward": 150
   }

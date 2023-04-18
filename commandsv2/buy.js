@@ -94,9 +94,7 @@ module.exports = {
       !boughtPart &&
       !boughtWarehouse &&
       !boughtHouse &&
-      !itemsList.Other[bought] &&
-      !itemsList.Police[bought] &&
-      !itemsList.Multiplier[bought]
+      !itemsList[bought]
     )
       return await interaction.reply(
         "That car or part isn't available yet, suggest it in the support server! In the meantime, check how to use the command by running /buy."
@@ -422,6 +420,8 @@ module.exports = {
           "Your prestige is not high enough to buy this house!"
         );
 
+        if(boughtHousePrice == 0) return interaction.reply("This house isn't purchasable!")
+
       let houseobj = boughtHouse[0];
       if (userdata.houses.includes(houseobj))
         return interaction.reply("You already own this house!");
@@ -463,12 +463,10 @@ module.exports = {
         } for ${toCurrency(boughtWarehouse.Price)}`
       );
     } else if (
-      itemsList.Police[bought] ||
-      itemsList.Other[bought] ||
-      itemsList.Multiplier[bought]
+      itemsList[bought]
     ) {
       let itemshopweek = global.itemshop;
-      let itemindb = itemsList.Other[bought];
+      let itemindb = itemsList[bought];
       if (!itemshopweek.includes(itemindb.Name))
         return interaction.reply(
           "That item isn't purchasable today! Check back tomorrow **THE SHOP REFRESHES WEEKLY**"
@@ -493,8 +491,8 @@ module.exports = {
       await userdata.save();
 
       await interaction.reply(
-        `Purchased x${amount2} ${itemsList.Other[bought].Emote} ${
-          itemsList.Other[bought].Name
+        `Purchased x${amount2} ${itemsList[bought].Emote} ${
+          itemsList[bought].Name
         } for ${toCurrency(pricing)}`
       );
     } else {

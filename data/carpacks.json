@@ -7,5 +7,14 @@
     ],
     "Gold": 500,
     "Name": "Rad Roadsters"
+  },
+  "suv adventures": {
+    "cars": [
+      "2022 porsche cayenne coupe",
+      "2023 mercedes glc coupe",
+      "2023 bmw x4"
+    ],
+    "Gold": 500,
+    "Name": "SUV Adventures"
   }
 }

@@ -38,5 +38,10 @@
     "Image": "https://i.ibb.co/r7Mmqq7/profile-drift.png",
     "Name": "Silver",
     "Emote": "🚗"
+  },
+  "space":{
+    "Image": "https://i.ibb.co/b2ZZQkg/profile-space.png",
+    "Name": "Space",
+    "Emote": "🪐"
   }
 }

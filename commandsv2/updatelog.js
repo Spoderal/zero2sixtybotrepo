@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "3/20/2023",
+            label: "4/19/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -53,7 +53,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 3/20/2023\n
+            ⚙️ Latest Patch 4/19/2023\n
             🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 4/11/2023\n
             🎉 Big Update 4/1/2023\n
@@ -81,13 +81,15 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• New trade system, removing all previous bugs\n
-                 • Fixed bug where it showed you the wrong required rank to prestige\n
-                 • Fixed bug where a house perk that gave 2x notoriety, didn't give 2x notoriety\n
-                 • Gold is now easier to purchase, giving you a link to purchase on balance commands, and dealership commands\n
-                 • Dealership has a featured car whenever you open it\n
-                 • Voting now gives a common crate, 1 wheelspin, and $2K\n
-                 • All cars can be purchased with gold
+                `• New event! Check /events\n
+                • Fixed a ton of bugs, including livery bugs, racing bugs where the user would lose if their stats were better, and more!\n
+                • New items! Orange Juice, Fruit Punch, Oil, Blueberry, Flat tire, Pet treats, and Epic Lockpick!\n
+                • New favoriting cars system! Favorite cars to prevent them from being sold with /ids favorite\n
+                • New jobs rework, old jobs have been removed!\n
+                • /open has been removed, now you can use /use (crate) for the same functionality!\n
+                • Cross country now has a chance to drop items\n
+                • Selling in bulk for cars\n
+                • New cars
 
                 `
               )

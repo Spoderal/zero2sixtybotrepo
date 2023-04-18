@@ -293,5 +293,17 @@
     "emote": "<:apollo:1066081882896351332>",
     "name": "Apollo",
     "country": "https://i.ibb.co/MMctwtD/flag-german.png"
+  },
+  "nasa":{
+    "image": "https://i.ibb.co/3fgB9z6/logo-nasa.png",
+    "emote": "<:logo_nasa:1096355505515020308>",
+    "name": "NASA",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "peel":{
+    "image": "https://i.ibb.co/wCMkcFK/logo-peel.png",
+    "emote": "<:peel:941833943278297108>",
+    "name": "Peel",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   }
 }

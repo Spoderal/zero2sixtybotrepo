@@ -21,6 +21,20 @@ module.exports = {
     let trypick = lodash.sample([true, false, true]);
     udata.lockpicks -= 1;
     udata.update();
+    if (using.includes("epic lockpick") || using.includes("Epic Lockpick")) {
+      let cooldown = cooldowns.epiclockpick;
+      let timeout = 600000;
+      console.log(timeout - (Date.now() - cooldown));
+      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
+        console.log("pulled");
+        udata.using.pull("epic lockpick");
+        udata.update();
+        interaction.channel.send("Your grape juice ran out! :(");
+      }
+      else {
+        trypick = true
+      }
+    }
     if (trypick == false) {
       interaction.reply("Your lockpick broke!");
       udata.save();

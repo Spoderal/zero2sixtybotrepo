@@ -41,6 +41,13 @@ module.exports = {
             customId: "f1",
             emoji: "🏎️",
           },
+          {
+            label: "Colonization Race",
+            description: "Information for the Colonization Race Event",
+            value: "colonize",
+            customId: "colonize",
+            emoji: "🪐",
+          },
         ])
     );
 
@@ -55,7 +62,8 @@ module.exports = {
           **__Events__**
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
-          F1 Icons 🏎️
+          F1 Icons 🏎️\n
+          Colonization Race🪐
       `);
 
     embed.setColor(colors.blue);
@@ -126,7 +134,36 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "f1_icons") {
+      }
+      else if (value === "colonize") {
+        embed.setTitle("Colonization Race Event");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Whats this? Space in Zero2Sixty? Thats right! As wild as this may seem, the rewards in this event are insane, you won't want to miss this event!
+
+        Travel to different planets that have all different types of gravity to collect the parts you need to build the <:superduperrocket:1096348560510943302> **Epic Rocket Engine**, a part that'll only be obtainable **once** in **this event**!
+
+        These parts are a little rare, so you may need to race on these planets multiple times!
+
+        You can also get space tokens to redeem for rewards in /season
+
+        Gravity will effect how you race, so make sure you equip <:spacetires:1096351158429286521> SpaceTires or use the mars rover!
+
+        Buy T1SpaceTires: $10,000
+
+        **View /season (colonization race) to view the rewards!**
+
+            **Ends May 31st 2023**
+            
+                  `);
+        embed.setImage("https://i.ibb.co/Q621RKK/event-colonize.png");
+        embed.setColor(colors.blue);
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+      else if (value === "f1_icons") {
         let row3 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setLabel("2023 Ferrari SF23")

@@ -9,6 +9,12 @@ const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
+const cratedb = require('../data/cratedb.json')
+const partdb = require('../data/partsdb.json')
+const titledb = require("../data/titles.json")
+const {EmbedBuilder, AttachmentBuilder} = require('discord.js')
+
+const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -39,7 +45,7 @@ module.exports = {
     let name;
     if (
       itemtouse.toLowerCase() !== "gold" &&
-      itemdb.Other[itemtouse.toLowerCase()].Type == "Non-Usable"
+      itemdb[itemtouse.toLowerCase()].Type == "Non-Usable"
     )
       return interaction.reply(`Thats not a usable item!`);
     if (
@@ -59,15 +65,12 @@ module.exports = {
       return interaction.reply("You don't have that many of that item!");
     let fullname;
 
-    if (itemdb.Police[itemtouse.toLowerCase()]) {
+    if (itemdb[itemtouse.toLowerCase()]) {
       userdata.using.push(itemtouse.toLowerCase());
-      fullname = `${itemdb.Police[itemtouse.toLowerCase()].Emote} ${
-        itemdb.Police[itemtouse.toLowerCase()].Name
+      fullname = `${itemdb[itemtouse.toLowerCase()].Emote} ${
+        itemdb[itemtouse.toLowerCase()].Name
       }`;
-    } else if (
-      itemdb.Other[itemtouse.toLowerCase()] ||
-      itemdb.Collectable[itemtouse.toLowerCase()]
-    ) {
+    } 
       if (itemtouse.toLowerCase() == "pink slip") {
         userdata.pinkslips += 1;
       } else if (itemtouse.toLowerCase() == "bank increase") {
@@ -122,20 +125,44 @@ module.exports = {
         if (userdata.banklimit >= 10000000) {
           userdata.banklimit = 10000000;
         }
-      } else if (itemtouse.toLowerCase() == "super wheelspin") {
-        let final = 1 * amount2;
-
-        userdata.swheelspins += final;
-      } else if (itemtouse.toLowerCase() == "energy drink") {
+      }  else if (itemtouse.toLowerCase() == "energy drink") {
         userdata.using.push(`energy drink`);
         cooldowndata.energydrink = Date.now();
-      } else if (itemtouse.toLowerCase() == "grape juice") {
+      }
+      else if (itemtouse.toLowerCase() == "blueberry") {
+        userdata.racerank += 1
+      }
+      else if (itemtouse.toLowerCase() == "grape juice") {
         userdata.using.push(`grape juice`);
         cooldowndata.grapejuice = Date.now();
       } else if (itemtouse.toLowerCase() == "apple juice") {
         userdata.using.push(`apple juice`);
         cooldowndata.applejuice = Date.now();
-      } else if (itemtouse.toLowerCase() == "sponsor") {
+      }
+      else if (itemtouse.toLowerCase() == "orange juice") {
+        userdata.using.push(`orange juice`);
+        cooldowndata.orangejuice = Date.now();
+      } 
+      else if (itemtouse.toLowerCase() == "oil") {
+        userdata.using.push(`oil`);
+        cooldowndata.oil = Date.now();
+      } 
+      else if (itemtouse.toLowerCase() == "flat tire") {
+        userdata.using.push(`flat tire`);
+        cooldowndata.flattire = Date.now();
+      } 
+      else if (itemtouse.toLowerCase() == "epic lockpick") {
+        userdata.using.push(`epic lockpick`);
+        cooldowndata.epiclockpick = Date.now();
+      } 
+      else if (itemtouse.toLowerCase() == "pet treats") {
+        if(!userdata.newpet.name) return interaction.reply("You don't have a pet!")
+        if(userdata.newpet.xessence >= 20) return interaction.reply("Your xessence cap is at 20, you cant give your pet any more treats!")
+        userdata.using.push(`pet treats`);
+        userdata.newpet.xessence += 1
+        cooldowndata.pettreats = Date.now();
+      } 
+      else if (itemtouse.toLowerCase() == "sponsor") {
         userdata.using.push(`sponsor`);
         cooldowndata.sponsor = Date.now();
       } else if (itemtouse.toLowerCase() == "small vault") {
@@ -162,10 +189,14 @@ module.exports = {
       } else if (itemtouse.toLowerCase() == "disguise") {
         userdata.using.push("disguise");
       } else if (itemtouse.toLowerCase() == "pet egg") {
-        let randcat = lodash.sample(["orange cat", "white cat"]);
+        let petsarr = []
+        for(let pet in petdb){
+          petsarr.push(petdb[pet])
+        }
+        let randcat = lodash.sample(petsarr);
         let pet = userdata.newpet;
         if (pet.name) return interaction.reply(`You already have a pet!`);
-        let petindb = petdb[randcat];
+        let petindb = petdb[randcat.Breed.toLowerCase()];
         let randname = lodash.sample(petindb.Names);
 
         let petobj = {
@@ -173,10 +204,12 @@ module.exports = {
           hunger: 100,
           thirst: 100,
           love: 100,
-          pet: randcat,
+          pet: petdb[randcat.Breed.toLowerCase()].Breed.toLowerCase(),
           xessence: 5,
         };
-
+        for (var p = 0; p < amount2; p++)
+        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+        userdata.items = items;
         userdata.newpet = petobj;
         userdata.save();
 
@@ -215,7 +248,7 @@ module.exports = {
 
         cooldowndata.save();
       } else if (itemtouse.toLowerCase() == "zero bar") {
-        let effects = itemdb.Other["zero bar"].Effects;
+        let effects = itemdb["zero bar"].Effects;
 
         let randomeffect = lodash.sample(effects);
 
@@ -348,29 +381,193 @@ module.exports = {
         interaction.reply(`${randomeffect}`);
 
         return;
+      
+    }
+
+    else if(cratedb.Crates[itemtouse.toLowerCase()]){
+      let pfps = require("../data/pfpsdb.json");
+      let crates = require("../data/cratedb.json");
+  
+
+      let inv = userdata.items;
+      let cooldown = 10000;
+      let cratecool = cooldowndata.crate;
+      if (cratecool !== null && cooldown - (Date.now() - cratecool) > 0) {
+        let time = ms(cooldown - (Date.now() - cratecool));
+        let timeEmbed = new EmbedBuilder()
+          .setColor(colors.blue)
+          .setDescription(`Please wait ${time} before opening another crate.`);
+        await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+        return;
       }
+      let boughtindb = crates.Crates[itemtouse.toLowerCase()];
+      console.log(boughtindb);
+  
+      if (!inv.includes(itemtouse))
+        return interaction.reply(
+          `You don't have a ${boughtindb.Emote} ${boughtindb.Name}!`
+        );
+  
+      let embed = new EmbedBuilder()
+        .setTitle(`Unboxing ${boughtindb.Emote} ${boughtindb.Name}...`)
+        .setColor(`#60b0f4`);
+  
+      interaction.reply({ embeds: [embed] });
+      for (var s = 0; s < 1; s++)
+        inv.splice(inv.indexOf(itemtouse.toLowerCase()), 1);
+      userdata.items = inv;
+      userdata.update();
+      cooldowndata.crate = Date.now();
+      cooldowndata.save();
+      const canvas = createCanvas(1280, 720);
+      const ctx = canvas.getContext("2d");
+      const bg = await loadImage("https://i.ibb.co/6WwF0gJ/crateunbox.png");
+      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+      let x = 0;
+      let rewards = [];
+      let i = setInterval(() => {
+        x++;
+        let reward = lodash.sample(boughtindb.Contents);
+        rewards.push(reward);
+  
+        if (x == 3) {
+          clearInterval(i);
+        }
+      }, 1000);
+  
+      setTimeout(async () => {
+        let reward1 = rewards[0];
+        let reward2 = rewards[1];
+        let reward3 = rewards[2];
+  
+        
+        let name1;
+        let name2;
+        let name3;
+        if (pfps.Pfps[reward1]) {
+          let helmetimg = pfps.Pfps[reward1].Image;
+          name1 = pfps.Pfps[reward1].Name;
+          let loadedhelm = await loadImage(helmetimg);
+  
+          ctx.drawImage(loadedhelm, 150, 200, 150, 150);
+          ctx.save();
+          userdata.pfps.push(name1.toLowerCase());
+        }
+        if (pfps.Pfps[reward2]) {
+          let helmetimg = pfps.Pfps[reward2].Image;
+          name2 = pfps.Pfps[reward2].Name;
+          let loadedhelm = await loadImage(helmetimg);
+  
+          ctx.drawImage(loadedhelm, 570, 200, 150, 150);
+          ctx.save();
+          userdata.pfps.push(name2.toLowerCase());
+        }
+        if (pfps.Pfps[reward3]) {
+          let helmetimg = pfps.Pfps[reward3].Image;
+          name3 = pfps.Pfps[reward3].Name;
+          let loadedhelm = await loadImage(helmetimg);
+  
+          ctx.drawImage(loadedhelm, 970, 200, 150, 150);
+          ctx.save();
+          userdata.pfps.push(name3.toLowerCase());
+        }
+  
+        ctx.restore();
+        ctx.font = "40px sans-serif";
+        ctx.fillStyle = "#00000";
+        let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png");
+  
+        if (reward1.endsWith(`Cash`)) {
+          let amount = Number(reward1.split(" ")[0]);
+          name1 = `${amount} Cash`;
+          ctx.drawImage(imageload, 150, 200, 150, 150);
+          userdata.cash += amount;
+        }
+  
+        if (reward2.endsWith(`Cash`)) {
+          let amount2 = Number(reward2.split(" ")[0]);
+          name2 = `${amount2} Cash`;
+          ctx.drawImage(imageload, 570, 200, 150, 150);
+          userdata.cash += amount2;
+        }
+  
+        if (reward3.endsWith(`Cash`)) {
+          let amount3 = Number(reward3.split(" ")[0]);
+          name3 = `${amount3} Cash`;
+          ctx.drawImage(imageload, 970, 200, 150, 150);
+          userdata.cash += amount3;
+        }
+  
+        if (titledb[reward1]) {
+          name1 = titledb[reward1].Title;
+          userdata.titles.push(name1.toLowerCase());
+        }
+        if (titledb[reward2]) {
+          name2 = titledb[reward2].Title;
+          userdata.titles.push(name2.toLowerCase());
+        }
+        if (titledb[reward3]) {
+          name3 = titledb[reward3].Title;
+          userdata.titles.push(name3.toLowerCase());
+        }
+  
+        if (partdb.Parts[reward1]) {
+          let partimg = partdb.Parts[reward1].Image;
+          name1 = partdb.Parts[reward1].Name;
+          let loadedpart = await loadImage(partimg);
+  
+          ctx.drawImage(loadedpart, 150, 200, 150, 150);
+          ctx.save();
+          userdata.parts.push(name1.toLowerCase());
+        }
+        if (partdb.Parts[reward2]) {
+          let partimg = partdb.Parts[reward2].Image;
+          name2 = partdb.Parts[reward2].Name;
+          let loadedpart = await loadImage(partimg);
+  
+          ctx.drawImage(loadedpart, 570, 200, 150, 150);
+          ctx.save();
+          userdata.parts.push(name2.toLowerCase());
+        }
+        if (partdb.Parts[reward3]) {
+          let partimg = partdb.Parts[reward3].Image;
+          name3 = partdb.Parts[reward3].Name;
+          let loadedpart = await loadImage(partimg);
+  
+          ctx.drawImage(loadedpart, 970, 200, 150, 150);
+          ctx.save();
+          userdata.parts.push(name3.toLowerCase());
+        }
+     
+        userdata.save();
+        ctx.fillText(name1, 100, 565);
+        ctx.fillText(name2, 520, 565);
+        ctx.fillText(name3, 920, 565);
+  
+        let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+          name: "profile-image.png",
+        });
+        embed.setImage(`attachment://profile-image.png`);
+        console.log(rewards);
+        await interaction.editReply({ embeds: [embed], files: [attachment] });
+        
+      }, 5000);
     }
-    if (itemdb.Police[itemtouse.toLowerCase()]) {
-      emote = itemdb.Police[itemtouse.toLowerCase()].Emote;
-      name = itemdb.Police[itemtouse.toLowerCase()].Name;
-    } else if (itemdb.Multiplier[itemtouse.toLowerCase()]) {
-      emote = itemdb.Multiplier[itemtouse.toLowerCase()].Emote;
-      name = itemdb.Multiplier[itemtouse.toLowerCase()].Name;
-    } else if (itemdb.Other[itemtouse.toLowerCase()]) {
-      emote = itemdb.Other[itemtouse.toLowerCase()].Emote;
-      name = itemdb.Other[itemtouse.toLowerCase()].Name;
-    } else if (itemdb.Collectable[itemtouse.toLowerCase()]) {
-      emote = itemdb.Collectable[itemtouse.toLowerCase()].Emote;
-      name = itemdb.Collectable[itemtouse.toLowerCase()].Name;
+    if(!cratedb.Crates[itemtouse.toLowerCase()]){
+      if (itemdb[itemtouse.toLowerCase()]) {
+        emote = itemdb[itemtouse.toLowerCase()].Emote;
+        name = itemdb[itemtouse.toLowerCase()].Name;
+      } 
+  
+      fullname = `${emote} ${name}`;
+  
+      for (var i = 0; i < amount2; i++)
+        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+      userdata.items = items;
+      cooldowndata.save();
+      userdata.save();
+      await interaction.reply(`Used x${amount2} ${fullname}!`);
+
     }
-
-    fullname = `${emote} ${name}`;
-
-    for (var i = 0; i < amount2; i++)
-      items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
-    userdata.items = items;
-    cooldowndata.save();
-    userdata.save();
-    await interaction.reply(`Used x${amount2} ${fullname}!`);
   },
 };

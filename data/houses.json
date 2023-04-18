@@ -75,5 +75,16 @@
     "Type": "House",
     "Space": 3,
     "Prestige": 3
+  },
+  "casa spaziale": {
+    "id": "spaziale",
+    "Name": "Casa Spaziale",
+    "Price": 0,
+    "Perk": "Earn 1 free exotic key every day with /daily",
+    "Image": "https://i.ibb.co/9pJX9Lp/220727110249-01-space-perspective.jpg",
+    "Emote": "🪐",
+    "Type": "House",
+    "Space": 10,
+    "Prestige": 0
   }
 }

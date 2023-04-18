@@ -7,13 +7,17 @@ const ms = require("ms");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const {
   toCurrency,
   blankInlineField,
+  randomRange,
   convertMPHtoKPH,
+  numberWithCommas
+
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const jobdb = require("../data/jobs.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,28 +37,41 @@ module.exports = {
             .setDescription("The job to hire yourself for")
             .setRequired(true)
             .addChoices(
-              { name: "Zuber", value: "zuber" },
+              { name: "Criminal", value: "criminal" },
               { name: "Police", value: "police" },
-              { name: "Tire Changer", value: "tire changer" }
+              { name: "Pizza Delivery", value: "pizza delivery" }
             )
         )
-    ),
+    )   
+    .addSubcommand((cmd) => cmd.setName("info").setDescription("View info about your job progress"))
+    ,
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+    let jobsarr = []
+
+    for(let job in jobdb){
+      jobsarr.push(jobdb[job])
+    }
 
     let subcommand = interaction.options.getSubcommand();
     if (subcommand == "hire") {
       if (userdata.work) return interaction.reply("You already have a job!");
       let job = interaction.options.getString("job");
+      let jobindb = jobdb[job.toLowerCase()]
+
+      console.log(jobindb)
       let jobtoset = {
-        name: `${job}`,
-        rank: 1,
-        rating: 0,
-        ratings: [],
+        name: `${jobindb.name}`,
         cooldown: 0,
         shifts: 0,
+        xp: 0,
+        earned: 0,
+        success: 0,
+        fails: 0,
+        salary: jobindb.Positions[0].salary,
+        position: jobindb.Positions[0].name
       };
       userdata.work = jobtoset;
       userdata.save();
@@ -66,7 +83,55 @@ module.exports = {
       userdata.work = null;
       userdata.save();
       interaction.reply(`You quit your job!`);
-    } else if (subcommand == "work") {
+    }
+    else if(subcommand == "info"){
+      if (!userdata.work) return interaction.reply("You don't have a job.");
+
+      let jobtowork = userdata.work;
+
+      let userjobfilter = jobsarr.filter((job) => job.name.toLowerCase() == jobtowork.name.toLowerCase())
+      let positionfilter = userjobfilter[0].Positions.filter((pos) => pos.name.toLowerCase() == jobtowork.position.toLowerCase())
+      let prevrank = positionfilter[0].rank
+      let nextrank = prevrank += 1
+      let newpositionfilter = userjobfilter[0].Positions.filter((pos) => pos.rank == nextrank) 
+
+      if(!newpositionfilter[0]){
+        newpositionfilter[0] = {
+          xp: 0,
+          
+        }
+      }
+
+      let embed = new EmbedBuilder()
+      .setTitle(`${interaction.user.username}'s stats for ${jobtowork.name}`)
+      .addFields(
+        {
+          name: 'Position',
+          value:`${jobtowork.position} ${positionfilter[0].emote}`
+        },
+        {
+          name: 'XP',
+          value:`${numberWithCommas(jobtowork.xp)}/${numberWithCommas(newpositionfilter[0].xp)}`
+        },
+        {
+          name: 'Salary',
+          value:`${toCurrency(jobtowork.salary)}`
+        },
+        {
+          name: 'Earned',
+          value:`${toCurrency(jobtowork.earned)}`
+        },
+        {
+          name: 'Success/Fail Ratio',
+          value:`${jobtowork.success}/${jobtowork.fails}`
+        },
+      )
+      .setColor(colors.blue)
+
+      interaction.reply({embeds: [embed]})
+    } 
+    
+    else if (subcommand == "work") {
       if (!userdata.work) return interaction.reply("You don't have a job.");
 
       let jobtowork = userdata.work;
@@ -84,334 +149,137 @@ module.exports = {
         return;
       }
 
-      if (jobtowork.name == "zuber") {
-        userdata.work.cooldown = Date.now();
-        userdata.markModified("work");
-        userdata.save();
-        let locations = [
-          { name: "Zero City", miles: 50 },
-          { name: "Zero Shores", miles: 30 },
-          { name: "Zero Plaza", miles: 20 },
-          { name: "Speed Street", miles: 10 },
-        ];
-        let people = [
-          { name: "Spoder", rating: 10, pay: 2000 },
-          { name: "Barry", rating: 0, pay: 200 },
-          { name: "Josh", rating: 0, pay: 200 },
-          { name: "Kayla", rating: 5, pay: 500 },
-          { name: "Fred", rating: 7, pay: 700 },
-        ];
+      let activities = ["memory"]
 
-        let filteredpeople = people.filter(
-          (person) => person.rating <= jobtowork.rating
-        );
-        let person = lodash.sample(filteredpeople);
-        let location = lodash.sample(locations);
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("yes")
+      let activity = lodash.sample(activities)
+      let userjobfilter = jobsarr.filter((job) => job.name.toLowerCase() == jobtowork.name.toLowerCase())
+      let positionfilter = userjobfilter[0].Positions.filter((pos) => pos.name.toLowerCase() == jobtowork.position.toLowerCase())
+      let prevrank = positionfilter[0].rank
+      let nextrank = prevrank += 1
+      let newpositionfilter = userjobfilter[0].Positions.filter((pos) => pos.rank == nextrank)
+
+      let embed = new EmbedBuilder()
+      .setTitle(`Working as a ${jobtowork.position} for ${jobtowork.name}`)
+      .setColor(colors.blue)
+      console.log(newpositionfilter)
+
+      if(newpositionfilter[0] && jobtowork.xp >= newpositionfilter[0].xp){
+        interaction.reply(`You've received a promotion! Your new salary is ${toCurrency(newpositionfilter[0].salary)}`)
+        userdata.work.position = newpositionfilter[0].name
+        userdata.work.salary = newpositionfilter[0].salary
+        userdata.work.xp = 0
+
+        userdata.markModified("work")
+        userdata.save()
+        return;
+      }
+
+      if(activity == "memory"){
+        let colors = ["🟢", "🔵", "🔴"]
+        let color = lodash.sample(colors)
+        let words = ["tire", "engine", "exhaust"]
+        let word = lodash.sample(words)
+        let colors2 = ["🟡", "🟣", "🟤"]
+        let words2 = ["grape", "apple", "orange"]
+        let word2 = lodash.sample(words2)
+        let color2 = lodash.sample(colors2)
+        let colors3 = ["⭕", "⚪", "⚫"]
+        let words3 = ["chicken", "pig", "cow"]
+        let word3 = lodash.sample(words3)
+        let color3 = lodash.sample(colors3)
+
+        let objects = []
+
+        let object1 = {
+          color: color,
+          word: word 
+        }
+
+        let object2 = {
+          color: color2,
+          word: word2 
+        }
+
+        let object3 = {
+          color: color3,
+          word: word3 
+        }
+
+        objects = [object1, object2, object3]
+
+        let objectinend = lodash.sample(objects)
+        
+        embed.setDescription(`Memorize the following\n\n${object1.color} ${object1.word}\n${object2.color} ${object2.word}\n${object3.color} ${object3.word}`)
+        interaction.reply({embeds: [embed], fetchReply: true})
+  
+        setTimeout(async () => {
+          embed.setDescription(`What emote was next to ${objectinend.word}`)
+          let row = new ActionRowBuilder()
+          .addComponents(
+            new ButtonBuilder()
+            .setCustomId(object1.word)
+            .setLabel(object1.color)
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId(object2.word)
+            .setLabel(object2.color)
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId(object3.word)
+            .setLabel(object3.color)
             .setStyle("Secondary")
-            .setEmoji("✔️"),
-          new ButtonBuilder()
-            .setCustomId("no")
-            .setStyle("Secondary")
-            .setEmoji("✖️")
-        );
-        let embed = new Discord.EmbedBuilder()
-          .setTitle(`Working for Zuber...`)
-          .setDescription(
-            `${person.name} is asking to be dropped off at ${location.name}, do you want to take this job?`
+            
           )
-          .setThumbnail("https://i.ibb.co/WKPDFM9/work-zuber.png")
-          .addFields({ name: "Miles", value: `${location.miles}` })
-          .setColor(colors.blue);
-        let msg = await interaction.reply({
-          embeds: [embed],
-          components: [row],
-          fetchReply: true,
-        });
 
-        let filter2 = (btnInt) => {
-          return interaction.user.id === btnInt.user.id;
-        };
-        let collector = msg.createMessageComponentCollector({
-          filter: filter2,
-        });
+          let msg = await interaction.editReply({embeds: [embed], components: [row], fetchReply: true})
 
-        collector.on("collect", async (i) => {
-          if (i.customId == "yes") {
-            userdata.work.cooldown = Date.now();
-            userdata.markModified("work");
-            userdata.update();
-            msg.edit({ components: [] });
-            let msg2 = await i.update({
-              content: `Please send the car id you wish to use to transport ${person.name}`,
-              fetchReply: true,
-            });
-            let filter = (m = Discord.Message) => {
-              return m.author.id === interaction.user.id;
-            };
-            let collector = interaction.channel.createMessageCollector({
-              filter,
-              time: 1000 * 30,
-            });
-            collector.on("collect", async (msg3) => {
-              let idtoselect = msg3.content.toLowerCase();
 
-              let filteredcar = userdata.cars.filter(
-                (car) => car.ID == idtoselect
-              );
-              let selected = filteredcar[0] || "No ID";
-              if (selected == "No ID") {
-                let errembed = new Discord.EmbedBuilder()
-                  .setTitle("Error!")
-                  .setColor(colors.discordTheme.red)
-                  .setDescription(
-                    `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
-                  );
-                return await interaction.reply({ embeds: [errembed] });
-              }
-
-              let comfort = selected.Comfort || 0;
-
-              let time = location.miles * 1000;
-
-              let speed = selected.Speed;
-              let z2s = selected.Acceleration;
-              let finalz;
-              if (z2s >= 10) {
-                finalz = 1;
-              } else if (z2s <= 8) {
-                finalz = 2;
-              } else if (z2s <= 5) {
-                finalz = 4;
-              } else if (z2s <= 2) {
-                finalz = 6;
-              }
-
-              let score = (speed * finalz) / 50;
-              console.log(score);
-
-              let miles = 0;
-              let speed2 = `${selected.Speed}`;
-
-              embed.setTitle(`Transporting ${person.name} to ${location.name}`);
-              embed.addFields({
-                name: `${carsdb.Cars[selected.Name.toLowerCase()].Emote} ${
-                  selected.Name
-                }`,
-                value: `Power: ${speed2}\nAcceleration: ${selected.Acceleration}s\nComfort: ${comfort}`,
-              });
-              msg2.edit({ embeds: [embed], components: [] });
-
-              let x = setInterval(async () => {
-                miles += score;
-                time -= 1000;
-                console.log(miles);
-                console.log(time);
-
-                if (time <= 0) {
-                  if (miles >= location.miles) {
-                    let extratime = (miles -= location.miles);
-                    let finalsc = (extratime += comfort);
-                    let rating;
-
-                    if (finalsc >= 100) {
-                      rating = 10;
-                    } else if (finalsc > 90) {
-                      rating = 9;
-                    } else if (finalsc > 80) {
-                      rating = 8;
-                    } else if (finalsc > 70) {
-                      rating = 7;
-                    } else if (finalsc > 60) {
-                      rating = 6;
-                    } else if (finalsc > 50) {
-                      rating = 5;
-                    } else if (finalsc > 40) {
-                      rating = 4;
-                    } else if (finalsc > 30) {
-                      rating = 3;
-                    } else if (finalsc > 20) {
-                      rating = 2;
-                    } else {
-                      rating = 1;
-                    }
-
-                    console.log(`score: ${finalsc}`);
-                    await msg2.edit(
-                      `Success! you got a rating of ${Math.floor(rating)}/10`
-                    );
-                    let salary = rating * 100;
-
-                    userdata.cash += salary;
-                    userdata.work.ratings.push(rating);
-                    userdata.markModified("work");
-                    let avg = mode(userdata.work.ratings);
-                    userdata.work.rating = avg;
-                    userdata.markModified("work");
-
-                    userdata.save();
-
-                    clearInterval(x);
-                  } else {
-                    await msg2.edit("Failed!");
-                    clearInterval(x);
-                  }
-                }
-              }, 1000);
-            });
-          }
-        });
-      } else if (jobtowork.name == "police") {
-        interaction.reply(`Use \`/wanted\` to work on your police job!`);
-      } else if (jobtowork.name == "tire changer") {
-        userdata.work.cooldown = Date.now();
-        userdata.markModified("work");
-        let salary = 300;
-        let motions = ["right", "left"];
-        let motion1 = lodash.sample(motions);
-        let motion2 = lodash.sample(motions);
-        let embed = new Discord.EmbedBuilder()
-          .setTitle("Remember this combination to rotate the tire:")
-          .setDescription(`Rotate the tire: **${motion1}, ${motion2}**`)
-          .setColor(colors.blue);
-        let msg = await interaction.reply({
-          embeds: [embed],
-          fetchReply: true,
-        });
-        let row2 = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("right")
-            .setStyle("Secondary")
-            .setLabel("Right")
-            .setEmoji("↪️"),
-          new ButtonBuilder()
-            .setCustomId("left")
-            .setStyle("Secondary")
-            .setLabel("Left")
-            .setEmoji("↩️")
-        );
-        setTimeout(() => {
-          embed.setDescription("What was the first rotation direction?");
-          interaction.editReply({ embeds: [embed], components: [row2] });
-
-          let filter2 = (btnInt) => {
+          let filter = (btnInt) => {
             return interaction.user.id === btnInt.user.id;
           };
+      
           let collector = msg.createMessageComponentCollector({
-            filter: filter2,
+            filter: filter,
           });
 
-          collector.on("collect", async (i) => {
-            if (i.customId.includes("right")) {
-              if (motion1 !== "right") {
-                collector.stop();
-                return i.update("Wrong!");
-              } else {
-                collector.stop();
-                embed.setDescription("What was the second rotation direction?");
-                i.update({
-                  embeds: [embed],
-                  content: "Correct!",
-                  components: [row2],
-                  fetchReply: true,
-                });
 
-                let filter2 = (btnInt) => {
-                  return interaction.user.id === btnInt.user.id;
-                };
-                let collector2 = msg.createMessageComponentCollector({
-                  filter: filter2,
-                });
+          collector.on('collect', async (i) => {
+            if(i.customId == objectinend.word){
+            let prompt = lodash.sample(userjobfilter[0].winprompts)
+            let randomxp = randomRange(1, 100)
+            embed.setDescription(`${prompt} and earned ${toCurrency(positionfilter[0].salary)} and ${randomxp} xp!`)
+            userdata.cash += positionfilter[0].salary
+            userdata.work.xp += randomxp
+            userdata.work.shifts += 1
+            userdata.work.success += 1
+            userdata.work.earned += positionfilter[0].salary
+            userdata.work.cooldown = Date.now()
+              userdata.markModified("work")
+              userdata.save()
 
-                collector2.on("collect", async (i) => {
-                  if (i.customId.includes("right")) {
-                    if (motion2 !== "right") {
-                      return i.update("Wrong!");
-                    } else {
-                      userdata.cash += salary;
-                      userdata.save();
-                      return interaction.channel.send({
-                        content: `Correct! You've earned $${salary} for your hard work!`,
-                        fetchReply: true,
-                      });
-                    }
-                  } else if (i.customId.includes("left")) {
-                    if (motion2 !== "left") {
-                      return i.update("Wrong!");
-                    } else {
-                      userdata.cash += salary;
-                      userdata.save();
-                      return interaction.channel.send({
-                        content: `Correct! You've earned $${salary} for your hard work!`,
-                        fetchReply: true,
-                      });
-                    }
-                  }
-                });
-              }
-            } else if (i.customId.includes("left")) {
-              if (motion1 !== "left") {
-                collector.stop();
-                return i.update("Wrong!");
-              } else {
-                collector.stop();
-                embed.setDescription("What was the second rotation direction?");
-                i.update({
-                  embeds: [embed],
-                  content: "Correct!",
-                  components: [row2],
-                  fetchReply: true,
-                });
-
-                let filter2 = (btnInt) => {
-                  return interaction.user.id === btnInt.user.id;
-                };
-                let collector2 = msg.createMessageComponentCollector({
-                  filter: filter2,
-                });
-
-                collector2.on("collect", async (i) => {
-                  if (i.customId.includes("right")) {
-                    if (motion2 !== "right") {
-                      return i.update("Wrong!");
-                    } else {
-                      userdata.cash += salary;
-                      userdata.save();
-                      return interaction.channel.send({
-                        content: `Correct! You've earned $${salary} for your hard work!`,
-                        fetchReply: true,
-                      });
-                    }
-                  } else if (i.customId.includes("left")) {
-                    if (motion2 !== "left") {
-                      return i.update("Wrong!");
-                    } else {
-                      userdata.cash += salary;
-
-                      userdata.save();
-                      return interaction.channel.send({
-                        content: `Correct! You've earned $${salary} for your hard work!`,
-                        fetchReply: true,
-                      });
-                    }
-                  }
-                });
-              }
+            await i.update({embeds: [embed], components: []})
             }
-          });
-        }, 2000);
+            else {
+              let prompt = lodash.sample(userjobfilter[0].loseprompts)
+              embed.setDescription(`${prompt}\nYou earned ${positionfilter[0].fail} for not doing your job.`)
+              await i.update({embeds: [embed], components: []})
+              userdata.cash += positionfilter[0].fail
+              userdata.work.earned += positionfilter[0].fail
+              userdata.work.fails += 1
+              userdata.work.shifts += 1
+              userdata.markModified("work")
+              userdata.save()
+            }
+          })
+        }, 3000);
       }
+
+
+      
+
+    
     }
   },
 };
 
-function mode(arr) {
-  return arr
-    .sort(
-      (a, b) =>
-        arr.filter((v) => v === a).length - arr.filter((v) => v === b).length
-    )
-    .pop();
-}
+

@@ -1871,11 +1871,11 @@
         }
       }
     },
-    "Space Race": {
+    "Colonization Race": {
       "Rewards": {
         "1": {
           "Number": 1,
-          "Item": "2000 Cash"
+          "Item": "10000 Cash"
         },
         "2": {
           "Number": 2,
@@ -1887,15 +1887,15 @@
         },
         "4": {
           "Number": 4,
-          "Item": "1 Super wheelspin"
+          "Item": "Mars Rover"
         },
         "5": {
           "Number": 5,
-          "Item": "2 Exotic Keys"
+          "Item": "Blueberry"
         },
         "6": {
           "Number": 6,
-          "Item": "T4Intake"
+          "Item": "Astronomical Racer Title"
         },
         "7": {
           "Number": 7,
@@ -1903,15 +1903,15 @@
         },
         "8": {
           "Number": 8,
-          "Item": "5000 Cash"
+          "Item": "10000 Cash"
         },
         "9": {
           "Number": 9,
-          "Item": "30000 Cash"
+          "Item": "10000 Cash"
         },
         "10": {
           "Number": 10,
-          "Item": "500 RP"
+          "Item": "Epic Lockpick"
         },
         "11": {
           "Number": 11,
@@ -1919,7 +1919,7 @@
         },
         "12": {
           "Number": 12,
-          "Item": "1 Bank Increase"
+          "Item": "Grape Juice"
         },
         "13": {
           "Number": 13,
@@ -1927,7 +1927,7 @@
         },
         "14": {
           "Number": 14,
-          "Item": "5000 Cash"
+          "Item": "10000 Cash"
         },
         "15": {
           "Number": 15,
@@ -1935,7 +1935,7 @@
         },
         "16": {
           "Number": 16,
-          "Item": "3500 Cash"
+          "Item": "Orange Juice"
         },
         "17": {
           "Number": 17,
@@ -1943,7 +1943,7 @@
         },
         "18": {
           "Number": 18,
-          "Item": "5000 Cash"
+          "Item": "10000 Cash"
         },
         "19": {
           "Number": 19,
@@ -1959,11 +1959,11 @@
         },
         "22": {
           "Number": 22,
-          "Item": "1 Legendary Barn Map"
+          "Item": "Casa Spaziale House"
         },
         "23": {
           "Number": 23,
-          "Item": "2500 Cash"
+          "Item": "10000 Cash"
         },
         "24": {
           "Number": 24,
@@ -1971,7 +1971,7 @@
         },
         "25": {
           "Number": 25,
-          "Item": "Super Rocket Engine"
+          "Item": "Rocket Engine"
         }
       }
     }

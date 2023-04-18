@@ -439,6 +439,21 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
+  rocket: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
+  spacetokens: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+  spaceredeemed: {
+    type: Number,
+    required: false,
+    default: 0
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

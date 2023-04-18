@@ -84,7 +84,7 @@ module.exports = {
 
     let randomstatuses = [
       `🌸 SPRING 🌸  /season`,
-      `🐣 EASTER 🧺   /events`,
+      `⚙️ PATCH ⚙️ 4/19 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
     ];
 

@@ -175,20 +175,23 @@ module.exports = {
     let speed = 0;
     let speed2 = 0;
 
+    let accms = acceleration * 10
+    let accms2 = acceleration2 * 10
+
     let x = setInterval(() => {
       if (speed < mph) {
         speed++;
       } else {
         clearInterval(x);
       }
-    }, 30);
+    }, accms);
     let x2 = setInterval(() => {
       if (speed2 < mph2) {
         speed2++;
       } else {
         clearInterval(x2);
       }
-    }, 30);
+    }, accms2);
     let sec;
     let sec2;
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
@@ -221,17 +224,17 @@ module.exports = {
 
     let i2 = setInterval(async () => {
       console.log(speed);
-      let calc = (weight += speed / 234);
-      calc = calc / acceleration;
-      sec = (6.29 * (weight / calc)) / acceleration;
+      let calc = (speed / 234)
+      sec = (weight / calc)
+      sec += handling
       calc = calc / sec;
       console.log(`calc: ${calc}`);
       console.log(`sec: ${sec}`);
       // car 2
       console.log(speed2);
-      let calc2 = (weight2 += speed2 / 234);
-      calc2 = calc2 / acceleration2;
-      sec2 = (6.29 * (weight2 / calc2)) / acceleration2;
+      let calc2 = (speed2 / 234)
+      sec2 = (weight2 / calc2)
+      sec2 += handling2
       console.log(`sec2: ${sec2}`);
 
       calc2 = calc2 / sec2;

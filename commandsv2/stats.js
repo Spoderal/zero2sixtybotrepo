@@ -350,9 +350,9 @@ module.exports = {
       await interaction.reply({ embeds: [embed] });
     } else if (
       subcommandfetch == "car_part" &&
-      itemdb.Other[item.toLowerCase()]
+      itemdb[item.toLowerCase()]
     ) {
-      let itemindb = itemdb.Other[item.toLowerCase()];
+      let itemindb = itemdb[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
         .setAuthor({
           name: `Information for ${itemindb.Name}`,

@@ -72,7 +72,7 @@ module.exports = {
           embed.setDescription(`You won a ${partsdb.Parts[reward].Name}!`);
           interaction.editReply({ embeds: [embed] });
         } else if (item == "🏎️") {
-          let randomnum = lodash.random(5);
+          let randomnum = lodash.random(10);
           let reward;
           if (randomnum == 2) {
             reward = lodash.sample(wheelspinrewards.SuperRare);

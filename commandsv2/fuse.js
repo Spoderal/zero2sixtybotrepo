@@ -7,6 +7,7 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
+const itemdb = require("../data/items.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,7 +36,8 @@ module.exports = {
           { name: "TXExhaust", value: "txexhaust" },
           { name: "TXIntake", value: "txintake" },
           { name: "TXTurbo", value: "txturbo" },
-          { name: "TXClutch", value: "txclutch" }
+          { name: "TXClutch", value: "txclutch" },
+          {name:"Fruit Punch", value:"fruit punch"}
         )
         .setRequired(true)
     ),
@@ -96,7 +98,112 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } else if (parttoinstall == "txintake") {
+    } 
+    else if (parttoinstall == "fruit punch") {
+      let items = userdata.items
+      let juice1 = userdata.items.filter((item) => item == "apple juice");
+      let juice2 = userdata.items.filter((item) => item == "grape juice");
+      let juice3 = userdata.items.filter((item) => item == "orange juice");
+      if (juice1.length == 0)  return await interaction.reply(`You're missing apple juice!`);
+      if (juice2.length == 0)  return await interaction.reply(`You're missing grape juice!`);
+      if (juice3.length == 0)  return await interaction.reply(`You're missing orange juice!`);
+
+      for (var j = 0; j < 1; j++) items.splice(items.indexOf("apple juice"), 1);
+      for (var j2 = 0; j2 < 1; j2++) items.splice(items.indexOf("grape juice"), 1);
+      for (var j3 = 0; j3 < 1; j3++) items.splice(items.indexOf("orange juice"), 1);
+      userdata.items = items;
+
+      
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into fruit punch...")
+        .addFields([
+          {
+            name: `Items`,
+            value: `${itemdb["apple juice"].Emote} ${itemdb["apple juice"].Name}\n${itemdb["grape juice"].Emote} ${itemdb["grape juice"].Name}\n${itemdb["orange juice"].Emote} ${itemdb["orange juice"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Item`,
+            value: `${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name}`,
+          },
+        ]);
+        userdata.items.push("fruit punch");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    }
+    else if (parttoinstall == "epic rocket engine") {
+      let frame = userdata.items.filter((item) => item == "metal frame");
+      let nuke = userdata.items.filter((item) => item == "nuclear core");
+      let hook = userdata.items.filter((item) => item == "car hook");
+      let pistons = userdata.items.filter((item) => item == "zionite pistons");
+      let oil = userdata.items.filter((item) => item == "alien oil");
+
+      if (frame.length == 0)  return await interaction.reply(`You're missing a metal frame!`);
+      if (nuke.length == 0)  return await interaction.reply(`You're missing nuclear core!`);
+      if (hook.length == 0)  return await interaction.reply(`You're missing car hook!`);
+      if (pistons.length == 0)  return await interaction.reply(`You're missing zionite pistons!`);
+      if (oil.length == 0)  return await interaction.reply(`You're missing alien oil!`);
+
+      for (var p = 0; p < 1; p++) parts.splice(parts.indexOf("metal frame"), 1);
+      for (var p2 = 0; p2 < 1; p2++) parts.splice(parts.indexOf("nuclear core"), 1);
+      for (var p3= 0; p3 < 1; p3++) parts.splice(parts.indexOf("car hook"), 1);
+      for (var p4 = 0; p4 < 1; p4++) parts.splice(parts.indexOf("zionite pistons"), 1);
+      for (var p5 = 0; p5 < 1; p5++) parts.splice(parts.indexOf("alien oil"), 1);
+
+      userdata.parts = parts;
+
+      if(userdata.rocket == true) return interaction.reply("You've already made an epic rocket engine!")
+
+      
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into epic rocket engine...")
+        .addFields([
+          {
+            name: `Items`,
+            value: `${itemdb["metal frame"].Emote} ${itemdb["metal frame"].Name}\n${itemdb["nuclear core"].Emote} ${itemdb["nuclear core"].Name}\n${itemdb["zionite pistons"].Emote} ${itemdb["zionite pistons"].Name}
+            ${itemdb["car hook"].Emote} ${itemdb["car hook"].Name}
+            ${itemdb["alien oil"].Emote} ${itemdb["alien oil"].Name}
+
+            
+            
+            `,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Item`,
+            value: `${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name}`,
+          },
+        ]);
+        userdata.items.push("fruit punch");
+        userdata.rocket = true
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    }
+    else if (parttoinstall == "txintake") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
