@@ -395,9 +395,9 @@ module.exports = {
           ],
         }
       );
-      
+
       globalModel.save();
-      globalModel.markModified("crews")
+      globalModel.markModified("crews");
 
       userdata.crew = crew2[0];
 

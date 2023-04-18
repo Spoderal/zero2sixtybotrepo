@@ -688,9 +688,7 @@ module.exports = {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,
               value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
-              Gold Price: ${emotes.gold} ${Math.round(
-                car.Price / 150
-              )}`,
+              Gold Price: ${emotes.gold} ${Math.round(car.Price / 150)}`,
               inline: true,
             });
           }

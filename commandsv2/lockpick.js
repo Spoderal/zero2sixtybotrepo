@@ -30,9 +30,8 @@ module.exports = {
         udata.using.pull("epic lockpick");
         udata.update();
         interaction.channel.send("Your grape juice ran out! :(");
-      }
-      else {
-        trypick = true
+      } else {
+        trypick = true;
       }
     }
     if (trypick == false) {

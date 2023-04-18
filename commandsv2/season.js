@@ -11,7 +11,7 @@ const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
 const lodash = require("lodash");
-const itemdb = require("../data/items.json")
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -21,9 +21,9 @@ module.exports = {
       option
         .setName("event")
         .setDescription("View the season type")
-        .addChoices({ name: "Spring Season", value: "spring" },
-        { name: "Colonization Race", value: "space" }
-        
+        .addChoices(
+          { name: "Spring Season", value: "spring" },
+          { name: "Colonization Race", value: "space" }
         )
         .setRequired(true)
     ),
@@ -38,7 +38,7 @@ module.exports = {
     let page = interaction.options.getString("page");
     let type = interaction.options.getString("event");
     if (type == "spring" || !type) {
-    let redeemed = userdata.springrewards || 1;
+      let redeemed = userdata.springrewards || 1;
       for (var i in seasonrewards) {
         let item = seasonrewards[i];
         let requirednot = item.Number * 100;
@@ -252,7 +252,7 @@ module.exports = {
           userdata.noto6 -= requirednot;
           userdata.save();
           console.log(item);
-          redeemed = userdata.spaceredeemed
+          redeemed = userdata.spaceredeemed;
           row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
               .setCustomId("claim")
@@ -300,8 +300,7 @@ module.exports = {
           content: `You can buy a car with /buy [car id], or the full name, the car id is listed next to \`ID:\`, an example would be /buy \`2002 mustang\``,
         });
       }
-    }
-    else  if (type == "space") {
+    } else if (type == "space") {
       let redeemed = userdata.spaceredeemed || 1;
       for (var d in eventrewards) {
         let item = eventrewards[d];
@@ -315,11 +314,7 @@ module.exports = {
       let itemrewards1 = reward.slice(0, 10);
       let itemrewards2 = reward.slice(10, 20);
       let itemrewards3 = reward.slice(20, 25);
-      let currentpage = [
-        itemrewards1,
-        itemrewards2,
-        itemrewards3,
-      ];
+      let currentpage = [itemrewards1, itemrewards2, itemrewards3];
       let row9 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("previous")
@@ -425,43 +420,39 @@ module.exports = {
             let helm = item.Item.toLowerCase();
             userdata.pfps.push(helm);
             userdata.spaceredeemed += 1;
-          } 
-          else if (itemdb[item.Item.toLowerCase()]) {
-
+          } else if (itemdb[item.Item.toLowerCase()]) {
             userdata.items.push(item.Item.toLowerCase());
             userdata.spaceredeemed += 1;
-          } 
-          else if (item.Item.endsWith("Title")) {
-            let title = item.Item.toLowerCase()
+          } else if (item.Item.endsWith("Title")) {
+            let title = item.Item.toLowerCase();
             let lastIndex = title.lastIndexOf(" ");
 
             title = title.substring(0, lastIndex);
 
             userdata.titles.push(title);
             userdata.spaceredeemed += 1;
-          }
-          else if (item.Item.endsWith("House")) {
-            let house = item.Item.toLowerCase()
+          } else if (item.Item.endsWith("House")) {
+            let house = item.Item.toLowerCase();
             let lastIndex = house.lastIndexOf(" ");
 
             house = house.substring(0, lastIndex);
 
             house = {
-              "id": "spaziale",
-              "Name": "Casa Spaziale",
-              "Price": 0,
-              "Perk": "Earn 1 free exotic key every day with /daily",
-              "Image": "https://i.ibb.co/9pJX9Lp/220727110249-01-space-perspective.jpg",
-              "Emote": "🪐",
-              "Type": "House",
-              "Space": 10,
-              "Prestige": 0
-            }
+              id: "spaziale",
+              Name: "Casa Spaziale",
+              Price: 0,
+              Perk: "Earn 1 free exotic key every day with /daily",
+              Image:
+                "https://i.ibb.co/9pJX9Lp/220727110249-01-space-perspective.jpg",
+              Emote: "🪐",
+              Type: "House",
+              Space: 10,
+              Prestige: 0,
+            };
 
             userdata.houses.push(house);
             userdata.spaceredeemed += 1;
-          }
-          else if (
+          } else if (
             item.Item.endsWith("Legendary Barn Map") ||
             item.Item.endsWith("Legendary Barn Maps")
           ) {
@@ -538,7 +529,7 @@ module.exports = {
           userdata.spacetokens -= requirednot;
           userdata.save();
           console.log(item);
-          redeemed = userdata.spaceredeemed
+          redeemed = userdata.spaceredeemed;
           row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
               .setCustomId("claim")

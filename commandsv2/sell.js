@@ -36,7 +36,8 @@ module.exports = {
     let filteredcar = userdata.cars.filter(
       (car) =>
         car.ID.toLowerCase() == selling.toLowerCase() ||
-        car.Name.toLowerCase() == selling.toLowerCase() && car.Favorite !== true
+        (car.Name.toLowerCase() == selling.toLowerCase() &&
+          car.Favorite !== true)
     );
     let selected = filteredcar[0] || "No ID";
 
@@ -47,14 +48,12 @@ module.exports = {
         price = cardb.Cars[selected.Name.toLowerCase()].sellprice;
       }
 
-      if(amount > selected.length) return interaction.reply("You don't have that many of that car!")
+      if (amount > selected.length)
+        return interaction.reply("You don't have that many of that car!");
 
-      price = price * amount
+      price = price * amount;
 
-      userdata.cars.splice(
-        userdata.cars.indexOf(selected),
-        amount
-      );
+      userdata.cars.splice(userdata.cars.indexOf(selected), amount);
       userdata.cash += Number(price);
 
       await interaction.reply(
@@ -79,11 +78,11 @@ module.exports = {
         return await interaction.reply(
           "You don't have that many of that part!"
         );
-        let finalamount = 0
+      let finalamount = 0;
       if (parts.Parts[selling.toLowerCase()].sellprice > 0) {
         let resale = parts.Parts[selling.toLowerCase()].Price * 0.35;
-         finalamount = amount * resale;
-        userdata.cash += finalamount
+        finalamount = amount * resale;
+        userdata.cash += finalamount;
       }
       for (var i = 0; i < amount; i++)
         userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);

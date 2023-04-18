@@ -175,8 +175,8 @@ module.exports = {
     let speed = 0;
     let speed2 = 0;
 
-    let accms = acceleration * 10
-    let accms2 = acceleration2 * 10
+    let accms = acceleration * 10;
+    let accms2 = acceleration2 * 10;
 
     let x = setInterval(() => {
       if (speed < mph) {
@@ -224,17 +224,17 @@ module.exports = {
 
     let i2 = setInterval(async () => {
       console.log(speed);
-      let calc = (speed / 234)
-      sec = (weight / calc)
-      sec += handling
+      let calc = speed / 234;
+      sec = weight / calc;
+      sec += handling;
       calc = calc / sec;
       console.log(`calc: ${calc}`);
       console.log(`sec: ${sec}`);
       // car 2
       console.log(speed2);
-      let calc2 = (speed2 / 234)
-      sec2 = (weight2 / calc2)
-      sec2 += handling2
+      let calc2 = speed2 / 234;
+      sec2 = weight2 / calc2;
+      sec2 += handling2;
       console.log(`sec2: ${sec2}`);
 
       calc2 = calc2 / sec2;

@@ -13,16 +13,13 @@ const Cooldowns = require("../schema/cooldowns");
 let cardb = require("../data/cardb.json");
 const lodash = require("lodash");
 const petdb = require("../data/pets.json");
-const {
-  toCurrency,
-  randomRange,
-} = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 const cratedb = require("../data/cratedb.json");
 const helmetdb = require("../data/pfpsdb.json");
-const partdb = require("../data/partsdb.json")
+const partdb = require("../data/partsdb.json");
 
 const ms = require("pretty-ms");
-const itemdb = require("../data/items.json")
+const itemdb = require("../data/items.json");
 
 const { createCanvas, loadImage } = require("canvas");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
@@ -46,9 +43,9 @@ module.exports = {
       let caroj = cardb.Cars[car1];
       carsarray.push(caroj);
     }
-    
+
     let userdata = await User.findOne({ id: user.id });
-    let usinginv = userdata.using
+    let usinginv = userdata.using;
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let pet = userdata.newpet;
     let cooldowndata =
@@ -98,11 +95,11 @@ module.exports = {
         .setEmoji("<:logo_hm:1090112674660102195>")
         .setCustomId("halfmile")
         .setStyle("Secondary"),
-        new ButtonBuilder()
-          .setLabel("Cross Country")
-          .setEmoji("<:logo_cr:1090120001744281742>")
-          .setCustomId("crossrace")
-          .setStyle("Secondary"),
+      new ButtonBuilder()
+        .setLabel("Cross Country")
+        .setEmoji("<:logo_cr:1090120001744281742>")
+        .setCustomId("crossrace")
+        .setStyle("Secondary")
     );
     const row5 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -110,27 +107,26 @@ module.exports = {
         .setEmoji("🪐")
         .setCustomId("venusrace")
         .setStyle("Primary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("Mars Race")
         .setEmoji("🪐")
         .setCustomId("marsrace")
         .setStyle("Primary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("Moon Race")
         .setEmoji("🪐")
         .setCustomId("moonrace")
         .setStyle("Primary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("Saturn Race")
         .setEmoji("🪐")
         .setCustomId("saturnrace")
         .setStyle("Primary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("Pluto Race")
         .setEmoji("🪐")
         .setCustomId("plutorace")
         .setStyle("Primary")
-        
     );
     const tierrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -171,14 +167,18 @@ module.exports = {
         .setCustomId("7")
         .setStyle("Secondary")
     );
-    let usingmsg = []
-    if(usinginv.includes("fruit punch")){
-      usingmsg.push(`${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name} Active`)
+    let usingmsg = [];
+    if (usinginv.includes("fruit punch")) {
+      usingmsg.push(
+        `${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name} Active`
+      );
     }
     let embed = new EmbedBuilder()
       .setTitle("Select a race")
       .setDescription(
-        `**Select a race from the menu below**\n\nDifferent races have different difficulties, and rewards\n\n${usingmsg.join('\n')}`
+        `**Select a race from the menu below**\n\nDifferent races have different difficulties, and rewards\n\n${usingmsg.join(
+          "\n"
+        )}`
       )
       .setColor(colors.blue)
       .setThumbnail(`${cardb.Cars[selected.Name.toLowerCase()].Image}`)
@@ -211,7 +211,7 @@ module.exports = {
       "marsrace",
       "moonrace",
       "saturnrace",
-      "plutorace"
+      "plutorace",
     ];
     collector.on("collect", async (i) => {
       console.log(i.customId);
@@ -237,7 +237,7 @@ module.exports = {
           i.customId == "marsrace" ||
           i.customId == "moonrace" ||
           i.customId == "saturnrace" ||
-          i.customId == "plutorace" 
+          i.customId == "plutorace"
         ) {
           cooldowndata.racing = Date.now();
           cooldowndata.save();
@@ -314,7 +314,6 @@ module.exports = {
 
           console.log(car2);
 
-
           let craterare = randomRange(1, 3);
 
           let crateearned;
@@ -371,7 +370,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -383,7 +382,7 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
@@ -422,13 +421,12 @@ module.exports = {
             fetchReply: true,
           });
 
-
-          weight = weight / 10
-          weight2 = weight2 / 10
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 10
-          handling2 = handling2 / 10
+          weight = weight / 10;
+          weight2 = weight2 / 10;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 10;
+          handling2 = handling2 / 10;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -448,17 +446,17 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -496,25 +494,26 @@ module.exports = {
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
 
-
-                if(using.includes("pet treats")){
+                if (using.includes("pet treats")) {
                   let cooldown = cooldowndata.pettreats;
-        let timeout = 600000;
-        console.log(timeout - (Date.now() - cooldown));
-        if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-          console.log("pulled");
-          userdata.using.pull("pet treats");
-          pet.xessence = petdb[pet.pet].Xessence
-          userdata.update();
-          interaction.channel.send("Your pet treats ran out! :(");
-        } 
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) < 0
+                  ) {
+                    console.log("pulled");
+                    userdata.using.pull("pet treats");
+                    pet.xessence = petdb[pet.pet].Xessence;
+                    userdata.update();
+                    interaction.channel.send("Your pet treats ran out! :(");
+                  }
                 }
-                
 
                 earnings.push(
                   `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
                 );
-                
+
                 userdata.xessence += xessneceearn;
                 userdata.newpet.love -= 5;
                 userdata.newpet.hunger -= 5;
@@ -538,20 +537,21 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
-
-              if(using.includes("flat tire")){
+              if (using.includes("flat tire")) {
                 let cooldown = cooldowndata.flattire;
-      let timeout = 1800000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("flat tire");
-        userdata.update();
-        interaction.channel.send("Your flat tire ran out! :(");
-      } 
-      else {
-        cashwon = cashwon += (cashwon * 0.05)
-      }
+                let timeout = 1800000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("flat tire");
+                  userdata.update();
+                  interaction.channel.send("Your flat tire ran out! :(");
+                } else {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
@@ -563,21 +563,24 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1
+              let raceranks = 1;
 
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -663,9 +666,14 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        } 
-        else  if (race[0].name == "venusrace") {
-          if(selected.Tires !== "T1SpaceTires" && selected.Name !== "Mars Rover") return interaction.channel.send("You need space tires to race on this planet!")
+        } else if (race[0].name == "venusrace") {
+          if (
+            selected.Tires !== "T1SpaceTires" &&
+            selected.Name !== "Mars Rover"
+          )
+            return interaction.channel.send(
+              "You need space tires to race on this planet!"
+            );
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -719,7 +727,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -777,7 +784,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -789,11 +796,11 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000)
+          let randomgravity = randomRange(2000, 5000);
 
           let sec;
           let sec2;
@@ -828,50 +835,42 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          let gravity = false
+          let gravity = false;
           setTimeout(async () => {
-        
-
-            let grow = new ActionRowBuilder()
-            .addComponents(
+            let grow = new ActionRowBuilder().addComponents(
               new ButtonBuilder()
-              .setCustomId("gravity")
-              .setEmoji("🪛")
-              .setLabel("Pull gravity lever")
-              .setStyle("Primary")
-            )
+                .setCustomId("gravity")
+                .setEmoji("🪛")
+                .setLabel("Pull gravity lever")
+                .setStyle("Primary")
+            );
 
-           await i.editReply({
+            await i.editReply({
               components: [grow],
-              fetchReply: true
-            })
+              fetchReply: true,
+            });
 
-              collector.on('collect', async (i) => {
-                if(i.customId.includes("gravity")){
-                  gravity = true
-                  await i.deferUpdate()
-                }
+            collector.on("collect", async (i) => {
+              if (i.customId.includes("gravity")) {
+                gravity = true;
+                await i.deferUpdate();
+              }
+            });
 
-              })
-
-              setTimeout(async () => {
-                await i.editReply({
-                  components: [],
-                  fetchReply: true
-                })
-              }, 2000);
-              
-       
-            
+            setTimeout(async () => {
+              await i.editReply({
+                components: [],
+                fetchReply: true,
+              });
+            }, 2000);
           }, randomgravity);
 
-       
-          weight = weight * 10
-          weight2 = weight2 * 10
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 100
-          handling2 = handling2 / 100
+          weight = weight * 10;
+          weight2 = weight2 * 10;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 100;
+          handling2 = handling2 / 100;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -891,37 +890,45 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
             console.log(`calc2: ${calc2}`);
             tracklength += calc;
             tracklength2 += calc2;
-            
-            if(tracklength > tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Venus Race lost! Your car flew off the planet!`);
+
+            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
+              embed.setTitle(
+                `Tier ${bot} Venus Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-            else if(tracklength < tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Venus Race lost! Your car flew off the planet!`);
+            } else if (
+              tracklength < tracklength2 &&
+              timer == 10 &&
+              gravity == false
+            ) {
+              embed.setTitle(
+                `Tier ${bot} Venus Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-
-          
-           else if (tracklength > tracklength2 && timer == 10 && gravity == true) {
+            } else if (
+              tracklength > tracklength2 &&
+              timer == 10 &&
+              gravity == true
+            ) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -986,30 +993,33 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let randompart = randomRange(1, 5)
-              
-              if(randompart > 3){
+              let randompart = randomRange(1, 5);
+
+              if (randompart > 3) {
                 earnings.push(
                   `${partdb.Parts["car hook"].Emote} +1 ${cratedb.Crates["car hook"].Name}`
                 );
-                userdata.parts.push("car hook")
+                userdata.parts.push("car hook");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -1070,7 +1080,11 @@ module.exports = {
               console.log(`track length 2 ${tracklength2}`);
             }
             // lost
-            else if (tracklength2 > tracklength && timer == 10 && gravity == true) {
+            else if (
+              tracklength2 > tracklength &&
+              timer == 10 &&
+              gravity == true
+            ) {
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -1095,9 +1109,14 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else  if (race[0].name == "marsrace") {
-          if(selected.Tires !== "T1SpaceTires" && selected.Name !== "Mars Rover") return interaction.channel.send("You need space tires to race on this planet!")
+        } else if (race[0].name == "marsrace") {
+          if (
+            selected.Tires !== "T1SpaceTires" &&
+            selected.Name !== "Mars Rover"
+          )
+            return interaction.channel.send(
+              "You need space tires to race on this planet!"
+            );
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -1151,7 +1170,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -1209,7 +1227,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -1221,11 +1239,11 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000)
+          let randomgravity = randomRange(2000, 5000);
 
           let sec;
           let sec2;
@@ -1260,50 +1278,42 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          let gravity = false
+          let gravity = false;
           setTimeout(async () => {
-        
-
-            let grow = new ActionRowBuilder()
-            .addComponents(
+            let grow = new ActionRowBuilder().addComponents(
               new ButtonBuilder()
-              .setCustomId("gravity")
-              .setEmoji("🪛")
-              .setLabel("Pull gravity lever")
-              .setStyle("Primary")
-            )
+                .setCustomId("gravity")
+                .setEmoji("🪛")
+                .setLabel("Pull gravity lever")
+                .setStyle("Primary")
+            );
 
-           await i.editReply({
+            await i.editReply({
               components: [grow],
-              fetchReply: true
-            })
+              fetchReply: true,
+            });
 
-              collector.on('collect', async (i) => {
-                if(i.customId.includes("gravity")){
-                  gravity = true
-                  await i.deferUpdate()
-                }
+            collector.on("collect", async (i) => {
+              if (i.customId.includes("gravity")) {
+                gravity = true;
+                await i.deferUpdate();
+              }
+            });
 
-              })
-
-              setTimeout(async () => {
-                await i.editReply({
-                  components: [],
-                  fetchReply: true
-                })
-              }, 2000);
-              
-       
-            
+            setTimeout(async () => {
+              await i.editReply({
+                components: [],
+                fetchReply: true,
+              });
+            }, 2000);
           }, randomgravity);
 
-       
-          weight = weight * 5
-          weight2 = weight2 * 5
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 50
-          handling2 = handling2 / 50
+          weight = weight * 5;
+          weight2 = weight2 * 5;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 50;
+          handling2 = handling2 / 50;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -1323,37 +1333,45 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
             console.log(`calc2: ${calc2}`);
             tracklength += calc;
             tracklength2 += calc2;
-            
-            if(tracklength > tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Mars Race lost! Your car flew off the planet!`);
+
+            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
+              embed.setTitle(
+                `Tier ${bot} Mars Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-            else if(tracklength < tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Mars Race lost! Your car flew off the planet!`);
+            } else if (
+              tracklength < tracklength2 &&
+              timer == 10 &&
+              gravity == false
+            ) {
+              embed.setTitle(
+                `Tier ${bot} Mars Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-
-          
-           else if (tracklength > tracklength2 && timer == 10 && gravity == true) {
+            } else if (
+              tracklength > tracklength2 &&
+              timer == 10 &&
+              gravity == true
+            ) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -1418,30 +1436,33 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let randompart = randomRange(1, 5)
-              
-              if(randompart > 3){
+              let randompart = randomRange(1, 5);
+
+              if (randompart > 3) {
                 earnings.push(
                   `${partdb.Parts["nuclear core"].Emote} +1 ${cratedb.Crates["nuclear core"].Name}`
                 );
-                userdata.parts.push("nuclear core")
+                userdata.parts.push("nuclear core");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -1502,7 +1523,11 @@ module.exports = {
               console.log(`track length 2 ${tracklength2}`);
             }
             // lost
-            else if (tracklength2 > tracklength && timer == 10 && gravity == true) {
+            else if (
+              tracklength2 > tracklength &&
+              timer == 10 &&
+              gravity == true
+            ) {
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -1527,10 +1552,14 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else  if (race[0].name == "moonrace") {
-
-          if(selected.Tires !== "T1SpaceTires" && selected.Name !== "Mars Rover") return interaction.channel.send("You need space tires to race on this planet!")
+        } else if (race[0].name == "moonrace") {
+          if (
+            selected.Tires !== "T1SpaceTires" &&
+            selected.Name !== "Mars Rover"
+          )
+            return interaction.channel.send(
+              "You need space tires to race on this planet!"
+            );
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -1584,7 +1613,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -1642,7 +1670,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -1654,11 +1682,11 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000)
+          let randomgravity = randomRange(2000, 5000);
 
           let sec;
           let sec2;
@@ -1693,50 +1721,42 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          let gravity = false
+          let gravity = false;
           setTimeout(async () => {
-        
-
-            let grow = new ActionRowBuilder()
-            .addComponents(
+            let grow = new ActionRowBuilder().addComponents(
               new ButtonBuilder()
-              .setCustomId("gravity")
-              .setEmoji("🪛")
-              .setLabel("Pull gravity lever")
-              .setStyle("Primary")
-            )
+                .setCustomId("gravity")
+                .setEmoji("🪛")
+                .setLabel("Pull gravity lever")
+                .setStyle("Primary")
+            );
 
-           await i.editReply({
+            await i.editReply({
               components: [grow],
-              fetchReply: true
-            })
+              fetchReply: true,
+            });
 
-              collector.on('collect', async (i) => {
-                if(i.customId.includes("gravity")){
-                  gravity = true
-                  await i.deferUpdate()
-                }
+            collector.on("collect", async (i) => {
+              if (i.customId.includes("gravity")) {
+                gravity = true;
+                await i.deferUpdate();
+              }
+            });
 
-              })
-
-              setTimeout(async () => {
-                await i.editReply({
-                  components: [],
-                  fetchReply: true
-                })
-              }, 1500);
-              
-       
-            
+            setTimeout(async () => {
+              await i.editReply({
+                components: [],
+                fetchReply: true,
+              });
+            }, 1500);
           }, randomgravity);
 
-       
-          weight = weight / 2
-          weight2 = weight2 / 2
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 500
-          handling2 = handling2 / 500
+          weight = weight / 2;
+          weight2 = weight2 / 2;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 500;
+          handling2 = handling2 / 500;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -1756,37 +1776,45 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
             console.log(`calc2: ${calc2}`);
             tracklength += calc;
             tracklength2 += calc2;
-            
-            if(tracklength > tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Moon Race lost! Your car flew off the planet!`);
+
+            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
+              embed.setTitle(
+                `Tier ${bot} Moon Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-            else if(tracklength < tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Moon Race lost! Your car flew off the planet!`);
+            } else if (
+              tracklength < tracklength2 &&
+              timer == 10 &&
+              gravity == false
+            ) {
+              embed.setTitle(
+                `Tier ${bot} Moon Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-
-          
-           else if (tracklength > tracklength2 && timer == 10 && gravity == true) {
+            } else if (
+              tracklength > tracklength2 &&
+              timer == 10 &&
+              gravity == true
+            ) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -1851,30 +1879,33 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let randompart = randomRange(1, 5)
-              
-              if(randompart > 3){
+              let randompart = randomRange(1, 5);
+
+              if (randompart > 3) {
                 earnings.push(
                   `${partdb.Parts["metal frame"].Emote} +1 ${cratedb.Crates["metal frame"].Name}`
                 );
-                userdata.parts.push("metal frame")
+                userdata.parts.push("metal frame");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -1935,7 +1966,11 @@ module.exports = {
               console.log(`track length 2 ${tracklength2}`);
             }
             // lost
-            else if (tracklength2 > tracklength && timer == 10 && gravity == true) {
+            else if (
+              tracklength2 > tracklength &&
+              timer == 10 &&
+              gravity == true
+            ) {
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -1960,9 +1995,14 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else  if (race[0].name == "saturnrace") {
-          if(selected.Tires !== "T1SpaceTires" && selected.Name !== "Mars Rover") return interaction.channel.send("You need space tires to race on this planet!")
+        } else if (race[0].name == "saturnrace") {
+          if (
+            selected.Tires !== "T1SpaceTires" &&
+            selected.Name !== "Mars Rover"
+          )
+            return interaction.channel.send(
+              "You need space tires to race on this planet!"
+            );
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -2016,7 +2056,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -2074,7 +2113,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -2086,11 +2125,11 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000)
+          let randomgravity = randomRange(2000, 5000);
 
           let sec;
           let sec2;
@@ -2125,50 +2164,42 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          let gravity = false
+          let gravity = false;
           setTimeout(async () => {
-        
-
-            let grow = new ActionRowBuilder()
-            .addComponents(
+            let grow = new ActionRowBuilder().addComponents(
               new ButtonBuilder()
-              .setCustomId("gravity")
-              .setEmoji("🪛")
-              .setLabel("Pull gravity lever")
-              .setStyle("Primary")
-            )
+                .setCustomId("gravity")
+                .setEmoji("🪛")
+                .setLabel("Pull gravity lever")
+                .setStyle("Primary")
+            );
 
-           await i.editReply({
+            await i.editReply({
               components: [grow],
-              fetchReply: true
-            })
+              fetchReply: true,
+            });
 
-              collector.on('collect', async (i) => {
-                if(i.customId.includes("gravity")){
-                  gravity = true
-                  await i.deferUpdate()
-                }
+            collector.on("collect", async (i) => {
+              if (i.customId.includes("gravity")) {
+                gravity = true;
+                await i.deferUpdate();
+              }
+            });
 
-              })
-
-              setTimeout(async () => {
-                await i.editReply({
-                  components: [],
-                  fetchReply: true
-                })
-              }, 1500);
-              
-       
-            
+            setTimeout(async () => {
+              await i.editReply({
+                components: [],
+                fetchReply: true,
+              });
+            }, 1500);
           }, randomgravity);
 
-       
-          weight = weight / 5
-          weight2 = weight2 / 5
-          let accms = acceleration * 15
-          let accms2 = acceleration2 * 15
-          handling = handling / 300
-          handling2 = handling2 / 300
+          weight = weight / 5;
+          weight2 = weight2 / 5;
+          let accms = acceleration * 15;
+          let accms2 = acceleration2 * 15;
+          handling = handling / 300;
+          handling2 = handling2 / 300;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -2188,37 +2219,45 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
             console.log(`calc2: ${calc2}`);
             tracklength += calc;
             tracklength2 += calc2;
-            
-            if(tracklength > tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Saturn Race lost! Your car flew off the planet!`);
+
+            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
+              embed.setTitle(
+                `Tier ${bot} Saturn Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-            else if(tracklength < tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Saturn Race lost! Your car flew off the planet!`);
+            } else if (
+              tracklength < tracklength2 &&
+              timer == 10 &&
+              gravity == false
+            ) {
+              embed.setTitle(
+                `Tier ${bot} Saturn Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-
-          
-           else if (tracklength > tracklength2 && timer == 10 && gravity == true) {
+            } else if (
+              tracklength > tracklength2 &&
+              timer == 10 &&
+              gravity == true
+            ) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -2283,30 +2322,33 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let randompart = randomRange(1, 5)
-              
-              if(randompart > 3){
+              let randompart = randomRange(1, 5);
+
+              if (randompart > 3) {
                 earnings.push(
                   `${partdb.Parts["alien oil"].Emote} +1 ${cratedb.Crates["alien oil"].Name}`
                 );
-                userdata.parts.push("alien oil")
+                userdata.parts.push("alien oil");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -2367,7 +2409,11 @@ module.exports = {
               console.log(`track length 2 ${tracklength2}`);
             }
             // lost
-            else if (tracklength2 > tracklength && timer == 10 && gravity == true) {
+            else if (
+              tracklength2 > tracklength &&
+              timer == 10 &&
+              gravity == true
+            ) {
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -2392,9 +2438,14 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else  if (race[0].name == "plutorace") {
-          if(selected.Tires !== "T1SpaceTires" && selected.Name !== "Mars Rover") return interaction.channel.send("You need space tires to race on this planet!")
+        } else if (race[0].name == "plutorace") {
+          if (
+            selected.Tires !== "T1SpaceTires" &&
+            selected.Name !== "Mars Rover"
+          )
+            return interaction.channel.send(
+              "You need space tires to race on this planet!"
+            );
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -2448,7 +2499,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -2506,7 +2556,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -2518,11 +2568,11 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000)
+          let randomgravity = randomRange(2000, 5000);
 
           let sec;
           let sec2;
@@ -2557,50 +2607,42 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          let gravity = false
+          let gravity = false;
           setTimeout(async () => {
-        
-
-            let grow = new ActionRowBuilder()
-            .addComponents(
+            let grow = new ActionRowBuilder().addComponents(
               new ButtonBuilder()
-              .setCustomId("gravity")
-              .setEmoji("🪛")
-              .setLabel("Pull gravity lever")
-              .setStyle("Primary")
-            )
+                .setCustomId("gravity")
+                .setEmoji("🪛")
+                .setLabel("Pull gravity lever")
+                .setStyle("Primary")
+            );
 
-           await i.editReply({
+            await i.editReply({
               components: [grow],
-              fetchReply: true
-            })
+              fetchReply: true,
+            });
 
-              collector.on('collect', async (i) => {
-                if(i.customId.includes("gravity")){
-                  gravity = true
-                  await i.deferUpdate()
-                }
+            collector.on("collect", async (i) => {
+              if (i.customId.includes("gravity")) {
+                gravity = true;
+                await i.deferUpdate();
+              }
+            });
 
-              })
-
-              setTimeout(async () => {
-                await i.editReply({
-                  components: [],
-                  fetchReply: true
-                })
-              }, 1500);
-              
-       
-            
+            setTimeout(async () => {
+              await i.editReply({
+                components: [],
+                fetchReply: true,
+              });
+            }, 1500);
           }, randomgravity);
 
-       
-          weight = weight * 2
-          weight2 = weight2 * 2
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 300
-          handling2 = handling2 / 300
+          weight = weight * 2;
+          weight2 = weight2 * 2;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 300;
+          handling2 = handling2 / 300;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -2620,37 +2662,45 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
             console.log(`calc2: ${calc2}`);
             tracklength += calc;
             tracklength2 += calc2;
-            
-            if(tracklength > tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Pluto Race lost! Your car flew off the planet!`);
+
+            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
+              embed.setTitle(
+                `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-            else if(tracklength < tracklength2 && timer == 10 && gravity == false){
-              embed.setTitle(`Tier ${bot} Pluto Race lost! Your car flew off the planet!`);
+            } else if (
+              tracklength < tracklength2 &&
+              timer == 10 &&
+              gravity == false
+            ) {
+              embed.setTitle(
+                `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
+              );
 
               await i.editReply({ embeds: [embed], files: [attachment] });
-            }
-
-          
-           else if (tracklength > tracklength2 && timer == 10 && gravity == true) {
+            } else if (
+              tracklength > tracklength2 &&
+              timer == 10 &&
+              gravity == true
+            ) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -2715,30 +2765,33 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let randompart = randomRange(1, 5)
-              
-              if(randompart > 3){
+              let randompart = randomRange(1, 5);
+
+              if (randompart > 3) {
                 earnings.push(
                   `${partdb.Parts["zionite pistons"].Emote} +1 ${cratedb.Crates["zionite pistons"].Name}`
                 );
-                userdata.parts.push("zionite pistons")
+                userdata.parts.push("zionite pistons");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -2799,7 +2852,11 @@ module.exports = {
               console.log(`track length 2 ${tracklength2}`);
             }
             // lost
-            else if (tracklength2 > tracklength && timer == 10 && gravity == true) {
+            else if (
+              tracklength2 > tracklength &&
+              timer == 10 &&
+              gravity == true
+            ) {
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -2824,8 +2881,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else if (race[0].name == "highwayrace") {
+        } else if (race[0].name == "highwayrace") {
           let tracklength = 1000;
           let tracklength2 = 1000;
           await i.update({ content: "Please wait...", components: [] });
@@ -2877,7 +2933,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -3007,8 +3062,8 @@ module.exports = {
             fetchReply: true,
           });
 
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -3025,15 +3080,15 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            let calc = (speed / 200)
-            sec = (weight / calc)
+            let calc = speed / 200;
+            sec = weight / calc;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 200)
-            sec2 = (weight2 / calc2)
+            let calc2 = speed2 / 200;
+            sec2 = weight2 / calc2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -3079,34 +3134,40 @@ module.exports = {
                 );
               }
 
-              let raceranks = 1
+              let raceranks = 1;
 
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
-                   if(using.includes("fruit punch")){
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -3343,9 +3404,8 @@ module.exports = {
             fetchReply: true,
           });
 
-
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -3362,15 +3422,15 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            let calc = (speed / 200)
-            sec = (weight / calc)
+            let calc = speed / 200;
+            sec = weight / calc;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 200)
-            sec2 = (weight2 / calc2)
+            let calc2 = speed2 / 200;
+            sec2 = weight2 / calc2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -3412,21 +3472,24 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1
+              let raceranks = 1;
 
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -3545,7 +3608,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -3675,8 +3737,8 @@ module.exports = {
             fetchReply: true,
           });
 
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -3693,15 +3755,15 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            let calc = (speed / 200)
-            sec = (weight / calc)
+            let calc = speed / 200;
+            sec = weight / calc;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 200)
-            sec2 = (weight2 / calc2)
+            let calc2 = speed2 / 200;
+            sec2 = weight2 / calc2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -3756,21 +3818,24 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1
+              let raceranks = 1;
 
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
@@ -3830,11 +3895,11 @@ module.exports = {
             }
           }, 1000);
         } else if (race[0].name == "crossrace") {
-          let itemdb = require('../data/items.json')
-          let findables = []
-          for(let ite in itemdb){
-            if(itemdb[ite].Findable == true){
-              findables.push(itemdb[ite])
+          let itemdb = require("../data/items.json");
+          let findables = [];
+          for (let ite in itemdb) {
+            if (itemdb[ite].Findable == true) {
+              findables.push(itemdb[ite]);
             }
           }
           let tracklength = 2500;
@@ -3853,8 +3918,8 @@ module.exports = {
           let commonmaps;
           let raremaps;
           let legendarymaps;
-          let itemfound 
-          let itemsucc = lodash.random(5)
+          let itemfound;
+          let itemsucc = lodash.random(5);
 
           if (bot == 1) {
             console.log("1");
@@ -3879,19 +3944,19 @@ module.exports = {
             );
             raremaps = 2;
           } else if (bot == 5) {
-            itemfound = lodash.sample(findables)
+            itemfound = lodash.sample(findables);
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 210
             );
             legendarymaps = 1;
           } else if (bot == 6) {
-            itemfound = lodash.sample(findables)
+            itemfound = lodash.sample(findables);
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 220
             );
             legendarymaps = 2;
           } else if (bot == 7) {
-            itemfound = lodash.sample(findables)
+            itemfound = lodash.sample(findables);
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 250
             );
@@ -3900,7 +3965,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
 
           let craterare = randomRange(1, 3);
 
@@ -4030,8 +4094,8 @@ module.exports = {
             fetchReply: true,
           });
 
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -4048,17 +4112,17 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            let calc = (speed / 234)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 234;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 234;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -4117,31 +4181,31 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              if(itemfound !== undefined){
-                if(itemsucc == 3){
+              if (itemfound !== undefined) {
+                if (itemsucc == 3) {
                   userdata.items.push(itemfound.Name.toLowerCase());
-                  earnings.push(
-                    `${itemfound.Emote} +1 ${itemfound.Name}`
-                  );
-
+                  earnings.push(`${itemfound.Emote} +1 ${itemfound.Name}`);
                 }
               }
 
-              let raceranks = 1
+              let raceranks = 1;
 
-              let using = userdata.using
-              if(using.includes("fruit punch")){
+              let using = userdata.using;
+              if (using.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("fruit punch");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-                raceranks = 2
-      }
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) < 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your orange juice ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
               }
               userdata.racerank += raceranks;
 
