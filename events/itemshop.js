@@ -15,7 +15,7 @@ async function updateItemShop() {
       itemarr.push(itemsdb[i]);
     }
 
-    let filtereditems = itemarr.filter((item) => item.Shop == true);
+      let filtereditems = itemarr.filter((item) => item.Shop == true);
 
     let randitem1 = lodash.sample(filtereditems);
     let randitem2 = lodash.sample(filtereditems);
@@ -24,14 +24,14 @@ async function updateItemShop() {
     let randitem5 = lodash.sample(filtereditems);
     let randitem6 = lodash.sample(filtereditems);
 
-    let item1 = randitem1.Name;
+      let item1 = randitem1.Name;
 
-    let item2 = randitem2.Name;
+      let item2 = randitem2.Name;
 
-    let item3 = randitem3.Name;
+      let item3 = randitem3.Name;
 
-    let item4 = randitem4.Name;
-    let item5 = randitem5.Name;
+      let item4 = randitem4.Name;
+      let item5 = randitem5.Name;
 
     let item6 = randitem6.Name;
 
@@ -42,8 +42,8 @@ async function updateItemShop() {
     items.push(item5);
     items.push(item6);
 
-    global.itemshop = items;
-    global.itemshopcooldown = Date.now();
+      global.itemshop = items;
+      global.itemshopcooldown = Date.now();
 
     global.save();
   } else {

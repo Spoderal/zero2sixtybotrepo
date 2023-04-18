@@ -152,7 +152,7 @@
       "Action": "Only get cars in blueprints for 15 minutes",
       "Name": "Apple Juice",
       "Type": "Usable",
-      "Emote": "<:item_applejuice:1094894556983611423>",
+      "Emote": "<:item_applejuice:1094894556983611423> ",
       "Shop": true,
       "Findable":true,
       "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png"
