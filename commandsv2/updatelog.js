@@ -17,7 +17,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "4/19/2023",
+            label: "4/18/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -53,7 +53,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 4/19/2023\n
+            ⚙️ Latest Patch 4/18/2023\n
             🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 4/11/2023\n
             🎉 Big Update 4/1/2023\n
@@ -93,7 +93,7 @@ module.exports = {
 
                 `
               )
-              .setFooter({ text: "3/15/2023" })
+              .setFooter({ text: "4/18/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
