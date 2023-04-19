@@ -20,5 +20,13 @@
   "noob racer": {
     "Title": "Noob Racer",
     "Achieve": "Event"
+  },
+  "pro racer": {
+    "Title": "Pro Racer",
+    "Achieve": "Event"
+  },
+  "best creator": {
+    "Title": "Best Creator",
+    "Achieve": "Event"
   }
 }
