@@ -427,8 +427,8 @@ module.exports = {
           weight2 = weight2 / 10
           let accms = acceleration * 10
           let accms2 = acceleration2 * 10
-          handling = handling / 10
-          handling2 = handling2 / 10
+          handling = handling / 100
+          handling2 = handling2 / 100
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -445,10 +445,11 @@ module.exports = {
             }
           }, accms2);
           let timer = 0;
+          
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
+            let calc = (speed / 2)
             sec = (weight / calc)
             sec += handling
             calc = calc / sec;
@@ -456,7 +457,7 @@ module.exports = {
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
+            let calc2 = (speed2 / 2)
             sec2 = (weight2 / calc2)
             sec2 += handling2
             console.log(`sec2: ${sec2}`);
@@ -497,7 +498,7 @@ module.exports = {
                 let xessneceearn = lodash.random(pet.xessence);
 
 
-                if(using.includes("pet treats")){
+                if(usinginv.includes("pet treats")){
                   let cooldown = cooldowndata.pettreats;
         let timeout = 600000;
         console.log(timeout - (Date.now() - cooldown));
@@ -539,7 +540,7 @@ module.exports = {
               }
 
 
-              if(using.includes("flat tire")){
+              if(usinginv.includes("flat tire")){
                 let cooldown = cooldowndata.flattire;
       let timeout = 1800000;
       console.log(timeout - (Date.now() - cooldown));
@@ -566,7 +567,7 @@ module.exports = {
               let raceranks = 1
 
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -799,6 +800,7 @@ module.exports = {
           let sec2;
           handling = Math.floor(handling);
           handling2 = Math.floor(handling2);
+          
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
           let embed = new EmbedBuilder()
@@ -891,7 +893,7 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
+            let calc = (speed / 2)
             sec = (weight / calc)
             sec += handling
             calc = calc / sec;
@@ -899,7 +901,7 @@ module.exports = {
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
+            let calc2 = (speed2 / 2)
             sec2 = (weight2 / calc2)
             sec2 += handling2
             console.log(`sec2: ${sec2}`);
@@ -998,7 +1000,7 @@ module.exports = {
               earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
               userdata.spacetokens += 1
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -1302,8 +1304,8 @@ module.exports = {
           weight2 = weight2 * 5
           let accms = acceleration * 10
           let accms2 = acceleration2 * 10
-          handling = handling / 50
-          handling2 = handling2 / 50
+          handling = handling / 100
+          handling = handling / 100
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -1323,7 +1325,7 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 234)
+            let calc = (speed)
             sec = (weight / calc)
             sec += handling
             calc = calc / sec;
@@ -1331,7 +1333,7 @@ module.exports = {
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 234)
+            let calc2 = (speed2)
             sec2 = (weight2 / calc2)
             sec2 += handling2
             console.log(`sec2: ${sec2}`);
@@ -1430,7 +1432,7 @@ module.exports = {
               earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
               userdata.spacetokens += 1
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -1863,7 +1865,7 @@ module.exports = {
               earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
               userdata.spacetokens += 1
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -2295,7 +2297,7 @@ module.exports = {
               earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
               userdata.spacetokens += 1
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -2727,7 +2729,7 @@ module.exports = {
               earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
               userdata.spacetokens += 1
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -3024,6 +3026,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
+          handling = handling / 100
+          handling2 = handling2 / 100
           let i2 = setInterval(async () => {
             let calc = (speed / 200)
             sec = (weight / calc)
@@ -3082,7 +3086,7 @@ module.exports = {
               let raceranks = 1
 
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -3095,7 +3099,7 @@ module.exports = {
                 raceranks = 2
       }
               }
-                   if(using.includes("fruit punch")){
+                   if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -3361,6 +3365,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
+          handling = handling / 100
+          handling2 = handling2 / 100
           let i2 = setInterval(async () => {
             let calc = (speed / 200)
             sec = (weight / calc)
@@ -3415,7 +3421,7 @@ module.exports = {
               let raceranks = 1
 
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -3692,6 +3698,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
+          handling = handling / 100
+          handling2 = handling2 / 100
           let i2 = setInterval(async () => {
             let calc = (speed / 200)
             sec = (weight / calc)
@@ -3759,7 +3767,7 @@ module.exports = {
               let raceranks = 1
 
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
@@ -4047,6 +4055,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
+          handling = handling / 100
+          handling2 = handling2 / 100
           let i2 = setInterval(async () => {
             let calc = (speed / 234)
             sec = (weight / calc)
@@ -4130,7 +4140,7 @@ module.exports = {
               let raceranks = 1
 
               let using = userdata.using
-              if(using.includes("fruit punch")){
+              if(usinginv.includes("fruit punch")){
                 let cooldown = cooldowndata.fruitpunch;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));

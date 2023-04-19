@@ -222,18 +222,21 @@ module.exports = {
       fetchReply: true,
     });
 
+    handling = handling / 100
+    handling2 = handling2 / 100
+
     let i2 = setInterval(async () => {
       console.log(speed);
-      let calc = (speed / 234)
-      sec = (weight / calc)
+      let calc = (speed)
+      sec = (weight / calc) / 100
       sec += handling
       calc = calc / sec;
       console.log(`calc: ${calc}`);
       console.log(`sec: ${sec}`);
       // car 2
       console.log(speed2);
-      let calc2 = (speed2 / 234)
-      sec2 = (weight2 / calc2)
+      let calc2 = (speed2)
+      sec2 = (weight2 / calc2) / 100
       sec2 += handling2
       console.log(`sec2: ${sec2}`);
 
