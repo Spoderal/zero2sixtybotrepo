@@ -11,6 +11,7 @@ const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
 const { toCurrency, numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const carpacks = require("../data/carpacks.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -88,6 +89,39 @@ module.exports = {
       (house) => house.id == bought.toLowerCase()
     );
     const boughtWarehouse = warehousedb[bought];
+
+
+    if(carpacks[bought.toLowerCase()]){
+      let pack = carpacks[bought.toLowerCase()]
+      if(gold < pack.Gold) return interaction.reply("You need 500 gold for this pack!")
+
+      for(let ca in pack.cars){
+        let car = pack.cars[ca]
+        let carindb = cars.Cars[car]
+
+        let obj = {
+          ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+          Drift: 0,
+          Weight: carindb.Weight,
+        }
+        userdata.cars.push(obj)
+
+      }
+
+      userdata.gold -= Number(pack.Gold)
+      
+      userdata.save()
+      return interaction.reply("Bought car pack!")
+
+    }
 
     if (
       !boughtCar &&

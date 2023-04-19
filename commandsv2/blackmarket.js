@@ -156,6 +156,18 @@ module.exports = {
                    ${cars.Cars["2022 bmw z4 roadster"].Emote} ${
                     cars.Cars["2022 bmw z4 roadster"].Name
                   }
+                  __${carpacks["suv adventures"].Name} : 🪙 ${
+                    carpacks["suv adventures"].Gold
+                  }__
+                   ${cars.Cars["2023 bmw x4"].Emote} ${
+                    cars.Cars["2023 bmw x4"].Name
+                  }
+                   ${cars.Cars["2022 porsche cayenne coupe"].Emote} ${
+                    cars.Cars["2022 porsche cayenne coupe"].Name
+                  }
+                   ${cars.Cars["2023 mercedes glc coupe"].Emote} ${
+                    cars.Cars["2023 mercedes glc coupe"].Name
+                  }
                   **`
                 )
                 .setColor(colors.blue)
