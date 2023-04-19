@@ -304,11 +304,11 @@ module.exports = {
       let redeemed = userdata.spaceredeemed || 1;
       for (var d in eventrewards) {
         let item = eventrewards[d];
-        let requirednot = item.Number * 100;
+        let requirednot = item.Number * 5;
         reward.push(
           `**${item.Number}** : ${item.Item} **Required : ${numberWithCommas(
             requirednot
-          )} Notoriety**`
+          )} Tokens**`
         );
       }
       let itemrewards1 = reward.slice(0, 10);
