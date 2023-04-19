@@ -27,7 +27,7 @@ module.exports = {
     let userdata = await User.findOne({ id: user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let helmet = userdata.helmet || "default";
-    let title = userdata.title || "noob racer"
+    let title = userdata.title || "noob racer";
     let driftrank = userdata.driftrank;
     let racerank = userdata.racerank;
     let prestige = userdata.prestige;
