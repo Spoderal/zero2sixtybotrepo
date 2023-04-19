@@ -16,5 +16,9 @@
   "astronomical racer": {
     "Title": "Astronomical Racer",
     "Achieve": "Event"
+  },
+  "noob racer": {
+    "Title": "Noob Racer",
+    "Achieve": "Event"
   }
 }
