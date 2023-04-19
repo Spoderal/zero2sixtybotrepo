@@ -73,7 +73,7 @@ async function updateItemShop() {
       let item6 = randitem6.Name;
 
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log("true")
+        console.log("true");
         items.push(item1);
         items.push(item2);
         items.push(item3);
@@ -84,7 +84,7 @@ async function updateItemShop() {
         global.itemshop = items;
         global.itemshopcooldown = Date.now();
 
-        global.markModified("itemshop")
+        global.markModified("itemshop");
         global.save();
 
         console.log(item1);
