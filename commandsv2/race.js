@@ -3084,14 +3084,14 @@ module.exports = {
           handling = handling / 100;
           handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
-            let calc = speed / 200;
+            let calc = speed / 2;
             sec = weight / calc;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = speed2 / 200;
+            let calc2 = speed2 / 2;
             sec2 = weight2 / calc2;
             console.log(`sec2: ${sec2}`);
 
