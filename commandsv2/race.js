@@ -421,13 +421,12 @@ module.exports = {
             fetchReply: true,
           });
 
-
-          weight = weight / 10
-          weight2 = weight2 / 10
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 100
-          handling2 = handling2 / 100
+          weight = weight / 10;
+          weight2 = weight2 / 10;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 100;
+          handling2 = handling2 / 100;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -444,21 +443,21 @@ module.exports = {
             }
           }, accms2);
           let timer = 0;
-          
+
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 2)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 2;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 2)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 2;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -539,8 +538,7 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
-
-              if(usinginv.includes("flat tire")){
+              if (usinginv.includes("flat tire")) {
                 let cooldown = cooldowndata.flattire;
                 let timeout = 1800000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -568,8 +566,8 @@ module.exports = {
               }
               let raceranks = 1;
 
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -809,7 +807,7 @@ module.exports = {
           let sec2;
           handling = Math.floor(handling);
           handling2 = Math.floor(handling2);
-          
+
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
           let embed = new EmbedBuilder()
@@ -894,17 +892,17 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed / 2)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed / 2;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2 / 2)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2 / 2;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -1005,11 +1003,11 @@ module.exports = {
                 );
                 userdata.parts.push("car hook");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -1312,13 +1310,12 @@ module.exports = {
             }, 2000);
           }, randomgravity);
 
-       
-          weight = weight * 5
-          weight2 = weight2 * 5
-          let accms = acceleration * 10
-          let accms2 = acceleration2 * 10
-          handling = handling / 100
-          handling = handling / 100
+          weight = weight * 5;
+          weight2 = weight2 * 5;
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+          handling = handling / 100;
+          handling = handling / 100;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -1338,17 +1335,17 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = (speed)
-            sec = (weight / calc)
-            sec += handling
+            let calc = speed;
+            sec = weight / calc;
+            sec += handling;
             calc = calc / sec;
             console.log(`calc: ${calc}`);
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = (speed2)
-            sec2 = (weight2 / calc2)
-            sec2 += handling2
+            let calc2 = speed2;
+            sec2 = weight2 / calc2;
+            sec2 += handling2;
             console.log(`sec2: ${sec2}`);
 
             calc2 = calc2 / sec2;
@@ -1449,11 +1446,11 @@ module.exports = {
                 );
                 userdata.parts.push("nuclear core");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -1892,11 +1889,11 @@ module.exports = {
                 );
                 userdata.parts.push("metal frame");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -2335,11 +2332,11 @@ module.exports = {
                 );
                 userdata.parts.push("alien oil");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -2778,11 +2775,11 @@ module.exports = {
                 );
                 userdata.parts.push("zionite pistons");
               }
-              let raceranks = 1
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token")
-              userdata.spacetokens += 1
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let raceranks = 1;
+              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
+              userdata.spacetokens += 1;
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3084,8 +3081,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100
-          handling2 = handling2 / 100
+          handling = handling / 100;
+          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
             let calc = speed / 200;
             sec = weight / calc;
@@ -3143,8 +3140,8 @@ module.exports = {
 
               let raceranks = 1;
 
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3160,7 +3157,7 @@ module.exports = {
                   raceranks = 2;
                 }
               }
-                   if(usinginv.includes("fruit punch")){
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3428,8 +3425,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100
-          handling2 = handling2 / 100
+          handling = handling / 100;
+          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
             let calc = speed / 200;
             sec = weight / calc;
@@ -3483,8 +3480,8 @@ module.exports = {
               }
               let raceranks = 1;
 
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3763,8 +3760,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100
-          handling2 = handling2 / 100
+          handling = handling / 100;
+          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
             let calc = speed / 200;
             sec = weight / calc;
@@ -3831,8 +3828,8 @@ module.exports = {
               }
               let raceranks = 1;
 
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -4122,8 +4119,8 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100
-          handling2 = handling2 / 100
+          handling = handling / 100;
+          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
             let calc = speed / 234;
             sec = weight / calc;
@@ -4203,8 +4200,8 @@ module.exports = {
 
               let raceranks = 1;
 
-              let using = userdata.using
-              if(usinginv.includes("fruit punch")){
+              let using = userdata.using;
+              if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
