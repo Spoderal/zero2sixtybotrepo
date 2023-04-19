@@ -28,6 +28,10 @@ module.exports = {
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let helmet = userdata.helmet || "default";
     let title = userdata.title || "noob racer";
+    if(!title || title == null || title == undefined){
+      title =  "noob racer"
+    }
+    console.log(title)
     let driftrank = userdata.driftrank;
     let racerank = userdata.racerank;
     let prestige = userdata.prestige;
@@ -170,7 +174,7 @@ module.exports = {
     ctx.font = "25px sans-serif";
     ctx.fillStyle = "#ffffff";
 
-    ctx.fillText(titledb[title].Title, 430, 50);
+    ctx.fillText(titledb[title.toLowerCase()].Title, 430, 50);
     ctx.font = "bold 28px sans-serif";
     ctx.fillText(user.username, 355, 135);
 
