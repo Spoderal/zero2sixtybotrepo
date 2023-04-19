@@ -997,7 +997,7 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
-              if (randompart > 3) {
+              if (randompart == 3) {
                 earnings.push(
                   `${partdb.Parts["car hook"].Emote} +1 ${cratedb.Crates["car hook"].Name}`
                 );
@@ -1440,7 +1440,7 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
-              if (randompart > 3) {
+              if (randompart == 3) {
                 earnings.push(
                   `${partdb.Parts["nuclear core"].Emote} +1 ${cratedb.Crates["nuclear core"].Name}`
                 );
@@ -1883,7 +1883,7 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
-              if (randompart > 3) {
+              if (randompart == 3) {
                 earnings.push(
                   `${partdb.Parts["metal frame"].Emote} +1 ${cratedb.Crates["metal frame"].Name}`
                 );
@@ -2326,7 +2326,7 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
-              if (randompart > 3) {
+              if (randompart == 3) {
                 earnings.push(
                   `${partdb.Parts["alien oil"].Emote} +1 ${cratedb.Crates["alien oil"].Name}`
                 );
@@ -2664,7 +2664,7 @@ module.exports = {
           let i2 = setInterval(async () => {
             timer++;
             console.log(timer);
-            let calc = speed / 234;
+            let calc = speed / 2;
             sec = weight / calc;
             sec += handling;
             calc = calc / sec;
@@ -2672,7 +2672,7 @@ module.exports = {
             console.log(`sec: ${sec}`);
             // car 2
             console.log(speed2);
-            let calc2 = speed2 / 234;
+            let calc2 = speed2 / 2;
             sec2 = weight2 / calc2;
             sec2 += handling2;
             console.log(`sec2: ${sec2}`);
@@ -2769,7 +2769,7 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
-              if (randompart > 3) {
+              if (randompart == 3) {
                 earnings.push(
                   `${partdb.Parts["zionite pistons"].Emote} +1 ${cratedb.Crates["zionite pistons"].Name}`
                 );

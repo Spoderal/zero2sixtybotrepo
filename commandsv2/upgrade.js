@@ -73,10 +73,9 @@ module.exports = {
       partindb = "None";
     }
     if (
-      partindb.Type == "engine" ||
-      partindb.Type == "turbo" ||
-      (partindb.Type == "intake" &&
-        cardb.Cars[selected.Name.toLowerCase()].Electric)
+      partindb.Type == "engine" &&  cardb.Cars[selected.Name.toLowerCase()].Electric ||
+      partindb.Type == "turbo" &&  cardb.Cars[selected.Name.toLowerCase()].Electric ||
+      partindb.Type == "intake" &&  cardb.Cars[selected.Name.toLowerCase()].Electric
     )
       return interaction.reply("EVs cant have engines, turbos, or intakes!");
     console.log(partindb);
