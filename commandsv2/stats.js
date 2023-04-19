@@ -348,10 +348,7 @@ module.exports = {
       }
 
       await interaction.reply({ embeds: [embed] });
-    } else if (
-      subcommandfetch == "car_part" &&
-      itemdb[item.toLowerCase()]
-    ) {
+    } else if (subcommandfetch == "car_part" && itemdb[item.toLowerCase()]) {
       let itemindb = itemdb[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
         .setAuthor({

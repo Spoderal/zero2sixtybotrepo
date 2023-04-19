@@ -24,28 +24,27 @@ module.exports = {
         )
     )
     .addSubcommand((subcommand) =>
-    subcommand
-      .setName("favorite")
-      .setDescription("Favorite a car via IDs")
-      .addStringOption((option) =>
-        option
-          .setName("car")
-          .setDescription("The car to favorite")
-          .setRequired(true)
-      )
-  )
-  .addSubcommand((subcommand) =>
-  subcommand
-    .setName("unfavorite")
-    .setDescription("Unfavorite a car via IDs")
-    .addStringOption((option) =>
-      option
-        .setName("car")
-        .setDescription("The car to favorite")
-        .setRequired(true)
+      subcommand
+        .setName("favorite")
+        .setDescription("Favorite a car via IDs")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car to favorite")
+            .setRequired(true)
+        )
     )
-)
-    ,
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("unfavorite")
+        .setDescription("Unfavorite a car via IDs")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car to favorite")
+            .setRequired(true)
+        )
+    ),
   async execute(interaction) {
     const db = require("quick.db");
 
@@ -150,79 +149,100 @@ module.exports = {
       await interaction.reply(`You deselected ${idtochoose}`);
     } else if (option == "favorite") {
       let idtochoose = interaction.options.getString("car");
-      let carfiltered = userdata.cars.filter((car) => car.Name.toLowerCase() == idtochoose.toLowerCase() || car.ID == idtochoose.toLowerCase())
-      if(!carfiltered[0]) return interaction.reply(`That car wasn't found in your cars, did you make sure to specify a car id, or its name?`)
+      let carfiltered = userdata.cars.filter(
+        (car) =>
+          car.Name.toLowerCase() == idtochoose.toLowerCase() ||
+          car.ID == idtochoose.toLowerCase()
+      );
+      if (!carfiltered[0])
+        return interaction.reply(
+          `That car wasn't found in your cars, did you make sure to specify a car id, or its name?`
+        );
 
       let embed = new Discord.EmbedBuilder()
         .setTitle("New Favorite ⭐")
         .setColor(colors.blue)
-        .setDescription(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Emote} ${carfiltered[0].Name}`)
-        .setThumbnail(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Image}`)
+        .setDescription(
+          `${cars.Cars[carfiltered[0].Name.toLowerCase()].Emote} ${
+            carfiltered[0].Name
+          }`
+        )
+        .setThumbnail(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Image}`);
 
-        carfiltered[0]["Favorite"] = true
+      carfiltered[0]["Favorite"] = true;
 
-        console.log(carfiltered)
+      console.log(carfiltered);
 
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": carfiltered[0],
           },
-          {
-            $set: {
-              "cars.$[car]": carfiltered[0],
+        },
+
+        {
+          arrayFilters: [
+            {
+              "car.Name": carfiltered[0].Name,
             },
-          },
-    
-          {
-            arrayFilters: [
-              {
-                "car.Name": carfiltered[0].Name,
-              },
-            ],
-          }
-        );
+          ],
+        }
+      );
 
-        userdata.markModified("cars")
-        userdata.save()
+      userdata.markModified("cars");
+      userdata.save();
 
       await interaction.reply({ embeds: [embed] });
-    }
-    else if (option == "unfavorite") {
+    } else if (option == "unfavorite") {
       let idtochoose = interaction.options.getString("car");
-      let carfiltered = userdata.cars.filter((car) => car.Name.toLowerCase() == idtochoose.toLowerCase() || car.ID == idtochoose.toLowerCase() && car.Favorite == true)
-      if(!carfiltered[0]) return interaction.reply(`That car wasn't found in your cars, did you make sure to specify a car id, or its name? It could also not be favorited`)
+      let carfiltered = userdata.cars.filter(
+        (car) =>
+          car.Name.toLowerCase() == idtochoose.toLowerCase() ||
+          (car.ID == idtochoose.toLowerCase() && car.Favorite == true)
+      );
+      if (!carfiltered[0])
+        return interaction.reply(
+          `That car wasn't found in your cars, did you make sure to specify a car id, or its name? It could also not be favorited`
+        );
 
       let embed = new Discord.EmbedBuilder()
         .setTitle("Removed Favorite ✅")
         .setColor(colors.blue)
-        .setDescription(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Emote} ${carfiltered[0].Name}`)
-        .setThumbnail(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Image}`)
+        .setDescription(
+          `${cars.Cars[carfiltered[0].Name.toLowerCase()].Emote} ${
+            carfiltered[0].Name
+          }`
+        )
+        .setThumbnail(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Image}`);
 
-        carfiltered[0]["Favorite"] = false
+      carfiltered[0]["Favorite"] = false;
 
-        console.log(carfiltered)
+      console.log(carfiltered);
 
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": carfiltered[0],
           },
-          {
-            $set: {
-              "cars.$[car]": carfiltered[0],
+        },
+
+        {
+          arrayFilters: [
+            {
+              "car.Name": carfiltered[0].Name,
             },
-          },
-    
-          {
-            arrayFilters: [
-              {
-                "car.Name": carfiltered[0].Name,
-              },
-            ],
-          }
-        );
+          ],
+        }
+      );
 
-        userdata.markModified("cars")
-        userdata.save()
+      userdata.markModified("cars");
+      userdata.save();
 
       await interaction.reply({ embeds: [embed] });
     }

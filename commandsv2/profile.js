@@ -8,7 +8,7 @@ const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
-const titledb = require("../data/titles.json")
+const titledb = require("../data/titles.json");
 
 const { createCanvas, loadImage } = require("canvas");
 

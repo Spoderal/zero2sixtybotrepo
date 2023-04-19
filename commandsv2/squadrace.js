@@ -175,8 +175,8 @@ module.exports = {
     let speed = 0;
     let speed2 = 0;
 
-    let accms = acceleration * 10
-    let accms2 = acceleration2 * 10
+    let accms = acceleration * 10;
+    let accms2 = acceleration2 * 10;
 
     let x = setInterval(() => {
       if (speed < mph) {

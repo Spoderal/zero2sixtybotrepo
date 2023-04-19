@@ -420,7 +420,8 @@ module.exports = {
           "Your prestige is not high enough to buy this house!"
         );
 
-        if(boughtHousePrice == 0) return interaction.reply("This house isn't purchasable!")
+      if (boughtHousePrice == 0)
+        return interaction.reply("This house isn't purchasable!");
 
       let houseobj = boughtHouse[0];
       if (userdata.houses.includes(houseobj))
@@ -462,9 +463,7 @@ module.exports = {
           boughtWarehouse.Name
         } for ${toCurrency(boughtWarehouse.Price)}`
       );
-    } else if (
-      itemsList[bought]
-    ) {
+    } else if (itemsList[bought]) {
       let itemshopweek = global.itemshop;
       let itemindb = itemsList[bought];
       if (!itemshopweek.includes(itemindb.Name))

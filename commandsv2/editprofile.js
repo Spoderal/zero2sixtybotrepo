@@ -5,7 +5,7 @@ const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const titlesdb = require("../data/titles.json")
+const titlesdb = require("../data/titles.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -55,8 +55,7 @@ module.exports = {
       userdata.save();
 
       await interaction.reply(`Set your profile picture to "${pfp}"`);
-    } 
-    else if (option == "title") {
+    } else if (option == "title") {
       let userpfps = userdata.titles;
 
       let pfp = interaction.options.getString("item");
@@ -73,8 +72,7 @@ module.exports = {
       userdata.save();
 
       await interaction.reply(`Set your profile picture to "${pfp}"`);
-    }
-    else if (option == "description") {
+    } else if (option == "description") {
       let titletoset = interaction.options.getString("item");
       let letterCount = titletoset.replace(/\s+/g, "").length;
       if (letterCount > 35)

@@ -260,9 +260,9 @@ module.exports = {
             notorietyreward = notorietyreward * 2;
           }
 
-          let using = userdata.using
-          if(using.includes("fruit punch")){
-            dranks = dranks * 2
+          let using = userdata.using;
+          if (using.includes("fruit punch")) {
+            dranks = dranks * 2;
           }
           earnings.push(`${emotes.notoriety} +${notorietyreward}`);
           earnings.push(`${emotes.cash} +${cashreward}`);

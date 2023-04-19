@@ -113,20 +113,20 @@ module.exports = {
       if (streak > 1) {
         dcash = dcash * (dailystre -= 0.5);
       }
-      let using = userdata.using
+      let using = userdata.using;
 
-      if(using.includes("oil")){
+      if (using.includes("oil")) {
         let cooldown = cooldowndata.oil;
         let timeout = 604800000;
         console.log(timeout - (Date.now() - cooldown));
         if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
           console.log("pulled");
           userdata.using.pull("oil");
-      
+
           userdata.update();
           interaction.channel.send("Your oil ran out! :(");
+        }
       }
-    }
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
       cooldowndata.lastDaily = Date.now();

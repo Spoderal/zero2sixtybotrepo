@@ -442,17 +442,17 @@ const Profile = new mongoose.Schema({
   rocket: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
   spacetokens: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   spaceredeemed: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
 });
 

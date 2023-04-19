@@ -1,344 +1,343 @@
 {
-    "trophy": {
-      "Price": 25000,
-      "Action": "Double your cash earnings for 30 minutes",
-      "Name": "Trophy",
-      "Multiply": 2,
-      "Time": 5000,
-      "Shop":false,
-      "Findable":false,
-      "Emote": "<:item_trophy:971646473940910131>"
-    },
-    "checkered flag": {
-      "Price": 50000,
-      "Action": "Triple your cash earnings for 10 minutes",
-      "Name": "Checkered Flag",
-      "Multiply": 3,
-      "Time": 600000,
-      "Shop":false,
-      "Findable":false,
-      "Emote": "<:item_checkflag:971646474360332298>"
-    },
-    "spikes": {
-      "Price": 10000,
-      "Action": "Slow down police cars",
-      "Name": "Spikes",
-      "Type": "Usable",
-      "Shop":false,
-      "Findable":false,
-      "Emote": "<:item_spikes:971639082935541761>"
-    },
-    "emp": {
-      "Price": 50000,
-      "Action": "Stop police cars completely",
-      "Name": "EMP",
-      "Type": "Usable",
-      "Shop":false,
-      "Findable":false,
-      "Emote": "<:item_emp:971639083325620274>"
-    },
-    "roadblock": {
-      "Price": 15000,
-      "Action": "Slow down player cars if you're a cop",
-      "Name": "RoadBlock",
-      "Type": "Usable",
-      "Shop":false,
-      "Findable":false,
-      "Emote": "<:item_roadblock:971639083266879548>"
-    },
-    "wrench": {
-      "Price": 15000,
-      "Action": "Fix any part on a junk car without needing the part",
-      "Name": "Wrench",
-      "Type": "Usable",
-      "Emote": "<:item_wrench:971655125988966400>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/52sV3zY/1539872271436.jpg"
-    },
-    "water bottle": {
-      "Price": 50000,
-      "Action": "Clear all race cooldowns",
-      "Name": "Water Bottle",
-      "Type": "Usable",
-      "Emote": "<:waterbottle:985084136517668904>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/GphNrXX/waterbottle.png"
-    },
-    "pink slip": {
-      "Price": 25000,
-      "Action": "Use this to bet your car in races",
-      "Name": "Pink Slip",
-      "Type": "Currency",
-      "Emote": "<:pinkslip:977442825186721863>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png"
-    },
-    "small vault": {
-      "Price": 50000,
-      "Name": "SmallVault",
-      "Action": "Store $25,000 cash before prestiging",
-      "Type": "Usable",
-      "Emote": "<:smallvault:995501944456089640>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/txz0Q8M/smallvault.png"
-    },
-    "bank increase": {
-      "Name": "Bank Increase",
-      "Price": 0,
-      "Action": "Increase your bank space by $5k",
-      "Type": "Usable",
-      "Emote": "<:bankupgrade:974153111298007131>",
-      "Items": 10,
-      "Findable":false,
-      "Shop": false
-    },
-    "big bank increase": {
-      "Name": "Big Bank Increase",
-      "Action": "Increase your bank space by $25k",
-      "Type": "Usable",
-      "Price": 0,
-      "Emote": "<:bigbank:1008110998202372170>",
-      "Items": 10,
-      "Findable":false,
-      "Shop": false
-    },
-    "medium vault": {
-      "Price": 100000,
-      "Name": "Medium Vault",
-      "Action": "Store $50,000 cash before prestiging",
-      "Type": "Usable",
-      "Emote": "<:mediumvault:995502551749365791>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/CHDN54r/mediumvault.png"
-    },
-    "large vault": {
-      "Price": 500000,
-      "Name": "Large Vault",
-      "Action": "Store $100,000 cash before prestiging",
-      "Type": "Usable",
-      "Emote": "<:largevault:995502550855991298>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/6HrgDYx/largevault.png"
-    },
-    "for sale sign": {
-      "Price": 50000,
-      "Action": "Use this to sell your house",
-      "Name": "For Sale Sign",
-      "Type": "Usable",
-      "Emote": "<:forsalesign:978883306940674078>",
-      "Shop": false,
-      "Findable":false,
-      "Image": "https://i.ibb.co/S01tb3H/forsalesign.png"
-    },
+  "trophy": {
+    "Price": 25000,
+    "Action": "Double your cash earnings for 30 minutes",
+    "Name": "Trophy",
+    "Multiply": 2,
+    "Time": 5000,
+    "Shop": false,
+    "Findable": false,
+    "Emote": "<:item_trophy:971646473940910131>"
+  },
+  "checkered flag": {
+    "Price": 50000,
+    "Action": "Triple your cash earnings for 10 minutes",
+    "Name": "Checkered Flag",
+    "Multiply": 3,
+    "Time": 600000,
+    "Shop": false,
+    "Findable": false,
+    "Emote": "<:item_checkflag:971646474360332298>"
+  },
+  "spikes": {
+    "Price": 10000,
+    "Action": "Slow down police cars",
+    "Name": "Spikes",
+    "Type": "Usable",
+    "Shop": false,
+    "Findable": false,
+    "Emote": "<:item_spikes:971639082935541761>"
+  },
+  "emp": {
+    "Price": 50000,
+    "Action": "Stop police cars completely",
+    "Name": "EMP",
+    "Type": "Usable",
+    "Shop": false,
+    "Findable": false,
+    "Emote": "<:item_emp:971639083325620274>"
+  },
+  "roadblock": {
+    "Price": 15000,
+    "Action": "Slow down player cars if you're a cop",
+    "Name": "RoadBlock",
+    "Type": "Usable",
+    "Shop": false,
+    "Findable": false,
+    "Emote": "<:item_roadblock:971639083266879548>"
+  },
+  "wrench": {
+    "Price": 15000,
+    "Action": "Fix any part on a junk car without needing the part",
+    "Name": "Wrench",
+    "Type": "Usable",
+    "Emote": "<:item_wrench:971655125988966400>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/52sV3zY/1539872271436.jpg"
+  },
+  "water bottle": {
+    "Price": 50000,
+    "Action": "Clear all race cooldowns",
+    "Name": "Water Bottle",
+    "Type": "Usable",
+    "Emote": "<:waterbottle:985084136517668904>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/GphNrXX/waterbottle.png"
+  },
+  "pink slip": {
+    "Price": 25000,
+    "Action": "Use this to bet your car in races",
+    "Name": "Pink Slip",
+    "Type": "Currency",
+    "Emote": "<:pinkslip:977442825186721863>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png"
+  },
+  "small vault": {
+    "Price": 50000,
+    "Name": "SmallVault",
+    "Action": "Store $25,000 cash before prestiging",
+    "Type": "Usable",
+    "Emote": "<:smallvault:995501944456089640>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/txz0Q8M/smallvault.png"
+  },
+  "bank increase": {
+    "Name": "Bank Increase",
+    "Price": 0,
+    "Action": "Increase your bank space by $5k",
+    "Type": "Usable",
+    "Emote": "<:bankupgrade:974153111298007131>",
+    "Items": 10,
+    "Findable": false,
+    "Shop": false
+  },
+  "big bank increase": {
+    "Name": "Big Bank Increase",
+    "Action": "Increase your bank space by $25k",
+    "Type": "Usable",
+    "Price": 0,
+    "Emote": "<:bigbank:1008110998202372170>",
+    "Items": 10,
+    "Findable": false,
+    "Shop": false
+  },
+  "medium vault": {
+    "Price": 100000,
+    "Name": "Medium Vault",
+    "Action": "Store $50,000 cash before prestiging",
+    "Type": "Usable",
+    "Emote": "<:mediumvault:995502551749365791>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/CHDN54r/mediumvault.png"
+  },
+  "large vault": {
+    "Price": 500000,
+    "Name": "Large Vault",
+    "Action": "Store $100,000 cash before prestiging",
+    "Type": "Usable",
+    "Emote": "<:largevault:995502550855991298>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/6HrgDYx/largevault.png"
+  },
+  "for sale sign": {
+    "Price": 50000,
+    "Action": "Use this to sell your house",
+    "Name": "For Sale Sign",
+    "Type": "Usable",
+    "Emote": "<:forsalesign:978883306940674078>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/S01tb3H/forsalesign.png"
+  },
 
-    "grape juice": {
-      "Price": 75000,
-      "Action": "Extra luck when using lockpicks for 15 minutes",
-      "Name": "Grape Juice",
-      "Type": "Usable",
-      "Emote": "<:item_grapejuice:1094894554097909760>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png"
-    },
-    "apple juice": {
-      "Price": 100000,
-      "Action": "Only get cars in blueprints for 15 minutes",
-      "Name": "Apple Juice",
-      "Type": "Usable",
-      "Emote": "<:item_applejuice:1094894556983611423> ",
-      "Shop": true,
-      "Findable":true,
-      "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png"
-    },
-    "orange juice": {
-      "Price": 60000,
-      "Action": "Only get t4parts in wheelspins for 60 seconds",
-      "Name": "Orange Juice",
-      "Type": "Usable",
-      "Emote": "<:item_orangejuice:1095474854775508993>",
-      "Shop": true,
-      "Findable":true,
-      "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png"
-    },
-    "fruit punch": {
-      "Price": 0,
-      "Action": "Receive x2 ranks when racing and drifting **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
-      "Name": "Fruit Punch",
-      "Type": "Usable",
-      "Emote": "<:item_fruitpunch:1095474852997120010>",
-      "Shop": false,
-      "Findable":true,
-      "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png"
-    },
-    "flat tire": {
-      "Price": 50000,
-      "Action": "Receive a 5% boost in cash when street racing for 30 minutes",
-      "Name": "Flat Tire",
-      "Type": "Usable",
-      "Emote": "<:item_flattire:1095474856306417756>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png"
-    },
-    "oil": {
-      "Price": 500000,
-      "Action": "Gives 5x Daily rewards for 7 days",
-      "Name": "Oil",
-      "Type": "Usable",
-      "Emote": "<:item_oil:1095474850098843689>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/ckgPdkP/item-oil.png"
-    },
-    "epic lockpick": {
-      "Price": 450000,
-      "Action": "While active (10 minutes), your lockpicks will not break",
-      "Name": "Epic Lockpick",
-      "Type": "Usable",
-      "Emote": "<:item_stronglockpick:1095474858328064065>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png"
-    },
-    "pet treats": {
-      "Price": 75000,
-      "Action": "Use these to make the random xessence cap on your pet higher by **1** for 10 minutes **USING MULTIPLE STACKS UP TO 20**",
-      "Name": "Pet Treats",
-      "Type": "Usable",
-      "Emote": "<:item_treats:1095474851046752327>",
-      "Shop": true,
-      "Findable":true,
-      "Image": "https://i.ibb.co/5MTkjcf/item-treats.png"
-    },
-    "blueberry": {
-      "Price": 350000,
-      "Action": "Eat a blueberry to increase your race rank by 1",
-      "Name": "Blueberry",
-      "Type": "Usable",
-      "Emote": "<:item_blueberry:1095474857514385480>",
-      "Shop": false,
-      "Findable":true,
-      "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png"
-    },
+  "grape juice": {
+    "Price": 75000,
+    "Action": "Extra luck when using lockpicks for 15 minutes",
+    "Name": "Grape Juice",
+    "Type": "Usable",
+    "Emote": "<:item_grapejuice:1094894554097909760>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png"
+  },
+  "apple juice": {
+    "Price": 100000,
+    "Action": "Only get cars in blueprints for 15 minutes",
+    "Name": "Apple Juice",
+    "Type": "Usable",
+    "Emote": "<:item_applejuice:1094894556983611423> ",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png"
+  },
+  "orange juice": {
+    "Price": 60000,
+    "Action": "Only get t4parts in wheelspins for 60 seconds",
+    "Name": "Orange Juice",
+    "Type": "Usable",
+    "Emote": "<:item_orangejuice:1095474854775508993>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png"
+  },
+  "fruit punch": {
+    "Price": 0,
+    "Action": "Receive x2 ranks when racing and drifting **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
+    "Name": "Fruit Punch",
+    "Type": "Usable",
+    "Emote": "<:item_fruitpunch:1095474852997120010>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png"
+  },
+  "flat tire": {
+    "Price": 50000,
+    "Action": "Receive a 5% boost in cash when street racing for 30 minutes",
+    "Name": "Flat Tire",
+    "Type": "Usable",
+    "Emote": "<:item_flattire:1095474856306417756>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png"
+  },
+  "oil": {
+    "Price": 500000,
+    "Action": "Gives 5x Daily rewards for 7 days",
+    "Name": "Oil",
+    "Type": "Usable",
+    "Emote": "<:item_oil:1095474850098843689>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/ckgPdkP/item-oil.png"
+  },
+  "epic lockpick": {
+    "Price": 450000,
+    "Action": "While active (10 minutes), your lockpicks will not break",
+    "Name": "Epic Lockpick",
+    "Type": "Usable",
+    "Emote": "<:item_stronglockpick:1095474858328064065>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png"
+  },
+  "pet treats": {
+    "Price": 75000,
+    "Action": "Use these to make the random xessence cap on your pet higher by **1** for 10 minutes **USING MULTIPLE STACKS UP TO 20**",
+    "Name": "Pet Treats",
+    "Type": "Usable",
+    "Emote": "<:item_treats:1095474851046752327>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/5MTkjcf/item-treats.png"
+  },
+  "blueberry": {
+    "Price": 350000,
+    "Action": "Eat a blueberry to increase your race rank by 1",
+    "Name": "Blueberry",
+    "Type": "Usable",
+    "Emote": "<:item_blueberry:1095474857514385480>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png"
+  },
 
-    "energy drink": {
-      "Price": 25000,
-      "Action": "2x RP for 10 minutes",
-      "Name": "Energy Drink",
-      "Type": "Usable",
-      "Emote": "<:energydrink:982468472787329095>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/qBj7PcP/energydrink.png"
-    },
-    "super wheelspin": {
-      "Price": 0,
-      "Action": "Super wheelspin, /use",
-      "Name": "Super Wheelspin",
-      "Type": "Usable",
-      "Emote": "🟣",
-      "Findable":false,
-      "Shop": false
-    },
-    "zero bar": {
-      "Price": 0,
-      "Action": "No idea",
-      "Name": "Zero Bar",
-      "Type": "Usable",
-      "Emote": "<:zerobar:1025128975216947210>",
-      "Effects": [
-        "One of your cars just got +1 speed",
-        "One of your cars just got +1 acceleration",
-        "One of your cars just got -20 handling",
-        "You stink, no effect for you",
-        "One of your cars just got +5 speed",
-        "You just got your weekly reward now!"
-      ],
-      "Findable":false,
-      "Shop": false
-    },
-    "sponsor": {
-      "Price": 50000,
-      "Action": "2x Cash in races for 10 minutes",
-      "Name": "Sponsor",
-      "Type": "Usable",
-      "Emote": "<:sponsor:982474960301854771>",
-      "Findable":false,
-      "Shop": false
-    },
-    "pet egg": {
-      "Price": 25000,
-      "Action": "Hatch a pet",
-      "Name": "Pet Egg",
-      "Type": "Usable",
-      "Emote": "<:item_petegg:1095138763446960128>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/HF7NfGT/item-petegg.png"
-    },
-    "disguise": {
-      "Price": 75000,
-      "Action": "Use this to steal from other users",
-      "Name": "Disguise",
-      "Type": "Usable",
-      "Emote": "<:disguise:1008228542208802816>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/M6DHckV/disguise.webp"
-    },
-    "toolbox": {
-      "Price": 25000,
-      "Action": "Use this to restore a car automatically",
-      "Name": "Toolbox",
-      "Type": "Non-Usable",
-      "Emote": "<:item_toolbox:972207018045759549>",
-      "Shop": true,
-      "Findable":false,
-      "Image": "https://i.ibb.co/SNJ7BPC/item-toolboxc.png"
-    },
+  "energy drink": {
+    "Price": 25000,
+    "Action": "2x RP for 10 minutes",
+    "Name": "Energy Drink",
+    "Type": "Usable",
+    "Emote": "<:energydrink:982468472787329095>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/qBj7PcP/energydrink.png"
+  },
+  "super wheelspin": {
+    "Price": 0,
+    "Action": "Super wheelspin, /use",
+    "Name": "Super Wheelspin",
+    "Type": "Usable",
+    "Emote": "🟣",
+    "Findable": false,
+    "Shop": false
+  },
+  "zero bar": {
+    "Price": 0,
+    "Action": "No idea",
+    "Name": "Zero Bar",
+    "Type": "Usable",
+    "Emote": "<:zerobar:1025128975216947210>",
+    "Effects": [
+      "One of your cars just got +1 speed",
+      "One of your cars just got +1 acceleration",
+      "One of your cars just got -20 handling",
+      "You stink, no effect for you",
+      "One of your cars just got +5 speed",
+      "You just got your weekly reward now!"
+    ],
+    "Findable": false,
+    "Shop": false
+  },
+  "sponsor": {
+    "Price": 50000,
+    "Action": "2x Cash in races for 10 minutes",
+    "Name": "Sponsor",
+    "Type": "Usable",
+    "Emote": "<:sponsor:982474960301854771>",
+    "Findable": false,
+    "Shop": false
+  },
+  "pet egg": {
+    "Price": 25000,
+    "Action": "Hatch a pet",
+    "Name": "Pet Egg",
+    "Type": "Usable",
+    "Emote": "<:item_petegg:1095138763446960128>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/HF7NfGT/item-petegg.png"
+  },
+  "disguise": {
+    "Price": 75000,
+    "Action": "Use this to steal from other users",
+    "Name": "Disguise",
+    "Type": "Usable",
+    "Emote": "<:disguise:1008228542208802816>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/M6DHckV/disguise.webp"
+  },
+  "toolbox": {
+    "Price": 25000,
+    "Action": "Use this to restore a car automatically",
+    "Name": "Toolbox",
+    "Type": "Non-Usable",
+    "Emote": "<:item_toolbox:972207018045759549>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/SNJ7BPC/item-toolboxc.png"
+  },
 
-    "common crate": {
-      "Price": 0,
-      "Action": "Open a common crate to get cosmetics, cash, and more!",
-      "Name": "Common Crate",
-      "Type": "Usable",
-      "Emote": "<:supplydrop:1044404467119960085>",
-      "Findable":false,
-      "Shop": false
-    },
-    "rare crate": {
-      "Price": 0,
-      "Action": "Open a rare crate to get cosmetics, cash, and more!",
-      "Name": "Rare Crate",
-      "Type": "Usable",
-      "Emote": "<:supplydroprare:1044404466096537731>",
-      "Findable":false,
-      "Shop": false
-    },
-    "prestige crate": {
-      "Price": 0,
-      "Action": "Open a prestige crate to get cosmetics, cash, and more!",
-      "Name": "Prestige Crate",
-      "Type": "Usable",
-      "Emote": "<:supplydropprestige:1044404462581719041>",
-      "Findable":false,
-      "Shop": false
-    },
-    "seasonal crate": {
-      "Price": 0,
-      "Action": "Open a prestige crate to get cosmetics, cash, and more!",
-      "Name": "Seasonal Crate",
-      "Type": "Usable",
-      "Emote": "<:crate_seasonal:1080285947733737483>",
-      "Findable":false,
-      "Shop": false
-    }
+  "common crate": {
+    "Price": 0,
+    "Action": "Open a common crate to get cosmetics, cash, and more!",
+    "Name": "Common Crate",
+    "Type": "Usable",
+    "Emote": "<:supplydrop:1044404467119960085>",
+    "Findable": false,
+    "Shop": false
+  },
+  "rare crate": {
+    "Price": 0,
+    "Action": "Open a rare crate to get cosmetics, cash, and more!",
+    "Name": "Rare Crate",
+    "Type": "Usable",
+    "Emote": "<:supplydroprare:1044404466096537731>",
+    "Findable": false,
+    "Shop": false
+  },
+  "prestige crate": {
+    "Price": 0,
+    "Action": "Open a prestige crate to get cosmetics, cash, and more!",
+    "Name": "Prestige Crate",
+    "Type": "Usable",
+    "Emote": "<:supplydropprestige:1044404462581719041>",
+    "Findable": false,
+    "Shop": false
+  },
+  "seasonal crate": {
+    "Price": 0,
+    "Action": "Open a prestige crate to get cosmetics, cash, and more!",
+    "Name": "Seasonal Crate",
+    "Type": "Usable",
+    "Emote": "<:crate_seasonal:1080285947733737483>",
+    "Findable": false,
+    "Shop": false
   }
-  
+}

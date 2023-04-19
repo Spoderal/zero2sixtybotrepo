@@ -62,8 +62,6 @@ module.exports = {
 
     console.log(parts);
 
-  
-
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
@@ -78,9 +76,9 @@ module.exports = {
     }
     for (let car in cars[0]) {
       car = cars[0][car];
-      let favorite = ""
-      if(car.Favorite == true){
-        favorite = "⭐"
+      let favorite = "";
+      if (car.Favorite == true) {
+        favorite = "⭐";
       }
       embed.addFields({
         name: `${car.Emote} ${car.Name} ${favorite}`,
@@ -178,7 +176,8 @@ module.exports = {
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
-        if (displayparts2.length == 0)  return i.update("You don't have any parts!");
+        if (displayparts2.length == 0)
+          return i.update("You don't have any parts!");
         embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
           embeds: [embed],
@@ -262,9 +261,9 @@ module.exports = {
         itempage = filtereddcars;
         for (let car in filter) {
           car = filter[car];
-          let favorite = ""
-          if(car.Favorite == true){
-            favorite = "⭐"
+          let favorite = "";
+          if (car.Favorite == true) {
+            favorite = "⭐";
           }
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
@@ -291,10 +290,10 @@ module.exports = {
         let filter = filtereddcars[0];
         itempage = filtereddcars;
         for (let car in filter) {
-          car = filter[car];         
-           let favorite = ""
-          if(car.Favorite == true){
-            favorite = "⭐"
+          car = filter[car];
+          let favorite = "";
+          if (car.Favorite == true) {
+            favorite = "⭐";
           }
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
@@ -322,9 +321,9 @@ module.exports = {
         itempage = filtereddcars;
         for (let car in filter) {
           car = filter[car];
-          let favorite = ""
-          if(car.Favorite == true){
-            favorite = "⭐"
+          let favorite = "";
+          if (car.Favorite == true) {
+            favorite = "⭐";
           }
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
@@ -346,9 +345,9 @@ module.exports = {
 
         for (let car in cars[0]) {
           car = cars[0][car];
-          let favorite = ""
-          if(car.Favorite == true){
-            favorite = "⭐"
+          let favorite = "";
+          if (car.Favorite == true) {
+            favorite = "⭐";
           }
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
@@ -381,14 +380,14 @@ module.exports = {
 
           page = itempage.length;
         }
-        console.log(itempage)
-        console.log(displayparts2)
+        console.log(itempage);
+        console.log(displayparts2);
         for (let e in itempage[page - 1]) {
           let car = itempage[page - 1][e];
           if (itempage == cars) {
-            let favorite = ""
-            if(car.Favorite == true){
-              favorite = "⭐"
+            let favorite = "";
+            if (car.Favorite == true) {
+              favorite = "⭐";
             }
             embed.addFields({
               name: `${car.Emote} ${car.Name} ${favorite}`,
@@ -396,9 +395,9 @@ module.exports = {
               inline: true,
             });
           } else if (itempage == filtereddcars) {
-               let favorite = ""
-            if(car.Favorite == true){
-              favorite = "⭐"
+            let favorite = "";
+            if (car.Favorite == true) {
+              favorite = "⭐";
             }
             embed.addFields({
               name: `${car.Emote} ${car.Name}  ${favorite}`,
@@ -412,7 +411,7 @@ module.exports = {
 
         if (current !== page) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
-         await i.update({ embeds: [embed], fetchReply: true });
+          await i.update({ embeds: [embed], fetchReply: true });
         } else {
           return i.update({ content: "No pages left!" });
         }

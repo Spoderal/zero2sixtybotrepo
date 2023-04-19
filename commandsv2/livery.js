@@ -282,7 +282,7 @@ module.exports = {
       global.liveries.pull(idfiltered[0]);
       global.liveries.push(livobj2);
       global.save();
-      global.markModified("liveries")
+      global.markModified("liveries");
       let embedapprove = new Discord.EmbedBuilder()
         .setTitle(`Approved ${idtoapprove}`)
         .setImage(idfiltered[0].image)
@@ -293,9 +293,9 @@ module.exports = {
       usertodm.send(
         `Your recent livery for the ${
           cars.Cars[cartoapprove.toLowerCase()].Name
-        } was approved! Use /livery Install [car] [id] to use it. The id is ${livobj2.id} ${
-          idfiltered[0].image
-        }`
+        } was approved! Use /livery Install [car] [id] to use it. The id is ${
+          livobj2.id
+        } ${idfiltered[0].image}`
       );
     } else if (subcommand == "list") {
       var car = interaction.options.getString("car").toLowerCase();

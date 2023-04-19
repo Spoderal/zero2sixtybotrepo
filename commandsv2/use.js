@@ -9,10 +9,10 @@ const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
-const cratedb = require('../data/cratedb.json')
-const partdb = require('../data/partsdb.json')
-const titledb = require("../data/titles.json")
-const {EmbedBuilder, AttachmentBuilder} = require('discord.js')
+const cratedb = require("../data/cratedb.json");
+const partdb = require("../data/partsdb.json");
+const titledb = require("../data/titles.json");
+const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
 
 const { createCanvas, loadImage } = require("canvas");
 
@@ -70,324 +70,314 @@ module.exports = {
       fullname = `${itemdb[itemtouse.toLowerCase()].Emote} ${
         itemdb[itemtouse.toLowerCase()].Name
       }`;
-    } 
-      if (itemtouse.toLowerCase() == "pink slip") {
-        userdata.pinkslips += 1;
-      } else if (itemtouse.toLowerCase() == "bank increase") {
-        let banklimit = userdata.banklimit || 0;
-
-        if (banklimit >= 2500000)
-          return interaction.reply(
-            `The bank limit cap is currently ${toCurrency(
-              2500000
-            )} for regular bank increases! Try using a big bank increase`
-          );
-
-        let finalbanklimit = 5000 * amount2;
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $set: {
-              banklimit: (banklimit += finalbanklimit),
-            },
-          }
-        );
-        userdata.update();
-
-        if (userdata.banklimit >= 2500000) {
-          userdata.banklimit = 2500000;
-        }
-      } else if (itemtouse.toLowerCase() == "big bank increase") {
-        let banklimit = userdata.banklimit;
-
-        if (banklimit >= 10000000)
-          return interaction.reply(
-            `The bank limit cap is currently ${toCurrency(
-              10000000
-            )} for big bank increases!`
-          );
-
-        let finalbanklimit = 25000 * amount2;
-        await User.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $set: {
-              banklimit: (banklimit += finalbanklimit),
-            },
-          }
-        );
-        userdata.update();
-
-        if (userdata.banklimit >= 10000000) {
-          userdata.banklimit = 10000000;
-        }
-      }  else if (itemtouse.toLowerCase() == "energy drink") {
-        userdata.using.push(`energy drink`);
-        cooldowndata.energydrink = Date.now();
-      }
-      else if (itemtouse.toLowerCase() == "blueberry") {
-        userdata.racerank += 1
-      }
-      else if (itemtouse.toLowerCase() == "grape juice") {
-        userdata.using.push(`grape juice`);
-        cooldowndata.grapejuice = Date.now();
-      } else if (itemtouse.toLowerCase() == "apple juice") {
-        userdata.using.push(`apple juice`);
-        cooldowndata.applejuice = Date.now();
-      }
-      else if (itemtouse.toLowerCase() == "orange juice") {
-        userdata.using.push(`orange juice`);
-        cooldowndata.orangejuice = Date.now();
-      } 
-      else if (itemtouse.toLowerCase() == "oil") {
-        userdata.using.push(`oil`);
-        cooldowndata.oil = Date.now();
-      } 
-      else if (itemtouse.toLowerCase() == "flat tire") {
-        userdata.using.push(`flat tire`);
-        cooldowndata.flattire = Date.now();
-      } 
-      else if (itemtouse.toLowerCase() == "epic lockpick") {
-        userdata.using.push(`epic lockpick`);
-        cooldowndata.epiclockpick = Date.now();
-      } 
-      else if (itemtouse.toLowerCase() == "pet treats") {
-        if(!userdata.newpet.name) return interaction.reply("You don't have a pet!")
-        if(userdata.newpet.xessence >= 20) return interaction.reply("Your xessence cap is at 20, you cant give your pet any more treats!")
-        userdata.using.push(`pet treats`);
-        userdata.newpet.xessence += 1
-        cooldowndata.pettreats = Date.now();
-      } 
-      else if (itemtouse.toLowerCase() == "sponsor") {
-        userdata.using.push(`sponsor`);
-        cooldowndata.sponsor = Date.now();
-      } else if (itemtouse.toLowerCase() == "small vault") {
-        let vault = userdata.vault;
-        if (vault)
-          return interaction.reply(
-            `You already have a vault activated, prestige to deactivate it!`
-          );
-        userdata.vault = itemtouse.toLowerCase();
-      } else if (itemtouse.toLowerCase() == "medium vault") {
-        let vault = userdata.vault;
-        if (vault)
-          return interaction.reply(
-            `You already have a vault activated, prestige to deactivate it!`
-          );
-        userdata.vault = itemtouse.toLowerCase();
-      } else if (itemtouse.toLowerCase() == "large vault") {
-        let vault = userdata.vault;
-        if (vault)
-          return interaction.reply(
-            `You already have a vault activated, prestige to deactivate it!`
-          );
-        userdata.vault = itemtouse.toLowerCase();
-      } else if (itemtouse.toLowerCase() == "disguise") {
-        userdata.using.push("disguise");
-      } else if (itemtouse.toLowerCase() == "pet egg") {
-        let petsarr = []
-        for(let pet in petdb){
-          petsarr.push(petdb[pet])
-        }
-        let randcat = lodash.sample(petsarr);
-        let pet = userdata.newpet;
-        if (pet.name) return interaction.reply(`You already have a pet!`);
-        let petindb = petdb[randcat.Breed.toLowerCase()];
-        let randname = lodash.sample(petindb.Names);
-
-        let petobj = {
-          name: randname,
-          hunger: 100,
-          thirst: 100,
-          love: 100,
-          pet: petdb[randcat.Breed.toLowerCase()].Breed.toLowerCase(),
-          xessence: 5,
-        };
-        for (var p = 0; p < amount2; p++)
-        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
-        userdata.items = items;
-        userdata.newpet = petobj;
-        userdata.save();
-
-        return await interaction.reply(
-          `You found a ${petindb.Breed} named ${randname}!`
-        );
-      } else if (itemtouse.toLowerCase() == "water bottle") {
-        let watercooldown = cooldowndata.waterbottle;
-        let timeout = 18000000;
-        if (
-          watercooldown !== null &&
-          timeout - (Date.now() - watercooldown) > 0
-        ) {
-          let time = ms(timeout - (Date.now() - watercooldown));
-          let timeEmbed = new Discord.EmbedBuilder()
-            .setColor(colors.blue)
-            .setDescription(`You can use a water bottle again in ${time}.`);
-          return await interaction.reply({ embeds: [timeEmbed] });
-        }
-        await Cooldowns.findOneAndUpdate(
-          {
-            id: interaction.user.id,
-          },
-          {
-            $set: {
-              racing: 0,
-              hm: 0,
-              qm: 0,
-              drifting: 0,
-              waterbottle: Date.now(),
-            },
-          }
-        );
-
-        cooldowndata.markModified();
-
-        cooldowndata.save();
-      } else if (itemtouse.toLowerCase() == "zero bar") {
-        let effects = itemdb["zero bar"].Effects;
-
-        let randomeffect = lodash.sample(effects);
-
-        if (randomeffect == "One of your cars just got +1 speed") {
-          let randomcar = lodash.sample(userdata.cars);
-          randomcar.Speed += 1;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car]": randomcar,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": randomcar.Name,
-                },
-              ],
-            }
-          );
-
-          userdata.update();
-        } else if (
-          randomeffect == "One of your cars just got +1 acceleration"
-        ) {
-          let randomcar = lodash.sample(userdata.cars);
-          randomcar.Acceleration += 1;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car]": randomcar,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": randomcar.Name,
-                },
-              ],
-            }
-          );
-
-          userdata.update();
-        } else if (randomeffect == "One of your cars just got -20 handling") {
-          let randomcar = lodash.sample(userdata.cars);
-          randomcar.Handling -= 20;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car]": randomcar,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": randomcar.Name,
-                },
-              ],
-            }
-          );
-
-          userdata.update();
-        } else if (randomeffect == "One of your cars just got +5 speed") {
-          let randomcar = lodash.sample(userdata.cars);
-          randomcar.Speed += 5;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car]": randomcar,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": randomcar.Name,
-                },
-              ],
-            }
-          );
-
-          userdata.update();
-        } else if (randomeffect == "You stink, no effect for you") {
-          return interaction.reply(`${randomeffect}`);
-        } else if (randomeffect == "You just got your weekly reward now!") {
-          let cash = 750;
-          let patron = userdata.patron;
-          let prestige = userdata.prestige;
-          if (patron && patron.tier == "1") {
-            cash *= 2;
-          }
-          if (patron && patron.tier == "2") {
-            cash *= 3;
-          }
-          if (patron && patron.tier == "3") {
-            cash *= 5;
-          }
-          if (patron && patron.tier == "4") {
-            cash *= 6;
-          }
-          if (prestige > 0) {
-            let mult = prestige * 0.05;
-
-            let multy = mult * cash;
-
-            cash = cash += multy;
-          }
-          userdata.cash += cash;
-          userdata.update();
-        }
-        for (var b = 0; i < amount2; b++)
-          items.splice(items.indexOf("zero bar"), 1);
-        userdata.items = items;
-        userdata.save();
-        interaction.reply(`${randomeffect}`);
-
-        return;
-      
     }
+    if (itemtouse.toLowerCase() == "pink slip") {
+      userdata.pinkslips += 1;
+    } else if (itemtouse.toLowerCase() == "bank increase") {
+      let banklimit = userdata.banklimit || 0;
 
-    else if(cratedb.Crates[itemtouse.toLowerCase()]){
+      if (banklimit >= 2500000)
+        return interaction.reply(
+          `The bank limit cap is currently ${toCurrency(
+            2500000
+          )} for regular bank increases! Try using a big bank increase`
+        );
+
+      let finalbanklimit = 5000 * amount2;
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            banklimit: (banklimit += finalbanklimit),
+          },
+        }
+      );
+      userdata.update();
+
+      if (userdata.banklimit >= 2500000) {
+        userdata.banklimit = 2500000;
+      }
+    } else if (itemtouse.toLowerCase() == "big bank increase") {
+      let banklimit = userdata.banklimit;
+
+      if (banklimit >= 10000000)
+        return interaction.reply(
+          `The bank limit cap is currently ${toCurrency(
+            10000000
+          )} for big bank increases!`
+        );
+
+      let finalbanklimit = 25000 * amount2;
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            banklimit: (banklimit += finalbanklimit),
+          },
+        }
+      );
+      userdata.update();
+
+      if (userdata.banklimit >= 10000000) {
+        userdata.banklimit = 10000000;
+      }
+    } else if (itemtouse.toLowerCase() == "energy drink") {
+      userdata.using.push(`energy drink`);
+      cooldowndata.energydrink = Date.now();
+    } else if (itemtouse.toLowerCase() == "blueberry") {
+      userdata.racerank += 1;
+    } else if (itemtouse.toLowerCase() == "grape juice") {
+      userdata.using.push(`grape juice`);
+      cooldowndata.grapejuice = Date.now();
+    } else if (itemtouse.toLowerCase() == "apple juice") {
+      userdata.using.push(`apple juice`);
+      cooldowndata.applejuice = Date.now();
+    } else if (itemtouse.toLowerCase() == "orange juice") {
+      userdata.using.push(`orange juice`);
+      cooldowndata.orangejuice = Date.now();
+    } else if (itemtouse.toLowerCase() == "oil") {
+      userdata.using.push(`oil`);
+      cooldowndata.oil = Date.now();
+    } else if (itemtouse.toLowerCase() == "flat tire") {
+      userdata.using.push(`flat tire`);
+      cooldowndata.flattire = Date.now();
+    } else if (itemtouse.toLowerCase() == "epic lockpick") {
+      userdata.using.push(`epic lockpick`);
+      cooldowndata.epiclockpick = Date.now();
+    } else if (itemtouse.toLowerCase() == "pet treats") {
+      if (!userdata.newpet.name)
+        return interaction.reply("You don't have a pet!");
+      if (userdata.newpet.xessence >= 20)
+        return interaction.reply(
+          "Your xessence cap is at 20, you cant give your pet any more treats!"
+        );
+      userdata.using.push(`pet treats`);
+      userdata.newpet.xessence += 1;
+      cooldowndata.pettreats = Date.now();
+    } else if (itemtouse.toLowerCase() == "sponsor") {
+      userdata.using.push(`sponsor`);
+      cooldowndata.sponsor = Date.now();
+    } else if (itemtouse.toLowerCase() == "small vault") {
+      let vault = userdata.vault;
+      if (vault)
+        return interaction.reply(
+          `You already have a vault activated, prestige to deactivate it!`
+        );
+      userdata.vault = itemtouse.toLowerCase();
+    } else if (itemtouse.toLowerCase() == "medium vault") {
+      let vault = userdata.vault;
+      if (vault)
+        return interaction.reply(
+          `You already have a vault activated, prestige to deactivate it!`
+        );
+      userdata.vault = itemtouse.toLowerCase();
+    } else if (itemtouse.toLowerCase() == "large vault") {
+      let vault = userdata.vault;
+      if (vault)
+        return interaction.reply(
+          `You already have a vault activated, prestige to deactivate it!`
+        );
+      userdata.vault = itemtouse.toLowerCase();
+    } else if (itemtouse.toLowerCase() == "disguise") {
+      userdata.using.push("disguise");
+    } else if (itemtouse.toLowerCase() == "pet egg") {
+      let petsarr = [];
+      for (let pet in petdb) {
+        petsarr.push(petdb[pet]);
+      }
+      let randcat = lodash.sample(petsarr);
+      let pet = userdata.newpet;
+      if (pet.name) return interaction.reply(`You already have a pet!`);
+      let petindb = petdb[randcat.Breed.toLowerCase()];
+      let randname = lodash.sample(petindb.Names);
+
+      let petobj = {
+        name: randname,
+        hunger: 100,
+        thirst: 100,
+        love: 100,
+        pet: petdb[randcat.Breed.toLowerCase()].Breed.toLowerCase(),
+        xessence: 5,
+      };
+      for (var p = 0; p < amount2; p++)
+        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+      userdata.items = items;
+      userdata.newpet = petobj;
+      userdata.save();
+
+      return await interaction.reply(
+        `You found a ${petindb.Breed} named ${randname}!`
+      );
+    } else if (itemtouse.toLowerCase() == "water bottle") {
+      let watercooldown = cooldowndata.waterbottle;
+      let timeout = 18000000;
+      if (
+        watercooldown !== null &&
+        timeout - (Date.now() - watercooldown) > 0
+      ) {
+        let time = ms(timeout - (Date.now() - watercooldown));
+        let timeEmbed = new Discord.EmbedBuilder()
+          .setColor(colors.blue)
+          .setDescription(`You can use a water bottle again in ${time}.`);
+        return await interaction.reply({ embeds: [timeEmbed] });
+      }
+      await Cooldowns.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            racing: 0,
+            hm: 0,
+            qm: 0,
+            drifting: 0,
+            waterbottle: Date.now(),
+          },
+        }
+      );
+
+      cooldowndata.markModified();
+
+      cooldowndata.save();
+    } else if (itemtouse.toLowerCase() == "zero bar") {
+      let effects = itemdb["zero bar"].Effects;
+
+      let randomeffect = lodash.sample(effects);
+
+      if (randomeffect == "One of your cars just got +1 speed") {
+        let randomcar = lodash.sample(userdata.cars);
+        randomcar.Speed += 1;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car]": randomcar,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": randomcar.Name,
+              },
+            ],
+          }
+        );
+
+        userdata.update();
+      } else if (randomeffect == "One of your cars just got +1 acceleration") {
+        let randomcar = lodash.sample(userdata.cars);
+        randomcar.Acceleration += 1;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car]": randomcar,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": randomcar.Name,
+              },
+            ],
+          }
+        );
+
+        userdata.update();
+      } else if (randomeffect == "One of your cars just got -20 handling") {
+        let randomcar = lodash.sample(userdata.cars);
+        randomcar.Handling -= 20;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car]": randomcar,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": randomcar.Name,
+              },
+            ],
+          }
+        );
+
+        userdata.update();
+      } else if (randomeffect == "One of your cars just got +5 speed") {
+        let randomcar = lodash.sample(userdata.cars);
+        randomcar.Speed += 5;
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car]": randomcar,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": randomcar.Name,
+              },
+            ],
+          }
+        );
+
+        userdata.update();
+      } else if (randomeffect == "You stink, no effect for you") {
+        return interaction.reply(`${randomeffect}`);
+      } else if (randomeffect == "You just got your weekly reward now!") {
+        let cash = 750;
+        let patron = userdata.patron;
+        let prestige = userdata.prestige;
+        if (patron && patron.tier == "1") {
+          cash *= 2;
+        }
+        if (patron && patron.tier == "2") {
+          cash *= 3;
+        }
+        if (patron && patron.tier == "3") {
+          cash *= 5;
+        }
+        if (patron && patron.tier == "4") {
+          cash *= 6;
+        }
+        if (prestige > 0) {
+          let mult = prestige * 0.05;
+
+          let multy = mult * cash;
+
+          cash = cash += multy;
+        }
+        userdata.cash += cash;
+        userdata.update();
+      }
+      for (var b = 0; i < amount2; b++)
+        items.splice(items.indexOf("zero bar"), 1);
+      userdata.items = items;
+      userdata.save();
+      interaction.reply(`${randomeffect}`);
+
+      return;
+    } else if (cratedb.Crates[itemtouse.toLowerCase()]) {
       let pfps = require("../data/pfpsdb.json");
       let crates = require("../data/cratedb.json");
-  
 
       let inv = userdata.items;
       let cooldown = 10000;
@@ -402,16 +392,16 @@ module.exports = {
       }
       let boughtindb = crates.Crates[itemtouse.toLowerCase()];
       console.log(boughtindb);
-  
+
       if (!inv.includes(itemtouse))
         return interaction.reply(
           `You don't have a ${boughtindb.Emote} ${boughtindb.Name}!`
         );
-  
+
       let embed = new EmbedBuilder()
         .setTitle(`Unboxing ${boughtindb.Emote} ${boughtindb.Name}...`)
         .setColor(`#60b0f4`);
-  
+
       interaction.reply({ embeds: [embed] });
       for (var s = 0; s < 1; s++)
         inv.splice(inv.indexOf(itemtouse.toLowerCase()), 1);
@@ -429,18 +419,17 @@ module.exports = {
         x++;
         let reward = lodash.sample(boughtindb.Contents);
         rewards.push(reward);
-  
+
         if (x == 3) {
           clearInterval(i);
         }
       }, 1000);
-  
+
       setTimeout(async () => {
         let reward1 = rewards[0];
         let reward2 = rewards[1];
         let reward3 = rewards[2];
-  
-        
+
         let name1;
         let name2;
         let name3;
@@ -448,7 +437,7 @@ module.exports = {
           let helmetimg = pfps.Pfps[reward1].Image;
           name1 = pfps.Pfps[reward1].Name;
           let loadedhelm = await loadImage(helmetimg);
-  
+
           ctx.drawImage(loadedhelm, 150, 200, 150, 150);
           ctx.save();
           userdata.pfps.push(name1.toLowerCase());
@@ -457,7 +446,7 @@ module.exports = {
           let helmetimg = pfps.Pfps[reward2].Image;
           name2 = pfps.Pfps[reward2].Name;
           let loadedhelm = await loadImage(helmetimg);
-  
+
           ctx.drawImage(loadedhelm, 570, 200, 150, 150);
           ctx.save();
           userdata.pfps.push(name2.toLowerCase());
@@ -466,38 +455,38 @@ module.exports = {
           let helmetimg = pfps.Pfps[reward3].Image;
           name3 = pfps.Pfps[reward3].Name;
           let loadedhelm = await loadImage(helmetimg);
-  
+
           ctx.drawImage(loadedhelm, 970, 200, 150, 150);
           ctx.save();
           userdata.pfps.push(name3.toLowerCase());
         }
-  
+
         ctx.restore();
         ctx.font = "40px sans-serif";
         ctx.fillStyle = "#00000";
         let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png");
-  
+
         if (reward1.endsWith(`Cash`)) {
           let amount = Number(reward1.split(" ")[0]);
           name1 = `${amount} Cash`;
           ctx.drawImage(imageload, 150, 200, 150, 150);
           userdata.cash += amount;
         }
-  
+
         if (reward2.endsWith(`Cash`)) {
           let amount2 = Number(reward2.split(" ")[0]);
           name2 = `${amount2} Cash`;
           ctx.drawImage(imageload, 570, 200, 150, 150);
           userdata.cash += amount2;
         }
-  
+
         if (reward3.endsWith(`Cash`)) {
           let amount3 = Number(reward3.split(" ")[0]);
           name3 = `${amount3} Cash`;
           ctx.drawImage(imageload, 970, 200, 150, 150);
           userdata.cash += amount3;
         }
-  
+
         if (titledb[reward1]) {
           name1 = titledb[reward1].Title;
           userdata.titles.push(name1.toLowerCase());
@@ -510,12 +499,12 @@ module.exports = {
           name3 = titledb[reward3].Title;
           userdata.titles.push(name3.toLowerCase());
         }
-  
+
         if (partdb.Parts[reward1]) {
           let partimg = partdb.Parts[reward1].Image;
           name1 = partdb.Parts[reward1].Name;
           let loadedpart = await loadImage(partimg);
-  
+
           ctx.drawImage(loadedpart, 150, 200, 150, 150);
           ctx.save();
           userdata.parts.push(name1.toLowerCase());
@@ -524,7 +513,7 @@ module.exports = {
           let partimg = partdb.Parts[reward2].Image;
           name2 = partdb.Parts[reward2].Name;
           let loadedpart = await loadImage(partimg);
-  
+
           ctx.drawImage(loadedpart, 570, 200, 150, 150);
           ctx.save();
           userdata.parts.push(name2.toLowerCase());
@@ -533,41 +522,39 @@ module.exports = {
           let partimg = partdb.Parts[reward3].Image;
           name3 = partdb.Parts[reward3].Name;
           let loadedpart = await loadImage(partimg);
-  
+
           ctx.drawImage(loadedpart, 970, 200, 150, 150);
           ctx.save();
           userdata.parts.push(name3.toLowerCase());
         }
-     
+
         userdata.save();
         ctx.fillText(name1, 100, 565);
         ctx.fillText(name2, 520, 565);
         ctx.fillText(name3, 920, 565);
-  
+
         let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
           name: "profile-image.png",
         });
         embed.setImage(`attachment://profile-image.png`);
         console.log(rewards);
         await interaction.editReply({ embeds: [embed], files: [attachment] });
-        
       }, 5000);
     }
-    if(!cratedb.Crates[itemtouse.toLowerCase()]){
+    if (!cratedb.Crates[itemtouse.toLowerCase()]) {
       if (itemdb[itemtouse.toLowerCase()]) {
         emote = itemdb[itemtouse.toLowerCase()].Emote;
         name = itemdb[itemtouse.toLowerCase()].Name;
-      } 
-  
+      }
+
       fullname = `${emote} ${name}`;
-  
+
       for (var i = 0; i < amount2; i++)
         items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
       cooldowndata.save();
       userdata.save();
       await interaction.reply(`Used x${amount2} ${fullname}!`);
-
     }
   },
 };

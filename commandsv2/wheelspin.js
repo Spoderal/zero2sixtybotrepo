@@ -45,7 +45,7 @@ module.exports = {
         userdata.update();
         interaction.channel.send("Your orange juice ran out! :(");
       } else {
-        item = "🪛"
+        item = "🪛";
       }
     }
     let cash = wheelspinrewards.Cash;
@@ -54,7 +54,7 @@ module.exports = {
 
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
-    let tier4 = wheelspinrewards.Tier4
+    let tier4 = wheelspinrewards.Tier4;
     let garagespaces = userdata.garageLimit;
 
     let usercars = userdata.cars;
@@ -89,8 +89,7 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        }
-        else if (item == "🪛") {
+        } else if (item == "🪛") {
           let reward = lodash.sample(tier4);
           userdata.parts.push(reward.toLowerCase());
 
@@ -98,8 +97,7 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } 
-        else if (item == "🛞") {
+        } else if (item == "🛞") {
           userdata.swheelspins += 1;
           embed.setDescription(`You won 1 super wheel spin!`);
           interaction.editReply({ embeds: [embed] });

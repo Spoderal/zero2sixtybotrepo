@@ -15,10 +15,7 @@ module.exports = (client) => {
 
       let userdata = await User.findOne({ id: user });
 
-        userdata.gold += Number(args[3]);
-
-     
-
+      userdata.gold += Number(args[3]);
 
       userdata.save();
     }

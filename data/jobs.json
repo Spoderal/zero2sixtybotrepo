@@ -3,64 +3,72 @@
     "prestige": 1,
     "salary": 100,
     "name": "Pizza Delivery",
-    "winprompts":["You skrrrrt and deliver the pizza to 132 Zero ST", "You were JUST on time", "You drift into the parking spot with the hot pizza in your seat"],
-    "loseprompts":["You dropped the pizza", "You delivered it 1 minute past the 30 minute gaurantee", "You put olives, they didn't ask for olives"],
-    "Positions":[
+    "winprompts": [
+      "You skrrrrt and deliver the pizza to 132 Zero ST",
+      "You were JUST on time",
+      "You drift into the parking spot with the hot pizza in your seat"
+    ],
+    "loseprompts": [
+      "You dropped the pizza",
+      "You delivered it 1 minute past the 30 minute gaurantee",
+      "You put olives, they didn't ask for olives"
+    ],
+    "Positions": [
       {
-        "name":"Intern Pizza Deliverer",
-        "salary":2000,
-        "fail":500,
-        "xp":0,
-        "emote":"🍕",
-        "rank":1
+        "name": "Intern Pizza Deliverer",
+        "salary": 2000,
+        "fail": 500,
+        "xp": 0,
+        "emote": "🍕",
+        "rank": 1
       },
       {
-        "name":"Decent Pizza Deliverer",
-        "salary":2500,
-        "fail":1000,
-        "xp":2500,
-        "emote":"🍕",
-        "rank":2
+        "name": "Decent Pizza Deliverer",
+        "salary": 2500,
+        "fail": 1000,
+        "xp": 2500,
+        "emote": "🍕",
+        "rank": 2
       },
       {
-        "name":"Pro Pizza Deliverer",
-        "salary":3000,
-        "fail":1500,
-        "xp":5000,
-        "emote":"🍕",
-        "rank":3
+        "name": "Pro Pizza Deliverer",
+        "salary": 3000,
+        "fail": 1500,
+        "xp": 5000,
+        "emote": "🍕",
+        "rank": 3
       },
       {
-        "name":"Best Pizza Deliverer",
-        "salary":3500,
-        "fail":1500,
-        "xp":7500,
-        "emote":"🍕",
-        "rank":4
+        "name": "Best Pizza Deliverer",
+        "salary": 3500,
+        "fail": 1500,
+        "xp": 7500,
+        "emote": "🍕",
+        "rank": 4
       },
       {
-        "name":"Pizza Shop Manager",
-        "salary":5000,
-        "fail":2000,
-        "xp":10000,
-        "emote":"🧑‍💼",
-        "rank":5
+        "name": "Pizza Shop Manager",
+        "salary": 5000,
+        "fail": 2000,
+        "xp": 10000,
+        "emote": "🧑‍💼",
+        "rank": 5
       },
       {
-        "name":"Pizza Shop Owner",
-        "salary":6500,
-        "fail":2000,
-        "xp":15000,
-        "emote":"🏢",
-        "rank":6
+        "name": "Pizza Shop Owner",
+        "salary": 6500,
+        "fail": 2000,
+        "xp": 15000,
+        "emote": "🏢",
+        "rank": 6
       },
       {
-        "name":"Pizza Brand CEO",
-        "salary":8000,
-        "fail":2000,
-        "xp":25000,
-        "emote":"💵",
-        "rank":7
+        "name": "Pizza Brand CEO",
+        "salary": 8000,
+        "fail": 2000,
+        "xp": 25000,
+        "emote": "💵",
+        "rank": 7
       }
     ]
   },
@@ -68,64 +76,73 @@
     "prestige": 2,
     "salary": 200,
     "name": "Police",
-    "winprompts":["You caught someone running a red light", "You caught a burglar while he was exiting the front door", "You took in a famous mafia boss", "You caught a guy driving a Porsche 911"],
-    "loseprompts":["You let a burglar that had 1 leg get away... How?", "You missed a guy speeding", "You lost a Lamborghini in the dust"],
-    "Positions":[
+    "winprompts": [
+      "You caught someone running a red light",
+      "You caught a burglar while he was exiting the front door",
+      "You took in a famous mafia boss",
+      "You caught a guy driving a Porsche 911"
+    ],
+    "loseprompts": [
+      "You let a burglar that had 1 leg get away... How?",
+      "You missed a guy speeding",
+      "You lost a Lamborghini in the dust"
+    ],
+    "Positions": [
       {
-        "name":"Cadet",
-        "salary":3500,
-        "fail":1000,
-        "xp":0,
-        "emote":"🚓",
-        "rank":1
+        "name": "Cadet",
+        "salary": 3500,
+        "fail": 1000,
+        "xp": 0,
+        "emote": "🚓",
+        "rank": 1
       },
       {
-        "name":"Cadet II",
-        "salary":4000,
-        "fail":1000,
-        "xp":5000,
-        "emote":"🚓",
-        "rank":2
+        "name": "Cadet II",
+        "salary": 4000,
+        "fail": 1000,
+        "xp": 5000,
+        "emote": "🚓",
+        "rank": 2
       },
       {
-        "name":"Cadet III",
-        "salary":4500,
-        "fail":1500,
-        "xp":7500,
-        "emote":"🚓",
-        "rank":3
+        "name": "Cadet III",
+        "salary": 4500,
+        "fail": 1500,
+        "xp": 7500,
+        "emote": "🚓",
+        "rank": 3
       },
       {
-        "name":"Sergeant",
-        "salary":5500,
-        "fail":2000,
-        "xp":10000,
-        "emote":"🚓",
-        "rank":4
+        "name": "Sergeant",
+        "salary": 5500,
+        "fail": 2000,
+        "xp": 10000,
+        "emote": "🚓",
+        "rank": 4
       },
       {
-        "name":"Lieutenant",
-        "salary":6000,
-        "fail":2000,
-        "xp":15000,
-        "emote":"👓",
-        "rank":5
+        "name": "Lieutenant",
+        "salary": 6000,
+        "fail": 2000,
+        "xp": 15000,
+        "emote": "👓",
+        "rank": 5
       },
       {
-        "name":"Captain",
-        "salary":7500,
-        "fail":2000,
-        "xp":25000,
-        "emote":"👮",
-        "rank":6
+        "name": "Captain",
+        "salary": 7500,
+        "fail": 2000,
+        "xp": 25000,
+        "emote": "👮",
+        "rank": 6
       },
       {
-        "name":"Chief",
-        "salary":10000,
-        "fail":3500,
-        "xp":50000,
-        "emote":"🚨",
-        "rank":7
+        "name": "Chief",
+        "salary": 10000,
+        "fail": 3500,
+        "xp": 50000,
+        "emote": "🚨",
+        "rank": 7
       }
     ]
   },
@@ -133,71 +150,83 @@
     "prestige": 5,
     "salary": 500,
     "name": "Criminal",
-    "winprompts":["You robbed an old lady of her purse... You're sick", "You stole a 2020 Lamborghini Huracan and traded it in for cash", "You stepped foot into the home alone house and came out unscaved", "You stole a big diamond", "You ran a red light", "You were going 500 mph in a school zone"],
-    "loseprompts":["You stepped into the home alone house and got hit in the head with a paint can", "You crossed paths with a laser", "You tripped while running from the police", "You got caught speeding"],
-    "Positions":[
+    "winprompts": [
+      "You robbed an old lady of her purse... You're sick",
+      "You stole a 2020 Lamborghini Huracan and traded it in for cash",
+      "You stepped foot into the home alone house and came out unscaved",
+      "You stole a big diamond",
+      "You ran a red light",
+      "You were going 500 mph in a school zone"
+    ],
+    "loseprompts": [
+      "You stepped into the home alone house and got hit in the head with a paint can",
+      "You crossed paths with a laser",
+      "You tripped while running from the police",
+      "You got caught speeding"
+    ],
+    "Positions": [
       {
-        "name":"New Robber",
-        "salary":5000,
-        "min":1000,
-        "fail":1000,
-        "xp":0,
-        "emote":"💰",
-        "rank":1
+        "name": "New Robber",
+        "salary": 5000,
+        "min": 1000,
+        "fail": 1000,
+        "xp": 0,
+        "emote": "💰",
+        "rank": 1
       },
       {
-        "name":"Intermediate Robber",
-        "salary":6500,
-        "min":2000,
-        "fail":1000,
-        "xp":5000,
-        "emote":"💰",
-        "rank":2
+        "name": "Intermediate Robber",
+        "salary": 6500,
+        "min": 2000,
+        "fail": 1000,
+        "xp": 5000,
+        "emote": "💰",
+        "rank": 2
       },
       {
-        "name":"Experienced Robber",
-        "salary":7500,
-        "min":3000,
-        "fail":1500,
-        "xp":10000,
-        "emote":"💰",
-        "rank":3
+        "name": "Experienced Robber",
+        "salary": 7500,
+        "min": 3000,
+        "fail": 1500,
+        "xp": 10000,
+        "emote": "💰",
+        "rank": 3
       },
       {
-        "name":"Respected Criminal",
-        "salary":10000,
-        "min":5000,
-        "fail":2000,
-        "xp":15000,
-        "emote":"💎",
-        "rank":4
+        "name": "Respected Criminal",
+        "salary": 10000,
+        "min": 5000,
+        "fail": 2000,
+        "xp": 15000,
+        "emote": "💎",
+        "rank": 4
       },
       {
-        "name":"Mafia Member",
-        "salary":25000,
-        "min":7500,
-        "fail":2000,
-        "xp":25000,
-        "emote":"🕶️",
-        "rank":5
+        "name": "Mafia Member",
+        "salary": 25000,
+        "min": 7500,
+        "fail": 2000,
+        "xp": 25000,
+        "emote": "🕶️",
+        "rank": 5
       },
       {
-        "name":"Mafia Boss",
-        "salary":50000,
-        "min":20000,
-        "fail":5000,
-        "xp":50000,
-        "emote":"🎭",
-        "rank":6
+        "name": "Mafia Boss",
+        "salary": 50000,
+        "min": 20000,
+        "fail": 5000,
+        "xp": 50000,
+        "emote": "🎭",
+        "rank": 6
       },
       {
-        "name":"Mafia Lord",
-        "salary":100000,
-        "min":50000,
-        "fail":3500,
-        "xp":100000,
-        "emote":"🏆",
-        "rank":7
+        "name": "Mafia Lord",
+        "salary": 100000,
+        "min": 50000,
+        "fail": 3500,
+        "xp": 100000,
+        "emote": "🏆",
+        "rank": 7
       }
     ]
   }
