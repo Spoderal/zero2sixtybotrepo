@@ -90,7 +90,7 @@ async function updateItemShop() {
         console.log(item1);
       }
     }
-  }, 300000);
+  }, 60000);
 }
 
 module.exports = {
