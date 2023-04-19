@@ -8072,6 +8072,7 @@
       "0-60": 5.9,
       "Drift": 0,
       "Handling": 500,
+      "Class":"S",
       "Obtained": "Exotic Imports",
       "Weight": 3600
     },
@@ -8088,6 +8089,7 @@
       "0-60": 4,
       "Drift": 0,
       "Handling": 750,
+      "Class":"S",
       "Obtained": "Exotic Imports",
       "Weight": 3600
     },
@@ -8104,6 +8106,7 @@
       "0-60": 11,
       "Drift": 0,
       "Handling": 650,
+      "Class":"D",
       "Obtained": "Wheelspin",
       "Weight": 3200
     },
@@ -8119,6 +8122,7 @@
       "Image": "https://i.ibb.co/3TZXpmJ/2019-porsche-cayenne-coupe.jpg",
       "0-60": 9.5,
       "Drift": 0,
+      "Class":"B",
       "Handling": 850,
       "Obtained": "Car Pack",
       "Weight": 3200
@@ -8136,6 +8140,7 @@
       "0-60": 10.3,
       "Drift": 0,
       "Handling": 800,
+      "Class":"B",
       "Obtained": "Car Pack",
       "Weight": 3200
     },
@@ -8152,6 +8157,7 @@
       "0-60": 9,
       "Drift": 0,
       "Handling": 900,
+      "Class":"B",
       "Obtained": "Car Pack",
       "Weight": 3200
     }
