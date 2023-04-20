@@ -997,9 +997,10 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
+              console.log(randompart)
               if (randompart == 3) {
                 earnings.push(
-                  `${partdb.Parts["car hook"].Emote} +1 ${cratedb.Crates["car hook"].Name}`
+                  `${partdb.Parts["car hook"].Emote} +1 ${partdb.Parts["car hook"].Name}`
                 );
                 userdata.parts.push("car hook");
               }
@@ -1442,7 +1443,7 @@ module.exports = {
 
               if (randompart == 3) {
                 earnings.push(
-                  `${partdb.Parts["nuclear core"].Emote} +1 ${cratedb.Crates["nuclear core"].Name}`
+                  `${partdb.Parts["nuclear core"].Emote} +1 ${partdb.Parts["nuclear core"].Name}`
                 );
                 userdata.parts.push("nuclear core");
               }
@@ -1885,7 +1886,7 @@ module.exports = {
 
               if (randompart == 3) {
                 earnings.push(
-                  `${partdb.Parts["metal frame"].Emote} +1 ${cratedb.Crates["metal frame"].Name}`
+                  `${partdb.Parts["metal frame"].Emote} +1 ${partdb.Parts["metal frame"].Name}`
                 );
                 userdata.parts.push("metal frame");
               }
@@ -2328,7 +2329,7 @@ module.exports = {
 
               if (randompart == 3) {
                 earnings.push(
-                  `${partdb.Parts["alien oil"].Emote} +1 ${cratedb.Crates["alien oil"].Name}`
+                  `${partdb.Parts["alien oil"].Emote} +1 ${partdb.Parts["alien oil"].Name}`
                 );
                 userdata.parts.push("alien oil");
               }
@@ -2771,7 +2772,7 @@ module.exports = {
 
               if (randompart == 3) {
                 earnings.push(
-                  `${partdb.Parts["zionite pistons"].Emote} +1 ${cratedb.Crates["zionite pistons"].Name}`
+                  `${partdb.Parts["zionite pistons"].Emote} +1 ${partdb.Parts["zionite pistons"].Name}`
                 );
                 userdata.parts.push("zionite pistons");
               }
