@@ -167,8 +167,10 @@ module.exports = {
       for (var p2 = 0; p2 < 1; p2++)
         parts.splice(parts.indexOf("nuclear core"), 1);
       for (var p3 = 0; p3 < 1; p3++) parts.splice(parts.indexOf("car hook"), 1);
-      for (var p4 = 0; p4 < 1; p4++) parts.splice(parts.indexOf("zionite pistons"), 1);
-      for (var p5 = 0; p5 < 1; p5++)  parts.splice(parts.indexOf("alien oil"), 1);
+      for (var p4 = 0; p4 < 1; p4++)
+        parts.splice(parts.indexOf("zionite pistons"), 1);
+      for (var p5 = 0; p5 < 1; p5++)
+        parts.splice(parts.indexOf("alien oil"), 1);
 
       userdata.parts = parts;
 
