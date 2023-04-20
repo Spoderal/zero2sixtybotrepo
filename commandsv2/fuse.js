@@ -37,7 +37,8 @@ module.exports = {
           { name: "TXIntake", value: "txintake" },
           { name: "TXTurbo", value: "txturbo" },
           { name: "TXClutch", value: "txclutch" },
-          { name: "Fruit Punch", value: "fruit punch" }
+          { name: "Fruit Punch", value: "fruit punch" },
+          { name: "Epic Rocket Engine", value: "epic rocket engine" }
         )
         .setRequired(true)
     ),
