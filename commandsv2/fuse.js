@@ -167,10 +167,8 @@ module.exports = {
       for (var p2 = 0; p2 < 1; p2++)
         parts.splice(parts.indexOf("nuclear core"), 1);
       for (var p3 = 0; p3 < 1; p3++) parts.splice(parts.indexOf("car hook"), 1);
-      for (var p4 = 0; p4 < 1; p4++)
-        parts.splice(parts.indexOf("zionite pistons"), 1);
-      for (var p5 = 0; p5 < 1; p5++)
-        parts.splice(parts.indexOf("alien oil"), 1);
+      for (var p4 = 0; p4 < 1; p4++) parts.splice(parts.indexOf("zionite pistons"), 1);
+      for (var p5 = 0; p5 < 1; p5++)  parts.splice(parts.indexOf("alien oil"), 1);
 
       userdata.parts = parts;
 
@@ -182,9 +180,9 @@ module.exports = {
         .addFields([
           {
             name: `Items`,
-            value: `${itemdb["metal frame"].Emote} ${itemdb["metal frame"].Name}\n${itemdb["nuclear core"].Emote} ${itemdb["nuclear core"].Name}\n${itemdb["zionite pistons"].Emote} ${itemdb["zionite pistons"].Name}
-            ${itemdb["car hook"].Emote} ${itemdb["car hook"].Name}
-            ${itemdb["alien oil"].Emote} ${itemdb["alien oil"].Name}
+            value: `${partdb.Parts["metal frame"].Emote} ${partdb.Parts["metal frame"].Name}\n${partdb.Parts["nuclear core"].Emote} ${partdb.Parts["nuclear core"].Name}\n${partdb.Parts["zionite pistons"].Emote} ${partdb.Parts["zionite pistons"].Name}
+            ${partdb.Parts["car hook"].Emote} ${partdb.Parts["car hook"].Name}
+            ${partdb.Parts["alien oil"].Emote} ${partdb.Parts["alien oil"].Name}
 
             
             
@@ -202,10 +200,10 @@ module.exports = {
         embed.addFields([
           {
             name: `Item`,
-            value: `${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name}`,
+            value: `${partdb.Parts["epic rocket engine"].Emote} ${partdb.Parts["epic rocket engine"].Name}`,
           },
         ]);
-        userdata.items.push("fruit punch");
+        userdata.parts.push("epic rocket engine");
         userdata.rocket = true;
         userdata.save();
         interaction.editReply({ embeds: [embed] });
