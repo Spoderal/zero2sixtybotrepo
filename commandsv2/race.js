@@ -997,7 +997,7 @@ module.exports = {
               }
               let randompart = randomRange(1, 5);
 
-              console.log(randompart)
+              console.log(randompart);
               if (randompart == 3) {
                 earnings.push(
                   `${partdb.Parts["car hook"].Emote} +1 ${partdb.Parts["car hook"].Name}`
