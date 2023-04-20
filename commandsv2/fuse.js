@@ -146,11 +146,11 @@ module.exports = {
       }, 2000);
       return;
     } else if (parttoinstall == "epic rocket engine") {
-      let frame = userdata.items.filter((item) => item == "metal frame");
-      let nuke = userdata.items.filter((item) => item == "nuclear core");
-      let hook = userdata.items.filter((item) => item == "car hook");
-      let pistons = userdata.items.filter((item) => item == "zionite pistons");
-      let oil = userdata.items.filter((item) => item == "alien oil");
+      let frame = userdata.parts.filter((item) => item == "metal frame");
+      let nuke = userdata.parts.filter((item) => item == "nuclear core");
+      let hook = userdata.parts.filter((item) => item == "car hook");
+      let pistons = userdata.parts.filter((item) => item == "zionite pistons");
+      let oil = userdata.parts.filter((item) => item == "alien oil");
 
       if (frame.length == 0)
         return await interaction.reply(`You're missing a metal frame!`);
