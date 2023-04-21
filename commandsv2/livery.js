@@ -309,7 +309,9 @@ module.exports = {
         return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-      let cardata = global.liveries.filter((livery => livery.Name.toLowerCase() == car.toLowerCase()))
+      let cardata = global.liveries.filter(
+        (livery) => livery.Name.toLowerCase() == car.toLowerCase()
+      );
 
       let liveriesforcar = cardata;
       if (!liveriesforcar)
