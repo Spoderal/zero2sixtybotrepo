@@ -312,5 +312,10 @@
     "emote": "<:logo_kawasaki:1089402371580379148>",
     "name": "Kawasaki",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
+  },
+  "no brand": {
+    "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+    "name": "No Logo",
+    "country": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
   }
 }
