@@ -1,6 +1,6 @@
 const Stats = require(`../schema/stats`);
 async function stats(client) {
-  let global = await Stats.find({});
+  let global = await Stats.findOne({});
     let users = client.guilds.cache.size
 
     setInterval(() => {
