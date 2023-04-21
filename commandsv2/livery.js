@@ -113,7 +113,7 @@ module.exports = {
         return await interaction.reply({ embeds: [errembed] });
       }
       let livid = interaction.options.getString("id");
-      let global = await Global.findOne();
+      let global = await Global.findOne({});
       let liverieslist = global.liveries;
       let carindb = selected;
       let cardata = liverieslist.filter(
@@ -298,6 +298,7 @@ module.exports = {
         } ${idfiltered[0].image}`
       );
     } else if (subcommand == "list") {
+      let lglobal = await Global.findOne({})
       var car = interaction.options.getString("car").toLowerCase();
       if (!car)
         return await interaction.reply(
@@ -309,9 +310,8 @@ module.exports = {
         return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-      let cardata = global.liveries.filter(
-        (livery) => livery.Name.toLowerCase() == car.toLowerCase()
-      );
+        console.log(lglobal.liveries)
+      let cardata = lglobal.liveries.filter((livery => livery.Name.toLowerCase() == car.toLowerCase()))
 
       let liveriesforcar = cardata;
       if (!liveriesforcar)
@@ -324,14 +324,14 @@ module.exports = {
         liverylist.push(`${actliv.id}`);
         //Do something
       }
-      let shopItems = cardata.liveries;
+      let shopItems = cardata;
       if (!shopItems || !shopItems.length)
         return await interaction.reply(`This car doesn't have any liveries!`);
       shopItems = lodash.chunk(
         shopItems.map(() => `**${liverylist.join("\n")}**`)
       );
 
-      const embed = new Discord.EmbedBuilder({ color: "#60b0f4" })
+      const embed = new Discord.EmbedBuilder()
         .setTitle(`Liveries for ${cars.Cars[car].Name}`)
         .setDescription(
           `View using \`/liveryview [id] [car]\`\nSet using \`/liveryinstall [id] [car]\`\n${shopItems[0].join(
@@ -340,6 +340,7 @@ module.exports = {
         )
         .setFooter({ text: `Pages 1/${shopItems.length}` })
         .setThumbnail("https://i.ibb.co/Hq4p8bx/usedicon.png")
+        .setColor(colors.blue)
         .setTimestamp();
 
       await interaction
