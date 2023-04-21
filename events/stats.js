@@ -8,7 +8,7 @@ async function stats(client) {
         global.update()
         global.save()
         console.log('done')
-    }, 10000);
+    }, 60000);
 }
 
 module.exports = {
