@@ -56,10 +56,10 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
-  stats:{
-    type:Object,
+  stats: {
+    type: Object,
     required: false,
-    default: {}
+    default: {},
   },
   events: {},
   stock: {

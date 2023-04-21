@@ -14,7 +14,7 @@ const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
 const cars = require("./cars").carfix;
 const gold = require("../gold");
-const stats = require('./stats').stats
+const stats = require("./stats").stats;
 
 let mongoConfig = {
   keepAlive: true,
@@ -38,7 +38,7 @@ module.exports = {
     patron(client);
     double(client);
     gold(client);
-    stats(client)
+    stats(client);
 
     var express = require("express");
     var app = express();
