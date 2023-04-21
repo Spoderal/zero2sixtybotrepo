@@ -155,8 +155,9 @@ module.exports = {
 
       let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
       let carimg = await loadImage(ogcar);
-      let brand = brandsarr.filter((br) => br.emote == carindb[0].Emote) || "no brand"
-      let brimg = await loadImage(brand[0].image)
+      let brand =
+        brandsarr.filter((br) => br.emote == carindb[0].Emote) || "no brand";
+      let brimg = await loadImage(brand[0].image);
       let flag = await loadImage(brand[0].country);
       ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
       console.log("car done");
