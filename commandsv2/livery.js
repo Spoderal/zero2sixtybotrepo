@@ -117,7 +117,7 @@ module.exports = {
       let liverieslist = global.liveries;
       let carindb = selected;
       let cardata = liverieslist.filter(
-        (car) => car.Name == carindb.Name.toLowerCase()
+        (car) => car.Name.toLowerCase() == carindb.Name.toLowerCase()
       );
       console.log(cardata);
       if (!livid) return await interaction.reply("Specify an id!");
@@ -309,11 +309,9 @@ module.exports = {
         return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-      let cardata =
-        (await Car.findOne({ name: list[car.toLowerCase()].Name })) ||
-        new Car({ name: list[car.toLowerCase()].Name });
+      let cardata = global.liveries.filter((livery => livery.Name.toLowerCase() == car.toLowerCase()))
 
-      let liveriesforcar = cardata.liveries;
+      let liveriesforcar = cardata;
       if (!liveriesforcar)
         return await interaction.reply(
           "This car doesn't have liveries yet, if you'd like to submit one, use /livery submit"
