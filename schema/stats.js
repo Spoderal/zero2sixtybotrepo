@@ -4,8 +4,8 @@ const Stats = new mongoose.Schema({
   users: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("stats", Stats);
