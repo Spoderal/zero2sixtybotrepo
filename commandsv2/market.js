@@ -181,8 +181,12 @@ module.exports = {
         return interaction.reply(
           `Error! The item you're trying to list either doesn't exist or is not marketable.`
         );
-        
-        if(partdb.Parts[item.toLowerCase()] && partdb.Parts[item.toLowerCase()].Market == false) return interaction.reply("This item isn't marketable.")
+
+      if (
+        partdb.Parts[item.toLowerCase()] &&
+        partdb.Parts[item.toLowerCase()].Market == false
+      )
+        return interaction.reply("This item isn't marketable.");
 
       global.marketId += 1;
       global.newmarket.push(obj);
