@@ -74,6 +74,9 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
+
+    cooldowndata.racing = Date.now();
+    cooldowndata.save();
     const row2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setLabel("Street Race")
@@ -214,8 +217,21 @@ module.exports = {
       "plutorace",
     ];
     collector.on("collect", async (i) => {
+
+     let timeout = 45 * 1000;
+    if (
+      cooldowndata.racing !== null &&
+      timeout - (Date.now() - cooldowndata.racing) > 0
+    ) {
+      let time = ms(timeout - (Date.now() - cooldowndata.racing));
+       let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`You can race again in ${time}`);
+      return await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
+    }
       console.log(i.customId);
       if (races.includes(i.customId)) {
+ 
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
@@ -227,21 +243,7 @@ module.exports = {
         embed.setTitle("Select a tier to race in (Difficulty)");
         embed.setDescription(`${rewardsarr.join("\n")}`);
 
-        if (
-          i.customId == "streetrace" ||
-          i.customId == "highwayrace" ||
-          i.customId == "halfmile" ||
-          i.customId == "quartermile" ||
-          i.customId == "crossrace" ||
-          i.customId == "venusrace" ||
-          i.customId == "marsrace" ||
-          i.customId == "moonrace" ||
-          i.customId == "saturnrace" ||
-          i.customId == "plutorace"
-        ) {
-          cooldowndata.racing = Date.now();
-          cooldowndata.save();
-        }
+
 
         console.log(race);
 
@@ -495,7 +497,7 @@ module.exports = {
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
 
-                if (using.includes("pet treats")) {
+                if (usinginv.includes("pet treats")) {
                   let cooldown = cooldowndata.pettreats;
                   let timeout = 600000;
                   console.log(timeout - (Date.now() - cooldown));
