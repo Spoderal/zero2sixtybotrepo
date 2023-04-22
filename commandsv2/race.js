@@ -217,8 +217,12 @@ module.exports = {
       "plutorace",
     ];
     collector.on("collect", async (i) => {
+
+     
+
       console.log(i.customId);
       if (races.includes(i.customId)) {
+ 
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
@@ -229,6 +233,8 @@ module.exports = {
         }
         embed.setTitle("Select a tier to race in (Difficulty)");
         embed.setDescription(`${rewardsarr.join("\n")}`);
+
+
 
         console.log(race);
 
@@ -2962,17 +2968,7 @@ module.exports = {
           ctx.fillText(car2.Name, 845, 180);
           ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
-          if (weather2.Emote == "🌧️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          } else if (weather2.Emote == "🌨️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          }
+     
 
           let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
             name: "profile-image.png",
@@ -2982,39 +2978,25 @@ module.exports = {
 
           let slipchance = weather2.Slip;
           let speedreduce = weather2.SpeedReduce;
-          let mph;
-          if (speedreduce > 0) {
-            mph = selected.Speed -= speedreduce;
-          } else {
-            mph = selected.Speed;
-          }
+          let mph = selected.Speed;
+          
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling / weather2.Grip;
+          let handling = selected.Handling 
 
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
           }
 
-          let mph2;
-
-          if (speedreduce > 0) {
-            mph2 = car2.Speed -= speedreduce;
-          } else {
-            mph2 = car2.Speed;
-          }
+          let mph2 = car2.Speed;
+          
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling / weather2.Grip;
-          if (slipchance > 0) {
-            let slip = randomRange(1, slipchance);
-            if (slip >= 2) {
-              mph -= 10;
-            }
-          }
+   
           let speed = 0;
           let speed2 = 0;
 
@@ -3025,7 +3007,7 @@ module.exports = {
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
           let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Highway Race ${weather2.Emote}`)
+            .setTitle(`Racing Tier ${bot} Highway Race`)
 
             .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
             .addFields(
@@ -3169,7 +3151,7 @@ module.exports = {
               userdata.lockpicks += lockpicks;
 
               embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Highway Race won! ${weather2.Emote}`);
+              embed.setTitle(`Tier ${bot} Highway Race won!`);
               embed.setImage(`attachment://profile-image.png`);
 
               await i.editReply({ embeds: [embed], files: [attachment] });
@@ -3199,7 +3181,7 @@ module.exports = {
               embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(
-                `Tier ${bot} Highway Race lost! ${weather2.Emote}`
+                `Tier ${bot} Highway Race lost!`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
