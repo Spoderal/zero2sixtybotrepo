@@ -217,12 +217,8 @@ module.exports = {
       "plutorace",
     ];
     collector.on("collect", async (i) => {
-
-     
-
       console.log(i.customId);
       if (races.includes(i.customId)) {
- 
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
@@ -233,8 +229,6 @@ module.exports = {
         }
         embed.setTitle("Select a tier to race in (Difficulty)");
         embed.setDescription(`${rewardsarr.join("\n")}`);
-
-
 
         console.log(race);
 
