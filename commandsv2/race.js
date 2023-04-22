@@ -217,21 +217,22 @@ module.exports = {
       "plutorace",
     ];
     collector.on("collect", async (i) => {
-
-     let timeout = 45 * 1000;
-    if (
-      cooldowndata.racing !== null &&
-      timeout - (Date.now() - cooldowndata.racing) > 0
-    ) {
-      let time = ms(timeout - (Date.now() - cooldowndata.racing));
-       let timeEmbed = new EmbedBuilder()
-        .setColor(colors.blue)
-        .setDescription(`You can race again in ${time}`);
-      return await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
-    }
+      let timeout = 45 * 1000;
+      if (
+        cooldowndata.racing !== null &&
+        timeout - (Date.now() - cooldowndata.racing) > 0
+      ) {
+        let time = ms(timeout - (Date.now() - cooldowndata.racing));
+        let timeEmbed = new EmbedBuilder()
+          .setColor(colors.blue)
+          .setDescription(`You can race again in ${time}`);
+        return await interaction.editReply({
+          embeds: [timeEmbed],
+          fetchReply: true,
+        });
+      }
       console.log(i.customId);
       if (races.includes(i.customId)) {
- 
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
@@ -242,8 +243,6 @@ module.exports = {
         }
         embed.setTitle("Select a tier to race in (Difficulty)");
         embed.setDescription(`${rewardsarr.join("\n")}`);
-
-
 
         console.log(race);
 
