@@ -77,6 +77,10 @@ module.exports = {
       cardb.Cars[selected.Name.toLowerCase()].Electric
     )
       return interaction.reply("EVs cant have engines, turbos, or intakes!");
+      let range = selected.Range
+
+      console.log(range)
+      if(partindb.Name == "Ludicrous" && range == undefined) return interaction.reply("Ludicrous can only be used on EVs!")
     console.log(partindb);
     if (cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0)
       return interaction.reply("F1 Cars cant have their speed upgraded.");
@@ -197,7 +201,10 @@ module.exports = {
     if (partInLocalDB?.DecreaseWeight && partInLocalDB?.DecreaseWeight > 0) {
       let newspeed = Number(partInLocalDB?.DecreaseWeight);
       let stat = Number(oldweight);
-      oldweight = oldweight -= newspeed;
+      if(stat > 500){
+        oldweight = oldweight -= newspeed;
+        
+      }
     }
     if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
       let newspeed = Number(partInLocalDB?.AddWeight);
