@@ -184,6 +184,12 @@ module.exports = {
         
         if(partdb.Parts[item.toLowerCase()] && partdb.Parts[item.toLowerCase()].Market == false) return interaction.reply("This item isn't marketable.")
 
+      if (
+        partdb.Parts[item.toLowerCase()] &&
+        partdb.Parts[item.toLowerCase()].Market == false
+      )
+        return interaction.reply("This item isn't marketable.");
+
       global.marketId += 1;
       global.newmarket.push(obj);
       userdata.marketlimit -= 1;

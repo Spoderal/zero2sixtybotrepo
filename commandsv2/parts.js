@@ -365,10 +365,7 @@ module.exports = {
                   } : ${toCurrency(parts.Parts["ls2"].Price)}\n
                     ${parts.Parts["ls3"].Emote}  ${
                     parts.Parts["ls3"].Name
-                  } : ${toCurrency(parts.Parts["ls3"].Price)}\n
-                    ${parts.Parts["rocket engine"].Emote}  ${
-                    parts.Parts["rocket engine"].Name
-                  } : ${toCurrency(parts.Parts["rocket engine"].Price)}\n
+                  } : ${toCurrency(parts.Parts["ls3"].Price)}
                   **`
                 )
                 .setColor(colors.blue)
