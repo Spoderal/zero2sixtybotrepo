@@ -39,7 +39,7 @@ module.exports = {
     );
     for (let part in parts) {
       part = parts[part];
-      console.log(part)
+      console.log(part);
       let partindb = partdb.Parts[part.toLowerCase()];
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
