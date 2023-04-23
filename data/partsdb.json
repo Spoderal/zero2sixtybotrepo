@@ -963,7 +963,25 @@
       "DecreaseHandling": "100",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
-      "Market": false
+      "Market":false
+    },
+    "ludicrous": {
+      "Name": "Ludicrous",
+      "AddedSpeed": 0,
+      "AddedSixty": 0,
+      "AddedSnow": 0,
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:batteryicon:953575541041160212>",
+      "Tier": "4",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "engine",
+      "DecreaseHandling": 0,
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
+      "Market":false
     },
     "super rocket engine": {
       "Name": "Super Rocket Engine",
@@ -981,7 +999,7 @@
       "Type": "engine",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
-      "Market": false
+      "Market":false
     },
     "epic rocket engine": {
       "Name": "Epic Rocket Engine",
@@ -999,7 +1017,7 @@
       "Type": "engine",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/Mc6rKLs/superduperrocket.png",
-      "Market": false
+      "Market":false
     },
     "nuclear core": {
       "Name": "Nuclear Core",
