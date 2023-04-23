@@ -298,7 +298,7 @@ module.exports = {
         } ${idfiltered[0].image}`
       );
     } else if (subcommand == "list") {
-      let lglobal = await Global.findOne({})
+      let lglobal = await Global.findOne({});
       var car = interaction.options.getString("car").toLowerCase();
       if (!car)
         return await interaction.reply(
@@ -310,8 +310,10 @@ module.exports = {
         return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-        console.log(lglobal.liveries)
-      let cardata = lglobal.liveries.filter((livery => livery.Name.toLowerCase() == car.toLowerCase()))
+      console.log(lglobal.liveries);
+      let cardata = lglobal.liveries.filter(
+        (livery) => livery.Name.toLowerCase() == car.toLowerCase()
+      );
 
       let liveriesforcar = cardata;
       if (!liveriesforcar)
