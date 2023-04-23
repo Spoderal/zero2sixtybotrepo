@@ -44,6 +44,7 @@ async function updateItemShop() {
 
       global.itemshop = items;
       global.itemshopcooldown = Date.now();
+      global.markModified("itemshop");
 
       global.save();
     } else {

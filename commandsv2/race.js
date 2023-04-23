@@ -74,6 +74,9 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
+
+    cooldowndata.racing = Date.now();
+    cooldowndata.save();
     const row2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setLabel("Street Race")
@@ -214,8 +217,12 @@ module.exports = {
       "plutorace",
     ];
     collector.on("collect", async (i) => {
+
+     
+
       console.log(i.customId);
       if (races.includes(i.customId)) {
+ 
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
@@ -227,21 +234,7 @@ module.exports = {
         embed.setTitle("Select a tier to race in (Difficulty)");
         embed.setDescription(`${rewardsarr.join("\n")}`);
 
-        if (
-          i.customId == "streetrace" ||
-          i.customId == "highwayrace" ||
-          i.customId == "halfmile" ||
-          i.customId == "quartermile" ||
-          i.customId == "crossrace" ||
-          i.customId == "venusrace" ||
-          i.customId == "marsrace" ||
-          i.customId == "moonrace" ||
-          i.customId == "saturnrace" ||
-          i.customId == "plutorace"
-        ) {
-          cooldowndata.racing = Date.now();
-          cooldowndata.save();
-        }
+
 
         console.log(race);
 
@@ -366,9 +359,7 @@ module.exports = {
 
           let mph = selected.Speed;
 
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling;
           if (!selected.WeightStat) {
@@ -378,11 +369,11 @@ module.exports = {
 
           let mph2;
 
-          mph2 = car2.Speed;
+          mph2 = car2.Speed
 
-          let weight2 = car2.Weight;
+          let weight2 = Number(car2.Weight)
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling;
+          let handling2 = Number(car2.Handling)
 
           let speed = 0;
           let speed2 = 0;
@@ -421,22 +412,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          weight = weight / 10;
-          weight2 = weight2 / 10;
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
-          handling = handling / 100;
-          handling2 = handling2 / 100;
+          let accms = acceleration * 10
+          let accms2 = acceleration2 * 10
 
           let x = setInterval(() => {
-            if (speed < mph) {
+            if (speed <= mph) {
               speed++;
             } else {
               clearInterval(x);
             }
           }, accms);
           let x2 = setInterval(() => {
-            if (speed2 < mph2) {
+            if (speed2 <= mph2) {
               speed2++;
             } else {
               clearInterval(x2);
@@ -444,26 +431,34 @@ module.exports = {
           }, accms2);
           let timer = 0;
 
-          let i2 = setInterval(async () => {
-            timer++;
-            console.log(timer);
-            let calc = speed / 2;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 2;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength += calc;
-            tracklength2 += calc2;
+          
+          let i2 = setInterval(async () => {
+          if(speed2 > mph2){
+            speed2 = mph2
+          }
+          if(speed > mph){
+            speed = mph
+          }
+          console.log(`speed ${speed}`)
+          console.log(`speed2 ${speed2}`)
+            timer++;
+             speed / 6
+            handling = handling / 100
+            handling2 = handling2 / 100
+            speed2 / 6
+
+            let formula = (speed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+
+            // car 2
+            
+            let formula2 = (speed2) += (handling2) += (weight2 / 100)
+            console.log(formula2)
+        
+            tracklength += formula;
+            tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
               ctx.save();
@@ -495,7 +490,7 @@ module.exports = {
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
 
-                if (using.includes("pet treats")) {
+                if (usinginv.includes("pet treats")) {
                   let cooldown = cooldowndata.pettreats;
                   let timeout = 600000;
                   console.log(timeout - (Date.now() - cooldown));
@@ -871,8 +866,6 @@ module.exports = {
           weight2 = weight2 * 10;
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
-          handling = handling / 100;
-          handling2 = handling2 / 100;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -890,25 +883,27 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
             timer++;
             console.log(timer);
-            let calc = speed / 2;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 2;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength += calc;
-            tracklength2 += calc2;
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10 && gravity == false) {
               embed.setTitle(
@@ -1315,8 +1310,6 @@ module.exports = {
           weight2 = weight2 * 5;
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
-          handling = handling / 100;
-          handling = handling / 100;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -1334,25 +1327,27 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
             timer++;
             console.log(timer);
-            let calc = speed;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength += calc;
-            tracklength2 += calc2;
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10 && gravity == false) {
               embed.setTitle(
@@ -1758,8 +1753,6 @@ module.exports = {
           weight2 = weight2 / 2;
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
-          handling = handling / 500;
-          handling2 = handling2 / 500;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -1777,25 +1770,27 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
             timer++;
             console.log(timer);
-            let calc = speed / 234;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 234;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength += calc;
-            tracklength2 += calc2;
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10 && gravity == false) {
               embed.setTitle(
@@ -2201,8 +2196,6 @@ module.exports = {
           weight2 = weight2 / 5;
           let accms = acceleration * 15;
           let accms2 = acceleration2 * 15;
-          handling = handling / 300;
-          handling2 = handling2 / 300;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -2220,25 +2213,27 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
             timer++;
             console.log(timer);
-            let calc = speed / 234;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 234;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength += calc;
-            tracklength2 += calc2;
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10 && gravity == false) {
               embed.setTitle(
@@ -2644,8 +2639,6 @@ module.exports = {
           weight2 = weight2 * 2;
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
-          handling = handling / 300;
-          handling2 = handling2 / 300;
 
           let x = setInterval(() => {
             if (speed < mph) {
@@ -2663,25 +2656,27 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
             timer++;
             console.log(timer);
-            let calc = speed / 2;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 2;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength += calc;
-            tracklength2 += calc2;
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10 && gravity == false) {
               embed.setTitle(
@@ -2975,17 +2970,7 @@ module.exports = {
           ctx.fillText(car2.Name, 845, 180);
           ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
-          if (weather2.Emote == "🌧️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          } else if (weather2.Emote == "🌨️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          }
+     
 
           let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
             name: "profile-image.png",
@@ -2995,39 +2980,25 @@ module.exports = {
 
           let slipchance = weather2.Slip;
           let speedreduce = weather2.SpeedReduce;
-          let mph;
-          if (speedreduce > 0) {
-            mph = selected.Speed -= speedreduce;
-          } else {
-            mph = selected.Speed;
-          }
+          let mph = selected.Speed;
+          
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling / weather2.Grip;
+          let handling = selected.Handling 
 
           if (!selected.WeightStat) {
             selected.WeightStat =
               cardb.Cars[selected.Name.toLowerCase()].Weight;
           }
 
-          let mph2;
-
-          if (speedreduce > 0) {
-            mph2 = car2.Speed -= speedreduce;
-          } else {
-            mph2 = car2.Speed;
-          }
+          let mph2 = car2.Speed;
+          
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling / weather2.Grip;
-          if (slipchance > 0) {
-            let slip = randomRange(1, slipchance);
-            if (slip >= 2) {
-              mph -= 10;
-            }
-          }
+   
           let speed = 0;
           let speed2 = 0;
 
@@ -3038,7 +3009,7 @@ module.exports = {
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
           let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Highway Race ${weather2.Emote}`)
+            .setTitle(`Racing Tier ${bot} Highway Race`)
 
             .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
             .addFields(
@@ -3082,24 +3053,28 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100;
-          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
-            let calc = speed / 2;
-            sec = weight / calc;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 2;
-            sec2 = weight2 / calc2;
-            console.log(`sec2: ${sec2}`);
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
+            let newspeed = speed / 5
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 5
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength -= calc;
-            tracklength2 -= calc2;
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
+            tracklength -= formula;
+            tracklength2 -= formula2;
 
             if (tracklength <= 0) {
               ctx.save();
@@ -3182,7 +3157,7 @@ module.exports = {
               userdata.lockpicks += lockpicks;
 
               embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Highway Race won! ${weather2.Emote}`);
+              embed.setTitle(`Tier ${bot} Highway Race won!`);
               embed.setImage(`attachment://profile-image.png`);
 
               await i.editReply({ embeds: [embed], files: [attachment] });
@@ -3212,7 +3187,7 @@ module.exports = {
               embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(
-                `Tier ${bot} Highway Race lost! ${weather2.Emote}`
+                `Tier ${bot} Highway Race lost!`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
@@ -3426,24 +3401,28 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100;
-          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
-            let calc = speed / 200;
-            sec = weight / calc;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
-            // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 200;
-            sec2 = weight2 / calc2;
-            console.log(`sec2: ${sec2}`);
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
+            let newspeed = speed / 3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 3
 
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength -= calc;
-            tracklength2 -= calc2;
+            let formula = (newspeed) += (handling) += (weight / 75)
+            
+            console.log(formula)
+            // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 75)
+            tracklength += formula;
+            tracklength2 += formula2;
+            tracklength -= formula;
+            tracklength2 -= formula2;
             if (tracklength <= 0) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
@@ -3761,25 +3740,28 @@ module.exports = {
               clearInterval(x2);
             }
           }, accms2);
-          handling = handling / 100;
-          handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
-            let calc = speed / 200;
-            sec = weight / calc;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
+            let newspeed = speed / 3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 3
+
+            let formula = (newspeed) += (handling) += (weight / 75)
+            
+            console.log(formula)
             // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 200;
-            sec2 = weight2 / calc2;
-            console.log(`sec2: ${sec2}`);
-
-            calc2 = calc2 / sec2;
-            console.log(`calc2: ${calc2}`);
-            tracklength -= calc;
-            tracklength2 -= calc2;
-
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 75)
+            tracklength += formula;
+            tracklength2 += formula2;
+            tracklength -= formula;
+            tracklength2 -= formula2;
             if (tracklength <= 0) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
@@ -4123,25 +4105,27 @@ module.exports = {
           handling = handling / 100;
           handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
-            let calc = speed / 234;
-            sec = weight / calc;
-            sec += handling;
-            calc = calc / sec;
-            console.log(`calc: ${calc}`);
-            console.log(`sec: ${sec}`);
+            if(speed2 > mph2){
+              speed2 = mph2
+            }
+            if(speed > mph){
+              speed = mph
+            }
+            let newspeed = speed / 5
+            handling = handling / 50
+            handling2 = handling2 / 50
+            let newspeed2 = speed2 / 5
+
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-            console.log(speed2);
-            let calc2 = speed2 / 234;
-            sec2 = weight2 / calc2;
-            sec2 += handling2;
-            console.log(`sec2: ${sec2}`);
-
-            calc2 = calc2 / sec2;
-
-            console.log(`calc2: ${calc2}`);
-            console.log(`sec2: ${sec2}`);
-            tracklength -= calc;
-            tracklength2 -= calc2;
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength += formula;
+            tracklength2 += formula2;
+            tracklength -= formula;
+            tracklength2 -= formula2;
 
             console.log(tracklength);
 

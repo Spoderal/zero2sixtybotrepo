@@ -79,6 +79,7 @@ module.exports = {
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
       return interaction.reply("You can't trade cash for cash!");
 
+
     let item;
     let item2;
     let row = new Discord.ActionRowBuilder().addComponents(
@@ -202,6 +203,9 @@ module.exports = {
       filter: filter,
       time: 60000,
     });
+
+    if(trading == "undefined" || trading == undefined || trading2 == "undefined" || trading2 == undefined) return interaction.channel.send("You cant trade undefined!")
+
 
     collector.on("collect", async (i) => {
       if (i.customId.includes(`accept`)) {

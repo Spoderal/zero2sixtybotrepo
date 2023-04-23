@@ -207,7 +207,11 @@ module.exports = {
     if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
       let newspeed = Number(partindb.DecreaseWeight);
       let stat = Number(selected.WeightStat);
-      selected.WeightStat = stat += newspeed;
+      if(stat > 500){
+        
+        selected.WeightStat = stat += newspeed;
+        
+      }
     }
     if (partindb.AddWeight && partindb.AddWeight > 0) {
       let newspeed = Number(partindb.AddWeight);

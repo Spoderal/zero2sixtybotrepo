@@ -14,7 +14,7 @@
       "DecreasedSixty": "0",
       "Type": "drivetrain",
       "DecreasedSpeed": "0",
-      "AddHandling": "2",
+      "AddHandling": 2,
       "Image": "https://i.ibb.co/PFSvF82/fwd.png"
     },
     "rwd": {
@@ -32,7 +32,7 @@
       "Type": "drivetrain",
       "DecreaseWeight": 350,
       "DecreasedSpeed": "0",
-      "AddedHandling": 100,
+      "AddHandling": 100,
       "Image": "https://i.ibb.co/GCQ4Kqw/rwd.png"
     },
     "awd": {
@@ -49,7 +49,7 @@
       "DecreasedSixty": "0",
       "Type": "drivetrain",
       "DecreasedSpeed": "0",
-      "AddedHandling": 500,
+      "AddHandling": 500,
       "Image": "https://i.ibb.co/VLYK29x/awd.png"
     },
     "t1exhaust": {
@@ -953,7 +953,7 @@
       "AddedSixty": 1,
       "AddedSnow": 0,
       "sellprice": 112500,
-      "Price": 200000000,
+      "Price": 0,
       "Emote": "<:rocketengine:985992825411866695>",
       "Tier": "4",
       "AddedDrift": "0",
@@ -962,7 +962,8 @@
       "Type": "engine",
       "DecreaseHandling": "100",
       "DecreasedSpeed": "0",
-      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png"
+      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
+      "Market":false
     },
     "super rocket engine": {
       "Name": "Super Rocket Engine",
@@ -979,7 +980,8 @@
       "DecreaseHandling": "200",
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png"
+      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
+      "Market":false
     },
     "epic rocket engine": {
       "Name": "Epic Rocket Engine",
@@ -996,7 +998,8 @@
       "DecreaseHandling": 300,
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "Image": "https://i.ibb.co/Mc6rKLs/superduperrocket.png"
+      "Image": "https://i.ibb.co/Mc6rKLs/superduperrocket.png",
+      "Market":false
     },
     "nuclear core": {
       "Name": "Nuclear Core",
@@ -1427,22 +1430,7 @@
       "DecreaseHandling": "0",
       "Image": "https://i.ibb.co/SyCkPnt/t5exhaust.png"
     },
-    "ludicrous": {
-      "Name": "Ludicrous",
-      "AddedSpeed": 25,
-      "AddedSnow": 0,
-      "AddedSixty": 0.5,
-      "sellprice": 0,
-      "Price": 150,
-      "Emote": "<:turbo_bm1:965042368531284058>",
-      "Tier": "BM1",
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "DecreasedSixty": "0",
-      "Type": "ludicrous",
-      "DecreasedSpeed": "0",
-      "DecreaseHandling": "0"
-    },
+
     "bm1driftsuspension": {
       "Name": "BM1DriftSuspension",
       "DecreaseSpeed": 0,

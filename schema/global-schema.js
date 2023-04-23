@@ -237,6 +237,16 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  usedcars: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  usedcooldown:{
+    type: Number,
+    required: false,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("global", Global);

@@ -3390,6 +3390,8 @@
       "Image": "https://bringatrailer.com/wp-content/uploads/2020/07/1595116719e28c3fe56f6c05aaereceived_809037032833840-scaled.jpeg?fit=940%2C627",
       "0-60": 13,
       "Drift": 2,
+      "HighPrice":50000,
+      "LowPrice":10100,
       "Handling": 500,
       "Obtained": "Common Barn Find",
       "Weight": 3600
@@ -7777,7 +7779,9 @@
       "Handling": 505,
       "Obtained": "Event",
       "Class": "B",
-      "Weight": 4500
+      "Weight": 4500,
+      "HighPrice":100000,
+      "LowPrice":50000
     },
     "1973 buick riviera": {
       "alias": "1973 riviera",
@@ -7809,7 +7813,9 @@
       "Handling": 500,
       "Obtained": "Rare Imports",
       "Class": "D",
-      "Weight": 2800
+      "Weight": 2800,
+      "HighPrice":60000,
+      "LowPrice":30000
     },
     "2008 porsche 911 gt2": {
       "alias": "2008 911",
@@ -8160,6 +8166,26 @@
       "Class": "B",
       "Obtained": "Car Pack",
       "Weight": 3200
+    },
+    "2021 porsche 911 turbo": {
+      "alias": "2021 911 turbo",
+      "Name": "2021 Porsche 911 Turbo",
+      "Emote": "<:porsche:931011550880338011>",
+      "kmh": 265,
+      "Speed": 193,
+      "Price": 0,
+      "sellprice": 18750,
+      "LowPrice":100000,
+      "HighPrice":200000,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/N2Hxc2H/2021-porsche-911-turbo-s-coupe-first-drive.jpg",
+      "0-60": 5,
+      "Descriptions":["Runs and drives", "High quality interior", "Fast", "Dual turbo", "Perfect condition"],
+      "Drift": 0,
+      "Handling": 750,
+      "Class": "A",
+      "Obtained": "Used Cars",
+      "Weight": 3800
     }
   }
 }

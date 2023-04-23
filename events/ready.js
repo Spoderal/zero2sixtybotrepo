@@ -15,6 +15,7 @@ const Topgg = require("@top-gg/sdk");
 const cars = require("./cars").carfix;
 const gold = require("../gold");
 const stats = require("./stats").stats;
+const { updateUsed } = require("./used");
 
 let mongoConfig = {
   keepAlive: true,
@@ -39,6 +40,7 @@ module.exports = {
     double(client);
     gold(client);
     stats(client);
+    
 
     var express = require("express");
     var app = express();
@@ -99,6 +101,7 @@ module.exports = {
     }, 20000);
 
     updateItemShop();
+    updateUsed();
 
     try {
       const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

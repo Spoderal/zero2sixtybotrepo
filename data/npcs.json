@@ -1,0 +1,41 @@
+{
+    "jerry":{
+        "cars":[
+            "2021 porsche 911 turbo",
+            "2023 jeep gladiator"
+        ],
+        "name":"Jerry",
+        "deals":[true, true, false, false],
+        "emote":"<:npc_jerry:1099231202927448145>",
+        "image":"https://i.ibb.co/hmS6XNC/npc-jerry.png"
+    },
+    "larry":{
+        "cars":[
+            "2021 porsche 911 turbo",
+            "1998 mitsubishi lancer evolution"
+        ],
+        "name":"Larry",
+        "deals":[false, true, false],
+        "emote":"<:npc_larry:1099231201111326770>",
+        "image":"https://i.ibb.co/fD7WX2T/npc-larry.png"
+    },
+    "gary":{
+        "cars":[
+            "2021 porsche 911 turbo",
+            "1990 nissan 240sx"
+        ],
+        "name":"Gary",
+        "deals":[true, false, false, false],
+        "emote":"<:npc_gary:1099231212859572276>",
+        "image":"https://i.ibb.co/zf6TWmX/npc-gary.png"
+    },
+    "mary":{
+        "cars":[
+            "2021 porsche 911 turbo"
+        ],
+        "name":"Mary",
+        "deals":[true, true, false, false],
+        "emote":"<:npc_mary:1099231329226334309>",
+        "image":"https://i.ibb.co/kc7K4PY/npc-mary.png"
+    }
+}

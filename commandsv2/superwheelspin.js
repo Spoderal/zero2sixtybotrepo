@@ -66,7 +66,14 @@ module.exports = {
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
         if (item == "⚙️") {
-          let reward = lodash.sample(parts);
+          let randomnum = lodash.random(10);
+          let reward;
+          if (randomnum == 2) {
+            reward = "rocket engine"
+          } else {
+            reward = lodash.sample(parts);
+          }
+   
           userdata.parts.push(reward.toLowerCase());
 
           embed.setDescription(`You won a ${partsdb.Parts[reward].Name}!`);
