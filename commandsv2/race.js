@@ -217,8 +217,12 @@ module.exports = {
       "plutorace",
     ];
     collector.on("collect", async (i) => {
+
+     
+
       console.log(i.customId);
       if (races.includes(i.customId)) {
+ 
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
@@ -229,6 +233,8 @@ module.exports = {
         }
         embed.setTitle("Select a tier to race in (Difficulty)");
         embed.setDescription(`${rewardsarr.join("\n")}`);
+
+
 
         console.log(race);
 
@@ -353,9 +359,7 @@ module.exports = {
 
           let mph = selected.Speed;
 
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling;
           if (!selected.WeightStat) {
@@ -365,11 +369,11 @@ module.exports = {
 
           let mph2;
 
-          mph2 = car2.Speed;
+          mph2 = car2.Speed
 
-          let weight2 = Number(car2.Weight);
+          let weight2 = Number(car2.Weight)
           let acceleration2 = car2["0-60"];
-          let handling2 = Number(car2.Handling);
+          let handling2 = Number(car2.Handling)
 
           let speed = 0;
           let speed2 = 0;
@@ -408,8 +412,8 @@ module.exports = {
             fetchReply: true,
           });
 
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
+          let accms = acceleration * 10
+          let accms2 = acceleration2 * 10
 
           let x = setInterval(() => {
             if (speed <= mph) {
@@ -427,30 +431,32 @@ module.exports = {
           }, accms2);
           let timer = 0;
 
+
+          
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            console.log(`speed ${speed}`);
-            console.log(`speed2 ${speed2}`);
+          if(speed2 > mph2){
+            speed2 = mph2
+          }
+          if(speed > mph){
+            speed = mph
+          }
+          console.log(`speed ${speed}`)
+          console.log(`speed2 ${speed2}`)
             timer++;
-            speed / 6;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            speed2 / 6;
+             speed / 6
+            handling = handling / 100
+            handling2 = handling2 / 100
+            speed2 / 6
 
-            let formula = (speed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (speed) += (handling) += (weight / 100)
+            
+            console.log(formula)
 
             // car 2
-
-            let formula2 = (speed2 += handling2 += weight2 / 100);
-            console.log(formula2);
-
+            
+            let formula2 = (speed2) += (handling2) += (weight2 / 100)
+            console.log(formula2)
+        
             tracklength += formula;
             tracklength2 += formula2;
 
@@ -477,9 +483,7 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-              if (weather2.Reward > 0) {
-                cashwon = cashwon += weather2.Reward;
-              }
+          
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -673,7 +677,6 @@ module.exports = {
           });
           console.log("street");
           console.log("race");
-          let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
           const canvas = createCanvas(1280, 720);
@@ -766,7 +769,6 @@ module.exports = {
             name: "profile-image.png",
           });
 
-          console.log(weather2);
 
           let mph = selected.Speed;
 
@@ -877,25 +879,25 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
             timer++;
             console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
             tracklength += formula;
             tracklength2 += formula2;
 
@@ -942,9 +944,7 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-              if (weather2.Reward > 0) {
-                cashwon = cashwon += weather2.Reward;
-              }
+      
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -1321,25 +1321,25 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
             timer++;
             console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
             tracklength += formula;
             tracklength2 += formula2;
 
@@ -1386,9 +1386,7 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-              if (weather2.Reward > 0) {
-                cashwon = cashwon += weather2.Reward;
-              }
+
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -1764,25 +1762,25 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
             timer++;
             console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
             tracklength += formula;
             tracklength2 += formula2;
 
@@ -1829,9 +1827,7 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-              if (weather2.Reward > 0) {
-                cashwon = cashwon += weather2.Reward;
-              }
+       
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -2207,25 +2203,25 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
             timer++;
             console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
             tracklength += formula;
             tracklength2 += formula2;
 
@@ -2271,9 +2267,6 @@ module.exports = {
               }
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
-              }
-              if (weather2.Reward > 0) {
-                cashwon = cashwon += weather2.Reward;
               }
 
               if (pet.name) {
@@ -2650,25 +2643,25 @@ module.exports = {
           }, accms2);
           let timer = 0;
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
             timer++;
             console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
+            let newspeed = speed / 6.3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 6.3
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
             tracklength += formula;
             tracklength2 += formula2;
 
@@ -2714,9 +2707,6 @@ module.exports = {
               }
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
-              }
-              if (weather2.Reward > 0) {
-                cashwon = cashwon += weather2.Reward;
               }
 
               if (pet.name) {
@@ -2964,21 +2954,21 @@ module.exports = {
           ctx.fillText(car2.Name, 845, 180);
           ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
 
+     
+
           let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
             name: "profile-image.png",
           });
 
-          console.log(weather2);
 
-          let slipchance = weather2.Slip;
-          let speedreduce = weather2.SpeedReduce;
+          
           let mph = selected.Speed;
-
+          
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling;
+          let handling = selected.Handling 
 
           if (!selected.WeightStat) {
             selected.WeightStat =
@@ -2986,11 +2976,11 @@ module.exports = {
           }
 
           let mph2 = car2.Speed;
-
+          
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling / weather2.Grip;
-
+          let handling2 = car2.Handling 
+   
           let speed = 0;
           let speed2 = 0;
 
@@ -3046,27 +3036,29 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
-            let newspeed = speed / 5;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 5;
+            let newspeed = speed / 5
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 5
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength -= formula;
+            tracklength2 -= formula2;
 
             if (tracklength <= 0) {
+              clearInterval(i2);
+
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -3163,7 +3155,6 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
 
               console.log(`track length ${tracklength}`);
@@ -3171,12 +3162,16 @@ module.exports = {
             }
             // lost
             else if (tracklength2 <= 0) {
+              clearInterval(i2);
+
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
               embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Highway Race lost!`);
+              embed.setTitle(
+                `Tier ${bot} Highway Race lost!`
+              );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
               await i.editReply({ embeds: [embed], files: [attachment] });
@@ -3191,7 +3186,6 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
             }
           }, 1000);
@@ -3390,26 +3384,28 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
-            let newspeed = speed / 3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 3;
+            let newspeed = speed / 3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 3
 
-            let formula = (newspeed += handling += weight / 75);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 75)
+            
+            console.log(formula)
             // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 75)
+            tracklength -= formula;
+            tracklength2 -= formula2;
+            if (tracklength <= 0) {              
+              clearInterval(i2);
 
-            let formula2 = (newspeed2 += handling2 += weight2 / 75);
-            tracklength += formula;
-            tracklength2 += formula2;
-            if (tracklength <= 0) {
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -3487,7 +3483,6 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
 
               console.log(`track length ${tracklength}`);
@@ -3495,6 +3490,8 @@ module.exports = {
             }
             // lost
             else if (tracklength2 <= 0) {
+              clearInterval(i2);
+
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -3517,7 +3514,6 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
             }
           }, 1000);
@@ -3727,27 +3723,31 @@ module.exports = {
             }
           }, accms2);
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
-            let newspeed = speed / 3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 3;
+            let newspeed = speed / 3
+            handling = handling / 100
+            handling2 = handling2 / 100
+            let newspeed2 = speed2 / 3
 
-            let formula = (newspeed += handling += weight / 75);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 75)
+            
+            console.log(formula)
             // car 2
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 75)
+            tracklength -= formula;
+            tracklength2 -= formula2;
 
-            let formula2 = (newspeed2 += handling2 += weight2 / 75);
-            tracklength += formula;
-            tracklength2 += formula2;
+            console.log(tracklength)
 
             if (tracklength <= 0) {
+              clearInterval(i2);
+
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -3836,14 +3836,17 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
+              
               userdata.save();
 
               console.log(`track length ${tracklength}`);
               console.log(`track length 2 ${tracklength2}`);
+              return
             }
             // lost
             else if (tracklength2 <= 0) {
+              clearInterval(i2);
+
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -3866,8 +3869,8 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
+              return
             }
           }, 1000);
         } else if (race[0].name == "crossrace") {
@@ -4090,29 +4093,31 @@ module.exports = {
           handling = handling / 100;
           handling2 = handling2 / 100;
           let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
+            if(speed2 > mph2){
+              speed2 = mph2
             }
-            if (speed > mph) {
-              speed = mph;
+            if(speed > mph){
+              speed = mph
             }
-            let newspeed = speed / 5;
-            handling = handling / 50;
-            handling2 = handling2 / 50;
-            let newspeed2 = speed2 / 5;
+            let newspeed = speed / 5
+            handling = handling / 50
+            handling2 = handling2 / 50
+            let newspeed2 = speed2 / 5
 
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
+            let formula = (newspeed) += (handling) += (weight / 100)
+            
+            console.log(formula)
             // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
+            
+            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+            tracklength -= formula;
+            tracklength2 -= formula2;
 
             console.log(tracklength);
 
             if (tracklength <= 0) {
+              clearInterval(i2);
+
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -4209,7 +4214,6 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
 
               console.log(`track length ${tracklength}`);
@@ -4217,6 +4221,8 @@ module.exports = {
             }
             // lost
             else if (tracklength2 <= 0) {
+              clearInterval(i2);
+
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
               });
@@ -4239,7 +4245,6 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              clearInterval(i2);
               userdata.save();
             }
           }, 1000);
