@@ -78,7 +78,7 @@
   },
   "small vault": {
     "Price": 50000,
-    "Name": "SmallVault",
+    "Name": "Small Vault",
     "Action": "Store $25,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:smallvault:995501944456089640>",
@@ -226,6 +226,66 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png"
+  },
+  "pizza": {
+    "Price": 0,
+    "Action": "Eat a pizza to increase your pizza delivery xp gain\nFound while doing the pizza delivery job",
+    "Name": "Pizza",
+    "Type": "Usable",
+    "Emote": "<:item_pizza:1098418923638095872>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/xD6h9PB/item-pizza.png"
+  },
+  "veggie pizza": {
+    "Price": 0,
+    "Action": "Eat a veggie pizza to increase your pizza delivery salary by $500\nFound while doing the pizza delivery job",
+    "Name": "Veggie Pizza",
+    "Type": "Usable",
+    "Emote": "<:item_veggiepizzaz:1098418931435311115>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/k03wJJg/item-veggiepizzaz.png"
+  },
+  "gem": {
+    "Price": 0,
+    "Action": "You found the beautiful red gem!\nFound while doing the criminal job",
+    "Name": "Gem",
+    "Type": "Non-Usable",
+    "Emote": "<a:item_gem:1098432365468061741>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/2MB5SNd/item-gem.gif"
+  },
+  "taser": {
+    "Price": 0,
+    "Action": "Prevent someone from robbing you for 7 days\nFound while doing the police job",
+    "Name": "Taser",
+    "Type": "Usable",
+    "Emote": "<:item_taser:1098418926871920680>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/z4DTB4V/item-taser.png"
+  },
+  "pet collar": {
+    "Price": 25000,
+    "Action": "Prevent your pet from getting hungry, thirsty, and running away for 1 hour",
+    "Name": "Pet Collar",
+    "Type": "Usable",
+    "Emote": "<:item_petcollar:1098418926012076132>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/F0vMtpm/item-petcollar.png"
+  },
+  "tequila shot": {
+    "Price": 50000,
+    "Action": "Get insane luck when spinning wheels for 1 hour, but lose half your earnings when racing for 1 hour, There is also a chance you lose $500K.",
+    "Name": "Tequila Shot",
+    "Type": "Usable",
+    "Emote": "<:item_whiskey:1098418928046329967>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/3mgKVRh/item-whiskey.png"
   },
 
   "energy drink": {
