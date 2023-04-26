@@ -81,7 +81,7 @@ async function updateItemShop() {
       let item6 = randitem6.Name;
 
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log(timeout - (Date.now() - itemcooldown) < 0))
+        console.log(timeout - (Date.now() - itemcooldown) < 0)
         console.log("true");
         items.push(item1);
         items.push(item2);
