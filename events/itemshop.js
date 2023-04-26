@@ -47,12 +47,11 @@ async function updateItemShop() {
         {
           $set: {
             itemshop: items,
-            itemshopcooldown: Date.now()
+            itemshopcooldown: Date.now(),
           },
-        },
-        
-        );
-        global.markModified("itemshop");
+        }
+      );
+      global.markModified("itemshop");
       global.save();
     } else {
       items = [];
@@ -81,7 +80,7 @@ async function updateItemShop() {
       let item6 = randitem6.Name;
 
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log(timeout - (Date.now() - itemcooldown) < 0)
+        console.log(timeout - (Date.now() - itemcooldown) < 0);
         console.log("true");
         items.push(item1);
         items.push(item2);
@@ -94,19 +93,17 @@ async function updateItemShop() {
           {},
           {
             $set: {
-              "itemshop": items,
-              itemshopcooldown: Date.now()
+              itemshop: items,
+              itemshopcooldown: Date.now(),
             },
-          },
-          
-          );
-          global.markModified("itemshop");
+          }
+        );
+        global.markModified("itemshop");
         global.save();
         global.save();
 
         console.log(item1);
-      }
-      else {
+      } else {
         return;
       }
     }
