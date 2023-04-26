@@ -45,7 +45,7 @@ async function updateItemShop() {
       global.itemshop = items;
       global.itemshopcooldown = Date.now();
       global.markModified("itemshop");
-      global.update()
+      global.update();
       global.save();
     } else {
       items = [];
