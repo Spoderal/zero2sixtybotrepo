@@ -46,13 +46,12 @@ async function updateItemShop() {
         {},
         {
           $set: {
-            "itemshop": items,
-            itemshopcooldown: Date.now()
+            itemshop: items,
+            itemshopcooldown: Date.now(),
           },
-        },
-        
-        );
-        global.markModified("itemshop");
+        }
+      );
+      global.markModified("itemshop");
       global.save();
     } else {
       items = [];
@@ -93,13 +92,12 @@ async function updateItemShop() {
           {},
           {
             $set: {
-              "itemshop": items,
-              itemshopcooldown: Date.now()
+              itemshop: items,
+              itemshopcooldown: Date.now(),
             },
-          },
-          
-          );
-          global.markModified("itemshop");
+          }
+        );
+        global.markModified("itemshop");
         global.save();
         global.save();
 
