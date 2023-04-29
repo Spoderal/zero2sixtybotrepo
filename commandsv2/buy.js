@@ -30,9 +30,9 @@ module.exports = {
         .setDescription("The amount to buy")
         .setRequired(false)
         .addChoices(
-          {name: "1", value: 1},
-          {name: "5", value: 5},
-          {name: "10", value: 10}
+          { name: "1", value: 1 },
+          { name: "5", value: 5 },
+          { name: "10", value: 10 }
         )
     )
     .addBooleanOption((option) =>
