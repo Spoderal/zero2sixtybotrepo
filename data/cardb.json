@@ -8205,12 +8205,12 @@
       "Image": "https://i.ibb.co/wNww71W/eb110.png",
       "0-60": 8.9,
       "Drift": 0,
-      "LowPrice":1000000,
-      "HighPrice":850000,
+      "LowPrice": 1000000,
+      "HighPrice": 850000,
       "Handling": 650,
       "Class": "S",
       "Weight": 3100,
-      "Obtained":"Used Cars"
+      "Obtained": "Used Cars"
     },
     "2021 porsche mission r": {
       "alias": "2021 mission r",
@@ -8224,12 +8224,12 @@
       "Image": "https://i.ibb.co/Xkzbd0Q/missionr.png",
       "0-60": 5,
       "Drift": 0,
-      "LowPrice":2000000,
-      "HighPrice":100000,
+      "LowPrice": 2000000,
+      "HighPrice": 100000,
       "Handling": 800,
       "Class": "S",
       "Weight": 3300,
-      "Obtained":"Used Cars"
+      "Obtained": "Used Cars"
     },
     "2023 bentley bentayga": {
       "alias": "2023 bentayga",
@@ -8245,9 +8245,9 @@
       "Handling": 750,
       "Class": "A",
       "Weight": 5300,
-      "LowPrice":800000,
-      "HighPrice":500000,
-      "Obtained":"Used Cars"
+      "LowPrice": 800000,
+      "HighPrice": 500000,
+      "Obtained": "Used Cars"
     },
     "2020 land rover range rover": {
       "alias": "2020 range rover",
@@ -8263,7 +8263,7 @@
       "Handling": 950,
       "Class": "B",
       "Weight": 4900,
-      "Obtained":"Super Wheelspin"
+      "Obtained": "Super Wheelspin"
     },
     "1959 cadillac series 62": {
       "alias": "1959 series 62",
@@ -8279,7 +8279,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 2900,
-      "Obtained":"Used Cars"
+      "Obtained": "Used Cars"
     },
     "2021 audi r8 green hell": {
       "alias": "2021 green hell",
@@ -8295,7 +8295,7 @@
       "Handling": 500,
       "Class": "A",
       "Weight": 3500,
-      "Obtained":"Blueprints"
+      "Obtained": "Blueprints"
     },
     "2021 audi r8 lms gt3": {
       "alias": "2021 lms gt3",
@@ -8311,7 +8311,7 @@
       "Handling": 1350,
       "Class": "A",
       "Weight": 3500,
-      "Obtained":"Blueprints"
+      "Obtained": "Blueprints"
     }
   }
 }

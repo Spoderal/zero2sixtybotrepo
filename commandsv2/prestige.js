@@ -53,13 +53,13 @@ module.exports = {
     );
     let vault = userdata.vault;
     if (vault && vault == "small vault") {
-      let cash = userdata.cash
-      let cashtostore = (50000 - cash)
+      let cash = userdata.cash;
+      let cashtostore = 50000 - cash;
 
-      let cashtostore2 = 50000 - cashtostore
+      let cashtostore2 = 50000 - cashtostore;
 
-      if(cashtostore2 <= 0){
-        cashtostore2 = 50000
+      if (cashtostore2 <= 0) {
+        cashtostore2 = 50000;
       }
       await User.findOneAndUpdate(
         {
@@ -82,13 +82,13 @@ module.exports = {
         }
       );
     } else if (vault && vault == "medium vault") {
-      let cash = userdata.cash
-      let cashtostore = (100000 - cash)
+      let cash = userdata.cash;
+      let cashtostore = 100000 - cash;
 
-      let cashtostore2 = 100000 - cashtostore
+      let cashtostore2 = 100000 - cashtostore;
 
-      if(cashtostore2 <= 0){
-        cashtostore2 = 100000
+      if (cashtostore2 <= 0) {
+        cashtostore2 = 100000;
       }
       await User.findOneAndUpdate(
         {
@@ -111,13 +111,13 @@ module.exports = {
         }
       );
     } else if (vault && vault == "large vault") {
-      let cash = userdata.cash
-      let cashtostore = (500000 - cash)
+      let cash = userdata.cash;
+      let cashtostore = 500000 - cash;
 
-      let cashtostore2 = 500000 - cashtostore
+      let cashtostore2 = 500000 - cashtostore;
 
-      if(cashtostore2 <= 0){
-        cashtostore2 = 500000
+      if (cashtostore2 <= 0) {
+        cashtostore2 = 500000;
       }
       await User.findOneAndUpdate(
         {
@@ -139,15 +139,14 @@ module.exports = {
           },
         }
       );
-    } 
-    else if (vault && vault == "huge vault") {
-      let cash = userdata.cash
-      let cashtostore = (1000000 - cash)
+    } else if (vault && vault == "huge vault") {
+      let cash = userdata.cash;
+      let cashtostore = 1000000 - cash;
 
-      let cashtostore2 = 1000000 - cashtostore
+      let cashtostore2 = 1000000 - cashtostore;
 
-      if(cashtostore2 <= 0){
-        cashtostore2 = 1000000
+      if (cashtostore2 <= 0) {
+        cashtostore2 = 1000000;
       }
       await User.findOneAndUpdate(
         {
@@ -169,8 +168,7 @@ module.exports = {
           },
         }
       );
-    } 
-    else {
+    } else {
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,

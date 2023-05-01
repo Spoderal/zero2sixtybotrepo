@@ -3,9 +3,9 @@ const User = require("../schema/profile-schema");
 const lodash = require("lodash");
 const { numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const Cooldowns = require('../schema/cooldowns')
-const ms = require('pretty-ms')
-const {EmbedBuilder} = require('discord.js')
+const Cooldowns = require("../schema/cooldowns");
+const ms = require("pretty-ms");
+const { EmbedBuilder } = require("discord.js");
 
 const colors = require("../common/colors");
 
@@ -22,8 +22,8 @@ module.exports = {
     let user = interaction.user;
     let usertorob = interaction.options.getUser("user");
     let userdata = await User.findOne({ id: userid });
-    let cooldowndata = await Cooldowns.findOne({id: userid})
-    let cooldowndata2 = await Cooldowns.findOne({id: usertorob.id})
+    let cooldowndata = await Cooldowns.findOne({ id: userid });
+    let cooldowndata2 = await Cooldowns.findOne({ id: usertorob.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let user2data = await User.findOne({ id: usertorob.id });
@@ -37,27 +37,29 @@ module.exports = {
         `The person you're trying to steal from needs to be prestige 2!`
       );
 
-        let timeout = 7200000
-      if (cooldowndata.rob !== null && timeout - (Date.now() - cooldowndata.rob) > 0) {
-        let time = ms(timeout - (Date.now() - cooldowndata.rob));
-        let timeEmbed = new EmbedBuilder()
-          .setColor(colors.blue)
-          .setDescription(
-            `You need to wait ${time} before robbing again.`
-          );
-        await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
-        return
-      }
+    let timeout = 7200000;
+    if (
+      cooldowndata.rob !== null &&
+      timeout - (Date.now() - cooldowndata.rob) > 0
+    ) {
+      let time = ms(timeout - (Date.now() - cooldowndata.rob));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`You need to wait ${time} before robbing again.`);
+      await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+      return;
+    }
 
-    if (userid == usertorob.id)  return interaction.reply(`You cant steal from yourself!`);
+    if (userid == usertorob.id)
+      return interaction.reply(`You cant steal from yourself!`);
 
-    if(user2data.canrob == false) {
-      let timeout = 604800000
-      let cooldownrob = cooldowndata2.canrob
+    if (user2data.canrob == false) {
+      let timeout = 604800000;
+      let cooldownrob = cooldowndata2.canrob;
       let time = ms(timeout - (Date.now() - cooldownrob));
 
-      if(timeout - (Date.now() - cooldownrob) > 0) {
-        return interaction.reply(`This user can't be robbed from for ${time}`)
+      if (timeout - (Date.now() - cooldownrob) > 0) {
+        return interaction.reply(`This user can't be robbed from for ${time}`);
       }
     }
 
@@ -89,12 +91,10 @@ module.exports = {
     if (chance <= 50) {
       userdata.using.pull("disguise");
       userdata.save();
-      cooldowndata.rob = Date.now()
-      cooldowndata.save()
+      cooldowndata.rob = Date.now();
+      cooldowndata.save();
       return interaction.reply(`${fail}`);
-      
-    }
-   else if (chance >= 50) {
+    } else if (chance >= 50) {
       let newcash;
       if (cash <= 10000) {
         newcash = 10000;
@@ -112,9 +112,9 @@ module.exports = {
       interaction.reply(
         `${successe}\nGot away with $${numberWithCommas(randcash)}`
       );
-      cooldowndata.rob = Date.now()
+      cooldowndata.rob = Date.now();
       userdata.using.pull("disguise");
-      cooldowndata.save()
+      cooldowndata.save();
       userdata.save();
     }
   },

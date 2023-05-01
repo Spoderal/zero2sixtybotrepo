@@ -477,7 +477,6 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-          
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -498,8 +497,6 @@ module.exports = {
                   }
                 }
 
- 
-
                 earnings.push(
                   `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
                 );
@@ -518,12 +515,10 @@ module.exports = {
                     userdata.update();
                     interaction.channel.send("Your pet collar fell off! :(");
                   }
-                }
-                else {
+                } else {
                   userdata.newpet.love -= 5;
                   userdata.newpet.hunger -= 5;
                   userdata.newpet.thirst -= 3;
-
                 }
 
                 if (userdata.newpet.hunger <= 0) {
@@ -543,7 +538,6 @@ module.exports = {
 
                 userdata.markModified("newpet");
               }
-
 
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
@@ -580,9 +574,11 @@ module.exports = {
                   cashwon = cashwon += cashwon * 0.05;
                 }
               }
-              let itemeffects = userdata.itemeffects || []
-              let itemeffectsfilter = itemeffects.filter((item) => item.item == "tequila shot")
-              if(itemeffectsfilter[0]){
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
                 let cooldown = cooldowndata.tequilla;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -595,21 +591,18 @@ module.exports = {
                   userdata.update();
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
-                if(itemeffectsfilter[0].earning == "bad"){
-                  earnings.push("You lost $500K!")
-                  let usercash = userdata.cash
-                  if((usercash -= 500000) < 0){
-                    userdata.cash = 0
-
-                  }
-                  else {
-                    userdata.cash -= 500000
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
                   }
                 }
-                else if(itemeffectsfilter[0].earning == "good"){
-                  cashwon = (cashwon * 5)
-                }
-              }
               }
 
               if (usinginv.includes("fruit punch")) {
@@ -1023,7 +1016,6 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-      
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -1905,7 +1897,6 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-       
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -3036,8 +3027,6 @@ module.exports = {
             name: "profile-image.png",
           });
 
-
-          
           let mph = selected.Speed;
 
           let weight =
@@ -3055,8 +3044,8 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling 
-   
+          let handling2 = car2.Handling;
+
           let speed = 0;
           let speed2 = 0;
 
@@ -3127,8 +3116,8 @@ module.exports = {
 
             console.log(formula);
             // car 2
-            
-            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+
+            let formula2 = (newspeed2 += handling2 += weight2 / 100);
             tracklength -= formula;
             tracklength2 -= formula2;
 
@@ -3176,8 +3165,7 @@ module.exports = {
 
               let using = userdata.using;
 
-              
-                   if (usinginv.includes("radio")) {
+              if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3212,9 +3200,11 @@ module.exports = {
                   cashwon = cashwon += cashwon * 0.05;
                 }
               }
-              let itemeffects = userdata.itemeffects || []
-              let itemeffectsfilter = itemeffects.filter((item) => item.item == "tequila shot")
-              if(itemeffectsfilter[0]){
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
                 let cooldown = cooldowndata.tequilla;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3227,21 +3217,18 @@ module.exports = {
                   userdata.update();
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
-                if(itemeffectsfilter[0].earning == "bad"){
-                  earnings.push("You lost $500K!")
-                  let usercash = userdata.cash
-                  if((usercash -= 500000) < 0){
-                    userdata.cash = 0
-
-                  }
-                  else {
-                    userdata.cash -= 500000
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
                   }
                 }
-                else if(itemeffectsfilter[0].earning == "good"){
-                  cashwon = (cashwon * 5)
-                }
-              }
               }
 
               if (usinginv.includes("fruit punch")) {
@@ -3551,11 +3538,11 @@ module.exports = {
 
             console.log(formula);
             // car 2
-            
-            let formula2 = (newspeed2) += (handling2) += (weight2 / 75)
+
+            let formula2 = (newspeed2 += handling2 += weight2 / 75);
             tracklength -= formula;
             tracklength2 -= formula2;
-            if (tracklength <= 0) {              
+            if (tracklength <= 0) {
               clearInterval(i2);
 
               ctx.save();
@@ -3583,7 +3570,7 @@ module.exports = {
               if (weather2.Reward > 0) {
                 cashwon = cashwon += weather2.Reward;
               }
-              
+
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
                 earnings.push(
@@ -3593,7 +3580,7 @@ module.exports = {
               let raceranks = 1;
 
               let using = userdata.using;
-  
+
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
@@ -3629,9 +3616,11 @@ module.exports = {
                   cashwon = cashwon += cashwon * 0.05;
                 }
               }
-              let itemeffects = userdata.itemeffects || []
-              let itemeffectsfilter = itemeffects.filter((item) => item.item == "tequila shot")
-              if(itemeffectsfilter[0]){
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
                 let cooldown = cooldowndata.tequilla;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -3644,21 +3633,18 @@ module.exports = {
                   userdata.update();
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
-                if(itemeffectsfilter[0].earning == "bad"){
-                  earnings.push("You lost $500K!")
-                  let usercash = userdata.cash
-                  if((usercash -= 500000) < 0){
-                    userdata.cash = 0
-
-                  }
-                  else {
-                    userdata.cash -= 500000
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
                   }
                 }
-                else if(itemeffectsfilter[0].earning == "good"){
-                  cashwon = (cashwon * 5)
-                }
-              }
               }
 
               if (usinginv.includes("fruit punch")) {
@@ -3693,9 +3679,9 @@ module.exports = {
                   rpwon = rpwon * 2;
                 }
               }
-          
-                earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-                earnings.push(`${emotes.rp} +${rpwon}`);
+
+              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+              earnings.push(`${emotes.rp} +${rpwon}`);
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
@@ -3975,12 +3961,12 @@ module.exports = {
 
             console.log(formula);
             // car 2
-            
-            let formula2 = (newspeed2) += (handling2) += (weight2 / 75)
+
+            let formula2 = (newspeed2 += handling2 += weight2 / 75);
             tracklength -= formula;
             tracklength2 -= formula2;
 
-            console.log(tracklength)
+            console.log(tracklength);
 
             if (tracklength <= 0) {
               clearInterval(i2);
@@ -4022,7 +4008,7 @@ module.exports = {
                 earnings.push(`${emotes.ekey} +${exotickeys}`);
                 userdata.ekeys += exotickeys;
               }
-              
+
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
                 earnings.push(
@@ -4065,9 +4051,11 @@ module.exports = {
                   cashwon = cashwon += cashwon * 0.05;
                 }
               }
-              let itemeffects = userdata.itemeffects || []
-              let itemeffectsfilter = itemeffects.filter((item) => item.item == "tequila shot")
-              if(itemeffectsfilter[0]){
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
                 let cooldown = cooldowndata.tequilla;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -4080,21 +4068,18 @@ module.exports = {
                   userdata.update();
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
-                if(itemeffectsfilter[0].earning == "bad"){
-                  earnings.push("You lost $500K!")
-                  let usercash = userdata.cash
-                  if((usercash -= 500000) < 0){
-                    userdata.cash = 0
-
-                  }
-                  else {
-                    userdata.cash -= 500000
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
                   }
                 }
-                else if(itemeffectsfilter[0].earning == "good"){
-                  cashwon = (cashwon * 5)
-                }
-              }
               }
 
               if (usinginv.includes("fruit punch")) {
@@ -4129,7 +4114,7 @@ module.exports = {
                   rpwon = rpwon * 2;
                 }
               }
-              
+
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
               userdata.racerank += raceranks;
@@ -4155,12 +4140,12 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              
+
               userdata.save();
 
               console.log(`track length ${tracklength}`);
               console.log(`track length 2 ${tracklength2}`);
-              return
+              return;
             }
             // lost
             else if (tracklength2 <= 0) {
@@ -4189,7 +4174,7 @@ module.exports = {
                 userdata.markModified("tutorial");
               }
               userdata.save();
-              return
+              return;
             }
           }, 1000);
         } else if (race[0].name == "crossrace") {
@@ -4427,8 +4412,8 @@ module.exports = {
 
             console.log(formula);
             // car 2
-            
-            let formula2 = (newspeed2) += (handling2) += (weight2 / 100)
+
+            let formula2 = (newspeed2 += handling2 += weight2 / 100);
             tracklength -= formula;
             tracklength2 -= formula2;
 
@@ -4528,9 +4513,11 @@ module.exports = {
                   cashwon = cashwon += cashwon * 0.05;
                 }
               }
-              let itemeffects = userdata.itemeffects || []
-              let itemeffectsfilter = itemeffects.filter((item) => item.item == "tequila shot")
-              if(itemeffectsfilter[0]){
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
                 let cooldown = cooldowndata.tequilla;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
@@ -4543,21 +4530,18 @@ module.exports = {
                   userdata.update();
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
-                if(itemeffectsfilter[0].earning == "bad"){
-                  earnings.push("You lost $500K!")
-                  let usercash = userdata.cash
-                  if((usercash -= 500000) < 0){
-                    userdata.cash = 0
-
-                  }
-                  else {
-                    userdata.cash -= 500000
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
                   }
                 }
-                else if(itemeffectsfilter[0].earning == "good"){
-                  cashwon = (cashwon * 5)
-                }
-              }
               }
 
               if (usinginv.includes("fruit punch")) {

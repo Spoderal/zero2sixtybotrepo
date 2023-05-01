@@ -119,7 +119,7 @@
       "Image": "https://i.ibb.co/QPC2rQp/part-t4exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5,
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t5exhaust": {
       "Name": "T5Exhaust",
@@ -138,7 +138,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 5,
       "Color": "#1859d0",
-      "Obtained":"Fusing 2 T4Exhaust"
+      "Obtained": "Fusing 2 T4Exhaust"
     },
     "txexhaust": {
       "Name": "TXExhaust",
@@ -157,7 +157,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 10,
       "Color": "#ffffff",
-      "Obtained":"Fusing T5Exhaust with 100 Xessence"
+      "Obtained": "Fusing T5Exhaust with 100 Xessence"
     },
     "t1clutch": {
       "Name": "T1Clutch",
@@ -230,7 +230,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 30,
       "Image": "https://i.ibb.co/TTT3Nn8/part-t4clutch.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t5clutch": {
       "Name": "T5Clutch",
@@ -249,7 +249,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 50,
       "Image": "https://i.ibb.co/PD5RWwY/part-t5clutch.png",
-      "Obtained":"Fusing 2 T4Clutch"
+      "Obtained": "Fusing 2 T4Clutch"
     },
     "txclutch": {
       "Name": "TXClutch",
@@ -267,7 +267,7 @@
       "AddedHandling": 100,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/3W7fCy6/part-txclutch.png",
-      "Obtained":"Fusing T5Clutch with 100 Xessence",
+      "Obtained": "Fusing T5Clutch with 100 Xessence",
       "AddHandling": 100
     },
     "t1intercooler": {
@@ -286,7 +286,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": "5",
       "Image": "https://i.ibb.co/pJTLWSJ/t1intercooler.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t2intercooler": {
       "Name": "T2Intercooler",
@@ -304,7 +304,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": "10",
       "Image": "https://i.ibb.co/ZXyNFQs/t2intercooler.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t3intercooler": {
       "Name": "T3Intercooler",
@@ -322,7 +322,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": "12",
       "Image": "https://i.ibb.co/Tgy17WV/t3intercooler.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t4intercooler": {
       "Name": "T4Intercooler",
@@ -340,7 +340,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": "13",
       "Image": "https://i.ibb.co/8mXVRh1/t4intercooler.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t5intercooler": {
       "Name": "T5Intercooler",
@@ -358,7 +358,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": "15",
       "Image": "https://i.ibb.co/sb522Gt/t5intercooler.png",
-      "Obtained":"Fusing 2 T4Intercooler"
+      "Obtained": "Fusing 2 T4Intercooler"
     },
     "t1ecu": {
       "Name": "T1ECU",
@@ -427,7 +427,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": "8",
       "Image": "https://i.ibb.co/VQ45YZk/t4ecu.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t5ecu": {
       "Name": "T5ECU",
@@ -445,7 +445,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 12,
       "Image": "https://i.ibb.co/C6GTX0D/t5ecu.png",
-      "Obtained":"Fusing 2 T4ECU"
+      "Obtained": "Fusing 2 T4ECU"
     },
     "t1nitro": {
       "Name": "T1Nitro",
@@ -531,7 +531,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "10",
       "Image": "https://i.ibb.co/1MSBNVk/t4turbo.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t5turbo": {
       "Name": "T5Turbo",
@@ -549,7 +549,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "Image": "https://i.ibb.co/yQGswVn/t5turbo.png",
-      "Obtained":"Fusing 2 T4Turbo"
+      "Obtained": "Fusing 2 T4Turbo"
     },
     "txturbo": {
       "Name": "TXTurbo",
@@ -567,7 +567,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png",
-      "Obtained":"Fusing T5Turbo with 100 Xessence"
+      "Obtained": "Fusing T5Turbo with 100 Xessence"
     },
 
     "t1brakes": {
@@ -638,7 +638,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 20,
       "Image": "https://i.ibb.co/1rkjcVD/part-t4brakesd.png",
-      "Obtained":"Wheelspin"
+      "Obtained": "Wheelspin"
     },
     "t5brakes": {
       "Name": "T5Brakes",
@@ -656,7 +656,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 25,
       "Image": "https://i.ibb.co/LNdPxvY/part-t5brakes.png",
-      "Obtained":"Fusing 2 T4Brakes"
+      "Obtained": "Fusing 2 T4Brakes"
     },
     "t1tracktires": {
       "Name": "T1TrackTires",
@@ -897,7 +897,7 @@
       "Color": "#00ae00",
       "Image": "https://i.ibb.co/987LLbp/part-t5intake.png"
     },
-    
+
     "txintake": {
       "Name": "TXIntake",
       "AddedSpeed": 10,
@@ -1178,7 +1178,7 @@
       "DecreaseHandling": 0,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
-      "Market":false
+      "Market": false
     },
     "super rocket engine": {
       "Name": "Super Rocket Engine",
@@ -1301,7 +1301,6 @@
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/P6JJgg2/car-hook.png"
     },
-   
 
     "t1tires": {
       "Name": "T1Tires",
@@ -1920,8 +1919,6 @@
       "AddHandling": 25,
       "Image": "https://i.ibb.co/bRHYcLz/t5racesuspension.png"
     },
-
-
 
     "wintertires": {
       "Name": "WinterTires",

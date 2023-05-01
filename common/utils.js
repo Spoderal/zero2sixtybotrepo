@@ -53,12 +53,8 @@ function convertMPHtoKPH(mph) {
 function isInt(n) {
   var er = /^-?[0-9]+$/;
 
-    return er.test(n);
-
-
+  return er.test(n);
 }
-
-
 
 module.exports = {
   numberWithCommas,
@@ -71,6 +67,5 @@ module.exports = {
   wait,
   formatDate,
   convertMPHtoKPH,
-  isInt
+  isInt,
 };
-

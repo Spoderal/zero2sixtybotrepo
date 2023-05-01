@@ -45,10 +45,10 @@ module.exports = {
     let settings = userdata.settings;
     let brandsarr = [];
     let embedl = new Discord.EmbedBuilder()
-    .setTitle(`${emotes.loading} Loading`)
-    .setDescription("Fetching data, this wont take too long!")
-    .setColor(colors.blue)
-    await interaction.reply({embeds: [embedl], fetchReply: true});
+      .setTitle(`${emotes.loading} Loading`)
+      .setDescription("Fetching data, this wont take too long!")
+      .setColor(colors.blue);
+    await interaction.reply({ embeds: [embedl], fetchReply: true });
     for (let b in brands) {
       brandsarr.push(brands[b]);
     }
@@ -56,7 +56,6 @@ module.exports = {
     let ucars = userdata.cars;
     let carindb = ucars.filter((c) => c.ID == item);
     if (list[item.toLowerCase()]) {
-    
       let canvas = createCanvas(1280, 720);
       let ctx = canvas.getContext("2d");
       let carindb = list[item.toLowerCase()];
@@ -113,7 +112,11 @@ module.exports = {
           .setStyle("Success")
       );
 
-      let msg = await interaction.editReply({embeds: [], files: [attachment], components: [row] });
+      let msg = await interaction.editReply({
+        embeds: [],
+        files: [attachment],
+        components: [row],
+      });
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
@@ -247,7 +250,7 @@ module.exports = {
     } else if (carindb[0]) {
       let canvas = createCanvas(1280, 720);
       let ctx = canvas.getContext("2d");
-      
+
       if (carindb.length == 0) {
         return interaction.editReply("Thats not an ID!");
       }
@@ -474,14 +477,19 @@ module.exports = {
 
       let avg = prices / total;
 
-      if(isNaN(avg)) {
-        avg = 0
+      if (isNaN(avg)) {
+        avg = 0;
       }
 
-      
       let embed = new Discord.EmbedBuilder()
         .setTitle(`Stats for ${partindb.Emote} ${partindb.Name}`)
-        .setDescription(`Store Price: ${toCurrency(partindb.Price)}\n\n${stats.join("\n")}\n\nMarket Listings: ${mark.length}\nAverage Price: ${toCurrency(avg)}`)
+        .setDescription(
+          `Store Price: ${toCurrency(partindb.Price)}\n\n${stats.join(
+            "\n"
+          )}\n\nMarket Listings: ${mark.length}\nAverage Price: ${toCurrency(
+            avg
+          )}`
+        )
         .setColor(colors.blue);
 
       if (partindb.Image) {
@@ -496,7 +504,10 @@ module.exports = {
           .setStyle("Success")
       );
 
-      let msg = await interaction.editReply({ embeds: [embed], components: [row] });
+      let msg = await interaction.editReply({
+        embeds: [embed],
+        components: [row],
+      });
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
@@ -647,7 +658,10 @@ module.exports = {
           .setStyle("Success")
       );
 
-      let msg = await interaction.editReply({ embeds: [embed], components: [row] });
+      let msg = await interaction.editReply({
+        embeds: [embed],
+        components: [row],
+      });
 
       let filter = (btnInt) => {
         return interaction.user.id === btnInt.user.id;
