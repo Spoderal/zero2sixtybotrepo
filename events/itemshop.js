@@ -42,10 +42,17 @@ async function updateItemShop() {
       items.push(item5);
       items.push(item6);
 
-      global.itemshop = items;
-      global.itemshopcooldown = Date.now();
-      global.markModified("itemshop");
-
+      await Global.findOneAndUpdate(
+        {},
+        {
+          $set: {
+            itemshop: items,
+            itemshopcooldown: Date.now()
+          },
+        },
+        
+        );
+        global.markModified("itemshop");
       global.save();
     } else {
       items = [];
@@ -74,6 +81,7 @@ async function updateItemShop() {
       let item6 = randitem6.Name;
 
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
+        console.log(timeout - (Date.now() - itemcooldown) < 0)
         console.log("true");
         items.push(item1);
         items.push(item2);
@@ -82,11 +90,17 @@ async function updateItemShop() {
         items.push(item5);
         items.push(item6);
 
-        global.itemshop = items;
-        global.itemshopcooldown = Date.now();
-
-        global.markModified("itemshop");
-        global.update();
+        await Global.findOneAndUpdate(
+          {},
+          {
+            $set: {
+              "itemshop": items,
+              itemshopcooldown: Date.now()
+            },
+          },
+          
+          );
+          global.markModified("itemshop");
         global.save();
 
         console.log(item1);

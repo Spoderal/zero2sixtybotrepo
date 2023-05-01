@@ -18,7 +18,8 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-
+    let personalities = ["is currently shy", "is currently joyful", "is currently calm", "is currently bored", "wants to go for a drive", "is currently gentle", "is currently serious", "is currently sassy", "is currently lonely", "is currently relaxed", "is currently amazed", "has the need for speed"]
+    let personality = lodash.sample(personalities)
     let pet = userdata.newpet;
     if (!pet.name) return interaction.reply(`You don't have a pet!`);
     let hunger = pet.hunger;
@@ -45,7 +46,7 @@ module.exports = {
       .setAuthor({ name: `${petbreed}`, iconURL: petimage })
       .addFields([
         { name: "Name", value: `${name}`, inline: true },
-        { name: "Status", value: "Looking for xessence", inline: true },
+        { name: "Status", value: `Your pet is currently **${personality}**`, inline: true },
         { name: "Hunger", value: `${hunger}`, inline: true },
         { name: "Thirst", value: `${thirst}`, inline: true },
         { name: "Love", value: `${love}`, inline: true },
@@ -122,7 +123,7 @@ module.exports = {
           .setAuthor({ name: `${petbreed}`, iconURL: petimage })
           .addFields([
             { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Status", value: `Your pet is currently **${personality}**`, inline: true },
             { name: "Hunger", value: `${hunger}`, inline: true },
             { name: "Thirst", value: `${thirst}`, inline: true },
             { name: "Love", value: `${newlove}`, inline: true },
@@ -157,7 +158,7 @@ module.exports = {
           .setAuthor({ name: `${petbreed}`, iconURL: petimage })
           .addFields([
             { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Status", value: `Your pet is currently **${personality}**`, inline: true },
             { name: "Hunger", value: `${newhunger}`, inline: true },
             { name: "Thirst", value: `${thirst}`, inline: true },
             { name: "Love", value: `${love}`, inline: true },
@@ -193,7 +194,7 @@ module.exports = {
           .setAuthor({ name: `${petbreed}`, iconURL: petimage })
           .addFields([
             { name: "Name", value: `${name}`, inline: true },
-            { name: "Status", value: "Looking for xessence", inline: true },
+            { name: "Status", value: `Your pet is currently **${personality}**`, inline: true },
             { name: "Hunger", value: `${hunger}`, inline: true },
             { name: "Thirst", value: `${newthirst}`, inline: true },
             { name: "Love", value: `${love}`, inline: true },
@@ -242,7 +243,7 @@ module.exports = {
             .setAuthor({ name: `${petbreed}`, iconURL: petimage })
             .addFields([
               { name: "Name", value: `${name}`, inline: true },
-              { name: "Status", value: "Looking for xessence", inline: true },
+              { name: "Status", value: `Your pet is currently **${personality}**`, inline: true },
               { name: "Hunger", value: `${hunger}`, inline: true },
               { name: "Thirst", value: `${thirst}`, inline: true },
               { name: "Love", value: `${love}`, inline: true },

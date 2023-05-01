@@ -6,6 +6,7 @@ const emotes = {
   featuresUpdate: "<:features_update:974452301920104509>",
   x: "❌",
   check: "✅",
+  loading: "<a:zloading:1102320589194150028>",
 
   // Currency
   cash: "<:zecash:983966383408832533>",

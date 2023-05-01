@@ -5,6 +5,8 @@ const {
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
+const cardb = require("../data/cardb.json")
+const itemdb = require("../data/items.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -38,7 +40,7 @@ module.exports = {
             emoji: "⬆️",
           },
           {
-            label: "4/1/2023",
+            label: "4/31/2023",
             description: "Information for the recent big update!",
             value: "6_update",
             customId: "up6",
@@ -56,7 +58,7 @@ module.exports = {
             ⚙️ Latest Patch 4/18/2023\n
             🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 4/11/2023\n
-            🎉 Big Update 4/1/2023\n
+            🎉 Big Update 4/31/2023\n
         `);
 
     embed.setColor(colors.blue);
@@ -133,18 +135,58 @@ module.exports = {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Big Update`);
-            embed
-              .setDescription(
-                `• New race system, use /race to find most races in one place! The only one's not there are drift, squadrace, timetrial, and cashcup\n
-                • New stats cards are finally here! New designs for cars make showing cars stats a lot better!\n
-                • New race: cross country, you can earn barn maps and $350 * the bot tier!
-                • Race rewards adjusted\n
-                • New cars, check /dealer\n
-                • New codes\n
-                
-                `
-              )
-              .setFooter({ text: "4/1/2023" })
+            embed.addFields(
+              {
+                name: 'Features ⭐',
+                value: `Used car dealership\n
+                Favorite cars filtering in garage\n
+                Steal changed to rob\n
+                Pet statuses\n
+                New parts store design\n
+                Drift is easier\n
+                New part, and item skins\n
+                F1 Event ended`,
+                inline: true
+              },
+              {
+                name: 'Cars 🚗',
+                value: `
+                ${cardb.Cars["2021 porsche 911 turbo"].Emote} ${cardb.Cars["2021 porsche 911 turbo"].Name}
+
+                ${cardb.Cars["1992 bugatti eb110"].Emote} ${cardb.Cars["1992 bugatti eb110"].Name}
+
+                ${cardb.Cars["2021 porsche mission r"].Emote} ${cardb.Cars["2021 porsche mission r"].Name}
+
+                ${cardb.Cars["2023 bentley bentayga"].Emote} ${cardb.Cars["2023 bentley bentayga"].Name}
+
+                 ${cardb.Cars["2020 land rover range rover"].Emote} ${cardb.Cars["2020 land rover range rover"].Name}
+
+                 ${cardb.Cars["2021 audi r8 lms gt3"].Emote} ${cardb.Cars["2021 audi r8 lms gt3"].Name}
+
+                 ${cardb.Cars["2021 audi r8 green hell"].Emote} ${cardb.Cars["2021 audi r8 green hell"].Name}
+
+                 ${cardb.Cars["1959 cadillac series 62"].Emote} ${cardb.Cars["1959 cadillac series 62"].Name}
+
+                 ${cardb.Cars["1981 dmc delorean"].Emote} ${cardb.Cars["1981 dmc delorean"].Name} *RETURNED*
+                `,
+                inline: true
+              },
+              {
+                name: `Items 🪛`,
+                value: `
+                ${itemdb.gem.Emote} ${itemdb.gem.Name}\n
+                ${itemdb["pet collar"].Emote} ${itemdb["pet collar"].Name}\n
+                ${itemdb["huge vault"].Emote} ${itemdb["huge vault"].Name}\n
+                ${itemdb.pizza.Emote} ${itemdb.pizza.Name}\n
+                ${itemdb["veggie pizza"].Emote} ${itemdb["veggie pizza"].Name}\n
+                ${itemdb.radio.Emote} ${itemdb.radio.Name}\n
+                ${itemdb.taser.Emote} ${itemdb.taser.Name}\n
+                ${itemdb["tequila shot"].Emote} ${itemdb["tequila shot"].Name}\n
+                `,
+                inline: true
+              }
+            )
+              .setFooter({ text: "4/31/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

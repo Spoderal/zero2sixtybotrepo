@@ -11,7 +11,7 @@
     },
     "larry":{
         "cars":[
-            "2021 porsche 911 turbo",
+            "2023 bentley bentayga",
             "1998 mitsubishi lancer evolution"
         ],
         "name":"Larry",
@@ -21,8 +21,8 @@
     },
     "gary":{
         "cars":[
-            "2021 porsche 911 turbo",
-            "1990 nissan 240sx"
+            "1959 cadillac series 62",
+            "1992 bugatti eb110"
         ],
         "name":"Gary",
         "deals":[true, false, false, false],
@@ -31,7 +31,8 @@
     },
     "mary":{
         "cars":[
-            "2021 porsche 911 turbo"
+            "1990 nissan 240sx",
+            "2021 porsche mission r"
         ],
         "name":"Mary",
         "deals":[true, true, false, false],

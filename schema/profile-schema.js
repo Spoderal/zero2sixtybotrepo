@@ -454,6 +454,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  canrob:{
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  itemeffects:{
+    type: Array,
+    required: false,
+    default: [],
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

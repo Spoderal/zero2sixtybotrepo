@@ -5,7 +5,7 @@ const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
@@ -139,7 +139,34 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "orange juice") {
       userdata.using.push(`orange juice`);
       cooldowndata.orangejuice = Date.now();
-    } else if (itemtouse.toLowerCase() == "oil") {
+    } 
+    else if (itemtouse.toLowerCase() == "radio") {
+      userdata.using.push(`radio`);
+      cooldowndata.radio = Date.now();
+    } 
+    else if (itemtouse.toLowerCase() == "pet collar") {
+      cooldowndata.petcollar = Date.now();
+    } 
+    else if (itemtouse.toLowerCase() == "oil") {
+
+      let oilchance = randomRange(1, 100)
+
+      if(oilchance <= 5){
+        let usercash2 = userdata.cash
+
+        if((usercash2 -= 100000) < 0){
+          userdata.cash = 0
+        }
+        else {
+          userdata.cash -= 100000
+        }
+        setTimeout(async () => {
+          await interaction.channel.send("Because you drank the oil you lost $100k to medical bills, dummy!")
+          
+        }, 2000);
+      }
+
+
       userdata.using.push(`oil`);
       cooldowndata.oil = Date.now();
     } else if (itemtouse.toLowerCase() == "flat tire") {
@@ -182,14 +209,73 @@ module.exports = {
           `You already have a vault activated, prestige to deactivate it!`
         );
       userdata.vault = itemtouse.toLowerCase();
-    } else if (itemtouse.toLowerCase() == "disguise") {
+    }
+    else if (itemtouse.toLowerCase() == "huge vault") {
+      let vault = userdata.vault;
+      if (vault)
+        return interaction.reply(
+          `You already have a vault activated, prestige to deactivate it!`
+        );
+      userdata.vault = itemtouse.toLowerCase();
+    }  
+    else if (itemtouse.toLowerCase() == "disguise") {
       userdata.using.push("disguise");
-    } else if (itemtouse.toLowerCase() == "pet egg") {
+    } 
+    else if (itemtouse.toLowerCase() == "pizza") {
+      let job = userdata.work 
+      
+      if(job == null || !job || job == {}) return interaction.reply("You don't have a job! Use /job")
+      let xpmult = job.xpmult || 0
+
+      userdata.work.xpmult = xpmult += 0.5
+
+      userdata.markModified("work")
+    }
+    else if (itemtouse.toLowerCase() == "veggie pizza") {
+      let job = userdata.work 
+      
+      if(job == null || !job || job == {}) return interaction.reply("You don't have a job! Use /job")
+
+
+      userdata.work.salary += 500
+
+      userdata.markModified("work")
+    }
+
+    else if (itemtouse.toLowerCase() == "radio") {
+      userdata.using.push("radio")
+      cooldowndata.radio = Date.now()
+    }
+
+    else if (itemtouse.toLowerCase() == "taser") {
+      
+      userdata.canrob = false
+      cooldowndata.canrob = Date.now()
+
+      userdata.markModified("work")
+    }
+    else if (itemtouse.toLowerCase() == "tequilla") {
+
+      let chance = randomRange(1, 100)
+
+      if(chance <= 10){
+        userdata.itemeffects.push({item: "tequila", earning: 'bad'})
+      }
+      else {
+        userdata.itemeffects.push({item: "tequila", earning: 'good'})
+      }
+      cooldowndata.tequila = Date.now()
+
+      userdata.markModified("itemeffects")
+    }
+    
+    else if (itemtouse.toLowerCase() == "pet egg") {
       let petsarr = [];
       for (let pet in petdb) {
         petsarr.push(petdb[pet]);
       }
       let randcat = lodash.sample(petsarr);
+      console.log(randcat)
       let pet = userdata.newpet;
       if (pet.name) return interaction.reply(`You already have a pet!`);
       let petindb = petdb[randcat.Breed.toLowerCase()];
@@ -554,7 +640,15 @@ module.exports = {
       userdata.items = items;
       cooldowndata.save();
       userdata.save();
-      await interaction.reply(`Used x${amount2} ${fullname}!`);
+      if(itemdb[itemtouse.toLowerCase()].Used){
+        let randommessage = lodash.sample(itemdb[itemtouse.toLowerCase()].Used)
+
+        await interaction.reply(`${randommessage}\n\nUsed x${amount2} ${fullname}!`);
+      }
+      else {
+        await interaction.reply(`Used x${amount2} ${fullname}!`);
+
+      }
     }
   },
 };

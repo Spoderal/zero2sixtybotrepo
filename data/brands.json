@@ -313,6 +313,12 @@
     "name": "Kawasaki",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
+  "land rover": {
+    "image": "https://i.ibb.co/2cD7bfL/landroiver.png",
+    "emote": "<:landrover:1100977237395767418>",
+    "name": "Land Rover",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
+  },
   "no brand": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
     "name": "No Logo",

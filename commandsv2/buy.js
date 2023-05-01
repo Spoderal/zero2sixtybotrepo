@@ -9,7 +9,7 @@ const { EmbedBuilder } = require("discord.js");
 let parts = require("../data/partsdb.json");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
-const { toCurrency, numberWithCommas } = require("../common/utils");
+const { toCurrency, numberWithCommas, isInt } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const carpacks = require("../data/carpacks.json");
 
@@ -29,6 +29,12 @@ module.exports = {
         .setName("amount")
         .setDescription("The amount to buy")
         .setRequired(false)
+        .addChoices(
+          {name: "1", value: 1},
+          {name: "5", value: 5},
+          {name: "10", value: 10}
+        )
+        
     )
     .addBooleanOption((option) =>
       option
@@ -55,7 +61,7 @@ module.exports = {
       return await interaction.reply(
         "To use this command, specify the car or part you want to buy. Example: /buy 1995 Mazda Miata"
       );
-
+      
     const carsList = cars.Cars;
     const partsList = parts.Parts;
     const itemsList = items;

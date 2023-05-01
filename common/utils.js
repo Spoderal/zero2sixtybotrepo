@@ -50,6 +50,16 @@ function convertMPHtoKPH(mph) {
   return mph * 1.60934;
 }
 
+function isInt(n) {
+  var er = /^-?[0-9]+$/;
+
+    return er.test(n);
+
+
+}
+
+
+
 module.exports = {
   numberWithCommas,
   toCurrency,
@@ -61,4 +71,6 @@ module.exports = {
   wait,
   formatDate,
   convertMPHtoKPH,
+  isInt
 };
+

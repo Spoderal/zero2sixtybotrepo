@@ -39,6 +39,7 @@ module.exports = {
     );
     for (let part in parts) {
       part = parts[part];
+      console.log(part)
       let partindb = partdb.Parts[part.toLowerCase()];
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
@@ -241,6 +242,11 @@ module.exports = {
             .setCustomId("fpower300")
             .setLabel("Power > 300")
             .setEmoji("<:newspeedemote:1049569265730195466>")
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId("favorites")
+            .setLabel("Favorites")
+            .setEmoji("⭐")
             .setStyle("Secondary")
         );
 
@@ -279,7 +285,39 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      } else if (i.customId.includes("fpower250")) {
+      }
+      else if (i.customId.includes("favorites")) {
+        console.log("power");
+        embed.data.fields = null;
+        filtereddcars = udata.cars.filter((car2) => car2.Favorite && car2.Favorite == true);
+        filtereddcars = lodash.chunk(
+          filtereddcars.map((a) => a),
+          6
+        );
+        let filter = filtereddcars[0];
+        itempage = filtereddcars;
+        for (let car in filter) {
+          car = filter[car];
+          let favorite = "";
+          if (car.Favorite == true) {
+            favorite = "⭐";
+          }
+          embed.addFields({
+            name: `${car.Emote} ${car.Name} ${favorite}`,
+            value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
+            inline: true,
+          });
+        }
+
+        embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
+
+        await i.update({
+          embeds: [embed],
+          components: [row, row2],
+          fetchReply: true,
+        });
+      }
+      else if (i.customId.includes("fpower250")) {
         console.log("power");
         embed.data.fields = null;
         filtereddcars = udata.cars.filter((car2) => car2.Speed >= 250);

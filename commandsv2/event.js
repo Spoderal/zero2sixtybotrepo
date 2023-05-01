@@ -35,13 +35,6 @@ module.exports = {
             emoji: "🏆",
           },
           {
-            label: "F1 Icons",
-            description: "Information for the F1 Icons Event",
-            value: "f1_icons",
-            customId: "f1",
-            emoji: "🏎️",
-          },
-          {
             label: "Colonization Race",
             description: "Information for the Colonization Race Event",
             value: "colonize",
@@ -62,7 +55,6 @@ module.exports = {
           **__Events__**
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
-          F1 Icons 🏎️\n
           Colonization Race🪐
       `);
 
@@ -161,127 +153,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "f1_icons") {
-        let row3 = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setLabel("2023 Ferrari SF23")
-            .setEmoji("<:ferrari:931011838374727730>")
-            .setStyle("Secondary")
-            .setCustomId("ferrari"),
-          new ButtonBuilder()
-            .setLabel("2023 Mercedes W14 E")
-            .setEmoji("<:mercedes_z:973000364410404924>")
-            .setStyle("Secondary")
-            .setCustomId("mercedes"),
-          new ButtonBuilder()
-            .setLabel("2023 Aston Martin AMR23")
-            .setEmoji("<:aston:931011548682534962>")
-            .setStyle("Secondary")
-            .setCustomId("aston")
-        );
-        embed.setTitle("F1 Icons Event");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`You can only pick 1 F1 Starter car, so make sure you check that its the one for your style!
-
-            Introducing the first ever F1 cars to Zero2Sixty, you'll be racing on the F1 track to get to 1st place! Multiple laps, and a leaderboard for laps of course! Use /f1race
-
-            And of course there's other F1 cars to obtain, for every lap you complete you'll obtain 1 F1 Blueprint, you can redeem 25 of those for a blueprint that could include an exclusive F1 car!
-
-
-            __List of obtainable F1 Cars__
-            ${cardb.Cars["2023 alfa romeo c38"].Emote} ${cardb.Cars["2023 alfa romeo c38"].Name}
-            ${cardb.Cars["2021 red bull rb18"].Emote} ${cardb.Cars["2021 red bull rb18"].Name}
-            ${cardb.Cars["2022 mclaren mcl36"].Emote} ${cardb.Cars["2022 mclaren mcl36"].Name}
-            ${cardb.Cars["1988 mclaren mp4/4"].Emote} ${cardb.Cars["1988 mclaren mp4/4"].Name}
-            ${cardb.Cars["2006 bmw sauber f106"].Emote} ${cardb.Cars["2006 bmw sauber f106"].Name}
-            ${cardb.Cars["2022 haas vf22"].Emote} ${cardb.Cars["2022 haas vf22"].Name}
-
-            *More to come soon*
-
-            **Choose your starter F1 below!**
-
-            **Ends April 31st 2023**
-            
-                  `);
-        embed.setImage("https://i.ibb.co/N60pqYw/event-f1.png");
-        embed.setColor(colors.blue);
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2, row3],
-          fetchReply: true,
-        });
-
-        if (userdata.chosef1 !== true) {
-          let filter2 = (btnInt) => {
-            return interaction.user.id === btnInt.user.id;
-          };
-          let collector2 = msg.createMessageComponentCollector({
-            filter: filter2,
-          });
-          let carobj = {};
-          collector2.on("collect", async (i) => {
-            if (i.customId == "ferrari") {
-              let carindb = cardb.Cars["2023 ferrari sf23"];
-              carobj = {
-                ID: carindb.alias,
-                Name: carindb.Name,
-                Speed: carindb.Speed,
-                Acceleration: carindb["0-60"],
-                Handling: carindb.Handling,
-                Parts: [],
-                Emote: carindb.Emote,
-                Livery: carindb.Image,
-                Miles: 0,
-                Resale: 1000000,
-              };
-              userdata.cars.push(carobj);
-              userdata.chosef1 = true;
-              userdata.save();
-              await i.update("✅");
-              collector2.stop();
-            } else if (i.customId == "mercedes") {
-              let carindb = cardb.Cars["2023 mercedes w14 e"];
-              carobj = {
-                ID: carindb.alias,
-                Name: carindb.Name,
-                Speed: carindb.Speed,
-                Acceleration: carindb["0-60"],
-                Handling: carindb.Handling,
-                Parts: [],
-                Emote: carindb.Emote,
-                Livery: carindb.Image,
-                Miles: 0,
-                Resale: 1000000,
-              };
-              userdata.cars.push(carobj);
-              userdata.chosef1 = true;
-              userdata.save();
-              await i.update("✅");
-              collector2.stop();
-            } else if (i.customId == "aston") {
-              let carindb = cardb.Cars["2023 aston martin amr23"];
-              carobj = {
-                ID: carindb.alias,
-                Name: carindb.Name,
-                Speed: carindb.Speed,
-                Acceleration: carindb["0-60"],
-                Handling: carindb.Handling,
-                Parts: [],
-                Emote: carindb.Emote,
-                Livery: carindb.Image,
-                Miles: 0,
-                Resale: 1000000,
-              };
-              userdata.cars.push(carobj);
-              userdata.chosef1 = true;
-              userdata.save();
-              await i.update("✅");
-              collector2.stop();
-            }
-          });
-        }
-      }
+      } 
     });
   },
 };

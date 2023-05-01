@@ -53,6 +53,14 @@ module.exports = {
     );
     let vault = userdata.vault;
     if (vault && vault == "small vault") {
+      let cash = userdata.cash
+      let cashtostore = (50000 - cash)
+
+      let cashtostore2 = 50000 - cashtostore
+
+      if(cashtostore2 <= 0){
+        cashtostore2 = 50000
+      }
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -74,6 +82,14 @@ module.exports = {
         }
       );
     } else if (vault && vault == "medium vault") {
+      let cash = userdata.cash
+      let cashtostore = (100000 - cash)
+
+      let cashtostore2 = 100000 - cashtostore
+
+      if(cashtostore2 <= 0){
+        cashtostore2 = 100000
+      }
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -90,11 +106,19 @@ module.exports = {
         },
         {
           $set: {
-            cash: 50000,
+            cash: cashtostore2,
           },
         }
       );
     } else if (vault && vault == "large vault") {
+      let cash = userdata.cash
+      let cashtostore = (500000 - cash)
+
+      let cashtostore2 = 500000 - cashtostore
+
+      if(cashtostore2 <= 0){
+        cashtostore2 = 500000
+      }
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -111,11 +135,42 @@ module.exports = {
         },
         {
           $set: {
-            cash: 100000,
+            cash: cashtostore2,
           },
         }
       );
-    } else {
+    } 
+    else if (vault && vault == "huge vault") {
+      let cash = userdata.cash
+      let cashtostore = (1000000 - cash)
+
+      let cashtostore2 = 1000000 - cashtostore
+
+      if(cashtostore2 <= 0){
+        cashtostore2 = 1000000
+      }
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            vault: null,
+          },
+        }
+      );
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            cash: cashtostore2,
+          },
+        }
+      );
+    } 
+    else {
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,

@@ -71,6 +71,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  canrob: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  rob: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   weekly: {
     type: Number,
     required: false,
@@ -176,6 +186,26 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  tequilla: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  radio: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  petcollar: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  usedcar: {
+    type: Number,
+    required: false,
+    default: 0,
+  }
 });
 
 module.exports = mongoose.model("cooldowns", Cooldowns);

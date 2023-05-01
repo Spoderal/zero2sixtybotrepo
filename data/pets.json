@@ -52,5 +52,51 @@
     "Breed": "Alien",
     "Sad": "https://i.ibb.co/5Lmb9GV/pet-alien-sad.png",
     "Saddest": "https://i.ibb.co/nPHHXqK/pet-alien-sadder.png"
+  },
+  "cow": {
+    "Image": "https://i.ibb.co/SR4K0m2/pet-cow.png",
+    "Emote": "<:pet_cow:1102089091039899748>",
+    "Names": ["Moo", "Moo moo", "Milky"],
+    "Xessence": 20,
+    "Breed": "Cow",
+    "Sad": "https://i.ibb.co/SR4K0m2/pet-cow.png",
+    "Saddest": "https://i.ibb.co/fNVQ4W6/pet-cow-sadder.png"
+  },
+  "brown cow": {
+    "Image": "https://i.ibb.co/bHK3D7w/pet-browncow.png",
+    "Emote": "<:pet_browncow:1102089090024865802>",
+    "Names": ["Moo", "Chocolate Milky"],
+    "Xessence": 20,
+    "Breed": "Brown Cow",
+    "Sad": "https://i.ibb.co/tPK5T7Z/pet-browncow-sad.png",
+    "Saddest": "https://i.ibb.co/H476HW8/pet-browncow-sadder.png"
+  },
+  "pig": {
+    "Image": "https://i.ibb.co/sbvWxdv/pet-pig.png",
+    "Emote": "<:pet_pig:1102089092398841966>",
+    "Names": ["Wilbur"],
+    "Xessence": 20,
+    "Breed": "Pig",
+    "Sad": "https://i.ibb.co/hsHdkCV/pet-pig-sads.png",
+    "Saddest": "https://i.ibb.co/19Y670k/pet-pig-sadder.png"
+  },
+  "spoder": {
+    "Image": "https://i.ibb.co/Xj2H7g1/pet-spoder.png",
+    "Emote": "<:pet_spoder:1102089093548081235>",
+    "Names": ["Spoder"],
+    "Xessence": 30,
+    "Breed": "Spoder",
+    "Sad": "https://i.ibb.co/Xj2H7g1/pet-spoder.png",
+    "Saddest": "https://i.ibb.co/Xj2H7g1/pet-spoder.png"
+  },
+  "widow": {
+    "Image": "https://i.ibb.co/1sLyLpS/pet-widow.png",
+    "Emote": "<:pet_widow:1102089087944511528>",
+    "Names": ["Spoder"],
+    "Xessence": 30,
+    "Breed": "Widow Spoder",
+    "Sad": "https://i.ibb.co/1sLyLpS/pet-widow.png",
+    "Saddest": "https://i.ibb.co/1sLyLpS/pet-widow.png"
   }
+
 }

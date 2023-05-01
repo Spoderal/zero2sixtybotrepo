@@ -61,10 +61,11 @@
     "Action": "Clear all race cooldowns",
     "Name": "Water Bottle",
     "Type": "Usable",
-    "Emote": "<:waterbottle:985084136517668904>",
+    "Emote": "<:item_waterbottle:1101001806462582834>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/GphNrXX/waterbottle.png"
+    "Image": "https://i.ibb.co/jZP44f1/item-waterbottle.png",
+    "Used":["This can't be good for the planet, your race cooldowns have been reset", "You drink some water now you can race again!"]
   },
   "pink slip": {
     "Price": 25000,
@@ -74,18 +75,10 @@
     "Emote": "<:pinkslip:977442825186721863>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png"
+    "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png",
+    "Used":["Great! Now you can bet your car and lose!", "Wow, time to go bet your car"]
   },
-  "small vault": {
-    "Price": 50000,
-    "Name": "SmallVault",
-    "Action": "Store $25,000 cash before prestiging",
-    "Type": "Usable",
-    "Emote": "<:smallvault:995501944456089640>",
-    "Shop": true,
-    "Findable": false,
-    "Image": "https://i.ibb.co/txz0Q8M/smallvault.png"
-  },
+
   "bank increase": {
     "Name": "Bank Increase",
     "Price": 0,
@@ -106,31 +99,55 @@
     "Findable": false,
     "Shop": false
   },
-  "medium vault": {
-    "Price": 100000,
-    "Name": "Medium Vault",
-    "Action": "Store $50,000 cash before prestiging",
+  "small vault": {
+    "Price": 20000,
+    "Name": "Small Vault",
+    "Action": "Store up to $50,000 cash before prestiging",
     "Type": "Usable",
-    "Emote": "<:mediumvault:995502551749365791>",
+    "Emote": "<:item_smallvault:1101004960130408458>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/CHDN54r/mediumvault.png"
+    "Image": "https://i.ibb.co/1Jxn8FJ/item-smallvault.png",
+    "Used":["You store some money in a small vault"]
+  },
+  "medium vault": {
+    "Price": 40000,
+    "Name": "Medium Vault",
+    "Action": "Store up to $100,000 cash before prestiging",
+    "Type": "Usable",
+    "Emote": "<:item_mediumvault:1101004954405175379>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/8KDVHj3/item-mediumvault.png",
+    "Used":["You store some money in a medium vault"]
   },
   "large vault": {
-    "Price": 500000,
+    "Price": 75000,
     "Name": "Large Vault",
-    "Action": "Store $100,000 cash before prestiging",
+    "Action": "Store up to $500,000 cash before prestiging",
     "Type": "Usable",
-    "Emote": "<:largevault:995502550855991298>",
+    "Emote": "<:item_largevault:1101004951574024244>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/6HrgDYx/largevault.png"
+    "Image": "https://i.ibb.co/n3MX4jM/item-largevault.png",
+    "Used":["You store some money in a large vault"]
+  },
+  "huge vault": {
+    "Price": 100000,
+    "Name": "Huge Vault",
+    "Action": "Store up to $1,000,000 cash before prestiging",
+    "Type": "Usable",
+    "Emote": "<:item_hugevault:1101004947107106876>",
+    "Shop": true,
+    "Findable": false,
+    "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
+    "Used":["You store some money in a huge vault"]
   },
   "for sale sign": {
-    "Price": 50000,
-    "Action": "Use this to sell your house",
+    "Price": 0,
+    "Action": "This item used to have a use?",
     "Name": "For Sale Sign",
-    "Type": "Usable",
+    "Type": "Non-Usable",
     "Emote": "<:forsalesign:978883306940674078>",
     "Shop": false,
     "Findable": false,
@@ -145,7 +162,8 @@
     "Emote": "<:item_grapejuice:1094894554097909760>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png"
+    "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png",
+    "Used":["You sip on some grape juice"]
   },
   "apple juice": {
     "Price": 100000,
@@ -155,7 +173,8 @@
     "Emote": "<:item_applejuice:1094894556983611423> ",
     "Shop": true,
     "Findable": true,
-    "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png"
+    "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png",
+    "Used":["You sip on some apple juice"]
   },
   "orange juice": {
     "Price": 60000,
@@ -165,7 +184,8 @@
     "Emote": "<:item_orangejuice:1095474854775508993>",
     "Shop": true,
     "Findable": true,
-    "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png"
+    "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png",
+    "Used":["You sip on some orange juice"]
   },
   "fruit punch": {
     "Price": 0,
@@ -175,7 +195,8 @@
     "Emote": "<:item_fruitpunch:1095474852997120010>",
     "Shop": false,
     "Findable": true,
-    "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png"
+    "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png",
+    "Used":["You sip on some fruit punch"]
   },
   "flat tire": {
     "Price": 50000,
@@ -185,17 +206,19 @@
     "Emote": "<:item_flattire:1095474856306417756>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png"
+    "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png",
+    "Used":["You're gonna receive 5% more cash from racing because we feel sorry for you racing with a flat tire"]
   },
   "oil": {
-    "Price": 500000,
-    "Action": "Gives 5x Daily rewards for 7 days",
+    "Price": 80000,
+    "Action": "Gives 5x Daily rewards for 7 days, but there's a 5% chance you'll lose $100K to medical bills because you shouldn't drink oil...",
     "Name": "Oil",
     "Type": "Usable",
-    "Emote": "<:item_oil:1095474850098843689>",
+    "Emote": "<:item_oil2:1101017605264900166>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/ckgPdkP/item-oil.png"
+    "Image": "https://i.ibb.co/0ZB9W78/item-oil.png",
+    "Used":["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
   },
   "epic lockpick": {
     "Price": 450000,
@@ -205,7 +228,8 @@
     "Emote": "<:item_stronglockpick:1095474858328064065>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png"
+    "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png",
+    "Used":["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
   },
   "pet treats": {
     "Price": 75000,
@@ -215,7 +239,8 @@
     "Emote": "<:item_treats:1095474851046752327>",
     "Shop": true,
     "Findable": true,
-    "Image": "https://i.ibb.co/5MTkjcf/item-treats.png"
+    "Image": "https://i.ibb.co/5MTkjcf/item-treats.png",
+    "Used":["You feed your pet treats and now it can find more xessence"]
   },
   "blueberry": {
     "Price": 350000,
@@ -225,19 +250,96 @@
     "Emote": "<:item_blueberry:1095474857514385480>",
     "Shop": false,
     "Findable": true,
-    "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png"
+    "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png",
+    "Used":["Blue? BLUE? BLUE??? Berry. Your race rank was increased by 1", "You eat a blueberry and see your race rank increase by 1"]
   },
-
+  "pizza": {
+    "Price": 0,
+    "Action": "Eat a pizza to increase your pizza delivery xp gain\n\nFound while doing the pizza delivery job",
+    "Name": "Pizza",
+    "Type": "Usable",
+    "Emote": "<:item_pizza:1098418923638095872>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/xD6h9PB/item-pizza.png",
+    "Used":["Mmm pizza... Now your xp gain from working is increased!", "You eat the pizza and see your xp gain from working suddenly increase."]
+  },
+  "veggie pizza": {
+    "Price": 0,
+    "Action": "Eat a veggie pizza to increase your pizza delivery salary by $500\n\nFound while doing the pizza delivery job",
+    "Name": "Veggie Pizza",
+    "Type": "Usable",
+    "Emote": "<:item_veggiepizzaz:1098418931435311115>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/k03wJJg/item-veggiepizzaz.png",
+    "Used":["Mmm veggie pizza... Now your salary is increased!", "You eat the veggie pizza and see your salary suddenly increase."]
+  },
+  "gem": {
+    "Price": 1000000,
+    "Action": "You found the beautiful red gem!\n\nFound while doing the criminal job",
+    "Name": "Gem",
+    "Type": "Non-Usable",
+    "Emote": "<a:item_gem:1098432365468061741>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/2MB5SNd/item-gem.gif"
+  },
+  "taser": {
+    "Price": 0,
+    "Action": "Prevent people from robbing you for 7 days\n\nFound while doing the police job",
+    "Name": "Taser",
+    "Type": "Usable",
+    "Emote": "<:item_taser:1098418926871920680>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/z4DTB4V/item-taser.png",
+    "Used":["You tase a random cat, now you cant be robbed from for 7 days", "You tase yourself by accident, now you cant be robbed from for 7 days because you're paralyzed", "You tase any intruder for 7 days"]
+  },
+  "pet collar": {
+    "Price": 25000,
+    "Action": "Prevent your pet from getting hungry, thirsty, and running away for 1 hour",
+    "Name": "Pet Collar",
+    "Type": "Usable",
+    "Emote": "<:item_petcollar:1098418926012076132>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/F0vMtpm/item-petcollar.png",
+    "Used":["You put a collar on your pet, now it wont get hungry, get thirsty, or run away! Thats definitely how it works right?"]
+  },
+  "tequila shot": {
+    "Price": 50000,
+    "Action": "Get 5x race earnings for 1 minute. There is also 10% chance you lose $500K per race, why not find out?",
+    "Name": "Tequila Shot",
+    "Type": "Usable",
+    "Emote": "<:item_whiskey:1098418928046329967>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/3mgKVRh/item-whiskey.png",
+    "Used":["You take a shot of tequila and you feel... interesting", "You thought you'd find out what'd happen after 10 shots of tequila and here we are, you may forget this is your 10th though...", "Why are you drinking tequila on a car game bot?"]
+  },
+  "radio": {
+    "Price": 75000,
+    "Action": "Obtain 2x cash, 2x RP, and 2x race rank while racing for 5 minutes",
+    "Name": "Radio",
+    "Type": "Usable",
+    "Emote": "<:item_radio:1101011638540312607>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/ByPdgcC/item-radio.png",
+    "Used":["You turn up the radio and hear Justin Bieber, you're now drifting to it", "The radio is blasting Levels by Avicii while you race"]
+  },
 
   "energy drink": {
     "Price": 25000,
     "Action": "2x RP for 10 minutes",
     "Name": "Energy Drink",
     "Type": "Usable",
-    "Emote": "<:energydrink:982468472787329095>",
+    "Emote": "<:item_energydrink:1101014779499384893>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/qBj7PcP/energydrink.png"
+    "Image": "https://i.ibb.co/mzf6rDT/item-energydrink.png",
+    "Used":["Don't drink too many of these, you get 2x RP for 10 minutes"]
   },
   "super wheelspin": {
     "Price": 0,
@@ -266,7 +368,7 @@
     "Shop": false
   },
   "sponsor": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "2x Cash in races for 10 minutes",
     "Name": "Sponsor",
     "Type": "Usable",
@@ -292,7 +394,8 @@
     "Emote": "<:disguise:1008228542208802816>",
     "Shop": true,
     "Findable": false,
-    "Image": "https://i.ibb.co/M6DHckV/disguise.webp"
+    "Image": "https://i.ibb.co/M6DHckV/disguise.webp",
+    "Used":["What are you doing? I'M CALLING THE COPS", "You put on a hat and sunglasses, you cant be recognized now! Go rob someone or something."]
   },
   "toolbox": {
     "Price": 25000,
