@@ -8277,6 +8277,8 @@
       "0-60": 14,
       "Drift": 1,
       "Handling": 500,
+      "LowPrice": 30000,
+      "HighPrice": 500000,
       "Class": "D",
       "Weight": 2900,
       "Obtained": "Used Cars"
