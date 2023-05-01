@@ -25,9 +25,7 @@ module.exports = {
         .setName("blueprint_type")
         .setDescription("The blueprint to use")
         .setRequired(true)
-        .setChoices(
-          { name: "Blueprint", value: "blueprints" }
-        )
+        .setChoices({ name: "Blueprint", value: "blueprints" })
     ),
   async execute(interaction) {
     let pfps = require("../data/pfpsdb.json");
