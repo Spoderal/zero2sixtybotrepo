@@ -16,24 +16,24 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const itemdb = require("../data/items.json");
 const { createCanvas, loadImage } = require("canvas");
 const brands = require("../data/brands.json");
-const lodash = require("lodash")
+const lodash = require("lodash");
 
 let currencies = require("../data/currencydb.json");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("stats")
     .setDescription("View the default stats of a car or part")
-    .addStringOption((option) => option
-    .setName("item")
-    .setRequired(true)
-    .setDescription('The item to see the stats for')
-    
+    .addStringOption((option) =>
+      option
+        .setName("item")
+        .setRequired(true)
+        .setDescription("The item to see the stats for")
     )
-    .addUserOption((option) => option
-    .setName("user")
-    .setRequired(false)
-    .setDescription('See the stats of a users car')
-
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setRequired(false)
+        .setDescription("See the stats of a users car")
     ),
 
   async execute(interaction) {
@@ -93,7 +93,7 @@ module.exports = {
       let price = `${toCurrency(carindb.Price)}`;
 
       if (carindb.Price <= 0) {
-        let obtained = carindb.Obtained || 'Not Obtainable'
+        let obtained = carindb.Obtained || "Not Obtainable";
         price = `Obtained: ${obtained}`;
       } else if (carindb.Squad) {
         price = `Obtained: Squad`;
@@ -105,16 +105,13 @@ module.exports = {
         name: "stats-image.png",
       });
 
-      let row = new ActionRowBuilder()
-      .addComponents(
+      let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-        .setCustomId("market")
-        .setLabel("View market listings")
-        .setEmoji("🏪")
-        .setStyle("Success")
-      )
-
-      
+          .setCustomId("market")
+          .setLabel("View market listings")
+          .setEmoji("🏪")
+          .setStyle("Success")
+      );
 
       let msg = await interaction.editReply({embeds: [], files: [attachment], components: [row] });
 
@@ -126,122 +123,127 @@ module.exports = {
         time: 60000,
       });
 
-      collector.on('collect', async (i) => {
-        if(i.customId.includes("market")){
-          let filt = "cars"
-        let market;
-        if (filt) {
-          market = global.newmarket.filter((item) => item.type == filt && item.item == carindb.Name.toLowerCase());
-        } else {
-          market = global.newmarket;
-        }
-
-        let marketdisplay = [];
-        for (let m in market) {
-          let listing = market[m];
-
-          if (cars.Cars[listing.item]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${cars.Cars[listing.item].Emote} ${
-                cars.Cars[listing.item].Name
-              } - ${toCurrency(listing.price)}`
+      collector.on("collect", async (i) => {
+        if (i.customId.includes("market")) {
+          let filt = "cars";
+          let market;
+          if (filt) {
+            market = global.newmarket.filter(
+              (item) =>
+                item.type == filt && item.item == carindb.Name.toLowerCase()
             );
-          }
-
-     if (partdb.Parts[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                partdb.Parts[listing.item.toLowerCase()].Emote
-              } ${partdb.Parts[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          } else if (itemdb[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                itemdb[listing.item.toLowerCase()].Emote
-              } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          } else if (currencies[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                currencies[listing.item.toLowerCase()].Emote
-              } ${currencies[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          }
-        }
-
-        marketdisplay = lodash.chunk(
-          marketdisplay.map((a) => `${a}`),
-          10
-        ) || ["Nothing on the market yet!"];
-        if (marketdisplay == undefined || !marketdisplay[0]) {
-          marketdisplay = [["Nothing yet!"]];
-        }
-        console.log(marketdisplay)
-        let embed1 = new Discord.EmbedBuilder()
-          .setTitle(`User Market`)
-          .setDescription(`${marketdisplay[0].join("\n")}`)
-          .setFooter({ text: `Page 1/${marketdisplay.length}` })
-          .setColor(colors.blue)
-
-
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
-
-        let msg = await i.update({
-          embeds: [embed1],
-          components: [row],
-          fetchReply: true,
-        });
-        let filter = (btnInt) => {
-          return interaction.user.id === btnInt.user.id;
-        };
-        let collector = msg.createMessageComponentCollector({
-          filter: filter,
-        });
-        let page = 1;
-        collector.on("collect", async (i) => {
-          let current = page;
-          if (i.customId.includes("previous") && page !== 1) page--;
-          else if (i.customId.includes("next") && page !== marketdisplay.length)
-            page++;
-          else if (i.customId.includes("first")) page = 1;
-          else if (i.customId.includes("last")) page = marketdisplay.length;
-
-          embed1.setDescription(`${marketdisplay[page - 1].join("\n")}`);
-
-          if (current !== page) {
-            embed1.setFooter({ text: `Page ${page}/${marketdisplay.length}` });
-            i.update({ embeds: [embed1] });
           } else {
-            return i.update({ content: "No pages left!" });
+            market = global.newmarket;
           }
-        });
 
+          let marketdisplay = [];
+          for (let m in market) {
+            let listing = market[m];
+
+            if (cars.Cars[listing.item]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${cars.Cars[listing.item].Emote} ${
+                  cars.Cars[listing.item].Name
+                } - ${toCurrency(listing.price)}`
+              );
+            }
+
+            if (partdb.Parts[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  partdb.Parts[listing.item.toLowerCase()].Emote
+                } ${
+                  partdb.Parts[listing.item.toLowerCase()].Name
+                } - ${toCurrency(listing.price)} **x${listing.amount}**`
+              );
+            } else if (itemdb[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  itemdb[listing.item.toLowerCase()].Emote
+                } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
+                  listing.price
+                )} **x${listing.amount}**`
+              );
+            } else if (currencies[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  currencies[listing.item.toLowerCase()].Emote
+                } ${currencies[listing.item.toLowerCase()].Name} - ${toCurrency(
+                  listing.price
+                )} **x${listing.amount}**`
+              );
+            }
+          }
+
+          marketdisplay = lodash.chunk(
+            marketdisplay.map((a) => `${a}`),
+            10
+          ) || ["Nothing on the market yet!"];
+          if (marketdisplay == undefined || !marketdisplay[0]) {
+            marketdisplay = [["Nothing yet!"]];
+          }
+          console.log(marketdisplay);
+          let embed1 = new Discord.EmbedBuilder()
+            .setTitle(`User Market`)
+            .setDescription(`${marketdisplay[0].join("\n")}`)
+            .setFooter({ text: `Page 1/${marketdisplay.length}` })
+            .setColor(colors.blue);
+
+          let row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("previous")
+              .setEmoji("◀️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("next")
+              .setEmoji("▶️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("first")
+              .setEmoji("⏮️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("last")
+              .setEmoji("⏭️")
+              .setStyle("Secondary")
+          );
+
+          let msg = await i.update({
+            embeds: [embed1],
+            components: [row],
+            fetchReply: true,
+          });
+          let filter = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          };
+          let collector = msg.createMessageComponentCollector({
+            filter: filter,
+          });
+          let page = 1;
+          collector.on("collect", async (i) => {
+            let current = page;
+            if (i.customId.includes("previous") && page !== 1) page--;
+            else if (
+              i.customId.includes("next") &&
+              page !== marketdisplay.length
+            )
+              page++;
+            else if (i.customId.includes("first")) page = 1;
+            else if (i.customId.includes("last")) page = marketdisplay.length;
+
+            embed1.setDescription(`${marketdisplay[page - 1].join("\n")}`);
+
+            if (current !== page) {
+              embed1.setFooter({
+                text: `Page ${page}/${marketdisplay.length}`,
+              });
+              i.update({ embeds: [embed1] });
+            } else {
+              return i.update({ content: "No pages left!" });
+            }
+          });
         }
-      })
-      
+      });
     } else if (carindb[0]) {
       let canvas = createCanvas(1280, 720);
       let ctx = canvas.getContext("2d");
@@ -419,7 +421,7 @@ module.exports = {
         files: [attachment],
         fetchReply: true,
       });
-    } else if (partdb.Parts[item.toLowerCase()] ) {
+    } else if (partdb.Parts[item.toLowerCase()]) {
       let part = interaction.options.getString("item");
       part = part.toLowerCase();
       let partindb = partdb.Parts[part];
@@ -460,14 +462,17 @@ module.exports = {
           `${emotes.zero2sixty} Acceleration: +${partindb.DecreasedSixty}`
         );
       }
-      let mark = global.newmarket.filter((item) => item.type == "parts" && item.item == partindb.Name.toLowerCase());
-      let prices = 0
-      for(let par in mark){
-        prices += mark[par].price
+      let mark = global.newmarket.filter(
+        (item) =>
+          item.type == "parts" && item.item == partindb.Name.toLowerCase()
+      );
+      let prices = 0;
+      for (let par in mark) {
+        prices += mark[par].price;
       }
-      let total = mark.length
+      let total = mark.length;
 
-      let avg = prices / total
+      let avg = prices / total;
 
       if(isNaN(avg)) {
         avg = 0
@@ -483,16 +488,13 @@ module.exports = {
         embed.setThumbnail(`${partindb.Image}`);
       }
 
-      let row = new ActionRowBuilder()
-      .addComponents(
+      let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-        .setCustomId("market")
-        .setLabel("View market listings")
-        .setEmoji("🏪")
-        .setStyle("Success")
-      )
-
-      
+          .setCustomId("market")
+          .setLabel("View market listings")
+          .setEmoji("🏪")
+          .setStyle("Success")
+      );
 
       let msg = await interaction.editReply({ embeds: [embed], components: [row] });
 
@@ -504,113 +506,119 @@ module.exports = {
         time: 60000,
       });
 
-      collector.on('collect', async (i) => {
-        if(i.customId.includes("market")){
-          let filt = "parts"
-        let market;
-        if (filt) {
-          market = global.newmarket.filter((item) => item.type == filt && item.item == partindb.Name.toLowerCase());
-        } else {
-          market = global.newmarket;
-        }
-
-        let marketdisplay = [];
-        for (let m in market) {
-          let listing = market[m];
-
-     if (partdb.Parts[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                partdb.Parts[listing.item.toLowerCase()].Emote
-              } ${partdb.Parts[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
+      collector.on("collect", async (i) => {
+        if (i.customId.includes("market")) {
+          let filt = "parts";
+          let market;
+          if (filt) {
+            market = global.newmarket.filter(
+              (item) =>
+                item.type == filt && item.item == partindb.Name.toLowerCase()
             );
-          } else if (itemdb[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                itemdb[listing.item.toLowerCase()].Emote
-              } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          } else if (currencies[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                currencies[listing.item.toLowerCase()].Emote
-              } ${currencies[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          }
-        }
-
-        marketdisplay = lodash.chunk(
-          marketdisplay.map((a) => `${a}`),
-          10
-        ) || ["Nothing on the market yet!"];
-        if (marketdisplay == undefined || !marketdisplay[0]) {
-          marketdisplay = [["Nothing yet!"]];
-        }
-        console.log(marketdisplay)
-        let embed1 = new Discord.EmbedBuilder()
-          .setTitle(`User Market`)
-          .setDescription(`${marketdisplay[0].join("\n")}`)
-          .setFooter({ text: `Page 1/${marketdisplay.length}` })
-          .setColor(colors.blue)
-
-
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
-
-        let msg = await i.update({
-          embeds: [embed1],
-          components: [row],
-          fetchReply: true,
-        });
-        let filter = (btnInt) => {
-          return interaction.user.id === btnInt.user.id;
-        };
-        let collector = msg.createMessageComponentCollector({
-          filter: filter,
-        });
-        let page = 1;
-        collector.on("collect", async (i) => {
-          let current = page;
-          if (i.customId.includes("previous") && page !== 1) page--;
-          else if (i.customId.includes("next") && page !== marketdisplay.length)
-            page++;
-          else if (i.customId.includes("first")) page = 1;
-          else if (i.customId.includes("last")) page = marketdisplay.length;
-
-          embed1.setDescription(`${marketdisplay[page - 1].join("\n")}`);
-
-          if (current !== page) {
-            embed1.setFooter({ text: `Page ${page}/${marketdisplay.length}` });
-            i.update({ embeds: [embed1] });
           } else {
-            return i.update({ content: "No pages left!" });
+            market = global.newmarket;
           }
-        });
 
+          let marketdisplay = [];
+          for (let m in market) {
+            let listing = market[m];
+
+            if (partdb.Parts[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  partdb.Parts[listing.item.toLowerCase()].Emote
+                } ${
+                  partdb.Parts[listing.item.toLowerCase()].Name
+                } - ${toCurrency(listing.price)} **x${listing.amount}**`
+              );
+            } else if (itemdb[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  itemdb[listing.item.toLowerCase()].Emote
+                } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
+                  listing.price
+                )} **x${listing.amount}**`
+              );
+            } else if (currencies[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  currencies[listing.item.toLowerCase()].Emote
+                } ${currencies[listing.item.toLowerCase()].Name} - ${toCurrency(
+                  listing.price
+                )} **x${listing.amount}**`
+              );
+            }
+          }
+
+          marketdisplay = lodash.chunk(
+            marketdisplay.map((a) => `${a}`),
+            10
+          ) || ["Nothing on the market yet!"];
+          if (marketdisplay == undefined || !marketdisplay[0]) {
+            marketdisplay = [["Nothing yet!"]];
+          }
+          console.log(marketdisplay);
+          let embed1 = new Discord.EmbedBuilder()
+            .setTitle(`User Market`)
+            .setDescription(`${marketdisplay[0].join("\n")}`)
+            .setFooter({ text: `Page 1/${marketdisplay.length}` })
+            .setColor(colors.blue);
+
+          let row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("previous")
+              .setEmoji("◀️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("next")
+              .setEmoji("▶️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("first")
+              .setEmoji("⏮️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("last")
+              .setEmoji("⏭️")
+              .setStyle("Secondary")
+          );
+
+          let msg = await i.update({
+            embeds: [embed1],
+            components: [row],
+            fetchReply: true,
+          });
+          let filter = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          };
+          let collector = msg.createMessageComponentCollector({
+            filter: filter,
+          });
+          let page = 1;
+          collector.on("collect", async (i) => {
+            let current = page;
+            if (i.customId.includes("previous") && page !== 1) page--;
+            else if (
+              i.customId.includes("next") &&
+              page !== marketdisplay.length
+            )
+              page++;
+            else if (i.customId.includes("first")) page = 1;
+            else if (i.customId.includes("last")) page = marketdisplay.length;
+
+            embed1.setDescription(`${marketdisplay[page - 1].join("\n")}`);
+
+            if (current !== page) {
+              embed1.setFooter({
+                text: `Page ${page}/${marketdisplay.length}`,
+              });
+              i.update({ embeds: [embed1] });
+            } else {
+              return i.update({ content: "No pages left!" });
+            }
+          });
         }
-      })
+      });
     } else if (itemdb[item.toLowerCase()]) {
       let itemindb = itemdb[item.toLowerCase()];
       let embed = new Discord.EmbedBuilder()
@@ -631,16 +639,13 @@ module.exports = {
         embed.setThumbnail(`${itemindb.Image}`);
       }
 
-      let row = new ActionRowBuilder()
-      .addComponents(
+      let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-        .setCustomId("market")
-        .setLabel("View market listings")
-        .setEmoji("🏪")
-        .setStyle("Success")
-      )
-
-      
+          .setCustomId("market")
+          .setLabel("View market listings")
+          .setEmoji("🏪")
+          .setStyle("Success")
+      );
 
       let msg = await interaction.editReply({ embeds: [embed], components: [row] });
 
@@ -652,114 +657,121 @@ module.exports = {
         time: 60000,
       });
 
-      collector.on('collect', async (i) => {
-        if(i.customId.includes("market")){
-          let filt = "items"
-        let market;
-        if (filt) {
-          market = global.newmarket.filter((item) => item.type == filt && item.item == itemindb.Name.toLowerCase());
-        } else {
-          market = global.newmarket;
-        }
-
-        let marketdisplay = [];
-        for (let m in market) {
-          let listing = market[m];
-
-     if (partdb.Parts[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                partdb.Parts[listing.item.toLowerCase()].Emote
-              } ${partdb.Parts[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
+      collector.on("collect", async (i) => {
+        if (i.customId.includes("market")) {
+          let filt = "items";
+          let market;
+          if (filt) {
+            market = global.newmarket.filter(
+              (item) =>
+                item.type == filt && item.item == itemindb.Name.toLowerCase()
             );
-          } else if (itemdb[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                itemdb[listing.item.toLowerCase()].Emote
-              } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          } else if (currencies[listing.item.toLowerCase()]) {
-            marketdisplay.push(
-              `\`ID ${listing.id}\`: ${
-                currencies[listing.item.toLowerCase()].Emote
-              } ${currencies[listing.item.toLowerCase()].Name} - ${toCurrency(
-                listing.price
-              )} **x${listing.amount}**`
-            );
-          }
-        }
-
-        marketdisplay = lodash.chunk(
-          marketdisplay.map((a) => `${a}`),
-          10
-        ) || ["Nothing on the market yet!"];
-        if (marketdisplay == undefined || !marketdisplay[0]) {
-          marketdisplay = [["Nothing yet!"]];
-        }
-        let embed1 = new Discord.EmbedBuilder()
-          .setTitle(`User Market`)
-          .setDescription(`${marketdisplay[0].join("\n")}`);
-
-        embed1
-          .setFooter({ text: `Page 1/${marketdisplay.length}` })
-          .setColor(`#60B0F4`)
-
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
-        await interaction.deferReply();
-
-        let msg = await interaction.editReply({
-          embeds: [embed1],
-          components: [row],
-          fetchReply: true,
-        });
-        let filter = (btnInt) => {
-          return interaction.user.id === btnInt.user.id;
-        };
-        let collector = msg.createMessageComponentCollector({
-          filter: filter,
-        });
-        let page = 1;
-        collector.on("collect", async (i) => {
-          let current = page;
-          if (i.customId.includes("previous") && page !== 1) page--;
-          else if (i.customId.includes("next") && page !== marketdisplay.length)
-            page++;
-          else if (i.customId.includes("first")) page = 1;
-          else if (i.customId.includes("last")) page = marketdisplay.length;
-
-          embed1.setDescription(`${marketdisplay[page - 1].join("\n")}`);
-
-          if (current !== page) {
-            embed1.setFooter({ text: `Page ${page}/${marketdisplay.length}` });
-            i.update({ embeds: [embed1] });
           } else {
-            return i.update({ content: "No pages left!" });
+            market = global.newmarket;
           }
-        });
 
+          let marketdisplay = [];
+          for (let m in market) {
+            let listing = market[m];
+
+            if (partdb.Parts[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  partdb.Parts[listing.item.toLowerCase()].Emote
+                } ${
+                  partdb.Parts[listing.item.toLowerCase()].Name
+                } - ${toCurrency(listing.price)} **x${listing.amount}**`
+              );
+            } else if (itemdb[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  itemdb[listing.item.toLowerCase()].Emote
+                } ${itemdb[listing.item.toLowerCase()].Name} - ${toCurrency(
+                  listing.price
+                )} **x${listing.amount}**`
+              );
+            } else if (currencies[listing.item.toLowerCase()]) {
+              marketdisplay.push(
+                `\`ID ${listing.id}\`: ${
+                  currencies[listing.item.toLowerCase()].Emote
+                } ${currencies[listing.item.toLowerCase()].Name} - ${toCurrency(
+                  listing.price
+                )} **x${listing.amount}**`
+              );
+            }
+          }
+
+          marketdisplay = lodash.chunk(
+            marketdisplay.map((a) => `${a}`),
+            10
+          ) || ["Nothing on the market yet!"];
+          if (marketdisplay == undefined || !marketdisplay[0]) {
+            marketdisplay = [["Nothing yet!"]];
+          }
+          let embed1 = new Discord.EmbedBuilder()
+            .setTitle(`User Market`)
+            .setDescription(`${marketdisplay[0].join("\n")}`);
+
+          embed1
+            .setFooter({ text: `Page 1/${marketdisplay.length}` })
+            .setColor(`#60B0F4`);
+
+          let row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("previous")
+              .setEmoji("◀️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("next")
+              .setEmoji("▶️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("first")
+              .setEmoji("⏮️")
+              .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("last")
+              .setEmoji("⏭️")
+              .setStyle("Secondary")
+          );
+          await interaction.deferReply();
+
+          let msg = await interaction.editReply({
+            embeds: [embed1],
+            components: [row],
+            fetchReply: true,
+          });
+          let filter = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          };
+          let collector = msg.createMessageComponentCollector({
+            filter: filter,
+          });
+          let page = 1;
+          collector.on("collect", async (i) => {
+            let current = page;
+            if (i.customId.includes("previous") && page !== 1) page--;
+            else if (
+              i.customId.includes("next") &&
+              page !== marketdisplay.length
+            )
+              page++;
+            else if (i.customId.includes("first")) page = 1;
+            else if (i.customId.includes("last")) page = marketdisplay.length;
+
+            embed1.setDescription(`${marketdisplay[page - 1].join("\n")}`);
+
+            if (current !== page) {
+              embed1.setFooter({
+                text: `Page ${page}/${marketdisplay.length}`,
+              });
+              i.update({ embeds: [embed1] });
+            } else {
+              return i.update({ content: "No pages left!" });
+            }
+          });
         }
-      })
+      });
     }
   },
 };

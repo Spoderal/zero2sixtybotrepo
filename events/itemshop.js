@@ -104,6 +104,8 @@ async function updateItemShop() {
         global.save();
 
         console.log(item1);
+      } else {
+        return;
       }
     }
   }, 60000);

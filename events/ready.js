@@ -40,7 +40,6 @@ module.exports = {
     double(client);
     gold(client);
     stats(client);
-    
 
     var express = require("express");
     var app = express();
