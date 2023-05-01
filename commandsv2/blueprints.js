@@ -26,8 +26,7 @@ module.exports = {
         .setDescription("The blueprint to use")
         .setRequired(true)
         .setChoices(
-          { name: "Blueprint", value: "blueprints" },
-          { name: "F1Blueprint", value: "f1blueprints" }
+          { name: "Blueprint", value: "blueprints" }
         )
     ),
   async execute(interaction) {
