@@ -65,7 +65,10 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/jZP44f1/item-waterbottle.png",
-    "Used":["This can't be good for the planet, your race cooldowns have been reset", "You drink some water now you can race again!"]
+    "Used": [
+      "This can't be good for the planet, your race cooldowns have been reset",
+      "You drink some water now you can race again!"
+    ]
   },
   "pink slip": {
     "Price": 25000,
@@ -76,7 +79,10 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png",
-    "Used":["Great! Now you can bet your car and lose!", "Wow, time to go bet your car"]
+    "Used": [
+      "Great! Now you can bet your car and lose!",
+      "Wow, time to go bet your car"
+    ]
   },
 
   "bank increase": {
@@ -108,7 +114,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/1Jxn8FJ/item-smallvault.png",
-    "Used":["You store some money in a small vault"]
+    "Used": ["You store some money in a small vault"]
   },
   "medium vault": {
     "Price": 40000,
@@ -119,7 +125,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/8KDVHj3/item-mediumvault.png",
-    "Used":["You store some money in a medium vault"]
+    "Used": ["You store some money in a medium vault"]
   },
   "large vault": {
     "Price": 75000,
@@ -130,7 +136,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/n3MX4jM/item-largevault.png",
-    "Used":["You store some money in a large vault"]
+    "Used": ["You store some money in a large vault"]
   },
   "huge vault": {
     "Price": 100000,
@@ -141,7 +147,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
-    "Used":["You store some money in a huge vault"]
+    "Used": ["You store some money in a huge vault"]
   },
   "for sale sign": {
     "Price": 0,
@@ -163,7 +169,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png",
-    "Used":["You sip on some grape juice"]
+    "Used": ["You sip on some grape juice"]
   },
   "apple juice": {
     "Price": 100000,
@@ -174,7 +180,7 @@
     "Shop": true,
     "Findable": true,
     "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png",
-    "Used":["You sip on some apple juice"]
+    "Used": ["You sip on some apple juice"]
   },
   "orange juice": {
     "Price": 60000,
@@ -185,7 +191,7 @@
     "Shop": true,
     "Findable": true,
     "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png",
-    "Used":["You sip on some orange juice"]
+    "Used": ["You sip on some orange juice"]
   },
   "fruit punch": {
     "Price": 0,
@@ -196,7 +202,7 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png",
-    "Used":["You sip on some fruit punch"]
+    "Used": ["You sip on some fruit punch"]
   },
   "flat tire": {
     "Price": 50000,
@@ -207,7 +213,9 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png",
-    "Used":["You're gonna receive 5% more cash from racing because we feel sorry for you racing with a flat tire"]
+    "Used": [
+      "You're gonna receive 5% more cash from racing because we feel sorry for you racing with a flat tire"
+    ]
   },
   "oil": {
     "Price": 80000,
@@ -218,7 +226,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/0ZB9W78/item-oil.png",
-    "Used":["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
+    "Used": ["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
   },
   "epic lockpick": {
     "Price": 450000,
@@ -229,7 +237,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png",
-    "Used":["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
+    "Used": ["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
   },
   "pet treats": {
     "Price": 75000,
@@ -240,7 +248,7 @@
     "Shop": true,
     "Findable": true,
     "Image": "https://i.ibb.co/5MTkjcf/item-treats.png",
-    "Used":["You feed your pet treats and now it can find more xessence"]
+    "Used": ["You feed your pet treats and now it can find more xessence"]
   },
   "blueberry": {
     "Price": 350000,
@@ -251,7 +259,10 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png",
-    "Used":["Blue? BLUE? BLUE??? Berry. Your race rank was increased by 1", "You eat a blueberry and see your race rank increase by 1"]
+    "Used": [
+      "Blue? BLUE? BLUE??? Berry. Your race rank was increased by 1",
+      "You eat a blueberry and see your race rank increase by 1"
+    ]
   },
   "pizza": {
     "Price": 0,
@@ -262,7 +273,10 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/xD6h9PB/item-pizza.png",
-    "Used":["Mmm pizza... Now your xp gain from working is increased!", "You eat the pizza and see your xp gain from working suddenly increase."]
+    "Used": [
+      "Mmm pizza... Now your xp gain from working is increased!",
+      "You eat the pizza and see your xp gain from working suddenly increase."
+    ]
   },
   "veggie pizza": {
     "Price": 0,
@@ -273,7 +287,10 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/k03wJJg/item-veggiepizzaz.png",
-    "Used":["Mmm veggie pizza... Now your salary is increased!", "You eat the veggie pizza and see your salary suddenly increase."]
+    "Used": [
+      "Mmm veggie pizza... Now your salary is increased!",
+      "You eat the veggie pizza and see your salary suddenly increase."
+    ]
   },
   "gem": {
     "Price": 1000000,
@@ -294,7 +311,11 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/z4DTB4V/item-taser.png",
-    "Used":["You tase a random cat, now you cant be robbed from for 7 days", "You tase yourself by accident, now you cant be robbed from for 7 days because you're paralyzed", "You tase any intruder for 7 days"]
+    "Used": [
+      "You tase a random cat, now you cant be robbed from for 7 days",
+      "You tase yourself by accident, now you cant be robbed from for 7 days because you're paralyzed",
+      "You tase any intruder for 7 days"
+    ]
   },
   "pet collar": {
     "Price": 25000,
@@ -305,7 +326,9 @@
     "Shop": true,
     "Findable": true,
     "Image": "https://i.ibb.co/F0vMtpm/item-petcollar.png",
-    "Used":["You put a collar on your pet, now it wont get hungry, get thirsty, or run away! Thats definitely how it works right?"]
+    "Used": [
+      "You put a collar on your pet, now it wont get hungry, get thirsty, or run away! Thats definitely how it works right?"
+    ]
   },
   "tequila shot": {
     "Price": 50000,
@@ -316,7 +339,11 @@
     "Shop": true,
     "Findable": true,
     "Image": "https://i.ibb.co/3mgKVRh/item-whiskey.png",
-    "Used":["You take a shot of tequila and you feel... interesting", "You thought you'd find out what'd happen after 10 shots of tequila and here we are, you may forget this is your 10th though...", "Why are you drinking tequila on a car game bot?"]
+    "Used": [
+      "You take a shot of tequila and you feel... interesting",
+      "You thought you'd find out what'd happen after 10 shots of tequila and here we are, you may forget this is your 10th though...",
+      "Why are you drinking tequila on a car game bot?"
+    ]
   },
   "radio": {
     "Price": 75000,
@@ -327,7 +354,10 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/ByPdgcC/item-radio.png",
-    "Used":["You turn up the radio and hear Justin Bieber, you're now drifting to it", "The radio is blasting Levels by Avicii while you race"]
+    "Used": [
+      "You turn up the radio and hear Justin Bieber, you're now drifting to it",
+      "The radio is blasting Levels by Avicii while you race"
+    ]
   },
 
   "energy drink": {
@@ -339,7 +369,7 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/mzf6rDT/item-energydrink.png",
-    "Used":["Don't drink too many of these, you get 2x RP for 10 minutes"]
+    "Used": ["Don't drink too many of these, you get 2x RP for 10 minutes"]
   },
   "super wheelspin": {
     "Price": 0,
@@ -395,7 +425,10 @@
     "Shop": true,
     "Findable": false,
     "Image": "https://i.ibb.co/M6DHckV/disguise.webp",
-    "Used":["What are you doing? I'M CALLING THE COPS", "You put on a hat and sunglasses, you cant be recognized now! Go rob someone or something."]
+    "Used": [
+      "What are you doing? I'M CALLING THE COPS",
+      "You put on a hat and sunglasses, you cant be recognized now! Go rob someone or something."
+    ]
   },
   "toolbox": {
     "Price": 25000,

@@ -85,7 +85,8 @@ module.exports = {
 
     let acc = selected.Acceleration;
 
-    let weight = selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
+    let weight =
+      selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
 
     let handling = selected.Handling;
 
@@ -208,7 +209,9 @@ module.exports = {
     const ctx = canvas.getContext("2d");
     const bg = await loadImage(trackimg);
 
-    let selected1image = await loadImage(`${selected.Livery}`) || cars.Cars[selected.Name.toLowerCase()].Image
+    let selected1image =
+      (await loadImage(`${selected.Livery}`)) ||
+      cars.Cars[selected.Name.toLowerCase()].Image;
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
     ctx.save();

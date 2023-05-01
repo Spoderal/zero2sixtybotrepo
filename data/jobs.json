@@ -13,7 +13,7 @@
       "You delivered it 1 minute past the 30 minute gaurantee",
       "You put olives, they didn't ask for olives"
     ],
-    "items":["pizza", "veggie pizza"],
+    "items": ["pizza", "veggie pizza"],
     "Positions": [
       {
         "name": "Intern Pizza Deliverer",
@@ -88,7 +88,7 @@
       "You missed a guy speeding",
       "You lost a Lamborghini in the dust"
     ],
-    "items":["taser"],
+    "items": ["taser"],
     "Positions": [
       {
         "name": "Cadet",
@@ -166,7 +166,7 @@
       "You tripped while running from the police",
       "You got caught speeding"
     ],
-    "items":["gem"],
+    "items": ["gem"],
     "Positions": [
       {
         "name": "New Robber",

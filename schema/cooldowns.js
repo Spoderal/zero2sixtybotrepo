@@ -205,7 +205,7 @@ const Cooldowns = new mongoose.Schema({
     type: Number,
     required: false,
     default: 0,
-  }
+  },
 });
 
 module.exports = mongoose.model("cooldowns", Cooldowns);

@@ -39,7 +39,7 @@ module.exports = {
     );
     for (let part in parts) {
       part = parts[part];
-      console.log(part)
+      console.log(part);
       let partindb = partdb.Parts[part.toLowerCase()];
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
@@ -243,7 +243,7 @@ module.exports = {
             .setLabel("Power > 300")
             .setEmoji("<:newspeedemote:1049569265730195466>")
             .setStyle("Secondary"),
-            new ButtonBuilder()
+          new ButtonBuilder()
             .setCustomId("favorites")
             .setLabel("Favorites")
             .setEmoji("⭐")
@@ -285,11 +285,12 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      }
-      else if (i.customId.includes("favorites")) {
+      } else if (i.customId.includes("favorites")) {
         console.log("power");
         embed.data.fields = null;
-        filtereddcars = udata.cars.filter((car2) => car2.Favorite && car2.Favorite == true);
+        filtereddcars = udata.cars.filter(
+          (car2) => car2.Favorite && car2.Favorite == true
+        );
         filtereddcars = lodash.chunk(
           filtereddcars.map((a) => a),
           6
@@ -316,8 +317,7 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      }
-      else if (i.customId.includes("fpower250")) {
+      } else if (i.customId.includes("fpower250")) {
         console.log("power");
         embed.data.fields = null;
         filtereddcars = udata.cars.filter((car2) => car2.Speed >= 250);

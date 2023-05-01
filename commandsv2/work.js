@@ -3,7 +3,7 @@ const carsdb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const ms = require("ms");
-const itemdb = require("../data/items.json")
+const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
@@ -180,8 +180,7 @@ module.exports = {
           )}`
         );
         userdata.work.position = newpositionfilter[0].name;
-        if(userdata.work.salary < newpositionfilter[0].salary){
-
+        if (userdata.work.salary < newpositionfilter[0].salary) {
           userdata.work.salary = newpositionfilter[0].salary;
         }
         userdata.work.xp = 0;
@@ -266,52 +265,45 @@ module.exports = {
             if (i.customId == objectinend.word) {
               let prompt = lodash.sample(userjobfilter[0].winprompts);
               let randomxp = randomRange(1, 100);
-              if(userdata.work.xpmult){
-                let mult = userdata.work.xpmult
-                let one = 100 * mult
-                let max = one += 100
+              if (userdata.work.xpmult) {
+                let mult = userdata.work.xpmult;
+                let one = 100 * mult;
+                let max = (one += 100);
                 randomxp = randomRange(50, max);
               }
 
-              let itemchance = randomRange(1, 10)
-              let itemchance2 = randomRange(1, 20)
-              let randompizza = lodash.sample(['pizza', 'veggie pizza'])
-              
+              let itemchance = randomRange(1, 10);
+              let itemchance2 = randomRange(1, 20);
+              let randompizza = lodash.sample(["pizza", "veggie pizza"]);
 
-              if(itemchance == 6 && userdata.work.name == "Pizza Delivery"){
-                embed.addFields(
-                  {
-                    name: 'Found Item',
-                    value: `${itemdb[randompizza].Emote} ${itemdb[randompizza].Name}`
-                  }
-                )
+              if (itemchance == 6 && userdata.work.name == "Pizza Delivery") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb[randompizza].Emote} ${itemdb[randompizza].Name}`,
+                });
 
-                userdata.items.push('pizza')
+                userdata.items.push("pizza");
               }
 
-              if(itemchance == 6 && userdata.work.name == "Police Officer"){
-                embed.addFields(
-                  {
-                    name: 'Found Item',
-                    value: `${itemdb["taser"].Emote} ${itemdb["taser"].Name}`
-                  }
-                )
+              if (itemchance == 6 && userdata.work.name == "Police Officer") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["taser"].Emote} ${itemdb["taser"].Name}`,
+                });
 
-                userdata.items.push('taser')
+                userdata.items.push("taser");
               }
 
-              if(itemchance2 == 6 && userdata.work.name == "Criminal"){
-                embed.addFields(
-                  {
-                    name: 'Found Item',
-                    value: `${itemdb["gem"].Emote} ${itemdb["gem"].Name}`
-                  }
-                )
+              if (itemchance2 == 6 && userdata.work.name == "Criminal") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["gem"].Emote} ${itemdb["gem"].Name}`,
+                });
 
-                userdata.items.push('gem')
+                userdata.items.push("gem");
               }
-              
-              console.log(itemchance)
+
+              console.log(itemchance);
               embed.setDescription(
                 `${prompt} and earned ${toCurrency(
                   userdata.work.salary
@@ -330,14 +322,16 @@ module.exports = {
             } else {
               let prompt = lodash.sample(userjobfilter[0].loseprompts);
               embed.setDescription(
-                `${prompt}\nYou earned ${toCurrency(positionfilter[0].fail)} for not doing your job.`
+                `${prompt}\nYou earned ${toCurrency(
+                  positionfilter[0].fail
+                )} for not doing your job.`
               );
               await i.update({ embeds: [embed], components: [] });
               userdata.cash += positionfilter[0].fail;
               userdata.work.earned += positionfilter[0].fail;
               userdata.work.fails += 1;
               userdata.work.shifts += 1;
-              userdata.work.cooldown = Date.now()
+              userdata.work.cooldown = Date.now();
               userdata.markModified("work");
               userdata.save();
             }
