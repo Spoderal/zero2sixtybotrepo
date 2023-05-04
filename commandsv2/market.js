@@ -79,8 +79,9 @@ module.exports = {
       let item = interaction.options.getString("item");
       let price = interaction.options.getNumber("price");
       let amount = interaction.options.getString("amount") || 1;
-      let useritems = userdata.items
-      if(amount.includes("-")) return interaction.reply("You can't list negative items!")
+      let useritems = userdata.items;
+      if (amount.includes("-"))
+        return interaction.reply("You can't list negative items!");
       let limit = userdata.marketlimit;
 
       if (limit == 0)
@@ -129,7 +130,8 @@ module.exports = {
         userdata.cars.pull(filteredcar[0]);
       } else if (partdb.Parts[item.toLowerCase()]) {
         let sellprice = partdb.Parts[item.toLowerCase()].Price * 10 || 0;
-        if(!userdata.parts.includes(item.toLowerCase())) return interaction.reply("You don't have this item!")
+        if (!userdata.parts.includes(item.toLowerCase()))
+          return interaction.reply("You don't have this item!");
         let filtereduser = userparts.filter(function hasmany(part) {
           return part === item.toLowerCase();
         });
