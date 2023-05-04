@@ -458,7 +458,7 @@ module.exports = {
 
       if (partindb.AddHandling > 0) {
         stats.push(
-          `<:handling:983963211403505724> Handling: +${partindb.AddedHandling}`
+          `<:handling:983963211403505724> Handling: +${partindb.AddHandling}`
         );
       }
 
