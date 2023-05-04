@@ -61,7 +61,7 @@ module.exports = {
         { name: "Name", value: `${name}`, inline: true },
         {
           name: "Status",
-          value: `Your pet is currently **${personality}**`,
+          value: `Your pet **${personality}**`,
           inline: true,
         },
         { name: "Hunger", value: `${hunger}`, inline: true },
@@ -142,7 +142,7 @@ module.exports = {
             { name: "Name", value: `${name}`, inline: true },
             {
               name: "Status",
-              value: `Your pet is currently **${personality}**`,
+              value: `Your pet **${personality}**`,
               inline: true,
             },
             { name: "Hunger", value: `${hunger}`, inline: true },
@@ -181,7 +181,7 @@ module.exports = {
             { name: "Name", value: `${name}`, inline: true },
             {
               name: "Status",
-              value: `Your pet is currently **${personality}**`,
+              value: `Your pet **${personality}**`,
               inline: true,
             },
             { name: "Hunger", value: `${newhunger}`, inline: true },
@@ -221,7 +221,7 @@ module.exports = {
             { name: "Name", value: `${name}`, inline: true },
             {
               name: "Status",
-              value: `Your pet is currently **${personality}**`,
+              value: `Your pet **${personality}**`,
               inline: true,
             },
             { name: "Hunger", value: `${hunger}`, inline: true },
@@ -274,7 +274,7 @@ module.exports = {
               { name: "Name", value: `${name}`, inline: true },
               {
                 name: "Status",
-                value: `Your pet is currently **${personality}**`,
+                value: `Your pet **${personality}**`,
                 inline: true,
               },
               { name: "Hunger", value: `${hunger}`, inline: true },

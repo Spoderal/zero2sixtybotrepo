@@ -79,6 +79,8 @@ module.exports = {
       let item = interaction.options.getString("item");
       let price = interaction.options.getNumber("price");
       let amount = interaction.options.getString("amount") || 1;
+      let useritems = userdata.items
+      if(amount.includes("-")) return interaction.reply("You can't list negative items!")
       let limit = userdata.marketlimit;
 
       if (limit == 0)
@@ -127,7 +129,14 @@ module.exports = {
         userdata.cars.pull(filteredcar[0]);
       } else if (partdb.Parts[item.toLowerCase()]) {
         let sellprice = partdb.Parts[item.toLowerCase()].Price * 10 || 0;
-
+        if(!userdata.parts.includes(item.toLowerCase())) return interaction.reply("You don't have this item!")
+        let filtereduser = userparts.filter(function hasmany(part) {
+          return part === item.toLowerCase();
+        });
+        if (amount > filtereduser.length)
+          return await interaction.reply(
+            "You don't have that many of that part!"
+          );
         if (sellprice !== 0 && price >= sellprice) {
           `Your price must at least be below ${toCurrency(
             sellprice
@@ -154,6 +163,13 @@ module.exports = {
           userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
         userdata.parts = userparts;
       } else if (itemdb[item.toLowerCase()]) {
+        let filtereduser = useritems.filter(function hasmany(part) {
+          return part === item.toLowerCase();
+        });
+        if (amount > filtereduser.length)
+          return await interaction.reply(
+            "You don't have that many of that part!"
+          );
         obj = {
           item: itemdb[item.toLowerCase()].Name.toLowerCase(),
           price: price,

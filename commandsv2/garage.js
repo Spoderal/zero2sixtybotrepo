@@ -44,6 +44,24 @@ module.exports = {
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
 
+            for (let item in items) {
+          item = items[item];
+          let itemindb = itemdb[item.toLowerCase()];
+          displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
+        }
+        var list2 = displayitems;
+        let displayitems2 = [];
+        var quantities2 = list2.reduce(function (obj, n) {
+          if (obj[n]) obj[n]++;
+          else obj[n] = 1;
+
+          return obj;
+        }, {});
+
+        for (let n in quantities2) {
+          displayitems2.push(`${n} x${quantities2[n]}`);
+        }
+
     var list = displayparts;
     var quantities = list.reduce(function (obj, n) {
       if (obj[n]) obj[n]++;
@@ -61,6 +79,11 @@ module.exports = {
       10
     );
 
+    displayitems2 = lodash.chunk(
+      displayitems2.map((a) => a),
+      10
+    );
+
     console.log(parts);
 
     let itempage = cars;
@@ -69,7 +92,6 @@ module.exports = {
       .setDescription(
         `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
       )
-      .setImage("https://i.ibb.co/pf4vwHC/istockphoto-521421426-612x612.jpg")
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
     if (udata.showcase) {
@@ -152,7 +174,6 @@ module.exports = {
           .setDescription(
             `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
           )
-          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         for (let car in cars[0]) {
@@ -173,7 +194,6 @@ module.exports = {
         itempage = displayparts2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying parts for ${user.username}`)
-          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
@@ -186,34 +206,16 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId.includes("items")) {
-        itempage = items;
+        itempage = displayitems2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
-          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(items);
-        for (let item in items) {
-          item = items[item];
-          let itemindb = itemdb[item.toLowerCase()];
-          displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
-        }
-        var list2 = displayitems;
-        let displayitems2 = [];
-        var quantities2 = list2.reduce(function (obj, n) {
-          if (obj[n]) obj[n]++;
-          else obj[n] = 1;
-
-          return obj;
-        }, {});
-
-        for (let n in quantities2) {
-          displayitems2.push(`${n} x${quantities2[n]}`);
-        }
-        if (displayitems2.length == 0) embed.setDescription(`No Items`);
-        else {
-          embed.setDescription(`${displayitems2.join("\n")}`);
-        }
+          console.log(items);
+          
+          if (displayitems2.length == 0) return i.update("You don't have any items!");
+          
+          embed.setDescription(displayitems2[0].join("\n"))
         await i.update({
           embeds: [embed],
           components: [row, row2],
@@ -421,6 +423,7 @@ module.exports = {
         console.log(itempage);
         console.log(displayparts2);
         for (let e in itempage[page - 1]) {
+          current = page;
           let car = itempage[page - 1][e];
           if (itempage == cars) {
             let favorite = "";
@@ -433,6 +436,7 @@ module.exports = {
               inline: true,
             });
           } else if (itempage == filtereddcars) {
+            current = page;
             let favorite = "";
             if (car.Favorite == true) {
               favorite = "⭐";
@@ -443,15 +447,18 @@ module.exports = {
               inline: true,
             });
           } else if (itempage == displayparts2) {
+            current = page;
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
         }
-
-        if (current !== page) {
+        console.log(current)
+        console.log(page)
+        if (current !== page || current == 1) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
           await i.update({ embeds: [embed], fetchReply: true });
-        } else {
-          return i.update({ content: "No pages left!" });
+        }
+        else {
+          return i.update({ content: "No pages left!", fetchReply: true });
         }
       }
     });
