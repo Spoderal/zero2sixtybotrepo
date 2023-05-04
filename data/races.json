@@ -54,5 +54,10 @@
     "name": "plutorace",
     "tiers": 7,
     "reward": 150
+  },
+  {
+    "name": "squadtake",
+    "tiers": 7,
+    "reward": 150
   }
 ]

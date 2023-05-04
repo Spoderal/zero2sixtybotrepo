@@ -424,7 +424,6 @@ module.exports = {
         console.log(itempage);
         console.log(displayparts2);
         for (let e in itempage[page - 1]) {
-          current = page;
           let car = itempage[page - 1][e];
           if (itempage == cars) {
             let favorite = "";
@@ -437,7 +436,6 @@ module.exports = {
               inline: true,
             });
           } else if (itempage == filtereddcars) {
-            current = page;
             let favorite = "";
             if (car.Favorite == true) {
               favorite = "⭐";
@@ -448,12 +446,10 @@ module.exports = {
               inline: true,
             });
           } else if (itempage == displayparts2) {
-            current = page;
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
         }
-        console.log(current);
-        console.log(page);
+
         if (current !== page) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
           await i.update({ embeds: [embed], fetchReply: true });
