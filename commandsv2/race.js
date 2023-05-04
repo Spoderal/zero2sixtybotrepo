@@ -17,7 +17,7 @@ const { toCurrency, randomRange } = require("../common/utils");
 const cratedb = require("../data/cratedb.json");
 const helmetdb = require("../data/pfpsdb.json");
 const partdb = require("../data/partsdb.json");
-const squaddb = require("../data/squads.json")
+const squaddb = require("../data/squads.json");
 
 const ms = require("pretty-ms");
 const itemdb = require("../data/items.json");
@@ -63,7 +63,7 @@ module.exports = {
         .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
-    let usercars = userdata.cars
+    let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car");
     let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
     let selected = filteredcar[0] || "No ID";
@@ -182,42 +182,39 @@ module.exports = {
 
     let rowsquads = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setLabel("Flame House")
-      .setEmoji("<:logo_t4:1088661369877975040>")
-      .setCustomId("flamehouse")
-      .setStyle("Secondary"),
-    new ButtonBuilder()
-      .setLabel("X Squad")
-      .setEmoji("<:logo_t5:1088661368414142474>")
-      .setCustomId("xsquad")
-      .setStyle("Secondary"),
-    new ButtonBuilder()
-      .setLabel("Muscle Brains")
-      .setEmoji("<:logo_t6:1088661367088742511>")
-      .setCustomId("musclebrains")
-      .setStyle("Secondary"),
-      )
-
+        .setLabel("Flame House")
+        .setEmoji("<:logo_t4:1088661369877975040>")
+        .setCustomId("flamehouse")
+        .setStyle("Secondary"),
+      new ButtonBuilder()
+        .setLabel("X Squad")
+        .setEmoji("<:logo_t5:1088661368414142474>")
+        .setCustomId("xsquad")
+        .setStyle("Secondary"),
+      new ButtonBuilder()
+        .setLabel("Muscle Brains")
+        .setEmoji("<:logo_t6:1088661367088742511>")
+        .setCustomId("musclebrains")
+        .setStyle("Secondary")
+    );
 
     let squadrow2 = new ActionRowBuilder().addComponents(
-      
       new ButtonBuilder()
         .setLabel("Cool Cobras")
         .setEmoji("<:logo_t7:1088661366447022090>")
         .setCustomId("coolcobras")
         .setStyle("Secondary"),
-            new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("The Ws")
         .setEmoji("<:logo_t7:1088661366447022090>")
         .setCustomId("thews")
         .setStyle("Secondary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setLabel("Snowys Agera")
         .setEmoji("<:logo_t7:1088661366447022090>")
         .setCustomId("snowysagera")
         .setStyle("Secondary")
-
-    )
+    );
 
     let usingmsg = [];
     if (usinginv.includes("fruit punch")) {
@@ -264,7 +261,7 @@ module.exports = {
       "moonrace",
       "saturnrace",
       "plutorace",
-      "squadtake"
+      "squadtake",
     ];
     collector.on("collect", async (i) => {
       console.log(i.customId);
@@ -282,22 +279,20 @@ module.exports = {
 
         console.log(race);
 
-        if(i.customId == "squadtake"){
+        if (i.customId == "squadtake") {
           await i.update({
             embeds: [embed],
             components: [rowsquads, squadrow2],
             fetchReply: true,
           });
-        }
-        else {
+        } else {
           await i.update({
             embeds: [embed],
             components: [tierrow, tierrow2],
             fetchReply: true,
           });
         }
-      }
-       else if (
+      } else if (
         i.customId == 1 ||
         i.customId == 2 ||
         i.customId == 3 ||
@@ -793,8 +788,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        } 
-        else if (race[0].name == "squadtake") {
+        } else if (race[0].name == "squadtake") {
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -817,23 +811,31 @@ module.exports = {
 
           if (bot == 1) {
             console.log("1");
-            car2 = squaddb.Squads["flame house"]
+            car2 = squaddb.Squads["flame house"];
           } else if (bot == 2) {
-            car2 = squaddb.Squads["x squad"].Cars
+            car2 = squaddb.Squads["x squad"].Cars;
           } else if (bot == 3) {
-            car2 = squaddb.Squads["muscle brains"].Cars
+            car2 = squaddb.Squads["muscle brains"].Cars;
           } else if (bot == 4) {
-            car2 = squaddb.Squads["cool cobras"].Cars
+            car2 = squaddb.Squads["cool cobras"].Cars;
           } else if (bot == 5) {
-            car2 = squaddb.Squads["the ws"].Cars
-          } 
-          else if (bot == 6) {
-            car2 = ["snowys 2018 koenigsegg agera", "pams 2016 bugatti chiron", "2016 bugatti chiron", "2021 mclaren 720s", "2016 bugatti chiron", "2021 mclaren 720s", "2016 bugatti chiron", "2021 mclaren 720s"]
-          } 
+            car2 = squaddb.Squads["the ws"].Cars;
+          } else if (bot == 6) {
+            car2 = [
+              "snowys 2018 koenigsegg agera",
+              "pams 2016 bugatti chiron",
+              "2016 bugatti chiron",
+              "2021 mclaren 720s",
+              "2016 bugatti chiron",
+              "2021 mclaren 720s",
+              "2016 bugatti chiron",
+              "2021 mclaren 720s",
+            ];
+          }
           car2 = lodash.sample(car2);
 
           console.log(car2);
-          car2 = cardb.Cars[car2.toLowerCase()]
+          car2 = cardb.Cars[car2.toLowerCase()];
 
           let craterare = randomRange(1, 3);
 
@@ -999,10 +1001,9 @@ module.exports = {
                 name: "profile-image.png",
               });
 
-              if(car2.Squad){
-                let filtercar = usercars.filter((car) => car.Name == car2.Name)
-                if(!filtercar[0]){
-                  
+              if (car2.Squad) {
+                let filtercar = usercars.filter((car) => car.Name == car2.Name);
+                if (!filtercar[0]) {
                 }
               }
 
@@ -1275,8 +1276,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else if (race[0].name == "venusrace") {
+        } else if (race[0].name == "venusrace") {
           if (
             selected.Tires !== "T1SpaceTires" &&
             selected.Name !== "Mars Rover"
