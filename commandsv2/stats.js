@@ -62,9 +62,10 @@ module.exports = {
 
       let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
       let carimg = await loadImage(carindb.Image);
-      let brand = brandsarr.filter((br) => br.emote == carindb.Emote) || 'no brand'
-      if(brand.length == 0){
-        brand[0] = "no brand"
+      let brand =
+        brandsarr.filter((br) => br.emote == carindb.Emote) || "no brand";
+      if (brand.length == 0) {
+        brand[0] = "no brand";
       }
       let brimg = await loadImage(brand[0].image);
       let flag = await loadImage(brand[0].country);
