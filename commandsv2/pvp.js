@@ -273,6 +273,8 @@ module.exports = {
             tracklength2 -= formula2;
 
             if (tracklength <= 0) {
+              
+              clearInterval(i2);
               ctx.save();
               roundedImage(ctx, 640, 200, 640, 360, 20);
               ctx.stroke();
@@ -295,6 +297,7 @@ module.exports = {
                 ) || 0;
               console.log(rewardinreward);
               if (rewardinreward.length !== 0) {
+
                 if (rewardinreward[0].reward.endsWith("Cash")) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);
                   userdata.cash += amount;
@@ -376,10 +379,11 @@ module.exports = {
               userdata.save();
               userdata2.save();
 
-              clearInterval(i2);
             }
             // lost
             else if (tracklength2 <= 0) {
+              
+              clearInterval(i2);
               ctx.drawImage(cupimg, 960, 50, 100, 100);
               attachment = new AttachmentBuilder(await canvas.toBuffer(), {
                 name: "profile-image.png",
@@ -467,7 +471,6 @@ module.exports = {
               userdata2.markModified("pvprank");
               userdata.save();
               userdata2.save();
-              clearInterval(i2);
             }
             console.log(tracklength);
             console.log(tracklength2);
