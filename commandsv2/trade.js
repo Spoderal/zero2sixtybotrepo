@@ -78,8 +78,10 @@ module.exports = {
 
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
       return interaction.reply("You can't trade cash for cash!");
-      if(amount.includes("-")) return interaction.reply("You can't trade negative cash!")
-      if(amount2.includes("-")) return interaction.reply("You can't trade negative cash!")
+    if (amount.includes("-"))
+      return interaction.reply("You can't trade negative cash!");
+    if (amount2.includes("-"))
+      return interaction.reply("You can't trade negative cash!");
     let item;
     let item2;
     let row = new Discord.ActionRowBuilder().addComponents(
@@ -109,13 +111,13 @@ module.exports = {
       item = `${partdb.Parts[trading].Emote} ${partdb.Parts[trading].Name} x${amount}`;
       if (!userdata.parts.includes(trading))
         return interaction.reply("You don't have this part!");
-        let filtereduser = userparts.filter(function hasmany(part) {
-          return part === trading.toLowerCase();
-        });
-        if (amount > filtereduser.length)
-          return await interaction.reply(
-            "You don't have that many of that part!"
-          );
+      let filtereduser = userparts.filter(function hasmany(part) {
+        return part === trading.toLowerCase();
+      });
+      if (amount > filtereduser.length)
+        return await interaction.reply(
+          "You don't have that many of that part!"
+        );
       for (var p = 0; p < amount; p++) user2parts.push(trading);
       for (var i4 = 0; i4 < amount; i4++)
         userparts.splice(userparts.indexOf(trading.toLowerCase()), 1);
@@ -136,13 +138,13 @@ module.exports = {
       item = `${itemdb[trading].Emote} ${itemdb[trading].Name} x${amount}`;
       if (!userdata.items.includes(trading))
         return interaction.reply("You don't have this item!");
-        let filtereduser = user1items.filter(function hasmany(part) {
-          return part === trading.toLowerCase();
-        });
-        if (amount > filtereduser.length)
-          return await interaction.reply(
-            "You don't have that many of that item!"
-          );
+      let filtereduser = user1items.filter(function hasmany(part) {
+        return part === trading.toLowerCase();
+      });
+      if (amount > filtereduser.length)
+        return await interaction.reply(
+          "You don't have that many of that item!"
+        );
       for (var p2 = 0; p2 < amount; p2++) user2items.push(trading);
       for (var it = 0; it < amount; it++)
         user1items.splice(user1items.indexOf(trading.toLowerCase()), 1);
@@ -160,8 +162,9 @@ module.exports = {
       userdata2.cash -= cashamount;
     }
     if (partdb.Parts[trading2]) {
-      if (!userdata2.parts.includes(trading2))  return interaction.reply("You don't have this part!");
-           let filtereduser = userparts.filter(function hasmany(part) {
+      if (!userdata2.parts.includes(trading2))
+        return interaction.reply("You don't have this part!");
+      let filtereduser = userparts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
       if (amount2 > filtereduser.length)

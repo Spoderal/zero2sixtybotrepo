@@ -44,23 +44,23 @@ module.exports = {
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
 
-            for (let item in items) {
-          item = items[item];
-          let itemindb = itemdb[item.toLowerCase()];
-          displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
-        }
-        var list2 = displayitems;
-        let displayitems2 = [];
-        var quantities2 = list2.reduce(function (obj, n) {
-          if (obj[n]) obj[n]++;
-          else obj[n] = 1;
+    for (let item in items) {
+      item = items[item];
+      let itemindb = itemdb[item.toLowerCase()];
+      displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
+    }
+    var list2 = displayitems;
+    let displayitems2 = [];
+    var quantities2 = list2.reduce(function (obj, n) {
+      if (obj[n]) obj[n]++;
+      else obj[n] = 1;
 
-          return obj;
-        }, {});
+      return obj;
+    }, {});
 
-        for (let n in quantities2) {
-          displayitems2.push(`${n} x${quantities2[n]}`);
-        }
+    for (let n in quantities2) {
+      displayitems2.push(`${n} x${quantities2[n]}`);
+    }
 
     var list = displayparts;
     var quantities = list.reduce(function (obj, n) {
@@ -211,11 +211,12 @@ module.exports = {
           .setTitle(`Displaying items for ${user.username}`)
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-          console.log(items);
-          
-          if (displayitems2.length == 0) return i.update("You don't have any items!");
-          
-          embed.setDescription(displayitems2[0].join("\n"))
+        console.log(items);
+
+        if (displayitems2.length == 0)
+          return i.update("You don't have any items!");
+
+        embed.setDescription(displayitems2[0].join("\n"));
         await i.update({
           embeds: [embed],
           components: [row, row2],
@@ -451,13 +452,12 @@ module.exports = {
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
         }
-        console.log(current)
-        console.log(page)
+        console.log(current);
+        console.log(page);
         if (current !== page || current == 1) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
           await i.update({ embeds: [embed], fetchReply: true });
-        }
-        else {
+        } else {
           return i.update({ content: "No pages left!", fetchReply: true });
         }
       }

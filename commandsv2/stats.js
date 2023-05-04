@@ -286,9 +286,9 @@ module.exports = {
       let carimg = await loadImage(ogcar);
       let brand =
         brandsarr.filter((br) => br.emote == carindb[0].Emote) || "no brand";
-        if(brand.length == 0){
-          brand[0] = "no brand"
-        }
+      if (brand.length == 0) {
+        brand[0] = "no brand";
+      }
       let brimg = await loadImage(brand[0].image);
       let flag = await loadImage(brand[0].country);
       ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);

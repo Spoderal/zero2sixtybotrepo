@@ -405,13 +405,14 @@ module.exports = {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.ckeys += amount;
             userdata.spaceredeemed += 1;
-          }
-          else if (item.Item.endsWith("Super Wheelspin") || (item.Item.endsWith("Super Wheelspin"))) {
+          } else if (
+            item.Item.endsWith("Super Wheelspin") ||
+            item.Item.endsWith("Super Wheelspin")
+          ) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.ckeys += amount;
             userdata.spaceredeemed += 1;
-          } 
-          else if (item.Item.endsWith("Drift Keys")) {
+          } else if (item.Item.endsWith("Drift Keys")) {
             let amount = Number(item.Item.split(" ")[0]);
             userdata.dkeys += amount;
             userdata.spaceredeemed += 1;
