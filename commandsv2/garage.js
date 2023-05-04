@@ -454,7 +454,7 @@ module.exports = {
         }
         console.log(current);
         console.log(page);
-        if (current !== page || current == 1) {
+        if (current !== page) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
           await i.update({ embeds: [embed], fetchReply: true });
         } else {

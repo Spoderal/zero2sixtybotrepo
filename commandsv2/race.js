@@ -132,12 +132,13 @@ module.exports = {
         .setStyle("Primary")
     );
     const row0 = new ActionRowBuilder().addComponents(
+      
       new ButtonBuilder()
-        .setLabel("Squad Takeover")
-        .setEmoji("🕶️")
-        .setCustomId("squadtake")
-        .setStyle("Secondary")
-    );
+      .setLabel("Squad Takeover")
+      .setEmoji("🕶️")
+      .setCustomId("squadtake")
+      .setStyle("Secondary")
+    )
     const tierrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setLabel("Tier 1")
@@ -3156,7 +3157,7 @@ module.exports = {
               if (weather2.Reward > 0) {
                 cashwon = cashwon += weather2.Reward;
               }
-
+          
               earnings.push(`${emotes.wheelSpin} +${wheelspins}`);
               earnings.push(`${emotes.lockpicks} +${lockpicks}`);
 

@@ -410,6 +410,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "D",
+      "Squad":true,
       "Weight": 2000
     },
     "freds 2002 ford mustang": {
@@ -426,6 +427,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "D",
+      "Squad":true,
       "Weight": 2000
     },
     "heathers 2007 infiniti g35 coupe": {
@@ -442,6 +444,7 @@
       "Drift": 1,
       "Handling": 500,
       "Class": "D",
+      "Squad":true,
       "Weight": 2000
     },
     "pauls 2007 mitsubishi evo ix": {
@@ -458,6 +461,7 @@
       "Drift": 3,
       "Handling": 500,
       "Class": "C",
+      "Squad":true,
       "Weight": 2000
     },
     "larrys 2002 mazda rx7 fd": {
@@ -474,6 +478,7 @@
       "Drift": 3,
       "Handling": 500,
       "Class": "C",
+      "Squad":true,
       "Weight": 2000
     },
     "ollies 2009 honda s2000 cr": {
@@ -490,6 +495,7 @@
       "Drift": 3,
       "Handling": 500,
       "Class": "C",
+      "Squad":true,
       "Weight": 2000
     },
     "kaylas 2010 ford mustang": {
@@ -506,6 +512,7 @@
       "Drift": 3,
       "Handling": 500,
       "Class": "C",
+      "Squad":true,
       "Weight": 2000
     },
     "toms 1994 porsche 911": {
@@ -522,6 +529,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "C",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -539,6 +547,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
+      "Squad":true,
       "Weight": 2000
     },
     "marks 2012 dodge challenger srt8": {
@@ -555,6 +564,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
+      "Squad":true,
       "Weight": 2000
     },
     "joys 2017 dodge viper acr": {
@@ -571,6 +581,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -588,6 +599,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -605,6 +617,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -623,6 +636,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -640,6 +654,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -657,6 +672,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
+      "Squad":true,
       "Weight": 2000
     },
     "mikes 2021 lamborghini huracan sto": {
@@ -673,6 +689,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
+      "Squad":true,
       "Weight": 2000
     },
     "cobras 2005 pagani zonda f": {
@@ -689,6 +706,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
+      "Squad":true,
       "Weight": 2000
     },
     "donnas 2021 mclaren 720s": {
@@ -705,6 +723,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "S",
+      "Squad":true,
       "Weight": 2000
     },
     "steves 2017 mercedes amg one": {
@@ -721,6 +740,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "S",
+      "Squad":true,
       "Weight": 2000
     },
     "lukes 2018 lamborghini aventador s": {
@@ -737,6 +757,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "S",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -754,6 +775,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "S",
+      "Squad":true,
       "Weight": 2000
     },
     "walters 2012 pagani huayra": {
@@ -770,6 +792,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "S",
+      "Squad":true,
       "Weight": 2000
     },
 
@@ -2055,6 +2078,7 @@
       "Image": "https://i.ibb.co/ZXyZGm2/sf909.png",
       "0-60": 4.4,
       "Drift": 0,
+      "Squad":true,
       "Handling": 560,
       "Weight": 3600
     },
@@ -2070,6 +2094,7 @@
       "Image": "https://i.ibb.co/Mgn58f9/082820-2008-Bugatti-Veyron-images-Blog5.png",
       "0-60": 4.4,
       "Drift": 0,
+      "Squad":true,
       "Handling": 560,
       "Weight": 3600
     },
@@ -2085,6 +2110,7 @@
       "Image": "https://i.ibb.co/BCbrM8M/Aston-Martin-Valkyrie-HED.png",
       "0-60": 3.3,
       "Drift": 0,
+      "Squad":true,
       "Handling": 560,
       "Weight": 3600
     },
@@ -2100,6 +2126,7 @@
       "Image": "https://i.ibb.co/PDBkP1f/2016-bugatti-chiron.jpg",
       "0-60": 3.1,
       "Drift": 0,
+      "Squad":true,
       "Handling": 560,
       "Weight": 3600
     },
@@ -2114,6 +2141,7 @@
       "Image": "https://www.classicdriver.com/sites/default/files/cars_images/dsc_1619_5.jpg",
       "0-60": 2.7,
       "Drift": 0,
+      "Squad":true,
       "Handling": 560,
       "Weight": 3600
     },
