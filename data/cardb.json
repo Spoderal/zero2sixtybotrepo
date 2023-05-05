@@ -1493,7 +1493,7 @@
       "Rear": "https://upload.wikimedia.org/wikipedia/commons/3/38/1997-2000_Toyota_Corolla_Levin_%28AE111%29_BZ-R_coupe_02.jpg",
       "0-60": 13.4,
       "Drift": 1,
-      "Class":"D",
+      "Class": "D",
       "Handling": 500,
       "Weight": 2500
     },
@@ -4603,7 +4603,7 @@
       "Rear": "https://images.cars.com/cldstatic/wp-content/uploads/img26451699-1478030871802.jpg",
       "0-60": 11.8,
       "Drift": 1,
-      "Class":"B",
+      "Class": "B",
       "Handling": 500,
       "Weight": 3100
     },
