@@ -43,7 +43,9 @@ module.exports = {
   async autocomplete(interaction, client) {
     let focusedValue = interaction.options.getFocused();
     let choices = cardata.shopitems;
-    let filtered = choices.filter((choice) => choice.toLowerCase().includes(focusedValue.toLowerCase()));
+    let filtered = choices.filter((choice) =>
+      choice.toLowerCase().includes(focusedValue.toLowerCase())
+    );
     let userdata2 = await User.findOne({ id: interaction.user.id });
     let options;
     filtered = userdata2.cars;
@@ -58,7 +60,9 @@ module.exports = {
       options = filteredarr;
     }
 
-    options = options.filter((option) => option.toLowerCase().includes(focusedValue.toLowerCase()));
+    options = options.filter((option) =>
+      option.toLowerCase().includes(focusedValue.toLowerCase())
+    );
 
     await interaction.respond(
       options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
