@@ -93,8 +93,6 @@ module.exports = {
 
       interaction.reply({ content: "Revving engines...", fetchReply: true });
 
-      
-
       let mph = selected.Speed;
       let weight =
         selected.WeightStatStat ||
@@ -134,7 +132,7 @@ module.exports = {
             `,
           },
         ])
-        .setColor(colors.blue)
+        .setColor(colors.blue);
 
       interaction.editReply({
         embeds: [embed],
@@ -157,9 +155,7 @@ module.exports = {
 
         if (tracklength <= 0) {
           clearInterval(i2);
-      
 
-      
           let earnings = [];
 
           clearInterval(timeint);
