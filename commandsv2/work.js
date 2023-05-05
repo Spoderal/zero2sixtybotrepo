@@ -313,19 +313,23 @@ module.exports = {
 
                 userdata.items.push("gem");
               }
-                let salary = userdata.work.salary
-              if(userdata.work.name == "Chef" && userdata.items.includes("spatula")){
-                randomxp =  randomxp += (randomxp * 0.5)
+              let salary = userdata.work.salary;
+              if (
+                userdata.work.name == "Chef" &&
+                userdata.items.includes("spatula")
+              ) {
+                randomxp = randomxp += randomxp * 0.5;
               }
-              if(userdata.work.name == "Chef" && userdata.items.includes("cooking pot")){
-                salary =  salary += (salary * 0.5)
+              if (
+                userdata.work.name == "Chef" &&
+                userdata.items.includes("cooking pot")
+              ) {
+                salary = salary += salary * 0.5;
               }
 
               console.log(itemchance);
               embed.setDescription(
-                `${prompt} and earned ${toCurrency(
-                  salary
-                )} and ${randomxp} xp!`
+                `${prompt} and earned ${toCurrency(salary)} and ${randomxp} xp!`
               );
               userdata.cash += Number(userdata.work.salary);
               userdata.work.xp += randomxp;

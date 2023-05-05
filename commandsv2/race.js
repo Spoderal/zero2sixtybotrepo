@@ -802,27 +802,42 @@ module.exports = {
           let car2;
           let bot = i.customId;
 
-          let cashwon = 0
-          let rpwon = 0
-          let cashlost = 0
-          let tier = userdata.tier
+          let cashwon = 0;
+          let rpwon = 0;
+          let cashlost = 0;
+          let tier = userdata.tier;
 
           if (bot == "flamehouse") {
             console.log("1");
-            car2 = squaddb.Squads["flame house"].Cars
-              if(tier < 1) return interaction.channel.send("You need to be tier 1 or higher to do this race")
+            car2 = squaddb.Squads["flame house"].Cars;
+            if (tier < 1)
+              return interaction.channel.send(
+                "You need to be tier 1 or higher to do this race"
+              );
           } else if (bot == "xsquad") {
             car2 = squaddb.Squads["x squad"].Cars;
-            if(tier < 2) return interaction.channel.send("You need to be tier 2 or higher to do this race")
+            if (tier < 2)
+              return interaction.channel.send(
+                "You need to be tier 2 or higher to do this race"
+              );
           } else if (bot == "musclebrains") {
             car2 = squaddb.Squads["muscle brains"].Cars;
-            if(tier < 3) return interaction.channel.send("You need to be tier 3 or higher to do this race")
+            if (tier < 3)
+              return interaction.channel.send(
+                "You need to be tier 3 or higher to do this race"
+              );
           } else if (bot == "coolcobras") {
             car2 = squaddb.Squads["cool cobras"].Cars;
-            if(tier < 4) return interaction.channel.send("You need to be tier 4 or higher to do this race")
+            if (tier < 4)
+              return interaction.channel.send(
+                "You need to be tier 4 or higher to do this race"
+              );
           } else if (bot == "thews") {
             car2 = squaddb.Squads["the ws"].Cars;
-            if(tier < 5) return interaction.channel.send("You need to be tier 5 or higher to do this race")
+            if (tier < 5)
+              return interaction.channel.send(
+                "You need to be tier 5 or higher to do this race"
+              );
           } else if (bot == "snowysagera") {
             car2 = [
               "snowys 2018 koenigsegg agera",
@@ -834,13 +849,15 @@ module.exports = {
               "2016 bugatti chiron",
               "2021 mclaren 720s",
             ];
-            if(tier < 6) return interaction.reply("You need to be tier 6 or higher to do this race")
+            if (tier < 6)
+              return interaction.reply(
+                "You need to be tier 6 or higher to do this race"
+              );
           }
           let car3 = lodash.sample(car2);
 
           console.log(car3);
           car2 = cardb.Cars[car3.toLowerCase()];
-          
 
           let craterare = randomRange(1, 3);
 
@@ -851,8 +868,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-          
 
           console.log(weather2);
 
@@ -879,7 +894,6 @@ module.exports = {
           let speed = 0;
           let speed2 = 0;
 
-        
           handling = Math.floor(handling);
           handling2 = Math.floor(handling2);
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
@@ -909,8 +923,8 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          cashwon = 0
-          rpwon = 0
+          cashwon = 0;
+          rpwon = 0;
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
@@ -958,26 +972,25 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-              
               let earnings = [];
               if (car2.Squad) {
-                let randomnumforcar = randomRange(1, 5)
-                if(randomnumforcar == 5){
-                  let filtercar = usercars.filter((car) => car.Name == car2.Name);
+                let randomnumforcar = randomRange(1, 5);
+                if (randomnumforcar == 5) {
+                  let filtercar = usercars.filter(
+                    (car) => car.Name == car2.Name
+                  );
                   if (!filtercar[0]) {
-                    earnings.push(`${car2.Emote} ${car2.Name}`)
+                    earnings.push(`${car2.Emote} ${car2.Name}`);
 
-                    let squadobj = car2
-                    userdata.cars.push(squadobj)
+                    let squadobj = car2;
+                    userdata.cars.push(squadobj);
                   }
 
-                  if(car2.Name == "Snowys 2018 Koenigsegg Agera") {
-                    earnings.push("Snowy: You cheated, not fair")
+                  if (car2.Name == "Snowys 2018 Koenigsegg Agera") {
+                    earnings.push("Snowy: You cheated, not fair");
                   }
-
-                }
-                else {
-                  earnings.push("You did NOT earn their car, try again!")
+                } else {
+                  earnings.push("You did NOT earn their car, try again!");
                 }
               }
               let filteredhouse = userdata.houses.filter(
@@ -993,8 +1006,6 @@ module.exports = {
                 rpwon = rpwon * 2;
               }
 
-
-              
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
                 earnings.push(
@@ -1008,10 +1019,10 @@ module.exports = {
               userdata.cash += cashwon;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
-           
-                earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-                earnings.push(`${emotes.rp} +${rpwon}`);
-          
+
+              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+              earnings.push(`${emotes.rp} +${rpwon}`);
+
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Squad Takeover won!`);
 
