@@ -9,8 +9,8 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
 const titledb = require("../data/titles.json");
-const emotes = require("../common/emotes").emotes
-const jobdb = require("../data/jobs.json")
+const emotes = require("../common/emotes").emotes;
+const jobdb = require("../data/jobs.json");
 
 const { createCanvas, loadImage } = require("canvas");
 
@@ -52,32 +52,30 @@ module.exports = {
     });
     let fastcar = carsort[0];
 
-
     let pvprank = userdata.pvprank;
     let pvpname = pvprank.Rank || "Silver";
 
     if (pvpname == undefined) {
       pvpname = "Silver";
     }
-    let jobemote = ""
-    
+    let jobemote = "";
 
     let pvpindb = pvpranks[pvpname.toLowerCase()];
-    let achievements = userdata.achievements
-    let userjob = userdata.work || {name: 'No Job', position: 'No Position'}
+    let achievements = userdata.achievements;
+    let userjob = userdata.work || { name: "No Job", position: "No Position" };
 
-    if(userjob.name !== 'No Job'){
-      let userjobfilter = jobdb[userjob.name.toLowerCase()]
+    if (userjob.name !== "No Job") {
+      let userjobfilter = jobdb[userjob.name.toLowerCase()];
       let positionfilter = userjobfilter.Positions.filter(
         (pos) => pos.name.toLowerCase() == userjob.position.toLowerCase()
       );
-      jobemote = positionfilter[0].emote
+      jobemote = positionfilter[0].emote;
     }
-    let achivarr = []
-    for(let ach in achievements){
-      let achiev = achievements[ach]
-      let achindb = achievementsdb.Achievements[achiev.name.toLowerCase()]
-      achivarr.push(`${achindb.Emote}`)
+    let achivarr = [];
+    for (let ach in achievements) {
+      let achiev = achievements[ach];
+      let achindb = achievementsdb.Achievements[achiev.name.toLowerCase()];
+      achivarr.push(`${achindb.Emote}`);
     }
     let cash = userdata.cash;
     finalprice += cash;
@@ -86,26 +84,26 @@ module.exports = {
     let showcase = userdata.showcase;
 
     let embed = new Discord.EmbedBuilder()
-    .setTitle(title)
-    .setAuthor({name: user.username, iconURL: acthelmet})
-    .setDescription(
-      `
+      .setTitle(title)
+      .setAuthor({ name: user.username, iconURL: acthelmet })
+      .setDescription(
+        `
       <:rank_race:1103913420320944198> Race Rank: ${racerank}\n
       <:rank_drift:1103913418567712818> Drift Rank: ${driftrank}\n
       <:rank_prestige:1103914107461181530> Prestige: ${prestige}\n
       ${pvpindb.emote} PVP Rank: ${pvpname} ${pvprank.Wins}\n
       **Tier**: ${tier}
       `
-    )
-    .addFields(
-      {
-        name: "Achievements",
-        value: `${achivarr.join(" ")}`,
-        inline: true
-      },
-      {
-        name: "Job",
-        value: `
+      )
+      .addFields(
+        {
+          name: "Achievements",
+          value: `${achivarr.join(" ")}`,
+          inline: true,
+        },
+        {
+          name: "Job",
+          value: `
        ${jobemote} __${userjob.name}__
         ${userjob.position}
         `,
