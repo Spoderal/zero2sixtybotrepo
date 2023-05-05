@@ -982,7 +982,19 @@ module.exports = {
                   if (!filtercar[0]) {
                     earnings.push(`${car2.Emote} ${car2.Name}`);
 
-                    let squadobj = car2;
+                    let squadobj = {
+                      ID: car2.alias,
+                      Name: car2.Name,
+                      Speed: car2.Speed,
+                      Acceleration: car2["0-60"],
+                      Handling: car2.Handling,
+                      Parts: [],
+                      Emote: car2.Emote,
+                      Livery: car2.Image,
+                      Miles: 0,
+                      Drift: 0,
+                      WeightStat: car2.Weight,
+                    }
                     userdata.cars.push(squadobj);
                   }
 
