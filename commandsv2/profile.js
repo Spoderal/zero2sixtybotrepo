@@ -10,6 +10,7 @@ const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
 const titledb = require("../data/titles.json");
 const emotes = require("../common/emotes").emotes
+const jobdb = require("../data/jobs.json")
 
 const { createCanvas, loadImage } = require("canvas");
 
@@ -50,7 +51,6 @@ module.exports = {
     let carsort = cars.sort(function(a, b){return b.Speed-a.Speed});
     let fastcar = carsort[0]
 
-    console.log(fastcar)
 
     let pvprank = userdata.pvprank 
     let pvpname = pvprank.Rank || "Silver";
@@ -58,10 +58,20 @@ module.exports = {
     if(pvpname == undefined){
       pvpname = "Silver"
     }
+    let jobemote = ""
+    
 
     let pvpindb = pvpranks[pvpname.toLowerCase()];
     let achievements = userdata.achievements
     let userjob = userdata.work || {name: 'No Job', position: 'No Position'}
+
+    if(userjob.name !== 'No Job'){
+      let userjobfilter = jobdb[userjob.name.toLowerCase()]
+      let positionfilter = userjobfilter.Positions.filter(
+        (pos) => pos.name.toLowerCase() == userjob.position.toLowerCase()
+      );
+      jobemote = positionfilter[0].emote
+    }
     let achivarr = []
     for(let ach in achievements){
       let achiev = achievements[ach]
@@ -79,10 +89,10 @@ module.exports = {
     .setAuthor({name: user.username, iconURL: acthelmet})
     .setDescription(
       `
-      Race Rank: ${racerank}\n
-      Drift Rank: ${driftrank}\n
-      Prestige: ${prestige}\n
-      PVP Rank: ${pvpindb.emote} ${pvpname} ${pvprank.Wins}\n
+      <:rank_race:1103913420320944198> Race Rank: ${racerank}\n
+      <:rank_drift:1103913418567712818> Drift Rank: ${driftrank}\n
+      <:rank_prestige:1103914107461181530> Prestige: ${prestige}\n
+      ${pvpindb.emote} PVP Rank: ${pvpname} ${pvprank.Wins}\n
       **Tier**: ${tier}
       `
     )
@@ -95,7 +105,7 @@ module.exports = {
       {
         name: "Job",
         value: `
-        __${userjob.name}__
+       ${jobemote} __${userjob.name}__
         ${userjob.position}
         `,
         inline: true

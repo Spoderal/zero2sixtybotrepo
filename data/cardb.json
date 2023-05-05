@@ -377,6 +377,7 @@
       "0-60": 12,
       "Drift": 0,
       "Handling": 500,
+      "Squad": true,
       "Class": "D",
       "Weight": 2000
     },
@@ -394,6 +395,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "D",
+      "Squad": true,
       "Weight": 2000
     },
     "troys 1994 honda prelude": {
@@ -2139,7 +2141,7 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "5.0 L V8",
-      "Image": "https://www.classicdriver.com/sites/default/files/cars_images/dsc_1619_5.jpg",
+      "Image": "https://i.ibb.co/2Ywdq09/snowys.png",
       "0-60": 2.7,
       "Drift": 0,
       "Squad": true,

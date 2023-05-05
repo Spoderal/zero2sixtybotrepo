@@ -41,6 +41,13 @@ module.exports = {
             customId: "colonize",
             emoji: "🪐",
           },
+          {
+            label: "Squad Takeover",
+            description: "Information for the Squad Takeover Event",
+            value: "squad",
+            customId: "squad",
+            emoji: "🕶️",
+          },
         ])
     );
 
@@ -55,7 +62,8 @@ module.exports = {
           **__Events__**
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
-          Colonization Race🪐
+          Colonization Race🪐\n
+          Squad Takeover 🕶️
       `);
 
     embed.setColor(colors.blue);
@@ -126,7 +134,32 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "colonize") {
+      } 
+      else if (value === "squad") {
+        embed.setTitle("Squad Takeover Event");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`
+        Uh oh, the squads are fighting over territory in Zero City! Its up to you to put a stop to it, race squad takeover in /race
+
+        Take their cars away from them so they cant use them to fight others! You also have a chance to get snowys agera in the hardest race!
+
+        You keep what you take, so make sure you take em all before the event is over as this is the **only** time this event will happen!
+
+        Help us put a stop to the squad takeover!
+
+
+            **Ends May 14th 2023**
+            
+                  `);
+        embed.setImage("https://i.ibb.co/LvMZpFH/squadtakeover.png");
+        embed.setColor(colors.blue);
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+      else if (value === "colonize") {
         embed.setTitle("Colonization Race Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Whats this? Space in Zero2Sixty? Thats right! As wild as this may seem, the rewards in this event are insane, you won't want to miss this event!

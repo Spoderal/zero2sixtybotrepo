@@ -62,20 +62,10 @@ module.exports = {
     cooldowns.wheelspin = Date.now();
     let embed = new Discord.EmbedBuilder()
       .setTitle("Wheel Spin!")
-      .setDescription(`${item}`)
       .setColor(colors.blue)
-      .setThumbnail("https://i.ibb.co/pwbLqnR/wheelimg.png");
+      .setImage("https://i.ibb.co/0jm0ZY5/wheelspin.gif");
     let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
-    setTimeout(() => {
-      let item = lodash.sample(items);
-      embed.setDescription(`${item}`);
-      interaction.editReply({ embeds: [embed] });
-    }, 1000);
-    setTimeout(() => {
-      let item = lodash.sample(items);
-      embed.setDescription(`${item}`);
-      interaction.editReply({ embeds: [embed] });
-    }, 2000);
+
     setTimeout(() => {
       let item = lodash.sample(items);
       embed.setDescription(`${item}`);

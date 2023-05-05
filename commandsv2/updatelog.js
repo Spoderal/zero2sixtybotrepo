@@ -19,7 +19,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "4/18/2023",
+            label: "5/5/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -55,7 +55,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 4/18/2023\n
+            ⚙️ Latest Patch 5/5/2023\n
             🌸 Spring Update 3/1/2023\n
             ⬆️ Small Update 4/11/2023\n
             🎉 Big Update 4/31/2023\n
@@ -84,18 +84,17 @@ module.exports = {
             embed
               .setDescription(
                 `• New event! Check /events\n
-                • Fixed a ton of bugs, including livery bugs, racing bugs where the user would lose if their stats were better, and more!\n
-                • New items! Orange Juice, Fruit Punch, Oil, Blueberry, Flat tire, Pet treats, and Epic Lockpick!\n
-                • New favoriting cars system! Favorite cars to prevent them from being sold with /ids favorite\n
-                • New jobs rework, old jobs have been removed!\n
-                • /open has been removed, now you can use /use (crate) for the same functionality!\n
-                • Cross country now has a chance to drop items\n
-                • Selling in bulk for cars\n
-                • New cars
+                • Fixed a lot of bugs!\n
+                • New visuals\n
+                • Autocomplete now in /race, and /buy, phasing out ids as the summer starts!\n
+                • Race visuals updated for smoother performance\n
+                • Profile visuals updated for smoother performance\n
+                • New job: Chef
+                • New items for chef job, <:item_spatula:1103826123600707658> Spatula and <a:item_pot:1103826120299778078> Cooking Pot
 
                 `
               )
-              .setFooter({ text: "4/18/2023" })
+              .setFooter({ text: "5/5/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
