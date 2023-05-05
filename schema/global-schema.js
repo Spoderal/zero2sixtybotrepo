@@ -247,6 +247,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  shopitems:{
+    type: Array,
+    required: false,
+    default: []
+  }
 });
 
 module.exports = mongoose.model("global", Global);

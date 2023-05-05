@@ -36,9 +36,10 @@ module.exports = {
             .setDescription("The job to hire yourself for")
             .setRequired(true)
             .addChoices(
-              { name: "Criminal", value: "criminal" },
+              { name: "Pizza Delivery", value: "pizza delivery" },
               { name: "Police", value: "police" },
-              { name: "Pizza Delivery", value: "pizza delivery" }
+              {name: "Chef", value: "chef"},
+              { name: "Criminal", value: "criminal" },
             )
         )
     )
@@ -275,6 +276,7 @@ module.exports = {
               let itemchance = randomRange(1, 10);
               let itemchance2 = randomRange(1, 20);
               let randompizza = lodash.sample(["pizza", "veggie pizza"]);
+              let randomchef = lodash.sample(["spatula", "cooking pot"])
 
               if (itemchance == 6 && userdata.work.name == "Pizza Delivery") {
                 embed.addFields({
@@ -282,7 +284,16 @@ module.exports = {
                   value: `${itemdb[randompizza].Emote} ${itemdb[randompizza].Name}`,
                 });
 
-                userdata.items.push("pizza");
+                userdata.items.push(randompizza);
+              }
+
+              if (itemchance == 3 && userdata.work.name == "Chef") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb[randomchef].Emote} ${itemdb[randomchef].Name}`,
+                });
+
+                userdata.items.push(randomchef);
               }
 
               if (itemchance == 6 && userdata.work.name == "Police Officer") {

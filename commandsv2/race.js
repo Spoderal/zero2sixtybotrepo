@@ -26,6 +26,9 @@ const { createCanvas, loadImage } = require("canvas");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const weather = require("../data/weather.json");
 
+const cardata = require("../events/shopdata")
+
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("race")
@@ -35,10 +38,39 @@ module.exports = {
         .setName("car")
         .setDescription("The car ID to race with")
         .setRequired(true)
+        .setAutocomplete(true)
     ),
+
+
+    async autocomplete(interaction, client){
+      let focusedValue = interaction.options.getFocused();
+      let choices = cardata.shopitems
+      let filtered = choices.filter((choice) => 
+      choice.includes(focusedValue)
+      );
+      let userdata2 = await User.findOne({ id: interaction.user.id });
+      let options;
+      filtered = userdata2.cars
+      let filteredarr = []
+      for(let ca in filtered){
+        let carind = filtered[ca]
+        filteredarr.push(carind.Name)
+      }
+      if (filteredarr.length > 25) {
+          options = filteredarr.slice(0, 25);
+      } else {
+          options = filteredarr;
+      }
+
+      await interaction.respond(
+          options.map(choice => ({ name: choice, value: choice.toLowerCase() })),
+      );
+    },
+
   async execute(interaction) {
     let user = interaction.user;
     let carsarray = [];
+
 
     for (let car1 in cardb.Cars) {
       let caroj = cardb.Cars[car1];
@@ -65,7 +97,8 @@ module.exports = {
     }
     let usercars = userdata.cars
     let idtoselect = interaction.options.getString("car");
-    let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect);
+    idtoselect = cardb.Cars[idtoselect].Name
+    let filteredcar = userdata.cars.filter((car) => car.Name == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
       let errembed = new EmbedBuilder()
@@ -218,13 +251,26 @@ module.exports = {
         .setStyle("Secondary")
 
     )
-
+    let carimage = selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image
     let usingmsg = [];
     if (usinginv.includes("fruit punch")) {
       usingmsg.push(
         `${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name} Active`
       );
     }
+    
+    if (usinginv.includes("flat tire")) {
+      usingmsg.push(
+        `${itemdb["flat tire"].Emote} ${itemdb["flat tire"].Name} Active`
+      );
+    }
+
+        if (usinginv.includes("energy drink")) {
+      usingmsg.push(
+        `${itemdb["energy drink"].Emote} ${itemdb["energy drink"].Name} Active`
+      );
+    }
+
     let embed = new EmbedBuilder()
       .setTitle("Select a race")
       .setDescription(
@@ -233,7 +279,7 @@ module.exports = {
         )}`
       )
       .setColor(colors.blue)
-      .setThumbnail(`${cardb.Cars[selected.Name.toLowerCase()].Image}`)
+      .setThumbnail(carimage)
       .addFields({
         name: "Your car",
         value: `${selected.Emote} ${selected.Name}`,
@@ -319,10 +365,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -376,38 +419,9 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
 
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+   
 
           console.log(weather2);
 
@@ -458,12 +472,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -515,15 +529,9 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
 
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+
+             
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -746,9 +754,8 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Street Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -769,15 +776,11 @@ module.exports = {
             }
             // lost
             else if (tracklength2 > tracklength && timer == 10) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Street Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -807,10 +810,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+      
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -850,38 +850,7 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+      
 
           console.log(weather2);
 
@@ -932,12 +901,10 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -989,15 +956,7 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+           
 
               if(car2.Squad){
                 let filtercar = usercars.filter((car) => car.Name == car2.Name)
@@ -1228,9 +1187,8 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Street Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed]});
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -1251,15 +1209,11 @@ module.exports = {
             }
             // lost
             else if (tracklength2 > tracklength && timer == 10) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Street Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -1295,10 +1249,7 @@ module.exports = {
           console.log("race");
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+      
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -1352,38 +1303,9 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+       
 
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
 
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
 
           let mph = selected.Speed;
 
@@ -1434,12 +1356,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -1521,7 +1443,7 @@ module.exports = {
                 `Tier ${bot} Venus Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed]});
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -1531,21 +1453,13 @@ module.exports = {
                 `Tier ${bot} Venus Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed]});
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
 
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -1664,9 +1578,8 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Venus Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -1691,15 +1604,11 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Venus Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -1735,10 +1644,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+        
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -1792,38 +1698,7 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+       
 
           console.log(weather2);
 
@@ -1875,12 +1750,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -1962,7 +1837,7 @@ module.exports = {
                 `Tier ${bot} Mars Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -1972,21 +1847,13 @@ module.exports = {
                 `Tier ${bot} Mars Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+         
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -2104,9 +1971,8 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Mars Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -2131,15 +1997,11 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Mars Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -2175,10 +2037,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -2232,38 +2091,7 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+        
 
           console.log(weather2);
 
@@ -2315,12 +2143,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -2402,7 +2230,7 @@ module.exports = {
                 `Tier ${bot} Moon Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed]});
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -2412,21 +2240,13 @@ module.exports = {
                 `Tier ${bot} Moon Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed]});
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+          
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -2544,9 +2364,8 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Moon Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -2571,15 +2390,12 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
+              
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Moon Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -2615,10 +2431,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -2672,38 +2485,7 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+       
 
           console.log(weather2);
 
@@ -2755,12 +2537,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -2842,7 +2624,7 @@ module.exports = {
                 `Tier ${bot} Saturn Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -2852,21 +2634,13 @@ module.exports = {
                 `Tier ${bot} Saturn Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+       
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -2984,9 +2758,6 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Saturn Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
-
-              await i.editReply({ embeds: [embed], files: [attachment] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -3011,15 +2782,11 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
+          
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Saturn Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -3055,10 +2822,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+     
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -3112,38 +2876,7 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (pet.name) {
-            let petimage = await loadImage(petdb[pet.pet.toLowerCase()].Image);
-
-            ctx.drawImage(petimage, 200, 200, 200, 200);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+        
 
           console.log(weather2);
 
@@ -3195,12 +2928,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -3282,7 +3015,6 @@ module.exports = {
                 `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -3292,21 +3024,12 @@ module.exports = {
                 `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+        
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -3424,9 +3147,8 @@ module.exports = {
               }
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Pluto Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -3451,15 +3173,11 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
+              
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Pluto Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -3484,10 +3202,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+        
           let cashwon = parseInt(bot) * 250;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -3543,32 +3258,7 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+     
 
           let mph = selected.Speed;
 
@@ -3616,12 +3306,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -3667,15 +3357,7 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+       
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -3823,9 +3505,6 @@ module.exports = {
 
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Highway Race won!`);
-              embed.setImage(`attachment://profile-image.png`);
-
-              await i.editReply({ embeds: [embed], files: [attachment] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -3847,15 +3526,10 @@ module.exports = {
             else if (tracklength2 <= 0) {
               clearInterval(i2);
 
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Highway Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -3877,10 +3551,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+      
           let cashwon = parseInt(bot) * 250;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -3934,44 +3605,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (weather2.Emote == "🌧️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          } else if (weather2.Emote == "🌨️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
 
           console.log(weather2);
 
@@ -4037,12 +3670,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -4087,15 +3720,7 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+         
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -4233,9 +3858,6 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Half Mile Race won! ${weather2.Emote}`
               );
-              embed.setImage(`attachment://profile-image.png`);
-
-              await i.editReply({ embeds: [embed], files: [attachment] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -4257,17 +3879,12 @@ module.exports = {
             else if (tracklength2 <= 0) {
               clearInterval(i2);
 
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(
                 `Tier ${bot} Half Mile Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -4289,10 +3906,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+    
           let cashwon = parseInt(bot) * 200;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -4357,44 +3971,9 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+  
 
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (weather2.Emote == "🌧️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          } else if (weather2.Emote == "🌨️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+       
 
           console.log(weather2);
 
@@ -4460,12 +4039,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -4513,15 +4092,7 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+         
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -4667,9 +4238,7 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Quarter Mile Race won! ${weather2.Emote}`
               );
-              embed.setImage(`attachment://profile-image.png`);
-
-              await i.editReply({ embeds: [embed], files: [attachment] });
+         
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -4693,17 +4262,11 @@ module.exports = {
             else if (tracklength2 <= 0) {
               clearInterval(i2);
 
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
               userdata.cash += cashlost;
               embed.setTitle(
                 `Tier ${bot} Quarter Mile Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
-              await i.editReply({ embeds: [embed], files: [attachment] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -4733,10 +4296,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          const canvas = createCanvas(1280, 720);
-          const ctx = canvas.getContext("2d");
-          const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-          const vsimg = await loadImage("https://i.ibb.co/HV63X20/VSIMG.png");
+     
           let cashwon = parseInt(bot) * 350;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -4806,45 +4366,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-          ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-          ctx.save();
-          roundedImage(ctx, 640, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected2image, 640, 200, 640, 360);
-          ctx.restore();
-
-          ctx.save();
-          roundedImage(ctx, 0, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(selected1image, 0, 200, 640, 360);
-          ctx.restore();
-          ctx.font = "40px sans-serif";
-          ctx.fillStyle = "#ffffff";
-
-          ctx.fillText(selected.Name, 75, 180);
-
-          ctx.fillText(car2.Name, 845, 180);
-          ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-          if (weather2.Emote == "🌧️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/QYLgQMS/rain-png-transparent-9.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          } else if (weather2.Emote == "🌨️") {
-            let weatherimg = await loadImage(
-              "https://i.ibb.co/Rbydwdt/snow-png-images-transparent-download-1-1.png"
-            );
-            ctx.drawImage(weatherimg, 0, 0, canvas.width, canvas.height);
-          }
-
-          let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
-
           console.log(weather2);
 
           let slipchance = weather2.Slip;
@@ -4909,12 +4430,12 @@ module.exports = {
               }
             )
             .setColor(colors.blue)
-            .setImage("attachment://profile-image.png");
+            .setImage(carimage)
+            .setThumbnail(car2.Image)
 
           await i.editReply({
             content: "",
             embeds: [embed],
-            files: [attachment],
             components: [],
             fetchReply: true,
           });
@@ -4964,15 +4485,7 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+          
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -5129,9 +4642,7 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Cross Country Race won! ${weather2.Emote}`
               );
-              embed.setImage(`attachment://profile-image.png`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -5153,17 +4664,15 @@ module.exports = {
             else if (tracklength2 <= 0) {
               clearInterval(i2);
 
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
+   
+              
               userdata.cash += cashlost;
               embed.setTitle(
                 `Tier ${bot} Cross Country Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
 
-              await i.editReply({ embeds: [embed], files: [attachment] });
+              await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -5184,16 +4693,4 @@ module.exports = {
   },
 };
 
-function roundedImage(ctx, x, y, width, height, radius) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-}
+

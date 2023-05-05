@@ -148,8 +148,83 @@
       }
     ]
   },
+  "chef": {
+    "prestige": 3,
+    "salary": 300,
+    "name": "Chef",
+    "winprompts": [
+      "You made a pizza",
+      "You made an apple pie",
+      "You made alfredo sauce",
+      "You made the best spaghetti ever"
+    ],
+    "loseprompts": [
+      "You put mustard on a donut...?",
+      "You put blueberries in the wrong recipe",
+      "You put ketchup instead of spaghetti sauce on noodles, ew"
+    ],
+    "items": ["chef hat"],
+    "Positions": [
+      {
+        "name": "Apprentice Chef",
+        "salary": 4000,
+        "fail": 1000,
+        "xp": 0,
+        "emote": "🧑‍🍳",
+        "rank": 1
+      },
+      {
+        "name": "Junior Chef",
+        "salary": 4500,
+        "fail": 1000,
+        "xp": 5000,
+        "emote": "🧑‍🍳",
+        "rank": 2
+      },
+      {
+        "name": "Station Chef",
+        "salary": 6500,
+        "fail": 1500,
+        "xp": 7500,
+        "emote": "🧑‍🍳",
+        "rank": 3
+      },
+      {
+        "name": "Senior Chef",
+        "salary": 7500,
+        "fail": 2000,
+        "xp": 10000,
+        "emote": "🧑‍🍳",
+        "rank": 4
+      },
+      {
+        "name": "Sous Chef",
+        "salary": 8500,
+        "fail": 2000,
+        "xp": 15000,
+        "emote": "🍲",
+        "rank": 5
+      },
+      {
+        "name": "Head Chef",
+        "salary": 10000,
+        "fail": 2000,
+        "xp": 25000,
+        "emote": "🍴",
+        "rank": 6
+      },
+      {
+        "name": "Executive Chef",
+        "salary": 15000,
+        "fail": 3500,
+        "xp": 50000,
+        "emote": "<:item_chefhat:1103823701864103988>",
+        "rank": 7
+      }
+    ]
+  },
   "criminal": {
-    "prestige": 5,
+    "prestige": 7,
     "salary": 500,
     "name": "Criminal",
     "winprompts": [

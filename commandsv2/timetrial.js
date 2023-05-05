@@ -93,27 +93,7 @@ module.exports = {
 
       interaction.reply({ content: "Revving engines...", fetchReply: true });
 
-      const canvas = createCanvas(1280, 720);
-      const ctx = canvas.getContext("2d");
-      const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-      const vsimg = await loadImage("https://i.ibb.co/MShN8pn/vstime.png");
-
-      let selected1image = await loadImage(`${selected.Livery}`);
-      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-      ctx.save();
-      roundedImage(ctx, 320, 200, 640, 360, 20);
-      ctx.stroke();
-      ctx.clip();
-      ctx.drawImage(selected1image, 320, 200, 640, 360);
-      ctx.restore();
-
-      ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-      let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-        name: "profile-image.png",
-      });
-
-      console.log(attachment);
+      
 
       let mph = selected.Speed;
       let weight =
@@ -155,11 +135,9 @@ module.exports = {
           },
         ])
         .setColor(colors.blue)
-        .setImage("attachment://profile-image.png");
 
       interaction.editReply({
         embeds: [embed],
-        files: [attachment],
         fetchReply: true,
       });
 
@@ -179,15 +157,9 @@ module.exports = {
 
         if (tracklength <= 0) {
           clearInterval(i2);
-          ctx.save();
-          roundedImage(ctx, 320, 200, 640, 360, 20);
-          ctx.stroke();
-          ctx.clip();
+      
 
-          ctx.restore();
-          attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-            name: "profile-image.png",
-          });
+      
           let earnings = [];
 
           clearInterval(timeint);
@@ -198,7 +170,6 @@ module.exports = {
 
           embed.setDescription(`${earnings.join("\n")}`);
           embed.setTitle(`Finished time trial in ${time}s!`);
-          embed.setImage(`attachment://profile-image.png`);
 
           if (time <= 2) {
             interaction.channel.send(
@@ -222,7 +193,7 @@ module.exports = {
             interaction.channel.send(`You just completed your task!`);
           }
 
-          await interaction.editReply({ embeds: [embed], files: [attachment] });
+          await interaction.editReply({ embeds: [embed] });
           userdata.save();
         }
 
@@ -269,17 +240,3 @@ module.exports = {
     }
   },
 };
-
-function roundedImage(ctx, x, y, width, height, radius) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-}

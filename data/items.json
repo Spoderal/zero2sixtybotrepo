@@ -266,7 +266,7 @@
   },
   "pizza": {
     "Price": 0,
-    "Action": "Eat a pizza to increase your pizza delivery xp gain\n\nFound while doing the pizza delivery job",
+    "Action": "Eat a pizza to increase your Pizza Delivery xp gain\n\nFound while doing the Pizza Delivery job",
     "Name": "Pizza",
     "Type": "Usable",
     "Emote": "<:item_pizza:1098418923638095872>",
@@ -280,7 +280,7 @@
   },
   "veggie pizza": {
     "Price": 0,
-    "Action": "Eat a veggie pizza to increase your pizza delivery salary by $500\n\nFound while doing the pizza delivery job",
+    "Action": "Eat a veggie pizza to increase your Pizza Delivery salary by $500\n\nFound while doing the Pizza Delivery job",
     "Name": "Veggie Pizza",
     "Type": "Usable",
     "Emote": "<:item_veggiepizzaz:1098418931435311115>",
@@ -292,9 +292,29 @@
       "You eat the veggie pizza and see your salary suddenly increase."
     ]
   },
+  "spatula": {
+    "Price": 0,
+    "Action": "While in your inventory you get 5% more xp while doing the Chef job\n\nFound while doing the Chef job",
+    "Name": "Spatula",
+    "Type": "Non-Usable",
+    "Emote": "",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/DtDmcQP/item-spatula.png"
+  },
+  "cooking pot": {
+    "Price": 0,
+    "Action": "While in your inventory you get 5% more salary while doing the Chef job\n\nFound while doing the Chef job",
+    "Name": "Cooking Pot",
+    "Type": "Non-Usable",
+    "Emote": "",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/vdjht6z/item-pot.gif"
+  },
   "gem": {
     "Price": 1000000,
-    "Action": "You found the beautiful red gem!\n\nFound while doing the criminal job",
+    "Action": "You found the beautiful red gem!\n\nFound while doing the Criminal job",
     "Name": "Gem",
     "Type": "Non-Usable",
     "Emote": "<a:item_gem:1098432365468061741>",
@@ -304,7 +324,7 @@
   },
   "taser": {
     "Price": 0,
-    "Action": "Prevent people from robbing you for 7 days\n\nFound while doing the police job",
+    "Action": "Prevent people from robbing you for 7 days\n\nFound while doing the Police job",
     "Name": "Taser",
     "Type": "Usable",
     "Emote": "<:item_taser:1098418926871920680>",
