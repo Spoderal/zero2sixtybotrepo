@@ -45,18 +45,19 @@ module.exports = {
       let car2 = cars[car];
       let price = cardb.Cars[car2.Name.toLowerCase()]?.Price;
       if (price) finalprice += Number(price);
-
     }
 
-    let carsort = cars.sort(function(a, b){return b.Speed-a.Speed});
-    let fastcar = carsort[0]
+    let carsort = cars.sort(function (a, b) {
+      return b.Speed - a.Speed;
+    });
+    let fastcar = carsort[0];
 
 
-    let pvprank = userdata.pvprank 
+    let pvprank = userdata.pvprank;
     let pvpname = pvprank.Rank || "Silver";
 
-    if(pvpname == undefined){
-      pvpname = "Silver"
+    if (pvpname == undefined) {
+      pvpname = "Silver";
     }
     let jobemote = ""
     
@@ -82,7 +83,7 @@ module.exports = {
     finalprice += cash;
 
     let acthelmet = profilepics.Pfps[helmet.toLowerCase()].Image;
-    let showcase = userdata.showcase 
+    let showcase = userdata.showcase;
 
     let embed = new Discord.EmbedBuilder()
     .setTitle(title)
@@ -108,30 +109,29 @@ module.exports = {
        ${jobemote} __${userjob.name}__
         ${userjob.position}
         `,
-        inline: true
-      },
-      {
-        name: "Best Car",
-        value:`
+          inline: true,
+        },
+        {
+          name: "Best Car",
+          value: `
         **${fastcar.Emote} ${fastcar.Name}**
         ${emotes.speed} ${fastcar.Speed}
         ${emotes.zero2sixty} ${fastcar.Acceleration}s
         ${emotes.handling} ${fastcar.Handling}
         ${emotes.weight} ${fastcar.WeightStat}
         `,
-        inline: true
-      },
-      {
-        name: "Networth",
-        value: `
+          inline: true,
+        },
+        {
+          name: "Networth",
+          value: `
        ${toCurrency(finalprice)}
-        `
-      },
-      
-    )
-    .setColor(`${colors.blue}`)
-    .setThumbnail(showcase)
-    
-    await interaction.reply({embeds: [embed]})
+        `,
+        }
+      )
+      .setColor(`${colors.blue}`)
+      .setThumbnail(showcase);
+
+    await interaction.reply({ embeds: [embed] });
   },
 };
