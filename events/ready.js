@@ -15,7 +15,7 @@ const Topgg = require("@top-gg/sdk");
 const cars = require("./cars").carfix;
 const gold = require("../gold");
 const stats = require("./stats").stats;
-const cardata = require('./shopdata')
+const cardata = require("./shopdata");
 const { updateUsed } = require("./used");
 
 let mongoConfig = {

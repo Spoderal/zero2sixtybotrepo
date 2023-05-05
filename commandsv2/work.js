@@ -38,8 +38,8 @@ module.exports = {
             .addChoices(
               { name: "Pizza Delivery", value: "pizza delivery" },
               { name: "Police", value: "police" },
-              {name: "Chef", value: "chef"},
-              { name: "Criminal", value: "criminal" },
+              { name: "Chef", value: "chef" },
+              { name: "Criminal", value: "criminal" }
             )
         )
     )
@@ -276,7 +276,7 @@ module.exports = {
               let itemchance = randomRange(1, 10);
               let itemchance2 = randomRange(1, 20);
               let randompizza = lodash.sample(["pizza", "veggie pizza"]);
-              let randomchef = lodash.sample(["spatula", "cooking pot"])
+              let randomchef = lodash.sample(["spatula", "cooking pot"]);
 
               if (itemchance == 6 && userdata.work.name == "Pizza Delivery") {
                 embed.addFields({

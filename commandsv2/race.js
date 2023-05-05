@@ -26,8 +26,7 @@ const { createCanvas, loadImage } = require("canvas");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const weather = require("../data/weather.json");
 
-const cardata = require("../events/shopdata")
-
+const cardata = require("../events/shopdata");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -41,36 +40,32 @@ module.exports = {
         .setAutocomplete(true)
     ),
 
+  async autocomplete(interaction, client) {
+    let focusedValue = interaction.options.getFocused();
+    let choices = cardata.shopitems;
+    let filtered = choices.filter((choice) => choice.includes(focusedValue));
+    let userdata2 = await User.findOne({ id: interaction.user.id });
+    let options;
+    filtered = userdata2.cars;
+    let filteredarr = [];
+    for (let ca in filtered) {
+      let carind = filtered[ca];
+      filteredarr.push(carind.Name);
+    }
+    if (filteredarr.length > 25) {
+      options = filteredarr.slice(0, 25);
+    } else {
+      options = filteredarr;
+    }
 
-    async autocomplete(interaction, client){
-      let focusedValue = interaction.options.getFocused();
-      let choices = cardata.shopitems
-      let filtered = choices.filter((choice) => 
-      choice.includes(focusedValue)
-      );
-      let userdata2 = await User.findOne({ id: interaction.user.id });
-      let options;
-      filtered = userdata2.cars
-      let filteredarr = []
-      for(let ca in filtered){
-        let carind = filtered[ca]
-        filteredarr.push(carind.Name)
-      }
-      if (filteredarr.length > 25) {
-          options = filteredarr.slice(0, 25);
-      } else {
-          options = filteredarr;
-      }
-
-      await interaction.respond(
-          options.map(choice => ({ name: choice, value: choice.toLowerCase() })),
-      );
-    },
+    await interaction.respond(
+      options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
+    );
+  },
 
   async execute(interaction) {
     let user = interaction.user;
     let carsarray = [];
-
 
     for (let car1 in cardb.Cars) {
       let caroj = cardb.Cars[car1];
@@ -97,7 +92,7 @@ module.exports = {
     }
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car");
-    idtoselect = cardb.Cars[idtoselect].Name
+    idtoselect = cardb.Cars[idtoselect].Name;
     let filteredcar = userdata.cars.filter((car) => car.Name == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
@@ -247,23 +242,23 @@ module.exports = {
         .setEmoji("<:logo_t7:1088661366447022090>")
         .setCustomId("snowysagera")
         .setStyle("Secondary")
-
-    )
-    let carimage = selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image
+    );
+    let carimage =
+      selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image;
     let usingmsg = [];
     if (usinginv.includes("fruit punch")) {
       usingmsg.push(
         `${itemdb["fruit punch"].Emote} ${itemdb["fruit punch"].Name} Active`
       );
     }
-    
+
     if (usinginv.includes("flat tire")) {
       usingmsg.push(
         `${itemdb["flat tire"].Emote} ${itemdb["flat tire"].Name} Active`
       );
     }
 
-        if (usinginv.includes("energy drink")) {
+    if (usinginv.includes("energy drink")) {
       usingmsg.push(
         `${itemdb["energy drink"].Emote} ${itemdb["energy drink"].Name} Active`
       );
@@ -415,10 +410,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-
-
-   
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -469,7 +460,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -525,9 +516,6 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-
-
-             
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -805,7 +793,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-      
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -852,8 +840,6 @@ module.exports = {
             `${cardb.Cars[selected.Name.toLowerCase()].Image}`
           );
           let selected2image = await loadImage(`${car2.Image}`);
-
-      
 
           console.log(weather2);
 
@@ -903,7 +889,7 @@ module.exports = {
                 inline: true,
               }
             )
-            .setColor(colors.blue)
+            .setColor(colors.blue);
 
           await i.editReply({
             content: "",
@@ -959,8 +945,6 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-           
-
               if (car2.Squad) {
                 let filtercar = usercars.filter((car) => car.Name == car2.Name);
                 if (!filtercar[0]) {
@@ -1190,7 +1174,7 @@ module.exports = {
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Street Race won!`);
 
-              await i.editReply({ embeds: [embed]});
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 1) {
                 userdata.parts.push("t1exhaust");
@@ -1250,7 +1234,7 @@ module.exports = {
           console.log("race");
           let car2;
           let bot = i.customId;
-      
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -1304,10 +1288,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-       
-
-
-
           let mph = selected.Speed;
 
           let weight =
@@ -1358,7 +1338,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -1444,7 +1424,7 @@ module.exports = {
                 `Tier ${bot} Venus Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed]});
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -1454,13 +1434,12 @@ module.exports = {
                 `Tier ${bot} Venus Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed]});
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -1645,7 +1624,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-        
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -1699,8 +1678,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-       
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -1752,7 +1729,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -1854,7 +1831,6 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-         
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -2092,8 +2068,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-        
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -2145,7 +2119,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -2231,7 +2205,7 @@ module.exports = {
                 `Tier ${bot} Moon Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed]});
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -2241,13 +2215,12 @@ module.exports = {
                 `Tier ${bot} Moon Race lost! Your car flew off the planet!`
               );
 
-              await i.editReply({ embeds: [embed]});
+              await i.editReply({ embeds: [embed] });
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-          
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -2391,7 +2364,6 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Moon Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
@@ -2486,8 +2458,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-       
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -2539,7 +2509,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -2641,7 +2611,6 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-       
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -2783,7 +2752,6 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-          
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Saturn Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
@@ -2823,7 +2791,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-     
+
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -2877,8 +2845,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-        
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -2930,7 +2896,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -3015,7 +2981,6 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
               );
-
             } else if (
               tracklength < tracklength2 &&
               timer == 10 &&
@@ -3024,13 +2989,11 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
               );
-
             } else if (
               tracklength > tracklength2 &&
               timer == 10 &&
               gravity == true
             ) {
-        
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -3174,7 +3137,6 @@ module.exports = {
               timer == 10 &&
               gravity == true
             ) {
-              
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Pluto Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
@@ -3203,7 +3165,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-        
+
           let cashwon = parseInt(bot) * 250;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -3259,8 +3221,6 @@ module.exports = {
           );
           let selected2image = await loadImage(`${car2.Image}`);
 
-     
-
           let mph = selected.Speed;
 
           let weight =
@@ -3308,7 +3268,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -3358,7 +3318,6 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-       
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -3552,7 +3511,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-      
+
           let cashwon = parseInt(bot) * 250;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -3605,7 +3564,6 @@ module.exports = {
             `${cardb.Cars[selected.Name.toLowerCase()].Image}`
           );
           let selected2image = await loadImage(`${car2.Image}`);
-
 
           console.log(weather2);
 
@@ -3672,7 +3630,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -3721,7 +3679,6 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-         
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -3907,7 +3864,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-    
+
           let cashwon = parseInt(bot) * 200;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -3971,10 +3928,6 @@ module.exports = {
             `${cardb.Cars[selected.Name.toLowerCase()].Image}`
           );
           let selected2image = await loadImage(`${car2.Image}`);
-
-  
-
-       
 
           console.log(weather2);
 
@@ -4041,7 +3994,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -4093,7 +4046,6 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-         
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -4239,7 +4191,6 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Quarter Mile Race won! ${weather2.Emote}`
               );
-         
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -4297,7 +4248,7 @@ module.exports = {
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-     
+
           let cashwon = parseInt(bot) * 350;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -4432,7 +4383,7 @@ module.exports = {
             )
             .setColor(colors.blue)
             .setImage(carimage)
-            .setThumbnail(car2.Image)
+            .setThumbnail(car2.Image);
 
           await i.editReply({
             content: "",
@@ -4486,7 +4437,6 @@ module.exports = {
             if (tracklength <= 0) {
               clearInterval(i2);
 
-          
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -4644,7 +4594,6 @@ module.exports = {
                 `Tier ${bot} Cross Country Race won! ${weather2.Emote}`
               );
 
-
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -4665,8 +4614,6 @@ module.exports = {
             else if (tracklength2 <= 0) {
               clearInterval(i2);
 
-   
-              
               userdata.cash += cashlost;
               embed.setTitle(
                 `Tier ${bot} Cross Country Race lost! ${weather2.Emote}`
@@ -4693,5 +4640,3 @@ module.exports = {
     });
   },
 };
-
-
