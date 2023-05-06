@@ -32,7 +32,12 @@ module.exports = {
         // Command
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
 
-        await command.execute(interaction);
+        try {
+          await command.execute(interaction);
+
+        } catch(err){
+          console.log(err)
+        }
 
         // Pets
         const petExecutionTimeName = "Pet update time";
