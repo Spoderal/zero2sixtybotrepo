@@ -41,12 +41,12 @@ module.exports = {
     ),
 
   async autocomplete(interaction, client) {
-    let focusedValue = interaction.options.getFocused();
-    let choices = cardata.shopitems;
-    let filtered = choices.filter((choice) =>
-      choice.toLowerCase().includes(focusedValue.toLowerCase())
-    );
     let userdata2 = await User.findOne({ id: interaction.user.id });
+    let focusedValue = interaction.options.getFocused();
+    let choices = userdata2.cars;
+    let filtered = choices.filter((choice) =>
+      choice.Name.toLowerCase().includes(focusedValue.toLowerCase())
+    );
     let options;
     filtered = userdata2.cars;
     let filteredarr = [];
