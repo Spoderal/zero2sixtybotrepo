@@ -52,7 +52,7 @@ module.exports = {
       }
     } catch (error) {
       if (error) {
-        console.error({ interactionCreateExecuteError: error });
+        console.log({ interactionCreateExecuteError: error });
         createBugCard({
           error,
           event: "interactionCreate",
