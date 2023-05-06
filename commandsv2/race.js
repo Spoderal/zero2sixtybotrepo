@@ -998,7 +998,7 @@ module.exports = {
                       Miles: 0,
                       Drift: 0,
                       WeightStat: car2.Weight,
-                    }
+                    };
                     userdata.cars.push(squadobj);
                   }
 
