@@ -37,7 +37,12 @@ async function cardata() {
     }
   }
 
-  global.save();
+  try {
+    global.save();
+
+  } catch (err){
+    console.log(err)
+  }
 }
 
 cardata();
