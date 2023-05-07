@@ -15,6 +15,7 @@ async function cardata() {
     console.log(err)
   }
 
+  console.log("e")
   for (let car in cardb.Cars) {
     let carindb = cardb.Cars[car];
     if (carindb.Price > 0) {
