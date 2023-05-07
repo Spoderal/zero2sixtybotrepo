@@ -2,12 +2,11 @@ const Global = require(`../schema/global-schema`);
 const itemsdb = require("../data/items.json");
 const lodash = require("lodash");
 async function updateItemShop() {
-  let global
+  let global;
   try {
-   global = await Global.findOne();
-  }
-  catch (err){
-    console.log(err)
+    global = await Global.findOne();
+  } catch (err) {
+    console.log(err);
   }
   let itemcooldown = global.itemshopcooldown;
   let items = [];
