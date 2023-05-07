@@ -5,7 +5,7 @@ const User = require("../schema/profile-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes");
-const itemdb = require('../data/items.json')
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -149,7 +149,7 @@ module.exports = {
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         for (let car in cars[0]) {
-          let favorite = ""
+          let favorite = "";
           if (car.Favorite == true) {
             favorite = "⭐";
           }
@@ -187,10 +187,10 @@ module.exports = {
           .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(items)
+        console.log(items);
         for (let item in items) {
           item = items[item];
-          let itemindb = itemdb[item.toLowerCase()]
+          let itemindb = itemdb[item.toLowerCase()];
           displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
         }
         var list2 = displayitems;
@@ -245,7 +245,6 @@ module.exports = {
               value: `${emotes.emotes.speed} Power: ${car.Speed}\n${emotes.emotes.zero2sixty} Acceleration: ${car.Acceleration}s\n\`ID: ${car.ID}\``,
               inline: true,
             });
-          
           } else if (itempage == displayparts2) {
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
