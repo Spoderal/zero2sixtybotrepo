@@ -34,9 +34,8 @@ module.exports = {
 
         try {
           await command.execute(interaction);
-
-        } catch(err){
-          console.log(err)
+        } catch (err) {
+          console.log(err);
         }
 
         // Pets

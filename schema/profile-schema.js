@@ -464,7 +464,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-    police: {
+  police: {
     type: Boolean,
     required: false,
     default: false,
