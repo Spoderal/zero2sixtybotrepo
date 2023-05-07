@@ -6,7 +6,14 @@ let array = [];
 let array2 = [];
 
 async function cardata() {
-  let global = await Global.findOne({});
+  let global
+  try {
+
+     global = await Global.findOne({});
+  }
+  catch (err){
+    console.log(err)
+  }
 
   for (let car in cardb.Cars) {
     let carindb = cardb.Cars[car];
@@ -37,7 +44,12 @@ async function cardata() {
     }
   }
 
-  global.save();
+  try {
+    global.save();
+
+  } catch (err){
+    console.log(err)
+  }
 }
 
 cardata();

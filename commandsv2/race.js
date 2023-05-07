@@ -98,7 +98,7 @@ module.exports = {
     }
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car");
-    idtoselect = cardb.Cars[idtoselect].Name;
+    idtoselect = cardb.Cars[idtoselect.toLowerCase()].Name;
     let filteredcar = userdata.cars.filter((car) => car.Name == idtoselect);
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {

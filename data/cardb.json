@@ -2301,6 +2301,7 @@
       "Weight": 3400
     },
 
+
     "2009 honda s2000 cr": {
       "alias": "2009 s2000 cr",
       "Name": "2009 Honda S2000 CR",
@@ -8346,6 +8347,22 @@
       "Class": "A",
       "Weight": 3500,
       "Obtained": "Blueprints"
+    },
+    "2003 ferrari enzo": {
+      "alias": "2003 enzo",
+      "Name": "2003 Ferrari Enzo",
+      "Emote": "<:ferrari:931011838374727730>",
+      "Speed": 220,
+      "kmh": 288,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "V12",
+      "Image": "https://i.ibb.co/jbTDv6Z/2003-ferrari-enzo-front.jpg",
+      "0-60": 8.9,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "S",
+      "Weight": 3400
     }
   }
 }

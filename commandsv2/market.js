@@ -80,7 +80,7 @@ module.exports = {
       let price = interaction.options.getNumber("price");
       let amount = interaction.options.getString("amount") || 1;
       let useritems = userdata.items;
-      if (amount.includes("-"))
+      if (amount < 0)
         return interaction.reply("You can't list negative items!");
       let limit = userdata.marketlimit;
 

@@ -464,6 +464,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
+    police: {
+    type: Boolean,
+    required: false,
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

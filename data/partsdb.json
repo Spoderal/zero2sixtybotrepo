@@ -479,13 +479,14 @@
       "DecreasedHandling": 10,
       "DecreasedSpeed": "0",
       "DecreaseHandling": 4,
+      "PSI":15,
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
     },
     "dualturbo": {
       "Name": "DualTurbo",
-      "AddedSpeed": 10,
+      "AddedSpeed": 5,
       "AddedSnow": 0,
-      "AddedSixty": 0.2,
+      "AddedSixty": 5,
       "sellprice": 9000,
       "Price": 20000,
       "Emote": "<:t2turbo:989758549330649118>",
@@ -495,13 +496,14 @@
       "DecreasedSixty": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": 5,
+      "DecreaseHandling": 50,
+      "PSI":24,
       "Image": "https://i.ibb.co/Qb9Hc0N/t2turbo.png"
     },
     "supercharger": {
       "Name": "SuperCharger",
       "AddedSpeed": 5,
-      "AddedSixty": 2,
+      "AddedSixty": 0,
       "sellprice": 11250,
       "Price": 30000,
       "AddedSnow": 0,
@@ -512,7 +514,8 @@
       "DecreasedSixty": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": "7",
+      "DecreaseHandling": 100,
+      "PSI":17,
       "Image": "https://i.ibb.co/JH6CzMv/t3turbo.png"
     },
     "t4turbo": {
@@ -530,6 +533,7 @@
       "Type": "turbo",
       "DecreasedSpeed": "0",
       "DecreaseHandling": "10",
+      "PSI":25,
       "Image": "https://i.ibb.co/1MSBNVk/t4turbo.png",
       "Obtained": "Wheelspin"
     },
@@ -548,6 +552,7 @@
       "Type": "turbo",
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
+      "PSI":28,
       "Image": "https://i.ibb.co/yQGswVn/t5turbo.png",
       "Obtained": "Fusing 2 T4Turbo"
     },
@@ -566,6 +571,7 @@
       "Type": "turbo",
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
+      "PSI":30,
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png",
       "Obtained": "Fusing T5Turbo with 100 Xessence"
     },
@@ -1699,7 +1705,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": "0"
+      "DecreaseHandling": "0",
+      "Height":6
     },
     "bm1racesuspension": {
       "Name": "BM1RaceSuspension",
@@ -1716,7 +1723,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreaseSpeed": "0",
-      "DecreasedSpeed": "0"
+      "DecreasedSpeed": "0",
+      "Height":6
     },
     "t1offroadsuspension": {
       "Name": "T1OffroadSuspension",
@@ -1732,7 +1740,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 10
+      "AddHandling": 10,
+      "Height":8.7
     },
     "t2offroadsuspension": {
       "Name": "T2OffroadSuspension",
@@ -1748,7 +1757,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 15
+      "AddHandling": 15,
+      "Height":8.7
     },
     "t3offroadsuspension": {
       "Name": "T3OffroadSuspension",
@@ -1764,7 +1774,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "AddHandling": 15
+      "AddHandling": 15,
+      "Height":8.7
     },
     "t2racesuspension": {
       "Name": "T2RaceSuspension",
@@ -1781,7 +1792,8 @@
       "Type": "suspension",
       "DecreasedSpeed": "0",
       "AddHandling": 5,
-      "Image": "https://i.ibb.co/Gkj9spW/t2suspension.png"
+      "Image": "https://i.ibb.co/Gkj9spW/t2suspension.png",
+      "Height":4.5
     },
     "t1gearbox": {
       "Name": "T1Gearbox",
@@ -1883,7 +1895,8 @@
       "Type": "suspension",
       "DecreasedSpeed": "0",
       "AddHandling": 10,
-      "Image": "https://i.ibb.co/MNr8FKN/t3racesuspension.png"
+      "Image": "https://i.ibb.co/MNr8FKN/t3racesuspension.png",
+      "Height":4.5
     },
     "t4racesuspension": {
       "Name": "T4RaceSuspension",
@@ -1900,7 +1913,8 @@
       "Type": "suspension",
       "DecreasedSpeed": "0",
       "AddHandling": 15,
-      "Image": "https://i.ibb.co/tCRKMLL/t4racesuspension.png"
+      "Image": "https://i.ibb.co/tCRKMLL/t4racesuspension.png",
+      "Height":4.5
     },
     "t5racesuspension": {
       "Name": "T5RaceSuspension",
@@ -1917,7 +1931,8 @@
       "Type": "suspension",
       "DecreasedSpeed": "0",
       "AddHandling": 25,
-      "Image": "https://i.ibb.co/bRHYcLz/t5racesuspension.png"
+      "Image": "https://i.ibb.co/bRHYcLz/t5racesuspension.png",
+      "Height":4.5
     },
 
     "wintertires": {
@@ -2047,7 +2062,8 @@
       "DecreasedSixty": "1",
       "Type": "suspension",
       "DecreasedSpeed": 5,
-      "Image": "https://i.ibb.co/ZWsD2v7/t1driftsuspension.png"
+      "Image": "https://i.ibb.co/ZWsD2v7/t1driftsuspension.png",
+      "Height":3
     },
     "t2driftsuspension": {
       "Name": "T2DriftSuspension",
@@ -2065,7 +2081,8 @@
       "Type": "suspension",
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
-      "Image": "https://i.ibb.co/C1kBcs9/t2driftsuspension.png"
+      "Image": "https://i.ibb.co/C1kBcs9/t2driftsuspension.png",
+      "Height":3
     },
     "t3driftsuspension": {
       "Name": "T3DriftSuspension",
@@ -2083,7 +2100,8 @@
       "Type": "suspension",
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
-      "Image": "https://i.ibb.co/DQS6YXm/t3driftsuspension.png"
+      "Image": "https://i.ibb.co/DQS6YXm/t3driftsuspension.png",
+      "Height":3
     },
     "t4driftsuspension": {
       "Name": "T4DriftSuspension",
@@ -2102,7 +2120,8 @@
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
       "AddHandling": 40,
-      "Image": "https://i.ibb.co/2N1rGBh/t4driftsuspension.png"
+      "Image": "https://i.ibb.co/2N1rGBh/t4driftsuspension.png",
+      "Height":3
     },
     "t5driftsuspension": {
       "Name": "T5DriftSuspension",
@@ -2121,7 +2140,8 @@
       "DecreaseSpeed": 5,
       "DecreasedSpeed": 5,
       "AddHandling": 50,
-      "Image": "https://i.ibb.co/1LwD7kj/t5driftsuspension.png"
+      "Image": "https://i.ibb.co/1LwD7kj/t5driftsuspension.png",
+      "Height":3
     },
     "pet spoiler": {
       "Name": "Pet Spoiler",
@@ -2305,7 +2325,8 @@
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0",
-      "Image": "https://i.ibb.co/Wtft3SN/t1racesuspension.png"
+      "Image": "https://i.ibb.co/Wtft3SN/t1racesuspension.png",
+      "Height":4.5
     },
     "bodykit": {
       "Name": "BodyKit",

@@ -78,9 +78,9 @@ module.exports = {
 
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
       return interaction.reply("You can't trade cash for cash!");
-    if (amount.includes("-"))
+    if (amount < 0)
       return interaction.reply("You can't trade negative cash!");
-    if (amount2.includes("-"))
+    if (amount2 < 0)
       return interaction.reply("You can't trade negative cash!");
     let item;
     let item2;
