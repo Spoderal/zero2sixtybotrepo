@@ -225,7 +225,6 @@ module.exports = {
       1
     );
 
-
     let row9 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("previous")
@@ -751,7 +750,7 @@ module.exports = {
         part = ecuarr[0][0];
         let statsdisp = [];
 
-        console.log(part)
+        console.log(part);
 
         if (part.AddedSpeed > 0) {
           statsdisp.push(`${emotes.speed} Power: +${part.AddedSpeed}`);
