@@ -3333,6 +3333,7 @@ module.exports = {
 
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Highway Race won!`);
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -3357,7 +3358,7 @@ module.exports = {
               userdata.cash += cashlost;
               embed.setTitle(`Tier ${bot} Highway Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
+await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -3684,7 +3685,7 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Half Mile Race won! ${weather2.Emote}`
               );
-
+await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -3710,7 +3711,7 @@ module.exports = {
                 `Tier ${bot} Half Mile Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
+await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -4059,6 +4060,7 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Quarter Mile Race won! ${weather2.Emote}`
               );
+              await i.editReply({ embeds: [embed] });
 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -4087,6 +4089,7 @@ module.exports = {
                 `Tier ${bot} Quarter Mile Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
+              await i.editReply({ embeds: [embed] }); 
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -4461,7 +4464,7 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Cross Country Race won! ${weather2.Emote}`
               );
-
+await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
                 interaction.channel.send(
@@ -4487,7 +4490,7 @@ module.exports = {
                 `Tier ${bot} Cross Country Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
+await i.editReply({ embeds: [embed] });
               await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
