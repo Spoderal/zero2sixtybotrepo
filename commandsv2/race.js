@@ -167,13 +167,6 @@ module.exports = {
         .setCustomId("plutorace")
         .setStyle("Primary")
     );
-    const row0 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setLabel("Squad Takeover")
-        .setEmoji("🕶️")
-        .setCustomId("squadtake")
-        .setStyle("Secondary")
-    );
     const tierrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setLabel("Tier 1")
