@@ -134,7 +134,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      }  else if (value === "colonize") {
+      } else if (value === "colonize") {
         embed.setTitle("Colonization Race Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Whats this? Space in Zero2Sixty? Thats right! As wild as this may seem, the rewards in this event are insane, you won't want to miss this event!
