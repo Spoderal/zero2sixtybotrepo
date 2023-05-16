@@ -5,13 +5,13 @@ async function updateCrew(interaction) {
   let usredata = await User.findOne({ id: interaction.user.id });
   if (usredata && usredata.crew) {
     let global = (await Global.findOne({})) || new Global({});
-
     let ucrew = usredata.crew;
     let crews = global.crews;
     let crew2;
     if (ucrew) {
       crew2 = crews.filter((crew) => crew.name == ucrew.name);
     }
+
 
     if (ucrew && crew2[0]) {
       crew2 = crew2[0];
@@ -43,6 +43,7 @@ async function updateCrew(interaction) {
     }
     console.log(crew2);
     global.markModified("crews");
+    global.update()
     global.save();
   }
 }
