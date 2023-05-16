@@ -279,7 +279,7 @@ module.exports = {
 
     let msg = await interaction.reply({
       embeds: [embed],
-      components: [row2, row5, row0],
+      components: [row2, row5],
       fetchReply: true,
     });
 
