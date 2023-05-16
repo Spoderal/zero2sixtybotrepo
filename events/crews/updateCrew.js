@@ -12,6 +12,7 @@ async function updateCrew(interaction) {
       crew2 = crews.filter((crew) => crew.name == ucrew.name);
     }
 
+
     if (ucrew && crew2[0]) {
       crew2 = crew2[0];
       let totalrp = 0;
@@ -41,9 +42,9 @@ async function updateCrew(interaction) {
       }
     }
     console.log(crew2);
-    global.markModified("crews");
-    global.update();
-    global.save();
+    await global.markModified("crews")
+    await global.update()
+    await global.save();
   }
 }
 
