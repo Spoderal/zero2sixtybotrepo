@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
+const ms = require("pretty-ms")
 
 module.exports = {
   data: new SlashCommandBuilder()

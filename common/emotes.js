@@ -16,17 +16,19 @@ const emotes = {
   // Player specific
   notoriety: "<:notoriety:1077420597388247170>",
   warehouse: "<:Warehouse1:985014760884019202>",
-
+  police: "<a:logo_police:1105267744896729169>",
   // Rewards
   wheelSpin: "<a:currency_wheelspin:1103930502467047437>",
   superWheel: "<a:currency_superwheelspin:1103930501619793943>",
   blueprints: "<:blueprint:1076026198171328562>",
+  bounty: "<:CURRENCY_BOUNTY:1105006773502480425>",
 
   // Keys
   ckey: "<:ckey:993011409132728370>",
   rkey: "<:rkey:993011407681486868>",
   ekey: "<:ekey:993011410210672671>",
   commonKey: "<:key_common:1103921692566360154>",
+  lekey:"<:key_lemans:1108502487016689715>",
   rareKey: "<:key_rare:1103921690657968220>",
   exoticKey: "<:key_exotic:1103923017576357969>",
   dirftKey: "<:key_limited:1103923572063354880>",

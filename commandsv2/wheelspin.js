@@ -39,7 +39,7 @@ module.exports = {
       let cooldown = cooldowns.applejuice;
       let timeout = 60000;
       console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
+      if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
         console.log("pulled");
         userdata.using.pull("orange juice");
         userdata.update();
@@ -143,6 +143,8 @@ module.exports = {
           }
           collector.on("collect", async (i) => {
             if (i.customId.includes("keep")) {
+              
+              collector.stop()
               if (usercars.length >= garagespaces) {
                 interaction.channel.send("You garage is full!");
                 return;
@@ -186,6 +188,8 @@ module.exports = {
               await i.update({ embeds: [embed] });
               return;
             } else if (i.customId.includes("sell")) {
+              
+              collector.stop()
               userdata.cash += sellprice;
               userdata.save();
               embed.setTitle("✅");

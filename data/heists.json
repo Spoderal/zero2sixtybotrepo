@@ -3,7 +3,7 @@
     "name": "Zero City Bank",
     "emote": "<:city_bank:1104299449406193764>",
     "image": "https://i.ibb.co/6JcTcBC/bank.png",
-    "items": ["mask", "crow bar"],
+    "items": ["mask", "crowbar"],
     "success": 35,
     "payoutrangehigh": 1000000,
     "payoutrangelow": 100000

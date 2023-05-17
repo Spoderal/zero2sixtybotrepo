@@ -220,6 +220,12 @@ module.exports = {
       1
     );
 
+    ecuarr = lodash.chunk(
+      ecuarr.map((a) => a),
+      1
+    );
+
+
     let row9 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("previous")
@@ -744,6 +750,8 @@ module.exports = {
       } else if (i.customId.includes("ecu")) {
         part = ecuarr[0][0];
         let statsdisp = [];
+
+        console.log(part)
 
         if (part.AddedSpeed > 0) {
           statsdisp.push(`${emotes.speed} Power: +${part.AddedSpeed}`);

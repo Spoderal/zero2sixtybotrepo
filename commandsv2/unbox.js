@@ -18,7 +18,8 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Drift", value: "drift" }
+          { name: "Drift", value: "drift" },
+          {name: "Le Mans", value:"le mans"}
         )
         .setRequired(true)
     )
@@ -33,7 +34,7 @@ module.exports = {
   async execute(interaction) {
     let crates = require("../data/imports.json");
     let cars = require("../data/cardb.json");
-    let list = ["common", "rare", "exotic", "drift", "fools"];
+    let list = ["common", "rare", "exotic", "drift", "fools", "le mans"];
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);

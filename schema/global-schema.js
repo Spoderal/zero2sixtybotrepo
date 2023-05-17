@@ -252,6 +252,24 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  clearbounty: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+  teams: {
+    type: Array,
+    required: false,
+    default: [
+      {name: "Audi", wins: 0},
+      {name: "Chevrolet", wins: 0},
+      {name: "Ferrari", wins: 0},
+      {name: "Peugeot", wins: 0},
+      {name: "Porsche", wins: 0},
+      {name: "Toyota", wins: 0}
+
+    ],
+  }
 });
 
 module.exports = mongoose.model("global", Global);

@@ -1,7 +1,9 @@
 {
   "Chapters": {
     "1": {
-      "dialog": "Welcome to Zero City! You hit your head pretty hard on that bump back there, this is the city everyone comes to just race and climb the ranks. Create rivalries, make enemies, and run from cops. What's your role in this city? Well, thats up to you! Wait, you don't remember ANYTHING?"
+      "dialog": "Tom: Welcome to Zero City! You're Snowy's kid right? I'm sorry about him being missing, that must be hard for you.\n\n**Flashback**\n\nHey kiddo, I'm home from the police station, the squad war is getting pretty hectic out there.\n\n**End Flashback**\n\nTom: Hello??? Oh there you are, ok so, these are my friends and uh yea introduce yourself."
+      
+
     }
   }
 }

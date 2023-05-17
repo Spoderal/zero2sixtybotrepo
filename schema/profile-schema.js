@@ -469,6 +469,47 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
+  bounty:{
+    type: Number,
+    required: false,
+    default: 0
+  },
+  car_racing: {
+    type: Object,
+    required: false,
+    default: {}
+  },
+  
+  impounds: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  impoundtimer: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+  canrace: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+  lemans:{
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  lekeys: {
+    type: Number,
+    required: false,
+    default: 0
+  },
+  firstpolice: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

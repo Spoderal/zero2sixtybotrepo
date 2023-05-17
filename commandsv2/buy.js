@@ -233,20 +233,22 @@ module.exports = {
         return;
       } else {
         let cargoldprice = Math.round(boughtCarPrice / 150);
-        if (cash < boughtCarPrice)
-          return await interaction.reply("You don't have enough cash!");
+        if (userdata.bounty < boughtCarPrice)
+          return await interaction.reply("You don't have enough bounty!");
         if (goldpurchase && cargoldprice > gold)
           return await interaction.reply("You don't have enough gold!");
         if (boughtCar.Police) {
-          if (cash < boughtCarPrice)
-            return await interaction.reply("You don't have enough cash!");
+          if (userdata.bounty < boughtCarPrice)
+            return await interaction.reply("You don't have enough bounty!");
 
           let job = userdata.work;
           if (!job) return await interaction.reply("You don't have a job!");
-          if (job.name !== "police")
+          if (job.name !== "Police")
             return await interaction.reply(
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
+
+          
 
           let idtoset = boughtCar.alias;
           let carobj = {

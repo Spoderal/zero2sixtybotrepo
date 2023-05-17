@@ -46,12 +46,22 @@ module.exports = {
 
     let description7 = lodash.sample(descriptions);
     let description8 = lodash.sample(descriptions);
+    let n1speed = "???"
+    let n2speed = "???"
+    let n3speed = "???"
+    let n4speed = "???"
+    if(userdata.items.includes("flowers")){
+      n1speed = car1.Speed
+       n2speed = car2.Speed
+       n3speed = car3.Speed
+       n4speed = car4.Speed
+    }
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Used cars for this week")
       .addFields({
         name: `${car1.NPC.emote} Jerry's ${car1.Name}`,
-        value: `${emotes.emotes.speed} ???\n${emotes.emotes.zero2sixty} ${
+        value: `${emotes.emotes.speed} ${n1speed}\n${emotes.emotes.zero2sixty} ${
           car1.Acceleration
         }s\n${emotes.emotes.handling} ${car1.Handling}\n${
           emotes.emotes.weight
@@ -111,7 +121,7 @@ module.exports = {
           .setTitle("Used cars for this week")
           .addFields({
             name: `${car1.NPC.emote} Jerry's ${car1.Name}`,
-            value: `${emotes.emotes.speed} ???\n${emotes.emotes.zero2sixty} ${
+            value: `${emotes.emotes.speed}${n1speed}\n${emotes.emotes.zero2sixty} ${
               car1.Acceleration
             }s\n${emotes.emotes.handling} ${car1.Handling}\n${
               emotes.emotes.weight
@@ -134,7 +144,7 @@ module.exports = {
           .setTitle("Used cars for this week")
           .addFields({
             name: `${car2.NPC.emote} Larry's ${car2.Name}`,
-            value: `${emotes.emotes.speed} ???\n${emotes.emotes.zero2sixty} ${
+            value: `${emotes.emotes.speed} ${n2speed}\n${emotes.emotes.zero2sixty} ${
               car2.Acceleration
             }s\n${emotes.emotes.handling} ${car2.Handling}\n${
               emotes.emotes.weight
@@ -157,7 +167,7 @@ module.exports = {
           .setTitle("Used cars for this week")
           .addFields({
             name: `${car3.NPC.emote} Gary's ${car3.Name}`,
-            value: `${emotes.emotes.speed} ???\n${emotes.emotes.zero2sixty} ${
+            value: `${emotes.emotes.speed} ${n3speed}\n${emotes.emotes.zero2sixty} ${
               car3.Acceleration
             }s\n${emotes.emotes.handling} ${car3.Handling}\n${
               emotes.emotes.weight
@@ -180,7 +190,7 @@ module.exports = {
           .setTitle("Used cars for this week")
           .addFields({
             name: `${car4.NPC.emote} Gary's ${car4.Name}`,
-            value: `${emotes.emotes.speed}???\n${emotes.emotes.zero2sixty} ${
+            value: `${emotes.emotes.speed} ${n4speed}\n${emotes.emotes.zero2sixty} ${
               car4.Acceleration
             }s\n${emotes.emotes.handling} ${car4.Handling}\n${
               emotes.emotes.weight

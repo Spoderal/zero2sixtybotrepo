@@ -30,21 +30,23 @@
   },
   "emp": {
     "Price": 50000,
-    "Action": "Stop police cars completely",
+    "Action": "Remove 20 speed temporarily from a cop car chasing you",
     "Name": "EMP",
     "Type": "Usable",
+    "Image":"https://i.ibb.co/12J5188/item-emp.gif",
     "Shop": false,
     "Findable": false,
-    "Emote": "<:item_emp:971639083325620274>"
+    "Emote": "<a:item_emp2:1107945198757101642>"
   },
   "roadblock": {
-    "Price": 15000,
-    "Action": "Slow down player cars if you're a cop",
+    "Price": 50000,
+    "Action": "Remove 20 speed temporarily from a racers car you're chasing",
     "Name": "RoadBlock",
     "Type": "Usable",
-    "Shop": false,
+    "Image":"https://i.ibb.co/smShBhY/item-policeblock.gif",
+    "Shop": true,
     "Findable": false,
-    "Emote": "<:item_roadblock:971639083266879548>"
+    "Emote": "<a:item_policeblock:1105320926221971496>"
   },
   "wrench": {
     "Price": 15000,
@@ -378,6 +380,107 @@
       "You turn up the radio and hear Justin Bieber, you're now drifting to it",
       "The radio is blasting Levels by Avicii while you race"
     ]
+  },
+  "flowers": {
+    "Price": 50000,
+    "Action": "With this in your inventory you can view the speed of each NPCs car",
+    "Name": "Flowers",
+    "Type": "Non-Usable",
+    "Emote": "<:item_flowers:1103826126721265664>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/0sddpRj/item-flowers.png"
+    
+  },
+
+  "crowbar": {
+    "Price": 50000,
+    "Action": "You'll need this to rob banks",
+    "Name": "Crowbar",
+    "Type": "Non-Usable",
+    "Emote": "<:item_crowbar:1104299475691917444>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/RDWfNFb/item-crowbar.png"
+    
+  },
+
+  "mask": {
+    "Price": 75000,
+    "Action": "You'll also need this to rob banks",
+    "Name": "Mask",
+    "Type": "Non-Usable",
+    "Emote": "<:item_mask:1104299478011367494>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/wBzGWGy/item-mask.png"
+    
+  },
+
+  "coconut": {
+    "Price": 0,
+    "Action": "While in your inventory, you'll receive 0.05x more money from selling cars",
+    "Name": "Coconut",
+    "Type": "Usable",
+    "Emote": "<:item_coconut:1103826134149374006>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/25y3tSq/item-coconut.png"
+    
+  },
+  "dirt": {
+    "Price": 0,
+    "Action": "Throw this at another user to prevent them from racing for 10 minutes, but it also has a 25% chance to prevent you from racing for 10 minutes",
+    "Name": "Dirt",
+    "Type": "Usable",
+    "Emote": "<a:item_dirt:1103827943039438930>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/SKs2HNs/item-dirt.gif"
+    
+  },
+  "milk": {
+    "Price": 0,
+    "Action": "Use this to receive x2 common keys while racing for 10 minutes",
+    "Name": "Milk",
+    "Type": "Usable",
+    "Emote": "<:item_milk:1103826130819100795>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/KyyC3L7/item-milk.png",
+    "Used":[
+      "Mmm milk", "Hope you're not lactose intolerant, now you'll get x2 common keys"
+    ]
+  },
+
+  "strawberry milk": {
+    "Price": 0,
+    "Action": "Use this to receive x2 rare keys while racing for 10 minutes",
+    "Name": "Strawberry Milk",
+    "Type": "Usable",
+    "Emote": "<:item_strawberrymilk:1103826129657274488>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/hmMTL2Z/item-strawberrymilk.png",
+    "Used":[
+      "Mmm berry milk", "Hope you're not lactose intolerant, now you'll get x2 rare keys"
+    ]
+    
+  },
+
+  "chocolate milk": {
+    "Price": 0,
+    "Action": "Use this to receive x2 exotic keys while racing for 10 minutes",
+    "Name": "Chocolate Milk",
+    "Type": "Usable",
+    "Emote": "<:item_chocolatemilk:1103826132949815327>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/RDdTW0S/item-chocolatemilk.png",
+    "Used":[
+      "Mmm choccy milk", "Hope you're not lactose intolerant, now you'll get x2 exotic keys"
+    ]
+    
   },
 
   "energy drink": {

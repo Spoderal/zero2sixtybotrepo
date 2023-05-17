@@ -226,24 +226,30 @@ module.exports = {
     handling2 = handling2 / 100;
 
     let i2 = setInterval(async () => {
-      console.log(speed);
-      let calc = speed;
-      sec = weight / calc / 100;
-      sec += handling;
-      calc = calc / sec;
-      console.log(`calc: ${calc}`);
-      console.log(`sec: ${sec}`);
-      // car 2
-      console.log(speed2);
-      let calc2 = speed2;
-      sec2 = weight2 / calc2 / 100;
-      sec2 += handling2;
-      console.log(`sec2: ${sec2}`);
+      if (speed2 > mph2) {
+        speed2 = mph2;
+      }
+      if (speed > mph) {
+        speed = mph;
+      }
+      console.log(`speed ${speed}`);
+      console.log(`speed2 ${speed2}`);
+      speed / 6;
+      handling = handling / 100;
+      handling2 = handling2 / 100;
+      speed2 / 6;
 
-      calc2 = calc2 / sec2;
-      console.log(`calc2: ${calc2}`);
-      tracklength -= calc;
-      tracklength2 -= calc2;
+      let formula = (speed += handling += weight / 100);
+
+      console.log(formula);
+
+      // car 2
+
+      let formula2 = (speed2 += handling2 += weight2 / 100);
+      console.log(formula2);
+
+      tracklength -= formula;
+      tracklength2 -= formula2;
 
       if (tracklength <= 0) {
         embed.setTitle(`${squadinfo.Name} race won!`);

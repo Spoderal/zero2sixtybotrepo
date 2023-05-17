@@ -5,6 +5,4 @@ VPS STUFF
 .vscode
 zerotosixty.ovpn
 
-commandsv2/settings.js
 commandsv2/tune.js
-commandsv2/heist.js

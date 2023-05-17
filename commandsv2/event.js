@@ -42,11 +42,11 @@ module.exports = {
             emoji: "🪐",
           },
           {
-            label: "Squad Takeover",
-            description: "Information for the Squad Takeover Event",
-            value: "squad",
-            customId: "squad",
-            emoji: "🕶️",
+            label: "Le Mans",
+            description: "Information for the Le Mans Event",
+            value: "lemans",
+            customId: "lemans",
+            emoji: "🏎️",
           },
         ])
     );
@@ -63,7 +63,7 @@ module.exports = {
           Spring Season 2023 🌸\n
           World Championship 2023 🏆\n
           Colonization Race🪐\n
-          Squad Takeover 🕶️
+          Le Mans 🏎️
       `);
 
     embed.setColor(colors.blue);
@@ -134,24 +134,32 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "squad") {
-        embed.setTitle("Squad Takeover Event");
+      } else if (value === "lemans") {
+        embed.setTitle("Le Mans Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
-        Uh oh, the squads are fighting over territory in Zero City! Its up to you to put a stop to it, race squad takeover in /race
+        24 Hours of Le Mans has entered Zero2Sixty!
 
-        Take their cars away from them so they cant use them to fight others! You also have a chance to get snowys agera in the hardest race!
+        Race in the Le Mans to gain Le Keys, which will help you get Le Mans cars! 
 
-        You keep what you take, so make sure you take em all before the event is over as this is the **only** time this event will happen!
+        Each car has a team its on, for example, a Porsche Le Mans car will be on the Porsche team and gain points for Porsche
 
-        Help us put a stop to the squad takeover!
+        At the end of the event, the team with the most points will get its own event!
 
+        I've given you 10 Le Keys to start, go to /unbox and unbox a Le Mans crate.
 
-            **Ends May 14th 2023**
+            **Ends June 31st 2023**
             
                   `);
-        embed.setImage("https://i.ibb.co/LvMZpFH/squadtakeover.png");
+        embed.setImage("https://i.ibb.co/4fb0D5V/events-lemans.png");
         embed.setColor(colors.blue);
+
+        if(userdata.lemans !== true){
+          userdata.lekeys += 10
+          userdata.lemans = true
+          userdata.save()
+
+        }
 
         await interaction.editReply({
           embeds: [embed],

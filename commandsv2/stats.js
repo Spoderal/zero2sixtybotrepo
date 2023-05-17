@@ -59,20 +59,23 @@ module.exports = {
       let canvas = createCanvas(1280, 720);
       let ctx = canvas.getContext("2d");
       let carindb = list[item.toLowerCase()];
-
       let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
       let carimg = await loadImage(carindb.Image);
       let brand =
-        brandsarr.filter((br) => br.emote == carindb.Emote) || "no brand";
+      brandsarr.filter((br) => br.emote == carindb.Emote) || "no brand";
       if (brand.length == 0) {
         brand[0] = "no brand";
       }
       let brimg = await loadImage(brand[0].image);
       let flag = await loadImage(brand[0].country);
+      let policeimg = await loadImage("https://i.ibb.co/cwr7WLB/police.png");
       ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
       ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
       ctx.drawImage(brimg, 15, 620, 100, 100);
       ctx.drawImage(flag, 1120, 620, 180, 100);
+      if(carindb.Police){
+        ctx.drawImage(policeimg, 920, 600, 150, 150);
+      }
 
       ctx.font = "bold 54px sans-serif";
       ctx.fillStyle = "#ffffff";

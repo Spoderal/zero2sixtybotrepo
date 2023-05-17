@@ -122,8 +122,7 @@ module.exports = {
           pageEmbed = new EmbedBuilder();
           pageEmbed.setDescription(`
             **bal - Check your balance of all your currency, barn maps, and more**\n
-            **bank deposit - Deposit money to your bank for bet racing**\n
-            **bank withdraw - Withdraw money from your bank**\n
+            **bal convert - Convert your bounty to cash to avoid the cops**\n
             **barn - Search for barn finds, these are restorable cars**\n
             **race - Race your car in multiple races**\n
             **blackmarket - View cars that are only on the black market**\n

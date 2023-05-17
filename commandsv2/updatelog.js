@@ -33,18 +33,11 @@ module.exports = {
             emoji: "🌸",
           },
           {
-            label: "4/11/2023",
+            label: "5/17/2023",
             description: "Information for the recent small update!",
             value: "5_update",
             customId: "up5",
-            emoji: "⬆️",
-          },
-          {
-            label: "4/31/2023",
-            description: "Information for the recent big update!",
-            value: "6_update",
-            customId: "up6",
-            emoji: "🎉",
+            emoji: "🚨",
           },
         ])
     );
@@ -57,8 +50,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 5/5/2023\n
             🌸 Spring Update 3/1/2023\n
-            ⬆️ Small Update 4/11/2023\n
-            🎉 Big Update 4/31/2023\n
+            🚨 Police Update 5/17/2023\n
         `);
 
     embed.setColor(colors.blue);
@@ -195,22 +187,90 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "5_update") {
-            embed.fields = [];
-            embed.setDescription("\u200b");
-            embed.setTitle(`Small Update`);
-            embed
-              .setDescription(
-                `• Garage filtering by power!\n
-                • Drivetrains! View /parts and select suspension to swap your drivetrain!\n
-                • New starting tutorial\n
-                • Weekly item shop instead of all items being purchasable\n
-                • New items, Apple juice <:item_applejuice:1094894556983611423>  and Grape juice <:item_grapejuice:1094894554097909760>\n
-                • Pets overhaul, new pets, get xessence by racing /streetrace with a pet\n
-                • Stats for items updated\n
-                • New limited stock cars
-                `
-              )
-              .setFooter({ text: "4/11/2023" })
+            embed.fields = []
+            embed.setDescription("\u200b")
+            embed.addFields(
+              {
+                name: "Features ⭐",
+                value: `Police Overhaul, view new in-depth tutorial [here](https://youtu.be/oGNZQdiF2fk)\n
+              Heists, make a heist with friends, or alone for decreased chances on success to get lots of money!\n
+              Bug fixes including squad race losses being random\n
+              Le Mans event!\n
+              Use /bal convert to convert bounty into cash
+            `,
+                inline: true,
+              },
+              {
+                name: "Cars 🚗",
+                value: `
+              ${cardb.Cars["2021 chevrolet corvette c8.r"].Emote} ${cardb.Cars["2021 chevrolet corvette c8.r"].Name}
+
+              ${cardb.Cars["2023 porsche 963"].Emote} ${cardb.Cars["2023 porsche 963"].Name}
+
+              ${cardb.Cars["2016 audi r18"].Emote} ${cardb.Cars["2016 audi r18"].Name}
+
+              ${cardb.Cars["2007 audi r10 tdi"].Emote} ${cardb.Cars["2007 audi r10 tdi"].Name}
+
+               ${cardb.Cars["2011 peugeot 908"].Emote} ${cardb.Cars["2011 peugeot 908"].Name}
+
+               ${cardb.Cars["2023 ferrari 499p"].Emote} ${cardb.Cars["2023 ferrari 499p"].Name}
+
+               ${cardb.Cars["2019 porsche 911 rsr19"].Emote} ${cardb.Cars["2019 porsche 911 rsr19"].Name}
+
+               ${cardb.Cars["2023 toyota gr010 hybrid"].Emote} ${cardb.Cars["2023 toyota gr010 hybrid"].Name}
+
+               ${cardb.Cars["2022 peugeot 9x8"].Emote} ${cardb.Cars["2022 peugeot 9x8"].Name}
+
+               ${cardb.Cars["1997 honda civic del sol"].Emote}  ${cardb.Cars["1997 honda civic del sol"].Name}
+
+               ${cardb.Cars["2012 honda accord"].Emote}  ${cardb.Cars["2012 honda accord"].Name}
+
+               ${cardb.Cars["2010 noble m600"].Emote}  ${cardb.Cars["2010 noble m600"].Name}
+
+               ${cardb.Cars["2008 acura tl"].Emote}  ${cardb.Cars["2008 acura tl"].Name}
+              `,
+                inline: true,
+              },
+              {
+                name: `Police Cars 🚨`,
+                value: `
+                ${cardb.Cars["police 2010 ford mustang"].Emote} ${cardb.Cars["police 2010 ford mustang"].Name}
+
+                ${cardb.Cars["police 2012 audi r8"].Emote} ${cardb.Cars["police 2012 audi r8"].Name}
+  
+                ${cardb.Cars["police 2012 bentley continental gt"].Emote} ${cardb.Cars["police 2012 bentley continental gt"].Name}
+  
+                ${cardb.Cars["police 2018 bmw m2"].Emote} ${cardb.Cars["police 2018 bmw m2"].Name}
+
+                ${cardb.Cars["police 2012 mercedes c63"].Emote} ${cardb.Cars["police 2012 mercedes c63"].Name}
+
+                ${cardb.Cars["police 2019 nissan gtr"].Emote} ${cardb.Cars["police 2019 nissan gtr"].Name}
+
+                ${cardb.Cars["police 2020 lamborghini urus"].Emote} ${cardb.Cars["police 2020 lamborghini urus"].Name}
+
+                ${cardb.Cars["police 2020 lamborghini huracan"].Emote} ${cardb.Cars["police 2020 lamborghini huracan"].Name}
+              `,
+                inline: true,
+              },
+              {
+                name: `Items 🪛`,
+                value: `
+              ${itemdb.dirt.Emote} ${itemdb.dirt.Name}\n
+              ${itemdb["coconut"].Emote} ${itemdb["coconut"].Name}\n
+              ${itemdb["milk"].Emote} ${itemdb["milk"].Name}\n
+              ${itemdb["chocolate milk"].Emote} ${itemdb["chocolate milk"].Name}\n
+              ${itemdb["strawberry milk"].Emote} ${itemdb["strawberry milk"].Name}\n
+              ${itemdb.crowbar.Emote} ${itemdb.crowbar.Name}\n
+              ${itemdb.mask.Emote} ${itemdb.mask.Name}\n
+              ${itemdb["spikes"].Emote} ${itemdb["spikes"].Name}\n
+              ${itemdb["emp"].Emote} ${itemdb["emp"].Name}\n
+              ${itemdb["flowers"].Emote} ${itemdb["flowers"].Name}\n
+              `,
+                inline: true,
+              }
+           
+            )
+              .setFooter({ text: "5/17/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
