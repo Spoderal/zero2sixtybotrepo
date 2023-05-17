@@ -61,8 +61,8 @@
     "reward": 0
   },
   {
-    "name":"police_streetrace",
-    "tiers":7,
-    "reward":100
+    "name": "police_streetrace",
+    "tiers": 7,
+    "reward": 100
   }
 ]

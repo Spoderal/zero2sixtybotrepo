@@ -7,21 +7,33 @@
     "image": "https://i.ibb.co/hmS6XNC/npc-jerry.png"
   },
   "larry": {
-    "cars": ["2023 bentley bentayga", "1998 mitsubishi lancer evolution", "2010 noble m600"],
+    "cars": [
+      "2023 bentley bentayga",
+      "1998 mitsubishi lancer evolution",
+      "2010 noble m600"
+    ],
     "name": "Larry",
     "deals": [false, true, false],
     "emote": "<:npc_larry:1099231201111326770>",
     "image": "https://i.ibb.co/fD7WX2T/npc-larry.png"
   },
   "gary": {
-    "cars": ["1959 cadillac series 62", "1992 bugatti eb110", "2012 honda accord"],
+    "cars": [
+      "1959 cadillac series 62",
+      "1992 bugatti eb110",
+      "2012 honda accord"
+    ],
     "name": "Gary",
     "deals": [true, false, false, false],
     "emote": "<:npc_gary:1099231212859572276>",
     "image": "https://i.ibb.co/zf6TWmX/npc-gary.png"
   },
   "mary": {
-    "cars": ["1990 nissan 240sx", "2021 porsche mission r", "1997 honda civic del sol"],
+    "cars": [
+      "1990 nissan 240sx",
+      "2021 porsche mission r",
+      "1997 honda civic del sol"
+    ],
     "name": "Mary",
     "deals": [true, true, false, false],
     "emote": "<:npc_mary:1099231329226334309>",

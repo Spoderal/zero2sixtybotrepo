@@ -17,7 +17,7 @@ const {
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const jobdb = require("../data/jobs.json");
-const cardb = require("../data/cardb.json").Cars
+const cardb = require("../data/cardb.json").Cars;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -76,17 +76,17 @@ module.exports = {
         position: jobindb.Positions[0].name,
       };
       userdata.work = jobtoset;
-      if(job.toLowerCase() == "police"){
-        if(userdata.firstpolice !== true){
-          userdata.cars.push(cardb["police 1998 ford crown victoria"])
-          interaction.channel.send(`Here's your first police car, a Police 1998 Ford Crown Victoria`)
+      if (job.toLowerCase() == "police") {
+        if (userdata.firstpolice !== true) {
+          userdata.cars.push(cardb["police 1998 ford crown victoria"]);
+          interaction.channel.send(
+            `Here's your first police car, a Police 1998 Ford Crown Victoria`
+          );
         }
       }
       userdata.save();
       console.log(jobtoset);
       interaction.reply(`Hired for ${job}`);
-
-
     } else if (subcommand == "quit") {
       if (!userdata.work) return interaction.reply("You don't have a job!");
 

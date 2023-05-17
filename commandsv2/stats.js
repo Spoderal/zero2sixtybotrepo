@@ -62,7 +62,7 @@ module.exports = {
       let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
       let carimg = await loadImage(carindb.Image);
       let brand =
-      brandsarr.filter((br) => br.emote == carindb.Emote) || "no brand";
+        brandsarr.filter((br) => br.emote == carindb.Emote) || "no brand";
       if (brand.length == 0) {
         brand[0] = "no brand";
       }
@@ -73,7 +73,7 @@ module.exports = {
       ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
       ctx.drawImage(brimg, 15, 620, 100, 100);
       ctx.drawImage(flag, 1120, 620, 180, 100);
-      if(carindb.Police){
+      if (carindb.Police) {
         ctx.drawImage(policeimg, 920, 600, 150, 150);
       }
 

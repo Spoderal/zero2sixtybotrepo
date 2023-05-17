@@ -154,11 +154,10 @@ module.exports = {
         embed.setImage("https://i.ibb.co/4fb0D5V/events-lemans.png");
         embed.setColor(colors.blue);
 
-        if(userdata.lemans !== true){
-          userdata.lekeys += 10
-          userdata.lemans = true
-          userdata.save()
-
+        if (userdata.lemans !== true) {
+          userdata.lekeys += 10;
+          userdata.lemans = true;
+          userdata.save();
         }
 
         await interaction.editReply({

@@ -248,8 +248,6 @@ module.exports = {
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
-          
-
           let idtoset = boughtCar.alias;
           let carobj = {
             ID: boughtCar.alias,

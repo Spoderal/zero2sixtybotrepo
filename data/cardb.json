@@ -5273,7 +5273,7 @@
       "Drift": 0,
       "Handling": 500,
       "Police": 3,
-      "Class":"B",
+      "Class": "B",
       "Rank": "Sergeant",
       "Weight": 3100
     },
@@ -5321,7 +5321,7 @@
       "Drift": 0,
       "Handling": 500,
       "Police": "1",
-      "Class":"D",
+      "Class": "D",
       "Rank": "Cadet",
       "Weight": 3100
     },
@@ -8517,7 +8517,7 @@
       "Handling": 500,
       "Class": "S",
       "Weight": 3000,
-      "Obtained":"Legendary Garage"
+      "Obtained": "Legendary Garage"
     },
     "2008 acura tl": {
       "alias": "2008 tl",
@@ -8534,7 +8534,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 2000,
-      "Obtained":"Used Cars",
+      "Obtained": "Used Cars",
       "LowPrice": 15000,
       "HighPrice": 25000
     },
@@ -8553,7 +8553,7 @@
       "Handling": 500,
       "Class": "B",
       "Weight": 2000,
-      "Obtained":"Used Cars",
+      "Obtained": "Used Cars",
       "LowPrice": 750000,
       "HighPrice": 2000000
     },
@@ -8573,7 +8573,7 @@
       "Starter": true,
       "Class": "D",
       "Weight": 2500,
-      "Obtained":"Used Cars",
+      "Obtained": "Used Cars",
       "LowPrice": 15000,
       "HighPrice": 25000
     },
@@ -8593,7 +8593,7 @@
       "Starter": true,
       "Class": "D",
       "Weight": 2100,
-      "Obtained":"Used Cars",
+      "Obtained": "Used Cars",
       "LowPrice": 10000,
       "HighPrice": 15000
     },
@@ -8613,8 +8613,8 @@
       "Starter": true,
       "Class": "A",
       "Weight": 2100,
-      "Obtained":"Event",
-      "Team":"Porsche"
+      "Obtained": "Event",
+      "Team": "Porsche"
     },
     "2016 audi r18": {
       "alias": "2016 r18",
@@ -8632,8 +8632,8 @@
       "Starter": true,
       "Class": "B",
       "Weight": 2100,
-      "Obtained":"Event",
-      "Team":"Audi"
+      "Obtained": "Event",
+      "Team": "Audi"
     },
     "2007 audi r10 tdi": {
       "alias": "2007 r10 tdi",
@@ -8651,8 +8651,8 @@
       "Starter": true,
       "Class": "S",
       "Weight": 2100,
-      "Obtained":"Event",
-      "Team":"Audi"
+      "Obtained": "Event",
+      "Team": "Audi"
     },
     "2011 peugeot 908": {
       "alias": "2011 908",
@@ -8670,8 +8670,8 @@
       "Starter": true,
       "Class": "A",
       "Weight": 2100,
-      "Obtained":"Event",
-      "Team":"Peugeot"
+      "Obtained": "Event",
+      "Team": "Peugeot"
     },
     "2021 chevrolet corvette c8.r": {
       "alias": "2021 c8.r",
@@ -8689,8 +8689,8 @@
       "Starter": true,
       "Class": "D",
       "Weight": 2100,
-      "Obtained":"Event",
-      "Team":"Chevrolet"
+      "Obtained": "Event",
+      "Team": "Chevrolet"
     },
     "2023 ferrari 499p": {
       "alias": "2023 499p.r",
@@ -8708,8 +8708,8 @@
       "Starter": true,
       "Class": "S",
       "Weight": 2100,
-      "Obtained":"Event",
-      "Team":"Ferrari"
+      "Obtained": "Event",
+      "Team": "Ferrari"
     },
     "2019 porsche 911 rsr19": {
       "alias": "2019 911 rsr",
@@ -8727,8 +8727,8 @@
       "Starter": true,
       "Class": "C",
       "Weight": 2700,
-      "Obtained":"Event",
-      "Team":"Porsche"
+      "Obtained": "Event",
+      "Team": "Porsche"
     },
     "2023 toyota gr010 hybrid": {
       "alias": "2023 gr010 h",
@@ -8746,8 +8746,8 @@
       "Starter": true,
       "Class": "S",
       "Weight": 2200,
-      "Obtained":"Event",
-      "Team":"Toyota"
+      "Obtained": "Event",
+      "Team": "Toyota"
     },
     "2022 peugeot 9x8": {
       "alias": "2022 9x8",
@@ -8765,8 +8765,8 @@
       "Starter": true,
       "Class": "S",
       "Weight": 2270,
-      "Obtained":"Event",
-      "Team":"Peugeot"
+      "Obtained": "Event",
+      "Team": "Peugeot"
     }
   }
 }

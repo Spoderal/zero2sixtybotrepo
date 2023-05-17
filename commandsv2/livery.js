@@ -101,7 +101,9 @@ module.exports = {
     let subcommand = interaction.options.getSubcommand();
     if (subcommand == "install") {
       let idtoselect = interaction.options.getString("car");
-      let filteredcar = userdata.cars.filter((car) => car.ID == idtoselect.toLowerCase());
+      let filteredcar = userdata.cars.filter(
+        (car) => car.ID == idtoselect.toLowerCase()
+      );
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID") {
         let errembed = new Discord.EmbedBuilder()
@@ -224,9 +226,10 @@ module.exports = {
         ])
         .setColor(colors.blue);
       interaction.reply({ embeds: [embed] });
-      interaction.channel.send("https://youtu.be/FkT-qlOoJeM")
-      let submitchannel =
-        interaction.client.channels.cache.get("1108512563974647818");
+      interaction.channel.send("https://youtu.be/FkT-qlOoJeM");
+      let submitchannel = interaction.client.channels.cache.get(
+        "1108512563974647818"
+      );
 
       submitchannel.send({ embeds: [embed] });
     } else if (subcommand == "approve") {

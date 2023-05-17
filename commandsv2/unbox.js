@@ -19,7 +19,7 @@ module.exports = {
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
           { name: "Drift", value: "drift" },
-          {name: "Le Mans", value:"le mans"}
+          { name: "Le Mans", value: "le mans" }
         )
         .setRequired(true)
     )

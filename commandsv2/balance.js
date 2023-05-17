@@ -16,21 +16,19 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns")
-const ms = require("pretty-ms")
+const Cooldowns = require("../schema/cooldowns");
+const ms = require("pretty-ms");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("bal")
     .setDescription("Check your balance")
     .addStringOption((option) =>
-    option
-      .setName("convert")
-      .setDescription("Convert bounty to cash")
-      .setRequired(false)
-      .addChoices(
-        {name:"Bounty to Cash", value: "bountytocash"}
-      )
+      option
+        .setName("convert")
+        .setDescription("Convert bounty to cash")
+        .setRequired(false)
+        .addChoices({ name: "Bounty to Cash", value: "bountytocash" })
     )
     .addUserOption((option) =>
       option
@@ -44,13 +42,14 @@ module.exports = {
     const profile = await userFindOrCreateInDB(user);
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
-    let covertoption = await interaction.options.getString("convert")
+    let covertoption = await interaction.options.getString("convert");
 
-    if(covertoption){
-      if(userdata.bounty == 0) return interaction.reply("You don't have any bounty!")
-      let prestigerank =  userdata.prestige || 0
-      let bountycooldown = prestigerank * 1000
-      let converted = cooldowndata.convert
+    if (covertoption) {
+      if (userdata.bounty == 0)
+        return interaction.reply("You don't have any bounty!");
+      let prestigerank = userdata.prestige || 0;
+      let bountycooldown = prestigerank * 1000;
+      let converted = cooldowndata.convert;
 
       if (converted !== null && bountycooldown - (Date.now() - converted) > 0) {
         let time = ms(bountycooldown - (Date.now() - converted));
@@ -59,21 +58,22 @@ module.exports = {
           .setDescription(
             `You need to wait ${time} before converting your bounty.`
           );
-       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+        return await interaction.reply({
+          embeds: [timeEmbed],
+          fetchReply: true,
+        });
       }
 
-      userdata.cash += userdata.bounty
+      userdata.cash += userdata.bounty;
 
-      userdata.bounty = 0
-      cooldowndata.convert = Date.now()
-      cooldowndata.save()
-      userdata.save()
+      userdata.bounty = 0;
+      cooldowndata.convert = Date.now();
+      cooldowndata.save();
+      userdata.save();
 
+      interaction.reply("✅");
 
-      interaction.reply("✅")
-
-      return
-
+      return;
     }
 
     let {
@@ -100,14 +100,10 @@ module.exports = {
       spacetokens,
       foolskeys,
       lekeys,
-      bounty
+      bounty,
     } = profile;
-    
 
-
-
-    if(userdata.police == false){
-
+    if (userdata.police == false) {
       if (typeof cash === "undefined") {
         await interaction.reply(GET_STARTED_MESSAGE);
       } else {
@@ -172,7 +168,7 @@ module.exports = {
             .setLabel("Buy Gold")
             .setURL("https://zero2sixty-store.tebex.io/")
         );
-  
+
         await interaction.reply({
           embeds: [embed],
           components: [row],
@@ -181,7 +177,7 @@ module.exports = {
         if (!achievements) {
           achievements = ["None"];
         }
-  
+
         let richFiltered = userdata.achievements.filter(
           (achievement) => achievement.name == "Rich"
         );
@@ -221,7 +217,7 @@ module.exports = {
           userdata.markModified("achievements");
           userdata.update();
         }
-  
+
         if (
           richFiltered.length !== 0 &&
           cash >= 100000 &&
@@ -238,7 +234,7 @@ module.exports = {
           userdata.update();
           userdata.markModified("achievements");
         }
-  
+
         if (
           richFiltered2.length !== 0 &&
           cash >= 1000000 &&
@@ -271,37 +267,37 @@ module.exports = {
           userdata.update();
           userdata.markModified("achievements");
         }
-  
+
         userdata.save();
       }
-    } else if(userdata.police == true) {
-      let bountyemote = emotes.bounty
-      let bounty = userdata.bounty
+    } else if (userdata.police == true) {
+      let bountyemote = emotes.bounty;
+      let bounty = userdata.bounty;
       let embed = new EmbedBuilder()
-      .setTitle(`${user.username}'s Police Balance`)
-      .setDescription(
-        `
+        .setTitle(`${user.username}'s Police Balance`)
+        .setDescription(
+          `
         ${bountyemote} Bounty: ${bounty}
         `
-      )
-      .setColor(colors.blue)
-      .setThumbnail("https://i.ibb.co/6gps3DT/police.gif")
-      .setFooter(tipFooterRandom)
-      .setFields([
-        {
-          name: "Event Items",
-          value: `
+        )
+        .setColor(colors.blue)
+        .setThumbnail("https://i.ibb.co/6gps3DT/police.gif")
+        .setFooter(tipFooterRandom)
+        .setFields([
+          {
+            name: "Event Items",
+            value: `
           ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
           ${emotes.rp}  RP: ${numberWithCommas(rp3)}
           ${emotes.dirftKey} Drift Keys: ${numberWithCommas(dkeys)}
           <:moontokens:1044726056680161371> Space Tokens: ${spacetokens}
           ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
           `,
-          inline: true,
-        },
-      ]);
+            inline: true,
+          },
+        ]);
 
-      await interaction.reply({embeds: [embed]})
+      await interaction.reply({ embeds: [embed] });
     }
   },
 };
