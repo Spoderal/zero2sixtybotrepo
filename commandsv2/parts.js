@@ -225,7 +225,6 @@ module.exports = {
       1
     );
 
-
     let row9 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("previous")

@@ -3639,6 +3639,7 @@ module.exports = {
 
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Highway Race won!`);
+              await i.editReply({ embeds: [embed] });
 
               await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
@@ -4428,6 +4429,7 @@ module.exports = {
               embed.setTitle(
                 `Tier ${bot} Quarter Mile Race won! ${weather2.Emote}`
               );
+              await i.editReply({ embeds: [embed] });
 
               await i.editReply({ embeds: [embed] });
 
@@ -4873,7 +4875,7 @@ module.exports = {
                 `Tier ${bot} Cross Country Race lost! ${weather2.Emote}`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
+              await i.editReply({ embeds: [embed] });
               await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
                 userdata.parts.push("t1exhaust");
@@ -5125,7 +5127,7 @@ module.exports = {
               if(bountyuser > 0){
                 cashwon = cashwon += bountyuser
               }
-              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+              earnings.push(`${emotes.bounty} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
 
            
