@@ -8,7 +8,7 @@ const {
 } = require("../common/user");
 const { InteractionType } = require("discord.js");
 
-
+//test
 module.exports = {
   name: "interactionCreate",
   once: false,
@@ -42,7 +42,6 @@ module.exports = {
 
         await updatePetOnCommands(interaction);
         await updateCrew(interaction);
-        await dailyCheck(interaction);
       } else if (
         interaction.type == InteractionType.ApplicationCommandAutocomplete
       ) {
