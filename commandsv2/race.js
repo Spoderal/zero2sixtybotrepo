@@ -106,7 +106,7 @@ module.exports = {
     console.log(idtoselect)
 
     for(let c in userdata.cars){
-      let ca = userdata.cars[ca]
+      let ca = userdata.cars[c]
 
       console.log(ca.ID)
     }
