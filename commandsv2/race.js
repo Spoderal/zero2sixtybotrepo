@@ -41,34 +41,34 @@ module.exports = {
         .setAutocomplete(true)
     ),
 
-  async autocomplete(interaction, client) {
-    let userdata2 = await User.findOne({ id: interaction.user.id });
-    let focusedValue = interaction.options.getFocused();
-    let choices = userdata2.cars;
-    let filtered = choices.filter((choice) =>
-      choice.Name.toLowerCase().includes(focusedValue.toLowerCase())
-    );
-    let options;
-    filtered = userdata2.cars;
-    let filteredarr = [];
-    for (let ca in filtered) {
-      let carind = filtered[ca];
-      filteredarr.push(carind.Name);
-    }
-    if (filteredarr.length > 25) {
-      options = filteredarr.slice(0, 25);
-    } else {
-      options = filteredarr;
-    }
+  // async autocomplete(interaction, client) {
+  //   let userdata2 = await User.findOne({ id: interaction.user.id });
+  //   let focusedValue = interaction.options.getFocused();
+  //   let choices = userdata2.cars;
+  //   let filtered = choices.filter((choice) =>
+  //     choice.Name.toLowerCase().includes(focusedValue.toLowerCase())
+  //   );
+  //   let options;
+  //   filtered = userdata2.cars;
+  //   let filteredarr = [];
+  //   for (let ca in filtered) {
+  //     let carind = filtered[ca];
+  //     filteredarr.push(carind.Name);
+  //   }
+  //   if (filteredarr.length > 25) {
+  //     options = filteredarr.slice(0, 25);
+  //   } else {
+  //     options = filteredarr;
+  //   }
 
-    options = options.filter((option) =>
-      option.toLowerCase().includes(focusedValue.toLowerCase())
-    );
+  //   options = options.filter((option) =>
+  //     option.toLowerCase().includes(focusedValue.toLowerCase())
+  //   );
 
-    await interaction.respond(
-      options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
-    );
-  },
+  //   await interaction.respond(
+  //     options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
+  //   );
+  // },
 
   async execute(interaction) {
     let user = interaction.user;
@@ -103,8 +103,8 @@ module.exports = {
     }
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car");
-    idtoselect = cardb.Cars[idtoselect.toLowerCase()].Name;
-    let filteredcar = userdata.cars.filter((car) => car.Name == idtoselect);
+    
+    let filteredcar = userdata.cars.filter((car) => car.ID.toLowerCase() == idtoselect.toLowerCase());
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
       let errembed = new EmbedBuilder()
