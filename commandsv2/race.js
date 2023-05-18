@@ -101,13 +101,15 @@ module.exports = {
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
     let usercars = userdata.cars;
-    let idtoselect = interaction.options.getString("car");
+    let idtoselect = interaction.options.getString("car").toLowerCase()
 
     console.log(idtoselect)
 
     let filteredcar = userdata.cars.filter(
-      (car) => car.ID.toLowerCase() == idtoselect.toLowerCase()
+      (car) => car.ID.toLowerCase() == idtoselect
     );
+
+
     let selected = filteredcar[0] || "No ID";
     if (selected == "No ID") {
       let errembed = new EmbedBuilder()
