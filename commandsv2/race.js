@@ -103,7 +103,7 @@ module.exports = {
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car").toLowerCase()
 
-    console.log(idtoselect)
+    console.log(idtoselect);
 
     for(let c in userdata.cars){
       let ca = userdata.cars[c]
