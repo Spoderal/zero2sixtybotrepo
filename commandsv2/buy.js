@@ -24,7 +24,6 @@ module.exports = {
         .setName("item")
         .setDescription("The car or part to buy")
         .setRequired(true)
-        .setAutocomplete(true)
     )
     .addNumberOption((option) =>
       option
@@ -236,7 +235,7 @@ module.exports = {
         if (userdata.cash < boughtCarPrice)   return await interaction.reply("You don't have enough cash!");
         if (goldpurchase && cargoldprice > gold)
           return await interaction.reply("You don't have enough gold!");
-        if (boughtCar.Police) {
+        if (boughtCar.Rank) {
           if (userdata.bounty < boughtCarPrice)
             return await interaction.reply("You don't have enough bounty!");
 
