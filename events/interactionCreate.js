@@ -8,7 +8,6 @@ const {
 } = require("../common/user");
 const { InteractionType } = require("discord.js");
 
-
 module.exports = {
   name: "interactionCreate",
   once: false,
