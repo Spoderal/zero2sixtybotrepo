@@ -105,11 +105,7 @@ module.exports = {
 
     console.log(idtoselect);
 
-    for(let c in userdata.cars){
-      let ca = userdata.cars[c]
-
-      console.log(ca.ID)
-    }
+  
 
     let filteredcar = userdata.cars.filter((car) => car.ID.toLowerCase() == idtoselect)
 

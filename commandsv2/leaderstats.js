@@ -172,6 +172,7 @@ module.exports = {
           .catch(() => {});
         if (!user?.username) continue;
         filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
+        console.log(user.id)
         currentUserPosition =
           filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
       }
