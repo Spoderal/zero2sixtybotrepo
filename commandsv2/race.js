@@ -1286,6 +1286,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
               cooldowndata.is_racing = true;
@@ -1678,6 +1679,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
               let taskfilter = userdata.tasks.filter(
@@ -2073,6 +2075,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
               let taskfilter = userdata.tasks.filter(
@@ -2468,6 +2471,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
               let taskfilter = userdata.tasks.filter(
@@ -2863,6 +2867,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
               let taskfilter = userdata.tasks.filter(
@@ -3251,6 +3256,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
               let taskfilter = userdata.tasks.filter(
@@ -3639,6 +3645,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               userdata.wheelspins += wheelspins;
               userdata.lockpicks += lockpicks;
@@ -3997,6 +4004,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
@@ -4428,6 +4436,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(
@@ -4845,6 +4854,7 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
+              userdata.bounty += 10;
               userdata.rp3 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
@@ -4892,6 +4902,7 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
+              userdata.bounty += 20
               userdata.save();
             }
           }, 1000);
@@ -5142,6 +5153,7 @@ module.exports = {
               await i.editReply({ embeds: [embed] });
 
               clearInterval(i2);
+              
               userdata.save();
 
               console.log(`track length ${tracklength}`);
