@@ -16,7 +16,7 @@ module.exports = {
     let dailyenabled = userdata.settings.daily;
     let tipsenabled = userdata.settings.tips;
     let tradesenabled = userdata.settings.trades;
-    let policemode = userdata.police
+    let policemode = userdata.police;
     if (!userdata.settings.trades || userdata.settings.trades == null) {
       userdata.settings.trades = true;
       userdata.update();
@@ -26,9 +26,7 @@ module.exports = {
     let vemote = "❌";
     let temote = "❌";
     let tremote = "❌";
-    let memote = "🏎️"
-
-  
+    let memote = "🏎️";
 
     if (dailyenabled == true) {
       demote = "✅";
@@ -39,7 +37,7 @@ module.exports = {
     if (tipsenabled == true) {
       temote = "✅";
     }
-    
+
     if (policemode == true) {
       memote = "🚨";
     }
@@ -67,21 +65,20 @@ module.exports = {
       new Discord.ButtonBuilder()
         .setCustomId("tips")
         .setLabel("Enable Tips")
+        .setStyle("Success")
+    );
+
+    let row2 = new Discord.ActionRowBuilder().addComponents(
+      new Discord.ButtonBuilder()
+        .setCustomId("trades")
+        .setLabel("Enable Trade Requests")
         .setStyle("Success"),
-        );
-        
-        let row2 = new Discord.ActionRowBuilder().addComponents(
-          new Discord.ButtonBuilder()
-            .setCustomId("trades")
-            .setLabel("Enable Trade Requests")
-            .setStyle("Success"),
-          new Discord.ButtonBuilder()
-          .setCustomId("police")
-          .setLabel("Enable Police Mode")
-          .setEmoji("🚨")
-          .setStyle("Success")
-          
-    )
+      new Discord.ButtonBuilder()
+        .setCustomId("police")
+        .setLabel("Enable Police Mode")
+        .setEmoji("🚨")
+        .setStyle("Success")
+    );
 
     if (voteenabled == true) {
       row.components[1].setStyle("Danger");
@@ -99,11 +96,11 @@ module.exports = {
       row2.components[0].setStyle("Danger");
       row2.components[0].setLabel("Disable Trade Requests");
     }
-    if(policemode == true){
+    if (policemode == true) {
       row2.components[1].setStyle("Danger");
-      row2.components[1].setLabel("Enable Race Mode")
-      row2.components[1].setEmoji("🏎️")
-      console.log(true)
+      row2.components[1].setLabel("Enable Race Mode");
+      row2.components[1].setEmoji("🏎️");
+      console.log(true);
     }
     let msg = await interaction.reply({
       embeds: [embed],
@@ -151,20 +148,25 @@ module.exports = {
           components: [row],
           fetchReply: true,
         });
-      }
-      else if (i.customId.includes("police")) {
-        if(!userdata.work) return interaction.editReply("You need to have the police job for this setting!")
-        if(userdata.work.name !== "Police") return interaction.editReply("You need to have the police job for this setting!")
+      } else if (i.customId.includes("police")) {
+        if (!userdata.work)
+          return interaction.editReply(
+            "You need to have the police job for this setting!"
+          );
+        if (userdata.work.name !== "Police")
+          return interaction.editReply(
+            "You need to have the police job for this setting!"
+          );
         if (userdata.police == true) {
           userdata.police = false;
           row2.components[1].setStyle("Success");
-      row2.components[1].setLabel("Enable Police Mode")
-      row2.components[1].setEmoji("🚨")
+          row2.components[1].setLabel("Enable Police Mode");
+          row2.components[1].setEmoji("🚨");
         } else if (userdata.police == false) {
           userdata.police = true;
           row2.components[1].setStyle("Danger");
-      row2.components[1].setLabel("Enable Race Mode")
-      row2.components[1].setEmoji("🏎️")
+          row2.components[1].setLabel("Enable Race Mode");
+          row2.components[1].setEmoji("🏎️");
         }
         userdata.save();
         if (userdata.police == true) {
@@ -187,8 +189,7 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      } 
-      else if (i.customId.includes("top")) {
+      } else if (i.customId.includes("top")) {
         if (userdata.settings.vote == true) {
           userdata.settings.vote = false;
           row.components[1].setStyle("Success");

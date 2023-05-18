@@ -469,17 +469,17 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
-  bounty:{
+  bounty: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   car_racing: {
     type: Object,
     required: false,
-    default: {}
+    default: {},
   },
-  
+
   impounds: {
     type: Array,
     required: false,
@@ -488,14 +488,14 @@ const Profile = new mongoose.Schema({
   impoundtimer: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   canrace: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
-  lemans:{
+  lemans: {
     type: Boolean,
     required: false,
     default: false,
@@ -503,7 +503,7 @@ const Profile = new mongoose.Schema({
   lekeys: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   firstpolice: {
     type: Boolean,

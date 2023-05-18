@@ -29,11 +29,12 @@ module.exports = {
         .setRequired(false)
         .setDescription("Amount to use")
     )
-    .addUserOption((option) => option
-    .setName("user")       
-     .setRequired(false)
-    .setDescription("Use this if your item requires a user")
-  ),
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setRequired(false)
+        .setDescription("Use this if your item requires a user")
+    ),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -240,17 +241,13 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "milk") {
       userdata.using.push("milk");
       cooldowndata.milk = Date.now();
-    } 
-    else if (itemtouse.toLowerCase() == "chocolate milk") {
+    } else if (itemtouse.toLowerCase() == "chocolate milk") {
       userdata.using.push("chocolate milk");
       cooldowndata.cmilk = Date.now();
-    } 
-    else if (itemtouse.toLowerCase() == "strawberry milk") {
+    } else if (itemtouse.toLowerCase() == "strawberry milk") {
       userdata.using.push("strawberry milk");
       cooldowndata.smilk = Date.now();
-    } 
-
-    else if (itemtouse.toLowerCase() == "taser") {
+    } else if (itemtouse.toLowerCase() == "taser") {
       userdata.canrob = false;
       cooldowndata.canrob = Date.now();
 
@@ -266,9 +263,8 @@ module.exports = {
       cooldowndata.tequila = Date.now();
 
       userdata.markModified("itemeffects");
-    } 
-    else if (itemtouse.toLowerCase() == "dirt") {
-      let timeout = 3600000
+    } else if (itemtouse.toLowerCase() == "dirt") {
+      let timeout = 3600000;
       if (
         cooldowndata.dirt !== null &&
         timeout - (Date.now() - cooldowndata.dirt) > 0
@@ -277,49 +273,50 @@ module.exports = {
         let timeEmbed = new EmbedBuilder()
           .setColor(colors.blue)
           .setDescription(`You can use dirt again in ${time}`);
-        return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+        return await interaction.reply({
+          embeds: [timeEmbed],
+          fetchReply: true,
+        });
       }
       let chance = randomRange(1, 100);
 
       if (chance <= 25) {
-        userdata.canrace = Date.now()
-        interaction.reply("Your dirt flew back in your face and now you can't race for 10 minutes!")
-        
+        userdata.canrace = Date.now();
+        interaction.reply(
+          "Your dirt flew back in your face and now you can't race for 10 minutes!"
+        );
+
         cooldowndata.dirt = Date.now();
-        cooldowndata.save()
+        cooldowndata.save();
         for (var i = 0; i < amount2; i++)
-        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
-      userdata.items = items;
+          items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+        userdata.items = items;
 
-        userdata.save()
-        return
-      
+        userdata.save();
+        return;
       } else {
+        let usertothrow = interaction.options.getUser("user");
 
-        let usertothrow = interaction.options.getUser("user")
-        
-        if(!usertothrow) return interaction.reply("You need to specify a user!")
+        if (!usertothrow)
+          return interaction.reply("You need to specify a user!");
 
         let userdatathrow = await User.findOne({ id: usertothrow.id });
 
-        userdatathrow.canrace = Date.now()
+        userdatathrow.canrace = Date.now();
 
-        userdatathrow.save()
+        userdatathrow.save();
         cooldowndata.dirt = Date.now();
-        cooldowndata.save()
+        cooldowndata.save();
         for (var i2 = 0; i2 < amount2; i2++)
-        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
-      userdata.items = items;
-      userdata.save()
-       interaction.reply(`${usertothrow}, ${interaction.user} threw dirt at you and now you cant race for 10 minutes!`)
-       return
+          items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+        userdata.items = items;
+        userdata.save();
+        interaction.reply(
+          `${usertothrow}, ${interaction.user} threw dirt at you and now you cant race for 10 minutes!`
+        );
+        return;
       }
-
-
-
-    } 
-    
-    else if (itemtouse.toLowerCase() == "pet egg") {
+    } else if (itemtouse.toLowerCase() == "pet egg") {
       let petsarr = [];
       for (let pet in petdb) {
         petsarr.push(petdb[pet]);

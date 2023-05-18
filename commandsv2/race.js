@@ -80,10 +80,10 @@ module.exports = {
     }
 
     let userdata = await User.findOne({ id: user.id });
-    let prestigerank = userdata.prestige || 0
-    let bountyuser = userdata.bounty || 0
-    console.log(prestigerank)
-    let bonus = prestigerank * 0.05
+    let prestigerank = userdata.prestige || 0;
+    let bountyuser = userdata.bounty || 0;
+    console.log(prestigerank);
+    let bonus = prestigerank * 0.05;
     let usinginv = userdata.using;
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let pet = userdata.newpet;
@@ -116,11 +116,13 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
 
-    if(selected.Impounded && selected.Impounded == true){
-      return interaction.reply("This car is impounded! Use /impound to unimpound it.")
+    if (selected.Impounded && selected.Impounded == true) {
+      return interaction.reply(
+        "This car is impounded! Use /impound to unimpound it."
+      );
     }
 
-    let canrace = 600000
+    let canrace = 600000;
     if (
       userdata.canrace !== null &&
       canrace - (Date.now() - userdata.canrace) > 0
@@ -132,12 +134,11 @@ module.exports = {
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
 
-    let row2
-    let row5 
-    let row0
-    if(userdata.police == false){
-
-       row2 = new ActionRowBuilder().addComponents(
+    let row2;
+    let row5;
+    let row0;
+    if (userdata.police == false) {
+      row2 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Street Race")
           .setEmoji("<:logo_sr:1088661364836417609>")
@@ -164,7 +165,7 @@ module.exports = {
           .setCustomId("crossrace")
           .setStyle("Secondary")
       );
-       row5 = new ActionRowBuilder().addComponents(
+      row5 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Venus Race")
           .setEmoji("🪐")
@@ -191,30 +192,29 @@ module.exports = {
           .setCustomId("plutorace")
           .setStyle("Primary")
       );
-       row0 = new ActionRowBuilder().addComponents(
+      row0 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Le Mans (EVENT)")
           .setEmoji("🏎️")
           .setCustomId("lemans")
           .setStyle("Secondary")
       );
-    }
-
-    else if(userdata.police == true){
-      if(!cardb.Cars[selected.Name.toLowerCase()].Police) return interaction.reply("You need to use a police car!")
+    } else if (userdata.police == true) {
+      if (!cardb.Cars[selected.Name.toLowerCase()].Police)
+        return interaction.reply("You need to use a police car!");
       row2 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Bounty Street Race")
           .setEmoji("<a:logo_police:1105267744896729169>")
           .setCustomId("police_streetrace")
-          .setStyle("Secondary"),
-      )
-      row5 = []
-      row0 = []
+          .setStyle("Secondary")
+      );
+      row5 = [];
+      row0 = [];
     }
 
-    cooldowndata.racing = Date.now()
-    cooldowndata.save()
+    cooldowndata.racing = Date.now();
+    cooldowndata.save();
     const tierrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setLabel("Tier 1")
@@ -324,22 +324,20 @@ module.exports = {
         name: "Your car",
         value: `${selected.Emote} ${selected.Name}`,
       });
-      let msg
-      if(userdata.police == false){
-         msg = await interaction.reply({
-          embeds: [embed],
-          components: [row2, row5, row0],
-          fetchReply: true,
-        });
-
-      }
-      else if(userdata.police == true){
-         msg = await interaction.reply({
-          embeds: [embed],
-          components: [row2],
-          fetchReply: true,
-        });
-      }
+    let msg;
+    if (userdata.police == false) {
+      msg = await interaction.reply({
+        embeds: [embed],
+        components: [row2, row5, row0],
+        fetchReply: true,
+      });
+    } else if (userdata.police == true) {
+      msg = await interaction.reply({
+        embeds: [embed],
+        components: [row2],
+        fetchReply: true,
+      });
+    }
 
     let filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
@@ -361,44 +359,43 @@ module.exports = {
       "saturnrace",
       "plutorace",
       "lemans",
-      "police_streetrace"
+      "police_streetrace",
     ];
     collector.on("collect", async (i) => {
-      
       console.log(i.customId);
       if (races.includes(i.customId)) {
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
         let reward = race[0].reward;
         let rewardsarr = [];
-        if(userdata.police == false){
+        if (userdata.police == false) {
           for (deftier; deftier <= race[0].tiers; deftier++) {
             let am = deftier * reward;
             rewardsarr.push(`Tier ${deftier} Reward: ${toCurrency(am)}`);
           }
           embed.setTitle("Select a tier to race in (Difficulty)");
-
-
-        }
-        else if(userdata.police == true){
+        } else if (userdata.police == true) {
           for (deftier; deftier <= race[0].tiers; deftier++) {
             let am = deftier * reward;
             rewardsarr.push(`Tier ${deftier} Reward: ${emotes.bounty} ${am}`);
           }
           embed.setTitle("Select a tier to patrol in (Difficulty)");
-
         }
-        embed.setDescription(`${toCurrency(bountyuser)} bonus cash from bounty\n${bonus}x bonus cash from prestige\n\n${rewardsarr.join("\n")}`);
+        embed.setDescription(
+          `${toCurrency(
+            bountyuser
+          )} bonus cash from bounty\n${bonus}x bonus cash from prestige\n\n${rewardsarr.join(
+            "\n"
+          )}`
+        );
 
         console.log(race);
 
-
-          await i.update({
-            embeds: [embed],
-            components: [tierrow, tierrow2],
-            fetchReply: true,
-          });
-        
+        await i.update({
+          embeds: [embed],
+          components: [tierrow, tierrow2],
+          fetchReply: true,
+        });
       } else if (
         i.customId == 1 ||
         i.customId == 2 ||
@@ -761,11 +758,11 @@ module.exports = {
                 }
               }
 
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
@@ -782,12 +779,12 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
-              userdata.bounty += 10
-              userdata.car_racing = selected
+              userdata.bounty += 10;
+              userdata.car_racing = selected;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
-              cooldowndata.is_racing = true
-              await cooldowndata.save()
+              cooldowndata.is_racing = true;
+              await cooldowndata.save();
               let taskfilter = userdata.tasks.filter(
                 (task) => task.Task == "Win 10 street races"
               );
@@ -863,24 +860,25 @@ module.exports = {
             }
           }, 1000);
         } else if (race[0].name == "lemans") {
-          let globals2 = await Globals.findOne()
-          let isteam = cardb.Cars[selected.Name.toLowerCase()].Team
-          if(!isteam) return interaction.editReply("You need to use a le mans car!")
+          let globals2 = await Globals.findOne();
+          let isteam = cardb.Cars[selected.Name.toLowerCase()].Team;
+          if (!isteam)
+            return interaction.editReply("You need to use a le mans car!");
 
-          let lemasncool = cooldowndata.lemans
-          let canrace = 43200000
-    if (
-      lemasncool !== null &&
-      canrace - (Date.now() - lemasncool) > 0
-    ) {
-      let time = ms(canrace - (Date.now() - lemasncool));
-      let timeEmbed = new EmbedBuilder()
-        .setColor(colors.blue)
-        .setDescription(`You can do le mans again in ${time}`);
-      return await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
-    }
+          let lemasncool = cooldowndata.lemans;
+          let canrace = 43200000;
+          if (lemasncool !== null && canrace - (Date.now() - lemasncool) > 0) {
+            let time = ms(canrace - (Date.now() - lemasncool));
+            let timeEmbed = new EmbedBuilder()
+              .setColor(colors.blue)
+              .setDescription(`You can do le mans again in ${time}`);
+            return await interaction.editReply({
+              embeds: [timeEmbed],
+              fetchReply: true,
+            });
+          }
 
-          cooldowndata.lemans = Date.now()
+          cooldowndata.lemans = Date.now();
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -897,25 +895,25 @@ module.exports = {
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
-          let keyswon = 0
+          let keyswon = 0;
           if (bot == 1) {
-            keyswon = 2
+            keyswon = 2;
             console.log("1");
             car2 = carsarray.filter(
               (car) => car.Class == "D" && car.Speed >= 170 && car.Team
             );
           } else if (bot == 2) {
-            keyswon = 4
+            keyswon = 4;
             car2 = carsarray.filter(
               (car) => car.Class == "C" && car.Speed < 200 && car.Team
             );
           } else if (bot == 3) {
-            keyswon = 5
+            keyswon = 5;
             car2 = carsarray.filter(
               (car) => car.Class == "B" && car.Speed < 210 && car.Team
             );
           } else if (bot == 4) {
-            keyswon = 6
+            keyswon = 6;
             car2 = carsarray.filter(
               (car) => car.Class == "A" && car.Speed < 220 && car.Team
             );
@@ -924,14 +922,22 @@ module.exports = {
               (car) => car.Class == "S" && car.Speed < 250 && car.Team
             );
           } else if (bot == 6) {
-            keyswon = 7
+            keyswon = 7;
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250 && car.Handling < 1500 && car.Team
+              (car) =>
+                car.Class == "S" &&
+                car.Speed < 250 &&
+                car.Handling < 1500 &&
+                car.Team
             );
           } else if (bot == 7) {
-            keyswon = 8
+            keyswon = 8;
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250 && car.Handling < 2000 && car.Team
+              (car) =>
+                car.Class == "S" &&
+                car.Speed < 250 &&
+                car.Handling < 2000 &&
+                car.Team
             );
           }
           car2 = lodash.sample(car2);
@@ -1233,17 +1239,17 @@ module.exports = {
                 }
               }
 
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
               earnings.push(`${emotes.lekey} +${keyswon}`);
-              userdata.lekeys += keyswon
+              userdata.lekeys += keyswon;
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
                 earnings.push(
@@ -1252,17 +1258,17 @@ module.exports = {
               }
               let raceranks = 1;
 
-              let isteam = cardb.Cars[selected.Name.toLowerCase()].Team
+              let isteam = cardb.Cars[selected.Name.toLowerCase()].Team;
 
-              if(isteam !== null){
-                console.log(isteam)
-                let wins = globals2.teams.filter((team) => team.name == isteam)
-                console.log(wins)
+              if (isteam !== null) {
+                console.log(isteam);
+                let wins = globals2.teams.filter((team) => team.name == isteam);
+                console.log(wins);
                 await Globals.findOneAndUpdate(
                   {},
                   {
                     $set: {
-                      "teams.$[team].wins": wins[0].wins += 1,
+                      "teams.$[team].wins": (wins[0].wins += 1),
                     },
                   },
                   {
@@ -1275,15 +1281,15 @@ module.exports = {
                 );
               }
 
-              globals2.save()
+              globals2.save();
 
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
               userdata.rp3 += rpwon;
               userdata.worldwins += 1;
-              cooldowndata.is_racing = true
-              await cooldowndata.save()
+              cooldowndata.is_racing = true;
+              await cooldowndata.save();
               let taskfilter = userdata.tasks.filter(
                 (task) => task.Task == "Win 10 street races"
               );
@@ -1625,11 +1631,11 @@ module.exports = {
 
                 userdata.markModified("newpet");
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -2021,11 +2027,11 @@ module.exports = {
 
                 userdata.markModified("newpet");
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
@@ -2417,11 +2423,11 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -2812,11 +2818,11 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -3199,11 +3205,11 @@ module.exports = {
 
                 userdata.markModified("newpet");
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -3621,11 +3627,11 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -3980,11 +3986,11 @@ module.exports = {
                   rpwon = rpwon * 2;
                 }
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -4259,7 +4265,7 @@ module.exports = {
                     userdata.update();
                     interaction.channel.send("Your milk ran out.");
                   } else {
-                    commonkeys = commonkeys * 2
+                    commonkeys = commonkeys * 2;
                   }
                 }
                 earnings.push(`${emotes.commonKey} +${commonkeys}`);
@@ -4279,7 +4285,7 @@ module.exports = {
                     userdata.update();
                     interaction.channel.send("Your strawberry milk ran out.");
                   } else {
-                    rarekeys = rarekeys * 2
+                    rarekeys = rarekeys * 2;
                   }
                 }
                 earnings.push(`${emotes.rareKey} +${rarekeys}`);
@@ -4299,7 +4305,7 @@ module.exports = {
                     userdata.update();
                     interaction.channel.send("Your chocolate milk ran out.");
                   } else {
-                    exotickeys = exotickeys * 2
+                    exotickeys = exotickeys * 2;
                   }
                 }
                 earnings.push(`${emotes.exoticKey} +${exotickeys}`);
@@ -4331,8 +4337,6 @@ module.exports = {
                   rpwon = rpwon * 2;
                 }
               }
-
-          
 
               if (usinginv.includes("flat tire")) {
                 let cooldown = cooldowndata.flattire;
@@ -4413,11 +4417,11 @@ module.exports = {
                   rpwon = rpwon * 2;
                 }
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -4707,11 +4711,11 @@ module.exports = {
                 earnings.push(`${emotes.barnMapLegendary} +${legendarymaps}`);
                 userdata.lmaps += legendarymaps;
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -4830,11 +4834,11 @@ module.exports = {
                   rpwon = rpwon * 2;
                 }
               }
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -4891,8 +4895,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }
-        else if (race[0].name == "police_streetrace") {
+        } else if (race[0].name == "police_streetrace") {
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -4943,8 +4946,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
-
 
           let selected1image = await loadImage(
             `${cardb.Cars[selected.Name.toLowerCase()].Image}`
@@ -5058,7 +5059,6 @@ module.exports = {
 
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
-            
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -5121,22 +5121,21 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
-              if(bonus > 0){
-                cashwon = cashwon += (cashwon * bonus)
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
               }
-              if(bountyuser > 0){
-                cashwon = cashwon += bountyuser
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
               }
               earnings.push(`${emotes.bounty} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
 
-           
               let policeranks = 50;
 
               userdata.work.xp += policeranks;
 
               userdata.bounty += cashwon;
-     
+
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Busted!`);
 
@@ -5151,9 +5150,9 @@ module.exports = {
             // lost
             else if (tracklength2 > tracklength && timer == 10) {
               userdata.bounty -= cashlost;
-              userdata.update()
-              if(userdata.bounty < 0){
-                userdata.bounty = 0
+              userdata.update();
+              if (userdata.bounty < 0) {
+                userdata.bounty = 0;
               }
               embed.setTitle(`Tier ${bot} got away!`);
               embed.setDescription(`${emotes.bounty} -${toCurrency(cashlost)}`);

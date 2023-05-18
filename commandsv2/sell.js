@@ -59,8 +59,8 @@ module.exports = {
 
       price = price * amount;
 
-      if(userdata.items.includes("coconut")){
-        price = price += (price / 0.05)
+      if (userdata.items.includes("coconut")) {
+        price = price += price / 0.05;
       }
 
       userdata.cars.splice(userdata.cars.indexOf(selected), amount);

@@ -209,48 +209,48 @@ const Cooldowns = new mongoose.Schema({
   is_racing: {
     type: Boolean,
     required: false,
-    default: 0
+    default: 0,
   },
-  lemans:{
+  lemans: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
-  heist:{
+  heist: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   chasing: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   milk: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   cmilk: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   smilk: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   dirt: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
   convert: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("cooldowns", Cooldowns);

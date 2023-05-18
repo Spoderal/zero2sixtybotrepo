@@ -325,21 +325,21 @@
     "name": "Noble",
     "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
-  "peugeot":{
-    "image":"https://i.ibb.co/4Z4gykr/logo-peugeot.png",
-    "emote":"<:logo_peugeot:1107783483180466217>",
-    "name":"Peugeot",
-    "country":"https://i.ibb.co/XzPKrPq/flag-french.png"
+  "peugeot": {
+    "image": "https://i.ibb.co/4Z4gykr/logo-peugeot.png",
+    "emote": "<:logo_peugeot:1107783483180466217>",
+    "name": "Peugeot",
+    "country": "https://i.ibb.co/XzPKrPq/flag-french.png"
   },
   "no brand": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
     "name": "No Logo",
     "country": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
   },
-  
+
   "horse": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-    "emote":"🐎",
+    "emote": "🐎",
     "name": "Horse",
     "country": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
   }

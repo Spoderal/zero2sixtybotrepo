@@ -28,7 +28,7 @@ const emotes = {
   rkey: "<:rkey:993011407681486868>",
   ekey: "<:ekey:993011410210672671>",
   commonKey: "<:key_common:1103921692566360154>",
-  lekey:"<:key_lemans:1108502487016689715>",
+  lekey: "<:key_lemans:1108502487016689715>",
   rareKey: "<:key_rare:1103921690657968220>",
   exoticKey: "<:key_exotic:1103923017576357969>",
   dirftKey: "<:key_limited:1103923572063354880>",

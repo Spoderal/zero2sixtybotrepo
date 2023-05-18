@@ -125,7 +125,9 @@ module.exports = {
     if (cardb.Cars[trading]) {
       item = `${cardb.Cars[trading].Emote} ${cardb.Cars[trading].Name}`;
       let carindb = userdata.cars.filter(
-        (car) => car.Name.toLowerCase() == trading.toLowerCase() || car.ID.toLowerCase() == trading.toLowerCase()
+        (car) =>
+          car.Name.toLowerCase() == trading.toLowerCase() ||
+          car.ID.toLowerCase() == trading.toLowerCase()
       );
       let carobj = carindb[0];
       if (!carobj) return interaction.reply("You don't have this car!");
@@ -180,7 +182,9 @@ module.exports = {
       item2 = `${cardb.Cars[trading2].Emote} ${cardb.Cars[trading2].Name}`;
       console.log("car");
       let carindb = userdata2.cars.filter(
-        (car) => car.Name.toLowerCase() == trading2.toLowerCase() || car.ID.toLowerCase() == trading2.toLowerCase()
+        (car) =>
+          car.Name.toLowerCase() == trading2.toLowerCase() ||
+          car.ID.toLowerCase() == trading2.toLowerCase()
       );
       let carobj = carindb[0];
       if (!carobj) return interaction.reply("You don't have this car!");

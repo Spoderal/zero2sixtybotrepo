@@ -17,7 +17,7 @@ const {
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const jobdb = require("../data/jobs.json");
-const cardb = require("../data/cardb.json").Cars
+const cardb = require("../data/cardb.json").Cars;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -99,8 +99,6 @@ module.exports = {
       userdata.save();
       console.log(jobtoset);
       interaction.reply(`Hired for ${job}`);
-
-
     } else if (subcommand == "quit") {
       if (!userdata.work) return interaction.reply("You don't have a job!");
 

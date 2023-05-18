@@ -119,7 +119,6 @@ module.exports = {
             return;
           }
           collector.on("collect", async (i) => {
-            
             if (i.customId.includes("keep")) {
               if (usercars.length >= garagespaces) {
                 interaction.channel.send("You garage is full!");
@@ -162,15 +161,15 @@ module.exports = {
               userdata.save();
               embed.setTitle("✅");
               await i.update({ embeds: [embed] });
-              collector.stop()
+              collector.stop();
               return;
             } else if (i.customId.includes("sell")) {
               userdata.cash += sellprice;
               userdata.save();
               embed.setTitle("✅");
               await i.update({ embeds: [embed] });
-              
-              collector.stop()
+
+              collector.stop();
               return;
             }
           });

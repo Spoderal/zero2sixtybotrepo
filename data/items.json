@@ -33,7 +33,7 @@
     "Action": "Remove 20 speed temporarily from a cop car chasing you",
     "Name": "EMP",
     "Type": "Usable",
-    "Image":"https://i.ibb.co/12J5188/item-emp.gif",
+    "Image": "https://i.ibb.co/12J5188/item-emp.gif",
     "Shop": false,
     "Findable": false,
     "Emote": "<a:item_emp2:1107945198757101642>"
@@ -43,7 +43,7 @@
     "Action": "Remove 20 speed temporarily from a racers car you're chasing",
     "Name": "RoadBlock",
     "Type": "Usable",
-    "Image":"https://i.ibb.co/smShBhY/item-policeblock.gif",
+    "Image": "https://i.ibb.co/smShBhY/item-policeblock.gif",
     "Shop": true,
     "Findable": false,
     "Emote": "<a:item_policeblock:1105320926221971496>"
@@ -390,7 +390,6 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/0sddpRj/item-flowers.png"
-    
   },
 
   "crowbar": {
@@ -402,7 +401,6 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/RDWfNFb/item-crowbar.png"
-    
   },
 
   "mask": {
@@ -414,7 +412,6 @@
     "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/wBzGWGy/item-mask.png"
-    
   },
 
   "coconut": {
@@ -426,7 +423,6 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/25y3tSq/item-coconut.png"
-    
   },
   "dirt": {
     "Price": 0,
@@ -437,7 +433,6 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/SKs2HNs/item-dirt.gif"
-    
   },
   "milk": {
     "Price": 0,
@@ -448,8 +443,9 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/KyyC3L7/item-milk.png",
-    "Used":[
-      "Mmm milk", "Hope you're not lactose intolerant, now you'll get x2 common keys"
+    "Used": [
+      "Mmm milk",
+      "Hope you're not lactose intolerant, now you'll get x2 common keys"
     ]
   },
 
@@ -462,10 +458,10 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/hmMTL2Z/item-strawberrymilk.png",
-    "Used":[
-      "Mmm berry milk", "Hope you're not lactose intolerant, now you'll get x2 rare keys"
+    "Used": [
+      "Mmm berry milk",
+      "Hope you're not lactose intolerant, now you'll get x2 rare keys"
     ]
-    
   },
 
   "chocolate milk": {
@@ -477,10 +473,10 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/RDdTW0S/item-chocolatemilk.png",
-    "Used":[
-      "Mmm choccy milk", "Hope you're not lactose intolerant, now you'll get x2 exotic keys"
+    "Used": [
+      "Mmm choccy milk",
+      "Hope you're not lactose intolerant, now you'll get x2 exotic keys"
     ]
-    
   },
 
   "energy drink": {

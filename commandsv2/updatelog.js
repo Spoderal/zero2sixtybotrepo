@@ -187,22 +187,23 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "5_update") {
-            embed.fields = []
-            embed.setDescription("\u200b")
-            embed.addFields(
-              {
-                name: "Features ⭐",
-                value: `Police Overhaul, view new in-depth tutorial [here](https://youtu.be/oGNZQdiF2fk)\n
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed
+              .addFields(
+                {
+                  name: "Features ⭐",
+                  value: `Police Overhaul, view new in-depth tutorial [here](https://youtu.be/oGNZQdiF2fk)\n
               Heists, make a heist with friends, or alone for decreased chances on success to get lots of money!\n
               Bug fixes including squad race losses being random\n
               Le Mans event!\n
               Use /bal convert to convert bounty into cash
             `,
-                inline: true,
-              },
-              {
-                name: "Cars 🚗",
-                value: `
+                  inline: true,
+                },
+                {
+                  name: "Cars 🚗",
+                  value: `
               ${cardb.Cars["2021 chevrolet corvette c8.r"].Emote} ${cardb.Cars["2021 chevrolet corvette c8.r"].Name}
 
               ${cardb.Cars["2023 porsche 963"].Emote} ${cardb.Cars["2023 porsche 963"].Name}
@@ -229,11 +230,11 @@ module.exports = {
 
                ${cardb.Cars["2008 acura tl"].Emote}  ${cardb.Cars["2008 acura tl"].Name}
               `,
-                inline: true,
-              },
-              {
-                name: `Police Cars 🚨`,
-                value: `
+                  inline: true,
+                },
+                {
+                  name: `Police Cars 🚨`,
+                  value: `
                 ${cardb.Cars["police 2010 ford mustang"].Emote} ${cardb.Cars["police 2010 ford mustang"].Name}
 
                 ${cardb.Cars["police 2012 audi r8"].Emote} ${cardb.Cars["police 2012 audi r8"].Name}
@@ -250,11 +251,11 @@ module.exports = {
 
                 ${cardb.Cars["police 2020 lamborghini huracan"].Emote} ${cardb.Cars["police 2020 lamborghini huracan"].Name}
               `,
-                inline: true,
-              },
-              {
-                name: `Items 🪛`,
-                value: `
+                  inline: true,
+                },
+                {
+                  name: `Items 🪛`,
+                  value: `
               ${itemdb.dirt.Emote} ${itemdb.dirt.Name}\n
               ${itemdb["coconut"].Emote} ${itemdb["coconut"].Name}\n
               ${itemdb["milk"].Emote} ${itemdb["milk"].Name}\n
@@ -266,10 +267,9 @@ module.exports = {
               ${itemdb["emp"].Emote} ${itemdb["emp"].Name}\n
               ${itemdb["flowers"].Emote} ${itemdb["flowers"].Name}\n
               `,
-                inline: true,
-              }
-           
-            )
+                  inline: true,
+                }
+              )
               .setFooter({ text: "5/17/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);

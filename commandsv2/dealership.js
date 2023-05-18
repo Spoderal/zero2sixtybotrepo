@@ -43,8 +43,7 @@ module.exports = {
     let global = await Global.findOne();
     let carstock = global.stock;
     let carsarray = [];
-    if(userdata.police == false){
-
+    if (userdata.police == false) {
       for (let c in cars.Cars) {
         let car = cars.Cars[c];
         carsarray.push(car);
@@ -58,7 +57,7 @@ module.exports = {
                 alias: car.alias,
                 Emote: car.Emote,
                 owned: "✅",
-                
+
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
             } else {
@@ -261,8 +260,7 @@ module.exports = {
           }
         }
       }
-    }
-    else if(userdata.police == true){
+    } else if (userdata.police == true) {
       for (let c in cars.Cars) {
         let car = cars.Cars[c];
         carsarray.push(car);
@@ -275,7 +273,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -285,7 +283,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -298,7 +296,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
               });
             } else {
@@ -307,7 +305,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
               });
             }
@@ -321,7 +319,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -331,7 +329,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -344,7 +342,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
               });
             } else {
@@ -353,7 +351,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
               });
             }
@@ -367,7 +365,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -377,7 +375,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -390,7 +388,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
               });
             } else {
@@ -399,7 +397,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
               });
             }
@@ -413,7 +411,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -423,7 +421,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -436,7 +434,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
               });
             } else {
@@ -445,7 +443,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
               });
             }
@@ -459,7 +457,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -469,7 +467,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
                 Stock: carstock[car.Name.toLowerCase()].Stock,
               });
@@ -482,7 +480,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "✅",
               });
             } else {
@@ -491,7 +489,7 @@ module.exports = {
                 Price: car.Price,
                 alias: car.alias,
                 Emote: car.Emote,
-                Rank:car.Rank,
+                Rank: car.Rank,
                 owned: "❌",
               });
             }
@@ -664,18 +662,19 @@ module.exports = {
               inline: true,
             });
           } else {
-            if(car.Rank){
+            if (car.Rank) {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
-                value: `\`ID: ${car.alias}\`\nPrice: ${emotes.bounty} ${toCurrency(car.Price)}
+                value: `\`ID: ${car.alias}\`\nPrice: ${
+                  emotes.bounty
+                } ${toCurrency(car.Price)}
                 Gold Price: ${emotes.gold} ${Math.round(
                   car.Price / 150
                 )}\nOwned: ${car.owned}
                 Rank: ${car.Rank}`,
                 inline: true,
               });
-            }
-            else {
+            } else {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
                 value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
@@ -734,19 +733,19 @@ module.exports = {
               inline: true,
             });
           } else {
-            if(car.Rank){
+            if (car.Rank) {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
-                value: `\`ID: ${car.alias}\`\nPrice: ${emotes.bounty} ${toCurrency(car.Price)}
+                value: `\`ID: ${car.alias}\`\nPrice: ${
+                  emotes.bounty
+                } ${toCurrency(car.Price)}
                 Gold Price: ${emotes.gold} ${Math.round(
                   car.Price / 150
                 )}\nOwned: ${car.owned}
                 Rank: ${car.Rank}`,
                 inline: true,
               });
-            }
-            else {
-
+            } else {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
                 value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
@@ -805,19 +804,19 @@ module.exports = {
               inline: true,
             });
           } else {
-            if(car.Rank){
+            if (car.Rank) {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
-                value: `\`ID: ${car.alias}\`\nPrice: ${emotes.bounty} ${toCurrency(car.Price)}
+                value: `\`ID: ${car.alias}\`\nPrice: ${
+                  emotes.bounty
+                } ${toCurrency(car.Price)}
                 Gold Price: ${emotes.gold} ${Math.round(
                   car.Price / 150
                 )}\nOwned: ${car.owned}
                 Rank: ${car.Rank}`,
                 inline: true,
               });
-            }
-            else {
-
+            } else {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
                 value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
@@ -876,19 +875,19 @@ module.exports = {
               inline: true,
             });
           } else {
-            if(car.Rank){
+            if (car.Rank) {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
-                value: `\`ID: ${car.alias}\`\nPrice: ${emotes.bounty} ${toCurrency(car.Price)}
+                value: `\`ID: ${car.alias}\`\nPrice: ${
+                  emotes.bounty
+                } ${toCurrency(car.Price)}
                 Gold Price: ${emotes.gold} ${Math.round(
                   car.Price / 150
                 )}\nOwned: ${car.owned}
                 Rank: ${car.Rank}`,
                 inline: true,
               });
-            }
-            else {
-
+            } else {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
                 value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
@@ -946,19 +945,19 @@ module.exports = {
               inline: true,
             });
           } else {
-            if(car.Rank){
+            if (car.Rank) {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
-                value: `\`ID: ${car.alias}\`\nPrice: ${emotes.bounty} ${toCurrency(car.Price)}
+                value: `\`ID: ${car.alias}\`\nPrice: ${
+                  emotes.bounty
+                } ${toCurrency(car.Price)}
                 Gold Price: ${emotes.gold} ${Math.round(
                   car.Price / 150
                 )}\nOwned: ${car.owned}
                 Rank: ${car.Rank}`,
                 inline: true,
               });
-            }
-            else {
-
+            } else {
               embed.addFields({
                 name: `${car.Emote} ${car.Name}`,
                 value: `\`ID: ${car.alias}\`\nPrice: ${toCurrency(car.Price)}
