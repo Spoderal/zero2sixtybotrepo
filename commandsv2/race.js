@@ -5136,9 +5136,7 @@ module.exports = {
               if (bonus > 0) {
                 cashwon = cashwon += cashwon * bonus;
               }
-              if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser;
-              }
+              
               earnings.push(`${emotes.bounty} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
 
