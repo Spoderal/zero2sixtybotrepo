@@ -76,9 +76,9 @@ module.exports = {
         position: jobindb.Positions[0].name,
       };
       userdata.work = jobtoset;
-      if(job.toLowerCase() == "police"){
-        if(userdata.firstpolice !== true){
-          let  carobj = {
+      if (job.toLowerCase() == "police") {
+        if (userdata.firstpolice !== true) {
+          let carobj = {
             ID: cardb["police 1998 ford crown victoria"].alias,
             Name: cardb["police 1998 ford crown victoria"].Name,
             Speed: cardb["police 1998 ford crown victoria"].Speed,
@@ -92,8 +92,10 @@ module.exports = {
             police: true,
             Weight: cardb["police 1998 ford crown victoria"].Weight,
           };
-          userdata.cars.push(carobj)
-          interaction.channel.send(`Here's your first police car, a Police 1998 Ford Crown Victoria`)
+          userdata.cars.push(carobj);
+          interaction.channel.send(
+            `Here's your first police car, a Police 1998 Ford Crown Victoria`
+          );
         }
       }
       userdata.save();
