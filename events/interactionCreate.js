@@ -8,7 +8,6 @@ const {
 } = require("../common/user");
 const { InteractionType } = require("discord.js");
 
-const { dailyCheck } = require("./daily");
 
 module.exports = {
   name: "interactionCreate",
