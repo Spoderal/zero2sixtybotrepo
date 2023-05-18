@@ -78,7 +78,21 @@ module.exports = {
       userdata.work = jobtoset;
       if(job.toLowerCase() == "police"){
         if(userdata.firstpolice !== true){
-          userdata.cars.push(cardb["police 1998 ford crown victoria"])
+          let  carobj = {
+            ID: cardb["police 1998 ford crown victoria"].alias,
+            Name: cardb["police 1998 ford crown victoria"].Name,
+            Speed: cardb["police 1998 ford crown victoria"].Speed,
+            Acceleration: cardb["police 1998 ford crown victoria"]["0-60"],
+            Handling: cardb["police 1998 ford crown victoria"].Handling,
+            Parts: [],
+            Emote: cardb["police 1998 ford crown victoria"].Emote,
+            Livery: cardb["police 1998 ford crown victoria"].Image,
+            Miles: 0,
+            Drift: 0,
+            police: true,
+            Weight: cardb["police 1998 ford crown victoria"].Weight,
+          };
+          userdata.cars.push(carobj)
           interaction.channel.send(`Here's your first police car, a Police 1998 Ford Crown Victoria`)
         }
       }

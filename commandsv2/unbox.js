@@ -82,6 +82,7 @@ module.exports = {
       let rarekeys = userdata.rkeys;
       let exotickeys = userdata.ekeys;
       let foolskeys = userdata.foolskeys;
+      let lekeys = userdata.lekeys;
 
       let driftkeys = userdata.dkeys2 || 0;
       let ferrarikeys = userdata.fkeys;
@@ -111,7 +112,10 @@ module.exports = {
         return await interaction.reply(
           `You dont have enough keys! This crate costs 100 McLaren keys`
         );
-
+        if (bought == "le mans" && lekeys < 10)
+        return await interaction.reply(
+          `You dont have enough keys! This crate costs 100 McLaren keys`
+        );
       if (bought == "common") {
         userdata.ckeys -= 50;
       } else if (bought == "rare") {
@@ -124,6 +128,10 @@ module.exports = {
         userdata.fkeys -= 100;
       } else if (bought == "fools") {
         userdata.foolskeys -= 25;
+      }
+
+      else if (bought == "le mans") {
+        userdata.foolskeys -= 10;
       }
 
       let cratecontents = crates[bought].Contents;
