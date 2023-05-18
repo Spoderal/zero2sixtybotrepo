@@ -104,12 +104,12 @@ module.exports = {
     let idtoselect = interaction.options.getString("car").toLowerCase();
 
     console.log(idtoselect);
-    let carsfiltered = []
-    for(let cr in userdata.cars){
-      let car = userdata.cars[cr]
+    let carsfiltered = [];
+    for (let cr in userdata.cars) {
+      let car = userdata.cars[cr];
 
-      if(car.ID){
-        carsfiltered.push(car)
+      if (car.ID) {
+        carsfiltered.push(car);
       }
     }
 
