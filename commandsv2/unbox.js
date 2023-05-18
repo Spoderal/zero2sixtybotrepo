@@ -112,7 +112,7 @@ module.exports = {
         return await interaction.reply(
           `You dont have enough keys! This crate costs 100 McLaren keys`
         );
-        if (bought == "le mans" && lekeys < 10)
+      if (bought == "le mans" && lekeys < 10)
         return await interaction.reply(
           `You dont have enough keys! This crate costs 100 McLaren keys`
         );
@@ -128,9 +128,7 @@ module.exports = {
         userdata.fkeys -= 100;
       } else if (bought == "fools") {
         userdata.foolskeys -= 25;
-      }
-
-      else if (bought == "le mans") {
+      } else if (bought == "le mans") {
         userdata.foolskeys -= 10;
       }
 
