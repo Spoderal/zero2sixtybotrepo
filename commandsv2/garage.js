@@ -68,7 +68,6 @@ module.exports = {
       .setDescription(
         `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
       )
-      .setImage("https://i.ibb.co/pf4vwHC/istockphoto-521421426-612x612.jpg")
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
     if (udata.showcase) {
@@ -145,7 +144,6 @@ module.exports = {
           .setDescription(
             `Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`
           )
-          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         for (let car in cars[0]) {
@@ -169,7 +167,6 @@ module.exports = {
         itempage = displayparts2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying parts for ${user.username}`)
-          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(parts);
@@ -184,7 +181,6 @@ module.exports = {
         itempage = items;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
-          .setImage("https://i.ibb.co/zfvBtLR/garage1img.png")
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         console.log(items);
