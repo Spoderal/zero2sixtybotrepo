@@ -38,7 +38,6 @@ module.exports = {
         .setName("car")
         .setDescription("The car ID to race with")
         .setRequired(true)
-        .setAutocomplete(true)
     ),
 
   // async autocomplete(interaction, client) {
