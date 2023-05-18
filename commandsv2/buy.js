@@ -44,25 +44,25 @@ module.exports = {
         .setRequired(false)
     ),
 
-  async autocomplete(interaction, client) {
-    let global2 = await Global.findOne({});
+  // async autocomplete(interaction, client) {
+  //   let global2 = await Global.findOne({});
 
-    let focusedValue = interaction.options.getFocused();
-    let choices = global2.shopitems;
-    let filtered = choices.filter((choice) => choice.includes(focusedValue));
+  //   let focusedValue = interaction.options.getFocused();
+  //   let choices = global2.shopitems;
+  //   let filtered = choices.filter((choice) => choice.includes(focusedValue));
 
-    let options;
+  //   let options;
 
-    if (filtered.length > 25) {
-      options = filtered.slice(0, 25);
-    } else {
-      options = filtered;
-    }
+  //   if (filtered.length > 25) {
+  //     options = filtered.slice(0, 25);
+  //   } else {
+  //     options = filtered;
+  //   }
 
-    await interaction.respond(
-      options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
-    );
-  },
+  //   await interaction.respond(
+  //     options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
+  //   );
+  // },
   async execute(interaction) {
     const userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);

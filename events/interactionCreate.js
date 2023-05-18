@@ -47,11 +47,11 @@ module.exports = {
         interaction.type == InteractionType.ApplicationCommandAutocomplete
       ) {
         command = interaction.client.commands.get(interaction.commandName);
-        try {
-          command.autocomplete(interaction, client);
-        } catch (err) {
-          console.log(err);
-        }
+        // try {
+        //   command.autocomplete(interaction, client);
+        // } catch (err) {
+        //   console.log(err);
+        // }
       }
     } catch (error) {
       if (error) {
