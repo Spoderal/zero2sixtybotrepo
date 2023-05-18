@@ -4902,7 +4902,7 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              userdata.bounty += 20
+              userdata.bounty += 20;
               userdata.save();
             }
           }, 1000);
@@ -5153,7 +5153,7 @@ module.exports = {
               await i.editReply({ embeds: [embed] });
 
               clearInterval(i2);
-              
+
               userdata.save();
 
               console.log(`track length ${tracklength}`);
