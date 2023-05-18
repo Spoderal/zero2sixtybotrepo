@@ -114,7 +114,7 @@ module.exports = {
         );
       if (bought == "le mans" && lekeys < 10)
         return await interaction.reply(
-          `You dont have enough keys! This crate costs 100 McLaren keys`
+          `You dont have enough keys! This crate costs 10 Le Keys`
         );
       if (bought == "common") {
         userdata.ckeys -= 50;
