@@ -233,8 +233,7 @@ module.exports = {
         return;
       } else {
         let cargoldprice = Math.round(boughtCarPrice / 150);
-        if (userdata.bounty < boughtCarPrice)
-          return await interaction.reply("You don't have enough bounty!");
+        if (userdata.cash < boughtCarPrice)   return await interaction.reply("You don't have enough cash!");
         if (goldpurchase && cargoldprice > gold)
           return await interaction.reply("You don't have enough gold!");
         if (boughtCar.Police) {
