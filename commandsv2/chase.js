@@ -47,8 +47,8 @@ module.exports = {
     let timeout = 900000;
     let raceritems = userdata.items;
     let policeitems = policedata.items;
-    let chased = userdata.chased
-    let chasedtime = 43200000
+    let chased = userdata.chased;
+    let chasedtime = 43200000;
 
     if (chasecool !== null && timeout - (Date.now() - chasecool) > 0) {
       let time = ms(timeout - (Date.now() - chasecool));
@@ -63,9 +63,7 @@ module.exports = {
       let time = ms(chasedtime - (Date.now() - chased));
       let timeEmbed = new Discord.EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(
-          `This user can be chased again in ${time}.`
-        );
+        .setDescription(`This user can be chased again in ${time}.`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
     if (bounty == 0)
@@ -220,8 +218,8 @@ module.exports = {
 
       tracklength += formula;
       tracklength2 += formula2;
-      let chasedbounty = randomRange(1, bounty)
-      let newbounty = bounty -= chasedbounty
+      let chasedbounty = randomRange(1, bounty);
+      let newbounty = (bounty -= chasedbounty);
       console.log(timer);
       if (timer >= 10) {
         clearInterval(w);
