@@ -228,7 +228,7 @@ module.exports = {
       interaction.reply({ embeds: [embed] });
       interaction.channel.send("https://youtu.be/FkT-qlOoJeM");
       let submitchannel = interaction.client.channels.cache.get(
-        "1108512563974647818"
+        "931078225021521920"
       );
 
       submitchannel.send({ embeds: [embed] });
