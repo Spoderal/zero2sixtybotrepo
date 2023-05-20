@@ -71,10 +71,10 @@ module.exports = {
       if (selected.Exhaust !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Exhaust.toLowerCase());
       }
-      if (selected.Tires !== null  && selected.Exhausted !== undefined) {
+      if (selected.Tires !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Tires.toLowerCase());
       }
-      if (selected.Intake !== null  && selected.Exhausted !== undefined) {
+      if (selected.Intake !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Intake.toLowerCase());
       }
       if (selected.Turbo !== null && selected.Exhausted !== undefined) {
@@ -113,7 +113,10 @@ module.exports = {
       if (selected.Drivetrain !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Drivetrain.toLowerCase());
       }
-      if (selected["Weight reduction"] !== null && selected.Exhausted !== undefined) {
+      if (
+        selected["Weight reduction"] !== null &&
+        selected.Exhausted !== undefined
+      ) {
         userdata.parts.push(selected["Weight reduction"].toLowerCase());
       }
       selected.Exhaust = null;
