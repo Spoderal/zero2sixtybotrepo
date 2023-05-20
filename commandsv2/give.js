@@ -1,15 +1,18 @@
 const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require(`../schema/profile-schema`);
-const partdb = require("../data/partsdb.json")
-const itemdb = require("../data/items.json")
+const partdb = require("../data/partsdb.json");
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("give")
     .setDescription("Give items to users (OWNER ONLY)")
     .addStringOption((option) =>
-      option.setName("item").setDescription("The item to give").setRequired(true)
+      option
+        .setName("item")
+        .setDescription("The item to give")
+        .setRequired(true)
     )
     .addUserOption((option) =>
       option
@@ -33,8 +36,7 @@ module.exports = {
 
       let udata2 = await User.findOne({ id: givingto.id });
 
-      if(cars.Cars[togive.toLowerCase()]){
-
+      if (cars.Cars[togive.toLowerCase()]) {
         let carindb = cars.Cars[togive.toLowerCase()];
         let carobj = {
           ID: carindb.alias,
@@ -54,38 +56,29 @@ module.exports = {
             MaxRange: carindb.Range,
           };
         }
-  
+
         udata2.cars.push(carobj);
-  
+
         udata2.save();
-  
+
         await interaction.reply(
           `Gave <@${givingto.id}> a ${cars.Cars[togive.toLowerCase()].Name}`
         );
-      }
-      else if(partdb.Parts[togive.toLowerCase()]){
-
-        udata2.parts.push(togive.toLowerCase())
-        udata2.save()
+      } else if (partdb.Parts[togive.toLowerCase()]) {
+        udata2.parts.push(togive.toLowerCase());
+        udata2.save();
         await interaction.reply(
           `Gave <@${givingto.id}> a ${partdb.Parts[togive.toLowerCase()].Name}`
         );
-      }
-
-      else if(itemdb[togive.toLowerCase()]){
-
-        udata2.items.push(togive.toLowerCase())
-        udata2.save()
+      } else if (itemdb[togive.toLowerCase()]) {
+        udata2.items.push(togive.toLowerCase());
+        udata2.save();
         await interaction.reply(
           `Gave <@${givingto.id}> a ${itemdb[togive.toLowerCase()].Name}`
         );
+      } else {
+        return await interaction.reply("Thats not an item!");
       }
-
-      else {
-        return await interaction.reply("Thats not an item!")
-      }
-
-
     }
   },
 };
