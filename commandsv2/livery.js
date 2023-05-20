@@ -227,9 +227,8 @@ module.exports = {
         .setColor(colors.blue);
       interaction.reply({ embeds: [embed] });
       interaction.channel.send("https://youtu.be/FkT-qlOoJeM");
-      let submitchannel = interaction.client.channels.cache.get(
-        "931078225021521920"
-      );
+      let submitchannel =
+        interaction.client.channels.cache.get("931078225021521920");
 
       submitchannel.send({ embeds: [embed] });
     } else if (subcommand == "approve") {
