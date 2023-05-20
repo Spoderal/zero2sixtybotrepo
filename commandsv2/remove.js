@@ -68,52 +68,52 @@ module.exports = {
 
     if (actpart == "All") {
       let carindb = cardb.Cars[selected.Name.toLowerCase()];
-      if (selected.Exhaust !== null) {
+      if (selected.Exhaust !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Exhaust.toLowerCase());
       }
-      if (selected.Tires !== null) {
+      if (selected.Tires !== null  && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Tires.toLowerCase());
       }
-      if (selected.Intake !== null) {
+      if (selected.Intake !== null  && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Intake.toLowerCase());
       }
-      if (selected.Turbo !== null) {
+      if (selected.Turbo !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Turbo.toLowerCase());
       }
-      if (selected.Suspension !== null) {
+      if (selected.Suspension !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Suspension.toLowerCase());
       }
-      if (selected.Spoiler !== null) {
+      if (selected.Spoiler !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Spoiler.toLowerCase());
       }
-      if (selected.Body !== null) {
+      if (selected.Body !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Body.toLowerCase());
       }
-      if (selected.ECU !== null) {
+      if (selected.ECU !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.ECU.toLowerCase());
       }
-      if (selected.Clutch !== null) {
+      if (selected.Clutch !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Clutch.toLowerCase());
       }
-      if (selected.Engine !== null) {
+      if (selected.Engine !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Engine.toLowerCase());
       }
-      if (selected.Gearbox !== null) {
+      if (selected.Gearbox !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Gearbox.toLowerCase());
       }
-      if (selected.Intercooler !== null) {
+      if (selected.Intercooler !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Intercooler.toLowerCase());
       }
-      if (selected.Springs !== null) {
+      if (selected.Springs !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Springs.toLowerCase());
       }
-      if (selected.Brakes !== null) {
+      if (selected.Brakes !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Brakes.toLowerCase());
       }
-      if (selected.Drivetrain !== null) {
+      if (selected.Drivetrain !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected.Drivetrain.toLowerCase());
       }
-      if (selected["Weight reduction"] !== null) {
+      if (selected["Weight reduction"] !== null && selected.Exhausted !== undefined) {
         userdata.parts.push(selected["Weight reduction"].toLowerCase());
       }
       selected.Exhaust = null;
