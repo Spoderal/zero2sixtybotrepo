@@ -161,8 +161,7 @@ module.exports = {
           type: "parts",
         };
         let userparts = userdata.parts;
-        for (var i = 0; i < amount; i++)
-          userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
+        for (var i = 0; i < amount; i++) userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
         userdata.parts = userparts;
       } else if (itemdb[item.toLowerCase()]) {
         let filtereduser = useritems.filter(function hasmany(part) {
@@ -181,7 +180,9 @@ module.exports = {
           type: "items",
         };
 
-        userdata.items.pull(item, amount);
+        let useitems = userdata.items;
+        for (var i2 = 0; i2 < amount; i2++) useitems.splice(useitems.indexOf(item.toLowerCase()), 1);
+        userdata.items = useitems;
       } else if (currencies[item.toLowerCase()]) {
         obj = {
           item: currencies[item.toLowerCase()].Name.toLowerCase(),

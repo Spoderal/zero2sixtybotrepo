@@ -8,7 +8,7 @@ const {
 } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
@@ -47,6 +47,8 @@ module.exports = {
     let timeout = 900000;
     let raceritems = userdata.items;
     let policeitems = policedata.items;
+    let chased = userdata.chased
+    let chasedtime = 43200000
 
     if (chasecool !== null && timeout - (Date.now() - chasecool) > 0) {
       let time = ms(timeout - (Date.now() - chasecool));
@@ -54,6 +56,15 @@ module.exports = {
         .setColor(colors.blue)
         .setDescription(
           `You need to wait ${time} before chasing someone again.`
+        );
+      return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+    }
+    if (chased !== null && chasedtime - (Date.now() - chased) > 0) {
+      let time = ms(chasedtime - (Date.now() - chased));
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(
+          `This user can be chased again in ${time}.`
         );
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
@@ -209,7 +220,8 @@ module.exports = {
 
       tracklength += formula;
       tracklength2 += formula2;
-
+      let chasedbounty = randomRange(1, bounty)
+      let newbounty = bounty -= chasedbounty
       console.log(timer);
       if (timer >= 10) {
         clearInterval(w);
@@ -218,9 +230,7 @@ module.exports = {
         if (tracklength > tracklength2) {
           embed.setTitle(`🚨 Busted! 🚨`);
           embed.setDescription(
-            `${user} your car has been impounded and you lost your bounty and ${toCurrency(
-              bounty
-            )}\n${policeuser} you gained ${bounty} bounty`
+            `${user} your car has been impounded and you lost ${newbounty} bounty\n${policeuser} you gained ${newbounty} bounty`
           );
 
           await User.findOneAndUpdate(
@@ -242,8 +252,9 @@ module.exports = {
               ],
             }
           );
-          userdata.bounty = 0;
-          policedata.bounty += bounty;
+          userdata.bounty = newbounty;
+          userdata.chased = Date.now();
+          policedata.bounty += newbounty;
           userdata.save();
           policedata.save();
           await msg.edit({ embeds: [embed] });
@@ -274,7 +285,7 @@ module.exports = {
               ],
             }
           );
-
+          userdata.chased = Date.now();
           userdata.cash += bounty;
           userdata.save();
           policedata.save();

@@ -510,6 +510,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
+  chased: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

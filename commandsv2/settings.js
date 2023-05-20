@@ -170,9 +170,9 @@ module.exports = {
         }
         userdata.save();
         if (userdata.police == true) {
-          demote = "✅";
+          memote = "✅";
         } else {
-          demote = "❌";
+          memote = "❌";
         }
 
         embed = new Discord.EmbedBuilder()
