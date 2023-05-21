@@ -23,7 +23,6 @@ const squaddb = require("../data/squads.json");
 const ms = require("pretty-ms");
 const itemdb = require("../data/items.json");
 
-const { createCanvas, loadImage } = require("canvas");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const weather = require("../data/weather.json");
 
@@ -485,10 +484,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+
 
           console.log(weather2);
 
@@ -966,10 +962,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+        
 
           console.log(weather2);
 
@@ -1445,10 +1438,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+      
 
           let mph = selected.Speed;
 
@@ -1841,10 +1831,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
 
           console.log(weather2);
 
@@ -2237,10 +2223,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
 
           console.log(weather2);
 
@@ -2633,10 +2615,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+
 
           console.log(weather2);
 
@@ -3026,10 +3005,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+         
 
           console.log(weather2);
 
@@ -3408,10 +3384,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
 
           let mph = selected.Speed;
 
@@ -3761,10 +3733,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+     
 
           console.log(weather2);
 
@@ -4133,10 +4102,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+        
 
           console.log(weather2);
 
@@ -4580,10 +4546,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+   
 
           console.log(weather2);
 
@@ -4970,10 +4933,7 @@ module.exports = {
 
           console.log(car2);
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+     
 
           console.log(weather2);
 
