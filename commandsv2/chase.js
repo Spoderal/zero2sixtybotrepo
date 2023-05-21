@@ -100,11 +100,11 @@ module.exports = {
       .addFields(
         {
           name: `${policeuser.username}'s ${selectedpolice.Name}`,
-          value: `${emotes.speed} Power: ${selectedpolice.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.Weight}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
+          value: `${emotes.speed} Power: ${selectedpolice.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.WeightStat}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
         },
         {
           name: `${user.username}'s ${selectedracer.Name}`,
-          value: `${emotes.speed} Power: ${selectedracer.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.Weight}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
+          value: `${emotes.speed} Power: ${selectedracer.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.WeightStat}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
         }
       )
       .setImage(liverypolice)
@@ -147,11 +147,11 @@ module.exports = {
       embed.setFields(
         {
           name: `${policeuser.username}'s ${selectedpolice.Name}`,
-          value: `${emotes.speed} Power: ${policemph}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.Weight}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
+          value: `${emotes.speed} Power: ${policemph}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.WeightStat}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
         },
         {
           name: `${user.username}'s ${selectedracer.Name}`,
-          value: `${emotes.speed} Power: ${racermph}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.Weight}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
+          value: `${emotes.speed} Power: ${racermph}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.WeightStat}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
         }
       );
       await msg.edit({ content: `The police used spikes!`, embeds: [embed] });
@@ -163,8 +163,8 @@ module.exports = {
     let policeacc = selectedpolice.Acceleration * 10;
     let raceacc = selectedracer.Acceleration * 10;
 
-    let policeweight = selectedpolice.Weight;
-    let racerweight = selectedracer.Weight;
+    let policeweight = selectedpolice.WeightStat;
+    let racerweight = selectedracer.WeightStat;
 
     let racerhandling = selectedracer.Handling / 100;
     let policehandling = selectedpolice.Handling / 100;
