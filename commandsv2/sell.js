@@ -35,7 +35,7 @@ module.exports = {
     let userparts = userdata.parts;
     let selling = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount") || 1;
-    let usercars = userdata.cars
+    let usercars = userdata.cars;
     if (!selling) return await interaction.reply("Specify a car or part!");
 
     let filteredcar = userdata.cars.filter(
@@ -63,8 +63,9 @@ module.exports = {
         price = price += price / 0.05;
       }
 
-      for (var i2 = 0; i2 < amount; i2++) usercars.splice(usercars.indexOf(selling.toLowerCase()), 1);
-      userdata.cars = usercars
+      for (var i2 = 0; i2 < amount; i2++)
+        usercars.splice(usercars.indexOf(selling.toLowerCase()), 1);
+      userdata.cars = usercars;
       userdata.cash += Number(price);
 
       await interaction.reply(
@@ -95,7 +96,8 @@ module.exports = {
         finalamount = amount * resale;
         userdata.cash += finalamount;
       }
-      for (var i = 0; i < amount; i++) userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
+      for (var i = 0; i < amount; i++)
+        userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
       userdata.parts = userparts;
       await interaction.reply(
         `You sold your ${selling} for ${toCurrency(finalamount)}!`
