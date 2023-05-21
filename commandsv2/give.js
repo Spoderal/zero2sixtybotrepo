@@ -28,7 +28,7 @@ module.exports = {
       await interaction.reply("You dont have permission to use this command!");
       return;
     } else {
-      let togive = interaction.options.getString("car");
+      let togive = interaction.options.getString("item");
       let givingto = interaction.options.getUser("user");
 
       if (!togive) return;
@@ -61,15 +61,14 @@ module.exports = {
 
         udata2.save();
 
-        await interaction.reply(
-          `Gave <@${givingto.id}> a ${cars.Cars[togive.toLowerCase()].Name}`
-        );
+       
       } else if (partdb.Parts[togive.toLowerCase()]) {
         udata2.parts.push(togive.toLowerCase());
         udata2.save();
         await interaction.reply(
           `Gave <@${givingto.id}> a ${partdb.Parts[togive.toLowerCase()].Name}`
         );
+        console.log("given")
       } else if (itemdb[togive.toLowerCase()]) {
         udata2.items.push(togive.toLowerCase());
         udata2.save();
@@ -79,6 +78,10 @@ module.exports = {
       } else {
         return await interaction.reply("Thats not an item!");
       }
+
+      await interaction.reply(
+        `Gave <@${givingto.id}> a ${togive}`
+      );
     }
   },
 };
