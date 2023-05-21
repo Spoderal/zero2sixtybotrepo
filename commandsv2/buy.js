@@ -136,7 +136,7 @@ module.exports = {
           Livery: carindb.Image,
           Miles: 0,
           Drift: 0,
-          Weight: carindb.Weight,
+          WeightStat: carindb.Weight,
         };
         userdata.cars.push(obj);
       }
@@ -193,7 +193,7 @@ module.exports = {
           Livery: carindb.Image,
           Miles: 0,
           Drift: 0,
-          Weight: carindb.Weight,
+          WeightStat: carindb.Weight,
         };
         if (boughtCar.Range) {
           carobj = {
@@ -209,7 +209,7 @@ module.exports = {
             Drift: 0,
             Range: carindb.Range,
             MaxRange: carindb.Range,
-            Weight: carindb.Weight,
+            WeightStat: carindb.Weight,
           };
         }
 
@@ -247,6 +247,8 @@ module.exports = {
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
+            if (job.position.toLowerCase() !== boughtCar.Rank.toLowerCase()) return await interaction.reply(`You need to be rank ${boughtCar.Rank} to buy this car!`);
+
           let idtoset = boughtCar.alias;
           let carobj = {
             ID: boughtCar.alias,
@@ -260,7 +262,7 @@ module.exports = {
             Miles: 0,
             Drift: 0,
             police: true,
-            Weight: boughtCar.Weight,
+            WeightStat: boughtCar.Weight,
           };
 
           if (boughtCar.Range) {
@@ -278,7 +280,7 @@ module.exports = {
               Range: boughtCar.Range,
               MaxRange: boughtCar.Range,
               police: true,
-              Weight: boughtCar.Weight,
+              WeightStat: boughtCar.Weight,
             };
           }
 
@@ -359,7 +361,7 @@ module.exports = {
             Livery: carindb.Image,
             Miles: 0,
             Resale: sellprice,
-            Weight: carindb.Weight,
+            WeightStat: carindb.Weight,
           };
           if (boughtCar.Range) {
             carobj = {
@@ -376,7 +378,7 @@ module.exports = {
               Drift: 0,
               Range: carindb.Range,
               MaxRange: carindb.Range,
-              Weight: carindb.Weight,
+              WeightStat: carindb.Weight,
             };
           }
 
