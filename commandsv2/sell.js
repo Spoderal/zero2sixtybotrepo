@@ -45,7 +45,7 @@ module.exports = {
           car.Favorite !== true)
     );
 
-    console.log(filteredcar)
+    console.log(filteredcar);
 
     let selected = filteredcar[0] || "No ID";
 
@@ -64,8 +64,9 @@ module.exports = {
       if (userdata.items.includes("coconut")) {
         price = price += price / 0.05;
       }
-      
-      for (var i2 = 0; i2 < amount; i2++)  usercars.splice(usercars.indexOf(selected), 1);
+
+      for (var i2 = 0; i2 < amount; i2++)
+        usercars.splice(usercars.indexOf(selected), 1);
       userdata.cars = usercars;
       userdata.cash += Number(price);
 
