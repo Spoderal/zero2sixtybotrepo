@@ -484,8 +484,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -962,8 +960,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-        
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -1438,8 +1434,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-      
-
           let mph = selected.Speed;
 
           let weight =
@@ -1830,7 +1824,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
 
           console.log(weather2);
 
@@ -2223,7 +2216,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -2615,8 +2607,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -3005,8 +2995,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-         
-
           console.log(weather2);
 
           let mph = selected.Speed;
@@ -3384,7 +3372,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-
           let mph = selected.Speed;
 
           let weight =
@@ -3732,8 +3719,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-     
 
           console.log(weather2);
 
@@ -4101,8 +4086,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-        
 
           console.log(weather2);
 
@@ -4546,8 +4529,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-   
-
           console.log(weather2);
 
           let slipchance = weather2.Slip;
@@ -4932,8 +4913,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
-     
 
           console.log(weather2);
 
