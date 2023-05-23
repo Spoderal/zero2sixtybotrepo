@@ -54,7 +54,7 @@ module.exports = {
       );
 
     await interaction.reply(
-      `Your car's impound has been removed, next time be more careful`
+      `Your car's impound has been removed for ${impoundc}, next time be more careful`
     );
 
     await User.findOneAndUpdate(
