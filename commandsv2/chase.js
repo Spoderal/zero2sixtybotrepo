@@ -250,7 +250,7 @@ module.exports = {
               ],
             }
           );
-          userdata.bounty = newbounty;
+          userdata.bounty -= newbounty;
           userdata.chased = Date.now();
           policedata.bounty += newbounty;
           userdata.save();
