@@ -322,7 +322,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy, rowbuy],
+          components: [row, prow2, row9, rowbuy],
         });
 
         page = 1;
@@ -382,7 +382,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy, rowbuy],
+          components: [row, prow2, row9, rowbuy],
         });
 
         page = 1;
