@@ -35,7 +35,6 @@ module.exports = {
     let item = lodash.sample(items);
     let using = userdata.using;
 
-
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
     let witems = wheelspinrewards.Items;
@@ -55,7 +54,6 @@ module.exports = {
     let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(() => {
-      
       let item = lodash.sample(items);
       if (userdata.using.includes("orange juice")) {
         let cooldown = cooldowns.orangejuice;

@@ -520,26 +520,26 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  season1claimed:{
+  season1claimed: {
     type: Number,
     required: false,
     default: 1,
   },
-  rp4:{
+  rp4: {
     type: Number,
     required: false,
     default: 0,
   },
-  crewseason3:{
+  crewseason3: {
     type: Number,
     required: false,
     default: 0,
   },
-  eventCooldown:{
+  eventCooldown: {
     type: Number,
     required: false,
     default: 0,
-  }
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

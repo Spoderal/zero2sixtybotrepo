@@ -18,8 +18,10 @@ module.exports = {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    if(userdata.tier < 2){
-      return interaction.reply("You need to beat the second squad to use super wheel spins!")
+    if (userdata.tier < 2) {
+      return interaction.reply(
+        "You need to beat the second squad to use super wheel spins!"
+      );
     }
     let cooldowndata =
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
@@ -55,19 +57,19 @@ module.exports = {
 
     setTimeout(() => {
       let item = lodash.sample(items);
-          if (userdata.using.includes("orange juice")) {
-      let cooldown = cooldowndata.orangejuice;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
-        console.log("pulled");
-        userdata.using.pull("orange juice");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-        item = "🪛";
+      if (userdata.using.includes("orange juice")) {
+        let cooldown = cooldowndata.orangejuice;
+        let timeout = 60000;
+        console.log(timeout - (Date.now() - cooldown));
+        if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
+          console.log("pulled");
+          userdata.using.pull("orange juice");
+          userdata.update();
+          interaction.channel.send("Your orange juice ran out! :(");
+        } else {
+          item = "🪛";
+        }
       }
-    }
       embed.setDescription(`${item}`);
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
@@ -226,8 +228,7 @@ module.exports = {
             `You won a ${numberWithCommas(reward)} barn map!`
           );
           interaction.editReply({ embeds: [embed] });
-        }
-        else if (item == "🪛") {
+        } else if (item == "🪛") {
           let reward = lodash.sample(tier4);
           userdata.parts.push(reward.toLowerCase());
 

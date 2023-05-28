@@ -1,7 +1,7 @@
 {
   "Seasons": {
     "Summer": {
-      "Image":"https://i.ibb.co/7RCRwfr/season-1.gif",
+      "Image": "https://i.ibb.co/7RCRwfr/season-1.gif",
       "Rewards": {
         "1": {
           "Number": 1,
@@ -506,7 +506,7 @@
       }
     },
     "Crew1": {
-      "Image":"https://i.ibb.co/85G4t6R/season1-image.png",
+      "Image": "https://i.ibb.co/85G4t6R/season1-image.png",
       "Rewards": {
         "1": {
           "Number": 1,
@@ -660,6 +660,5 @@
         }
       }
     }
-   
   }
 }

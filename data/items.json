@@ -529,7 +529,7 @@
     "Findable": true,
     "Image": "https://i.ibb.co/H4G1dqT/item-beachball.gif"
   },
-  
+
   "cocktail": {
     "Price": 75000,
     "Action": "While this is in your inventory, you'll receive a 25% discount when buying used cars, but there's also a 15% chance you'll need to pay 10% extra",
@@ -541,7 +541,7 @@
     "Image": "https://i.ibb.co/Xstp72T/item-cocktail.png"
   },
 
-    "radar": {
+  "radar": {
     "Price": 0,
     "Action": "Use radar to detect police officers, now you cant be chased for 12 hours",
     "Name": "Radar",

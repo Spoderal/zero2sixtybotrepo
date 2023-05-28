@@ -48,8 +48,8 @@ module.exports = {
 
     let impoundc = impoundcost / 10;
 
-    if(userdata.items.includes("beach ball")){
-      impoundc = impoundc -= (impoundc / 10)
+    if (userdata.items.includes("beach ball")) {
+      impoundc = impoundc -= impoundc / 10;
     }
 
     if (userdata.cash < impoundc)

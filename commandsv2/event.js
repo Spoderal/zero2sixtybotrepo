@@ -9,7 +9,7 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
 const cardb = require("../data/cardb.json");
-let seasondb = require("../data/seasons.json")
+let seasondb = require("../data/seasons.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -84,8 +84,9 @@ module.exports = {
 
                   `);
         embed.setThumbnail(seasondb.Seasons.Summer.Image);
-        embed.setColor(colors.blue)
-        .setImage("https://i.ibb.co/85G4t6R/season1-image.png")
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/85G4t6R/season1-image.png");
 
         await interaction.editReply({
           embeds: [embed],
@@ -121,7 +122,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
+      }
     });
   },
 };

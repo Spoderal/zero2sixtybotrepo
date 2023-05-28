@@ -23,8 +23,8 @@ const emotes = {
   blueprints: "<:blueprint:1076026198171328562>",
   bounty: "<:CURRENCY_BOUNTY:1105006773502480425>",
   PT: "<:pt:1110967734558273567>",
-  addgarage:"<:garageico:1111452748936904805>",
-  garage:"<:garageicobase:1111453007926788157>",
+  addgarage: "<:garageico:1111452748936904805>",
+  garage: "<:garageicobase:1111453007926788157>",
 
   // Keys
   ckey: "<:ckey:993011409132728370>",

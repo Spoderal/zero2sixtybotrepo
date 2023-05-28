@@ -86,7 +86,8 @@ module.exports = {
     if (cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0)
       return interaction.reply("F1 Cars cant have their speed upgraded.");
     let oldspeed = selected.Speed;
-    let oldweight =  Number(selected.WeightStat) || cardb[selected.Name.toLowerCase()].Weight;
+    let oldweight =
+      Number(selected.WeightStat) || cardb[selected.Name.toLowerCase()].Weight;
     let oldhandling = selected.Handling;
     let oldhand = selected.Handling;
     let old060 = selected.Acceleration;

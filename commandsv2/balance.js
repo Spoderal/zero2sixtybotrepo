@@ -63,8 +63,8 @@ module.exports = {
           fetchReply: true,
         });
       }
-      let bountyc = userdata.bounty
-      let toconvert = bountyc / 2
+      let bountyc = userdata.bounty;
+      let toconvert = bountyc / 2;
       userdata.cash += toconvert;
 
       userdata.bounty = 0;
@@ -72,7 +72,9 @@ module.exports = {
       cooldowndata.save();
       userdata.save();
 
-      interaction.reply(`You received ${toCurrency(toconvert)} (50% of your bounty)`);
+      interaction.reply(
+        `You received ${toCurrency(toconvert)} (50% of your bounty)`
+      );
 
       return;
     }
