@@ -192,10 +192,9 @@ module.exports = {
           .setCustomId("police_streetrace")
           .setStyle("Secondary")
       );
-      row5 = [];
       row0 = [];
     }
-
+    let raceranks = 1;
     cooldowndata.racing = Date.now();
     cooldowndata.save();
     const tierrow = new ActionRowBuilder().addComponents(
@@ -530,7 +529,7 @@ module.exports = {
             tracklength += formula;
             tracklength2 += formula2;
 
-            let raceranks = 1;
+
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
@@ -1055,7 +1054,7 @@ module.exports = {
 
             tracklength += formula;
             tracklength2 += formula2;
-
+            
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
@@ -1254,7 +1253,7 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1;
+    
 
               let isteam = cardb.Cars[selected.Name.toLowerCase()].Team;
 
@@ -1547,7 +1546,7 @@ module.exports = {
                 );
               }
 
-              let raceranks = 1;
+            
 
               let using = userdata.using;
 
@@ -1943,7 +1942,7 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1;
+             
 
               let using = userdata.using;
 
@@ -2409,7 +2408,7 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1;
+
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
@@ -2884,7 +2883,6 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1;
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
@@ -3322,7 +3320,6 @@ module.exports = {
                 }
               }
 
-              let raceranks = 1;
 
               let using = userdata.using;
               if (usinginv.includes("radio")) {
