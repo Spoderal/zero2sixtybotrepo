@@ -98,7 +98,7 @@ module.exports = {
       );
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
       crew2 = crew2[0];
-     await interaction.reply({content:`Please wait...`, fetchReply: true})
+      await interaction.reply({ content: `Please wait...`, fetchReply: true });
       let rpmembers = crew2.members;
       let emoji = emotes.zerorp;
       var finalLb = "";
