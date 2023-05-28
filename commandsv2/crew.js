@@ -1,4 +1,3 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const icons = require("../data/crewicons.json");
@@ -174,7 +173,7 @@ module.exports = {
         );
       }
 
-      interaction
+      await interaction
         .reply({ embeds: [embed], components: [row], fetchReply: true })
         .then(async (emb) => {
           let filter = (btnInt) => {
