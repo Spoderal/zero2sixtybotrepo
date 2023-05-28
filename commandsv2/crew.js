@@ -98,6 +98,7 @@ module.exports = {
       );
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
       crew2 = crew2[0];
+     await interaction.reply({content:`Please wait...`, fetchReply: true})
       let rpmembers = crew2.members;
       let emoji = emotes.zerorp;
       var finalLb = "";
@@ -174,7 +175,7 @@ module.exports = {
       }
 
       await interaction
-        .reply({ embeds: [embed], components: [row], fetchReply: true })
+        .editReply({ embeds: [embed], components: [row], fetchReply: true })
         .then(async (emb) => {
           let filter = (btnInt) => {
             return interaction.user.id === btnInt.user.id;
