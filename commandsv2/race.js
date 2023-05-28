@@ -530,6 +530,7 @@ module.exports = {
             tracklength += formula;
             tracklength2 += formula2;
 
+            let raceranks = 1;
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
@@ -730,7 +731,6 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-              let raceranks = 1;
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
