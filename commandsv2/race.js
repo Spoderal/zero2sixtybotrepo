@@ -529,7 +529,6 @@ module.exports = {
             tracklength += formula;
             tracklength2 += formula2;
 
-
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
@@ -1054,7 +1053,7 @@ module.exports = {
 
             tracklength += formula;
             tracklength2 += formula2;
-            
+
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
@@ -1253,7 +1252,6 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-    
 
               let isteam = cardb.Cars[selected.Name.toLowerCase()].Team;
 
@@ -1545,8 +1543,6 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-
-            
 
               let using = userdata.using;
 
@@ -1942,7 +1938,6 @@ module.exports = {
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-             
 
               let using = userdata.using;
 
@@ -3319,7 +3314,6 @@ module.exports = {
                   earnings.push(`${itemfound.Emote} +1 ${itemfound.Name}`);
                 }
               }
-
 
               let using = userdata.using;
               if (usinginv.includes("radio")) {
