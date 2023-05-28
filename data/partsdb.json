@@ -504,7 +504,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 4,
       "PSI": 15,
-      "MaxPSI":20,
+      "MaxPSI": 20,
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
     },
     "dualturbo": {
@@ -523,7 +523,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 50,
       "PSI": 24,
-      "MaxPSI":30,
+      "MaxPSI": 30,
       "Image": "https://i.ibb.co/Qb9Hc0N/t2turbo.png"
     },
     "supercharger": {
@@ -542,7 +542,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 100,
       "PSI": 17,
-      "MaxPSI":40,
+      "MaxPSI": 40,
       "Image": "https://i.ibb.co/JH6CzMv/t3turbo.png"
     },
     "t4turbo": {
@@ -561,7 +561,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "10",
       "PSI": 25,
-      "MaxPSI":35,
+      "MaxPSI": 35,
       "Image": "https://i.ibb.co/1MSBNVk/t4turbo.png",
       "Obtained": "Wheelspin"
     },
@@ -581,7 +581,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "PSI": 28,
-      "MaxPSI":40,
+      "MaxPSI": 40,
       "Image": "https://i.ibb.co/yQGswVn/t5turbo.png",
       "Obtained": "Fusing 2 T4Turbo"
     },
@@ -601,7 +601,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "PSI": 30,
-      "MaxPSI":45,
+      "MaxPSI": 45,
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png",
       "Obtained": "Fusing T5Turbo with 100 Xessence"
     },

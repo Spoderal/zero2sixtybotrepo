@@ -18,61 +18,56 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("crew")
     .setDescription("Do things with crews")
-    .addSubcommand((command) => command
-    .setName("join")
-    .setDescription("Join a crew")
-    .addStringOption((option) => option
-    .setName("name")
-    .setDescription("The name of the crew")
-    .setRequired(true)
+    .addSubcommand((command) =>
+      command
+        .setName("join")
+        .setDescription("Join a crew")
+        .addStringOption((option) =>
+          option
+            .setName("name")
+            .setDescription("The name of the crew")
+            .setRequired(true)
+        )
+    )
+    .addSubcommand((command) =>
+      command.setName("leave").setDescription("Leave a crew")
+    )
+    .addSubcommand((command) =>
+      command
+        .setName("view")
+        .setDescription("View a crew")
+        .addStringOption((option) =>
+          option
+            .setName("name")
+            .setDescription("The name of the crew")
+            .setRequired(false)
+        )
+    )
+    .addSubcommand((command) =>
+      command
+        .setName("create")
+        .setDescription("Create a crew")
+        .addStringOption((option) =>
+          option
+            .setName("name")
+            .setDescription("The name of the crew you want to create")
+            .setRequired(true)
+        )
+    )
+    .addSubcommand((command) =>
+      command.setName("top").setDescription("View the top crews")
+    )
+    .addSubcommand((command) =>
+      command
+        .setName("edit")
+        .setDescription("Edit a crew (CREW OWNER)")
 
-    )
-
-    )
-    .addSubcommand((command) => command
-    .setName("leave")
-    .setDescription("Leave a crew")
-
-    )
-    .addSubcommand((command) => command
-    .setName("view")
-    .setDescription("View a crew")
-    .addStringOption((option) => option
-    .setName("name")
-    .setDescription("The name of the crew")
-    .setRequired(false)
-
-    )
-
-    )
-    .addSubcommand((command) => command
-    .setName("create")
-    .setDescription("Create a crew")
-    .addStringOption((option) => option
-    .setName("name")
-    .setDescription("The name of the crew you want to create")
-    .setRequired(true)
-
-    )
-
-    )
-    .addSubcommand((command) => command
-    .setName("top")
-    .setDescription("View the top crews")
-
-    )
-    .addSubcommand((command) => command
-    .setName("edit")
-    .setDescription("Edit a crew (CREW OWNER)")
-    
-    .addStringOption((option) =>
-    option
-    .setName("option")
-    .setDescription("The option to edit")
-    .addChoices(
-      {name: "Icon", value:"icon"}
-    )
-    )
+        .addStringOption((option) =>
+          option
+            .setName("option")
+            .setDescription("The option to edit")
+            .addChoices({ name: "Icon", value: "icon" })
+        )
     ),
 
   async execute(interaction) {
@@ -89,7 +84,7 @@ module.exports = {
     }
 
     if (option == "view") {
-      let crewname = interaction.options.getString("name")
+      let crewname = interaction.options.getString("name");
       let crew;
       if (!crewname) {
         crew = userdata.crew;
@@ -99,7 +94,9 @@ module.exports = {
           );
         crewname = crew.name;
       }
-      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.toLowerCase());
+      let crew2 = crews.filter(
+        (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
+      );
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
       crew2 = crew2[0];
       let rpmembers = crew2.members;
@@ -205,7 +202,7 @@ module.exports = {
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
-              console.log(reward)
+              console.log(reward);
               let embed2 = new Discord.EmbedBuilder()
                 .setTitle(`Season 1 for ${crew2.name}`)
                 .addFields([{ name: "Rewards", value: `${reward.join("\n")}` }])
@@ -568,24 +565,23 @@ module.exports = {
       let crew2 = crews.filter((crew) => crew.name == crewname.name);
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
-      let toedit = interaction.options.getString("option")
-      console.log(crew2[0])
-      if(toedit == "icon"){
-        let icons = crewicons.Icons
-        let iconsdisplay = []
-        for(let ico in icons){
-          let icon = icons[ico]
+      let toedit = interaction.options.getString("option");
+      console.log(crew2[0]);
+      if (toedit == "icon") {
+        let icons = crewicons.Icons;
+        let iconsdisplay = [];
+        for (let ico in icons) {
+          let icon = icons[ico];
 
-          iconsdisplay.push(icon)
+          iconsdisplay.push(icon);
         }
 
-        let row = new ActionRowBuilder()
-        .addComponents(
+        let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
-          .setCustomId("set")
-          .setLabel("Set as icon")
-          .setStyle("Success")
-        )
+            .setCustomId("set")
+            .setLabel("Set as icon")
+            .setStyle("Success")
+        );
 
         let row9 = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
@@ -605,109 +601,112 @@ module.exports = {
             .setEmoji("⏭️")
             .setStyle("Secondary")
         );
-        
-        let iconum = 0
+
+        let iconum = 0;
         let embed = new EmbedBuilder()
-        .setTitle("Choose an icon")
-        .setColor(colors.blue)
-        .setDescription(`Icon ${iconum}`)
-        .setImage(`${iconsdisplay[iconum]}`)
+          .setTitle("Choose an icon")
+          .setColor(colors.blue)
+          .setDescription(`Icon ${iconum}`)
+          .setImage(`${iconsdisplay[iconum]}`);
 
-       let msg =  await interaction.reply({embeds: [embed], fetchReply: true, components: [row9, row]})
+        let msg = await interaction.reply({
+          embeds: [embed],
+          fetchReply: true,
+          components: [row9, row],
+        });
 
+        let filter = (btnInt) => {
+          return interaction.user.id == btnInt.user.id;
+        };
+        const collector = msg.createMessageComponentCollector({
+          filter: filter,
+        });
 
-        
-      let filter = (btnInt) => {
-        return interaction.user.id == btnInt.user.id;
-      };
-      const collector = msg.createMessageComponentCollector({
-        filter: filter,
-      });
-      
-      collector.on("collect", async (i) => {
-        if(i.customId == "next"){
-          iconum ++
-          
-     
-          embed = new EmbedBuilder()
-        .setTitle("Choose an icon")
-        .setColor(colors.blue)
-        .setDescription(`Icon ${iconum}`)
-        .setImage(`${iconsdisplay[iconum]}`)
+        collector.on("collect", async (i) => {
+          if (i.customId == "next") {
+            iconum++;
 
-        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
-        }
-        else if(i.customId == "previous"){
-          iconum --
-          
-        
-          embed = new EmbedBuilder()
-        .setTitle("Choose an icon")
-        .setColor(colors.blue)
-        .setDescription(`Icon ${iconum}`)
-        .setImage(`${iconsdisplay[iconum]}`)
+            embed = new EmbedBuilder()
+              .setTitle("Choose an icon")
+              .setColor(colors.blue)
+              .setDescription(`Icon ${iconum}`)
+              .setImage(`${iconsdisplay[iconum]}`);
 
-        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
-        }
+            await i.update({
+              embeds: [embed],
+              fetchReply: true,
+              components: [row9, row],
+            });
+          } else if (i.customId == "previous") {
+            iconum--;
 
-        else if(i.customId == "last"){
-          iconum = iconsdisplay.length
-          
-        
-          embed = new EmbedBuilder()
-        .setTitle("Choose an icon")
-        .setColor(colors.blue)
-        .setDescription(`Icon ${iconum}`)
-        .setImage(`${iconsdisplay[iconum]}`)
+            embed = new EmbedBuilder()
+              .setTitle("Choose an icon")
+              .setColor(colors.blue)
+              .setDescription(`Icon ${iconum}`)
+              .setImage(`${iconsdisplay[iconum]}`);
 
-        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
-        }
-        else if(i.customId == "first"){
-          iconum = 0
-          
-        
-          embed = new EmbedBuilder()
-        .setTitle("Choose an icon")
-        .setColor(colors.blue)
-        .setDescription(`Icon ${iconum}`)
-        .setImage(`${iconsdisplay[iconum]}`)
+            await i.update({
+              embeds: [embed],
+              fetchReply: true,
+              components: [row9, row],
+            });
+          } else if (i.customId == "last") {
+            iconum = iconsdisplay.length;
 
-        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
-        }
+            embed = new EmbedBuilder()
+              .setTitle("Choose an icon")
+              .setColor(colors.blue)
+              .setDescription(`Icon ${iconum}`)
+              .setImage(`${iconsdisplay[iconum]}`);
 
-        else if(i.customId == "set"){
-          let iconurl = iconsdisplay[iconum]
+            await i.update({
+              embeds: [embed],
+              fetchReply: true,
+              components: [row9, row],
+            });
+          } else if (i.customId == "first") {
+            iconum = 0;
 
-          crew2[0].icon = iconurl
+            embed = new EmbedBuilder()
+              .setTitle("Choose an icon")
+              .setColor(colors.blue)
+              .setDescription(`Icon ${iconum}`)
+              .setImage(`${iconsdisplay[iconum]}`);
 
-          await Global.findOneAndUpdate(
-            {},
-    
-            {
-              $set: {
-                "crews.$[crew].icon": iconurl,
-              },
-            },
-    
-            {
-              arrayFilters: [
-                {
-                  "crew.name": crew2[0].name,
+            await i.update({
+              embeds: [embed],
+              fetchReply: true,
+              components: [row9, row],
+            });
+          } else if (i.customId == "set") {
+            let iconurl = iconsdisplay[iconum];
+
+            crew2[0].icon = iconurl;
+
+            await Global.findOneAndUpdate(
+              {},
+
+              {
+                $set: {
+                  "crews.$[crew].icon": iconurl,
                 },
-              ],
-            }
-          );
+              },
 
-          globalModel.save()
-          await i.update(`✅`)
-        }
+              {
+                arrayFilters: [
+                  {
+                    "crew.name": crew2[0].name,
+                  },
+                ],
+              }
+            );
 
-
-      })
-
+            globalModel.save();
+            await i.update(`✅`);
+          }
+        });
       }
-
-
     } else if (option == "leaderboard") {
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
 

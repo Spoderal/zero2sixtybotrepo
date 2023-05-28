@@ -238,8 +238,6 @@ module.exports = {
         .setStyle("Secondary")
     );
 
-
-    
     let carimage =
       selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image;
     let usingmsg = [];
@@ -374,44 +372,44 @@ module.exports = {
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
-          let notowon = 0
+          let notowon = 0;
 
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
               (car) => car.Class == "D" && car.Speed < 140
             );
-            notowon = 25
+            notowon = 25;
           } else if (bot == 2) {
             car2 = carsarray.filter(
               (car) => car.Class == "C" && car.Speed < 160
             );
-            notowon = 50
+            notowon = 50;
           } else if (bot == 3) {
             car2 = carsarray.filter(
               (car) => car.Class == "B" && car.Speed < 180
             );
-            notowon = 100
+            notowon = 100;
           } else if (bot == 4) {
             car2 = carsarray.filter(
               (car) => car.Class == "A" && car.Speed < 200
             );
-            notowon = 150
+            notowon = 150;
           } else if (bot == 5) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 210
             );
-            notowon = 200
+            notowon = 200;
           } else if (bot == 6) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 220
             );
-            notowon = 250
+            notowon = 250;
           } else if (bot == 7) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 250
             );
-            notowon = 350
+            notowon = 350;
           }
           car2 = lodash.sample(car2);
 
@@ -426,8 +424,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-
 
           console.log(weather2);
 
@@ -564,8 +560,8 @@ module.exports = {
                     userdata.using.pull("pet treats");
                     pet.xessence = petdb[pet.pet].Xessence;
                     userdata.update();
-                    
-                    cooldowndata.pettreats = 0
+
+                    cooldowndata.pettreats = 0;
                     interaction.channel.send("Your pet treats ran out! :(");
                   }
                 }
@@ -586,7 +582,7 @@ module.exports = {
                     console.log("pulled");
                     userdata.using.pull("pet collar");
                     userdata.update();
-                    cooldowndata.petcollar = 0
+                    cooldowndata.petcollar = 0;
                     interaction.channel.send("Your pet collar fell off! :(");
                   }
                 } else {
@@ -617,11 +613,14 @@ module.exports = {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
-                if (cooldown !== null && timeout - (Date.now() - cooldown) > 0 ) {
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
                   userdata.update();
-                  cooldowndata.radio = 0
+                  cooldowndata.radio = 0;
                   interaction.channel.send("Your radio battery ran out.");
                 } else {
                   raceranks = raceranks * 2;
@@ -641,7 +640,7 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
-                  cooldowndata.flattire = 0
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
                 } else {
                   cashwon = cashwon += cashwon * 0.05;
@@ -662,7 +661,7 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
                   userdata.update();
-                  cooldowndata.tequilla = 0
+                  cooldowndata.tequilla = 0;
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
                   if (itemeffectsfilter[0].earning == "bad") {
@@ -690,8 +689,8 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
-                  cooldowndata.fruitpunch = 0
-                  cooldown = 0
+                  cooldowndata.fruitpunch = 0;
+                  cooldown = 0;
                   interaction.channel.send("Your fruit punch ran out! :(");
                 } else {
                   raceranks = 2;
@@ -708,7 +707,7 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
-                  cooldowndata.energydrink = 0
+                  cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
                 } else {
                   rpwon = rpwon * 2;
@@ -738,10 +737,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 2,
+                    "cars.$[car].Miles": (selected.Miles += 2),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -752,9 +751,9 @@ module.exports = {
               );
 
               userdata.racerank += raceranks;
-                earnings.push(`${emotes.notoriety} ${notowon} Notoriety`)
+              earnings.push(`${emotes.notoriety} ${notowon} Notoriety`);
               userdata.cash += cashwon;
-              userdata.notoriety += notowon
+              userdata.notoriety += notowon;
               userdata.bounty += 5;
               userdata.car_racing = selected;
               userdata.rp4 += rpwon;
@@ -838,10 +837,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 2,
+                    "cars.$[car].Miles": (selected.Miles += 2),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -862,7 +861,7 @@ module.exports = {
 
           let lemasncool = cooldowndata.lemans;
           let canrace = userdata.eventCooldown || 43200000;
-          if(userdata.using.includes("ice cube")){
+          if (userdata.using.includes("ice cube")) {
             canrace = canrace / 2;
           }
           if (lemasncool !== null && canrace - (Date.now() - lemasncool) > 0) {
@@ -951,8 +950,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-        
 
           console.log(weather2);
 
@@ -1135,11 +1132,11 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
-                if(usinginv.includes("ice cube")){
-                  userdata.using.pull("ice cube")
-                  userdata.eventCooldown = 43200000
-                  userdata.update();
-                }
+              if (usinginv.includes("ice cube")) {
+                userdata.using.pull("ice cube");
+                userdata.eventCooldown = 43200000;
+                userdata.update();
+              }
 
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
@@ -1366,7 +1363,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        }  else if (race[0].name == "highwayrace") {
+        } else if (race[0].name == "highwayrace") {
           let tracklength = 1000;
           let tracklength2 = 1000;
           await i.update({ content: "Please wait...", components: [] });
@@ -1680,10 +1677,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 5,
+                    "cars.$[car].Miles": (selected.Miles += 5),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -1738,10 +1735,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 5,
+                    "cars.$[car].Miles": (selected.Miles += 5),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -1808,8 +1805,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-     
 
           console.log(weather2);
 
@@ -2074,10 +2069,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 0.5,
+                    "cars.$[car].Miles": (selected.Miles += 0.5),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -2132,10 +2127,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 0.5,
+                    "cars.$[car].Miles": (selected.Miles += 0.5),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -2213,8 +2208,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-        
 
           console.log(weather2);
 
@@ -2553,10 +2546,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 0.25,
+                    "cars.$[car].Miles": (selected.Miles += 0.25),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -2599,10 +2592,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 0.25,
+                    "cars.$[car].Miles": (selected.Miles += 0.25),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -2615,15 +2608,15 @@ module.exports = {
               return;
             }
           }, 1000);
-        } 
-        else if (race[0].name == "muscledrag") {
+        } else if (race[0].name == "muscledrag") {
           let tracklength = 400;
           let tracklength2 = 400;
           await i.update({ content: "Please wait...", components: [] });
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          if(!cardb.Cars[selected.Name.toLowerCase()].Muscle) return i.update("You need to use a muscle car!")
+          if (!cardb.Cars[selected.Name.toLowerCase()].Muscle)
+            return i.update("You need to use a muscle car!");
           let cashwon = parseInt(bot) * 200;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
@@ -2631,40 +2624,40 @@ module.exports = {
           let rarekeys;
           let exotickeys;
 
-          let notowon = 0
+          let notowon = 0;
 
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
               (car) => car.Class == "D" && car.Speed < 140
             );
-            notowon = 50
+            notowon = 50;
             commonkeys = 2;
           } else if (bot == 2) {
             car2 = carsarray.filter(
               (car) => car.Class == "C" && car.Speed < 160
             );
 
-            notowon = 100
+            notowon = 100;
             commonkeys = 5;
           } else if (bot == 3) {
             car2 = carsarray.filter(
               (car) => car.Class == "B" && car.Speed < 180
             );
             rarekeys = 2;
-            notowon = 200
+            notowon = 200;
           } else if (bot == 4) {
             car2 = carsarray.filter(
               (car) => car.Class == "A" && car.Speed < 200
             );
             rarekeys = 5;
-            notowon = 250
+            notowon = 250;
           } else if (bot == 5) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 210
             );
             exotickeys = 2;
-            notowon = 300
+            notowon = 300;
           } else if (bot == 6) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 220
@@ -2674,7 +2667,7 @@ module.exports = {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 250
             );
-            notowon = 500
+            notowon = 500;
             exotickeys = 7;
           }
           car2 = lodash.sample(car2);
@@ -2690,8 +2683,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-        
 
           console.log(weather2);
 
@@ -3000,10 +2991,10 @@ module.exports = {
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
-              
+
               earnings.push(`${emotes.notoriety} +${notowon}`);
               userdata.racerank += raceranks;
-              userdata.notoriety += notowon
+              userdata.notoriety += notowon;
               userdata.cash += cashwon;
               userdata.bounty += 5;
               userdata.rp4 += rpwon;
@@ -3015,17 +3006,16 @@ module.exports = {
 
               await i.editReply({ embeds: [embed] });
 
-         
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 0.25,
+                    "cars.$[car].Miles": (selected.Miles += 0.25),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -3068,10 +3058,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 0.25,
+                    "cars.$[car].Miles": (selected.Miles += 0.25),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -3084,8 +3074,7 @@ module.exports = {
               return;
             }
           }, 1000);
-        }
-        else if (race[0].name == "crossrace") {
+        } else if (race[0].name == "crossrace") {
           let itemdb = require("../data/items.json");
           let findables = [];
           for (let ite in itemdb) {
@@ -3163,8 +3152,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-   
 
           console.log(weather2);
 
@@ -3460,10 +3447,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 10,
+                    "cars.$[car].Miles": (selected.Miles += 10),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -3520,10 +3507,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Miles": selected.Miles += 10,
+                    "cars.$[car].Miles": (selected.Miles += 10),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -3586,8 +3573,6 @@ module.exports = {
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
-     
 
           console.log(weather2);
 
@@ -3695,7 +3680,7 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-              clearInterval(i2)
+              clearInterval(i2);
 
               let earnings = [];
 
@@ -3714,7 +3699,7 @@ module.exports = {
                     userdata.using.pull("pet treats");
                     pet.xessence = petdb[pet.pet].Xessence;
                     userdata.update();
-                    cooldowndata.pettreats = 0
+                    cooldowndata.pettreats = 0;
                     interaction.channel.send("Your pet treats ran out! :(");
                   }
                 }
@@ -3771,35 +3756,35 @@ module.exports = {
               let policeranks = 50;
 
               userdata.work.xp += policeranks;
-              
-              userdata.update()
 
-            let jobdb = require("../data/jobs.json")
-            let post = userdata.work
-            
-      let positionfilter = jobdb.police.Positions.filter(
-        (pos) => pos.name.toLowerCase() == post.position.toLowerCase()
-      );
-      let prevrank = positionfilter[0].rank;
-      let nextrank = (prevrank += 1);
-      let newpositionfilter = jobdb.police.Positions.filter(
-        (pos) => pos.rank == nextrank
-      );
+              userdata.update();
 
-      if (newpositionfilter[0] && post.xp >= newpositionfilter[0].xp) {
-        interaction.channel.send(
-          `You've received a promotion! Your new salary is ${toCurrency(
-            newpositionfilter[0].salary
-          )}`
-        );
-        userdata.work.position = newpositionfilter[0].name;
-        if (userdata.work.salary < newpositionfilter[0].salary) {
-          userdata.work.salary = newpositionfilter[0].salary;
-        }
-        userdata.work.xp = 0;
+              let jobdb = require("../data/jobs.json");
+              let post = userdata.work;
 
-        userdata.markModified("work");
-      }
+              let positionfilter = jobdb.police.Positions.filter(
+                (pos) => pos.name.toLowerCase() == post.position.toLowerCase()
+              );
+              let prevrank = positionfilter[0].rank;
+              let nextrank = (prevrank += 1);
+              let newpositionfilter = jobdb.police.Positions.filter(
+                (pos) => pos.rank == nextrank
+              );
+
+              if (newpositionfilter[0] && post.xp >= newpositionfilter[0].xp) {
+                interaction.channel.send(
+                  `You've received a promotion! Your new salary is ${toCurrency(
+                    newpositionfilter[0].salary
+                  )}`
+                );
+                userdata.work.position = newpositionfilter[0].name;
+                if (userdata.work.salary < newpositionfilter[0].salary) {
+                  userdata.work.salary = newpositionfilter[0].salary;
+                }
+                userdata.work.xp = 0;
+
+                userdata.markModified("work");
+              }
 
               userdata.bounty += cashwon;
 

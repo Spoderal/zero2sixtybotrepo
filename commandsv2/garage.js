@@ -1,4 +1,9 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, AttachmentBuilder } = require("discord.js");
+const {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  AttachmentBuilder,
+} = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
@@ -6,10 +11,10 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes");
 const itemdb = require("../data/items.json");
-const ms = require("pretty-ms")
+const ms = require("pretty-ms");
 const { createCanvas, loadImage } = require("canvas");
-const cardb = require("../data/cardb.json")
-const {numberWithCommas} = require("../common/utils")
+const cardb = require("../data/cardb.json");
+const { numberWithCommas } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -63,21 +68,20 @@ module.exports = {
       displayparts2.map((a) => a),
       10
     );
-    
-      let showcaseimg = udata.showcase
-    console.log(parts);
 
+    let showcaseimg = udata.showcase;
+    console.log(parts);
 
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
       .setDescription(
         `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
-        )
-        .setColor(colors.blue)
-        .setFooter({ text: `Pages ${page}/${itempage.length}` })
-        embed.setImage("attachment://profile-image.png")
-    
+      )
+      .setColor(colors.blue)
+      .setFooter({ text: `Pages ${page}/${itempage.length}` });
+    embed.setImage("attachment://profile-image.png");
+
     if (udata.showcase) {
       embed.setThumbnail(udata.showcase);
     }
@@ -87,18 +91,18 @@ module.exports = {
       if (car.Favorite == true) {
         favorite = "⭐";
       }
-      let spe = car.Speed 
-      let acc = Math.floor(car.Acceleration)
-      let hp = (spe / acc)
-      hp = Math.round(hp)
+      let spe = car.Speed;
+      let acc = Math.floor(car.Acceleration);
+      let hp = spe / acc;
+      hp = Math.round(hp);
       embed.addFields({
         name: `${car.Emote} ${car.Name} ${favorite}`,
-        value: `\`/stats ${car.ID}\`\n${emotes.emotes.PT} PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${car.ID}\``,
+        value: `\`/stats ${car.ID}\`\n${
+          emotes.emotes.PT
+        } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${car.ID}\``,
         inline: true,
       });
     }
-
-
 
     let row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -134,10 +138,10 @@ module.exports = {
         .setCustomId("items")
         .setEmoji("🪛")
         .setLabel("Items")
-        .setStyle("Secondary"),
+        .setStyle("Secondary")
     );
     let msg = await interaction.reply({
-      content:"Loading garage...",
+      content: "Loading garage...",
       embeds: [embed],
       components: [row, row2],
       fetchReply: true,
@@ -147,64 +151,64 @@ module.exports = {
     let ctx = canvas.getContext("2d");
     let bg = await loadImage("https://i.ibb.co/QMZ0Hch/garage.png");
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-    
-    let defaulty = 50
-    let defaultx = 5
-    for(let ca in cars[0]){
-      console.log(ca)
-        if(ca == 0){
-          defaulty = 40
-           defaultx = 5
-        }
-        if(ca == 1){
-          defaulty = 40
-           defaultx = 150
-        }
-        if(ca == 2){
-          defaulty = 40
-           defaultx = 300
-        }
-        if(ca == 3){
-          defaulty = 125
-           defaultx = 5
-        }
-        if(ca == 4){
-          defaulty = 125
-           defaultx = 150
-        }
-        if(ca == 5){
-          defaulty = 125
-           defaultx = 300
-        }
-        let car = cars[0][ca]
-        console.log(car)
-        let carimage = await loadImage(`${cardb.Cars[car.Name.toLowerCase()].Image}`)
-        try {
-          ctx.save();
-          roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
-          ctx.stroke();
-          ctx.clip();
-          ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
-          ctx.restore();
-        }
-        catch (err){
-          console.log("error loading image")
-        }
 
+    let defaulty = 50;
+    let defaultx = 5;
+    for (let ca in cars[0]) {
+      console.log(ca);
+      if (ca == 0) {
+        defaulty = 40;
+        defaultx = 5;
+      }
+      if (ca == 1) {
+        defaulty = 40;
+        defaultx = 150;
+      }
+      if (ca == 2) {
+        defaulty = 40;
+        defaultx = 300;
+      }
+      if (ca == 3) {
+        defaulty = 125;
+        defaultx = 5;
+      }
+      if (ca == 4) {
+        defaulty = 125;
+        defaultx = 150;
+      }
+      if (ca == 5) {
+        defaulty = 125;
+        defaultx = 300;
+      }
+      let car = cars[0][ca];
+      console.log(car);
+      let carimage = await loadImage(
+        `${cardb.Cars[car.Name.toLowerCase()].Image}`
+      );
+      try {
+        ctx.save();
+        roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
+        ctx.stroke();
+        ctx.clip();
+        ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
+        ctx.restore();
+      } catch (err) {
+        console.log("error loading image");
+      }
     }
     let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
       name: "profile-image.png",
     });
 
     setTimeout(async () => {
-      embed.setImage("attachment://profile-image.png")
-     await interaction.editReply({
-      content:"Loaded!",
-      embeds: [embed],
-      components: [row, row2],
-      files: [attachment],
-      fetchReply: true,
-    });
+      embed.setImage("attachment://profile-image.png");
+      await interaction.editReply({
+        content: "Loaded!",
+        embeds: [embed],
+        components: [row, row2],
+        files: [attachment],
+        fetchReply: true,
+      });
     }, 3000);
 
     let filter2 = (btnInt) => {
@@ -231,13 +235,17 @@ module.exports = {
           if (car.Favorite == true) {
             favorite = "⭐";
           }
-          let spe = car.Speed 
-          let acc = Math.floor(car.Acceleration)
-          let hp = (spe / acc)
-          hp = Math.round(hp)
+          let spe = car.Speed;
+          let acc = Math.floor(car.Acceleration);
+          let hp = spe / acc;
+          hp = Math.round(hp);
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
-            value: `\`/stats ${car.ID}\`\n${emotes.emotes.PT} PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${car.ID}\``,
+            value: `\`/stats ${car.ID}\`\n${
+              emotes.emotes.PT
+            } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${
+              car.ID
+            }\``,
             inline: true,
           });
         }
@@ -316,21 +324,23 @@ module.exports = {
         for (let e in itempage[page - 1]) {
           let car = itempage[page - 1][e];
           if (itempage == cars) {
-            
             let favorite = "";
             if (car.Favorite == true) {
               favorite = "⭐";
             }
-            let spe = car.Speed 
-            let acc = Math.floor(car.Acceleration)
-            let hp = (spe / acc)
-            hp = Math.round(hp)
+            let spe = car.Speed;
+            let acc = Math.floor(car.Acceleration);
+            let hp = spe / acc;
+            hp = Math.round(hp);
             embed.addFields({
               name: `${car.Emote} ${car.Name} ${favorite}`,
-              value: `\`/stats ${car.ID}\`\n${emotes.emotes.PT} PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${car.ID}\``,
+              value: `\`/stats ${car.ID}\`\n${
+                emotes.emotes.PT
+              } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${
+                car.ID
+              }\``,
               inline: true,
             });
-    
           } else if (itempage == displayparts2) {
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
           }
@@ -338,69 +348,71 @@ module.exports = {
 
         if (current !== page) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
-          if(itempage == cars){
+          if (itempage == cars) {
             embed.setFooter({ text: `Loading car image...` });
             i.update({ embeds: [embed], fetchReply: true });
             let canvas = createCanvas(426, 240);
             let ctx = canvas.getContext("2d");
             let bg = await loadImage("https://i.ibb.co/QMZ0Hch/garage.png");
             ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-            
-            let defaulty = 50
-            let defaultx = 5
-            for(let ca in itempage[page - 1]){
-              console.log(ca)
-                if(ca == 0){
-                  defaulty = 40
-                   defaultx = 5
-                }
-                if(ca == 1){
-                  defaulty = 40
-                   defaultx = 150
-                }
-                if(ca == 2){
-                  defaulty = 40
-                   defaultx = 300
-                }
-                if(ca == 3){
-                  defaulty = 125
-                   defaultx = 5
-                }
-                if(ca == 4){
-                  defaulty = 125
-                   defaultx = 150
-                }
-                if(ca == 5){
-                  defaulty = 125
-                   defaultx = 300
-                }
-                let car = itempage[page - 1][ca]
-                console.log(car)
-                let carimage = await loadImage(`${cardb.Cars[car.Name.toLowerCase()].Image}`)
-                try {
-                  ctx.save();
-                  roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
-                  ctx.stroke();
-                  ctx.clip();
-                  ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
-                  ctx.restore();
-                }
-                catch (err){
-                  console.log("error loading image")
-                }
-        
+
+            let defaulty = 50;
+            let defaultx = 5;
+            for (let ca in itempage[page - 1]) {
+              console.log(ca);
+              if (ca == 0) {
+                defaulty = 40;
+                defaultx = 5;
+              }
+              if (ca == 1) {
+                defaulty = 40;
+                defaultx = 150;
+              }
+              if (ca == 2) {
+                defaulty = 40;
+                defaultx = 300;
+              }
+              if (ca == 3) {
+                defaulty = 125;
+                defaultx = 5;
+              }
+              if (ca == 4) {
+                defaulty = 125;
+                defaultx = 150;
+              }
+              if (ca == 5) {
+                defaulty = 125;
+                defaultx = 300;
+              }
+              let car = itempage[page - 1][ca];
+              console.log(car);
+              let carimage = await loadImage(
+                `${cardb.Cars[car.Name.toLowerCase()].Image}`
+              );
+              try {
+                ctx.save();
+                roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
+                ctx.stroke();
+                ctx.clip();
+                ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
+                ctx.restore();
+              } catch (err) {
+                console.log("error loading image");
+              }
             }
             let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
               name: "profile-image.png",
             });
             setTimeout(() => {
-              embed.setImage("attachment://profile-image.png")
+              embed.setImage("attachment://profile-image.png");
               embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
-              interaction.editReply({ embeds: [embed], fetchReply: true, files: [attachment] });
+              interaction.editReply({
+                embeds: [embed],
+                fetchReply: true,
+                files: [attachment],
+              });
             }, 5000);
-
-          }
-          else {
+          } else {
             i.update({ embeds: [embed], fetchReply: true });
           }
         } else {

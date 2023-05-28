@@ -247,7 +247,10 @@ module.exports = {
               "You don't work as a cop! Use `/work hire` to get a job!"
             );
 
-            if (job.position.toLowerCase() !== boughtCar.Rank.toLowerCase()) return await interaction.reply(`You need to be rank ${boughtCar.Rank} to buy this car!`);
+          if (job.position.toLowerCase() !== boughtCar.Rank.toLowerCase())
+            return await interaction.reply(
+              `You need to be rank ${boughtCar.Rank} to buy this car!`
+            );
 
           let idtoset = boughtCar.alias;
           let carobj = {

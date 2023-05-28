@@ -87,7 +87,7 @@ module.exports = {
     selectedpolice = selectedpolice[0];
 
     let selectedracer = userdata.car_racing || lodash.sample(userdata.cars);
-    let racerusing = userdata.using
+    let racerusing = userdata.using;
     let liveryracer =
       selectedracer.Livery ||
       cardb.Cars[selectedracer.Name.toLowerCase()].Image;
@@ -231,38 +231,38 @@ module.exports = {
           embed.setDescription(
             `${user} your car has been impounded and you lost ${newbounty} bounty\n${policeuser} you gained ${newbounty} bounty`
           );
-          
-          let coold = racercooldown.permissionslip
-          if(racerusing.includes("permission slip") && coold !== null && timeout - (Date.now() - coold) > 0){
-            interaction.channel.send("Your car is safe thanks to your permission slip!")
-          
-          }
-          else {
 
-          await User.findOneAndUpdate(
-            {
-              id: user.id,
-            },
-            {
-              $set: {
-                "cars.$[car].Impounded": true,
-                "cars.$[car].ImpoundTime": Date.now(),
+          let coold = racercooldown.permissionslip;
+          if (
+            racerusing.includes("permission slip") &&
+            coold !== null &&
+            timeout - (Date.now() - coold) > 0
+          ) {
+            interaction.channel.send(
+              "Your car is safe thanks to your permission slip!"
+            );
+          } else {
+            await User.findOneAndUpdate(
+              {
+                id: user.id,
               },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": selectedracer.Name,
+              {
+                $set: {
+                  "cars.$[car].Impounded": true,
+                  "cars.$[car].ImpoundTime": Date.now(),
                 },
-              ],
-            }
-          );
-          }
-         
+              },
 
-          
-          
+              {
+                arrayFilters: [
+                  {
+                    "car.Name": selectedracer.Name,
+                  },
+                ],
+              }
+            );
+          }
+
           userdata.bounty -= newbounty;
           userdata.chased = Date.now();
           policedata.bounty += newbounty;
