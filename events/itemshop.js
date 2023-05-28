@@ -10,7 +10,7 @@ async function updateItemShop() {
   }
   let itemcooldown = global.itemshopcooldown;
   let items = [];
-  let timeout = 604800000;
+  let timeout = 86400000;
   let itemshopalr = global.itemshop;
   setInterval(async () => {
     if (itemshopalr.length == 0) {
@@ -56,6 +56,7 @@ async function updateItemShop() {
           },
         }
       );
+      global.update()
       global.markModified("itemshop");
       global.save();
     } else {
@@ -103,15 +104,22 @@ async function updateItemShop() {
             },
           }
         );
-        global.markModified("itemshop");
-        global.save();
+        try {
+
+          global.updateOne()
+          global.markModified("itemshop");
+          global.save();
+        }
+        catch(err){
+          console.log(err)
+        }
 
         console.log(item1);
       } else {
         return;
       }
     }
-  }, 60000);
+  }, 600000);
 }
 
 module.exports = {

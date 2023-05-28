@@ -24,6 +24,24 @@
     10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000,
     150000, 200000, 250000, 300000
   ],
+  "Tier4": [
+    "t4weight",
+    "t4bodykit",
+    "t4brakes",
+    "t4clutch",
+    "t4driftsuspension",
+    "t4drifttires",
+    "t4ecu",
+    "t4exhaust",
+    "t4gearbox",
+    "t4intercooler",
+    "t4intake",
+    "t4racesuspension",
+    "t4spoiler",
+    "t4tires",
+    "t4turbo",
+    "t4weightreduction"
+  ],
   "Maps": ["Common", "Common", "Rare", "Legendary"],
   "RareCash": [500000, 750000, 1000000, 2000000],
   "SuperRare": [

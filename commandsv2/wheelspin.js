@@ -35,19 +35,7 @@ module.exports = {
     let item = lodash.sample(items);
     let using = userdata.using;
 
-    if (using.includes("orange juice")) {
-      let cooldown = cooldowns.applejuice;
-      let timeout = 60000;
-      console.log(timeout - (Date.now() - cooldown));
-      if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
-        console.log("pulled");
-        userdata.using.pull("orange juice");
-        userdata.update();
-        interaction.channel.send("Your orange juice ran out! :(");
-      } else {
-        item = "🪛";
-      }
-    }
+
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
     let witems = wheelspinrewards.Items;
@@ -67,7 +55,21 @@ module.exports = {
     let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(() => {
+      
       let item = lodash.sample(items);
+      if (userdata.using.includes("orange juice")) {
+        let cooldown = cooldowns.orangejuice;
+        let timeout = 60000;
+        console.log(timeout - (Date.now() - cooldown));
+        if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
+          console.log("pulled");
+          userdata.using.pull("orange juice");
+          userdata.update();
+          interaction.channel.send("Your orange juice ran out! :(");
+        } else {
+          item = "🪛";
+        }
+      }
       embed.setDescription(`${item}`);
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {

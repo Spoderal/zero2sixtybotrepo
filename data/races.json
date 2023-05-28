@@ -2,7 +2,7 @@
   {
     "name": "streetrace",
     "tiers": 7,
-    "reward": 150
+    "reward": 50
   },
   {
     "name": "highwayrace",
@@ -12,12 +12,12 @@
   {
     "name": "quartermile",
     "tiers": 7,
-    "reward": 200
+    "reward": 150
   },
   {
     "name": "halfmile",
     "tiers": 7,
-    "reward": 250
+    "reward": 200
   },
   {
     "name": "squadrace",
@@ -28,32 +28,7 @@
   {
     "name": "crossrace",
     "tiers": 7,
-    "reward": 350
-  },
-  {
-    "name": "venusrace",
-    "tiers": 7,
-    "reward": 150
-  },
-  {
-    "name": "marsrace",
-    "tiers": 7,
-    "reward": 150
-  },
-  {
-    "name": "moonrace",
-    "tiers": 7,
-    "reward": 150
-  },
-  {
-    "name": "saturnrace",
-    "tiers": 7,
-    "reward": 150
-  },
-  {
-    "name": "plutorace",
-    "tiers": 7,
-    "reward": 150
+    "reward": 300
   },
   {
     "name": "lemans",
@@ -63,6 +38,6 @@
   {
     "name": "police_streetrace",
     "tiers": 7,
-    "reward": 100
+    "reward": 25
   }
 ]

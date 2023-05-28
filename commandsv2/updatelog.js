@@ -26,11 +26,11 @@ module.exports = {
             emoji: "⚙️",
           },
           {
-            label: "3/1/2023",
-            description: "Information for the recent spring season update!",
+            label: "5/31/2023",
+            description: "Information for the recent summer season update!",
             value: "4_update",
             customId: "up4",
-            emoji: "🌸",
+            emoji: "☀️",
           },
           {
             label: "5/17/2023",
@@ -49,7 +49,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             ⚙️ Latest Patch 5/5/2023\n
-            🌸 Spring Update 3/1/2023\n
+            ☀️ Summer Update 5/31/2023\n
             🚨 Police Update 5/17/2023\n
         `);
 
@@ -97,24 +97,65 @@ module.exports = {
           } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Spring Update`);
+            embed.setTitle(`Big Update`);
             embed
-              .setDescription(
-                `• New season! The snow melts, and everyone starts drifting! Featuring a brand new season with never seen before rewards! Check /season for more information and use /drift to earn notoriety!\n
-                 • Drift mechanics revamp, no more drift stat, handling and weight matter the most in drifting! The more weight and the more handling, the better chance you have\n
-                 • Master drift difficulty with a badge for winning 20 times on it!\n
-                 • New parts, featuring drift spoilers, a new TXTurbo, and T5DriftTires!\n
-                 • New seasonal crate featuring new helmets, and drift spoilers\n
-                 • The drift crate returns with more drift cars than ever!\n
-                 • Referrals, make a code and give it to your friends who sign up so you both get $10K!\n
-                 • Profile backgrounds, make your profile look snazzy\n
-                 • /stats fixed, now shows the correct information for parts\n
-                 • View the new cars with /dealer\n
-                 • View cars in crates with the new list option in /unbox!\n
-                 • Remove all parts with /remove!
-                `
+              .addFields(
+                {
+                  name: "Features ⭐",
+                  value: `New season design, shorter seasons, more unique themes and better rewards\n
+                Garage images (BETA, PLEASE WAIT 3 SECONDS BEFORE SCROLLING THROUGH YOUR GARAGE)\n
+                New Crew season\n
+                New Crew command design\n
+                Police racing rewards nerfed\n
+                Imports and super wheelspins are now limited to users who have beaten the 2nd squad.\n
+                Police racing now ranks your police rank up\n
+                Item shop changed to daily instead of weekly\n
+                New titles and helmets\n
+                editprofile removed, moved to /profile edit\n
+                Profile now shows buttons to view helmets and titles\n
+                Miles and "power total" shows in garage now instead of full stats\n
+                Bounty conversion nerfed\n
+                Race rewards nerfed\n
+                TXGearbox, TXECU`,
+                  inline: true,
+                },
+                {
+                  name: "Cars 🚗",
+                  value: `
+                ${cardb.Cars["2020 chevy camaro ss"].Emote} ${cardb.Cars["2020 chevy camaro ss"].Name}
+
+                ${cardb.Cars["2020 ford mustang gt500"].Emote} ${cardb.Cars["2020 ford mustang gt500"].Name}
+
+                ${cardb.Cars["2019 dodge challenger hellcat redeye"].Emote} ${cardb.Cars["2019 dodge challenger hellcat redeye"].Name}
+
+                ${cardb.Cars["2015 dodge charger hellcat"].Emote} ${cardb.Cars["2015 dodge charger hellcat"].Name}
+
+                 ${cardb.Cars["1969 ford mustang boss"].Emote} ${cardb.Cars["1969 ford mustang boss"].Name}
+
+                 ${cardb.Cars["2021 dodge durango hellcat"].Emote} ${cardb.Cars["2021 dodge durango hellcat"].Name}
+
+                 ${cardb.Cars["1968 plymouth roadrunner"].Emote} ${cardb.Cars["1968 plymouth roadrunner"].Name}
+
+                 ${cardb.Cars["2021 mclaren 720s gt3x"].Emote} ${cardb.Cars["2021 mclaren 720s gt3x"].Name}
+
+                 ${cardb.Cars["1973 ford mustang mach 1"].Emote} ${cardb.Cars["1973 ford mustang mach 1"].Name} *RETURNED*
+                `,
+                  inline: true,
+                },
+                {
+                  name: `Items 🪛`,
+                  value: `
+                ${itemdb["beach ball"].Emote} ${itemdb["beach ball"].Name}\n
+                ${itemdb["cocktail"].Emote} ${itemdb["cocktail"].Name}\n
+                ${itemdb["ice cube"].Emote} ${itemdb["ice cube"].Name}\n
+                ${itemdb["old kite"].Emote} ${itemdb["old kite"].Name}\n
+                ${itemdb["permission slip"].Emote} ${itemdb["permission slip"].Name}\n
+                ${itemdb.radar.Emote} ${itemdb.radar.Name}\n
+                `,
+                  inline: true,
+                }
               )
-              .setFooter({ text: "3/1/2023" })
+              .setFooter({ text: "4/31/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

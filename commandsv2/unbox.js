@@ -39,6 +39,10 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
+    if(userdata.tier < 1){
+      return interaction.reply("You need to beat the first squad to use import crates!")
+    }
+
     let bought = interaction.options.getString("crate");
     let listed = interaction.options.getBoolean("list");
     if (listed == true) {

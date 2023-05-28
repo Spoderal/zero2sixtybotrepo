@@ -384,6 +384,71 @@
       "Name": "Rave Helmet",
       "Image": "https://i.ibb.co/v1rgxQ6/helmet-rave.png",
       "Emote": "<:helmet_rave:1080285108264771734>"
+    },
+    "umbrella helmet": {
+      "Name": "Umbrella Helmet",
+      "Image": "https://i.ibb.co/NNHTVhx/helmet-umbrella.png",
+      "Emote": "<:helmet_umbrella:1111583942366199909>"
+    },
+    "tropical helmet": {
+      "Name": "Tropical Helmet",
+      "Image": "https://i.ibb.co/qJM4TdD/helmet-tropical.png",
+      "Emote": "<:helmet_tropical:1111583940357148703>"
+    },
+    "muscle helmet": {
+      "Name": "Muscle Helmet",
+      "Image": "https://i.ibb.co/bHYgtmR/helmet-muscle.png",
+      "Emote": "<:helmet_muscle:1111583935277834312>"
+    },
+    "city helmet": {
+      "Name": "City Helmet",
+      "Image": "https://i.ibb.co/tZc3xdh/helmet-city.png",
+      "Emote": "<:helmet_city:1111583948707987517>"
+    },
+    "american helmet": {
+      "Name": "American Helmet",
+      "Image": "https://i.ibb.co/HxdGDKJ/helmet-american.png",
+      "Emote": "<:helmet_american:1111583943859376148>"
+    },
+    "oink helmet": {
+      "Name": "Oink Helmet",
+      "Image": "https://i.ibb.co/kBhkMLF/helmet-pig.png",
+      "Emote": "<:helmet_pig:1111583937240764498>"
+    },
+    "cow helmet": {
+      "Name": "Cow Helmet",
+      "Image": "https://i.ibb.co/nPPcSPS/helmet-cow.png",
+      "Emote": "<:helmet_cow:1111583950343786546>"
+    },
+    "redbull helmet": {
+      "Name": "Redbull Helmet",
+      "Image": "https://i.ibb.co/jw9K8HB/helmet-redbull.png",
+      "Emote": "<:helmet_cow:1111583950343786546> "
+    },
+    "cardboard helmet": {
+      "Name": "Cardboard Helmet",
+      "Image": "https://i.ibb.co/YTP2bZy/helmet-cardboard.png",
+      "Emote": "<:helmet_cardboard:1111583946359181393>"
+    },
+    "fancy helmet": {
+      "Name": "Fancy Helmet",
+      "Image": "https://i.ibb.co/vLJ0h4K/helmet-fancy.png",
+      "Emote": "<:helmet_fancy:1111946749712547900>"
+    },
+    "cool helmet": {
+      "Name": "Cool Helmet",
+      "Image": "https://i.ibb.co/Wtb7xqr/helmet-cool.png",
+      "Emote": "<:helmet_cool:1111946751717417020>"
+    },
+    "tiger helmet": {
+      "Name": "Tiger Helmet",
+      "Image": "https://i.ibb.co/hs3g520/helmet-tiger.png",
+      "Emote": "<:helmet_tiger:1111946753122504726>"
+    },
+    "rockstar helmet": {
+      "Name": "Rockstar Helmet",
+      "Image": "https://i.ibb.co/3F9RSbD/helmet-rockstar.png",
+      "Emote": "<:helmet_rockstar:1111948535911419924>"
     }
   }
 }

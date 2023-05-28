@@ -43,6 +43,7 @@ module.exports = {
     let policeuser = interaction.user;
     let policedata = await User.findOne({ id: policeuser.id });
     let policecooldown = await Cooldowns.findOne({ id: policeuser.id });
+    let racercooldown = await Cooldowns.findOne({ id: user.id });
     let chasecool = policecooldown.chasing;
     let timeout = 900000;
     let raceritems = userdata.items;
@@ -86,7 +87,7 @@ module.exports = {
     selectedpolice = selectedpolice[0];
 
     let selectedracer = userdata.car_racing || lodash.sample(userdata.cars);
-
+    let racerusing = userdata.using
     let liveryracer =
       selectedracer.Livery ||
       cardb.Cars[selectedracer.Name.toLowerCase()].Image;
@@ -100,11 +101,11 @@ module.exports = {
       .addFields(
         {
           name: `${policeuser.username}'s ${selectedpolice.Name}`,
-          value: `${emotes.speed} Power: ${selectedpolice.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.Weight}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
+          value: `${emotes.speed} Power: ${selectedpolice.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.WeightStat}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
         },
         {
           name: `${user.username}'s ${selectedracer.Name}`,
-          value: `${emotes.speed} Power: ${selectedracer.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.Weight}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
+          value: `${emotes.speed} Power: ${selectedracer.Speed}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.WeightStat}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
         }
       )
       .setImage(liverypolice)
@@ -147,11 +148,11 @@ module.exports = {
       embed.setFields(
         {
           name: `${policeuser.username}'s ${selectedpolice.Name}`,
-          value: `${emotes.speed} Power: ${policemph}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.Weight}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
+          value: `${emotes.speed} Power: ${policemph}\n${emotes.zero2sixty} Acceleration: ${selectedpolice.Acceleration}s\n${emotes.handling} Handling: ${selectedpolice.Handling}\n${emotes.weight} Weight: ${selectedpolice.WeightStat}\n\n${emotes.bounty} Rank: ${policedata.work.position}`,
         },
         {
           name: `${user.username}'s ${selectedracer.Name}`,
-          value: `${emotes.speed} Power: ${racermph}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.Weight}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
+          value: `${emotes.speed} Power: ${racermph}\n${emotes.zero2sixty} Acceleration: ${selectedracer.Acceleration}s\n${emotes.handling} Handling: ${selectedracer.Handling}\n${emotes.weight} Weight: ${selectedracer.WeightStat}\n\n${emotes.bounty} Bounty: ${userdata.bounty}`,
         }
       );
       await msg.edit({ content: `The police used spikes!`, embeds: [embed] });
@@ -163,8 +164,8 @@ module.exports = {
     let policeacc = selectedpolice.Acceleration * 10;
     let raceacc = selectedracer.Acceleration * 10;
 
-    let policeweight = selectedpolice.Weight;
-    let racerweight = selectedracer.Weight;
+    let policeweight = selectedpolice.WeightStat;
+    let racerweight = selectedracer.WeightStat;
 
     let racerhandling = selectedracer.Handling / 100;
     let policehandling = selectedpolice.Handling / 100;
@@ -230,6 +231,13 @@ module.exports = {
           embed.setDescription(
             `${user} your car has been impounded and you lost ${newbounty} bounty\n${policeuser} you gained ${newbounty} bounty`
           );
+          
+          let coold = racercooldown.permissionslip
+          if(racerusing.includes("permission slip") && coold !== null && timeout - (Date.now() - coold) > 0){
+            interaction.channel.send("Your car is safe thanks to your permission slip!")
+          
+          }
+          else {
 
           await User.findOneAndUpdate(
             {
@@ -250,7 +258,12 @@ module.exports = {
               ],
             }
           );
-          userdata.bounty = newbounty;
+          }
+         
+
+          
+          
+          userdata.bounty -= newbounty;
           userdata.chased = Date.now();
           policedata.bounty += newbounty;
           userdata.save();

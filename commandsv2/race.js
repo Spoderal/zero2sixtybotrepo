@@ -23,7 +23,6 @@ const squaddb = require("../data/squads.json");
 const ms = require("pretty-ms");
 const itemdb = require("../data/items.json");
 
-const { createCanvas, loadImage } = require("canvas");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const weather = require("../data/weather.json");
 
@@ -147,7 +146,6 @@ module.exports = {
     }
 
     let row2;
-    let row5;
     let row0;
     if (userdata.police == false) {
       row2 = new ActionRowBuilder().addComponents(
@@ -176,33 +174,6 @@ module.exports = {
           .setEmoji("<:logo_cr:1090120001744281742>")
           .setCustomId("crossrace")
           .setStyle("Secondary")
-      );
-      row5 = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setLabel("Venus Race")
-          .setEmoji("🪐")
-          .setCustomId("venusrace")
-          .setStyle("Primary"),
-        new ButtonBuilder()
-          .setLabel("Mars Race")
-          .setEmoji("🪐")
-          .setCustomId("marsrace")
-          .setStyle("Primary"),
-        new ButtonBuilder()
-          .setLabel("Moon Race")
-          .setEmoji("🪐")
-          .setCustomId("moonrace")
-          .setStyle("Primary"),
-        new ButtonBuilder()
-          .setLabel("Saturn Race")
-          .setEmoji("🪐")
-          .setCustomId("saturnrace")
-          .setStyle("Primary"),
-        new ButtonBuilder()
-          .setLabel("Pluto Race")
-          .setEmoji("🪐")
-          .setCustomId("plutorace")
-          .setStyle("Primary")
       );
       row0 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -267,41 +238,8 @@ module.exports = {
         .setStyle("Secondary")
     );
 
-    let rowsquads = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setLabel("Flame House")
-        .setEmoji("<:squad_flamehouse:1025142698807668736>")
-        .setCustomId("flamehouse")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("X Squad")
-        .setEmoji("<:squad_xsquad:1025142697553563649>")
-        .setCustomId("xsquad")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("Muscle Brains")
-        .setEmoji("<:squad_muscleheads:1025581852683153428>")
-        .setCustomId("musclebrains")
-        .setStyle("Secondary")
-    );
 
-    let squadrow2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setLabel("Cool Cobras")
-        .setEmoji("<:squad_cobras:1025856889730379776>")
-        .setCustomId("coolcobras")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("The Ws")
-        .setEmoji("<:squad_w:1026222214648963152>")
-        .setCustomId("thews")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setLabel("Snowys Agera")
-        .setEmoji("❄️")
-        .setCustomId("snowysagera")
-        .setStyle("Secondary")
-    );
+    
     let carimage =
       selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image;
     let usingmsg = [];
@@ -340,7 +278,7 @@ module.exports = {
     if (userdata.police == false) {
       msg = await interaction.reply({
         embeds: [embed],
-        components: [row2, row5, row0],
+        components: [row2, row0],
         fetchReply: true,
       });
     } else if (userdata.police == true) {
@@ -364,12 +302,8 @@ module.exports = {
       "highwayrace",
       "halfmile",
       "quartermile",
+      "muscledrag",
       "crossrace",
-      "venusrace",
-      "marsrace",
-      "moonrace",
-      "saturnrace",
-      "plutorace",
       "lemans",
       "police_streetrace",
     ];
@@ -440,36 +374,44 @@ module.exports = {
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
+          let notowon = 0
 
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
               (car) => car.Class == "D" && car.Speed < 140
             );
+            notowon = 25
           } else if (bot == 2) {
             car2 = carsarray.filter(
               (car) => car.Class == "C" && car.Speed < 160
             );
+            notowon = 50
           } else if (bot == 3) {
             car2 = carsarray.filter(
               (car) => car.Class == "B" && car.Speed < 180
             );
+            notowon = 100
           } else if (bot == 4) {
             car2 = carsarray.filter(
               (car) => car.Class == "A" && car.Speed < 200
             );
+            notowon = 150
           } else if (bot == 5) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 210
             );
+            notowon = 200
           } else if (bot == 6) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 220
             );
+            notowon = 250
           } else if (bot == 7) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 250
             );
+            notowon = 350
           }
           car2 = lodash.sample(car2);
 
@@ -485,10 +427,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+
 
           console.log(weather2);
 
@@ -625,6 +564,8 @@ module.exports = {
                     userdata.using.pull("pet treats");
                     pet.xessence = petdb[pet.pet].Xessence;
                     userdata.update();
+                    
+                    cooldowndata.pettreats = 0
                     interaction.channel.send("Your pet treats ran out! :(");
                   }
                 }
@@ -645,6 +586,7 @@ module.exports = {
                     console.log("pulled");
                     userdata.using.pull("pet collar");
                     userdata.update();
+                    cooldowndata.petcollar = 0
                     interaction.channel.send("Your pet collar fell off! :(");
                   }
                 } else {
@@ -675,13 +617,11 @@ module.exports = {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
                 console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
-                ) {
+                if (cooldown !== null && timeout - (Date.now() - cooldown) > 0 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
                   userdata.update();
+                  cooldowndata.radio = 0
                   interaction.channel.send("Your radio battery ran out.");
                 } else {
                   raceranks = raceranks * 2;
@@ -701,6 +641,7 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0
                   interaction.channel.send("Your flat tire ran out! :(");
                 } else {
                   cashwon = cashwon += cashwon * 0.05;
@@ -721,6 +662,7 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
                   userdata.update();
+                  cooldowndata.tequilla = 0
                   interaction.channel.send("Your tequila shot ran out! :(");
                 } else {
                   if (itemeffectsfilter[0].earning == "bad") {
@@ -748,6 +690,8 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
+                  cooldowndata.fruitpunch = 0
+                  cooldown = 0
                   interaction.channel.send("Your fruit punch ran out! :(");
                 } else {
                   raceranks = 2;
@@ -764,6 +708,7 @@ module.exports = {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
+                  cooldowndata.energydrink = 0
                   interaction.channel.send("Your energy drink ran out! :(");
                 } else {
                   rpwon = rpwon * 2;
@@ -787,13 +732,32 @@ module.exports = {
                 );
               }
               let raceranks = 1;
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 2,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
 
               userdata.racerank += raceranks;
-
+                earnings.push(`${emotes.notoriety} ${notowon} Notoriety`)
               userdata.cash += cashwon;
-              userdata.bounty += 10;
+              userdata.notoriety += notowon
+              userdata.bounty += 5;
               userdata.car_racing = selected;
-              userdata.rp3 += rpwon;
+              userdata.rp4 += rpwon;
               userdata.worldwins += 1;
               cooldowndata.is_racing = true;
               await cooldowndata.save();
@@ -867,6 +831,25 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
+
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 2,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
               clearInterval(i2);
               userdata.save();
             }
@@ -878,7 +861,10 @@ module.exports = {
             return interaction.editReply("You need to use a le mans car!");
 
           let lemasncool = cooldowndata.lemans;
-          let canrace = 43200000;
+          let canrace = userdata.eventCooldown || 43200000;
+          if(userdata.using.includes("ice cube")){
+            canrace = canrace / 2;
+          }
           if (lemasncool !== null && canrace - (Date.now() - lemasncool) > 0) {
             let time = ms(canrace - (Date.now() - lemasncool));
             let timeEmbed = new EmbedBuilder()
@@ -966,10 +952,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+        
 
           console.log(weather2);
 
@@ -1152,6 +1135,12 @@ module.exports = {
                 userdata.markModified("newpet");
               }
 
+                if(usinginv.includes("ice cube")){
+                  userdata.using.pull("ice cube")
+                  userdata.eventCooldown = 43200000
+                  userdata.update();
+                }
+
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
@@ -1298,8 +1287,8 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
               userdata.worldwins += 1;
               cooldowndata.is_racing = true;
               await cooldowndata.save();
@@ -1377,1978 +1366,7 @@ module.exports = {
               userdata.save();
             }
           }, 1000);
-        } else if (race[0].name == "venusrace") {
-          if (
-            selected.Tires !== "T1SpaceTires" &&
-            selected.Name !== "Mars Rover"
-          )
-            return interaction.channel.send(
-              "You need space tires to race on this planet!"
-            );
-          let tracklength = 0;
-          let tracklength2 = 0;
-          await i.update({
-            content: "Please wait...",
-            components: [],
-            fetchReply: true,
-          });
-          console.log("street");
-          console.log("race");
-          let car2;
-          let bot = i.customId;
-
-          let cashwon = parseInt(bot) * 150;
-          let rpwon = parseInt(bot) * 2;
-          let cashlost = parseInt(bot) * 20;
-
-          if (bot == 1) {
-            console.log("1");
-            car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
-            );
-          } else if (bot == 2) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
-            );
-          } else if (bot == 3) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
-            );
-          } else if (bot == 4) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
-            );
-          } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
-            );
-          } else if (bot == 6) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
-            );
-          } else if (bot == 7) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
-            );
-          }
-          car2 = lodash.sample(car2);
-
-          console.log(car2);
-
-          let craterare = randomRange(1, 3);
-
-          let crateearned;
-
-          if (craterare == 2) {
-            crateearned = "common crate";
-          } else if (craterare == 3) {
-            crateearned = "rare crate";
-          }
-
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
-
-          let mph = selected.Speed;
-
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
-          let acceleration = selected.Acceleration;
-          let handling = selected.Handling;
-          if (!selected.WeightStat) {
-            selected.WeightStat =
-              cardb.Cars[selected.Name.toLowerCase()].Weight;
-          }
-
-          let mph2;
-
-          mph2 = car2.Speed;
-
-          let weight2 = car2.Weight;
-          let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling;
-
-          let speed = 0;
-          let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000);
-
-          let sec;
-          let sec2;
-          handling = Math.floor(handling);
-          handling2 = Math.floor(handling2);
-
-          let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
-
-          let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Venus Race`)
-
-            .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
-            .addFields(
-              {
-                name: `${selected.Emote} ${selected.Name}`,
-                value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-
-                inline: true,
-              },
-              {
-                name: `${car2.Emote} ${car2.Name}`,
-                value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-                inline: true,
-              }
-            )
-            .setColor(colors.blue)
-            .setImage(carimage)
-            .setThumbnail(car2.Image);
-
-          await i.editReply({
-            content: "",
-            embeds: [embed],
-            components: [],
-            fetchReply: true,
-          });
-          let gravity = false;
-          setTimeout(async () => {
-            let grow = new ActionRowBuilder().addComponents(
-              new ButtonBuilder()
-                .setCustomId("gravity")
-                .setEmoji("🪛")
-                .setLabel("Pull gravity lever")
-                .setStyle("Primary")
-            );
-
-            await i.editReply({
-              components: [grow],
-              fetchReply: true,
-            });
-
-            collector.on("collect", async (i) => {
-              if (i.customId.includes("gravity")) {
-                gravity = true;
-                await i.deferUpdate();
-              }
-            });
-
-            setTimeout(async () => {
-              await i.editReply({
-                components: [],
-                fetchReply: true,
-              });
-            }, 2000);
-          }, randomgravity);
-
-          weight = weight * 10;
-          weight2 = weight2 * 10;
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
-
-          let x = setInterval(() => {
-            if (speed < mph) {
-              speed++;
-            } else {
-              clearInterval(x);
-            }
-          }, accms);
-          let x2 = setInterval(() => {
-            if (speed2 < mph2) {
-              speed2++;
-            } else {
-              clearInterval(x2);
-            }
-          }, accms2);
-          let timer = 0;
-          let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            timer++;
-            console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
-
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
-            // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
-
-            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
-              embed.setTitle(
-                `Tier ${bot} Venus Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength < tracklength2 &&
-              timer == 10 &&
-              gravity == false
-            ) {
-              embed.setTitle(
-                `Tier ${bot} Venus Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength > tracklength2 &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              let earnings = [];
-              let filteredhouse = userdata.houses.filter(
-                (house) => house.Name == "Buone Vedute"
-              );
-              let filteredhouse2 = userdata.houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-
-              if (pet.name) {
-                let xessneceearn = lodash.random(pet.xessence);
-
-                earnings.push(
-                  `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
-                );
-                userdata.xessence += xessneceearn;
-                userdata.newpet.love -= 5;
-                userdata.newpet.hunger -= 5;
-                userdata.newpet.thirst -= 3;
-
-                if (userdata.newpet.hunger <= 0) {
-                  interaction.channel.send("Your pet died of hunger :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.thirst <= 0) {
-                  interaction.channel.send("Your pet died of thirst :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.love <= 0) {
-                  interaction.channel.send(
-                    "Your pet left because it wasn't loved enough :("
-                  );
-                  userdata.newpet = {};
-                }
-
-                userdata.markModified("newpet");
-              }
-              if (bonus > 0) {
-                cashwon = cashwon += cashwon * bonus;
-              }
-              if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser;
-              }
-              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-              earnings.push(`${emotes.rp} +${rpwon}`);
-
-              if (crateearned !== undefined) {
-                userdata.items.push(crateearned);
-                earnings.push(
-                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
-                );
-              }
-              let randompart = randomRange(1, 5);
-
-              console.log(randompart);
-              if (randompart == 3) {
-                earnings.push(
-                  `${partdb.Parts["car hook"].Emote} +1 ${partdb.Parts["car hook"].Name}`
-                );
-                userdata.parts.push("car hook");
-              }
-              let raceranks = 1;
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
-              userdata.spacetokens += 1;
-              let using = userdata.using;
-              if (usinginv.includes("fruit punch")) {
-                let cooldown = cooldowndata.fruitpunch;
-                let timeout = 60000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("fruit punch");
-                  userdata.update();
-                  interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
-                }
-              }
-              userdata.racerank += raceranks;
-
-              userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
-              userdata.worldwins += 1;
-              let taskfilter = userdata.tasks.filter(
-                (task) => task.Task == "Win 10 street races"
-              );
-              if (taskfilter[0]) {
-                taskfilter[0].Races += 1;
-                await User.findOneAndUpdate(
-                  {
-                    id: user.id,
-                  },
-                  {
-                    $set: {
-                      "tasks.$[task]": taskfilter[0],
-                    },
-                  },
-
-                  {
-                    arrayFilters: [
-                      {
-                        "task.Task": "Win 10 street races",
-                      },
-                    ],
-                  }
-                );
-                if (taskfilter[0].Races >= 10) {
-                  userdata.cash += taskfilter[0].Reward;
-                  userdata.tasks.pull(taskfilter[0]);
-                  userdata.tasks.push({ ID: "T1", Time: Date.now() });
-                  interaction.channel.send(`You just completed your task!`);
-                }
-              }
-              embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Venus Race won!`);
-
-              await i.editReply({ embeds: [embed] });
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-
-              console.log(`track length ${tracklength}`);
-              console.log(`track length 2 ${tracklength2}`);
-            }
-            // lost
-            else if (
-              tracklength2 > tracklength &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Venus Race lost!`);
-              embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
-              await i.editReply({ embeds: [embed] });
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-            }
-          }, 1000);
-        } else if (race[0].name == "marsrace") {
-          if (
-            selected.Tires !== "T1SpaceTires" &&
-            selected.Name !== "Mars Rover"
-          )
-            return interaction.channel.send(
-              "You need space tires to race on this planet!"
-            );
-          let tracklength = 0;
-          let tracklength2 = 0;
-          await i.update({
-            content: "Please wait...",
-            components: [],
-            fetchReply: true,
-          });
-          console.log("street");
-          console.log("race");
-          let weather2 = lodash.sample(weather);
-          let car2;
-          let bot = i.customId;
-
-          let cashwon = parseInt(bot) * 150;
-          let rpwon = parseInt(bot) * 2;
-          let cashlost = parseInt(bot) * 20;
-
-          if (bot == 1) {
-            console.log("1");
-            car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
-            );
-          } else if (bot == 2) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
-            );
-          } else if (bot == 3) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
-            );
-          } else if (bot == 4) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
-            );
-          } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
-            );
-          } else if (bot == 6) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
-            );
-          } else if (bot == 7) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
-            );
-          }
-          car2 = lodash.sample(car2);
-
-          console.log(car2);
-
-          let craterare = randomRange(1, 3);
-
-          let crateearned;
-
-          if (craterare == 2) {
-            crateearned = "common crate";
-          } else if (craterare == 3) {
-            crateearned = "rare crate";
-          }
-
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
-
-          console.log(weather2);
-
-          let mph = selected.Speed;
-
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
-          let acceleration = selected.Acceleration;
-          let handling = selected.Handling;
-          if (!selected.WeightStat) {
-            selected.WeightStat =
-              cardb.Cars[selected.Name.toLowerCase()].Weight;
-          }
-
-          let mph2;
-
-          mph2 = car2.Speed;
-
-          let weight2 = car2.Weight;
-          let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling;
-
-          let speed = 0;
-          let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000);
-
-          let sec;
-          let sec2;
-          handling = Math.floor(handling);
-          handling2 = Math.floor(handling2);
-          let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
-
-          let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Mars Race`)
-
-            .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
-            .addFields(
-              {
-                name: `${selected.Emote} ${selected.Name}`,
-                value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-
-                inline: true,
-              },
-              {
-                name: `${car2.Emote} ${car2.Name}`,
-                value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-                inline: true,
-              }
-            )
-            .setColor(colors.blue)
-            .setImage(carimage)
-            .setThumbnail(car2.Image);
-
-          await i.editReply({
-            content: "",
-            embeds: [embed],
-            components: [],
-            fetchReply: true,
-          });
-          let gravity = false;
-          setTimeout(async () => {
-            let grow = new ActionRowBuilder().addComponents(
-              new ButtonBuilder()
-                .setCustomId("gravity")
-                .setEmoji("🪛")
-                .setLabel("Pull gravity lever")
-                .setStyle("Primary")
-            );
-
-            await i.editReply({
-              components: [grow],
-              fetchReply: true,
-            });
-
-            collector.on("collect", async (i) => {
-              if (i.customId.includes("gravity")) {
-                gravity = true;
-                await i.deferUpdate();
-              }
-            });
-
-            setTimeout(async () => {
-              await i.editReply({
-                components: [],
-                fetchReply: true,
-              });
-            }, 2000);
-          }, randomgravity);
-
-          weight = weight * 5;
-          weight2 = weight2 * 5;
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
-
-          let x = setInterval(() => {
-            if (speed < mph) {
-              speed++;
-            } else {
-              clearInterval(x);
-            }
-          }, accms);
-          let x2 = setInterval(() => {
-            if (speed2 < mph2) {
-              speed2++;
-            } else {
-              clearInterval(x2);
-            }
-          }, accms2);
-          let timer = 0;
-          let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            timer++;
-            console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
-
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
-            // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
-
-            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
-              embed.setTitle(
-                `Tier ${bot} Mars Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength < tracklength2 &&
-              timer == 10 &&
-              gravity == false
-            ) {
-              embed.setTitle(
-                `Tier ${bot} Mars Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength > tracklength2 &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              let earnings = [];
-              let filteredhouse = userdata.houses.filter(
-                (house) => house.Name == "Buone Vedute"
-              );
-              let filteredhouse2 = userdata.houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-
-              if (pet.name) {
-                let xessneceearn = lodash.random(pet.xessence);
-
-                earnings.push(
-                  `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
-                );
-                userdata.xessence += xessneceearn;
-                userdata.newpet.love -= 5;
-                userdata.newpet.hunger -= 5;
-                userdata.newpet.thirst -= 3;
-
-                if (userdata.newpet.hunger <= 0) {
-                  interaction.channel.send("Your pet died of hunger :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.thirst <= 0) {
-                  interaction.channel.send("Your pet died of thirst :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.love <= 0) {
-                  interaction.channel.send(
-                    "Your pet left because it wasn't loved enough :("
-                  );
-                  userdata.newpet = {};
-                }
-
-                userdata.markModified("newpet");
-              }
-              if (bonus > 0) {
-                cashwon = cashwon += cashwon * bonus;
-              }
-              if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser;
-              }
-
-              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-              earnings.push(`${emotes.rp} +${rpwon}`);
-              if (crateearned !== undefined) {
-                userdata.items.push(crateearned);
-                earnings.push(
-                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
-                );
-              }
-              let randompart = randomRange(1, 5);
-
-              if (randompart == 3) {
-                earnings.push(
-                  `${partdb.Parts["nuclear core"].Emote} +1 ${partdb.Parts["nuclear core"].Name}`
-                );
-                userdata.parts.push("nuclear core");
-              }
-              let raceranks = 1;
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
-              userdata.spacetokens += 1;
-              let using = userdata.using;
-              if (usinginv.includes("fruit punch")) {
-                let cooldown = cooldowndata.fruitpunch;
-                let timeout = 60000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("fruit punch");
-                  userdata.update();
-                  interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
-                }
-              }
-              userdata.racerank += raceranks;
-
-              userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
-              userdata.worldwins += 1;
-              let taskfilter = userdata.tasks.filter(
-                (task) => task.Task == "Win 10 street races"
-              );
-              if (taskfilter[0]) {
-                taskfilter[0].Races += 1;
-                await User.findOneAndUpdate(
-                  {
-                    id: user.id,
-                  },
-                  {
-                    $set: {
-                      "tasks.$[task]": taskfilter[0],
-                    },
-                  },
-
-                  {
-                    arrayFilters: [
-                      {
-                        "task.Task": "Win 10 street races",
-                      },
-                    ],
-                  }
-                );
-                if (taskfilter[0].Races >= 10) {
-                  userdata.cash += taskfilter[0].Reward;
-                  userdata.tasks.pull(taskfilter[0]);
-                  userdata.tasks.push({ ID: "T1", Time: Date.now() });
-                  interaction.channel.send(`You just completed your task!`);
-                }
-              }
-              embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Mars Race won!`);
-
-              await i.editReply({ embeds: [embed] });
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-
-              console.log(`track length ${tracklength}`);
-              console.log(`track length 2 ${tracklength2}`);
-            }
-            // lost
-            else if (
-              tracklength2 > tracklength &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Mars Race lost!`);
-              embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
-              await i.editReply({ embeds: [embed] });
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-            }
-          }, 1000);
-        } else if (race[0].name == "moonrace") {
-          if (
-            selected.Tires !== "T1SpaceTires" &&
-            selected.Name !== "Mars Rover"
-          )
-            return interaction.channel.send(
-              "You need space tires to race on this planet!"
-            );
-          let tracklength = 0;
-          let tracklength2 = 0;
-          await i.update({
-            content: "Please wait...",
-            components: [],
-            fetchReply: true,
-          });
-          console.log("street");
-          console.log("race");
-          let weather2 = lodash.sample(weather);
-          let car2;
-          let bot = i.customId;
-
-          let cashwon = parseInt(bot) * 150;
-          let rpwon = parseInt(bot) * 2;
-          let cashlost = parseInt(bot) * 20;
-
-          if (bot == 1) {
-            console.log("1");
-            car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
-            );
-          } else if (bot == 2) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
-            );
-          } else if (bot == 3) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
-            );
-          } else if (bot == 4) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
-            );
-          } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
-            );
-          } else if (bot == 6) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
-            );
-          } else if (bot == 7) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
-            );
-          }
-          car2 = lodash.sample(car2);
-
-          console.log(car2);
-
-          let craterare = randomRange(1, 3);
-
-          let crateearned;
-
-          if (craterare == 2) {
-            crateearned = "common crate";
-          } else if (craterare == 3) {
-            crateearned = "rare crate";
-          }
-
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
-
-          console.log(weather2);
-
-          let mph = selected.Speed;
-
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
-          let acceleration = selected.Acceleration;
-          let handling = selected.Handling;
-          if (!selected.WeightStat) {
-            selected.WeightStat =
-              cardb.Cars[selected.Name.toLowerCase()].Weight;
-          }
-
-          let mph2;
-
-          mph2 = car2.Speed;
-
-          let weight2 = car2.Weight;
-          let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling;
-
-          let speed = 0;
-          let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000);
-
-          let sec;
-          let sec2;
-          handling = Math.floor(handling);
-          handling2 = Math.floor(handling2);
-          let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
-
-          let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Moon Race`)
-
-            .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
-            .addFields(
-              {
-                name: `${selected.Emote} ${selected.Name}`,
-                value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-
-                inline: true,
-              },
-              {
-                name: `${car2.Emote} ${car2.Name}`,
-                value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-                inline: true,
-              }
-            )
-            .setColor(colors.blue)
-            .setImage(carimage)
-            .setThumbnail(car2.Image);
-
-          await i.editReply({
-            content: "",
-            embeds: [embed],
-            components: [],
-            fetchReply: true,
-          });
-          let gravity = false;
-          setTimeout(async () => {
-            let grow = new ActionRowBuilder().addComponents(
-              new ButtonBuilder()
-                .setCustomId("gravity")
-                .setEmoji("🪛")
-                .setLabel("Pull gravity lever")
-                .setStyle("Primary")
-            );
-
-            await i.editReply({
-              components: [grow],
-              fetchReply: true,
-            });
-
-            collector.on("collect", async (i) => {
-              if (i.customId.includes("gravity")) {
-                gravity = true;
-                await i.deferUpdate();
-              }
-            });
-
-            setTimeout(async () => {
-              await i.editReply({
-                components: [],
-                fetchReply: true,
-              });
-            }, 1500);
-          }, randomgravity);
-
-          weight = weight / 2;
-          weight2 = weight2 / 2;
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
-
-          let x = setInterval(() => {
-            if (speed < mph) {
-              speed++;
-            } else {
-              clearInterval(x);
-            }
-          }, accms);
-          let x2 = setInterval(() => {
-            if (speed2 < mph2) {
-              speed2++;
-            } else {
-              clearInterval(x2);
-            }
-          }, accms2);
-          let timer = 0;
-          let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            timer++;
-            console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
-
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
-            // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
-
-            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
-              embed.setTitle(
-                `Tier ${bot} Moon Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength < tracklength2 &&
-              timer == 10 &&
-              gravity == false
-            ) {
-              embed.setTitle(
-                `Tier ${bot} Moon Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength > tracklength2 &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              let earnings = [];
-              let filteredhouse = userdata.houses.filter(
-                (house) => house.Name == "Buone Vedute"
-              );
-              let filteredhouse2 = userdata.houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-
-              if (pet.name) {
-                let xessneceearn = lodash.random(pet.xessence);
-
-                earnings.push(
-                  `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
-                );
-                userdata.xessence += xessneceearn;
-                userdata.newpet.love -= 5;
-                userdata.newpet.hunger -= 5;
-                userdata.newpet.thirst -= 3;
-
-                if (userdata.newpet.hunger <= 0) {
-                  interaction.channel.send("Your pet died of hunger :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.thirst <= 0) {
-                  interaction.channel.send("Your pet died of thirst :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.love <= 0) {
-                  interaction.channel.send(
-                    "Your pet left because it wasn't loved enough :("
-                  );
-                  userdata.newpet = {};
-                }
-
-                userdata.markModified("newpet");
-              }
-
-              if (bonus > 0) {
-                cashwon = cashwon += cashwon * bonus;
-              }
-              if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser;
-              }
-              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-              earnings.push(`${emotes.rp} +${rpwon}`);
-              if (crateearned !== undefined) {
-                userdata.items.push(crateearned);
-                earnings.push(
-                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
-                );
-              }
-              let randompart = randomRange(1, 5);
-
-              if (randompart == 3) {
-                earnings.push(
-                  `${partdb.Parts["metal frame"].Emote} +1 ${partdb.Parts["metal frame"].Name}`
-                );
-                userdata.parts.push("metal frame");
-              }
-              let raceranks = 1;
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
-              userdata.spacetokens += 1;
-              let using = userdata.using;
-              if (usinginv.includes("fruit punch")) {
-                let cooldown = cooldowndata.fruitpunch;
-                let timeout = 60000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("fruit punch");
-                  userdata.update();
-                  interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
-                }
-              }
-              userdata.racerank += raceranks;
-
-              userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
-              userdata.worldwins += 1;
-              let taskfilter = userdata.tasks.filter(
-                (task) => task.Task == "Win 10 street races"
-              );
-              if (taskfilter[0]) {
-                taskfilter[0].Races += 1;
-                await User.findOneAndUpdate(
-                  {
-                    id: user.id,
-                  },
-                  {
-                    $set: {
-                      "tasks.$[task]": taskfilter[0],
-                    },
-                  },
-
-                  {
-                    arrayFilters: [
-                      {
-                        "task.Task": "Win 10 street races",
-                      },
-                    ],
-                  }
-                );
-                if (taskfilter[0].Races >= 10) {
-                  userdata.cash += taskfilter[0].Reward;
-                  userdata.tasks.pull(taskfilter[0]);
-                  userdata.tasks.push({ ID: "T1", Time: Date.now() });
-                  interaction.channel.send(`You just completed your task!`);
-                }
-              }
-              embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Moon Race won!`);
-
-              await i.editReply({ embeds: [embed] });
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-
-              console.log(`track length ${tracklength}`);
-              console.log(`track length 2 ${tracklength2}`);
-            }
-            // lost
-            else if (
-              tracklength2 > tracklength &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Moon Race lost!`);
-              embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
-              await i.editReply({ embeds: [embed] });
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-            }
-          }, 1000);
-        } else if (race[0].name == "saturnrace") {
-          if (
-            selected.Tires !== "T1SpaceTires" &&
-            selected.Name !== "Mars Rover"
-          )
-            return interaction.channel.send(
-              "You need space tires to race on this planet!"
-            );
-          let tracklength = 0;
-          let tracklength2 = 0;
-          await i.update({
-            content: "Please wait...",
-            components: [],
-            fetchReply: true,
-          });
-          console.log("street");
-          console.log("race");
-          let weather2 = lodash.sample(weather);
-          let car2;
-          let bot = i.customId;
-
-          let cashwon = parseInt(bot) * 150;
-          let rpwon = parseInt(bot) * 2;
-          let cashlost = parseInt(bot) * 20;
-
-          if (bot == 1) {
-            console.log("1");
-            car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
-            );
-          } else if (bot == 2) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
-            );
-          } else if (bot == 3) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
-            );
-          } else if (bot == 4) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
-            );
-          } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
-            );
-          } else if (bot == 6) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
-            );
-          } else if (bot == 7) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
-            );
-          }
-          car2 = lodash.sample(car2);
-
-          console.log(car2);
-
-          let craterare = randomRange(1, 3);
-
-          let crateearned;
-
-          if (craterare == 2) {
-            crateearned = "common crate";
-          } else if (craterare == 3) {
-            crateearned = "rare crate";
-          }
-
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
-
-          console.log(weather2);
-
-          let mph = selected.Speed;
-
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
-          let acceleration = selected.Acceleration;
-          let handling = selected.Handling;
-          if (!selected.WeightStat) {
-            selected.WeightStat =
-              cardb.Cars[selected.Name.toLowerCase()].Weight;
-          }
-
-          let mph2;
-
-          mph2 = car2.Speed;
-
-          let weight2 = car2.Weight;
-          let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling;
-
-          let speed = 0;
-          let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000);
-
-          let sec;
-          let sec2;
-          handling = Math.floor(handling);
-          handling2 = Math.floor(handling2);
-          let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
-
-          let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Saturn Race`)
-
-            .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
-            .addFields(
-              {
-                name: `${selected.Emote} ${selected.Name}`,
-                value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-
-                inline: true,
-              },
-              {
-                name: `${car2.Emote} ${car2.Name}`,
-                value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-                inline: true,
-              }
-            )
-            .setColor(colors.blue)
-            .setImage(carimage)
-            .setThumbnail(car2.Image);
-
-          await i.editReply({
-            content: "",
-            embeds: [embed],
-            components: [],
-            fetchReply: true,
-          });
-          let gravity = false;
-          setTimeout(async () => {
-            let grow = new ActionRowBuilder().addComponents(
-              new ButtonBuilder()
-                .setCustomId("gravity")
-                .setEmoji("🪛")
-                .setLabel("Pull gravity lever")
-                .setStyle("Primary")
-            );
-
-            await i.editReply({
-              components: [grow],
-              fetchReply: true,
-            });
-
-            collector.on("collect", async (i) => {
-              if (i.customId.includes("gravity")) {
-                gravity = true;
-                await i.deferUpdate();
-              }
-            });
-
-            setTimeout(async () => {
-              await i.editReply({
-                components: [],
-                fetchReply: true,
-              });
-            }, 1500);
-          }, randomgravity);
-
-          weight = weight / 5;
-          weight2 = weight2 / 5;
-          let accms = acceleration * 15;
-          let accms2 = acceleration2 * 15;
-
-          let x = setInterval(() => {
-            if (speed < mph) {
-              speed++;
-            } else {
-              clearInterval(x);
-            }
-          }, accms);
-          let x2 = setInterval(() => {
-            if (speed2 < mph2) {
-              speed2++;
-            } else {
-              clearInterval(x2);
-            }
-          }, accms2);
-          let timer = 0;
-          let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            timer++;
-            console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
-
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
-            // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
-
-            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
-              embed.setTitle(
-                `Tier ${bot} Saturn Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength < tracklength2 &&
-              timer == 10 &&
-              gravity == false
-            ) {
-              embed.setTitle(
-                `Tier ${bot} Saturn Race lost! Your car flew off the planet!`
-              );
-
-              await i.editReply({ embeds: [embed] });
-            } else if (
-              tracklength > tracklength2 &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              let earnings = [];
-              let filteredhouse = userdata.houses.filter(
-                (house) => house.Name == "Buone Vedute"
-              );
-              let filteredhouse2 = userdata.houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-
-              if (pet.name) {
-                let xessneceearn = lodash.random(pet.xessence);
-
-                earnings.push(
-                  `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
-                );
-                userdata.xessence += xessneceearn;
-                userdata.newpet.love -= 5;
-                userdata.newpet.hunger -= 5;
-                userdata.newpet.thirst -= 3;
-
-                if (userdata.newpet.hunger <= 0) {
-                  interaction.channel.send("Your pet died of hunger :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.thirst <= 0) {
-                  interaction.channel.send("Your pet died of thirst :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.love <= 0) {
-                  interaction.channel.send(
-                    "Your pet left because it wasn't loved enough :("
-                  );
-                  userdata.newpet = {};
-                }
-
-                userdata.markModified("newpet");
-              }
-
-              if (bonus > 0) {
-                cashwon = cashwon += cashwon * bonus;
-              }
-              if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser;
-              }
-              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-              earnings.push(`${emotes.rp} +${rpwon}`);
-              if (crateearned !== undefined) {
-                userdata.items.push(crateearned);
-                earnings.push(
-                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
-                );
-              }
-              let randompart = randomRange(1, 5);
-
-              if (randompart == 3) {
-                earnings.push(
-                  `${partdb.Parts["alien oil"].Emote} +1 ${partdb.Parts["alien oil"].Name}`
-                );
-                userdata.parts.push("alien oil");
-              }
-              let raceranks = 1;
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
-              userdata.spacetokens += 1;
-              let using = userdata.using;
-              if (usinginv.includes("fruit punch")) {
-                let cooldown = cooldowndata.fruitpunch;
-                let timeout = 60000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("fruit punch");
-                  userdata.update();
-                  interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
-                }
-              }
-              userdata.racerank += raceranks;
-
-              userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
-              userdata.worldwins += 1;
-              let taskfilter = userdata.tasks.filter(
-                (task) => task.Task == "Win 10 street races"
-              );
-              if (taskfilter[0]) {
-                taskfilter[0].Races += 1;
-                await User.findOneAndUpdate(
-                  {
-                    id: user.id,
-                  },
-                  {
-                    $set: {
-                      "tasks.$[task]": taskfilter[0],
-                    },
-                  },
-
-                  {
-                    arrayFilters: [
-                      {
-                        "task.Task": "Win 10 street races",
-                      },
-                    ],
-                  }
-                );
-                if (taskfilter[0].Races >= 10) {
-                  userdata.cash += taskfilter[0].Reward;
-                  userdata.tasks.pull(taskfilter[0]);
-                  userdata.tasks.push({ ID: "T1", Time: Date.now() });
-                  interaction.channel.send(`You just completed your task!`);
-                }
-              }
-              embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Saturn Race won!`);
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-
-              console.log(`track length ${tracklength}`);
-              console.log(`track length 2 ${tracklength2}`);
-            }
-            // lost
-            else if (
-              tracklength2 > tracklength &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Saturn Race lost!`);
-              embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-            }
-          }, 1000);
-        } else if (race[0].name == "plutorace") {
-          if (
-            selected.Tires !== "T1SpaceTires" &&
-            selected.Name !== "Mars Rover"
-          )
-            return interaction.channel.send(
-              "You need space tires to race on this planet!"
-            );
-          let tracklength = 0;
-          let tracklength2 = 0;
-          await i.update({
-            content: "Please wait...",
-            components: [],
-            fetchReply: true,
-          });
-          console.log("street");
-          console.log("race");
-          let weather2 = lodash.sample(weather);
-          let car2;
-          let bot = i.customId;
-
-          let cashwon = parseInt(bot) * 150;
-          let rpwon = parseInt(bot) * 2;
-          let cashlost = parseInt(bot) * 20;
-
-          if (bot == 1) {
-            console.log("1");
-            car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
-            );
-          } else if (bot == 2) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
-            );
-          } else if (bot == 3) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
-            );
-          } else if (bot == 4) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
-            );
-          } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
-            );
-          } else if (bot == 6) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
-            );
-          } else if (bot == 7) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
-            );
-          }
-          car2 = lodash.sample(car2);
-
-          console.log(car2);
-
-          let craterare = randomRange(1, 3);
-
-          let crateearned;
-
-          if (craterare == 2) {
-            crateearned = "common crate";
-          } else if (craterare == 3) {
-            crateearned = "rare crate";
-          }
-
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
-
-          console.log(weather2);
-
-          let mph = selected.Speed;
-
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
-          let acceleration = selected.Acceleration;
-          let handling = selected.Handling;
-          if (!selected.WeightStat) {
-            selected.WeightStat =
-              cardb.Cars[selected.Name.toLowerCase()].Weight;
-          }
-
-          let mph2;
-
-          mph2 = car2.Speed;
-
-          let weight2 = car2.Weight;
-          let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling;
-
-          let speed = 0;
-          let speed2 = 0;
-          let randomgravity = randomRange(2000, 5000);
-
-          let sec;
-          let sec2;
-          handling = Math.floor(handling);
-          handling2 = Math.floor(handling2);
-          let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
-
-          let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Pluto Race`)
-
-            .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
-            .addFields(
-              {
-                name: `${selected.Emote} ${selected.Name}`,
-                value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
-
-                inline: true,
-              },
-              {
-                name: `${car2.Emote} ${car2.Name}`,
-                value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
-                inline: true,
-              }
-            )
-            .setColor(colors.blue)
-            .setImage(carimage)
-            .setThumbnail(car2.Image);
-
-          await i.editReply({
-            content: "",
-            embeds: [embed],
-            components: [],
-            fetchReply: true,
-          });
-          let gravity = false;
-          setTimeout(async () => {
-            let grow = new ActionRowBuilder().addComponents(
-              new ButtonBuilder()
-                .setCustomId("gravity")
-                .setEmoji("🪛")
-                .setLabel("Pull gravity lever")
-                .setStyle("Primary")
-            );
-
-            await i.editReply({
-              components: [grow],
-              fetchReply: true,
-            });
-
-            collector.on("collect", async (i) => {
-              if (i.customId.includes("gravity")) {
-                gravity = true;
-                await i.deferUpdate();
-              }
-            });
-
-            setTimeout(async () => {
-              await i.editReply({
-                components: [],
-                fetchReply: true,
-              });
-            }, 1500);
-          }, randomgravity);
-
-          weight = weight * 2;
-          weight2 = weight2 * 2;
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
-
-          let x = setInterval(() => {
-            if (speed < mph) {
-              speed++;
-            } else {
-              clearInterval(x);
-            }
-          }, accms);
-          let x2 = setInterval(() => {
-            if (speed2 < mph2) {
-              speed2++;
-            } else {
-              clearInterval(x2);
-            }
-          }, accms2);
-          let timer = 0;
-          let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            timer++;
-            console.log(timer);
-            let newspeed = speed / 6.3;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            let newspeed2 = speed2 / 6.3;
-
-            let formula = (newspeed += handling += weight / 100);
-
-            console.log(formula);
-            // car 2
-
-            let formula2 = (newspeed2 += handling2 += weight2 / 100);
-            tracklength += formula;
-            tracklength2 += formula2;
-
-            if (tracklength > tracklength2 && timer == 10 && gravity == false) {
-              embed.setTitle(
-                `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
-              );
-            } else if (
-              tracklength < tracklength2 &&
-              timer == 10 &&
-              gravity == false
-            ) {
-              embed.setTitle(
-                `Tier ${bot} Pluto Race lost! Your car flew off the planet!`
-              );
-            } else if (
-              tracklength > tracklength2 &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              let earnings = [];
-              let filteredhouse = userdata.houses.filter(
-                (house) => house.Name == "Buone Vedute"
-              );
-              let filteredhouse2 = userdata.houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-
-              if (pet.name) {
-                let xessneceearn = lodash.random(pet.xessence);
-
-                earnings.push(
-                  `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
-                );
-                userdata.xessence += xessneceearn;
-                userdata.newpet.love -= 5;
-                userdata.newpet.hunger -= 5;
-                userdata.newpet.thirst -= 3;
-
-                if (userdata.newpet.hunger <= 0) {
-                  interaction.channel.send("Your pet died of hunger :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.thirst <= 0) {
-                  interaction.channel.send("Your pet died of thirst :(");
-                  userdata.newpet = {};
-                }
-                if (userdata.newpet.love <= 0) {
-                  interaction.channel.send(
-                    "Your pet left because it wasn't loved enough :("
-                  );
-                  userdata.newpet = {};
-                }
-
-                userdata.markModified("newpet");
-              }
-              if (bonus > 0) {
-                cashwon = cashwon += cashwon * bonus;
-              }
-              if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser;
-              }
-              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-              earnings.push(`${emotes.rp} +${rpwon}`);
-
-              if (crateearned !== undefined) {
-                userdata.items.push(crateearned);
-                earnings.push(
-                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
-                );
-              }
-              let randompart = randomRange(1, 5);
-
-              if (randompart == 3) {
-                earnings.push(
-                  `${partdb.Parts["zionite pistons"].Emote} +1 ${partdb.Parts["zionite pistons"].Name}`
-                );
-                userdata.parts.push("zionite pistons");
-              }
-              let raceranks = 1;
-              earnings.push("<:moontokens:1044726056680161371> 1 Space Token");
-              userdata.spacetokens += 1;
-              let using = userdata.using;
-              if (usinginv.includes("fruit punch")) {
-                let cooldown = cooldowndata.fruitpunch;
-                let timeout = 60000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("fruit punch");
-                  userdata.update();
-                  interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
-                }
-              }
-              userdata.racerank += raceranks;
-
-              userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
-              userdata.worldwins += 1;
-              let taskfilter = userdata.tasks.filter(
-                (task) => task.Task == "Win 10 street races"
-              );
-              if (taskfilter[0]) {
-                taskfilter[0].Races += 1;
-                await User.findOneAndUpdate(
-                  {
-                    id: user.id,
-                  },
-                  {
-                    $set: {
-                      "tasks.$[task]": taskfilter[0],
-                    },
-                  },
-
-                  {
-                    arrayFilters: [
-                      {
-                        "task.Task": "Win 10 street races",
-                      },
-                    ],
-                  }
-                );
-                if (taskfilter[0].Races >= 10) {
-                  userdata.cash += taskfilter[0].Reward;
-                  userdata.tasks.pull(taskfilter[0]);
-                  userdata.tasks.push({ ID: "T1", Time: Date.now() });
-                  interaction.channel.send(`You just completed your task!`);
-                }
-              }
-              embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(`Tier ${bot} Pluto Race won!`);
-
-              await i.editReply({ embeds: [embed] });
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-
-              console.log(`track length ${tracklength}`);
-              console.log(`track length 2 ${tracklength2}`);
-            }
-            // lost
-            else if (
-              tracklength2 > tracklength &&
-              timer == 10 &&
-              gravity == true
-            ) {
-              userdata.cash += cashlost;
-              embed.setTitle(`Tier ${bot} Pluto Race lost!`);
-              embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
-
-              if (userdata.tutorial && userdata.tutorial.stage == 1) {
-                userdata.parts.push("t1exhaust");
-                interaction.channel.send(
-                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-                );
-                interaction.channel.send(
-                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-                );
-                userdata.tutorial.stage += 1;
-                userdata.markModified("tutorial");
-              }
-              clearInterval(i2);
-              userdata.save();
-            }
-          }, 1000);
-        } else if (race[0].name == "highwayrace") {
+        }  else if (race[0].name == "highwayrace") {
           let tracklength = 1000;
           let tracklength2 = 1000;
           await i.update({ content: "Please wait...", components: [] });
@@ -3408,10 +1426,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
 
           let mph = selected.Speed;
 
@@ -3657,11 +1671,28 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
               userdata.wheelspins += wheelspins;
               userdata.lockpicks += lockpicks;
-
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 5,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Highway Race won!`);
               await i.editReply({ embeds: [embed] });
@@ -3702,6 +1733,24 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 5,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
               userdata.save();
             }
           }, 1000);
@@ -3761,10 +1810,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+     
 
           console.log(weather2);
 
@@ -4016,12 +2062,30 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(
                 `Tier ${bot} Half Mile Race won! ${weather2.Emote}`
+              );
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 0.5,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
               );
 
               await i.editReply({ embeds: [embed] });
@@ -4063,6 +2127,24 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 0.5,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
               userdata.save();
             }
           }, 1000);
@@ -4133,10 +2215,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+        
 
           console.log(weather2);
 
@@ -4448,8 +2527,8 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(
                 `Tier ${bot} Quarter Mile Race won! ${weather2.Emote}`
@@ -4469,6 +2548,24 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 0.25,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
 
               userdata.save();
 
@@ -4497,11 +2594,499 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 0.25,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
               userdata.save();
               return;
             }
           }, 1000);
-        } else if (race[0].name == "crossrace") {
+        } 
+        else if (race[0].name == "muscledrag") {
+          let tracklength = 400;
+          let tracklength2 = 400;
+          await i.update({ content: "Please wait...", components: [] });
+          let weather2 = lodash.sample(weather);
+          let car2;
+          let bot = i.customId;
+          if(!cardb.Cars[selected.Name.toLowerCase()].Muscle) return i.update("You need to use a muscle car!")
+          let cashwon = parseInt(bot) * 200;
+          let rpwon = parseInt(bot) * 2;
+          let cashlost = parseInt(bot) * 20;
+          let commonkeys;
+          let rarekeys;
+          let exotickeys;
+
+          let notowon = 0
+
+          if (bot == 1) {
+            console.log("1");
+            car2 = carsarray.filter(
+              (car) => car.Class == "D" && car.Speed < 140
+            );
+            notowon = 50
+            commonkeys = 2;
+          } else if (bot == 2) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "C" && car.Speed < 160
+            );
+
+            notowon = 100
+            commonkeys = 5;
+          } else if (bot == 3) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "B" && car.Speed < 180
+            );
+            rarekeys = 2;
+            notowon = 200
+          } else if (bot == 4) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "A" && car.Speed < 200
+            );
+            rarekeys = 5;
+            notowon = 250
+          } else if (bot == 5) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 210
+            );
+            exotickeys = 2;
+            notowon = 300
+          } else if (bot == 6) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 220
+            );
+            exotickeys = 5;
+          } else if (bot == 7) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 250
+            );
+            notowon = 500
+            exotickeys = 7;
+          }
+          car2 = lodash.sample(car2);
+
+          console.log(car2);
+
+          let craterare = randomRange(1, 3);
+
+          let crateearned;
+
+          if (craterare == 2) {
+            crateearned = "common crate";
+          } else if (craterare == 3) {
+            crateearned = "rare crate";
+          }
+
+        
+
+          console.log(weather2);
+
+          let slipchance = weather2.Slip;
+          let speedreduce = weather2.SpeedReduce;
+          let mph;
+          if (speedreduce > 0) {
+            mph = selected.Speed -= speedreduce;
+          } else {
+            mph = selected.Speed;
+          }
+          let weight =
+            selected.WeightStat ||
+            cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let acceleration = selected.Acceleration;
+          let handling = selected.Handling / weather2.Grip;
+
+          if (!selected.WeightStat) {
+            selected.WeightStat =
+              cardb.Cars[selected.Name.toLowerCase()].Weight;
+          }
+
+          let mph2;
+
+          if (speedreduce > 0) {
+            mph2 = car2.Speed -= speedreduce;
+          } else {
+            mph2 = car2.Speed;
+          }
+          let weight2 = car2.Weight;
+          let acceleration2 = car2["0-60"];
+          let handling2 = car2.Handling / weather2.Grip;
+          if (slipchance > 0) {
+            let slip = randomRange(1, slipchance);
+            if (slip >= 2) {
+              mph -= 10;
+            }
+          }
+          let speed = 0;
+          let speed2 = 0;
+
+          let sec;
+          let sec2;
+          handling = Math.floor(handling);
+          handling2 = Math.floor(handling2);
+          let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
+
+          let embed = new EmbedBuilder()
+            .setTitle(`Racing Tier ${bot} Muscle Drag Race ${weather2.Emote}`)
+
+            .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
+            .addFields(
+              {
+                name: `${selected.Emote} ${selected.Name}`,
+                value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
+
+                inline: true,
+              },
+              {
+                name: `${car2.Emote} ${car2.Name}`,
+                value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
+                inline: true,
+              }
+            )
+            .setColor(colors.blue)
+            .setImage(carimage)
+            .setThumbnail(car2.Image);
+
+          await i.editReply({
+            content: "",
+            embeds: [embed],
+            components: [],
+            fetchReply: true,
+          });
+
+          let accms = acceleration * 10;
+          let accms2 = acceleration2 * 10;
+
+          let x = setInterval(() => {
+            if (speed < mph) {
+              speed++;
+            } else {
+              clearInterval(x);
+            }
+          }, accms);
+          let x2 = setInterval(() => {
+            if (speed2 < mph2) {
+              speed2++;
+            } else {
+              clearInterval(x2);
+            }
+          }, accms2);
+          let i2 = setInterval(async () => {
+            if (speed2 > mph2) {
+              speed2 = mph2;
+            }
+            if (speed > mph) {
+              speed = mph;
+            }
+            let newspeed = speed / 3;
+            handling = handling / 100;
+            handling2 = handling2 / 100;
+            let newspeed2 = speed2 / 3;
+
+            let formula = (newspeed += handling += weight / 75);
+
+            console.log(formula);
+            // car 2
+
+            let formula2 = (newspeed2 += handling2 += weight2 / 75);
+            tracklength -= formula;
+            tracklength2 -= formula2;
+
+            console.log(tracklength);
+
+            if (tracklength <= 0) {
+              clearInterval(i2);
+
+              let earnings = [];
+              let filteredhouse = userdata.houses.filter(
+                (house) => house.Name == "Buone Vedute"
+              );
+              let filteredhouse2 = userdata.houses.filter(
+                (house) => house.Name == "Casa Della Pace"
+              );
+              if (userdata.houses && filteredhouse[0]) {
+                cashwon = cashwon += cashwon * 0.05;
+              }
+              if (userdata.houses && filteredhouse2[0]) {
+                rpwon = rpwon * 2;
+              }
+              if (weather2.Reward > 0) {
+                cashwon = cashwon += weather2.Reward;
+              }
+              if (commonkeys && commonkeys > 0) {
+                if (usinginv.includes("milk")) {
+                  let cooldown = cooldowndata.milk;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    console.log("pulled");
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your milk ran out.");
+                  } else {
+                    commonkeys = commonkeys * 2;
+                  }
+                }
+                earnings.push(`${emotes.commonKey} +${commonkeys}`);
+                userdata.ckeys += commonkeys;
+              }
+              if (rarekeys && rarekeys > 0) {
+                if (usinginv.includes("strawberry milk")) {
+                  let cooldown = cooldowndata.smilk;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    console.log("pulled");
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your strawberry milk ran out.");
+                  } else {
+                    rarekeys = rarekeys * 2;
+                  }
+                }
+                earnings.push(`${emotes.rareKey} +${rarekeys}`);
+                userdata.rkeys += rarekeys;
+              }
+              if (exotickeys && exotickeys > 0) {
+                if (usinginv.includes("chocolate milk")) {
+                  let cooldown = cooldowndata.cmilk;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    console.log("pulled");
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your chocolate milk ran out.");
+                  } else {
+                    exotickeys = exotickeys * 2;
+                  }
+                }
+                earnings.push(`${emotes.exoticKey} +${exotickeys}`);
+                userdata.ekeys += exotickeys;
+              }
+
+              if (crateearned !== undefined) {
+                userdata.items.push(crateearned);
+                earnings.push(
+                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
+                );
+              }
+              let raceranks = 1;
+              if (usinginv.includes("radio")) {
+                let cooldown = cooldowndata.radio;
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  interaction.channel.send("Your radio battery ran out.");
+                } else {
+                  raceranks = raceranks * 2;
+                  cashwon = cashwon * 2;
+                  rpwon = rpwon * 2;
+                }
+              }
+
+              if (usinginv.includes("flat tire")) {
+                let cooldown = cooldowndata.flattire;
+                let timeout = 1800000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("flat tire");
+                  userdata.update();
+                  interaction.channel.send("Your flat tire ran out! :(");
+                } else {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
+              }
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
+                let cooldown = cooldowndata.tequilla;
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("tequila shot");
+                  userdata.update();
+                  interaction.channel.send("Your tequila shot ran out! :(");
+                } else {
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
+                  }
+                }
+              }
+
+              if (usinginv.includes("fruit punch")) {
+                let cooldown = cooldowndata.fruitpunch;
+                let timeout = 600000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your fruit punch ran out! :(");
+                } else {
+                  raceranks = 2;
+                }
+              }
+              if (usinginv.includes("energy drink")) {
+                let cooldown = cooldowndata.energydrink;
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  console.log("pulled");
+                  userdata.using.pull("energy drink");
+                  userdata.update();
+                  interaction.channel.send("Your energy drink ran out! :(");
+                } else {
+                  rpwon = rpwon * 2;
+                }
+              }
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
+              }
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
+              }
+              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+              earnings.push(`${emotes.rp} +${rpwon}`);
+              
+              earnings.push(`${emotes.notoriety} +${notowon}`);
+              userdata.racerank += raceranks;
+              userdata.notoriety += notowon
+              userdata.cash += cashwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
+              embed.setDescription(`${earnings.join("\n")}`);
+              embed.setTitle(
+                `Tier ${bot} Muscle Drag Race won! ${weather2.Emote}`
+              );
+              await i.editReply({ embeds: [embed] });
+
+              await i.editReply({ embeds: [embed] });
+
+         
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 0.25,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
+
+              userdata.save();
+
+              console.log(`track length ${tracklength}`);
+              console.log(`track length 2 ${tracklength2}`);
+              return;
+            }
+            // lost
+            else if (tracklength2 <= 0) {
+              clearInterval(i2);
+
+              userdata.cash += cashlost;
+              embed.setTitle(
+                `Tier ${bot} Muscle Drag Race lost! ${weather2.Emote}`
+              );
+              embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
+              await i.editReply({ embeds: [embed] });
+              if (userdata.tutorial && userdata.tutorial.stage == 2) {
+                userdata.parts.push("t1exhaust");
+                interaction.channel.send(
+                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
+                );
+                interaction.channel.send(
+                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
+                );
+                userdata.tutorial.stage += 1;
+                userdata.markModified("tutorial");
+              }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 0.25,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
+              userdata.save();
+              return;
+            }
+          }, 1000);
+        }
+        else if (race[0].name == "crossrace") {
           let itemdb = require("../data/items.json");
           let findables = [];
           for (let ite in itemdb) {
@@ -4580,10 +3165,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+   
 
           console.log(weather2);
 
@@ -4866,12 +3448,30 @@ module.exports = {
               userdata.racerank += raceranks;
 
               userdata.cash += cashwon;
-              userdata.bounty += 10;
-              userdata.rp3 += rpwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(
                 `Tier ${bot} Cross Country Race won! ${weather2.Emote}`
+              );
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 10,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
               );
 
               await i.editReply({ embeds: [embed] });
@@ -4915,6 +3515,24 @@ module.exports = {
                 userdata.markModified("tutorial");
               }
               userdata.bounty += 20;
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": selected.Miles += 10,
+                  },
+                },
+          
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
               userdata.save();
             }
           }, 1000);
@@ -4970,10 +3588,7 @@ module.exports = {
 
           console.log(car2);
 
-          let selected1image = await loadImage(
-            `${cardb.Cars[selected.Name.toLowerCase()].Image}`
-          );
-          let selected2image = await loadImage(`${car2.Image}`);
+     
 
           console.log(weather2);
 
@@ -5081,6 +3696,8 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
+              clearInterval(i2)
+
               let earnings = [];
 
               if (pet.name) {
@@ -5098,6 +3715,7 @@ module.exports = {
                     userdata.using.pull("pet treats");
                     pet.xessence = petdb[pet.pet].Xessence;
                     userdata.update();
+                    cooldowndata.pettreats = 0
                     interaction.channel.send("Your pet treats ran out! :(");
                   }
                 }
@@ -5154,6 +3772,35 @@ module.exports = {
               let policeranks = 50;
 
               userdata.work.xp += policeranks;
+              
+              userdata.update()
+
+            let jobdb = require("../data/jobs.json")
+            let post = userdata.work
+            
+      let positionfilter = jobdb.police.Positions.filter(
+        (pos) => pos.name.toLowerCase() == post.position.toLowerCase()
+      );
+      let prevrank = positionfilter[0].rank;
+      let nextrank = (prevrank += 1);
+      let newpositionfilter = jobdb.police.Positions.filter(
+        (pos) => pos.rank == nextrank
+      );
+
+      if (newpositionfilter[0] && post.xp >= newpositionfilter[0].xp) {
+        interaction.channel.send(
+          `You've received a promotion! Your new salary is ${toCurrency(
+            newpositionfilter[0].salary
+          )}`
+        );
+        userdata.work.position = newpositionfilter[0].name;
+        if (userdata.work.salary < newpositionfilter[0].salary) {
+          userdata.work.salary = newpositionfilter[0].salary;
+        }
+        userdata.work.xp = 0;
+
+        userdata.markModified("work");
+      }
 
               userdata.bounty += cashwon;
 

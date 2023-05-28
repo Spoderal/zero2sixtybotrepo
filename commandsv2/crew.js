@@ -1,6 +1,6 @@
 const db = require("quick.db");
 const Discord = require("discord.js");
-const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const icons = require("../data/crewicons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const crewicons = require("../data/crewicons.json");
@@ -18,34 +18,68 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("crew")
     .setDescription("Do things with crews")
-    .addStringOption((option) =>
-      option
-        .setName("option")
-        .setDescription("Join, create, leave, and more")
-        .setRequired(true)
-        .addChoices(
-          { name: "Join", value: "join" },
-          { name: "Leave", value: "leave" },
-          { name: "View", value: "view" },
-          { name: "Create", value: "create" },
-          { name: "Global Leaderboard", value: "leaderboard" },
-          { name: "Set Icon (crew owner)", value: "icon" },
-          { name: "Delete (DANGEROUS)", value: "delete" },
-          {
-            name: "Approve Icon (BOT SUPPORT)",
-            value: "approveico",
-          }
-        )
+    .addSubcommand((command) => command
+    .setName("join")
+    .setDescription("Join a crew")
+    .addStringOption((option) => option
+    .setName("name")
+    .setDescription("The name of the crew")
+    .setRequired(true)
+
     )
+
+    )
+    .addSubcommand((command) => command
+    .setName("leave")
+    .setDescription("Leave a crew")
+
+    )
+    .addSubcommand((command) => command
+    .setName("view")
+    .setDescription("View a crew")
+    .addStringOption((option) => option
+    .setName("name")
+    .setDescription("The name of the crew")
+    .setRequired(false)
+
+    )
+
+    )
+    .addSubcommand((command) => command
+    .setName("create")
+    .setDescription("Create a crew")
+    .addStringOption((option) => option
+    .setName("name")
+    .setDescription("The name of the crew you want to create")
+    .setRequired(true)
+
+    )
+
+    )
+    .addSubcommand((command) => command
+    .setName("top")
+    .setDescription("View the top crews")
+
+    )
+    .addSubcommand((command) => command
+    .setName("edit")
+    .setDescription("Edit a crew (CREW OWNER)")
+    
     .addStringOption((option) =>
-      option.setName("name").setDescription("The name of the crew or icon")
+    option
+    .setName("option")
+    .setDescription("The option to edit")
+    .addChoices(
+      {name: "Icon", value:"icon"}
+    )
+    )
     ),
 
   async execute(interaction) {
     let globalModel = await Global.findOne();
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let option = interaction.options.getString("option");
+    let option = interaction.options.getSubcommand();
     const crews = globalModel?.crews;
 
     if (!crews?.length && option !== "create") {
@@ -55,7 +89,7 @@ module.exports = {
     }
 
     if (option == "view") {
-      let crewname = interaction.options.getString("name");
+      let crewname = interaction.options.getString("name")
       let crew;
       if (!crewname) {
         crew = userdata.crew;
@@ -65,7 +99,7 @@ module.exports = {
           );
         crewname = crew.name;
       }
-      let crew2 = crews.filter((crew) => crew.name == crewname);
+      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.toLowerCase());
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
       crew2 = crew2[0];
       let rpmembers = crew2.members;
@@ -80,7 +114,7 @@ module.exports = {
         let isOwner = false;
         if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
-        let rp = newuserdata.rp3 || 0;
+        let rp = newuserdata.rp4 || 0;
         rparray.push({ rp, user, isOwner });
         newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
@@ -96,8 +130,8 @@ module.exports = {
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
       let owner = newrparray.find((u) => u?.isOwner);
-      if (!crew2.Rank2) {
-        crew2.Rank2 = 1;
+      if (!crew2.Rank3) {
+        crew2.Rank3 = 1;
 
         globalModel.update();
         globalModel.markModified("crews");
@@ -111,7 +145,7 @@ module.exports = {
             name: "Information",
             value: `
               ${mlength} members\n
-              Rank ${crew2.Rank2}\n
+              Rank ${crew2.Rank3}\n
               RP: ${total}\n
               ${
                 owner
@@ -138,7 +172,7 @@ module.exports = {
           new ButtonBuilder()
             .setCustomId("season")
             .setEmoji("💵")
-            .setLabel("Season 3")
+            .setLabel("Season 1")
             .setStyle("Secondary")
         );
       }
@@ -153,7 +187,7 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let redeemed = userdata.crewseason2 || 0;
+          let redeemed = userdata.crewseason3 || 0;
           let crewseason = require("../data/seasons.json").Seasons.Crew1;
 
           collector.on("collect", async (i) => {
@@ -161,18 +195,19 @@ module.exports = {
               crewseason = require("../data/seasons.json").Seasons.Crew1
                 .Rewards;
               let reward = [];
-              redeemed = userdata.crewseason2 || 0;
+              redeemed = userdata.crewseason3 || 0;
               for (var w in crewseason) {
                 let item = crewseason[w];
                 let required = item.Number;
                 let emote = "❌";
-                if (required <= crew2.Rank2) {
+                if (required <= crew2.Rank3) {
                   emote = "✅";
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
+              console.log(reward)
               let embed2 = new Discord.EmbedBuilder()
-                .setTitle(`Season 2 for ${crew2.name}`)
+                .setTitle(`Season 1 for ${crew2.name}`)
                 .addFields([{ name: "Rewards", value: `${reward.join("\n")}` }])
                 .setThumbnail(icon)
                 .setColor(colors.blue);
@@ -195,7 +230,7 @@ module.exports = {
                   name: "Information",
                   value: `
                       ${crew2.members.length} members\n
-                      Rank ${crew2.Rank2}\n
+                      Rank ${crew2.Rank3}\n
                       RP: ${total}\n
                       Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
                     `,
@@ -207,7 +242,7 @@ module.exports = {
               await i.update({ embeds: [embed], components: [row] });
             } else if (i.customId.includes("claim")) {
               let item = crewseason[redeemed];
-              if (item.Number > crew2.Rank2) {
+              if (item.Number > crew2.Rank3) {
                 return;
               }
               console.log(item);
@@ -308,7 +343,7 @@ module.exports = {
                 new ButtonBuilder()
                   .setCustomId("season")
                   .setEmoji("💵")
-                  .setLabel("Season 2")
+                  .setLabel("Season 1")
                   .setStyle("Secondary"),
                 new ButtonBuilder()
                   .setCustomId("stats")
@@ -320,7 +355,7 @@ module.exports = {
                   .setLabel(`Claim Reward ${(redeemed += 1)}`)
                   .setStyle(`Success`)
               );
-              if (item.Number > crew2.Rank2) {
+              if (item.Number > crew2.Rank3) {
                 row.components[0].setStyle(`Danger`);
               }
 
@@ -401,7 +436,7 @@ module.exports = {
 
       userdata.crew = crew2[0];
 
-      userdata.rp3 = 0;
+      userdata.rp4 = 0;
       userdata.joinedcrew = Date.now();
       userdata.save();
 
@@ -426,7 +461,7 @@ module.exports = {
         members: [interaction.user.id],
         owner: interaction.user,
         icon: icons.Icons.default,
-        Rank2: 1,
+        Rank3: 1,
         RP: 0,
       };
 
@@ -526,61 +561,153 @@ module.exports = {
           return;
         }
       });
-    } else if (option == "icon") {
+    } else if (option == "edit") {
       let crewname = userdata.crew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
-      let crew2 = crews.filter((crew) => crew.name == crewname);
+      let crew2 = crews.filter((crew) => crew.name == crewname.name);
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
-      if (crew2.ownerid !== interaction.user.id)
-        return await interaction.reply("You're not the crew owner!");
+      let toedit = interaction.options.getString("option")
+      console.log(crew2[0])
+      if(toedit == "icon"){
+        let icons = crewicons.Icons
+        let iconsdisplay = []
+        for(let ico in icons){
+          let icon = icons[ico]
 
-      await interaction.reply(
-        "What crew icon would you like to submit? **Send an image below**"
-      );
-
-      const filter = (m) => {
-        return m.author.id === interaction.user.id;
-      };
-
-      let collector = interaction.channel.createMessageCollector({
-        filter,
-        max: 1,
-        time: 1000 * 30,
-      });
-
-      collector.on("collect", async (m) => {
-        let ImageLink;
-        if (m.attachments.size > 0) {
-          m.attachments.forEach((attachment) => {
-            ImageLink = attachment.url;
-          });
-          let embed = new Discord.EmbedBuilder()
-            .setImage(ImageLink)
-            .setDescription("Crew icon submitted for review!")
-            .addFields([{ name: `Crew Name`, value: `${crewname}` }])
-            .setColor(colors.blue);
-          m.reply({ embeds: [embed] });
-          let submitchannel =
-            interaction.client.channels.cache.get("931078225021521920");
-
-          submitchannel.send({ embeds: [embed] });
-          db.push(`crewicons_${interaction.user.id}`, {
-            ID: crewname,
-            Approved: false,
-          });
-          db.set(`crewicons_${crewname}`, ImageLink);
-
-          db.push(`crewicons_${crewname}_approve`, {
-            id: db.fetch(`${crewname}`),
-            image: db.fetch(`crewicons_${crewname}`),
-            uid: interaction.user.id,
-          });
-        } else {
-          return m.reply("Specify an image!");
+          iconsdisplay.push(icon)
         }
+
+        let row = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+          .setCustomId("set")
+          .setLabel("Set as icon")
+          .setStyle("Success")
+        )
+
+        let row9 = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setCustomId("previous")
+            .setEmoji("◀️")
+            .setStyle("Secondary"),
+          new ButtonBuilder()
+            .setCustomId("next")
+            .setEmoji("▶️")
+            .setStyle("Secondary"),
+          new ButtonBuilder()
+            .setCustomId("first")
+            .setEmoji("⏮️")
+            .setStyle("Secondary"),
+          new ButtonBuilder()
+            .setCustomId("last")
+            .setEmoji("⏭️")
+            .setStyle("Secondary")
+        );
+        
+        let iconum = 0
+        let embed = new EmbedBuilder()
+        .setTitle("Choose an icon")
+        .setColor(colors.blue)
+        .setDescription(`Icon ${iconum}`)
+        .setImage(`${iconsdisplay[iconum]}`)
+
+       let msg =  await interaction.reply({embeds: [embed], fetchReply: true, components: [row9, row]})
+
+
+        
+      let filter = (btnInt) => {
+        return interaction.user.id == btnInt.user.id;
+      };
+      const collector = msg.createMessageComponentCollector({
+        filter: filter,
       });
+      
+      collector.on("collect", async (i) => {
+        if(i.customId == "next"){
+          iconum ++
+          
+     
+          embed = new EmbedBuilder()
+        .setTitle("Choose an icon")
+        .setColor(colors.blue)
+        .setDescription(`Icon ${iconum}`)
+        .setImage(`${iconsdisplay[iconum]}`)
+
+        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
+        }
+        else if(i.customId == "previous"){
+          iconum --
+          
+        
+          embed = new EmbedBuilder()
+        .setTitle("Choose an icon")
+        .setColor(colors.blue)
+        .setDescription(`Icon ${iconum}`)
+        .setImage(`${iconsdisplay[iconum]}`)
+
+        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
+        }
+
+        else if(i.customId == "last"){
+          iconum = iconsdisplay.length
+          
+        
+          embed = new EmbedBuilder()
+        .setTitle("Choose an icon")
+        .setColor(colors.blue)
+        .setDescription(`Icon ${iconum}`)
+        .setImage(`${iconsdisplay[iconum]}`)
+
+        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
+        }
+        else if(i.customId == "first"){
+          iconum = 0
+          
+        
+          embed = new EmbedBuilder()
+        .setTitle("Choose an icon")
+        .setColor(colors.blue)
+        .setDescription(`Icon ${iconum}`)
+        .setImage(`${iconsdisplay[iconum]}`)
+
+        await i.update({embeds: [embed], fetchReply: true, components: [row9, row]})
+        }
+
+        else if(i.customId == "set"){
+          let iconurl = iconsdisplay[iconum]
+
+          crew2[0].icon = iconurl
+
+          await Global.findOneAndUpdate(
+            {},
+    
+            {
+              $set: {
+                "crews.$[crew].icon": iconurl,
+              },
+            },
+    
+            {
+              arrayFilters: [
+                {
+                  "crew.name": crew2[0].name,
+                },
+              ],
+            }
+          );
+
+          globalModel.save()
+          await i.update(`✅`)
+        }
+
+
+      })
+
+      }
+
+
     } else if (option == "leaderboard") {
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
 
@@ -595,11 +722,11 @@ module.exports = {
       }
 
       members = members.sort(function (b, a) {
-        return a.Rank2 - b.Rank2;
+        return a.Rank3 - b.Rank3;
       });
 
       members = members.filter(function BigEnough(value) {
-        return value.Rank2 > 0;
+        return value.Rank3 > 0;
       });
 
       members = members.slice(0, 10);
@@ -609,7 +736,7 @@ module.exports = {
       for (let i = 0; i < members.length; i++) {
         let user = members[i].name;
         if (!user) return;
-        let bal = members[i].Rank2;
+        let bal = members[i].Rank3;
         desc += `${i + 1}. ${user} - Rank ${numberWithCommas(bal)}\n`;
       }
       let embed = new Discord.EmbedBuilder()

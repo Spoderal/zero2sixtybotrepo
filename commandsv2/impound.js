@@ -48,13 +48,17 @@ module.exports = {
 
     let impoundc = impoundcost / 10;
 
+    if(userdata.items.includes("beach ball")){
+      impoundc = impoundc -= (impoundc / 10)
+    }
+
     if (userdata.cash < impoundc)
       return interaction.reply(
         `You need ${impoundc} to remove the impound from your car!`
       );
 
     await interaction.reply(
-      `Your car's impound has been removed, next time be more careful`
+      `Your car's impound has been removed for ${impoundc}, next time be more careful`
     );
 
     await User.findOneAndUpdate(

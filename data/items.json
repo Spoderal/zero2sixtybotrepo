@@ -479,6 +479,79 @@
     ]
   },
 
+  "ice cube": {
+    "Price": 25000,
+    "Action": "Use this to reduce event cooldowns by half once! Be careful, you also have a 25% chance to slip on the ice and make your cooldown increase by x2",
+    "Name": "Ice Cube",
+    "Type": "Usable",
+    "Emote": "<:item_icecube:1111580004942352414>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/PQs8pGD/item-icecube.png",
+    "Used": [
+      "You're not listening to ice cube, but your event cooldowns are reduced so thats good",
+      "You suck on some ice and now your event cooldowns are reduced"
+    ]
+  },
+
+  "permission slip": {
+    "Price": 0,
+    "Action": "Who'd you get this from? Your mom? Using this item will make your car unimpoundable for 24 hours",
+    "Name": "Permission Slip",
+    "Type": "Usable",
+    "Emote": "<:item_permissionslip:1111580007861596202>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/n7qs0k6/item-permission-slip.png",
+    "Used": [
+      "You're not listening to ice cube, but your event cooldowns are reduced so thats good",
+      "You suck on some ice and now your event cooldowns are reduced"
+    ]
+  },
+
+  "old kite": {
+    "Price": 0,
+    "Action": "This item is completely useless, unless you want to collect it and show it off",
+    "Name": "Old Kite",
+    "Type": "Non-Usable",
+    "Emote": "<:item_oldkite:1111580006653628466>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/0MdP4Gz/item-oldkite.png"
+  },
+  "beach ball": {
+    "Price": 0,
+    "Action": "While this is in your inventory, you'll receive a 10% discount when unimpounding your car",
+    "Name": "Beach Ball",
+    "Type": "Non-Usable",
+    "Emote": "<a:item_beachball:1111097346072260758>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/H4G1dqT/item-beachball.gif"
+  },
+  
+  "cocktail": {
+    "Price": 75000,
+    "Action": "While this is in your inventory, you'll receive a 25% discount when buying used cars, but there's also a 15% chance you'll need to pay 10% extra",
+    "Name": "Cocktail",
+    "Type": "Non-Usable",
+    "Emote": "<:item_cocktail:1111580012534042634>",
+    "Shop": true,
+    "Findable": true,
+    "Image": "https://i.ibb.co/Xstp72T/item-cocktail.png"
+  },
+
+    "radar": {
+    "Price": 0,
+    "Action": "Use radar to detect police officers, now you cant be chased for 12 hours",
+    "Name": "Radar",
+    "Type": "Usable",
+    "Emote": "<:item_radar:1111580009853878272>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/h18BFcm/item-radar.png"
+  },
+
   "energy drink": {
     "Price": 25000,
     "Action": "2x RP for 10 minutes",

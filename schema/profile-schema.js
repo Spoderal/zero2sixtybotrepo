@@ -515,6 +515,31 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  notoriety: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  season1claimed:{
+    type: Number,
+    required: false,
+    default: 1,
+  },
+  rp4:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  crewseason3:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  eventCooldown:{
+    type: Number,
+    required: false,
+    default: 0,
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

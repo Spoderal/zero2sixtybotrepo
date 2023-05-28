@@ -134,7 +134,27 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push(`energy drink`);
       cooldowndata.energydrink = Date.now();
-    } else if (itemtouse.toLowerCase() == "blueberry") {
+    } 
+
+    else if (itemtouse.toLowerCase() == "ice cube") {
+      if(userdata.using.includes("ice cube")) return interaction.reply("You're already using an ice cube!")
+      let chance = randomRange(1, 100)
+      if(chance <= 25){
+        interaction.channel.send("You slipped on your ice cube! Your cooldown is now 2x the original cooldown")
+      }
+      userdata.using.push("ice cube")
+      let cooldowns = userdata.eventCooldown
+      userdata.eventCooldown = cooldowns / 2
+    } 
+    else if (itemtouse.toLowerCase() == "permission slip") {
+      if(userdata.using.includes("permission slip")) return interaction.reply("You're already using a permission slip!")
+      userdata.using.push(`permission slip`);
+      cooldowndata.permissionslip = Date.now()
+    } 
+    else if (itemtouse.toLowerCase() == "radar") {
+      userdata.chased = Date.now()
+    } 
+    else if (itemtouse.toLowerCase() == "blueberry") {
       userdata.racerank += 1;
     } else if (itemtouse.toLowerCase() == "grape juice") {
       userdata.using.push(`grape juice`);

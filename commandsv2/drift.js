@@ -267,13 +267,12 @@ module.exports = {
           if (using.includes("fruit punch")) {
             dranks = dranks * 2;
           }
-          earnings.push(`${emotes.notoriety} +${notorietyreward}`);
+          
           earnings.push(`${emotes.cash} +${cashreward}`);
           earnings.push(`${emotes.dirftKey} +${keysreward}`);
           earnings.push(`+${dranks} Drift Rank`);
 
           userdata.driftrank += dranks;
-          userdata.noto6 += notorietyreward;
           userdata.cash += cashreward;
           userdata.dkeys2 += keysreward;
           if (crater == true) {

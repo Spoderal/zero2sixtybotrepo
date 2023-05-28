@@ -4,7 +4,7 @@ const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 const lodash = require("lodash");
 const cardb = require("../data/cardb.json");
 const Cooldowns = require("../schema/cooldowns");
@@ -222,9 +222,20 @@ module.exports = {
         }
 
         let cash = userdata.cash;
+        let price = tobuy.Price
 
-        if (cash < tobuy.Price)
-          return i.update("You don't have enough cash for this car!");
+        if(userdata.inventory.includes("cocktail")){
+          let chance = randomRange(1, 100)
+
+          if(chance <= 15){
+            price = price += (price * 0.10)
+          }
+          else {
+            price = price -= (price * 0.25)
+          }
+        }
+
+        if (cash < price) return i.update(`You don't have enough cash for this car! You need ${price}`);
 
         let carindb = cardb.Cars[tobuy.Name.toLowerCase()];
         let carobj = {
@@ -245,7 +256,7 @@ module.exports = {
         userdata.save();
         cooldowns.usedcar = Date.now();
         cooldowns.save();
-
+        userdata.cash -= price
         await i.update(`Bought!`);
 
         collector2.stop();

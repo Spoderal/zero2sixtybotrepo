@@ -431,7 +431,8 @@
       "Handling": 500,
       "Class": "D",
       "Squad": true,
-      "Weight": 2000
+      "Weight": 2000,
+      "Muscle":true
     },
     "heathers 2007 infiniti g35 coupe": {
       "alias": "heathers 2007 g35",
@@ -516,7 +517,8 @@
       "Handling": 500,
       "Class": "C",
       "Squad": true,
-      "Weight": 2000
+      "Weight": 2000,
+      "Muscle":true
     },
     "toms 1994 porsche 911": {
       "alias": "toms 1994 911",
@@ -551,7 +553,8 @@
       "Handling": 500,
       "Class": "B",
       "Squad": true,
-      "Weight": 2000
+      "Weight": 2000,
+      "Muscle":true
     },
     "marks 2012 dodge challenger srt8": {
       "alias": "marks 2012 challenger srt8",
@@ -568,7 +571,8 @@
       "Handling": 500,
       "Class": "B",
       "Squad": true,
-      "Weight": 2000
+      "Weight": 2000,
+      "Muscle":true
     },
     "joys 2017 dodge viper acr": {
       "alias": "joys 2017 viper acr",
@@ -585,7 +589,8 @@
       "Handling": 500,
       "Class": "B",
       "Squad": true,
-      "Weight": 2000
+      "Weight": 2000,
+      "Muscle":true
     },
 
     "ians 2005 ford gt": {
@@ -957,7 +962,8 @@
       "Handling": 500,
       "Starter": true,
       "Class": "D",
-      "Weight": 2900
+      "Weight": 2900,
+      "Muscle":true
     },
     "2002 pontiac firebird": {
       "alias": "2002 firebird",
@@ -975,7 +981,8 @@
       "Handling": 500,
       "Starter": true,
       "Class": "D",
-      "Weight": 3000
+      "Weight": 3000,
+      "Muscle":true
     },
     "1999 mitsubishi eclipse": {
       "alias": "1999 eclipse",
@@ -1804,7 +1811,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 3800
+      "Weight": 3800,
+      "Muscle":true
     },
     "2012 dodge challenger srt8": {
       "alias": "2012 challenger srt8",
@@ -1820,7 +1828,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 5000
+      "Weight": 5000,
+      "Muscle":true
     },
     "2017 dodge viper acr": {
       "alias": "2017 viper acr",
@@ -1836,7 +1845,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 3300
+      "Weight": 3300,
+      "Muscle":true
     },
     "2010 dodge viper srt10": {
       "alias": "2010 viper srt10",
@@ -1852,7 +1862,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
-      "Weight": 3400
+      "Weight": 3400,
+      "Muscle":true
     },
     "1989 nissan skyline r32": {
       "alias": "1989 skyline r32",
@@ -1951,7 +1962,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "C",
-      "Weight": 3400
+      "Weight": 3400,
+      "Muscle":true
     },
     "2024 ford mustang": {
       "alias": "2024 mustang",
@@ -1967,7 +1979,8 @@
       "Drift": 0,
       "Handling": 510,
       "Class": "B",
-      "Weight": 3700
+      "Weight": 3700,
+      "Muscle":true
     },
     "1987 ford mustang gt": {
       "alias": "1987 mustang gt",
@@ -1984,7 +1997,8 @@
       "Handling": 550,
       "Obtained": "Event",
       "Class": "C",
-      "Weight": 2700
+      "Weight": 2700,
+      "Muscle":true
     },
     "2014 ford mustang gt500": {
       "alias": "2014 mustang gt500",
@@ -2001,7 +2015,93 @@
       "Handling": 500,
       "Obtained": "Rare Imports",
       "Class": "C",
-      "Weight": 3800
+      "Weight": 3800,
+      "Muscle":true
+    },
+    "2020 ford mustang gt500": {
+      "alias": "2020 mustang gt500",
+      "Name": "2020 Ford Mustang GT500",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 185,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "6.2 L V8",
+      "Image": "https://i.ibb.co/4YW5RJP/maxresdefault-95.jpg",
+      "0-60": 9.5,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Season",
+      "Class": "B",
+      "Weight": 3600,
+      "Muscle":true
+    },
+    "1973 ford mustang mach 1": {
+      "alias": "1973 mustang m1",
+      "Name": "1973 Ford Mustang Mach 1",
+      "Emote": "<:ford:931012624152399902>",
+      "kmh": 265,
+      "Speed": 145,
+      "Price": 0,
+      "sellprice": 18750,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/NF3Q4mv/maxresdefault.jpg",
+      "0-60": 12.3,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Season",
+      "Weight": 3600,
+      "Muscle":true
+    },
+    "1969 ford mustang boss": {
+      "alias": "1969 mustang boss",
+      "Name": "1969 Ford Mustang Boss",
+      "Emote": "<:ford:931012624152399902>",
+      "kmh": 265,
+      "Speed": 155,
+      "Price": 0,
+      "sellprice": 18750,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/nkDDpqq/1187839-1.jpg",
+      "0-60": 11.5,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Season",
+      "Weight": 3600,
+      "Muscle":true
+    },
+    "2020 chevy camaro ss": {
+      "alias": "2020 camaro ss",
+      "Name": "2020 Chevy Camaro SS",
+      "Emote": "<:chevy:931012624039182406>",
+      "Speed": 190,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "6.2 L V8",
+      "Image": "https://i.ibb.co/2sr0Q2S/2020-chevrolet-camaro-ss.jpg",
+      "0-60": 10,
+      "Drift": 0,
+      "Handling": 750,
+      "Obtained": "Season",
+      "Class": "B",
+      "Weight": 3000,
+      "Muscle":true
+    },
+    "2021 dodge durango hellcat": {
+      "alias": "2021 durango hellcat",
+      "Name": "2021 Dodge Durango Hellcat",
+      "Emote": "<:dodge:931011880040951828>",
+      "Speed": 178,
+      "Price": 0,
+      "sellprice": 35000,
+      "Engine": "6.2L V8",
+      "Image": "https://i.ibb.co/Z89wCg8/2021-dodge-durango-srt-hellcat.jpg",
+      "0-60": 9.5,
+      "Drift": 0,
+      "Handling": 550,
+      "Obtained": "Season",
+      "Class": "B",
+      "Weight": 5200,
+      "Muscle":true
     },
     "2022 shelby super snake": {
       "alias": "2022 super snake",
@@ -2018,7 +2118,8 @@
       "Handling": 500,
       "Obtained": "Exotic Imports",
       "Class": "B",
-      "Weight": 3800
+      "Weight": 3800,
+      "Muscle":true
     },
     "2020 ford f150 raptor": {
       "alias": "2020 f150 raptor",
@@ -2332,7 +2433,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "C",
-      "Weight": 3700
+      "Weight": 3700,
+      "Muscle":true
     },
     "2020 aston martin vantage": {
       "alias": "2020 vantage",
@@ -2509,7 +2611,8 @@
       "0-60": 10,
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "1992 dodge viper": {
       "alias": "1992 viper",
@@ -2526,7 +2629,8 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Legendary Barn Find",
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "barn 2002 koenigsegg cc8s": {
       "alias": "barn 2002 koenigsegg cc8s",
@@ -2749,7 +2853,8 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Uncommon Barn Find",
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "barn 1973 pontiac trans am": {
       "alias": "barn 1973 trans am",
@@ -2766,7 +2871,8 @@
       "0-60": 12.6,
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "barn 1966 lamborghini miura": {
       "alias": "barn 1966 miura",
@@ -2920,7 +3026,8 @@
       "0-60": 12.8,
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "1969 ford mustang": {
       "alias": "1969 mustang",
@@ -2954,7 +3061,8 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Rare Barn Find",
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "1969 toyota 2000gt": {
       "alias": "1969 2000gt",
@@ -3074,7 +3182,8 @@
       "0-60": 12.5,
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "barn 1970 dodge charger": {
       "alias": "barn 1970 charger",
@@ -3091,7 +3200,8 @@
       "0-60": 12.4,
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "barn 1965 porsche 911": {
       "alias": "barn 1965 911",
@@ -3261,7 +3371,8 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Rare Barn Find",
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "1979 aston martin v8 vantage": {
       "alias": "1979 v8 vantage",
@@ -3330,7 +3441,8 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Common Barn Find",
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "barn 1973 plymouth barracuda": {
       "alias": "barn 1973 barracuda",
@@ -3347,7 +3459,8 @@
       "restored": "1973 plymouth barracuda",
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "1970 dodge charger": {
       "alias": "1970 charger",
@@ -3363,7 +3476,8 @@
       "0-60": 12.4,
       "Drift": 0,
       "Handling": 500,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "rexs 1969 ford mustang": {
       "alias": "1969 mustang",
@@ -3378,7 +3492,8 @@
       "0-60": 7,
       "Drift": 0,
       "Handling": 450,
-      "Weight": 3600
+      "Weight": 3600,
+      "Muscle":true
     },
     "ryans 1990 nissan 240sx": {
       "alias": "ryans 1990 240sx",
@@ -4227,7 +4342,8 @@
       "0-60": 10,
       "Drift": 0,
       "Handling": 610,
-      "Weight": 3200
+      "Weight": 3200,
+      "Muscle":true
     },
     "seans 1989 nissan skyline r32": {
       "alias": "seans 1989 skyline r32",
@@ -4381,6 +4497,7 @@
       "Obtained": "Crew Season",
       "Weight": 3400
     },
+    
     "2021 lamborghini sc20": {
       "alias": "2021 sc20",
       "Name": "2021 Lamborghini SC20",
@@ -4558,7 +4675,8 @@
       "0-60": 7,
       "Drift": 0,
       "Handling": 600,
-      "Weight": 3100
+      "Weight": 3100,
+      "Muscle":true
     },
     "alexs 1993 porsche 959": {
       "alias": "alexs 1993 959",
@@ -5017,7 +5135,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 4300
+      "Weight": 4300,
+      "Muscle":true
     },
     "2010 dodge charger": {
       "alias": "2010 charger",
@@ -5032,7 +5151,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "C",
-      "Weight": 3700
+      "Weight": 3700,
+      "Muscle":true
     },
     "2020 dodge charger hellcat": {
       "alias": "2020 charger hellcat",
@@ -5048,7 +5168,25 @@
       "Handling": 500,
       "Obtained": "Wheelspin",
       "Class": "B",
-      "Weight": 4500
+      "Weight": 4500,
+      "Muscle":true
+    },
+    "2015 dodge charger hellcat": {
+      "alias": "2015 charger hellcat",
+      "Name": "2015 Dodge Charger Hellcat",
+      "Emote": "<:dodge:931011880040951828>",
+      "Speed": 175,
+      "Price": 0,
+      "sellprice": 35000,
+      "Engine": "6.4 L V8",
+      "Image": "https://i.ibb.co/2FRQJ3f/2015-Dodge-Charger-SRT-Hellcat-524.jpg",
+      "0-60": 9.9,
+      "Drift": 0,
+      "Handling": 500,
+      "Obtained": "Season",
+      "Class": "B",
+      "Weight": 4400,
+      "Muscle":true
     },
     "2017 jeep grand cherokee trackhawk": {
       "alias": "2017 trackhawk",
@@ -5306,7 +5444,8 @@
       "Drift": 0,
       "Handling": 500,
       "Rank": "Sergeant",
-      "Weight": 3100
+      "Weight": 3100,
+      "Muscle":true
     },
     "police 2012 dodge charger srt8": {
       "alias": "police 2012 charger srt8",
@@ -5323,7 +5462,8 @@
       "Police": "1",
       "Class": "D",
       "Rank": "Cadet",
-      "Weight": 3100
+      "Weight": 3100,
+      "Muscle":true
     },
     "police 2020 ford explorer": {
       "alias": "police 2020 explorer",
@@ -5391,7 +5531,8 @@
       "Police": 5,
       "Rank": "Sergeant",
       "Class": "B",
-      "Weight": 3100
+      "Weight": 3100,
+      "Muscle":true
     },
     "police 2018 bmw m2": {
       "alias": "police 2018 m2",
@@ -5401,7 +5542,7 @@
       "Price": 80000,
       "sellprice": 33000,
       "Engine": "3.3 L V6",
-      "Image": "https://i.ibb.co/D7tH6Jd/maxresdefault-94.jpg",
+      "Image": "https://i.ibb.co/x6F3Pdd/40607580-bmw-m2-m-town-police-car.jpg",
       "0-60": 8.5,
       "Drift": 0,
       "Handling": 750,
@@ -5809,7 +5950,8 @@
       "Drift": 1,
       "Handling": 500,
       "Class": "D",
-      "Weight": 2400
+      "Weight": 2400,
+      "Muscle":true
     },
     "2021 toyota supra": {
       "alias": "2021 supra",
@@ -6616,8 +6758,27 @@
       "Handling": 500,
       "Obtained": "Season",
       "Class": "A",
-      "Weight": 4200
+      "Weight": 4200,
+      "Muscle":true
     },
+    "2019 dodge challenger hellcat redeye": {
+      "alias": "2019 challenger hellcat r",
+      "Name": "2019 Dodge Challenger Hellcat Redeye",
+      "Emote": "<:dodge:931011880040951828>",
+      "Speed": 205,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "6.2 L V8",
+      "Image": "https://i.ibb.co/GTfnpTq/2019-dodge-challenger-srt-hellcat-redeye-widebody-placement-1530137519.jpg",
+      "0-60": 4,
+      "Drift": 0,
+      "Handling": 400,
+      "Obtained": "Season",
+      "Class": "A",
+      "Weight": 4200,
+      "Muscle":true
+    },
+   
     "2007 infiniti g35 coupe": {
       "alias": "2007 g35",
       "Name": "2007 Infiniti G35 Coupe",
@@ -6709,7 +6870,7 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "2.0 L 4B11T",
-      "Image": "https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/800x450/format/jpg/quality/85/http://www.blogcdn.com/www.autoblog.com/media/2013/04/03-2013-mitsubishi-lancer-evo-x-review-opt.jpg",
+      "Image": "https://i.ibb.co/THGfSwx/maxresdefault-96.jpg",
       "0-60": 9,
       "Drift": 6,
       "Handling": 500,
@@ -6794,7 +6955,8 @@
       "Handling": 500,
       "Obtained": "Exotic Imports (LIMITED)",
       "Class": "B",
-      "Weight": 3500
+      "Weight": 3500,
+      "Muscle":true
     },
     "1978 hoonigan ford escort mk2 rs1800": {
       "alias": "1978 hoonigan mk2",
@@ -6957,11 +7119,11 @@
       "Name": "2022 Rimac Nevera",
       "Emote": "<:rimac:962776154761216050>",
       "Speed": 235,
-      "Price": 2500000,
+      "Price": 12500000,
       "sellprice": 0,
       "Engine": "N/A",
       "Image": "https://www.motortrend.com/uploads/sites/5/2021/08/Rimac-Nevera-4.jpg",
-      "0-60": 2.4,
+      "0-60": 2.8,
       "Drift": 0,
       "Electric": true,
       "Range": "7",
@@ -7001,7 +7163,8 @@
       "Range": "1",
       "Handling": 500,
       "Class": "C",
-      "Weight": 4500
+      "Weight": 4500,
+      "Muscle":true
     },
     "2023 tesla roadster": {
       "alias": "2023 roadster",
@@ -7028,7 +7191,7 @@
       "Price": 250000,
       "sellprice": 0,
       "Engine": "N/A",
-      "Image": "https://tesla-cdn.thron.com/delivery/public/image/tesla/32e5e0f3-5c04-42ef-8f8f-c6b1c26f8a9e/bvlatuR/std/2880x1800/ms-main-hero-desktop",
+      "Image": "https://i.ibb.co/BKFSkY7/Tesla-Model-S-2021-01-2x.jpg",
       "0-60": 4.4,
       "Drift": 0,
       "Electric": true,
@@ -7299,7 +7462,8 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Weight": 4000
+      "Weight": 4000,
+      "Muscle":true
     },
     "christmas car": {
       "alias": "christmas car",
@@ -8768,6 +8932,42 @@
       "Weight": 2270,
       "Obtained": "Event",
       "Team": "Peugeot"
+    },
+    "2021 mclaren 720s gt3x": {
+      "alias": "2021 720s gt3x",
+      "Name": "2021 McLaren 720S GT3X",
+      "Emote": "<:mclaren:931011546354692137>",
+      "kmh": 201,
+      "Speed": 206,
+      "Price": 0,
+      "sellprice": 176250,
+      "Engine": "6.5 L V12",
+      "Image": "https://i.ibb.co/hy0PCVS/mclaren.png",
+      "0-60": 5.7,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "S",
+      "Obtained": "Crew Season",
+      "Weight": 2668
+    },
+    "1968 plymouth roadrunner": {
+      "alias": "1966 roadrunner",
+      "Name": "1968 Plymouth Roadrunner",
+      "Emote": "<:plymouth:965096601829916672>",
+      "kmh": 201,
+      "Speed": 149,
+      "Price": 0,
+      "sellprice": 176250,
+      "Engine": "6.5 L V12",
+      "Image": "https://i.ibb.co/7NCHXZT/1968-plymouth-hemi-road-runner-main.jpg",
+      "0-60": 10,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "D",
+      "Obtained": "Season",
+      "Weight": 2668,
+      "Muscle":true
     }
+    
   }
 }

@@ -51,6 +51,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  permissionslip: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   pettreats: {
     type: Number,
     required: false,

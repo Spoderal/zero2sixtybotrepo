@@ -373,9 +373,10 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "ecu",
+      "RevLimit": 2000,
       "DecreasedSpeed": "0",
       "AddHandling": "1",
-      "Image": "https://i.ibb.co/L5fMSbL/t1ecu.png"
+      "Image": "https://i.ibb.co/99yhvLq/part-t1ecu.png"
     },
     "t2ecu": {
       "Name": "T2ECU",
@@ -390,9 +391,10 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "ecu",
+      "RevLimit": 2500,
       "DecreasedSpeed": "0",
       "AddHandling": 2,
-      "Image": "https://i.ibb.co/BsyZsYw/t2ecu.png"
+      "Image": "https://i.ibb.co/ngjHH0M/part-t2ecu.png"
     },
     "t3ecu": {
       "Name": "T3ECU",
@@ -407,9 +409,10 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "ecu",
+      "RevLimit": 2500,
       "DecreasedSpeed": "0",
       "AddHandling": "5",
-      "Image": "https://i.ibb.co/K7Nr1G0/t3ecu.png"
+      "Image": "https://i.ibb.co/CMXFJMB/part-t3ecu.png"
     },
     "t4ecu": {
       "Name": "T4ECU",
@@ -424,9 +427,10 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "ecu",
+      "RevLimit": 3000,
       "DecreasedSpeed": "0",
       "AddHandling": "8",
-      "Image": "https://i.ibb.co/VQ45YZk/t4ecu.png",
+      "Image": "https://i.ibb.co/W2pJJgs/part-t4ecu.png",
       "Obtained": "Wheelspin"
     },
     "t5ecu": {
@@ -442,10 +446,30 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "ecu",
+      "RevLimit": 5000,
       "DecreasedSpeed": "0",
       "AddHandling": 12,
-      "Image": "https://i.ibb.co/C6GTX0D/t5ecu.png",
+      "Image": "https://i.ibb.co/f8hfyK9/part-t5ecu.png",
       "Obtained": "Fusing 2 T4ECU"
+    },
+    "txecu": {
+      "Name": "TXECU",
+      "AddedSixty": 3,
+      "AddedSnow": 0,
+      "AddedSpeed": 10,
+      "sellprice": 1200,
+      "Price": 0,
+      "Emote": "<:part_txecu:1110024171485937694>",
+      "Tier": "X",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "ecu",
+      "RevLimit": 6000,
+      "DecreasedSpeed": "0",
+      "AddHandling": 25,
+      "Image": "https://i.ibb.co/Q6ZLwbC/part-txecu.png",
+      "Obtained": "Fusing T5ECU with 100 Xessence"
     },
     "t1nitro": {
       "Name": "T1Nitro",
@@ -480,6 +504,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 4,
       "PSI": 15,
+      "MaxPSI":20,
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
     },
     "dualturbo": {
@@ -498,6 +523,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 50,
       "PSI": 24,
+      "MaxPSI":30,
       "Image": "https://i.ibb.co/Qb9Hc0N/t2turbo.png"
     },
     "supercharger": {
@@ -516,6 +542,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 100,
       "PSI": 17,
+      "MaxPSI":40,
       "Image": "https://i.ibb.co/JH6CzMv/t3turbo.png"
     },
     "t4turbo": {
@@ -534,6 +561,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "10",
       "PSI": 25,
+      "MaxPSI":35,
       "Image": "https://i.ibb.co/1MSBNVk/t4turbo.png",
       "Obtained": "Wheelspin"
     },
@@ -553,6 +581,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "PSI": 28,
+      "MaxPSI":40,
       "Image": "https://i.ibb.co/yQGswVn/t5turbo.png",
       "Obtained": "Fusing 2 T4Turbo"
     },
@@ -572,6 +601,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": "8",
       "PSI": 30,
+      "MaxPSI":45,
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png",
       "Obtained": "Fusing T5Turbo with 100 Xessence"
     },
@@ -1146,24 +1176,6 @@
       "DecreasedSixty": "0",
       "Type": "engine",
       "DecreaseHandling": "100",
-      "DecreasedSpeed": "0",
-      "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
-      "Market": false
-    },
-    "ludicrous": {
-      "Name": "Ludicrous",
-      "AddedSpeed": 0,
-      "AddedSixty": 0,
-      "AddedSnow": 0,
-      "sellprice": 0,
-      "Price": 0,
-      "Emote": "<:batteryicon:953575541041160212>",
-      "Tier": "4",
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "DecreasedSixty": "0",
-      "Type": "engine",
-      "DecreaseHandling": 0,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/rwr1TpX/rocketengine.png",
       "Market": false
@@ -1879,6 +1891,23 @@
       "DecreasedSpeed": "0",
       "AddHandling": 20,
       "Image": "https://i.ibb.co/2s8M2xp/part-t5gearbox.png"
+    },
+    "txgearbox": {
+      "Name": "T5Gearbox",
+      "AddedSpeed": 15,
+      "AddedSixty": 1,
+      "sellprice": 4125,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:part_txgearbox:1110024169543966790>",
+      "Tier": "X",
+      "AddedDrift": 10,
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "gearbox",
+      "DecreasedSpeed": "0",
+      "AddHandling": 50,
+      "Image": "https://i.ibb.co/mRd8V52/part-txgearbox.png"
     },
     "t3racesuspension": {
       "Name": "T3RaceSuspension",

@@ -152,7 +152,7 @@ async function updateUsed() {
       global.usedcars = items;
       global.usedcooldown = Date.now();
       global.markModified("usedcars");
-
+      global.updateOne()
       global.save();
     } else {
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
@@ -297,7 +297,7 @@ async function updateUsed() {
         global.usedcars = items;
         global.usedcooldown = Date.now();
         global.markModified("usedcars");
-
+        global.updateOne()
         global.save();
       }
     }

@@ -15,7 +15,7 @@ module.exports = {
     let global = await Global.findOne();
     let itemshop = global.itemshop;
     let itemcooldown = global.itemshopcooldown;
-    let timeout = 604800000;
+    let timeout = 86400000;
     let cool = timeout - (Date.now() - itemcooldown);
     cool = ms(cool);
     for (let i in itemshop) {
@@ -31,7 +31,7 @@ module.exports = {
     }
 
     let embed = new Discord.EmbedBuilder()
-      .setTitle("Weekly Item Shop")
+      .setTitle("Daily Item Shop")
       .setDescription(`${items.join("\n\n")}`)
       .setColor(colors.blue)
       .setFooter({ text: `${cool} until the shop resets` });

@@ -63,15 +63,16 @@ module.exports = {
           fetchReply: true,
         });
       }
-
-      userdata.cash += userdata.bounty;
+      let bountyc = userdata.bounty
+      let toconvert = bountyc / 2
+      userdata.cash += toconvert;
 
       userdata.bounty = 0;
       cooldowndata.convert = Date.now();
       cooldowndata.save();
       userdata.save();
 
-      interaction.reply("✅");
+      interaction.reply(`You received ${toCurrency(toconvert)} (50% of your bounty)`);
 
       return;
     }
@@ -79,7 +80,7 @@ module.exports = {
     let {
       cash,
       gold,
-      rp3,
+      rp4,
       cmaps: barnmaps,
       rmaps: rbarnmaps,
       lmaps: lbarnmaps,
@@ -88,7 +89,7 @@ module.exports = {
       ekeys,
       fkeys,
       dkeys2: dkeys,
-      noto6: notoriety,
+      notoriety,
       wheelspins,
       lockpicks: lockpicks,
       swheelspins,
@@ -153,9 +154,7 @@ module.exports = {
               name: "Event Items",
               value: `
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
-              ${emotes.rp}  RP: ${numberWithCommas(rp3)}
-              ${emotes.dirftKey} Drift Keys: ${numberWithCommas(dkeys)}
-              <:moontokens:1044726056680161371> Space Tokens: ${spacetokens}
+              ${emotes.rp}  RP: ${numberWithCommas(rp4)}
               ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
               `,
               inline: true,
@@ -288,9 +287,7 @@ module.exports = {
             name: "Event Items",
             value: `
           ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
-          ${emotes.rp}  RP: ${numberWithCommas(rp3)}
-          ${emotes.dirftKey} Drift Keys: ${numberWithCommas(dkeys)}
-          <:moontokens:1044726056680161371> Space Tokens: ${spacetokens}
+          ${emotes.rp}  RP: ${numberWithCommas(rp4)}
           ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
           `,
             inline: true,

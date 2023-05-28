@@ -642,13 +642,22 @@ module.exports = {
       });
     } else if (itemdb[item.toLowerCase()]) {
       let itemindb = itemdb[item.toLowerCase()];
+      let price = itemindb.Price
+
+      if(price == 0 && itemindb.Findable == true){
+        price = `Findable only`
+      }
+      else {
+        price = toCurrency(itemindb.Price)
+      }
+
       let embed = new Discord.EmbedBuilder()
         .setAuthor({
           name: `Information for ${itemindb.Name}`,
           iconURL: itemindb.Image,
         })
         .setDescription(
-          `${itemindb.Action}\n\nPrice: ${toCurrency(itemindb.Price)}`
+          `${itemindb.Action}\n\nPrice: ${price}`
         )
         .addFields({
           name: "Type",
