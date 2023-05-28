@@ -1426,7 +1426,6 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-
           let mph = selected.Speed;
 
           let weight =
