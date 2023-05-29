@@ -384,8 +384,19 @@ module.exports = {
         {
           $set: {
             canrace: 0,
+            racing: 0,
             drifting: 0,
             waterbottle: Date.now(),
+          },
+        }
+      );
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            canrace: 0,
           },
         }
       );
