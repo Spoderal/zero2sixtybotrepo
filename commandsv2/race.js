@@ -2659,15 +2659,13 @@ module.exports = {
             notowon = 300;
             notowon = 500;
             exotickeys = 7;
-          }
-          else if (bot == 6) {
+          } else if (bot == 6) {
             car2 = carsarray.filter((car) => car.Speed > 200 && car.Muscle);
             exotickeys = 2;
             notowon = 300;
             notowon = 500;
             exotickeys = 7;
-          }
-          else if (bot == 7) {
+          } else if (bot == 7) {
             car2 = carsarray.filter((car) => car.Speed > 200 && car.Muscle);
             exotickeys = 2;
             notowon = 300;
