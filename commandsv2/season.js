@@ -223,9 +223,9 @@ module.exports = {
         page = 0;
         vispage = 1;
       } else if (i.customId == "claim") {
-        notoriety = userdata.notoriety
-        console.log(`required ${rewardtoclaim.Required}`)
-      
+        notoriety = userdata.notoriety;
+        console.log(`required ${rewardtoclaim.Required}`);
+
         if (rewardtoclaim.Required > notoriety) return;
 
         if (rewardtoclaim.Item.endsWith("Cash")) {
@@ -235,7 +235,7 @@ module.exports = {
           let newamount = parseInt((usercash += num));
           console.log(newamount);
           console.log(usercash);
-          let oldnoto = userdata.notoriety
+          let oldnoto = userdata.notoriety;
           userdata.cash = newamount;
           userdata.notoriety = oldnoto -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
@@ -355,7 +355,7 @@ module.exports = {
         }
       }
 
-      notoriety = userdata.notoriety
+      notoriety = userdata.notoriety;
 
       embed = new EmbedBuilder()
         .setTitle(`Season 1 Page ${vispage}`)
