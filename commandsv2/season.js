@@ -210,11 +210,11 @@ module.exports = {
 
     collector.on("collect", async (i) => {
       if (i.customId == "next") {
-        if((page += 1) > 17) return interaction.reply("No more pages!")
+        if ((page += 1) > 17) return interaction.reply("No more pages!");
         page++;
         vispage++;
       } else if (i.customId == "previous") {
-        if((page -= 1) < 1) return interaction.reply("No more pages!")
+        if ((page -= 1) < 1) return interaction.reply("No more pages!");
         page--;
         vispage--;
       } else if (i.customId == "last") {

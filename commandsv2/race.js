@@ -181,12 +181,12 @@ module.exports = {
           .setEmoji("💪")
           .setCustomId("muscledrag")
           .setStyle("Secondary"),
-          
+
         new ButtonBuilder()
-        .setLabel("Le Mans (EVENT)")
-        .setEmoji("🏎️")
-        .setCustomId("lemans")
-        .setStyle("Secondary")
+          .setLabel("Le Mans (EVENT)")
+          .setEmoji("🏎️")
+          .setCustomId("lemans")
+          .setStyle("Secondary")
       );
     } else if (userdata.police == true) {
       if (!cardb.Cars[selected.Name.toLowerCase()].Police)
@@ -536,19 +536,19 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-              let earnings = []
+              let earnings = [];
 
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
-              )
+              );
 
               let filteredhouse2 = userdata.houses.filter(
                 (house) => house.Name == "Casa Della Pace"
-                )
+              );
 
-                let filteredhouse3 = userdata.houses.filter(
-                  (house) => house.Name == "Casa Sul Lago"
-                )
+              let filteredhouse3 = userdata.houses.filter(
+                (house) => house.Name == "Casa Sul Lago"
+              );
               if (userdata.houses && filteredhouse[0]) {
                 cashwon = cashwon += cashwon * 0.05;
               }
@@ -2637,40 +2637,30 @@ module.exports = {
 
           if (bot == 1) {
             console.log("1");
-            car2 = carsarray.filter(
-              (car) => car.Speed < 145 && car.Muscle
-            );
+            car2 = carsarray.filter((car) => car.Speed < 145 && car.Muscle);
             notowon = 50;
             commonkeys = 2;
           } else if (bot == 2) {
-            car2 = carsarray.filter(
-              (car) => car.Speed < 160 && car.Muscle
-            );
+            car2 = carsarray.filter((car) => car.Speed < 160 && car.Muscle);
 
             notowon = 100;
             commonkeys = 5;
           } else if (bot == 3) {
-            car2 = carsarray.filter(
-              (car) =>  car.Speed < 180 && car.Muscle
-            );
+            car2 = carsarray.filter((car) => car.Speed < 180 && car.Muscle);
             rarekeys = 2;
             notowon = 200;
           } else if (bot == 4) {
-            car2 = carsarray.filter(
-              (car) =>  car.Speed < 190 && car.Muscle
-            );
+            car2 = carsarray.filter((car) => car.Speed < 190 && car.Muscle);
             rarekeys = 5;
             notowon = 250;
           } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) =>  car.Speed < 200 && car.Muscle
-            );
+            car2 = carsarray.filter((car) => car.Speed < 200 && car.Muscle);
             exotickeys = 2;
             notowon = 300;
             notowon = 500;
             exotickeys = 7;
           }
-          
+
           car2 = lodash.sample(car2);
 
           console.log(car2);
@@ -2687,10 +2677,11 @@ module.exports = {
 
           console.log(weather2);
 
-         
-          let mph = selected.Speed
-       
-          let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let mph = selected.Speed;
+
+          let weight =
+            selected.WeightStat ||
+            cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling / weather2.Grip;
 
@@ -2701,11 +2692,10 @@ module.exports = {
 
           let mph2 = car2.Speed;
 
-      
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling / weather2.Grip;
-      
+
           let speed = 0;
           let speed2 = 0;
 
@@ -2771,33 +2761,30 @@ module.exports = {
             handling = handling / 100;
             handling2 = handling2 / 100;
             let newspeed2 = speed2 / 3;
-            let newweight 
-            let newweight2
+            let newweight;
+            let newweight2;
 
-            if(weight >= 1000){
-              newweight = weight / 1000
+            if (weight >= 1000) {
+              newweight = weight / 1000;
+            } else if (weight < 1000) {
+              newweight = weight / 100;
             }
-            else if(weight < 1000){
-              newweight = weight / 100
+            if (weight2 >= 1000) {
+              newweight2 = weight2 / 1000;
+            } else if (weight2 < 1000) {
+              newweight2 = weight2 / 100;
             }
-            if(weight2 >= 1000){
-              newweight2 = weight2 / 1000
-            }
-            else if(weight2 < 1000){
-              newweight2 = weight2 / 100
-            }
-            
 
             let formula = (newspeed += handling / newweight2);
 
             console.log(formula);
             // car 2
 
-            let formula2 = (newspeed2 += handling2 /  newweight);
+            let formula2 = (newspeed2 += handling2 / newweight);
             tracklength -= formula;
             tracklength2 -= formula2;
-            console.log(tracklength)
-            console.log(tracklength2)
+            console.log(tracklength);
+            console.log(tracklength2);
 
             if (tracklength <= 0) {
               clearInterval(i2);
@@ -3005,9 +2992,7 @@ module.exports = {
               userdata.bounty += 5;
               userdata.rp4 += rpwon;
               embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(
-                `Tier ${bot} Muscle Drag Race won!`
-              );
+              embed.setTitle(`Tier ${bot} Muscle Drag Race won!`);
               await i.editReply({ embeds: [embed] });
 
               await i.editReply({ embeds: [embed] });
@@ -3042,9 +3027,7 @@ module.exports = {
               clearInterval(i2);
 
               userdata.cash += cashlost;
-              embed.setTitle(
-                `Tier ${bot} Muscle Drag Race lost!`
-              );
+              embed.setTitle(`Tier ${bot} Muscle Drag Race lost!`);
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
               await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
