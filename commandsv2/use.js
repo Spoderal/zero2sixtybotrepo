@@ -710,7 +710,7 @@ module.exports = {
 
       fullname = `${emote} ${name}`;
 
-      for (var i = 0; i < amount2; i++)
+      for (var i5 = 0; i5 < amount2; i5++)
         items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
       cooldowndata.save();
