@@ -707,7 +707,7 @@ module.exports = {
           }
         });
       }
-    } else if (option == "leaderboard") {
+    } else if (option == "top") {
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
 
       let data = globalModel.crews;

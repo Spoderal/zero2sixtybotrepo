@@ -1624,8 +1624,8 @@
       "DecreasedSixty": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling": 100,
-      "AddHandling": 100,
+      "AddedHandling": 200,
+      "AddHandling": 200,
       "Image": "https://i.ibb.co/1JvyK0V/t1dspoiler.png"
     },
     "t3driftspoiler": {
@@ -1643,8 +1643,8 @@
       "DecreasedSixty": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling": 100,
-      "AddHandling": 100,
+      "AddedHandling": 300,
+      "AddHandling": 300,
       "Image": "https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },
     "bm1drifttires": {

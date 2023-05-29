@@ -169,6 +169,7 @@ module.exports = {
 
     let trackimg;
     let trackemote;
+    let miles = 0
 
     if (track == "regular") {
       trackemote = "🛣️";
@@ -181,6 +182,7 @@ module.exports = {
       } else if (difficulty == "master") {
         trackimg = "https://i.ibb.co/YjXsvc2/track-regular-master.png";
       }
+      miles = 3
     } else if (track == "mountain") {
       trackemote = "🏔️";
       if (difficulty == "easy") {
@@ -192,6 +194,7 @@ module.exports = {
       } else if (difficulty == "master") {
         trackimg = "https://i.ibb.co/ZWg8Z83/track-mountains-master.png";
       }
+      miles = 5
     } else if (track == "parking garage") {
       trackemote = "🅿️";
       if (difficulty == "easy") {
@@ -203,6 +206,7 @@ module.exports = {
       } else if (difficulty == "master") {
         trackimg = "https://i.ibb.co/F00h1Rv/track-parking-master.png";
       }
+      miles = 2
     }
 
     const canvas = createCanvas(1280, 720);
@@ -275,6 +279,24 @@ module.exports = {
           userdata.driftrank += dranks;
           userdata.cash += cashreward;
           userdata.dkeys2 += keysreward;
+            await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": (selected.Miles += miles),
+                  },
+                },
+
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
           if (crater == true) {
             earnings.push(
               `+ ${cratedb.Crates["seasonal crate"].Emote} ${cratedb.Crates["seasonal crate"].Name}`

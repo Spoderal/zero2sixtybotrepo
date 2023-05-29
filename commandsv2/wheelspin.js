@@ -59,7 +59,7 @@ module.exports = {
         let cooldown = cooldowns.orangejuice;
         let timeout = 60000;
         console.log(timeout - (Date.now() - cooldown));
-        if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
+        if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
           console.log("pulled");
           userdata.using.pull("orange juice");
           userdata.update();

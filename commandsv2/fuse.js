@@ -37,6 +37,8 @@ module.exports = {
           { name: "TXIntake", value: "txintake" },
           { name: "TXTurbo", value: "txturbo" },
           { name: "TXClutch", value: "txclutch" },
+          { name: "TXGearbox", value: "txgearbox" },
+          { name: "TXECU", value: "txecu" },
           { name: "Fruit Punch", value: "fruit punch" },
           { name: "Epic Rocket Engine", value: "epic rocket engine" }
         )
@@ -252,7 +254,92 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } else if (parttoinstall == "txturbo") {
+    }
+    else if (parttoinstall == "txecu") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5ecu") && !parts.includes("T5ECU"))
+        return await interaction.reply(`You need a T5ECU to do this fuse!`);
+
+      for (var f2 = 0; f2 < 1; f2++) parts.splice(parts.indexOf("t5ecu"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5ecu"].Emote} ${partdb.Parts["t5ecu"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txecu"].Emote} ${partdb.Parts["txecu"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txecu");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    }  
+    else if (parttoinstall == "txgearbox") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5gearbox") && !parts.includes("T5Gearbox"))
+        return await interaction.reply(`You need a T5Gearbox to do this fuse!`);
+
+      for (var f3 = 0; f3 < 1; f3++) parts.splice(parts.indexOf("t5gearbox"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5gearbox"].Emote} ${partdb.Parts["t5gearbox"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txgearbox"].Emote} ${partdb.Parts["txgearbox"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txgearbox");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    }  
+    else if (parttoinstall == "txturbo") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(

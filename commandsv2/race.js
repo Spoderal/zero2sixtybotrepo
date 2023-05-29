@@ -177,10 +177,16 @@ module.exports = {
       );
       row0 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-          .setLabel("Le Mans (EVENT)")
-          .setEmoji("🏎️")
-          .setCustomId("lemans")
-          .setStyle("Secondary")
+          .setLabel("Muscle Drag (SEASON)")
+          .setEmoji("💪")
+          .setCustomId("muscledrag")
+          .setStyle("Secondary"),
+          
+        new ButtonBuilder()
+        .setLabel("Le Mans (EVENT)")
+        .setEmoji("🏎️")
+        .setCustomId("lemans")
+        .setStyle("Secondary")
       );
     } else if (userdata.police == true) {
       if (!cardb.Cars[selected.Name.toLowerCase()].Police)
@@ -530,18 +536,27 @@ module.exports = {
             tracklength2 += formula2;
 
             if (tracklength > tracklength2 && timer == 10) {
-              let earnings = [];
+              let earnings = []
+
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
-              );
+              )
+
               let filteredhouse2 = userdata.houses.filter(
                 (house) => house.Name == "Casa Della Pace"
-              );
+                )
+
+                let filteredhouse3 = userdata.houses.filter(
+                  (house) => house.Name == "Casa Sul Lago"
+                )
               if (userdata.houses && filteredhouse[0]) {
                 cashwon = cashwon += cashwon * 0.05;
               }
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
+              }
+              if (userdata.houses && filteredhouse3[0]) {
+                notowon = notowon * 2;
               }
 
               if (pet.name) {
@@ -614,7 +629,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -634,7 +649,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
@@ -655,7 +670,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
@@ -683,7 +698,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
@@ -701,7 +716,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
@@ -1142,7 +1157,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -1552,7 +1567,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -1571,7 +1586,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
@@ -1591,7 +1606,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
@@ -1618,7 +1633,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
@@ -1634,7 +1649,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
@@ -1947,7 +1962,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -1966,7 +1981,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
@@ -1986,7 +2001,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
@@ -2013,7 +2028,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
@@ -2029,7 +2044,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
@@ -2410,7 +2425,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -2429,7 +2444,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
@@ -2449,7 +2464,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
@@ -2476,7 +2491,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
@@ -2492,7 +2507,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
@@ -2623,47 +2638,39 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
+              (car) => car.Speed < 145 && car.Muscle
             );
             notowon = 50;
             commonkeys = 2;
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
+              (car) => car.Speed < 160 && car.Muscle
             );
 
             notowon = 100;
             commonkeys = 5;
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) =>  car.Speed < 180 && car.Muscle
             );
             rarekeys = 2;
             notowon = 200;
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) =>  car.Speed < 190 && car.Muscle
             );
             rarekeys = 5;
             notowon = 250;
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) =>  car.Speed < 200 && car.Muscle
             );
             exotickeys = 2;
             notowon = 300;
-          } else if (bot == 6) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
-            );
-            exotickeys = 5;
-          } else if (bot == 7) {
-            car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
-            );
             notowon = 500;
             exotickeys = 7;
           }
+          
           car2 = lodash.sample(car2);
 
           console.log(car2);
@@ -2680,17 +2687,10 @@ module.exports = {
 
           console.log(weather2);
 
-          let slipchance = weather2.Slip;
-          let speedreduce = weather2.SpeedReduce;
-          let mph;
-          if (speedreduce > 0) {
-            mph = selected.Speed -= speedreduce;
-          } else {
-            mph = selected.Speed;
-          }
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
+         
+          let mph = selected.Speed
+       
+          let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling / weather2.Grip;
 
@@ -2699,22 +2699,13 @@ module.exports = {
               cardb.Cars[selected.Name.toLowerCase()].Weight;
           }
 
-          let mph2;
+          let mph2 = car2.Speed;
 
-          if (speedreduce > 0) {
-            mph2 = car2.Speed -= speedreduce;
-          } else {
-            mph2 = car2.Speed;
-          }
+      
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling / weather2.Grip;
-          if (slipchance > 0) {
-            let slip = randomRange(1, slipchance);
-            if (slip >= 2) {
-              mph -= 10;
-            }
-          }
+      
           let speed = 0;
           let speed2 = 0;
 
@@ -2725,7 +2716,7 @@ module.exports = {
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
           let embed = new EmbedBuilder()
-            .setTitle(`Racing Tier ${bot} Muscle Drag Race ${weather2.Emote}`)
+            .setTitle(`Racing Tier ${bot} Muscle Drag Race`)
 
             .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
             .addFields(
@@ -2780,17 +2771,33 @@ module.exports = {
             handling = handling / 100;
             handling2 = handling2 / 100;
             let newspeed2 = speed2 / 3;
+            let newweight 
+            let newweight2
 
-            let formula = (newspeed += handling += weight / 75);
+            if(weight >= 1000){
+              newweight = weight / 1000
+            }
+            else if(weight < 1000){
+              newweight = weight / 100
+            }
+            if(weight2 >= 1000){
+              newweight2 = weight2 / 1000
+            }
+            else if(weight2 < 1000){
+              newweight2 = weight2 / 100
+            }
+            
+
+            let formula = (newspeed += handling / newweight2);
 
             console.log(formula);
             // car 2
 
-            let formula2 = (newspeed2 += handling2 += weight2 / 75);
+            let formula2 = (newspeed2 += handling2 /  newweight);
             tracklength -= formula;
             tracklength2 -= formula2;
-
-            console.log(tracklength);
+            console.log(tracklength)
+            console.log(tracklength2)
 
             if (tracklength <= 0) {
               clearInterval(i2);
@@ -2884,7 +2891,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -2903,7 +2910,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
@@ -2923,7 +2930,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
@@ -2950,7 +2957,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
@@ -2966,7 +2973,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
@@ -2993,7 +3000,7 @@ module.exports = {
               userdata.rp4 += rpwon;
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(
-                `Tier ${bot} Muscle Drag Race won! ${weather2.Emote}`
+                `Tier ${bot} Muscle Drag Race won!`
               );
               await i.editReply({ embeds: [embed] });
 
@@ -3030,7 +3037,7 @@ module.exports = {
 
               userdata.cash += cashlost;
               embed.setTitle(
-                `Tier ${bot} Muscle Drag Race lost! ${weather2.Emote}`
+                `Tier ${bot} Muscle Drag Race lost!`
               );
               embed.setDescription(`${emotes.cash} +${toCurrency(cashlost)}`);
               await i.editReply({ embeds: [embed] });
@@ -3322,7 +3329,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("radio");
@@ -3341,7 +3348,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
@@ -3361,7 +3368,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
@@ -3388,7 +3395,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
@@ -3404,7 +3411,7 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
+                  timeout - (Date.now() - cooldown) < 0
                 ) {
                   console.log("pulled");
                   userdata.using.pull("energy drink");

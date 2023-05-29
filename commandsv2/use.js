@@ -383,9 +383,7 @@ module.exports = {
         },
         {
           $set: {
-            racing: 0,
-            hm: 0,
-            qm: 0,
+            canrace: 0,
             drifting: 0,
             waterbottle: Date.now(),
           },

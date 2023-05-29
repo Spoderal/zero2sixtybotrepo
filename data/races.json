@@ -36,6 +36,11 @@
     "reward": 0
   },
   {
+    "name": "muscledrag",
+    "tiers": 7,
+    "reward": 75
+  },
+  {
     "name": "police_streetrace",
     "tiers": 7,
     "reward": 25
