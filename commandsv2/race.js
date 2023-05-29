@@ -2809,11 +2809,17 @@ module.exports = {
               let filteredhouse2 = userdata.houses.filter(
                 (house) => house.Name == "Casa Della Pace"
               );
+              let filteredhouse3 = userdata.houses.filter(
+                (house) => house.Name == "Casa Sul Lago"
+              )
               if (userdata.houses && filteredhouse[0]) {
                 cashwon = cashwon += cashwon * 0.05;
               }
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
+              } 
+              if (userdata.houses && filteredhouse3[0]) {
+                notowon = notowon * 2;
               }
               if (weather2.Reward > 0) {
                 cashwon = cashwon += weather2.Reward;
