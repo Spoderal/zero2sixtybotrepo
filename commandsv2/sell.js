@@ -60,7 +60,7 @@ module.exports = {
       price = price * amount;
 
       if (userdata.items.includes("coconut")) {
-        price = price += price / 0.05;
+        price = price += price * 0.05;
       }
 
       for (var i2 = 0; i2 < amount; i2++)
