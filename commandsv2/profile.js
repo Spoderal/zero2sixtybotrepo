@@ -63,7 +63,7 @@ module.exports = {
       if (!title || title == null || title == undefined) {
         title = "noob racer";
       }
-      title = titledb[title].Title;
+      title = titledb[title.toLowerCase()].Title;
       console.log(title);
       let driftrank = userdata.driftrank;
       let racerank = userdata.racerank;
