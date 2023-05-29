@@ -418,7 +418,7 @@
     "Price": 0,
     "Action": "While in your inventory, you'll receive 0.05x more money from selling cars",
     "Name": "Coconut",
-    "Type": "Usable",
+    "Type": "Non-Usable",
     "Emote": "<:item_coconut:1103826134149374006>",
     "Shop": false,
     "Findable": true,
