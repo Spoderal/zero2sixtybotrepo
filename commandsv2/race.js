@@ -2798,13 +2798,13 @@ module.exports = {
               );
               let filteredhouse3 = userdata.houses.filter(
                 (house) => house.Name == "Casa Sul Lago"
-              )
+              );
               if (userdata.houses && filteredhouse[0]) {
                 cashwon = cashwon += cashwon * 0.05;
               }
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
-              } 
+              }
               if (userdata.houses && filteredhouse3[0]) {
                 notowon = notowon * 2;
               }
