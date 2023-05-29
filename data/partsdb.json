@@ -1893,7 +1893,7 @@
       "Image": "https://i.ibb.co/2s8M2xp/part-t5gearbox.png"
     },
     "txgearbox": {
-      "Name": "T5Gearbox",
+      "Name": "TXGearbox",
       "AddedSpeed": 15,
       "AddedSixty": 1,
       "sellprice": 4125,
