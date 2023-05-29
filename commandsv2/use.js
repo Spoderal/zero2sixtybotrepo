@@ -402,7 +402,6 @@ module.exports = {
       );
 
       cooldowndata.markModified();
-
     } else if (itemtouse.toLowerCase() == "zero bar") {
       let effects = itemdb["zero bar"].Effects;
 
