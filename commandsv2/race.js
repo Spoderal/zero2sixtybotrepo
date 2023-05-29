@@ -2654,7 +2654,7 @@ module.exports = {
             rarekeys = 5;
             notowon = 250;
           } else if (bot == 5) {
-            car2 = carsarray.filter((car) => car.Speed < 200 && car.Muscle);
+            car2 = carsarray.filter((car) => car.Speed > 200 && car.Muscle);
             exotickeys = 2;
             notowon = 300;
             notowon = 500;
