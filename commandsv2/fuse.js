@@ -254,8 +254,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    }
-    else if (parttoinstall == "txecu") {
+    } else if (parttoinstall == "txecu") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -296,8 +295,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    }  
-    else if (parttoinstall == "txgearbox") {
+    } else if (parttoinstall == "txgearbox") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -306,7 +304,8 @@ module.exports = {
       if (!parts.includes("t5gearbox") && !parts.includes("T5Gearbox"))
         return await interaction.reply(`You need a T5Gearbox to do this fuse!`);
 
-      for (var f3 = 0; f3 < 1; f3++) parts.splice(parts.indexOf("t5gearbox"), 1);
+      for (var f3 = 0; f3 < 1; f3++)
+        parts.splice(parts.indexOf("t5gearbox"), 1);
       userdata.parts = parts;
 
       userdata.xessence -= 100;
@@ -338,8 +337,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    }  
-    else if (parttoinstall == "txturbo") {
+    } else if (parttoinstall == "txturbo") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
