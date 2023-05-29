@@ -2625,7 +2625,7 @@ module.exports = {
           let car2;
           let bot = i.customId;
           if (!cardb.Cars[selected.Name.toLowerCase()].Muscle)
-            return i.update("You need to use a muscle car!");
+            return interaction.channel.send("You need to use a muscle car!");
           let cashwon = parseInt(bot) * 200;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
