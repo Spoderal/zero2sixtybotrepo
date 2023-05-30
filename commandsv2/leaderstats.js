@@ -12,64 +12,57 @@ module.exports = {
   async execute(interaction) {
     await interaction.deferReply();
     let leaderboardtype = interaction.options.getString("leaderboard");
-   
-      let users = await User.find({});
-      if (!users?.length) {
-        return await interaction.editReply(
-          "The leaderboard is currently empty!"
-        );
-      }
 
-      let embed = new Discord.EmbedBuilder()
-        .setTitle("Cash Leaderboard")
-        .setColor(colors.blue);
+    let users = await User.find({});
+    if (!users?.length) {
+      return await interaction.editReply("The leaderboard is currently empty!");
+    }
 
-      const filteredUsers = users
-        .filter((value) => value.cash > 0)
-        .sort((b, a) => a.cash - b.cash)
-        .slice(0, 40);
+    let embed = new Discord.EmbedBuilder()
+      .setTitle("Cash Leaderboard")
+      .setColor(colors.blue);
 
-      if (!filteredUsers?.length) {
-        return await interaction.editReply(
-          "The leaderboard is currently empty!"
-        );
-      }
+    const filteredUsers = users
+      .filter((value) => value.cash > 0)
+      .sort((b, a) => a.cash - b.cash)
+      .slice(0, 40);
 
-      let currentUserPosition = 0;
-      for (let i = 0; i < filteredUsers?.length; i++) {
-        const user = await interaction.client.users
-          .fetch(filteredUsers[i].id)
-          .catch(() => {});
-        if (!user?.username) continue;
-        filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
-        console.log(user.id);
-        currentUserPosition =
-          filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
-      }
+    if (!filteredUsers?.length) {
+      return await interaction.editReply("The leaderboard is currently empty!");
+    }
 
-      const onlyTaggedUsers = filteredUsers.filter((u) => u.tag).slice(0, 10);
-      if (!onlyTaggedUsers?.length) {
-        return await interaction.editReply(
-          "The leaderboard is currently empty!"
-        );
-      }
+    let currentUserPosition = 0;
+    for (let i = 0; i < filteredUsers?.length; i++) {
+      const user = await interaction.client.users
+        .fetch(filteredUsers[i].id)
+        .catch(() => {});
+      if (!user?.username) continue;
+      filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
+      console.log(user.id);
+      currentUserPosition =
+        filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
+    }
 
-      if (currentUserPosition > 0) {
-        embed.setFooter({
-          text: `Your position is #${currentUserPosition} on the cash leaderboard!`,
-        });
-      }
+    const onlyTaggedUsers = filteredUsers.filter((u) => u.tag).slice(0, 10);
+    if (!onlyTaggedUsers?.length) {
+      return await interaction.editReply("The leaderboard is currently empty!");
+    }
 
-      let desc = "";
-      for (let i = 0; i < onlyTaggedUsers.length; i++) {
-        desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${toCurrency(
-          onlyTaggedUsers[i].cash
-        )}.00\n`;
-      }
+    if (currentUserPosition > 0) {
+      embed.setFooter({
+        text: `Your position is #${currentUserPosition} on the cash leaderboard!`,
+      });
+    }
 
-      embed.setDescription(desc);
+    let desc = "";
+    for (let i = 0; i < onlyTaggedUsers.length; i++) {
+      desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${toCurrency(
+        onlyTaggedUsers[i].cash
+      )}.00\n`;
+    }
 
-      await interaction.editReply({ embeds: [embed] });
-    
+    embed.setDescription(desc);
+
+    await interaction.editReply({ embeds: [embed] });
   },
 };
