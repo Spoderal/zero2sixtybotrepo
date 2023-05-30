@@ -91,7 +91,7 @@ module.exports = {
       cooldowndata.timetrial = Date.now();
       cooldowndata.save();
 
-      interaction.reply({ content: "Revving engines...", fetchReply: true });
+      
 
       let mph = selected.Speed;
       let weight =
@@ -103,6 +103,7 @@ module.exports = {
       if (!selected.WeightStat) {
         selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
       }
+      let carimg = selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image
 
       let speed = 0;
       let time = 0;
@@ -132,9 +133,10 @@ module.exports = {
             `,
           },
         ])
+        .setImage(`${carimg}`)
         .setColor(colors.blue);
 
-      interaction.editReply({
+    await interaction.reply({
         embeds: [embed],
         fetchReply: true,
       });
