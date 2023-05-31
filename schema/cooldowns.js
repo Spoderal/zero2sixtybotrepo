@@ -61,7 +61,7 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  
+
   opened: {
     type: Number,
     required: false,
