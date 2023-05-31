@@ -16,7 +16,7 @@ const itemdb = require("../data/items.json");
 const emotes = require("../common/emotes").emotes;
 const pfpdb = require("../data/pfpsdb.json");
 const titledb = require("../data/titles.json");
-const ms = require ("ms")
+const ms = require("ms");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,8 +43,8 @@ module.exports = {
 
     let claimable = userdata.season1claimed || 1;
 
-    let opened = cooldowndata.opened
-    let timeout = 15000
+    let opened = cooldowndata.opened;
+    let timeout = 15000;
     if (opened !== null && timeout - (Date.now() - opened) > 0) {
       let time = ms(timeout - (Date.now() - opened));
       let timeEmbed = new EmbedBuilder()
@@ -214,17 +214,15 @@ module.exports = {
       components: [row9, rowclaim],
       fetchReply: true,
     });
-    cooldowndata.opened = Date.now()
-    cooldowndata.save()
+    cooldowndata.opened = Date.now();
+    cooldowndata.save();
     let filter = (btnInt) => {
       return interaction.user.id == btnInt.user.id;
     };
     const collector = msg.createMessageComponentCollector({
       filter: filter,
-      time: 15000
+      time: 15000,
     });
-
-
 
     collector.on("collect", async (i) => {
       if (i.customId == "next") {
