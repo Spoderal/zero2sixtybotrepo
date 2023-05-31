@@ -243,7 +243,7 @@ module.exports = {
         .setStyle("Secondary")
     );
 
-        let nosrow = new ActionRowBuilder().addComponents(
+    let nosrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setLabel("Use NOS")
         .setEmoji("<:nos:1112991188711116891>")
@@ -2702,7 +2702,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling
+          let handling = selected.Handling;
 
           if (!selected.WeightStat) {
             selected.WeightStat =
@@ -2713,7 +2713,7 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling
+          let handling2 = car2.Handling;
 
           let speed = 0;
           let speed2 = 0;
