@@ -61,6 +61,12 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  
+  opened: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   epiclockpick: {
     type: Number,
     required: false,

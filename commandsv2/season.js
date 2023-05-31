@@ -3,6 +3,7 @@ const discord = require("discord.js");
 const seasons = require("../data/seasons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const Cooldown = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { numberWithCommas, toCurrency } = require("../common/utils");
 const { tipFooterSeasonPages } = require("../common/tips");
@@ -15,6 +16,7 @@ const itemdb = require("../data/items.json");
 const emotes = require("../common/emotes").emotes;
 const pfpdb = require("../data/pfpsdb.json");
 const titledb = require("../data/titles.json");
+const ms = require ("ms")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,7 +25,7 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-
+    let cooldowndata = await Cooldown.findOne({ id: interaction.user.id });
     let seasonRewards = seasons.Seasons.Summer.Rewards;
     let notoriety = userdata.notoriety;
 
@@ -40,6 +42,18 @@ module.exports = {
     );
 
     let claimable = userdata.season1claimed || 1;
+
+    let opened = cooldowndata.opened
+    let timeout = 15000
+    if (opened !== null && timeout - (Date.now() - opened) > 0) {
+      let time = ms(timeout - (Date.now() - opened));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(
+          `You need to wait to open the season again for ${time}.`
+        );
+      await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+    }
 
     let row9 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -200,13 +214,17 @@ module.exports = {
       components: [row9, rowclaim],
       fetchReply: true,
     });
-
+    cooldowndata.opened = Date.now()
+    cooldowndata.save()
     let filter = (btnInt) => {
       return interaction.user.id == btnInt.user.id;
     };
     const collector = msg.createMessageComponentCollector({
       filter: filter,
+      time: 15000
     });
+
+
 
     collector.on("collect", async (i) => {
       if (i.customId == "next") {
