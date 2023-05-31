@@ -243,6 +243,14 @@ module.exports = {
         .setStyle("Secondary")
     );
 
+        let nosrow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel("Use NOS")
+        .setEmoji("<:nos:1112991188711116891>")
+        .setCustomId("nos")
+        .setStyle("Primary")
+    );
+
     let carimage =
       selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image;
     let usingmsg = [];
@@ -485,7 +493,6 @@ module.exports = {
           await i.editReply({
             content: "",
             embeds: [embed],
-            components: [],
             fetchReply: true,
           });
 
@@ -2695,7 +2702,7 @@ module.exports = {
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
-          let handling = selected.Handling / weather2.Grip;
+          let handling = selected.Handling
 
           if (!selected.WeightStat) {
             selected.WeightStat =
@@ -2706,7 +2713,7 @@ module.exports = {
 
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
-          let handling2 = car2.Handling / weather2.Grip;
+          let handling2 = car2.Handling
 
           let speed = 0;
           let speed2 = 0;
