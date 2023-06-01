@@ -47,7 +47,7 @@ module.exports = {
     let amount = interaction.options.getNumber("amount");
     let amount2 = amount || 1;
     let items = userdata.items;
-    let using = userdata.using
+    let using = userdata.using;
     let emote;
     let name;
     if (
@@ -73,7 +73,6 @@ module.exports = {
     let fullname;
 
     if (itemdb[itemtouse.toLowerCase()]) {
-      
       fullname = `${itemdb[itemtouse.toLowerCase()].Emote} ${
         itemdb[itemtouse.toLowerCase()].Name
       }`;
@@ -135,10 +134,10 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push(`energy drink`);
       cooldowndata.energydrink = Date.now();
-    }
-     else if (itemtouse.toLowerCase() == "ice cube") {
-      console.log(using)
-      if (using.includes("ice cube")) return interaction.reply("You're already using an ice cube!");
+    } else if (itemtouse.toLowerCase() == "ice cube") {
+      console.log(using);
+      if (using.includes("ice cube"))
+        return interaction.reply("You're already using an ice cube!");
       let chance = randomRange(1, 100);
       if (chance <= 25) {
         interaction.channel.send(
@@ -148,9 +147,9 @@ module.exports = {
       userdata.using.push("ice cube");
       let cooldowns = userdata.eventCooldown;
       userdata.eventCooldown = cooldowns / 2;
-    } 
-    else if (itemtouse.toLowerCase() == "permission slip") {
-      if (userdata.using.includes("permission slip"))  return interaction.reply("You're already using a permission slip!");
+    } else if (itemtouse.toLowerCase() == "permission slip") {
+      if (userdata.using.includes("permission slip"))
+        return interaction.reply("You're already using a permission slip!");
       userdata.using.push(`permission slip`);
       cooldowndata.permissionslip = Date.now();
     } else if (itemtouse.toLowerCase() == "radar") {
