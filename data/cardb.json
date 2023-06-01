@@ -1034,7 +1034,7 @@
       "Handling": 500,
       "Class": "B",
       "Weight": 3500,
-      "Muscle":true
+      "Muscle": true
     },
     "2017 ford gt": {
       "alias": "2017 gt",
@@ -1458,7 +1458,7 @@
       "Handling": 500,
       "Class": "C",
       "Weight": 3400,
-      "Muscle":true
+      "Muscle": true
     },
     "2020 chevy corvette c8": {
       "alias": "2020 c8",
@@ -1475,7 +1475,7 @@
       "Handling": 500,
       "Class": "B",
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "1989 chevy camaro": {
       "alias": "1989 camaro",
@@ -1492,7 +1492,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 2700,
-      "Muscle":true
+      "Muscle": true
     },
     "2000 toyota corolla levin": {
       "alias": "2000 corolla levin",
@@ -3563,7 +3563,7 @@
       "Handling": 500,
       "Obtained": "Common Barn Find",
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "1977 chevy camaro": {
       "alias": "1977 camaro",
@@ -3580,7 +3580,7 @@
       "Handling": 500,
       "Obtained": "Common Barn Find",
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "barn 1977 chevy camaro": {
       "alias": "barn 1977 camaro",
@@ -3599,7 +3599,7 @@
       "Junked": true,
       "restored": "1977 chevy camaro",
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "barn 1967 chevy impala": {
       "alias": "barn 1967 impala",
@@ -3649,7 +3649,7 @@
       "Drift": 0,
       "Handling": 450,
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "barn 1967 chevy camaro": {
       "alias": "barn 1967 camaro",
@@ -3667,7 +3667,7 @@
       "Drift": 0,
       "Handling": 500,
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "1973 ferrari dino": {
       "alias": "1973 dino",
@@ -3748,7 +3748,7 @@
       "Drift": 0,
       "Handling": 500,
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "1971 chevy corvette": {
       "alias": "1971 corvette",
@@ -3765,7 +3765,7 @@
       "Handling": 500,
       "Obtained": "Uncommon Barn Find",
       "Weight": 3600,
-      "Muscle":true
+      "Muscle": true
     },
     "barn 1969 ford gt40": {
       "alias": "barn 1969 gt40",
@@ -4606,7 +4606,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 3200,
-      "Muscle":true
+      "Muscle": true
     },
     "2015 volkswagen golf gti": {
       "alias": "2015 golf gti",
@@ -5275,7 +5275,7 @@
       "Handling": 500,
       "Class": "B",
       "Weight": 3200,
-      "Muscle":true
+      "Muscle": true
     },
     "2019 chevy corvette c7": {
       "alias": "2019 c7",
@@ -5292,7 +5292,7 @@
       "Trims": ["2019 chevy corvette c7 zr1"],
       "Class": "B",
       "Weight": 3200,
-      "Muscle":true
+      "Muscle": true
     },
     "2019 chevy corvette c7 zr1": {
       "alias": "2019 c7 zr1",
@@ -5308,7 +5308,7 @@
       "Handling": 400,
       "Class": "A",
       "Weight": 3300,
-      "Muscle":true
+      "Muscle": true
     },
     "police 2008 bugatti veyron": {
       "alias": "police 2008 veyron",
@@ -5445,7 +5445,7 @@
       "Police": "3",
       "Rank": "Sergeant",
       "Weight": 3100,
-      "Muscle":true
+      "Muscle": true
     },
     "police 2020 ford mustang": {
       "alias": "police 2020 mustang",
@@ -5531,7 +5531,7 @@
       "Rank": "Sergeant",
       "Class": "B",
       "Weight": 3100,
-      "Muscle":true
+      "Muscle": true
     },
     "police 2010 ford mustang": {
       "alias": "police 2010 mustang",
@@ -6016,7 +6016,7 @@
       "Handling": 500,
       "Class": "C",
       "Weight": 3200,
-      "Muscle":true
+      "Muscle": true
     },
 
     "1993 porsche 959": {
@@ -6523,7 +6523,7 @@
       "Tires": "T3Tires",
       "Intake": "T2Intake",
       "Weight": 3400,
-      "Muscle":true
+      "Muscle": true
     },
     "bm 2022 bmw m8": {
       "alias": "bm 2002 m8",
@@ -8874,7 +8874,7 @@
       "Weight": 2100,
       "Obtained": "Event",
       "Team": "Chevrolet",
-      "Muscle":true
+      "Muscle": true
     },
     "2023 ferrari 499p": {
       "alias": "2023 499p.r",
