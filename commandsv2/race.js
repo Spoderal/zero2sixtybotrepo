@@ -636,17 +636,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
+                  raceranks = raceranks * 2;
+                  cashwon = cashwon * 2;
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("radio");
                   userdata.update();
                   cooldowndata.radio = 0;
                   interaction.channel.send("Your radio battery ran out.");
-                } else {
-                  raceranks = raceranks * 2;
-                  cashwon = cashwon * 2;
-                  rpwon = rpwon * 2;
                 }
               }
 
@@ -656,15 +656,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
                   cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -677,14 +677,8 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  cooldowndata.tequilla = 0;
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -696,6 +690,11 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
 
@@ -705,16 +704,14 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  raceranks = 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
-                  cooldowndata.fruitpunch = 0;
-                  cooldown = 0;
                   interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
                 }
               }
               if (usinginv.includes("energy drink")) {
@@ -723,15 +720,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
                   cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
                 }
               }
 
@@ -883,7 +880,9 @@ module.exports = {
           let canrace = userdata.eventCooldown || 43200000;
           if (userdata.using.includes("ice cube")) {
             canrace = canrace / 2;
+            userdata.using.pull("ice cube")
           }
+
           if (lemasncool !== null && canrace - (Date.now() - lemasncool) > 0) {
             let time = ms(canrace - (Date.now() - lemasncool));
             let timeEmbed = new EmbedBuilder()
@@ -1164,16 +1163,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("radio");
-                  userdata.update();
-                  interaction.channel.send("Your radio battery ran out.");
-                } else {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
                   raceranks = raceranks * 2;
                   cashwon = cashwon * 2;
                   rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
                 }
               }
 
@@ -1185,12 +1185,13 @@ module.exports = {
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -1205,11 +1206,6 @@ module.exports = {
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -1221,9 +1217,13 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
-
               if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 600000;
@@ -1232,12 +1232,12 @@ module.exports = {
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
+                  raceranks = 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
                   interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
                 }
               }
               if (usinginv.includes("energy drink")) {
@@ -1248,12 +1248,13 @@ module.exports = {
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
+                  cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
                 }
               }
 
@@ -1574,16 +1575,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("radio");
-                  userdata.update();
-                  interaction.channel.send("Your radio battery ran out.");
-                } else {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
                   raceranks = raceranks * 2;
                   cashwon = cashwon * 2;
                   rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
                 }
               }
 
@@ -1593,14 +1595,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -1613,13 +1616,8 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -1631,6 +1629,11 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
 
@@ -1640,14 +1643,14 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  raceranks = 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
                   interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
                 }
               }
               if (usinginv.includes("energy drink")) {
@@ -1656,14 +1659,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
+                  cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
                 }
               }
               if (crateearned !== undefined) {
@@ -1969,16 +1973,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("radio");
-                  userdata.update();
-                  interaction.channel.send("Your radio battery ran out.");
-                } else {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
                   raceranks = raceranks * 2;
                   cashwon = cashwon * 2;
                   rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
                 }
               }
 
@@ -1988,14 +1993,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -2008,13 +2014,8 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -2026,41 +2027,47 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
 
-              if (usinginv.includes("fruit punch")) {
-                let cooldown = cooldowndata.fruitpunch;
-                let timeout = 600000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("fruit punch");
-                  userdata.update();
-                  interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
+                if (usinginv.includes("fruit punch")) {
+                  let cooldown = cooldowndata.fruitpunch;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    raceranks = 2;
+                  } else {
+                    console.log("pulled");
+                    userdata.using.pull("fruit punch");
+                    userdata.update();
+                    interaction.channel.send("Your fruit punch ran out! :(");
+                  }
                 }
-              }
-              if (usinginv.includes("energy drink")) {
-                let cooldown = cooldowndata.energydrink;
-                let timeout = 60000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("energy drink");
-                  userdata.update();
-                  interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
+                if (usinginv.includes("energy drink")) {
+                  let cooldown = cooldowndata.energydrink;
+                  let timeout = 60000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    rpwon = rpwon * 2;
+                  } else {
+                    console.log("pulled");
+                    userdata.using.pull("energy drink");
+                    userdata.update();
+                    cooldowndata.energydrink = 0;
+                    interaction.channel.send("Your energy drink ran out! :(");
+                  }
                 }
-              }
               if (bonus > 0) {
                 cashwon = cashwon += cashwon * bonus;
               }
@@ -2367,12 +2374,12 @@ module.exports = {
                     cooldown !== null &&
                     timeout - (Date.now() - cooldown) > 0
                   ) {
+                    commonkeys = commonkeys * 2;
+                  } else {
                     console.log("pulled");
                     userdata.using.pull("milk");
                     userdata.update();
                     interaction.channel.send("Your milk ran out.");
-                  } else {
-                    commonkeys = commonkeys * 2;
                   }
                 }
                 earnings.push(`${emotes.commonKey} +${commonkeys}`);
@@ -2387,12 +2394,12 @@ module.exports = {
                     cooldown !== null &&
                     timeout - (Date.now() - cooldown) > 0
                   ) {
+                    rarekeys = rarekeys * 2;
+                  } else {
                     console.log("pulled");
                     userdata.using.pull("milk");
                     userdata.update();
                     interaction.channel.send("Your strawberry milk ran out.");
-                  } else {
-                    rarekeys = rarekeys * 2;
                   }
                 }
                 earnings.push(`${emotes.rareKey} +${rarekeys}`);
@@ -2407,12 +2414,12 @@ module.exports = {
                     cooldown !== null &&
                     timeout - (Date.now() - cooldown) > 0
                   ) {
+                    exotickeys = exotickeys * 2;
+                  } else {
                     console.log("pulled");
                     userdata.using.pull("milk");
                     userdata.update();
                     interaction.channel.send("Your chocolate milk ran out.");
-                  } else {
-                    exotickeys = exotickeys * 2;
                   }
                 }
                 earnings.push(`${emotes.exoticKey} +${exotickeys}`);
@@ -2432,16 +2439,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("radio");
-                  userdata.update();
-                  interaction.channel.send("Your radio battery ran out.");
-                } else {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
                   raceranks = raceranks * 2;
                   cashwon = cashwon * 2;
                   rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
                 }
               }
 
@@ -2451,14 +2459,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -2471,13 +2480,8 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -2489,6 +2493,11 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
 
@@ -2498,14 +2507,14 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  raceranks = 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
                   interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
                 }
               }
               if (usinginv.includes("energy drink")) {
@@ -2514,14 +2523,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
+                  cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
                 }
               }
               if (bonus > 0) {
@@ -2903,16 +2913,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("radio");
-                  userdata.update();
-                  interaction.channel.send("Your radio battery ran out.");
-                } else {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
                   raceranks = raceranks * 2;
                   cashwon = cashwon * 2;
                   rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
                 }
               }
 
@@ -2922,14 +2933,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -2942,13 +2954,8 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -2960,6 +2967,11 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
 
@@ -2969,14 +2981,14 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  raceranks = 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
                   interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
                 }
               }
               if (usinginv.includes("energy drink")) {
@@ -2985,14 +2997,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
+                  cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
                 }
               }
               if (bonus > 0) {
@@ -3337,16 +3350,17 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("radio");
-                  userdata.update();
-                  interaction.channel.send("Your radio battery ran out.");
-                } else {
+                  timeout - (Date.now() - cooldown) > 0
+                  ) {
                   raceranks = raceranks * 2;
                   cashwon = cashwon * 2;
                   rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
                 }
               }
 
@@ -3356,14 +3370,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("flat tire");
                   userdata.update();
+                  cooldowndata.flattire = 0;
                   interaction.channel.send("Your flat tire ran out! :(");
-                } else {
-                  cashwon = cashwon += cashwon * 0.05;
                 }
               }
               let itemeffects = userdata.itemeffects || [];
@@ -3376,13 +3391,8 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
-                  console.log("pulled");
-                  userdata.using.pull("tequila shot");
-                  userdata.update();
-                  interaction.channel.send("Your tequila shot ran out! :(");
-                } else {
                   if (itemeffectsfilter[0].earning == "bad") {
                     earnings.push("You lost $500K!");
                     let usercash = userdata.cash;
@@ -3394,6 +3404,11 @@ module.exports = {
                   } else if (itemeffectsfilter[0].earning == "good") {
                     cashwon = cashwon * 5;
                   }
+                } else {
+                    console.log("pulled");
+                    userdata.using.pull("tequila shot");
+                    userdata.update();
+                    interaction.channel.send("Your tequila shot ran out! :(");
                 }
               }
 
@@ -3403,14 +3418,14 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  raceranks = 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("fruit punch");
                   userdata.update();
                   interaction.channel.send("Your fruit punch ran out! :(");
-                } else {
-                  raceranks = 2;
                 }
               }
               if (usinginv.includes("energy drink")) {
@@ -3419,14 +3434,15 @@ module.exports = {
                 console.log(timeout - (Date.now() - cooldown));
                 if (
                   cooldown !== null &&
-                  timeout - (Date.now() - cooldown) < 0
+                  timeout - (Date.now() - cooldown) > 0
                 ) {
+                  rpwon = rpwon * 2;
+                } else {
                   console.log("pulled");
                   userdata.using.pull("energy drink");
                   userdata.update();
+                  cooldowndata.energydrink = 0;
                   interaction.channel.send("Your energy drink ran out! :(");
-                } else {
-                  rpwon = rpwon * 2;
                 }
               }
               if (bonus > 0) {
