@@ -2051,24 +2051,7 @@
       "Weight": 3700,
       "Muscle": true
     },
-    "2024 ford mustang dark horse": {
-      "alias": "2024 mustang dh",
-      "Name": "2024 Ford Mustang Dark Horse",
-      "Emote": "<:ford:931012624152399902>",
-      "Speed": 195,
-      "kmh": 249,
-      "Price": 0,
-      "sellprice": 12000,
-      "Engine": "V8",
-      "Image": "https://i.ibb.co/mNCNJmy/darkhorse.png",
-      "0-60": 4,
-      "Drift": 0,
-      "Handling": 850,
-      "Class": "B",
-      "Weight": 3700,
-      "Muscle": true,
-      "Obtained": "Used Cars"
-    },
+
     "1987 ford mustang gt": {
       "alias": "1987 mustang gt",
       "Name": "1987 Ford Mustang GT",
@@ -8678,6 +8661,26 @@
       "Class": "A",
       "Obtained": "Used Cars",
       "Weight": 3800
+    },
+    "2024 ford mustang dark horse": {
+      "alias": "2024 mustang dh",
+      "Name": "2024 Ford Mustang Dark Horse",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 195,
+      "kmh": 249,
+      "Price": 0,
+      "sellprice": 12000,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/mNCNJmy/darkhorse.png",
+      "0-60": 4,
+      "Drift": 0,
+      "Handling": 850,
+      "LowPrice": 200000,
+      "HighPrice": 500000,
+      "Class": "B",
+      "Weight": 3700,
+      "Muscle": true,
+      "Obtained": "Used Cars"
     },
     "1992 bugatti eb110": {
       "alias": "1992 eb110",
