@@ -7,7 +7,6 @@ async function stats(client) {
     global.users = users;
     global.update();
     global.save();
-    console.log("done");
   }, 600000);
 }
 
