@@ -274,7 +274,7 @@ module.exports = {
           if (using.includes("fruit punch")) {
             dranks = dranks * 2;
           }
-
+          //test
           earnings.push(`${emotes.cash} +${cashreward}`);
           if (keysreward > 0) {
             earnings.push(`${emotes.dirftKey} +${keysreward}`);
