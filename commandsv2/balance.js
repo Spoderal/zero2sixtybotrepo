@@ -104,6 +104,7 @@ module.exports = {
       foolskeys,
       lekeys,
       bounty,
+      seriestickets
     } = profile;
 
     if (userdata.police == false) {
@@ -125,6 +126,8 @@ module.exports = {
             ${emotes.superWheel} Super Wheel spins: ${swheelspins}  
             
             ${emotes.blueprints} Blueprints: ${blueprints}\n
+
+            ${emotes.seriestickets} Series Tickets ${seriestickets}
             `
           )
           .setColor(colors.blue)

@@ -115,7 +115,7 @@ module.exports = {
 
           You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2018 Singer DLS**
 
-          Once you have 25 wins, come back and claim your Singer DLS
+          Once you have 50 wins, come back and claim your Singer DLS
 
           You will also have a chance to earn exclusive **DIAMOND PLATED PARTS** such as the <:part_txxecu:1113746120187846726> TXXECU!
                     `);

@@ -90,7 +90,7 @@ module.exports = {
       let foolskeys = userdata.foolskeys;
       let lekeys = userdata.lekeys;
 
-      let driftkeys = userdata.dkeys2 || 0;
+      let driftkeys = userdata.dkeyst || 0;
       let ferrarikeys = userdata.fkeys;
 
       if (bought == "common" && commonkeys < 50)

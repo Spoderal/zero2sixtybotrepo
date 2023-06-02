@@ -12,6 +12,7 @@ const emotes = {
   cash: "<:zecash:983966383408832533>",
   gold: "<:z_gold:933929482518167552>",
   bank: "🏦",
+  seriestickets: "<:stickets:1114077581898154064>",
 
   // Player specific
   notoriety: "<:notoriety:1077420597388247170>",

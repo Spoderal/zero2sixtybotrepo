@@ -44,5 +44,10 @@
     "name": "police_streetrace",
     "tiers": 7,
     "reward": 75
+  },
+  {
+    "name": "carseries",
+    "tiers": 7,
+    "reward": 0
   }
 ]
