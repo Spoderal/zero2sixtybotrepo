@@ -205,7 +205,7 @@ module.exports = {
       miles = 2;
     }
     if (track == "mountain" && difficulty == "master") {
-      tracklength = 40000;
+      tracklength = 35000;
       cashreward = cashreward * 4;
       dranks = dranks * 3;
       trackimg = "https://i.ibb.co/NF6jb79/devilsmountain2.png";
