@@ -3683,7 +3683,7 @@ module.exports = {
                 } else {
                   console.log("pulled");
                   userdata.using.pull("tequila shot");
-                  userdata.itemeffects.pull(itemeffectsfilter[0])
+                  userdata.itemeffects.pull(itemeffectsfilter[0]);
                   userdata.update();
                   interaction.channel.send("Your tequila shot ran out! :(");
                 }
