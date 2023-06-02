@@ -246,6 +246,7 @@ module.exports = {
         "969040033153712179",
         "452045662188732417"
       ];
+      //test
 
       if (!whitelist.includes(interaction.user.id))
         return await interaction.reply({
