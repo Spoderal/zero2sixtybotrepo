@@ -332,7 +332,7 @@ module.exports = {
                 };
                 userdata.cars.push(carobj);
 
-                userdata.crewseason2 += 1;
+                userdata.crewseason3 += 1;
                 userdata.save();
               }
 
