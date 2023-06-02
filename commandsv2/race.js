@@ -338,7 +338,7 @@ module.exports = {
       "crossrace",
       "lemans",
       "police_streetrace",
-      "carseries"
+      "carseries",
     ];
     collector.on("collect", async (i) => {
       console.log(i.customId);
@@ -3117,7 +3117,8 @@ module.exports = {
             }
           }, 1000);
         } else if (race[0].name == "carseries") {
-          if(userdata.seriestickets <= 0) return interaction.reply("You need a series ticket to race!")
+          if (userdata.seriestickets <= 0)
+            return interaction.reply("You need a series ticket to race!");
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({ content: "Please wait...", components: [] });
@@ -3178,7 +3179,7 @@ module.exports = {
 
           let speed = 0;
           let speed2 = 0;
-          userdata.seriestickets -= 1
+          userdata.seriestickets -= 1;
           handling = Math.floor(handling);
           handling2 = Math.floor(handling2);
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
