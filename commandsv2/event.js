@@ -100,8 +100,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
-      else if (value === "devilsmountain") {
+      } else if (value === "devilsmountain") {
         embed.setTitle("Devils Mountain");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Can you beat the drift king?

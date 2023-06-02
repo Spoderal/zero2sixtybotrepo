@@ -1338,7 +1338,7 @@
       "Weight": 3500
     },
 
-        "devils 2001 toyota supra mk4": {
+    "devils 2001 toyota supra mk4": {
       "alias": "devils 2001 supra mk4",
       "Name": "Devils 2001 Toyota Supra mk4",
       "Emote": "<:toyota:931012829283233883>",
@@ -2067,7 +2067,7 @@
       "Class": "B",
       "Weight": 3700,
       "Muscle": true,
-      "Obtained":"Used Cars"
+      "Obtained": "Used Cars"
     },
     "1987 ford mustang gt": {
       "alias": "1987 mustang gt",
@@ -3443,7 +3443,7 @@
       "Handling": 500,
       "Weight": 3600
     },
-   "1980 porsche 911": {
+    "1980 porsche 911": {
       "alias": "1980 911",
       "Name": "1980 Porsche 911",
       "Emote": "<:porsche:931011550880338011>",
@@ -3457,10 +3457,10 @@
       "Drift": 0,
       "Handling": 500,
       "Weight": 3600,
-      "Class":"D",
-      "Series":true
+      "Class": "D",
+      "Series": true
     },
-  "2018 singer dls": {
+    "2018 singer dls": {
       "alias": "2018 dls",
       "Name": "2018 Singer DLS",
       "Emote": "<:porsche:931011550880338011>",
@@ -3472,7 +3472,7 @@
       "Image": "https://i.ibb.co/3MrTWHz/porsche-singer-vehicle-design-dls-2018-ht-1280x720-1.jpg",
       "0-60": 5,
       "Drift": 0,
-      "Class":"A",
+      "Class": "A",
       "Handling": 750,
       "Weight": 2100
     },
@@ -4839,7 +4839,7 @@
       "Class": "A",
       "Weight": 2788,
       "Obtained": "Blueprints",
-      "Series":true
+      "Series": true
     },
     "2018 honda civic type r": {
       "alias": "2018 civic type r",

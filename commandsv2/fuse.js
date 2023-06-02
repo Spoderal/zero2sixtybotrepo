@@ -338,9 +338,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } 
-    
-    else if (parttoinstall == "txbrakes") {
+    } else if (parttoinstall == "txbrakes") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
@@ -349,8 +347,7 @@ module.exports = {
       if (!parts.includes("t5brakes") && !parts.includes("T5Brakes"))
         return await interaction.reply(`You need a T5Brakes to do this fuse!`);
 
-      for (var f4 = 0; f4 < 1; f4++)
-        parts.splice(parts.indexOf("t5brakes"), 1);
+      for (var f4 = 0; f4 < 1; f4++) parts.splice(parts.indexOf("t5brakes"), 1);
       userdata.parts = parts;
 
       userdata.xessence -= 100;
@@ -382,8 +379,7 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } 
-    else if (parttoinstall == "txturbo") {
+    } else if (parttoinstall == "txturbo") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(

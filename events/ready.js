@@ -17,7 +17,7 @@ const gold = require("../gold");
 const stats = require("./stats").stats;
 const cardata = require("./shopdata");
 
-const {series} = require("./series");
+const { series } = require("./series");
 const { updateUsed } = require("./used");
 
 let mongoConfig = {
@@ -43,7 +43,7 @@ module.exports = {
     double(client);
     gold(client);
     stats(client);
-    series(client)
+    series(client);
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");

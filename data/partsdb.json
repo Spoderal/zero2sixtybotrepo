@@ -79,7 +79,7 @@
       "Tier": "1",
       "Type": "exhaust",
       "Image": "https://i.ibb.co/N1g03nQ/part-t1exhaust.png",
-      "Loan":true
+      "Loan": true
     },
     "t2exhaust": {
       "Name": "T2Exhaust",
@@ -407,7 +407,7 @@
       "DecreasedSpeed": "0",
       "AddHandling": 1,
       "Image": "https://i.ibb.co/99yhvLq/part-t1ecu.png",
-      "Loan":true
+      "Loan": true
     },
     "t2ecu": {
       "Name": "T2ECU",
@@ -567,7 +567,7 @@
       "Tier": "1",
       "Type": "exhaust",
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png",
-      "Loan":true
+      "Loan": true
     },
     "dualturbo": {
       "Name": "DualTurbo",
@@ -976,7 +976,7 @@
       "Type": "intake",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/Pw3WgyH/part-t1intake.png",
-      "Loan":true
+      "Loan": true
     },
     "t2intake": {
       "Name": "T2Intake",
@@ -2484,7 +2484,7 @@
       "Price": 0,
       "Emote": "<:suspension1:932046370725044335>",
       "Tier": "1",
-      "AddHandling":50,
+      "AddHandling": 50,
       "AddedDrift": "0",
       "DecreasedDrift": "2",
       "DecreasedSixty": "0",
@@ -2492,7 +2492,7 @@
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/Wtft3SN/t1racesuspension.png",
       "Height": 4.5,
-      "Loan":true
+      "Loan": true
     },
     "bodykit": {
       "Name": "BodyKit",

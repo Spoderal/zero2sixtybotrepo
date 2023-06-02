@@ -63,11 +63,18 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
 
-    if(selected.Loan && !partdb.Parts[inputPartName].Loan && selected.Wins < 50){
-      return interaction.reply("You can only use loaned parts with this car! Get 50 wins or complete the series to use other parts.")
+    if (
+      selected.Loan &&
+      !partdb.Parts[inputPartName].Loan &&
+      selected.Wins < 50
+    ) {
+      return interaction.reply(
+        "You can only use loaned parts with this car! Get 50 wins or complete the series to use other parts."
+      );
     }
 
-    if(partdb.Parts[inputPartName].Loan && !selected.Loan) return interaction.reply("You can only use loan parts on series cars!")
+    if (partdb.Parts[inputPartName].Loan && !selected.Loan)
+      return interaction.reply("You can only use loan parts on series cars!");
 
     if (!userdata.parts.includes(inputPartName))
       return await interaction.reply("You don't have this part!");
