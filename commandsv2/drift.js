@@ -109,14 +109,12 @@ module.exports = {
       timelimit = 15;
       notorietyreward = 50;
       cashreward = 100;
-      keysreward = 2;
       dranks = 1;
     } else if (difficulty == "medium") {
       time = 250;
       timelimit = 10;
       notorietyreward = 100;
       cashreward = 250;
-      keysreward = 3;
       dranks = 2;
     } else if (difficulty == "hard") {
       time = 500;
@@ -124,7 +122,6 @@ module.exports = {
 
       notorietyreward = 200;
       cashreward = 500;
-      keysreward = 5;
       dranks = 2;
     } else if (difficulty == "master") {
       time = 550;
@@ -132,7 +129,6 @@ module.exports = {
 
       notorietyreward = 300;
       cashreward = 600;
-      keysreward = 6;
       dranks = 3;
     }
 
@@ -208,6 +204,13 @@ module.exports = {
       }
       miles = 2;
     }
+     if(track == "mountain" && difficulty == "master"){
+      tracklength = 40000;
+      cashreward = cashreward * 4;
+      dranks = dranks * 3
+      trackimg = "https://i.ibb.co/NF6jb79/devilsmountain2.png";
+      keysreward = 1
+    }
 
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
@@ -273,12 +276,15 @@ module.exports = {
           }
 
           earnings.push(`${emotes.cash} +${cashreward}`);
-          earnings.push(`${emotes.dirftKey} +${keysreward}`);
+          if(keysreward > 0){
+
+            earnings.push(`${emotes.dirftKey} +${keysreward}`);
+          }
           earnings.push(`+${dranks} Drift Rank`);
 
           userdata.driftrank += dranks;
           userdata.cash += cashreward;
-          userdata.dkeys2 += keysreward;
+          userdata.dkeyst += keysreward;
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
@@ -312,6 +318,14 @@ module.exports = {
               userdata.achievements.push({
                 name: "Drift King",
               });
+            }
+          }
+
+          if(difficulty == "master" && track == "mountain"){
+            userdata.dkeyst += 2
+            if(!userdata.titles.includes("drift king")){
+              userdata.titles.push("drift king")
+
             }
           }
           userdata.save();

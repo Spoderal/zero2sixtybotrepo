@@ -552,6 +552,17 @@
     "Image": "https://i.ibb.co/h18BFcm/item-radar.png"
   },
 
+  "secret brief case": {
+    "Price": 0,
+    "Action": "Top secret, you'll receive 1000 bounty for using this as a police officer, don't tell anyone.",
+    "Name": "Radar",
+    "Type": "Usable",
+    "Emote": "<:item_briefcase:1114027394660044800>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/j35ztVR/item-briefcase.png"
+  },
+
   "energy drink": {
     "Price": 25000,
     "Action": "2x RP for 10 minutes",

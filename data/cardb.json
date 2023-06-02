@@ -1256,6 +1256,39 @@
       "Class": "D",
       "Weight": 3100
     },
+
+    "devils 1995 nissan skyline r33": {
+      "alias": "devils 1995 skyline r33",
+      "Name": "Devils 1995 Nissan Skyline R33",
+      "Emote": "<:nissan:931011548678352916>",
+      "Speed": 155,
+      "Price": 0,
+      "sellprice": 6750,
+      "Engine": "1.8 L CA18DE I4",
+      "Image": "https://i.ibb.co/XZfKhCp/maxresdefault-3-2.jpg",
+      "0-60": 11.9,
+      "Drift": 4,
+      "Handling": 1000,
+      "Obtained": "Drift Imports",
+      "Class": "C",
+      "Weight": 3400
+    },
+    "devils 2009 honda s2000": {
+      "alias": "devils 2009 s2000",
+      "Name": "Devils 2009 Honda S2000",
+      "Emote": "<:honda:931011549705957397>",
+      "Speed": 158,
+      "Price": 0,
+      "sellprice": 6750,
+      "Engine": "1.8 L CA18DE I4",
+      "Image": "https://i.ibb.co/mz9qBZh/maxresdefault-99.jpg",
+      "0-60": 12,
+      "Drift": 4,
+      "Handling": 950,
+      "Obtained": "Drift Imports",
+      "Class": "C",
+      "Weight": 3200
+    },
     "drift 2001 lexus is300": {
       "alias": "drift 2001 lexus is300",
       "Name": "Drift 2001 Lexus IS300",
@@ -1287,6 +1320,38 @@
       "Handling": 3000,
       "Class": "D",
       "Weight": 4100
+    },
+    "devils 2002 nissan skyline r34": {
+      "alias": "devils 2002 skyline r34",
+      "Name": "Devils 2002 Nissan Skyline R34",
+      "Emote": "<:nissan:931011548678352916>",
+      "Speed": 178,
+      "Price": 0,
+      "sellprice": 6750,
+      "Engine": "1.8 L CA18DE I4",
+      "Image": "https://i.ibb.co/0MsyStT/maxresdefault-100.jpg",
+      "0-60": 10.5,
+      "Drift": 4,
+      "Handling": 1050,
+      "Obtained": "Drift Imports",
+      "Class": "C",
+      "Weight": 3500
+    },
+
+        "devils 2001 toyota supra mk4": {
+      "alias": "devils 2001 supra mk4",
+      "Name": "Devils 2001 Toyota Supra mk4",
+      "Emote": "<:toyota:931012829283233883>",
+      "Speed": 175,
+      "Price": 0,
+      "sellprice": 6750,
+      "Engine": "1.8 L CA18DE I4",
+      "Image": "https://i.ibb.co/fM1FWqT/white-toyota-supra-mk4-wallpaper-1280x720-45.jpg",
+      "0-60": 10.5,
+      "Handling": 3100,
+      "Obtained": "Drift Imports",
+      "Class": "C",
+      "Weight": 3600
     },
 
     "sil-eighty": {
@@ -1985,6 +2050,24 @@
       "Class": "B",
       "Weight": 3700,
       "Muscle": true
+    },
+    "2024 ford mustang dark horse": {
+      "alias": "2024 mustang dh",
+      "Name": "2024 Ford Mustang Dark Horse",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 195,
+      "kmh": 249,
+      "Price": 0,
+      "sellprice": 12000,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/mNCNJmy/darkhorse.png",
+      "0-60": 4,
+      "Drift": 0,
+      "Handling": 850,
+      "Class": "B",
+      "Weight": 3700,
+      "Muscle": true,
+      "Obtained":"Used Cars"
     },
     "1987 ford mustang gt": {
       "alias": "1987 mustang gt",
@@ -3345,7 +3428,7 @@
       "Weight": 3600
     },
     "1965 porsche 911": {
-      "alias": "barn 1965 911",
+      "alias": "1965 911",
       "Name": "1965 Porsche 911",
       "Emote": "<:porsche:931011550880338011>",
       "kmh": 265,
@@ -3359,6 +3442,39 @@
       "Drift": 0,
       "Handling": 500,
       "Weight": 3600
+    },
+   "1980 porsche 911": {
+      "alias": "1980 911",
+      "Name": "1980 Porsche 911",
+      "Emote": "<:porsche:931011550880338011>",
+      "kmh": 265,
+      "Speed": 140,
+      "Price": 0,
+      "sellprice": 10000,
+      "Engine": "3.0 L flat-six",
+      "Image": "https://i.ibb.co/LgJ8DMq/maxresdefault-2023-06-01-T184700-796.jpg",
+      "0-60": 12.3,
+      "Drift": 0,
+      "Handling": 500,
+      "Weight": 3600,
+      "Class":"D",
+      "Series":true
+    },
+  "2018 singer dls": {
+      "alias": "2018 dls",
+      "Name": "2018 Singer DLS",
+      "Emote": "<:porsche:931011550880338011>",
+      "kmh": 265,
+      "Speed": 200,
+      "Price": 0,
+      "sellprice": 10000,
+      "Engine": "3.0 L flat-six",
+      "Image": "https://i.ibb.co/3MrTWHz/porsche-singer-vehicle-design-dls-2018-ht-1280x720-1.jpg",
+      "0-60": 5,
+      "Drift": 0,
+      "Class":"A",
+      "Handling": 750,
+      "Weight": 2100
     },
     "1970 dodge challenger": {
       "alias": "1970 challenger",
@@ -4722,7 +4838,8 @@
       "Handling": 500,
       "Class": "A",
       "Weight": 2788,
-      "Obtained": "Blueprints"
+      "Obtained": "Blueprints",
+      "Series":true
     },
     "2018 honda civic type r": {
       "alias": "2018 civic type r",

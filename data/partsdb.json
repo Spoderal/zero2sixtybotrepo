@@ -69,6 +69,18 @@
       "DecreasedSpeed": "0",
       "AddHandling": "2"
     },
+    "loan exhaust": {
+      "Name": "Loan Exhaust",
+      "AddedSpeed": 5,
+      "AddedSixty": 2,
+      "sellprice": 900,
+      "Price": 0,
+      "Emote": "<:part_t1exhaust:1101027462932086855>",
+      "Tier": "1",
+      "Type": "exhaust",
+      "Image": "https://i.ibb.co/N1g03nQ/part-t1exhaust.png",
+      "Loan":true
+    },
     "t2exhaust": {
       "Name": "T2Exhaust",
       "AddedSpeed": 3,
@@ -378,6 +390,25 @@
       "AddHandling": "1",
       "Image": "https://i.ibb.co/99yhvLq/part-t1ecu.png"
     },
+    "loan ecu": {
+      "Name": "Loan ECU",
+      "AddedSixty": 0.5,
+      "AddedSnow": 0,
+      "AddedSpeed": 5,
+      "sellprice": 1200,
+      "Price": 0,
+      "Emote": "<:part_t1ecu:1102062324371693599>",
+      "Tier": "1",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "ecu",
+      "RevLimit": 2000,
+      "DecreasedSpeed": "0",
+      "AddHandling": 1,
+      "Image": "https://i.ibb.co/99yhvLq/part-t1ecu.png",
+      "Loan":true
+    },
     "t2ecu": {
       "Name": "T2ECU",
       "AddedSixty": 0.3,
@@ -471,6 +502,25 @@
       "Image": "https://i.ibb.co/Q6ZLwbC/part-txecu.png",
       "Obtained": "Fusing T5ECU with 100 Xessence"
     },
+    "txxecu": {
+      "Name": "TXXECU",
+      "AddedSixty": 5,
+      "AddedSnow": 0,
+      "AddedSpeed": 15,
+      "sellprice": 1200,
+      "Price": 0,
+      "Emote": "<:part_txxecu:1113746120187846726>",
+      "Tier": "XX",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "ecu",
+      "RevLimit": 7000,
+      "DecreasedSpeed": "0",
+      "AddHandling": 50,
+      "Image": "https://i.ibb.co/55DqR1d/part-txxecu.png",
+      "Obtained": "Car Series"
+    },
     "t1nitro": {
       "Name": "T1Nitro",
       "AddedSixty": "0",
@@ -506,6 +556,18 @@
       "PSI": 15,
       "MaxPSI": 20,
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
+    },
+    "loan turbo": {
+      "Name": "Loan Turbo",
+      "AddedSpeed": 5,
+      "AddedSixty": 2,
+      "sellprice": 900,
+      "Price": 0,
+      "Emote": "<:t1turbo:989758553340383272>",
+      "Tier": "1",
+      "Type": "exhaust",
+      "Image": "https://i.ibb.co/170X5fw/t1turbo.png",
+      "Loan":true
     },
     "dualturbo": {
       "Name": "DualTurbo",
@@ -694,6 +756,42 @@
       "Image": "https://i.ibb.co/LNdPxvY/part-t5brakes.png",
       "Obtained": "Fusing 2 T4Brakes"
     },
+    "txbrakes": {
+      "Name": "TXBrakes",
+      "AddedSpeed": "0",
+      "AddedSnow": 0,
+      "AddedSixty": "0",
+      "sellprice": 562,
+      "Price": 0,
+      "Emote": "<:part_txbrakes:1101659677642727464>",
+      "Tier": "X",
+      "AddedDrift": "0",
+      "DecreasedDrift": "2",
+      "DecreasedSixty": "0",
+      "Type": "brakes",
+      "DecreasedSpeed": "0",
+      "AddHandling": 100,
+      "Image": "https://i.ibb.co/6JjVFW4/part-txbrakes.png",
+      "Obtained": "Fusing T5Brakes with 100 Xessence"
+    },
+    "txxbrakes": {
+      "Name": "TXXBrakes",
+      "AddedSpeed": "0",
+      "AddedSnow": 0,
+      "AddedSixty": "0",
+      "sellprice": 562,
+      "Price": 0,
+      "Emote": "<:part_txxbrakes:1113959753119440956>",
+      "Tier": "XX",
+      "AddedDrift": "0",
+      "DecreasedDrift": "2",
+      "DecreasedSixty": "0",
+      "Type": "brakes",
+      "DecreasedSpeed": "0",
+      "AddHandling": 200,
+      "Image": "https://i.ibb.co/zFffYdx/part-txxbrakes.png",
+      "Obtained": "Car Series"
+    },
     "t1tracktires": {
       "Name": "T1TrackTires",
       "AddedSpeed": "0",
@@ -862,6 +960,23 @@
       "Type": "intake",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/Pw3WgyH/part-t1intake.png"
+    },
+    "loan intake": {
+      "Name": "Loan Intake",
+      "AddedSpeed": 5,
+      "AddedSnow": 0,
+      "AddedSixty": "0",
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:part_t1intake:1101659642095992882>",
+      "Tier": "1",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "intake",
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/Pw3WgyH/part-t1intake.png",
+      "Loan":true
     },
     "t2intake": {
       "Name": "T2Intake",
@@ -2359,6 +2474,25 @@
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/Wtft3SN/t1racesuspension.png",
       "Height": 4.5
+    },
+    "loan suspension": {
+      "Name": "Loan Suspension",
+      "AddedSpeed": 5,
+      "AddedSixty": 1,
+      "AddedSnow": 0,
+      "sellprice": 2812,
+      "Price": 0,
+      "Emote": "<:suspension1:932046370725044335>",
+      "Tier": "1",
+      "AddHandling":50,
+      "AddedDrift": "0",
+      "DecreasedDrift": "2",
+      "DecreasedSixty": "0",
+      "Type": "suspension",
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/Wtft3SN/t1racesuspension.png",
+      "Height": 4.5,
+      "Loan":true
     },
     "bodykit": {
       "Name": "BodyKit",

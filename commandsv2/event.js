@@ -35,6 +35,13 @@ module.exports = {
             customId: "lemans",
             emoji: "🏎️",
           },
+          {
+            label: "Devils Mountain",
+            description: "Information for the Devils Mountain Event",
+            value: "devilsmountain",
+            customId: "devilsmountain",
+            emoji: "🤘",
+          },
         ])
     );
 
@@ -48,7 +55,8 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 1 <a:season_1:1111097329836113920>\n
-          Le Mans 🏎️
+          Le Mans 🏎️\n
+          Devils Mountain 🤘
       `);
 
     embed.setColor(colors.blue);
@@ -87,6 +95,31 @@ module.exports = {
         embed
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/85G4t6R/season1-image.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } 
+      else if (value === "devilsmountain") {
+        embed.setTitle("Devils Mountain");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Can you beat the drift king?
+
+            Welcome to Devils Mountain, the longest, and hardest drift track ever, you're gonna need an extra good drift build to win against the drift king, his name is unknown.
+
+            Drift in /drift mountain extreme to race the drift king, you'll earn 3x drift rank for winning, an achievement if you win, 
+
+            Earn the title "DRIFT KING" for winning against him!
+            
+            The drift crate is also back with new cars temporarily!
+
+            **Ends July 1st 2023**
+
+                  `);
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/fXrT4K0/devilsmountain.png");
 
         await interaction.editReply({
           embeds: [embed],

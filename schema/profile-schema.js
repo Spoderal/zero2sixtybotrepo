@@ -144,7 +144,7 @@ const Profile = new mongoose.Schema({
     default: 0,
   },
 
-  dkeys2: {
+  dkeyst: {
     type: Number,
     required: false,
     default: 0,
@@ -539,6 +539,26 @@ const Profile = new mongoose.Schema({
     type: Number,
     required: false,
     default: 0,
+  },
+  perfectengineering: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  perfectengineeringcomplete: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  backintime: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  backintimecomplete: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 

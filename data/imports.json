@@ -94,19 +94,23 @@
       "drift 1993 bmw m3 e30",
       "drift 1998 bmw m3 e36",
       "drift 2000 lexus sc400",
-      "drift 2001 lexus is300"
+      "drift 2001 lexus is300",
+      "devils 1995 nissan skyline r33",
+      "devils 2001 toyota supra mk4",
+      "devils 2002 nissan skyline r34",
+      "devils 2009 honda s2000"
     ]
   },
   "blueprints": {
     "Contents": [
       "1981 dmc delorean",
       "50000 Cash",
-      "2021 audi r8 lms gt3",
-      "1989 toyota mr2",
+      "2015 mercedes c class",
+      "1984 renault 5 turbo 2",
       "25000 Cash",
       "25000 Cash",
       "25000 Cash",
-      "2021 audi r8 green hell",
+      "2013 porsche 911 turbo",
       "25000 Cash",
       "50000 Cash",
       "50000 Cash",

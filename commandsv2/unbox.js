@@ -129,7 +129,7 @@ module.exports = {
       } else if (bought == "exotic") {
         userdata.ekeys -= 20;
       } else if (bought == "drift") {
-        userdata.dkeys2 -= 50;
+        userdata.dkeyst -= 50;
       } else if (bought == "mclaren") {
         userdata.fkeys -= 100;
       } else if (bought == "fools") {

@@ -19,7 +19,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "5/5/2023",
+            label: "6/2/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -48,7 +48,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 5/5/2023\n
+            ⚙️ Latest Patch 6/2/2023\n
             ☀️ Summer Update 5/31/2023\n
             🚨 Police Update 5/17/2023\n
         `);
@@ -77,16 +77,14 @@ module.exports = {
               .setDescription(
                 `• New event! Check /events\n
                 • Fixed a lot of bugs!\n
-                • New visuals\n
-                • Autocomplete now in /race, and /buy, phasing out ids as the summer starts!\n
-                • Race visuals updated for smoother performance\n
-                • Profile visuals updated for smoother performance\n
-                • New job: Chef
-                • New items for chef job, <:item_spatula:1103826123600707658> Spatula and <a:item_pot:1103826120299778078> Cooking Pot
+                • New feature, Car series, check /series and click help for more information!\n
+                • Bounty resets every 24 hours\n
+                • Bounty earnings increased for cops
+                • New items: Brief Case
 
                 `
               )
-              .setFooter({ text: "5/5/2023" })
+              .setFooter({ text: "6/2/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

@@ -90,7 +90,7 @@ module.exports = {
       rkeys,
       ekeys,
       fkeys,
-      dkeys2: dkeys,
+      dkeyst: dkeys,
       notoriety,
       wheelspins,
       lockpicks: lockpicks,
@@ -158,6 +158,7 @@ module.exports = {
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
               ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
+              ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}
               `,
               inline: true,
             },
@@ -291,6 +292,7 @@ module.exports = {
           ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
           ${emotes.rp}  RP: ${numberWithCommas(rp4)}
           ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
+          ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}
           `,
             inline: true,
           },

@@ -67,6 +67,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  bounty: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   epiclockpick: {
     type: Number,
     required: false,
@@ -258,6 +263,11 @@ const Cooldowns = new mongoose.Schema({
     default: 0,
   },
   convert: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  series1: {
     type: Number,
     required: false,
     default: 0,

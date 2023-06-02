@@ -39,6 +39,7 @@ module.exports = {
           { name: "TXClutch", value: "txclutch" },
           { name: "TXGearbox", value: "txgearbox" },
           { name: "TXECU", value: "txecu" },
+          { name: "TXBrakes", value: "txbrakes" },
           { name: "Fruit Punch", value: "fruit punch" },
           { name: "Epic Rocket Engine", value: "epic rocket engine" }
         )
@@ -337,7 +338,52 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    } else if (parttoinstall == "txturbo") {
+    } 
+    
+    else if (parttoinstall == "txbrakes") {
+      let xessence = userdata.xessence;
+      if (xessence < 100)
+        return await interaction.reply(
+          `You need 100 Xessence to fuse this part into a TX!`
+        );
+      if (!parts.includes("t5brakes") && !parts.includes("T5Brakes"))
+        return await interaction.reply(`You need a T5Brakes to do this fuse!`);
+
+      for (var f4 = 0; f4 < 1; f4++)
+        parts.splice(parts.indexOf("t5brakes"), 1);
+      userdata.parts = parts;
+
+      userdata.xessence -= 100;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into a TX...")
+        .addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["t5brakes"].Emote} ${partdb.Parts["t5brakes"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Part`,
+            value: `${partdb.Parts["txbrakes"].Emote} ${partdb.Parts["txbrakes"].Name}`,
+          },
+        ]);
+        userdata.parts.push("txbrakes");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+      }, 2000);
+      return;
+    } 
+    else if (parttoinstall == "txturbo") {
       let xessence = userdata.xessence;
       if (xessence < 100)
         return await interaction.reply(
