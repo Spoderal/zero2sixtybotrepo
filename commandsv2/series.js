@@ -175,9 +175,9 @@ module.exports = {
       if (i.customId == "claimcar") {
         let series1cool = cooldowndata.series1;
         userdata = await User.findOne({ id: interaction.user.id });
-       let eng = userdata.perfectengineering
+        let eng = userdata.perfectengineering;
         let cooldown = 86400000;
-        if (eng == true)  return i.update("You already started this series!");
+        if (eng == true) return i.update("You already started this series!");
         if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
           let time = ms(cooldown - (Date.now() - series1cool));
           let timeEmbed = new EmbedBuilder()
@@ -216,11 +216,10 @@ module.exports = {
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
       ) {
-        
         let carobj = cardb.Cars["2018 singer dls"];
         userdata = await User.findOne({ id: interaction.user.id });
-        let eng = userdata.perfectengineeringcomplete
-         if (eng == true)  return i.update("You already finished this series!");
+        let eng = userdata.perfectengineeringcomplete;
+        if (eng == true) return i.update("You already finished this series!");
         let newobj = {
           ID: carobj.alias,
           Name: carobj.Name,
