@@ -560,11 +560,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
-  seriestickets:{
+  seriestickets: {
     type: Number,
     required: false,
     default: 10,
-  }
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

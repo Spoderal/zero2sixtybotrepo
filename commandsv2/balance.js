@@ -104,7 +104,7 @@ module.exports = {
       foolskeys,
       lekeys,
       bounty,
-      seriestickets
+      seriestickets,
     } = profile;
 
     if (userdata.police == false) {

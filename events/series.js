@@ -17,17 +17,18 @@ async function series() {
         try {
           let cooldowns = await Cooldown.findOne({ id: userdata.id });
           let bountycool = cooldowns.series1;
-          let ticketscool = cooldowns.series1tickets
+          let ticketscool = cooldowns.series1tickets;
           let udata = await User.findOne({ id: userdata.id });
           if (udata) {
             let timeout = 86400000;
-            let timeout2 = 600000
+            let timeout2 = 600000;
             if (
               udata.perfectengineering == true &&
-              udata.seriestickets < 10 && ticketscool !== null &&
+              udata.seriestickets < 10 &&
+              ticketscool !== null &&
               timeout2 - (Date.now() - ticketscool) < 0
             ) {
-              udata.seriestickets += 1
+              udata.seriestickets += 1;
             }
             if (
               udata.perfectengineering == true &&
@@ -54,7 +55,6 @@ async function series() {
 
               cooldowns.series1 = 0;
               udata.perfectengineering = false;
-
             }
             udata.update();
             cooldowns.update();
