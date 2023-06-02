@@ -1,6 +1,11 @@
 {
   "jerry": {
-    "cars": ["2021 porsche 911 turbo", "2023 jeep gladiator", "2008 acura tl", "2024 ford mustang dark horse"],
+    "cars": [
+      "2021 porsche 911 turbo",
+      "2023 jeep gladiator",
+      "2008 acura tl",
+      "2024 ford mustang dark horse"
+    ],
     "name": "Jerry",
     "deals": [true, true, false, false],
     "emote": "<:npc_jerry:1099231202927448145>",
