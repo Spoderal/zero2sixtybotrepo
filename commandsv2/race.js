@@ -99,18 +99,20 @@ module.exports = {
         .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
-    let bountytimeout = 86400000
-     if (
+    let bountytimeout = 86400000;
+    if (
       cooldowndata.bounty !== null &&
-      bountytimeout - (Date.now() - cooldowndata.bounty) > 0 && userdata.bounty > 0
+      bountytimeout - (Date.now() - cooldowndata.bounty) > 0 &&
+      userdata.bounty > 0
     ) {
-      console.log("bounty")
-    }
-    else {
-      interaction.channel.send("Your bounty reset, it resets every **24 hours**")
-      cooldowndata.bounty = 0
-      userdata.bounty = 0
-      userdata.update()
+      console.log("bounty");
+    } else {
+      interaction.channel.send(
+        "Your bounty reset, it resets every **24 hours**"
+      );
+      cooldowndata.bounty = 0;
+      userdata.bounty = 0;
+      userdata.update();
     }
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car").toLowerCase();
@@ -157,7 +159,7 @@ module.exports = {
         .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
-    cooldowndata.bounty = Date.now()
+    cooldowndata.bounty = Date.now();
     let row2;
     let row0;
     if (userdata.police == false) {
@@ -195,7 +197,7 @@ module.exports = {
           .setCustomId("muscledrag")
           .setStyle("Secondary"),
 
-          new ButtonBuilder()
+        new ButtonBuilder()
           .setLabel("Car Series")
           .setEmoji("🚗")
           .setCustomId("carseries")
@@ -3113,24 +3115,22 @@ module.exports = {
               return;
             }
           }, 1000);
-        } 
-        
-        else if (race[0].name == "carseries") {
+        } else if (race[0].name == "carseries") {
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({ content: "Please wait...", components: [] });
           let weather2 = lodash.sample(weather);
           let car2;
           let bot = i.customId;
-          if (!cardb.Cars[selected.Name.toLowerCase()].Series) return interaction.channel.send("You need to use a series car!");
-
+          if (!cardb.Cars[selected.Name.toLowerCase()].Series)
+            return interaction.channel.send("You need to use a series car!");
 
           let cashwon = parseInt(bot) * 1;
-          let diamond = randomRange(1, 100)
+          let diamond = randomRange(1, 100);
 
-          let diam = false
-          if(diamond <= 10){
-            diam = true
+          let diam = false;
+          if (diamond <= 10) {
+            diam = true;
           }
           if (bot == 1) {
             console.log("1");
@@ -3144,19 +3144,14 @@ module.exports = {
           } else if (bot == 5) {
             car2 = carsarray.filter((car) => car.Speed > 200);
           } else if (bot == 6) {
-
             car2 = carsarray.filter((car) => car.Speed > 210);
           } else if (bot == 7) {
             car2 = carsarray.filter((car) => car.Speed > 220);
-
           }
 
           car2 = lodash.sample(car2);
 
           console.log(car2);
-
-
-
 
           console.log(weather2);
 
@@ -3182,7 +3177,6 @@ module.exports = {
           let speed = 0;
           let speed2 = 0;
 
-  
           handling = Math.floor(handling);
           handling2 = Math.floor(handling2);
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
@@ -3214,7 +3208,7 @@ module.exports = {
             components: [],
             fetchReply: true,
           });
-          let timer = 0
+          let timer = 0;
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
@@ -3261,25 +3255,37 @@ module.exports = {
 
             if (tracklength > tracklength2 && timer == 10) {
               clearInterval(i2);
-              let earnings = []
+              let earnings = [];
 
-              if(diam == true){
-                if(selected.Name == "1980 Porsche 911" || selected.Name == "2018 Singer DLS"){
+              if (diam == true) {
+                if (
+                  selected.Name == "1980 Porsche 911" ||
+                  selected.Name == "2018 Singer DLS"
+                ) {
                   earnings.push(`+ <:part_txxecu:1113746120187846726> TXXECU`);
-                  userdata.parts.push("txxecu")
-                }
-                else if(selected.Name == "1981 DMC Delorean"){
-                  earnings.push(`+ <:part_txxbrakes:1113959753119440956> TXXBrakes`);
-                  userdata.parts.push("txxbrakes")
+                  userdata.parts.push("txxecu");
+                } else if (selected.Name == "1981 DMC Delorean") {
+                  earnings.push(
+                    `+ <:part_txxbrakes:1113959753119440956> TXXBrakes`
+                  );
+                  userdata.parts.push("txxbrakes");
                 }
               }
 
-              let randompart = randomRange(1, 5)
+              let randompart = randomRange(1, 5);
 
-              if(randompart >= 3){
-                let randpart = lodash.sample(["loan exhaust", "loan turbo", "loan intake", "loan suspension", "loan ecu"])
-                earnings.push(`+ ${partdb.Parts[randpart].Emote} ${partdb.Parts[randpart].Name}`)
-                userdata.parts.push(randpart)
+              if (randompart >= 3) {
+                let randpart = lodash.sample([
+                  "loan exhaust",
+                  "loan turbo",
+                  "loan intake",
+                  "loan suspension",
+                  "loan ecu",
+                ]);
+                earnings.push(
+                  `+ ${partdb.Parts[randpart].Emote} ${partdb.Parts[randpart].Name}`
+                );
+                userdata.parts.push(randpart);
               }
 
               earnings.push(`+${cashwon} Wins`);
@@ -3290,10 +3296,10 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Wins": selected.Wins += 1,
+                    "cars.$[car].Wins": (selected.Wins += 1),
                   },
                 },
-          
+
                 {
                   arrayFilters: [
                     {
@@ -3339,7 +3345,7 @@ module.exports = {
 
               embed.setTitle(`Tier ${bot} Car Series Race lost!`);
               await i.editReply({ embeds: [embed] });
-           
+
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
@@ -3362,8 +3368,7 @@ module.exports = {
               return;
             }
           }, 1000);
-        } 
-        else if (race[0].name == "crossrace") {
+        } else if (race[0].name == "crossrace") {
           let itemdb = require("../data/items.json");
           let findables = [];
           for (let ite in itemdb) {

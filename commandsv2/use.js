@@ -272,12 +272,13 @@ module.exports = {
       cooldowndata.canrob = Date.now();
 
       userdata.markModified("work");
-    } 
-    else if (itemtouse.toLowerCase() == "secret brief case") {
-      if(userdata.work.name !== "Police") return interaction.reply("You need to be a police officer to use this item!")
-      userdata.bounty += 1000
-    } 
-    else if (itemtouse.toLowerCase() == "tequila shot") {
+    } else if (itemtouse.toLowerCase() == "secret brief case") {
+      if (userdata.work.name !== "Police")
+        return interaction.reply(
+          "You need to be a police officer to use this item!"
+        );
+      userdata.bounty += 1000;
+    } else if (itemtouse.toLowerCase() == "tequila shot") {
       let chance = randomRange(1, 100);
 
       if (chance <= 10) {

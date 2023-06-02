@@ -204,12 +204,12 @@ module.exports = {
       }
       miles = 2;
     }
-     if(track == "mountain" && difficulty == "master"){
+    if (track == "mountain" && difficulty == "master") {
       tracklength = 40000;
       cashreward = cashreward * 4;
-      dranks = dranks * 3
+      dranks = dranks * 3;
       trackimg = "https://i.ibb.co/NF6jb79/devilsmountain2.png";
-      keysreward = 1
+      keysreward = 1;
     }
 
     const canvas = createCanvas(1280, 720);
@@ -276,8 +276,7 @@ module.exports = {
           }
 
           earnings.push(`${emotes.cash} +${cashreward}`);
-          if(keysreward > 0){
-
+          if (keysreward > 0) {
             earnings.push(`${emotes.dirftKey} +${keysreward}`);
           }
           earnings.push(`+${dranks} Drift Rank`);
@@ -321,11 +320,10 @@ module.exports = {
             }
           }
 
-          if(difficulty == "master" && track == "mountain"){
-            userdata.dkeyst += 2
-            if(!userdata.titles.includes("drift king")){
-              userdata.titles.push("drift king")
-
+          if (difficulty == "master" && track == "mountain") {
+            userdata.dkeyst += 2;
+            if (!userdata.titles.includes("drift king")) {
+              userdata.titles.push("drift king");
             }
           }
           userdata.save();
