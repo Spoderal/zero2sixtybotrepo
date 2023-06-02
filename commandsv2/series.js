@@ -176,7 +176,7 @@ const {
 
         if(i.customId == "claimcar"){
           let series1cool = cooldowndata.series1
-          let cooldown = 60000
+          let cooldown = 86400000
           if(series1 == true) return i.update("You already started this series!")
           if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
             let time = ms(cooldown - (Date.now() - series1cool));
