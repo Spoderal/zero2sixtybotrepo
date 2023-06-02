@@ -278,12 +278,12 @@ module.exports = {
           earnings.push(`${emotes.cash} +${cashreward}`);
           if (keysreward > 0) {
             earnings.push(`${emotes.dirftKey} +${keysreward}`);
+            userdata.dkeyst += keysreward;
           }
           earnings.push(`+${dranks} Drift Rank`);
 
           userdata.driftrank += dranks;
           userdata.cash += cashreward;
-          userdata.dkeyst += keysreward;
           await User.findOneAndUpdate(
             {
               id: interaction.user.id,
