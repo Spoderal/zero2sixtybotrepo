@@ -89,8 +89,8 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `🌸 SPRING 🌸  /season`,
-      `⚙️ PATCH ⚙️ 4/19 /updates`,
+      `☀️ SUMMER ☀️  /season`,
+      `⚙️ PATCH ⚙️ 6/1 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
     ];
 
