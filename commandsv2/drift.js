@@ -105,18 +105,21 @@ module.exports = {
     let keysreward;
     let dranks;
     if (difficulty == "easy") {
+          keysreward = 1;
       time = 100;
       timelimit = 15;
       notorietyreward = 50;
       cashreward = 100;
       dranks = 1;
     } else if (difficulty == "medium") {
+      keysreward = 2;
       time = 250;
       timelimit = 10;
       notorietyreward = 100;
       cashreward = 250;
       dranks = 2;
     } else if (difficulty == "hard") {
+      keysreward = 3;
       time = 500;
       timelimit = 7;
 
@@ -124,6 +127,7 @@ module.exports = {
       cashreward = 500;
       dranks = 2;
     } else if (difficulty == "master") {
+      keysreward = 4;
       time = 550;
       timelimit = 5;
 
@@ -166,8 +170,9 @@ module.exports = {
     let trackimg;
     let trackemote;
     let miles = 0;
-
+    keysreward = 1;
     if (track == "regular") {
+      
       trackemote = "🛣️";
       if (difficulty == "easy") {
         trackimg = "https://i.ibb.co/mtbZtS8/track-regular.png";
@@ -209,8 +214,8 @@ module.exports = {
       cashreward = cashreward * 4;
       dranks = dranks * 3;
       trackimg = "https://i.ibb.co/NF6jb79/devilsmountain2.png";
-      keysreward = 1;
     }
+
 
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
