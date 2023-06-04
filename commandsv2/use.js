@@ -559,10 +559,6 @@ module.exports = {
       let boughtindb = crates.Crates[itemtouse.toLowerCase()];
       console.log(boughtindb);
 
-      if (!inv.includes(itemtouse))
-        return interaction.reply(
-          `You don't have a ${boughtindb.Emote} ${boughtindb.Name}!`
-        );
 
       let embed = new EmbedBuilder()
         .setTitle(`Unboxing ${boughtindb.Emote} ${boughtindb.Name}...`)
