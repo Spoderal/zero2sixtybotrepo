@@ -224,7 +224,7 @@ module.exports = {
         let cash = userdata.cash;
         let price = tobuy.Price;
 
-        if (userdata.inventory.includes("cocktail")) {
+        if (userdata.using.includes("cocktail")) {
           let chance = randomRange(1, 100);
 
           if (chance <= 15) {
