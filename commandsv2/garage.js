@@ -27,19 +27,17 @@ module.exports = {
         .setDescription("The user to view the garage of")
     )
     .addStringOption((option) =>
-    option
-      .setName("filter")
-      .setRequired(false)
-      .setDescription("Filter your garage")
-      .addChoices(
-        {name:"Favorites", value:"favorites"}
-      )
-  ),
+      option
+        .setName("filter")
+        .setRequired(false)
+        .setDescription("Filter your garage")
+        .addChoices({ name: "Favorites", value: "favorites" })
+    ),
   async execute(interaction) {
     let user = interaction.options.getUser("user") || interaction.user;
 
     let udata = await User.findOne({ id: user.id });
-    let filter = interaction.options.getString("filter")
+    let filter = interaction.options.getString("filter");
 
     let ucars = udata.cars;
     let cars = udata.cars;
@@ -48,10 +46,9 @@ module.exports = {
     let garagelimit = udata.garageLimit;
     let xessence = udata.xessence;
 
-
-    if(filter && filter == "favorites"){
-      ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true)
-      console.log(ucars)
+    if (filter && filter == "favorites") {
+      ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true);
+      console.log(ucars);
     }
 
     let displayparts = [];
