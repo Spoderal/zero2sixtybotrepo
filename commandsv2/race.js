@@ -597,7 +597,7 @@ module.exports = {
                   console.log(timeout - (Date.now() - cooldown));
                   if (
                     cooldown !== null &&
-                    timeout - (Date.now() - cooldown) < 0
+                    timeout - (Date.now() - cooldown) > 0
                   ) {
                     console.log("pulled");
                     userdata.using.pull("pet treats");
@@ -620,7 +620,7 @@ module.exports = {
                   console.log(timeout - (Date.now() - cooldown));
                   if (
                     cooldown !== null &&
-                    timeout - (Date.now() - cooldown) < 0
+                    timeout - (Date.now() - cooldown) > 0
                   ) {
                     console.log("pulled");
                     userdata.using.pull("pet collar");
@@ -1120,7 +1120,7 @@ module.exports = {
                   console.log(timeout - (Date.now() - cooldown));
                   if (
                     cooldown !== null &&
-                    timeout - (Date.now() - cooldown) < 0
+                    timeout - (Date.now() - cooldown) > 0
                   ) {
                     console.log("pulled");
                     userdata.using.pull("pet treats");
@@ -1141,7 +1141,7 @@ module.exports = {
                   console.log(timeout - (Date.now() - cooldown));
                   if (
                     cooldown !== null &&
-                    timeout - (Date.now() - cooldown) < 0
+                    timeout - (Date.now() - cooldown) > 0
                   ) {
                     console.log("pulled");
                     userdata.using.pull("pet collar");
@@ -3992,7 +3992,7 @@ module.exports = {
                   console.log(timeout - (Date.now() - cooldown));
                   if (
                     cooldown !== null &&
-                    timeout - (Date.now() - cooldown) < 0
+                    timeout - (Date.now() - cooldown) > 0
                   ) {
                     console.log("pulled");
                     userdata.using.pull("pet treats");
@@ -4014,7 +4014,7 @@ module.exports = {
                   console.log(timeout - (Date.now() - cooldown));
                   if (
                     cooldown !== null &&
-                    timeout - (Date.now() - cooldown) < 0
+                    timeout - (Date.now() - cooldown) > 0
                   ) {
                     console.log("pulled");
                     userdata.using.pull("pet collar");

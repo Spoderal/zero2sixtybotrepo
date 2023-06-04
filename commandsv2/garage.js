@@ -34,12 +34,19 @@ module.exports = {
       .addChoices(
         {name:"Favorites", value:"favorites"}
       )
-  ),
+  )
+  .addStringOption((option) =>
+  option
+    .setName("filtertag")
+    .setRequired(false)
+    .setDescription("Filter your garage by tag")
+),
   async execute(interaction) {
     let user = interaction.options.getUser("user") || interaction.user;
 
     let udata = await User.findOne({ id: user.id });
     let filter = interaction.options.getString("filter")
+    let filtertag = interaction.options.getString("filtertag")
 
     let ucars = udata.cars;
     let cars = udata.cars;
@@ -51,6 +58,10 @@ module.exports = {
 
     if(filter && filter == "favorites"){
       ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true)
+      console.log(ucars)
+    }
+    if(filtertag){
+      ucars = udata.cars.filter((car) => car.Tag && car.Tag == filtertag)
       console.log(ucars)
     }
 
@@ -104,8 +115,12 @@ module.exports = {
     for (let car in cars[0]) {
       car = cars[0][car];
       let favorite = "";
+      let tag = ""
       if (car.Favorite == true) {
         favorite = "⭐";
+      }
+      if (car.Tag) {
+        tag = `🏷️ ${car.Tag}`;
       }
       let spe = car.Speed;
       let acc = Math.floor(car.Acceleration);
@@ -113,7 +128,7 @@ module.exports = {
       hp = Math.round(hp);
       embed.addFields({
         name: `${car.Emote} ${car.Name} ${favorite}`,
-        value: `\`/stats ${car.ID}\`\n${
+        value: `${tag}\n${
           emotes.emotes.PT
         } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${car.ID}\``,
         inline: true,
@@ -248,8 +263,12 @@ module.exports = {
         for (let car in cars[0]) {
           car = cars[0][car];
           let favorite = "";
+          let tag = ""
           if (car.Favorite == true) {
             favorite = "⭐";
+          }
+          if (car.Tag) {
+            tag = `🏷️ ${car.Tag}`;
           }
           let spe = car.Speed;
           let acc = Math.floor(car.Acceleration);
@@ -257,7 +276,7 @@ module.exports = {
           hp = Math.round(hp);
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
-            value: `\`/stats ${car.ID}\`\n${
+            value: `${tag}\n${
               emotes.emotes.PT
             } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${
               car.ID
@@ -341,8 +360,12 @@ module.exports = {
           let car = itempage[page - 1][e];
           if (itempage == cars) {
             let favorite = "";
+            let tag = ""
             if (car.Favorite == true) {
               favorite = "⭐";
+            }
+            if (car.Tag) {
+              tag = `🏷️ ${car.Tag}`;
             }
             let spe = car.Speed;
             let acc = Math.floor(car.Acceleration);
@@ -350,7 +373,7 @@ module.exports = {
             hp = Math.round(hp);
             embed.addFields({
               name: `${car.Emote} ${car.Name} ${favorite}`,
-              value: `\`/stats ${car.ID}\`\n${
+              value: `${tag}\n${
                 emotes.emotes.PT
               } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${
                 car.ID

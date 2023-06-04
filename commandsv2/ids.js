@@ -23,6 +23,7 @@ module.exports = {
           option.setName("id").setDescription("The id to set").setRequired(true)
         )
     )
+
     .addSubcommand((subcommand) =>
       subcommand
         .setName("favorite")
@@ -44,7 +45,24 @@ module.exports = {
             .setDescription("The car to favorite")
             .setRequired(true)
         )
-    ),
+    )
+    .addSubcommand((subcommand) =>
+    subcommand
+      .setName("tag")
+      .setDescription("Tag a car for a group, such as for sale")
+      .addStringOption((option) =>
+        option
+          .setName("car")
+          .setDescription("The car to set an id to")
+          .setRequired(true)
+      )
+      .addStringOption((option) =>
+      option
+        .setName("tag")
+        .setDescription("The tag to set, example: my porsches")
+        .setRequired(true)
+    )
+  ),
   async execute(interaction) {
     const db = require("quick.db");
 
@@ -196,7 +214,59 @@ module.exports = {
       userdata.save();
 
       await interaction.reply({ embeds: [embed] });
-    } else if (option == "unfavorite") {
+    }
+    else if (option == "tag") {
+      let idtochoose = interaction.options.getString("car");
+      let carfiltered = userdata.cars.filter(
+        (car) =>
+          car.Name.toLowerCase() == idtochoose.toLowerCase() ||
+          car.ID == idtochoose.toLowerCase()
+      );
+      let tagtoset = interaction.options.getString("tag");
+      if (!carfiltered[0])
+        return interaction.reply(
+          `That car wasn't found in your cars, did you make sure to specify a car id, or its name?`
+        );
+
+      let embed = new Discord.EmbedBuilder()
+        .setTitle("New Tag 🏷️")
+        .setColor(colors.blue)
+        .setDescription(
+          `${cars.Cars[carfiltered[0].Name.toLowerCase()].Emote} ${
+            carfiltered[0].Name
+          }`
+        )
+        .setThumbnail(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Image}`);
+
+      carfiltered[0]["Tag"] = tagtoset;
+
+      console.log(carfiltered);
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": carfiltered[0],
+          },
+        },
+
+        {
+          arrayFilters: [
+            {
+              "car.Name": carfiltered[0].Name,
+            },
+          ],
+        }
+      );
+
+      userdata.markModified("cars");
+      userdata.save();
+
+      await interaction.reply({ embeds: [embed] });
+    }
+    else if (option == "unfavorite") {
       let idtochoose = interaction.options.getString("car");
       let carfiltered = userdata.cars.filter(
         (car) =>
