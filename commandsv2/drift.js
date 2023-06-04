@@ -105,7 +105,7 @@ module.exports = {
     let keysreward;
     let dranks;
     if (difficulty == "easy") {
-          keysreward = 1;
+      keysreward = 1;
       time = 100;
       timelimit = 15;
       notorietyreward = 50;
@@ -172,7 +172,6 @@ module.exports = {
     let miles = 0;
     keysreward = 1;
     if (track == "regular") {
-      
       trackemote = "🛣️";
       if (difficulty == "easy") {
         trackimg = "https://i.ibb.co/mtbZtS8/track-regular.png";
@@ -215,7 +214,6 @@ module.exports = {
       dranks = dranks * 3;
       trackimg = "https://i.ibb.co/NF6jb79/devilsmountain2.png";
     }
-
 
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
