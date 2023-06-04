@@ -117,7 +117,7 @@ async function updateItemShop() {
         return;
       }
     }
-  }, 600000);
+  }, 60000);
 }
 
 module.exports = {
