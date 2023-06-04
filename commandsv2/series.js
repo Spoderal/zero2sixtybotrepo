@@ -55,7 +55,7 @@ module.exports = {
     );
     let winstext = "";
     if (wins) {
-      winstext = `Wins: ${wins}`;
+      winstext = `Wins: ${wins[0].Wins}`;
     }
     let embed = new EmbedBuilder();
     embed.setTitle("Series Menu");
@@ -63,7 +63,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current car series going on!\n\n
             **__Events__**
-            Perfect Engineering <:porsche:931011550880338011>\n *Prestige 5* ${winstext}
+            Perfect Engineering <:porsche:931011550880338011> *Prestige 5* ${winstext}
 
             You only have **1 day** to complete a car series
         `);
