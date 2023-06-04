@@ -56,7 +56,7 @@ async function updateItemShop() {
           },
         }
       );
-      global.update();
+      global.updateOne();
       global.markModified("itemshop");
       global.save();
     } else {
