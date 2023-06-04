@@ -125,7 +125,7 @@ module.exports = {
             
             ${emotes.superWheel} Super Wheel spins: ${swheelspins}  
             
-            ${emotes.blueprints} Blueprints: ${blueprints}\n
+            ${emotes.blueprints} Blueprints: ${blueprints}
 
             ${emotes.seriestickets} Series Tickets ${seriestickets}
             `
