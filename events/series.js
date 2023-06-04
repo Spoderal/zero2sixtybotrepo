@@ -26,7 +26,7 @@ async function series() {
               udata.perfectengineering == true &&
               udata.seriestickets < 10 &&
               ticketscool !== null &&
-              timeout2 - (Date.now() - ticketscool) < 0
+              timeout2 - (Date.now() - ticketscool) > 0
             ) {
               udata.seriestickets += 1;
             }
