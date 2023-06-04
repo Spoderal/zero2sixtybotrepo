@@ -3299,7 +3299,7 @@ module.exports = {
                 },
                 {
                   $set: {
-                    "cars.$[car].Wins": (selected.Wins += 1),
+                    "cars.$[car].Wins": (selected.Wins += cashwon),
                   },
                 },
 
