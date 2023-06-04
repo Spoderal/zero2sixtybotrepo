@@ -559,7 +559,6 @@ module.exports = {
       let boughtindb = crates.Crates[itemtouse.toLowerCase()];
       console.log(boughtindb);
 
-
       let embed = new EmbedBuilder()
         .setTitle(`Unboxing ${boughtindb.Emote} ${boughtindb.Name}...`)
         .setColor(`#60b0f4`);
