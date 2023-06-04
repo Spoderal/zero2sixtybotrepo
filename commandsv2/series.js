@@ -48,12 +48,14 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    
+
     let series1 = userdata.perfectengineering;
-    let wins = userdata.cars.filter((car) => car.Name == "1980 Porsche 911" && car.Wins)
-      let winstext = ""
-    if(wins){
-      winstext = `Wins: ${wins}`
+    let wins = userdata.cars.filter(
+      (car) => car.Name == "1980 Porsche 911" && car.Wins
+    );
+    let winstext = "";
+    if (wins) {
+      winstext = `Wins: ${wins}`;
     }
     let embed = new EmbedBuilder();
     embed.setTitle("Series Menu");
