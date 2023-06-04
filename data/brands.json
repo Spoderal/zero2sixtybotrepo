@@ -23,6 +23,12 @@
     "name": "Audi",
     "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
+  "shelby": {
+    "image": "https://i.ibb.co/Q6x4vzv/shelby-2-logo-png-transparent-1.png",
+    "emote": "<:shelby:978870450505515018>",
+    "name": "Shelby",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
   "bentley": {
     "image": "https://i.ibb.co/pZ2Kpj0/logo-bently.png",
     "emote": "<:bently:979618638539669505>",
