@@ -127,7 +127,7 @@ module.exports = {
       seriescomplfilt2[0].Wins >= 50 &&
       userdata.pressurecomplete !== true
     ) {
-      row3.addComponents(
+      row4.addComponents(
         new ButtonBuilder()
           .setLabel("Claim 2016 BMW M4 GTS")
           .setEmoji("<:bmw:931011550054056007>")
@@ -135,6 +135,7 @@ module.exports = {
           .setStyle("Secondary")
       );
     }
+    console.log(seriescomplfilt2)
     const filter = (interaction2) =>
       interaction2.isSelectMenu() &&
       interaction2.user.id === interaction.user.id;
