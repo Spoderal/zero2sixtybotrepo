@@ -955,7 +955,7 @@ module.exports = {
             );
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Speed > 190 && car.Speed < 215 && car.Track
+              (car) => car.Speed > 190 && car.Speed < 250 && car.Track
             );
           }
           car2 = lodash.sample(car2);
