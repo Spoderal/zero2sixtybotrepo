@@ -1134,10 +1134,10 @@ module.exports = {
 
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
-              let carrandom = randomRange(1, 100)
+              let carrandom = randomRange(1, 100);
 
-              if(carrandom < 20){
-                earnings.push("Car earned!")
+              if (carrandom < 20) {
+                earnings.push("Car earned!");
                 let newcarobj = {
                   ID: car2.alias,
                   Name: car2.Name,
@@ -1150,8 +1150,8 @@ module.exports = {
                   Miles: 0,
                   Resale: 0,
                   WeightStat: car2.Weight,
-                }
-                userdata.cars.push(newcarobj)
+                };
+                userdata.cars.push(newcarobj);
               }
 
               if (usinginv.includes("pet collar")) {
