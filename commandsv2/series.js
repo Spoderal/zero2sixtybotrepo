@@ -337,7 +337,7 @@ module.exports = {
       ) {
         let carobj = cardb.Cars["2016 bmw m4 gts"];
         userdata = await User.findOne({ id: interaction.user.id });
-        let eng = userdata.perfectengineeringcomplete;
+        let eng = userdata.pressurecomplete;
         if (eng == true) return i.update("You already finished this series!");
         let newobj = {
           ID: carobj.alias,
