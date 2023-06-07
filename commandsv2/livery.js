@@ -197,7 +197,7 @@ module.exports = {
         ) || [];
 
       console.log(cardata);
-          interaction.reply("Please send an image file")
+          interaction.reply("Please send an image file, size 1280x720 is highly recommended")
       const collectorFilter = m => m.author.id == interaction.user.id
 const collector2 = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15000 });
 
