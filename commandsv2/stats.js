@@ -273,8 +273,6 @@ module.exports = {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
       }
 
-      
-
       let exhaust = carindb[0].Exhaust;
       let intake = carindb[0].Intake;
       let tires = carindb[0].Tires;
