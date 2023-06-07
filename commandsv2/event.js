@@ -55,12 +55,11 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
+    let tracklist = [];
 
-    let tracklist = []
-
-    for(let car in cardb.Cars){
-      if(cardb.Cars[car].Track){
-        tracklist.push(`${cardb.Cars[car].Emote} ${cardb.Cars[car].Name}`)
+    for (let car in cardb.Cars) {
+      if (cardb.Cars[car].Track) {
+        tracklist.push(`${cardb.Cars[car].Emote} ${cardb.Cars[car].Name}`);
       }
     }
 
@@ -164,7 +163,7 @@ module.exports = {
 
         Cars you can obtain:
 
-        ${tracklist.join('\n')}
+        ${tracklist.join("\n")}
 
         *Forget to break, and you'll be at a disadvantage!*
 
