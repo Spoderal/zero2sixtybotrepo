@@ -34,14 +34,14 @@ module.exports = {
             description: "Information for the Perfect Engineering Series",
             value: "perfect_engineering",
             customId: "pe",
-            emoji:"<:porsche:931011550880338011>"
+            emoji: "<:porsche:931011550880338011>",
           },
           {
             label: "Pressure",
             description: "Information for the Pressure Series",
             value: "pressure",
             customId: "pressure",
-            emoji:"<:bmw:931011550054056007>"
+            emoji: "<:bmw:931011550054056007>",
           },
         ])
     );
@@ -72,11 +72,11 @@ module.exports = {
     );
     let winstext = "";
     if (wins[0]) {
-      console.log(wins)
+      console.log(wins);
       winstext = `Wins: ${wins[0].Wins}`;
     }
 
-       let winstext2 = "";
+    let winstext2 = "";
     if (wins2[0]) {
       winstext2 = `Wins: ${wins2[0].Wins}`;
     }
@@ -261,8 +261,7 @@ module.exports = {
         cooldowndata.save();
 
         i.update("✅");
-      } 
-      else if (i.customId == "claimcar2") {
+      } else if (i.customId == "claimcar2") {
         let series1cool = cooldowndata.series1;
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.pressure;
@@ -302,8 +301,7 @@ module.exports = {
         cooldowndata.save();
 
         i.update("✅");
-      }
-      else if (
+      } else if (
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
       ) {
@@ -332,8 +330,7 @@ module.exports = {
         userdata.save();
 
         i.update("✅");
-      }
-      else if (
+      } else if (
         i.customId == "claimcarfinal2" &&
         userdata.pressurecomplete !== true
       ) {

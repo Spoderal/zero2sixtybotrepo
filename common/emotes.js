@@ -11,9 +11,9 @@ const emotes = {
   //ranks
 
   prestige: "<:rank_newprestige:1114812459182723102>",
-  race:"<:rank_newrace:1114815495959486504>",
-  drift:"<:rank_newdrift:1114815498056638506> ",
-  tier:"<:rank_tier:1114816526076362803>",
+  race: "<:rank_newrace:1114815495959486504>",
+  drift: "<:rank_newdrift:1114815498056638506> ",
+  tier: "<:rank_tier:1114816526076362803>",
 
   // Currency
   cash: "<a:emote_cash:1114822702461616168>",

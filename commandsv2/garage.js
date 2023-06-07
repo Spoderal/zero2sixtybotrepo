@@ -15,7 +15,7 @@ const ms = require("pretty-ms");
 const { createCanvas, loadImage } = require("canvas");
 const cardb = require("../data/cardb.json");
 const { numberWithCommas } = require("../common/utils");
-const housedb = require("../data/houses.json")
+const housedb = require("../data/houses.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -28,26 +28,24 @@ module.exports = {
         .setDescription("The user to view the garage of")
     )
     .addStringOption((option) =>
-    option
-      .setName("filter")
-      .setRequired(false)
-      .setDescription("Filter your garage")
-      .addChoices(
-        {name:"Favorites", value:"favorites"}
-      )
-  )
-  .addStringOption((option) =>
-  option
-    .setName("filtertag")
-    .setRequired(false)
-    .setDescription("Filter your garage by tag")
-),
+      option
+        .setName("filter")
+        .setRequired(false)
+        .setDescription("Filter your garage")
+        .addChoices({ name: "Favorites", value: "favorites" })
+    )
+    .addStringOption((option) =>
+      option
+        .setName("filtertag")
+        .setRequired(false)
+        .setDescription("Filter your garage by tag")
+    ),
   async execute(interaction) {
     let user = interaction.options.getUser("user") || interaction.user;
 
     let udata = await User.findOne({ id: user.id });
-    let filter = interaction.options.getString("filter")
-    let filtertag = interaction.options.getString("filtertag")
+    let filter = interaction.options.getString("filter");
+    let filtertag = interaction.options.getString("filtertag");
 
     let ucars = udata.cars;
     let cars = udata.cars;
@@ -61,15 +59,15 @@ module.exports = {
       ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true);
       console.log(ucars);
     }
-    if(filtertag){
-      ucars = udata.cars.filter((car) => car.Tag && car.Tag == filtertag)
-      console.log(ucars)
+    if (filtertag) {
+      ucars = udata.cars.filter((car) => car.Tag && car.Tag == filtertag);
+      console.log(ucars);
     }
 
     let displayparts = [];
     let displayitems = [];
-    let displayhouses = []
-    let displayhouses2 = []
+    let displayhouses = [];
+    let displayhouses2 = [];
     let page = 1;
     let displayparts2 = [];
     cars = lodash.chunk(
@@ -140,7 +138,7 @@ module.exports = {
     for (let car in cars[0]) {
       car = cars[0][car];
       let favorite = "";
-      let tag = ""
+      let tag = "";
       if (car.Favorite == true) {
         favorite = "⭐";
       }
@@ -195,12 +193,12 @@ module.exports = {
         .setEmoji("🪛")
         .setLabel("Items")
         .setStyle("Secondary"),
-        
+
       new ButtonBuilder()
-      .setCustomId("houses")
-      .setEmoji("🏠")
-      .setLabel("Houses")
-      .setStyle("Secondary")
+        .setCustomId("houses")
+        .setEmoji("🏠")
+        .setLabel("Houses")
+        .setStyle("Secondary")
     );
     let msg = await interaction.reply({
       content: "Loading garage...",
@@ -294,7 +292,7 @@ module.exports = {
         for (let car in cars[0]) {
           car = cars[0][car];
           let favorite = "";
-          let tag = ""
+          let tag = "";
           if (car.Favorite == true) {
             favorite = "⭐";
           }
@@ -332,13 +330,12 @@ module.exports = {
         embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
           embeds: [embed],
-          
+
           files: [],
           components: [row, row2],
           fetchReply: true,
         });
-      } 
-      else if (i.customId.includes("houses")) {
+      } else if (i.customId.includes("houses")) {
         itempage = displayhouses2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying houses for ${user.username}`)
@@ -353,8 +350,7 @@ module.exports = {
           files: [],
           fetchReply: true,
         });
-      } 
-      else if (i.customId.includes("items")) {
+      } else if (i.customId.includes("items")) {
         itempage = items;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
@@ -385,7 +381,7 @@ module.exports = {
         await i.update({
           embeds: [embed],
           components: [row, row2],
-          
+
           files: [],
           fetchReply: true,
         });
@@ -412,7 +408,7 @@ module.exports = {
           let car = itempage[page - 1][e];
           if (itempage == cars) {
             let favorite = "";
-            let tag = ""
+            let tag = "";
             if (car.Favorite == true) {
               favorite = "⭐";
             }

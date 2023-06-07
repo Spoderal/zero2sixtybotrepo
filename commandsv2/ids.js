@@ -47,22 +47,22 @@ module.exports = {
         )
     )
     .addSubcommand((subcommand) =>
-    subcommand
-      .setName("tag")
-      .setDescription("Tag a car for a group, such as for sale")
-      .addStringOption((option) =>
-        option
-          .setName("car")
-          .setDescription("The car to set an id to")
-          .setRequired(true)
-      )
-      .addStringOption((option) =>
-      option
+      subcommand
         .setName("tag")
-        .setDescription("The tag to set, example: my porsches")
-        .setRequired(true)
-    )
-  ),
+        .setDescription("Tag a car for a group, such as for sale")
+        .addStringOption((option) =>
+          option
+            .setName("car")
+            .setDescription("The car to set an id to")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("tag")
+            .setDescription("The tag to set, example: my porsches")
+            .setRequired(true)
+        )
+    ),
   async execute(interaction) {
     const db = require("quick.db");
 
@@ -214,8 +214,7 @@ module.exports = {
       userdata.save();
 
       await interaction.reply({ embeds: [embed] });
-    }
-    else if (option == "tag") {
+    } else if (option == "tag") {
       let idtochoose = interaction.options.getString("car");
       let carfiltered = userdata.cars.filter(
         (car) =>
@@ -265,8 +264,7 @@ module.exports = {
       userdata.save();
 
       await interaction.reply({ embeds: [embed] });
-    }
-    else if (option == "unfavorite") {
+    } else if (option == "unfavorite") {
       let idtochoose = interaction.options.getString("car");
       let carfiltered = userdata.cars.filter(
         (car) =>

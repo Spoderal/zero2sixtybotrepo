@@ -7,9 +7,8 @@ const Car = require("../schema/car");
 const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const { ImgurClient } = require('imgur');
-const {createReadStream} = require("fs")
-
+const { ImgurClient } = require("imgur");
+const { createReadStream } = require("fs");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -182,15 +181,17 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "submit") {
-      let cli = new ImgurClient({accessToken: process.env.imgur})
-      
+      let cli = new ImgurClient({ accessToken: process.env.imgur });
+
       let global = await Global.findOne();
       let liverieslist = global.liveries;
       let cartosubmit = interaction.options.getString("car");
-      if (!cartosubmit) return await interaction.reply("Usage: /livery submit (car)");
+      if (!cartosubmit)
+        return await interaction.reply("Usage: /livery submit (car)");
       let list = cars.Cars;
 
-      if (!list[cartosubmit.toLowerCase()])  return await interaction.reply("That isnt an available car yet!");
+      if (!list[cartosubmit.toLowerCase()])
+        return await interaction.reply("That isnt an available car yet!");
       let cardata =
         liverieslist.filter(
           (car) => car.Name.toLowerCase() == cartosubmit.toLowerCase()
@@ -242,6 +243,8 @@ collector2.on('collect', async (m) => {
   submitchannel.send({ embeds: [embed] });
 })
 
+        submitchannel.send({ embeds: [embed] });
+      });
     } else if (subcommand == "approve") {
       let whitelist = [
         "275419902381260802",

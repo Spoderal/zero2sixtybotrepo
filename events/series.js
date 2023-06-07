@@ -55,8 +55,7 @@ async function series() {
 
               cooldowns.series1 = 0;
               udata.perfectengineering = false;
-            }
-           else if (
+            } else if (
               udata.pressure == true &&
               udata.seriestickets < 10 &&
               ticketscool !== null &&
