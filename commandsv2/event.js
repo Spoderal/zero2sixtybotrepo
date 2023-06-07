@@ -159,7 +159,7 @@ module.exports = {
         T4Brakes: +400 Score
         T5Brakes: +500 Score
         TXBrakes: +600 Score
-        TXXBrakes: +70 Score
+        TXXBrakes: +700 Score
 
         Cars you can obtain:
 
