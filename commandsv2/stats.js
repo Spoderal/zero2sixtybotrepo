@@ -264,7 +264,7 @@ module.exports = {
 
       console.log(carindb);
       let ogcar = cars.Cars[carindb[0].Name.toLowerCase()].Image;
-      let carim = carindb[0].Image || ogcar
+      let carim = carindb[0].Image || ogcar;
       let weight = carindb[0].WeightStat;
       if (!weight) {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
@@ -291,7 +291,7 @@ module.exports = {
       // let intercoolerimg = await loadImage(partdb.Parts[intercooler.toLowerCase()].Image)
       let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
       let carimg = await loadImage(carim);
-      console.log(carim)
+      console.log(carim);
       let brand =
         brandsarr.filter((br) => br.emote == carindb[0].Emote) || "no brand";
       if (brand.length == 0) {

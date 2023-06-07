@@ -7,9 +7,8 @@ const Car = require("../schema/car");
 const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const { ImgurClient } = require('imgur');
-const {createReadStream} = require("fs")
-
+const { ImgurClient } = require("imgur");
+const { createReadStream } = require("fs");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -182,66 +181,72 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "submit") {
-      let cli = new ImgurClient({accessToken: process.env.imgur})
-      
+      let cli = new ImgurClient({ accessToken: process.env.imgur });
+
       let global = await Global.findOne();
       let liverieslist = global.liveries;
       let cartosubmit = interaction.options.getString("car");
-      if (!cartosubmit) return await interaction.reply("Usage: /livery submit (car)");
+      if (!cartosubmit)
+        return await interaction.reply("Usage: /livery submit (car)");
       let list = cars.Cars;
 
-      if (!list[cartosubmit.toLowerCase()])  return await interaction.reply("That isnt an available car yet!");
+      if (!list[cartosubmit.toLowerCase()])
+        return await interaction.reply("That isnt an available car yet!");
       let cardata =
         liverieslist.filter(
           (car) => car.Name.toLowerCase() == cartosubmit.toLowerCase()
         ) || [];
 
       console.log(cardata);
-          interaction.reply("Please send an image file")
-      const collectorFilter = m => m.author.id == interaction.user.id
-const collector2 = interaction.channel.createMessageCollector({ filter: collectorFilter, time: 15000 });
+      interaction.reply("Please send an image file");
+      const collectorFilter = (m) => m.author.id == interaction.user.id;
+      const collector2 = interaction.channel.createMessageCollector({
+        filter: collectorFilter,
+        time: 15000,
+      });
 
-collector2.on('collect', async (m) => {
+      collector2.on("collect", async (m) => {
+        let image = m.attachments.size > 0 ? m.attachments.first().url : null;
 
-  let image = m.attachments.size > 0 ? m.attachments.first().url : null
+        if (image == null)
+          return m.channel.send(
+            "Specify an image! Send submit again, and copy and paste an image, or upload an image"
+          );
 
-  if(image == null) return m.channel.send("Specify an image! Send submit again, and copy and paste an image, or upload an image")
+        let response = await cli.upload({
+          image: image,
+          type: "stream",
+        });
 
-  let response = await cli.upload({
-    image: image,
-    type: 'stream',
-  });
-  
-  console.log(response.data)
-  
-  let livobj = {
-    image: response.data.link,
-    id: (cardata.length += 1),
-    user: interaction.user.id,
-    approved: false,
-    Name: cartosubmit,
-  };
-  
-  liverieslist.push(livobj);
-  
-  global.save();
-  
-  
-  let embed = new Discord.EmbedBuilder()
-    .setImage(response.data.link)
-    .setDescription("Submitted for review!")
-    .addFields([
-      { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
-      { name: "ID", value: `${livobj.id}` },
-    ])
-    .setColor(colors.blue);
-  interaction.channel.send({ embeds: [embed] });
-  
-  let submitchannel =  interaction.client.channels.cache.get("931078225021521920");
-  
-  submitchannel.send({ embeds: [embed] });
-})
+        console.log(response.data);
 
+        let livobj = {
+          image: response.data.link,
+          id: (cardata.length += 1),
+          user: interaction.user.id,
+          approved: false,
+          Name: cartosubmit,
+        };
+
+        liverieslist.push(livobj);
+
+        global.save();
+
+        let embed = new Discord.EmbedBuilder()
+          .setImage(response.data.link)
+          .setDescription("Submitted for review!")
+          .addFields([
+            { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
+            { name: "ID", value: `${livobj.id}` },
+          ])
+          .setColor(colors.blue);
+        interaction.channel.send({ embeds: [embed] });
+
+        let submitchannel =
+          interaction.client.channels.cache.get("931078225021521920");
+
+        submitchannel.send({ embeds: [embed] });
+      });
     } else if (subcommand == "approve") {
       let whitelist = [
         "275419902381260802",

@@ -486,7 +486,9 @@ module.exports = {
       if (boughtHousePrice == 0)
         return interaction.reply("This house isn't purchasable!");
 
-      let houseobj = userdata.houses.filter((house) => house.Name == boughtHouse[0].Name);
+      let houseobj = userdata.houses.filter(
+        (house) => house.Name == boughtHouse[0].Name
+      );
       if (houseobj[0]) return interaction.reply("You already own this house!");
 
       console.log(houseobj);

@@ -17,22 +17,22 @@
     "Name": "T3Warehouse",
     "Emote": "<:warehouse_3:1114773853550415933>"
   },
-    "t4warehouse": {
+  "t4warehouse": {
     "Space": 25,
     "Price": 5000000,
     "Name": "T4Warehouse",
     "Emote": "<:warehouse_4:1114773851616841768>"
   },
   "t5warehouse": {
-  "Space": 50,
-  "Price": 10000000,
-  "Name": "T5Warehouse",
-  "Emote": "<:warehouse_5:1114773849934921859>"
-},
-"t6warehouse": {
-"Space": 100,
-"Price": 20000000,
-"Name": "T6Warehouse",
-"Emote": "<:warehouse_6:1114773852715745341>"
-}
+    "Space": 50,
+    "Price": 10000000,
+    "Name": "T5Warehouse",
+    "Emote": "<:warehouse_5:1114773849934921859>"
+  },
+  "t6warehouse": {
+    "Space": 100,
+    "Price": 20000000,
+    "Name": "T6Warehouse",
+    "Emote": "<:warehouse_6:1114773852715745341>"
+  }
 }

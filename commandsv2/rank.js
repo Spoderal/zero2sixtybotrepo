@@ -4,7 +4,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const ms = require("pretty-ms");
-const emotes = require("../common/emotes").emotes
+const emotes = require("../common/emotes").emotes;
 
 module.exports = {
   data: new SlashCommandBuilder()

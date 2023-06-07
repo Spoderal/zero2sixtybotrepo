@@ -132,8 +132,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      }
-      else if (value === "tracklegends") {
+      } else if (value === "tracklegends") {
         embed.setTitle("Track Legends");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Track Legends returns with new cars to earn and try out! 
@@ -167,8 +166,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      }
-      else if (value === "lemans") {
+      } else if (value === "lemans") {
         embed.setTitle("Le Mans Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`

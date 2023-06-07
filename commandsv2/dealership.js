@@ -36,7 +36,7 @@ module.exports = {
       cars.Cars["2019 mclaren senna gtr"],
       cars.Cars["2010 pagani zonda r evolution"],
       cars.Cars["2017 ferrari 488 gte"],
-      cars.Cars["2021 alpine a110 r"]
+      cars.Cars["2021 alpine a110 r"],
     ];
     let global = await Global.findOne();
     let carstock = global.stock;
