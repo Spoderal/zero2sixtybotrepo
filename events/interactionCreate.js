@@ -42,7 +42,6 @@ module.exports = {
         const petExecutionTimeName = "Pet update time";
 
         await updatePetOnCommands(interaction);
-        await updateCrew(interaction);
       } else if (
         interaction.type == InteractionType.ApplicationCommandAutocomplete
       ) {
