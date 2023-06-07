@@ -1352,7 +1352,7 @@
       "Engine": "1.8 L CA18DE I4",
       "Image": "https://i.ibb.co/fM1FWqT/white-toyota-supra-mk4-wallpaper-1280x720-45.jpg",
       "0-60": 10.5,
-      "Handling": 3100,
+      "Handling": 3300,
       "Obtained": "Drift Imports",
       "Class": "C",
       "Weight": 3600,
@@ -9206,7 +9206,7 @@
       "Image": "https://i.ibb.co/vzL11Fq/maxresdefault-2023-06-06-T224247-231.jpg",
       "0-60": 6,
       "Drift": 0,
-      "Handling": 2500,
+      "Handling": 3500,
       "Class": "S",
       "Weight": 2600,
       "Track": true
