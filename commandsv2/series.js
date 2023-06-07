@@ -135,7 +135,7 @@ module.exports = {
           .setStyle("Secondary")
       );
     }
-    console.log(seriescomplfilt2)
+    console.log(seriescomplfilt2);
     const filter = (interaction2) =>
       interaction2.isSelectMenu() &&
       interaction2.user.id === interaction.user.id;
