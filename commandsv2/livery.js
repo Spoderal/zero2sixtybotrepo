@@ -9,7 +9,7 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { ImgurClient } = require("imgur");
 const { createReadStream } = require("fs");
-const imgbb = require("imgbb-uploader")
+const imgbb = require("imgbb-uploader");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -182,9 +182,6 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "submit") {
-
-
-
       let global = await Global.findOne();
       let liverieslist = global.liveries;
       let cartosubmit = interaction.options.getString("car");
@@ -217,13 +214,12 @@ module.exports = {
             "Specify an image! Send submit again, and copy and paste an image, or upload an image"
           );
 
-          let options = {
-            apiKey: "141e8760bc34356d461607deca22eeee",
-            imageUrl: image
-          }
+        let options = {
+          apiKey: "141e8760bc34356d461607deca22eeee",
+          imageUrl: image,
+        };
 
-          let response =  await imgbb(options)
-
+        let response = await imgbb(options);
 
         console.log(response.display_url);
 

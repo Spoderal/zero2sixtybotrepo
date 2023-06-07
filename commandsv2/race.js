@@ -1106,7 +1106,7 @@ module.exports = {
                 }
                 braked = true;
 
-                interaction.editReply({components: []})
+                interaction.editReply({ components: [] });
               }
             });
 
