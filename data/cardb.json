@@ -9155,7 +9155,8 @@
       "Handling": 750,
       "Obtained": "Car Series",
       "Class": "C",
-      "Weight": 3900
+      "Weight": 3900,
+      "Series": true
     },
 
     "2018 bmw m4cs": {
@@ -9173,7 +9174,8 @@
       "Handling": 600,
       "Obtained": "Car Series",
       "Class": "C",
-      "Weight": 3900
+      "Weight": 3900,
+      "Series": true
     },
     "2016 bugatti chiron pur sport": {
       "alias": "2016 chiron ps",
