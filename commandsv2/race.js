@@ -1154,42 +1154,7 @@ module.exports = {
                 userdata.cars.push(newcarobj);
               }
 
-              if (usinginv.includes("pet collar")) {
-                let cooldown = cooldowndata.petcollar;
-                let timeout = 3600000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
-                ) {
-                  console.log("pulled");
-                  userdata.using.pull("pet collar");
-                  userdata.update();
-                  cooldowndata.petcollar = 0;
-                  interaction.channel.send("Your pet collar fell off! :(");
-                }
-              } else {
-                userdata.newpet.love -= 5;
-                userdata.newpet.hunger -= 5;
-                userdata.newpet.thirst -= 3;
-              }
 
-              if (userdata.newpet.hunger <= 0) {
-                interaction.channel.send("Your pet died of hunger :(");
-                userdata.newpet = {};
-              }
-              if (userdata.newpet.thirst <= 0) {
-                interaction.channel.send("Your pet died of thirst :(");
-                userdata.newpet = {};
-              }
-              if (userdata.newpet.love <= 0) {
-                interaction.channel.send(
-                  "Your pet left because it wasn't loved enough :("
-                );
-                userdata.newpet = {};
-              }
-
-              userdata.markModified("newpet");
 
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
