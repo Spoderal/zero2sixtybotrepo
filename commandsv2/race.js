@@ -1134,6 +1134,25 @@ module.exports = {
 
             if (tracklength > tracklength2 && timer == 10) {
               let earnings = [];
+              let carrandom = randomRange(1, 100)
+
+              if(carrandom < 20){
+                earnings.push("Car earned!")
+                let newcarobj = {
+                  ID: car2.alias,
+                  Name: car2.Name,
+                  Speed: car2.Speed,
+                  Acceleration: car2["0-60"],
+                  Handling: car2.Handling,
+                  Parts: [],
+                  Emote: car2.Emote,
+                  Image: car2.Image,
+                  Miles: 0,
+                  Resale: 0,
+                  WeightStat: car2.Weight,
+                }
+                userdata.cars.push(newcarobj)
+              }
 
               if (usinginv.includes("pet collar")) {
                 let cooldown = cooldowndata.petcollar;
