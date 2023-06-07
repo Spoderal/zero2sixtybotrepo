@@ -55,6 +55,15 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
+
+    let tracklist = []
+
+    for(let car in cardb.Cars){
+      if(cardb.Cars[car].Track){
+        tracklist.push(`${cardb.Cars[car].Emote} ${cardb.Cars[car].Name}`)
+      }
+    }
+
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
     embed.setFooter({ text: 'Prefix is "/"' });
@@ -152,6 +161,10 @@ module.exports = {
         T5Brakes: +500 Score
         TXBrakes: +600 Score
         TXXBrakes: +70 Score
+
+        Cars you can obtain:
+
+        ${tracklist.join('\n')}
 
         *Forget to break, and you'll be at a disadvantage!*
 

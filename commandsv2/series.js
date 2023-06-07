@@ -56,7 +56,7 @@ module.exports = {
       new ButtonBuilder()
         .setLabel("Claim 2018 BMW M4CS")
         .setEmoji("<:bmw:931011550054056007>")
-        .setCustomId("claimcar")
+        .setCustomId("claimcar2")
         .setStyle("Secondary")
     );
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -131,7 +131,7 @@ module.exports = {
         new ButtonBuilder()
           .setLabel("Claim 2016 BMW M4 GTS")
           .setEmoji("<:bmw:931011550054056007>")
-          .setCustomId("claimcarfinal")
+          .setCustomId("claimcarfinal2")
           .setStyle("Secondary")
       );
     }
