@@ -235,7 +235,7 @@ module.exports = {
         global.save();
 
         let embed = new Discord.EmbedBuilder()
-          .setImage(response.data.link)
+          .setImage(`${response.data.link}`)
           .setDescription("Submitted for review!")
           .addFields([
             { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
