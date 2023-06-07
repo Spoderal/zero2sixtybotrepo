@@ -1106,7 +1106,7 @@ module.exports = {
                 }
                 braked = true;
 
-                await interaction.editReply("✅")
+                interaction.editReply({components: []})
               }
             });
 
