@@ -948,9 +948,7 @@ module.exports = {
               (car) => car.Speed > 170 && car.Speed < 180 && car.Track
             );
           } else if (bot == 5) {
-            car2 = carsarray.filter(
-              (car) => car.Speed > 180  && car.Track
-            );
+            car2 = carsarray.filter((car) => car.Speed > 180 && car.Track);
           } else if (bot == 6) {
             car2 = carsarray.filter(
               (car) => car.Speed > 190 && car.Speed < 215 && car.Track
