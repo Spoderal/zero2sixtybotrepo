@@ -56,7 +56,7 @@ async function updateItemShop() {
           },
         }
       );
-      global.updateOne();
+      global.updateOne("itemshop");
       global.markModified("itemshop");
       global.save();
     } else {
@@ -105,7 +105,7 @@ async function updateItemShop() {
           }
         );
         try {
-          global.updateOne();
+          global.updateOne("itemshop");
           global.markModified("itemshop");
           global.save();
         } catch (err) {
