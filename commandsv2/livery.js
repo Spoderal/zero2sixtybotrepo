@@ -244,8 +244,7 @@ module.exports = {
           .setColor(colors.blue);
         interaction.channel.send({ embeds: [embed] });
 
-        let submitchannel =
-          interaction.client.channels.cache.get("931078225021521920");
+        let submitchannel = interaction.client.channels.cache.get("931078225021521920");
 
         submitchannel.send({ embeds: [embed] });
       });
