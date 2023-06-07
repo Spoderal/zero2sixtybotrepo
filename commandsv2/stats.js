@@ -18,6 +18,8 @@ const { createCanvas, loadImage } = require("canvas");
 const brands = require("../data/brands.json");
 const lodash = require("lodash");
 
+const { ImgurClient } = require("imgur");
+
 let currencies = require("../data/currencydb.json");
 module.exports = {
   data: new SlashCommandBuilder()
@@ -264,11 +266,14 @@ module.exports = {
 
       console.log(carindb);
       let ogcar = cars.Cars[carindb[0].Name.toLowerCase()].Image;
+      new ImgurClient({ accessToken: process.env.imgur });
       let carim = carindb[0].Image || ogcar;
       let weight = carindb[0].WeightStat;
       if (!weight) {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
       }
+
+      
 
       let exhaust = carindb[0].Exhaust;
       let intake = carindb[0].Intake;
