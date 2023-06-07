@@ -41,7 +41,7 @@ async function updateCrew(interaction) {
       }
     }
     await global.markModified("crews");
-    await global.updateOne("crews");
+    await Global.findOneAndUpdate("crews");
     await global.save();
   }
 }
