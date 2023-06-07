@@ -1106,7 +1106,7 @@ module.exports = {
                 }
                 braked = true;
 
-                await i.deferUpdate();
+                await interaction.editReply("✅")
               }
             });
 
