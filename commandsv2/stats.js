@@ -268,7 +268,7 @@ module.exports = {
       let ogcar = cars.Cars[carindb[0].Name.toLowerCase()].Image;
       new ImgurClient({ accessToken: process.env.imgur });
       let carim = carindb[0].Image || ogcar;
-      console.log(carim)
+      console.log(carim);
       let weight = carindb[0].WeightStat;
       if (!weight) {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
