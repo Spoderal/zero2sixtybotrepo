@@ -4,6 +4,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const ms = require("pretty-ms");
+const emotes = require("../common/emotes").emotes
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -29,9 +30,9 @@ module.exports = {
       .setTitle(`${user.username}'s ranks`)
       .setDescription(
         `
-        **Prestige**: ${prestigerank}\n
-        Race Rank: ${racerank}/${required1}\n
-        Drift Rank: ${driftrank}/${required2}\n
+        ${emotes.prestige} **Prestige**: ${prestigerank}\n
+        ${emotes.race} Race Rank: ${racerank}/${required1}\n
+        ${emotes.drift} Drift Rank: ${driftrank}/${required2}\n
         Bounty cooldown: ${ms(bountycooldown)}\n
         Bonus Cash: ${bonus}%
         `

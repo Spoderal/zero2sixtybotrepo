@@ -550,12 +550,12 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
-  backintime: {
+  pressure: {
     type: Boolean,
     required: false,
     default: false,
   },
-  backintimecomplete: {
+  pressurecomplete: {
     type: Boolean,
     required: false,
     default: false,

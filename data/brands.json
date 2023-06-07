@@ -23,6 +23,12 @@
     "name": "Audi",
     "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
+  "alpine": {
+    "image": "https://i.ibb.co/80Gh4Ty/alpine.png",
+    "emote": "<:alpine:1115857956601348096>",
+    "name": "Alpine",
+    "country": "https://i.ibb.co/XzPKrPq/flag-french.png"
+  },
   "shelby": {
     "image": "https://i.ibb.co/Q6x4vzv/shelby-2-logo-png-transparent-1.png",
     "emote": "<:shelby:978870450505515018>",

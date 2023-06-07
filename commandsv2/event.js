@@ -42,6 +42,13 @@ module.exports = {
             customId: "devilsmountain",
             emoji: "🤘",
           },
+          {
+            label: "Track Legends",
+            description: "Information for the Track Legends Event",
+            value: "tracklegends",
+            customId: "tracklegends",
+            emoji: "<:tracklegends:1072357967652995174>",
+          },
         ])
     );
 
@@ -56,7 +63,8 @@ module.exports = {
           **__Events__**
           Season 1 <a:season_1:1111097329836113920>\n
           Le Mans 🏎️\n
-          Devils Mountain 🤘
+          Devils Mountain 🤘\n
+          Track Legends <:tracklegends:1072357967652995174>
       `);
 
     embed.setColor(colors.blue);
@@ -124,7 +132,43 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "lemans") {
+      }
+      else if (value === "tracklegends") {
+        embed.setTitle("Track Legends");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Track Legends returns with new cars to earn and try out! 
+
+        A brand new track race system, with twists and turns, decide when you should brake, it'll have you on your toes the entire time!
+
+        Have a chance to earn the car you beat! Be warned, if you lose, your car will be locked in impound!
+
+        Can you earn all the cars before you lose?
+
+        Brake advantages:
+
+        T1Brakes: +100 Score
+        T2Brakes: +200 Score
+        T3Brakes: +300 Score
+        T4Brakes: +400 Score
+        T5Brakes: +500 Score
+        TXBrakes: +600 Score
+        TXXBrakes: +70 Score
+
+        *Forget to break, and you'll be at a disadvantage!*
+
+            **Ends June 31st 2023**
+
+                  `);
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/nj58ZNY/event-tracklegends.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+      else if (value === "lemans") {
         embed.setTitle("Le Mans Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`

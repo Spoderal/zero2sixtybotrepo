@@ -133,7 +133,7 @@ module.exports = {
           Handling: carindb.Handling,
           Parts: [],
           Emote: carindb.Emote,
-          Livery: carindb.Image,
+          Image: carindb.Image,
           Miles: 0,
           Drift: 0,
           WeightStat: carindb.Weight,
@@ -190,7 +190,7 @@ module.exports = {
           Handling: carindb.Handling,
           Parts: [],
           Emote: carindb.Emote,
-          Livery: carindb.Image,
+          Image: carindb.Image,
           Miles: 0,
           Drift: 0,
           WeightStat: carindb.Weight,
@@ -204,7 +204,7 @@ module.exports = {
             Handling: carindb.Handling,
             Parts: [],
             Emote: carindb.Emote,
-            Livery: carindb.Image,
+            Image: carindb.Image,
             Miles: 0,
             Drift: 0,
             Range: carindb.Range,
@@ -261,7 +261,7 @@ module.exports = {
             Handling: boughtCar.Handling,
             Parts: [],
             Emote: boughtCar.Emote,
-            Livery: boughtCar.Image,
+            Image: boughtCar.Image,
             Miles: 0,
             Drift: 0,
             police: true,
@@ -277,7 +277,7 @@ module.exports = {
               Handling: boughtCar.Handling,
               Parts: [],
               Emote: boughtCar.Emote,
-              Livery: boughtCar.Image,
+              Image: boughtCar.Image,
               Miles: 0,
               Drift: 0,
               Range: boughtCar.Range,
@@ -361,7 +361,7 @@ module.exports = {
             Handling: carindb.Handling,
             Parts: [],
             Emote: carindb.Emote,
-            Livery: carindb.Image,
+            Image: carindb.Image,
             Miles: 0,
             Resale: sellprice,
             WeightStat: carindb.Weight,
@@ -375,7 +375,7 @@ module.exports = {
               Handling: carindb.Handling,
               Parts: [],
               Emote: carindb.Emote,
-              Livery: carindb.Image,
+              Image: carindb.Image,
               Miles: 0,
               Resale: sellprice,
               Drift: 0,
@@ -486,21 +486,20 @@ module.exports = {
       if (boughtHousePrice == 0)
         return interaction.reply("This house isn't purchasable!");
 
-      let houseobj = boughtHouse[0];
-      if (userdata.houses.includes(houseobj))
-        return interaction.reply("You already own this house!");
+      let houseobj = userdata.houses.filter((house) => house.Name == boughtHouse[0].Name);
+      if (houseobj[0]) return interaction.reply("You already own this house!");
 
       console.log(houseobj);
-      userdata.garageLimit += houseobj.Space;
-      userdata.houses.push(houseobj);
+      userdata.garageLimit += boughtHouse[0].Space;
+      userdata.houses.push(boughtHouse[0]);
 
       userdata.cash -= boughtHousePrice;
       await userdata.save();
       let embed = new EmbedBuilder()
-        .setTitle(`Bought ${houseobj.Name}`)
-        .setImage(`${houseobj.Image}`)
+        .setTitle(`Bought ${boughtHouse[0].Name}`)
+        .setImage(`${boughtHouse[0].Image}`)
         .setColor(colors.blue)
-        .setDescription(`Price: ${toCurrency(houseobj.Price)}`);
+        .setDescription(`Price: ${toCurrency(boughtHouse[0].Price)}`);
       await interaction.reply({ embeds: [embed] });
     } else if (boughtWarehouse) {
       let warehouses = userdata.warehouses;

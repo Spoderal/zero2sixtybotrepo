@@ -34,6 +34,14 @@ module.exports = {
             description: "Information for the Perfect Engineering Series",
             value: "perfect_engineering",
             customId: "pe",
+            emoji:"<:porsche:931011550880338011>"
+          },
+          {
+            label: "Pressure",
+            description: "Information for the Pressure Series",
+            value: "pressure",
+            customId: "pressure",
+            emoji:"<:bmw:931011550054056007>"
           },
         ])
     );
@@ -44,7 +52,13 @@ module.exports = {
         .setCustomId("claimcar")
         .setStyle("Secondary")
     );
-
+    let row4 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel("Claim 2018 BMW M4CS")
+        .setEmoji("<:bmw:931011550054056007>")
+        .setCustomId("claimcar")
+        .setStyle("Secondary")
+    );
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -53,9 +67,18 @@ module.exports = {
     let wins = userdata.cars.filter(
       (car) => car.Name == "1980 Porsche 911" && car.Wins
     );
+    let wins2 = userdata.cars.filter(
+      (car) => car.Name == "2018 BMW M4CS" && car.Wins
+    );
     let winstext = "";
-    if (wins) {
+    if (wins[0]) {
+      console.log(wins)
       winstext = `Wins: ${wins[0].Wins}`;
+    }
+
+       let winstext2 = "";
+    if (wins2[0]) {
+      winstext2 = `Wins: ${wins2[0].Wins}`;
     }
     let embed = new EmbedBuilder();
     embed.setTitle("Series Menu");
@@ -64,6 +87,8 @@ module.exports = {
     embed.setDescription(`Here you can check out the current car series going on!\n\n
             **__Events__**
             Perfect Engineering <:porsche:931011550880338011> *Prestige 5* ${winstext}
+
+            Pressure <:bmw:931011550054056007> *Prestige 3* ${winstext2}
 
             You only have **1 day** to complete a car series
         `);
@@ -80,6 +105,10 @@ module.exports = {
       (car) => car.Name == "1980 Porsche 911"
     );
 
+    let seriescomplfilt2 = userdata.cars.filter(
+      (car) => car.Name == "2018 BMW M4CS"
+    );
+
     if (
       seriescomplfilt[0] &&
       seriescomplfilt[0].Wins >= 50 &&
@@ -89,6 +118,19 @@ module.exports = {
         new ButtonBuilder()
           .setLabel("Claim 2018 Singer DLS")
           .setEmoji("<:porsche:931011550880338011>")
+          .setCustomId("claimcarfinal")
+          .setStyle("Secondary")
+      );
+    }
+    if (
+      seriescomplfilt2[0] &&
+      seriescomplfilt2[0].Wins >= 50 &&
+      userdata.pressurecomplete !== true
+    ) {
+      row3.addComponents(
+        new ButtonBuilder()
+          .setLabel("Claim 2016 BMW M4 GTS")
+          .setEmoji("<:bmw:931011550054056007>")
           .setCustomId("claimcarfinal")
           .setStyle("Secondary")
       );
@@ -155,13 +197,13 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "bit" && userdata.prestige >= 6) {
-        embed.setTitle("Back In Time Series");
+      } else if (value === "pressure" && userdata.prestige >= 6) {
+        embed.setTitle("Pressure");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
-          Time to go back in time with the delorean! You'll be renting out a delorean to go to different time periods to race with it!
+          Put some pressure on your opponents with the brand new 2018 BMW M4CS!
 
-          You're gonna need a 1981 DMC DeLorean to complete the series, and you can only try to complete it once!
+          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 75 races with this car, you finish the series and earn the **2016 BMW M4 GTS**
 
           You will also have a chance to earn exclusive **DIAMOND PLATED PARTS** such as the <:part_txxbrakes:1113959753119440956> TXXBrakes!
   
@@ -169,11 +211,11 @@ module.exports = {
         embed.setThumbnail("https://i.ibb.co/Ttth621/carseries.png");
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/cJp0dhC/series-backintime.png");
+          .setImage("https://i.ibb.co/w6X8HbH/series-pressure.png");
 
         await interaction.editReply({
           embeds: [embed],
-          components: [row2],
+          components: [row2, row4],
         });
       }
     });
@@ -219,7 +261,49 @@ module.exports = {
         cooldowndata.save();
 
         i.update("✅");
-      } else if (
+      } 
+      else if (i.customId == "claimcar2") {
+        let series1cool = cooldowndata.series1;
+        userdata = await User.findOne({ id: interaction.user.id });
+        let eng = userdata.pressure;
+        let cooldown = 86400000;
+        if (eng == true) return i.update("You already started this series!");
+        if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
+          let time = ms(cooldown - (Date.now() - series1cool));
+          let timeEmbed = new EmbedBuilder()
+            .setColor(colors.blue)
+            .setDescription(
+              `You've already started a series\n\nStart one again in ${time}.`
+            );
+          await i.update({ embeds: [timeEmbed], fetchReply: true });
+        }
+        let carobj = cardb.Cars["2018 bmw m4cs"];
+
+        let newobj = {
+          ID: carobj.alias,
+          Name: carobj.Name,
+          Speed: carobj.Speed,
+          Acceleration: carobj["0-60"],
+          Handling: carobj.Handling,
+          Parts: [],
+          Emote: carobj.Emote,
+          Livery: carobj.Image,
+          Miles: 0,
+          Drift: 0,
+          Loan: true,
+          WeightStat: carobj.Weight,
+          Wins: 0,
+        };
+
+        cooldowndata.series1 = Date.now();
+        userdata.pressure = true;
+        userdata.cars.push(newobj);
+        userdata.save();
+        cooldowndata.save();
+
+        i.update("✅");
+      }
+      else if (
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
       ) {
@@ -244,6 +328,36 @@ module.exports = {
 
         userdata.perfectengineering = true;
         userdata.perfectengineeringcomplete = true;
+        userdata.cars.push(newobj);
+        userdata.save();
+
+        i.update("✅");
+      }
+      else if (
+        i.customId == "claimcarfinal2" &&
+        userdata.pressurecomplete !== true
+      ) {
+        let carobj = cardb.Cars["2016 bmw m4 gts"];
+        userdata = await User.findOne({ id: interaction.user.id });
+        let eng = userdata.perfectengineeringcomplete;
+        if (eng == true) return i.update("You already finished this series!");
+        let newobj = {
+          ID: carobj.alias,
+          Name: carobj.Name,
+          Speed: carobj.Speed,
+          Acceleration: carobj["0-60"],
+          Handling: carobj.Handling,
+          Parts: [],
+          Emote: carobj.Emote,
+          Livery: carobj.Image,
+          Miles: 0,
+          Drift: 0,
+          Loan: true,
+          WeightStat: carobj.Weight,
+        };
+
+        userdata.pressure = true;
+        userdata.pressurecomplete = true;
         userdata.cars.push(newobj);
         userdata.save();
 

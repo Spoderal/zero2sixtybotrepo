@@ -2394,7 +2394,7 @@
       "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 10000,
-      "Emote": "<:suspension1:932046370725044335>",
+      "Emote": "<:part_t1bodykit:1115309924113715241>",
       "Tier": "1",
       "AddedDrift": 0,
       "DecreasedDrift": "0",
@@ -2402,7 +2402,7 @@
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
       "AddWeight": 100,
-      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
+      "Image": "https://i.ibb.co/vxkzCRD/part-t1bodykit.png"
     },
     "t2weight": {
       "Name": "T2Weight",
@@ -2412,7 +2412,7 @@
       "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 14000,
-      "Emote": "<:suspension1:932046370725044335>",
+      "Emote": "<:part_t2bodykit:1115309922876403883>",
       "Tier": "2",
       "AddedDrift": 0,
       "DecreasedDrift": "0",
@@ -2420,7 +2420,7 @@
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
       "AddWeight": 200,
-      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
+      "Image": "https://i.ibb.co/xFY4CkY/part-t2bodykit.png"
     },
     "t3weight": {
       "Name": "T3Weight",
@@ -2430,7 +2430,7 @@
       "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 24000,
-      "Emote": "<:suspension1:932046370725044335>",
+      "Emote": "<:part_t3bodykit:1115309921685217460>",
       "Tier": "3",
       "AddedDrift": 0,
       "DecreasedDrift": "0",
@@ -2438,7 +2438,7 @@
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
       "AddWeight": 300,
-      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
+      "Image": "https://i.ibb.co/6WtH896/part-t3bodykit.png"
     },
     "t4weight": {
       "Name": "T4Weight",
@@ -2448,7 +2448,7 @@
       "AddedOffRoad": 0,
       "sellprice": 3750,
       "Price": 0,
-      "Emote": "<:suspension4:974458572031291443>",
+      "Emote": "<:part_t4bodykit:1115309920020090921>",
       "Tier": "4",
       "AddedDrift": 0,
       "DecreasedDrift": "0",
@@ -2456,7 +2456,25 @@
       "Type": "weight reduction",
       "DecreasedSpeed": "0",
       "AddWeight": 400,
-      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
+      "Image": "https://i.ibb.co/KLJK1Gz/part-t4bodykit.png"
+    },
+    "t5weight": {
+      "Name": "T5Weight",
+      "AddedSpeed": 0,
+      "DriftScore": 0,
+      "AddedSixty": 0,
+      "AddedOffRoad": 0,
+      "sellprice": 3750,
+      "Price": 0,
+      "Emote": "<:part_t5bodykit:1115309918996664390>",
+      "Tier": "5",
+      "AddedDrift": 0,
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "weight reduction",
+      "DecreasedSpeed": "0",
+      "AddWeight": 500,
+      "Image": "https://i.ibb.co/Rp5K7N9/part-t5bodykit.png"
     },
     "racesuspension": {
       "Name": "RaceSuspension",

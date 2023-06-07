@@ -182,7 +182,6 @@ async function carfix() {
       }
     }
   }
-  console.log("done");
 }
 
 module.exports = {

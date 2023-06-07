@@ -15,6 +15,7 @@ const ms = require("pretty-ms");
 const { createCanvas, loadImage } = require("canvas");
 const cardb = require("../data/cardb.json");
 const { numberWithCommas } = require("../common/utils");
+const housedb = require("../data/houses.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -52,13 +53,13 @@ module.exports = {
     let cars = udata.cars;
     let parts = udata.parts;
     let items = udata.items;
+    let houses = udata.houses;
     let garagelimit = udata.garageLimit;
     let xessence = udata.xessence;
 
-
-    if(filter && filter == "favorites"){
-      ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true)
-      console.log(ucars)
+    if (filter && filter == "favorites") {
+      ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true);
+      console.log(ucars);
     }
     if(filtertag){
       ucars = udata.cars.filter((car) => car.Tag && car.Tag == filtertag)
@@ -67,6 +68,8 @@ module.exports = {
 
     let displayparts = [];
     let displayitems = [];
+    let displayhouses = []
+    let displayhouses2 = []
     let page = 1;
     let displayparts2 = [];
     cars = lodash.chunk(
@@ -79,8 +82,21 @@ module.exports = {
       displayparts.push(`${partindb.Emote} ${partindb.Name}`);
     }
 
+    for (let house in houses) {
+      house = houses[house];
+      let houseindb = housedb[house.Name.toLowerCase()];
+      displayhouses.push(`${houseindb.Emote} ${houseindb.Name}`);
+    }
+
     var list = displayparts;
+    var hlist = displayhouses;
     var quantities = list.reduce(function (obj, n) {
+      if (obj[n]) obj[n]++;
+      else obj[n] = 1;
+
+      return obj;
+    }, {});
+    var hquantities = hlist.reduce(function (obj, n) {
       if (obj[n]) obj[n]++;
       else obj[n] = 1;
 
@@ -91,8 +107,17 @@ module.exports = {
       displayparts2.push(`${n} x${quantities[n]}`);
     }
 
+    for (let n in hquantities) {
+      displayhouses2.push(`${n} x${hquantities[n]}`);
+    }
+
     displayparts2 = lodash.chunk(
       displayparts2.map((a) => a),
+      10
+    );
+
+    displayhouses2 = lodash.chunk(
+      displayhouses2.map((a) => a),
       10
     );
 
@@ -169,7 +194,13 @@ module.exports = {
         .setCustomId("items")
         .setEmoji("🪛")
         .setLabel("Items")
-        .setStyle("Secondary")
+        .setStyle("Secondary"),
+        
+      new ButtonBuilder()
+      .setCustomId("houses")
+      .setEmoji("🏠")
+      .setLabel("Houses")
+      .setStyle("Secondary")
     );
     let msg = await interaction.reply({
       content: "Loading garage...",
@@ -301,10 +332,29 @@ module.exports = {
         embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
           embeds: [embed],
+          
+          files: [],
           components: [row, row2],
           fetchReply: true,
         });
-      } else if (i.customId.includes("items")) {
+      } 
+      else if (i.customId.includes("houses")) {
+        itempage = displayhouses2;
+        embed = new EmbedBuilder()
+          .setTitle(`Displaying houses for ${user.username}`)
+          .setColor(colors.blue)
+          .setFooter({ text: `Pages ${page}/${itempage.length}` });
+        console.log(parts);
+
+        embed.setDescription(`${displayhouses2[0].join("\n")}`);
+        await i.update({
+          embeds: [embed],
+          components: [row, row2],
+          files: [],
+          fetchReply: true,
+        });
+      } 
+      else if (i.customId.includes("items")) {
         itempage = items;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
@@ -335,6 +385,8 @@ module.exports = {
         await i.update({
           embeds: [embed],
           components: [row, row2],
+          
+          files: [],
           fetchReply: true,
         });
       } else {

@@ -56,6 +56,40 @@ async function series() {
               cooldowns.series1 = 0;
               udata.perfectengineering = false;
             }
+           else if (
+              udata.pressure == true &&
+              udata.seriestickets < 10 &&
+              ticketscool !== null &&
+              timeout2 - (Date.now() - ticketscool) < 0
+            ) {
+              udata.seriestickets += 1;
+            }
+            if (
+              udata.pressure == true &&
+              bountycool !== null &&
+              timeout - (Date.now() - bountycool) < 0
+            ) {
+              let cartopull = udata.cars.filter(
+                (car) => car.Name == "2018 BMW M4CS"
+              );
+
+              if (cartopull[0] && udata.pressurecomplete == false) {
+                udata.cars.pull(cartopull[0]);
+                for (let p in udata.parts) {
+                  let part = udata.parts[p];
+
+                  if (
+                    partdb.Parts[part].Loan &&
+                    partdb.Parts[part].Loan == true
+                  ) {
+                    udata.parts.pull(part);
+                  }
+                }
+              }
+
+              cooldowns.series1 = 0;
+              udata.pressure = false;
+            }
             udata.update();
             cooldowns.update();
             udata.save();
@@ -66,7 +100,6 @@ async function series() {
         }
       }
     }
-    console.log("done");
   }, 10000);
 }
 

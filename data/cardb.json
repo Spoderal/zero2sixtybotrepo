@@ -1103,7 +1103,8 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Donator",
-      "Weight": 3200
+      "Weight": 3200,
+      "Squad": true
     },
     "2020 mclaren speedtail": {
       "alias": "2020 speedtail",
@@ -1271,7 +1272,8 @@
       "Handling": 1000,
       "Obtained": "Drift Imports",
       "Class": "C",
-      "Weight": 3400
+      "Weight": 3400,
+      "Squad":true
     },
     "devils 2009 honda s2000": {
       "alias": "devils 2009 s2000",
@@ -1287,7 +1289,8 @@
       "Handling": 950,
       "Obtained": "Drift Imports",
       "Class": "C",
-      "Weight": 3200
+      "Weight": 3200,
+      "Squad":true
     },
     "drift 2001 lexus is300": {
       "alias": "drift 2001 lexus is300",
@@ -1335,7 +1338,8 @@
       "Handling": 1050,
       "Obtained": "Drift Imports",
       "Class": "C",
-      "Weight": 3500
+      "Weight": 3500,
+      "Squad":true
     },
 
     "devils 2001 toyota supra mk4": {
@@ -1351,7 +1355,8 @@
       "Handling": 3100,
       "Obtained": "Drift Imports",
       "Class": "C",
-      "Weight": 3600
+      "Weight": 3600,
+      "Squad":true
     },
 
     "sil-eighty": {
@@ -3441,6 +3446,7 @@
       "Handling": 500,
       "Weight": 3600,
       "Class": "D",
+      "Obtained":"Car Series",
       "Series": true
     },
     "2018 singer dls": {
@@ -3456,6 +3462,7 @@
       "0-60": 5,
       "Drift": 0,
       "Class": "A",
+      "Obtained":"Car Series",
       "Handling": 750,
       "Weight": 2100
     },
@@ -3596,6 +3603,7 @@
       "Drift": 0,
       "Handling": 450,
       "Weight": 3600,
+      "Squad": true,
       "Muscle": true
     },
     "ryans 1990 nissan 240sx": {
@@ -3611,6 +3619,7 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 450,
+      "Squad": true,
       "Weight": 3600
     },
     "saws 1990 bmw m3": {
@@ -3626,6 +3635,7 @@
       "0-60": 6.2,
       "Drift": 0,
       "Handling": 450,
+      "Squad": true,
       "Weight": 3600
     },
     "1990 nissan 240sx": {
@@ -3812,6 +3822,7 @@
       "Junked": true,
       "restored": "1990 bmw m3",
       "0-60": 14,
+      "Obtained":"Rare Barn Find",
       "Drift": 0,
       "Handling": 500,
       "Weight": 3600
@@ -3823,6 +3834,7 @@
       "kmh": 265,
       "Speed": 128,
       "Price": 0,
+      "Obtained":"Rare Barn Find",
       "sellprice": 10000,
       "Engine": "V6",
       "Image": "https://i.ibb.co/t2jdnRF/1990-bmw-m3-by-vilner.png",
@@ -5782,7 +5794,8 @@
       "Drift": 0,
       "Handling": 650,
       "Class": "S",
-      "Weight": 3700
+      "Weight": 3700,
+      "Squad":true
     },
     "destinys 2020 mclaren speedtail": {
       "alias": "destinys 2020 speedtail",
@@ -5798,7 +5811,8 @@
       "Drift": 0,
       "Handling": 700,
       "Class": "S",
-      "Weight": 3500
+      "Weight": 3500,
+      "Squad":true
     },
     "angels 2019 apollo ie": {
       "alias": "angels 2019 ie",
@@ -5814,7 +5828,8 @@
       "Drift": 0,
       "Handling": 800,
       "Class": "S",
-      "Weight": 3500
+      "Weight": 3500,
+      "Squad":true
     },
     "madisons 2020 koenigsegg jesko": {
       "alias": "madisons 2020 jesko",
@@ -5830,7 +5845,8 @@
       "Drift": 0,
       "Handling": 900,
       "Class": "S",
-      "Weight": 3500
+      "Weight": 3500,
+      "Squad":true
     },
     "spoders 2005 porsche carrera gt": {
       "alias": "spoders 2005 carrera gt",
@@ -5845,7 +5861,8 @@
       "0-60": 1.5,
       "Drift": 0,
       "Handling": 1000,
-      "Weight": 3000
+      "Weight": 3000,
+      "Squad":true
     },
     "spoders 2021 porsche 911 targa": {
       "alias": "spoders 2021 911 targa",
@@ -7472,7 +7489,8 @@
       "Drift": 0,
       "Handling": 800,
       "Bike": true,
-      "Weight": 2200
+      "Weight": 2200,
+      "Squad":true
     },
     "janes 2018 ducati panigale v4": {
       "alias": "janes 2018 panigale",
@@ -7487,7 +7505,8 @@
       "Drift": 0,
       "Handling": 900,
       "Bike": true,
-      "Weight": 2200
+      "Weight": 2200,
+      "Squad":true
     },
     "naomis 2019 bmw s1000rr": {
       "alias": "naomis 2019 s1000rr",
@@ -7502,7 +7521,8 @@
       "Drift": 0,
       "Handling": 950,
       "Bike": true,
-      "Weight": 2200
+      "Weight": 2200,
+      "Squad":true
     },
     "pauls 2022 suzuki hayabusa": {
       "alias": "pauls 2022 hayabusa",
@@ -7517,7 +7537,8 @@
       "Drift": 0,
       "Handling": 1000,
       "Bike": true,
-      "Weight": 2200
+      "Weight": 2200,
+      "Squad":true
     },
     "katherines 2022 yamaha yzf-r1": {
       "alias": "katherines 2022 yzf-r1",
@@ -7532,7 +7553,8 @@
       "Drift": 0,
       "Handling": 1000,
       "Bike": true,
-      "Weight": 2200
+      "Weight": 2200,
+      "Squad":true
     },
     "toy car": {
       "alias": "toy car",
@@ -7663,7 +7685,8 @@
       "Handling": 1800,
       "Class": "A",
       "Weight": 4000,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2019 jaguar xe sv": {
       "alias": "2019 xe sv",
@@ -7680,7 +7703,8 @@
       "Handling": 1000,
       "Class": "B",
       "Weight": 3500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2021 bmw m2": {
       "alias": "2021 m2",
@@ -7697,7 +7721,8 @@
       "Handling": 1200,
       "Class": "B",
       "Weight": 3500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2020 subaru brz ts": {
       "alias": "2020 brz ts",
@@ -7714,7 +7739,8 @@
       "Handling": 1100,
       "Class": "B",
       "Weight": 3300,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2019 mazda miata": {
       "alias": "2019 miata",
@@ -7731,7 +7757,8 @@
       "Handling": 1000,
       "Class": "B",
       "Weight": 3200,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2021 bac mono": {
       "alias": "2021 mono",
@@ -7748,7 +7775,8 @@
       "Handling": 1200,
       "Class": "B",
       "Weight": 3500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2020 mini": {
       "alias": "2020 mini",
@@ -7765,7 +7793,8 @@
       "Handling": 1500,
       "Class": "B",
       "Weight": 3500,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2020 hyundai i30 n": {
       "alias": "2020 i30 n",
@@ -7782,7 +7811,8 @@
       "Handling": 1250,
       "Class": "C",
       "Weight": 3400,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2022 ford fiesta st": {
       "alias": "2022 fiesta st",
@@ -7799,7 +7829,8 @@
       "Handling": 1250,
       "Class": "C",
       "Weight": 3300,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2020 ferrari f8 tributo": {
       "alias": "2020 tributo",
@@ -7816,7 +7847,8 @@
       "Handling": 2200,
       "Class": "S",
       "Weight": 4300,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "2021 mercedes amg gt black series": {
       "alias": "2021 amg gt black",
@@ -7833,7 +7865,8 @@
       "Handling": 1800,
       "Class": "S",
       "Weight": 4100,
-      "Obtained": "Event"
+      "Obtained": "Event",
+      "Track":true
     },
     "1987 ruf ctr yellowbird": {
       "alias": "1987 ctr yb",
@@ -9106,6 +9139,126 @@
       "Obtained": "Season",
       "Weight": 2668,
       "Muscle": true
+    },
+    "2016 bmw m4 gts": {
+      "alias": "2016 m4 gts",
+      "Name": "2016 BMW M4 GTS",
+      "Emote": "<:bmw:931011550054056007>",
+      "Speed": 164,
+      "kmh": 233,
+      "Price": 0,
+      "sellprice": 18750,
+      "Engine": "4.4 L V8",
+      "Image": "https://i.ibb.co/rsG8yVN/maxresdefault-41.jpg",
+      "0-60": 10.5,
+      "Drift": 0,
+      "Handling": 750,
+      "Obtained": "Car Series",
+      "Class": "C",
+      "Weight": 3900
+    },
+
+    "2018 bmw m4cs": {
+      "alias": "2018 m4cs",
+      "Name": "2018 BMW M4CS",
+      "Emote": "<:bmw:931011550054056007>",
+      "Speed": 165,
+      "kmh": 233,
+      "Price": 0,
+      "sellprice": 18750,
+      "Engine": "4.4 L V8",
+      "Image": "",
+      "0-60": 10,
+      "Drift": 0,
+      "Handling": 600,
+      "Obtained": "Car Series",
+      "Class": "C",
+      "Weight": 3900
+    },
+    "2016 bugatti chiron pur sport": {
+      "alias": "2016 chiron ps",
+      "Name": "2016 Bugatti Chiron Pure Sport",
+      "Emote": "<:bugatti:931012624110460979>",
+      "Speed": 215,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 375000,
+      "Engine": "8.0 L quad-turbocharged W16",
+      "Image": "https://i.ibb.co/f2vqjWh/pursport.png",
+      "0-60": 4.7,
+      "Drift": 0,
+      "Handling": 1800,
+      "Class": "S",
+      "Weight": 4100,
+      "Track":true
+    },
+    "2019 mclaren senna gtr": {
+      "alias": "2019 senna gtr",
+      "Name": "2019 McLaren Senna GTR",
+      "Emote": "<:bugatti:931012624110460979>",
+      "Speed": 220,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 375000,
+      "Engine": "8.0 L quad-turbocharged W16",
+      "Image": "https://i.ibb.co/vzL11Fq/maxresdefault-2023-06-06-T224247-231.jpg",
+      "0-60": 6,
+      "Drift": 0,
+      "Handling": 2500,
+      "Class": "S",
+      "Weight": 2600,
+      "Track":true
+    },
+    "2010 pagani zonda r evolution": {
+      "alias": "2010 r evolution",
+      "Name": "2010 Pagani Zonda R Evolution",
+      "Emote": "<:pagani:933622884126056498>",
+      "Speed": 200,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 375000,
+      "Engine": "8.0 L quad-turbocharged W16",
+      "Image": "https://i.ibb.co/yXQymGr/rm-zondar-033.jpg",
+      "0-60": 5,
+      "Drift": 0,
+      "Handling": 1500,
+      "Class": "S",
+      "Weight": 2300,
+      "Track":true
+    },
+    "2017 ferrari 488 gte": {
+      "alias": "2017 488 gte",
+      "Name": "2017 Ferrari 488 GTE",
+      "Emote": "<:ferrari:931011838374727730>",
+      "Speed": 190,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 375000,
+      "Engine": "8.0 L quad-turbocharged W16",
+      "Image": "https://i.ibb.co/Y3dfhYW/1280px-AF-Corse-Ferrari-488-GTE-Calado-Silverstone-2018.jpg",
+      "0-60": 5,
+      "Drift": 0,
+      "Handling": 1000,
+      "Class": "A",
+      "Weight": 2700,
+      "Track":true
+    },
+    "2021 alpine a110 r": {
+      "alias": "2021 a110 r",
+      "Name": "2021 Alpine A110 R",
+      "Emote": "<:alpine:1115857956601348096>",
+      "Speed": 160,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 375000,
+      "Engine": "8.0 L quad-turbocharged W16",
+      "Image": "https://i.ibb.co/0QLDw4S/090-alpine-a110-r-alonso-front.jpg",
+      "0-60": 10,
+      "Drift": 0,
+      "Handling": 850,
+      "Class": "C",
+      "Weight": 2700,
+      "Track":true
     }
   }
 }

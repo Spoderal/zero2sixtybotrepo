@@ -35,7 +35,6 @@ async function isracing() {
       }
     }
   }
-  console.log("done");
 }
 
 module.exports = {

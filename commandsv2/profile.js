@@ -122,11 +122,11 @@ module.exports = {
         .setAuthor({ name: user.username, iconURL: acthelmet })
         .setDescription(
           `
-        <:rank_race:1103913420320944198> Race Rank: ${racerank}\n
-        <:rank_drift:1103913418567712818> Drift Rank: ${driftrank}\n
-        <:rank_prestige:1103914107461181530> Prestige: ${prestige}\n
+        ${emotes.race} Race Rank: ${racerank}\n
+        ${emotes.drift} Drift Rank: ${driftrank}\n
+        ${emotes.prestige} Prestige: ${prestige}\n
+        ${emotes.tier} **Tier**: ${tier}\n
         ${pvpindb.emote} PVP Rank: ${pvpname} ${pvprank.Wins}\n
-        **Tier**: ${tier}
         `
         )
         .addFields(

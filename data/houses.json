@@ -14,7 +14,7 @@
     "id": "bv",
     "Name": "Buone Vedute",
     "Price": 750000,
-    "Perk": "Earn 5% more cash when racing in /streetrace.",
+    "Perk": "Earn 5% more cash when racing in street race.",
     "Image": "https://i.ibb.co/YXXLDF7/1cb9f46d-5556-481e-963b-ab7eb48f08b4-austrailia-house-exterior-close.jpg",
     "Emote": "<:houseview:1050305264701669416>",
     "Type": "House",
@@ -86,5 +86,27 @@
     "Type": "House",
     "Space": 10,
     "Prestige": 0
+  },
+  "villa sull acqua": {
+    "id": "acqua",
+    "Name": "Villa Sull Acqua",
+    "Price": 2000000,
+    "Perk": "Earn 2x Xessence from your pet",
+    "Image": "https://i.ibb.co/XySsvd9/methode-times-prod-web-bin-4a1e487c-1050-11e9-a440-fb17d0e61415.jpg",
+    "Emote": "<:villawater:1114765089006948363>",
+    "Type": "House",
+    "Space": 6,
+    "Prestige": 5
+  },
+  "castello verde":{
+    "id": "verde",
+    "Name": "Castello Verde",
+    "Price": 20000000,
+    "Perk": "Earn 10% more cash in highway races",
+    "Image": "https://i.ibb.co/p2cm0tj/large-Sauerthal-E2-80-931-1.jpg",
+    "Emote": "🏰",
+    "Type": "House",
+    "Space": 20,
+    "Prestige": 10
   }
 }

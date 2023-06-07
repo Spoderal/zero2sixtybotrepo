@@ -8,8 +8,15 @@ const emotes = {
   check: "✅",
   loading: "<a:zloading:1102320589194150028>",
 
+  //ranks
+
+  prestige: "<:rank_newprestige:1114812459182723102>",
+  race:"<:rank_newrace:1114815495959486504>",
+  drift:"<:rank_newdrift:1114815498056638506> ",
+  tier:"<:rank_tier:1114816526076362803>",
+
   // Currency
-  cash: "<:zecash:983966383408832533>",
+  cash: "<a:emote_cash:1114822702461616168>",
   gold: "<:z_gold:933929482518167552>",
   bank: "🏦",
   seriestickets: "<:stickets:1114077581898154064>",
@@ -22,7 +29,7 @@ const emotes = {
   wheelSpin: "<a:currency_wheelspin:1103930502467047437>",
   superWheel: "<a:currency_superwheelspin:1103930501619793943>",
   blueprints: "<:blueprint:1076026198171328562>",
-  bounty: "<:CURRENCY_BOUNTY:1105006773502480425>",
+  bounty: "<a:emote_bounty:1114824655505731614>",
   PT: "<:pt:1110967734558273567>",
   addgarage: "<:garageico:1111452748936904805>",
   garage: "<:garageicobase:1111453007926788157>",

@@ -49,5 +49,10 @@
     "name": "carseries",
     "tiers": 7,
     "reward": 0
+  },
+  {
+    "name": "trackrace",
+    "tiers": 7,
+    "reward": 50
   }
 ]
