@@ -9,6 +9,7 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { ImgurClient } = require("imgur");
 const { createReadStream } = require("fs");
+const imgbb = require("imgbb-uploader")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -181,7 +182,8 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "submit") {
-      let cli = new ImgurClient({ accessToken: process.env.imgur });
+
+
 
       let global = await Global.findOne();
       let liverieslist = global.liveries;
@@ -215,15 +217,18 @@ module.exports = {
             "Specify an image! Send submit again, and copy and paste an image, or upload an image"
           );
 
-        let response = await cli.upload({
-          image: image,
-          type: "stream",
-        });
+          let options = {
+            apiKey: "141e8760bc34356d461607deca22eeee",
+            imageUrl: image
+          }
 
-        console.log(response.data);
+          let response =  await imgbb(options)
+
+
+        console.log(response.display_url);
 
         let livobj = {
-          image: response.data.link,
+          image: response.display_url,
           id: (cardata.length += 1),
           user: interaction.user.id,
           approved: false,
@@ -235,7 +240,7 @@ module.exports = {
         global.save();
 
         let embed = new Discord.EmbedBuilder()
-          .setImage(`${response.data.link}`)
+          .setImage(`${response.display_url}`)
           .setDescription("Submitted for review!")
           .addFields([
             { name: "Car", value: cars.Cars[cartosubmit.toLowerCase()].Name },
