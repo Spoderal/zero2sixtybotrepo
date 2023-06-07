@@ -197,7 +197,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "pressure" && userdata.prestige >= 6) {
+      } else if (value === "pressure" && userdata.prestige >= 3) {
         embed.setTitle("Pressure");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
