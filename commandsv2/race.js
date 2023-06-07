@@ -1154,8 +1154,6 @@ module.exports = {
                 userdata.cars.push(newcarobj);
               }
 
-
-
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
                 let timeout = 60000;
