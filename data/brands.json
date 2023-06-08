@@ -180,6 +180,18 @@
     "name": "Mazda",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
+  "mini": {
+    "image": "https://i.ibb.co/7z9wm2w/mini.png",
+    "emote": "<:mini:900283310012510228>",
+    "name": "MINI",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
+  },
+    "bac": {
+    "image": "https://i.ibb.co/LdHVW1w/bac.png",
+    "emote": "<:bac:1072343963303940157>",
+    "name": "BAC",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
+  },
   "mclaren": {
     "image": "https://i.ibb.co/RYfgjgD/logo-mclaren.png",
     "emote": "<:mclaren:931011546354692137>",
