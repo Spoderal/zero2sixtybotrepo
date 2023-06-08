@@ -3465,7 +3465,7 @@
       "Obtained": "Car Series",
       "Handling": 750,
       "Weight": 2100,
-      "Series":true
+      "Series": true
     },
     "1970 dodge challenger": {
       "alias": "1970 challenger",

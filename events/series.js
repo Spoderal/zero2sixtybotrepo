@@ -23,7 +23,8 @@ async function series() {
             let timeout = 86400000;
             let timeout2 = 600000;
             if (
-              udata.perfectengineeringcomplete !== true && udata.perfectengineering == true &&
+              udata.perfectengineeringcomplete !== true &&
+              udata.perfectengineering == true &&
               udata.seriestickets < 10 &&
               ticketscool !== null &&
               timeout2 - (Date.now() - ticketscool) < 0
@@ -64,7 +65,8 @@ async function series() {
               udata.seriestickets += 1;
             }
             if (
-              udata.pressurecomplete !== true && udata.pressure == true &&
+              udata.pressurecomplete !== true &&
+              udata.pressure == true &&
               bountycool !== null &&
               timeout - (Date.now() - bountycool) < 0
             ) {
