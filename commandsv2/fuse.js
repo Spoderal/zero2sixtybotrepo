@@ -31,7 +31,7 @@ module.exports = {
           { name: "Turbo", value: "turbo" },
           { name: "Spoiler", value: "spoiler" },
           { name: "Bodykit", value: "bodykit" },
-          
+
           { name: "Weight Reduction", value: "weightreduction" },
           { name: "Weight", value: "weight" },
           { name: "Brakes", value: "brakes" },
@@ -511,8 +511,7 @@ module.exports = {
       } else if (parttoinstall == "weightreduction") {
         parte = "t4weightreduction";
         partb = "t5weightreduction";
-      }
-      else if (parttoinstall == "weight") {
+      } else if (parttoinstall == "weight") {
         parte = "t4weight";
         partb = "t5weight";
       }
