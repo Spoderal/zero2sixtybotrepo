@@ -242,8 +242,9 @@ module.exports = {
       }
       let car = cars[0][ca];
       console.log(car);
+      let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image
       let carimage = await loadImage(
-        `${cardb.Cars[car.Name.toLowerCase()].Image}`
+        carimg
       );
       try {
         ctx.save();
@@ -473,8 +474,10 @@ module.exports = {
               }
               let car = itempage[page - 1][ca];
               console.log(car);
+              
+              let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image
               let carimage = await loadImage(
-                `${cardb.Cars[car.Name.toLowerCase()].Image}`
+                carimg
               );
               try {
                 ctx.save();

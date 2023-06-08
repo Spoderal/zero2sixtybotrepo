@@ -307,7 +307,7 @@ module.exports = {
         }
       )
       .setColor(colors.blue)
-      .setThumbnail(`${selected.Livery}`);
+      .setThumbnail(`${selected.Image}`);
 
     await interaction.reply({ embeds: [embed] });
   },
