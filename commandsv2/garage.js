@@ -242,10 +242,8 @@ module.exports = {
       }
       let car = cars[0][ca];
       console.log(car);
-      let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image
-      let carimage = await loadImage(
-        carimg
-      );
+      let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image;
+      let carimage = await loadImage(carimg);
       try {
         ctx.save();
         roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
@@ -474,11 +472,10 @@ module.exports = {
               }
               let car = itempage[page - 1][ca];
               console.log(car);
-              
-              let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image
-              let carimage = await loadImage(
-                carimg
-              );
+
+              let carimg =
+                car.Image || cardb.Cars[car.Name.toLowerCase()].Image;
+              let carimage = await loadImage(carimg);
               try {
                 ctx.save();
                 roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
