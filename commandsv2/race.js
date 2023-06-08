@@ -933,25 +933,25 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Speed > 140 && car.Speed < 160 && car.Track
+              (car) => car.Speed >= 140 && car.Speed <= 160 && car.Track
             );
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Speed > 150 && car.Speed < 170 && car.Track
+              (car) => car.Speed >= 150 && car.Speed <= 170 && car.Track
             );
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Speed > 170 && car.Speed < 180 && car.Track
+              (car) => car.Speed >= 170 && car.Speed <= 180 && car.Track
             );
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Speed > 170 && car.Speed < 180 && car.Track
+              (car) => car.Speed >= 170 && car.Speed <= 180 && car.Track
             );
           } else if (bot == 5) {
-            car2 = carsarray.filter((car) => car.Speed > 180 && car.Track);
+            car2 = carsarray.filter((car) => car.Speed >= 180 && car.Track);
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Speed > 190 && car.Speed < 215 && car.Track
+              (car) => car.Speed >= 190 && car.Speed <= 215 && car.Track
             );
           } else if (bot == 7) {
             car2 = carsarray.filter(
