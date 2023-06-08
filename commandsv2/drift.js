@@ -219,7 +219,7 @@ module.exports = {
     const ctx = canvas.getContext("2d");
     const bg = await loadImage(trackimg);
     let img = selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
-    let selected1image = await loadImage(img)
+    let selected1image = await loadImage(img);
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
     ctx.save();
