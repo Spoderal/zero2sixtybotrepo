@@ -63,8 +63,11 @@ module.exports = {
         price = price += price * 0.05;
       }
 
-      for (var i2 = 0; i2 < amount; i2++)
-        usercars.splice(usercars.indexOf(selected), 1);
+    userdata.cars.splice(
+      userdata.cars.indexOf(selected),
+      amount
+    );
+    userdata.save();
       userdata.cars = usercars;
       userdata.cash += Number(price);
 

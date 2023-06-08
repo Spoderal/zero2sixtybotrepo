@@ -3464,7 +3464,8 @@
       "Class": "A",
       "Obtained": "Car Series",
       "Handling": 750,
-      "Weight": 2100
+      "Weight": 2100,
+      "Series":true
     },
     "1970 dodge challenger": {
       "alias": "1970 challenger",
@@ -4610,8 +4611,7 @@
       "Price": 0,
       "sellprice": 176250,
       "Engine": "6.5 L V12",
-      "Image": "https://www.motortrend.com/uploads/sites/5/2020/02/2020-Lamborghini-Aventador-SVJ-Roadster-45.jpg",
-      "Rear": "https://m.economictimes.com/thumb/msid-63845654,width-1200,height-900,resizemode-4,imgsize-265543/at-460247-lamborghinis-2018-aventador-s-roadster-is-messy-angry-passionate-disinclined-to-obey.jpg",
+      "Image": "https://i.ibb.co/kgbH4Ky/2020-lamborghini-aventador-svj-roadster.jpg",
       "0-60": 5.7,
       "Drift": 0,
       "Handling": 500,
