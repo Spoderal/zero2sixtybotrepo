@@ -5,6 +5,7 @@ let parts = require("../data/partsdb.json");
 let profilestuff = require("../data/pfpsdb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
+const lodash = require("lodash")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -62,8 +63,13 @@ module.exports = {
       if (userdata.items.includes("coconut")) {
         price = price += price * 0.05;
       }
+      for (var i =0; i < usercars.length; i++)
+   if (usercars[i].Name === selected.Name) {
+    usercars.splice(i,amount);
+      break;
+   }
 
-      userdata.cars.splice(userdata.cars.indexOf(selected), amount);
+      userdata.cars = usercars
       userdata.cash += Number(price);
       
       await interaction.reply(
