@@ -64,13 +64,12 @@ module.exports = {
       }
 
       userdata.cars.splice(userdata.cars.indexOf(selected), amount);
-      userdata.save();
-      userdata.cars = usercars;
       userdata.cash += Number(price);
-
+      
       await interaction.reply(
         `You sold ${amount} ${selected.Name} for ${toCurrency(price)}!`
-      );
+        );
+        
     } else if (parts.Parts[selling.toLowerCase()]) {
       if (
         !userparts.includes(
