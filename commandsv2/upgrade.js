@@ -216,13 +216,13 @@ module.exports = {
       let newspeed = Number(partInLocalDB?.DecreaseWeight);
       let stat = Number(oldweight);
       if (stat > 500) {
-        selected.Weight = oldweight -= newspeed;
+        selected.WeightStat = oldweight -= newspeed;
       }
     }
     if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
       let newspeed = Number(partInLocalDB?.AddWeight);
       let stat = Number(oldweight);
-      selected.Weight = stat += newspeed;
+      selected.WeightStat = stat += newspeed;
     }
     selected.WeightStat = oldweight;
     selected.Handling = oldhandling;
@@ -237,8 +237,7 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = oldhandling;
-    let newweight =
-      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight =  selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
