@@ -237,7 +237,8 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = oldhandling;
-    let newweight =  selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight =
+      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
