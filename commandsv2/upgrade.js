@@ -277,7 +277,7 @@ module.exports = {
         Emote: "",
       };
     }
-    let image = selected.Image || cardb[selected.Name.toLowerCase()].Image
+    let image = selected.Image || cardb[selected.Name.toLowerCase()].Image;
     let embed = new discord.EmbedBuilder()
       .setTitle(
         `Upgraded ${partType} on your ${selected.Emote} ${selected.Name}`
