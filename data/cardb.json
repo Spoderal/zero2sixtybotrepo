@@ -9260,6 +9260,23 @@
       "Class": "C",
       "Weight": 2700,
       "Track": true
+    },
+    "1996 ford f250 power stroke": {
+      "alias": "1996 f250 power stroke",
+      "Name": "1996 Ford F250 Power Stroke",
+      "Emote": "<:ford:931012624152399902>",
+      "Speed": 140,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 375000,
+      "Engine": "8.0 L quad-turbocharged W16",
+      "Image": "https://i.ibb.co/gvJm93K/Snapchat-736842070.jpg",
+      "0-60": 12,
+      "Drift": 0,
+      "Handling": 500,
+      "Class": "D",
+      "Weight": 4500,
+      "Obtained":"Common Imports"
     }
   }
 }
