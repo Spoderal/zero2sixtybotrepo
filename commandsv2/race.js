@@ -527,9 +527,7 @@ module.exports = {
 
           let mph = selected.Speed;
 
-          let weight =
-            selected.WeightStat ||
-            cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let weight = selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling;
           if (!selected.WeightStat) {
@@ -548,8 +546,7 @@ module.exports = {
           let speed = selected.Speed;
           let speed2 = car2.Speed;
 
-          let sec;
-          let sec2;
+   
           handling = Math.floor(handling);
           handling2 = Math.floor(handling2);
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
@@ -581,8 +578,7 @@ module.exports = {
             fetchReply: true,
           });
 
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
+
 
           class ICar {
             constructor(speed, accel, handling, weight) {
@@ -612,7 +608,7 @@ module.exports = {
           };
 
           const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const track = formula(400, 2.0, 500, 3000)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -2978,7 +2974,7 @@ module.exports = {
           };
 
           const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const track = formula(400, 2.0, 500, 3000)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -3419,7 +3415,7 @@ module.exports = {
           };
 
           const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const track = formula(400, 2.0, 500, 3000)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -3924,7 +3920,7 @@ module.exports = {
           };
 
           const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const track = formula(400, 2.0, 500, 3000)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -4350,7 +4346,7 @@ module.exports = {
           };
 
           const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const track = formula(400, 2.0, 500, 3000)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -4659,7 +4655,7 @@ module.exports = {
           };
 
           const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const track = formula(400, 2.0, 500, 3000)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
