@@ -1197,9 +1197,6 @@
       "Emote": "<:suspensionrestored:941546331367960627>",
       "Image":"https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Tier": "j",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "suspension",
       "DecreasedSpeed": "0"

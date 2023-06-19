@@ -52,7 +52,6 @@ module.exports = {
 
     if (
       !exhaust ||
-      !tires  ||
       !intake  ||
       !clutch  ||
       !suspension  ||
@@ -100,28 +99,3 @@ module.exports = {
          
         );
     }
-
-    let carindb = cars.Cars[selected.Name.toLowerCase()].restored;
-    carindb = cars.Cars[carindb.toLowerCase()];
-    let carobj = {
-      ID: carindb.alias,
-      Name: carindb.Name,
-      Speed: carindb.Speed,
-      Acceleration: carindb["0-60"],
-      Handling: carindb.Handling,
-      Parts: [],
-      Emote: carindb.Emote,
-      Livery: carindb.Image,
-      Miles: 0,
-    };
-
-    for (var i = 0; i < 1; i++) usercars.splice(usercars.indexOf(selected), 1);
-    userdata.cars = usercars;
-
-    userdata.cars.push(carobj);
-
-    userdata.save();
-
-    await interaction.reply(`✅`);
-  },
-};
