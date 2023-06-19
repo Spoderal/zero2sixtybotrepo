@@ -1633,11 +1633,7 @@ module.exports = {
             tracklength += formula;
             tracklength2 += formula2;
 
-            if (timer == 9) {
-              if (braked == false) {
-                formula -= 500;
-              }
-            }
+        
 
             console.log(`track ${tracklength}`);
             console.log(`track2 ${tracklength2}`);
