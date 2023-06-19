@@ -515,7 +515,6 @@ module.exports = {
           }
           car2 = lodash.sample(car2);
 
-          console.log(car2);
 
           let craterare = randomRange(1, 3);
 
@@ -527,7 +526,7 @@ module.exports = {
             crateearned = "rare crate";
           }
 
-          console.log(weather2);
+         
 
           let mph = selected.Speed;
 
@@ -602,8 +601,7 @@ module.exports = {
             return (car) => {
               const speedDifference = target.speed - car.speed;
               const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
+              const handling = car.handling + speedDifference * handlingPerSpeed;
 
               const weightDifference = target.weight - car.weight;
               const accelPerWeight = target.accel / target.weight;
@@ -616,22 +614,20 @@ module.exports = {
           };
 
           const drag = formula(200, 2.0, 700, 2600);
-          const track = formula(400, 3.0, 1700, 3300);
+          const track = formula(1, 20, 1, 1)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
           let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(player)
+          console.log(opponent)
           let winner;
           const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-            winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+            winner = playerRegression <= opponentRegression ? "Player" : "Opponent";
 
-            const string =
-              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
-              `- Winner: ${winner}\n`;
+            const string =   `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` + `- Winner: ${winner}\n`;
 
             return string;
           };
@@ -2538,7 +2534,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(420, 2.0, 700, 2700);
+          const drag = formula(1, 20, 1, 1)
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -2980,7 +2976,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(450, 2.0, 500, 3200);
+          const drag = formula(1, 20, 1, 1)
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -3421,7 +3417,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(400, 2.0, 700, 2600);
+          const drag = formula(1, 20, 1, 1)
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -3926,7 +3922,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(400, 2.0, 700, 3500);
+          const drag = formula(1, 20, 1, 1)
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -4352,8 +4348,8 @@ module.exports = {
             };
           };
 
-          const drag = formula(200, 2.0, 700, 3500);
-          const track = formula(400, 3.0, 1700, 3300);
+          const drag = formula(1, 20, 1, 1)
+          const track = formula(1, 20, 1, 1)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -4662,7 +4658,7 @@ module.exports = {
           };
 
           const drag = formula(230, 2.0, 500, 3500);
-          const track = formula(400, 2.0, 1700, 3300);
+          const track = formula(1, 20, 1, 1)
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
