@@ -4670,7 +4670,7 @@
       "Handling": 750,
       "Class": "B",
       "Weight": 2200,
-      "Obtained":"Event"
+      "Obtained": "Event"
     },
     "2012 lotus evora s": {
       "alias": "2012 evora s",
@@ -7434,7 +7434,7 @@
       "Handling": 500,
       "Class": "A",
       "Weight": 5200,
-      "Obtained":"Exotic Imports"
+      "Obtained": "Exotic Imports"
     },
     "2015 hsv gts maloo": {
       "alias": "2015 gts maloo",
@@ -9361,7 +9361,7 @@
       "Handling": 750,
       "Class": "A",
       "Weight": 4000,
-      "Obtained":"Exotic Imports"
+      "Obtained": "Exotic Imports"
     },
     "1996 ford f250 power stroke": {
       "alias": "1996 f250 power stroke",
@@ -9378,7 +9378,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 4500,
-      "Obtained":"Common Imports"
+      "Obtained": "Common Imports"
     },
     "2024 porsche mission x": {
       "alias": "2024 mission x",
@@ -9408,7 +9408,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
-      "Obtained":"Rare Imports",
+      "Obtained": "Rare Imports",
       "Weight": 4200
     },
     "kaylas 2024 porsche mission x": {
@@ -9425,7 +9425,7 @@
       "Handling": 1500,
       "Class": "X",
       "Weight": 3000,
-      "Boss":true
+      "Boss": true
     },
     "madisons 2021 mercedes amg gt black series": {
       "alias": "madisons 2021 amg gt black series",
@@ -9441,7 +9441,7 @@
       "Handling": 1000,
       "Class": "X",
       "Weight": 3500,
-      "Boss":true
+      "Boss": true
     },
     "1987 porsche 911 slant nose": {
       "alias": "1987 911 slant nose",
