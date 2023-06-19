@@ -69,11 +69,8 @@ module.exports = {
         )
     )
     .addSubcommand((command) =>
-    command
-      .setName("delete")
-      .setDescription("Delete a crew (CREW OWNER)")
-    
-  ),
+      command.setName("delete").setDescription("Delete a crew (CREW OWNER)")
+    ),
 
   async execute(interaction) {
     let globalModel = await Global.findOne();
@@ -573,7 +570,8 @@ module.exports = {
 
       let toedit = interaction.options.getString("option");
       console.log(crew2[0]);
-      if(crew2[0].owner.id !== interaction.user.id) return interaction.reply("You need to be the crew owner!")
+      if (crew2[0].owner.id !== interaction.user.id)
+        return interaction.reply("You need to be the crew owner!");
       if (toedit == "icon") {
         let icons = crewicons.Icons;
         let iconsdisplay = [];
@@ -714,8 +712,7 @@ module.exports = {
           }
         });
       }
-    } 
-    else if (option == "delete") {
+    } else if (option == "delete") {
       let crewname = userdata.crew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
@@ -723,77 +720,73 @@ module.exports = {
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       console.log(crew2[0]);
-      if(crew2[0].owner.id !== interaction.user.id) return interaction.reply("You need to be the crew owner!")
-     
-   interaction.reply({content: 'Are you sure you want to delete this crew? This action is not reversable. Y/N', fetchReply: true})
+      if (crew2[0].owner.id !== interaction.user.id)
+        return interaction.reply("You need to be the crew owner!");
+
+      interaction.reply({
+        content:
+          "Are you sure you want to delete this crew? This action is not reversable. Y/N",
+        fetchReply: true,
+      });
 
       let filter = (m) => m.author.id == interaction.user.id;
       const collector2 = interaction.channel.createMessageCollector({
         filter: filter,
-        time: 10000
+        time: 10000,
       });
 
-
-      collector2.on('collect', async (i) => {
-        if(i.content.toLowerCase() == "y"){
-
-          let crews = globalModel.crews
+      collector2.on("collect", async (i) => {
+        if (i.content.toLowerCase() == "y") {
+          let crews = globalModel.crews;
 
           for (var i2 = 0; i2 < crews.length; i2++)
-          if (crews[i2].name === crew2[0].name) {
-            crews.splice(i2, 1);
-            break;
-          }
+            if (crews[i2].name === crew2[0].name) {
+              crews.splice(i2, 1);
+              break;
+            }
 
-        for(let mem in crew2[0].members){
-          let member = crew2[0].members[mem]
+          for (let mem in crew2[0].members) {
+            let member = crew2[0].members[mem];
 
-          let memberdata = await User.findOne({id: member})
+            let memberdata = await User.findOne({ id: member });
 
-          if(memberdata.crew){
-            await User.findOneAndUpdate(
-              {
-                id: member
-              },
-              {
-                $unset: {
-                  "crew": {},
+            if (memberdata.crew) {
+              await User.findOneAndUpdate(
+                {
+                  id: member,
                 },
-              },
-              {
-                
-              }
-            );
+                {
+                  $unset: {
+                    crew: {},
+                  },
+                },
+                {}
+              );
+            }
           }
 
-        
-        }
-
-          globalModel.crews = crews
+          globalModel.crews = crews;
 
           await User.findOneAndUpdate(
             {
-              id: interaction.user.id
+              id: interaction.user.id,
             },
             {
               $unset: {
-                "crew": {},
+                crew: {},
               },
             },
-            {
-              
-            }
+            {}
           );
 
-          userdata.save()
-          
+          userdata.save();
+
           globalModel.save();
 
-          await interaction.channel.send("Crew deleted")
+          await interaction.channel.send("Crew deleted");
         }
-      })
-    }
-    else if (option == "top") {
+      });
+    } else if (option == "top") {
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
 
       let data = globalModel.crews;

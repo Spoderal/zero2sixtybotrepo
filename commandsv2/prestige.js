@@ -17,8 +17,8 @@ module.exports = {
     let racerank = userdata.racerank;
     let prestigerank = userdata.prestige;
 
-    let keeprace = userdata.keeprace
-    let keepdrift = userdata.keepdrift
+    let keeprace = userdata.keeprace;
+    let keepdrift = userdata.keepdrift;
 
     let newprestige2 = (prestigerank += 1);
 
@@ -35,9 +35,9 @@ module.exports = {
       );
 
     userdata.prestige += 1;
-    if(keeprace){
-      let oldraces = racerank -= raceprestige
-      userdata.keeprace = false
+    if (keeprace) {
+      let oldraces = (racerank -= raceprestige);
+      userdata.keeprace = false;
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -48,9 +48,7 @@ module.exports = {
           },
         }
       );
-    }
-    
-    else {
+    } else {
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -61,11 +59,10 @@ module.exports = {
           },
         }
       );
-
     }
-    if(keepdrift){
-      let olddrift = driftrank -= driftprestige
-      userdata.keepdrift = false
+    if (keepdrift) {
+      let olddrift = (driftrank -= driftprestige);
+      userdata.keepdrift = false;
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -76,9 +73,7 @@ module.exports = {
           },
         }
       );
-    }
-    else {
-
+    } else {
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,

@@ -555,7 +555,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
-  raintrophy:{
+  raintrophy: {
     type: Number,
     required: false,
     default: 0,
@@ -565,12 +565,12 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  keepdrift:{
+  keepdrift: {
     type: Boolean,
     required: false,
     default: false,
   },
-  keeprace:{
+  keeprace: {
     type: Boolean,
     required: false,
     default: false,

@@ -604,7 +604,9 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/JRHjvrk/item-gas.png",
-    "Used":["You warm your hands around the fire and now your extra race ranks will transfer over to the next prestige"]
+    "Used": [
+      "You warm your hands around the fire and now your extra race ranks will transfer over to the next prestige"
+    ]
   },
   "fireplace": {
     "Price": 0,
@@ -615,7 +617,9 @@
     "Shop": false,
     "Findable": true,
     "Image": "https://i.ibb.co/xXjThV3/item-fireplace.png",
-    "Used":["You warm your hands around the fire and now your extra drift ranks will transfer over to the next prestige"]
+    "Used": [
+      "You warm your hands around the fire and now your extra drift ranks will transfer over to the next prestige"
+    ]
   },
   "bubbles": {
     "Price": 0,

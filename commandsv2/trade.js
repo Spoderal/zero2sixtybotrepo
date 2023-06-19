@@ -97,7 +97,7 @@ module.exports = {
 
     if (trading.endsWith("cash")) {
       let cashamount = Number(trading.split(" ")[0]);
-      let newamount = Math.round((cashamount -= cashamount * 0.10));
+      let newamount = Math.round((cashamount -= cashamount * 0.1));
       console.log(newamount);
       item = `${toCurrency(newamount)}`;
       if (cashamount > userdata.cash)
@@ -154,7 +154,7 @@ module.exports = {
 
     if (trading2.endsWith("cash")) {
       let cashamount = Number(trading2.split(" ")[0]);
-      let newamount = Math.round((cashamount -= cashamount * 0.10));
+      let newamount = Math.round((cashamount -= cashamount * 0.1));
       item2 = `${toCurrency(newamount)}`;
       if (cashamount > userdata2.cash)
         return interaction.reply("You don't have enough cash!");

@@ -124,11 +124,12 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
-      else if (value === "wetwarriors") {
+      } else if (value === "wetwarriors") {
         embed.setTitle("Wet Warriors");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Its the season of rain! You're gonna slip and slide while trying to collect these warriors!
+        embed
+          .setDescription(
+            `Its the season of rain! You're gonna slip and slide while trying to collect these warriors!
 
         Go around the wet track collecting wet trophies as you see them, they'll randomly pop up to claim during your race!
 
@@ -138,8 +139,9 @@ module.exports = {
 
             **Ends June 30th 2023**
 
-                  `)
-        
+                  `
+          )
+
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/sPW7X1t/wetwarriors.png");
 
@@ -147,8 +149,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      }
-      else if (value === "devilsmountain") {
+      } else if (value === "devilsmountain") {
         embed.setTitle("Devils Mountain");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Can you beat the drift king?

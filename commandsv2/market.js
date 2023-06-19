@@ -161,7 +161,7 @@ module.exports = {
           user: interaction.user,
           type: "parts",
         };
-        
+
         for (var i = 0; i < amount; i++)
           userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
         userdata.parts = userparts;

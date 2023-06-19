@@ -1,7 +1,7 @@
 const Global = require(`../schema/global-schema`);
 const itemsdb = require("../data/items.json");
 const lodash = require("lodash");
-const {randomNoRepeats} = require("../common/utils")
+const { randomNoRepeats } = require("../common/utils");
 async function updateItemShop() {
   let global;
   try {
@@ -22,7 +22,7 @@ async function updateItemShop() {
       }
 
       let filtereditems = itemarr.filter((item) => item.Shop == true);
-      var chooser = randomNoRepeats(filtereditems)
+      var chooser = randomNoRepeats(filtereditems);
 
       let randitem1 = chooser();
       let randitem2 = chooser();
@@ -49,10 +49,10 @@ async function updateItemShop() {
       items.push(item5);
       items.push(item6);
 
-      global.itemshop = items
+      global.itemshop = items;
       global.update();
-      global.itemshopcooldown = Date.now()
-      
+      global.itemshopcooldown = Date.now();
+
       global.update();
       global.save();
     } else {
@@ -64,7 +64,7 @@ async function updateItemShop() {
 
       let filtereditems = itemarr.filter((item) => item.Shop == true);
 
-      var chooser2 = randomNoRepeats(filtereditems)
+      var chooser2 = randomNoRepeats(filtereditems);
 
       let randitem1 = chooser2();
       let randitem2 = chooser2();
@@ -93,12 +93,11 @@ async function updateItemShop() {
         items.push(item5);
         items.push(item6);
 
-       
         try {
-          global.itemshop = items
+          global.itemshop = items;
           global.update();
-          global.itemshopcooldown = Date.now()
-          
+          global.itemshopcooldown = Date.now();
+
           global.update();
           global.save();
         } catch (err) {

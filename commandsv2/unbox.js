@@ -35,7 +35,15 @@ module.exports = {
   async execute(interaction) {
     let crates = require("../data/imports.json");
     let cars = require("../data/cardb.json");
-    let list = ["common", "rare", "exotic", "drift", "fools", "le mans", "rain"];
+    let list = [
+      "common",
+      "rare",
+      "exotic",
+      "drift",
+      "fools",
+      "le mans",
+      "rain",
+    ];
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -123,7 +131,7 @@ module.exports = {
         return await interaction.reply(
           `You dont have enough keys! This crate costs 10 Le Keys`
         );
-        if (bought == "rain" && trophy < 25)
+      if (bought == "rain" && trophy < 25)
         return await interaction.reply(
           `You dont have enough keys! This crate costs 25 Rain Trophies`
         );
@@ -141,8 +149,7 @@ module.exports = {
         userdata.foolskeys -= 25;
       } else if (bought == "le mans") {
         userdata.lekeys -= 10;
-      }
-      else if (bought == "rain") {
+      } else if (bought == "rain") {
         userdata.raintrophy -= 25;
       }
 
