@@ -616,7 +616,7 @@ module.exports = {
           };
 
           const drag = formula(200, 2.0, 700, 2600);
-          const track = formula(300, 3.0, 1700, 3300);
+          const track = formula(400, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -2538,7 +2538,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(220, 2.0, 700, 2700);
+          const drag = formula(420, 2.0, 700, 2700);
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -2980,7 +2980,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(250, 2.0, 500, 3200);
+          const drag = formula(450, 2.0, 500, 3200);
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -3421,7 +3421,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(200, 2.0, 700, 2600);
+          const drag = formula(400, 2.0, 700, 2600);
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -3926,7 +3926,7 @@ module.exports = {
             };
           };
 
-          const drag = formula(200, 2.0, 700, 3500);
+          const drag = formula(400, 2.0, 700, 3500);
           const track = formula(300, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
@@ -4353,7 +4353,7 @@ module.exports = {
           };
 
           const drag = formula(200, 2.0, 700, 3500);
-          const track = formula(300, 3.0, 1700, 3300);
+          const track = formula(400, 3.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -4662,7 +4662,7 @@ module.exports = {
           };
 
           const drag = formula(230, 2.0, 500, 3500);
-          const track = formula(300, 2.0, 1700, 3300);
+          const track = formula(400, 2.0, 1700, 3300);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
