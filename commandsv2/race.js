@@ -1613,11 +1613,11 @@ module.exports = {
             speed2 / 6;
 
             let formula = (speed += handling += weight / 100);
-            let trophy = true;
+            let trophy = false;
             collec.on("collect", async (i) => {
               if (i.customId == "trophy" && trophy == false) {
                 userdata.raintrophy += 1;
-
+                trophy = true
                 interaction.editReply({ components: [] });
               }
             });
