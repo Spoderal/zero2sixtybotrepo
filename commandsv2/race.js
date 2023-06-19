@@ -598,7 +598,8 @@ module.exports = {
             return (car) => {
               let speedDifference = target.speed - car.speed;
               let handlingPerSpeed = target.handling / target.speed;
-              let handling = (car.handling += speedDifference) * handlingPerSpeed;
+              let handling =
+                (car.handling += speedDifference) * handlingPerSpeed;
 
               let weightDifference = target.weight - car.weight;
               let accelPerWeight = target.accel / target.weight;
@@ -606,13 +607,13 @@ module.exports = {
 
               let targetRegression = target.handling / target.accel;
               let regression = Math.abs((targetRegression -= handling) / accel);
-              console.log(targetRegression)
+              console.log(targetRegression);
               return Math.round(regression * 100) / 100;
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -2522,7 +2523,8 @@ module.exports = {
             return (car) => {
               let speedDifference = target.speed - car.speed;
               let handlingPerSpeed = target.handling / target.speed;
-              let handling = (car.handling += speedDifference) * handlingPerSpeed;
+              let handling =
+                (car.handling += speedDifference) * handlingPerSpeed;
 
               let weightDifference = target.weight - car.weight;
               let accelPerWeight = target.accel / target.weight;
@@ -2530,13 +2532,13 @@ module.exports = {
 
               let targetRegression = target.handling / target.accel;
               let regression = Math.abs((targetRegression -= handling) / accel);
-              console.log(targetRegression)
+              console.log(targetRegression);
               return Math.round(regression * 100) / 100;
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -2964,7 +2966,8 @@ module.exports = {
             return (car) => {
               let speedDifference = target.speed - car.speed;
               let handlingPerSpeed = target.handling / target.speed;
-              let handling = (car.handling += speedDifference) * handlingPerSpeed;
+              let handling =
+                (car.handling += speedDifference) * handlingPerSpeed;
 
               let weightDifference = target.weight - car.weight;
               let accelPerWeight = target.accel / target.weight;
@@ -2972,13 +2975,13 @@ module.exports = {
 
               let targetRegression = target.handling / target.accel;
               let regression = Math.abs((targetRegression -= handling) / accel);
-              console.log(targetRegression)
+              console.log(targetRegression);
               return Math.round(regression * 100) / 100;
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -3405,7 +3408,8 @@ module.exports = {
             return (car) => {
               let speedDifference = target.speed - car.speed;
               let handlingPerSpeed = target.handling / target.speed;
-              let handling = (car.handling += speedDifference) * handlingPerSpeed;
+              let handling =
+                (car.handling += speedDifference) * handlingPerSpeed;
 
               let weightDifference = target.weight - car.weight;
               let accelPerWeight = target.accel / target.weight;
@@ -3413,13 +3417,13 @@ module.exports = {
 
               let targetRegression = target.handling / target.accel;
               let regression = Math.abs((targetRegression -= handling) / accel);
-              console.log(targetRegression)
+              console.log(targetRegression);
               return Math.round(regression * 100) / 100;
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -3910,7 +3914,8 @@ module.exports = {
             return (car) => {
               let speedDifference = target.speed - car.speed;
               let handlingPerSpeed = target.handling / target.speed;
-              let handling = (car.handling += speedDifference) * handlingPerSpeed;
+              let handling =
+                (car.handling += speedDifference) * handlingPerSpeed;
 
               let weightDifference = target.weight - car.weight;
               let accelPerWeight = target.accel / target.weight;
@@ -3918,13 +3923,13 @@ module.exports = {
 
               let targetRegression = target.handling / target.accel;
               let regression = Math.abs((targetRegression -= handling) / accel);
-              console.log(targetRegression)
+              console.log(targetRegression);
               return Math.round(regression * 100) / 100;
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -4336,7 +4341,8 @@ module.exports = {
             return (car) => {
               let speedDifference = target.speed - car.speed;
               let handlingPerSpeed = target.handling / target.speed;
-              let handling = (car.handling += speedDifference) * handlingPerSpeed;
+              let handling =
+                (car.handling += speedDifference) * handlingPerSpeed;
 
               let weightDifference = target.weight - car.weight;
               let accelPerWeight = target.accel / target.weight;
@@ -4344,13 +4350,13 @@ module.exports = {
 
               let targetRegression = target.handling / target.accel;
               let regression = Math.abs((targetRegression -= handling) / accel);
-              console.log(targetRegression)
+              console.log(targetRegression);
               return Math.round(regression * 100) / 100;
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
@@ -4658,8 +4664,8 @@ module.exports = {
             };
           };
 
-          const drag = formula(400, 2.0, 1000, 2000)
-          const track = formula(250, 2.0, 500, 3000)
+          const drag = formula(400, 2.0, 1000, 2000);
+          const track = formula(250, 2.0, 500, 3000);
           const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
