@@ -63,11 +63,12 @@ module.exports = {
       let carindb = list[item.toLowerCase()];
       let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
       let carimg = await loadImage(carindb.Image);
-      let brand =
-        brandsarr.filter((br) => br.emote == carindb.Emote) || "no brand";
-      if (brand.length == 0) {
-        brand[0] = "no brand";
+      let brand = brandsarr.filter((br) => br.emote == carindb.Emote) 
+      console.log(brand)
+      if (!brand[0]) {
+        brand[0] = brands["no brand"]
       }
+      console.log(brand)
       let brimg = await loadImage(brand[0].image);
       let flag = await loadImage(brand[0].country);
       let policeimg = await loadImage("https://i.ibb.co/cwr7WLB/police.png");
@@ -257,6 +258,8 @@ module.exports = {
         }
       });
     } else if (carindb[0]) {
+
+   
       let canvas = createCanvas(1280, 720);
       let ctx = canvas.getContext("2d");
 
@@ -286,6 +289,8 @@ module.exports = {
       let brakes = carindb[0].Brakes;
       let spoiler = carindb[0].Spoiler;
       let intercooler = carindb[0].Intercooler;
+
+      
 
       let drivetrain = carindb[0].Drivetrain;
 

@@ -555,6 +555,26 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
+  raintrophy:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  chips: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  keepdrift:{
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  keeprace:{
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   pressurecomplete: {
     type: Boolean,
     required: false,

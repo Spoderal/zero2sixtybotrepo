@@ -75,6 +75,7 @@ module.exports = {
     let global = await Global.findOne();
     let userdata = await User.findOne({ id: interaction.user.id });
     let currencies = require("../data/currencydb.json");
+    let userparts = userdata.parts;
     if (subcommand == "list") {
       let item = interaction.options.getString("item");
       let price = interaction.options.getNumber("price");
@@ -160,7 +161,7 @@ module.exports = {
           user: interaction.user,
           type: "parts",
         };
-        let userparts = userdata.parts;
+        
         for (var i = 0; i < amount; i++)
           userparts.splice(userparts.indexOf(item.toLowerCase()), 1);
         userdata.parts = userparts;

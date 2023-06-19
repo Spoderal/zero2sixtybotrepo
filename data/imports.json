@@ -6,8 +6,10 @@
       "1994 honda prelude",
       "1994 toyota celica gt4",
       "2000 lexus sc400",
-      "sil-eighty",
-      "1989 toyota celica"
+      "1989 toyota celica",
+      "1996 ford f250 power stroke",
+      "1995 porsche 928",
+      "2008 audi rs6"
     ]
   },
   "rare": {
@@ -25,7 +27,8 @@
       "2012 mazda rx8",
       "2016 bmw m6",
       "2021 acura tlx type s",
-      "1998 mitsubishi lancer evolution"
+      "1998 mitsubishi lancer evolution",
+      "2021 porsche panamara turbo"
     ]
   },
   "exotic": {
@@ -55,7 +58,8 @@
       "2017 mercedes amg one",
       "2022 aston martin valkyrie",
       "2006 koenigsegg ccx",
-      "2007 koenigsegg ccgt"
+      "2007 koenigsegg ccgt",
+      "2024 lotus eletra"
     ]
   },
   "le mans": {
@@ -69,6 +73,16 @@
       "2019 porsche 911 rsr-19",
       "2023 toyota gr010 hybrid",
       "2022 peugeot 9x8"
+    ]
+  },
+  "rain": {
+    "Contents": [
+      "2015 lotus exige s roadster",
+      "2008 bmw z4",
+      "1993 lamborghini lm002",
+      "1999 lamborghini diablo gtr",
+      "1986 ford escort rs turbo",
+      "1998 mercedes amg clk gtr"
     ]
   },
   "fools": {

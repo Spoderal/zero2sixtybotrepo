@@ -563,6 +563,71 @@
     "Image": "https://i.ibb.co/j35ztVR/item-briefcase.png"
   },
 
+  "match": {
+    "Price": 0,
+    "Action": "Light a match I cant see anything!\n\nWith this item in your inventory you boost your drift rank earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS BESIDES MATCHES*",
+    "Name": "Match",
+    "Type": "Usable",
+    "Emote": "<:item_match:1116954447797567488>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/tBXd68Q/item-match.png"
+  },
+
+  "chips": {
+    "Price": 0,
+    "Action": "Half the bag is air\n\nBoost your drift cash earnings for 10 minutes by 5% *STACKS UP TO 50%*",
+    "Name": "Chips",
+    "Type": "Usable",
+    "Emote": "<:item_chips:1116954446090469427>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/VBYx5fQ/item-chips.png"
+  },
+
+  "parking brake": {
+    "Price": 0,
+    "Action": "*TOKYO DRIFT MUSIC PLAYS*\n\nBoost your drift rank earnings to 4x PERMANENTLY\n*STACKS WITH OTHER ITEMS BESIDES PARKING BRAKES*",
+    "Name": "Parking Brake",
+    "Type": "Usable",
+    "Emote": "<:item_match:1116954447797567488>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/5hHSWCD/item-parkingbrake.png"
+  },
+  "gas": {
+    "Price": 0,
+    "Action": "Wow this item is GASSS\n\nBring your previous race ranks with you when prestiging",
+    "Name": "Gas",
+    "Type": "Usable",
+    "Emote": "<:item_gas:1116954444500848650>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/JRHjvrk/item-gas.png",
+    "Used":["You warm your hands around the fire and now your extra race ranks will transfer over to the next prestige"]
+  },
+  "fireplace": {
+    "Price": 0,
+    "Action": "Wait if we're underwater how can there be a-\n\nBring your previous drift ranks with you when prestiging",
+    "Name": "Fireplace",
+    "Type": "Usable",
+    "Emote": "<:item_fireplace:1116954448976166962>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/xXjThV3/item-fireplace.png",
+    "Used":["You warm your hands around the fire and now your extra drift ranks will transfer over to the next prestige"]
+  },
+  "bubbles": {
+    "Price": 0,
+    "Action": "I'm gonna pop your bubbles\n\nBoost your race rank earnings by 3x",
+    "Name": "Bubbles",
+    "Type": "Usable",
+    "Emote": "<:item_bubbles:1116954441380286545>",
+    "Shop": false,
+    "Findable": true,
+    "Image": "https://i.ibb.co/7VV9Vgx/item-bubbles.png"
+  },
+
   "energy drink": {
     "Price": 25000,
     "Action": "2x RP for 10 minutes",

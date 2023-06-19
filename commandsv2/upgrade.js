@@ -216,7 +216,7 @@ module.exports = {
       let newspeed = Number(partInLocalDB?.DecreaseWeight);
       let stat = Number(oldweight);
       if (stat > 500) {
-        selected.WeightStat = oldweight -= newspeed;
+        selected.WeightStat = stat -= newspeed;
       }
     }
     if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
@@ -224,7 +224,8 @@ module.exports = {
       let stat = Number(oldweight);
       selected.WeightStat = stat += newspeed;
     }
-    selected.WeightStat = oldweight;
+    console.log(selected.WeightStat)
+    
     selected.Handling = oldhandling;
     console.log(oldhandling);
 
@@ -237,8 +238,7 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = oldhandling;
-    let newweight =
-      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight =  selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
@@ -277,6 +277,7 @@ module.exports = {
         Emote: "",
       };
     }
+    let image = selected.Image || cardb[selected.Name.toLowerCase()].Image
     let embed = new discord.EmbedBuilder()
       .setTitle(
         `Upgraded ${partType} on your ${selected.Emote} ${selected.Name}`
@@ -307,7 +308,7 @@ module.exports = {
         }
       )
       .setColor(colors.blue)
-      .setThumbnail(`${selected.Image}`);
+      .setThumbnail(`${image}`);
 
     await interaction.reply({ embeds: [embed] });
   },

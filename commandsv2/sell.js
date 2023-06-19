@@ -63,9 +63,9 @@ module.exports = {
       if (userdata.items.includes("coconut")) {
         price = price += price * 0.05;
       }
-      for (var i = 0; i < usercars.length; i++)
-        if (usercars[i].Name === selected.Name) {
-          usercars.splice(i, amount);
+      for (var b = 0; b < usercars.length; b++)
+        if (usercars[b].Name === selected.Name) {
+          usercars.splice(b, amount);
           break;
         }
 
@@ -100,7 +100,7 @@ module.exports = {
         finalamount = amount * resale;
         userdata.cash += finalamount;
       }
-      for (var i = 0; i < amount; i++)
+      for (var i2 = 0; i2 < amount; i2++)
         userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
       userdata.parts = userparts;
       await interaction.reply(

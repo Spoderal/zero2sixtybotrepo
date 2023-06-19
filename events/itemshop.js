@@ -1,6 +1,7 @@
 const Global = require(`../schema/global-schema`);
 const itemsdb = require("../data/items.json");
 const lodash = require("lodash");
+const {randomNoRepeats} = require("../common/utils")
 async function updateItemShop() {
   let global;
   try {
@@ -21,13 +22,14 @@ async function updateItemShop() {
       }
 
       let filtereditems = itemarr.filter((item) => item.Shop == true);
+      var chooser = randomNoRepeats(filtereditems)
 
-      let randitem1 = lodash.sample(filtereditems);
-      let randitem2 = lodash.sample(filtereditems);
-      let randitem3 = lodash.sample(filtereditems);
-      let randitem4 = lodash.sample(filtereditems);
-      let randitem5 = lodash.sample(filtereditems);
-      let randitem6 = lodash.sample(filtereditems);
+      let randitem1 = chooser();
+      let randitem2 = chooser();
+      let randitem3 = chooser();
+      let randitem4 = chooser();
+      let randitem5 = chooser();
+      let randitem6 = chooser();
 
       let item1 = randitem1.Name;
 
@@ -47,17 +49,11 @@ async function updateItemShop() {
       items.push(item5);
       items.push(item6);
 
-      await Global.findOneAndUpdate(
-        {},
-        {
-          $set: {
-            itemshop: items,
-            itemshopcooldown: Date.now(),
-          },
-        }
-      );
-      global.updateOne("itemshop");
-      global.markModified("itemshop");
+      global.itemshop = items
+      global.update();
+      global.itemshopcooldown = Date.now()
+      
+      global.update();
       global.save();
     } else {
       items = [];
@@ -68,12 +64,14 @@ async function updateItemShop() {
 
       let filtereditems = itemarr.filter((item) => item.Shop == true);
 
-      let randitem1 = lodash.sample(filtereditems);
-      let randitem2 = lodash.sample(filtereditems);
-      let randitem3 = lodash.sample(filtereditems);
-      let randitem4 = lodash.sample(filtereditems);
-      let randitem5 = lodash.sample(filtereditems);
-      let randitem6 = lodash.sample(filtereditems);
+      var chooser2 = randomNoRepeats(filtereditems)
+
+      let randitem1 = chooser2();
+      let randitem2 = chooser2();
+      let randitem3 = chooser2();
+      let randitem4 = chooser2();
+      let randitem5 = chooser2();
+      let randitem6 = chooser2();
 
       let item1 = randitem1.Name;
 
@@ -86,7 +84,7 @@ async function updateItemShop() {
       let item6 = randitem6.Name;
 
       if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log(timeout - (Date.now() - itemcooldown) < 0);
+        console.log(timeout - (Date.now() - itemcooldown) > 0);
         console.log("true");
         items.push(item1);
         items.push(item2);
@@ -95,18 +93,13 @@ async function updateItemShop() {
         items.push(item5);
         items.push(item6);
 
-        await Global.findOneAndUpdate(
-          {},
-          {
-            $set: {
-              itemshop: items,
-              itemshopcooldown: Date.now(),
-            },
-          }
-        );
+       
         try {
-          global.updateOne("itemshop");
-          global.markModified("itemshop");
+          global.itemshop = items
+          global.update();
+          global.itemshopcooldown = Date.now()
+          
+          global.update();
           global.save();
         } catch (err) {
           console.log(err);

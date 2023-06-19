@@ -204,9 +204,26 @@ module.exports = {
           "Your xessence cap is at 20, you cant give your pet any more treats!"
         );
       userdata.using.push(`pet treats`);
-      userdata.newpet.xessence += 1;
+      userdata.newpet.xessence = userdata.newpet.xessence += 1;
+      userdata.markModified("newpet")
       cooldowndata.pettreats = Date.now();
-    } else if (itemtouse.toLowerCase() == "sponsor") {
+    } 
+    else if (itemtouse.toLowerCase() == "chips") {
+      if(userdata.chips >= 50) return interaction.reply("You can only stack up to 50%!")
+      userdata.using.push(`chips`);
+      userdata.chips += 5;
+      cooldowndata.chips = Date.now();
+    } 
+
+    else if (itemtouse.toLowerCase() == "fireplace") {
+      if(userdata.keepdrift == true) return interaction.reply("You already used a fireplace!")
+      userdata.keepdrift = true;
+    } 
+    else if (itemtouse.toLowerCase() == "gas") {
+      if(userdata.keeprace == true) return interaction.reply("You already used gas!")
+      userdata.keeprace = true;
+    } 
+    else if (itemtouse.toLowerCase() == "sponsor") {
       userdata.using.push(`sponsor`);
       cooldowndata.sponsor = Date.now();
     } else if (itemtouse.toLowerCase() == "small vault") {

@@ -19,7 +19,8 @@ module.exports = {
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
           { name: "Drift", value: "drift" },
-          { name: "Le Mans", value: "le mans" }
+          { name: "Le Mans", value: "le mans" },
+          { name: "Rain", value: "rain" }
         )
         .setRequired(true)
     )
@@ -34,7 +35,7 @@ module.exports = {
   async execute(interaction) {
     let crates = require("../data/imports.json");
     let cars = require("../data/cardb.json");
-    let list = ["common", "rare", "exotic", "drift", "fools", "le mans"];
+    let list = ["common", "rare", "exotic", "drift", "fools", "le mans", "rain"];
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -89,7 +90,7 @@ module.exports = {
       let exotickeys = userdata.ekeys;
       let foolskeys = userdata.foolskeys;
       let lekeys = userdata.lekeys;
-
+      let trophy = userdata.raintrophy;
       let driftkeys = userdata.dkeyst || 0;
       let ferrarikeys = userdata.fkeys;
 
@@ -122,6 +123,10 @@ module.exports = {
         return await interaction.reply(
           `You dont have enough keys! This crate costs 10 Le Keys`
         );
+        if (bought == "rain" && trophy < 25)
+        return await interaction.reply(
+          `You dont have enough keys! This crate costs 25 Rain Trophies`
+        );
       if (bought == "common") {
         userdata.ckeys -= 50;
       } else if (bought == "rare") {
@@ -136,6 +141,9 @@ module.exports = {
         userdata.foolskeys -= 25;
       } else if (bought == "le mans") {
         userdata.lekeys -= 10;
+      }
+      else if (bought == "rain") {
+        userdata.raintrophy -= 25;
       }
 
       let cratecontents = crates[bought].Contents;

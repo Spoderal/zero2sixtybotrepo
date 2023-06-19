@@ -49,6 +49,13 @@ module.exports = {
             customId: "tracklegends",
             emoji: "<:tracklegends:1072357967652995174>",
           },
+          {
+            label: "Wet Warriors",
+            description: "Information for the Wet Warriors Event",
+            value: "wetwarriors",
+            customId: "wetwarriors",
+            emoji: "🌧️",
+          },
         ])
     );
 
@@ -72,7 +79,8 @@ module.exports = {
           Season 1 <a:season_1:1111097329836113920>\n
           Le Mans 🏎️\n
           Devils Mountain 🤘\n
-          Track Legends <:tracklegends:1072357967652995174>
+          Track Legends <:tracklegends:1072357967652995174>\n
+          Wet Warriors 🌧️
       `);
 
     embed.setColor(colors.blue);
@@ -116,7 +124,31 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "devilsmountain") {
+      } 
+      else if (value === "wetwarriors") {
+        embed.setTitle("Wet Warriors");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Its the season of rain! You're gonna slip and slide while trying to collect these warriors!
+
+        Go around the wet track collecting wet trophies as you see them, they'll randomly pop up to claim during your race!
+
+        Collect all the wet warriors while you can, this event is rare!
+
+        **VIEW THE OBTAINABLE WARRIORS WITH /unbox rain list: true**
+
+            **Ends June 30th 2023**
+
+                  `)
+        
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/sPW7X1t/wetwarriors.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+      else if (value === "devilsmountain") {
         embed.setTitle("Devils Mountain");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Can you beat the drift king?
@@ -167,7 +199,7 @@ module.exports = {
 
         *Forget to break, and you'll be at a disadvantage!*
 
-            **Ends June 31st 2023**
+            **Ends June 30st 2023**
 
                   `);
         embed
@@ -192,7 +224,7 @@ module.exports = {
 
         I've given you 10 Le Keys to start, go to /unbox and unbox a Le Mans crate.
 
-            **Ends June 31st 2023**
+            **Ends June 30st 2023**
             
                   `);
         embed.setImage("https://i.ibb.co/4fb0D5V/events-lemans.png");

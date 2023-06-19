@@ -56,6 +56,17 @@ function isInt(n) {
   return er.test(n);
 }
 
+function randomNoRepeats(array) {
+  var copy = array.slice(0);
+  return function() {
+    if (copy.length < 1) { copy = array.slice(0); }
+    var index = Math.floor(Math.random() * copy.length);
+    var item = copy[index];
+    copy.splice(index, 1);
+    return item;
+  };
+}
+
 module.exports = {
   numberWithCommas,
   toCurrency,
@@ -64,6 +75,7 @@ module.exports = {
   blankField,
   blankInlineField,
   doubleCashWeekendField,
+  randomNoRepeats,
   wait,
   formatDate,
   convertMPHtoKPH,

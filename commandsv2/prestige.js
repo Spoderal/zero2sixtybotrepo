@@ -17,6 +17,9 @@ module.exports = {
     let racerank = userdata.racerank;
     let prestigerank = userdata.prestige;
 
+    let keeprace = userdata.keeprace
+    let keepdrift = userdata.keepdrift
+
     let newprestige2 = (prestigerank += 1);
 
     let raceprestige = newprestige2 * 30;
@@ -32,26 +35,61 @@ module.exports = {
       );
 
     userdata.prestige += 1;
-    await User.findOneAndUpdate(
-      {
-        id: interaction.user.id,
-      },
-      {
-        $set: {
-          racerank: 0,
+    if(keeprace){
+      let oldraces = racerank -= raceprestige
+      userdata.keeprace = false
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
         },
-      }
-    );
-    await User.findOneAndUpdate(
-      {
-        id: interaction.user.id,
-      },
-      {
-        $set: {
-          driftrank: 0,
+        {
+          $set: {
+            racerank: oldraces,
+          },
+        }
+      );
+    }
+    
+    else {
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
         },
-      }
-    );
+        {
+          $set: {
+            racerank: 0,
+          },
+        }
+      );
+
+    }
+    if(keepdrift){
+      let olddrift = driftrank -= driftprestige
+      userdata.keepdrift = false
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            driftrank: olddrift,
+          },
+        }
+      );
+    }
+    else {
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            driftrank: 0,
+          },
+        }
+      );
+    }
     let vault = userdata.vault;
     if (vault && vault == "small vault") {
       let cash = userdata.cash;

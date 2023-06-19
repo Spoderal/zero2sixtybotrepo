@@ -282,6 +282,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  bubbles: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  chips: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("cooldowns", Cooldowns);

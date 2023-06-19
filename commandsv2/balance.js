@@ -102,6 +102,7 @@ module.exports = {
       f1blueprints,
       spacetokens,
       foolskeys,
+      raintrophy,
       lekeys,
       bounty,
       seriestickets,
@@ -161,7 +162,8 @@ module.exports = {
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
               ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
-              ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}
+              ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}\n
+              ${emotes.raintrophy} Rain Trophies ${numberWithCommas(raintrophy)}
               `,
               inline: true,
             },
@@ -295,7 +297,8 @@ module.exports = {
           ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
           ${emotes.rp}  RP: ${numberWithCommas(rp4)}
           ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
-          ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}
+          ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}\n
+          ${emotes.raintrophy} Rain Trophies ${numberWithCommas(raintrophy)}
           `,
             inline: true,
           },

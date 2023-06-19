@@ -21,6 +21,7 @@ const emotes = {
   bank: "🏦",
   seriestickets: "<:stickets:1114077581898154064>",
 
+  raintrophy: "<:trophy_rain:1118814812785365023>",
   // Player specific
   notoriety: "<:notoriety:1077420597388247170>",
   warehouse: "<:Warehouse1:985014760884019202>",

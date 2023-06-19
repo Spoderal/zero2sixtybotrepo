@@ -67,6 +67,8 @@ module.exports = {
         { name: "Hunger", value: `${hunger}`, inline: true },
         { name: "Thirst", value: `${thirst}`, inline: true },
         { name: "Love", value: `${love}`, inline: true },
+        
+        { name: "Xessence Gain", value: `Your pet can gain up to ${pet.xessence} xessence in street races`, inline: true },
       ])
       .setThumbnail(petimage)
       .setColor(colors.blue);

@@ -281,6 +281,15 @@ module.exports = {
             earnings.push(`${emotes.dirftKey} +${keysreward}`);
             userdata.dkeyst += keysreward;
           }
+
+          if(userdata.items.includes("match")){
+            dranks = dranks * 2;
+          }
+          if(userdata.items.includes("parking brake")){
+            dranks = dranks * 4;
+          }
+
+
           earnings.push(`+${dranks} Drift Rank`);
 
           userdata.driftrank += dranks;
