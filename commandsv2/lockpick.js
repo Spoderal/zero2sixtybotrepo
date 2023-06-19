@@ -1,6 +1,11 @@
 const cars = require("../data/cardb.json");
 const partdb = require("../data/partsdb.json").Parts;
-const {EmbedBuilder, ButtonBuilder, ActionRowBuilder, ActionRow} = require("discord.js");
+const {
+  EmbedBuilder,
+  ButtonBuilder,
+  ActionRowBuilder,
+  ActionRow,
+} = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
@@ -80,18 +85,16 @@ module.exports = {
     console.log(chance);
 
     let garageindb = garagedb[garagepicked];
-    var chooser = randomNoRepeats(garageindb.Contents)
-    let rand1 = chooser()
-    let rand2 = chooser()
-    let rand3 = chooser()
+    var chooser = randomNoRepeats(garageindb.Contents);
+    let rand1 = chooser();
+    let rand2 = chooser();
+    let rand3 = chooser();
 
-    
-  
     let randcash = lodash.random(garageindb.MaxCash);
     let randomarray = [rand1, rand2, rand3];
     let rand2arr = [];
-    let sellrow = new ActionRowBuilder()
-    let cararray = []
+    let sellrow = new ActionRowBuilder();
+    let cararray = [];
     for (let r in randomarray) {
       let it = randomarray[r];
       if (cars.Cars[it.toLowerCase()]) {
@@ -115,12 +118,10 @@ module.exports = {
 
         sellrow.addComponents(
           new ButtonBuilder()
-          .setCustomId(`${it}`)
-          .setLabel(`Sell ${it}`)
-          .setStyle("Danger")
-        )
-
-
+            .setCustomId(`${it}`)
+            .setLabel(`Sell ${it}`)
+            .setStyle("Danger")
+        );
       } else if (partdb[it.toLowerCase()]) {
         rand2arr.push(
           `${partdb[it.toLowerCase()].Emote} ${partdb[it.toLowerCase()].Name}`
@@ -128,87 +129,73 @@ module.exports = {
         udata.parts.push(it.toLowerCase());
       }
     }
-   
 
     let embed = new EmbedBuilder()
       .setTitle(`Found ${garagepicked}`)
       .addFields({
         name: `Items found`,
-        value: `${rand2arr.join("\n")}\n${toCurrency(randcash)}\nYou will receive them in 15 seconds\n\nSell the cars for $5k each`,
+        value: `${rand2arr.join("\n")}\n${toCurrency(
+          randcash
+        )}\nYou will receive them in 15 seconds\n\nSell the cars for $5k each`,
         inline: true,
       })
       .setThumbnail(garagedb[garagepicked].Image)
-      .setColor(colors.blue)
-      
-      
+      .setColor(colors.blue);
 
     udata.cash += randcash;
 
-      let msg
-    if(sellrow.components[0]){
+    let msg;
+    if (sellrow.components[0]) {
       msg = await interaction.reply({ embeds: [embed], components: [sellrow] });
-    }
-    else {
-
-     msg = interaction.reply({ embeds: [embed] });
+    } else {
+      msg = interaction.reply({ embeds: [embed] });
     }
 
     let filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
     };
-    let collector
-    if(sellrow.components[0]){
-       collector = msg.createMessageComponentCollector({filter, time: 15000 })
+    let collector;
+    if (sellrow.components[0]) {
+      collector = msg.createMessageComponentCollector({ filter, time: 15000 });
 
+      collector.on("collect", async (i) => {
+        let car = cars.Cars[i.customId.toLowerCase()];
 
-    collector.on('collect', async (i) => {
-      let car = cars.Cars[i.customId.toLowerCase()]
-      
-      console.log(car)
+        console.log(car);
 
-      if(car){
-        console.log('car')
-        let button = sellrow.components.filter((b) => b.data.custom_id !== i.customId)
-        console.log(button[0])
-          for (var i2 = 0; i2 < cararray.length; i2++){
+        if (car) {
+          console.log("car");
+          let button = sellrow.components.filter(
+            (b) => b.data.custom_id !== i.customId
+          );
+          console.log(button[0]);
+          for (var i2 = 0; i2 < cararray.length; i2++) {
             if (cararray[i2].Name.toLowerCase() == i.customId.toLowerCase()) {
-              udata.cash += 5000
-              console.log("spliced")
+              udata.cash += 5000;
+              console.log("spliced");
               cararray.splice(i2, 1);
               break;
             }
-
           }
 
-          
-          sellrow = sellrow.setComponents(
-            button
-          )
+          sellrow = sellrow.setComponents(button);
 
-        
-
-        console.log(sellrow.components.length)
-        if(sellrow.components.length == 0){
-          await i.update({components: [], content: 'Sold all cars!'})
+          console.log(sellrow.components.length);
+          if (sellrow.components.length == 0) {
+            await i.update({ components: [], content: "Sold all cars!" });
+          } else {
+            await i.update({ components: [sellrow] });
+          }
         }
-        else {
-          await i.update({components: [sellrow]})
-
-        }
-      }
-    })
-  }
-
-   setTimeout(() => {
-    console.log(cararray)
-    for(let ca in cararray){
-      udata.cars.push(cararray[ca])
-
+      });
     }
-    udata.save()
-   }, 15000);
 
-
-
+    setTimeout(() => {
+      console.log(cararray);
+      for (let ca in cararray) {
+        udata.cars.push(cararray[ca]);
+      }
+      udata.save();
+    }, 15000);
   },
 };

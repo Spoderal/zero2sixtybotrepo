@@ -282,13 +282,12 @@ module.exports = {
             userdata.dkeyst += keysreward;
           }
 
-          if(userdata.items.includes("match")){
+          if (userdata.items.includes("match")) {
             dranks = dranks * 2;
           }
-          if(userdata.items.includes("parking brake")){
+          if (userdata.items.includes("parking brake")) {
             dranks = dranks * 4;
           }
-
 
           earnings.push(`+${dranks} Drift Rank`);
 

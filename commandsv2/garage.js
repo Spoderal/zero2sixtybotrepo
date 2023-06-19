@@ -48,7 +48,7 @@ module.exports = {
     let filtertag = interaction.options.getString("filtertag");
 
     let ucars = udata.cars;
-    ucars = ucars.reverse()
+    ucars = ucars.reverse();
     let cars = udata.cars;
     let parts = udata.parts;
     let items = udata.items;

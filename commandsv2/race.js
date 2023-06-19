@@ -212,11 +212,11 @@ module.exports = {
           .setEmoji("<:tracklegends:1072357967652995174>")
           .setCustomId("trackrace")
           .setStyle("Secondary"),
-          new ButtonBuilder()
+        new ButtonBuilder()
           .setLabel("Wet Warriors (EVENT)")
           .setEmoji("🌧️")
           .setCustomId("wetrace")
-          .setStyle("Secondary"),
+          .setStyle("Secondary")
       );
     } else if (userdata.police == true) {
       if (!cardb.Cars[selected.Name.toLowerCase()].Police)
@@ -250,7 +250,6 @@ module.exports = {
         .setCustomId("3")
         .setStyle("Secondary")
     );
-    
 
     let nosrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -294,7 +293,7 @@ module.exports = {
         name: "Your car",
         value: `${selected.Emote} ${selected.Name}`,
       })
-      .setImage("https://i.ibb.co/Xx6bPT9/zerocity-map.png")
+      .setImage("https://i.ibb.co/Xx6bPT9/zerocity-map.png");
     let msg;
     if (userdata.police == false) {
       msg = await interaction.reply({
@@ -329,7 +328,7 @@ module.exports = {
       "police_streetrace",
       "carseries",
       "trackrace",
-      "wetrace"
+      "wetrace",
     ];
     collector.on("collect", async (i) => {
       let tierrow2 = new ActionRowBuilder().addComponents(
@@ -354,21 +353,22 @@ module.exports = {
           .setCustomId("7")
           .setStyle("Secondary")
       );
-      let tierrow3 = new ActionRowBuilder()
+      let tierrow3 = new ActionRowBuilder();
 
-      
       console.log(i.customId);
       if (races.includes(i.customId)) {
         race = racedb.filter((r) => r.name == i.customId);
         let deftier = 1;
-     
+
         let reward = race[0].reward;
         let rewardsarr = [];
         if (userdata.police == false) {
           for (deftier; deftier <= race[0].tiers; deftier++) {
             let am = deftier * reward;
-            let rank =  deftier * race[0].ranks
-            rewardsarr.push(`Tier ${deftier} Reward: ${toCurrency(am)} **Ranks: ${rank}**`);
+            let rank = deftier * race[0].ranks;
+            rewardsarr.push(
+              `Tier ${deftier} Reward: ${toCurrency(am)} **Ranks: ${rank}**`
+            );
           }
           embed.setTitle("Select a tier to race in (Difficulty)");
         } else if (userdata.police == true) {
@@ -388,37 +388,37 @@ module.exports = {
 
         console.log(race);
 
-        if(race[0].tiers >= 8){
+        if (race[0].tiers >= 8) {
           tierrow3.addComponents(
             new ButtonBuilder()
-          .setLabel("Tier 8")
-          .setEmoji("<:logo_t8:1118019024501092415>")
-          .setCustomId("8")
-          .setStyle("Secondary"),
-          )
+              .setLabel("Tier 8")
+              .setEmoji("<:logo_t8:1118019024501092415>")
+              .setCustomId("8")
+              .setStyle("Secondary")
+          );
         }
-        if(race[0].tiers >= 9){
+        if (race[0].tiers >= 9) {
           tierrow3.addComponents(
             new ButtonBuilder()
-          .setLabel("Tier 9")
-          .setEmoji("<:logo_t9:1118019026057187368>")
-          .setCustomId("9")
-          .setStyle("Secondary"),
-          )
+              .setLabel("Tier 9")
+              .setEmoji("<:logo_t9:1118019026057187368>")
+              .setCustomId("9")
+              .setStyle("Secondary")
+          );
         }
-        if(race[0].tiers >= 10){
+        if (race[0].tiers >= 10) {
           tierrow3.addComponents(
             new ButtonBuilder()
-          .setLabel("Tier X")
-          .setEmoji("<:logo_tx:1118019022655602769>")
-          .setCustomId("10")
-          .setStyle("Secondary"),
-          )
+              .setLabel("Tier X")
+              .setEmoji("<:logo_tx:1118019022655602769>")
+              .setCustomId("10")
+              .setStyle("Secondary")
+          );
         }
-        let components = [tierrow, tierrow2]
+        let components = [tierrow, tierrow2];
 
-        if(race[0].tiers >= 8){
-          components.push(tierrow3)
+        if (race[0].tiers >= 8) {
+          components.push(tierrow3);
         }
         await i.update({
           embeds: [embed],
@@ -460,7 +460,7 @@ module.exports = {
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 50;
           let race2 = racedb.filter((r) => r.name == "streetrace");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
           let notowon = 0;
 
           if (bot == 1) {
@@ -499,23 +499,18 @@ module.exports = {
               (car) => car.Class == "S" && car.Speed < 250
             );
             notowon = 350;
-          }
-          else if (bot == 8) {
+          } else if (bot == 8) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 260
             );
             notowon = 350;
-          }
-          else if (bot == 9) {
+          } else if (bot == 9) {
             car2 = carsarray.filter(
               (car) => car.Class == "S" && car.Speed < 270
             );
             notowon = 350;
-          }
-          else if (bot == 10) {
-            car2 = carsarray.filter(
-              (car) => car.Speed >= 270
-            );
+          } else if (bot == 10) {
+            car2 = carsarray.filter((car) => car.Speed >= 270);
             notowon = 350;
           }
           car2 = lodash.sample(car2);
@@ -593,61 +588,59 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-        
-            class ICar {
-              constructor(speed, accel, handling, weight) {
-                  this.speed = speed;
-                  this.accel = accel;
-                  this.handling = handling;
-                  this.weight = weight;
-              }
+          class ICar {
+            constructor(speed, accel, handling, weight) {
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
+            }
           }
-          
-         let formula = function(speed, accel, handling, weight) {
-              const target = new ICar(speed, accel, handling, weight);
-              return (car) => {
-                  const speedDifference = target.speed - car.speed;
-                  const handlingPerSpeed = target.handling / target.speed;
-                  const handling = car.handling + (speedDifference * handlingPerSpeed);
-                  
-                  const weightDifference = target.weight - car.weight;
-                  const accelPerWeight = target.accel / target.weight;
-                  const accel = car.accel - (weightDifference * accelPerWeight);
-                  
-                  const targetRegression  = target.handling / target.accel;
-                  const regression = Math.abs(targetRegression - (handling / accel));
-                  return Math.round(regression * 100) / 100;
-              }
-          }
-          
+
+          let formula = function (speed, accel, handling, weight) {
+            const target = new ICar(speed, accel, handling, weight);
+            return (car) => {
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
+
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
           const drag = formula(200, 2.0, 700, 2600);
           const track = formula(300, 3.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+          const drift = formula(150, 4.0, 2300, 3700);
 
           let player = new ICar(speed, acceleration, handling, weight);
           let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-          
-          let winner
+
+          let winner;
           const dorace = (f) => {
-              const playerRegression = f(player);
-              const opponentRegression = f(opponent);
-               winner = playerRegression <= opponentRegression
-                  ? "Player"
-                  : "Opponent";
-          
-              const string =
-                  `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                  + `- Winner: ${winner}\n`;
-          
-              return string;    
-          }
+            const playerRegression = f(player);
+            const opponentRegression = f(opponent);
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
+            const string =
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
+
+            return string;
+          };
 
           console.log("Track Race:\n", dorace(track));
 
-          dorace(track)
+          dorace(track);
 
-          setTimeout( async () => {
-            
+          setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
 
@@ -687,9 +680,9 @@ const drift = formula(150, 4.0, 2300, 3700);
                   if (
                     cooldown !== null &&
                     timeout - (Date.now() - cooldown) > 0
-                    ) {
-                      console.log("there")
-                    xessneceearn = pet.xessence
+                  ) {
+                    console.log("there");
+                    xessneceearn = pet.xessence;
                   } else {
                     console.log("pulled");
                     userdata.using.pull("pet treats");
@@ -949,9 +942,9 @@ const drift = formula(150, 4.0, 2300, 3700);
             // lost
             else if (winner == "Opponent") {
               userdata.cash -= cashlost;
-              let iszero = userdata.cash -= cashlost
-              if(iszero < 0){
-                userdata.cash = 0
+              let iszero = (userdata.cash -= cashlost);
+              if (iszero < 0) {
+                userdata.cash = 0;
               }
               embed.setTitle(`Tier ${bot} Street Race lost!`);
               embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
@@ -987,7 +980,7 @@ const drift = formula(150, 4.0, 2300, 3700);
                   ],
                 }
               );
-              userdata.cash -= cashlost
+              userdata.cash -= cashlost;
               userdata.save();
             }
           }, 5000);
@@ -1012,9 +1005,9 @@ const drift = formula(150, 4.0, 2300, 3700);
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
-          
+
           let race2 = racedb.filter((r) => r.name == "trackrace");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
 
           if (bot == 1) {
             console.log("1");
@@ -1432,8 +1425,7 @@ const drift = formula(150, 4.0, 2300, 3700);
               userdata.save();
             }
           }, 1000);
-        } 
-        else if (race[0].name == "wetrace") {
+        } else if (race[0].name == "wetrace") {
           let tracklength = 0;
           let tracklength2 = 0;
           if (selected.Speed > 350)
@@ -1454,9 +1446,9 @@ const drift = formula(150, 4.0, 2300, 3700);
           let cashwon = parseInt(bot) * 150;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
-          
+
           let race2 = racedb.filter((r) => r.name == "wetrace");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
 
           if (bot == 1) {
             console.log("1");
@@ -1531,17 +1523,15 @@ const drift = formula(150, 4.0, 2300, 3700);
           handling2 = Math.floor(handling2);
           let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
           let rowbrake;
-          
-            rowbrake = new ActionRowBuilder().setComponents(
-              new ButtonBuilder()
-                .setLabel("Trophy Appeared!")
-                .setEmoji(
-                  `<:trophy_rain:1118814812785365023>`
-                )
-                .setCustomId("trophy")
-                .setStyle("Secondary")
-            );
-          
+
+          rowbrake = new ActionRowBuilder().setComponents(
+            new ButtonBuilder()
+              .setLabel("Trophy Appeared!")
+              .setEmoji(`<:trophy_rain:1118814812785365023>`)
+              .setCustomId("trophy")
+              .setStyle("Secondary")
+          );
+
           let embed = new EmbedBuilder()
             .setTitle(`Racing Tier ${bot} Wet Warriors`)
 
@@ -1563,19 +1553,19 @@ const drift = formula(150, 4.0, 2300, 3700);
             .setImage(carimage)
             .setThumbnail(car2.Image);
 
+          await i.editReply({
+            content: "",
+            embeds: [embed],
+            fetchReply: true,
+          });
+          let rand = [1000, 2000, 3000, 4000, 5000];
+          let randtime = lodash.sample(rand);
+          setTimeout(async () => {
             await i.editReply({
-              content: "",
-              embeds: [embed],
               fetchReply: true,
+              components: [rowbrake],
             });
-            let rand = [1000, 2000, 3000, 4000, 5000]
-            let randtime = lodash.sample(rand)
-            setTimeout(async () => {
-              await i.editReply({
-                fetchReply: true,
-                components:[rowbrake]
-              });
-            }, randtime);
+          }, randtime);
 
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
@@ -1626,9 +1616,7 @@ const drift = formula(150, 4.0, 2300, 3700);
             let trophy = true;
             collec.on("collect", async (i) => {
               if (i.customId == "trophy" && trophy == false) {
-              
-                  userdata.raintrophy += 1
-                
+                userdata.raintrophy += 1;
 
                 interaction.editReply({ components: [] });
               }
@@ -1656,7 +1644,6 @@ const drift = formula(150, 4.0, 2300, 3700);
 
             if (tracklength > tracklength2 && timer == 15) {
               let earnings = [];
-
 
               if (usinginv.includes("radio")) {
                 let cooldown = cooldowndata.radio;
@@ -1704,8 +1691,8 @@ const drift = formula(150, 4.0, 2300, 3700);
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
-                  let chip = userdata.chips
-                  let percent = chip * 0.1
+                  let chip = userdata.chips;
+                  let percent = chip * 0.1;
                   cashwon += cashwon * percent;
                 } else {
                   console.log("pulled");
@@ -1715,7 +1702,6 @@ const drift = formula(150, 4.0, 2300, 3700);
                   interaction.channel.send("You ran out of chips.");
                 }
               }
-              
 
               if (usinginv.includes("flat tire")) {
                 let cooldown = cooldowndata.flattire;
@@ -1891,8 +1877,7 @@ const drift = formula(150, 4.0, 2300, 3700);
               userdata.save();
             }
           }, 1000);
-        } 
-        else if (race[0].name == "lemans") {
+        } else if (race[0].name == "lemans") {
           let globals2 = await Globals.findOne();
           let isteam = cardb.Cars[selected.Name.toLowerCase()].Team;
           if (!isteam)
@@ -1933,7 +1918,7 @@ const drift = formula(150, 4.0, 2300, 3700);
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
           let race2 = racedb.filter((r) => r.name == "trackrace");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
 
           let keyswon = 0;
           if (bot == 1) {
@@ -2124,8 +2109,8 @@ const drift = formula(150, 4.0, 2300, 3700);
                   if (
                     cooldown !== null &&
                     timeout - (Date.now() - cooldown) > 0
-                    ) {
-                    xessneceearn = pet.xessence
+                  ) {
+                    xessneceearn = pet.xessence;
                   } else {
                     console.log("pulled");
                     userdata.using.pull("pet treats");
@@ -2427,7 +2412,7 @@ const drift = formula(150, 4.0, 2300, 3700);
           let lockpicks = parseInt(bot) * 1;
           let wheelspins = parseInt(bot) * 1;
           let race2 = racedb.filter((r) => r.name == "highwayrace");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
 
           if (bot == 1) {
             console.log("1");
@@ -2532,65 +2517,60 @@ const drift = formula(150, 4.0, 2300, 3700);
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-    
           class ICar {
             constructor(speed, accel, handling, weight) {
-                this.speed = speed;
-                this.accel = accel;
-                this.handling = handling;
-                this.weight = weight;
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
             }
-        }
-        
-       let formula = function(speed, accel, handling, weight) {
+          }
+
+          let formula = function (speed, accel, handling, weight) {
             const target = new ICar(speed, accel, handling, weight);
             return (car) => {
-                const speedDifference = target.speed - car.speed;
-                const handlingPerSpeed = target.handling / target.speed;
-                const handling = car.handling + (speedDifference * handlingPerSpeed);
-                
-                const weightDifference = target.weight - car.weight;
-                const accelPerWeight = target.accel / target.weight;
-                const accel = car.accel - (weightDifference * accelPerWeight);
-                
-                const targetRegression  = target.handling / target.accel;
-                const regression = Math.abs(targetRegression - (handling / accel));
-                return Math.round(regression * 100) / 100;
-            }
-        }
-        
-        const drag = formula(220, 2.0, 700, 2700);
-        const track = formula(300, 3.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
 
-        let player = new ICar(speed, acceleration, handling, weight);
-        let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-        
-        let winner
-        const dorace = (f) => {
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
+          const drag = formula(220, 2.0, 700, 2700);
+          const track = formula(300, 3.0, 1700, 3300);
+          const drift = formula(150, 4.0, 2300, 3700);
+
+          let player = new ICar(speed, acceleration, handling, weight);
+          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
+
+          let winner;
+          const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-             winner = playerRegression <= opponentRegression
-                ? "Player"
-                : "Opponent";
-        
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
             const string =
-                `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                + `- Winner: ${winner}\n`;
-        
-            return string;    
-        }
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
-        console.log("Track Race:\n", dorace(drag));
+            return string;
+          };
 
-        dorace(drag)
+          console.log("Track Race:\n", dorace(drag));
 
-        setTimeout(async () => {
-          
-     
+          dorace(drag);
 
+          setTimeout(async () => {
             if (winner == "Player") {
-
               let earnings = [];
               let filteredhouse2 = userdata.houses.filter(
                 (house) => house.Name == "Casa Della Pace"
@@ -2606,8 +2586,6 @@ const drift = formula(150, 4.0, 2300, 3700);
               if (userdata.houses && filteredhouse3[0]) {
                 cashwon = cashwon += cashwon * 0.1;
               }
-
-            
 
               earnings.push(`${emotes.wheelSpin} +${wheelspins}`);
               earnings.push(`${emotes.lockpicks} +${lockpicks}`);
@@ -2666,8 +2644,8 @@ const drift = formula(150, 4.0, 2300, 3700);
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
-                  let chip = userdata.chips
-                  let percent = chip * 0.1
+                  let chip = userdata.chips;
+                  let percent = chip * 0.1;
                   cashwon += cashwon * percent;
                 } else {
                   console.log("pulled");
@@ -2818,16 +2796,13 @@ const drift = formula(150, 4.0, 2300, 3700);
 
               console.log(`track length ${tracklength}`);
               console.log(`track length 2 ${tracklength2}`);
-
-              
             }
             // lost
             else if (winner == "Opponent") {
-
               userdata.cash -= cashlost;
-              let iszero = userdata.cash -= cashlost
-              if(iszero < 0){
-                userdata.cash = 0
+              let iszero = (userdata.cash -= cashlost);
+              if (iszero < 0) {
+                userdata.cash = 0;
               }
               embed.setTitle(`Tier ${bot} Highway Race lost!`);
               embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
@@ -2875,9 +2850,9 @@ const drift = formula(150, 4.0, 2300, 3700);
           let cashwon = parseInt(bot) * 250;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
-          
+
           let race2 = racedb.filter((r) => r.name == "halfmile");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
 
           if (bot == 1) {
             console.log("1");
@@ -2925,24 +2900,25 @@ const drift = formula(150, 4.0, 2300, 3700);
 
           console.log(weather2);
 
-          
-          let mph = selected.Speed
-       
-          let weight =selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
+          let mph = selected.Speed;
+
+          let weight =
+            selected.WeightStat ||
+            cardb.Cars[selected.Name.toLowerCase()].Weight;
           let acceleration = selected.Acceleration;
           let handling = selected.Handling;
 
           if (!selected.WeightStat) {
-            selected.WeightStat =  cardb.Cars[selected.Name.toLowerCase()].Weight;
+            selected.WeightStat =
+              cardb.Cars[selected.Name.toLowerCase()].Weight;
           }
 
-          let mph2 = car2.Speed
+          let mph2 = car2.Speed;
 
-  
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling;
-  
+
           let speed = 0;
           let speed2 = 0;
 
@@ -2985,60 +2961,58 @@ const drift = formula(150, 4.0, 2300, 3700);
 
           class ICar {
             constructor(speed, accel, handling, weight) {
-                this.speed = speed;
-                this.accel = accel;
-                this.handling = handling;
-                this.weight = weight;
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
             }
-        }
-        
-       let formula = function(speed, accel, handling, weight) {
+          }
+
+          let formula = function (speed, accel, handling, weight) {
             const target = new ICar(speed, accel, handling, weight);
             return (car) => {
-                const speedDifference = target.speed - car.speed;
-                const handlingPerSpeed = target.handling / target.speed;
-                const handling = car.handling + (speedDifference * handlingPerSpeed);
-                
-                const weightDifference = target.weight - car.weight;
-                const accelPerWeight = target.accel / target.weight;
-                const accel = car.accel - (weightDifference * accelPerWeight);
-                
-                const targetRegression  = target.handling / target.accel;
-                const regression = Math.abs(targetRegression - (handling / accel));
-                return Math.round(regression * 100) / 100;
-            }
-        }
-        
-        const drag = formula(250, 2.0, 500, 3200);
-        const track = formula(300, 3.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
 
-        let player = new ICar(speed, acceleration, handling, weight);
-        let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-        
-        let winner
-        const dorace = (f) => {
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
+          const drag = formula(250, 2.0, 500, 3200);
+          const track = formula(300, 3.0, 1700, 3300);
+          const drift = formula(150, 4.0, 2300, 3700);
+
+          let player = new ICar(speed, acceleration, handling, weight);
+          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
+
+          let winner;
+          const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-             winner = playerRegression <= opponentRegression
-                ? "Player"
-                : "Opponent";
-        
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
             const string =
-                `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                + `- Winner: ${winner}\n`;
-        
-            return string;    
-        }
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
-        console.log("Track Race:\n", dorace(drag));
+            return string;
+          };
 
-        dorace(drag)
-   
+          console.log("Track Race:\n", dorace(drag));
+
+          dorace(drag);
+
           setTimeout(async () => {
-
             if (winner == "Player") {
-
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -3052,7 +3026,6 @@ const drift = formula(150, 4.0, 2300, 3700);
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-             
 
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
@@ -3109,8 +3082,8 @@ const drift = formula(150, 4.0, 2300, 3700);
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
-                  let chip = userdata.chips
-                  let percent = chip * 0.1
+                  let chip = userdata.chips;
+                  let percent = chip * 0.1;
                   cashwon += cashwon * percent;
                 } else {
                   console.log("pulled");
@@ -3217,9 +3190,7 @@ const drift = formula(150, 4.0, 2300, 3700);
               userdata.rp4 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(
-                `Tier ${bot} Half Mile Race won!`
-              );
+              embed.setTitle(`Tier ${bot} Half Mile Race won!`);
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
@@ -3260,13 +3231,11 @@ const drift = formula(150, 4.0, 2300, 3700);
             // lost
             else if (winner == "Opponent") {
               userdata.cash -= cashlost;
-              let iszero = userdata.cash -= cashlost
-              if(iszero < 0){
-                userdata.cash = 0
+              let iszero = (userdata.cash -= cashlost);
+              if (iszero < 0) {
+                userdata.cash = 0;
               }
-              embed.setTitle(
-                `Tier ${bot} Half Mile Race lost!`
-              );
+              embed.setTitle(`Tier ${bot} Half Mile Race lost!`);
               embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
               await i.editReply({ embeds: [embed] });
               if (userdata.tutorial && userdata.tutorial.stage == 2) {
@@ -3313,7 +3282,7 @@ const drift = formula(150, 4.0, 2300, 3700);
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
           let race2 = racedb.filter((r) => r.name == "quartermile");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
           let commonkeys;
           let rarekeys;
           let exotickeys;
@@ -3372,9 +3341,8 @@ const drift = formula(150, 4.0, 2300, 3700);
 
           console.log(weather2);
 
-      
-          let mph = selected.Speed
-    
+          let mph = selected.Speed;
+
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -3386,13 +3354,12 @@ const drift = formula(150, 4.0, 2300, 3700);
               cardb.Cars[selected.Name.toLowerCase()].Weight;
           }
 
-          let mph2 = car2.Speed
+          let mph2 = car2.Speed;
 
-       
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling;
-     
+
           let speed = 0;
           let speed2 = 0;
 
@@ -3433,387 +3400,378 @@ const drift = formula(150, 4.0, 2300, 3700);
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-       
           class ICar {
             constructor(speed, accel, handling, weight) {
-                this.speed = speed;
-                this.accel = accel;
-                this.handling = handling;
-                this.weight = weight;
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
             }
-        }
-        
-       let formula = function(speed, accel, handling, weight) {
+          }
+
+          let formula = function (speed, accel, handling, weight) {
             const target = new ICar(speed, accel, handling, weight);
             return (car) => {
-                const speedDifference = target.speed - car.speed;
-                const handlingPerSpeed = target.handling / target.speed;
-                const handling = car.handling + (speedDifference * handlingPerSpeed);
-                
-                const weightDifference = target.weight - car.weight;
-                const accelPerWeight = target.accel / target.weight;
-                const accel = car.accel - (weightDifference * accelPerWeight);
-                
-                const targetRegression  = target.handling / target.accel;
-                const regression = Math.abs(targetRegression - (handling / accel));
-                return Math.round(regression * 100) / 100;
-            }
-        }
-        
-        const drag = formula(200, 2.0, 700, 2600);
-        const track = formula(300, 3.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
 
-        let player = new ICar(speed, acceleration, handling, weight);
-        let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-        
-        let winner
-        const dorace = (f) => {
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
+          const drag = formula(200, 2.0, 700, 2600);
+          const track = formula(300, 3.0, 1700, 3300);
+          const drift = formula(150, 4.0, 2300, 3700);
+
+          let player = new ICar(speed, acceleration, handling, weight);
+          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
+
+          let winner;
+          const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-             winner = playerRegression <= opponentRegression
-                ? "Player"
-                : "Opponent";
-        
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
             const string =
-                `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                + `- Winner: ${winner}\n`;
-        
-            return string;    
-        }
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
-        console.log("Track Race:\n", dorace(drag));
+            return string;
+          };
 
-        dorace(drag)
-        setTimeout(async () => {
-          
-          if (winner == "Player") {
-  
-            let earnings = [];
-            let filteredhouse = userdata.houses.filter(
-              (house) => house.Name == "Buone Vedute"
-            );
-            let filteredhouse2 = userdata.houses.filter(
-              (house) => house.Name == "Casa Della Pace"
-            );
-            if (userdata.houses && filteredhouse[0]) {
-              cashwon = cashwon += cashwon * 0.05;
-            }
-            if (userdata.houses && filteredhouse2[0]) {
-              rpwon = rpwon * 2;
-            }
-         
-            if (commonkeys && commonkeys > 0) {
-              if (usinginv.includes("milk")) {
-                let cooldown = cooldowndata.milk;
-                let timeout = 600000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
-                ) {
-                  commonkeys = commonkeys * 2;
-                } else {
-                  console.log("pulled");
-                  userdata.using.pull("milk");
-                  userdata.update();
-                  interaction.channel.send("Your milk ran out.");
-                }
-              }
-              earnings.push(`${emotes.commonKey} +${commonkeys}`);
-              userdata.ckeys += commonkeys;
-            }
-            if (rarekeys && rarekeys > 0) {
-              if (usinginv.includes("strawberry milk")) {
-                let cooldown = cooldowndata.smilk;
-                let timeout = 600000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
-                ) {
-                  rarekeys = rarekeys * 2;
-                } else {
-                  console.log("pulled");
-                  userdata.using.pull("milk");
-                  userdata.update();
-                  interaction.channel.send("Your strawberry milk ran out.");
-                }
-              }
-              earnings.push(`${emotes.rareKey} +${rarekeys}`);
-              userdata.rkeys += rarekeys;
-            }
-            if (exotickeys && exotickeys > 0) {
-              if (usinginv.includes("chocolate milk")) {
-                let cooldown = cooldowndata.cmilk;
-                let timeout = 600000;
-                console.log(timeout - (Date.now() - cooldown));
-                if (
-                  cooldown !== null &&
-                  timeout - (Date.now() - cooldown) > 0
-                ) {
-                  exotickeys = exotickeys * 2;
-                } else {
-                  console.log("pulled");
-                  userdata.using.pull("milk");
-                  userdata.update();
-                  interaction.channel.send("Your chocolate milk ran out.");
-                }
-              }
-              earnings.push(`${emotes.exoticKey} +${exotickeys}`);
-              userdata.ekeys += exotickeys;
-            }
-  
-            if (crateearned !== undefined) {
-              userdata.items.push(crateearned);
-              earnings.push(
-                `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
+          console.log("Track Race:\n", dorace(drag));
+
+          dorace(drag);
+          setTimeout(async () => {
+            if (winner == "Player") {
+              let earnings = [];
+              let filteredhouse = userdata.houses.filter(
+                (house) => house.Name == "Buone Vedute"
               );
-            }
-  
-            if (usinginv.includes("radio")) {
-              let cooldown = cooldowndata.radio;
-              let timeout = 60000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
-                rankswon = rankswon * 2;
-                cashwon = cashwon * 2;
-                rpwon = rpwon * 2;
-              } else {
-                console.log("pulled");
-                userdata.using.pull("radio");
-                userdata.update();
-                cooldowndata.radio = 0;
-                interaction.channel.send("Your radio battery ran out.");
-              }
-            }
-
-            if (usinginv.includes("bubbles")) {
-              let cooldown = cooldowndata.bubbles;
-              let timeout = 60000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
-                cashwon = cashwon * 3;
-              } else {
-                console.log("pulled");
-                userdata.using.pull("bubbles");
-                userdata.update();
-                cooldowndata.bubbles = 0;
-                interaction.channel.send("Your bubbles popped.");
-              }
-            }
-
-            if (usinginv.includes("chips")) {
-              let cooldown = cooldowndata.chips;
-              let timeout = 600000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
-                let chip = userdata.chips
-                let percent = chip * 0.1
-                cashwon += cashwon * percent;
-              } else {
-                console.log("pulled");
-                userdata.using.pull("chips");
-                userdata.update();
-                cooldowndata.radio = 0;
-                interaction.channel.send("You ran out of chips.");
-              }
-            }
-  
-            if (usinginv.includes("flat tire")) {
-              let cooldown = cooldowndata.flattire;
-              let timeout = 1800000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
+              let filteredhouse2 = userdata.houses.filter(
+                (house) => house.Name == "Casa Della Pace"
+              );
+              if (userdata.houses && filteredhouse[0]) {
                 cashwon = cashwon += cashwon * 0.05;
-              } else {
-                console.log("pulled");
-                userdata.using.pull("flat tire");
-                userdata.update();
-                cooldowndata.flattire = 0;
-                interaction.channel.send("Your flat tire ran out! :(");
               }
-            }
-            let itemeffects = userdata.itemeffects || [];
-            let itemeffectsfilter = itemeffects.filter(
-              (item) => item.item == "tequila shot"
-            );
-            if (itemeffectsfilter[0]) {
-              let cooldown = cooldowndata.tequilla;
-              let timeout = 60000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
-                if (itemeffectsfilter[0].earning == "bad") {
-                  earnings.push("You lost $500K!");
-                  let usercash = userdata.cash;
-                  if ((usercash -= 500000) < 0) {
-                    userdata.cash = 0;
-                  } else {
-                    userdata.cash -= 500000;
-                  }
-                } else if (itemeffectsfilter[0].earning == "good") {
-                  cashwon = cashwon * 5;
-                }
-              } else {
-                console.log("pulled");
-                userdata.itemeffects.pull(itemeffectsfilter[0]);
-                userdata.update();
-                interaction.channel.send("Your tequila shot ran out! :(");
-              }
-            }
-  
-            if (usinginv.includes("fruit punch")) {
-              let cooldown = cooldowndata.fruitpunch;
-              let timeout = 600000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
-                rankswon = rankswon * 2;
-              } else {
-                console.log("pulled");
-                userdata.using.pull("fruit punch");
-                userdata.update();
-                interaction.channel.send("Your fruit punch ran out! :(");
-              }
-            }
-            if (usinginv.includes("energy drink")) {
-              let cooldown = cooldowndata.energydrink;
-              let timeout = 600000;
-              console.log(timeout - (Date.now() - cooldown));
-              if (
-                cooldown !== null &&
-                timeout - (Date.now() - cooldown) > 0
-              ) {
+              if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
-              } else {
-                console.log("pulled");
-                userdata.using.pull("energy drink");
-                userdata.update();
-                cooldowndata.energydrink = 0;
-                interaction.channel.send("Your energy drink ran out! :(");
               }
-            }
-            if (bonus > 0) {
-              cashwon = cashwon += cashwon * bonus;
-            }
-            if (bountyuser > 0) {
-              cashwon = cashwon += bountyuser;
-            }
-            earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
-            earnings.push(`${emotes.rp} +${rpwon}`);
-            userdata.racerank += rankswon;
-  
-            userdata.cash += cashwon;
-            userdata.bounty += 5;
-            userdata.rp4 += rpwon;
-            embed.setDescription(`${earnings.join("\n")}`);
-            embed.setTitle(
-              `Tier ${bot} Quarter Mile Race won!`
-            );
-            await i.editReply({ embeds: [embed] });
-  
-            await i.editReply({ embeds: [embed] });
-  
-            if (userdata.tutorial && userdata.tutorial.stage == 2) {
-              userdata.parts.push("t1exhaust");
-              interaction.channel.send(
-                `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-              );
-              interaction.channel.send(
-                "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-              );
-              userdata.tutorial.stage += 1;
-              userdata.markModified("tutorial");
-            }
-            await User.findOneAndUpdate(
-              {
-                id: interaction.user.id,
-              },
-              {
-                $set: {
-                  "cars.$[car].Miles": (selected.Miles += 0.25),
-                },
-              },
-  
-              {
-                arrayFilters: [
-                  {
-                    "car.Name": selected.Name,
-                  },
-                ],
-              }
-            );
-  
-            userdata.save();
-  
-            console.log(`track length ${tracklength}`);
-            console.log(`track length 2 ${tracklength2}`);
-            return;
-          }
-          // lost
-          else if (winner == "Opponent") {
-  
-            userdata.cash -= cashlost;
-            let iszero = userdata.cash -= cashlost
-            if(iszero < 0){
-              userdata.cash = 0
-            }
-            embed.setTitle(
-              `Tier ${bot} Quarter Mile Race lost!`
-            );
-            embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
-            await i.editReply({ embeds: [embed] });
-            if (userdata.tutorial && userdata.tutorial.stage == 2) {
-              userdata.parts.push("t1exhaust");
-              interaction.channel.send(
-                `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
-              );
-              interaction.channel.send(
-                "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
-              );
-              userdata.tutorial.stage += 1;
-              userdata.markModified("tutorial");
-            }
-            await User.findOneAndUpdate(
-              {
-                id: interaction.user.id,
-              },
-              {
-                $set: {
-                  "cars.$[car].Miles": (selected.Miles += 0.25),
-                },
-              },
-  
-              {
-                arrayFilters: [
-                  {
-                    "car.Name": selected.Name,
-                  },
-                ],
-              }
-            );
-            userdata.save();
-            return;
-          }
-        }, 3000);
 
+              if (commonkeys && commonkeys > 0) {
+                if (usinginv.includes("milk")) {
+                  let cooldown = cooldowndata.milk;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    commonkeys = commonkeys * 2;
+                  } else {
+                    console.log("pulled");
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your milk ran out.");
+                  }
+                }
+                earnings.push(`${emotes.commonKey} +${commonkeys}`);
+                userdata.ckeys += commonkeys;
+              }
+              if (rarekeys && rarekeys > 0) {
+                if (usinginv.includes("strawberry milk")) {
+                  let cooldown = cooldowndata.smilk;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    rarekeys = rarekeys * 2;
+                  } else {
+                    console.log("pulled");
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your strawberry milk ran out.");
+                  }
+                }
+                earnings.push(`${emotes.rareKey} +${rarekeys}`);
+                userdata.rkeys += rarekeys;
+              }
+              if (exotickeys && exotickeys > 0) {
+                if (usinginv.includes("chocolate milk")) {
+                  let cooldown = cooldowndata.cmilk;
+                  let timeout = 600000;
+                  console.log(timeout - (Date.now() - cooldown));
+                  if (
+                    cooldown !== null &&
+                    timeout - (Date.now() - cooldown) > 0
+                  ) {
+                    exotickeys = exotickeys * 2;
+                  } else {
+                    console.log("pulled");
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your chocolate milk ran out.");
+                  }
+                }
+                earnings.push(`${emotes.exoticKey} +${exotickeys}`);
+                userdata.ekeys += exotickeys;
+              }
+
+              if (crateearned !== undefined) {
+                userdata.items.push(crateearned);
+                earnings.push(
+                  `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
+                );
+              }
+
+              if (usinginv.includes("radio")) {
+                let cooldown = cooldowndata.radio;
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  rankswon = rankswon * 2;
+                  cashwon = cashwon * 2;
+                  rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("radio");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("Your radio battery ran out.");
+                }
+              }
+
+              if (usinginv.includes("bubbles")) {
+                let cooldown = cooldowndata.bubbles;
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  cashwon = cashwon * 3;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("bubbles");
+                  userdata.update();
+                  cooldowndata.bubbles = 0;
+                  interaction.channel.send("Your bubbles popped.");
+                }
+              }
+
+              if (usinginv.includes("chips")) {
+                let cooldown = cooldowndata.chips;
+                let timeout = 600000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  let chip = userdata.chips;
+                  let percent = chip * 0.1;
+                  cashwon += cashwon * percent;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("chips");
+                  userdata.update();
+                  cooldowndata.radio = 0;
+                  interaction.channel.send("You ran out of chips.");
+                }
+              }
+
+              if (usinginv.includes("flat tire")) {
+                let cooldown = cooldowndata.flattire;
+                let timeout = 1800000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  cashwon = cashwon += cashwon * 0.05;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("flat tire");
+                  userdata.update();
+                  cooldowndata.flattire = 0;
+                  interaction.channel.send("Your flat tire ran out! :(");
+                }
+              }
+              let itemeffects = userdata.itemeffects || [];
+              let itemeffectsfilter = itemeffects.filter(
+                (item) => item.item == "tequila shot"
+              );
+              if (itemeffectsfilter[0]) {
+                let cooldown = cooldowndata.tequilla;
+                let timeout = 60000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  if (itemeffectsfilter[0].earning == "bad") {
+                    earnings.push("You lost $500K!");
+                    let usercash = userdata.cash;
+                    if ((usercash -= 500000) < 0) {
+                      userdata.cash = 0;
+                    } else {
+                      userdata.cash -= 500000;
+                    }
+                  } else if (itemeffectsfilter[0].earning == "good") {
+                    cashwon = cashwon * 5;
+                  }
+                } else {
+                  console.log("pulled");
+                  userdata.itemeffects.pull(itemeffectsfilter[0]);
+                  userdata.update();
+                  interaction.channel.send("Your tequila shot ran out! :(");
+                }
+              }
+
+              if (usinginv.includes("fruit punch")) {
+                let cooldown = cooldowndata.fruitpunch;
+                let timeout = 600000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  rankswon = rankswon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("fruit punch");
+                  userdata.update();
+                  interaction.channel.send("Your fruit punch ran out! :(");
+                }
+              }
+              if (usinginv.includes("energy drink")) {
+                let cooldown = cooldowndata.energydrink;
+                let timeout = 600000;
+                console.log(timeout - (Date.now() - cooldown));
+                if (
+                  cooldown !== null &&
+                  timeout - (Date.now() - cooldown) > 0
+                ) {
+                  rpwon = rpwon * 2;
+                } else {
+                  console.log("pulled");
+                  userdata.using.pull("energy drink");
+                  userdata.update();
+                  cooldowndata.energydrink = 0;
+                  interaction.channel.send("Your energy drink ran out! :(");
+                }
+              }
+              if (bonus > 0) {
+                cashwon = cashwon += cashwon * bonus;
+              }
+              if (bountyuser > 0) {
+                cashwon = cashwon += bountyuser;
+              }
+              earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
+              earnings.push(`${emotes.rp} +${rpwon}`);
+              userdata.racerank += rankswon;
+
+              userdata.cash += cashwon;
+              userdata.bounty += 5;
+              userdata.rp4 += rpwon;
+              embed.setDescription(`${earnings.join("\n")}`);
+              embed.setTitle(`Tier ${bot} Quarter Mile Race won!`);
+              await i.editReply({ embeds: [embed] });
+
+              await i.editReply({ embeds: [embed] });
+
+              if (userdata.tutorial && userdata.tutorial.stage == 2) {
+                userdata.parts.push("t1exhaust");
+                interaction.channel.send(
+                  `You won! Thats great! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
+                );
+                interaction.channel.send(
+                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
+                );
+                userdata.tutorial.stage += 1;
+                userdata.markModified("tutorial");
+              }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": (selected.Miles += 0.25),
+                  },
+                },
+
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
+
+              userdata.save();
+
+              console.log(`track length ${tracklength}`);
+              console.log(`track length 2 ${tracklength2}`);
+              return;
+            }
+            // lost
+            else if (winner == "Opponent") {
+              userdata.cash -= cashlost;
+              let iszero = (userdata.cash -= cashlost);
+              if (iszero < 0) {
+                userdata.cash = 0;
+              }
+              embed.setTitle(`Tier ${bot} Quarter Mile Race lost!`);
+              embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
+              await i.editReply({ embeds: [embed] });
+              if (userdata.tutorial && userdata.tutorial.stage == 2) {
+                userdata.parts.push("t1exhaust");
+                interaction.channel.send(
+                  `You lost! Thats ok! To give you a head start, I've given you a T1Exhaust, now use the \`/upgrade\` command to upgrade your car, and input your cars ID followed by **t1exhaust** to equip the exhaust!`
+                );
+                interaction.channel.send(
+                  "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmY5NzBhMzBjYzcxYTdhZDUzZWE5MWI3MmM2ZjliMzI3ZDFiOGJhYSZjdD1n/xvZXwzhNYtfUqjvDnb/giphy.gif"
+                );
+                userdata.tutorial.stage += 1;
+                userdata.markModified("tutorial");
+              }
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Miles": (selected.Miles += 0.25),
+                  },
+                },
+
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": selected.Name,
+                    },
+                  ],
+                }
+              );
+              userdata.save();
+              return;
+            }
+          }, 3000);
         } else if (race[0].name == "muscledrag") {
           let tracklength = 400;
           let tracklength2 = 400;
@@ -3827,7 +3785,7 @@ const drift = formula(150, 4.0, 2300, 3700);
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
           let race2 = racedb.filter((r) => r.name == "muscledrag");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
           let commonkeys;
           let rarekeys;
           let exotickeys;
@@ -3947,63 +3905,59 @@ const drift = formula(150, 4.0, 2300, 3700);
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          
           class ICar {
             constructor(speed, accel, handling, weight) {
-                this.speed = speed;
-                this.accel = accel;
-                this.handling = handling;
-                this.weight = weight;
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
             }
-        }
-        
-       let formula = function(speed, accel, handling, weight) {
+          }
+
+          let formula = function (speed, accel, handling, weight) {
             const target = new ICar(speed, accel, handling, weight);
             return (car) => {
-                const speedDifference = target.speed - car.speed;
-                const handlingPerSpeed = target.handling / target.speed;
-                const handling = car.handling + (speedDifference * handlingPerSpeed);
-                
-                const weightDifference = target.weight - car.weight;
-                const accelPerWeight = target.accel / target.weight;
-                const accel = car.accel - (weightDifference * accelPerWeight);
-                
-                const targetRegression  = target.handling / target.accel;
-                const regression = Math.abs(targetRegression - (handling / accel));
-                return Math.round(regression * 100) / 100;
-            }
-        }
-        
-        const drag = formula(200, 2.0, 700, 3500);
-        const track = formula(300, 3.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
 
-        let player = new ICar(speed, acceleration, handling, weight);
-        let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-        
-        let winner
-        const dorace = (f) => {
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
+          const drag = formula(200, 2.0, 700, 3500);
+          const track = formula(300, 3.0, 1700, 3300);
+          const drift = formula(150, 4.0, 2300, 3700);
+
+          let player = new ICar(speed, acceleration, handling, weight);
+          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
+
+          let winner;
+          const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-             winner = playerRegression <= opponentRegression
-                ? "Player"
-                : "Opponent";
-        
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
             const string =
-                `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                + `- Winner: ${winner}\n`;
-        
-            return string;    
-        }
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
-        console.log("Track Race:\n", dorace(drag));
+            return string;
+          };
 
-        dorace(drag)
-         setTimeout(async () => {
-         
+          console.log("Track Race:\n", dorace(drag));
 
+          dorace(drag);
+          setTimeout(async () => {
             if (winner == "Player") {
-
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -4023,7 +3977,7 @@ const drift = formula(150, 4.0, 2300, 3700);
               if (userdata.houses && filteredhouse3[0]) {
                 notowon = notowon * 2;
               }
-       
+
               if (commonkeys && commonkeys > 0) {
                 if (usinginv.includes("milk")) {
                   let cooldown = cooldowndata.milk;
@@ -4241,9 +4195,9 @@ const drift = formula(150, 4.0, 2300, 3700);
             // lost
             else if (winner == "Opponent") {
               userdata.cash -= cashlost;
-              let iszero = userdata.cash -= cashlost
-              if(iszero < 0){
-                userdata.cash = 0
+              let iszero = (userdata.cash -= cashlost);
+              if (iszero < 0) {
+                userdata.cash = 0;
               }
               embed.setTitle(`Tier ${bot} Muscle Drag Race lost!`);
               embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
@@ -4377,61 +4331,58 @@ const drift = formula(150, 4.0, 2300, 3700);
             fetchReply: true,
           });
 
-
           class ICar {
             constructor(speed, accel, handling, weight) {
-                this.speed = speed;
-                this.accel = accel;
-                this.handling = handling;
-                this.weight = weight;
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
             }
-        }
-        
-       let formula = function(speed, accel, handling, weight) {
+          }
+
+          let formula = function (speed, accel, handling, weight) {
             const target = new ICar(speed, accel, handling, weight);
             return (car) => {
-                const speedDifference = target.speed - car.speed;
-                const handlingPerSpeed = target.handling / target.speed;
-                const handling = car.handling + (speedDifference * handlingPerSpeed);
-                
-                const weightDifference = target.weight - car.weight;
-                const accelPerWeight = target.accel / target.weight;
-                const accel = car.accel - (weightDifference * accelPerWeight);
-                
-                const targetRegression  = target.handling / target.accel;
-                const regression = Math.abs(targetRegression - (handling / accel));
-                return Math.round(regression * 100) / 100;
-            }
-        }
-        
-        const drag = formula(200, 2.0, 700, 3500);
-        const track = formula(300, 3.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
 
-        let player = new ICar(speed, acceleration, handling, weight);
-        let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-        
-        let winner
-        const dorace = (f) => {
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
+          const drag = formula(200, 2.0, 700, 3500);
+          const track = formula(300, 3.0, 1700, 3300);
+          const drift = formula(150, 4.0, 2300, 3700);
+
+          let player = new ICar(speed, acceleration, handling, weight);
+          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
+
+          let winner;
+          const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-             winner = playerRegression <= opponentRegression
-                ? "Player"
-                : "Opponent";
-        
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
             const string =
-                `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                + `- Winner: ${winner}\n`;
-        
-            return string;    
-        }
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
-        console.log("Track Race:\n", dorace(track));
+            return string;
+          };
 
-        dorace(track)
+          console.log("Track Race:\n", dorace(track));
+
+          dorace(track);
           setTimeout(async () => {
-        
-
             if (winner == "Player") {
               let earnings = [];
 
@@ -4522,7 +4473,6 @@ const drift = formula(150, 4.0, 2300, 3700);
             }
             // lost
             else if (winner == "Opponent") {
-
               embed.setTitle(`Tier ${bot} Car Series Race lost!`);
               await i.editReply({ embeds: [embed] });
 
@@ -4566,9 +4516,9 @@ const drift = formula(150, 4.0, 2300, 3700);
           let cashwon = parseInt(bot) * 350;
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
-          
+
           let race2 = racedb.filter((r) => r.name == "crosrace");
-          let rankswon = parseInt(bot) * race2[0].ranks
+          let rankswon = parseInt(bot) * race2[0].ranks;
           let commonmaps;
           let raremaps;
           let legendarymaps;
@@ -4632,8 +4582,8 @@ const drift = formula(150, 4.0, 2300, 3700);
 
           console.log(weather2);
 
-          let mph = selected.Speed
-        
+          let mph = selected.Speed;
+
           let weight =
             selected.WeightStat ||
             cardb.Cars[selected.Name.toLowerCase()].Weight;
@@ -4647,11 +4597,10 @@ const drift = formula(150, 4.0, 2300, 3700);
 
           let mph2 = car2.Speed;
 
-       
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling;
-  
+
           let speed = 0;
           let speed2 = 0;
 
@@ -4693,59 +4642,57 @@ const drift = formula(150, 4.0, 2300, 3700);
           let accms2 = acceleration2 * 10;
           class ICar {
             constructor(speed, accel, handling, weight) {
-                this.speed = speed;
-                this.accel = accel;
-                this.handling = handling;
-                this.weight = weight;
+              this.speed = speed;
+              this.accel = accel;
+              this.handling = handling;
+              this.weight = weight;
             }
-        }
-        
-       let formula = function(speed, accel, handling, weight) {
+          }
+
+          let formula = function (speed, accel, handling, weight) {
             const target = new ICar(speed, accel, handling, weight);
             return (car) => {
-                const speedDifference = target.speed - car.speed;
-                const handlingPerSpeed = target.handling / target.speed;
-                const handling = car.handling + (speedDifference * handlingPerSpeed);
-                
-                const weightDifference = target.weight - car.weight;
-                const accelPerWeight = target.accel / target.weight;
-                const accel = car.accel - (weightDifference * accelPerWeight);
-                
-                const targetRegression  = target.handling / target.accel;
-                const regression = Math.abs(targetRegression - (handling / accel));
-                return Math.round(regression * 100) / 100;
-            }
-        }
-        
-        const drag = formula(230, 2.0, 500, 3500);
-        const track = formula(300, 2.0, 1700, 3300);
-const drift = formula(150, 4.0, 2300, 3700);
+              const speedDifference = target.speed - car.speed;
+              const handlingPerSpeed = target.handling / target.speed;
+              const handling =
+                car.handling + speedDifference * handlingPerSpeed;
 
-        let player = new ICar(speed, acceleration, handling, weight);
-        let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-        
-        let winner
-        const dorace = (f) => {
+              const weightDifference = target.weight - car.weight;
+              const accelPerWeight = target.accel / target.weight;
+              const accel = car.accel - weightDifference * accelPerWeight;
+
+              const targetRegression = target.handling / target.accel;
+              const regression = Math.abs(targetRegression - handling / accel);
+              return Math.round(regression * 100) / 100;
+            };
+          };
+
+          const drag = formula(230, 2.0, 500, 3500);
+          const track = formula(300, 2.0, 1700, 3300);
+          const drift = formula(150, 4.0, 2300, 3700);
+
+          let player = new ICar(speed, acceleration, handling, weight);
+          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
+
+          let winner;
+          const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-             winner = playerRegression <= opponentRegression
-                ? "Player"
-                : "Opponent";
-        
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
+
             const string =
-                `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n`
-                + `- Winner: ${winner}\n`;
-        
-            return string;    
-        }
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
-        console.log("Track Race:\n", dorace(track));
+            return string;
+          };
 
-        dorace(track)
-           setTimeout(async () => {
-        
+          console.log("Track Race:\n", dorace(track));
+
+          dorace(track);
+          setTimeout(async () => {
             if (winner == "Player") {
-
               let earnings = [];
               let filteredhouse = userdata.houses.filter(
                 (house) => house.Name == "Buone Vedute"
@@ -4777,7 +4724,6 @@ const drift = formula(150, 4.0, 2300, 3700);
               if (bountyuser > 0) {
                 cashwon = cashwon += bountyuser;
               }
-             
 
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
@@ -4839,8 +4785,8 @@ const drift = formula(150, 4.0, 2300, 3700);
                   cooldown !== null &&
                   timeout - (Date.now() - cooldown) > 0
                 ) {
-                  let chip = userdata.chips
-                  let percent = chip * 0.1
+                  let chip = userdata.chips;
+                  let percent = chip * 0.1;
                   cashwon += cashwon * percent;
                 } else {
                   console.log("pulled");
@@ -4948,9 +4894,7 @@ const drift = formula(150, 4.0, 2300, 3700);
               userdata.rp4 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
-              embed.setTitle(
-                `Tier ${bot} Cross Country Race won!`
-              );
+              embed.setTitle(`Tier ${bot} Cross Country Race won!`);
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
@@ -4991,13 +4935,11 @@ const drift = formula(150, 4.0, 2300, 3700);
             // lost
             else if (winner == "Opponent") {
               userdata.cash -= cashlost;
-              let iszero = userdata.cash -= cashlost
-              if(iszero < 0){
-                userdata.cash = 0
+              let iszero = (userdata.cash -= cashlost);
+              if (iszero < 0) {
+                userdata.cash = 0;
               }
-              embed.setTitle(
-                `Tier ${bot} Cross Country Race lost!`
-              );
+              embed.setTitle(`Tier ${bot} Cross Country Race lost!`);
               embed.setDescription(`${emotes.cash} -${toCurrency(cashlost)}`);
               await i.editReply({ embeds: [embed] });
               await i.editReply({ embeds: [embed] });
@@ -5206,8 +5148,8 @@ const drift = formula(150, 4.0, 2300, 3700);
                   if (
                     cooldown !== null &&
                     timeout - (Date.now() - cooldown) > 0
-                    ) {
-                    xessneceearn = pet.xessence
+                  ) {
+                    xessneceearn = pet.xessence;
                   } else {
                     console.log("pulled");
                     userdata.using.pull("pet treats");

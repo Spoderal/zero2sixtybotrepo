@@ -224,8 +224,8 @@ module.exports = {
       let stat = Number(oldweight);
       selected.WeightStat = stat += newspeed;
     }
-    console.log(selected.WeightStat)
-    
+    console.log(selected.WeightStat);
+
     selected.Handling = oldhandling;
     console.log(oldhandling);
 
@@ -238,7 +238,8 @@ module.exports = {
     selected[partType] = partInLocalDB.Name;
     let newspeed = selected.Speed;
     let newhandling = oldhandling;
-    let newweight =  selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
+    let newweight =
+      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
     let new060 = selected.Acceleration;
     await User.findOneAndUpdate(
       {
@@ -277,7 +278,7 @@ module.exports = {
         Emote: "",
       };
     }
-    let image = selected.Image || cardb[selected.Name.toLowerCase()].Image
+    let image = selected.Image || cardb[selected.Name.toLowerCase()].Image;
     let embed = new discord.EmbedBuilder()
       .setTitle(
         `Upgraded ${partType} on your ${selected.Emote} ${selected.Name}`

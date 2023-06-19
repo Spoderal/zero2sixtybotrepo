@@ -3,73 +3,73 @@
     "name": "streetrace",
     "tiers": 10,
     "reward": 50,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "highwayrace",
     "tiers": 7,
     "reward": 250,
-    "ranks":2
+    "ranks": 2
   },
   {
     "name": "quartermile",
     "tiers": 7,
     "reward": 150,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "halfmile",
     "tiers": 7,
     "reward": 200,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "squadrace",
     "tiers": 7,
     "reward": 250,
-    "ranks":1
+    "ranks": 1
   },
 
   {
     "name": "crossrace",
     "tiers": 7,
     "reward": 300,
-    "ranks":2
+    "ranks": 2
   },
   {
     "name": "lemans",
     "tiers": 7,
     "reward": 0,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "muscledrag",
     "tiers": 7,
     "reward": 75,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "police_streetrace",
     "tiers": 7,
     "reward": 75,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "carseries",
     "tiers": 7,
     "reward": 0,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "trackrace",
     "tiers": 7,
     "reward": 50,
-    "ranks":1
+    "ranks": 1
   },
   {
     "name": "wetrace",
     "tiers": 7,
     "reward": 0,
-    "ranks":1
+    "ranks": 1
   }
 ]
