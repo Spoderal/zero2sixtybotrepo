@@ -1633,8 +1633,6 @@ module.exports = {
             tracklength += formula;
             tracklength2 += formula2;
 
-        
-
             console.log(`track ${tracklength}`);
             console.log(`track2 ${tracklength2}`);
 
