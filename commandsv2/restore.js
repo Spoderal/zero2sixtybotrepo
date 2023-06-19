@@ -58,47 +58,42 @@ module.exports = {
       !suspension &&
       !gearbox &&
       !body &&
-      
       !engine &&
       !uitems.includes("toolbox")
-    )
-    {
-
-      let required = []
-      if( !exhaust){
-        required.push("<:exhaustrestored:941546331384717333> Exhaust")
+    ) {
+      let required = [];
+      if (!exhaust) {
+        required.push("<:exhaustrestored:941546331384717333> Exhaust");
       }
-      if( !tires){
-        required.push("<:tiresrestored:941546331703509132> Tires")
+      if (!tires) {
+        required.push("<:tiresrestored:941546331703509132> Tires");
       }
-      if( !intake){
-        required.push("<:intakerestored:941546331686719558> Intake")
+      if (!intake) {
+        required.push("<:intakerestored:941546331686719558> Intake");
       }
-      if( !clutch){
-        required.push("<:clutchrestored:941546331590250566> Clutch")
+      if (!clutch) {
+        required.push("<:clutchrestored:941546331590250566> Clutch");
       }
-      if( !suspension){
-        required.push("<:suspensionrestored:941546331367960627> Suspension")
+      if (!suspension) {
+        required.push("<:suspensionrestored:941546331367960627> Suspension");
       }
-      if( !gearbox){
-        required.push("<:gearboxdefault:968751095629348894> Gearbox")
+      if (!gearbox) {
+        required.push("<:gearboxdefault:968751095629348894> Gearbox");
       }
-      if( !body){
-        required.push("<:spoilerrestored:941546331716063232> Body")
+      if (!body) {
+        required.push("<:spoilerrestored:941546331716063232> Body");
       }
-      if( !engine){
-        required.push("<:enginerestored:941546331808333864> Engine")
+      if (!engine) {
+        required.push("<:enginerestored:941546331808333864> Engine");
       }
-        let embed = new Discord.EmbedBuilder()
+      let embed = new Discord.EmbedBuilder()
         .setTitle(`Parts required for restoration`)
-        .setDescription(`${required.join('\n')}`)
-        .setColor(colors.blue)
-        return await interaction.reply({
-          content: `You haven't completed this restoration! Use /upgrade to restore it, or buy a toolbox from the item shop!`,
-          embeds: [embed]
-        }
-         
-        );
+        .setDescription(`${required.join("\n")}`)
+        .setColor(colors.blue);
+      return await interaction.reply({
+        content: `You haven't completed this restoration! Use /upgrade to restore it, or buy a toolbox from the item shop!`,
+        embeds: [embed],
+      });
     }
 
     let carindb = cars.Cars[selected.Name.toLowerCase()].restored;
