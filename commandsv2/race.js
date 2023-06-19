@@ -1617,7 +1617,7 @@ module.exports = {
             collec.on("collect", async (i) => {
               if (i.customId == "trophy" && trophy == false) {
                 userdata.raintrophy += 1;
-                trophy = true
+                trophy = true;
                 interaction.editReply({ components: [] });
               }
             });
