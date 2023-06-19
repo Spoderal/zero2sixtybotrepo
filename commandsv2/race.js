@@ -515,7 +515,6 @@ module.exports = {
           }
           car2 = lodash.sample(car2);
 
-
           let craterare = randomRange(1, 3);
 
           let crateearned;
@@ -525,8 +524,6 @@ module.exports = {
           } else if (craterare == 3) {
             crateearned = "rare crate";
           }
-
-         
 
           let mph = selected.Speed;
 
@@ -620,15 +617,18 @@ module.exports = {
 
           let player = new ICar(speed, acceleration, handling, weight);
           let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-          console.log(player)
-          console.log(opponent)
+          console.log(player);
+          console.log(opponent);
           let winner;
           const dorace = (f) => {
             const playerRegression = f(player);
             const opponentRegression = f(opponent);
-            winner = playerRegression <= opponentRegression ? "Player" : "Opponent";
+            winner =
+              playerRegression <= opponentRegression ? "Player" : "Opponent";
 
-            const string =   `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` + `- Winner: ${winner}\n`;
+            const string =
+              `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+              `- Winner: ${winner}\n`;
 
             return string;
           };
