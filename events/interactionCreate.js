@@ -49,18 +49,16 @@ module.exports = {
           } else {
             cooldowndata.command_ran = Date.now();
             await command.execute(interaction);
-            let global = await Globals.findOne({}) || []
-            if(!global.legacy.includes(interaction.user.id)){
-
-              global.legacy.push(interaction.user.id)
+            let global = (await Globals.findOne({})) || [];
+            if (!global.legacy.includes(interaction.user.id)) {
+              global.legacy.push(interaction.user.id);
             }
-            global.save()
+            global.save();
             await interaction.channel.send({
               content:
                 "All data will be reset June 31st, this is to overhaul the economy, making it better, and have everyone start from scratch, we hope you understand, **you've received an exclusive legacy badge for the next chapter of Zero2Sixty**!",
               fetchReply: true,
-            })
-
+            });
           }
         } catch (err) {
           console.log(err);
