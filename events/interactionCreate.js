@@ -48,6 +48,11 @@ module.exports = {
           } else {
             cooldowndata.command_ran = Date.now();
             await command.execute(interaction);
+            await interaction.channel.send({
+              content:
+                "All data will be reset June 31st, this is to overhaul the economy, making it better, and have everyone start from scratch, we hope you understand",
+              fetchReply: true,
+            });
           }
         } catch (err) {
           console.log(err);
