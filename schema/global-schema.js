@@ -257,6 +257,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  legacy: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   teams: {
     type: Array,
     required: false,
