@@ -579,19 +579,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -601,8 +600,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
 
@@ -2477,19 +2474,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -2499,8 +2495,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
 
@@ -2894,19 +2888,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -2916,8 +2909,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
 
@@ -3310,19 +3301,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -3332,8 +3322,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
@@ -3790,19 +3778,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -3812,8 +3799,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
@@ -4191,19 +4176,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -4213,8 +4197,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
@@ -4473,19 +4455,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = (handling / acceleration) + (speed * weightscore)
-          console.log(player)
-          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
+          let player = handling / acceleration + speed * weightscore;
+          console.log(player);
+          let opponent = handling2 / acceleration2 + speed2 * weightscore2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -4495,8 +4476,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
