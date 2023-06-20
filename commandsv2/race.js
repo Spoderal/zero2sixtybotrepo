@@ -579,47 +579,21 @@ module.exports = {
             fetchReply: true,
           });
 
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(400, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-          console.log(player);
           console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -628,9 +602,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(track));
+          
 
-          dorace(track);
+          dorace();
 
           setTimeout(async () => {
             if (winner == "Player") {
@@ -2503,46 +2477,21 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(250, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -2551,9 +2500,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(drag));
+          
 
-          dorace(drag);
+          dorace();
 
           setTimeout(async () => {
             if (winner == "Player") {
@@ -2945,46 +2894,21 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(400, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -2993,9 +2917,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(drag));
+          
 
-          dorace(drag);
+          dorace();
 
           setTimeout(async () => {
             if (winner == "Player") {
@@ -3386,46 +3310,21 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(400, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -3434,9 +3333,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(drag));
+          
 
-          dorace(drag);
+          dorace();
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
@@ -3891,46 +3790,21 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(400, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -3939,9 +3813,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(drag));
+          
 
-          dorace(drag);
+          dorace();
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
@@ -4317,46 +4191,21 @@ module.exports = {
             fetchReply: true,
           });
 
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(400, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -4365,9 +4214,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(track));
+          
 
-          dorace(track);
+          dorace();
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
@@ -4624,48 +4473,21 @@ module.exports = {
             fetchReply: true,
           });
 
-          let accms = acceleration * 10;
-          let accms2 = acceleration2 * 10;
-          class ICar {
-            constructor(speed, accel, handling, weight) {
-              this.speed = speed;
-              this.accel = accel;
-              this.handling = handling;
-              this.weight = weight;
-            }
-          }
+          let weightscore = Math.floor(weight / 100)
+          let weightscore2 = Math.floor(weight2 / 100)
 
-          let formula = function (speed, accel, handling, weight) {
-            const target = new ICar(speed, accel, handling, weight);
-            return (car) => {
-              const speedDifference = target.speed - car.speed;
-              const handlingPerSpeed = target.handling / target.speed;
-              const handling =
-                car.handling + speedDifference * handlingPerSpeed;
 
-              const weightDifference = target.weight - car.weight;
-              const accelPerWeight = target.accel / target.weight;
-              const accel = car.accel - weightDifference * accelPerWeight;
+          let player = (handling / acceleration) + (speed * weightscore)
+          console.log(player)
+          let opponent = (handling2 / acceleration2) + (speed2 * weightscore2)
 
-              const targetRegression = target.handling / target.accel;
-              const regression = Math.abs(targetRegression - handling / accel);
-              return Math.round(regression * 100) / 100;
-            };
-          };
-
-          const drag = formula(400, 2.0, 1000, 2000);
-          const track = formula(400, 2.0, 500, 3000);
-          const drift = formula(150, 4.0, 2300, 3700);
-
-          let player = new ICar(speed, acceleration, handling, weight);
-          let opponent = new ICar(speed2, acceleration2, handling2, weight2);
-
+          console.log(opponent);
           let winner;
-          const dorace = (f) => {
-            const playerRegression = f(player);
-            const opponentRegression = f(opponent);
+          const dorace = () => {
+            const playerRegression = player
+            const opponentRegression = opponent
             winner =
-              playerRegression <= opponentRegression ? "Player" : "Opponent";
+              playerRegression >= opponentRegression ? "Player" : "Opponent";
 
             const string =
               `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -4674,9 +4496,9 @@ module.exports = {
             return string;
           };
 
-          console.log("Track Race:\n", dorace(track));
+          
 
-          dorace(track);
+          dorace();
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
