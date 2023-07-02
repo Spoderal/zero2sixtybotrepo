@@ -1041,20 +1041,31 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
-              let filteredhouse2 = houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              let filteredhouse3 = houses.filter(
-                (house) => house.Name == "Castello Verde"
-              );
+              let houses = userdata.houses || [];
 
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-
-              if (userdata.houses && filteredhouse3[0]) {
-                cashwon = cashwon += cashwon * 0.1;
+              if(houses.length > 0){
+                
+                let filteredhouse2 = houses.filter(
+                  (house) => house.Name == "Casa Della Pace"
+                );
+                let filteredhouse1 = houses.filter(
+                  (house) => house.Name == "Castello Verde"
+                );
+  
+                let filteredhouse3 = userdata.houses.filter(
+                  (house) => house.Name == "Casa Sul Lago"
+                );
+  
+                let filteredhouse4 = userdata.houses.filter(
+                  (house) => house.Name == "Villa Sull Acqua"
+                );
+  
+                if (userdata.houses && filteredhouse1[0]) {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
+                if (userdata.houses && filteredhouse2[0]) {
+                  rpwon = rpwon * 2;
+                }
               }
               let wheelrandom = randomRange(1, 5);
               if (wheelrandom == 2) {
@@ -1422,17 +1433,30 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
               let houses = userdata.houses || []
-              let filteredhouse = houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              let filteredhouse2 = houses.filter(
-                (house) => house.Name == "Castello Verde"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
+
+              if(houses.length > 0){
+                
+                let filteredhouse2 = houses.filter(
+                  (house) => house.Name == "Casa Della Pace"
+                );
+                let filteredhouse1 = houses.filter(
+                  (house) => house.Name == "Castello Verde"
+                );
+  
+                let filteredhouse3 = userdata.houses.filter(
+                  (house) => house.Name == "Casa Sul Lago"
+                );
+  
+                let filteredhouse4 = userdata.houses.filter(
+                  (house) => house.Name == "Villa Sull Acqua"
+                );
+  
+                if (userdata.houses && filteredhouse1[0]) {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
+                if (userdata.houses && filteredhouse2[0]) {
+                  rpwon = rpwon * 2;
+                }
               }
 
               if (crateearned !== undefined) {
@@ -1788,17 +1812,30 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
               let houses = userdata.houses || []
-              let filteredhouse = houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              let filteredhouse2 = houses.filter(
-                (house) => house.Name == "Castello Verde"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
+
+              if(houses.length > 0){
+                
+                let filteredhouse2 = houses.filter(
+                  (house) => house.Name == "Casa Della Pace"
+                );
+                let filteredhouse1 = houses.filter(
+                  (house) => house.Name == "Castello Verde"
+                );
+  
+                let filteredhouse3 = userdata.houses.filter(
+                  (house) => house.Name == "Casa Sul Lago"
+                );
+  
+                let filteredhouse4 = userdata.houses.filter(
+                  (house) => house.Name == "Villa Sull Acqua"
+                );
+  
+                if (userdata.houses && filteredhouse1[0]) {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
+                if (userdata.houses && filteredhouse2[0]) {
+                  rpwon = rpwon * 2;
+                }
               }
               let randomkey = randomRange(1, 5);
               if (randomkey == 2) {
@@ -2482,17 +2519,30 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
               let houses = userdata.houses || []
-              let filteredhouse = houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              let filteredhouse2 = houses.filter(
-                (house) => house.Name == "Castello Verde"
-              );
-              if (userdata.houses && filteredhouse[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
+
+              if(houses.length > 0){
+                
+                let filteredhouse2 = houses.filter(
+                  (house) => house.Name == "Casa Della Pace"
+                );
+                let filteredhouse1 = houses.filter(
+                  (house) => house.Name == "Castello Verde"
+                );
+  
+                let filteredhouse3 = userdata.houses.filter(
+                  (house) => house.Name == "Casa Sul Lago"
+                );
+  
+                let filteredhouse4 = userdata.houses.filter(
+                  (house) => house.Name == "Villa Sull Acqua"
+                );
+  
+                if (userdata.houses && filteredhouse1[0]) {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
+                if (userdata.houses && filteredhouse2[0]) {
+                  rpwon = rpwon * 2;
+                }
               }
               if (commonmaps && commonmaps > 0) {
                 let randommap = randomRange(1, 5);
