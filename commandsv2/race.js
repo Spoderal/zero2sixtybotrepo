@@ -586,7 +586,7 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
 
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
               let filteredhouse2 = houses.filter(
                 (house) => house.Name == "Casa Della Pace"
               );
@@ -1037,7 +1037,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
               let filteredhouse2 = houses.filter(
                 (house) => house.Name == "Casa Della Pace"
               );
@@ -1417,7 +1417,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
               let filteredhouse = houses.filter(
                 (house) => house.Name == "Casa Della Pace"
               );
@@ -1783,7 +1783,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
               let filteredhouse = houses.filter(
                 (house) => house.Name == "Casa Della Pace"
               );
@@ -2477,7 +2477,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
               let filteredhouse = houses.filter(
                 (house) => house.Name == "Casa Della Pace"
               );
