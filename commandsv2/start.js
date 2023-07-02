@@ -132,6 +132,9 @@ module.exports = {
           completed: true,
         });
       }
+      else {
+        newuser.houses = []
+      }
 
       newuser.cars.push(carobj);
       newuser.save();

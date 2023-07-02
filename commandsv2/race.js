@@ -587,29 +587,33 @@ module.exports = {
               let earnings = [];
 
               let houses = userdata.houses || []
-              let filteredhouse2 = houses.filter(
-                (house) => house.Name == "Casa Della Pace"
-              );
-              let filteredhouse1 = houses.filter(
-                (house) => house.Name == "Castello Verde"
-              );
 
-              let filteredhouse3 = userdata.houses.filter(
-                (house) => house.Name == "Casa Sul Lago"
-              );
-
-              let filteredhouse4 = userdata.houses.filter(
-                (house) => house.Name == "Villa Sull Acqua"
-              );
-
-              if (userdata.houses && filteredhouse1[0]) {
-                cashwon = cashwon += cashwon * 0.05;
-              }
-              if (userdata.houses && filteredhouse2[0]) {
-                rpwon = rpwon * 2;
-              }
-              if (userdata.houses && filteredhouse3[0]) {
-                notowon = notowon * 2;
+              if(houses.length > 0){
+                
+                let filteredhouse2 = houses.filter(
+                  (house) => house.Name == "Casa Della Pace"
+                );
+                let filteredhouse1 = houses.filter(
+                  (house) => house.Name == "Castello Verde"
+                );
+  
+                let filteredhouse3 = userdata.houses.filter(
+                  (house) => house.Name == "Casa Sul Lago"
+                );
+  
+                let filteredhouse4 = userdata.houses.filter(
+                  (house) => house.Name == "Villa Sull Acqua"
+                );
+  
+                if (userdata.houses && filteredhouse1[0]) {
+                  cashwon = cashwon += cashwon * 0.05;
+                }
+                if (userdata.houses && filteredhouse2[0]) {
+                  rpwon = rpwon * 2;
+                }
+                if (userdata.houses && filteredhouse3[0]) {
+                  notowon = notowon * 2;
+                }
               }
 
               if (pet.name) {
