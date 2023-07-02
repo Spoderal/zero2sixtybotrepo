@@ -2130,7 +2130,7 @@ module.exports = {
           let weight2 = car2.Weight;
           let acceleration2 = car2["0-60"];
           let handling2 = car2.Handling;
-
+          //test
           let speed = 0;
           let speed2 = 0;
           userdata.seriestickets -= 1;
