@@ -34,8 +34,6 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-
-
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
     embed.setFooter({ text: 'Prefix is "/"' });
@@ -87,7 +85,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } 
+      }
     });
   },
 };

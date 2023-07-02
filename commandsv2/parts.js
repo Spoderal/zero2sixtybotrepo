@@ -68,18 +68,16 @@ module.exports = {
         .setLabel("Engines")
         .setCustomId("engines")
         .setEmoji("<:v12:1069491173850353684>")
-        .setStyle("Secondary"),
-        
+        .setStyle("Secondary")
     );
 
     let prow3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setLabel("Intercoolers")
-      .setCustomId("intercooler")
-      .setEmoji("<:part_t1intercooler:1123148189999038514>")
-      .setStyle("Secondary")
-
-    )
+        .setLabel("Intercoolers")
+        .setCustomId("intercooler")
+        .setEmoji("<:part_t1intercooler:1123148189999038514>")
+        .setStyle("Secondary")
+    );
 
     let userdata = await User.findOne({ id: interaction.user.id });
     let part;
@@ -150,8 +148,7 @@ module.exports = {
           enginearr.push(part);
         } else if (part.Type == "gearbox") {
           gearboxarr.push(part);
-        }
-        else if (part.Type == "intercooler") {
+        } else if (part.Type == "intercooler") {
           intercoolerarr.push(part);
         }
       }
@@ -411,8 +408,7 @@ module.exports = {
         });
 
         page = 1;
-      } 
-      else if (i.customId.includes("intercooler")) {
+      } else if (i.customId.includes("intercooler")) {
         part = intercoolerarr[0][0];
         let statsdisp = [];
 
@@ -472,8 +468,7 @@ module.exports = {
         });
 
         page = 1;
-      } 
-      else if (i.customId.includes("intakes")) {
+      } else if (i.customId.includes("intakes")) {
         part = intakearr[0][0];
         let statsdisp = [];
 

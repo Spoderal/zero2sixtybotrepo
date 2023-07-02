@@ -200,7 +200,6 @@ module.exports = {
       miles = 2;
     }
 
-
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage(trackimg);
@@ -247,7 +246,6 @@ module.exports = {
           embed.setTitle(`${trackemote} ${difficulty} ${track} track lost.`);
           await interaction.editReply({ embeds: [embed] });
         } else if (tracklength <= 0) {
-          
           let earnings = [];
           let filteredhouse = userdata.houses.filter(
             (house) => house.Name == "Casa Sul Lago"
@@ -262,7 +260,6 @@ module.exports = {
           }
           //test
           earnings.push(`${emotes.cash} +${cashreward}`);
-         
 
           if (userdata.items.includes("match")) {
             dranks = dranks * 2;
@@ -293,8 +290,6 @@ module.exports = {
               ],
             }
           );
-    
-       
 
           if (difficulty == "master" && track == "mountain") {
             userdata.dkeyst += 2;

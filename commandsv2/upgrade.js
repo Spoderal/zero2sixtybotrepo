@@ -76,16 +76,19 @@ module.exports = {
 
     if (partdb.Parts[inputPartName].Loan && !selected.Loan)
       return interaction.reply("You can only use loan parts on series cars!");
-      
-      let cooldowns = await Cooldowns.findOne({id: interaction.user.id})
 
-      let timeout = 10000
+    let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
 
+    let timeout = 10000;
 
-      if (cooldowns.trading !== null && timeout - (Date.now() - cooldowns.trading) > 0) {
-        
-       return interaction.reply({ content: `You need to wait to use this command because you're trading with someone! **IF SOMEONE IS ABUSING THIS, REPORT IT TO STAFF IMMEDIATELY**` });
-      }
+    if (
+      cooldowns.trading !== null &&
+      timeout - (Date.now() - cooldowns.trading) > 0
+    ) {
+      return interaction.reply({
+        content: `You need to wait to use this command because you're trading with someone! **IF SOMEONE IS ABUSING THIS, REPORT IT TO STAFF IMMEDIATELY**`,
+      });
+    }
 
     if (!userdata.parts.includes(inputPartName))
       return await interaction.reply("You don't have this part!");

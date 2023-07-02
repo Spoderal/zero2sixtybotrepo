@@ -420,7 +420,7 @@
       "Obtained": "Rare Garage"
     },
 
-    "jons 1997 acura integra": {   
+    "jons 1997 acura integra": {
       "alias": "jons 1997 integra",
       "Name": "Jons 1997 Acura Integra",
       "Emote": "<:acura:931012624164978728>",
@@ -437,7 +437,7 @@
       "Class": "D",
       "Weight": 2643
     },
-    "jessicas 2005 hyundai tiburon": { 
+    "jessicas 2005 hyundai tiburon": {
       "alias": "jessicas 2005 tiburon",
       "Name": "Jessicas 2005 Hyundai Tiburon",
       "Emote": "<:hyundai:931015215447941200>",
@@ -454,7 +454,7 @@
       "Squad": true,
       "Weight": 2969
     },
-    "troys 1994 honda prelude": {  
+    "troys 1994 honda prelude": {
       "alias": "troys 1994 prelude",
       "Name": "Troys 1994 Honda Prelude",
       "Emote": "<:honda:931011549705957397>",
@@ -489,7 +489,7 @@
       "Weight": 3115,
       "Muscle": true
     },
-    "heathers 2007 infiniti g35 coupe": { 
+    "heathers 2007 infiniti g35 coupe": {
       "alias": "heathers 2007 g35",
       "Name": "Heathers 2007 Infiniti G35 Coupe",
       "Emote": "<:infiniti:933637817370824724>",
@@ -506,7 +506,7 @@
       "Squad": true,
       "Weight": 3512
     },
-    "pauls 2007 mitsubishi evo ix": { 
+    "pauls 2007 mitsubishi evo ix": {
       "alias": "pauls 2007 evo ix",
       "Name": "Pauls 2007 Mitsubishi Evo IX",
       "Emote": "<:mistu:931012414479147038>",
@@ -523,7 +523,7 @@
       "Squad": true,
       "Weight": 3230
     },
-    "larrys 2002 mazda rx7 fd": { 
+    "larrys 2002 mazda rx7 fd": {
       "alias": "larrys 2002 rx7 fd",
       "Name": "Larrys 2002 Mazda RX7 FD",
       "Emote": "<:mazda:931011549680779364>",
@@ -540,7 +540,7 @@
       "Squad": true,
       "Weight": 2778
     },
-    "ollies 2009 honda s2000 cr": { 
+    "ollies 2009 honda s2000 cr": {
       "alias": "ollies 2009 s2000 cr",
       "Name": "Ollies 2009 Honda S2000 CR",
       "Emote": "<:honda:931011549705957397>",
@@ -648,7 +648,6 @@
       "Muscle": true
     },
 
-
     "ians 2005 ford gt": {
       "alias": "ians 2005 gt",
       "Name": "Ians 2005 Ford GT",
@@ -722,7 +721,7 @@
       "Weight": 2000
     },
 
-    "jordans 2021 nissan gtr": { 
+    "jordans 2021 nissan gtr": {
       "alias": "jordans 2021 gtr",
       "Name": "Jordans 2021 Nissan GTR",
       "Emote": "<:nissan:931011548678352916>",
@@ -860,7 +859,7 @@
       "Weight": 2000
     },
 
-    "sallys 1997 acura integra": { 
+    "sallys 1997 acura integra": {
       "alias": "sallys 1997 integra",
       "Name": "Sallys 1997 Acura Integra",
       "Emote": "<:acura:931012624164978728>",
@@ -877,7 +876,7 @@
       "Class": "SQ",
       "Weight": 2643
     },
-    "maxs 1995 mazda miata": { 
+    "maxs 1995 mazda miata": {
       "alias": "maxs 1995 miata",
       "Name": "Maxs 1995 Mazda Miata",
       "Emote": "<:mazda:931011549680779364>",
@@ -895,7 +894,7 @@
       "Class": "SQ",
       "Weight": 2293
     },
-    "johns 1991 toyota mr2": { 
+    "johns 1991 toyota mr2": {
       "alias": "johns 1991 mr2",
       "Name": "Johns 1991 Toyota MR2",
       "Emote": "<:toyota:931012829283233883>",
@@ -913,7 +912,7 @@
       "Class": "SQ",
       "Weight": 2758
     },
-    "sams 1999 mitsubishi eclipse": { 
+    "sams 1999 mitsubishi eclipse": {
       "alias": "sams 1999 eclipse",
       "Name": "Sams 1999 Mitsubishi Eclipse",
       "Emote": "<:mistu:931012414479147038>",
@@ -1031,7 +1030,7 @@
       "Image": "https://i.ibb.co/sqppRQ6/maxresdefault-4.jpg",
       "0-60": 8.1,
       "Drift": 0,
-      "Class":"D",
+      "Class": "D",
       "Handling": 350,
       "Weight": 3370,
       "Muscle": true
@@ -1054,13 +1053,13 @@
       "Weight": 3630,
       "Muscle": true
     },
-    "1999 mitsubishi eclipse": { 
+    "1999 mitsubishi eclipse": {
       "alias": "1999 eclipse",
       "Name": "1999 Mitsubishi Eclipse",
       "Emote": "<:mistu:931012414479147038>",
       "Speed": 210,
       "kmh": 248,
-      "Price": 3300,  
+      "Price": 3300,
       "sellprice": 1980,
       "Engine": "2.0 L 4-cylinder",
       "Image": "https://images.fitmentindustries.com/web-compressed/1375186-1-1999-eclipse-mitsubishi-gs-yonaka-motorsports-coilovers-street-gear-shadow-black.jpg",
@@ -1193,7 +1192,7 @@
       "Class": "S",
       "Weight": 3000
     },
-    "1994 mitsubishi 3000gt vr4": { 
+    "1994 mitsubishi 3000gt vr4": {
       "alias": "1994 3000gt vr4",
       "Name": "1994 Mitsubishi 3000GT VR4",
       "Emote": "<:mistu:931012414479147038>",
@@ -1245,7 +1244,7 @@
       "Class": "D",
       "Weight": 4133
     },
-    "2000 lexus sc400": { 
+    "2000 lexus sc400": {
       "alias": "2000 sc400",
       "Name": "2000 Lexus SC400",
       "Emote": "<:lexus:932776357124001823>",
@@ -1429,7 +1428,7 @@
       "Squad": true
     },
 
-    "sil-eighty": { 
+    "sil-eighty": {
       "alias": "sil-eighty",
       "Name": "Sil-Eighty",
       "Emote": "<:nissan:931011548678352916>",
@@ -1634,7 +1633,7 @@
       "Weight": 3075,
       "Muscle": true
     },
-    "2000 toyota corolla levin": { 
+    "2000 toyota corolla levin": {
       "alias": "2000 corolla levin",
       "Name": "2000 Toyota Corolla Levin",
       "Emote": "<:toyota:931012829283233883>",
@@ -1821,7 +1820,7 @@
       "Class": "B",
       "Weight": 2200
     },
-    "1993 nissan silvia s14": { 
+    "1993 nissan silvia s14": {
       "alias": "1993 silvia s14",
       "Name": "1993 Nissan Silvia S14",
       "Emote": "<:nissan:931011548678352916>",
@@ -1838,7 +1837,7 @@
       "Class": "C",
       "Weight": 2690
     },
-    "2012 mazda rx8": { 
+    "2012 mazda rx8": {
       "alias": "2012 rx8",
       "Name": "2012 Mazda RX8",
       "Emote": "<:mazda:931011549680779364>",
@@ -2008,7 +2007,7 @@
       "Weight": 3450,
       "Muscle": true
     },
-    "1989 nissan skyline r32": { 
+    "1989 nissan skyline r32": {
       "alias": "1989 skyline r32",
       "Name": "1989 Nissan Skyline R32",
       "Emote": "<:nissan:931011548678352916>",
@@ -2496,7 +2495,7 @@
       "Obtained": "Exotic Imports",
       "Weight": 3600
     },
-    "2021 nissan gtr": { 
+    "2021 nissan gtr": {
       "alias": "2021 gtr",
       "Name": "2021 Nissan GTR",
       "Emote": "<:nissan:931011548678352916>",
@@ -2513,7 +2512,7 @@
       "Weight": 3933
     },
 
-    "2019 subaru brz": { 
+    "2019 subaru brz": {
       "alias": "2019 brz",
       "Name": "2019 Subaru BRZ",
       "Emote": "<:subaru:931011550418976808>",
@@ -2550,7 +2549,7 @@
       "Weight": 3400
     },
 
-    "2009 honda s2000 cr": { 
+    "2009 honda s2000 cr": {
       "alias": "2009 s2000 cr",
       "Name": "2009 Honda S2000 CR",
       "Emote": "<:honda:931011549705957397>",
@@ -2614,7 +2613,7 @@
       "Handling": 500,
       "Weight": 3600
     },
-    "1986 toyota ae86": { 
+    "1986 toyota ae86": {
       "alias": "1986 ae86",
       "Name": "1986 Toyota AE86",
       "Emote": "<:toyota:931012829283233883>",
@@ -2710,7 +2709,7 @@
       "Class": "S",
       "Weight": 2900
     },
-    "1991 acura nsx": { 
+    "1991 acura nsx": {
       "alias": "1991 nsx",
       "Name": "1991 Acura NSX",
       "Emote": "<:acura:931012624164978728>",
@@ -3212,7 +3211,7 @@
       "Weight": 3600,
       "Muscle": true
     },
-    "1969 toyota 2000gt": { 
+    "1969 toyota 2000gt": {
       "alias": "1969 2000gt",
       "Name": "1969 Toyota 2000GT",
       "Emote": "<:toyota:931012829283233883>",
@@ -3229,7 +3228,7 @@
       "Obtained": "Rare Barn Find",
       "Weight": 2469
     },
-    "barn 1969 toyota 2000gt": { 
+    "barn 1969 toyota 2000gt": {
       "alias": "barn 1969 2000gt",
       "Name": "Barn 1969 Toyota 2000GT",
       "Emote": "<:toyota:931012829283233883>",
@@ -3246,7 +3245,7 @@
       "Handling": 175,
       "Weight": 2469
     },
-    "barn 1990 nissan 240sx": { 
+    "barn 1990 nissan 240sx": {
       "alias": "barn 1990 240sx",
       "Name": "Barn 1990 Nissan 240SX",
       "Emote": "<:nissan:931011548678352916>",
@@ -3437,7 +3436,7 @@
       "Handling": 500,
       "Weight": 3600
     },
-    "barn 1972 datsun 240z": { 
+    "barn 1972 datsun 240z": {
       "alias": "barn 1972 240z",
       "Name": "Barn 1972 Datsun 240Z",
       "Emote": "<:datsun:931011550095998997>",
@@ -3471,7 +3470,7 @@
       "Handling": 500,
       "Weight": 3600
     },
-    "1972 datsun 240z": { 
+    "1972 datsun 240z": {
       "alias": "1972 240z",
       "Name": "1972 Datsun 240Z",
       "Emote": "<:datsun:931011550095998997>",
@@ -3540,7 +3539,7 @@
       "Weight": 2100,
       "Series": true
     },
-    "1970 dodge challenger": { 
+    "1970 dodge challenger": {
       "alias": "1970 challenger",
       "Name": "1970 Dodge Challenger",
       "Emote": "<:dodge:931011880040951828>",
@@ -3646,7 +3645,7 @@
       "Weight": 3600,
       "Muscle": true
     },
-    "1970 dodge charger": { 
+    "1970 dodge charger": {
       "alias": "1970 charger",
       "Name": "1970 Dodge Charger",
       "Emote": "<:dodge:931011880040951828>",
@@ -3712,7 +3711,7 @@
       "Squad": true,
       "Weight": 3600
     },
-    "1990 nissan 240sx": { 
+    "1990 nissan 240sx": {
       "alias": "1990 240sx",
       "Name": "1990 Nissan 240SX",
       "Emote": "<:nissan:931011548678352916>",
@@ -3731,7 +3730,7 @@
       "Obtained": "Common Barn Find",
       "Weight": 2684
     },
-    "1967 chevy camaro": { 
+    "1967 chevy camaro": {
       "alias": "1967 camaro",
       "Name": "1967 Chevy Camaro",
       "Emote": "<:chevy:931012624039182406>",
@@ -3749,7 +3748,7 @@
       "Muscle": true
     },
 
-    "barn 1967 chevy impala": { 
+    "barn 1967 chevy impala": {
       "alias": "barn 1967 impala",
       "Name": "Barn 1967 Chevy Impala",
       "Emote": "<:chevy:931012624039182406>",
@@ -3767,7 +3766,7 @@
       "restored": "1967 chevy impala",
       "Weight": 4085
     },
-    "1967 chevy impala": { 
+    "1967 chevy impala": {
       "alias": "1967 impala",
       "Name": "1967 Chevy Impala",
       "Emote": "<:chevy:931012624039182406>",
@@ -3917,7 +3916,7 @@
       "Weight": 3380,
       "Muscle": true
     },
-    "barn 1969 ford gt40": { 
+    "barn 1969 ford gt40": {
       "alias": "barn 1969 gt40",
       "Name": "Barn 1969 Ford GT40",
       "Emote": "<:ford:931012624152399902>",
@@ -3934,7 +3933,7 @@
       "Handling": 166,
       "Weight": 2205
     },
-    "1996 nissan 300zx twin turbo": { 
+    "1996 nissan 300zx twin turbo": {
       "alias": "1996 300zx tt",
       "Name": "1996 Nissan 300ZX Twin Turbo",
       "Emote": "<:nissan:931011548678352916>",
@@ -3951,7 +3950,7 @@
       "Class": "C",
       "Weight": 3474
     },
-    "1969 ford gt40": { 
+    "1969 ford gt40": {
       "alias": "1969 gt40",
       "Name": "1969 Ford GT40",
       "Emote": "<:ford:931012624152399902>",
@@ -4282,7 +4281,7 @@
       "Class": "A",
       "Weight": 3100
     },
-    "2001 toyota supra mk4": { 
+    "2001 toyota supra mk4": {
       "alias": "2001 supra mk4",
       "Name": "2001 Toyota Supra MK4",
       "Emote": "<:toyota:931012829283233883>",
@@ -4299,7 +4298,7 @@
       "Class": "C",
       "Weight": 3616
     },
-    "1992 toyota supra mk3": { 
+    "1992 toyota supra mk3": {
       "alias": "1992 supra mk3",
       "Name": "1992 Toyota Supra MK3",
       "Emote": "<:toyota:931012829283233883>",
@@ -4316,7 +4315,7 @@
       "Class": "C",
       "Weight": 3534
     },
-    "2002 mazda rx7 fd": { 
+    "2002 mazda rx7 fd": {
       "alias": "2002 rx7 fd",
       "Name": "2002 Mazda RX7 FD",
       "Emote": "<:mazda:931011549680779364>",
@@ -4332,7 +4331,7 @@
       "Class": "C",
       "Weight": 2778
     },
-    "1989 mazda rx7 fc": { 
+    "1989 mazda rx7 fc": {
       "alias": "1989 rx7 fc",
       "Name": "1989 Mazda RX7 FC",
       "Emote": "<:mazda:931011549680779364>",
@@ -4349,7 +4348,7 @@
       "Class": "C",
       "Weight": 2888
     },
-    "stat track 2005 mazda rx8": { 
+    "stat track 2005 mazda rx8": {
       "alias": "2005 rx8 stt",
       "Name": "Stat Track 2005 Mazda RX8",
       "Emote": "<:mazda:931011549680779364>",
@@ -4367,7 +4366,7 @@
       "Class": "C",
       "Weight": 3640
     },
-    "stat track 2001 toyota supra mk4": { 
+    "stat track 2001 toyota supra mk4": {
       "alias": "2001 supra mk4 stt",
       "Name": "Stat Track 2001 Toyota Supra MK4",
       "Emote": "<:toyota:931012829283233883>",
@@ -4384,7 +4383,7 @@
       "Handling": 575,
       "Weight": 4216
     },
-    "2005 mazda rx8": { 
+    "2005 mazda rx8": {
       "alias": "2005 rx8",
       "Name": "2005 Mazda RX8",
       "Emote": "<:mazda:931011549680779364>",
@@ -4401,7 +4400,7 @@
       "Class": "C",
       "Weight": 3040
     },
-    "stat track 2008 mazda miata": { 
+    "stat track 2008 mazda miata": {
       "alias": "2008 miata stt",
       "Name": "Stat Track 2008 Mazda Miata",
       "Emote": "<:mazda:931011549680779364>",
@@ -4419,7 +4418,7 @@
       "Class": "C",
       "Weight": 3074
     },
-    "2008 mazda miata": { 
+    "2008 mazda miata": {
       "alias": "2008 miata",
       "Name": "2008 Mazda Miata",
       "Emote": "<:mazda:931011549680779364>",
@@ -4436,7 +4435,7 @@
       "Class": "C",
       "Weight": 2474
     },
-    "2007 mitsubishi evo ix": { 
+    "2007 mitsubishi evo ix": {
       "alias": "2007 evo ix",
       "Name": "2007 Mitsubishi Evo IX",
       "Emote": "<:mistu:931012414479147038>",
@@ -4453,7 +4452,7 @@
       "Class": "C",
       "Weight": 3230
     },
-    "2004 subaru wrx sti": { 
+    "2004 subaru wrx sti": {
       "alias": "2004 wrx sti",
       "Name": "2004 Subaru WRX STI",
       "Emote": "<:subaru:931011550418976808>",
@@ -4506,7 +4505,7 @@
       "Weight": 3200,
       "Muscle": true
     },
-    "seans 1989 nissan skyline r32": { 
+    "seans 1989 nissan skyline r32": {
       "alias": "seans 1989 skyline r32",
       "Name": "Seans 1989 Nissan Skyline R32",
       "Emote": "<:nissan:931011548678352916>",
@@ -4539,7 +4538,7 @@
       "Handling": 650,
       "Weight": 3281
     },
-    "damiens 2001 toyota supra mk4": { 
+    "damiens 2001 toyota supra mk4": {
       "alias": "damiens 2001 supra mk4",
       "Name": "Damiens 2001 Toyota Supra MK4",
       "Emote": "<:toyota:931012829283233883>",
@@ -4757,7 +4756,7 @@
       "Class": "D",
       "Weight": 3100
     },
-    "1996 corvette c4": { 
+    "1996 corvette c4": {
       "alias": "1996 c4",
       "Name": "1996 Corvette C4",
       "Emote": "<:chevy:931012624039182406>",
@@ -4838,7 +4837,7 @@
       "Handling": 600,
       "Weight": 3100
     },
-    "xs 2012 dodge challenger srt8": { 
+    "xs 2012 dodge challenger srt8": {
       "alias": "xs 2012 challenger",
       "Name": "Xs 2012 Dodge Challenger SRT8",
       "Emote": "<:dodge:931011880040951828>",
@@ -4922,7 +4921,7 @@
       "Class": "B",
       "Weight": 3902
     },
-    "2013 lexus lfa": { 
+    "2013 lexus lfa": {
       "alias": "2013 lfa",
       "Name": "2013 Lexus LFA",
       "Emote": "<:lexus:932776357124001823>",
@@ -4937,7 +4936,7 @@
       "Class": "A",
       "Weight": 3428
     },
-    "2022 toyota gr86": { 
+    "2022 toyota gr86": {
       "alias": "2022 gr86",
       "Name": "2022 Toyota GR86",
       "Emote": "<:toyota:931012829283233883>",
@@ -5047,7 +5046,7 @@
       "Class": "B",
       "Weight": 5000
     },
-    "2020 nissan 370z nismo": { 
+    "2020 nissan 370z nismo": {
       "alias": "2020 370z nismo",
       "Name": "2020 Nissan 370Z Nismo",
       "Emote": "<:nissan:931011548678352916>",
@@ -5063,7 +5062,7 @@
       "Class": "B",
       "Weight": 3457
     },
-    "2023 nissan z": { 
+    "2023 nissan z": {
       "alias": "2023 z",
       "Name": "2023 Nissan Z",
       "Emote": "<:nissan:931011548678352916>",
@@ -5224,7 +5223,7 @@
       "Class": "A",
       "Weight": 3100
     },
-    "2013 mazda speed3": { 
+    "2013 mazda speed3": {
       "alias": "2013 speed3",
       "Name": "2013 Mazda Speed3",
       "Emote": "<:mazda:931011549680779364>",
@@ -5239,7 +5238,7 @@
       "Class": "C",
       "Weight": 3281
     },
-    "1995 nissan skyline r33": { 
+    "1995 nissan skyline r33": {
       "alias": "1995 skyline r33",
       "Name": "1995 Nissan Skyline R33",
       "Emote": "<:nissan:931011548678352916>",
@@ -5300,7 +5299,7 @@
       "Obtained": "Wheelspin",
       "Weight": 130
     },
-    "2012 dodge charger srt8": { 
+    "2012 dodge charger srt8": {
       "alias": "2012 charger srt8",
       "Name": "2012 Dodge Charger SRT8",
       "Emote": "<:dodge:931011880040951828>",
@@ -5316,7 +5315,7 @@
       "Weight": 4365,
       "Muscle": true
     },
-    "2010 dodge charger": { 
+    "2010 dodge charger": {
       "alias": "2010 charger",
       "Name": "2010 Dodge Charger",
       "Emote": "<:dodge:931011880040951828>",
@@ -5332,7 +5331,7 @@
       "Weight": 3727,
       "Muscle": true
     },
-    "2020 dodge charger hellcat": { 
+    "2020 dodge charger hellcat": {
       "alias": "2020 charger hellcat",
       "Name": "2020 Dodge Charger Hellcat",
       "Emote": "<:dodge:931011880040951828>",
@@ -5349,7 +5348,7 @@
       "Weight": 4586,
       "Muscle": true
     },
-    "2015 dodge charger hellcat": { 
+    "2015 dodge charger hellcat": {
       "alias": "2015 charger hellcat",
       "Name": "2015 Dodge Charger Hellcat",
       "Emote": "<:dodge:931011880040951828>",
@@ -5366,7 +5365,7 @@
       "Weight": 4400,
       "Muscle": true
     },
-    "2017 jeep grand cherokee trackhawk": { 
+    "2017 jeep grand cherokee trackhawk": {
       "alias": "2017 trackhawk",
       "Name": "2017 Jeep Grand Cherokee Trackhawk",
       "Emote": "<:jeep:979619771064647700>",
@@ -5382,7 +5381,7 @@
       "Class": "B",
       "Weight": 5363
     },
-    "2010 jeep wrangler": { 
+    "2010 jeep wrangler": {
       "alias": "2010 wrangler",
       "Name": "2010 Jeep Wrangler",
       "Emote": "<:jeep:979619771064647700>",
@@ -5395,7 +5394,7 @@
       "Drift": 0,
       "Handling": 300,
       "Class": "D",
-      "Obtained":"Wheelspin",
+      "Obtained": "Wheelspin",
       "Weight": 4390
     },
     "2021 porsche cayenne coupe": {
@@ -5413,7 +5412,7 @@
       "Class": "C",
       "Weight": 4600
     },
-    "2021 ford bronco": { 
+    "2021 ford bronco": {
       "alias": "2021 bronco",
       "Name": "2021 Ford Bronco",
       "Emote": "<:ford:931012624152399902>",
@@ -5428,7 +5427,7 @@
       "Class": "C",
       "Weight": 4705
     },
-    "2009 corvette c6": { 
+    "2009 corvette c6": {
       "alias": "2009 c6",
       "Name": "2009 Corvette C6",
       "Emote": "<:chevy:931012624039182406>",
@@ -5444,7 +5443,7 @@
       "Weight": 3324,
       "Muscle": true
     },
-    "2019 chevy corvette c7": { 
+    "2019 chevy corvette c7": {
       "alias": "2019 c7",
       "Name": "2019 Chevy Corvette C7",
       "Emote": "<:chevy:931012624039182406>",
@@ -5461,7 +5460,7 @@
       "Weight": 3524,
       "Muscle": true
     },
-    "2019 chevy corvette c7 zr1": { 
+    "2019 chevy corvette c7 zr1": {
       "alias": "2019 c7 zr1",
       "Name": "2019 Chevy Corvette C7 ZR1",
       "Emote": "<:chevy:931012624039182406>",
@@ -5544,7 +5543,7 @@
       "Class": "A",
       "Weight": 3100
     },
-    "police 1998 ford crown victoria": { 
+    "police 1998 ford crown victoria": {
       "alias": "police 1998 crown victoria",
       "Name": "Police 1998 Ford Crown Victoria",
       "Emote": "<:ford:931012624152399902>",
@@ -5614,7 +5613,7 @@
       "Weight": 3100,
       "Muscle": true
     },
-    "police 2020 ford mustang": { 
+    "police 2020 ford mustang": {
       "alias": "police 2020 mustang",
       "Name": "Police 2020 Ford Mustang",
       "Emote": "<:ford:931012624152399902>",
@@ -5803,7 +5802,7 @@
       "Class": "S",
       "Weight": 2800
     },
-    "police 2019 nissan gtr": { 
+    "police 2019 nissan gtr": {
       "alias": "police 2019 gtr",
       "Name": "Police 2019 Nissan GTR",
       "Emote": "<:nissan:931011548678352916>",
@@ -6046,7 +6045,7 @@
       "Weight": 4700,
       "Stock": 50
     },
-    "2023 honda civic type r": { 
+    "2023 honda civic type r": {
       "alias": "2023 civic type r",
       "Name": "2023 Honda Civic Type R",
       "Emote": "<:honda:931011549705957397>",
@@ -6142,7 +6141,7 @@
       "Weight": 2400,
       "Muscle": true
     },
-    "2021 toyota supra": { 
+    "2021 toyota supra": {
       "alias": "2021 supra",
       "Name": "2021 Toyota Supra",
       "Emote": "<:toyota:931012829283233883>",
@@ -6158,7 +6157,7 @@
       "Class": "B",
       "Weight": 3400
     },
-    "1989 nissan silvia s13": { 
+    "1989 nissan silvia s13": {
       "alias": "1989 silvia s13",
       "Name": "1989 Nissan Silvia S13",
       "Emote": "<:nissan:931011548678352916>",
@@ -6420,7 +6419,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "D",
-      "Obtained":"Common Imports",
+      "Obtained": "Common Imports",
       "Weight": 1400
     },
     "1978 porsche 911 sc": {
@@ -6440,7 +6439,7 @@
       "Class": "C",
       "Weight": 6000
     },
-    "2017 ford focus rs": { 
+    "2017 ford focus rs": {
       "alias": "2017 focus rs",
       "Name": "2017 Ford Focus RS",
       "Emote": "<:ford:931012624152399902>",
@@ -6537,7 +6536,7 @@
       "Class": "A",
       "Weight": 2700
     },
-    "2018 subaru wrx sti we": { 
+    "2018 subaru wrx sti we": {
       "alias": "2018 wrx sti we",
       "Name": "2018 Subaru WRX STI WE",
       "Emote": "<:subaru:931011550418976808>",
@@ -6554,7 +6553,7 @@
       "Obtained": "Season",
       "Weight": 3300
     },
-    "2015 mitsubishi lancer evolution we": { 
+    "2015 mitsubishi lancer evolution we": {
       "alias": "2015 lancer evo we",
       "Name": "2015 Mitsubishi Lancer Evolution WE",
       "Emote": "<:mistu:931012414479147038>",
@@ -6605,7 +6604,7 @@
       "Obtained": "Season",
       "Weight": 3500
     },
-    "2020 toyota gr yaris": { 
+    "2020 toyota gr yaris": {
       "alias": "2020 gr yaris",
       "Name": "2020 Toyota GR Yaris",
       "Emote": "<:toyota:931012829283233883>",
@@ -6642,7 +6641,7 @@
       "Class": "C",
       "Weight": 2800
     },
-    "2020 toyota gr yaris we": { 
+    "2020 toyota gr yaris we": {
       "alias": "2020 gr yaris we",
       "Name": "2020 Toyota GR Yaris WE",
       "Emote": "<:toyota:931012829283233883>",
@@ -6660,7 +6659,7 @@
       "Class": "C",
       "Weight": 2800
     },
-    "2002 nissan skyline r34": { 
+    "2002 nissan skyline r34": {
       "alias": "2002 skyline r34",
       "Name": "2002 Nissan Skyline R34",
       "Emote": "<:nissan:931011548678352916>",
@@ -6772,7 +6771,7 @@
       "Handling": 500,
       "Weight": 3400
     },
-    "bm 2002 nissan skyline r34": { 
+    "bm 2002 nissan skyline r34": {
       "alias": "bm 2002 skyline r34",
       "Name": "BM 2002 Nissan Skyline R34",
       "Emote": "<:nissan:931011548678352916>",
@@ -6791,7 +6790,7 @@
       "Intake": "T2Intake",
       "Weight": 3400
     },
-    "bm 2019 toyota 86": { 
+    "bm 2019 toyota 86": {
       "alias": "bm 2019 86",
       "Name": "BM 2019 Toyota 86",
       "Emote": "<:toyota:931012829283233883>",
@@ -6969,7 +6968,7 @@
       "Muscle": true
     },
 
-    "2007 infiniti g35 coupe": { 
+    "2007 infiniti g35 coupe": {
       "alias": "2007 g35",
       "Name": "2007 Infiniti G35 Coupe",
       "Emote": "<:infiniti:933637817370824724>",
@@ -6986,7 +6985,7 @@
       "Weight": 3512
     },
 
-    "2018 infiniti q60": { 
+    "2018 infiniti q60": {
       "alias": "2018 q60",
       "Name": "2018 Infiniti Q60",
       "Emote": "<:infiniti:933637817370824724>",
@@ -7002,7 +7001,7 @@
       "Class": "C",
       "Weight": 4024
     },
-    "2005 hyundai tiburon": { 
+    "2005 hyundai tiburon": {
       "alias": "2005 tiburon",
       "Name": "2005 Hyundai Tiburon",
       "Emote": "<:hyundai:931015215447941200>",
@@ -7051,7 +7050,7 @@
       "Class": "B",
       "Weight": 3500
     },
-    "2013 mitsubishi evo x": { 
+    "2013 mitsubishi evo x": {
       "alias": "2013 evo x",
       "Name": "2013 Mitsubishi Evo X",
       "Emote": "<:mistu:931012414479147038>",
@@ -7067,7 +7066,7 @@
       "Class": "B",
       "Weight": 3516
     },
-    "2000 honda civic type r": { 
+    "2000 honda civic type r": {
       "alias": "2000 civic type r",
       "Name": "2000 Honda Civic Type R",
       "Emote": "<:honda:931011549705957397>",
@@ -7082,7 +7081,7 @@
       "Obtained": "Common Imports",
       "Weight": 2403
     },
-    "2002 nissan silvia s15": { 
+    "2002 nissan silvia s15": {
       "alias": "2002 silvia s15",
       "Name": "2002 Nissan Silvia S15",
       "Emote": "<:nissan:931011548678352916>",
@@ -7564,7 +7563,7 @@
       "Class": "A",
       "Weight": 3500
     },
-    "1994 toyota celica gt4": { 
+    "1994 toyota celica gt4": {
       "alias": "1994 celica gt4",
       "Name": "1994 Toyota Celica GT4",
       "Emote": "<:toyota:931012829283233883>",
@@ -7580,7 +7579,7 @@
       "Class": "D",
       "Weight": 3086
     },
-    "1989 toyota celica": { 
+    "1989 toyota celica": {
       "alias": "1989 celica",
       "Name": "1989 Toyota Celica",
       "Emote": "<:toyota:931012829283233883>",
@@ -7596,7 +7595,7 @@
       "Class": "D",
       "Weight": 3109
     },
-    "jakes 2015 honda cbr": { 
+    "jakes 2015 honda cbr": {
       "alias": "jakes 2015 cbr",
       "Name": "Jakes 2015 Honda CBR",
       "Emote": "<:honda:931011549705957397>",
@@ -7644,7 +7643,7 @@
       "Weight": 2200,
       "Squad": true
     },
-    "pauls 2022 suzuki hayabusa": { 
+    "pauls 2022 suzuki hayabusa": {
       "alias": "pauls 2022 hayabusa",
       "Name": "Pauls 2022 Suzuki Hayabusa",
       "Emote": "<:suzuki:963982472192864278>",
@@ -7660,7 +7659,7 @@
       "Weight": 582,
       "Squad": true
     },
-    "katherines 2022 yamaha yzf-r1": { 
+    "katherines 2022 yamaha yzf-r1": {
       "alias": "katherines 2022 yzf-r1",
       "Name": "Katherines 2022 Yamaha YZF-R1",
       "Emote": "<:yamaha:963982542237761617>",
@@ -7774,7 +7773,7 @@
       "Weight": 3000
     },
 
-    "2021 nissan gtr nismo": { 
+    "2021 nissan gtr nismo": {
       "alias": "2021 gtr n",
       "Name": "2021 Nissan GTR Nismo",
       "Emote": "<:nissan:931011548678352916>",
@@ -7844,7 +7843,7 @@
       "Obtained": "Event",
       "Track": true
     },
-    "2020 subaru brz ts": { 
+    "2020 subaru brz ts": {
       "alias": "2020 brz ts",
       "Name": "2020 Subaru BRZ TS",
       "Emote": "<:subaru:931011550418976808>",
@@ -7862,7 +7861,7 @@
       "Obtained": "Event",
       "Track": true
     },
-    "2019 mazda miata": { 
+    "2019 mazda miata": {
       "alias": "2019 miata",
       "Name": "2019 Mazda Miata",
       "Emote": "<:mazda:931011549680779364>",
@@ -7916,7 +7915,7 @@
       "Obtained": "Event",
       "Track": true
     },
-    "2020 hyundai i30 n": { 
+    "2020 hyundai i30 n": {
       "alias": "2020 i30 n",
       "Name": "2020 Hyundai i30 N",
       "Emote": "<:hyundai:931015215447941200>",
@@ -8056,7 +8055,7 @@
       "Weight": 3900,
       "Obtained": "Blueprints"
     },
-    "2015 honda civic type r": { 
+    "2015 honda civic type r": {
       "alias": "2015 civic type r",
       "Name": "2015 Honda Civic Type R",
       "Emote": "<:honda:931011549705957397>",
@@ -8124,7 +8123,7 @@
       "Weight": 2300,
       "Obtained": "Blueprints"
     },
-    "1989 toyota mr2": { 
+    "1989 toyota mr2": {
       "alias": "1989 mr2",
       "Name": "1989 Toyota MR2",
       "Emote": "<:toyota:931012829283233883>",
@@ -8141,7 +8140,7 @@
       "Weight": 2425,
       "Obtained": "Blueprints"
     },
-    "1991 mazda 787b": { 
+    "1991 mazda 787b": {
       "alias": "1991 787b",
       "Name": "1991 Mazda 787B",
       "Emote": "<:mazda:931011549680779364>",
@@ -8371,7 +8370,7 @@
       "Weight": 2500,
       "Obtained": "Event"
     },
-    "2020 kawasaki z900": { 
+    "2020 kawasaki z900": {
       "alias": "2020 z900",
       "Name": "2020 Kawasaki Z900",
       "Emote": "<:logo_kawasaki:1089402371580379148>",
@@ -8421,7 +8420,7 @@
       "Class": "D",
       "Weight": 3500
     },
-    "1998 mitsubishi lancer evolution": { 
+    "1998 mitsubishi lancer evolution": {
       "alias": "1998 evo",
       "Name": "1998 Mitsubishi Lancer Evolution",
       "Emote": "<:mistu:931012414479147038>",
@@ -8487,7 +8486,7 @@
       "Class": "C",
       "Weight": 2800
     },
-    "1969 toyota corolla": { 
+    "1969 toyota corolla": {
       "alias": "1969 corolla",
       "Name": "1969 Toyota Corolla",
       "Emote": "<:toyota:931012829283233883>",
@@ -8520,7 +8519,7 @@
       "Weight": 3800,
       "Obtained": "Blueprints"
     },
-    "2023 acura integra": { 
+    "2023 acura integra": {
       "alias": "2023 integra",
       "Name": "2023 Acura Integra",
       "Emote": "<:acura:931012624164978728>",
@@ -8536,7 +8535,7 @@
       "Class": "C",
       "Weight": 3109
     },
-    "1987 toyota corolla": { 
+    "1987 toyota corolla": {
       "alias": "1987 corolla",
       "Name": "1987 Toyota Corolla",
       "Emote": "<:toyota:931012829283233883>",
@@ -8815,7 +8814,7 @@
       "Obtained": "Used Cars",
       "Weight": 3800
     },
-    "2024 ford mustang dark horse": { 
+    "2024 ford mustang dark horse": {
       "alias": "2024 mustang dh",
       "Name": "2024 Ford Mustang Dark Horse",
       "Emote": "<:ford:931012624152399902>",
@@ -8975,7 +8974,7 @@
       "Weight": 3000,
       "Obtained": "Legendary Garage"
     },
-    "2008 acura tl": { 
+    "2008 acura tl": {
       "alias": "2008 tl",
       "Name": "2008 Acura TL",
       "Emote": "<:acura:931012624164978728>",
@@ -9013,7 +9012,7 @@
       "LowPrice": 750000,
       "HighPrice": 2000000
     },
-    "2012 honda accord": { 
+    "2012 honda accord": {
       "alias": "2012 accord",
       "Name": "2012 Honda Accord",
       "Emote": "<:honda:931011549705957397>",
@@ -9033,7 +9032,7 @@
       "LowPrice": 15000,
       "HighPrice": 25000
     },
-    "1997 honda civic del sol": { 
+    "1997 honda civic del sol": {
       "alias": "1997 civic ds",
       "Name": "1997 Honda Civic Del Sol",
       "Emote": "<:honda:931011549705957397>",
@@ -9186,7 +9185,7 @@
       "Obtained": "Event",
       "Team": "Porsche"
     },
-    "2023 toyota gr010 hybrid": { 
+    "2023 toyota gr010 hybrid": {
       "alias": "2023 gr010 h",
       "Name": "2023 Toyota GR010 Hybrid",
       "Emote": "<:toyota:931012829283233883>",

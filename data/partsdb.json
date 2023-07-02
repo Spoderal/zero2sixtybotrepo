@@ -659,7 +659,7 @@
       "Type": "turbo",
       "DecreasedSpeed": "0",
       "DecreaseHandling": 50,
-      "DecreasedHandling":50,
+      "DecreasedHandling": 50,
       "PSI": 30,
       "MaxPSI": 45,
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png",

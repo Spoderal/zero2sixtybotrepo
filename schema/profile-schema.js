@@ -569,13 +569,13 @@ const Profile = new mongoose.Schema({
   barnmaps: {
     type: Number,
     required: false,
-    default: 0
-  },  
+    default: 0,
+  },
   business: {
     type: Object,
     required: false,
-    default: {}
-  }
+    default: {},
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

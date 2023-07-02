@@ -53,13 +53,13 @@ module.exports = {
               cooldowndata.is_racing !== null &&
               timeout - (Date.now() - cooldowndata.is_racing) > 0
             ) {
-            
-              return await interaction.reply({ content: `Wait for your race to finish to run other commands`, ephemeral: true });
+              return await interaction.reply({
+                content: `Wait for your race to finish to run other commands`,
+                ephemeral: true,
+              });
             }
-        
+
             await command.execute(interaction);
-           
-       
           }
         } catch (err) {
           console.log(err);

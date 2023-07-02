@@ -189,13 +189,11 @@ module.exports = {
           .setStyle("Secondary")
       );
       row0 = new ActionRowBuilder().addComponents(
-      
         new ButtonBuilder()
           .setLabel("Car Series")
           .setEmoji("🚗")
           .setCustomId("carseries")
-          .setStyle("Secondary"),
-
+          .setStyle("Secondary")
       );
     } else if (userdata.police == true) {
       if (!cardb.Cars[selected.Name.toLowerCase()].Police)
@@ -274,9 +272,8 @@ module.exports = {
       .setImage("https://i.ibb.co/Xx6bPT9/zerocity-map.png");
     let msg;
     cooldowndata.racing = Date.now();
-          cooldowndata.save();
+    cooldowndata.save();
     if (userdata.police == false) {
-      
       msg = await interaction.reply({
         embeds: [embed],
         components: [row2, row0],
@@ -420,13 +417,11 @@ module.exports = {
         i.customId == "coolcobras" ||
         i.customId == "snowysagera"
       ) {
-       
-        console.log("test")
+        console.log("test");
         if (race[0].name == "streetrace") {
-          
-          cooldowndata.is_racing = Date.now()
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
-          
+
           let tracklength = 0;
           let tracklength2 = 0;
           await i.update({
@@ -562,19 +557,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = ((handling) + (speed) - weightscore) / acceleration
-          console.log(player)
-          let opponent = ((handling2) + (speed2) - weightscore2) / acceleration2
+          let player = (handling + speed - weightscore) / acceleration;
+          console.log(player);
+          let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -585,12 +579,10 @@ module.exports = {
             return string;
           };
 
-          
-
           dorace();
 
           setTimeout(async () => {
-            console.log(winner)
+            console.log(winner);
             if (winner == "Player") {
               let earnings = [];
 
@@ -709,7 +701,6 @@ module.exports = {
                 }
               }
               let itemeffects = userdata.itemeffects || [];
-             
 
               if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
@@ -749,7 +740,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += (bountyuser * 0.75);
+                cashwon = cashwon += bountyuser * 0.75;
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
@@ -845,8 +836,7 @@ module.exports = {
               let iszero = (userdata.cash -= cashlost);
               if (iszero < 0) {
                 userdata.cash = 0;
-              }
-              else {
+              } else {
                 userdata.cash -= cashlost;
               }
               embed.setTitle(`Tier ${bot} Street Race lost!`);
@@ -888,8 +878,7 @@ module.exports = {
             }
           }, 5000);
         } else if (race[0].name == "highwayrace") {
-        
-          cooldowndata.is_racing = Date.now()
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
           let tracklength = 1000;
           let tracklength2 = 1000;
@@ -904,7 +893,7 @@ module.exports = {
           let rpwon = parseInt(bot) * 2;
           let cashlost = parseInt(bot) * 20;
           let lockpicks = parseInt(bot) * 1;
-          let wheelspins = 1
+          let wheelspins = 1;
           let race2 = racedb.filter((r) => r.name == "highwayrace");
           let rankswon = parseInt(bot) * race2[0].ranks;
 
@@ -1011,19 +1000,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = ((handling) + (speed) - weightscore) / acceleration
-          console.log(player)
-          let opponent = ((handling2) + (speed2) - weightscore2) / acceleration2
+          let player = (handling + speed - weightscore) / acceleration;
+          console.log(player);
+          let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
           console.log(opponent);
 
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -1033,8 +1021,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
 
@@ -1055,17 +1041,15 @@ module.exports = {
               if (userdata.houses && filteredhouse3[0]) {
                 cashwon = cashwon += cashwon * 0.1;
               }
-              let wheelrandom = randomRange(1, 5)
-              if(wheelrandom == 2){
+              let wheelrandom = randomRange(1, 5);
+              if (wheelrandom == 2) {
                 userdata.wheelspins += wheelspins;
                 earnings.push(`${emotes.wheelSpin} +${wheelspins}`);
-
               }
-              let lockpickrandom = randomRange(1, 5)
-              if(lockpickrandom == 2){
+              let lockpickrandom = randomRange(1, 5);
+              if (lockpickrandom == 2) {
                 earnings.push(`${emotes.lockpicks} +1`);
                 userdata.lockpicks += 1;
-
               }
 
               if (crateearned !== undefined) {
@@ -1077,7 +1061,6 @@ module.exports = {
 
               let using = userdata.using;
 
-             
               if (usinginv.includes("bubbles")) {
                 let cooldown = cooldowndata.bubbles;
                 let timeout = 60000;
@@ -1133,7 +1116,6 @@ module.exports = {
                 }
               }
               let itemeffects = userdata.itemeffects || [];
-            
 
               if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
@@ -1168,12 +1150,12 @@ module.exports = {
                   interaction.channel.send("Your energy drink ran out! :(");
                 }
               }
-          
+
               if (bonus > 0) {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += (bountyuser * 0.75);
+                cashwon = cashwon += bountyuser * 0.75;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -1183,7 +1165,7 @@ module.exports = {
               userdata.cash += cashwon;
               userdata.bounty += 5;
               userdata.rp4 += rpwon;
-            
+
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
@@ -1266,8 +1248,7 @@ module.exports = {
             }
           }, 3000);
         } else if (race[0].name == "halfmile") {
-        
-          cooldowndata.is_racing = Date.now()
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
           let tracklength = 800;
           let tracklength2 = 800;
@@ -1388,19 +1369,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-                   let player = ((handling) + (speed) - weightscore) / acceleration
-          console.log(player)
-          let opponent = ((handling2) + (speed2) - weightscore2) / acceleration2
+          let player = (handling + speed - weightscore) / acceleration;
+          console.log(player);
+          let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -1410,8 +1390,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
 
@@ -1439,8 +1417,6 @@ module.exports = {
               }
 
               let using = userdata.using;
-
-           
 
               if (usinginv.includes("bubbles")) {
                 let cooldown = cooldowndata.bubbles;
@@ -1498,7 +1474,6 @@ module.exports = {
                 }
               }
               let itemeffects = userdata.itemeffects || [];
-            
 
               if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
@@ -1537,7 +1512,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += (bountyuser * 0.75);
+                cashwon = cashwon += bountyuser * 0.75;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -1629,8 +1604,7 @@ module.exports = {
             }
           }, 3000);
         } else if (race[0].name == "quartermile") {
-        
-          cooldowndata.is_racing = Date.now()
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
           let tracklength = 400;
           let tracklength2 = 400;
@@ -1761,19 +1735,18 @@ module.exports = {
           let accms = acceleration * 10;
           let accms2 = acceleration2 * 10;
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = ((handling) + (speed) - weightscore) / acceleration
-          console.log(player)
-          let opponent = ((handling2) + (speed2) - weightscore2) / acceleration2
+          let player = (handling + speed - weightscore) / acceleration;
+          console.log(player);
+          let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -1783,8 +1756,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
@@ -1802,81 +1773,76 @@ module.exports = {
               if (userdata.houses && filteredhouse2[0]) {
                 rpwon = rpwon * 2;
               }
-              let randomkey = randomRange(1, 5)
-              if(randomkey == 2){
+              let randomkey = randomRange(1, 5);
+              if (randomkey == 2) {
                 earnings.push(`${emotes.commonKey} +${commonkeys}`);
                 userdata.ckeys += commonkeys;
 
-              
-              if (commonkeys && commonkeys > 0) {
-                if (usinginv.includes("milk")) {
-                  let cooldown = cooldowndata.milk;
-                  let timeout = 600000;
-                  console.log(timeout - (Date.now() - cooldown));
-                  if (
-                    cooldown !== null &&
-                    timeout - (Date.now() - cooldown) > 0
-                  ) {
-                    commonkeys = commonkeys * 2;
-                  } else {
-                    console.log("pulled");
-                    userdata.using.pull("milk");
-                    userdata.update();
-                    interaction.channel.send("Your milk ran out.");
+                if (commonkeys && commonkeys > 0) {
+                  if (usinginv.includes("milk")) {
+                    let cooldown = cooldowndata.milk;
+                    let timeout = 600000;
+                    console.log(timeout - (Date.now() - cooldown));
+                    if (
+                      cooldown !== null &&
+                      timeout - (Date.now() - cooldown) > 0
+                    ) {
+                      commonkeys = commonkeys * 2;
+                    } else {
+                      console.log("pulled");
+                      userdata.using.pull("milk");
+                      userdata.update();
+                      interaction.channel.send("Your milk ran out.");
+                    }
                   }
                 }
-        
-              }
-              if (rarekeys && rarekeys > 0) {
-                if (usinginv.includes("strawberry milk")) {
-                  let cooldown = cooldowndata.smilk;
-                  let timeout = 600000;
-                  console.log(timeout - (Date.now() - cooldown));
-                  if (
-                    cooldown !== null &&
-                    timeout - (Date.now() - cooldown) > 0
-                  ) {
-                    rarekeys = rarekeys * 2;
-                  } else {
-                    console.log("pulled");
-                    userdata.using.pull("milk");
-                    userdata.update();
-                    interaction.channel.send("Your strawberry milk ran out.");
+                if (rarekeys && rarekeys > 0) {
+                  if (usinginv.includes("strawberry milk")) {
+                    let cooldown = cooldowndata.smilk;
+                    let timeout = 600000;
+                    console.log(timeout - (Date.now() - cooldown));
+                    if (
+                      cooldown !== null &&
+                      timeout - (Date.now() - cooldown) > 0
+                    ) {
+                      rarekeys = rarekeys * 2;
+                    } else {
+                      console.log("pulled");
+                      userdata.using.pull("milk");
+                      userdata.update();
+                      interaction.channel.send("Your strawberry milk ran out.");
+                    }
                   }
+                  earnings.push(`${emotes.rareKey} +${rarekeys}`);
+                  userdata.rkeys += rarekeys;
                 }
-                earnings.push(`${emotes.rareKey} +${rarekeys}`);
-                userdata.rkeys += rarekeys;
-              }
-              if (exotickeys && exotickeys > 0) {
-                if (usinginv.includes("chocolate milk")) {
-                  let cooldown = cooldowndata.cmilk;
-                  let timeout = 600000;
-                  console.log(timeout - (Date.now() - cooldown));
-                  if (
-                    cooldown !== null &&
-                    timeout - (Date.now() - cooldown) > 0
-                  ) {
-                    exotickeys = exotickeys * 2;
-                  } else {
-                    console.log("pulled");
-                    userdata.using.pull("milk");
-                    userdata.update();
-                    interaction.channel.send("Your chocolate milk ran out.");
+                if (exotickeys && exotickeys > 0) {
+                  if (usinginv.includes("chocolate milk")) {
+                    let cooldown = cooldowndata.cmilk;
+                    let timeout = 600000;
+                    console.log(timeout - (Date.now() - cooldown));
+                    if (
+                      cooldown !== null &&
+                      timeout - (Date.now() - cooldown) > 0
+                    ) {
+                      exotickeys = exotickeys * 2;
+                    } else {
+                      console.log("pulled");
+                      userdata.using.pull("milk");
+                      userdata.update();
+                      interaction.channel.send("Your chocolate milk ran out.");
+                    }
                   }
+                  earnings.push(`${emotes.exoticKey} +${exotickeys}`);
+                  userdata.ekeys += exotickeys;
                 }
-                earnings.push(`${emotes.exoticKey} +${exotickeys}`);
-                userdata.ekeys += exotickeys;
               }
-
-            }
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
                 earnings.push(
                   `${cratedb.Crates[crateearned].Emote} +1 ${cratedb.Crates[crateearned].Name}`
                 );
               }
-
-           
 
               if (usinginv.includes("bubbles")) {
                 let cooldown = cooldowndata.bubbles;
@@ -1934,7 +1900,6 @@ module.exports = {
                 }
               }
               let itemeffects = userdata.itemeffects || [];
-          
 
               if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
@@ -1973,7 +1938,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += (bountyuser * 0.75);
+                cashwon = cashwon += bountyuser * 0.75;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -2067,9 +2032,8 @@ module.exports = {
               return;
             }
           }, 3000);
-        }  else if (race[0].name == "carseries") {
-       
-          cooldowndata.is_racing = Date.now()
+        } else if (race[0].name == "carseries") {
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
           if (userdata.seriestickets <= 0)
             return interaction.reply("You need a series ticket to race!");
@@ -2166,19 +2130,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = ((handling) + (speed) - weightscore) / acceleration
-          console.log(player)
-          let opponent = ((handling2) + (speed2) - weightscore2) / acceleration2
+          let player = (handling + speed - weightscore) / acceleration;
+          console.log(player);
+          let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -2188,8 +2151,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
@@ -2309,8 +2270,7 @@ module.exports = {
             }
           }, 3000);
         } else if (race[0].name == "crossrace") {
-         
-          cooldowndata.is_racing = Date.now()
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
           let itemdb = require("../data/items.json");
           let findables = [];
@@ -2341,7 +2301,6 @@ module.exports = {
             car2 = carsarray.filter(
               (car) => car.Class == "D" && car.Speed < 140
             );
-            
           } else if (bot == 2) {
             car2 = carsarray.filter(
               (car) => car.Class == "C" && car.Speed < 160
@@ -2446,19 +2405,18 @@ module.exports = {
             fetchReply: true,
           });
 
-          let weightscore = Math.floor(weight / 100)
-          let weightscore2 = Math.floor(weight2 / 100)
+          let weightscore = Math.floor(weight / 100);
+          let weightscore2 = Math.floor(weight2 / 100);
 
-
-          let player = ((handling) + (speed) - weightscore) / acceleration
-          console.log(player)
-          let opponent = ((handling2) + (speed2) - weightscore2) / acceleration2
+          let player = (handling + speed - weightscore) / acceleration;
+          console.log(player);
+          let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
           console.log(opponent);
           let winner;
           const dorace = () => {
-            const playerRegression = player
-            const opponentRegression = opponent
+            const playerRegression = player;
+            const opponentRegression = opponent;
             winner =
               playerRegression >= opponentRegression ? "Player" : "Opponent";
 
@@ -2468,8 +2426,6 @@ module.exports = {
 
             return string;
           };
-
-          
 
           dorace();
           setTimeout(async () => {
@@ -2488,19 +2444,18 @@ module.exports = {
                 rpwon = rpwon * 2;
               }
               if (commonmaps && commonmaps > 0) {
-                let randommap = randomRange(1, 5)
-                if(randommap == 2){
+                let randommap = randomRange(1, 5);
+                if (randommap == 2) {
                   earnings.push(`${emotes.barnMapCommon} +${commonmaps}`);
                   userdata.barnmaps += commonmaps;
-
                 }
               }
-           
+
               if (bonus > 0) {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += (bountyuser * 0.75);
+                cashwon = cashwon += bountyuser * 0.75;
               }
 
               if (crateearned !== undefined) {
@@ -2517,7 +2472,6 @@ module.exports = {
               }
 
               let using = userdata.using;
-      
 
               if (usinginv.includes("bubbles")) {
                 let cooldown = cooldowndata.bubbles;
@@ -2575,9 +2529,6 @@ module.exports = {
                 }
               }
 
-              
-        
-
               if (usinginv.includes("fruit punch")) {
                 let cooldown = cooldowndata.fruitpunch;
                 let timeout = 600000;
@@ -2615,7 +2566,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += (bountyuser * 0.75);
+                cashwon = cashwon += bountyuser * 0.75;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -2709,8 +2660,7 @@ module.exports = {
             }
           }, 3000);
         } else if (race[0].name == "police_streetrace") {
-      
-          cooldowndata.is_racing = Date.now()
+          cooldowndata.is_racing = Date.now();
           cooldowndata.save();
           let tracklength = 0;
           let tracklength2 = 0;
