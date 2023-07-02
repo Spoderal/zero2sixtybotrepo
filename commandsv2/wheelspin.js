@@ -7,7 +7,11 @@ const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { numberWithCommas, toCurrency, randomRange } = require("../common/utils");
+const {
+  numberWithCommas,
+  toCurrency,
+  randomRange,
+} = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
@@ -35,8 +39,6 @@ module.exports = {
     let item = lodash.sample(items);
     let using = userdata.using;
 
-    
-
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
 
@@ -56,7 +58,7 @@ module.exports = {
 
     setTimeout(() => {
       let item = lodash.sample(items);
-      if(item == "🏎️"){
+      if (item == "🏎️") {
         item = lodash.sample(items);
       }
       if (userdata.using.includes("orange juice")) {
@@ -90,12 +92,12 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        }  else if (item == "🏎️") {
+        } else if (item == "🏎️") {
           let randomnum = lodash.random(5);
           let reward;
-         
-            reward = lodash.sample(cars);
-          
+
+          reward = lodash.sample(cars);
+
           let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice;
 
           let row = new Discord.ActionRowBuilder().addComponents(
@@ -185,7 +187,7 @@ module.exports = {
               return;
             } else if (i.customId.includes("sell")) {
               collector.stop();
-              
+
               userdata.save();
               embed.setTitle("✅");
               await i.update({ embeds: [embed] });
@@ -193,7 +195,7 @@ module.exports = {
             }
           });
         } else if (item == "💵") {
-          let reward = randomRange(1, 1000)
+          let reward = randomRange(1, 1000);
           reward = Number(reward);
           let filteredhouse = userdata.houses.filter(
             (house) => house.Name == "Il Maniero"

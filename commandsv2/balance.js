@@ -36,7 +36,6 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
 
-
     let {
       cash,
       gold,
@@ -63,7 +62,7 @@ module.exports = {
       lekeys,
       bounty,
       seriestickets,
-      barnmaps
+      barnmaps,
     } = profile;
 
     if (userdata.police == false) {

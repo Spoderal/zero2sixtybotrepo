@@ -1,10 +1,10 @@
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const {ButtonBuilder} = require('discord.js')
+const { ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
 const cardb = require("../data/cardb.json");
-const houses = require('../data/houses.json')
+const houses = require("../data/houses.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -16,55 +16,64 @@ module.exports = {
 
     if (userdata) return await interaction.reply("You have an account!");
 
-    let startersjp = ["1995 mazda miata", "2011 scion tc", "1997 acura integra"]
-    let startersam = ["2002 ford mustang", "1977 chevy camaro", "2002 pontiac firebird"]
-    let starterseu = ["1999 audi a4", "2000 bmw series 3", "2001 volkswagen golf"]
+    let startersjp = [
+      "1995 mazda miata",
+      "2011 scion tc",
+      "1997 acura integra",
+    ];
+    let startersam = [
+      "2002 ford mustang",
+      "1977 chevy camaro",
+      "2002 pontiac firebird",
+    ];
+    let starterseu = [
+      "1999 audi a4",
+      "2000 bmw series 3",
+      "2001 volkswagen golf",
+    ];
 
+    let globals = await Global.findOne({});
 
-    let globals = await Global.findOne({ });
+    let rowjp = new discord.ActionRowBuilder();
+    let rowam = new discord.ActionRowBuilder();
+    let roweu = new discord.ActionRowBuilder();
 
-    
+    for (let eu in starterseu) {
+      let car = starterseu[eu];
 
-    let rowjp = new discord.ActionRowBuilder()
-    let rowam = new discord.ActionRowBuilder()
-    let roweu = new discord.ActionRowBuilder()
+      console.log(car);
 
-    for(let eu in starterseu){
-      let car = starterseu[eu]
-
-      console.log(car)
-      
       roweu.addComponents(
         new ButtonBuilder()
-        .setCustomId(`${car}`)
-        .setLabel(`${cardb.Cars[car].Name}`)
-        .setEmoji(`${cardb.Cars[car].Emote}`)
-        .setStyle(`Secondary`)
-      )
+          .setCustomId(`${car}`)
+          .setLabel(`${cardb.Cars[car].Name}`)
+          .setEmoji(`${cardb.Cars[car].Emote}`)
+          .setStyle(`Secondary`)
+      );
     }
 
-    for(let jp in startersjp){
-      let car = startersjp[jp]
+    for (let jp in startersjp) {
+      let car = startersjp[jp];
 
       rowjp.addComponents(
         new ButtonBuilder()
-        .setCustomId(`${car}`)
-        .setLabel(`${cardb.Cars[car].Name}`)
-        .setEmoji(`${cardb.Cars[car].Emote}`)
-        .setStyle(`Secondary`)
-      )
+          .setCustomId(`${car}`)
+          .setLabel(`${cardb.Cars[car].Name}`)
+          .setEmoji(`${cardb.Cars[car].Emote}`)
+          .setStyle(`Secondary`)
+      );
     }
 
-    for(let am in startersam){
-      let car = startersam[am]
+    for (let am in startersam) {
+      let car = startersam[am];
 
       rowam.addComponents(
         new ButtonBuilder()
-        .setCustomId(`${car}`)
-        .setLabel(`${cardb.Cars[car].Name}`)
-        .setEmoji(`${cardb.Cars[car].Emote}`)
-        .setStyle(`Secondary`)
-      )
+          .setCustomId(`${car}`)
+          .setLabel(`${cardb.Cars[car].Name}`)
+          .setEmoji(`${cardb.Cars[car].Emote}`)
+          .setStyle(`Secondary`)
+      );
     }
 
     let embed = new discord.EmbedBuilder({
@@ -97,26 +106,26 @@ module.exports = {
     newuser.cash += 500;
 
     collector.on("collect", async (i) => {
-      let car = i.customId
-      let carindb = cardb.Cars[car]
+      let car = i.customId;
+      let carindb = cardb.Cars[car];
       userdata = await User.findOne({ id: userid });
       if (userdata) return await i.update("You have an account!");
       let carobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Image: carindb.Image,
-            Miles: 0,
-            Resale: 375,
-            WeightStat: carindb.Weight,
-      }
-      
-      if(globals.legacy.includes(interaction.user.id)){
-        newuser.houses.push(houses["patrimonio dell appartamento"])
+        ID: carindb.alias,
+        Name: carindb.Name,
+        Speed: carindb.Speed,
+        Acceleration: carindb["0-60"],
+        Handling: carindb.Handling,
+        Parts: [],
+        Emote: carindb.Emote,
+        Image: carindb.Image,
+        Miles: 0,
+        Resale: 375,
+        WeightStat: carindb.Weight,
+      };
+
+      if (globals.legacy.includes(interaction.user.id)) {
+        newuser.houses.push(houses["patrimonio dell appartamento"]);
         newuser.achievements.push({
           name: "Legacy",
           id: "legacy",
@@ -129,8 +138,6 @@ module.exports = {
       await i.update(
         `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, run /garage to see your cars ID, go ahead and try running \`/race car: ${carobj.ID}\`, and **select street race**, then **select Tier 1**`
       );
-      });
-
-      
+    });
   },
 };

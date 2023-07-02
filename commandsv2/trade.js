@@ -96,8 +96,6 @@ module.exports = {
         .setEmoji(`✖️`)
         .setStyle(`Danger`)
     );
-    
-   
 
     if (trading.endsWith("cash")) {
       let cashamount = Number(trading.split(" ")[0]);
@@ -212,15 +210,23 @@ module.exports = {
       userdata.items = user1items;
       userdata2.items = user2items;
     }
-    console.log(trading)
-    if ( item == "undefined" || item == undefined || item2 == "undefined" ||  item2 == undefined )  return interaction.reply("Make sure to specify cash, parts, or a car! If you're trading cash, make sure to put cash at the end of the number")
-    let cooldowns1 = await Cooldowns.findOne({id: user1.id})
-    let cooldowns2 = await Cooldowns.findOne({id: user2.id})
+    console.log(trading);
+    if (
+      item == "undefined" ||
+      item == undefined ||
+      item2 == "undefined" ||
+      item2 == undefined
+    )
+      return interaction.reply(
+        "Make sure to specify cash, parts, or a car! If you're trading cash, make sure to put cash at the end of the number"
+      );
+    let cooldowns1 = await Cooldowns.findOne({ id: user1.id });
+    let cooldowns2 = await Cooldowns.findOne({ id: user2.id });
 
-    cooldowns1.trading = Date.now()
-    cooldowns2.trading = Date.now()
-    cooldowns1.save()
-    cooldowns2.save()
+    cooldowns1.trading = Date.now();
+    cooldowns2.trading = Date.now();
+    cooldowns1.save();
+    cooldowns2.save();
     let embed = new Discord.EmbedBuilder()
       .setTitle("Trade Request")
       .addFields(
@@ -249,8 +255,6 @@ module.exports = {
       time: 10000,
     });
 
-
-
     collector.on("collect", async (i) => {
       if (i.customId.includes(`accept`)) {
         userdata.save();
@@ -265,9 +269,9 @@ module.exports = {
       }
     });
 
-    collector.on('end', async (i) => {
+    collector.on("end", async (i) => {
       embed.setTitle("Trade expired!");
       await i.update({ embeds: [embed] });
-    })
+    });
   },
 };

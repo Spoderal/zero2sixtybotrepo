@@ -26,21 +26,20 @@ module.exports = {
     let barntimer = cooldowns.barn;
     let barnmaps = userdata.barnmaps;
 
-    if (barnmaps <= 0)  return await interaction.reply("You don't have any common barn maps!");
+    if (barnmaps <= 0)
+      return await interaction.reply("You don't have any common barn maps!");
 
     let timeout = 3600000;
 
-    let randomRarity = randomRange(1, 100)
-    let rarity
+    let randomRarity = randomRange(1, 100);
+    let rarity;
 
-    if(randomRarity >= 40) {
-      rarity = "common"
-    }
-    else if(randomRarity < 40) {
-      rarity = "rare"
-    }
-    else if(randomRarity < 10) {
-      rarity = "legendary"
+    if (randomRarity >= 40) {
+      rarity = "common";
+    } else if (randomRarity < 40) {
+      rarity = "rare";
+    } else if (randomRarity < 10) {
+      rarity = "legendary";
     }
 
     let garagelimit = userdata.garageLimit;
@@ -60,7 +59,6 @@ module.exports = {
 
       return;
     }
-
 
     // Create an array of 100 elements, based on the chances field
     let barnfind = lodash.sample(barns.Barns[rarity.toLowerCase()]);
@@ -103,14 +101,12 @@ module.exports = {
       Livery: carindb.Image,
       Miles: 0,
     };
-    userdata.barnmaps -= 1
+    userdata.barnmaps -= 1;
 
     let arrByID = cars.find((item) => item.Name == carobj.Name);
     if (arrByID[0]) {
       await interaction.reply(
-        `You found a ${
-          carindb.Name
-        } but you already have this car..`
+        `You found a ${carindb.Name} but you already have this car..`
       );
       userdata.save();
 

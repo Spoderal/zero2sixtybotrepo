@@ -34,15 +34,17 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
+    let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
 
-    let cooldowns = await Cooldowns.findOne({id: interaction.user.id})
+    let timeout = 10000;
 
-    let timeout = 10000
-
-
-    if (cooldowns.trading !== null && timeout - (Date.now() - cooldowns.trading) > 0) {
-      
-     return interaction.reply({ content: `You need to wait to use this command because you're trading with someone! **IF SOMEONE IS ABUSING THIS, REPORT IT TO STAFF IMMEDIATELY**` });
+    if (
+      cooldowns.trading !== null &&
+      timeout - (Date.now() - cooldowns.trading) > 0
+    ) {
+      return interaction.reply({
+        content: `You need to wait to use this command because you're trading with someone! **IF SOMEONE IS ABUSING THIS, REPORT IT TO STAFF IMMEDIATELY**`,
+      });
     }
     let userparts = userdata.parts;
     let selling = interaction.options.getString("item");
@@ -111,15 +113,14 @@ module.exports = {
         finalamount = amount * resale;
         userdata.cash += finalamount;
       }
-      if(parts.Parts[selling.toLowerCase()].Tier == "4"){
-        let resale = 1000
+      if (parts.Parts[selling.toLowerCase()].Tier == "4") {
+        let resale = 1000;
         finalamount = amount * resale;
-        userdata.cash += finalamount
-      }
-      else if(parts.Parts[selling.toLowerCase()].Tier == "5"){
-        let resale = 2500
+        userdata.cash += finalamount;
+      } else if (parts.Parts[selling.toLowerCase()].Tier == "5") {
+        let resale = 2500;
         finalamount = amount * resale;
-        userdata.cash += finalamount
+        userdata.cash += finalamount;
       }
       for (var i2 = 0; i2 < amount; i2++)
         userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
