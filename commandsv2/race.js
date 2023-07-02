@@ -97,20 +97,19 @@ module.exports = {
         .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
-    let bountytimeout = 86400000;
+    let bountytimeout = 3600000;
     if (
       cooldowndata.bounty !== null &&
-      bountytimeout - (Date.now() - cooldowndata.bounty) > 0 &&
-      userdata.bounty > 0
+      bountytimeout - (Date.now() - cooldowndata.bounty) > 0
     ) {
-      console.log("bounty");
-    } else {
       interaction.channel.send(
-        "Your bounty reset, it resets every **24 hours**"
+        "Your bounty reset, it resets every **1 hour**"
       );
       cooldowndata.bounty = 0;
       userdata.bounty = 0;
       userdata.update();
+    } else {
+      console.log("bounty");
     }
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car").toLowerCase();
@@ -588,33 +587,7 @@ module.exports = {
 
               let houses = userdata.houses || []
 
-              if(houses.length > 0){
-                
-                let filteredhouse2 = houses.filter(
-                  (house) => house.Name == "Casa Della Pace"
-                );
-                let filteredhouse1 = houses.filter(
-                  (house) => house.Name == "Castello Verde"
-                );
-  
-                let filteredhouse3 = userdata.houses.filter(
-                  (house) => house.Name == "Casa Sul Lago"
-                );
-  
-                let filteredhouse4 = userdata.houses.filter(
-                  (house) => house.Name == "Villa Sull Acqua"
-                );
-  
-                if (userdata.houses && filteredhouse1[0]) {
-                  cashwon = cashwon += cashwon * 0.05;
-                }
-                if (userdata.houses && filteredhouse2[0]) {
-                  rpwon = rpwon * 2;
-                }
-                if (userdata.houses && filteredhouse3[0]) {
-                  notowon = notowon * 2;
-                }
-              }
+
 
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
@@ -779,7 +752,7 @@ module.exports = {
               earnings.push(`${emotes.notoriety} ${notowon} Notoriety`);
               userdata.cash += cashwon;
               userdata.notoriety += notowon;
-              userdata.bounty += 5;
+              userdata.bounty += 1;
               userdata.car_racing = selected;
               userdata.rp4 += rpwon;
               userdata.worldwins += 1;
@@ -916,19 +889,19 @@ module.exports = {
             );
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 400
+              (car) => car.Class == "A" && car.Speed >= 400
             );
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 500
+              (car) => car.Class == "S" && car.Speed >= 500
             );
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 600
+              (car) => car.Class == "S" && car.Speed >= 600
             );
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 700
+              (car) => car.Class == "S" && car.Speed >= 700
             );
           } else if (bot == 8) {
             car2 = carsarray.filter(
@@ -1043,30 +1016,7 @@ module.exports = {
               let earnings = [];
               let houses = userdata.houses || [];
 
-              if(houses.length > 0){
-                
-                let filteredhouse2 = houses.filter(
-                  (house) => house.Name == "Casa Della Pace"
-                );
-                let filteredhouse1 = houses.filter(
-                  (house) => house.Name == "Castello Verde"
-                );
   
-                let filteredhouse3 = userdata.houses.filter(
-                  (house) => house.Name == "Casa Sul Lago"
-                );
-  
-                let filteredhouse4 = userdata.houses.filter(
-                  (house) => house.Name == "Villa Sull Acqua"
-                );
-  
-                if (userdata.houses && filteredhouse1[0]) {
-                  cashwon = cashwon += cashwon * 0.05;
-                }
-                if (userdata.houses && filteredhouse2[0]) {
-                  rpwon = rpwon * 2;
-                }
-              }
               let wheelrandom = randomRange(1, 5);
               if (wheelrandom == 2) {
                 userdata.wheelspins += wheelspins;
@@ -1189,7 +1139,7 @@ module.exports = {
               userdata.racerank += rankswon;
 
               userdata.cash += cashwon;
-              userdata.bounty += 5;
+              userdata.bounty += 1;
               userdata.rp4 += rpwon;
 
               await User.findOneAndUpdate(
@@ -1434,30 +1384,7 @@ module.exports = {
               let earnings = [];
               let houses = userdata.houses || []
 
-              if(houses.length > 0){
-                
-                let filteredhouse2 = houses.filter(
-                  (house) => house.Name == "Casa Della Pace"
-                );
-                let filteredhouse1 = houses.filter(
-                  (house) => house.Name == "Castello Verde"
-                );
-  
-                let filteredhouse3 = userdata.houses.filter(
-                  (house) => house.Name == "Casa Sul Lago"
-                );
-  
-                let filteredhouse4 = userdata.houses.filter(
-                  (house) => house.Name == "Villa Sull Acqua"
-                );
-  
-                if (userdata.houses && filteredhouse1[0]) {
-                  cashwon = cashwon += cashwon * 0.05;
-                }
-                if (userdata.houses && filteredhouse2[0]) {
-                  rpwon = rpwon * 2;
-                }
-              }
+           
 
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
@@ -1569,7 +1496,7 @@ module.exports = {
               userdata.racerank += rankswon;
 
               userdata.cash += cashwon;
-              userdata.bounty += 5;
+              userdata.bounty += 1;
               userdata.rp4 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
@@ -1813,30 +1740,7 @@ module.exports = {
               let earnings = [];
               let houses = userdata.houses || []
 
-              if(houses.length > 0){
-                
-                let filteredhouse2 = houses.filter(
-                  (house) => house.Name == "Casa Della Pace"
-                );
-                let filteredhouse1 = houses.filter(
-                  (house) => house.Name == "Castello Verde"
-                );
-  
-                let filteredhouse3 = userdata.houses.filter(
-                  (house) => house.Name == "Casa Sul Lago"
-                );
-  
-                let filteredhouse4 = userdata.houses.filter(
-                  (house) => house.Name == "Villa Sull Acqua"
-                );
-  
-                if (userdata.houses && filteredhouse1[0]) {
-                  cashwon = cashwon += cashwon * 0.05;
-                }
-                if (userdata.houses && filteredhouse2[0]) {
-                  rpwon = rpwon * 2;
-                }
-              }
+            
               let randomkey = randomRange(1, 5);
               if (randomkey == 2) {
                 earnings.push(`${emotes.commonKey} +${commonkeys}`);
@@ -2009,7 +1913,7 @@ module.exports = {
               userdata.racerank += rankswon;
 
               userdata.cash += cashwon;
-              userdata.bounty += 5;
+              userdata.bounty += 1;
               userdata.rp4 += rpwon;
               embed.setDescription(`${earnings.join("\n")}`);
               embed.setTitle(`Tier ${bot} Quarter Mile Race won!`);
@@ -2520,30 +2424,7 @@ module.exports = {
               let earnings = [];
               let houses = userdata.houses || []
 
-              if(houses.length > 0){
-                
-                let filteredhouse2 = houses.filter(
-                  (house) => house.Name == "Casa Della Pace"
-                );
-                let filteredhouse1 = houses.filter(
-                  (house) => house.Name == "Castello Verde"
-                );
-  
-                let filteredhouse3 = userdata.houses.filter(
-                  (house) => house.Name == "Casa Sul Lago"
-                );
-  
-                let filteredhouse4 = userdata.houses.filter(
-                  (house) => house.Name == "Villa Sull Acqua"
-                );
-  
-                if (userdata.houses && filteredhouse1[0]) {
-                  cashwon = cashwon += cashwon * 0.05;
-                }
-                if (userdata.houses && filteredhouse2[0]) {
-                  rpwon = rpwon * 2;
-                }
-              }
+            
               if (commonmaps && commonmaps > 0) {
                 let randommap = randomRange(1, 5);
                 if (randommap == 2) {
@@ -2674,7 +2555,7 @@ module.exports = {
               userdata.racerank += rankswon;
 
               userdata.cash += cashwon;
-              userdata.bounty += 5;
+              userdata.bounty += 1;
               userdata.rp4 += rpwon;
 
               embed.setDescription(`${earnings.join("\n")}`);
@@ -2738,7 +2619,7 @@ module.exports = {
                 userdata.tutorial.stage += 1;
                 userdata.markModified("tutorial");
               }
-              userdata.bounty += 20;
+              userdata.bounty += 1;
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
