@@ -444,51 +444,51 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 135
+              (car) => car.Class == "D" && car.Speed < 150
             );
             notowon = 25;
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 155
+              (car) => car.Class == "C" && car.Speed < 250
             );
             notowon = 50;
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) => car.Class == "B" && car.Speed < 300
             );
             notowon = 100;
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) => car.Class == "A" && car.Speed < 400
             );
             notowon = 150;
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) => car.Class == "S" && car.Speed < 500
             );
             notowon = 200;
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
+              (car) => car.Class == "S" && car.Speed < 600
             );
             notowon = 250;
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
+              (car) => car.Class == "S" && car.Speed < 700
             );
             notowon = 350;
           } else if (bot == 8) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 260
+              (car) => car.Class == "S" && car.Speed < 750
             );
             notowon = 350;
           } else if (bot == 9) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 270
+              (car) => car.Class == "S" && car.Speed < 800
             );
             notowon = 350;
           } else if (bot == 10) {
-            car2 = carsarray.filter((car) => car.Speed >= 270);
+            car2 = carsarray.filter((car) => car.Speed >= 900);
             notowon = 350;
           }
           car2 = lodash.sample(car2);
@@ -900,32 +900,42 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
+              (car) => car.Class == "D" && car.Speed < 150
             );
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
+              (car) => car.Class == "C" && car.Speed < 250
             );
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) => car.Class == "B" && car.Speed < 300
             );
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) => car.Class == "A" && car.Speed < 400
             );
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) => car.Class == "S" && car.Speed < 500
             );
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
+              (car) => car.Class == "S" && car.Speed < 600
             );
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
+              (car) => car.Class == "S" && car.Speed < 700
             );
+          } else if (bot == 8) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 750
+            );
+          } else if (bot == 9) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 800
+            );
+          } else if (bot == 10) {
+            car2 = carsarray.filter((car) => car.Speed >= 900);
           }
           car2 = lodash.sample(car2);
 
@@ -1267,32 +1277,42 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
+              (car) => car.Class == "D" && car.Speed < 150
             );
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
+              (car) => car.Class == "C" && car.Speed < 250
             );
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) => car.Class == "B" && car.Speed < 300
             );
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) => car.Class == "A" && car.Speed < 400
             );
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) => car.Class == "S" && car.Speed < 500
             );
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
+              (car) => car.Class == "S" && car.Speed < 600
             );
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
+              (car) => car.Class == "S" && car.Speed < 700
             );
+          } else if (bot == 8) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 750
+            );
+          } else if (bot == 9) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 800
+            );
+          } else if (bot == 10) {
+            car2 = carsarray.filter((car) => car.Speed >= 900);
           }
           car2 = lodash.sample(car2);
 
@@ -1625,38 +1645,38 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
+              (car) => car.Class == "D" && car.Speed < 150
             );
             commonkeys = 1;
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
+              (car) => car.Class == "C" && car.Speed < 250
             );
 
             commonkeys = 1;
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) => car.Class == "B" && car.Speed < 350
             );
             rarekeys = 1;
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) => car.Class == "A" && car.Speed < 400
             );
             rarekeys = 1;
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) => car.Class == "S" && car.Speed < 500
             );
             exotickeys = 1;
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
+              (car) => car.Class == "S" && car.Speed < 600
             );
             exotickeys = 1;
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
+              (car) => car.Class == "S" && car.Speed < 700
             );
             exotickeys = 1;
           }
@@ -2055,21 +2075,44 @@ module.exports = {
           }
           if (bot == 1) {
             console.log("1");
-            car2 = carsarray.filter((car) => car.Speed < 140);
+            car2 = carsarray.filter(
+              (car) => car.Class == "D" && car.Speed < 150
+            );
           } else if (bot == 2) {
-            car2 = carsarray.filter((car) => car.Speed < 160);
+            car2 = carsarray.filter(
+              (car) => car.Class == "C" && car.Speed < 250
+            );
           } else if (bot == 3) {
-            car2 = carsarray.filter((car) => car.Speed < 180);
+            car2 = carsarray.filter(
+              (car) => car.Class == "B" && car.Speed < 300
+            );
           } else if (bot == 4) {
-            car2 = carsarray.filter((car) => car.Speed < 190);
+            car2 = carsarray.filter(
+              (car) => car.Class == "A" && car.Speed < 400
+            );
           } else if (bot == 5) {
-            car2 = carsarray.filter((car) => car.Speed > 200);
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 500
+            );
           } else if (bot == 6) {
-            car2 = carsarray.filter((car) => car.Speed > 210);
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 600
+            );
           } else if (bot == 7) {
-            car2 = carsarray.filter((car) => car.Speed > 220);
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 700
+            );
+          } else if (bot == 8) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 750
+            );
+          } else if (bot == 9) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 800
+            );
+          } else if (bot == 10) {
+            car2 = carsarray.filter((car) => car.Speed >= 900);
           }
-
           car2 = lodash.sample(car2);
 
           console.log(car2);
@@ -2299,37 +2342,37 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
+              (car) => car.Class == "D" && car.Speed < 150
             );
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
+              (car) => car.Class == "C" && car.Speed < 200
             );
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) => car.Class == "B" && car.Speed < 350
             );
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) => car.Class == "A" && car.Speed < 400
             );
             commonmaps = 1;
           } else if (bot == 5) {
             itemfound = lodash.sample(findables);
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) => car.Class == "S" && car.Speed < 500
             );
             commonmaps = 1;
           } else if (bot == 6) {
             itemfound = lodash.sample(findables);
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
+              (car) => car.Class == "S" && car.Speed < 600
             );
             commonmaps = 1;
           } else if (bot == 7) {
             itemfound = lodash.sample(findables);
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
+              (car) => car.Class == "S" && car.Speed < 700
             );
             commonmaps = 1;
           }
@@ -2682,32 +2725,42 @@ module.exports = {
           if (bot == 1) {
             console.log("1");
             car2 = carsarray.filter(
-              (car) => car.Class == "D" && car.Speed < 140
+              (car) => car.Class == "D" && car.Speed < 150
             );
           } else if (bot == 2) {
             car2 = carsarray.filter(
-              (car) => car.Class == "C" && car.Speed < 160
+              (car) => car.Class == "C" && car.Speed < 250
             );
           } else if (bot == 3) {
             car2 = carsarray.filter(
-              (car) => car.Class == "B" && car.Speed < 180
+              (car) => car.Class == "B" && car.Speed < 300
             );
           } else if (bot == 4) {
             car2 = carsarray.filter(
-              (car) => car.Class == "A" && car.Speed < 200
+              (car) => car.Class == "A" && car.Speed < 400
             );
           } else if (bot == 5) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 210
+              (car) => car.Class == "S" && car.Speed < 500
             );
           } else if (bot == 6) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 220
+              (car) => car.Class == "S" && car.Speed < 600
             );
           } else if (bot == 7) {
             car2 = carsarray.filter(
-              (car) => car.Class == "S" && car.Speed < 250
+              (car) => car.Class == "S" && car.Speed < 700
             );
+          } else if (bot == 8) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 750
+            );
+          } else if (bot == 9) {
+            car2 = carsarray.filter(
+              (car) => car.Class == "S" && car.Speed < 800
+            );
+          } else if (bot == 10) {
+            car2 = carsarray.filter((car) => car.Speed >= 900);
           }
           car2 = lodash.sample(car2);
 
