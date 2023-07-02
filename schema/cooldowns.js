@@ -223,7 +223,12 @@ const Cooldowns = new mongoose.Schema({
     default: 0,
   },
   is_racing: {
-    type: Boolean,
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  trading: {
+    type: Number,
     required: false,
     default: 0,
   },

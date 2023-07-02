@@ -50,6 +50,13 @@
       "Reward": 0,
       "Image": "https://i.ibb.co/vkfr887/ACH-driftking.png"
     },
+    "legacy": {
+      "Emote": "<:ach_legacy:1124125405402640536>",
+      "Task": "Use the bot before June 30th 2023",
+      "Name": "Legacy",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/0hTDFp9/ach-legacy.png"
+    },
     "s1 spring badge": {
       "Emote": "<:badge_springs1:1078234569972666421>",
       "Task": "Complete the S1 Spring season",

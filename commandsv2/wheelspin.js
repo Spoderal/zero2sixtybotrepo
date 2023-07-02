@@ -7,7 +7,7 @@ const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { numberWithCommas, toCurrency } = require("../common/utils");
+const { numberWithCommas, toCurrency, randomRange } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
@@ -31,13 +31,14 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-    let items = ["🏎️", "💵", "⚙️", "🗺️", "🛞"];
+    let items = ["🏎️", "💵", "⚙️", "🗺️"];
     let item = lodash.sample(items);
     let using = userdata.using;
 
+    
+
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
-    let witems = wheelspinrewards.Items;
 
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
@@ -55,6 +56,9 @@ module.exports = {
 
     setTimeout(() => {
       let item = lodash.sample(items);
+      if(item == "🏎️"){
+        item = lodash.sample(items);
+      }
       if (userdata.using.includes("orange juice")) {
         let cooldown = cooldowns.orangejuice;
         let timeout = 60000;
@@ -68,7 +72,6 @@ module.exports = {
           item = "🪛";
         }
       }
-      embed.setDescription(`${item}`);
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
         if (item == "⚙️") {
@@ -87,18 +90,12 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🛞") {
-          userdata.swheelspins += 1;
-          embed.setDescription(`You won 1 super wheel spin!`);
-          interaction.editReply({ embeds: [embed] });
-        } else if (item == "🏎️") {
+        }  else if (item == "🏎️") {
           let randomnum = lodash.random(5);
           let reward;
-          if (randomnum == 2) {
-            reward = lodash.sample(wheelspinrewards.SuperRare);
-          } else {
+         
             reward = lodash.sample(cars);
-          }
+          
           let sellprice = carsdb.Cars[reward.toLowerCase()].sellprice;
 
           let row = new Discord.ActionRowBuilder().addComponents(
@@ -108,7 +105,7 @@ module.exports = {
               .setStyle("Success"),
             new Discord.ButtonBuilder()
               .setCustomId("sell")
-              .setLabel(`Sell for ${toCurrency(sellprice)}`)
+              .setLabel(`Sell for $0`)
               .setStyle("Danger")
           );
           embed.setDescription(
@@ -188,7 +185,7 @@ module.exports = {
               return;
             } else if (i.customId.includes("sell")) {
               collector.stop();
-              userdata.cash += sellprice;
+              
               userdata.save();
               embed.setTitle("✅");
               await i.update({ embeds: [embed] });
@@ -196,7 +193,7 @@ module.exports = {
             }
           });
         } else if (item == "💵") {
-          let reward = lodash.sample(cash);
+          let reward = randomRange(1, 1000)
           reward = Number(reward);
           let filteredhouse = userdata.houses.filter(
             (house) => house.Name == "Il Maniero"
@@ -221,11 +218,6 @@ module.exports = {
           embed.setDescription(
             `You won a ${numberWithCommas(reward)} barn map!`
           );
-          interaction.editReply({ embeds: [embed] });
-        } else if (item == "🏦") {
-          let reward = lodash.sample(witems);
-          userdata.items.push(reward.toLowerCase());
-          embed.setDescription(`You won a ${numberWithCommas(reward)}`);
           interaction.editReply({ embeds: [embed] });
         }
 

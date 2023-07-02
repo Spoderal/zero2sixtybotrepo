@@ -4,6 +4,8 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
+
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
@@ -94,6 +96,8 @@ module.exports = {
         .setEmoji(`✖️`)
         .setStyle(`Danger`)
     );
+    
+   
 
     if (trading.endsWith("cash")) {
       let cashamount = Number(trading.split(" ")[0]);
@@ -208,6 +212,15 @@ module.exports = {
       userdata.items = user1items;
       userdata2.items = user2items;
     }
+    console.log(trading)
+    if ( item == "undefined" || item == undefined || item2 == "undefined" ||  item2 == undefined )  return interaction.reply("Make sure to specify cash, parts, or a car! If you're trading cash, make sure to put cash at the end of the number")
+    let cooldowns1 = await Cooldowns.findOne({id: user1.id})
+    let cooldowns2 = await Cooldowns.findOne({id: user2.id})
+
+    cooldowns1.trading = Date.now()
+    cooldowns2.trading = Date.now()
+    cooldowns1.save()
+    cooldowns2.save()
     let embed = new Discord.EmbedBuilder()
       .setTitle("Trade Request")
       .addFields(
@@ -233,16 +246,10 @@ module.exports = {
     };
     let collector = msg.createMessageComponentCollector({
       filter: filter,
-      time: 60000,
+      time: 10000,
     });
 
-    if (
-      trading == "undefined" ||
-      trading == undefined ||
-      trading2 == "undefined" ||
-      trading2 == undefined
-    )
-      return interaction.channel.send("You cant trade undefined!");
+
 
     collector.on("collect", async (i) => {
       if (i.customId.includes(`accept`)) {
@@ -257,5 +264,10 @@ module.exports = {
         return;
       }
     });
+
+    collector.on('end', async (i) => {
+      embed.setTitle("Trade expired!");
+      await i.update({ embeds: [embed] });
+    })
   },
 };

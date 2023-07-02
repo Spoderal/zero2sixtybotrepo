@@ -16,7 +16,7 @@ const cars = require("./cars").carfix;
 const gold = require("../gold");
 const stats = require("./stats").stats;
 const cardata = require("./shopdata");
-
+const {isracing} = require("./is_racing");
 const { series } = require("./series");
 const { updateUsed } = require("./used");
 

@@ -23,13 +23,6 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("bal")
     .setDescription("Check your balance")
-    .addStringOption((option) =>
-      option
-        .setName("convert")
-        .setDescription("Convert bounty to cash")
-        .setRequired(false)
-        .addChoices({ name: "Bounty to Cash", value: "bountytocash" })
-    )
     .addUserOption((option) =>
       option
         .setName("user")
@@ -42,48 +35,12 @@ module.exports = {
     const profile = await userFindOrCreateInDB(user);
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
-    let covertoption = await interaction.options.getString("convert");
 
-    if (covertoption) {
-      if (userdata.bounty == 0)
-        return interaction.reply("You don't have any bounty!");
-      let prestigerank = userdata.prestige || 0;
-      let bountycooldown = prestigerank * 1000;
-      let converted = cooldowndata.convert;
-
-      if (converted !== null && bountycooldown - (Date.now() - converted) > 0) {
-        let time = ms(bountycooldown - (Date.now() - converted));
-        let timeEmbed = new EmbedBuilder()
-          .setColor(colors.blue)
-          .setDescription(
-            `You need to wait ${time} before converting your bounty.`
-          );
-        return await interaction.reply({
-          embeds: [timeEmbed],
-          fetchReply: true,
-        });
-      }
-      let bountyc = userdata.bounty;
-      let toconvert = bountyc / 2;
-      userdata.cash += toconvert;
-
-      userdata.bounty = 0;
-      cooldowndata.convert = Date.now();
-      cooldowndata.save();
-      userdata.save();
-
-      interaction.reply(
-        `You received ${toCurrency(toconvert)} (50% of your bounty)`
-      );
-
-      return;
-    }
 
     let {
       cash,
       gold,
       rp4,
-      cmaps: barnmaps,
       rmaps: rbarnmaps,
       lmaps: lbarnmaps,
       ckeys,
@@ -106,6 +63,7 @@ module.exports = {
       lekeys,
       bounty,
       seriestickets,
+      barnmaps
     } = profile;
 
     if (userdata.police == false) {
@@ -122,6 +80,8 @@ module.exports = {
   
             ${emotes.bounty} Bounty: ${bounty}
 
+            ${emotes.barnMapCommon} Barn Maps ${barnmaps}
+
             ${emotes.wheelSpin} Wheel spins: ${wheelspins}  
             
             ${emotes.superWheel} Super Wheel spins: ${swheelspins}  
@@ -135,17 +95,6 @@ module.exports = {
           .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
           .setFooter(tipFooterRandom)
           .setFields([
-            {
-              name: "Barn Maps",
-              value: `
-                ${emotes.barnMapCommon} Common: ${numberWithCommas(barnmaps)}
-                ${emotes.barnMapRare} Rare: ${numberWithCommas(rbarnmaps)}
-                ${emotes.barnMapLegendary} Legendary: ${numberWithCommas(
-                lbarnmaps
-              )}
-              `,
-              inline: true,
-            },
             {
               name: "Keys",
               value: `

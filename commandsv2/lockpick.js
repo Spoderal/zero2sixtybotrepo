@@ -12,7 +12,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const garagedb = require("../data/garages.json");
-const { toCurrency, randomNoRepeats } = require("../common/utils");
+const { toCurrency, randomNoRepeats, randomRange } = require("../common/utils");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("lockpick")
@@ -85,13 +85,40 @@ module.exports = {
     console.log(chance);
 
     let garageindb = garagedb[garagepicked];
+    let carchance1 = randomRange(1, 10)
+    let carchance2 = randomRange(1, 10)
+    let carchance3 = randomRange(1, 10)
+
     var chooser = randomNoRepeats(garageindb.Contents);
-    let rand1 = chooser();
-    let rand2 = chooser();
-    let rand3 = chooser();
+    let rand1
+    let rand2
+    let rand3
+    if(carchance1 >= 6){
+       rand1 = chooser();
+
+    }
+    else {
+       rand1 = randomNoRepeats(garageindb.Cars);
+    }
+    if(carchance2 >= 6){
+      rand2 = chooser();
+
+   }
+   else {
+      rand2 = randomNoRepeats(garageindb.Cars);
+   }
+   if(carchance3 >= 6){
+    rand3 = chooser();
+
+ }
+ else {
+    rand3 = randomNoRepeats(garageindb.Cars);
+ }
+
 
     let randcash = lodash.random(garageindb.MaxCash);
     let randomarray = [rand1, rand2, rand3];
+    console.log(randomarray)
     let rand2arr = [];
     let sellrow = new ActionRowBuilder();
     let cararray = [];
@@ -134,15 +161,13 @@ module.exports = {
       .setTitle(`Found ${garagepicked}`)
       .addFields({
         name: `Items found`,
-        value: `${rand2arr.join("\n")}\n${toCurrency(
-          randcash
-        )}\nYou will receive them in 15 seconds\n\nSell the cars for $5k each`,
+        value: `${rand2arr.join("\n")}\nYou will receive them in 15 seconds\n\nSell the cars for $5k each`,
         inline: true,
       })
       .setThumbnail(garagedb[garagepicked].Image)
       .setColor(colors.blue);
 
-    udata.cash += randcash;
+
 
     let msg;
     if (sellrow.components[0]) {

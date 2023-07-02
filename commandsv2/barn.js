@@ -7,24 +7,12 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("barn")
-    .setDescription("Search barns for restoration cars")
-    .addStringOption((option) =>
-      option
-        .setName("rarity")
-        .setDescription("The barn you want to search")
-        .addChoices(
-          { name: "Common", value: "common" },
-          { name: "Rare", value: "rare" },
-          { name: "Legendary", value: "legendary" }
-        )
-
-        .setRequired(true)
-    ),
+    .setDescription("Search barns for old cars to restore!"),
 
   async execute(interaction) {
     let userid = interaction.user.id;
@@ -36,24 +24,24 @@ module.exports = {
       new Cooldowns({ id: userid });
 
     let barntimer = cooldowns.barn;
-    let barnmaps = userdata.cmaps;
-    let rbarnmaps = userdata.rmaps;
-    let lbarnmaps = userdata.lmaps;
-    let rarity2 = interaction.options.getString("rarity");
+    let barnmaps = userdata.barnmaps;
 
-    if (!barnmaps && rarity2 == "common")
-      return await interaction.reply("You don't have any common barn maps!");
-
-    if (!rbarnmaps && rarity2 == "rare")
-      return await interaction.reply("You don't have any rare barn maps!");
-
-    if (!lbarnmaps && rarity2 == "legendary")
-      return await interaction.reply("You don't have any legendary barn maps!");
-
-    let house = userdata.house;
+    if (barnmaps <= 0)  return await interaction.reply("You don't have any common barn maps!");
 
     let timeout = 3600000;
-    if (house) timeout = 300000;
+
+    let randomRarity = randomRange(1, 100)
+    let rarity
+
+    if(randomRarity >= 40) {
+      rarity = "common"
+    }
+    else if(randomRarity < 40) {
+      rarity = "rare"
+    }
+    else if(randomRarity < 10) {
+      rarity = "legendary"
+    }
 
     let garagelimit = userdata.garageLimit;
     let usercars = userdata.cars;
@@ -73,38 +61,13 @@ module.exports = {
       return;
     }
 
-    var rarities = [
-      {
-        type: "Common",
-        chance: 0,
-      },
-      {
-        type: "Legendary",
-        chance: 10,
-      },
-      {
-        type: "Rare",
-        chance: 30,
-      },
-      {
-        type: "Uncommon",
-        chance: 50,
-      },
-    ];
-
-    // Calculate chances for common
-    var filler =
-      100 -
-      rarities.map((r) => r.chance).reduce((sum, current) => sum + current);
-
-    if (filler <= 0) return;
 
     // Create an array of 100 elements, based on the chances field
-    let barnfind = lodash.sample(barns.Barns[rarity2.toLowerCase()]);
+    let barnfind = lodash.sample(barns.Barns[rarity.toLowerCase()]);
     let resale;
     let namefor;
     let color;
-    switch (rarity2) {
+    switch (rarity) {
       case "common":
         color = "#388eff";
         resale = 1000;
@@ -140,37 +103,14 @@ module.exports = {
       Livery: carindb.Image,
       Miles: 0,
     };
+    userdata.barnmaps -= 1
 
-    switch (rarity2) {
-      case "common":
-        userdata.cmaps -= 1;
-        break;
-
-      case "uncommon":
-        userdata.ucmaps -= 1;
-        break;
-
-      case "rare":
-        userdata.rmaps -= 1;
-        break;
-
-      case "legendary":
-        userdata.lmaps -= 1;
-        break;
-    }
-
-    let arrByID = cars.find(
-      (item) => item.ID == carobj.ID || item.Name == carobj.Name
-    );
-    if (arrByID) {
-      userdata.cash += resale;
-
+    let arrByID = cars.find((item) => item.Name == carobj.Name);
+    if (arrByID[0]) {
       await interaction.reply(
         `You found a ${
           carindb.Name
-        } but you already have this car, so you found ${toCurrency(
-          resale
-        )} instead.`
+        } but you already have this car..`
       );
       userdata.save();
 
@@ -190,7 +130,7 @@ module.exports = {
         { name: "ID", value: carobj.ID },
       ])
       .setImage(carobj.Livery)
-      .setColor(color);
+      .setColor(`${color}`);
 
     await interaction.reply({ embeds: [embed] });
   },

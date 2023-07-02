@@ -28,47 +28,13 @@ module.exports = {
             customId: "spring",
             emoji: "<a:season_1:1111097329836113920>",
           },
-          {
-            label: "Le Mans",
-            description: "Information for the Le Mans Event",
-            value: "lemans",
-            customId: "lemans",
-            emoji: "🏎️",
-          },
-          {
-            label: "Devils Mountain",
-            description: "Information for the Devils Mountain Event",
-            value: "devilsmountain",
-            customId: "devilsmountain",
-            emoji: "🤘",
-          },
-          {
-            label: "Track Legends",
-            description: "Information for the Track Legends Event",
-            value: "tracklegends",
-            customId: "tracklegends",
-            emoji: "<:tracklegends:1072357967652995174>",
-          },
-          {
-            label: "Wet Warriors",
-            description: "Information for the Wet Warriors Event",
-            value: "wetwarriors",
-            customId: "wetwarriors",
-            emoji: "🌧️",
-          },
         ])
     );
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let tracklist = [];
 
-    for (let car in cardb.Cars) {
-      if (cardb.Cars[car].Track) {
-        tracklist.push(`${cardb.Cars[car].Emote} ${cardb.Cars[car].Name}`);
-      }
-    }
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -77,10 +43,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 1 <a:season_1:1111097329836113920>\n
-          Le Mans 🏎️\n
-          Devils Mountain 🤘\n
-          Track Legends <:tracklegends:1072357967652995174>\n
-          Wet Warriors 🌧️
+          
       `);
 
     embed.setColor(colors.blue);
@@ -112,7 +75,7 @@ module.exports = {
 
             Earn notoriety from street race, and use that towards the Z Pass in /season!
 
-            **Ends July 12th 2023**
+            **Ends August 31st 2023**
 
                   `);
         embed.setThumbnail(seasondb.Seasons.Summer.Image);
@@ -124,124 +87,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "wetwarriors") {
-        embed.setTitle("Wet Warriors");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed
-          .setDescription(
-            `Its the season of rain! You're gonna slip and slide while trying to collect these warriors!
-
-        Go around the wet track collecting wet trophies as you see them, they'll randomly pop up to claim during your race!
-
-        Collect all the wet warriors while you can, this event is rare!
-
-        **VIEW THE OBTAINABLE WARRIORS WITH /unbox rain list: true**
-
-            **Ends June 30th 2023**
-
-                  `
-          )
-
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/sPW7X1t/wetwarriors.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "devilsmountain") {
-        embed.setTitle("Devils Mountain");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Can you beat the drift king?
-
-            Welcome to Devils Mountain, the longest, and hardest drift track ever, you're gonna need an extra good drift build to win against the drift king, his name is unknown.
-
-            Drift in /drift mountain extreme to race the drift king, you'll earn 3x drift rank for winning, an achievement if you win, 
-
-            Earn the title "DRIFT KING" for winning against him!
-            
-            The drift crate is also back with new cars temporarily!
-
-            **Ends July 1st 2023**
-
-                  `);
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/fXrT4K0/devilsmountain.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "tracklegends") {
-        embed.setTitle("Track Legends");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Track Legends returns with new cars to earn and try out! 
-
-        A brand new track race system, with twists and turns, decide when you should brake, it'll have you on your toes the entire time!
-
-        Have a chance to earn the car you beat! Be warned, if you lose, your car will be locked in impound!
-
-        Can you earn all the cars before you lose?
-
-        Brake advantages:
-
-        T1Brakes: +100 Score
-        T2Brakes: +200 Score
-        T3Brakes: +300 Score
-        T4Brakes: +400 Score
-        T5Brakes: +500 Score
-        TXBrakes: +600 Score
-        TXXBrakes: +700 Score
-
-        Cars you can obtain:
-
-        ${tracklist.join("\n")}
-
-        *Forget to break, and you'll be at a disadvantage!*
-
-            **Ends June 30st 2023**
-
-                  `);
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/nj58ZNY/event-tracklegends.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "lemans") {
-        embed.setTitle("Le Mans Event");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`
-        24 Hours of Le Mans has entered Zero2Sixty!
-
-        Race in the Le Mans to gain Le Keys, which will help you get Le Mans cars! 
-
-        Each car has a team its on, for example, a Porsche Le Mans car will be on the Porsche team and gain points for Porsche
-
-        At the end of the event, the team with the most points will get its own event!
-
-        I've given you 10 Le Keys to start, go to /unbox and unbox a Le Mans crate.
-
-            **Ends June 30st 2023**
-            
-                  `);
-        embed.setImage("https://i.ibb.co/4fb0D5V/events-lemans.png");
-        embed.setColor(colors.blue);
-
-        if (userdata.lemans !== true) {
-          userdata.lekeys += 10;
-          userdata.lemans = true;
-          userdata.save();
-        }
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      }
+      } 
     });
   },
 };

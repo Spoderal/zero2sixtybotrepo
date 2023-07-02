@@ -68,8 +68,19 @@ module.exports = {
         .setLabel("Engines")
         .setCustomId("engines")
         .setEmoji("<:v12:1069491173850353684>")
-        .setStyle("Secondary")
+        .setStyle("Secondary"),
+        
     );
+
+    let prow3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setLabel("Intercoolers")
+      .setCustomId("intercooler")
+      .setEmoji("<:part_t1intercooler:1123148189999038514>")
+      .setStyle("Secondary")
+
+    )
+
     let userdata = await User.findOne({ id: interaction.user.id });
     let part;
     let embed = new EmbedBuilder()
@@ -106,6 +117,8 @@ module.exports = {
     let enginearr = [];
     let gearboxarr = [];
 
+    let intercoolerarr = [];
+
     let partsarr = [];
     for (let p in parts.Parts) {
       part = parts.Parts[p];
@@ -137,6 +150,9 @@ module.exports = {
           enginearr.push(part);
         } else if (part.Type == "gearbox") {
           gearboxarr.push(part);
+        }
+        else if (part.Type == "intercooler") {
+          intercoolerarr.push(part);
         }
       }
     }
@@ -178,6 +194,10 @@ module.exports = {
     });
 
     gearboxarr = gearboxarr.sort((a, b) => {
+      return a.Price - b.Price;
+    });
+
+    intercoolerarr = intercoolerarr.sort((a, b) => {
       return a.Price - b.Price;
     });
 
@@ -225,6 +245,11 @@ module.exports = {
       1
     );
 
+    intercoolerarr = lodash.chunk(
+      intercoolerarr.map((a) => a),
+      1
+    );
+
     let row9 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("previous")
@@ -253,7 +278,7 @@ module.exports = {
 
     await interaction.editReply({
       embeds: [embed],
-      components: [row, prow2],
+      components: [row, prow2, prow3],
       fetchReply: true,
     });
 
@@ -322,7 +347,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -382,11 +407,73 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
-      } else if (i.customId.includes("intakes")) {
+      } 
+      else if (i.customId.includes("intercooler")) {
+        part = intercoolerarr[0][0];
+        let statsdisp = [];
+
+        if (part.AddedSpeed > 0) {
+          statsdisp.push(`${emotes.speed} Power: +${part.AddedSpeed}`);
+        }
+        if (part.DecreaseSpeed > 0) {
+          statsdisp.push(`${emotes.speed} Power: -${part.AddedSpeed}`);
+        }
+        if (part.AddedSixty > 0) {
+          statsdisp.push(
+            `${emotes.zero2sixty} Acceleration: -${part.AddedSixty}`
+          );
+        }
+        if (part.DecreasedSixty > 0) {
+          statsdisp.push(
+            `${emotes.zero2sixty} Acceleration: +${part.DecreasedSixty}`
+          );
+        }
+        if (part.AddHandling > 0) {
+          statsdisp.push(`${emotes.handling} Handling: +${part.AddHandling}`);
+        }
+        if (part.DecreasedHandling > 0) {
+          statsdisp.push(
+            `${emotes.handling} Handling: -${part.DecreasedHandling}`
+          );
+        }
+        if (part.AddWeight > 0) {
+          statsdisp.push(`${emotes.weight} Weight: +${part.AddWeight}`);
+        }
+        if (part.DecreaseWeight > 0) {
+          statsdisp.push(`${emotes.weight} Weight: -${part.DecreaseWeight}`);
+        }
+
+        if (part.Obtained) {
+          statsdisp.push(`Obtained: ${part.Obtained}`);
+        }
+
+        if (part.Price > 0) {
+          statsdisp.push(`\nPrice: ${toCurrency(part.Price)}`);
+        }
+
+        classpage = intercoolerarr;
+        let embed2 = new EmbedBuilder()
+          .setTitle(`${part.Emote} ${part.Name}`)
+          .setDescription(`**Stats**\n${statsdisp.join("\n")}`)
+          .setColor(colors.blue);
+
+        if (part.Image) {
+          embed2.setThumbnail(part.Image);
+        }
+
+        i.update({
+          embeds: [embed2],
+          fetchReply: true,
+          components: [row, prow2, prow3, row9, rowbuy],
+        });
+
+        page = 1;
+      } 
+      else if (i.customId.includes("intakes")) {
         part = intakearr[0][0];
         let statsdisp = [];
 
@@ -442,7 +529,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -502,7 +589,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -562,7 +649,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -622,7 +709,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -682,7 +769,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -742,7 +829,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, row9, prow3, rowbuy],
         });
 
         page = 1;
@@ -804,7 +891,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;
@@ -864,7 +951,7 @@ module.exports = {
         i.update({
           embeds: [embed2],
           fetchReply: true,
-          components: [row, prow2, row9, rowbuy],
+          components: [row, prow2, prow3, row9, rowbuy],
         });
 
         page = 1;

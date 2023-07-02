@@ -5,11 +5,17 @@
       "t1intercooler",
       "t2clutch",
       "t1tires",
+      "t1exhaust",
+      "t2exhaust",
+      "t2intercooler"
+    ],
+    "Cars":[
+      
       "1969 ford mustang",
       "1969 volkswagen beetle",
       "1973 plymouth barracuda"
     ],
-    "MaxCash": 10000,
+    "MaxCash": 5000,
     "Emoji": "<:commongarage:1036380413695897651>",
     "Image": "https://i.ibb.co/9HP0hRC/commongarage.png",
     "Rarity": 50
@@ -20,6 +26,13 @@
       "t3intercooler",
       "t3clutch",
       "t3tires",
+      "t2clutch",
+      "t1intercooler",
+      "t2intercooler",
+      "t2exhaust",
+      "t3intake"
+    ],
+    "Cars":[
       "1992 dodge viper",
       "1969 dodge daytona",
       "1973 pontiac trans am",
@@ -29,9 +42,10 @@
       "2023 acura integra",
       "2015 bmw m3",
       "2021 evora gt"
+      
     ],
     "Emoji": "<:raregarage:1036380412940918944>",
-    "MaxCash": 100000,
+    "MaxCash": 25000,
     "Image": "https://i.ibb.co/S7ydkYT/raregarage.png",
     "Rarity": 24
   },
@@ -42,17 +56,22 @@
       "t5clutch",
       "t4wintertires",
       "t4tires",
-      "$100,000",
+      "t3clutch",
+      "t3intercooler",
+      "t3intake"
+    ],
+    "Cars":[
       "1967 330 p4",
       "1966 lamborghini miura",
       "1989 lotus esprit",
       "2021 lamborghini sc20",
       "2022 ferrari 812 competizione",
       "2003 ferrari enzo"
+
     ],
-    "MaxCash": 100000,
+    "MaxCash": 50000,
     "Emoji": "<:legendarygarage:1036380411942670458>",
     "Image": "https://i.ibb.co/1GkR0Fz/legendarygarage.png",
-    "Rarity": 3
+    "Rarity": 1
   }
 }

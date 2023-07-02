@@ -19,17 +19,19 @@ async function isracing() {
       try {
         let bountycool = global.clearbounty;
         let udata = await User.findOne({ id: userdata.id });
+        let cooldowns = await Cooldowns.findOne({ id: userdata.id });
         let timeout = 4320000;
-
+      
         if (bountycool !== null && timeout - (Date.now() - bountycool) < 0) {
           udata.bounty = 0;
           global.clearbounty = Date.now();
-
+          
           udata.update();
           global.update();
-          udata.save();
           global.save();
+          udata.save();
         }
+        cooldowns.save();
       } catch (err) {
         console.log(err);
       }

@@ -66,26 +66,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  cmaps: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  ucmaps: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  rmaps: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
-  lmaps: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
+
   cars: {
     type: Array,
     required: false,
@@ -585,6 +566,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 10,
   },
+  barnmaps: {
+    type: Number,
+    required: false,
+    default: 0
+  },  
+  business: {
+    type: Object,
+    required: false,
+    default: {}
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

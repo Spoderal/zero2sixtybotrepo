@@ -108,5 +108,16 @@
     "Type": "House",
     "Space": 20,
     "Prestige": 10
+  },
+  "patrimonio dell appartamento": {
+    "id": "appartamento",
+    "Name": "Patrimonio Dell'Appartamento",
+    "Price": 0,
+    "Perk": "Earn 0.1x more cash in street races",
+    "Image": "https://i.ibb.co/XVssx3z/italian-homes-vs-american-homes-balcony-vs-porch.jpg",
+    "Emote": "🛖",
+    "Type": "House",
+    "Space": 0,
+    "Prestige": 0
   }
 }

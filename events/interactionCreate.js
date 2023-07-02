@@ -2,6 +2,7 @@ const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
 const Cooldowns = require("../schema/cooldowns");
+const Globals = require("../schema/global-schema");
 
 const {
   blacklistInteractionCheck,
@@ -46,13 +47,19 @@ module.exports = {
               ephemeral: true,
             });
           } else {
+            let timeout = 4000;
             cooldowndata.command_ran = Date.now();
+            if (
+              cooldowndata.is_racing !== null &&
+              timeout - (Date.now() - cooldowndata.is_racing) > 0
+            ) {
+            
+              return await interaction.reply({ content: `Wait for your race to finish to run other commands`, ephemeral: true });
+            }
+        
             await command.execute(interaction);
-            await interaction.channel.send({
-              content:
-                "All data will be reset June 31st, this is to overhaul the economy, making it better, and have everyone start from scratch, we hope you understand",
-              fetchReply: true,
-            });
+           
+       
           }
         } catch (err) {
           console.log(err);

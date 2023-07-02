@@ -98,28 +98,21 @@ module.exports = {
 
     let cashreward;
     let crater;
-    let cratereward = lodash.sample(["yes", "no", "no"]);
-    if (cratereward == "yes") {
-      crater = true;
-    }
-    let keysreward;
+
     let dranks;
     if (difficulty == "easy") {
-      keysreward = 1;
       time = 100;
       timelimit = 15;
       notorietyreward = 50;
       cashreward = 100;
       dranks = 1;
     } else if (difficulty == "medium") {
-      keysreward = 2;
       time = 250;
       timelimit = 10;
       notorietyreward = 100;
       cashreward = 250;
       dranks = 2;
     } else if (difficulty == "hard") {
-      keysreward = 3;
       time = 500;
       timelimit = 7;
 
@@ -127,7 +120,6 @@ module.exports = {
       cashreward = 500;
       dranks = 2;
     } else if (difficulty == "master") {
-      keysreward = 4;
       time = 550;
       timelimit = 5;
 
@@ -170,7 +162,6 @@ module.exports = {
     let trackimg;
     let trackemote;
     let miles = 0;
-    keysreward = 1;
     if (track == "regular") {
       trackemote = "🛣️";
       if (difficulty == "easy") {
@@ -208,12 +199,7 @@ module.exports = {
       }
       miles = 2;
     }
-    if (track == "mountain" && difficulty == "master") {
-      tracklength = 35000;
-      cashreward = cashreward * 4;
-      dranks = dranks * 3;
-      trackimg = "https://i.ibb.co/NF6jb79/devilsmountain2.png";
-    }
+
 
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
@@ -261,8 +247,7 @@ module.exports = {
           embed.setTitle(`${trackemote} ${difficulty} ${track} track lost.`);
           await interaction.editReply({ embeds: [embed] });
         } else if (tracklength <= 0) {
-          console.log(crater);
-          console.log(cratereward);
+          
           let earnings = [];
           let filteredhouse = userdata.houses.filter(
             (house) => house.Name == "Casa Sul Lago"
@@ -277,10 +262,7 @@ module.exports = {
           }
           //test
           earnings.push(`${emotes.cash} +${cashreward}`);
-          if (keysreward > 0) {
-            earnings.push(`${emotes.dirftKey} +${keysreward}`);
-            userdata.dkeyst += keysreward;
-          }
+         
 
           if (userdata.items.includes("match")) {
             dranks = dranks * 2;
@@ -311,23 +293,8 @@ module.exports = {
               ],
             }
           );
-          if (crater == true) {
-            earnings.push(
-              `+ ${cratedb.Crates["seasonal crate"].Emote} ${cratedb.Crates["seasonal crate"].Name}`
-            );
-            userdata.items.push("seasonal crate");
-          }
-          if (difficulty == "master") {
-            let filteredach = userdata.achievements.filter(
-              (ach) => ach.name == "Drift King"
-            );
-            userdata.masterwins += 1;
-            if (userdata.masterwins == 20 && !filteredach[0]) {
-              userdata.achievements.push({
-                name: "Drift King",
-              });
-            }
-          }
+    
+       
 
           if (difficulty == "master" && track == "mountain") {
             userdata.dkeyst += 2;

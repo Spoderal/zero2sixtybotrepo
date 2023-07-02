@@ -63,9 +63,8 @@
     "t4turbo",
     "t4weightreduction"
   ],
-  "Cash": [1000, 2000, 3000, 4000, 5000, 6000, 7500],
+  "Cash": 1000,
   "Maps": ["Common", "Common", "Rare"],
-  "Items": ["big bank increase", "bank increase"],
   "Helmets": [
     "platinum helmet",
     "gold helmet",
@@ -76,12 +75,5 @@
     "blue helmet",
     "flame helmet",
     "doge helmet"
-  ],
-  "SuperRare": [
-    "1991 acura nsx",
-    "1964 aston martin db5",
-    "2020 dodge charger hellcat",
-    "2017 jeep grand cherokee trackhawk",
-    "2018 audi rs5"
   ]
 }
