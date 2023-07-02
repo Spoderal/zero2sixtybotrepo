@@ -586,25 +586,24 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
 
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
-              if(houses.length > 0){
-                
+              if (houses.length > 0) {
                 let filteredhouse2 = houses.filter(
                   (house) => house.Name == "Casa Della Pace"
                 );
                 let filteredhouse1 = houses.filter(
                   (house) => house.Name == "Castello Verde"
                 );
-  
+
                 let filteredhouse3 = userdata.houses.filter(
                   (house) => house.Name == "Casa Sul Lago"
                 );
-  
+
                 let filteredhouse4 = userdata.houses.filter(
                   (house) => house.Name == "Villa Sull Acqua"
                 );
-  
+
                 if (userdata.houses && filteredhouse1[0]) {
                   cashwon = cashwon += cashwon * 0.05;
                 }
@@ -1043,23 +1042,22 @@ module.exports = {
               let earnings = [];
               let houses = userdata.houses || [];
 
-              if(houses.length > 0){
-                
+              if (houses.length > 0) {
                 let filteredhouse2 = houses.filter(
                   (house) => house.Name == "Casa Della Pace"
                 );
                 let filteredhouse1 = houses.filter(
                   (house) => house.Name == "Castello Verde"
                 );
-  
+
                 let filteredhouse3 = userdata.houses.filter(
                   (house) => house.Name == "Casa Sul Lago"
                 );
-  
+
                 let filteredhouse4 = userdata.houses.filter(
                   (house) => house.Name == "Villa Sull Acqua"
                 );
-  
+
                 if (userdata.houses && filteredhouse1[0]) {
                   cashwon = cashwon += cashwon * 0.05;
                 }
@@ -1432,25 +1430,24 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
-              if(houses.length > 0){
-                
+              if (houses.length > 0) {
                 let filteredhouse2 = houses.filter(
                   (house) => house.Name == "Casa Della Pace"
                 );
                 let filteredhouse1 = houses.filter(
                   (house) => house.Name == "Castello Verde"
                 );
-  
+
                 let filteredhouse3 = userdata.houses.filter(
                   (house) => house.Name == "Casa Sul Lago"
                 );
-  
+
                 let filteredhouse4 = userdata.houses.filter(
                   (house) => house.Name == "Villa Sull Acqua"
                 );
-  
+
                 if (userdata.houses && filteredhouse1[0]) {
                   cashwon = cashwon += cashwon * 0.05;
                 }
@@ -1811,25 +1808,24 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
-              if(houses.length > 0){
-                
+              if (houses.length > 0) {
                 let filteredhouse2 = houses.filter(
                   (house) => house.Name == "Casa Della Pace"
                 );
                 let filteredhouse1 = houses.filter(
                   (house) => house.Name == "Castello Verde"
                 );
-  
+
                 let filteredhouse3 = userdata.houses.filter(
                   (house) => house.Name == "Casa Sul Lago"
                 );
-  
+
                 let filteredhouse4 = userdata.houses.filter(
                   (house) => house.Name == "Villa Sull Acqua"
                 );
-  
+
                 if (userdata.houses && filteredhouse1[0]) {
                   cashwon = cashwon += cashwon * 0.05;
                 }
@@ -2518,25 +2514,24 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
-              if(houses.length > 0){
-                
+              if (houses.length > 0) {
                 let filteredhouse2 = houses.filter(
                   (house) => house.Name == "Casa Della Pace"
                 );
                 let filteredhouse1 = houses.filter(
                   (house) => house.Name == "Castello Verde"
                 );
-  
+
                 let filteredhouse3 = userdata.houses.filter(
                   (house) => house.Name == "Casa Sul Lago"
                 );
-  
+
                 let filteredhouse4 = userdata.houses.filter(
                   (house) => house.Name == "Villa Sull Acqua"
                 );
-  
+
                 if (userdata.houses && filteredhouse1[0]) {
                   cashwon = cashwon += cashwon * 0.05;
                 }

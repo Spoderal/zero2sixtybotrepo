@@ -131,9 +131,8 @@ module.exports = {
           id: "legacy",
           completed: true,
         });
-      }
-      else {
-        newuser.houses = []
+      } else {
+        newuser.houses = [];
       }
 
       newuser.cars.push(carobj);
