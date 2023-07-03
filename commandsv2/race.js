@@ -585,8 +585,7 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
 
-              let houses = userdata.houses || []
-
+              let houses = userdata.houses || [];
 
 
               if (pet.name) {
@@ -1382,7 +1381,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
            
 
@@ -1738,7 +1737,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
             
               let randomkey = randomRange(1, 5);
@@ -2422,7 +2421,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || []
+              let houses = userdata.houses || [];
 
             
               if (commonmaps && commonmaps > 0) {
