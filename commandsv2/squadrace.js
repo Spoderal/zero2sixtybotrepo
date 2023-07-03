@@ -113,7 +113,8 @@ module.exports = {
     }
     let squadinfo = squadfiltered[0];
     let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
-    let carimage = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Imager
+    let carimage =
+      selected.Image || cardb.Cars[selected.Name.toLowerCase()].Imager;
     let botcarindb = cars.Cars[botcar.toLowerCase()];
     let car2 = botcarindb;
     let selected1image = await loadImage(`${carimage}`);
@@ -176,7 +177,6 @@ module.exports = {
     let speed = 0;
     let speed2 = 0;
 
-  
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
@@ -208,8 +208,8 @@ module.exports = {
     let weightscore = Math.floor(weight / 100);
     let weightscore2 = Math.floor(weight2 / 100);
 
-    speed = mph * 100
-    speed2 = mph2 * 100
+    speed = mph * 100;
+    speed2 = mph2 * 100;
 
     let player = (handling + speed - weightscore) / acceleration;
     console.log(player);
@@ -220,8 +220,7 @@ module.exports = {
     const dorace = () => {
       const playerRegression = player;
       const opponentRegression = opponent;
-      winner =
-        playerRegression >= opponentRegression ? "Player" : "Opponent";
+      winner = playerRegression >= opponentRegression ? "Player" : "Opponent";
 
       const string =
         `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
@@ -232,10 +231,7 @@ module.exports = {
 
     dorace();
 
-      setTimeout(async () => {
-        
-     
-
+    setTimeout(async () => {
       if (winner == "Player") {
         embed.setTitle(`${squadinfo.Name} race won!`);
 
