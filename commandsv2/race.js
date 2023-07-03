@@ -490,7 +490,7 @@ module.exports = {
           }
           car2 = lodash.sample(car2);
 
-          let craterare = randomRange(1, 20);
+          let craterare = randomRange(1, 50);
 
           let crateearned;
 
@@ -909,7 +909,7 @@ module.exports = {
 
           console.log(car2);
 
-          let craterare = randomRange(1, 20);
+          let craterare = randomRange(1, 50);
 
           let crateearned;
 
@@ -1273,7 +1273,7 @@ module.exports = {
 
           console.log(car2);
 
-          let craterare = randomRange(1, 20);
+          let craterare = randomRange(1, 50);
 
           let crateearned;
 
@@ -1627,7 +1627,7 @@ module.exports = {
 
           console.log(car2);
 
-          let craterare = randomRange(1, 20);
+          let craterare = randomRange(1, 50);
 
           let crateearned;
 
@@ -2312,7 +2312,7 @@ module.exports = {
 
           console.log(car2);
 
-          let craterare = randomRange(1, 20);
+          let craterare = randomRange(1, 50);
 
           let crateearned;
 
