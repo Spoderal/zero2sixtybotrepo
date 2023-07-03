@@ -244,24 +244,7 @@ module.exports = {
           // moneyearnedtxt += calccash;
           moneyearned += calccash;
         }
-        if (
-          (userdata.patreon && userdata.patreon.tier == 1) ||
-          (userdata.patreon && userdata.patreon.tier == 2)
-        ) {
-          let patronbonus = moneyearned * 1.5;
-
-          moneyearned += patronbonus;
-        }
-        if (userdata.patreon && userdata.patreon.tier == 3) {
-          let patronbonus = moneyearned * 2;
-
-          moneyearned += patronbonus;
-        }
-        if (userdata.patreon && userdata.patreon.tier == 4) {
-          let patronbonus = moneyearned * 4;
-
-          moneyearned += patronbonus;
-        }
+        
         let newnum = (sqlevelfiltered[0].car += 1);
         await User.findOneAndUpdate(
           {
@@ -284,8 +267,8 @@ module.exports = {
 
         let earningsresult = [];
         earningsresult.push(`$${moneyearned}`);
-
-        userdata.cash += parseInt(moneyearned);
+        moneyearned = Number(moneyearned)
+        userdata.cash += moneyearned
         userdata.update();
         let newlevel = sqlevels.filter(
           (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
@@ -311,6 +294,8 @@ module.exports = {
         userdata.save();
       } else if (winner == "Opponent") {
         let moneye = moneyearned / 5;
+        
+        moneye = Number(moneye)
         embed.setTitle(`Race lost!`);
 
         embed.addFields([
