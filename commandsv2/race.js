@@ -556,7 +556,8 @@ module.exports = {
 
           let weightscore = Math.floor(weight / 100);
           let weightscore2 = Math.floor(weight2 / 100);
-
+          speed = speed * 100
+          speed2 = speed2 * 100
           let player = (handling + speed - weightscore) / acceleration;
           console.log(player);
           let opponent = (handling2 + speed2 - weightscore2) / acceleration2;

@@ -113,9 +113,10 @@ module.exports = {
     }
     let squadinfo = squadfiltered[0];
     let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
+    let carimage = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Imager
     let botcarindb = cars.Cars[botcar.toLowerCase()];
     let car2 = botcarindb;
-    let selected1image = await loadImage(`${selected.Livery}`);
+    let selected1image = await loadImage(`${carimage}`);
     let selected2image = await loadImage(`${car2.Image}`);
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     const squadimg = await loadImage(squadfiltered[0].Icon);
@@ -175,25 +176,7 @@ module.exports = {
     let speed = 0;
     let speed2 = 0;
 
-    let accms = acceleration * 10;
-    let accms2 = acceleration2 * 10;
-
-    let x = setInterval(() => {
-      if (speed < mph) {
-        speed++;
-      } else {
-        clearInterval(x);
-      }
-    }, accms);
-    let x2 = setInterval(() => {
-      if (speed2 < mph2) {
-        speed2++;
-      } else {
-        clearInterval(x2);
-      }
-    }, accms2);
-    let sec;
-    let sec2;
+  
     let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
 
     let embed = new EmbedBuilder()
@@ -222,36 +205,38 @@ module.exports = {
       fetchReply: true,
     });
 
-    handling = handling / 100;
-    handling2 = handling2 / 100;
+    let weightscore = Math.floor(weight / 100);
+    let weightscore2 = Math.floor(weight2 / 100);
 
-    let i2 = setInterval(async () => {
-      if (speed2 > mph2) {
-        speed2 = mph2;
-      }
-      if (speed > mph) {
-        speed = mph;
-      }
-      console.log(`speed ${speed}`);
-      console.log(`speed2 ${speed2}`);
-      speed / 6;
-      handling = handling / 100;
-      handling2 = handling2 / 100;
-      speed2 / 6;
+    speed = mph * 100
+    speed2 = mph2 * 100
 
-      let formula = (speed += handling += weight / 100);
+    let player = (handling + speed - weightscore) / acceleration;
+    console.log(player);
+    let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
-      console.log(formula);
+    console.log(opponent);
+    let winner;
+    const dorace = () => {
+      const playerRegression = player;
+      const opponentRegression = opponent;
+      winner =
+        playerRegression >= opponentRegression ? "Player" : "Opponent";
 
-      // car 2
+      const string =
+        `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+        `- Winner: ${winner}\n`;
 
-      let formula2 = (speed2 += handling2 += weight2 / 100);
-      console.log(formula2);
+      return string;
+    };
 
-      tracklength -= formula;
-      tracklength2 -= formula2;
+    dorace();
 
-      if (tracklength <= 0) {
+      setTimeout(async () => {
+        
+     
+
+      if (winner == "Player") {
         embed.setTitle(`${squadinfo.Name} race won!`);
 
         if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
@@ -328,8 +313,7 @@ module.exports = {
         }
 
         userdata.save();
-        clearInterval(i2);
-      } else if (tracklength2 <= 0) {
+      } else if (winner == "Opponent") {
         let moneye = moneyearned / 5;
         embed.setTitle(`Race lost!`);
 
@@ -341,7 +325,6 @@ module.exports = {
         ]);
         userdata.cash += Number(moneye);
 
-        clearInterval(i2);
         if (range > 0) {
           selected.Range -= 1;
         }
@@ -352,7 +335,7 @@ module.exports = {
 
       console.log(tracklength);
       console.log(tracklength2);
-    }, 1000);
+    }, 3000);
   },
 };
 function roundedImage(ctx, x, y, width, height, radius) {
