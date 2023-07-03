@@ -80,7 +80,7 @@ module.exports = {
     }
     let velocity = selected.Speed;
 
-    if (velocity >= 300)
+    if (velocity >= 700)
       return interaction.reply("Your car is too fast so it crashed!");
 
     let acc = selected.Acceleration;
