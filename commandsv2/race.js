@@ -351,7 +351,7 @@ module.exports = {
         }
         embed.setDescription(
           `${toCurrency(
-            bountyuser * 0.10
+            bountyuser * 0.1
           )} bonus cash from bounty\n${bonus}x bonus cash from prestige\n\n${rewardsarr.join(
             "\n"
           )}`
@@ -708,7 +708,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser * 0.10;
+                cashwon = cashwon += bountyuser * 0.1;
               }
 
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
@@ -1120,7 +1120,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser * 0.10;
+                cashwon = cashwon += bountyuser * 0.1;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -1475,7 +1475,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser * 0.10;
+                cashwon = cashwon += bountyuser * 0.1;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -1890,7 +1890,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser * 0.10;
+                cashwon = cashwon += bountyuser * 0.1;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
@@ -2419,7 +2419,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser * 0.10;
+                cashwon = cashwon += bountyuser * 0.1;
               }
 
               if (crateearned !== undefined) {
@@ -2530,7 +2530,7 @@ module.exports = {
                 cashwon = cashwon += cashwon * bonus;
               }
               if (bountyuser > 0) {
-                cashwon = cashwon += bountyuser * 0.10;
+                cashwon = cashwon += bountyuser * 0.1;
               }
               earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
               earnings.push(`${emotes.rp} +${rpwon}`);
