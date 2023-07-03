@@ -133,7 +133,11 @@ module.exports = {
         let richFiltered = userdata.achievements.filter(
           (achievement) => achievement.name == "Rich"
         );
-        if (richFiltered.length == 0 && interaction.user.id == userdata.id && userdata.cash >= 100000) {
+        if (
+          richFiltered.length == 0 &&
+          interaction.user.id == userdata.id &&
+          userdata.cash >= 100000
+        ) {
           console.log("none");
           userdata.achievements.push({
             name: "Rich",
@@ -146,7 +150,11 @@ module.exports = {
         let richFiltered2 = userdata.achievements.filter(
           (achievement) => achievement.name == "Richer"
         );
-        if (richFiltered2.length == 0 && interaction.user.id == userdata.id && userdata.cash >= 1000000) {
+        if (
+          richFiltered2.length == 0 &&
+          interaction.user.id == userdata.id &&
+          userdata.cash >= 1000000
+        ) {
           console.log("none");
           userdata.achievements.push({
             name: "Richer",
@@ -159,7 +167,11 @@ module.exports = {
         let richFiltered3 = userdata.achievements.filter(
           (achievement) => achievement.name == "Richest"
         );
-        if (richFiltered3.length == 0 && interaction.user.id == userdata.id && userdata.cash >= 100000000) {
+        if (
+          richFiltered3.length == 0 &&
+          interaction.user.id == userdata.id &&
+          userdata.cash >= 100000000
+        ) {
           console.log("none");
           userdata.achievements.push({
             name: "Richest",
