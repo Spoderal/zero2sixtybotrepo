@@ -109,9 +109,6 @@ module.exports = {
               value: `
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
-              ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
-              ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}\n
-              ${emotes.raintrophy} Rain Trophies ${numberWithCommas(raintrophy)}
               `,
               inline: true,
             },
@@ -136,7 +133,7 @@ module.exports = {
         let richFiltered = userdata.achievements.filter(
           (achievement) => achievement.name == "Rich"
         );
-        if (richFiltered.length == 0 && interaction.user.id == userdata.id) {
+        if (richFiltered.length == 0 && interaction.user.id == userdata.id && userdata.cash >= 100000) {
           console.log("none");
           userdata.achievements.push({
             name: "Rich",
@@ -149,7 +146,7 @@ module.exports = {
         let richFiltered2 = userdata.achievements.filter(
           (achievement) => achievement.name == "Richer"
         );
-        if (richFiltered2.length == 0 && interaction.user.id == userdata.id) {
+        if (richFiltered2.length == 0 && interaction.user.id == userdata.id && userdata.cash >= 1000000) {
           console.log("none");
           userdata.achievements.push({
             name: "Richer",
@@ -162,7 +159,7 @@ module.exports = {
         let richFiltered3 = userdata.achievements.filter(
           (achievement) => achievement.name == "Richest"
         );
-        if (richFiltered3.length == 0 && interaction.user.id == userdata.id) {
+        if (richFiltered3.length == 0 && interaction.user.id == userdata.id && userdata.cash >= 100000000) {
           console.log("none");
           userdata.achievements.push({
             name: "Richest",
@@ -244,9 +241,6 @@ module.exports = {
             value: `
           ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
           ${emotes.rp}  RP: ${numberWithCommas(rp4)}
-          ${emotes.lekey} Le Keys: ${numberWithCommas(lekeys)}
-          ${emotes.dirftKey} Drift Keys ${numberWithCommas(dkeys)}\n
-          ${emotes.raintrophy} Rain Trophies ${numberWithCommas(raintrophy)}
           `,
             inline: true,
           },
