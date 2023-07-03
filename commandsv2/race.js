@@ -102,9 +102,7 @@ module.exports = {
       cooldowndata.bounty !== null &&
       bountytimeout - (Date.now() - cooldowndata.bounty) > 0
     ) {
-      interaction.channel.send(
-        "Your bounty reset, it resets every **1 hour**"
-      );
+      interaction.channel.send("Your bounty reset, it resets every **1 hour**");
       cooldowndata.bounty = 0;
       userdata.bounty = 0;
       userdata.update();
@@ -587,7 +585,6 @@ module.exports = {
 
               
 
-
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
 
@@ -1013,7 +1010,6 @@ module.exports = {
               let earnings = [];
               
 
-  
               let wheelrandom = randomRange(1, 5);
               if (wheelrandom == 2) {
                 userdata.wheelspins += wheelspins;
@@ -1381,8 +1377,6 @@ module.exports = {
               let earnings = [];
        
 
-           
-
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
                 earnings.push(
@@ -1737,7 +1731,6 @@ module.exports = {
               let earnings = [];
 
 
-            
               let randomkey = randomRange(1, 5);
               if (randomkey == 2) {
                 earnings.push(`${emotes.commonKey} +${commonkeys}`);
@@ -2420,7 +2413,6 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
 
-            
               if (commonmaps && commonmaps > 0) {
                 let randommap = randomRange(1, 5);
                 if (randommap == 2) {
