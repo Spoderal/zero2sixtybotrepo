@@ -585,7 +585,7 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
 
-              let houses = userdata.houses || [];
+              
 
 
               if (pet.name) {
@@ -616,9 +616,7 @@ module.exports = {
                   `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
                 );
 
-                if (userdata.houses && filteredhouse4[0]) {
-                  xessneceearn = xessneceearn * 2;
-                }
+            
 
                 userdata.xessence += xessneceearn;
                 if (usinginv.includes("pet collar")) {
@@ -1013,7 +1011,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || [];
+              
 
   
               let wheelrandom = randomRange(1, 5);
@@ -1381,7 +1379,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || [];
+       
 
            
 
@@ -1737,7 +1735,7 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || [];
+
 
             
               let randomkey = randomRange(1, 5);
@@ -2421,7 +2419,6 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let houses = userdata.houses || [];
 
             
               if (commonmaps && commonmaps > 0) {

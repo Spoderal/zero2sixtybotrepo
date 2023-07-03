@@ -124,16 +124,6 @@ module.exports = {
         WeightStat: carindb.Weight,
       };
 
-      if (globals.legacy.includes(interaction.user.id)) {
-        newuser.houses.push(houses["patrimonio dell appartamento"]);
-        newuser.achievements.push({
-          name: "Legacy",
-          id: "legacy",
-          completed: true,
-        });
-      } else {
-        newuser.houses = [];
-      }
 
       newuser.cars.push(carobj);
       newuser.save();
