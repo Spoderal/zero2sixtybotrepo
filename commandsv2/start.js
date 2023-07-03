@@ -124,7 +124,6 @@ module.exports = {
         WeightStat: carindb.Weight,
       };
 
-
       newuser.cars.push(carobj);
       newuser.save();
       await i.update(

@@ -583,8 +583,6 @@ module.exports = {
             if (winner == "Player") {
               let earnings = [];
 
-              
-
               if (pet.name) {
                 let xessneceearn = lodash.random(pet.xessence);
 
@@ -612,8 +610,6 @@ module.exports = {
                 earnings.push(
                   `${petdb[pet.pet].Emote} +${xessneceearn} Xessence`
                 );
-
-            
 
                 userdata.xessence += xessneceearn;
                 if (usinginv.includes("pet collar")) {
@@ -1008,7 +1004,6 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              
 
               let wheelrandom = randomRange(1, 5);
               if (wheelrandom == 2) {
@@ -1375,7 +1370,6 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-       
 
               if (crateearned !== undefined) {
                 userdata.items.push(crateearned);
@@ -1729,7 +1723,6 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-
 
               let randomkey = randomRange(1, 5);
               if (randomkey == 2) {
