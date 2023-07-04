@@ -207,7 +207,7 @@ module.exports = {
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
-        } 
+        }
 
         userdata.save();
       }, 500);
