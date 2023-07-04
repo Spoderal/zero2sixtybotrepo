@@ -103,7 +103,8 @@ module.exports = {
     };
     userdata.barnmaps -= 1;
 
-    let arrByID = cars.find((item) => item.Name == carobj.Name);
+    let arrByID = cars.filter((item) => item.Name == carobj.Name);
+    console.log(arrByID)
     if (arrByID[0]) {
       await interaction.reply(
         `You found a ${carindb.Name} but you already have this car..`

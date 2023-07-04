@@ -23,6 +23,30 @@
       "Emote": "<:supplydrop:1044404467119960085>",
       "Image": "https://i.ibb.co/dQ2D2yT/supplydrop.png"
     },
+    "vote crate": {
+      "Contents": [
+        "green helmet",
+        "red helmet",
+        "blue helmet",
+        "cat helmet",
+        "yellow helmet",
+        "touch grass helmet",
+        "dark matter helmet",
+        "dark matter helmet",
+        "cherry blossom helmet",
+        "cardboard helmet",
+        "cherry blossom helmet",
+        "t1clutch",
+        "450 Cash",
+        "1000 Cash",
+        "500 Cash",
+        "250 Cash",
+        "500 Cash"
+      ],
+      "Name": "Vote Crate",
+      "Emote": "<:votecrate:1125629728175431761>",
+      "Image": "https://i.ibb.co/TTs8ym4/votecrate.png"
+    },
     "rare crate": {
       "Contents": [
         "flame helmet",

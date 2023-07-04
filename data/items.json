@@ -722,6 +722,15 @@
     "Findable": false,
     "Shop": false
   },
+  "vote crate": {
+    "Price": 0,
+    "Action": "Open a vote crate to get cosmetics, cash, and more!",
+    "Name": "Vote Crate",
+    "Type": "Usable",
+    "Emote": "<:votecrate:1125629728175431761>",
+    "Findable": false,
+    "Shop": false
+  },
   "rare crate": {
     "Price": 0,
     "Action": "Open a rare crate to get cosmetics, cash, and more!",

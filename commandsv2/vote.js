@@ -20,14 +20,13 @@ module.exports = {
     if (voted == false) return await interaction.reply({ embeds: [embed] });
 
     userdata.cash += 2000;
-    userdata.wheelspins += 1;
-    userdata.items.push("common crate");
+    userdata.items.push("vote crate");
     userdata.hasvoted = false;
 
     let embed2 = new Discord.EmbedBuilder()
       .setThumbnail("https://i.ibb.co/JjrvkQs/smalllogo.png")
       .setDescription(
-        "Thank you for voting! Here's $2k cash, a common crate, and a wheelspin! 💙\n\nTip: Support us even more by purchasing gold! Join the support server to learn more."
+        "Thank you for voting! Here's a <:votecrate:1125629728175431761> vote crate! 💙\n\nTip: Support us even more by purchasing gold! Join the support server to learn more."
       );
     embed.setColor(colors.blue);
 

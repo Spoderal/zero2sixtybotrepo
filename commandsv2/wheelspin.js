@@ -35,7 +35,7 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-    let items = ["🏎️", "💵", "⚙️", "🗺️"];
+    let items = ["🏎️", "💵", "⚙️"];
     let item = lodash.sample(items);
     let using = userdata.using;
 
@@ -207,21 +207,7 @@ module.exports = {
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🗺️") {
-          let reward = lodash.sample(maps);
-          switch (reward) {
-            case "Common":
-              userdata.cmaps += 1;
-              break;
-            case "Rare":
-              userdata.rmaps += 1;
-              break;
-          }
-          embed.setDescription(
-            `You won a ${numberWithCommas(reward)} barn map!`
-          );
-          interaction.editReply({ embeds: [embed] });
-        }
+        } 
 
         userdata.save();
       }, 500);
