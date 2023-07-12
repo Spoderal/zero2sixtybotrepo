@@ -247,7 +247,7 @@ module.exports = {
                 Miles: 0,
                 WeightStat: carindb.Weight,
                 Gas: 0,
-                MaxGas: 0
+                MaxGas: 0,
               };
 
               userdata.cars.push(carobj);
@@ -287,7 +287,7 @@ module.exports = {
                 Miles: 0,
                 WeightStat: carindb.Weight,
                 Gas: 0,
-                MaxGas: 0
+                MaxGas: 0,
               };
 
               userdata.cars.push(carobj);
@@ -327,7 +327,7 @@ module.exports = {
                 Miles: 0,
                 WeightStat: carindb.Weight,
                 Gas: 0,
-                MaxGas: 0
+                MaxGas: 0,
               };
 
               userdata.cars.push(carobj);

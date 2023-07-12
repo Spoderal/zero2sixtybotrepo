@@ -14,7 +14,7 @@ module.exports = {
     let key3emote = emotes.exoticKey;
     let key4emote = emotes.mclaren;
     let goldemote = emotes.gold;
-    let key5emote = emotes.dirftKey
+    let key5emote = emotes.dirftKey;
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Kaylas Import Crates")

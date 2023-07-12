@@ -158,7 +158,7 @@ module.exports = {
                   Miles: 0,
                   Gas: 10,
                   MaxGas: 10,
-                  WeightStat: carindb.Weight
+                  WeightStat: carindb.Weight,
                 };
 
                 let carobj = {
@@ -173,7 +173,7 @@ module.exports = {
                   Miles: 0,
                   Gas: 10,
                   MaxGas: 10,
-                  WeightStat: carindb.Weight
+                  WeightStat: carindb.Weight,
                 };
 
                 if (carsdb.Cars[reward.toLowerCase()].Range) {
