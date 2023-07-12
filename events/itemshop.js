@@ -83,40 +83,42 @@ async function updateItemShop() {
       let item5 = randitem5.Name;
       let item6 = randitem6.Name;
 
-      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log(timeout - (Date.now() - itemcooldown));
-        console.log("true");
-        items.push(item1);
-        items.push(item2);
-        items.push(item3);
-        items.push(item4);
-        items.push(item5);
-        items.push(item6);
-
-        try {
-          global.itemshop = items;
-          global.update();
-          global.itemshopcooldown = Date.now();
-
-          global.update();
-          let randomgas = lodash.sample([`up`, `down`]);
-          let randomupdown = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
-          let randominc = lodash.sample(randomupdown);
-          if (randomgas == `up`) {
-            global.gas += randominc;
-          } else if (randomgas == `down`) {
-            global.gas -= randominc;
-          }
-          global.update();
-          global.save();
-        } catch (err) {
-          console.log(err);
-        }
-
-        console.log(item1);
-      } else {
-        return;
+      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) > 0) {
+        return
       }
+        else {
+
+          console.log(timeout - (Date.now() - itemcooldown));
+          console.log("true");
+          items.push(item1);
+          items.push(item2);
+          items.push(item3);
+          items.push(item4);
+          items.push(item5);
+          items.push(item6);
+  
+          try {
+            global.itemshop = items;
+            global.update();
+            global.itemshopcooldown = Date.now();
+  
+            global.update();
+            let randomgas = lodash.sample([`up`, `down`]);
+            let randomupdown = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
+            let randominc = lodash.sample(randomupdown);
+            if (randomgas == `up`) {
+              global.gas += randominc;
+            } else if (randomgas == `down`) {
+              global.gas -= randominc;
+            }
+            global.update();
+            global.save();
+          } catch (err) {
+            console.log(err);
+          }
+  
+          console.log(item1);
+        }
     }
   }, 60000);
 }
