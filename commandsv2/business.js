@@ -119,7 +119,7 @@ module.exports = {
           },
           {
             name: `Customers/Day`,
-            value: `👥 ${ubusiness.Customers}`,
+            value: `👥 ${ubusiness.CustomerD}/${ubusiness.Customers}`,
           },
           {
             name: `Reputation`,
