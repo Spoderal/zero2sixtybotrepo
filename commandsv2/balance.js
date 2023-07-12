@@ -129,9 +129,6 @@ module.exports = {
         if (!achievements) {
           achievements = ["None"];
         }
-
-    
-
       }
     } else if (userdata.police == true) {
       let bountyemote = emotes.bounty;
