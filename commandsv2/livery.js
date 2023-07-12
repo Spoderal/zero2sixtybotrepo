@@ -161,9 +161,12 @@ module.exports = {
       let list = cars.Cars;
       if (!list[car.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
-      let cardata = liverieslist.filter((car) => car.Name.toLowerCase() == car.toLowerCase());
-      console.log(cardata)
-      if (!cardata[0])   return await interaction.reply("This car doesn't have any livery id's");
+      let cardata = liverieslist.filter(
+        (car) => car.Name.toLowerCase() == car.toLowerCase()
+      );
+      console.log(cardata);
+      if (!cardata[0])
+        return await interaction.reply("This car doesn't have any livery id's");
 
       let filtered = cardata.filter((e) => e.id == livid);
 
