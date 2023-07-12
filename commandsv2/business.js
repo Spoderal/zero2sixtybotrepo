@@ -7,6 +7,8 @@ const {
   ActionRow,
 } = require("discord.js");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
+
 const { toCurrency, randomRange } = require("../common/utils");
 const cardb = require("../data/cardb.json");
 const colors = require("../common/colors");
@@ -19,8 +21,10 @@ module.exports = {
     .setDescription("View the business menu"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
+    let cooldowns = await Cooldowns.findOne({id: interaction.user.id})
     let businessarr = [];
     let ubusiness = userdata.business;
+    let businesscooldown = cooldowns.business 
     for (let bus in businesses) {
       businessarr.push(businesses[bus]);
     }
@@ -28,17 +32,18 @@ module.exports = {
     let embed;
     let timeout = 86400000;
     if (
-      ubusiness &&
+      ubusiness !== null &&
       ubusiness.CustomerD == 0 &&
-      ubusiness.Cooldown !== null &&
-      timeout - (Date.now() - ubusiness.Cooldown) > 0
+      businesscooldown !== null &&
+      timeout - (Date.now() - businesscooldown) > 0
     ) {
       return;
     } else {
       userdata.business.CustomerD = userdata.business.Customers;
-      userdata.business.Cooldown = 0;
+      cooldowns.business = Date.now()
       userdata.markModified("business");
       userdata.save();
+      cooldowns.save()
       await interaction.reply(`Your customers have been filled!`);
     }
 
@@ -322,7 +327,7 @@ module.exports = {
           userdata.business.Served += 1;
           userdata.business.CustomerD -= 1;
           if (userdata.business.CustomerD == 0) {
-            userdata.business.Cooldown = Date.now();
+            cooldowns.business = Date.now();
           }
           if (userdata.business.Reputation < 100) {
             userdata.business.Reputation += 1;

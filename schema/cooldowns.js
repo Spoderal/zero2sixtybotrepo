@@ -226,6 +226,11 @@ const Cooldowns = new mongoose.Schema({
     type: Number,
     required: false,
     default: 0,
+  }, 
+   business: {
+    type: Number,
+    required: false,
+    default: 0,
   },
   trading: {
     type: Number,
