@@ -160,7 +160,7 @@ module.exports = {
           let earnings = [];
 
           clearInterval(timeint);
-          let cashwon = 5000 / time;
+          let cashwon = 100 / time;
           earnings.push(`${emotes.cash} +${toCurrency(cashwon)}`);
 
           userdata.cash += cashwon;
