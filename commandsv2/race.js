@@ -410,7 +410,9 @@ module.exports = {
     setTimeout(async () => {
       if (winner == "Player") {
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
+        rewards.push(`<:rank_race:1103913420320944198> +1 Rank`)
         userdata.cash += cashwon;
+        userdata.racerank += 1
         let cratechance = randomRange(1, 500);
         if (cratechance >= 400) {
           rewards.push(`<:supplydrop:1044404467119960085> Common Crate`);
