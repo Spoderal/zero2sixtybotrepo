@@ -108,7 +108,7 @@ module.exports = {
       let mult = prestige * 0.05;
 
       let multy = mult * moneyearned;
-
+      
       moneyearned = moneyearned += multy;
     }
     let squadinfo = squadfiltered[0];
