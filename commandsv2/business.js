@@ -32,10 +32,7 @@ module.exports = {
     let embed;
     let timeout = 86400000;
     if (
-      ubusiness !== null &&
-      ubusiness.CustomerD == 0 &&
-      businesscooldown !== null &&
-      timeout - (Date.now() - businesscooldown) > 0
+      businesscooldown !== null && timeout - (Date.now() - businesscooldown) > 0
     ) {
       return;
     } else {

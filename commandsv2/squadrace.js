@@ -122,31 +122,7 @@ module.exports = {
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     const squadimg = await loadImage(squadfiltered[0].Icon);
 
-    ctx.save();
-    roundedImage(ctx, 640, 200, 640, 360, 20);
-    ctx.stroke();
-    ctx.clip();
-    ctx.drawImage(selected2image, 640, 200, 640, 360);
-    ctx.restore();
 
-    ctx.save();
-    roundedImage(ctx, 0, 200, 640, 360, 20);
-    ctx.stroke();
-    ctx.clip();
-    ctx.drawImage(selected1image, 0, 200, 640, 360);
-    ctx.restore();
-    ctx.font = "40px sans-serif";
-    ctx.fillStyle = "#ffffff";
-
-    ctx.fillText(selected.Name, 75, 180);
-
-    ctx.fillText(car2.Name, 845, 180);
-    ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-
-    ctx.drawImage(squadimg, 540, 50, 200, 200);
-    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-      name: "profile-image.png",
-    });
 
     let racelevel = userdata.racerank;
 
@@ -197,11 +173,11 @@ module.exports = {
         }
       )
       .setColor(colors.blue)
-      .setImage("attachment://profile-image.png");
-
+      .setImage(carimage)
+      .setThumbnail(botcarindb.Image)
+      
    await interaction.editReply({
       embeds: [embed],
-      files: [attachment],
       fetchReply: true,
     });
 
