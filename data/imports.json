@@ -52,16 +52,14 @@
       "2023 ferrari daytona sp3",
       "2022 ferrari br20",
       "2024 aston martin valhalla",
-      "1991 hoonigan porsche 911 turbo",
-      "1965 hoonigan ford mustang hoonicorn",
-      "1978 hoonigan ford escort mk2 rs1800",
       "2017 mercedes amg one",
       "2022 aston martin valkyrie",
       "2006 koenigsegg ccx",
       "2007 koenigsegg ccgt",
       "2024 lotus eletra",
       "1993 porsche 959",
-      "2011 mercedes sl65 amg black series"
+      "2011 mercedes sl65 amg black series",
+      "2017 dodge viper acr"
     ]
   },
   "le mans": {
@@ -119,35 +117,27 @@
   },
   "blueprints": {
     "Contents": [
-      "1981 dmc delorean",
-      "50000 Cash",
-      "2015 mercedes c class",
-      "1984 renault 5 turbo 2",
+      "5000 Cash",
+      "2500 Cash",
+      "2500 Cash",
+      "2500 Cash",
+      "2500 Cash",
+      "5000 Cash",
+      "5000 Cash",
+      "5000 Cash",
       "25000 Cash",
-      "25000 Cash",
-      "25000 Cash",
-      "2013 porsche 911 turbo",
-      "25000 Cash",
-      "50000 Cash",
-      "50000 Cash",
-      "50000 Cash",
-      "25000 Cash",
-      "25000 Cash",
-      "25000 Cash",
-      "25000 Cash",
+      "2500 Cash",
+      "2500 Cash",
+      "2500 Cash",
 
-      "25000 Cash",
-      "25000 Cash",
-      "25000 Cash",
-      "50000 Cash",
-      "50000 Cash",
-      "50000 Cash",
+      "2500 Cash",
+      "2500 Cash",
+      "2500 Cash",
+      "5000 Cash",
+      "5000 Cash",
+      "5000 Cash",
 
-      "50000 Cash",
-      "t4exhaust",
-      "t4exhaust",
-      "t4exhaust",
-      "t5intake"
+      "5000 Cash"
     ]
   },
   "carsblueprints": {

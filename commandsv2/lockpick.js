@@ -90,24 +90,26 @@ module.exports = {
     let carchance3 = randomRange(1, 10);
 
     var chooser = randomNoRepeats(garageindb.Contents);
+    var chooser2 = randomNoRepeats(garageindb.Cars);
     let rand1;
     let rand2;
     let rand3;
     if (carchance1 >= 6) {
-      rand1 = chooser();
+      rand1 = chooser()
     } else {
-      rand1 = randomNoRepeats(garageindb.Cars);
+      rand1 = chooser2()
     }
     if (carchance2 >= 6) {
-      rand2 = chooser();
+      rand2 = chooser()
     } else {
-      rand2 = randomNoRepeats(garageindb.Cars);
+      rand2 = chooser2()
     }
     if (carchance3 >= 6) {
-      rand3 = chooser();
+      rand3 = chooser()
     } else {
-      rand3 = randomNoRepeats(garageindb.Cars);
+      rand3 = chooser2()
     }
+    console.log(rand1)
 
     let randcash = lodash.random(garageindb.MaxCash);
     let randomarray = [rand1, rand2, rand3];

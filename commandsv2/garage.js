@@ -154,7 +154,7 @@ module.exports = {
         name: `${car.Emote} ${car.Name} ${favorite}`,
         value: `${tag}\n${
           emotes.emotes.PT
-        } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${car.ID}\``,
+        } PT: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n⛽ Gas: ${car.Gas}\n\`ID: ${car.ID}\``,
         inline: true,
       });
     }
@@ -307,9 +307,9 @@ module.exports = {
             name: `${car.Emote} ${car.Name} ${favorite}`,
             value: `${tag}\n${
               emotes.emotes.PT
-            } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${
+            } PT: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
               car.ID
-            }\``,
+            }\n⛽ Gas: ${car.Gas}\``,
             inline: true,
           });
         }
@@ -320,6 +320,7 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId.includes("parts")) {
+        if(!displayparts2[0]) return interaction.channel.send("You don't have any parts!")
         itempage = displayparts2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying parts for ${user.username}`)
@@ -423,9 +424,9 @@ module.exports = {
               name: `${car.Emote} ${car.Name} ${favorite}`,
               value: `${tag}\n${
                 emotes.emotes.PT
-              } PT: ${hp}\nMiles: ${numberWithCommas(car.Miles)}\n\`ID: ${
+              } PT: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
                 car.ID
-              }\``,
+              }\n⛽ Gas: ${car.Gas}\``,
               inline: true,
             });
           } else if (itempage == displayparts2) {

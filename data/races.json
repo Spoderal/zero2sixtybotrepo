@@ -1,75 +1,14 @@
-[
-  {
-    "name": "streetrace",
-    "tiers": 10,
-    "reward": 50,
-    "ranks": 1
+{
+  "streetrace":{
+    "Name":"Street Race",
+    "Reward":50
   },
-  {
-    "name": "highwayrace",
-    "tiers": 7,
-    "reward": 75,
-    "ranks": 2
+  "dragrace":{
+    "Name":"Drag Race",
+    "Reward":75
   },
-  {
-    "name": "quartermile",
-    "tiers": 7,
-    "reward": 65,
-    "ranks": 1
-  },
-  {
-    "name": "halfmile",
-    "tiers": 7,
-    "reward": 60,
-    "ranks": 1
-  },
-  {
-    "name": "squadrace",
-    "tiers": 7,
-    "reward": 70,
-    "ranks": 1
-  },
-
-  {
-    "name": "crossrace",
-    "tiers": 7,
-    "reward": 75,
-    "ranks": 2
-  },
-  {
-    "name": "lemans",
-    "tiers": 7,
-    "reward": 0,
-    "ranks": 1
-  },
-  {
-    "name": "muscledrag",
-    "tiers": 7,
-    "reward": 75,
-    "ranks": 1
-  },
-  {
-    "name": "police_streetrace",
-    "tiers": 7,
-    "reward": 75,
-    "ranks": 1
-  },
-  {
-    "name": "carseries",
-    "tiers": 7,
-    "reward": 0,
-    "ranks": 1
-  },
-  {
-    "name": "trackrace",
-    "tiers": 7,
-    "reward": 50,
-    "ranks": 1
-  },
-  {
-    "name": "wetrace",
-    "tiers": 7,
-    "reward": 0,
-    "ranks": 1
+  "trackrace":{
+    "Name":"Track Race",
+    "Reward":65
   }
-]
+}

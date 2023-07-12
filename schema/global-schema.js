@@ -262,6 +262,11 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
+  gas:{
+    type: Number,
+    required: false,
+    default: 0
+  },
   teams: {
     type: Array,
     required: false,

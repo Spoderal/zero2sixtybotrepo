@@ -13,7 +13,6 @@ const emotes = require("../common/emotes").emotes;
 const pvpranks = require("../data/ranks.json");
 const helmetdb = require("../data/pfpsdb.json");
 
-const { createCanvas, loadImage } = require("canvas");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("pvp")
@@ -126,10 +125,7 @@ module.exports = {
 
       let carindb1 = cars.Cars[selected.Name.toLowerCase()];
       let carindb2 = cars.Cars[selected2.Name.toLowerCase()];
-      const canvas = createCanvas(1280, 720);
-      const ctx = canvas.getContext("2d");
-      const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-      const vsimg = await loadImage("https://i.ibb.co/RyrK1MR/PVPvsimg.png");
+      
 
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -141,36 +137,8 @@ module.exports = {
           .setStyle("Danger")
           .setEmoji("✖️")
       );
-      let selected1image = await loadImage(`${selected.Livery}`);
-      let selected2image = await loadImage(`${selected2.Livery}`);
-      let cupimg = await loadImage(
-        `https://i.ibb.co/QD34bF0/Golden-Cup-Vector-Transparent-Image.png`
-      );
-      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
-      ctx.save();
-      roundedImage(ctx, 640, 200, 640, 360, 20);
-      ctx.stroke();
-      ctx.clip();
-      ctx.drawImage(selected2image, 640, 200, 640, 360);
-      ctx.restore();
 
-      ctx.save();
-      roundedImage(ctx, 0, 200, 640, 360, 20);
-      ctx.stroke();
-      ctx.clip();
-      ctx.drawImage(selected1image, 0, 200, 640, 360);
-      ctx.restore();
-      ctx.font = "40px sans-serif";
-      ctx.fillStyle = "#ffffff";
-
-      ctx.fillText(selected.Name, 75, 180);
-
-      ctx.fillText(selected2.Name, 845, 180);
-      ctx.drawImage(vsimg, 0, 0, canvas.width, canvas.height);
-      let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-        name: "profile-image.png",
-      });
 
       if (!selected.WeightStat) {
         selected.WeightStat = cars.Cars[selected.Name.toLowerCase()].Weight;
@@ -223,14 +191,14 @@ module.exports = {
             value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} 0-60: ${acceleration2}s\n\n${emotes.handling} Handling: ${handling2}\n\n${emotes.weight} Weight: ${weight2}`,
           },
         ])
-        .setImage("attachment://profile-image.png")
+        .setImage(carindb1.Image)
+        .setThumbnail(carindb2.Image)
         .setColor(`#60b0f4`);
 
       let msg = await interaction.editReply({
         embeds: [embed],
         components: [row],
-        fetchReply: true,
-        files: [attachment],
+        fetchReply: true
       });
 
       let filter = (btnInt) => {
@@ -274,16 +242,7 @@ module.exports = {
 
             if (tracklength <= 0) {
               clearInterval(i2);
-              ctx.save();
-              roundedImage(ctx, 640, 200, 640, 360, 20);
-              ctx.stroke();
-              ctx.clip();
-
-              ctx.restore();
-              ctx.drawImage(cupimg, 200, 50, 100, 100);
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
+              
               let earnings = [];
               userdata.pvprank.Wins = userdata.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
@@ -332,11 +291,9 @@ module.exports = {
                 embed.setDescription(`${earnings.join("\n")}`);
               }
               embed.setTitle(`${user.username} Won!!`);
-              embed.setImage(`attachment://profile-image.png`);
 
               await interaction.editReply({
-                embeds: [embed],
-                files: [attachment],
+                embeds: [embed]
               });
               console.log(nextuser1rank[0]);
               userdata.update();
@@ -380,11 +337,8 @@ module.exports = {
             // lost
             else if (tracklength2 <= 0) {
               clearInterval(i2);
-              ctx.drawImage(cupimg, 960, 50, 100, 100);
-              attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-                name: "profile-image.png",
-              });
-              embed.setImage(`attachment://profile-image.png`);
+       
+
               let earnings = [];
               userdata2.pvprank.Wins = userdata2.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
@@ -434,8 +388,7 @@ module.exports = {
               }
               embed.setTitle(`${user2.username} Won!`);
               await interaction.editReply({
-                embeds: [embed],
-                files: [attachment],
+                embeds: [embed]
               });
               userdata2.pvprank.Wins += 1;
               userdata.pvprank.Losses += 1;

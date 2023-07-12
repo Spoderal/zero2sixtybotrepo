@@ -17,12 +17,12 @@ const cardata = require("../events/shopdata");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("buy")
-    .setDescription("Buy a car or part")
+    .setDescription("Buy a car or item")
 
     .addStringOption((option) =>
       option
         .setName("item")
-        .setDescription("The car or part to buy")
+        .setDescription("The car or item to buy")
         .setRequired(true)
     )
     .addNumberOption((option) =>
@@ -79,7 +79,7 @@ module.exports = {
 
     if (!bought)
       return await interaction.reply(
-        "To use this command, specify the car or part you want to buy. Example: /buy 1995 Mazda Miata"
+        "To use this command, specify the car you want to buy. Example: /buy 1995 Mazda Miata"
       );
 
     const carsList = cars.Cars;
@@ -110,7 +110,7 @@ module.exports = {
     boughtCar = boughtCar[0];
 
     console.log(boughtCar);
-    const boughtPart = partsList[bought];
+    
     const boughtHouse = housearry.filter(
       (house) => house.id == bought.toLowerCase()
     );
@@ -137,6 +137,8 @@ module.exports = {
           Miles: 0,
           Drift: 0,
           WeightStat: carindb.Weight,
+          Gas: 10,
+          MaxGas: 10
         };
         userdata.cars.push(obj);
       }
@@ -149,13 +151,12 @@ module.exports = {
 
     if (
       !boughtCar &&
-      !boughtPart &&
       !boughtWarehouse &&
       !boughtHouse &&
       !itemsList[bought]
     )
       return await interaction.reply(
-        "That car or part isn't available yet, suggest it in the support server! In the meantime, check how to use the command by running /buy."
+        "That car or item isn't available yet, suggest it in the support server! **Parts are no longer purchasable**."
       );
 
     if (boughtCar) {
@@ -194,6 +195,8 @@ module.exports = {
           Miles: 0,
           Drift: 0,
           WeightStat: carindb.Weight,
+          Gas: 10,
+          MaxGas: 10
         };
         if (boughtCar.Range) {
           carobj = {
@@ -266,6 +269,8 @@ module.exports = {
             Drift: 0,
             police: true,
             WeightStat: boughtCar.Weight,
+            Gas: 10,
+            MaxGas: 10
           };
 
           if (boughtCar.Range) {
@@ -284,6 +289,8 @@ module.exports = {
               MaxRange: boughtCar.Range,
               police: true,
               WeightStat: boughtCar.Weight,
+              Gas: 10,
+              MaxGas: 10
             };
           }
 
@@ -365,6 +372,8 @@ module.exports = {
             Miles: 0,
             Resale: sellprice,
             WeightStat: carindb.Weight,
+            Gas: 10,
+            MaxGas: 10
           };
           if (boughtCar.Range) {
             carobj = {
@@ -382,6 +391,8 @@ module.exports = {
               Range: carindb.Range,
               MaxRange: carindb.Range,
               WeightStat: carindb.Weight,
+              Gas: 10,
+              MaxGas: 10
             };
           }
 
@@ -413,68 +424,7 @@ module.exports = {
           await interaction.reply({ embeds: [embed] });
         }
       }
-    } else if (boughtPart) {
-      const boughtPartPrice = parseInt(boughtPart.Price);
-
-      if (amount2 > 50)
-        return await interaction.reply(
-          `The max amount you can buy in one command is 50!`
-        );
-
-      if (boughtPart.Tier == "BM1") {
-        if (gold < boughtPartPrice)
-          return await interaction.reply("You don't have enough gold!");
-
-        userdata.gold -= boughtPartPrice;
-        userdata.parts.push(bought);
-        await userdata.save();
-
-        await interaction.reply(
-          `You bought a ${boughtPart.Name} for 🪙 ${numberWithCommas(
-            boughtPartPrice
-          )}`
-        );
-      } else {
-        if (boughtPartPrice == 0)
-          return await interaction.reply("This part is not purchasable.");
-
-        let newprice = boughtPartPrice * amount2;
-        if (userdata.cash < newprice)
-          return await interaction.reply(
-            `You cant afford this! You need ${toCurrency(newprice)}`
-          );
-
-        let user1newpart = [];
-        for (let i = 0; i < amount2; i++) user1newpart.push(bought);
-        for (i in user1newpart) {
-          userdata.parts.push(bought);
-        }
-
-        cash -= newprice;
-        userdata.cash -= newprice;
-        await userdata.save();
-
-        let embed = new EmbedBuilder()
-          .setTitle(`✅ Bought x${amount2} ${boughtPart.Name}`)
-          .addFields([
-            {
-              name: `Price`,
-              value: `${emotes.cash} ${toCurrency(newprice)}`,
-            },
-            {
-              name: "New cash balance",
-              value: `${emotes.cash} ${toCurrency(cash)}`,
-            },
-          ])
-          .setColor(colors.blue);
-
-        if (boughtPart.Image) {
-          embed.setThumbnail(boughtPart.Image);
-        }
-
-        await interaction.reply({ embeds: [embed] });
-      }
-    } else if (boughtHouse[0]) {
+    }  else if (boughtHouse[0]) {
       let boughtHousePrice = boughtHouse[0].Price;
       if (cash < boughtHousePrice)
         return await interaction.reply("You don't have enough cash!");

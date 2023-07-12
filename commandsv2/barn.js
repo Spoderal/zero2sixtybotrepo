@@ -40,6 +40,8 @@ module.exports = {
       rarity = "rare";
     } else if (randomRarity < 10) {
       rarity = "legendary";
+    } else {
+      rarity = "common";
     }
 
     let garagelimit = userdata.garageLimit;
@@ -71,11 +73,6 @@ module.exports = {
         resale = 1000;
         namefor = "Common";
         break;
-      case "uncommon":
-        color = "#f9ff3d";
-        resale = 2500;
-        namefor = "Uncommon";
-        break;
       case "rare":
         color = "#a80000";
         resale = 10000;
@@ -90,6 +87,7 @@ module.exports = {
 
     let cars = userdata.cars;
     let carindb = carsdb.Cars[barnfind.toLowerCase()];
+    console.log(carindb)
     let carobj = {
       ID: carindb.alias,
       Name: carindb.Name,

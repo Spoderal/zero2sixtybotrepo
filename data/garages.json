@@ -14,7 +14,7 @@
       "1969 volkswagen beetle",
       "1973 plymouth barracuda"
     ],
-    "MaxCash": 5000,
+    "MaxCash": 3000,
     "Emoji": "<:commongarage:1036380413695897651>",
     "Image": "https://i.ibb.co/9HP0hRC/commongarage.png",
     "Rarity": 50
@@ -43,7 +43,7 @@
       "2021 evora gt"
     ],
     "Emoji": "<:raregarage:1036380412940918944>",
-    "MaxCash": 25000,
+    "MaxCash": 10000,
     "Image": "https://i.ibb.co/S7ydkYT/raregarage.png",
     "Rarity": 24
   },
@@ -66,7 +66,7 @@
       "2022 ferrari 812 competizione",
       "2003 ferrari enzo"
     ],
-    "MaxCash": 50000,
+    "MaxCash": 25000,
     "Emoji": "<:legendarygarage:1036380411942670458>",
     "Image": "https://i.ibb.co/1GkR0Fz/legendarygarage.png",
     "Rarity": 1

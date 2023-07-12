@@ -1,4 +1,4 @@
-const discord = require("discord.js");
+const {EmbedBuilder, ActionRowBuilder, ButtonBuilder} = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
@@ -8,6 +8,8 @@ const colors = require("../common/colors");
 const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json").Cars;
+const parttiersdb = require("../data/parttiers.json");
+const { toCurrency } = require("../common/utils");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("upgrade")
@@ -17,314 +19,570 @@ module.exports = {
         .setName("car")
         .setDescription("Your car ID or Name to upgrade")
         .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option.setName("part").setDescription("The part Name").setRequired(true)
     ),
 
   async execute(interaction) {
     let inputCarIdOrName = interaction.options.getString("car");
-    let inputPartName = interaction.options.getString("part").toLowerCase();
-    let partInLocalDB = partdb.Parts[inputPartName];
-    if (!partInLocalDB) {
-      return await interaction.reply("That's not a valid part");
-    }
-
-    let partType =
-      partInLocalDB.Type === "ecu" ? "ECU" : capitalize(partInLocalDB.Type);
-
-    let user1 = interaction.user;
-    let userdata = await User.findOne({ id: user1.id });
+    let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+    let usercars = userdata.cars || []
 
-    let userParts = userdata.parts;
-    let userCar = userdata.cars.find(
-      (car) => car.ID == inputCarIdOrName || car.Name == inputCarIdOrName
-    );
+    let selected = usercars.filter((car) => car.Name.toLowerCase() == inputCarIdOrName.toLowerCase() || car.ID == inputCarIdOrName)
 
-    if (inputCarIdOrName == "pet") {
-      if (!userParts.includes("pet spoiler"))
-        return await interaction.reply("You don't have a pet spoiler!");
-      userdata.pet.spoiler = true;
-      userdata.save();
-
-      await interaction.reply(`✅`);
-      return;
+    if(selected.length == 0) return interaction.reply("Thats not a car! Make sure to specify a car ID, or car name")
+    let carimage = selected[0].Image || cardb[selected[0].Name.toLowerCase()].Image
+    let carindb = cardb[selected[0].Name.toLowerCase()]
+    let carprice = carindb.Price
+    if(carindb.Price == 0){
+      carprice = 5000
     }
 
-    let selected = userCar || "No ID";
-    if (selected == "No ID") {
-      let errembed = new discord.EmbedBuilder()
-        .setTitle("Error!")
-        .setColor(colors.discordTheme.red).setDescription(`
-          That car/id isn't selected!
-          Use \`/ids select [id] [car to select]\` to select a car to your specified id!\n
-          **Example: \`/ids select 1 1995 mazda miata\`**
-        `);
-      return await interaction.reply({ embeds: [errembed] });
+    let exhausttier = selected[0].exhaust || 0
+    let turbotier = selected[0].turbo || 0
+    let tiretier = selected[0].tires || 0
+    let suspensiontier = selected[0].suspension || 0
+    let enginetier = selected[0].engine || 0
+    let clutchtier = selected[0].clutch || 0
+    let intercoolertier = selected[0].intercooler || 0
+    let braketier = selected[0].brakes || 0
+    let intaketier = selected[0].intake || 0
+    let ecutier = selected[0].ecu || 0
+    let gearboxtier = selected[0].gearbox || 0
+
+    let newtier1 = exhausttier += 1
+    let newtier2 = turbotier += 1
+    let newtier3 = tiretier += 1
+    let newtier4 = suspensiontier += 1
+    let newtier5 = clutchtier += 1
+    let newtier6 = intercoolertier += 1
+    let newtier7 = intaketier += 1
+    let newtier8 = ecutier += 1
+    let newtier9 = gearboxtier += 1
+    let newtier0 =  enginetier += 1
+    
+
+    let exhaustcost = (carprice * 0.25) * newtier1
+    let turbocost = (carprice * 0.45) * newtier2
+    let tirecost = (carprice * 0.15) * newtier3
+    let suspensioncost = (carprice * 0.20) * newtier4
+    let enginecost = (carprice * 0.75) * newtier0
+    let clutchcost = (carprice * 0.15) * newtier5
+    let intercoolercost = (carprice * 0.20) * newtier6
+    let intakecost = (carprice * 0.15) * newtier7
+    let ecucost = (carprice * 0.20) * newtier8
+    let gearboxcost = (carprice * 0.30) * newtier9
+    
+    let exhaustpower = 0
+    if(exhausttier <= 5){
+       exhaustpower = Math.round(parttiersdb[`exhaust${newtier1}`].Power * selected[0].Speed)
+
     }
+    
+    let turbopower = 0
+    if(turbotier <= 5){
+      turbopower = Math.round(parttiersdb[`turbo${newtier2}`].Power * selected[0].Speed)
 
-    if (
-      selected.Loan &&
-      !partdb.Parts[inputPartName].Loan &&
-      selected.Wins < 50
-    ) {
-      return interaction.reply(
-        "You can only use loaned parts with this car! Get 50 wins or complete the series to use other parts."
-      );
-    }
+   }
+    let tirepower = 0
+    if(tiretier <= 5){
+      tirepower = Math.round(parttiersdb[`tires${newtier3}`].Handling * selected[0].Handling)
 
-    if (partdb.Parts[inputPartName].Loan && !selected.Loan)
-      return interaction.reply("You can only use loan parts on series cars!");
+   }
+    let suspensionpower = 0
+    if(suspensiontier <= 5){
+      suspensionpower = Math.round(parttiersdb[`suspension${newtier4}`].Handling * selected[0].Handling)
+   }
+    let enginepower = 0
+    if(enginetier <= 5){
+      enginepower = Math.round(parttiersdb[`engine${newtier0}`].Power * selected[0].Speed)
 
-    let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
+   }
+    let clutchpower = 0
+    if(clutchtier <= 5){
+      clutchpower = Math.round(parttiersdb[`clutch${newtier5}`].Power * selected[0].Speed)
 
-    let timeout = 10000;
+   }
+    let intercoolerpower = Math.round(parttiersdb[`intercooler${newtier6}`].Power * selected[0].Speed)
+    if(intercoolertier <= 5){
+      intercoolerpower = Math.round(parttiersdb[`intercooler${newtier6}`].Power * selected[0].Speed)
 
-    if (
-      cooldowns.trading !== null &&
-      timeout - (Date.now() - cooldowns.trading) > 0
-    ) {
-      return interaction.reply({
-        content: `You need to wait to use this command because you're trading with someone! **IF SOMEONE IS ABUSING THIS, REPORT IT TO STAFF IMMEDIATELY**`,
-      });
-    }
+   }
+    let intakepower = 0
+    if(intaketier <= 5){
+      intakepower = Math.round(parttiersdb[`intake${newtier7}`].Power * selected[0].Speed)
 
-    if (!userdata.parts.includes(inputPartName))
-      return await interaction.reply("You don't have this part!");
-    let realpart = selected[partType];
-    let partindb;
-    if (realpart !== undefined && realpart !== null) {
-      partindb = partdb.Parts[realpart.toLowerCase()];
-    } else {
-      partindb = "None";
-    }
-    if (
-      partindb.Type == "engine" &&
-      cardb.Cars[selected.Name.toLowerCase()].Electric
+   }
+    let ecupower = 0
+    if(ecutier <= 5){
+      ecupower = Math.round(parttiersdb[`ecu${newtier8}`].Power * selected[0].Speed)
+
+   }
+    let gearboxpower = 0
+    if(gearboxtier <= 5){
+      gearboxpower = Math.round(parttiersdb[`gearbox${newtier9}`].Handling * selected[0].Handling)
+
+   }
+
+    let exhaustemote = partdb.Parts[`t1exhaust`].Emote
+    let turboemote = partdb.Parts[`turbo`].Emote
+    let tireemote = partdb.Parts[`t1tires`].Emote
+    let suspensionemote = partdb.Parts[`loan suspension`].Emote
+    let engineemote = partdb.Parts[`no engine`].Emote
+    let clutchemote = partdb.Parts[`t1clutch`].Emote
+    let intercooleremote = partdb.Parts[`t1intercooler`].Emote
+    let intakeemote = partdb.Parts[`t1intake`].Emote
+    let ecuemote = partdb.Parts[`t1ecu`].Emote
+    let gearboxemote = partdb.Parts[`t1gearbox`].Emote
+
+      let exhaustacc = 0
+      if(exhausttier <= 5){
+        exhaustacc = parttiersdb[`exhaust${newtier1}`].Acceleration
+      }
+      let  turboacc = 0
+      if(turbotier <= 5){
+        turboacc = parttiersdb[`turbo${newtier2}`].Acceleration
+      }
+      let  intakeacc = 0
+      if(intaketier <= 5){
+        intakeacc = parttiersdb[`intake${newtier7}`].Acceleration
+      }
+
+    let embed = new EmbedBuilder()
+    .setTitle(`Upgrade your ${selected[0].Name}`)
+    .addFields(
+      {
+        name:`${exhaustemote} Exhaust`,
+        value: `Next Tier: ${newtier1}\nPower: ${exhaustpower}\nAcceleration: ${exhaustacc}\nCost to upgrade: ${toCurrency(exhaustcost)}`,
+        inline: true
+      },
+      {
+        name:`${tireemote} Tires`,
+        value: `Next Tier: ${newtier3}\nHandling: ${tirepower}\nCost to upgrade: ${toCurrency(tirecost)}`,
+        inline: true
+      },
+      {
+        name:`${suspensionemote} Suspension`,
+        value: `Next Tier: ${newtier4}\nHandling: ${suspensionpower}\nCost to upgrade: ${toCurrency(suspensioncost)}`,
+        inline: true
+      },
+      {
+        name:`${turboemote} Turbo`,
+        value: `Next Tier: ${newtier2}\nPower: ${turbopower}\nAcceleration: ${turboacc}\nCost to upgrade: ${toCurrency(turbocost)}`,
+        inline: true
+      },
+      {
+        name:`${intakeemote} Intake`,
+        value: `Next Tier: ${newtier7}\nPower: ${intakepower}\nAcceleration: ${intakeacc}\nCost to upgrade: ${toCurrency(intakecost)}`,
+        inline: true
+      },
+      {
+        name:`${engineemote} Engine`,
+        value: `Next Tier: ${newtier0}\nPower: ${enginepower}\nCost to upgrade: ${toCurrency(enginecost)}`,
+        inline: true
+      }
+      ,
+      {
+        name:`${intercooleremote} Intercooler`,
+        value: `Next Tier: ${newtier6}\nPower: ${intercoolerpower}\nCost to upgrade: ${toCurrency(intercoolercost)}`,
+        inline: true
+      }
+      ,
+      {
+        name:`${ecuemote} ECU`,
+        value: `Next Tier: ${newtier8}\nPower: ${ecupower}\nCost to upgrade: ${toCurrency(ecucost)}`,
+        inline: true
+      },
+      {
+        name:`${clutchemote} Clutch`,
+        value: `Next Tier: ${newtier5}\nPower: ${clutchpower}\nCost to upgrade: ${toCurrency(clutchcost)}`,
+        inline: true
+      },
+      {
+        name:`${gearboxemote} Gearbox`,
+        value: `Next Tier: ${newtier9}\nHandling: ${gearboxpower}\nCost to upgrade: ${toCurrency(gearboxcost)}`,
+        inline: true
+      }
     )
-      return interaction.reply("EVs cant have engines, turbos, or intakes!");
-    let range = selected.Range;
+    .setColor(colors.blue)
+    .setThumbnail(carimage)
 
-    console.log(range);
-    if (partindb.Name == "Ludicrous" && range == undefined)
-      return interaction.reply("Ludicrous can only be used on EVs!");
-    console.log(partindb);
-    if (cardb[selected.Name.toLowerCase()].F1 && partindb.AddedSpeed > 0)
-      return interaction.reply("F1 Cars cant have their speed upgraded.");
-    let oldspeed = selected.Speed;
-    let oldweight =
-      Number(selected.WeightStat) || cardb[selected.Name.toLowerCase()].Weight;
-    let oldhandling = selected.Handling;
-    let oldhand = selected.Handling;
-    let old060 = selected.Acceleration;
-    if (partindb !== "None") {
-      console.log("not none");
 
-      userdata.parts.push(partindb.Name.toLowerCase());
-      if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
-        let newspeed = Number(partindb.AddedSpeed);
-        let stat = Number(selected.Speed);
-        selected.Speed = stat -= newspeed;
+
+    let row = new ActionRowBuilder()
+    .setComponents(
+      new ButtonBuilder()
+      .setCustomId("exhaust")
+      .setLabel("Upgrade Exhaust")
+      .setEmoji(exhaustemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("tires")
+      .setLabel("Upgrade Tires")
+      .setEmoji(tireemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("suspension")
+      .setLabel("Upgrade Suspension")
+      .setEmoji(suspensionemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("turbo")
+      .setLabel("Upgrade Turbo")
+      .setEmoji(turboemote)
+      .setStyle("Success")
+    )
+    let row2 = new ActionRowBuilder()
+    .setComponents(
+      new ButtonBuilder()
+      .setCustomId("intake")
+      .setLabel("Upgrade Intake")
+      .setEmoji(intakeemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("engine")
+      .setLabel("Upgrade Engine")
+      .setEmoji(engineemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("intercooler")
+      .setLabel("Upgrade Intercooler")
+      .setEmoji(intercooleremote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("ecu")
+      .setLabel("Upgrade ECU")
+      .setEmoji(ecuemote)
+      .setStyle("Success")
+    )
+    let row3 = new ActionRowBuilder()
+    .setComponents(
+      new ButtonBuilder()
+      .setCustomId("clutch")
+      .setLabel("Upgrade Clutch")
+      .setEmoji(clutchemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("gearbox")
+      .setLabel("Upgrade Gearbox")
+      .setEmoji(gearboxemote)
+      .setStyle("Success")
+    )
+    for(let butt in row.components){
+      let button = row.components[butt]
+      let tier = selected[0][button.data.custom_id] || 1
+      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+      if(tier >= 5) {
+        button.setDisabled(true)
       }
-      if (partindb.DecreasedSpeed && partindb.DecreaseSpeed > 0) {
-        let newspeed = Number(partindb.DecreasedSpeed);
-        let stat = Number(selected.Speed);
-        selected.Speed = stat += newspeed;
+      if(price > userdata.cash){
+        console.log("danger")
+        button.setStyle(`Danger`)
+        button.setDisabled(true)
       }
-      if (partindb.AddedSixty && partindb.AddedSixty > 0) {
-        let newspeed = parseFloat(partindb.AddedSixty);
-        let stat = parseFloat(selected.Acceleration);
-        selected.Acceleration = stat += newspeed;
-      }
-      if (partindb.DecreasedSixty && partindb.DecreasedSixty > 0) {
-        let newspeed = parseFloat(partindb.DecreasedSixty);
-        let stat = parseFloat(selected.Acceleration);
-        if (stat > 2) selected.Acceleration = stat -= newspeed;
-        if (selected.Acceleration < 2) selected.Acceleration = 2;
-      }
-      if (partindb.AddHandling && partindb.AddHandling > 0) {
-        let newspeed = Number(partindb.AddHandling);
-        let stat = Number(selected.Handling);
-        oldhandling = oldhandling -= newspeed;
-      }
-      if (partindb.DecreasedHandling && partindb.DecreasedHandling > 0) {
-        let newspeed = Number(partindb.DecreasedHandling);
-        let stat = Number(selected.Handling);
-        oldhandling = oldhandling += newspeed;
-      }
-      if (partindb.AddedDrift && partindb.AddedDrift > 0) {
-        let newspeed = Number(partindb.AddedDrift);
-        let stat = Number(selected.Drift);
-        selected.Drift = stat -= newspeed;
-      }
-      if (partindb.DecreasedDrift && partindb.DecreasedDrift > 0) {
-        let newspeed = Number(partindb.DecreasedDrift);
-        let stat = Number(selected.Drift);
-        selected.Drift = stat += newspeed;
-      }
-      if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
-        let newspeed = Number(partindb.DecreaseWeight);
-        let stat = Number(oldweight);
-        oldweight = oldweight += newspeed;
-      }
-      if (partindb.AddWeight && partindb.AddWeight > 0) {
-        let newspeed = Number(partindb.AddWeight);
-        let stat = Number(oldweight);
-        oldweight = oldweight -= newspeed;
-      }
-      if (selected.Price && partindb.Price && partindb.Price > 0) {
-        let resale = Number(partindb.Price * 0.35);
-        let stat = Number(selected.Price);
-        selected.Price = stat -= resale;
-      }
+      
     }
 
-    if (partInLocalDB?.AddedSpeed > 0) {
-      let newspeed = Number(partInLocalDB.AddedSpeed);
-      let stat = Number(selected.Speed);
-      selected.Speed = stat += newspeed;
-    }
-    if (partInLocalDB?.DecreaseSpeed > 0) {
-      let newspeed = Number(partInLocalDB.DecreasedSpeed);
-      let stat = Number(selected.Speed);
-      selected.Speed = stat -= newspeed;
-    }
-    if (partInLocalDB?.AddedSixty > 0) {
-      let newspeed = parseFloat(partInLocalDB.AddedSixty);
-      let stat = parseFloat(selected.Acceleration);
-      if (stat > 2) selected.Acceleration = stat -= newspeed;
-      if (selected.Acceleration < 2) selected.Acceleration = 2;
-    }
-    if (partInLocalDB?.DecreasedSixty > 0) {
-      let newspeed = parseFloat(partInLocalDB.DecreasedSixty);
-      let stat = parseFloat(selected.Acceleration);
-      selected.Acceleration = stat += newspeed;
-    }
-    if (partInLocalDB?.AddHandling && partInLocalDB?.AddHandling > 0) {
-      let newspeed = Number(partInLocalDB.AddHandling);
-      let stat = Number(selected.Handling);
-      oldhandling = oldhandling += newspeed;
-    }
-    if (
-      partInLocalDB?.DecreasedHandling &&
-      partInLocalDB?.DecreasedHandling > 0
-    ) {
-      let newspeed = Number(partInLocalDB.DecreasedHandling);
-      let stat = Number(selected.Handling);
-      oldhandling = oldhandling -= newspeed;
-    }
-    if (partInLocalDB?.AddedDrift > 0) {
-      let newspeed = Number(partInLocalDB.AddedDrift);
-      let driftam = selected.Drift || 0;
-      let stat = Number(driftam);
-
-      selected.Drift = stat += newspeed;
-    }
-    if (partInLocalDB?.DecreasedDrift > 0) {
-      let newspeed = Number(partInLocalDB.DecreasedDrift);
-      let stat = Number(selected.Drift);
-      selected.Drift = stat -= newspeed;
-    }
-    if (partInLocalDB?.DecreaseWeight && partInLocalDB?.DecreaseWeight > 0) {
-      let newspeed = Number(partInLocalDB?.DecreaseWeight);
-      let stat = Number(oldweight);
-      if (stat > 500) {
-        selected.WeightStat = stat -= newspeed;
+    for(let butt in row2.components){
+      let button = row2.components[butt]
+      let tier = selected[0][button.data.custom_id] || 1
+      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+      console.log(tier)
+      if(tier >= 5) {
+        button.setDisabled(true)
       }
+      if(price > userdata.cash){
+        console.log("danger")
+        button.setStyle(`Danger`)
+        button.setDisabled(true)
+      }
+      
     }
-    if (partInLocalDB?.AddWeight && partInLocalDB?.AddWeight > 0) {
-      let newspeed = Number(partInLocalDB?.AddWeight);
-      let stat = Number(oldweight);
-      selected.WeightStat = stat += newspeed;
-    }
-    console.log(selected.WeightStat);
 
-    selected.Handling = oldhandling;
-    console.log(oldhandling);
+    for(let butt in row3.components){
+      let button = row3.components[butt]
+    
+      let tier = selected[0][button.data.custom_id.toLowerCase()] || 1
 
-    if (selected?.Price && partInLocalDB?.Price > 0) {
-      let resale = Number(partInLocalDB.Price * 0.35);
-      let stat = Number(selected.Price);
-      selected.Price = stat += resale;
+      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+      if(tier >= 5) {
+        button.setDisabled(true)
+      }
+
+      if(price > userdata.cash){
+        console.log("danger")
+        button.setStyle(`Danger`)
+        button.setDisabled(true)
+      }
+
+      
     }
-    userdata.update();
-    selected[partType] = partInLocalDB.Name;
-    let newspeed = selected.Speed;
-    let newhandling = oldhandling;
-    let newweight =
-      selected.WeightStat || cardb[selected.Name.toLowerCase()].Weight;
-    let new060 = selected.Acceleration;
-    await User.findOneAndUpdate(
-      {
-        id: user1.id,
-      },
-      {
-        $set: {
-          "cars.$[car]": selected,
+    
+
+    let msg = await interaction.reply({embeds: [embed], components: [row, row2, row3], fetchReply: true})
+
+    let filter2 = (btnInt) => {
+      return interaction.user.id === btnInt.user.id;
+    };
+    let collector = msg.createMessageComponentCollector({
+      filter: filter2,
+    });
+
+    collector.on('collect', async (i) => {
+      
+      console.log(selected[0])
+      let tier = selected[0][i.customId] || 0
+      let newtier = tier += 1
+      let price = Math.round(carprice * parttiersdb[`${i.customId}${newtier}`].Cost) * newtier
+      let power = Math.round(selected[0].Speed * parttiersdb[`${i.customId}${newtier}`].Power)
+      let acceleration = parttiersdb[`${i.customId}${newtier}`].Acceleration
+      console.log(parttiersdb[`${i.customId}${newtier}`])
+      let handling = Math.round(selected[0].Handling * parttiersdb[`${i.customId}${newtier}`].Handling)
+      let useracc = selected[0].Acceleration
+      let newacc = useracc -= acceleration
+      console.log(power)
+      userdata.cash -= price
+      if(parttiersdb[`${i.customId}${newtier}`].Power){
+        selected[0].Speed += power
+      }
+      if(parttiersdb[`${i.customId}${newtier}`].Handling){
+        selected[0].Handling += handling
+      }
+      if(parttiersdb[`${i.customId}${newtier}`].Acceleration && newacc >= 2){
+        selected[0].Acceleration -= acceleration
+      }
+
+      selected[0][i.customId] = newtier
+      
+      console.log(selected[0])
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
         },
-      },
-
-      {
-        arrayFilters: [
-          {
-            "car.Name": selected.Name,
+        {
+          $set: {
+            "cars.$[car]": selected[0],
           },
-        ],
-      }
-    );
-    if (userdata.tutorial && userdata.tutorial.stage == 2) {
-      console.log("tutorial");
-      interaction.channel.send({
-        content: `Nice! Now your car is even faster! Thats all from the tutorial! If you have any other questions make sure to join the support server!`,
-      });
-      userdata.tutorial = null;
-    }
-    userdata.parts.splice(
-      userdata.parts.indexOf(partInLocalDB.Name.toLowerCase()),
-      1
-    );
-    userdata.save();
-
-    if (partindb.Name == undefined) {
-      partindb = {
-        Name: "None",
-        Emote: "",
-      };
-    }
-    let image = selected.Image || cardb[selected.Name.toLowerCase()].Image;
-    let embed = new discord.EmbedBuilder()
-      .setTitle(
-        `Upgraded ${partType} on your ${selected.Emote} ${selected.Name}`
-      )
-      .addFields(
-        {
-          name: "Old Part",
-          value: `${partindb.Emote} ${partindb.Name}`,
-          inline: true,
         },
+  
         {
-          name: "New Part",
-          value: `${partInLocalDB.Emote} ${
-            partInLocalDB?.Name || inputPartName
-          }`,
-          inline: true,
-        },
-        { name: "\u200b", value: "\u200b" },
-        {
-          name: "Old Stats",
-          value: `${emotes.speed} Power: ${oldspeed}\n${emotes.zero2sixty} Acceleration: ${old060}s\n${emotes.handling} Handling: ${oldhand}\n${emotes.weight} Weight: ${oldweight}`,
-          inline: true,
-        },
-        {
-          name: `New Stats`,
-          value: `${emotes.speed} Power: ${newspeed}\n${emotes.zero2sixty} Acceleration: ${new060}s\n${emotes.handling} Handling: ${newhandling}\n${emotes.weight} Weight: ${newweight}`,
-          inline: true,
+          arrayFilters: [
+            {
+              "car.Name": selected[0].Name,
+            },
+          ],
         }
       )
-      .setColor(colors.blue)
-      .setThumbnail(`${image}`);
 
-    await interaction.reply({ embeds: [embed] });
+
+      userdata.save()
+
+      for(let butt in row.components){
+        let button = row.components[butt]
+        let tier = selected[0][button.data.custom_id] || 1
+        let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+        if(tier >= 5) {
+          button.setDisabled(true)
+        }
+        if(price > userdata.cash){
+          console.log("danger")
+          button.setStyle(`Danger`)
+          button.setDisabled(true)
+        }
+        
+      }
+      if(newtier > 5){
+        newtier = 5
+      }
+  
+      for(let butt in row2.components){
+        let button = row2.components[butt]
+        let tier = selected[0][button.data.custom_id] || 1
+        let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+        console.log(tier)
+        if(tier >= 5) {
+          button.setDisabled(true)
+        }
+        if(price > userdata.cash){
+          console.log("danger")
+          button.setStyle(`Danger`)
+          button.setDisabled(true)
+        }
+        
+      }
+  
+      for(let butt in row3.components){
+        let button = row3.components[butt]
+      
+        let tier = selected[0][button.data.custom_id.toLowerCase()] || 1
+  
+        let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+        if(tier >= 5) {
+          button.setDisabled(true)
+        }
+  
+        if(price > userdata.cash){
+          console.log("danger")
+          button.setStyle(`Danger`)
+          button.setDisabled(true)
+        }
+  
+        
+      }
+
+       selected = userdata.cars.filter((car) => car == selected[0])
+
+
+
+       exhausttier = selected[0].exhaust || 0
+     turbotier = selected[0].turbo || 0
+     tiretier = selected[0].tires || 0
+     suspensiontier = selected[0].suspension || 0
+     enginetier = selected[0].engine || 0
+     clutchtier = selected[0].clutch || 0
+     intercoolertier = selected[0].intercooler || 0
+     braketier = selected[0].brakes || 0
+     intaketier = selected[0].intake || 0
+     ecutier = selected[0].ecu || 0
+     gearboxtier = selected[0].gearbox || 0
+
+     newtier1 = exhausttier += 1
+     newtier2 = turbotier += 1
+     newtier3 = tiretier += 1
+     newtier4 = suspensiontier += 1
+     newtier5 = clutchtier += 1
+     newtier6 = intercoolertier += 1
+     newtier7 = intaketier += 1
+     newtier8 = ecutier += 1
+     newtier9 = gearboxtier += 1
+     newtier0 =  enginetier += 1
+
+
+
+      exhaustcost = (carprice * 0.15) * newtier1
+      turbocost = (carprice * 0.30) * newtier2
+      tirecost = (carprice * 0.10) * newtier3
+      suspensioncost = (carprice * 0.15) * newtier4
+      enginecost = (carprice * 0.50) * newtier0
+      clutchcost = (carprice * 0.12) * newtier5
+      intercoolercost = (carprice * 0.15) * newtier6
+      intakecost = (carprice * 0.10) * newtier7
+      ecucost = (carprice * 0.15) * newtier8
+      gearboxcost = (carprice * 0.30) * newtier9
+
+      let exhaustacc = 0
+      if(exhausttier <= 5){
+        exhaustacc = parttiersdb[`exhaust${newtier1}`].Acceleration
+      }
+      let  turboacc = 0
+      if(turbotier <= 5){
+        turboacc = parttiersdb[`turbo${newtier2}`].Acceleration
+      }
+      let  intakeacc = 0
+      if(intaketier <= 5){
+        intakeacc = parttiersdb[`intake${newtier7}`].Acceleration
+      }
+      exhaustpower = 0
+      if(exhausttier <= 5){
+      exhaustpower = Math.round(parttiersdb[`exhaust${newtier1}`].Power * selected[0].Speed)
+      }
+      
+      turbopower = 0
+      if(turbotier <= 5){
+        turbopower = Math.round(parttiersdb[`turbo${newtier2}`].Power * selected[0].Speed)
+        }
+      tirepower = 0
+      if(tiretier <= 5){
+        tirepower = Math.round(parttiersdb[`tires${newtier3}`].Handling * selected[0].Handling)
+        }
+      suspensionpower = 0
+      if(suspensiontier <= 5){
+        suspensionpower = Math.round(parttiersdb[`suspension${newtier4}`].Handling * selected[0].Handling)
+        }
+      enginepower = 0
+      if(enginetier <= 5){
+        enginepower = Math.round(parttiersdb[`engine${newtier0}`].Power * selected[0].Speed)
+        }
+      clutchpower = 0
+      if(clutchtier <= 5){
+        clutchpower = Math.round(parttiersdb[`clutch${newtier5}`].Power * selected[0].Speed)
+        }
+      intercoolerpower = 0
+      if(intercoolertier <= 5){
+        intercoolerpower = Math.round(parttiersdb[`intercooler${newtier6}`].Power * selected[0].Speed)
+        }
+      intakepower = 0
+      if(intaketier <= 5){
+        intakepower = Math.round(parttiersdb[`intake${newtier7}`].Power * selected[0].Speed)
+        }
+      ecupower = 0
+      if(ecutier <= 5){
+        ecupower = Math.round(parttiersdb[`ecu${newtier8}`].Power * selected[0].Speed)
+        }
+      gearboxpower = 0
+      if(gearboxtier <= 5){
+        gearboxpower = Math.round(parttiersdb[`gearbox${newtier9}`].Handling * selected[0].Handling)
+        }
+
+
+
+      embed.setFields(
+        {
+          name:`${exhaustemote} Exhaust`,
+          value: `Next Tier: ${newtier1}\nPower: ${exhaustpower}\nAcceleration: ${exhaustacc}\nCost to upgrade: ${toCurrency(exhaustcost)}`,
+          inline: true
+        },
+        {
+          name:`${tireemote} Tires`,
+          value: `Next Tier: ${newtier3}\nHandling: ${tirepower}\nCost to upgrade: ${toCurrency(tirecost)}`,
+          inline: true
+        },
+        {
+          name:`${suspensionemote} Suspension`,
+          value: `Next Tier: ${newtier4}\nHandling: ${suspensionpower}\nCost to upgrade: ${toCurrency(suspensioncost)}`,
+          inline: true
+        },
+        {
+          name:`${turboemote} Turbo`,
+          value: `Next Tier: ${newtier2}\nPower: ${turbopower}\nAcceleration: ${turboacc}\nCost to upgrade: ${toCurrency(turbocost)}`,
+          inline: true
+        },
+        {
+          name:`${intakeemote} Intake`,
+          value: `Next Tier: ${newtier7}\nPower: ${intakepower}\nAcceleration: ${intakeacc}\nCost to upgrade: ${toCurrency(intakecost)}`,
+          inline: true
+        },
+        {
+          name:`${engineemote} Engine`,
+          value: `Next Tier: ${newtier0}\nPower: ${enginepower}\nCost to upgrade: ${toCurrency(enginecost)}`,
+          inline: true
+        }
+        ,
+        {
+          name:`${intercooleremote} Intercooler`,
+          value: `Next Tier: ${newtier6}\nPower: ${intercoolerpower}\nCost to upgrade: ${toCurrency(intercoolercost)}`,
+          inline: true
+        }
+        ,
+        {
+          name:`${ecuemote} ECU`,
+          value: `Next Tier: ${newtier8}\nPower: ${ecupower}\nCost to upgrade: ${toCurrency(ecucost)}`,
+          inline: true
+        },
+        {
+          name:`${clutchemote} Clutch`,
+          value: `Next Tier: ${newtier5}\nPower: ${clutchpower}\nCost to upgrade: ${toCurrency(clutchcost)}`,
+          inline: true
+        },
+        {
+          name:`${gearboxemote} Gearbox`,
+          value: `Next Tier: ${newtier9}\nHandling: ${gearboxpower}\nCost to upgrade: ${toCurrency(gearboxcost)}`,
+          inline: true
+        }
+      )
+
+      await i.update({embeds: [embed], content: `✅`, components: [row, row2, row3]})
+      
+    })
   },
 };

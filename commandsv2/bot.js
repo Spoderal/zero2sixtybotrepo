@@ -1,13 +1,15 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const { numberWithCommas } = require("../common/utils");
-
+const { numberWithCommas, toCurrency } = require("../common/utils");
+const Global = require("../schema/global-schema");
+const { emotes } = require("../common/emotes");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("bot")
     .setDescription("Check the bot information"),
   async execute(interaction) {
+    let global = await Global.findOne({})
     let bot = interaction.client.user;
     let totalSeconds = interaction.client.uptime / 1000;
     let days = Math.floor(totalSeconds / 86400);
@@ -16,7 +18,8 @@ module.exports = {
     totalSeconds %= 3600;
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
-
+    let gas =  global.gas
+    let rounded = Math.round(gas * 10) / 10
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Info for ${bot.username}`)
       .setThumbnail(bot.displayAvatarURL())
@@ -32,7 +35,7 @@ module.exports = {
             )
           )} users\n\n🏓 Ping: ${Math.round(
             interaction.client.ws.ping
-          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds`,
+          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n\nGas Price: ${emotes.cash} ${toCurrency(rounded)}`,
           inline: true,
         },
         {

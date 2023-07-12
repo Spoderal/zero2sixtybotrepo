@@ -42,26 +42,27 @@ module.exports = {
     var list = cars.Cars;
     var item = interaction.options.getString("item");
     let user = interaction.options.getUser("user") || interaction.user;
-    let userdata = await User.findOne({ id: user.id });
+    let userdata = await User.findOne({ id: user.id }) || []
     let global = await Global.findOne({});
     let settings = userdata.settings;
     let brandsarr = [];
+    for (let b in brands) {
+      brandsarr.push(brands[b]);
+    }
+    let weightemote = emotes.weight;
+    let ucars = userdata.cars  || []
+    let carindb = ucars.filter((c) => c.ID == item);
+    if(!list[item.toLowerCase()] && !carindb[0]) return interaction.reply(`I couldn't find that car! If you're checking default stats, put the full name, and if you want your stats, put the ID.`)
     let embedl = new Discord.EmbedBuilder()
       .setTitle(`${emotes.loading} Loading`)
       .setDescription("Fetching data, this wont take too long!")
       .setColor(colors.blue);
     await interaction.reply({ embeds: [embedl], fetchReply: true });
-    for (let b in brands) {
-      brandsarr.push(brands[b]);
-    }
-    let weightemote = emotes.weight;
-    let ucars = userdata.cars;
-    let carindb = ucars.filter((c) => c.ID == item);
     if (list[item.toLowerCase()]) {
       let canvas = createCanvas(1280, 720);
       let ctx = canvas.getContext("2d");
       let carindb = list[item.toLowerCase()];
-      let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
+      let carbg = await loadImage("https://i.ibb.co/SNWzQ7X/statcard.png");
       let carimg = await loadImage(carindb.Image);
       let brand = brandsarr.filter((br) => br.emote == carindb.Emote);
       console.log(brand);
@@ -74,8 +75,8 @@ module.exports = {
       let policeimg = await loadImage("https://i.ibb.co/cwr7WLB/police.png");
       ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
       ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
-      ctx.drawImage(brimg, 15, 620, 100, 100);
-      ctx.drawImage(flag, 1120, 620, 180, 100);
+      ctx.drawImage(brimg, 15, 600, 100, 100);
+      ctx.drawImage(flag, 1050, 572, 250, 150);
       if (carindb.Police) {
         ctx.drawImage(policeimg, 920, 600, 150, 150);
       }
@@ -83,22 +84,22 @@ module.exports = {
       ctx.font = "bold 54px sans-serif";
       ctx.fillStyle = "#ffffff";
 
-      ctx.fillText(carindb.Name, 125, 690);
+      ctx.fillText(carindb.Name, 125, 670);
 
-      ctx.font = "bold 45px sans-serif";
+      ctx.font = "bold 55px sans-serif";
 
-      ctx.fillText(carindb.Speed, 15, 105);
-      ctx.fillText(carindb["0-60"], 170, 105);
-      ctx.fillText(carindb.Handling, 300, 105);
+      ctx.fillText(carindb.Speed, 15, 120);
+      ctx.fillText(carindb["0-60"], 215, 120);
+      ctx.fillText(carindb.Handling, 400, 120);
 
       ctx.font = "bold 35px sans-serif";
-      ctx.fillText(carindb.Weight, 435, 105);
+      ctx.fillText(carindb.Weight, 595, 120);
 
       ctx.font = "bold 110px sans-serif";
 
       ctx.fillText(carindb.Class, 1160, 110);
 
-      ctx.font = "bold 30px sans-serif";
+      ctx.font = "bold 55px sans-serif";
       let price = `${toCurrency(carindb.Price)}`;
 
       if (carindb.Price <= 0) {
@@ -108,7 +109,7 @@ module.exports = {
         price = `Obtained: Squad`;
       }
 
-      ctx.fillText(price, 600, 75);
+      ctx.fillText(price, 800, 100);
 
       let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
         name: "stats-image.png",
@@ -275,18 +276,18 @@ module.exports = {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
       }
 
-      let exhaust = carindb[0].Exhaust;
-      let intake = carindb[0].Intake;
-      let tires = carindb[0].Tires;
-      let turbo = carindb[0].Turbo;
-      let suspension = carindb[0].Suspension;
-      let engine = carindb[0].Engine;
-      let gearbox = carindb[0].Gearbox;
-      let clutch = carindb[0].Clutch;
-      let ecu = carindb[0].ECU;
-      let brakes = carindb[0].Brakes;
-      let spoiler = carindb[0].Spoiler;
-      let intercooler = carindb[0].Intercooler;
+      let exhaust = carindb[0].exhaust || 0
+      let intake = carindb[0].intake || 0
+      let tires = carindb[0].tires  || 0
+      let turbo = carindb[0].turbo || 0
+      let suspension = carindb[0].suspension || 0
+      let engine = carindb[0].engine || 0
+      let gearbox = carindb[0].gearbox || 0
+      let clutch = carindb[0].clutch || 0
+      let ecu = carindb[0].ecu || 0
+      let intercooler = carindb[0].intercooler || 0
+
+      
 
       let drivetrain = carindb[0].Drivetrain;
 
@@ -294,7 +295,7 @@ module.exports = {
       // let engineimg = await loadImage(partdb.Parts[engine.toLowerCase()].Image)
       // let gearboximg = await loadImage(partdb.Parts[gearbox.toLowerCase()].Image)
       // let intercoolerimg = await loadImage(partdb.Parts[intercooler.toLowerCase()].Image)
-      let carbg = await loadImage("https://i.ibb.co/MN2rTZ7/newcardblue-1.png");
+      let carbg = await loadImage("https://i.ibb.co/SNWzQ7X/statcard.png");
       let carimg = await loadImage(carim);
       console.log(carim);
       let brand =
@@ -308,126 +309,100 @@ module.exports = {
       console.log("car done");
       ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
       console.log("bg done");
-      ctx.drawImage(brimg, 15, 620, 100, 100);
-      console.log("br done");
-      ctx.drawImage(flag, 1120, 620, 180, 100);
-      console.log("flag done");
+
+      ctx.drawImage(brimg, 15, 600, 100, 100);
+      ctx.drawImage(flag, 1050, 573, 250, 150);
 
       ctx.font = "bold 54px sans-serif";
       ctx.fillStyle = "#ffffff";
 
-      ctx.fillText(carindb[0].Name, 125, 690);
-      console.log("name done");
+      ctx.fillText(carindb[0].Name, 125, 670);
 
-      ctx.font = "bold 45px sans-serif";
+      ctx.font = "bold 55px sans-serif";  
+      let acceleration = Math.round(carindb[0].Acceleration * 10) / 10
 
-      ctx.fillText(carindb[0].Speed, 15, 105);
-      console.log("speed done");
-      ctx.fillText(`${carindb[0].Acceleration.toFixed(1)}`, 170, 105);
-      console.log("acc done");
-      ctx.fillText(carindb[0].Handling, 300, 105);
-      console.log("hand done");
+      ctx.fillText(carindb[0].Speed, 15, 120);
+      ctx.fillText(acceleration, 215, 120);
+      ctx.fillText(carindb[0].Handling, 400, 120);
 
       ctx.font = "bold 35px sans-serif";
-      console.log("done");
-      ctx.fillText(weight, 435, 105);
+      ctx.fillText(carindb[0].WeightStat, 595, 120);
 
-      ctx.font = "bold 20px sans-serif";
+      ctx.font = "bold 35px sans-serif";
 
       if (exhaust) {
         let exhaustimg = await loadImage(
-          partdb.Parts[exhaust.toLowerCase()].Image
+          partdb.Parts[`t${exhaust}exhaust`].Image
         );
-        ctx.drawImage(exhaustimg, 595, 10, 75, 75);
-        ctx.fillText(exhaust, 585, 105);
+        ctx.drawImage(exhaustimg, 815, 30, 50, 50);
+        ctx.fillText(exhaust, 810, 29);
       }
 
       if (intake) {
         let intakeimg = await loadImage(
-          partdb.Parts[intake.toLowerCase()].Image
+          partdb.Parts[`t${intake}intake`].Image
         );
-        ctx.drawImage(intakeimg, 710, 10, 75, 75);
-        ctx.fillText(intake, 700, 105);
+        ctx.drawImage(intakeimg, 875, 30, 50, 50);
+        ctx.fillText(intake, 870, 29);
       }
 
       if (tires) {
-        let tiresimg = await loadImage(partdb.Parts[tires.toLowerCase()].Image);
-        ctx.drawImage(tiresimg, 815, 10, 75, 75);
-        ctx.fillText(tires, 815, 105);
+        let tiresimg = await loadImage(partdb.Parts[`t${tires}tires`].Image);
+        ctx.drawImage(tiresimg, 935, 30, 50, 50);
+        ctx.fillText(tires, 930, 29);
       }
 
       if (turbo) {
-        let turboimg = await loadImage(partdb.Parts[turbo.toLowerCase()].Image);
-        ctx.drawImage(turboimg, 930, 10, 75, 75);
-        ctx.fillText(turbo, 930, 105);
+        let turboimg = await loadImage(partdb.Parts[`turbo`].Image);
+        ctx.drawImage(turboimg, 995, 30, 50, 50);
+        ctx.fillText(turbo, 990, 29);
       }
 
       if (clutch) {
         let clutchimg = await loadImage(
-          partdb.Parts[clutch.toLowerCase()].Image
+          partdb.Parts[`t${clutch}clutch`].Image
         );
-        ctx.drawImage(clutchimg, 1045, 10, 75, 75);
-        ctx.fillText(clutch, 1045, 105);
+        ctx.drawImage(clutchimg, 1045, 30, 50, 50);
+        ctx.fillText(clutch, 1045, 29);
       }
 
       if (ecu) {
-        let ecuimg = await loadImage(partdb.Parts[ecu.toLowerCase()].Image);
-        ctx.drawImage(ecuimg, 1160, 10, 75, 75);
-        ctx.fillText(ecu, 1160, 105);
+        let ecuimg = await loadImage(partdb.Parts[`t${ecu}ecu`].Image);
+        ctx.drawImage(ecuimg, 1105, 30, 50, 50);
+        ctx.fillText(ecu, 1100, 29);
       }
 
-      if (brakes) {
-        let brakesimg = await loadImage(
-          partdb.Parts[brakes.toLowerCase()].Image
-        );
-        ctx.drawImage(brakesimg, 1160, 115, 75, 75);
-        ctx.fillText(brakes, 1160, 215);
-      }
-
-      if (spoiler) {
-        let spoilerimg = await loadImage(
-          partdb.Parts[spoiler.toLowerCase()].Image
-        );
-        ctx.drawImage(spoilerimg, 1160, 215, 75, 75);
-        ctx.fillText(spoiler, 1160, 315);
-      }
       if (intercooler) {
         let intercoolerimg = await loadImage(
-          partdb.Parts[intercooler.toLowerCase()].Image
+          partdb.Parts[`t${intercooler}intercooler`].Image
         );
-        ctx.drawImage(intercoolerimg, 1160, 315, 75, 75);
-        ctx.fillText(intercooler, 1140, 415);
+        ctx.drawImage(intercoolerimg, 1165, 30, 50, 50);
+        ctx.fillText(intercooler, 1160, 29);
       }
 
       if (suspension) {
         let suspensionimg = await loadImage(
-          partdb.Parts[suspension.toLowerCase()].Image
+          partdb.Parts[`t${suspension}suspension`].Image
         );
-        ctx.drawImage(suspensionimg, 1160, 415, 75, 75);
-        ctx.fillText(suspension, 1140, 515);
+        ctx.drawImage(suspensionimg, 1225, 30, 50, 50);
+        ctx.fillText(suspension, 1220, 29);
       }
-      if (drivetrain) {
-        let drivetrainimg = await loadImage(
-          partdb.Parts[drivetrain.toLowerCase()].Image
-        );
-        ctx.drawImage(drivetrainimg, 1170, 515, 75, 75);
-        ctx.fillText(drivetrain, 1170, 615);
-      }
+    
 
       if (engine) {
         let engineimg = await loadImage(
-          partdb.Parts[engine.toLowerCase()].Image
+          partdb.Parts[`no engine`].Image
         );
-        ctx.drawImage(engineimg, 790, 640, 75, 75);
-        ctx.fillText("Engine", 800, 650);
+        ctx.drawImage(engineimg, 815, 100, 50, 50);
+        ctx.fillText(engine, 810, 99);
       }
 
       if (gearbox) {
         let gearboximg = await loadImage(
-          partdb.Parts[gearbox.toLowerCase()].Image
+          partdb.Parts[`t${gearbox}gearbox`].Image
         );
-        ctx.drawImage(gearboximg, 890, 640, 75, 75);
-        ctx.fillText(gearbox, 900, 650);
+        ctx.drawImage(gearboximg, 875, 100, 50, 50);
+        ctx.fillText(gearbox, 870, 99);
       }
 
       console.log("done");

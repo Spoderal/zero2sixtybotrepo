@@ -12,7 +12,9 @@
         "dark matter helmet",
         "dark matter helmet",
         "cherry blossom helmet",
-
+        "t1driftsprings",
+        "t1tracksprings",
+        "t1racesprings",
         "cherry blossom helmet",
         "1000 Cash",
         "500 Cash",
@@ -69,17 +71,19 @@
     },
     "prestige crate": {
       "Contents": [
-        "100000 Cash",
+        "1000 Cash",
         "dark mode helmet",
         "dark mode helmet",
         "stig helmet",
         "vibrant helmet",
+        "5000 Cash",
         "500 Cash",
         "500 Cash",
-        "500 Cash",
-        "t5clutch",
-        "t5exhaust",
-        "2500 Cash"
+        "lockpick",
+        "wheelspin",
+        "2500 Cash",
+        "wheelspin",
+        "super wheelspin"
       ],
       "Name": "Prestige Crate",
       "Emote": "<:supplydropprestige:1044404462581719041>",

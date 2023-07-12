@@ -13,6 +13,7 @@ const {
   randomRange,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,13 +36,13 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-    let items = ["🏎️", "💵", "⚙️"];
+    let items = ["🏎️", "💵", "⚙️", "🔩"];
     let item = lodash.sample(items);
     let using = userdata.using;
 
     let cash = wheelspinrewards.Cash;
     let maps = wheelspinrewards.Maps;
-
+    let items2 = wheelspinrewards.Items;
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
     let tier4 = wheelspinrewards.Tier4;
@@ -61,19 +62,7 @@ module.exports = {
       if (item == "🏎️") {
         item = lodash.sample(items);
       }
-      if (userdata.using.includes("orange juice")) {
-        let cooldown = cooldowns.orangejuice;
-        let timeout = 60000;
-        console.log(timeout - (Date.now() - cooldown));
-        if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-          console.log("pulled");
-          userdata.using.pull("orange juice");
-          userdata.update();
-          interaction.channel.send("Your orange juice ran out! :(");
-        } else {
-          item = "🪛";
-        }
-      }
+
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
         if (item == "⚙️") {
@@ -84,7 +73,19 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🪛") {
+        } 
+        if (item == "🔩") {
+          let reward = lodash.sample(items2);
+         if(reward == "lockpick"){
+          userdata.lockpicks += 1
+         }
+
+          embed.setDescription(
+            `You won a $${emotes.lockpicks} lockpick!`
+          );
+          interaction.editReply({ embeds: [embed] });
+        }
+        else if (item == "🪛") {
           let reward = lodash.sample(tier4);
           userdata.parts.push(reward.toLowerCase());
 

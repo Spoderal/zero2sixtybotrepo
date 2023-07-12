@@ -33,8 +33,8 @@ module.exports = {
             emoji: "☀️",
           },
           {
-            label: "6/19/2023",
-            description: "Information for the recent small update!",
+            label: "7/11/2023",
+            description: "Information for the recent huge overhaul!",
             value: "5_update",
             customId: "up5",
             emoji: "🏎️",
@@ -50,7 +50,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 6/7/2023\n
             ☀️ Summer Update 5/31/2023\n
-            🏎️ Race Update 6/19/2023\n
+            🏎️ Race Update 7/11/2023\n
         `);
 
     embed.setColor(colors.blue);
@@ -243,54 +243,37 @@ module.exports = {
                 {
                   name: "Features ⭐",
                   value: `__Race revamp__
-                  Displays a new map of races\n
-                  New formula so you wont lose randomly\n
-                  New tiers for street race only (BETA)\n
-                  You now lose money if you lose races\n
-                  **NEW EVENT: WET WARRIORS**\n
-                  Sell cars from lockpicks easier\n
-                  No more duplicates in lockpicks\n
-                  Garage sorts by new\n
-                  Crew delete added\n
-                  /restore shows parts needed when you don't have the parts\n
-                  Item shop no longer has duplicate items
+                  Quarter mile and half mile joined into 1 race
+                  Race menu removed, typing only\n
+                  Highway removed\n
+                  Track race added\n
+                  Tiers go up to 5 for now\n
+                  Bounty removed for the time being until its reworked\n
+                  Barn maps moved to drag race\n
+                  Cash cup removed\n
+                  Wheelspin cars are purchasable\n
+                  Stats changed for more cars\n
+                  
+                
             `,
                   inline: true,
                 },
                 {
-                  name: "Cars 🚗",
-                  value: `
-                  ${cardb.Cars["2024 porsche mission x"].Emote} ${cardb.Cars["2024 porsche mission x"].Name}\n
-                  ${cardb.Cars["2021 porsche panamara turbo"].Emote} ${cardb.Cars["2021 porsche panamara turbo"].Name}\n
-                  ${cardb.Cars["2011 mercedes sl65 amg black series"].Emote} ${cardb.Cars["2011 mercedes sl65 amg black series"].Name}\n
-                  ${cardb.Cars["2015 lotus exige s roadster"].Emote} ${cardb.Cars["2015 lotus exige s roadster"].Name}\n
-                  ${cardb.Cars["2024 lotus eletra"].Emote} ${cardb.Cars["2024 lotus eletra"].Name}\n
-                  ${cardb.Cars["2008 audi rs6"].Emote} ${cardb.Cars["2008 audi rs6"].Name}\n
-                  ${cardb.Cars["2008 bmw z4"].Emote} ${cardb.Cars["2008 bmw z4"].Name}\n
-                  ${cardb.Cars["1995 porsche 928"].Emote} ${cardb.Cars["1995 porsche 928"].Name}\n
-                  ${cardb.Cars["1986 ford escort rs turbo"].Emote} ${cardb.Cars["1986 ford escort rs turbo"].Name}\n
-                  ${cardb.Cars["1993 lamborghini lm002"].Emote} ${cardb.Cars["1993 lamborghini lm002"].Name}\n
-                  ${cardb.Cars["1999 lamborghini diablo gtr"].Emote} ${cardb.Cars["1999 lamborghini diablo gtr"].Name}\n
-                  ${cardb.Cars["1998 mercedes amg clk gtr"].Emote} ${cardb.Cars["1998 mercedes amg clk gtr"].Name}\n
-
-              `,
-                  inline: true,
-                },
-                {
-                  name: `Items 🪛`,
-                  value: `
-              ${itemdb.gas.Emote} ${itemdb.gas.Name}\n
-              ${itemdb.fireplace.Emote} ${itemdb.fireplace.Name}\n
-              ${itemdb.bubbles.Emote} ${itemdb.bubbles.Name}\n
-              ${itemdb["parking brake"].Emote} ${itemdb["parking brake"].Name}\n
-              ${itemdb.chips.Emote} ${itemdb.chips.Name}\n
-              ${itemdb.match.Emote} ${itemdb.match.Name}\n
-
-              `,
+                  name: "Features 2 ⭐",
+                  value: `  Keys earned in track race\n
+                  Key droprates, and barn droprates reduced\n
+                  Lockpicks only obtainable in wheelspins\n
+                  Wheelspins and super wheelspins obtainable in crates\n
+                  Upgrade system overhauled\n
+                  Restoration tweaked, now you must have 5 of the right junk parts in your inventory to restore a car\n
+                  New stats card\n
+                  GAS! You'll need gas for each of your cars to race, view the current gas price with /bot, and fill up with /gas, EVs are charged their car price / 1000 to charge the car\n
+            `,
                   inline: true,
                 }
+             
               )
-              .setFooter({ text: "6/19/2023" })
+              .setFooter({ text: "7/11/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

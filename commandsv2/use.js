@@ -5,7 +5,7 @@ const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency, randomRange } = require("../common/utils");
+const { toCurrency, randomRange, randomNoRepeats } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
@@ -591,21 +591,14 @@ module.exports = {
       ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
       let x = 0;
       let rewards = [];
-      let i = setInterval(() => {
-        x++;
-        let reward = lodash.sample(boughtindb.Contents);
-        rewards.push(reward);
-
-        if (x == 3) {
-          clearInterval(i);
-        }
-      }, 1000);
-
+      var chooser = randomNoRepeats(boughtindb.Contents);
       setTimeout(async () => {
-        let reward1 = rewards[0];
-        let reward2 = rewards[1];
-        let reward3 = rewards[2];
-
+        let reward1 = chooser();
+        let reward2 = chooser();
+        let reward3 = chooser();
+        console.log(reward1)
+        console.log(reward2)
+        console.log(reward3)
         let name1;
         let name2;
         let name3;
@@ -637,11 +630,14 @@ module.exports = {
           userdata.pfps.push(name3.toLowerCase());
         }
 
+     
+
         ctx.restore();
         ctx.font = "40px sans-serif";
         ctx.fillStyle = "#00000";
         let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png");
-
+        let imagewheel = await loadImage("https://i.ibb.co/Rpp6Rt2/wheelspin.gif")
+        let imagewheelspin = await loadImage("https://i.ibb.co/HpQvFST/superwheelspin.gif")
         if (reward1.endsWith(`Cash`)) {
           let amount = Number(reward1.split(" ")[0]);
           name1 = `${amount} Cash`;
@@ -661,6 +657,63 @@ module.exports = {
           name3 = `${amount3} Cash`;
           ctx.drawImage(imageload, 970, 200, 150, 150);
           userdata.cash += amount3;
+        }
+
+        if (reward1 == `super wheelspin`) {
+          let amount = 1
+          name1 = `${amount} Super Wheelspin`;
+          ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
+          userdata.swheelspins += amount;
+        }
+        if (reward2 == `super wheelspin`) {
+          let amount = 1
+          name2 = `${amount} Super Wheelspin`;
+          ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
+          userdata.swheelspins += amount;
+        }
+        if (reward3 == `super wheelspin`) {
+          let amount = 1
+          name3 = `${amount} Super Wheelspin`;
+          ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
+          userdata.swheelspins += amount;
+        }
+
+        if (reward1 == `wheelspin`) {
+          let amount = 1
+          name1 = `${amount} Wheelspin`;
+          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          userdata.wheelspins += amount;
+        }
+        if (reward2 == `wheelspin`) {
+          let amount = 1
+          name2 = `${amount} Wheelspin`;
+          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          userdata.wheelspins += amount;
+        }
+        if (reward3 == `wheelspin`) {
+          let amount = 1
+          name3 = `${amount} Wheelspin`;
+          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          userdata.wheelspins += amount;
+        }
+
+        if (reward1 == `lockpick`) {
+          let amount = 1
+          name1 = `${amount} Lockpick`;
+          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          userdata.lockpicks += amount;
+        }
+        if (reward2 == `lockpick`) {
+          let amount = 1
+          name2 = `${amount} Lockpick`;
+          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          userdata.lockpicks += amount;
+        }
+        if (reward3 == `lockpick`) {
+          let amount = 1
+          name3 = `${amount} Lockpick`;
+          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          userdata.lockpicks += amount;
         }
 
         if (titledb[reward1]) {

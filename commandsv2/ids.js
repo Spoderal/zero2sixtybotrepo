@@ -64,7 +64,6 @@ module.exports = {
         )
     ),
   async execute(interaction) {
-    const db = require("quick.db");
 
     let option = interaction.options.getSubcommand();
 
@@ -129,43 +128,7 @@ module.exports = {
         )
         .setColor(`#60b0f4`);
       await interaction.reply({ embeds: [embed] });
-    } else if (option == "deselect") {
-      let usercars = db.fetch(`cars_${interaction.user.id}`);
-      let idtochoose = interaction.options.getString("id");
-      let selectedids = db.fetch(`selectedids_${interaction.user.id}`);
-      if (!usercars) return await interaction.reply("You don't own any cars!");
-      if (!idtochoose) return await interaction.reply("Specify an id!");
-      if (!db.fetch(`selected_${idtochoose}_${interaction.user.id}`))
-        return await interaction.reply(
-          `There is no car set to that id! Run /ids select [id] [car] to select it, if you are reselecting a car, here's your old IDs: ${selectedids.join(
-            ", "
-          )}`
-        );
-
-      let selectedcar = db.fetch(
-        `selected_${idtochoose}_${interaction.user.id}`
-      );
-
-      let cartoremove = `${idtochoose} : ${
-        cars.Cars[selectedcar.toLowerCase()].Name
-      }`;
-      const filtered = selectedids.filter((e) => e !== cartoremove);
-      db.set(`selectedids_${interaction.user.id}`, filtered);
-      db.delete(`selected_${idtochoose}_${interaction.user.id}`);
-      db.delete(`selected_${idtochoose}_${interaction.user.id}`);
-      db.delete(
-        `isselected_${cars.Cars[selectedcar.toLowerCase()].Name}_${
-          interaction.user.id
-        }`
-      );
-      db.delete(
-        `selected_${cars.Cars[selectedcar.toLowerCase()].Name}_${
-          interaction.user.id
-        }`
-      );
-
-      await interaction.reply(`You deselected ${idtochoose}`);
-    } else if (option == "favorite") {
+    }  else if (option == "favorite") {
       let idtochoose = interaction.options.getString("car");
       let carfiltered = userdata.cars.filter(
         (car) =>

@@ -551,30 +551,30 @@ module.exports = {
     let row2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("classD")
-        .setEmoji("<:class_d:1030953018591559720>")
+        .setEmoji("<:Dclass:954635612986679317>")
         .setStyle("Secondary"),
       new ButtonBuilder()
         .setCustomId("classC")
-        .setEmoji("<:class_c:1030953017249386546>")
-        .setStyle("Secondary")
-    );
+        .setEmoji("<:cclass:954635613385162792>")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
+          .setCustomId("classB")
+          .setEmoji("<:Bclass:954635613339000862>")
+          .setStyle("Secondary"),
+          );
 
     let row5 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("classB")
-        .setEmoji("<:class_b:1030953016204996678>")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setCustomId("classA")
-        .setEmoji("<:class_a:1030953021678567554>")
-        .setStyle("Secondary")
+          new ButtonBuilder()
+            .setCustomId("classA")
+            .setEmoji("<:aclass:954635613376770108>")
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+              .setCustomId("classS")
+              .setEmoji("<:sclass:967698398314655754>")
+              .setStyle("Secondary"),
     );
 
     let row3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("classS")
-        .setEmoji("<:CLASS_S:1030953020806152222>")
-        .setStyle("Secondary"),
       new ButtonBuilder()
         .setCustomId("classN")
         .setLabel("New")
@@ -607,13 +607,14 @@ module.exports = {
 
     let embed = new EmbedBuilder()
       .setTitle("Dealership")
-      .setThumbnail("https://i.ibb.co/n8NJdD9/dealerico.png")
+      .setThumbnail("https://i.ibb.co/6yt9vLT/dealer.png")
       .setImage(randomcar.Image)
       .setColor(colors.blue)
       .setDescription(
         `Welcome to the dealership! Click on a class to begin looking through the cars we have available.\n\n
         **__Featured car__**
         ${randomcar.Emote} ${randomcar.Name}\n
+        Class ${randomcar.Class}
         ${emotes.cash} Price: ${toCurrency(randomcar.Price)}
         ${emotes.speed} Power: ${randomcar.Speed}
         ${emotes.zero2sixty} Acceleration: ${randomcar["0-60"]}
@@ -641,7 +642,7 @@ module.exports = {
         embed = new EmbedBuilder().setTitle("Class D Dealership");
 
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/SfwjQY9/dealericon.png")
+          .setThumbnail("https://i.ibb.co/0MggTrB/Dclass.png")
           .setTitle("Class D Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
@@ -713,7 +714,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/kGT51Gh/class-c.png")
+          .setThumbnail("https://i.ibb.co/fYgt2kj/cclass.png")
           .setTitle("Class C Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
@@ -784,7 +785,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/r52rPJ5/class-b.png")
+          .setThumbnail("https://i.ibb.co/k5ByyvZ/Bclass.png")
           .setTitle("Class B Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
@@ -855,7 +856,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/1KBwRWR/class-a.png")
+          .setThumbnail("https://i.ibb.co/mDNbCrR/aclass.png")
           .setTitle("Class A Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });
@@ -926,7 +927,7 @@ module.exports = {
             .setStyle("Secondary")
         );
         embed = new EmbedBuilder()
-          .setThumbnail("https://i.ibb.co/WnSVK05/CLASS-S.png")
+          .setThumbnail("https://i.ibb.co/tqY1mCf/sclass.png")
           .setTitle("Class S Dealership")
           .setColor(colors.blue);
         embed.setFooter({ text: `Pages 1/${classpage.length}` });

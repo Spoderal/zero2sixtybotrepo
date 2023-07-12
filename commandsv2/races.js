@@ -53,25 +53,7 @@ module.exports = {
             value: "driftrace",
             customId: "drift",
           },
-          {
-            label: "wanted",
-            description: "Information about escaping the police",
-            value: "police_race",
-            customId: "police",
-          },
-          {
-            label: "cashcup",
-            description: "Information about cashcup races",
-            value: "cash_race",
-            customId: "cash",
-          },
 
-          {
-            label: "crosscountry",
-            description: "Information about crosscountry races",
-            value: "cross_race",
-            customId: "cross",
-          },
         ])
     );
 
@@ -82,8 +64,7 @@ module.exports = {
     embed.setFooter({ text: 'Prefix is "/"' });
     embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
     embed.setDescription(`Here you can check out the race types and their rewards!\n\n
-          
-          <:boost:983813400289234978> = You can use nitrous in this race
+        
 
           Choose an item from the drop down menu below, there are many different types such as drifting, pink slips, and more!\n
           Use /race to race in any of these races!
@@ -124,7 +105,7 @@ module.exports = {
             embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
-              `Race against bots for practice!\n<:boost:983813400289234978>`
+              `Race against bots for practice!`
             );
             embed.addFields([
               {
@@ -134,34 +115,24 @@ module.exports = {
               },
               {
                 name: `Tier 2`,
-                value: `${cashemote} $150\n${rpemote} 1\n50 Race XP`,
+                value: `${cashemote} $100\n${rpemote} 1\n50 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 3`,
-                value: `${cashemote} $350\n${rpemote} 2\n100 Race XP`,
+                value: `${cashemote} $150\n${rpemote} 2\n100 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 4`,
-                value: `${cashemote} $450\n${rpemote} 3\n150 Race XP`,
+                value: `${cashemote} $200\n${rpemote} 3\n150 Race XP`,
                 inline: true,
               },
               {
                 name: `Tier 5`,
-                value: `${cashemote} $550\n${rpemote} 4\n<:zbarns:941571059600195594> 1\n200 Race XP`,
+                value: `${cashemote} $250\n${rpemote} 4\n<:zbarns:941571059600195594> 1\n200 Race XP`,
                 inline: true,
-              },
-              {
-                name: `Tier 6`,
-                value: `${cashemote} $750\n${rpemote} 5\n<:zbarns:941571059600195594> 2\n250 Race XP`,
-                inline: true,
-              },
-              {
-                name: `Tier 7`,
-                value: `${cashemote} $1050\n${rpemote} 10\n<:zbarns_u:958540705964371978> 1\n300 Race XP`,
-                inline: true,
-              },
+              }
             ]);
 
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
@@ -173,10 +144,10 @@ module.exports = {
             });
           } else if (value === "qm_race") {
             embed.fields = [];
-            embed.setTitle("Quarter Mile Racing");
+            embed.setTitle("Drag Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
-              `Race bots on the quarter mile track and earn keys for import crates!\n<:boost:983813400289234978>`
+              `Race bots on the quarter mile track and earn maps for barns!`
             );
             embed.addFields([
               {
@@ -186,169 +157,24 @@ module.exports = {
               },
               {
                 name: `Tier 2`,
-                value: `${cashemote} $225\n${rpemote} 2\n<:ckey:993011409132728370> 4`,
+                value: `${cashemote} $150\n${rpemote} 2\n<:ckey:993011409132728370> 4`,
                 inline: true,
               },
               {
                 name: `Tier 3`,
-                value: `${cashemote} $275\n${rpemote} 3\n<:rkey:993011407681486868> 1`,
+                value: `${cashemote} $225\n${rpemote} 3\n<:rkey:993011407681486868> 1`,
                 inline: true,
               },
               {
                 name: `Tier 4`,
-                value: `${cashemote} $375\n${rpemote} 4\n<:rkey:993011407681486868> 2`,
+                value: `${cashemote} $300\n${rpemote} 4\n<:rkey:993011407681486868> 2`,
                 inline: true,
               },
               {
                 name: `Tier 5`,
-                value: `${cashemote} $475\n${rpemote} 5\n<:rkey:993011407681486868> 3`,
+                value: `${cashemote} $375\n${rpemote} 5\n<:rkey:993011407681486868> 3`,
                 inline: true,
-              },
-              {
-                name: `Tier 6`,
-                value: `${cashemote} $675\n${rpemote} 6\n<:rkey:993011407681486868> 5`,
-                inline: true,
-              },
-              {
-                name: `Tier 7`,
-                value: `${cashemote} $850\n${rpemote} 7\n<:ekey:993011410210672671> 1`,
-                inline: true,
-              },
-            ]);
-
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "train_race") {
-            embed.fields = [];
-            embed.setTitle("Training Track Racing");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Race beginner bots on the track **for new users**!\n<:boost:983813400289234978>`
-            );
-            embed.addFields([
-              {
-                name: `Tier 1`,
-                value: `${cashemote} $150\n${rpemote} 1`,
-                inline: true,
-              },
-              {
-                name: `Tier 2`,
-                value: `${cashemote} $250\n${rpemote} 2`,
-                inline: true,
-              },
-              {
-                name: `Tier 3`,
-                value: `${cashemote} $350\n${rpemote} 3`,
-                inline: true,
-              },
-            ]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "hm_race") {
-            embed.fields = [];
-            embed.setTitle("Half Mile Racing");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Race bots on the half mile track!\n<:boost:983813400289234978>`
-            );
-            embed.addFields([
-              {
-                name: `Tier 1`,
-                value: `${cashemote} $150\n${rpemote} 2`,
-                inline: true,
-              },
-              {
-                name: `Tier 2`,
-                value: `${cashemote} $300\n${rpemote} 3 ${rpemote}`,
-                inline: true,
-              },
-              {
-                name: `Tier 3`,
-                value: `${cashemote} $450\n${rpemote} 4`,
-                inline: true,
-              },
-              {
-                name: `Tier 4`,
-                value: `${cashemote} $650\n${rpemote} 4`,
-                inline: true,
-              },
-              {
-                name: `Tier 5`,
-                value: `${cashemote} $750\n${rpemote} 5`,
-                inline: true,
-              },
-              {
-                name: `Tier 6`,
-                value: `${cashemote} $900\n${rpemote} 6\n<:wheelspin:985048616865517578> 1\nChance at <:bankupgrade:974153111298007131> 1`,
-                inline: true,
-              },
-              {
-                name: `Tier 7`,
-                value: `${cashemote} $1250\n${rpemote} 10\n<:wheelspin:985048616865517578> 2`,
-                inline: true,
-              },
-            ]);
-
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "cross_race") {
-            embed.fields = [];
-            embed.setTitle("Cross Country Racing");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Race bots around the world!\n<:boost:983813400289234978>`
-            );
-            embed.addFields([
-              {
-                name: `Tier 1`,
-                value: `${cashemote} $350\n${rpemote} 2\n${emotes.barnMapCommon} 1`,
-                inline: true,
-              },
-              {
-                name: `Tier 2`,
-                value: `${cashemote} $700\n${rpemote} 3 ${rpemote}\n${emotes.barnMapCommon} 2`,
-                inline: true,
-              },
-              {
-                name: `Tier 3`,
-                value: `${cashemote} $1050\n${rpemote} 4\n${emotes.barnMapRare} 1`,
-                inline: true,
-              },
-              {
-                name: `Tier 4`,
-                value: `${cashemote} $1400\n${rpemote} 4\n${emotes.barnMapRare} 2`,
-                inline: true,
-              },
-              {
-                name: `Tier 5`,
-                value: `${cashemote} $1750\n${rpemote} 5\n${emotes.barnMapLegendary} 1`,
-                inline: true,
-              },
-              {
-                name: `Tier 6`,
-                value: `${cashemote} $2100\n${rpemote} 6\n${emotes.barnMapLegendary} 2`,
-                inline: true,
-              },
-              {
-                name: `Tier 7`,
-                value: `${cashemote} $2450\n${rpemote} 10\n${emotes.barnMapLegendary} 3`,
-                inline: true,
-              },
+              }
             ]);
 
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
@@ -363,7 +189,7 @@ module.exports = {
             embed.setTitle("Squad Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
-              `Race squads to take their cars!\n<:boost:983813400289234978>`
+              `Race squads to take their cars!`
             );
             embed.addFields([{ name: `Rewards`, value: `$600` }]);
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
@@ -427,20 +253,30 @@ module.exports = {
             );
             embed.addFields([
               {
-                name: `Easy`,
-                value: `${cashemote} $200\n${rpemote} 2\n<:zeronotor:962785804202176574> Car Handling / Laps\n100 Race XP`,
+                name: `Tier 1`,
+                value: `${cashemote} $65\n${rpemote} 1\n<:ckey:993011409132728370> 2`,
                 inline: true,
               },
               {
-                name: `Medium`,
-                value: `${cashemote} $500\n${rpemote} 4\n<:zeronotor:962785804202176574> Car Handling / Laps\n250 Race XP`,
+                name: `Tier 2`,
+                value: `${cashemote} $130\n${rpemote} 2\n<:ckey:993011409132728370> 4`,
                 inline: true,
               },
               {
-                name: `Hard`,
-                value: `${cashemote} $1,000\n${rpemote} 6\n<:zeronotor:962785804202176574> Car Handling / Laps\n400 Race XP`,
+                name: `Tier 3`,
+                value: `${cashemote} $195\n${rpemote} 3\n<:rkey:993011407681486868> 1`,
                 inline: true,
               },
+              {
+                name: `Tier 4`,
+                value: `${cashemote} $260\n${rpemote} 4\n<:rkey:993011407681486868> 2`,
+                inline: true,
+              },
+              {
+                name: `Tier 5`,
+                value: `${cashemote} $325\n${rpemote} 5\n<:rkey:993011407681486868> 3`,
+                inline: true,
+              }
             ]);
 
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
@@ -474,21 +310,6 @@ module.exports = {
               { name: `Tier 1`, value: `${cashemote} $400`, inline: true },
               { name: `Tier 2`, value: `${cashemote} $700`, inline: true },
               { name: `Tier 3`, value: `${cashemote} $1000`, inline: true },
-            ]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "pinkslip_race") {
-            embed.fields = [];
-            embed.setTitle("Pinkslips");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Race another user to steal their car!*`);
-            embed.addFields([
-              { name: `Rewards`, value: `The winner gets the losers car` },
             ]);
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
             embed.setColor(colors.blue);

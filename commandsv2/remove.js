@@ -1,255 +1,335 @@
-const discord = require("discord.js");
+const {EmbedBuilder, ActionRowBuilder, ButtonBuilder} = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
 const { capitalize } = require("lodash");
 const colors = require("../common/colors");
+const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const cardb = require("../data/cardb.json");
+const cardb = require("../data/cardb.json").Cars;
+const parttiersdb = require("../data/parttiers.json");
+const { toCurrency } = require("../common/utils");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("remove")
     .setDescription("Remove a part from your car")
     .addStringOption((option) =>
       option
-        .setName("part")
-        .setDescription("The part to remove")
-        .addChoices(
-          { name: "Exhaust", value: "exhaust" },
-          { name: "Tires", value: "tires" },
-          { name: "Intake", value: "intake" },
-          { name: "Turbo", value: "turbo" },
-          { name: "Suspension", value: "suspension" },
-          { name: "Spoiler", value: "spoiler" },
-          { name: "Body", value: "body" },
-          { name: "ECU", value: "ecu" },
-          { name: "Clutch", value: "clutch" },
-          { name: "Engine", value: "engine" },
-          { name: "Gearbox", value: "gearbox" },
-          { name: "Weight reduction", value: "Weight reduction" },
-          { name: "Intercooler", value: "intercooler" },
-          { name: "Nitro", value: "nitro" },
-          { name: "Brakes", value: "brakes" },
-          { name: "Springs", value: "springs" },
-          { name: "Drivetrain", value: "drivetrain" },
-          { name: "All", value: "all" }
-        )
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
         .setName("car")
-        .setDescription("The car id to remove the part from")
+        .setDescription("Your car ID")
         .setRequired(true)
     ),
+
   async execute(interaction) {
-    let user1 = interaction.user;
-    let userdata = await User.findOne({ id: user1.id });
+    let inputCarIdOrName = interaction.options.getString("car");
+    let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+    let usercars = userdata.cars || []
 
-    let parttoinstall = interaction.options.getString("part");
-    let cartoinstall = interaction.options.getString("car");
-    let actpart = parttoinstall === "ecu" ? "ECU" : capitalize(parttoinstall);
+    let selected = usercars.filter((car) => car.Name.toLowerCase() == inputCarIdOrName.toLowerCase() || car.ID == inputCarIdOrName)
 
-    let filteredcar = userdata.cars.find((car) => car.ID == cartoinstall);
-    let selected = filteredcar || "No ID";
-    if (selected == "No ID") {
-      let errembed = new discord.EmbedBuilder()
-        .setTitle("Error!")
-        .setColor(colors.discordTheme.red)
-        .setDescription(
-          `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
-        );
-      return await interaction.reply({ embeds: [errembed] });
+    if(selected.length == 0) return interaction.reply("Thats not a car! Make sure to specify a car ID, or car name")
+    let carimage = selected[0].Image || cardb[selected[0].Name.toLowerCase()].Image
+    let carindb = cardb[selected[0].Name.toLowerCase()]
+    let carprice = carindb.Price
+    if(carindb.Price == 0){
+      carprice = 1000
     }
-    console.log(actpart);
-    if (!selected[actpart] && actpart !== "All")
-      return await interaction.reply(`This car doesn't have a "${actpart}" !`);
 
-    if (actpart == "All") {
-      let carindb = cardb.Cars[selected.Name.toLowerCase()];
-      if (selected.Exhaust !== null && selected.Exhaust !== undefined) {
-        userdata.parts.push(selected.Exhaust.toLowerCase());
+    let exhausttier = selected[0].exhaust || 1
+    let turbotier = selected[0].turbo || 1
+    let tiretier = selected[0].tires || 1
+    let suspensiontier = selected[0].suspension || 1
+    let enginetier = selected[0].engine || 1
+    let clutchtier = selected[0].clutch || 1
+    let intercoolertier = selected[0].intercooler || 1
+    let braketier = selected[0].brakes || 1
+    let intaketier = selected[0].intake || 1
+    let ecutier = selected[0].ecu || 1
+    let gearboxtier = selected[0].gearbox || 1
+
+    
+
+    
+
+
+    let exhaustpower = Math.round(parttiersdb[`exhaust${exhausttier}`].Power * selected[0].Speed)
+    let turbopower = Math.round(parttiersdb[`turbo${turbotier}`].Power * selected[0].Speed)
+    let tirepower = Math.round(parttiersdb[`tires${tiretier}`].Handling * selected[0].Handling)
+    let suspensionpower = Math.round(parttiersdb[`suspension${suspensiontier}`].Handling * selected[0].Handling)
+    let enginepower = Math.round(parttiersdb[`engine${enginetier}`].Power * selected[0].Speed)
+    let clutchpower = Math.round(parttiersdb[`clutch${clutchtier}`].Power * selected[0].Speed)
+    let intercoolerpower = Math.round(parttiersdb[`intercooler${intercoolertier}`].Power * selected[0].Speed)
+    let intakepower = Math.round(parttiersdb[`intake${intaketier}`].Power * selected[0].Speed)
+    let ecupower = Math.round(parttiersdb[`ecu${ecutier}`].Power * selected[0].Speed)
+    let gearboxpower = Math.round(parttiersdb[`gearbox${gearboxtier}`].Handling * selected[0].Handling)
+
+    let exhaustemote = partdb.Parts[`t${exhausttier}exhaust`].Emote
+    let turboemote = partdb.Parts[`turbo`].Emote
+    let tireemote = partdb.Parts[`t${tiretier}tires`].Emote
+    let suspensionemote = partdb.Parts[`loan suspension`].Emote
+    let engineemote = partdb.Parts[`no engine`].Emote
+    let clutchemote = partdb.Parts[`t${clutchtier}clutch`].Emote
+    let intercooleremote = partdb.Parts[`t${intercoolertier}intercooler`].Emote
+    let intakeemote = partdb.Parts[`t${intaketier}intake`].Emote
+    let ecuemote = partdb.Parts[`t${ecutier}ecu`].Emote
+    let gearboxemote = partdb.Parts[`t${gearboxtier}gearbox`].Emote
+
+    let embed = new EmbedBuilder()
+    .setTitle(`Remove parts from your ${selected[0].Name}`)
+    .addFields(
+      {
+        name:`${exhaustemote} Exhaust`,
+        value: `Tier: ${exhausttier}\nPower: ${exhaustpower}\nAcceleration: ${parttiersdb[`exhaust${exhausttier}`].Acceleration}`,
+        inline: true
+      },
+      {
+        name:`${tireemote} Tires`,
+        value: `Tier: ${tiretier}\nHandling: ${tirepower}`,
+        inline: true
+      },
+      {
+        name:`${suspensionemote} Suspension`,
+        value: `Tier: ${suspensiontier}\nHandling: ${suspensionpower}`,
+        inline: true
+      },
+      {
+        name:`${turboemote} Turbo`,
+        value: `Tier: ${turbotier}\nPower: ${turbopower}\nAcceleration: ${parttiersdb[`turbo${turbotier}`].Acceleration}`,
+        inline: true
+      },
+      {
+        name:`${intakeemote} Intake`,
+        value: `Tier: ${intaketier}\nPower: ${intakepower}\nAcceleration: ${parttiersdb[`intake${intaketier}`].Acceleration}`,
+        inline: true
+      },
+      {
+        name:`${engineemote} Engine`,
+        value: `Tier: ${enginetier}\nPower: ${enginepower}`,
+        inline: true
       }
-      if (selected.Tires !== null && selected.Tires !== undefined) {
-        userdata.parts.push(selected.Tires.toLowerCase());
+      ,
+      {
+        name:`${intercooleremote} Intercooler`,
+        value: `Tier: ${intercoolertier}\nPower: ${intercoolerpower}\nAcceleration: ${parttiersdb[`intercooler${intercoolertier}`].Acceleration}`,
+        inline: true
       }
-      if (selected.Intake !== null && selected.Intake !== undefined) {
-        userdata.parts.push(selected.Intake.toLowerCase());
+      ,
+      {
+        name:`${ecuemote} ECU`,
+        value: `Tier: ${ecutier}\nPower: ${ecupower}`,
+        inline: true
+      },
+      {
+        name:`${clutchemote} Clutch`,
+        value: `Tier: ${clutchtier}\nPower: ${clutchpower}`,
+        inline: true
+      },
+      {
+        name:`${gearboxemote} Gearbox`,
+        value: `Tier: ${gearboxtier}\nHandling: ${gearboxpower}`,
+        inline: true
       }
-      if (selected.Turbo !== null && selected.Turbo !== undefined) {
-        userdata.parts.push(selected.Turbo.toLowerCase());
+    )
+    .setColor(colors.blue)
+    .setThumbnail(carimage)
+    .setDescription(`You will need to upgrade your tier 1 twice to get to the next tier.`)
+
+
+
+    let row = new ActionRowBuilder()
+    .setComponents(
+      new ButtonBuilder()
+      .setCustomId("exhaust")
+      .setLabel("Remove Exhaust")
+      .setEmoji(exhaustemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("tires")
+      .setLabel("Remove Tires")
+      .setEmoji(tireemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("suspension")
+      .setLabel("Remove Suspension")
+      .setEmoji(suspensionemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("turbo")
+      .setLabel("Remove Turbo")
+      .setEmoji(turboemote)
+      .setStyle("Success")
+    )
+    let row2 = new ActionRowBuilder()
+    .setComponents(
+      new ButtonBuilder()
+      .setCustomId("intake")
+      .setLabel("Remove Intake")
+      .setEmoji(intakeemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("engine")
+      .setLabel("Remove Engine")
+      .setEmoji(engineemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("intercooler")
+      .setLabel("Remove Intercooler")
+      .setEmoji(intercooleremote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("ecu")
+      .setLabel("Remove ECU")
+      .setEmoji(ecuemote)
+      .setStyle("Success")
+    )
+    let row3 = new ActionRowBuilder()
+    .setComponents(
+      new ButtonBuilder()
+      .setCustomId("clutch")
+      .setLabel("Remove Clutch")
+      .setEmoji(clutchemote)
+      .setStyle("Success"),
+      new ButtonBuilder()
+      .setCustomId("gearbox")
+      .setLabel("Remove Gearbox")
+      .setEmoji(gearboxemote)
+      .setStyle("Success")
+    )
+    for(let butt in row.components){
+      let button = row.components[butt]
+      let tier = selected[0][button.data.custom_id] || 1
+      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+      if(tier <= 1) {
+        button.setDisabled(true)
       }
-      if (selected.Suspension !== null && selected.Suspension !== undefined) {
-        userdata.parts.push(selected.Suspension.toLowerCase());
+      
+    }
+
+    for(let butt in row2.components){
+      let button = row2.components[butt]
+      let tier = selected[0][button.data.custom_id] || 1
+      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+      console.log(tier)
+      if(tier <= 1) {
+        button.setDisabled(true)
       }
-      if (selected.Spoiler !== null && selected.Spoiler !== undefined) {
-        userdata.parts.push(selected.Spoiler.toLowerCase());
+ 
+      
+    }
+
+    for(let butt in row3.components){
+      let button = row3.components[butt]
+    
+      let tier = selected[0][button.data.custom_id.toLowerCase()] || 1
+
+      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+      if(tier <= 1) {
+        button.setDisabled(true)
       }
-      if (selected.Body !== null && selected.Body !== undefined) {
-        userdata.parts.push(selected.Body.toLowerCase());
+
+   
+
+      
+    }
+    
+
+    let msg = await interaction.reply({embeds: [embed], components: [row, row2, row3], fetchReply: true})
+
+    let filter2 = (btnInt) => {
+      return interaction.user.id === btnInt.user.id;
+    };
+    let collector = msg.createMessageComponentCollector({
+      filter: filter2,
+    });
+
+    collector.on('collect', async (i) => {
+      
+      console.log(selected[0])
+      let tier = selected[0][i.customId] || 0
+      let newtier = tier 
+      let price = Math.round(carprice * parttiersdb[`${i.customId}${newtier}`].Cost) * newtier
+      let power = Math.round(selected[0].Speed * parttiersdb[`${i.customId}${newtier}`].Power)
+      let acceleration = parttiersdb[`${i.customId}${newtier}`].Acceleration
+      console.log(parttiersdb[`${i.customId}${newtier}`])
+      let handling = Math.floor(selected[0].Handling * parttiersdb[`${i.customId}${newtier}`].Handling)
+      let useracc = selected[0].Acceleration
+      let newacc = useracc -= acceleration
+      console.log(power)
+      if(parttiersdb[`${i.customId}${newtier}`].Power){
+        selected[0].Speed -= power
       }
-      if (selected.ECU !== null && selected.ECU !== undefined) {
-        userdata.parts.push(selected.ECU.toLowerCase());
+      if(parttiersdb[`${i.customId}${newtier}`].Handling){
+        selected[0].Handling -= handling
       }
-      if (selected.Clutch !== null && selected.Clutch !== undefined) {
-        userdata.parts.push(selected.Clutch.toLowerCase());
+      if(parttiersdb[`${i.customId}${newtier}`].Acceleration && newacc >= 2){
+        selected[0].Acceleration += acceleration
       }
-      if (selected.Engine !== null && selected.Engine !== undefined) {
-        userdata.parts.push(selected.Engine.toLowerCase());
-      }
-      if (selected.Gearbox !== null && selected.Gearbox !== undefined) {
-        userdata.parts.push(selected.Gearbox.toLowerCase());
-      }
-      if (selected.Intercooler !== null && selected.Intercooler !== undefined) {
-        userdata.parts.push(selected.Intercooler.toLowerCase());
-      }
-      if (selected.Springs !== null && selected.Springs !== undefined) {
-        userdata.parts.push(selected.Springs.toLowerCase());
-      }
-      if (selected.Brakes !== null && selected.Brakes !== undefined) {
-        userdata.parts.push(selected.Brakes.toLowerCase());
-      }
-      if (selected.Drivetrain !== null && selected.Drivetrain !== undefined) {
-        userdata.parts.push(selected.Drivetrain.toLowerCase());
-      }
-      if (
-        selected["Weight reduction"] !== null &&
-        selected["Weight reduction"] !== undefined
-      ) {
-        userdata.parts.push(selected["Weight reduction"].toLowerCase());
-      }
-      selected.Exhaust = null;
-      selected.Tires = null;
-      selected.Intake = null;
-      selected.Turbo = null;
-      selected.Suspension = null;
-      selected.Spoiler = null;
-      selected.Body = null;
-      selected.ECU = null;
-      selected.Clutch = null;
-      selected.Engine = null;
-      selected.Gearbox = null;
-      selected.Intercooler = null;
-      selected["Weight reduction"] = null;
-      selected.Brakes = null;
-      selected.Drivetrain = null;
-      selected.Springs = null;
-      selected.Speed = carindb.Speed;
-      selected.Acceleration = carindb["0-60"];
-      selected.Weight = carindb.Weight;
-      selected.Handling = carindb.Handling;
-      let newobj = selected;
+
+      selected[0][i.customId] -= 1
+      
+      console.log(selected[0])
+
       await User.findOneAndUpdate(
         {
-          id: user1.id,
+          id: interaction.user.id,
         },
         {
           $set: {
-            "cars.$[car]": newobj,
+            "cars.$[car]": selected[0],
           },
         },
-
+  
         {
           arrayFilters: [
             {
-              "car.Name": selected.Name,
+              "car.Name": selected[0].Name,
             },
           ],
         }
-      );
+      )
 
-      userdata.save();
 
-      return interaction.reply("Removed all parts from your car!");
-    }
+      userdata.save()
 
-    let realpart = selected[actpart];
-    let partindb = partdb.Parts[realpart.toLowerCase()];
-    if (partindb.AddedSpeed && partindb.AddedSpeed > 0) {
-      let newspeed = Number(partindb.AddedSpeed);
-      let stat = Number(selected.Speed);
-      selected.Speed = stat -= newspeed;
-    }
-    if (partindb.DecreasedSpeed && partindb.DecreaseSpeed > 0) {
-      let newspeed = Number(partindb.DecreasedSpeed);
-      let stat = Number(selected.Speed);
-      selected.Speed = stat += newspeed;
-    }
-    if (partindb.AddedSixty && partindb.AddedSixty > 0) {
-      let newspeed = parseFloat(partindb.AddedSixty);
-      let stat = parseFloat(selected.Acceleration);
-      selected.Acceleration = stat += newspeed;
-    }
-    if (partindb.DecreasedSixty && partindb.DecreasedSixty > 0) {
-      let newspeed = parseFloat(partindb.DecreasedSixty);
-      let stat = parseFloat(selected.Acceleration);
-      if (stat > 2) selected.Acceleration = stat -= newspeed;
-      if (selected.Acceleration < 2) selected.Acceleration = 2;
-    }
-    if (partindb.AddHandling && partindb.AddHandling > 0) {
-      let newspeed = Number(partindb.AddHandling);
-      let stat = Number(selected.Handling);
-      selected.Handling = stat -= newspeed;
-    }
-    if (partindb.DecreasedHandling && partindb.DecreasedHandling > 0) {
-      let newspeed = Number(partindb.DecreasedHandling);
-      let stat = Number(selected.Handling);
-      selected.Handling = stat += newspeed;
-    }
-    if (partindb.AddedDrift && partindb.AddedDrift > 0) {
-      let newspeed = Number(partindb.AddedDrift);
-      let stat = Number(selected.Drift);
-      selected.Drift = stat -= newspeed;
-    }
-    if (partindb.DecreasedDrift && partindb.DecreasedDrift > 0) {
-      let newspeed = Number(partindb.DecreasedDrift);
-      let stat = Number(selected.Drift);
-      selected.Drift = stat += newspeed;
-    }
-    if (partindb.DecreaseWeight && partindb.DecreaseWeight > 0) {
-      let newspeed = Number(partindb.DecreaseWeight);
-      let stat = Number(selected.WeightStat);
-      if (stat > 500) {
-        selected.WeightStat = stat += newspeed;
+      for(let butt in row.components){
+        let button = row.components[butt]
+        let tier = selected[0][button.data.custom_id] || 1
+        let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+        if(tier <= 1) {
+          button.setDisabled(true)
+        }
+        
       }
-    }
-    if (partindb.AddWeight && partindb.AddWeight > 0) {
-      let newspeed = Number(partindb.AddWeight);
-      let stat = Number(selected.WeightStat);
-      selected.WeightStat = stat -= newspeed;
-    }
-    if (selected.Price && partindb.Price && partindb.Price > 0) {
-      let resale = Number(partindb.Price * 0.35);
-      let stat = Number(selected.Price);
-      selected.Price = stat -= resale;
-    }
-
-    selected[actpart] = null;
-    let newobj = selected;
-
-    await User.findOneAndUpdate(
-      {
-        id: user1.id,
-      },
-      {
-        $set: {
-          "cars.$[car]": newobj,
-        },
-      },
-
-      {
-        arrayFilters: [
-          {
-            "car.Name": selected.Name,
-          },
-        ],
+  
+      for(let butt in row2.components){
+        let button = row2.components[butt]
+        let tier = selected[0][button.data.custom_id] || 1
+        let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+        console.log(tier)
+        if(tier <= 1) {
+          button.setDisabled(true)
+        }
+       
+        
       }
-    );
+  
+      for(let butt in row3.components){
+        let button = row3.components[butt]
+      
+        let tier = selected[0][button.data.custom_id.toLowerCase()] || 1
+  
+        let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost
+        if(tier <= 1) {
+          button.setDisabled(true)
+        }
+  
+        
+      }
 
-    userdata.parts.push(`${realpart.toLowerCase()}`);
-    userdata.save();
-
-    await interaction.reply(`Removed ${actpart} from ${selected?.Name}`);
+      await i.update({content: `✅`, components: [row, row2, row3]})
+      
+    })
   },
 };
