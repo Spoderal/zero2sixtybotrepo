@@ -71,13 +71,13 @@ module.exports = {
     let exhaustcost = carprice * 0.25 * newtier1;
     let turbocost = carprice * 0.45 * newtier2;
     let tirecost = carprice * 0.15 * newtier3;
-    let suspensioncost = carprice * 0.20 * newtier4;
+    let suspensioncost = carprice * 0.2 * newtier4;
     let enginecost = carprice * 0.75 * newtier0;
     let clutchcost = carprice * 0.15 * newtier5;
-    let intercoolercost = carprice * 0.20 * newtier6;
+    let intercoolercost = carprice * 0.2 * newtier6;
     let intakecost = carprice * 0.15 * newtier7;
-    let ecucost = carprice * 0.20 * newtier8;
-    let gearboxcost = carprice * 0.30 * newtier9;
+    let ecucost = carprice * 0.2 * newtier8;
+    let gearboxcost = carprice * 0.3 * newtier9;
 
     let exhaustpower = 0;
     if (exhausttier <= 5) {
@@ -304,7 +304,7 @@ module.exports = {
       let button = row.components[butt];
       let tier = selected[0][button.data.custom_id] || 1;
       let price =
-        carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * tier
+        carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * tier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
@@ -318,7 +318,8 @@ module.exports = {
     for (let butt in row2.components) {
       let button = row2.components[butt];
       let tier = selected[0][button.data.custom_id] || 1;
-      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * tier
+      let price =
+        carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * tier;
       console.log(tier);
       if (tier >= 5) {
         button.setDisabled(true);
@@ -335,7 +336,8 @@ module.exports = {
 
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 1;
 
-      let price = carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * tier
+      let price =
+        carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * tier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
@@ -364,7 +366,9 @@ module.exports = {
       console.log(selected[0]);
       let tier = selected[0][i.customId] || 0;
       let newtier = (tier += 1);
-      let price = Math.round(carprice * parttiersdb[`${i.customId}${newtier}`].Cost) * newtier;
+      let price =
+        Math.round(carprice * parttiersdb[`${i.customId}${newtier}`].Cost) *
+        newtier;
       let power = Math.round(
         selected[0].Speed * parttiersdb[`${i.customId}${newtier}`].Power
       );
@@ -373,7 +377,7 @@ module.exports = {
       let handling = Math.round(
         selected[0].Handling * parttiersdb[`${i.customId}${newtier}`].Handling
       );
-      if(price > userdata.cash) return i.update(`You don't have enough cash!`)
+      if (price > userdata.cash) return i.update(`You don't have enough cash!`);
       let useracc = selected[0].Acceleration;
       let newacc = (useracc -= acceleration);
       console.log(power);
