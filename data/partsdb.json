@@ -1527,8 +1527,8 @@
       "AddHandling": 10,
       "Image": "https://i.ibb.co/CPYgzS6/part-t4tires.png"
     },
-    "t5slicks": {
-      "Name": "T5Slicks",
+    "t5tires": {
+      "Name": "T5Tires",
       "AddedSpeed": 10,
       "AddedSixty": 0.5,
       "sellprice": 0,
