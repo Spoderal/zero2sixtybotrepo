@@ -74,11 +74,7 @@ module.exports = {
       }
     }
     if (tier >= 7) return interaction.reply("You've beaten all the squads!");
-    interaction.reply(`Revving engines...`);
-    const canvas = createCanvas(1280, 720);
-    const ctx = canvas.getContext("2d");
-    const bg = await loadImage("https://i.ibb.co/b7WGPX2/bgqm.png");
-    const vsimg = await loadImage("https://i.ibb.co/XSrdHPd/vssq.png");
+
 
     let squadsarr = [];
     for (let s in squadsdb.Squads) {
@@ -117,10 +113,8 @@ module.exports = {
       selected.Image || cardb.Cars[selected.Name.toLowerCase()].Imager;
     let botcarindb = cars.Cars[botcar.toLowerCase()];
     let car2 = botcarindb;
-    let selected1image = await loadImage(`${carimage}`);
-    let selected2image = await loadImage(`${car2.Image}`);
-    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-    const squadimg = await loadImage(squadfiltered[0].Icon);
+
+
 
     let racelevel = userdata.racerank;
 
@@ -174,7 +168,7 @@ module.exports = {
       .setImage(carimage)
       .setThumbnail(botcarindb.Image);
 
-    await interaction.editReply({
+    await interaction.reply({
       embeds: [embed],
       fetchReply: true,
     });
@@ -293,16 +287,4 @@ module.exports = {
     }, 3000);
   },
 };
-function roundedImage(ctx, x, y, width, height, radius) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-}
+
