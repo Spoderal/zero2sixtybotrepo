@@ -411,11 +411,11 @@ module.exports = {
       if (winner == "Player") {
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
         userdata.cash += cashwon;
-        let cratechance = randomRange(1, 100);
-        if (cratechance >= 75) {
+        let cratechance = randomRange(1, 500);
+        if (cratechance >= 400) {
           rewards.push(`<:supplydrop:1044404467119960085> Common Crate`);
           userdata.items.push("common crate");
-        } else if (cratechance <= 10) {
+        } else if (cratechance <= 25) {
           rewards.push(`<:supplydroprare:1044404466096537731> Rare Crate`);
           userdata.items.push("rare crate");
         } else {
