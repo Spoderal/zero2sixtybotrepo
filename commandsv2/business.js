@@ -31,10 +31,12 @@ module.exports = {
     let businessrow;
     let embed;
     let timeout = 86400000;
-    if ( businesscooldown !== null &&  timeout - (Date.now() - businesscooldown) > 0 ) {
+    if (
+      businesscooldown !== null &&
+      timeout - (Date.now() - businesscooldown) > 0
+    ) {
       return;
-    } 
-    else {
+    } else {
       userdata.business.CustomerD = userdata.business.Customers;
       cooldowns.business = Date.now();
       userdata.markModified("business");
