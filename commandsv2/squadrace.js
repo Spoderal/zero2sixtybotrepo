@@ -108,7 +108,7 @@ module.exports = {
       let mult = prestige * 0.05;
 
       let multy = mult * moneyearned;
-      
+
       moneyearned = moneyearned += multy;
     }
     let squadinfo = squadfiltered[0];
@@ -121,8 +121,6 @@ module.exports = {
     let selected2image = await loadImage(`${car2.Image}`);
     ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     const squadimg = await loadImage(squadfiltered[0].Icon);
-
-
 
     let racelevel = userdata.racerank;
 
@@ -174,9 +172,9 @@ module.exports = {
       )
       .setColor(colors.blue)
       .setImage(carimage)
-      .setThumbnail(botcarindb.Image)
-      
-   await interaction.editReply({
+      .setThumbnail(botcarindb.Image);
+
+    await interaction.editReply({
       embeds: [embed],
       fetchReply: true,
     });
