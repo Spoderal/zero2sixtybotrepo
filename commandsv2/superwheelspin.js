@@ -76,11 +76,9 @@ module.exports = {
         if (item == "⚙️") {
           let randomnum = lodash.random(10);
           let reward;
-          if (randomnum == 2) {
-            reward = "rocket engine";
-          } else {
+       
             reward = lodash.sample(parts);
-          }
+          
 
           userdata.parts.push(reward.toLowerCase());
 
@@ -201,11 +199,9 @@ module.exports = {
           let randomnum = lodash.random(10);
           let reward;
 
-          if (randomnum == 2) {
-            reward = lodash.sample(wheelspinrewards.RareCash);
-          } else {
+         
             reward = lodash.sample(cash);
-          }
+        
           reward = Number(reward);
           let filteredhouse = userdata.houses.filter(
             (house) => house.Name == "Il Maniero"
@@ -217,24 +213,7 @@ module.exports = {
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🗺️") {
-          let reward = lodash.sample(maps);
-          switch (reward) {
-            case "Common":
-              userdata.cmaps += 1;
-              break;
-            case "Rare":
-              userdata.rmaps += 1;
-              break;
-            case "Legendary":
-              userdata.lmaps += 1;
-              break;
-          }
-          embed.setDescription(
-            `You won a ${numberWithCommas(reward)} barn map!`
-          );
-          interaction.editReply({ embeds: [embed] });
-        } else if (item == "🪛") {
+        }  else if (item == "🪛") {
           let reward = lodash.sample(tier4);
           userdata.parts.push(reward.toLowerCase());
 

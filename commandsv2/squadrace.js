@@ -258,19 +258,10 @@ module.exports = {
 
         userdata.save();
       } else if (winner == "Opponent") {
-        let moneye = moneyearned / 5;
 
-        moneye = Number(moneye);
         embed.setTitle(`Race lost!`);
 
-        embed.addFields([
-          {
-            name: "Earnings",
-            value: `${cemote} $${moneye}`,
-          },
-        ]);
-        userdata.cash += Number(moneye);
-
+        
         if (range > 0) {
           selected.Range -= 1;
         }

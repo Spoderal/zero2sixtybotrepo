@@ -6,6 +6,9 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
+const ms = require("pretty-ms");
+
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
@@ -60,7 +63,31 @@ module.exports = {
       if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
       let userdata2 = await User.findOne({ id: user2.id });
-
+      let cooldowndata =
+      (await Cooldowns.findOne({ id: user.id })) || new Cooldowns({ id: user.id });
+    let timeout = 3600000
+    if (
+      cooldowndata.racing !== null &&
+      timeout - (Date.now() - cooldowndata.racing) > 0
+    ) {
+      let time = ms(timeout - (Date.now() - cooldowndata.racing));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`You can pvp again in ${time}`);
+      return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+    }
+    let cooldowndata2 =
+    (await Cooldowns.findOne({ id: user2.id })) || new Cooldowns({ id: user2.id });
+  if (
+    cooldowndata2.racing !== null &&
+    timeout - (Date.now() - cooldowndata2.racing) > 0
+  ) {
+    let time = ms(timeout - (Date.now() - cooldowndata2.racing));
+    let timeEmbed = new EmbedBuilder()
+      .setColor(colors.blue)
+      .setDescription(`${user2.username} can pvp again in ${time}`);
+    return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+  }
       let idtoselect = car;
       let idtoselect2 = car2;
       if (user2.id == interaction.user.id)
@@ -258,10 +285,10 @@ module.exports = {
                   userdata.pvprank.Rewards += 1;
                   earnings.push(`${emotes.cash} +${toCurrency(amount)}`);
                 } else if (
-                  rewardinreward[0].reward.endsWith("Legendary Barn Map")
+                  rewardinreward[0].reward.endsWith("Barn Map")
                 ) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);
-                  userdata.lmaps += amount;
+                  userdata.barnmaps += amount;
                   userdata.pvprank.Rewards += 1;
                   earnings.push(`${emotes.barnMapLegendary} +${amount}`);
                 } else if (
@@ -353,10 +380,10 @@ module.exports = {
                   userdata2.pvprank.Rewards += 1;
                   earnings.push(`${emotes.cash} +${toCurrency(amount)}`);
                 } else if (
-                  rewardinreward[0].reward.endsWith("Legendary Barn Map")
+                  rewardinreward[0].reward.endsWith("Barn Map")
                 ) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);
-                  userdata2.lmaps += amount;
+                  userdata2.barnmaps += amount;
                   userdata2.pvprank.Rewards += 1;
                   earnings.push(`${emotes.barnMapLegendary} +${amount}`);
                 } else if (

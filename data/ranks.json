@@ -8,67 +8,67 @@
     "rewards": [
       {
         "number": 1,
-        "reward": "1000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 2,
-        "reward": "2000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 3,
-        "reward": "3000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 4,
-        "reward": "4000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 5,
-        "reward": "5000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 6,
-        "reward": "10000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 7,
-        "reward": "5 Super Wheelspins"
+        "reward": "250 Cash"
       },
       {
         "number": 8,
-        "reward": "8000 Cash"
+        "reward": "800 Cash"
       },
       {
         "number": 9,
-        "reward": "9000 Cash"
+        "reward": "900 Cash"
       },
       {
         "number": 10,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 11,
-        "reward": "1 Legendary Barn Map"
+        "reward": "1 Barn Map"
       },
       {
         "number": 12,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 13,
-        "reward": "15000 Cash"
+        "reward": "150 Cash"
       },
       {
         "number": 14,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 15,
-        "reward": "50000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 16,
-        "reward": "5 Lockpicks"
+        "reward": "1 Lockpicks"
       },
       {
         "number": 17,
@@ -80,11 +80,11 @@
       },
       {
         "number": 19,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 20,
-        "reward": "100000 Cash"
+        "reward": "1000 Cash"
       }
     ]
   },
@@ -97,67 +97,67 @@
     "rewards": [
       {
         "number": 3,
-        "reward": "5000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 6,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 9,
-        "reward": "5000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 12,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 15,
-        "reward": "5000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 18,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 21,
-        "reward": "10 Super Wheelspins"
+        "reward": "1 Barn Map"
       },
       {
         "number": 24,
-        "reward": "8000 Cash"
+        "reward": "800 Cash"
       },
       {
         "number": 27,
-        "reward": "9000 Cash"
+        "reward": "900 Cash"
       },
       {
         "number": 30,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 33,
-        "reward": "1 Legendary Barn Map"
+        "reward": "1 Barn Map"
       },
       {
         "number": 36,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 38,
-        "reward": "15000 Cash"
+        "reward": "150 Cash"
       },
       {
         "number": 40,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 42,
-        "reward": "50000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 44,
-        "reward": "5 Lockpicks"
+        "reward": "1 Lockpicks"
       },
       {
         "number": 46,
@@ -165,11 +165,11 @@
       },
       {
         "number": 48,
-        "reward": "50000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 50,
-        "reward": "200000 Cash"
+        "reward": "2000 Cash"
       }
     ]
   },
@@ -182,67 +182,67 @@
     "rewards": [
       {
         "number": 3,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 6,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 9,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 12,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 15,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 18,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 21,
-        "reward": "10 Super Wheelspins"
+        "reward": "1 Lockpicks"
       },
       {
         "number": 24,
-        "reward": "15000 Cash"
+        "reward": "150 Cash"
       },
       {
         "number": 27,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 30,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 33,
-        "reward": "1 Legendary Barn Map"
+        "reward": "1 Barn Map"
       },
       {
         "number": 36,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 38,
-        "reward": "15000 Cash"
+        "reward": "150 Cash"
       },
       {
         "number": 40,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 42,
-        "reward": "50000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 44,
-        "reward": "10 Lockpicks"
+        "reward": "1 Lockpicks"
       },
       {
         "number": 46,
@@ -250,11 +250,11 @@
       },
       {
         "number": 48,
-        "reward": "100000 Cash"
+        "reward": "1000 Cash"
       },
       {
         "number": 50,
-        "reward": "500000 Cash"
+        "reward": "3000 Cash"
       }
     ]
   },
@@ -267,67 +267,67 @@
     "rewards": [
       {
         "number": 3,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 6,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 9,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 12,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 15,
-        "reward": "10000 Cash"
+        "reward": "100 Cash"
       },
       {
         "number": 18,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 21,
-        "reward": "10 Super Wheelspins"
+        "reward": "1 Lockpicks"
       },
       {
         "number": 24,
-        "reward": "15000 Cash"
+        "reward": "150 Cash"
       },
       {
         "number": 27,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 30,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 33,
-        "reward": "1 Legendary Barn Map"
+        "reward": "1 Barn Map"
       },
       {
         "number": 36,
-        "reward": "25000 Cash"
+        "reward": "250 Cash"
       },
       {
         "number": 38,
-        "reward": "15000 Cash"
+        "reward": "150 Cash"
       },
       {
         "number": 40,
-        "reward": "20000 Cash"
+        "reward": "200 Cash"
       },
       {
         "number": 42,
-        "reward": "50000 Cash"
+        "reward": "500 Cash"
       },
       {
         "number": 44,
-        "reward": "10 Lockpicks"
+        "reward": "1 Lockpicks"
       },
       {
         "number": 46,
@@ -335,11 +335,11 @@
       },
       {
         "number": 48,
-        "reward": "100000 Cash"
+        "reward": "1000 Cash"
       },
       {
         "number": 50,
-        "reward": "500000 Cash"
+        "reward": "5000 Cash"
       }
     ]
   }
