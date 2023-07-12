@@ -243,17 +243,17 @@ module.exports = {
                 {
                   name: "Features ⭐",
                   value: `__Race revamp__
-                  Quarter mile and half mile joined into 1 race
+                  Quarter mile and half mile joined into 1 race\n
                   Race menu removed, typing only\n
                   Highway removed\n
                   Track race added\n
-                  Tiers go up to 5 for now\n
+                  Tiers go up to 8 \n
                   Bounty removed for the time being until its reworked\n
                   Barn maps moved to drag race\n
                   Cash cup removed\n
                   Wheelspin cars are purchasable\n
                   Stats changed for more cars\n
-                  
+
                 
             `,
                   inline: true,
