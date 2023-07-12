@@ -443,7 +443,7 @@ module.exports = {
           userdata.ekeys += randomamount;
         }
 
-        if (raceoption == "dragrace" && randombarn > 10) {
+        if (raceoption == "dragrace" && randombarn == 10) {
           let randomamount = 1;
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
           userdata.barnmaps += randomamount;
