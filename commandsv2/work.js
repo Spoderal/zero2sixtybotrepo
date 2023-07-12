@@ -65,6 +65,7 @@ module.exports = {
       let job = interaction.options.getString("job");
       let jobindb = jobdb[job.toLowerCase()];
 
+      if(jobindb.prestige > userdata.prestige) return interaction.reply(`You need to be prestige ${jobindb.prestige} for this job!`)
       console.log(jobindb);
       let jobtoset = {
         name: `${jobindb.name}`,
