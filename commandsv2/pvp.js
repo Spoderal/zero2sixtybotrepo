@@ -64,30 +64,38 @@ module.exports = {
 
       let userdata2 = await User.findOne({ id: user2.id });
       let cooldowndata =
-      (await Cooldowns.findOne({ id: user.id })) || new Cooldowns({ id: user.id });
-    let timeout = 3600000
-    if (
-      cooldowndata.racing !== null &&
-      timeout - (Date.now() - cooldowndata.racing) > 0
-    ) {
-      let time = ms(timeout - (Date.now() - cooldowndata.racing));
-      let timeEmbed = new EmbedBuilder()
-        .setColor(colors.blue)
-        .setDescription(`You can pvp again in ${time}`);
-      return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
-    }
-    let cooldowndata2 =
-    (await Cooldowns.findOne({ id: user2.id })) || new Cooldowns({ id: user2.id });
-  if (
-    cooldowndata2.racing !== null &&
-    timeout - (Date.now() - cooldowndata2.racing) > 0
-  ) {
-    let time = ms(timeout - (Date.now() - cooldowndata2.racing));
-    let timeEmbed = new EmbedBuilder()
-      .setColor(colors.blue)
-      .setDescription(`${user2.username} can pvp again in ${time}`);
-    return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
-  }
+        (await Cooldowns.findOne({ id: user.id })) ||
+        new Cooldowns({ id: user.id });
+      let timeout = 3600000;
+      if (
+        cooldowndata.racing !== null &&
+        timeout - (Date.now() - cooldowndata.racing) > 0
+      ) {
+        let time = ms(timeout - (Date.now() - cooldowndata.racing));
+        let timeEmbed = new EmbedBuilder()
+          .setColor(colors.blue)
+          .setDescription(`You can pvp again in ${time}`);
+        return await interaction.reply({
+          embeds: [timeEmbed],
+          fetchReply: true,
+        });
+      }
+      let cooldowndata2 =
+        (await Cooldowns.findOne({ id: user2.id })) ||
+        new Cooldowns({ id: user2.id });
+      if (
+        cooldowndata2.racing !== null &&
+        timeout - (Date.now() - cooldowndata2.racing) > 0
+      ) {
+        let time = ms(timeout - (Date.now() - cooldowndata2.racing));
+        let timeEmbed = new EmbedBuilder()
+          .setColor(colors.blue)
+          .setDescription(`${user2.username} can pvp again in ${time}`);
+        return await interaction.reply({
+          embeds: [timeEmbed],
+          fetchReply: true,
+        });
+      }
       let idtoselect = car;
       let idtoselect2 = car2;
       if (user2.id == interaction.user.id)
@@ -284,9 +292,7 @@ module.exports = {
                   userdata.cash += amount;
                   userdata.pvprank.Rewards += 1;
                   earnings.push(`${emotes.cash} +${toCurrency(amount)}`);
-                } else if (
-                  rewardinreward[0].reward.endsWith("Barn Map")
-                ) {
+                } else if (rewardinreward[0].reward.endsWith("Barn Map")) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);
                   userdata.barnmaps += amount;
                   userdata.pvprank.Rewards += 1;
@@ -379,9 +385,7 @@ module.exports = {
                   userdata2.cash += amount;
                   userdata2.pvprank.Rewards += 1;
                   earnings.push(`${emotes.cash} +${toCurrency(amount)}`);
-                } else if (
-                  rewardinreward[0].reward.endsWith("Barn Map")
-                ) {
+                } else if (rewardinreward[0].reward.endsWith("Barn Map")) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);
                   userdata2.barnmaps += amount;
                   userdata2.pvprank.Rewards += 1;
