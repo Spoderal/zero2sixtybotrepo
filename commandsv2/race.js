@@ -349,7 +349,7 @@ module.exports = {
     }
     let randombarn = randomRange(1, 20);
 
-    let possiblekey = randomRange(1, 20);
+    let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];
     let cashwon = tieroption * raceindb.Reward;
     let carimg =
@@ -421,13 +421,13 @@ module.exports = {
         } else {
           rewards.push("No crate");
         }
-        if (raceoption == "trackrace" && possiblekey > 10 && tieroption <= 2) {
+        if (raceoption == "trackrace" && possiblekey == 10 && tieroption <= 2) {
           let randomamount = randomRange(1, 3);
           rewards.push(`${emotes.commonKey} ${randomamount}`);
           userdata.ckeys += randomamount;
         } else if (
           raceoption == "trackrace" &&
-          possiblekey > 10 &&
+          possiblekey == 10 &&
           tieroption <= 4
         ) {
           let randomamount = randomRange(1, 3);
@@ -435,7 +435,7 @@ module.exports = {
           userdata.rkeys += randomamount;
         } else if (
           raceoption == "trackrace" &&
-          possiblekey > 10 &&
+          possiblekey == 10 &&
           tieroption >= 5
         ) {
           let randomamount = randomRange(1, 3);
