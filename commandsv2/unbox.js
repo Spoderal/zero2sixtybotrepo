@@ -18,7 +18,7 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Snow Vs Sun", value: "snowvssun" },
+          { name: "Snow Vs Sun", value: "snowvssun" }
         )
         .setRequired(true)
     )
@@ -167,7 +167,7 @@ module.exports = {
         Miles: 0,
         WeightStat: carindb.Weight,
         Gas: 0,
-        MaxGas: 0
+        MaxGas: 0,
       };
       if (carindb.Obtained == "Blueprints") {
         carobj = {

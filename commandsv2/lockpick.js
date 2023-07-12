@@ -130,9 +130,9 @@ module.exports = {
           Emote: cars.Cars[it.toLowerCase()].Emote,
           Livery: cars.Cars[it.toLowerCase()].Image,
           Miles: 0,
-        WeightStat: cars.Cars[it.toLowerCase()].Weight,
-        Gas: 0,
-        MaxGas: 0
+          WeightStat: cars.Cars[it.toLowerCase()].Weight,
+          Gas: 0,
+          MaxGas: 0,
         };
         rand2arr.push(
           `${cars.Cars[it.toLowerCase()].Emote} ${

@@ -38,7 +38,7 @@ module.exports = {
           { name: `Street Race`, value: `streetrace` },
           { name: `Drag Race`, value: `dragrace` },
           { name: `Track Race`, value: `trackrace` },
-          {name: `Cross Country`, value: `crosscountry`}
+          { name: `Cross Country`, value: `crosscountry` }
         )
         .setRequired(true)
         .setDescription(`The race to start`)
@@ -347,8 +347,7 @@ module.exports = {
 
       console.log(car2);
       console.log(winner);
-    }
-    else if (raceoption == "crosscountry") {
+    } else if (raceoption == "crosscountry") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -383,9 +382,16 @@ module.exports = {
       console.log(winner);
     }
     let randombarn = randomRange(1, 20);
-    let randomstory = ["Snowy is the leader of the oldest squad in the city.", "Snowy gained his Agera from Devil by beating him in a race", "You are snowy's son", "Snowy has now been missing for 3 years", "Zero City is heavily controlled by Devil, the ZPD Captain", "Snowy used to be the ZPD Captain"]
-    let randstory = lodash.sample(randomstory)
-    let randkey = randomRange(1, 10)
+    let randomstory = [
+      "Snowy is the leader of the oldest squad in the city.",
+      "Snowy gained his Agera from Devil by beating him in a race",
+      "You are snowy's son",
+      "Snowy has now been missing for 3 years",
+      "Zero City is heavily controlled by Devil, the ZPD Captain",
+      "Snowy used to be the ZPD Captain",
+    ];
+    let randstory = lodash.sample(randomstory);
+    let randkey = randomRange(1, 10);
     let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];
     let cashwon = tieroption * raceindb.Reward;
@@ -490,7 +496,7 @@ module.exports = {
         if (raceoption == "crosscountry" && randkey >= 6) {
           let randomamount = 1;
           rewards.push(`${emotes.dirftKey} ${randomamount}`);
-          rewards.push(`${randstory}`)
+          rewards.push(`${randstory}`);
           userdata.evkeys += randomamount;
         }
         embed.addFields({

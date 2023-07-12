@@ -92,8 +92,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      }
-     else if (value === "event_1") {
+      } else if (value === "event_1") {
         embed.setTitle("Snow Vs Sun");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Snowy has been missing, but why? Find out below!

@@ -85,7 +85,8 @@ module.exports = {
 
     let acc = selected.Acceleration;
 
-    let weight =  selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
+    let weight =
+      selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
 
     let handling = selected.Handling;
 
