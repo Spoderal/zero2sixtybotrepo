@@ -73,19 +73,16 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } 
+        }
         if (item == "🔩") {
           let reward = lodash.sample(items2);
-         if(reward == "lockpick"){
-          userdata.lockpicks += 1
-         }
+          if (reward == "lockpick") {
+            userdata.lockpicks += 1;
+          }
 
-          embed.setDescription(
-            `You won a $${emotes.lockpicks} lockpick!`
-          );
+          embed.setDescription(`You won a $${emotes.lockpicks} lockpick!`);
           interaction.editReply({ embeds: [embed] });
-        }
-        else if (item == "🪛") {
+        } else if (item == "🪛") {
           let reward = lodash.sample(tier4);
           userdata.parts.push(reward.toLowerCase());
 

@@ -199,17 +199,16 @@ module.exports = {
         let upgrades = business[0].Upgrades;
         let upgraded = [];
         let upgraderow = new ActionRowBuilder();
-        console.log(upgrades)
+        console.log(upgrades);
         for (let u in upgrades) {
           let upg = upgrades[u];
-          let upgradefilt = userdata.business.Upgrades.filter((u) => u.ID == upg.ID)
+          let upgradefilt = userdata.business.Upgrades.filter(
+            (u) => u.ID == upg.ID
+          );
           console.log(upg.Level);
           console.log(userdata.business.Level);
           if (userdata.business.Level >= upg.Level) {
-            if (
-              userdata.business.Upgrades &&
-              !upgradefilt[0]
-            ) {
+            if (userdata.business.Upgrades && !upgradefilt[0]) {
               upgraded.push(
                 `${upg.Emote} **${upg.Name}** ${upg.Description} : ${toCurrency(
                   upg.Cost
@@ -250,9 +249,7 @@ module.exports = {
         await i.update(em);
 
         collector2.on("collect", async (i) => {
-          let upgrade = upgrades.filter(
-            (upgrade) => upgrade.ID == i.customId
-          );
+          let upgrade = upgrades.filter((upgrade) => upgrade.ID == i.customId);
           let upgradearr = userdata.business.Upgrades || [];
           console.log(upgrade);
 
@@ -275,7 +272,7 @@ module.exports = {
           userdata.business.Upgrades = upgradearr;
           userdata.markModified("business");
           userdata.save();
-          collector2.stop()
+          collector2.stop();
           await i.update({ embeds: [embed1], components: [businessrow] });
         });
       } else if (i.customId == "edit") {

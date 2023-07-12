@@ -1,14 +1,14 @@
 {
-  "streetrace":{
-    "Name":"Street Race",
-    "Reward":50
+  "streetrace": {
+    "Name": "Street Race",
+    "Reward": 50
   },
-  "dragrace":{
-    "Name":"Drag Race",
-    "Reward":75
+  "dragrace": {
+    "Name": "Drag Race",
+    "Reward": 75
   },
-  "trackrace":{
-    "Name":"Track Race",
-    "Reward":65
+  "trackrace": {
+    "Name": "Track Race",
+    "Reward": 65
   }
 }

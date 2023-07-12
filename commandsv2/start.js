@@ -123,7 +123,7 @@ module.exports = {
         Resale: 375,
         WeightStat: carindb.Weight,
         Gas: 10,
-        MaxGas: 10
+        MaxGas: 10,
       };
 
       newuser.cars.push(carobj);

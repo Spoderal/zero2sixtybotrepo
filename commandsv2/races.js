@@ -53,7 +53,6 @@ module.exports = {
             value: "driftrace",
             customId: "drift",
           },
-
         ])
     );
 
@@ -104,9 +103,7 @@ module.exports = {
             embed.fields = [];
             embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Race against bots for practice!`
-            );
+            embed.setDescription(`Race against bots for practice!`);
             embed.addFields([
               {
                 name: `Tier 1`,
@@ -132,7 +129,7 @@ module.exports = {
                 name: `Tier 5`,
                 value: `${cashemote} $250\n${rpemote} 4\n<:zbarns:941571059600195594> 1\n200 Race XP`,
                 inline: true,
-              }
+              },
             ]);
 
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
@@ -174,7 +171,7 @@ module.exports = {
                 name: `Tier 5`,
                 value: `${cashemote} $375\n${rpemote} 5\n<:rkey:993011407681486868> 3`,
                 inline: true,
-              }
+              },
             ]);
 
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
@@ -188,9 +185,7 @@ module.exports = {
             embed.fields = [];
             embed.setTitle("Squad Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Race squads to take their cars!`
-            );
+            embed.setDescription(`Race squads to take their cars!`);
             embed.addFields([{ name: `Rewards`, value: `$600` }]);
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
             embed.setColor(colors.blue);
@@ -276,7 +271,7 @@ module.exports = {
                 name: `Tier 5`,
                 value: `${cashemote} $325\n${rpemote} 5\n<:rkey:993011407681486868> 3`,
                 inline: true,
-              }
+              },
             ]);
 
             embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");

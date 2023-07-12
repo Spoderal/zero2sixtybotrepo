@@ -271,7 +271,6 @@ module.exports = {
             `,
                   inline: true,
                 }
-             
               )
               .setFooter({ text: "7/11/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)

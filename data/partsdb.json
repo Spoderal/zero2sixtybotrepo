@@ -907,8 +907,8 @@
       "Type": "springs",
       "DecreasedSpeed": "0",
       "Handling": 50,
-      "Weight":100,
-      "Fuse":true,
+      "Weight": 100,
+      "Fuse": true,
       "Image": "https://i.imgur.com/dyGUd6v.png"
     },
     "t1racesprings": {
@@ -926,7 +926,7 @@
       "Type": "springs",
       "DecreasedSpeed": "0",
       "Handling": 5,
-      "Fuse":true,
+      "Fuse": true,
       "Image": "https://i.imgur.com/7i2TUiE.png"
     },
     "t1tracksprings": {
@@ -944,7 +944,7 @@
       "Type": "springs",
       "DecreasedSpeed": 0,
       "Handling": 100,
-      "Fuse":true,
+      "Fuse": true,
       "Image": "https://i.imgur.com/TVAPE5h.png"
     },
     "t1intake": {
@@ -2833,10 +2833,6 @@
       "Emote": "<:z_nitrous:916531625444130817>",
       "Tier": "1"
     },
-
-
-
-
 
     "cracked exhaust": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",

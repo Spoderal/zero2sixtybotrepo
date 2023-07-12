@@ -1951,7 +1951,7 @@
       "Handling": 1000,
       "Class": "A",
       "Weight": 3390,
-      "Obtained":"Exotic Imports",
+      "Obtained": "Exotic Imports",
       "Muscle": true
     },
     "2010 dodge viper srt10": {
@@ -2278,7 +2278,7 @@
       "Class": "S",
       "Weight": 3600
     },
-    
+
     "snowys 2018 koenigsegg agera": {
       "alias": "snowys 2018 agera",
       "Name": "Snowys 2018 Koenigsegg Agera",
@@ -3546,7 +3546,7 @@
       "Weight": 3880,
       "Muscle": true
     },
-    
+
     "1990 nissan 240sx": {
       "alias": "1990 240sx",
       "Name": "1990 Nissan 240SX",
@@ -3618,7 +3618,7 @@
       "Obtained": "Common Barn Find",
       "Weight": 4085
     },
-   
+
     "barn 1967 chevy camaro": {
       "alias": "barn 1967 camaro",
       "Name": "Barn 1967 Chevy Camaro",
@@ -3823,7 +3823,6 @@
       "Weight": 3100
     },
 
-   
     "2021 bugatti bolide": {
       "alias": "2021 bolide",
       "Name": "2021 Bugatti Bolide",
@@ -4099,7 +4098,6 @@
       "Weight": 2888
     },
 
-  
     "2005 mazda rx8": {
       "alias": "2005 rx8",
       "Name": "2005 Mazda RX8",
@@ -4490,7 +4488,6 @@
       "Obtained": "Rare Garage"
     },
 
-    
     "1981 dmc delorean": {
       "alias": "1981 delorean",
       "Name": "1981 DMC DeLorean",
@@ -5908,7 +5905,6 @@
       "Weight": 3200
     },
 
-  
     "1967 mini cooper s": {
       "alias": "1967 mc s",
       "Name": "1967 Mini Cooper S",
@@ -6180,7 +6176,6 @@
       "Weight": 3673
     },
 
-   
     "spoders 2022 bmw m8": {
       "alias": "spoders 2002 m8",
       "Name": "Spoders 2022 BMW M8",
@@ -6201,8 +6196,7 @@
       "Intake": "T2Intake",
       "Weight": 3400
     },
-  
-   
+
     "2018 koenigsegg agera": {
       "alias": "2018 agera",
       "Name": "2018 Koenigsegg Agera",
@@ -7146,7 +7140,7 @@
       "sellprice": 75000,
       "Engine": "4.0 L Flat-Six",
       "Image": "https://i.ibb.co/tXv0mGC/maxresdefault-78.jpg",
-      "0-60":2.6,
+      "0-60": 2.6,
       "Drift": 0,
       "Handling": 1300,
       "Class": "S",
