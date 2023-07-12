@@ -487,7 +487,10 @@ module.exports = {
           rewards.push(`${emotes.exoticKey} ${randomamount}`);
           userdata.ekeys += randomamount;
         }
-
+        if(raceoption == "dragrace"){
+          rewards.push(`${emotes.notoriety} +25 Notoriety`)
+          userdata.notoriety += 25
+        }
         if (raceoption == "dragrace" && randombarn == 10) {
           let randomamount = 1;
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
