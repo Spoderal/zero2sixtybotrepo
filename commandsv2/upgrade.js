@@ -116,9 +116,7 @@ module.exports = {
         parttiersdb[`clutch${newtier5}`].Power * selected[0].Speed
       );
     }
-    let intercoolerpower = Math.round(
-      parttiersdb[`intercooler${newtier6}`].Power * selected[0].Speed
-    );
+    let intercoolerpower = 0
     if (intercoolertier <= 5) {
       intercoolerpower = Math.round(
         parttiersdb[`intercooler${newtier6}`].Power * selected[0].Speed
