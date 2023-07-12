@@ -415,13 +415,11 @@ module.exports = {
         if (cratechance >= 75) {
           rewards.push(`<:supplydrop:1044404467119960085> Common Crate`);
           userdata.items.push("common crate");
-        }
-        else if (cratechance <= 10) {
+        } else if (cratechance <= 10) {
           rewards.push(`<:supplydroprare:1044404466096537731> Rare Crate`);
           userdata.items.push("rare crate");
-        }
-        else {
-          rewards.push("No crate")
+        } else {
+          rewards.push("No crate");
         }
         if (raceoption == "trackrace" && possiblekey > 10 && tieroption <= 2) {
           let randomamount = randomRange(1, 3);
