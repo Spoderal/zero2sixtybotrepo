@@ -21,10 +21,10 @@ module.exports = {
     .setDescription("View the business menu"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
-    let cooldowns = await Cooldowns.findOne({id: interaction.user.id})
+    let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
     let businessarr = [];
     let ubusiness = userdata.business;
-    let businesscooldown = cooldowns.business 
+    let businesscooldown = cooldowns.business;
     for (let bus in businesses) {
       businessarr.push(businesses[bus]);
     }
@@ -40,10 +40,10 @@ module.exports = {
       return;
     } else {
       userdata.business.CustomerD = userdata.business.Customers;
-      cooldowns.business = Date.now()
+      cooldowns.business = Date.now();
       userdata.markModified("business");
       userdata.save();
-      cooldowns.save()
+      cooldowns.save();
       await interaction.reply(`Your customers have been filled!`);
     }
 
