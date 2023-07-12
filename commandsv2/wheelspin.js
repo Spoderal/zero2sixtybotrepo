@@ -159,6 +159,9 @@ module.exports = {
                   Range: carindb.Range,
                   MaxRange: carindb.Range,
                   Miles: 0,
+                  Gas: 10,
+                  MaxGas: 10,
+                  WeightStat: carindb.Weight
                 };
 
                 let carobj = {
@@ -171,6 +174,9 @@ module.exports = {
                   Emote: carindb.Emote,
                   Livery: carindb.Image,
                   Miles: 0,
+                  Gas: 10,
+                  MaxGas: 10,
+                  WeightStat: carindb.Weight
                 };
 
                 if (carsdb.Cars[reward.toLowerCase()].Range) {
