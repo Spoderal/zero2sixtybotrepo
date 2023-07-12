@@ -111,11 +111,11 @@ module.exports = {
         let achindb = achievementsdb.Achievements[achiev.name.toLowerCase()];
         achivarr.push(`${achindb.Emote}`);
       }
-      console.log(achivarr)
-      if(achivarr.length == 0) {
-        achivarr = ["No achievements"]
+      console.log(achivarr);
+      if (achivarr.length == 0) {
+        achivarr = ["No achievements"];
       }
-      console.log(achivarr)
+      console.log(achivarr);
 
       let cash = userdata.cash;
       finalprice += cash;
