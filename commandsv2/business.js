@@ -366,7 +366,7 @@ module.exports = {
         let nowdate = new Date();
         userdata.business = {
           Name: `${interaction.user.username}s ${businesscreated.Name}`,
-          Income: businesscreated.Income,
+          Income: Number(businesscreated.Income),
           Reputation: 0,
           Customers: 5,
           Logo: businesscreated.Logo,
