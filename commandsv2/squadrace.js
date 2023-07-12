@@ -75,7 +75,6 @@ module.exports = {
     }
     if (tier >= 7) return interaction.reply("You've beaten all the squads!");
 
-
     let squadsarr = [];
     for (let s in squadsdb.Squads) {
       let sq = squadsdb.Squads[s];
@@ -113,8 +112,6 @@ module.exports = {
       selected.Image || cardb.Cars[selected.Name.toLowerCase()].Imager;
     let botcarindb = cars.Cars[botcar.toLowerCase()];
     let car2 = botcarindb;
-
-
 
     let racelevel = userdata.racerank;
 
@@ -287,4 +284,3 @@ module.exports = {
     }, 3000);
   },
 };
-
