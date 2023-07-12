@@ -199,7 +199,7 @@ module.exports = {
       .setColor(colors.blue)
       .setImage("attachment://profile-image.png");
 
-   await interaction.editReply({
+    await interaction.editReply({
       embeds: [embed],
       files: [attachment],
       fetchReply: true,
