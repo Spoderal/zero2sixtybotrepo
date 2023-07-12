@@ -33,6 +33,9 @@ module.exports = {
       ubusiness.Cooldown !== null &&
       timeout - (Date.now() - ubusiness.Cooldown) > 0
     ) {
+      return
+    }
+    else {
       userdata.business.CustomerD = userdata.business.Customers;
       userdata.business.Cooldown = 0;
       userdata.markModified("business");
