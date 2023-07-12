@@ -258,10 +258,8 @@ module.exports = {
 
         userdata.save();
       } else if (winner == "Opponent") {
-
         embed.setTitle(`Race lost!`);
 
-        
         if (range > 0) {
           selected.Range -= 1;
         }
