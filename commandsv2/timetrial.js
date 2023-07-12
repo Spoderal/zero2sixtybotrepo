@@ -101,8 +101,7 @@ module.exports = {
       if (!selected.WeightStat) {
         selected.WeightStat = cardb.Cars[selected.Name.toLowerCase()].Weight;
       }
-      let carimg =
-        selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image;
+      let carimg = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image;
 
       let speed = 0;
       let time = 0;
