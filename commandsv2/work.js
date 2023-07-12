@@ -50,6 +50,8 @@ module.exports = {
   async execute(interaction) {
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
+    let cooldowns = await Cooldowns.findOne({id: uid})
+    let worked = cooldowns.worked
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let jobsarr = [];
 
@@ -166,10 +168,10 @@ module.exports = {
 
       let timeout = 28800000;
       if (
-        userdata.work.cooldown !== null &&
-        timeout - (Date.now() - userdata.work.cooldown) > 0
+        worked !== null &&
+        timeout - (Date.now() - worked) > 0
       ) {
-        let time = ms(timeout - (Date.now() - userdata.work.cooldown));
+        let time = ms(timeout - (Date.now() - worked));
         let timeEmbed = new Discord.EmbedBuilder()
           .setColor(colors.blue)
           .setDescription(`You've already worked\n\nWork again in ${time}.`);
@@ -359,10 +361,10 @@ module.exports = {
               userdata.work.shifts += 1;
               userdata.work.success += 1;
               userdata.work.earned += positionfilter[0].salary;
-              userdata.work.cooldown = Date.now();
+              cooldowns.worked = Date.now();
               userdata.markModified("work");
               userdata.save();
-
+              cooldowns.save()
               await i.update({ embeds: [embed], components: [] });
             } else {
               let prompt = lodash.sample(userjobfilter[0].loseprompts);
@@ -376,8 +378,9 @@ module.exports = {
               userdata.work.earned += positionfilter[0].fail;
               userdata.work.fails += 1;
               userdata.work.shifts += 1;
-              userdata.work.cooldown = Date.now();
+              cooldowns.worked = Date.now();
               userdata.markModified("work");
+              cooldowns.save()
               userdata.save();
             }
           });
