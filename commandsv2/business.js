@@ -33,17 +33,14 @@ module.exports = {
     let timeout = 86400000;
     if (
       businesscooldown !== null &&
-      timeout - (Date.now() - businesscooldown) > 0
+      timeout - (Date.now() - businesscooldown) < 0
     ) {
-      return;
-    } else {
       userdata.business.CustomerD = userdata.business.Customers;
       cooldowns.business = Date.now();
       userdata.markModified("business");
       userdata.save();
       cooldowns.save();
-      await interaction.reply(`Your customers have been filled!`);
-    }
+    } 
 
     if (userdata.business.Name) {
       businessrow = new ActionRowBuilder().setComponents(
@@ -377,7 +374,6 @@ module.exports = {
           Business: businesscreated.Name,
           Level: 1,
           TipChance: 10,
-          Cooldown: 0,
           Tips: 0,
           CustomerD: 5,
           Served: 0,
