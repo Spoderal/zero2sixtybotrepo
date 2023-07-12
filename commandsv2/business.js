@@ -40,7 +40,7 @@ module.exports = {
       userdata.markModified("business");
       userdata.save();
       cooldowns.save();
-    } 
+    }
 
     if (userdata.business.Name) {
       businessrow = new ActionRowBuilder().setComponents(
