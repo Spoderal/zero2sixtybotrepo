@@ -95,21 +95,21 @@ module.exports = {
     let rand2;
     let rand3;
     if (carchance1 >= 6) {
-      rand1 = chooser()
+      rand1 = chooser();
     } else {
-      rand1 = chooser2()
+      rand1 = chooser2();
     }
     if (carchance2 >= 6) {
-      rand2 = chooser()
+      rand2 = chooser();
     } else {
-      rand2 = chooser2()
+      rand2 = chooser2();
     }
     if (carchance3 >= 6) {
-      rand3 = chooser()
+      rand3 = chooser();
     } else {
-      rand3 = chooser2()
+      rand3 = chooser2();
     }
-    console.log(rand1)
+    console.log(rand1);
 
     let randcash = lodash.random(garageindb.MaxCash);
     let randomarray = [rand1, rand2, rand3];

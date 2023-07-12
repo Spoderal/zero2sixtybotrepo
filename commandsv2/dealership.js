@@ -557,21 +557,21 @@ module.exports = {
         .setCustomId("classC")
         .setEmoji("<:cclass:954635613385162792>")
         .setStyle("Secondary"),
-        new ButtonBuilder()
-          .setCustomId("classB")
-          .setEmoji("<:Bclass:954635613339000862>")
-          .setStyle("Secondary"),
-          );
+      new ButtonBuilder()
+        .setCustomId("classB")
+        .setEmoji("<:Bclass:954635613339000862>")
+        .setStyle("Secondary")
+    );
 
     let row5 = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("classA")
-            .setEmoji("<:aclass:954635613376770108>")
-            .setStyle("Secondary"),
-            new ButtonBuilder()
-              .setCustomId("classS")
-              .setEmoji("<:sclass:967698398314655754>")
-              .setStyle("Secondary"),
+      new ButtonBuilder()
+        .setCustomId("classA")
+        .setEmoji("<:aclass:954635613376770108>")
+        .setStyle("Secondary"),
+      new ButtonBuilder()
+        .setCustomId("classS")
+        .setEmoji("<:sclass:967698398314655754>")
+        .setStyle("Secondary")
     );
 
     let row3 = new ActionRowBuilder().addComponents(

@@ -110,7 +110,7 @@ module.exports = {
     boughtCar = boughtCar[0];
 
     console.log(boughtCar);
-    
+
     const boughtHouse = housearry.filter(
       (house) => house.id == bought.toLowerCase()
     );
@@ -138,7 +138,7 @@ module.exports = {
           Drift: 0,
           WeightStat: carindb.Weight,
           Gas: 10,
-          MaxGas: 10
+          MaxGas: 10,
         };
         userdata.cars.push(obj);
       }
@@ -149,12 +149,7 @@ module.exports = {
       return interaction.reply("Bought car pack!");
     }
 
-    if (
-      !boughtCar &&
-      !boughtWarehouse &&
-      !boughtHouse &&
-      !itemsList[bought]
-    )
+    if (!boughtCar && !boughtWarehouse && !boughtHouse && !itemsList[bought])
       return await interaction.reply(
         "That car or item isn't available yet, suggest it in the support server! **Parts are no longer purchasable**."
       );
@@ -196,7 +191,7 @@ module.exports = {
           Drift: 0,
           WeightStat: carindb.Weight,
           Gas: 10,
-          MaxGas: 10
+          MaxGas: 10,
         };
         if (boughtCar.Range) {
           carobj = {
@@ -270,7 +265,7 @@ module.exports = {
             police: true,
             WeightStat: boughtCar.Weight,
             Gas: 10,
-            MaxGas: 10
+            MaxGas: 10,
           };
 
           if (boughtCar.Range) {
@@ -290,7 +285,7 @@ module.exports = {
               police: true,
               WeightStat: boughtCar.Weight,
               Gas: 10,
-              MaxGas: 10
+              MaxGas: 10,
             };
           }
 
@@ -373,7 +368,7 @@ module.exports = {
             Resale: sellprice,
             WeightStat: carindb.Weight,
             Gas: 10,
-            MaxGas: 10
+            MaxGas: 10,
           };
           if (boughtCar.Range) {
             carobj = {
@@ -392,7 +387,7 @@ module.exports = {
               MaxRange: carindb.Range,
               WeightStat: carindb.Weight,
               Gas: 10,
-              MaxGas: 10
+              MaxGas: 10,
             };
           }
 
@@ -424,7 +419,7 @@ module.exports = {
           await interaction.reply({ embeds: [embed] });
         }
       }
-    }  else if (boughtHouse[0]) {
+    } else if (boughtHouse[0]) {
       let boughtHousePrice = boughtHouse[0].Price;
       if (cash < boughtHousePrice)
         return await interaction.reply("You don't have enough cash!");

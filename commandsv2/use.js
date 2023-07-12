@@ -596,9 +596,9 @@ module.exports = {
         let reward1 = chooser();
         let reward2 = chooser();
         let reward3 = chooser();
-        console.log(reward1)
-        console.log(reward2)
-        console.log(reward3)
+        console.log(reward1);
+        console.log(reward2);
+        console.log(reward3);
         let name1;
         let name2;
         let name3;
@@ -630,14 +630,16 @@ module.exports = {
           userdata.pfps.push(name3.toLowerCase());
         }
 
-     
-
         ctx.restore();
         ctx.font = "40px sans-serif";
         ctx.fillStyle = "#00000";
         let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png");
-        let imagewheel = await loadImage("https://i.ibb.co/Rpp6Rt2/wheelspin.gif")
-        let imagewheelspin = await loadImage("https://i.ibb.co/HpQvFST/superwheelspin.gif")
+        let imagewheel = await loadImage(
+          "https://i.ibb.co/Rpp6Rt2/wheelspin.gif"
+        );
+        let imagewheelspin = await loadImage(
+          "https://i.ibb.co/HpQvFST/superwheelspin.gif"
+        );
         if (reward1.endsWith(`Cash`)) {
           let amount = Number(reward1.split(" ")[0]);
           name1 = `${amount} Cash`;
@@ -660,57 +662,57 @@ module.exports = {
         }
 
         if (reward1 == `super wheelspin`) {
-          let amount = 1
+          let amount = 1;
           name1 = `${amount} Super Wheelspin`;
           ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
           userdata.swheelspins += amount;
         }
         if (reward2 == `super wheelspin`) {
-          let amount = 1
+          let amount = 1;
           name2 = `${amount} Super Wheelspin`;
           ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
           userdata.swheelspins += amount;
         }
         if (reward3 == `super wheelspin`) {
-          let amount = 1
+          let amount = 1;
           name3 = `${amount} Super Wheelspin`;
           ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
           userdata.swheelspins += amount;
         }
 
         if (reward1 == `wheelspin`) {
-          let amount = 1
+          let amount = 1;
           name1 = `${amount} Wheelspin`;
           ctx.drawImage(imagewheel, 150, 200, 150, 150);
           userdata.wheelspins += amount;
         }
         if (reward2 == `wheelspin`) {
-          let amount = 1
+          let amount = 1;
           name2 = `${amount} Wheelspin`;
           ctx.drawImage(imagewheel, 150, 200, 150, 150);
           userdata.wheelspins += amount;
         }
         if (reward3 == `wheelspin`) {
-          let amount = 1
+          let amount = 1;
           name3 = `${amount} Wheelspin`;
           ctx.drawImage(imagewheel, 150, 200, 150, 150);
           userdata.wheelspins += amount;
         }
 
         if (reward1 == `lockpick`) {
-          let amount = 1
+          let amount = 1;
           name1 = `${amount} Lockpick`;
           ctx.drawImage(imagewheel, 150, 200, 150, 150);
           userdata.lockpicks += amount;
         }
         if (reward2 == `lockpick`) {
-          let amount = 1
+          let amount = 1;
           name2 = `${amount} Lockpick`;
           ctx.drawImage(imagewheel, 150, 200, 150, 150);
           userdata.lockpicks += amount;
         }
         if (reward3 == `lockpick`) {
-          let amount = 1
+          let amount = 1;
           name3 = `${amount} Lockpick`;
           ctx.drawImage(imagewheel, 150, 200, 150, 150);
           userdata.lockpicks += amount;

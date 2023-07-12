@@ -38,12 +38,19 @@ module.exports = {
       return await interaction.reply("Thats not a car!");
     car = car.Name.toLowerCase();
 
-    let requiredp = userdata.parts.includes("j1exhaust") && userdata.parts.includes("j1engine") && userdata.parts.includes("body") && userdata.parts.includes("j1intake") && userdata.parts.includes("j1suspension")
-    let toolbox = userdata.parts.includes("toolbox")
-    if (!cars.Cars[car].Junked) return await interaction.reply("Thats not a junk car!");
-    if(!requiredp && !toolbox) return interaction.reply("You can't restore this car without the required parts in your inventory! You'll need a j1exhaust, a j1engine, a j1body, a j1intake, and a j1suspension!")
-    
-      
+    let requiredp =
+      userdata.parts.includes("j1exhaust") &&
+      userdata.parts.includes("j1engine") &&
+      userdata.parts.includes("body") &&
+      userdata.parts.includes("j1intake") &&
+      userdata.parts.includes("j1suspension");
+    let toolbox = userdata.parts.includes("toolbox");
+    if (!cars.Cars[car].Junked)
+      return await interaction.reply("Thats not a junk car!");
+    if (!requiredp && !toolbox)
+      return interaction.reply(
+        "You can't restore this car without the required parts in your inventory! You'll need a j1exhaust, a j1engine, a j1body, a j1intake, and a j1suspension!"
+      );
 
     let carindb = cars.Cars[selected.Name.toLowerCase()].restored;
     carindb = cars.Cars[carindb.toLowerCase()];
@@ -63,12 +70,17 @@ module.exports = {
     userdata.cars = usercars;
 
     userdata.cars.push(carobj);
-    let userparts = userdata.parts
-    for (var i2 = 0; i2 < 1; i2++) userparts.splice(userparts.indexOf("j1exhaust"), 1);
-    for (var i3 = 0; i3 < 1; i3++) userparts.splice(userparts.indexOf("j1engine"), 1);
-    for (var i4 = 0; i4 < 1; i4++) userparts.splice(userparts.indexOf("j1intake"), 1);
-    for (var i5 = 0; i5 < 1; i5++) userparts.splice(userparts.indexOf("j1suspension"), 1);
-    for (var i6 = 0; i6 < 1; i6++) userparts.splice(userparts.indexOf("j1body"), 1);
+    let userparts = userdata.parts;
+    for (var i2 = 0; i2 < 1; i2++)
+      userparts.splice(userparts.indexOf("j1exhaust"), 1);
+    for (var i3 = 0; i3 < 1; i3++)
+      userparts.splice(userparts.indexOf("j1engine"), 1);
+    for (var i4 = 0; i4 < 1; i4++)
+      userparts.splice(userparts.indexOf("j1intake"), 1);
+    for (var i5 = 0; i5 < 1; i5++)
+      userparts.splice(userparts.indexOf("j1suspension"), 1);
+    for (var i6 = 0; i6 < 1; i6++)
+      userparts.splice(userparts.indexOf("j1body"), 1);
 
     userdata.save();
 

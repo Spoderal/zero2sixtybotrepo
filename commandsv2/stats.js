@@ -42,7 +42,7 @@ module.exports = {
     var list = cars.Cars;
     var item = interaction.options.getString("item");
     let user = interaction.options.getUser("user") || interaction.user;
-    let userdata = await User.findOne({ id: user.id }) || []
+    let userdata = (await User.findOne({ id: user.id })) || [];
     let global = await Global.findOne({});
     let settings = userdata.settings;
     let brandsarr = [];
@@ -50,9 +50,12 @@ module.exports = {
       brandsarr.push(brands[b]);
     }
     let weightemote = emotes.weight;
-    let ucars = userdata.cars  || []
+    let ucars = userdata.cars || [];
     let carindb = ucars.filter((c) => c.ID == item);
-    if(!list[item.toLowerCase()] && !carindb[0]) return interaction.reply(`I couldn't find that car! If you're checking default stats, put the full name, and if you want your stats, put the ID.`)
+    if (!list[item.toLowerCase()] && !carindb[0])
+      return interaction.reply(
+        `I couldn't find that car! If you're checking default stats, put the full name, and if you want your stats, put the ID.`
+      );
     let embedl = new Discord.EmbedBuilder()
       .setTitle(`${emotes.loading} Loading`)
       .setDescription("Fetching data, this wont take too long!")
@@ -276,18 +279,16 @@ module.exports = {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
       }
 
-      let exhaust = carindb[0].exhaust || 0
-      let intake = carindb[0].intake || 0
-      let tires = carindb[0].tires  || 0
-      let turbo = carindb[0].turbo || 0
-      let suspension = carindb[0].suspension || 0
-      let engine = carindb[0].engine || 0
-      let gearbox = carindb[0].gearbox || 0
-      let clutch = carindb[0].clutch || 0
-      let ecu = carindb[0].ecu || 0
-      let intercooler = carindb[0].intercooler || 0
-
-      
+      let exhaust = carindb[0].exhaust || 0;
+      let intake = carindb[0].intake || 0;
+      let tires = carindb[0].tires || 0;
+      let turbo = carindb[0].turbo || 0;
+      let suspension = carindb[0].suspension || 0;
+      let engine = carindb[0].engine || 0;
+      let gearbox = carindb[0].gearbox || 0;
+      let clutch = carindb[0].clutch || 0;
+      let ecu = carindb[0].ecu || 0;
+      let intercooler = carindb[0].intercooler || 0;
 
       let drivetrain = carindb[0].Drivetrain;
 
@@ -318,8 +319,8 @@ module.exports = {
 
       ctx.fillText(carindb[0].Name, 125, 670);
 
-      ctx.font = "bold 55px sans-serif";  
-      let acceleration = Math.round(carindb[0].Acceleration * 10) / 10
+      ctx.font = "bold 55px sans-serif";
+      let acceleration = Math.round(carindb[0].Acceleration * 10) / 10;
 
       ctx.fillText(carindb[0].Speed, 15, 120);
       ctx.fillText(acceleration, 215, 120);
@@ -339,9 +340,7 @@ module.exports = {
       }
 
       if (intake) {
-        let intakeimg = await loadImage(
-          partdb.Parts[`t${intake}intake`].Image
-        );
+        let intakeimg = await loadImage(partdb.Parts[`t${intake}intake`].Image);
         ctx.drawImage(intakeimg, 875, 30, 50, 50);
         ctx.fillText(intake, 870, 29);
       }
@@ -359,9 +358,7 @@ module.exports = {
       }
 
       if (clutch) {
-        let clutchimg = await loadImage(
-          partdb.Parts[`t${clutch}clutch`].Image
-        );
+        let clutchimg = await loadImage(partdb.Parts[`t${clutch}clutch`].Image);
         ctx.drawImage(clutchimg, 1045, 30, 50, 50);
         ctx.fillText(clutch, 1045, 29);
       }
@@ -387,12 +384,9 @@ module.exports = {
         ctx.drawImage(suspensionimg, 1225, 30, 50, 50);
         ctx.fillText(suspension, 1220, 29);
       }
-    
 
       if (engine) {
-        let engineimg = await loadImage(
-          partdb.Parts[`no engine`].Image
-        );
+        let engineimg = await loadImage(partdb.Parts[`no engine`].Image);
         ctx.drawImage(engineimg, 815, 100, 50, 50);
         ctx.fillText(engine, 810, 99);
       }

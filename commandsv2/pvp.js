@@ -125,7 +125,6 @@ module.exports = {
 
       let carindb1 = cars.Cars[selected.Name.toLowerCase()];
       let carindb2 = cars.Cars[selected2.Name.toLowerCase()];
-      
 
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -137,8 +136,6 @@ module.exports = {
           .setStyle("Danger")
           .setEmoji("✖️")
       );
-
-
 
       if (!selected.WeightStat) {
         selected.WeightStat = cars.Cars[selected.Name.toLowerCase()].Weight;
@@ -198,7 +195,7 @@ module.exports = {
       let msg = await interaction.editReply({
         embeds: [embed],
         components: [row],
-        fetchReply: true
+        fetchReply: true,
       });
 
       let filter = (btnInt) => {
@@ -242,7 +239,7 @@ module.exports = {
 
             if (tracklength <= 0) {
               clearInterval(i2);
-              
+
               let earnings = [];
               userdata.pvprank.Wins = userdata.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
@@ -293,7 +290,7 @@ module.exports = {
               embed.setTitle(`${user.username} Won!!`);
 
               await interaction.editReply({
-                embeds: [embed]
+                embeds: [embed],
               });
               console.log(nextuser1rank[0]);
               userdata.update();
@@ -337,7 +334,6 @@ module.exports = {
             // lost
             else if (tracklength2 <= 0) {
               clearInterval(i2);
-       
 
               let earnings = [];
               userdata2.pvprank.Wins = userdata2.pvprank.Wins += 1;
@@ -388,7 +384,7 @@ module.exports = {
               }
               embed.setTitle(`${user2.username} Won!`);
               await interaction.editReply({
-                embeds: [embed]
+                embeds: [embed],
               });
               userdata2.pvprank.Wins += 1;
               userdata.pvprank.Losses += 1;

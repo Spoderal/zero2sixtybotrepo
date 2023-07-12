@@ -21,7 +21,7 @@ module.exports = {
     let user = interaction.user;
     let guild = interaction.guild;
     let client = interaction.client;
-    let timeout2 = 5000
+    let timeout2 = 5000;
     try {
       if (interaction.isSelectMenu()) {
         await interaction.deferUpdate();
@@ -46,21 +46,17 @@ module.exports = {
               fetchReply: true,
               ephemeral: true,
             });
-          } 
-          else if  (
+          } else if (
             cooldowndata.is_racing !== null &&
             timeout2 - (Date.now() - cooldowndata.is_racing) > 0
-            ) {
-              cooldowndata.command_ran = Date.now();
-              return await interaction.reply({
+          ) {
+            cooldowndata.command_ran = Date.now();
+            return await interaction.reply({
               content: `Wait for your race to finish to run other commands`,
               fetchReply: true,
               ephemeral: true,
             });
-          }
-          else {
-            
-
+          } else {
             await command.execute(interaction);
           }
         } catch (err) {

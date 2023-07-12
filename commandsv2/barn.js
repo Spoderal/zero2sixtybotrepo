@@ -87,7 +87,7 @@ module.exports = {
 
     let cars = userdata.cars;
     let carindb = carsdb.Cars[barnfind.toLowerCase()];
-    console.log(carindb)
+    console.log(carindb);
     let carobj = {
       ID: carindb.alias,
       Name: carindb.Name,

@@ -64,7 +64,6 @@ module.exports = {
         )
     ),
   async execute(interaction) {
-
     let option = interaction.options.getSubcommand();
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -128,7 +127,7 @@ module.exports = {
         )
         .setColor(`#60b0f4`);
       await interaction.reply({ embeds: [embed] });
-    }  else if (option == "favorite") {
+    } else if (option == "favorite") {
       let idtochoose = interaction.options.getString("car");
       let carfiltered = userdata.cars.filter(
         (car) =>
