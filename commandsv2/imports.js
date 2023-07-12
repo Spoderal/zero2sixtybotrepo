@@ -14,6 +14,7 @@ module.exports = {
     let key3emote = emotes.exoticKey;
     let key4emote = emotes.mclaren;
     let goldemote = emotes.gold;
+    let key5emote = emotes.dirftKey
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Kaylas Import Crates")
@@ -24,6 +25,7 @@ module.exports = {
           <:crate_common:1103921687818407936> Common Import Crate: 50 ${key1emote} Keys
           <:crate_rare:1103921686765637703> Rare Import Crate : 25 ${key2emote} Keys
           <:crate_esxotic:1103921685972922449> Exotic Import Crate : 20 ${key3emote} Keys
+          <:crate_limited:1103921683968032829> Sun Vs Snow Import Crate : 100 ${key5emote} Keys
           `,
         },
       ])

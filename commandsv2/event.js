@@ -28,6 +28,13 @@ module.exports = {
             customId: "spring",
             emoji: "<a:season_1:1111097329836113920>",
           },
+          {
+            label: "Snow Vs Sun",
+            description: "Information for the Snow Vs Sun Event",
+            value: "event_1",
+            customId: "event_1",
+            emoji: "❄️",
+          },
         ])
     );
 
@@ -41,7 +48,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 1 <a:season_1:1111097329836113920>\n
-          
+          Snow vs Sun ☀️❄️
       `);
 
     embed.setColor(colors.blue);
@@ -80,6 +87,33 @@ module.exports = {
         embed
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/85G4t6R/season1-image.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+     else if (value === "event_1") {
+        embed.setTitle("Snow Vs Sun");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Snowy has been missing, but why? Find out below!
+
+        It was a cold Friday night, snowy was finishing his last race in his white Agera cheerfully when someone pulls up. 
+
+        Its the police captain, Devil, and he wants to take snowy down, he's been chasing snowy for years for a reason, and now its his chance to get him back.
+
+        They race around the city, dodging civilians, sharp turns, tires screaming as their engines roar.
+        In the end, snowys car starts to sputter, the coolant level is low... He panicks, and turns a corner out of the city, Devil has ran him out.
+        Devil looks past the city, with a smug expression that quickly turns to anger. "YOU NEVER SHOULD HAVE STEPPED DOWN SNOWY!" he yells into the cold wind
+
+        Find out other parts to the story in the new limited edition race, cross country! Pick up the pieces as you pick up keys to unbox the snow vs sun crate to earn exclusive cars!
+
+            **Ends August 12th 2023**
+
+                  `);
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/0M4qTB6/snowvssun.png");
 
         await interaction.editReply({
           embeds: [embed],

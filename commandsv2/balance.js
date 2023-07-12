@@ -60,6 +60,7 @@ module.exports = {
       foolskeys,
       raintrophy,
       lekeys,
+      evkeys,
       bounty,
       seriestickets,
       barnmaps,
@@ -100,6 +101,7 @@ module.exports = {
               ${emotes.commonKey} Common: ${ckeys}
               ${emotes.rareKey} Rare: ${rkeys}
               ${emotes.exoticKey} Exotic: ${ekeys}
+              ${emotes.dirftKey} Event Keys ${evkeys}
               <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
               `,
               inline: true,

@@ -18,9 +18,7 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Drift", value: "drift" },
-          { name: "Le Mans", value: "le mans" },
-          { name: "Rain", value: "rain" }
+          { name: "Snow Vs Sun", value: "snowvssun" },
         )
         .setRequired(true)
     )
@@ -42,7 +40,7 @@ module.exports = {
       "drift",
       "fools",
       "le mans",
-      "rain",
+      "snowvssun",
     ];
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -100,7 +98,7 @@ module.exports = {
       let lekeys = userdata.lekeys;
       let trophy = userdata.raintrophy;
       let driftkeys = userdata.dkeyst || 0;
-      let ferrarikeys = userdata.fkeys;
+      let eventkeys = userdata.evkeys;
 
       if (bought == "common" && commonkeys < 50)
         return await interaction.reply(
@@ -123,9 +121,9 @@ module.exports = {
           `You dont have enough keys! This crate costs 1K fools keys...APRIL FOOLS! Its 25 fools keys`
         );
 
-      if (bought == "mclaren" && ferrarikeys < 100)
+      if (bought == "snowvssun" && eventkeys < 100)
         return await interaction.reply(
-          `You dont have enough keys! This crate costs 100 McLaren keys`
+          `You dont have enough keys! This crate costs 100 Event Keys`
         );
       if (bought == "le mans" && lekeys < 10)
         return await interaction.reply(
@@ -143,8 +141,8 @@ module.exports = {
         userdata.ekeys -= 20;
       } else if (bought == "drift") {
         userdata.dkeyst -= 50;
-      } else if (bought == "mclaren") {
-        userdata.fkeys -= 100;
+      } else if (bought == "snowvssun") {
+        userdata.evkeys -= 100;
       } else if (bought == "fools") {
         userdata.foolskeys -= 25;
       } else if (bought == "le mans") {
@@ -167,6 +165,9 @@ module.exports = {
         Emote: carindb.Emote,
         Livery: carindb.Image,
         Miles: 0,
+        WeightStat: carindb.Weight,
+        Gas: 0,
+        MaxGas: 0
       };
       if (carindb.Obtained == "Blueprints") {
         carobj = {

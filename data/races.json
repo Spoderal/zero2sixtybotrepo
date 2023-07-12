@@ -10,5 +10,9 @@
   "trackrace": {
     "Name": "Track Race",
     "Reward": 65
+  },
+  "crosscountry": {
+    "Name": "Cross Country",
+    "Reward": 45
   }
 }

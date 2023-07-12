@@ -37,7 +37,8 @@ module.exports = {
         .setChoices(
           { name: `Street Race`, value: `streetrace` },
           { name: `Drag Race`, value: `dragrace` },
-          { name: `Track Race`, value: `trackrace` }
+          { name: `Track Race`, value: `trackrace` },
+          {name: `Cross Country`, value: `crosscountry`}
         )
         .setRequired(true)
         .setDescription(`The race to start`)
@@ -347,8 +348,44 @@ module.exports = {
       console.log(car2);
       console.log(winner);
     }
-    let randombarn = randomRange(1, 20);
+    else if (raceoption == "crosscountry") {
+      let weight = selected.WeightStat;
+      let speed = selected.Speed;
+      let acceleration = selected.Acceleration;
+      let handling = selected.Handling;
 
+      let weight2 = car2.Weight;
+      let speed2 = car2.Speed;
+      let acceleration2 = car2["0-60"];
+      let handling2 = car2.Handling;
+
+      let handlingscore = handling * 150;
+      let handlingscore2 = handling2 * 150;
+
+      let weightscore = Math.floor(weight / 10);
+      let weightscore2 = Math.floor(weight2 / 10);
+
+      let speedscore = speed * 20;
+      let speedscore2 = speed2 * 20;
+
+      dorace(
+        speedscore,
+        speedscore2,
+        handlingscore,
+        handlingscore2,
+        weightscore,
+        weightscore2,
+        acceleration,
+        acceleration2
+      );
+
+      console.log(car2);
+      console.log(winner);
+    }
+    let randombarn = randomRange(1, 20);
+    let randomstory = ["Snowy is the leader of the oldest squad in the city.", "Snowy gained his Agera from Devil by beating him in a race", "You are snowy's son", "Snowy has now been missing for 3 years", "Zero City is heavily controlled by Devil, the ZPD Captain", "Snowy used to be the ZPD Captain"]
+    let randstory = lodash.sample(randomstory)
+    let randkey = randomRange(1, 10)
     let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];
     let cashwon = tieroption * raceindb.Reward;
@@ -449,6 +486,12 @@ module.exports = {
           let randomamount = 1;
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
           userdata.barnmaps += randomamount;
+        }
+        if (raceoption == "crosscountry" && randkey >= 6) {
+          let randomamount = 1;
+          rewards.push(`${emotes.dirftKey} ${randomamount}`);
+          rewards.push(`${randstory}`)
+          userdata.evkeys += randomamount;
         }
         embed.addFields({
           name: `Rewards`,
