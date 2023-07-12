@@ -65,6 +65,8 @@ module.exports = {
       Emote: carindb.Emote,
       Livery: carindb.Image,
       Miles: 0,
+      Gas: 10,
+      MaxGas: 10
     };
 
     for (var i = 0; i < 1; i++) usercars.splice(usercars.indexOf(selected), 1);
