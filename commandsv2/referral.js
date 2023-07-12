@@ -84,13 +84,13 @@ module.exports = {
         return interaction.reply("You can't use your own code!");
 
       interaction.reply(
-        "Used referral code and earned $10K Cash! The user who made the code has also earned $10K"
+        "Used referral code and earned $10K Cash! The user who made the code has also earned $5"
       );
 
-      userdata.cash += 10000;
+      userdata.cash += 5000;
       userdata.code = true;
       let userdata2 = await User.findOne({ id: filteredcode[0].user });
-      userdata2.cash += 10000;
+      userdata2.cash += 5000;
       userdata2.save();
 
       userdata.save();
