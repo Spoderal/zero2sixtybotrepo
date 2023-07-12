@@ -29,7 +29,7 @@ module.exports = {
     let timeout = 86400000;
     if (
       ubusiness &&
-      ubusiness.CustomerD < ubusiness.Customers &&
+      ubusiness.CustomerD == 0 &&
       ubusiness.Cooldown !== null &&
       timeout - (Date.now() - ubusiness.Cooldown) > 0
     ) {
