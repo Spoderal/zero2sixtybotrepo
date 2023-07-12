@@ -68,7 +68,8 @@ module.exports = {
         price = cardb.Cars[selected.Name.toLowerCase()].sellprice;
       }
 
-      if (amount > filteredcar.length) return interaction.reply("You don't have that many of that car!");
+      if (amount > filteredcar.length)
+        return interaction.reply("You don't have that many of that car!");
 
       price = price * amount;
 
