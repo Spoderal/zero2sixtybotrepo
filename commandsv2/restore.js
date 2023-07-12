@@ -60,6 +60,7 @@ module.exports = {
       Speed: carindb.Speed,
       Acceleration: carindb["0-60"],
       Handling: carindb.Handling,
+      Weight: carindb.Weight,
       Parts: [],
       Emote: carindb.Emote,
       Livery: carindb.Image,
