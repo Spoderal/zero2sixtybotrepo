@@ -297,10 +297,11 @@ module.exports = {
     for (let butt in row.components) {
       let button = row.components[butt];
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
+      let oldtier = tier
       console.log(button.data.custom_id);
       let newtier = (tier += 1);
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-      if (tier >= 5) {
+      if (oldtier >= 5) {
         button.setDisabled(true);
       }
       if (price > userdata.cash) {
@@ -313,11 +314,11 @@ module.exports = {
     for (let butt in row2.components) {
       let button = row2.components[butt];
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
-
+      let oldtier = tier
       let newtier = (tier += 1);
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
       console.log(tier);
-      if (tier >= 5) {
+      if (oldtier >= 5) {
         button.setDisabled(true);
       }
       if (price > userdata.cash) {
@@ -331,11 +332,12 @@ module.exports = {
       let button = row3.components[butt];
 
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
+      let oldtier = tier
 
       let newtier = (tier += 1);
 
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-      if (tier >= 5) {
+      if (oldtier >= 5) {
         button.setDisabled(true);
       }
 
@@ -417,9 +419,10 @@ module.exports = {
       for (let butt in row.components) {
         let button = row.components[butt];
         let tier = selected[0][button.data.custom_id] || 1;
+        let oldtier = tier
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-        if (tier >= 5) {
+        if (oldtier >= 5) {
           button.setDisabled(true);
         }
         if (price > userdata.cash) {
@@ -435,10 +438,12 @@ module.exports = {
       for (let butt in row2.components) {
         let button = row2.components[butt];
         let tier = selected[0][button.data.custom_id] || 1;
+        let oldtier = tier
         let newtier = (tier += 1);
+        
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         console.log(tier);
-        if (tier >= 5) {
+        if (oldtier >= 5) {
           button.setDisabled(true);
         }
         if (price > userdata.cash) {
@@ -452,10 +457,11 @@ module.exports = {
         let button = row3.components[butt];
 
         let tier = selected[0][button.data.custom_id.toLowerCase()] || 1;
+        let oldtier = tier
 
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-        if (tier >= 5) {
+        if (oldtier >= 5) {
           button.setDisabled(true);
         }
 
