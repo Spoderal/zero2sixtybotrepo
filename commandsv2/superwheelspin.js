@@ -35,7 +35,7 @@ module.exports = {
     let wheelspins = userdata.swheelspins;
     if (wheelspins <= 0)
       return await interaction.reply("You're out of super wheel spins!");
-    let items = ["🏎️", "⚙️", "🗺️", "💵"];
+    let items = ["🏎️", "⚙️", "💵"];
     let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
