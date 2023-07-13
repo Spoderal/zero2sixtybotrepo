@@ -90,7 +90,17 @@ module.exports = {
     let ecucost2 = parttiersdb[`ecu1`].Cost * newtier8;
     let gearboxcost2 = parttiersdb[`gearbox1`].Cost * newtier9;
 
-    let totalcost = (exhaustcost2 + turbocost2 + tirecost2 + suspensioncost2 + enginecost2 + clutchcost2 + intercoolercost2 + intakecost2 + ecucost2 + gearboxcost2)
+    let totalcost =
+      exhaustcost2 +
+      turbocost2 +
+      tirecost2 +
+      suspensioncost2 +
+      enginecost2 +
+      clutchcost2 +
+      intercoolercost2 +
+      intakecost2 +
+      ecucost2 +
+      gearboxcost2;
 
     let exhaustpower = 0;
     if (exhausttier <= 5) {
@@ -176,7 +186,9 @@ module.exports = {
 
     let embed = new EmbedBuilder()
       .setTitle(`Upgrade your ${selected[0].Name}`)
-      .setDescription(`Total cost to upgrade all parts: ${toCurrency(totalcost)}`)
+      .setDescription(
+        `Total cost to upgrade all parts: ${toCurrency(totalcost)}`
+      )
       .addFields(
         {
           name: `${exhaustemote} Exhaust`,

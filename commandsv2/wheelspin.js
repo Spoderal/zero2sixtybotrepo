@@ -201,7 +201,7 @@ module.exports = {
         } else if (item == "💵") {
           let reward = randomRange(1, 1000);
           reward = Number(reward);
-       
+
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });

@@ -149,7 +149,6 @@ module.exports = {
         return await interaction.reply({ embeds: [errembed] });
       }
 
-      
       let userpvprank = userdata.pvprank || {
         Rank: "Silver",
         Wins: 0,
@@ -197,7 +196,6 @@ module.exports = {
           .setEmoji("✖️")
       );
 
- 
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -214,9 +212,10 @@ module.exports = {
       let speedscore = speed * 10;
       let speedscore2 = speed2 * 10;
 
-      let carimage1 = selected.Image || cars.Cars[selected.Name.toLowerCase()].Image
-      let carimage2 = selected2.Image || cars.Cars[selected2.Name.toLowerCase()].Image
-
+      let carimage1 =
+        selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
+      let carimage2 =
+        selected2.Image || cars.Cars[selected2.Name.toLowerCase()].Image;
 
       let embed = new discord.EmbedBuilder()
         .setTitle(`${user2.username}, would you like to race ${user.username}?`)
@@ -257,8 +256,6 @@ module.exports = {
           embed.setTitle("Racing!");
           i.update({ embeds: [embed], components: [] });
 
-        
-    
           dorace(
             speedscore,
             speedscore2,
@@ -270,9 +267,7 @@ module.exports = {
             acceleration2
           );
           setTimeout(async () => {
-            
             if (winner == "Player") {
-
               let earnings = [];
               userdata.pvprank.Wins = userdata.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
@@ -364,7 +359,6 @@ module.exports = {
             }
             // lost
             else if (winner == "Opponent") {
-
               let earnings = [];
               userdata2.pvprank.Wins = userdata2.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
