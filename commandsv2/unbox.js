@@ -166,8 +166,8 @@ module.exports = {
         Livery: carindb.Image,
         Miles: 0,
         WeightStat: carindb.Weight,
-        Gas: 0,
-        MaxGas: 0,
+        Gas: 10,
+        MaxGas: 10,
       };
       if (carindb.Obtained == "Blueprints") {
         carobj = {
