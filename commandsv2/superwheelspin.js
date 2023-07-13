@@ -201,7 +201,7 @@ module.exports = {
           reward = lodash.sample(cash);
 
           reward = Number(reward);
-          
+
           userdata.cash += Number(reward);
           embed.setDescription(`You won ${toCurrency(reward)} cash!`);
           interaction.editReply({ embeds: [embed] });
