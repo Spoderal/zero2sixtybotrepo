@@ -303,7 +303,10 @@ module.exports = {
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
 
       let newtier = (tier += 1);
-      let price =  carprice * parttiersdb[`${button.data.custom_id}${newtier}`].Cost *  newtier;
+      let price =
+        carprice *
+        parttiersdb[`${button.data.custom_id}${newtier}`].Cost *
+        newtier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
@@ -397,9 +400,11 @@ module.exports = {
       }
       if (parttiersdb[`${i.customId}${newtier}`].Acceleration && newacc >= 2) {
         selected[0].Acceleration -= acceleration;
-      }
-      else if (parttiersdb[`${i.customId}${newtier}`].Acceleration && newacc < 2) {
-        selected[0].Acceleration = 2
+      } else if (
+        parttiersdb[`${i.customId}${newtier}`].Acceleration &&
+        newacc < 2
+      ) {
+        selected[0].Acceleration = 2;
       }
 
       selected[0][i.customId] = newtier;

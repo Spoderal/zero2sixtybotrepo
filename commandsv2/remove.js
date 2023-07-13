@@ -18,22 +18,23 @@ module.exports = {
       option.setName("car").setDescription("Your car ID").setRequired(true)
     )
     .addStringOption((option) =>
-      option.setName("part").setDescription("The part to remove").setRequired(true)
-      .addChoices(
-        {name: "Exhaust", value: "exhaust"},
-        {name: "Tires", value: "tires"},
-        {name: "Suspension", value: "suspension"},
-        {name: "Turbo", value: "turbo"},
-        {name: "Intake", value: "intake"},
-        {name: "Engine", value: "engine"},
-        {name: "Intercooler", value: "intercooler"},
-        {name: "ECU", value: "ecu"},
-        {name: "Clutch", value: "clutch"},
-        {name: "Gearbox", value: "gearbox"}
-      )
-    )
-    ,
-
+      option
+        .setName("part")
+        .setDescription("The part to remove")
+        .setRequired(true)
+        .addChoices(
+          { name: "Exhaust", value: "exhaust" },
+          { name: "Tires", value: "tires" },
+          { name: "Suspension", value: "suspension" },
+          { name: "Turbo", value: "turbo" },
+          { name: "Intake", value: "intake" },
+          { name: "Engine", value: "engine" },
+          { name: "Intercooler", value: "intercooler" },
+          { name: "ECU", value: "ecu" },
+          { name: "Clutch", value: "clutch" },
+          { name: "Gearbox", value: "gearbox" }
+        )
+    ),
   async execute(interaction) {
     let inputCarIdOrName = interaction.options.getString("car");
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -55,27 +56,29 @@ module.exports = {
     if (carindb.Price == 0) {
       carprice = 1000;
     }
-    let removepart = interaction.options.getString("part")
+    let removepart = interaction.options.getString("part");
 
-    if(!selected[0][removepart.toLowerCase()]) return interaction.reply("Your car doesn't have this part!")
+    if (!selected[0][removepart.toLowerCase()])
+      return interaction.reply("Your car doesn't have this part!");
 
-    if(selected[0][removepart.toLowerCase()] == 0) return interaction.reply("This part cant go any lower!")
-    let partoncar = selected[0][removepart.toLowerCase()]
+    if (selected[0][removepart.toLowerCase()] == 0)
+      return interaction.reply("This part cant go any lower!");
+    let partoncar = selected[0][removepart.toLowerCase()];
 
-    let parttier = parttiersdb[`${removepart.toLowerCase()}${partoncar}`]
-  
+    let parttier = parttiersdb[`${removepart.toLowerCase()}${partoncar}`];
 
-    if(parttier.Power){
-      selected[0].Speed -= (selected[0].Speed * parttier.Power)
+    if (parttier.Power) {
+      selected[0].Speed -= selected[0].Speed * parttier.Power;
     }
-    if(parttier.Handling){
-      selected[0].Handling -= (selected[0].Handling * parttier.Handling)
+    if (parttier.Handling) {
+      selected[0].Handling -= selected[0].Handling * parttier.Handling;
     }
-    if(parttier.Acceleration){
-      selected[0].Acceleration += (selected[0].Acceleration * parttier.Acceleration)
+    if (parttier.Acceleration) {
+      selected[0].Acceleration +=
+        selected[0].Acceleration * parttier.Acceleration;
     }
 
-    selected[0][removepart.toLowerCase()] -= 1
+    selected[0][removepart.toLowerCase()] -= 1;
 
     await User.findOneAndUpdate(
       {
@@ -96,17 +99,16 @@ module.exports = {
       }
     );
 
-    let carcost  = cardb[selected[0].Name.toLowerCase()].Price 
-    if(carcost == 0){
-      carcost = 5000
+    let carcost = cardb[selected[0].Name.toLowerCase()].Price;
+    if (carcost == 0) {
+      carcost = 5000;
     }
-    let partcost = parttier.Cost * Math.round(carcost)
+    let partcost = parttier.Cost * Math.round(carcost);
 
-    userdata.cash += partcost
+    userdata.cash += partcost;
 
-    userdata.save()
+    userdata.save();
 
-    interaction.reply("✅")
-
+    interaction.reply("✅");
   },
 };
