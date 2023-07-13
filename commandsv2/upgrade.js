@@ -400,9 +400,8 @@ module.exports = {
       }
       if (parttiersdb[`${i.customId}${newtier}`].Acceleration && newacc >= 2) {
         selected[0].Acceleration -= acceleration;
-      }
-      else {
-        selected[0].Acceleration = 2
+      } else {
+        selected[0].Acceleration = 2;
       }
 
       selected[0][i.customId] = newtier;
