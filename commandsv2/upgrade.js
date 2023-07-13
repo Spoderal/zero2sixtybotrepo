@@ -301,9 +301,12 @@ module.exports = {
     for (let butt in row.components) {
       let button = row.components[butt];
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
-      console.log(button.data.custom_id)
+      console.log(button.data.custom_id);
       let newtier = (tier += 1);
-      let price = carprice *  parttiersdb[`${button.data.custom_id}${newtier}`].Cost * newtier;
+      let price =
+        carprice *
+        parttiersdb[`${button.data.custom_id}${newtier}`].Cost *
+        newtier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
