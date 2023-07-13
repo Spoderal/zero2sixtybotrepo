@@ -44,7 +44,7 @@ module.exports = {
     gold(client);
     stats(client);
     series(client);
-    cars(client)
+    cars(client);
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");

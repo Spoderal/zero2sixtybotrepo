@@ -99,8 +99,7 @@ module.exports = {
       }
     );
 
-   
-    let partcost = partoncar * parttier.Cost
+    let partcost = partoncar * parttier.Cost;
 
     userdata.cash += partcost;
 
