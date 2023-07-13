@@ -297,7 +297,7 @@ module.exports = {
     for (let butt in row.components) {
       let button = row.components[butt];
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
-      let oldtier = tier
+      let oldtier = tier;
       console.log(button.data.custom_id);
       let newtier = (tier += 1);
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
@@ -314,7 +314,7 @@ module.exports = {
     for (let butt in row2.components) {
       let button = row2.components[butt];
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
-      let oldtier = tier
+      let oldtier = tier;
       let newtier = (tier += 1);
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
       console.log(tier);
@@ -332,7 +332,7 @@ module.exports = {
       let button = row3.components[butt];
 
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
-      let oldtier = tier
+      let oldtier = tier;
 
       let newtier = (tier += 1);
 
@@ -419,7 +419,7 @@ module.exports = {
       for (let butt in row.components) {
         let button = row.components[butt];
         let tier = selected[0][button.data.custom_id] || 1;
-        let oldtier = tier
+        let oldtier = tier;
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         if (oldtier >= 5) {
@@ -438,9 +438,9 @@ module.exports = {
       for (let butt in row2.components) {
         let button = row2.components[butt];
         let tier = selected[0][button.data.custom_id] || 1;
-        let oldtier = tier
+        let oldtier = tier;
         let newtier = (tier += 1);
-        
+
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         console.log(tier);
         if (oldtier >= 5) {
@@ -457,7 +457,7 @@ module.exports = {
         let button = row3.components[butt];
 
         let tier = selected[0][button.data.custom_id.toLowerCase()] || 1;
-        let oldtier = tier
+        let oldtier = tier;
 
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
