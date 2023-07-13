@@ -395,12 +395,11 @@ module.exports = {
     let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];
     let cashwon = tieroption * raceindb.Reward;
-    if(userdata.prestige){
-      let prestige = userdata.prestige
-      let prestigebonus = prestige * 0.1
+    if (userdata.prestige) {
+      let prestige = userdata.prestige;
+      let prestigebonus = prestige * 0.1;
 
-      cashwon = cashwon += (cashwon * prestigebonus)
-
+      cashwon = cashwon += cashwon * prestigebonus;
     }
     let carimg =
       selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image;
@@ -498,8 +497,8 @@ module.exports = {
           rewards.push(`${emotes.notoriety} +25 Notoriety`);
           userdata.notoriety += 25;
         }
-        rewards.push(`${emotes.rp} + 10 RP`)
-        userdata.rp4 += 10
+        rewards.push(`${emotes.rp} + 10 RP`);
+        userdata.rp4 += 10;
         if (raceoption == "dragrace" && randombarn == 10) {
           let randomamount = 1;
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
