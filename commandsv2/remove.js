@@ -65,7 +65,7 @@ module.exports = {
       return interaction.reply("This part cant go any lower!");
     let partoncar = selected[0][removepart.toLowerCase()];
 
-    let parttier = parttiersdb[`${removepart.toLowerCase()}${partoncar}`];
+    let parttier = parttiersdb[`${removepart.toLowerCase()}1`];
 
     if (parttier.Power) {
       selected[0].Speed -= selected[0].Speed * parttier.Power;
@@ -99,11 +99,8 @@ module.exports = {
       }
     );
 
-    let carcost = cardb[selected[0].Name.toLowerCase()].Price;
-    if (carcost == 0) {
-      carcost = 5000;
-    }
-    let partcost = parttier.Cost * Math.round(carcost);
+   
+    let partcost = partoncar * parttier.Cost
 
     userdata.cash += partcost;
 

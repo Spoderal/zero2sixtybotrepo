@@ -1,222 +1,46 @@
 {
   "exhaust1": {
-    "Cost": 0.25,
-    "Power": 0.03,
+    "Cost": 1000,
+    "Power": 0.02,
     "Acceleration": 0.1
   },
   "tires1": {
-    "Cost": 0.15,
+    "Cost": 1000,
     "Handling": 0.05
   },
   "intake1": {
-    "Cost": 0.15,
+    "Cost": 1000,
     "Power": 0.02,
     "Acceleration": 0.1
   },
   "engine1": {
-    "Cost": 0.75,
+    "Cost": 5000,
     "Power": 0.05
   },
   "suspension1": {
-    "Cost": 0.2,
-    "Handling": 0.1
+    "Cost": 1500,
+    "Handling": 0.10
   },
   "clutch1": {
-    "Cost": 0.15,
-    "Power": 0.03
+    "Cost": 1000,
+    "Power": 0.02
   },
   "turbo1": {
-    "Cost": 0.45,
-    "Power": 0.08,
+    "Cost": 3000,
+    "Power": 0.05,
     "Acceleration": 0.2
   },
   "gearbox1": {
-    "Cost": 0.3,
+    "Cost": 3000,
     "Handling": 0.05
   },
   "ecu1": {
-    "Cost": 0.2,
-    "Power": 0.05
+    "Cost": 1000,
+    "Power": 0.02
   },
 
   "intercooler1": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-  "exhaust2": {
-    "Cost": 0.25,
-    "Power": 0.03,
-    "Acceleration": 0.2
-  },
-  "tires2": {
-    "Cost": 0.15,
-    "Handling": 0.05
-  },
-  "intake2": {
-    "Cost": 0.15,
-    "Power": 0.02,
-    "Acceleration": 0.2
-  },
-  "engine2": {
-    "Cost": 0.75,
-    "Power": 0.05
-  },
-  "suspension2": {
-    "Cost": 0.2,
-    "Handling": 0.1
-  },
-  "clutch2": {
-    "Cost": 0.15,
-    "Power": 0.03
-  },
-  "turbo2": {
-    "Cost": 0.45,
-    "Power": 0.08,
-    "Acceleration": 0.5
-  },
-  "gearbox2": {
-    "Cost": 0.3,
-    "Handling": 0.05
-  },
-  "ecu2": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-
-  "intercooler2": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-  "exhaust3": {
-    "Cost": 0.25,
-    "Power": 0.03,
-    "Acceleration": 0.3
-  },
-  "tires3": {
-    "Cost": 0.15,
-    "Handling": 0.05
-  },
-  "intake3": {
-    "Cost": 0.15,
-    "Power": 0.02,
-    "Acceleration": 0.4
-  },
-  "engine3": {
-    "Cost": 0.75,
-    "Power": 0.05
-  },
-  "suspension3": {
-    "Cost": 0.2,
-    "Handling": 0.1
-  },
-  "clutch3": {
-    "Cost": 0.15,
-    "Power": 0.03
-  },
-  "turbo3": {
-    "Cost": 0.45,
-    "Power": 0.08,
-    "Acceleration": 1
-  },
-  "gearbox3": {
-    "Cost": 0.3,
-    "Handling": 0.05
-  },
-  "ecu3": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-
-  "intercooler3": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-  "exhaust4": {
-    "Cost": 0.25,
-    "Power": 0.03,
-    "Acceleration": 0.4
-  },
-  "tires4": {
-    "Cost": 0.15,
-    "Handling": 0.05
-  },
-  "intake4": {
-    "Cost": 0.15,
-    "Power": 0.02,
-    "Acceleration": 0.5
-  },
-  "engine4": {
-    "Cost": 0.75,
-    "Power": 0.05
-  },
-  "suspension4": {
-    "Cost": 0.2,
-    "Handling": 0.1
-  },
-  "clutch4": {
-    "Cost": 0.15,
-    "Power": 0.03
-  },
-  "turbo4": {
-    "Cost": 0.45,
-    "Power": 0.08,
-    "Acceleration": 2
-  },
-  "gearbox4": {
-    "Cost": 0.3,
-    "Handling": 0.05
-  },
-  "ecu4": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-
-  "intercooler4": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-  "exhaust5": {
-    "Cost": 0.25,
-    "Power": 0.03,
-    "Acceleration": 0.5
-  },
-  "tires5": {
-    "Cost": 0.15,
-    "Handling": 0.05
-  },
-  "intake5": {
-    "Cost": 0.15,
-    "Power": 0.02,
-    "Acceleration": 0.8
-  },
-  "engine5": {
-    "Cost": 0.75,
-    "Power": 0.05
-  },
-  "suspension5": {
-    "Cost": 0.2,
-    "Handling": 0.1
-  },
-  "clutch5": {
-    "Cost": 0.15,
-    "Power": 0.03
-  },
-  "turbo5": {
-    "Cost": 0.45,
-    "Power": 0.08,
-    "Acceleration": 5
-  },
-  "gearbox5": {
-    "Cost": 0.3,
-    "Handling": 0.05
-  },
-  "ecu5": {
-    "Cost": 0.2,
-    "Power": 0.05
-  },
-
-  "intercooler5": {
-    "Cost": 0.2,
-    "Power": 0.05
+    "Cost": 1000,
+    "Power": 0.02
   }
 }
