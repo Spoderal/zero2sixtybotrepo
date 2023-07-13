@@ -88,9 +88,7 @@ module.exports = {
 
     let turbopower = 0;
     if (turbotier <= 5) {
-      turbopower = Math.round(
-        parttiersdb[`turbo1`].Power * selected[0].Speed
-      );
+      turbopower = Math.round(parttiersdb[`turbo1`].Power * selected[0].Speed);
     }
     let tirepower = 0;
     if (tiretier <= 5) {
@@ -130,9 +128,7 @@ module.exports = {
     }
     let ecupower = 0;
     if (ecutier <= 5) {
-      ecupower = Math.round(
-        parttiersdb[`ecu1`].Power * selected[0].Speed
-      );
+      ecupower = Math.round(parttiersdb[`ecu1`].Power * selected[0].Speed);
     }
     let gearboxpower = 0;
     if (gearboxtier <= 5) {
@@ -367,8 +363,7 @@ module.exports = {
       console.log(selected[0]);
       let tier = selected[0][i.customId] || 0;
       let newtier = (tier += 1);
-      let price =
-        Math.round(parttiersdb[`${i.customId}1`].Cost) * newtier;
+      let price = Math.round(parttiersdb[`${i.customId}1`].Cost) * newtier;
       let power = Math.round(
         selected[0].Speed * parttiersdb[`${i.customId}1`].Power
       );
@@ -390,10 +385,7 @@ module.exports = {
       }
       if (parttiersdb[`${i.customId}1`].Acceleration && newacc >= 2) {
         selected[0].Acceleration -= acceleration;
-      } else if (
-        parttiersdb[`${i.customId}1`].Acceleration &&
-        newacc < 2
-      ) {
+      } else if (parttiersdb[`${i.customId}1`].Acceleration && newacc < 2) {
         selected[0].Acceleration = 2;
       }
 
@@ -425,7 +417,7 @@ module.exports = {
       for (let butt in row.components) {
         let button = row.components[butt];
         let tier = selected[0][button.data.custom_id] || 1;
-        let newtier = tier += 1
+        let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         if (tier >= 5) {
           button.setDisabled(true);
@@ -443,7 +435,7 @@ module.exports = {
       for (let butt in row2.components) {
         let button = row2.components[butt];
         let tier = selected[0][button.data.custom_id] || 1;
-        let newtier = tier += 1
+        let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         console.log(tier);
         if (tier >= 5) {
@@ -461,7 +453,7 @@ module.exports = {
 
         let tier = selected[0][button.data.custom_id.toLowerCase()] || 1;
 
-        let newtier = tier += 1
+        let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         if (tier >= 5) {
           button.setDisabled(true);
@@ -573,9 +565,7 @@ module.exports = {
       }
       ecupower = 0;
       if (ecutier <= 5) {
-        ecupower = Math.round(
-          parttiersdb[`ecu1`].Power * selected[0].Speed
-        );
+        ecupower = Math.round(parttiersdb[`ecu1`].Power * selected[0].Speed);
       }
       gearboxpower = 0;
       if (gearboxtier <= 5) {

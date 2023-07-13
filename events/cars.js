@@ -24,7 +24,7 @@ async function carfix() {
             let carf = cars[car].Name;
 
             let carindb = cardb.Cars[carf.toLowerCase()];
-    
+
             let carobj = {
               ID: carindb.alias,
               Name: carindb.Name,
@@ -39,14 +39,11 @@ async function carfix() {
               WeightStat: carindb.Weight,
               Gas: 10,
               MaxGas: 10,
-            }
-            cars[car] = carobj
+            };
+            cars[car] = carobj;
           }
-
-
-
         }
-        udata.cash += 50000
+        udata.cash += 50000;
         udata.markModified("cars");
         udata.save();
       } catch (err) {

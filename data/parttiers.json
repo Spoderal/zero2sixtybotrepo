@@ -19,7 +19,7 @@
   },
   "suspension1": {
     "Cost": 1500,
-    "Handling": 0.10
+    "Handling": 0.1
   },
   "clutch1": {
     "Cost": 1000,
