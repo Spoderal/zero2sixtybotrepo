@@ -337,6 +337,8 @@ module.exports = {
             Miles: 0,
             Resale: 0,
             WeightStat: car.Weight,
+            Gas: 10,
+            MaxGas: 10
           };
           userdata.cars.push(carobj);
           userdata.notoriety -= rewardtoclaim.Required;
