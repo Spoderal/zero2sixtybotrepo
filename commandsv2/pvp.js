@@ -243,10 +243,10 @@ module.exports = {
 
       collector.on("collect", async (i) => {
         if (i.customId.includes("approve")) {
-          cooldowndata2.pvp = Date.now()
-          cooldowndata.pvp = Date.now()
-          cooldowndata.save()
-          cooldowndata2.save()
+          cooldowndata2.pvp = Date.now();
+          cooldowndata.pvp = Date.now();
+          cooldowndata.save();
+          cooldowndata2.save();
           embed.setTitle("Racing!");
           i.update({ embeds: [embed], components: [] });
 
@@ -418,7 +418,7 @@ module.exports = {
                 embed.setDescription(`${earnings.join("\n")}`);
               }
               embed.setTitle(`${user2.username} Won!`);
-     
+
               await interaction.editReply({
                 embeds: [embed],
               });
