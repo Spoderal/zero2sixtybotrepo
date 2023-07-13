@@ -25,10 +25,7 @@ module.exports = {
           { name: "Rare Keys", value: "rkeys" },
           { name: "Common Keys", value: "ckeys" },
           { name: "Exotic Keys", value: "ekeys" },
-          { name: "Common Barn Maps", value: "cmaps" },
-          { name: "Uncommon Barn Maps", value: "ucmaps" },
-          { name: "Rare Barn Maps", value: "rmaps" },
-          { name: "Legendary Barn Maps", value: "lmaps" },
+          { name: "Barn Maps", value: "barnmaps" },
           { name: "Wheel spins", value: "wheelspins" },
           { name: "Super wheel spins", value: "swheelspins" }
         )
