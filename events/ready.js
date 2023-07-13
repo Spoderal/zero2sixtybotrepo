@@ -1,6 +1,6 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
-const crews = require("../crewrank");
+const crews = require("./crews/updateCrew");
 const lodash = require("lodash");
 require("dotenv").config();
 const patron = require("../patreon");
@@ -38,7 +38,6 @@ module.exports = {
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
 
-    crews(client);
     patron(client);
     double(client);
     gold(client);

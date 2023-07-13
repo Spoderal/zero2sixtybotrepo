@@ -40,8 +40,10 @@ async function updateCrew(interaction) {
         console.log("ranked");
       }
     }
+    await global.update();
     await global.markModified("crews");
-    await Global.findOneAndUpdate("crews");
+    await global.update();
+
     await global.save();
   }
 }
