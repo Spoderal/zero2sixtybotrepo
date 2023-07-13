@@ -50,7 +50,7 @@ module.exports = {
           Miles: 0,
           WeightStat: carindb.Weight,
           Gas: 10,
-          MaxGas: 10
+          MaxGas: 10,
         };
         if (carindb.Range) {
           carobj = {
