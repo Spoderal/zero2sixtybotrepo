@@ -303,10 +303,7 @@ module.exports = {
       let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
 
       let newtier = (tier += 1);
-      let price =
-        carprice *
-        parttiersdb[`${button.data.custom_id}${tier}`].Cost *
-        newtier;
+      let price =  carprice * parttiersdb[`${button.data.custom_id}${newtier}`].Cost *  newtier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
@@ -324,7 +321,7 @@ module.exports = {
       let newtier = (tier += 1);
       let price =
         carprice *
-        parttiersdb[`${button.data.custom_id}${tier}`].Cost *
+        parttiersdb[`${button.data.custom_id}${newtier}`].Cost *
         newtier;
       console.log(tier);
       if (tier >= 5) {
@@ -346,7 +343,7 @@ module.exports = {
 
       let price =
         carprice *
-        parttiersdb[`${button.data.custom_id}${tier}`].Cost *
+        parttiersdb[`${button.data.custom_id}${newtier}`].Cost *
         newtier;
       if (tier >= 5) {
         button.setDisabled(true);
