@@ -611,15 +611,15 @@ module.exports = {
           let helmetimg = pfps.Pfps[reward2].Image;
           name2 = pfps.Pfps[reward2].Name;
           let loadedhelm = await loadImage(helmetimg);
-          rewards.push(`${pfps.Pfps[reward2].Emote} ${name2}`)
-       
+          rewards.push(`${pfps.Pfps[reward2].Emote} ${name2}`);
+
           userdata.pfps.push(name2.toLowerCase());
         }
         if (pfps.Pfps[reward3]) {
           let helmetimg = pfps.Pfps[reward3].Image;
           name3 = pfps.Pfps[reward3].Name;
           let loadedhelm = await loadImage(helmetimg);
-          rewards.push(`${pfps.Pfps[reward3].Emote} ${name3}`)
+          rewards.push(`${pfps.Pfps[reward3].Emote} ${name3}`);
           userdata.pfps.push(name3.toLowerCase());
         }
 
