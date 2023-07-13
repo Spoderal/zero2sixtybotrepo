@@ -300,10 +300,13 @@ module.exports = {
     );
     for (let butt in row.components) {
       let button = row.components[butt];
-      let tier = selected[0][button.data.custom_id.toLowerCase()] || 0
+      let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
 
-      let newtier = tier += 1
-      let price =  carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * newtier;
+      let newtier = (tier += 1);
+      let price =
+        carprice *
+        parttiersdb[`${button.data.custom_id}${tier}`].Cost *
+        newtier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
@@ -316,10 +319,13 @@ module.exports = {
 
     for (let butt in row2.components) {
       let button = row2.components[butt];
-      let tier = selected[0][button.data.custom_id.toLowerCase()] || 0
+      let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
 
-      let newtier = tier += 1
-      let price =  carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * newtier;
+      let newtier = (tier += 1);
+      let price =
+        carprice *
+        parttiersdb[`${button.data.custom_id}${tier}`].Cost *
+        newtier;
       console.log(tier);
       if (tier >= 5) {
         button.setDisabled(true);
@@ -334,11 +340,14 @@ module.exports = {
     for (let butt in row3.components) {
       let button = row3.components[butt];
 
-      let tier = selected[0][button.data.custom_id.toLowerCase()] || 0
+      let tier = selected[0][button.data.custom_id.toLowerCase()] || 0;
 
-      let newtier = tier += 1
+      let newtier = (tier += 1);
 
-      let price =  carprice * parttiersdb[`${button.data.custom_id}${tier}`].Cost * newtier;
+      let price =
+        carprice *
+        parttiersdb[`${button.data.custom_id}${tier}`].Cost *
+        newtier;
       if (tier >= 5) {
         button.setDisabled(true);
       }
@@ -368,7 +377,8 @@ module.exports = {
       let tier = selected[0][i.customId] || 0;
       let newtier = (tier += 1);
       let price =
-        Math.round(carprice * parttiersdb[`${i.customId}${newtier}`].Cost) * newtier;
+        Math.round(carprice * parttiersdb[`${i.customId}${newtier}`].Cost) *
+        newtier;
       let power = Math.round(
         selected[0].Speed * parttiersdb[`${i.customId}${newtier}`].Power
       );
