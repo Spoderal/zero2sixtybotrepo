@@ -584,15 +584,13 @@ module.exports = {
       userdata.items = inv;
       userdata.update();
       cooldowndata.crate = Date.now();
-      cooldowndata.save();
-      const canvas = createCanvas(1280, 720);
-      const ctx = canvas.getContext("2d");
-      const bg = await loadImage("https://i.ibb.co/6WwF0gJ/crateunbox.png");
-      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+   
+    
       let x = 0;
       let rewards = [];
       var chooser = randomNoRepeats(boughtindb.Contents);
       setTimeout(async () => {
+        let rewards = []
         let reward1 = chooser();
         let reward2 = chooser();
         let reward3 = chooser();
@@ -606,128 +604,123 @@ module.exports = {
           let helmetimg = pfps.Pfps[reward1].Image;
           name1 = pfps.Pfps[reward1].Name;
           let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 150, 200, 150, 150);
-          ctx.save();
+          rewards.push(`${pfps.Pfps[reward1].Emote} ${name1}`)
+         
           userdata.pfps.push(name1.toLowerCase());
         }
         if (pfps.Pfps[reward2]) {
           let helmetimg = pfps.Pfps[reward2].Image;
           name2 = pfps.Pfps[reward2].Name;
           let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 570, 200, 150, 150);
-          ctx.save();
+          rewards.push(`${pfps.Pfps[reward1].Emote} ${name2}`)
+       
           userdata.pfps.push(name2.toLowerCase());
         }
         if (pfps.Pfps[reward3]) {
           let helmetimg = pfps.Pfps[reward3].Image;
           name3 = pfps.Pfps[reward3].Name;
           let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 970, 200, 150, 150);
-          ctx.save();
+          rewards.push(`${pfps.Pfps[reward1].Emote} ${name3}`)
           userdata.pfps.push(name3.toLowerCase());
         }
 
-        ctx.restore();
-        ctx.font = "40px sans-serif";
-        ctx.fillStyle = "#00000";
-        let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png");
-        let imagewheel = await loadImage(
-          "https://i.ibb.co/Rpp6Rt2/wheelspin.gif"
-        );
-        let imagewheelspin = await loadImage(
-          "https://i.ibb.co/HpQvFST/superwheelspin.gif"
-        );
+       
         if (reward1.endsWith(`Cash`)) {
           let amount = Number(reward1.split(" ")[0]);
           name1 = `${amount} Cash`;
-          ctx.drawImage(imageload, 150, 200, 150, 150);
+          rewards.push(`${amount} Cash`)
           userdata.cash += amount;
         }
 
         if (reward2.endsWith(`Cash`)) {
           let amount2 = Number(reward2.split(" ")[0]);
           name2 = `${amount2} Cash`;
-          ctx.drawImage(imageload, 570, 200, 150, 150);
+          rewards.push(`${amount2} Cash`)
           userdata.cash += amount2;
         }
 
         if (reward3.endsWith(`Cash`)) {
           let amount3 = Number(reward3.split(" ")[0]);
           name3 = `${amount3} Cash`;
-          ctx.drawImage(imageload, 970, 200, 150, 150);
+          rewards.push(`${amount3} Cash`)
           userdata.cash += amount3;
         }
 
         if (reward1 == `super wheelspin`) {
           let amount = 1;
           name1 = `${amount} Super Wheelspin`;
-          ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
+          rewards.push(`${amount} Super Wheelspin`)
           userdata.swheelspins += amount;
         }
         if (reward2 == `super wheelspin`) {
           let amount = 1;
           name2 = `${amount} Super Wheelspin`;
-          ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
+          rewards.push(`${amount} Super Wheelspin`)
           userdata.swheelspins += amount;
         }
         if (reward3 == `super wheelspin`) {
           let amount = 1;
           name3 = `${amount} Super Wheelspin`;
-          ctx.drawImage(imagewheelspin, 150, 200, 150, 150);
+          rewards.push(`${amount} Super Wheelspin`)
           userdata.swheelspins += amount;
         }
 
         if (reward1 == `wheelspin`) {
           let amount = 1;
           name1 = `${amount} Wheelspin`;
-          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          rewards.push(`${amount} Wheelspin`)
           userdata.wheelspins += amount;
         }
         if (reward2 == `wheelspin`) {
           let amount = 1;
           name2 = `${amount} Wheelspin`;
-          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          rewards.push(`${amount} Wheelspin`)
+
           userdata.wheelspins += amount;
         }
         if (reward3 == `wheelspin`) {
           let amount = 1;
           name3 = `${amount} Wheelspin`;
-          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          rewards.push(`${amount} Wheelspin`)
+
           userdata.wheelspins += amount;
         }
 
         if (reward1 == `lockpick`) {
           let amount = 1;
           name1 = `${amount} Lockpick`;
-          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          rewards.push(`${amount} Lockpick`)
+
           userdata.lockpicks += amount;
         }
         if (reward2 == `lockpick`) {
           let amount = 1;
           name2 = `${amount} Lockpick`;
-          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          rewards.push(`${amount} Lockpick`)
+
           userdata.lockpicks += amount;
         }
         if (reward3 == `lockpick`) {
           let amount = 1;
           name3 = `${amount} Lockpick`;
-          ctx.drawImage(imagewheel, 150, 200, 150, 150);
+          rewards.push(`${amount} Lockpick`)
+
           userdata.lockpicks += amount;
         }
 
         if (titledb[reward1]) {
           name1 = titledb[reward1].Title;
+          rewards.push(`${name1} Title`)
           userdata.titles.push(name1.toLowerCase());
         }
         if (titledb[reward2]) {
           name2 = titledb[reward2].Title;
+          rewards.push(`${name2} Title`)
           userdata.titles.push(name2.toLowerCase());
         }
         if (titledb[reward3]) {
           name3 = titledb[reward3].Title;
+          rewards.push(`${name3} Title`)
           userdata.titles.push(name3.toLowerCase());
         }
 
@@ -736,17 +729,16 @@ module.exports = {
           name1 = partdb.Parts[reward1].Name;
           let loadedpart = await loadImage(partimg);
 
-          ctx.drawImage(loadedpart, 150, 200, 150, 150);
-          ctx.save();
+          rewards.push(`${name1}`)
+      
           userdata.parts.push(name1.toLowerCase());
         }
         if (partdb.Parts[reward2]) {
           let partimg = partdb.Parts[reward2].Image;
           name2 = partdb.Parts[reward2].Name;
           let loadedpart = await loadImage(partimg);
-
-          ctx.drawImage(loadedpart, 570, 200, 150, 150);
-          ctx.save();
+          rewards.push(`${name2}`)
+         
           userdata.parts.push(name2.toLowerCase());
         }
         if (partdb.Parts[reward3]) {
@@ -754,23 +746,18 @@ module.exports = {
           name3 = partdb.Parts[reward3].Name;
           let loadedpart = await loadImage(partimg);
 
-          ctx.drawImage(loadedpart, 970, 200, 150, 150);
-          ctx.save();
+          rewards.push(`${name3}`)
           userdata.parts.push(name3.toLowerCase());
         }
 
         userdata.save();
-        ctx.fillText(name1, 100, 565);
-        ctx.fillText(name2, 520, 565);
-        ctx.fillText(name3, 920, 565);
-
-        let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-          name: "profile-image.png",
-        });
-        embed.setImage(`attachment://profile-image.png`);
+        embed.addFields(
+          {name:"Rewards", value: `${rewards.join('\n')}`}
+        )
+        .setImage(`${cratedb.Crates[itemtouse.toLowerCase()].Image}`)
         console.log(rewards);
-        await interaction.editReply({ embeds: [embed], files: [attachment] });
-      }, 5000);
+        await interaction.editReply({ embeds: [embed] });
+      }, 3000);
     }
     if (!cratedb.Crates[itemtouse.toLowerCase()]) {
       if (itemdb[itemtouse.toLowerCase()]) {

@@ -68,16 +68,29 @@ module.exports = {
     let newtier9 = (gearboxtier += 1);
     let newtier0 = (enginetier += 1);
 
-    let exhaustcost = 1000 * newtier1;
-    let turbocost = 3000 * newtier2;
-    let tirecost = 1000 * newtier3;
-    let suspensioncost = 1000 * newtier4;
-    let enginecost = 5000 * newtier0;
-    let clutchcost = 1000 * newtier5;
-    let intercoolercost = 2000 * newtier6;
-    let intakecost = 1000 * newtier7;
-    let ecucost = 1000 * newtier8;
-    let gearboxcost = 2500 * newtier9;
+    let exhaustcost = parttiersdb[`exhaust1`].Cost * newtier1;
+    let turbocost = parttiersdb[`turbo1`].Cost * newtier2;
+    let tirecost = parttiersdb[`tires1`].Cost * newtier3;
+    let suspensioncost = parttiersdb[`suspension1`].Cost * newtier4;
+    let enginecost = parttiersdb[`engine1`].Cost * newtier0;
+    let clutchcost = parttiersdb[`clutch1`].Cost * newtier5;
+    let intercoolercost = parttiersdb[`intercooler1`].Cost * newtier6;
+    let intakecost = parttiersdb[`intake1`].Cost * newtier7;
+    let ecucost = parttiersdb[`ecu1`].Cost * newtier8;
+    let gearboxcost = parttiersdb[`gearbox1`].Cost * newtier9;
+
+    let exhaustcost2 = parttiersdb[`exhaust1`].Cost * newtier1;
+    let turbocost2 = parttiersdb[`turbo1`].Cost * newtier2;
+    let tirecost2 = parttiersdb[`tires1`].Cost * newtier3;
+    let suspensioncost2 = parttiersdb[`suspension1`].Cost * newtier4;
+    let enginecost2 = parttiersdb[`engine1`].Cost * newtier0;
+    let clutchcost2 = parttiersdb[`clutch1`].Cost * newtier5;
+    let intercoolercost2 = parttiersdb[`intercooler1`].Cost * newtier6;
+    let intakecost2 = parttiersdb[`intake1`].Cost * newtier7;
+    let ecucost2 = parttiersdb[`ecu1`].Cost * newtier8;
+    let gearboxcost2 = parttiersdb[`gearbox1`].Cost * newtier9;
+
+    let totalcost = (exhaustcost2 + turbocost2 + tirecost2 + suspensioncost2 + enginecost2 + clutchcost2 + intercoolercost2 + intakecost2 + ecucost2 + gearboxcost2)
 
     let exhaustpower = 0;
     if (exhausttier <= 5) {
@@ -163,6 +176,7 @@ module.exports = {
 
     let embed = new EmbedBuilder()
       .setTitle(`Upgrade your ${selected[0].Name}`)
+      .setDescription(`Total cost to upgrade all parts: ${toCurrency(totalcost)}`)
       .addFields(
         {
           name: `${exhaustemote} Exhaust`,

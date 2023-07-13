@@ -47,8 +47,34 @@ module.exports = {
       subcommand.setName("rank").setDescription("View your PVP rank")
     ),
   async execute(interaction) {
-    const discord = require("discord.js");
+    const dorace = (
+      speed,
+      speed2,
+      handling,
+      handling2,
+      weight,
+      weight2,
+      acceleration,
+      acceleration2
+    ) => {
+      speed = speed * 100;
+      speed2 = speed2 * 100;
+      let player = (handling + speed - weight) / acceleration;
+      let opponent = (handling2 + speed2 - weight2) / acceleration2;
+      console.log(player);
+      console.log(opponent);
+      const playerRegression = player;
+      const opponentRegression = opponent;
+      winner = playerRegression >= opponentRegression ? "Player" : "Opponent";
 
+      const string =
+        `- Player: ${playerRegression} vs Opponent: ${opponentRegression}\n` +
+        `- Winner: ${winner}\n`;
+
+      return string;
+    };
+    const discord = require("discord.js");
+    let winner;
     const cars = require("../data/cardb.json");
     let subcommand = interaction.options.getSubcommand();
     let user = interaction.user;
@@ -66,7 +92,7 @@ module.exports = {
       let cooldowndata =
         (await Cooldowns.findOne({ id: user.id })) ||
         new Cooldowns({ id: user.id });
-      let timeout = 3600000;
+      let timeout = 600000;
       if (
         cooldowndata.pvp !== null &&
         timeout - (Date.now() - cooldowndata.pvp) > 0
@@ -123,8 +149,7 @@ module.exports = {
         return await interaction.reply({ embeds: [errembed] });
       }
 
-      let tracklength = 1000;
-      let tracklength2 = 1000;
+      
       let userpvprank = userdata.pvprank || {
         Rank: "Silver",
         Wins: 0,
@@ -172,59 +197,41 @@ module.exports = {
           .setEmoji("✖️")
       );
 
-      if (!selected.WeightStat) {
-        selected.WeightStat = cars.Cars[selected.Name.toLowerCase()].Weight;
-      }
-
-      let mph = selected.Speed;
-      let weight =
-        selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
+ 
+      let weight = selected.WeightStat;
+      let speed = selected.Speed;
       let acceleration = selected.Acceleration;
       let handling = selected.Handling;
 
-      if (!selected2.Weight) {
-        selected2.Weight = cars.Cars[selected2.Name.toLowerCase()].Weight;
-      }
-      let mph2 = selected2.Speed;
-      let weight2 = selected2.Weight;
+      let weight2 = selected2.WeightStat;
+      let speed2 = selected2.Speed;
       let acceleration2 = selected2.Acceleration;
       let handling2 = selected2.Handling;
 
-      let speed = 0;
-      let speed2 = 0;
+      let weightscore = Math.floor(weight / 100);
+      let weightscore2 = Math.floor(weight2 / 100);
 
-      let accms = acceleration * 10;
-      let accms2 = acceleration2 * 10;
+      let speedscore = speed * 10;
+      let speedscore2 = speed2 * 10;
 
-      let x = setInterval(() => {
-        if (speed <= mph) {
-          speed++;
-        } else {
-          clearInterval(x);
-        }
-      }, accms);
-      let x2 = setInterval(() => {
-        if (speed2 <= mph2) {
-          speed2++;
-        } else {
-          clearInterval(x2);
-        }
-      }, accms2);
+      let carimage1 = selected.Image || cars.Cars[selected.Name.toLowerCase()].Image
+      let carimage2 = selected2.Image || cars.Cars[selected2.Name.toLowerCase()].Image
+
 
       let embed = new discord.EmbedBuilder()
         .setTitle(`${user2.username}, would you like to race ${user.username}?`)
         .addFields([
           {
             name: `${user.username}'s ${carindb1.Emote} ${carindb1.Name}`,
-            value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
+            value: `${emotes.speed} Power: ${speed}\n\n${emotes.zero2sixty} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
           },
           {
             name: `${user2.username}'s ${carindb2.Emote} ${carindb2.Name}`,
-            value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} 0-60: ${acceleration2}s\n\n${emotes.handling} Handling: ${handling2}\n\n${emotes.weight} Weight: ${weight2}`,
+            value: `${emotes.speed} Power: ${speed2}\n\n${emotes.zero2sixty} 0-60: ${acceleration2}s\n\n${emotes.handling} Handling: ${handling2}\n\n${emotes.weight} Weight: ${weight2}`,
           },
         ])
-        .setImage(carindb1.Image)
-        .setThumbnail(carindb2.Image)
+        .setImage(carimage1)
+        .setThumbnail(carimage2)
         .setColor(`#60b0f4`);
 
       let msg = await interaction.editReply({
@@ -250,34 +257,21 @@ module.exports = {
           embed.setTitle("Racing!");
           i.update({ embeds: [embed], components: [] });
 
-          let i2 = setInterval(async () => {
-            if (speed2 > mph2) {
-              speed2 = mph2;
-            }
-            if (speed > mph) {
-              speed = mph;
-            }
-            console.log(`speed ${speed}`);
-            console.log(`speed2 ${speed2}`);
-            speed / 6;
-            handling = handling / 100;
-            handling2 = handling2 / 100;
-            speed2 / 6;
-
-            let formula = (speed += handling += weight / 100);
-
-            console.log(formula);
-
-            // car 2
-
-            let formula2 = (speed2 += handling2 += weight2 / 100);
-            console.log(formula2);
-
-            tracklength -= formula;
-            tracklength2 -= formula2;
-
-            if (tracklength <= 0) {
-              clearInterval(i2);
+        
+    
+          dorace(
+            speedscore,
+            speedscore2,
+            handling,
+            handling2,
+            weightscore,
+            weightscore2,
+            acceleration,
+            acceleration2
+          );
+          setTimeout(async () => {
+            
+            if (winner == "Player") {
 
               let earnings = [];
               userdata.pvprank.Wins = userdata.pvprank.Wins += 1;
@@ -369,8 +363,7 @@ module.exports = {
               userdata2.save();
             }
             // lost
-            else if (tracklength2 <= 0) {
-              clearInterval(i2);
+            else if (winner == "Opponent") {
 
               let earnings = [];
               userdata2.pvprank.Wins = userdata2.pvprank.Wins += 1;
@@ -453,9 +446,7 @@ module.exports = {
               userdata.save();
               userdata2.save();
             }
-            console.log(tracklength);
-            console.log(tracklength2);
-          }, 1000);
+          }, 5000);
         } else {
           embed.addFields([{ name: "Result", value: "Declined" }]);
           row.components[0].setDisabled(true);
