@@ -68,10 +68,10 @@ module.exports = {
         new Cooldowns({ id: user.id });
       let timeout = 3600000;
       if (
-        cooldowndata.racing !== null &&
-        timeout - (Date.now() - cooldowndata.racing) > 0
+        cooldowndata.pvp !== null &&
+        timeout - (Date.now() - cooldowndata.pvp) > 0
       ) {
-        let time = ms(timeout - (Date.now() - cooldowndata.racing));
+        let time = ms(timeout - (Date.now() - cooldowndata.pvp));
         let timeEmbed = new EmbedBuilder()
           .setColor(colors.blue)
           .setDescription(`You can pvp again in ${time}`);
@@ -84,10 +84,10 @@ module.exports = {
         (await Cooldowns.findOne({ id: user2.id })) ||
         new Cooldowns({ id: user2.id });
       if (
-        cooldowndata2.racing !== null &&
-        timeout - (Date.now() - cooldowndata2.racing) > 0
+        cooldowndata2.pvp !== null &&
+        timeout - (Date.now() - cooldowndata2.pvp) > 0
       ) {
-        let time = ms(timeout - (Date.now() - cooldowndata2.racing));
+        let time = ms(timeout - (Date.now() - cooldowndata2.pvp));
         let timeEmbed = new EmbedBuilder()
           .setColor(colors.blue)
           .setDescription(`${user2.username} can pvp again in ${time}`);
@@ -243,6 +243,10 @@ module.exports = {
 
       collector.on("collect", async (i) => {
         if (i.customId.includes("approve")) {
+          cooldowndata2.pvp = Date.now()
+          cooldowndata.pvp = Date.now()
+          cooldowndata.save()
+          cooldowndata2.save()
           embed.setTitle("Racing!");
           i.update({ embeds: [embed], components: [] });
 
@@ -414,6 +418,7 @@ module.exports = {
                 embed.setDescription(`${earnings.join("\n")}`);
               }
               embed.setTitle(`${user2.username} Won!`);
+     
               await interaction.editReply({
                 embeds: [embed],
               });

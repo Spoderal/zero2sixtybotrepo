@@ -257,6 +257,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  pvp: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   milk: {
     type: Number,
     required: false,
