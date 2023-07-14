@@ -57,7 +57,7 @@ module.exports = {
               ephemeral: true,
             });
           } else {
-            await updateCrew(interaction)
+            await updateCrew(interaction);
             await command.execute(interaction);
           }
         } catch (err) {
