@@ -216,8 +216,7 @@ module.exports = {
                   upg.Cost
                 )}`
               );
-              if(upgraded.length < 5){
-
+              if (upgraded.length < 5) {
                 upgraderow.addComponents(
                   new ButtonBuilder()
                     .setCustomId(`${upg.ID}`)
@@ -323,15 +322,14 @@ module.exports = {
           userdata.business.Earned += income;
           userdata.business.Served += 1;
           userdata.business.CustomerD -= 1;
-          let served = userdata.business.Served
-          let level = userdata.business.Level
-          let otherlevel = level * 10
+          let served = userdata.business.Served;
+          let level = userdata.business.Level;
+          let otherlevel = level * 10;
 
-          if(served > otherlevel){
-            userdata.business.Level += 1
-            interaction.channel.send("Business level up!")
+          if (served > otherlevel) {
+            userdata.business.Level += 1;
+            interaction.channel.send("Business level up!");
           }
-
 
           if (userdata.business.CustomerD == 0) {
             cooldowns.business = Date.now();

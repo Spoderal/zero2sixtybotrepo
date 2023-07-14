@@ -65,11 +65,11 @@ module.exports = {
       selected[0].Handling -= partindb.Handling;
     }
     if (partindb.Weight) {
-        selected[0].WeightStat -= partindb.Weight;
-      }
-      if (partindb.WeightMinus) {
-        selected[0].WeightStat += partindb.WeightMinus;
-      }
+      selected[0].WeightStat -= partindb.Weight;
+    }
+    if (partindb.WeightMinus) {
+      selected[0].WeightStat += partindb.WeightMinus;
+    }
     if (partindb.Acceleration) {
       selected[0].Acceleration += partindb.Acceleration;
     }
@@ -77,7 +77,7 @@ module.exports = {
       selected[0].Handling += partindb.HandlingMinus;
     }
 
-    selected[0][partindb.Type.toLowerCase()] = null
+    selected[0][partindb.Type.toLowerCase()] = null;
 
     await User.findOneAndUpdate(
       {

@@ -13,7 +13,7 @@ const { toCurrency, numberWithCommas, isInt } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const carpacks = require("../data/carpacks.json");
 const cardata = require("../events/shopdata");
-const imports = require("../data/imports.json")
+const imports = require("../data/imports.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -167,16 +167,20 @@ module.exports = {
       if (goldpurchase && cargoldprice > gold)
         return await interaction.reply("You don't have enough gold!");
 
-      if (boughtCarPrice == 0 && !imports.common.Contents.includes(boughtCar.Name.toLowerCase()) && !imports.rare.Contents.includes(boughtCar.Name.toLowerCase()) && !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase()))  return await interaction.reply("This car is not purchasable.");
+      if (
+        boughtCarPrice == 0 &&
+        !imports.common.Contents.includes(boughtCar.Name.toLowerCase()) &&
+        !imports.rare.Contents.includes(boughtCar.Name.toLowerCase()) &&
+        !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())
+      )
+        return await interaction.reply("This car is not purchasable.");
 
       if (usercars.find((c) => c.Name == boughtCar.Name))
         return await interaction.reply("You already own this car!");
 
       if (boughtCar.Blackmarket) {
-        if (gold < boughtCarPrice)   return await interaction.reply("You don't have enough gold!");
-
-      
-
+        if (gold < boughtCarPrice)
+          return await interaction.reply("You don't have enough gold!");
 
         let idtoset = boughtCar.alias;
         let carindb = boughtCar;
@@ -251,16 +255,19 @@ module.exports = {
             return await interaction.reply(
               `You need to be rank ${boughtCar.Rank} to buy this car!`
             );
-            if(imports.common.Contents.includes(boughtCar.Name.toLowerCase())){
-              console.log("common")
-              if(userdata.commonCredits < 25) return interaction.reply("You don't have enough common credits!")
-            }
-            if(imports.rare.Contents.includes(boughtCar.Name.toLowerCase())){
-              if(userdata.rareCredits < 25) return interaction.reply("You don't have enough common credits!")
-            }
-            if(imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())){
-              if(userdata.exoticCredits < 25) return interaction.reply("You don't have enough common credits!")
-            }
+          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
+            console.log("common");
+            if (userdata.commonCredits < 25)
+              return interaction.reply("You don't have enough common credits!");
+          }
+          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
+            if (userdata.rareCredits < 25)
+              return interaction.reply("You don't have enough common credits!");
+          }
+          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
+            if (userdata.exoticCredits < 25)
+              return interaction.reply("You don't have enough common credits!");
+          }
 
           let idtoset = boughtCar.alias;
           let carobj = {
@@ -301,14 +308,14 @@ module.exports = {
             };
           }
 
-          if(imports.common.Contents.includes(boughtCar.Name.toLowerCase())){
-            userdata.commonCredits -= 25
+          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
+            userdata.commonCredits -= 25;
           }
-          if(imports.rare.Contents.includes(boughtCar.Name.toLowerCase())){
-            userdata.rareCredits -= 25
+          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
+            userdata.rareCredits -= 25;
           }
-          if(imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())){
-            userdata.exoticCredits -= 25
+          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
+            userdata.exoticCredits -= 25;
           }
           if (!goldpurchase) {
             userdata.cash -= boughtCarPrice;
@@ -341,9 +348,7 @@ module.exports = {
             .setThumbnail(`${boughtCar.Image}`);
 
           return await interaction.reply({ embeds: [embed] });
-
-        }
-         else {
+        } else {
           let sellprice = boughtCarPrice * 0.65;
           let carstock = global.stock;
           let filteredcar =
@@ -365,16 +370,19 @@ module.exports = {
 
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
-            if(imports.common.Contents.includes(boughtCar.Name.toLowerCase())){
-              console.log("common")
-              if(userdata.commonCredits < 25) return interaction.reply("You don't have enough common credits!")
-            }
-            if(imports.rare.Contents.includes(boughtCar.Name.toLowerCase())){
-              if(userdata.rareCredits < 25) return interaction.reply("You don't have enough common credits!")
-            }
-            if(imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())){
-              if(userdata.exoticCredits < 25) return interaction.reply("You don't have enough common credits!")
-            }
+          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
+            console.log("common");
+            if (userdata.commonCredits < 25)
+              return interaction.reply("You don't have enough common credits!");
+          }
+          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
+            if (userdata.rareCredits < 25)
+              return interaction.reply("You don't have enough common credits!");
+          }
+          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
+            if (userdata.exoticCredits < 25)
+              return interaction.reply("You don't have enough common credits!");
+          }
           cash -= boughtCarPrice;
 
           if (carindb.Stock) {
@@ -422,14 +430,14 @@ module.exports = {
               MaxGas: 10,
             };
           }
-          if(imports.common.Contents.includes(boughtCar.Name.toLowerCase())){
-            userdata.commonCredits -= 25
+          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
+            userdata.commonCredits -= 25;
           }
-          if(imports.rare.Contents.includes(boughtCar.Name.toLowerCase())){
-            userdata.rareCredits -= 25
+          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
+            userdata.rareCredits -= 25;
           }
-          if(imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())){
-            userdata.exoticCredits -= 25
+          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
+            userdata.exoticCredits -= 25;
           }
           if (goldpurchase == true) {
             userdata.gold -= cargoldprice;
