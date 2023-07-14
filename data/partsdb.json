@@ -547,6 +547,25 @@
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png",
       "Loan": true
     },
+    "turbo": {
+      "Name": "Turbo",
+      "Power": 25,
+      "AddedSnow": 0,
+      "AddedSixty": 0,
+      "sellprice": 9000,
+      "Price": 20000,
+      "Emote": "<:t2turbo:989758549330649118>",
+      "Tier": "1",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "turbo",
+      "DecreasedSpeed": "0",
+      "HandlingMinus": 50,
+      "PSI": 24,
+      "MaxPSI": 30,
+      "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
+    },
     "dualturbo": {
       "Name": "DualTurbo",
       "Power": 25,
