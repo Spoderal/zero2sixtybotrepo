@@ -564,7 +564,7 @@
       "HandlingMinus": 50,
       "PSI": 24,
       "MaxPSI": 30,
-      "Fuse":true,
+      "Fuse": true,
       "Image": "https://i.ibb.co/Qb9Hc0N/t2turbo.png"
     },
     "supercharger": {
@@ -584,7 +584,7 @@
       "HandlingMinus": 100,
       "PSI": 17,
       "MaxPSI": 40,
-      "Fuse":true,
+      "Fuse": true,
       "Image": "https://i.ibb.co/JH6CzMv/t3turbo.png"
     },
     "t4turbo": {
@@ -1806,7 +1806,6 @@
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png"
     },
 
-
     "bm1driftsuspension": {
       "Name": "BM1DriftSuspension",
       "DecreaseSpeed": 0,
@@ -2319,7 +2318,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 100,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
@@ -2338,7 +2337,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 200,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
@@ -2357,7 +2356,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 300,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
@@ -2376,7 +2375,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 400,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
@@ -2395,7 +2394,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 500,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
@@ -2414,7 +2413,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "Weight": 100,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/vxkzCRD/part-t1bodykit.png"
@@ -2432,9 +2431,9 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-   
+
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "Weight": 200,
       "Image": "https://i.ibb.co/xFY4CkY/part-t2bodykit.png"
     },
@@ -2451,9 +2450,9 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      
+
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "Weight": 300,
       "Image": "https://i.ibb.co/6WtH896/part-t3bodykit.png"
     },
@@ -2470,9 +2469,9 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-     
+
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "Weight": 400,
       "Image": "https://i.ibb.co/KLJK1Gz/part-t4bodykit.png"
     },
@@ -2490,7 +2489,7 @@
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
       "Type": "weightupgrade",
-      "Fuse":true,
+      "Fuse": true,
       "DecreasedSpeed": "0",
       "Weight": 500,
       "Image": "https://i.ibb.co/Rp5K7N9/part-t5bodykit.png"

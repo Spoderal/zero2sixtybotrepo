@@ -57,8 +57,9 @@ module.exports = {
     let partoncar = selected[0][partindb.Type.toLowerCase()];
 
     let partoncardb = partdb.Parts[partoncar];
-    
-    if(partoncardb) return interaction.reply("This car part already has a fuse slot in use!")
+
+    if (partoncardb)
+      return interaction.reply("This car part already has a fuse slot in use!");
 
     if (partindb.Power) {
       selected[0].Speed += partindb.Power;

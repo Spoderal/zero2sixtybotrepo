@@ -7,8 +7,8 @@ let profilestuff = require("../data/pfpsdb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 const lodash = require("lodash");
-const itemdb = require("../data/items.json")
-const imports = require("../data/imports.json")
+const itemdb = require("../data/items.json");
+const imports = require("../data/imports.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -83,22 +83,20 @@ module.exports = {
           usercars.splice(b, amount);
           break;
         }
-        if(isNaN(price)){
-          price = 0
-        }
+      if (isNaN(price)) {
+        price = 0;
+      }
       userdata.cars = usercars;
       userdata.cash += Number(price);
-      if(imports.common.Contents.includes(selected.Name.toLowerCase())){
-        userdata.commonCredits += 5
+      if (imports.common.Contents.includes(selected.Name.toLowerCase())) {
+        userdata.commonCredits += 5;
       }
-      if(imports.exotic.Contents.includes(selected.Name.toLowerCase())){
-        userdata.exoticCredits += 5
+      if (imports.exotic.Contents.includes(selected.Name.toLowerCase())) {
+        userdata.exoticCredits += 5;
       }
-      if(imports.rare.Contents.includes(selected.Name.toLowerCase())){
-        userdata.rareCredits += 5
+      if (imports.rare.Contents.includes(selected.Name.toLowerCase())) {
+        userdata.rareCredits += 5;
       }
-
-
 
       await interaction.reply(
         `You sold ${amount} ${selected.Name} for ${toCurrency(price)}!`
@@ -189,16 +187,13 @@ module.exports = {
       await interaction.reply(
         `Sold ${amount} ${selling} for ${toCurrency(finalam)}`
       );
-    } 
-    else if(itemdb[selling.toLowerCase()]){
-      let useritems = userdata.items
+    } else if (itemdb[selling.toLowerCase()]) {
+      let useritems = userdata.items;
       useritems.splice(useritems.indexOf(selling.toLowerCase()), 1);
       userdata.items = useritems;
 
-
       await interaction.reply(`You sold your ${selling} for $0!`);
-    }
-    else if (profilestuff.Pfps[selling.toLowerCase()]) {
+    } else if (profilestuff.Pfps[selling.toLowerCase()]) {
       userdata.pfps.pull(selling.toLowerCase());
 
       await interaction.reply(`You sold your ${selling} for $0!`);

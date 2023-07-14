@@ -257,8 +257,7 @@ module.exports = {
           embeds: [embed],
           components: [row2, row4],
         });
-      }
-      else if (value === "fiesta" && userdata.prestige >= 2) {
+      } else if (value === "fiesta" && userdata.prestige >= 2) {
         embed.setTitle("Fiesta Familia");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
@@ -365,10 +364,7 @@ module.exports = {
         cooldowndata.save();
 
         i.update("✅");
-      }
-      
-     
-      else if (i.customId == "claimcar3") {
+      } else if (i.customId == "claimcar3") {
         let series1cool = cooldowndata.series1;
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.fiestafamilia;
@@ -410,8 +406,7 @@ module.exports = {
         cooldowndata.save();
 
         i.update("✅");
-      } 
-      else if (
+      } else if (
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
       ) {
@@ -474,8 +469,7 @@ module.exports = {
         userdata.save();
 
         i.update("✅");
-      }
-      else if (
+      } else if (
         i.customId == "claimcarfinal3" &&
         userdata.fiestafamiliacomplete !== true
       ) {

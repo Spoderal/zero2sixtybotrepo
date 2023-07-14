@@ -39,7 +39,7 @@ module.exports = {
           { name: `Drag Race`, value: `dragrace` },
           { name: `Track Race`, value: `trackrace` },
           { name: `Cross Country`, value: `crosscountry` },
-          {name: "Car Series", value: "carseries"}
+          { name: "Car Series", value: "carseries" }
         )
         .setRequired(true)
         .setDescription(`The race to start`)
@@ -381,15 +381,14 @@ module.exports = {
 
       console.log(car2);
       console.log(winner);
-    }
+    } else if (raceoption == "carseries") {
+      if (userdata.seriestickets <= 0)
+        return interaction.reply("You need a series ticket to race!");
 
-    else if(raceoption =="carseries"){
-      if (userdata.seriestickets <= 0)   return interaction.reply("You need a series ticket to race!");
+      if (!cardb.Cars[selected.Name.toLowerCase()].Series)
+        return interaction.channel.send("You need to use a series car!");
 
-    if (!cardb.Cars[selected.Name.toLowerCase()].Series)  return interaction.channel.send("You need to use a series car!");
-
-
-  let weight = selected.WeightStat;
+      let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
       let handling = selected.Handling;
@@ -418,8 +417,6 @@ module.exports = {
 
       console.log(car2);
       console.log(winner);
-
-
     }
     let randombarn = randomRange(1, 20);
     let randomstory = [
@@ -550,7 +547,7 @@ module.exports = {
           rewards.push(`${randstory}`);
           userdata.evkeys += randomamount;
         }
-        if(raceoption == "carseries"){
+        if (raceoption == "carseries") {
           rewards.push(`+1 Wins`);
           await User.findOneAndUpdate(
             {
@@ -570,8 +567,8 @@ module.exports = {
               ],
             }
           );
-          
-      userdata.seriestickets -= 1;
+
+          userdata.seriestickets -= 1;
         }
         embed.addFields({
           name: `Rewards`,
@@ -582,7 +579,7 @@ module.exports = {
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);
       }
       await interaction.editReply({ embeds: [embed] });
-      selected.Miles += 15
+      selected.Miles += 15;
       await User.findOneAndUpdate(
         {
           id: interaction.user.id,
@@ -601,8 +598,7 @@ module.exports = {
           ],
         }
       );
-      
-      
+
       userdata.save();
     }, 5000);
   },
