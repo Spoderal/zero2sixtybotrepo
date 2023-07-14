@@ -220,6 +220,7 @@ module.exports = {
       global.newmarket.push(obj);
       userdata.marketlimit -= 1;
 
+      global.update()
       global.save();
       userdata.save();
 
@@ -463,8 +464,7 @@ module.exports = {
 
       itemtobuy = itemtobuy[0];
 
-      if (parseInt(itemtobuy.price) > cash)
-        return interaction.reply("You can't afford this!");
+      if (Number(itemtobuy.price) > cash)  return interaction.reply("You can't afford this!");
 
       if (itemtobuy.type == "cars") {
         userdata.cars.push(itemtobuy.carobj);
@@ -475,11 +475,12 @@ module.exports = {
         for (let i = 0; i < itemtobuy.amount; i++)
           userdata.parts.push(itemtobuy.item);
       } else if (itemtobuy.type == "currencies") {
-        userdata[itemtobuy.nameindb] += parseInt(itemtobuy.amount);
+        userdata[itemtobuy.nameindb] += Number(itemtobuy.amount);
       }
-      userdata.cash -= parseInt(itemtobuy.price);
+      userdata.cash -= Number(itemtobuy.price);
       let udata2 = await User.findOne({ id: itemtobuy.user.id });
-      udata2.cash += parseInt(itemtobuy.price);
+      console.log(itemtobuy)
+      udata2.cash += Number(itemtobuy.price);
       if (udata2.marketlimit < 5) {
         udata2.marketlimit += 1;
       }
@@ -493,8 +494,10 @@ module.exports = {
       } catch (err) {
         console.log(err);
       }
+      global.update()
       interaction.reply(`Successfully bought!`);
       global.newmarket.pull(itemtobuy);
+      global.update()
       global.save();
     }
   },

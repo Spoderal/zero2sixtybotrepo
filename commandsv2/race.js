@@ -38,7 +38,8 @@ module.exports = {
           { name: `Street Race`, value: `streetrace` },
           { name: `Drag Race`, value: `dragrace` },
           { name: `Track Race`, value: `trackrace` },
-          { name: `Cross Country`, value: `crosscountry` }
+          { name: `Cross Country`, value: `crosscountry` },
+          {name: "Car Series", value: "carseries"}
         )
         .setRequired(true)
         .setDescription(`The race to start`)
@@ -381,6 +382,45 @@ module.exports = {
       console.log(car2);
       console.log(winner);
     }
+
+    else if(raceoption =="carseries"){
+      if (userdata.seriestickets <= 0)   return interaction.reply("You need a series ticket to race!");
+
+    if (!cardb.Cars[selected.Name.toLowerCase()].Series)  return interaction.channel.send("You need to use a series car!");
+
+
+  let weight = selected.WeightStat;
+      let speed = selected.Speed;
+      let acceleration = selected.Acceleration;
+      let handling = selected.Handling;
+
+      let weight2 = car2.Weight;
+      let speed2 = car2.Speed;
+      let acceleration2 = car2["0-60"];
+      let handling2 = car2.Handling;
+
+      let weightscore = Math.floor(weight / 100);
+      let weightscore2 = Math.floor(weight2 / 100);
+
+      let speedscore = speed * 10;
+      let speedscore2 = speed2 * 10;
+
+      dorace(
+        speedscore,
+        speedscore2,
+        handling,
+        handling2,
+        weightscore,
+        weightscore2,
+        acceleration,
+        acceleration2
+      );
+
+      console.log(car2);
+      console.log(winner);
+
+
+    }
     let randombarn = randomRange(1, 20);
     let randomstory = [
       "Snowy is the leader of the oldest squad in the city.",
@@ -510,6 +550,29 @@ module.exports = {
           rewards.push(`${randstory}`);
           userdata.evkeys += randomamount;
         }
+        if(raceoption == "carseries"){
+          rewards.push(`+1 Wins`);
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Wins": (selected.Wins += 1),
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": selected.Name,
+                },
+              ],
+            }
+          );
+          
+      userdata.seriestickets -= 1;
+        }
         embed.addFields({
           name: `Rewards`,
           value: `${rewards.join("\n")}`,
@@ -519,7 +582,27 @@ module.exports = {
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);
       }
       await interaction.editReply({ embeds: [embed] });
+      selected.Miles += 15
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": selected,
+          },
+        },
 
+        {
+          arrayFilters: [
+            {
+              "car.Name": selected.Name,
+            },
+          ],
+        }
+      );
+      
+      
       userdata.save();
     }, 5000);
   },

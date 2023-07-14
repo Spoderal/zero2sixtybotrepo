@@ -43,6 +43,13 @@ module.exports = {
             customId: "pressure",
             emoji: "<:bmw:931011550054056007>",
           },
+          {
+            label: "Fiesta Familia",
+            description: "Information for the Fiesta Familia Series",
+            value: "fiesta",
+            customId: "fiesta",
+            emoji: "<:ford:931012624152399902>",
+          },
         ])
     );
     let row3 = new ActionRowBuilder().addComponents(
@@ -59,6 +66,13 @@ module.exports = {
         .setCustomId("claimcar2")
         .setStyle("Secondary")
     );
+    let row6 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel("Claim 2017 Ford Fiesta ST")
+        .setEmoji("<:ford:931012624152399902>")
+        .setCustomId("claimcar3")
+        .setStyle("Secondary")
+    );
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -70,6 +84,9 @@ module.exports = {
     let wins2 = userdata.cars.filter(
       (car) => car.Name == "2018 BMW M4CS" && car.Wins
     );
+    let wins3 = userdata.cars.filter(
+      (car) => car.Name == "2017 Ford Fiesta ST" && car.Wins
+    );
     let winstext = "";
     if (wins[0]) {
       console.log(wins);
@@ -80,6 +97,10 @@ module.exports = {
     if (wins2[0]) {
       winstext2 = `Wins: ${wins2[0].Wins}`;
     }
+    let winstext3 = "";
+    if (wins3[0]) {
+      winstext3 = `Wins: ${wins3[0].Wins}`;
+    }
     let embed = new EmbedBuilder();
     embed.setTitle("Series Menu");
     embed.setFooter({ text: 'Prefix is "/"' });
@@ -89,6 +110,8 @@ module.exports = {
             Perfect Engineering <:porsche:931011550880338011> *Prestige 5* ${winstext}
 
             Pressure <:bmw:931011550054056007> *Prestige 3* ${winstext2}
+
+            Fiesta Familia <:ford:931012624152399902> *Prestige 2* ${winstext3}
 
             You only have **1 day** to complete a car series
         `);
@@ -107,6 +130,10 @@ module.exports = {
 
     let seriescomplfilt2 = userdata.cars.filter(
       (car) => car.Name == "2018 BMW M4CS"
+    );
+
+    let seriescomplfilt3 = userdata.cars.filter(
+      (car) => car.Name == "2017 Ford Fiesta ST"
     );
 
     if (
@@ -132,6 +159,20 @@ module.exports = {
           .setLabel("Claim 2016 BMW M4 GTS")
           .setEmoji("<:bmw:931011550054056007>")
           .setCustomId("claimcarfinal2")
+          .setStyle("Secondary")
+      );
+    }
+
+    if (
+      seriescomplfilt3[0] &&
+      seriescomplfilt3[0].Wins >= 50 &&
+      userdata.fiestafamiliacomplete !== true
+    ) {
+      row6.addComponents(
+        new ButtonBuilder()
+          .setLabel("Claim 2016 Ford Focus RS")
+          .setEmoji("<:ford:931012624152399902>")
+          .setCustomId("claimcarfinal3")
           .setStyle("Secondary")
       );
     }
@@ -167,7 +208,6 @@ module.exports = {
 
           Once you have 50 wins, come back and claim your Singer DLS
 
-          You will also have a chance to earn exclusive **DIAMOND PLATED PARTS** such as the <:part_txxecu:1113746120187846726> TXXECU!
                     `);
         embed.setThumbnail("https://i.ibb.co/Ttth621/carseries.png");
         embed
@@ -204,10 +244,9 @@ module.exports = {
         embed.setDescription(`
           Put some pressure on your opponents with the brand new 2018 BMW M4CS!
 
-          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 75 races with this car, you finish the series and earn the **2016 BMW M4 GTS**
+          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2016 BMW M4 GTS**
 
-          You will also have a chance to earn exclusive **DIAMOND PLATED PARTS** such as the <:part_txxbrakes:1113959753119440956> TXXBrakes!
-  
+          Once you have 50 wins, come back and claim your 2016 BMW M4 GTS
                     `);
         embed.setThumbnail("https://i.ibb.co/Ttth621/carseries.png");
         embed
@@ -217,6 +256,26 @@ module.exports = {
         await interaction.editReply({
           embeds: [embed],
           components: [row2, row4],
+        });
+      }
+      else if (value === "fiesta" && userdata.prestige >= 2) {
+        embed.setTitle("Fiesta Familia");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`
+          A member of our family, the fiesta is going out of production, so its time for one last ride with the 2017 Ford Fiesta ST!
+
+          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2016 Ford Focus RS**
+
+          Once you have 50 wins, come back and claim your 2016 Ford Focus RS
+                    `);
+        embed.setThumbnail("https://i.ibb.co/Ttth621/carseries.png");
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/zxpMkqQ/series-fiesta.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2, row6],
         });
       }
     });
@@ -247,11 +306,13 @@ module.exports = {
           Handling: carobj.Handling,
           Parts: [],
           Emote: carobj.Emote,
-          Livery: carobj.Image,
+          Image: carobj.Image,
           Miles: 0,
           Drift: 0,
           Loan: true,
           WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
           Wins: 0,
         };
 
@@ -287,11 +348,13 @@ module.exports = {
           Handling: carobj.Handling,
           Parts: [],
           Emote: carobj.Emote,
-          Livery: carobj.Image,
+          Image: carobj.Image,
           Miles: 0,
           Drift: 0,
           Loan: true,
           WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
           Wins: 0,
         };
 
@@ -302,7 +365,53 @@ module.exports = {
         cooldowndata.save();
 
         i.update("✅");
-      } else if (
+      }
+      
+     
+      else if (i.customId == "claimcar3") {
+        let series1cool = cooldowndata.series1;
+        userdata = await User.findOne({ id: interaction.user.id });
+        let eng = userdata.fiestafamilia;
+        let cooldown = 86400000;
+        if (eng == true) return i.update("You already started this series!");
+        if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
+          let time = ms(cooldown - (Date.now() - series1cool));
+          let timeEmbed = new EmbedBuilder()
+            .setColor(colors.blue)
+            .setDescription(
+              `You've already started a series\n\nStart one again in ${time}.`
+            );
+          await i.update({ embeds: [timeEmbed], fetchReply: true });
+        }
+        let carobj = cardb.Cars["2017 ford fiesta st"];
+
+        let newobj = {
+          ID: carobj.alias,
+          Name: carobj.Name,
+          Speed: carobj.Speed,
+          Acceleration: carobj["0-60"],
+          Handling: carobj.Handling,
+          Parts: [],
+          Emote: carobj.Emote,
+          Image: carobj.Image,
+          Miles: 0,
+          Drift: 0,
+          Loan: true,
+          WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
+          Wins: 0,
+        };
+
+        cooldowndata.series1 = Date.now();
+        userdata.fiestafamilia = true;
+        userdata.cars.push(newobj);
+        userdata.save();
+        cooldowndata.save();
+
+        i.update("✅");
+      } 
+      else if (
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
       ) {
@@ -318,13 +427,15 @@ module.exports = {
           Handling: carobj.Handling,
           Parts: [],
           Emote: carobj.Emote,
-          Livery: carobj.Image,
+          Image: carobj.Image,
           Miles: 0,
           Drift: 0,
           Loan: true,
           WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
+          Wins: 0,
         };
-
         userdata.perfectengineering = true;
         userdata.perfectengineeringcomplete = true;
         userdata.cars.push(newobj);
@@ -347,15 +458,51 @@ module.exports = {
           Handling: carobj.Handling,
           Parts: [],
           Emote: carobj.Emote,
-          Livery: carobj.Image,
+          Image: carobj.Image,
           Miles: 0,
           Drift: 0,
           Loan: true,
           WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
+          Wins: 0,
         };
 
         userdata.pressure = true;
         userdata.pressurecomplete = true;
+        userdata.cars.push(newobj);
+        userdata.save();
+
+        i.update("✅");
+      }
+      else if (
+        i.customId == "claimcarfinal3" &&
+        userdata.fiestafamiliacomplete !== true
+      ) {
+        let carobj = cardb.Cars["2016 ford focus rs"];
+        userdata = await User.findOne({ id: interaction.user.id });
+        let eng = userdata.fiestafamiliacomplete;
+        if (eng == true) return i.update("You already finished this series!");
+        let newobj = {
+          ID: carobj.alias,
+          Name: carobj.Name,
+          Speed: carobj.Speed,
+          Acceleration: carobj["0-60"],
+          Handling: carobj.Handling,
+          Parts: [],
+          Emote: carobj.Emote,
+          Image: carobj.Image,
+          Miles: 0,
+          Drift: 0,
+          Loan: true,
+          WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
+          Wins: 0,
+        };
+
+        userdata.fiestafamilia = true;
+        userdata.fiestafamiliacomplete = true;
         userdata.cars.push(newobj);
         userdata.save();
 

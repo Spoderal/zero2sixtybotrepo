@@ -22,15 +22,15 @@ module.exports = {
         {
           name: invisibleSpace,
           value: `
-          <:crate_common:1103921687818407936> Common Import Crate: 50 ${key1emote} Keys
-          <:crate_rare:1103921686765637703> Rare Import Crate : 25 ${key2emote} Keys
-          <:crate_esxotic:1103921685972922449> Exotic Import Crate : 20 ${key3emote} Keys
+          <:crate_common:1103921687818407936> Common Import Crate: 50 ${key1emote} Keys *Car Cost: 25 Common Credits*
+          <:crate_rare:1103921686765637703> Rare Import Crate : 25 ${key2emote} Keys *Car Cost: 25 Rare Credits*
+          <:crate_esxotic:1103921685972922449> Exotic Import Crate : 20 ${key3emote} Keys *Car Cost: 25 Exotic Credits*
           <:crate_limited:1103921683968032829> Sun Vs Snow Import Crate : 100 ${key5emote} Keys
           `,
         },
       ])
       .setDescription(
-        "Exclusive cars that you can only find in crates!\n\nUse `/unbox` to buy them!"
+        "Exclusive cars that you can only find in crates!\n\nUse `/unbox` to buy them! Or, if you get too many you don't like, use /sell to get import credits to buy a car you DO want"
       )
       .setThumbnail("https://i.ibb.co/MBGccn7/kayla.png")
       .setColor(colors.blue);

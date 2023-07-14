@@ -19,7 +19,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "6/7/2023",
+            label: "7/14/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -48,7 +48,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 6/7/2023\n
+            ⚙️ Latest Patch 7/14/2023\n
             ☀️ Summer Update 5/31/2023\n
             🏎️ Race Update 7/11/2023\n
         `);
@@ -75,26 +75,19 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• 2 New events! Check /events\n
-                • Fixed a lot of bugs!\n
-                • New feature, Car series, check /series and click help for more information!\n
-                • Bounty resets every 24 hours\n
-                • Bounty earnings increased for cops
-                • New items: Brief Case\n
-                • Stats now shows your livery\n
-                • Livery overhaul, all liveries deleted, but you can now utilize liveries in more places\n
-                • New car series\n
-                • New leaderboards for prestige, and pvp\n
-                • /carlist will show you all cars on the bot\n
-                • Tags, add tags to cars you want to set apart from the others\n
-                • Filter garage by favorites\n
-                • 2 New houses\n
-                • New warehouses
-                • New cars, check /dealer
-                • New parts: T5Weight, TXXBrakes
+                `• New car series\n
+                 • New fuse parts in crates\n
+                 • Import cars are buyable with credits obtained from selling them\n
+                 • New business upgrades\n
+                 • Business leveling\n
+                 • /uninstall, /install and /fuseparts for fuse parts\n
+                 • Weight fuse parts for reducing or increasing car weight\n
+                 • Crates fixed\n
+                 • Car series is raceable\n
+                 • Races give miles
                 `
               )
-              .setFooter({ text: "6/7/2023" })
+              .setFooter({ text: "7/14/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

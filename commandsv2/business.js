@@ -216,13 +216,16 @@ module.exports = {
                   upg.Cost
                 )}`
               );
-              upgraderow.addComponents(
-                new ButtonBuilder()
-                  .setCustomId(`${upg.ID}`)
-                  .setEmoji(`${upg.Emote}`)
-                  .setLabel(`${upg.Name}`)
-                  .setStyle("Secondary")
-              );
+              if(upgraded.length < 5){
+
+                upgraderow.addComponents(
+                  new ButtonBuilder()
+                    .setCustomId(`${upg.ID}`)
+                    .setEmoji(`${upg.Emote}`)
+                    .setLabel(`${upg.Name}`)
+                    .setStyle("Secondary")
+                );
+              }
             }
           }
         }
@@ -316,11 +319,20 @@ module.exports = {
             userdata.business.TipsCollected += tip;
             interaction.channel.send(`You earned a tip of $${tip}!`);
           }
-
           userdata.cash += income;
           userdata.business.Earned += income;
           userdata.business.Served += 1;
           userdata.business.CustomerD -= 1;
+          let served = userdata.business.Served
+          let level = userdata.business.Level
+          let otherlevel = level * 10
+
+          if(served > otherlevel){
+            userdata.business.Level += 1
+            interaction.channel.send("Business level up!")
+          }
+
+
           if (userdata.business.CustomerD == 0) {
             cooldowns.business = Date.now();
           }

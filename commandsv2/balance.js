@@ -63,6 +63,9 @@ module.exports = {
       evkeys,
       bounty,
       seriestickets,
+      commonCredits,
+      rareCredits,
+      exoticCredits,
       barnmaps,
     } = profile;
 
@@ -80,7 +83,7 @@ module.exports = {
   
             ${emotes.bounty} Bounty: ${bounty}
 
-            ${emotes.barnMapCommon} Barn Maps ${barnmaps}
+            ${emotes.barnMapCommon} Barn Maps: ${barnmaps}
 
             ${emotes.wheelSpin} Wheel spins: ${wheelspins}  
             
@@ -88,7 +91,7 @@ module.exports = {
             
             ${emotes.blueprints} Blueprints: ${blueprints}
 
-            ${emotes.seriestickets} Series Tickets ${seriestickets}
+            ${emotes.seriestickets} Series Tickets: ${seriestickets}
             `
           )
           .setColor(colors.blue)
@@ -98,10 +101,11 @@ module.exports = {
             {
               name: "Keys",
               value: `
-              ${emotes.commonKey} Common: ${ckeys}
-              ${emotes.rareKey} Rare: ${rkeys}
-              ${emotes.exoticKey} Exotic: ${ekeys}
+              ${emotes.commonKey} Common: ${ckeys} *Credits: ${commonCredits}*
+              ${emotes.rareKey} Rare: ${rkeys} *Credits: ${rareCredits}*
+              ${emotes.exoticKey} Exotic: ${ekeys} *Credits: ${exoticCredits}*
               ${emotes.dirftKey} Event Keys ${evkeys}
+              
               <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
               `,
               inline: true,

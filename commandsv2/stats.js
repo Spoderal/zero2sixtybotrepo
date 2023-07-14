@@ -52,7 +52,7 @@ module.exports = {
     let weightemote = emotes.weight;
     let ucars = userdata.cars || [];
     let carindb = ucars.filter((c) => c.ID == item);
-    if (!list[item.toLowerCase()] && !carindb[0])
+    if (!list[item.toLowerCase()] && !carindb[0] && !itemdb[item.toLowerCase()])
       return interaction.reply(
         `I couldn't find that car! If you're checking default stats, put the full name, and if you want your stats, put the ID.`
       );

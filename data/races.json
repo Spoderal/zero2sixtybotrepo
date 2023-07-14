@@ -14,5 +14,9 @@
   "crosscountry": {
     "Name": "Cross Country",
     "Reward": 45
+  },
+  "carseries": {
+    "Name": "Car Series",
+    "Reward": 20
   }
 }

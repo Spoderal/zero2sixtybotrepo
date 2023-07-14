@@ -531,6 +531,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
+  fiestafamilia: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  fiestafamiliacomplete: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   pressure: {
     type: Boolean,
     required: false,
@@ -567,6 +577,21 @@ const Profile = new mongoose.Schema({
     default: 10,
   },
   barnmaps: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  commonCredits: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  rareCredits: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  exoticCredits: {
     type: Number,
     required: false,
     default: 0,

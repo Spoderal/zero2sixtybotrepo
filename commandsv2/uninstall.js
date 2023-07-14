@@ -8,17 +8,17 @@ const partdb = require("../data/partsdb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("install")
-    .setDescription("Install parts onto your upgrades")
+    .setName("uninstall")
+    .setDescription("Take off fuse parts from your upgrades")
     .addStringOption((option) =>
       option
-        .setDescription("The car to install the part on")
+        .setDescription("The car to uninstall the part from")
         .setName("car")
         .setRequired(true)
     )
     .addStringOption((option) =>
       option
-        .setDescription("The part to install")
+        .setDescription("The part to uninstall")
         .setName("part")
         .setRequired(true)
     ),
@@ -57,29 +57,27 @@ module.exports = {
     let partoncar = selected[0][partindb.Type.toLowerCase()];
 
     let partoncardb = partdb.Parts[partoncar];
-    
-    if(partoncardb) return interaction.reply("This car part already has a fuse slot in use!")
 
     if (partindb.Power) {
-      selected[0].Speed += partindb.Power;
+      selected[0].Speed -= partindb.Power;
     }
     if (partindb.Handling) {
-      selected[0].Handling += partindb.Handling;
+      selected[0].Handling -= partindb.Handling;
     }
     if (partindb.Weight) {
-      selected[0].WeightStat += partindb.Weight;
-    }
-    if (partindb.WeightMinus) {
-      selected[0].WeightStat -= partindb.WeightMinus;
-    }
+        selected[0].WeightStat -= partindb.Weight;
+      }
+      if (partindb.WeightMinus) {
+        selected[0].WeightStat += partindb.WeightMinus;
+      }
     if (partindb.Acceleration) {
-      selected[0].Acceleration -= partindb.Acceleration;
+      selected[0].Acceleration += partindb.Acceleration;
     }
     if (partindb.HandlingMinus) {
-      selected[0].Handling -= partindb.HandlingMinus;
+      selected[0].Handling += partindb.HandlingMinus;
     }
 
-    selected[0][partindb.Type.toLowerCase()] = partindb.Name.toLowerCase();
+    selected[0][partindb.Type.toLowerCase()] = null
 
     await User.findOneAndUpdate(
       {
@@ -103,7 +101,7 @@ module.exports = {
     userdata.save();
 
     interaction.reply(
-      `Installed a ${partindb.Emote} ${partindb.Name} on your ${selected[0].Name}`
+      `Uninstalled ${partindb.Emote} ${partindb.Name} from your ${selected[0].Name}`
     );
   },
 };

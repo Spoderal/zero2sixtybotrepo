@@ -64,12 +64,12 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/N1g03nQ/part-t1exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": "2"
     },
-    "loan exhaust": {
+    "loan exhaustupgrade": {
       "Name": "Loan Exhaust",
       "AddedSpeed": 5,
       "AddedSixty": 2,
@@ -77,7 +77,7 @@
       "Price": 0,
       "Emote": "<:part_t1exhaust:1101027462932086855>",
       "Tier": "1",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/N1g03nQ/part-t1exhaust.png",
       "Loan": true
     },
@@ -93,7 +93,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/C1TD87L/part-t2exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 2
@@ -110,7 +110,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/n3HkcbX/part-t3exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5
@@ -127,7 +127,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/QPC2rQp/part-t4exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5,
@@ -145,7 +145,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/1QnwxT1/part-t5exhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 5,
@@ -164,7 +164,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "Image": "https://i.ibb.co/j5fbrD3/part-txexhaust.png",
       "DecreasedSpeed": "0",
       "AddHandling": 10,
@@ -534,26 +534,7 @@
       "DecreasedSpeed": "0",
       "AddedBoost": 5
     },
-    "turbo": {
-      "Name": "Turbo",
-      "AddedSpeed": 15,
-      "AddedSnow": 0,
-      "AddedSixty": 0,
-      "sellprice": 7500,
-      "Price": 15000,
-      "Emote": "<:t1turbo:989758553340383272>",
-      "Tier": "1",
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "DecreasedSixty": "0",
-      "Type": "turbo",
-      "DecreasedHandling": 10,
-      "DecreasedSpeed": "0",
-      "DecreaseHandling": 4,
-      "PSI": 15,
-      "MaxPSI": 20,
-      "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
-    },
+
     "loan turbo": {
       "Name": "Loan Turbo",
       "AddedSpeed": 5,
@@ -568,7 +549,7 @@
     },
     "dualturbo": {
       "Name": "DualTurbo",
-      "AddedSpeed": 25,
+      "Power": 25,
       "AddedSnow": 0,
       "AddedSixty": 0,
       "sellprice": 9000,
@@ -578,17 +559,18 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "turbo",
+      "Type": "turboupgrade",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": 50,
+      "HandlingMinus": 50,
       "PSI": 24,
       "MaxPSI": 30,
+      "Fuse":true,
       "Image": "https://i.ibb.co/Qb9Hc0N/t2turbo.png"
     },
     "supercharger": {
       "Name": "SuperCharger",
-      "AddedSpeed": 10,
-      "AddedSixty": 1,
+      "Power": 10,
+      "Acceleration": 1,
       "sellprice": 11250,
       "Price": 30000,
       "AddedSnow": 0,
@@ -597,11 +579,12 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "turbo",
+      "Type": "turboupgrade",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": 100,
+      "HandlingMinus": 100,
       "PSI": 17,
       "MaxPSI": 40,
+      "Fuse":true,
       "Image": "https://i.ibb.co/JH6CzMv/t3turbo.png"
     },
     "t4turbo": {
@@ -1168,7 +1151,7 @@
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "exhaust",
+      "Type": "exhaustupgrade",
       "DecreasedSpeed": "0"
     },
     "j1tires": {
@@ -1822,23 +1805,7 @@
       "DecreaseHandling": "0",
       "Image": "https://i.ibb.co/88DJqtL/txturbo.png"
     },
-    "bm1exhaust": {
-      "Name": "BM1Exhaust",
-      "AddedSpeed": 5,
-      "AddedSnow": 0,
-      "AddedSixty": 0.5,
-      "sellprice": 0,
-      "Price": 8,
-      "Emote": "<:exhaustbm1:979830768836681738>",
-      "Tier": "BM1",
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "DecreasedSixty": "0",
-      "Type": "exhaust",
-      "DecreasedSpeed": "0",
-      "DecreaseHandling": "0",
-      "Image": "https://i.ibb.co/SyCkPnt/t5exhaust.png"
-    },
+
 
     "bm1driftsuspension": {
       "Name": "BM1DriftSuspension",
@@ -2351,9 +2318,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 100,
+      "WeightMinus": 100,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t2weightreduction": {
@@ -2369,9 +2337,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 200,
+      "WeightMinus": 200,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t3weightreduction": {
@@ -2387,9 +2356,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 300,
+      "WeightMinus": 300,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t4weightreduction": {
@@ -2405,9 +2375,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 400,
+      "WeightMinus": 400,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t5weightreduction": {
@@ -2423,9 +2394,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
       "DecreasedSpeed": "0",
-      "DecreaseWeight": 500,
+      "WeightMinus": 500,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t1weight": {
@@ -2441,9 +2413,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
+      "Weight": 100,
       "DecreasedSpeed": "0",
-      "AddWeight": 100,
       "Image": "https://i.ibb.co/vxkzCRD/part-t1bodykit.png"
     },
     "t2weight": {
@@ -2459,9 +2432,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
-      "DecreasedSpeed": "0",
-      "AddWeight": 200,
+   
+      "Type": "weightupgrade",
+      "Fuse":true,
+      "Weight": 200,
       "Image": "https://i.ibb.co/xFY4CkY/part-t2bodykit.png"
     },
     "t3weight": {
@@ -2477,9 +2451,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
-      "DecreasedSpeed": "0",
-      "AddWeight": 300,
+      
+      "Type": "weightupgrade",
+      "Fuse":true,
+      "Weight": 300,
       "Image": "https://i.ibb.co/6WtH896/part-t3bodykit.png"
     },
     "t4weight": {
@@ -2495,9 +2470,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
-      "DecreasedSpeed": "0",
-      "AddWeight": 400,
+     
+      "Type": "weightupgrade",
+      "Fuse":true,
+      "Weight": 400,
       "Image": "https://i.ibb.co/KLJK1Gz/part-t4bodykit.png"
     },
     "t5weight": {
@@ -2513,9 +2489,10 @@
       "AddedDrift": 0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
-      "Type": "weight reduction",
+      "Type": "weightupgrade",
+      "Fuse":true,
       "DecreasedSpeed": "0",
-      "AddWeight": 500,
+      "Weight": 500,
       "Image": "https://i.ibb.co/Rp5K7N9/part-t5bodykit.png"
     },
 

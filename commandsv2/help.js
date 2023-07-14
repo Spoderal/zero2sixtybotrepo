@@ -152,6 +152,9 @@ module.exports = {
             **houses - View listings for houses, and warehouses**\n
             **ids select - Select a car to a custom ID**\n
             **ids deselect - Deselect an ID**\n
+            **install - Install fuse parts onto your car that'll give it more variety**\n
+            **uninstall - Uninstall fuse parts from your car, make sure to put the fuse part name, like dualturbo**\n
+            **fuseparts - View the fuse parts on your car**\n
             **imports - View exclusive car import crates**\n
             **invite - Invite the bot to your server**\n
             **itemshop - View the daily rotational item shop**\n
