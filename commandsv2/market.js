@@ -231,10 +231,12 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
 
-      let submitchannel =  interaction.client.channels.cache.get("931004191428706397");
+      let submitchannel =
+        interaction.client.channels.cache.get("931004191428706397");
 
-        submitchannel.send({ content: `${interaction.user.id} listed ${item.toLowerCase()}` });
-
+      submitchannel.send({
+        content: `${interaction.user.id} listed ${item.toLowerCase()}`,
+      });
     } else if (subcommand == "view") {
       if (interaction.options.getString("id")) {
         let findid = interaction.options.getString("id");
