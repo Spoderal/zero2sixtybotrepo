@@ -245,7 +245,7 @@ module.exports = {
               if (item.Number > crew2.Rank3) {
                 return;
               }
-              
+
               console.log(item);
               if (item.Item.endsWith("Cash")) {
                 let amount = item.Item.split(" ")[0];
@@ -326,10 +326,9 @@ module.exports = {
                   Miles: 0,
                   WeightStat: carindb.Weight,
                   Gas: 10,
-                  MaxGas: 10
+                  MaxGas: 10,
                 };
                 userdata.cars.push(carobj);
-
               }
               userdata.crewseason3 += 1;
               userdata.save();
