@@ -245,18 +245,17 @@ module.exports = {
               if (item.Number > crew2.Rank3) {
                 return;
               }
+              
               console.log(item);
               if (item.Item.endsWith("Cash")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.cash += Number(amount);
                 userdata.crewseason2 += 1;
                 console.log("done");
-                userdata.save();
               } else if (item.Item.endsWith("Notoriety")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.notofall += Number(amount);
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (
                 item.Item.endsWith("Legendary Barn Maps") ||
                 item.Item.endsWith("Legendary Barn Map")
@@ -265,12 +264,10 @@ module.exports = {
                 userdata.lmaps += Number(amount);
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (item.Item.endsWith("Bank Increase")) {
                 userdata.items.push("bank increase");
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (
                 item.Item.endsWith("Super wheelspin") ||
                 item.Item.endsWith("Super wheelspins")
@@ -279,7 +276,6 @@ module.exports = {
                 userdata.swheelspins += Number(amount);
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (item.Item.endsWith("Common Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.ckeys += Number(amount);
@@ -301,24 +297,20 @@ module.exports = {
                 userdata.garagelimit += Number(amount);
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (item.Item.endsWith("Rare Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.rkeys += Number(amount);
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (item.Item.endsWith("Exotic Keys")) {
                 let amount = item.Item.split(" ")[0];
                 userdata.ekeys += Number(amount);
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (partdb.Parts[item.Item.toLowerCase()]) {
                 userdata.parts.push(item.Item.toLowerCase());
 
                 userdata.crewseason2 += 1;
-                userdata.save();
               } else if (cardb.Cars[item.Item.toLowerCase()]) {
                 let cartogive = cardb.Cars[item.Item.toLowerCase()];
                 let carindb = cartogive;
@@ -332,12 +324,15 @@ module.exports = {
                   Emote: carindb.Emote,
                   Livery: carindb.Image,
                   Miles: 0,
+                  WeightStat: carindb.Weight,
+                  Gas: 10,
+                  MaxGas: 10
                 };
                 userdata.cars.push(carobj);
 
-                userdata.crewseason3 += 1;
-                userdata.save();
               }
+              userdata.crewseason3 += 1;
+              userdata.save();
 
               row = new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
