@@ -3,6 +3,7 @@ const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const { updateCrew } = require("./crews/updateCrew");
 const Cooldowns = require("../schema/cooldowns");
 const Globals = require("../schema/global-schema");
+const User = require("../schema/profile-schema");
 
 const {
   blacklistInteractionCheck,
@@ -34,9 +35,9 @@ module.exports = {
         // Command
         const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
 
-        let cooldowndata =
-          (await Cooldowns.findOne({ id: interaction.user.id })) ||
-          new Cooldowns({ id: interaction.user.id });
+        let cooldowndata =  (await Cooldowns.findOne({ id: interaction.user.id })) || new Cooldowns({ id: interaction.user.id });
+        let userdata =  await User.findOne({ id: interaction.user.id })
+
         try {
           let timeout = 3000;
           let commandran = cooldowndata.command_ran;
@@ -58,6 +59,17 @@ module.exports = {
             });
           } else {
             await updateCrew(interaction);
+            if(userdata){
+              if(Number.isInteger(userdata.cash) == false){
+                let bal1 = userdata.cash
+                console.log(bal1)
+                let bal = Math.trunc(bal1)
+                console.log("bal fixed")
+                console.log(bal)
+                userdata.cash = bal
+                userdata.save()
+              }
+            }
             await command.execute(interaction);
           }
         } catch (err) {
