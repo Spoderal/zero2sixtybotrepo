@@ -71,17 +71,16 @@ module.exports = {
         )
     )
     .addSubcommand((option) =>
-    option
-      .setName("delist")
-      .setDescription("Delist an item from the market")
-      .addStringOption((option) =>
-        option
-          .setName("id")
-          .setDescription("Item id to delist")
-          .setRequired(true)
-      )
-  )
-    ,
+      option
+        .setName("delist")
+        .setDescription("Delist an item from the market")
+        .addStringOption((option) =>
+          option
+            .setName("id")
+            .setDescription("Item id to delist")
+            .setRequired(true)
+        )
+    ),
   async execute(interaction) {
     let subcommand = interaction.options.getSubcommand();
     let global = await Global.findOne();
@@ -110,7 +109,8 @@ module.exports = {
         );
       }
 
-      if(amount < 1) return interaction.reply("You need to list more than 1 item")
+      if (amount < 1)
+        return interaction.reply("You need to list more than 1 item");
 
       if (cardb.Cars[item.toLowerCase()]) {
         let filteredcar = userdata.cars.filter(
@@ -244,9 +244,6 @@ module.exports = {
         .setDescription(`${obj.item}\nYou'll be notified if this item sells!`);
 
       interaction.reply({ embeds: [embed] });
-
-      
-
     } else if (subcommand == "view") {
       if (interaction.options.getString("id")) {
         let findid = interaction.options.getString("id");
@@ -326,7 +323,7 @@ module.exports = {
               name: `Gearbox`,
               value: `${gearbox}`,
               inline: true,
-            }
+            },
           ]);
 
         interaction.reply({ embeds: [embed] });
@@ -495,14 +492,19 @@ module.exports = {
       global.update();
       global.save();
 
-      let submitchannel =  interaction.client.channels.cache.get("931004191428706397");
+      let submitchannel =
+        interaction.client.channels.cache.get("931004191428706397");
 
-        submitchannel.send({ content: `${interaction.user.id} bought ${itemtobuy.item.toLowerCase()} for ${itemtobuy.price}` });
-    }
-    else if (subcommand == "delist") {
+      submitchannel.send({
+        content: `${
+          interaction.user.id
+        } bought ${itemtobuy.item.toLowerCase()} for ${itemtobuy.price}`,
+      });
+    } else if (subcommand == "delist") {
       let gmarket = global.newmarket;
 
-      if (!gmarket)  return interaction.reply("There isn't anything listed at the moment!");
+      if (!gmarket)
+        return interaction.reply("There isn't anything listed at the moment!");
 
       let cash = userdata.cash;
 
@@ -510,14 +512,14 @@ module.exports = {
 
       let itemtobuy = gmarket.filter((item) => item.id == idtobuy);
 
-      if (!itemtobuy[0])  return interaction.reply("Thats not an item on the market!");
+      if (!itemtobuy[0])
+        return interaction.reply("Thats not an item on the market!");
 
       itemtobuy = itemtobuy[0];
 
-      if(itemtobuy.user.id !== interaction.user.id) return interaction.reply("This isn't your item!")
+      if (itemtobuy.user.id !== interaction.user.id)
+        return interaction.reply("This isn't your item!");
 
-
-  
       if (itemtobuy.type == "cars") {
         userdata.cars.push(itemtobuy.carobj);
       } else if (itemtobuy.type == "items") {
@@ -530,7 +532,7 @@ module.exports = {
         userdata[itemtobuy.nameindb] += Number(itemtobuy.amount);
       }
       console.log(itemtobuy);
-    
+
       userdata.save();
 
       global.update();
