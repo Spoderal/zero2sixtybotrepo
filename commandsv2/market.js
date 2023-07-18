@@ -69,7 +69,19 @@ module.exports = {
             .setDescription("Amount of the item")
             .setRequired(false)
         )
-    ),
+    )
+    .addSubcommand((option) =>
+    option
+      .setName("delist")
+      .setDescription("Delist an item from the market")
+      .addStringOption((option) =>
+        option
+          .setName("id")
+          .setDescription("Item id to delist")
+          .setRequired(true)
+      )
+  )
+    ,
   async execute(interaction) {
     let subcommand = interaction.options.getSubcommand();
     let global = await Global.findOne();
@@ -98,6 +110,8 @@ module.exports = {
         );
       }
 
+      if(amount < 1) return interaction.reply("You need to list more than 1 item")
+
       if (cardb.Cars[item.toLowerCase()]) {
         let filteredcar = userdata.cars.filter(
           (car) =>
@@ -106,7 +120,7 @@ module.exports = {
         );
         if (!filteredcar[0])
           return interaction.reply("You don't have this car!");
-        let sellprice = cardb.Cars[item.toLowerCase()].Price * 0.65;
+        let sellprice = cardb.Cars[item.toLowerCase()].Price * 0.75;
         let sellpricemax = sellprice * 10;
         if (sellprice > price)
           return interaction.reply(
@@ -231,12 +245,8 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
 
-      let submitchannel =
-        interaction.client.channels.cache.get("931004191428706397");
+      
 
-      submitchannel.send({
-        content: `${interaction.user.id} listed ${item.toLowerCase()}`,
-      });
     } else if (subcommand == "view") {
       if (interaction.options.getString("id")) {
         let findid = interaction.options.getString("id");
@@ -248,32 +258,19 @@ module.exports = {
         if (!carob) return interaction.reply("This id isn't a car!");
         let speed = `${carob.Speed}`;
 
-        let exhaust = carob.Exhaust || "Stock Exhaust";
-        let intake = carob.Intake || "Stock Intake";
-        let suspension = carob.Suspension || "Stock Suspension";
-        let tires = carob.Tires || "Stock Tires";
-        let engine = carob.Engine || "Stock Engine";
-        let clutch = carob.Clutch || "Stock Clutch";
-        let ecu = carob.ECU || "Stock ECU";
-        let turbo = carob.Turbo || "Stock Turbo";
-        let nitro = carob.Nitro || "Stock Nitro";
-        let intercooler = carob.Intercooler || "Stock Intercooler";
-        let gearbox = carob.Gearbox || "Stock Gearbox";
-        let brakes = carob.Brakes || "Stock Brakes";
-        let exhaustemote = partdb.Parts[exhaust.toLowerCase()]?.Emote || "🔵";
-        let intakeemote = partdb.Parts[intake.toLowerCase()]?.Emote || "🔵";
-        let suspensionemote =
-          partdb.Parts[suspension.toLowerCase()]?.Emote || "🔵";
-        let tiresemote = partdb.Parts[tires.toLowerCase()]?.Emote || "🔵";
-        let clutchemote = partdb.Parts[clutch.toLowerCase()]?.Emote || "🔵";
-        let ecuemote = partdb.Parts[ecu.toLowerCase()]?.Emote || "🔵";
-        let engineemote = partdb.Parts[engine.toLowerCase()]?.Emote || "🔵";
-        let turboemote = partdb.Parts[turbo.toLowerCase()]?.Emote || "🔵";
-        let nitroemote = partdb.Parts[nitro.toLowerCase()]?.Emote || "🔵";
-        let intercooleremote =
-          partdb.Parts[intercooler.toLowerCase()]?.Emote || "🔵";
-        let gearboxemote = partdb.Parts[gearbox.toLowerCase()]?.Emote || "🔵";
-        let brakesemote = partdb.Parts[brakes.toLowerCase()]?.Emote || "🔵";
+        let exhaust = carob.exhaust || "Stock Exhaust";
+        let intake = carob.intake || "Stock Intake";
+        let suspension = carob.suspension || "stock suspension";
+        let tires = carob.tires || "stock tires";
+        let engine = carob.engine || "stock engine";
+        let clutch = carob.clutch || "stock clutch";
+        let ecu = carob.ecu || "stock ecu";
+        let turbo = carob.turbo || "stock turbo";
+        let nitro = carob.nitro || "stock nitro";
+        let intercooler = carob.intercooler || "stock intercooler";
+        let gearbox = carob.gearbox || "stock gearbox";
+        let brakes = carob.brakes || "stock brakes";
+
         let embed = new EmbedBuilder()
           .setTitle(`Stats for ${carob.Name}`)
           .setDescription(`Power: ${speed}\n0-60: ${carob.Acceleration}s`)
@@ -282,64 +279,54 @@ module.exports = {
           .addFields([
             {
               name: `Exhaust`,
-              value: `${exhaustemote} ${exhaust.split(" ")[0]}`,
+              value: `${exhaust}`,
               inline: true,
             },
             {
               name: `Intake`,
-              value: `${intakeemote} ${intake.split(" ")[0]}`,
+              value: `${intake}`,
               inline: true,
             },
             {
               name: `Tires`,
-              value: `${tiresemote} ${tires.split(" ")[0]}`,
+              value: `${tires}`,
               inline: true,
             },
             {
               name: `Turbo`,
-              value: `${turboemote} ${turbo.split(" ")[0]}`,
+              value: `${turbo}`,
               inline: true,
             },
             {
               name: `Suspension`,
-              value: `${suspensionemote} ${suspension.split(" ")[0]}`,
+              value: `${suspension}`,
               inline: true,
             },
             {
               name: `Clutch`,
-              value: `${clutchemote} ${clutch.split(" ")[0]}`,
+              value: `${clutch}`,
               inline: true,
             },
             {
               name: `ECU`,
-              value: `${ecuemote} ${ecu.split(" ")[0]}`,
+              value: ` ${ecu}`,
               inline: true,
             },
             {
               name: `Engine`,
-              value: `${engineemote} ${engine.split(" ")[0]}`,
-              inline: true,
-            },
-            {
-              name: `Nitro`,
-              value: `${nitroemote} ${nitro.split(" ")[0]}`,
+              value: `${engine}`,
               inline: true,
             },
             {
               name: `Intercooler`,
-              value: `${intercooleremote} ${intercooler.split(" ")[0]}`,
+              value: `${intercooler}`,
               inline: true,
             },
             {
               name: `Gearbox`,
-              value: `${gearboxemote} ${gearbox.split(" ")[0]}`,
+              value: `${gearbox}`,
               inline: true,
-            },
-            {
-              name: `Brakes`,
-              value: `${brakesemote} ${brakes.split(" ")[0]}`,
-              inline: true,
-            },
+            }
           ]);
 
         interaction.reply({ embeds: [embed] });
@@ -504,6 +491,50 @@ module.exports = {
       }
       global.update();
       interaction.reply(`Successfully bought!`);
+      global.newmarket.pull(itemtobuy);
+      global.update();
+      global.save();
+
+      let submitchannel =  interaction.client.channels.cache.get("931004191428706397");
+
+        submitchannel.send({ content: `${interaction.user.id} bought ${itemtobuy.item.toLowerCase()} for ${itemtobuy.price}` });
+    }
+    else if (subcommand == "delist") {
+      let gmarket = global.newmarket;
+
+      if (!gmarket)  return interaction.reply("There isn't anything listed at the moment!");
+
+      let cash = userdata.cash;
+
+      let idtobuy = interaction.options.getString("id");
+
+      let itemtobuy = gmarket.filter((item) => item.id == idtobuy);
+
+      if (!itemtobuy[0])  return interaction.reply("Thats not an item on the market!");
+
+      itemtobuy = itemtobuy[0];
+
+      if(itemtobuy.user.id !== interaction.user.id) return interaction.reply("This isn't your item!")
+
+
+  
+      if (itemtobuy.type == "cars") {
+        userdata.cars.push(itemtobuy.carobj);
+      } else if (itemtobuy.type == "items") {
+        for (let i = 0; i < itemtobuy.amount; i++)
+          userdata.items.push(itemtobuy.item);
+      } else if (itemtobuy.type == "parts") {
+        for (let i = 0; i < itemtobuy.amount; i++)
+          userdata.parts.push(itemtobuy.item);
+      } else if (itemtobuy.type == "currencies") {
+        userdata[itemtobuy.nameindb] += Number(itemtobuy.amount);
+      }
+      console.log(itemtobuy);
+    
+      userdata.save();
+
+      global.update();
+      interaction.reply(`Successfully delisted!`);
       global.newmarket.pull(itemtobuy);
       global.update();
       global.save();
