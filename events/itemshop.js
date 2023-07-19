@@ -108,9 +108,19 @@ async function updateItemShop() {
           let randominc = lodash.sample(randomupdown);
           if (randomgas == `up`) {
             global.gas += randominc;
+            global.update();
+
           } else if (randomgas == `down`) {
             global.gas -= randominc;
+            global.update();
+
           }
+
+          if(global.gas < 1){
+            global.gas = 6
+            global.update()
+          }
+
           global.update();
           global.save();
         } catch (err) {
