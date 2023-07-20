@@ -36,7 +36,7 @@
         "Name": "Small Sign",
         "Emote": "🪧",
         "Description": "Show the name of your store on the sign in the front, gain +2 customers per day",
-        "Customer": 2,
+        "Customers": 2,
         "Level": 2,
         "Cost": 1500
       },
@@ -54,11 +54,12 @@
         "Name": "Ads on Social Media",
         "Emote": "🪧",
         "Description": "Post some ads on social media, gain +3 customers per day",
-        "Customer": 3,
+        "Customers": 3,
         "Level": 3,
         "Cost": 2500
       }
     ],
+    "Cost":10000,
     "Logo": "https://i.ibb.co/jwrns6s/business-carwash.png"
   },
   "gasstation": {
@@ -116,11 +117,12 @@
         "Name": "Ads on Social Media",
         "Emote": "🪧",
         "Description": "Post some ads on social media, gain +3 customers per day",
-        "Customer": 3,
+        "Customers": 3,
         "Level": 3,
         "Cost": 3000
       }
     ],
+    "Cost":15000,
     "Logo": "https://i.ibb.co/Dz4Kws0/business-gasstation.png"
   },
   "carmechanic": {
@@ -178,11 +180,12 @@
         "Name": "Ads on Social Media",
         "Emote": "🪧",
         "Description": "Post some ads on social media, gain +3 customers per day",
-        "Customer": 3,
+        "Customers": 3,
         "Level": 3,
         "Cost": 3000
       }
     ],
+    "Cost":20000,
     "Logo": "https://i.ibb.co/VxYMVf2/business-mechanic.png"
   }
 }
