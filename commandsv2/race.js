@@ -41,7 +41,7 @@ module.exports = {
           { name: `Track Race (EVENT)`, value: `trackraceevent` },
           { name: `Cross Country`, value: `crosscountry` },
           { name: "Car Series", value: "carseries" },
-          {name: "Motorcycle Madness", value: "motorcyclemad"}
+          { name: "Motorcycle Madness", value: "motorcyclemad" }
         )
         .setRequired(true)
         .setDescription(`The race to start`)
@@ -60,7 +60,7 @@ module.exports = {
           { name: `Tier 5`, value: 5 },
           { name: `Tier 6`, value: 6 },
           { name: `Tier 7`, value: 7 },
-          { name: `Tier 8`, value: 8 },
+          { name: `Tier 8`, value: 8 }
         )
     )
     .addStringOption((option) =>
@@ -100,62 +100,43 @@ module.exports = {
   // },
 
   async execute(interaction) {
-    const dorace = function(hp, a, h, w) {
-      let targetHp = 750
-      let targetA = 4.0
-      let targetH = 650
-      let targetW = 3500
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    const dorace = function (hp, a, h, w) {
+      let targetHp = 750;
+      let targetA = 4.0;
+      let targetH = 650;
+      let targetW = 3500;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-
-
-    }
-    const dodrag = function(hp, a, h, w) {
-      let targetHp = 1000
-      let targetA = 3.0
-      let targetH = 500
-      let targetW = 3000
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    };
+    const dodrag = function (hp, a, h, w) {
+      let targetHp = 1000;
+      let targetA = 3.0;
+      let targetH = 500;
+      let targetW = 3000;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-}
+    };
 
-
-    const dotrack = function(hp, a, h, w) {
-      let targetHp = 500
-      let targetA = 5.0
-      let targetH = 2000
-      let targetW = 2000
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    const dotrack = function (hp, a, h, w) {
+      let targetHp = 500;
+      let targetA = 5.0;
+      let targetH = 2000;
+      let targetW = 2000;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-
-
-    }
-    const domotor = function(hp, a, h, w) {
-      let targetHp = 300
-      let targetA = 3.0
-      let targetH = 1000
-      let targetW = 500
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    };
+    const domotor = function (hp, a, h, w) {
+      let targetHp = 300;
+      let targetA = 3.0;
+      let targetH = 1000;
+      let targetW = 500;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-
-
-    }
+    };
     let user = interaction.user;
     let carsarray = [];
 
@@ -171,9 +152,14 @@ module.exports = {
     let usinginv = userdata.using;
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let pet = userdata.newpet;
-    let cooldowndata =  (await Cooldowns.findOne({ id: user.id })) ||  new Cooldowns({ id: user.id });
+    let cooldowndata =
+      (await Cooldowns.findOne({ id: user.id })) ||
+      new Cooldowns({ id: user.id });
     let timeout = 45 * 1000;
-    if ( cooldowndata.racing !== null &&  timeout - (Date.now() - cooldowndata.racing) > 0  ) {
+    if (
+      cooldowndata.racing !== null &&
+      timeout - (Date.now() - cooldowndata.racing) > 0
+    ) {
       let time = ms(timeout - (Date.now() - cooldowndata.racing));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
@@ -182,8 +168,6 @@ module.exports = {
     }
     let bountytimeout = 3600000;
 
-
-    
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car").toLowerCase();
 
@@ -219,7 +203,10 @@ module.exports = {
     }
 
     let canrace = 600000;
-    if ( userdata.canrace !== null && canrace - (Date.now() - userdata.canrace) > 0 ) {
+    if (
+      userdata.canrace !== null &&
+      canrace - (Date.now() - userdata.canrace) > 0
+    ) {
       let time = ms(canrace - (Date.now() - userdata.canrace));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
@@ -281,19 +268,23 @@ module.exports = {
 
     if (tieroption == 1 && raceoption == "motorcyclemad") {
       cartofilter = carsarray.filter(
-        (car) => car.Motorcycle && car.Speed <= 150 
+        (car) => car.Motorcycle && car.Speed <= 150
       );
     } else if (tieroption == 2 && raceoption == "motorcyclemad") {
       cartofilter = carsarray.filter(
-        (car) =>car.Motorcycle && car.Speed <= 200 
+        (car) => car.Motorcycle && car.Speed <= 200
       );
     } else if (tieroption == 3 && raceoption == "motorcyclemad") {
       cartofilter = carsarray.filter(
-        (car) =>car.Motorcycle && car.Speed <= 300 
+        (car) => car.Motorcycle && car.Speed <= 300
       );
-    } 
-    else if(tieroption > 3 && raceoption == "motorcyclemad") return interaction.reply("The max tier for this race is 3!")
-    else if(raceoption == "motorcyclemad" && !cardb.Cars[selected.Name.toLowerCase()].Motorcycle) return interaction.reply("You need a motorcycle for this race!")
+    } else if (tieroption > 3 && raceoption == "motorcyclemad")
+      return interaction.reply("The max tier for this race is 3!");
+    else if (
+      raceoption == "motorcyclemad" &&
+      !cardb.Cars[selected.Name.toLowerCase()].Motorcycle
+    )
+      return interaction.reply("You need a motorcycle for this race!");
 
     if (tieroption == 1 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
@@ -314,32 +305,31 @@ module.exports = {
     } else if (tieroption == 5 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed <= 700 && car.Class == "A") && car.Track ||
-          (car.Speed <= 700 && car.Class == "S") && car.Track
+          (car.Speed <= 700 && car.Class == "A" && car.Track) ||
+          (car.Speed <= 700 && car.Class == "S" && car.Track)
       );
     } else if (tieroption == 6 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed <= 800 && car.Class == "A") && car.Track ||
-          (car.Speed <= 800 && car.Class == "S") && car.Track
+          (car.Speed <= 800 && car.Class == "A" && car.Track) ||
+          (car.Speed <= 800 && car.Class == "S" && car.Track)
       );
     } else if (tieroption == 7 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed <= 900 && car.Class == "A") && car.Track ||
-          (car.Speed <= 900 && car.Class == "S") && car.Track
+          (car.Speed <= 900 && car.Class == "A" && car.Track) ||
+          (car.Speed <= 900 && car.Class == "S" && car.Track)
       );
     } else if (tieroption == 8 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed >= 1000 && car.Class == "A") && car.Track ||
-          (car.Speed >= 1000 && car.Class == "S") && car.Track
+          (car.Speed >= 1000 && car.Class == "A" && car.Track) ||
+          (car.Speed >= 1000 && car.Class == "S" && car.Track)
       );
     }
-    
 
     car2 = lodash.sample(cartofilter);
-    console.log(cartofilter)
+    console.log(cartofilter);
     let winner;
     let rewards = [];
     if (raceoption == "streetrace") {
@@ -359,18 +349,13 @@ module.exports = {
       let speedscore = speed * 10;
       let speedscore2 = speed2 * 10;
 
-      let playerrace = dorace(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dorace(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dorace(speed, acceleration, handling, weight);
+      let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
     } else if (raceoption == "dragrace") {
       let weight = selected.WeightStat;
@@ -389,18 +374,13 @@ module.exports = {
       let speedscore = speed * 5;
       let speedscore2 = speed2 * 5;
 
-      let playerrace = dodrag(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dodrag(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dodrag(speed, acceleration, handling, weight);
+      let opponentrace = dodrag(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
     } else if (raceoption == "trackrace") {
       let weight = selected.WeightStat;
@@ -422,21 +402,15 @@ module.exports = {
       let speedscore = speed * 15;
       let speedscore2 = speed2 * 15;
 
-      let playerrace = dotrack(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dotrack(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dotrack(speed, acceleration, handling, weight);
+      let opponentrace = dotrack(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
-    }
-    else if (raceoption == "trackraceevent") {
+    } else if (raceoption == "trackraceevent") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -456,21 +430,15 @@ module.exports = {
       let speedscore = speed * 15;
       let speedscore2 = speed2 * 15;
 
-      let playerrace = dotrack(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dotrack(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dotrack(speed, acceleration, handling, weight);
+      let opponentrace = dotrack(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
-    }
-     else if (raceoption == "crosscountry") {
+    } else if (raceoption == "crosscountry") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -490,22 +458,15 @@ module.exports = {
       let speedscore = speed * 20;
       let speedscore2 = speed2 * 20;
 
-      let playerrace = dorace(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dorace(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dorace(speed, acceleration, handling, weight);
+      let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
-    }
-    
-    else if (raceoption == "motorcyclemad") {
+    } else if (raceoption == "motorcyclemad") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -516,22 +477,15 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
+      let playerrace = domotor(speed, acceleration, handling, weight);
+      let opponentrace = domotor(speed2, acceleration2, handling2, weight2);
 
-      let playerrace = domotor(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = domotor(
-        speed2, acceleration2, handling2, weight2
-      );
-
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
-    }
-    else if (raceoption == "carseries") {
+    } else if (raceoption == "carseries") {
       if (userdata.seriestickets <= 0)
         return interaction.reply("You need a series ticket to race!");
 
@@ -554,20 +508,14 @@ module.exports = {
       let speedscore = speed * 10;
       let speedscore2 = speed2 * 10;
 
-      let playerrace = dorace(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dorace(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dorace(speed, acceleration, handling, weight);
+      let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
-
     }
     let randombarn = randomRange(1, 20);
     let randomstory = [
@@ -590,7 +538,8 @@ module.exports = {
 
       cashwon = cashwon += cashwon * prestigebonus;
     }
-    let carimg = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image;
+    let carimg =
+      selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image;
     let userpfp = userdata.helmet || "Noob Helmet";
     let embed = new EmbedBuilder()
       .setTitle(`Racing tier ${tieroption} ${raceindb.Name}`)
@@ -645,17 +594,17 @@ module.exports = {
     await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(async () => {
-      console.log(winner)
+      console.log(winner);
       if (winner == true) {
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
-        let rankwon = 1
-        let rating = selected.Rating
-        if(userdata.items.includes("camera")){
-          rating += 1
+        let rankwon = 1;
+        let rating = selected.Rating;
+        if (userdata.items.includes("camera")) {
+          rating += 1;
         }
 
-        if(rating && rating >= 1){
-          rankwon = rankwon += (rankwon * rating)
+        if (rating && rating >= 1) {
+          rankwon = rankwon += rankwon * rating;
         }
 
         rewards.push(`<:rank_race:1103913420320944198> +${rankwon} Rank`);
@@ -723,10 +672,10 @@ module.exports = {
             Miles: 0,
             WeightStat: car2.Weight,
             Gas: 10,
-            MaxGas: 10
+            MaxGas: 10,
           };
           rewards.push(`${carobj.Emote} ${carobj.Name} Won!`);
-          userdata.cars.push(carobj)
+          userdata.cars.push(carobj);
         }
         if (raceoption == "carseries") {
           rewards.push(`+1 Wins`);
@@ -759,17 +708,15 @@ module.exports = {
       } else if (winner == false) {
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);
       }
-      
-     
+
       await interaction.editReply({ embeds: [embed] });
       selected.Miles += 15;
-      let dirt = selected.Dirt || 100
+      let dirt = selected.Dirt || 100;
 
-      let newdirt = dirt -= 5
+      let newdirt = (dirt -= 5);
 
-      if(dirt > 0){
-        selected.Dirt = newdirt
-
+      if (dirt > 0) {
+        selected.Dirt = newdirt;
       }
 
       await User.findOneAndUpdate(
