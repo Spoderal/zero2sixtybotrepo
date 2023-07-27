@@ -245,7 +245,7 @@ module.exports = {
               if (item.Number > crew2.Rank3) {
                 return;
               }
-              
+
               console.log(item);
               if (item.Item.endsWith("Cash")) {
                 let amount = item.Item.split(" ")[0];
@@ -326,10 +326,9 @@ module.exports = {
                   Miles: 0,
                   WeightStat: carindb.Weight,
                   Gas: 10,
-                  MaxGas: 10
+                  MaxGas: 10,
                 };
                 userdata.cars.push(carobj);
-
               }
               userdata.crewseason3 += 1;
               userdata.save();
@@ -522,11 +521,11 @@ module.exports = {
         if (i.customId.includes("confirm")) {
           let actcrew = crew;
           let newmem = actcrew.members;
-    
 
-          for (var i2 = 0; i2 < 1; i2++)  newmem.splice(newmem.indexOf(`${uid}`), 1);
-          console.log(actcrew)
-          console.log(newmem)
+          for (var i2 = 0; i2 < 1; i2++)
+            newmem.splice(newmem.indexOf(`${uid}`), 1);
+          console.log(actcrew);
+          console.log(newmem);
           await Global.findOneAndUpdate(
             {},
             {

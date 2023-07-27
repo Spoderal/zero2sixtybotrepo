@@ -749,8 +749,8 @@ module.exports = {
         }
 
         embed
-        .addFields({ name: "Rewards", value: `${rewards.join("\n")}` })
-        .setImage(`${cratedb.Crates[itemtouse.toLowerCase()].Image}`);
+          .addFields({ name: "Rewards", value: `${rewards.join("\n")}` })
+          .setImage(`${cratedb.Crates[itemtouse.toLowerCase()].Image}`);
         console.log(rewards);
         await interaction.editReply({ embeds: [embed] });
         userdata.save();

@@ -77,7 +77,7 @@
         "Cost": 4000
       }
     ],
-    "Cost":10000,
+    "Cost": 10000,
     "Logo": "https://i.ibb.co/jwrns6s/business-carwash.png"
   },
   "gasstation": {
@@ -158,7 +158,7 @@
         "Cost": 4500
       }
     ],
-    "Cost":15000,
+    "Cost": 15000,
     "Logo": "https://i.ibb.co/Dz4Kws0/business-gasstation.png"
   },
   "carmechanic": {
@@ -239,7 +239,7 @@
         "Cost": 4000
       }
     ],
-    "Cost":20000,
+    "Cost": 20000,
     "Logo": "https://i.ibb.co/VxYMVf2/business-mechanic.png"
   }
 }

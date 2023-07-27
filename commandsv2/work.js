@@ -41,8 +41,8 @@ module.exports = {
               { name: "Police", value: "police" },
               { name: "Chef", value: "chef" },
               { name: "Criminal", value: "criminal" },
-              {name: "Zuber Driver", value: "zuber driver"},
-              {name: "Photographer", value: "photographer"}
+              { name: "Zuber Driver", value: "zuber driver" },
+              { name: "Photographer", value: "photographer" }
             )
         )
     )

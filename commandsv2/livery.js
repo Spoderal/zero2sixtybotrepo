@@ -128,13 +128,14 @@ module.exports = {
       console.log(filtered);
       if (!filtered[0]) return await interaction.reply("Thats not a valid ID!");
 
-      if(userdata.cash < 500) return interaction.reply("You need $500 to install liveries!")
-      let starrating = selected.Star || 0
-      let addstar = 1
-      if(!selected.HasLivery){
-        addstar = 0
+      if (userdata.cash < 500)
+        return interaction.reply("You need $500 to install liveries!");
+      let starrating = selected.Star || 0;
+      let addstar = 1;
+      if (!selected.HasLivery) {
+        addstar = 0;
       }
-      let newstar = starrating += addstar
+      let newstar = (starrating += addstar);
       await User.findOneAndUpdate(
         {
           id: uid,
@@ -143,7 +144,7 @@ module.exports = {
           $set: {
             "cars.$[car].Image": filtered[0].image,
             "cars.$[car].Rating": newstar,
-            "cars.$[car].HasLivery": true
+            "cars.$[car].HasLivery": true,
           },
         },
 
@@ -160,8 +161,8 @@ module.exports = {
         .setImage(filtered[0].image)
         .setColor(colors.blue);
 
-        userdata.cash -= 500
-        userdata.save()
+      userdata.cash -= 500;
+      userdata.save();
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "view") {
@@ -260,7 +261,8 @@ module.exports = {
           .setColor(colors.blue);
         interaction.channel.send({ embeds: [embed] });
 
-        let submitchannel = interaction.client.channels.cache.get("931078225021521920");
+        let submitchannel =
+          interaction.client.channels.cache.get("931078225021521920");
 
         submitchannel.send({ embeds: [embed] });
       });
