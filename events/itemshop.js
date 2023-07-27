@@ -115,7 +115,7 @@ async function updateItemShop() {
             global.update();
 
           }
-
+          //test
           if(global.gas < 1){
             global.gas = 6
             global.update()
