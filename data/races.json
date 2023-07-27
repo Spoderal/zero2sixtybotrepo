@@ -11,6 +11,15 @@
     "Name": "Track Race",
     "Reward": 65
   },
+  
+  "trackraceevent": {
+    "Name": "Track Race (EVENT)",
+    "Reward": 65
+  },
+  "motorcyclemad": {
+    "Name": "Motorcycle Madness",
+    "Reward": 70
+  },
   "crosscountry": {
     "Name": "Cross Country",
     "Reward": 45

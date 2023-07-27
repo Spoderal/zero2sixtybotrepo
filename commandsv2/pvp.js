@@ -8,7 +8,7 @@ const {
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const ms = require("pretty-ms");
-
+const lodash = require("lodash")
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
@@ -42,6 +42,7 @@ module.exports = {
             .setDescription("The users car id they want to race you with")
             .setRequired(true)
         )
+         
     )
     .addSubcommand((subcommand) =>
       subcommand.setName("rank").setDescription("View your PVP rank")
@@ -89,9 +90,7 @@ module.exports = {
       if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
       let userdata2 = await User.findOne({ id: user2.id });
-      let cooldowndata =
-        (await Cooldowns.findOne({ id: user.id })) ||
-        new Cooldowns({ id: user.id });
+      let cooldowndata =  (await Cooldowns.findOne({ id: user.id })) || new Cooldowns({ id: user.id });
       let timeout = 600000;
       if (
         cooldowndata.pvp !== null &&
@@ -217,9 +216,13 @@ module.exports = {
       let carimage2 =
         selected2.Image || cars.Cars[selected2.Name.toLowerCase()].Image;
 
+
+
+
       let embed = new discord.EmbedBuilder()
         .setTitle(`${user2.username}, would you like to race ${user.username}?`)
         .addFields([
+      
           {
             name: `${user.username}'s ${carindb1.Emote} ${carindb1.Name}`,
             value: `${emotes.speed} Power: ${speed}\n\n${emotes.zero2sixty} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
@@ -247,8 +250,47 @@ module.exports = {
         time: 30000,
       });
 
+      let filter2 = (btnInt) => {
+        return user.id == btnInt.user.id;
+      };
+      const collector2 = msg.createMessageComponentCollector({
+        filter: filter2,
+        time: 30000,
+      });
+
+      let rowstrat = new ActionRowBuilder()
+      .setComponents(
+        new ButtonBuilder()
+        .setCustomId("careful")
+        .setLabel("Careful")
+        .setEmoji("🟢")
+        .setStyle("Success"),
+        new ButtonBuilder()
+        .setCustomId("fast")
+        .setLabel("Fast")
+        .setEmoji("🔴")
+        .setStyle("Success")
+      )
+
+      let rowstrat2 = new ActionRowBuilder()
+      .setComponents(
+        new ButtonBuilder()
+        .setCustomId("careful")
+        .setLabel("Careful")
+        .setEmoji("🟢")
+        .setStyle("Danger"),
+        new ButtonBuilder()
+        .setCustomId("fast")
+        .setLabel("Fast")
+        .setEmoji("🔴")
+        .setStyle("Danger")
+      )
+
       collector.on("collect", async (i) => {
         if (i.customId.includes("approve")) {
+
+          
+
           cooldowndata2.pvp = Date.now();
           cooldowndata.pvp = Date.now();
           cooldowndata.save();

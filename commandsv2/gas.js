@@ -95,6 +95,10 @@ module.exports = {
 
       let finalprice = gas * gallons;
 
+      if(userdata.business && userdata.business.Business == "Gas Station"){
+        finalprice = finalprice * 0.75
+      }
+
       finalprice = Math.round(finalprice);
 
       if (finalprice > userdata.cash)

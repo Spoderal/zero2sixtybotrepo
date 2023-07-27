@@ -24,7 +24,7 @@ module.exports = {
     let startersam = [
       "2002 ford mustang",
       "1977 chevy camaro",
-      "2002 pontiac firebird",
+      "1998 pontiac fiero",
     ];
     let starterseu = [
       "1999 audi a4",

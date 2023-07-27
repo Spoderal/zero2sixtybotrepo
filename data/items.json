@@ -324,6 +324,26 @@
     "Findable": false,
     "Image": "https://i.ibb.co/2MB5SNd/item-gem.gif"
   },
+  "star sticker": {
+    "Price": 500000,
+    "Action": "Your did it\n\nFound while doing the Zuber job",
+    "Name": "Star Sticker",
+    "Type": "Non-Usable",
+    "Emote": "<a:item_star:1130304126933282948>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/4NCJ5N5/item-star.gif"
+  },
+  "camera": {
+    "Price": 0,
+    "Action": "With this in your inventory all your cars get a star rating boost of 1\n\nFound while doing the Photographer job",
+    "Name": "Camera",
+    "Type": "Non-Usable",
+    "Emote": "<a:item_camera:1130305659888480377>",
+    "Shop": false,
+    "Findable": false,
+    "Image": "https://i.ibb.co/g95JXdc/Soggy-Fantastic-Earwig-max-1mb.gif"
+  },
   "taser": {
     "Price": 0,
     "Action": "Prevent people from robbing you for 7 days\n\nFound while doing the Police job",

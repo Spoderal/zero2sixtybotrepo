@@ -40,7 +40,9 @@ module.exports = {
               { name: "Pizza Delivery", value: "pizza delivery" },
               { name: "Police", value: "police" },
               { name: "Chef", value: "chef" },
-              { name: "Criminal", value: "criminal" }
+              { name: "Criminal", value: "criminal" },
+              {name: "Zuber Driver", value: "zuber driver"},
+              {name: "Photographer", value: "photographer"}
             )
         )
     )
@@ -329,6 +331,24 @@ module.exports = {
                 });
 
                 userdata.items.push("taser");
+              }
+
+              if (itemchance == 6 && userdata.work.name == "Photographer") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["camera"].Emote} ${itemdb["camera"].Name}`,
+                });
+
+                userdata.items.push("camera");
+              }
+
+              if (itemchance2 == 5 && userdata.work.name == "Zuber Driver") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["star sticker"].Emote} ${itemdb["star sticker"].Name}`,
+                });
+
+                userdata.items.push("star sticker");
               }
 
               if (itemchance2 == 6 && userdata.work.name == "Criminal") {

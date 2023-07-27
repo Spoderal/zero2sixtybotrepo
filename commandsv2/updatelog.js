@@ -39,6 +39,13 @@ module.exports = {
             customId: "up5",
             emoji: "🏎️",
           },
+          {
+            label: "7/26/2023",
+            description: "Information for the recent update!",
+            value: "2_update",
+            customId: "up5",
+            emoji: "⬆️",
+          },
         ])
     );
 
@@ -51,6 +58,7 @@ module.exports = {
             ⚙️ Latest Patch 7/14/2023\n
             ☀️ Summer Update 5/31/2023\n
             🏎️ Race Update 7/11/2023\n
+            ⬆️ New Update 7/26/2023
         `);
 
     embed.setColor(colors.blue);
@@ -156,7 +164,7 @@ module.exports = {
                   inline: true,
                 }
               )
-              .setFooter({ text: "4/31/2023" })
+              .setFooter({ text: "7/14/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
@@ -164,7 +172,66 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "6_update") {
+          } 
+          else if (value === "2_update") {
+            embed.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`Big Update`);
+            embed
+              .addFields(
+                {
+                  name: "Features ⭐",
+                  value: `• Bug fixes\n
+                  • Car rating, boosts your race rank earnings from races\n
+                  • Track legends returns with new cars!\n
+                  • New jobs\n
+                  • Body kits\n
+                  • Fiero replaces the firebird in starter cars\n
+                  • Businesses have perks, gas station will get a discount on gas, car wash gets half off when washing your car, and mechanic gets 2 parts in the junkyard!\n
+                  • Level 4 business upgrades\n
+                  • Button to abandon your business\n
+                  • Motorcycles! And a motorcycle exclusive race\n
+                  • Engine and drivetrain information added for a few cars\n
+                  • Delist items from market`,
+                  inline: true,
+                },
+                {
+                  name: "Cars 🚗",
+                  value: `
+                ${cardb.Cars["2021 volvo s90"].Emote} ${cardb.Cars["2021 volvo s90"].Name}\n
+                ${cardb.Cars["2022 genisis g70"].Emote} ${cardb.Cars["2022 genisis g70"].Name}\n
+                ${cardb.Cars["2016 dodge dart"].Emote} ${cardb.Cars["2016 dodge dart"].Name}\n
+                ${cardb.Cars["2014 chevy camaro z28"].Emote} ${cardb.Cars["2014 chevy camaro z28"].Name}\n
+                ${cardb.Cars["2023 mclaren solus gt"].Emote} ${cardb.Cars["2023 mclaren solus gt"].Name}\n
+                ${cardb.Cars["2016 apollo arrow"].Emote} ${cardb.Cars["2016 apollo arrow"].Name}\n
+                ${cardb.Cars["1997 tvr cerbera speed 12"].Emote} ${cardb.Cars["1997 tvr cerbera speed 12"].Name}\n
+                ${cardb.Cars["2021 honda cbr600rr"].Emote} ${cardb.Cars["2021 honda cbr600rr"].Name}\n
+                ${cardb.Cars["2020 kawasaki z900"].Emote} ${cardb.Cars["2020 kawasaki z900"].Name}\n
+                ${cardb.Cars["2017 kawasaki ninja 650"].Emote} ${cardb.Cars["2017 kawasaki ninja 650"].Name}\n
+                ${cardb.Cars["2019 yamaha r15"].Emote} ${cardb.Cars["2019 yamaha r15"].Name}
+
+                `,
+                  inline: true,
+                },
+                {
+                  name: `Items 🪛`,
+                  value: `
+                ${itemdb["star sticker"].Emote} ${itemdb["star sticker"].Name}\n
+                ${itemdb["camera"].Emote} ${itemdb["camera"].Name}\n
+                `,
+                  inline: true,
+                }
+              )
+              .setFooter({ text: "7/26/2023" })
+              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else if (value === "6_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Big Update`);

@@ -33,6 +33,7 @@ module.exports = {
     let turbo = selected[0].turboupgrade;
     let weight = selected[0].weightupgrade;
     let springs = selected[0].springs;
+    let bodykit = selected[0].bodykit;
 
     let fuses = [];
     if (turbo) {
@@ -53,6 +54,13 @@ module.exports = {
       fuses.push(
         `${partdb.Parts[springs.toLowerCase()].Emote} ${
           partdb.Parts[springs.toLowerCase()].Name
+        }`
+      );
+    }
+    if (bodykit) {
+      fuses.push(
+        `${partdb.Parts[bodykit.toLowerCase()].Emote} ${
+          partdb.Parts[bodykit.toLowerCase()].Name
         }`
       );
     }

@@ -80,6 +80,10 @@ module.exports = {
       selected[0].Handling -= partindb.HandlingMinus;
     }
 
+    if(partindb.Stars){
+      selected[0].Rating += partindb.Stars
+    }
+
     selected[0][partindb.Type.toLowerCase()] = partindb.Name.toLowerCase();
 
     await User.findOneAndUpdate(

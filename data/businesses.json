@@ -36,7 +36,7 @@
         "Name": "Small Sign",
         "Emote": "🪧",
         "Description": "Show the name of your store on the sign in the front, gain +2 customers per day",
-        "Customer": 2,
+        "Customers": 2,
         "Level": 2,
         "Cost": 1500
       },
@@ -54,11 +54,30 @@
         "Name": "Ads on Social Media",
         "Emote": "🪧",
         "Description": "Post some ads on social media, gain +3 customers per day",
-        "Customer": 3,
+        "Customers": 3,
         "Level": 3,
         "Cost": 2500
+      },
+      {
+        "ID": "premiumsoap",
+        "Name": "Premium Soap",
+        "Emote": "🧼",
+        "Description": "Start using PREMIUM soap, earning +$150 per customer",
+        "Income": 150,
+        "Level": 4,
+        "Cost": 4500
+      },
+      {
+        "ID": "smallbillboard",
+        "Name": "Small Billboard",
+        "Emote": "🪧",
+        "Description": "Make a small billboard, gain +4 customers per day",
+        "Customers": 4,
+        "Level": 4,
+        "Cost": 4000
       }
     ],
+    "Cost":10000,
     "Logo": "https://i.ibb.co/jwrns6s/business-carwash.png"
   },
   "gasstation": {
@@ -116,11 +135,30 @@
         "Name": "Ads on Social Media",
         "Emote": "🪧",
         "Description": "Post some ads on social media, gain +3 customers per day",
-        "Customer": 3,
+        "Customers": 3,
         "Level": 3,
         "Cost": 3000
+      },
+      {
+        "ID": "energydrinks",
+        "Name": "Energy Drinks",
+        "Emote": "<:item_energydrink:1101014779499384893>",
+        "Description": "Start selling energy drinks, earning +$100 per customer",
+        "Income": 100,
+        "Level": 4,
+        "Cost": 4000
+      },
+      {
+        "ID": "smallbillboard",
+        "Name": "Small Billboard",
+        "Emote": "🪧",
+        "Description": "Make a small billboard, gain +4 customers per day",
+        "Customers": 4,
+        "Level": 4,
+        "Cost": 4500
       }
     ],
+    "Cost":15000,
     "Logo": "https://i.ibb.co/Dz4Kws0/business-gasstation.png"
   },
   "carmechanic": {
@@ -178,11 +216,30 @@
         "Name": "Ads on Social Media",
         "Emote": "🪧",
         "Description": "Post some ads on social media, gain +3 customers per day",
-        "Customer": 3,
+        "Customers": 3,
         "Level": 3,
         "Cost": 3000
+      },
+      {
+        "ID": "premiumoil",
+        "Name": "Premium Oil",
+        "Emote": "🛢️",
+        "Description": "Start using PREMIUM oil, earning +$150 per customer",
+        "Income": 150,
+        "Level": 4,
+        "Cost": 4500
+      },
+      {
+        "ID": "smallbillboard",
+        "Name": "Small Billboard",
+        "Emote": "🪧",
+        "Description": "Make a small billboard, gain +4 customers per day",
+        "Customers": 4,
+        "Level": 4,
+        "Cost": 4000
       }
     ],
+    "Cost":20000,
     "Logo": "https://i.ibb.co/VxYMVf2/business-mechanic.png"
   }
 }

@@ -355,6 +355,24 @@
     "name": "Peugeot",
     "country": "https://i.ibb.co/XzPKrPq/flag-french.png"
   },
+  "volvo": {
+    "image": "https://i.ibb.co/yQ0zzJZ/logo-volvo.png",
+    "emote": "<:logo_volvo:1130352957456658512>",
+    "name": "Volvo",
+    "country": "https://i.ibb.co/tcVzQ2d/Flag-of-Sweden-svg.png"
+  },
+  "genisis": {
+    "image": "https://i.ibb.co/2Y7LsvV/logo-genisis.png",
+    "emote": "<:logo_genisis:1130354503732957286>",
+    "name": "Genisis",
+    "country": "https://i.ibb.co/frRGCVV/Flag-of-South-Korea-svg.png"
+  },
+  "yamaha": {
+    "image": "https://i.ibb.co/gzNXz9Y/yamaha.png",
+    "emote": "<:yamaha:963982542237761617>",
+    "name": "Yamaha",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
+  },
   "no brand": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
     "name": "No Logo",

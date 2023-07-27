@@ -52,7 +52,7 @@ module.exports = {
     let weightemote = emotes.weight;
     let ucars = userdata.cars || [];
     let carindb = ucars.filter((c) => c.ID == item);
-    if (!list[item.toLowerCase()] && !carindb[0] && !itemdb[item.toLowerCase()])
+    if (!list[item.toLowerCase()] && !carindb[0] && !itemdb[item.toLowerCase()] && !partdb.Parts[item.toLowerCase()])
       return interaction.reply(
         `I couldn't find that car! If you're checking default stats, put the full name, and if you want your stats, put the ID.`
       );
@@ -104,6 +104,18 @@ module.exports = {
 
       ctx.font = "bold 55px sans-serif";
       let price = `${toCurrency(carindb.Price)}`;
+
+      if(carindb.Drivetrain){
+        let drivetrain = carindb.Drivetrain
+
+        ctx.fillText(drivetrain, 900, 640);
+      }
+
+      if(carindb.Engine){
+        let engine = carindb.Engine
+
+        ctx.fillText(engine, 900, 690);
+      }
 
       if (carindb.Price <= 0) {
         let obtained = carindb.Obtained || "Not Obtainable";
@@ -321,10 +333,12 @@ module.exports = {
 
       ctx.font = "bold 55px sans-serif";
       let acceleration = Math.round(carindb[0].Acceleration * 10) / 10;
+      let speed = Math.round(carindb[0].Speed)
+      let handling = Math.round(carindb[0].Handling)
 
-      ctx.fillText(carindb[0].Speed, 15, 120);
+      ctx.fillText(speed, 15, 120);
       ctx.fillText(acceleration, 215, 120);
-      ctx.fillText(carindb[0].Handling, 400, 120);
+      ctx.fillText(handling, 400, 120);
 
       ctx.font = "bold 35px sans-serif";
       ctx.fillText(carindb[0].WeightStat, 595, 120);
@@ -417,37 +431,32 @@ module.exports = {
       if (!partindb) return await interaction.editReply(`Thats not a part!`);
       let stats = [];
 
-      if (partindb.AddedSpeed > 0) {
-        stats.push(`${emotes.speed} Speed: +${partindb.AddedSpeed}`);
+      if (partindb.Power > 0) {
+        stats.push(`${emotes.speed} Speed: +${partindb.Power}`);
       }
-      if (partindb.DecreaseWeight > 0) {
-        stats.push(`${emotes.weight} Weight: -${partindb.DecreaseWeight}`);
+ 
+      if (partindb.Weight > 0) {
+        stats.push(`${emotes.weight} Weight: +${partindb.Weight}`);
+      }
+      if (partindb.WeightMinus > 0) {
+        stats.push(`${emotes.weight} Weight: +${partindb.WeightMinus}`);
       }
 
-      if (partindb.AddWeight > 0) {
-        stats.push(`${emotes.weight} Weight: +${partindb.AddWeight}`);
-      }
 
-      if (partindb.DecreaseHandling > 0) {
+      if (partindb.Handling > 0) {
         stats.push(
-          `<:handling:983963211403505724> Handling: -${partindb.DecreaseHandling}`
+          `<:handling:983963211403505724> Handling: +${partindb.Handling}`
         );
       }
 
-      if (partindb.AddHandling > 0) {
+      if (partindb.Acceleration > 0) {
         stats.push(
-          `<:handling:983963211403505724> Handling: +${partindb.AddHandling}`
+          `${emotes.zero2sixty} Acceleration: -${partindb.Acceleration}`
         );
       }
-
-      if (partindb.AddedSixty > 0) {
+      if (partindb.Stars > 0) {
         stats.push(
-          `${emotes.zero2sixty} Acceleration: -${partindb.AddedSixty}`
-        );
-      }
-      if (partindb.DecreasedSixty > 0) {
-        stats.push(
-          `${emotes.zero2sixty} Acceleration: +${partindb.DecreasedSixty}`
+          `⭐ Rating: +${partindb.Stars}`
         );
       }
       let mark = global.newmarket.filter(

@@ -73,6 +73,158 @@
       }
     ]
   },
+  "zuber driver": {
+    "prestige": 1,
+    "salary": 100,
+    "name": "Zuber Driver",
+    "winprompts": [
+      "You drove Spoder to work and received 5 stars!",
+      "You drove Kayla home and got 4 stars!",
+      "You drift into Charados work to pick him up and receive 5 stars"
+    ],
+    "loseprompts": [
+      "Wow... this car SUCKS, 1 STAR",
+      "This car is just too uncomfortable, 2 stars",
+      "You missed Spoders destination now hes late for work...1 star."
+    ],
+    "items":["star sticker"],
+    "Positions": [
+      {
+        "name": "New Zuber Driver",
+        "salary": 1750,
+        "fail": 750,
+        "xp": 0,
+        "emote": "🚘",
+        "rank": 1
+      },
+      {
+        "name": "Decent Zuber Driver",
+        "salary": 3000,
+        "fail": 1000,
+        "xp": 2500,
+        "emote": "🛻",
+        "rank": 2
+      },
+      {
+        "name": "Experienced Zuber Driver",
+        "salary": 3500,
+        "fail": 1500,
+        "xp": 5000,
+        "emote": "🛻",
+        "rank": 3
+      },
+      {
+        "name": "Pro Zuber Driver",
+        "salary": 4500,
+        "fail": 2000,
+        "xp": 7500,
+        "emote": "🚘",
+        "rank": 4
+      },
+      {
+        "name": "Zuber Blue Driver",
+        "salary": 6000,
+        "fail": 2000,
+        "xp": 10000,
+        "emote": "🧑‍💼",
+        "rank": 5
+      },
+      {
+        "name": "Zuber Black Driver",
+        "salary": 7500,
+        "fail": 2500,
+        "xp": 15000,
+        "emote": "🕵️‍♂️",
+        "rank": 6
+      },
+      {
+        "name": "Zuber CEO",
+        "salary": 9000,
+        "fail": 3000,
+        "xp": 25000,
+        "emote": "💵",
+        "rank": 7
+      }
+    ]
+  },
+
+  "photographer": {
+    "prestige": 3,
+    "salary": 150,
+    "name": "Photographer",
+    "winprompts": [
+      "You took a photo of a Lamborghini Huracan!",
+      "You took a photo of a Porsche 911!",
+      "You took a photo of a Ford Mustang!",
+      
+      "You took a photo of a Chevy Camaro!",
+      "You took a photo of a McLaren F1!"
+    ],
+    "loseprompts": [
+      "Your photo was out of focus...",
+      "Your photo has a smudge...",
+      "Your photo SUCKS..."
+    ],
+    "items":["camera"],
+    "Positions": [
+      {
+        "name": "Freelance Photographer",
+        "salary": 3900,
+        "fail": 750,
+        "xp": 0,
+        "emote": "📷",
+        "rank": 1
+      },
+      {
+        "name": "Intern Photographer",
+        "salary": 4300,
+        "fail": 1000,
+        "xp": 2500,
+        "emote": "📷",
+        "rank": 2
+      },
+      {
+        "name": "Jr Photographer",
+        "salary": 4600,
+        "fail": 1500,
+        "xp": 5000,
+        "emote": "📸",
+        "rank": 3
+      },
+      {
+        "name": "Sr Photographer",
+        "salary": 5000,
+        "fail": 2000,
+        "xp": 7500,
+        "emote": "📹",
+        "rank": 4
+      },
+      {
+        "name": "Sr Photographer II",
+        "salary": 5500,
+        "fail": 2000,
+        "xp": 10000,
+        "emote": "📹",
+        "rank": 5
+      },
+      {
+        "name": "Professional Photographer",
+        "salary": 7500,
+        "fail": 2500,
+        "xp": 15000,
+        "emote": "🎥",
+        "rank": 6
+      },
+      {
+        "name": "Top Photographer",
+        "salary": 14500,
+        "fail": 3000,
+        "xp": 25000,
+        "emote": "🎥",
+        "rank": 7
+      }
+    ]
+  },
   "police": {
     "prestige": 2,
     "salary": 200,

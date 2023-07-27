@@ -250,7 +250,9 @@ module.exports = {
           Emote: carindb.Emote,
           Livery: carindb.Image,
           Miles: 0,
-          Weight: carindb.Weight,
+          WeightStat: carindb.Weight,
+          Gas: 10,
+          MaxGas: 10
         };
 
         userdata.cars.push(carobj);

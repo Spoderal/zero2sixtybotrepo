@@ -35,11 +35,29 @@ module.exports = {
             customId: "event_1",
             emoji: "❄️",
           },
+          {
+          label: "Track Legends",
+          description: "Information for the Track Legends Event",
+          value: "event_2",
+          customId: "event_2",
+          emoji: "<:tracklegends:1072357967652995174>",
+        },
         ])
     );
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
+
+    let eventcars = ["2023 porsche 911 gt3 rs", "2019 jaguar xe sv", "2021 bmw m2", "2021 bac mono", "2021 mercedes amg gt black series", "2020 hyundai i30 n", "2021 alpine a110 r", "2014 chevy camaro z28", "2016 bugatti chiron pur sport", "2020 ferrari f8 tributo", "2020 mini", "2017 ferrari 488 gte", "2019 mclaren senna gtr", "1997 tvr cerbera speed 12", "2016 apollo arrow", "2023 mclaren solus gt"]
+    let eventcararr = []
+
+    for(let car in eventcars){
+      let car2 = cardb.Cars[eventcars[car]]
+
+      console.log(eventcars[car])
+      eventcararr.push(`${car2.Emote} ${car2.Name}`)
+    }
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -48,7 +66,8 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 1 <a:season_1:1111097329836113920>\n
-          Snow vs Sun ☀️❄️
+          Snow vs Sun ☀️❄️\n
+          Track Legends <:tracklegends:1072357967652995174>
       `);
 
     embed.setColor(colors.blue);
@@ -113,6 +132,33 @@ module.exports = {
         embed
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/0M4qTB6/snowvssun.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+      else if (value === "event_2") {
+        embed.setTitle("Track Legends");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Welcome to the track! There's tons of track toys to choose from, and win!
+
+        Handling and weight are the MOST important thing, without that, you stand no chance, you can have all the speed in the world, but you need to be able to handle the speed!
+
+        Win against the opponent in the event track race in /race and have a chance to obtain the car!
+
+        Can you earn all of the cars before the event ends?
+
+        Cars to obtain:
+
+        ${eventcararr.join('\n')}
+
+            **Ends August 31st 2023**
+
+                  `);
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/MfWrndh/tracklegends2.png");
 
         await interaction.editReply({
           embeds: [embed],

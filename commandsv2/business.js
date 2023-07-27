@@ -41,7 +41,13 @@ module.exports = {
       userdata.save();
       cooldowns.save();
     }
-
+    let row = new ActionRowBuilder().setComponents(
+      new ButtonBuilder()
+        .setLabel("Abandon")
+        .setCustomId("abandon")
+        .setEmoji("❌")
+        .setStyle("Danger")
+    )
     if (userdata.business.Name) {
       businessrow = new ActionRowBuilder().setComponents(
         new ButtonBuilder()
@@ -68,8 +74,10 @@ module.exports = {
           .setLabel("Tips")
           .setCustomId("tips")
           .setEmoji("🫙")
-          .setStyle("Primary")
+          .setStyle("Primary"),
+          
       );
+      
       let ubusiness = userdata.business;
       var today = new Date();
       var createdOn = new Date(userdata.business.Age);
@@ -157,7 +165,7 @@ module.exports = {
 
     let msg = await interaction.reply({
       embeds: [embed],
-      components: [businessrow],
+      components: [businessrow, row],
       fetchReply: true,
     });
 
@@ -191,7 +199,7 @@ module.exports = {
     collector.on("collect", async (i) => {
       if (i.customId == "create") {
         embed.setTitle(`Select a business to create`);
-
+        embed.setDescription(`Car Wash : Washing your car costs 50% less **10K to open**\n\nGas Station : Gas is 25% off**15K to open**\n\nCar Mechanic : Gain a bonus part when in the junkyard **20K to open**`)
         await i.update({ embeds: [embed], components: [businessbuttons] });
       } else if (i.customId == "upgrade") {
         console.log(userdata.business.Business);
@@ -369,6 +377,7 @@ module.exports = {
 
         await i.update({ content: `✅`, fetchReply: true });
       } else if (businesses[i.customId]) {
+        if(businesses[i.customId].Cost > userdata.cash) return interaction.reply(`You need ${businesses[i.customId].Cost} to open this business!`)
         embed.setTitle(
           `Created your business! View it by sending the command again.`
         );
@@ -391,10 +400,32 @@ module.exports = {
           Upgrades: [],
           TipsCollected: 0,
         };
+        userdata.cash -= businesses[i.customId].Cost
+
         userdata.save();
 
         await i.update({ embeds: [embed], components: [] });
       }
+      else if(i.customId == "abandon"){
+ 
+
+        let rowab = new ActionRowBuilder()
+        .setComponents(
+          new ButtonBuilder()
+          .setCustomId("yes")
+          .setLabel("Yes")
+          .setStyle("Success")
+        )
+
+        i.update({content: `Are you sure?`, components: [rowab], fetchReply: true})
+      }
+      else if(i.customId == "yes"){
+        userdata.business = {}
+        userdata.save()
+        collector.stop()
+        i.update("✅")
+      }
+
     });
   },
 };

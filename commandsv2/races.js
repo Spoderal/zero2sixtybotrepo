@@ -68,6 +68,8 @@ module.exports = {
           Choose an item from the drop down menu below, there are many different types such as drifting, pink slips, and more!\n
           Use /race to race in any of these races!
 
+          **Your cars rating will boost your race rank earnings in races! Check /rating for your cars rating and tips on how to boost it**
+
        `);
 
     embed.setColor(colors.blue);
