@@ -6907,8 +6907,7 @@
       "Handling": 1000,
       "Class": "B",
       "Weight": 3200,
-      "Obtained": "Event",
-      "Track": true
+      "Obtained": "Event"
     },
     "2021 bac mono": {
       "alias": "2021 mono",

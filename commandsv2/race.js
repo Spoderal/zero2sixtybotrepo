@@ -462,43 +462,38 @@ module.exports = {
 
     if (tieroption == 1 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
-        (car) => car.Speed <= 300 && car.Class == "D" && car.Track
+        (car) => car.Speed <= 300 && car.Track
       );
     } else if (tieroption == 2 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
-        (car) => car.Speed <= 400 && car.Class == "C" && car.Track
+        (car) => car.Speed <= 400  && car.Track
       );
     } else if (tieroption == 3 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
-        (car) => car.Speed <= 500 && car.Class == "B" && car.Track
+        (car) => car.Speed <= 500  && car.Track
       );
     } else if (tieroption == 4 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
-        (car) => car.Speed <= 600 && car.Class == "A" && car.Track
+        (car) => car.Speed <= 600 && car.Track
       );
     } else if (tieroption == 5 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed <= 700 && car.Class == "A" && car.Track) ||
-          (car.Speed <= 700 && car.Class == "S" && car.Track)
+          (car.Speed <= 700  && car.Track)
       );
     } else if (tieroption == 6 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed <= 800 && car.Class == "A" && car.Track) ||
-          (car.Speed <= 800 && car.Class == "S" && car.Track)
+          (car.Speed <= 800 && car.Track) 
       );
     } else if (tieroption == 7 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
         (car) =>
-          (car.Speed <= 900 && car.Class == "A" && car.Track) ||
-          (car.Speed <= 900 && car.Class == "S" && car.Track)
+          (car.Speed <= 900 && car.Track)
       );
     } else if (tieroption == 8 && raceoption == "trackraceevent") {
       cartofilter = carsarray.filter(
-        (car) =>
-          (car.Speed >= 1000 && car.Class == "A" && car.Track) ||
-          (car.Speed >= 1000 && car.Class == "S" && car.Track)
+        (car) =>  (car.Speed >= 900 && car.Track) 
       );
     }
 
