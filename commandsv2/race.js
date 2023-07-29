@@ -100,7 +100,6 @@ module.exports = {
   // },
 
   async execute(interaction) {
-   
     let user = interaction.user;
     let carsarray = [];
 
@@ -188,215 +187,195 @@ module.exports = {
     let tieroption = interaction.options.getNumber("tier");
 
     let streettiers = {
-      1:{
+      1: {
         hp: 300,
         acc: 5,
         handling: 500,
-        weight: 3000
+        weight: 3000,
       },
-      2:{
+      2: {
         hp: 400,
         acc: 5,
         handling: 600,
-        weight: 2800
+        weight: 2800,
       },
-      3:{
+      3: {
         hp: 500,
         acc: 4,
         handling: 700,
-        weight: 2600
+        weight: 2600,
       },
-      4:{
+      4: {
         hp: 600,
         acc: 4,
         handling: 700,
-        weight: 2600
+        weight: 2600,
       },
-      5:{
+      5: {
         hp: 700,
         acc: 3,
         handling: 800,
-        weight: 2500
+        weight: 2500,
       },
-      6:{
+      6: {
         hp: 800,
         acc: 3,
         handling: 800,
-        weight: 2400
+        weight: 2400,
       },
-      7:{
+      7: {
         hp: 1000,
         acc: 2,
         handling: 1000,
-        weight: 2400
+        weight: 2400,
       },
-      8:{
+      8: {
         hp: 4000,
         acc: 2,
         handling: 1200,
-        weight: 2300
-      }
-    }
+        weight: 2300,
+      },
+    };
 
     let dragtiers = {
-      1:{
+      1: {
         hp: 400,
         acc: 5,
         handling: 500,
-        weight: 3000
+        weight: 3000,
       },
-      2:{
+      2: {
         hp: 500,
         acc: 5,
         handling: 500,
-        weight: 2800
+        weight: 2800,
       },
-      3:{
+      3: {
         hp: 600,
         acc: 4,
         handling: 500,
-        weight: 2600
+        weight: 2600,
       },
-      4:{
+      4: {
         hp: 700,
         acc: 4,
         handling: 500,
-        weight: 2600
+        weight: 2600,
       },
-      5:{
+      5: {
         hp: 800,
         acc: 3,
         handling: 500,
-        weight: 2500
+        weight: 2500,
       },
-      6:{
+      6: {
         hp: 900,
         acc: 3,
         handling: 500,
-        weight: 2400
+        weight: 2400,
       },
-      7:{
+      7: {
         hp: 1000,
         acc: 2,
         handling: 500,
-        weight: 2400
+        weight: 2400,
       },
-      8:{
+      8: {
         hp: 3000,
         acc: 2,
         handling: 500,
-        weight: 2300
-      }
-    }
+        weight: 2300,
+      },
+    };
 
     let tracktiers = {
-      1:{
+      1: {
         hp: 300,
         acc: 5,
         handling: 750,
-        weight: 3500
+        weight: 3500,
       },
-      2:{
+      2: {
         hp: 400,
         acc: 5,
         handling: 800,
-        weight: 3400
+        weight: 3400,
       },
-      3:{
+      3: {
         hp: 500,
         acc: 4,
         handling: 1000,
-        weight: 3300
+        weight: 3300,
       },
-      4:{
+      4: {
         hp: 600,
         acc: 4,
         handling: 1500,
-        weight: 3200
+        weight: 3200,
       },
-      5:{
+      5: {
         hp: 700,
         acc: 3,
         handling: 2000,
-        weight: 3100
+        weight: 3100,
       },
-      6:{
+      6: {
         hp: 800,
         acc: 3,
         handling: 2500,
-        weight: 3000
+        weight: 3000,
       },
-      7:{
+      7: {
         hp: 1000,
         acc: 2,
         handling: 3000,
-        weight: 2900
+        weight: 2900,
       },
-      8:{
+      8: {
         hp: 3000,
         acc: 2,
         handling: 3500,
-        weight: 2800
-      }
-    }
+        weight: 2800,
+      },
+    };
 
-    
-
-    const dorace = function(hp, a, h, w) {
-      let targetHp = streettiers[tieroption].hp
-      let targetA = streettiers[tieroption].acc
-      let targetH = streettiers[tieroption].handling
-      let targetW = streettiers[tieroption].weight
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    const dorace = function (hp, a, h, w) {
+      let targetHp = streettiers[tieroption].hp;
+      let targetA = streettiers[tieroption].acc;
+      let targetH = streettiers[tieroption].handling;
+      let targetW = streettiers[tieroption].weight;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-
-
-    }
-    const dodrag = function(hp, a, h, w) {
-      let targetHp = dragtiers[tieroption].hp
-      let targetA = dragtiers[tieroption].acc
-      let targetH = dragtiers[tieroption].handling
-      let targetW = dragtiers[tieroption].weight
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(w, targetW)
+    };
+    const dodrag = function (hp, a, h, w) {
+      let targetHp = dragtiers[tieroption].hp;
+      let targetA = dragtiers[tieroption].acc;
+      let targetH = dragtiers[tieroption].handling;
+      let targetW = dragtiers[tieroption].weight;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(w, targetW);
       return sum / 4;
-}
+    };
 
-
-    const dotrack = function(hp, a, h, w) {
-      let targetHp = tracktiers[tieroption].hp
-      let targetA = tracktiers[tieroption].acc
-      let targetH = tracktiers[tieroption].handling
-      let targetW = tracktiers[tieroption].weight
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    const dotrack = function (hp, a, h, w) {
+      let targetHp = tracktiers[tieroption].hp;
+      let targetA = tracktiers[tieroption].acc;
+      let targetH = tracktiers[tieroption].handling;
+      let targetW = tracktiers[tieroption].weight;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-
-
-    }
-    const domotor = function(hp, a, h, w) {
-      let targetHp = 300
-      let targetA = 3.0
-      let targetH = 1000
-      let targetW = 500
-      let p = (x, t) => 100 - Math.abs(100 - ((x / t) * 100));
-      let sum = p(hp, targetHp)
-        + p(a, targetA)
-        + p(h, targetH)
-        + p(w, targetW)
+    };
+    const domotor = function (hp, a, h, w) {
+      let targetHp = 300;
+      let targetA = 3.0;
+      let targetH = 1000;
+      let targetW = 500;
+      let p = (x, t) => 100 - Math.abs(100 - (x / t) * 100);
+      let sum = p(hp, targetHp) + p(a, targetA) + p(h, targetH) + p(w, targetW);
       return sum / 4;
-
-
-    }
+    };
     let cartofilter = [];
     if (tieroption == 1) {
       cartofilter = carsarray.filter(
@@ -634,21 +613,15 @@ module.exports = {
       let speedscore = speed * 15;
       let speedscore2 = speed2 * 15;
 
-      let playerrace = dotrack(
-        speed, acceleration, handling, weight
-      );
-      let opponentrace = dotrack(
-        speed2, acceleration2, handling2, weight2
-      );
+      let playerrace = dotrack(speed, acceleration, handling, weight);
+      let opponentrace = dotrack(speed2, acceleration2, handling2, weight2);
 
-      winner = playerrace > opponentrace
-      
+      winner = playerrace > opponentrace;
 
       console.log(playerrace);
-      console.log(opponentrace)
+      console.log(opponentrace);
       console.log(winner);
-    }
-     else if (raceoption == "crosscountry") {
+    } else if (raceoption == "crosscountry") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -804,7 +777,7 @@ module.exports = {
     await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(async () => {
-      console.log(winner)
+      console.log(winner);
       if (winner == true) {
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
         let rankwon = 1;
