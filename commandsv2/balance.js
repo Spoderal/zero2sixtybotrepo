@@ -75,7 +75,7 @@ module.exports = {
       } else {
         let embed = new EmbedBuilder()
           .setTitle(`${user.username}'s Balance`)
-        
+
           .setColor(colors.blue)
           .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
           .setFooter(tipFooterRandom)
@@ -99,7 +99,7 @@ module.exports = {
 
           ${emotes.seriestickets} Series Tickets: ${seriestickets}
               `,
-              inline: true
+              inline: true,
             },
             {
               name: "Keys",

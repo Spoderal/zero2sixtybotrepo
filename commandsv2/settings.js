@@ -71,7 +71,7 @@ module.exports = {
       new Discord.ButtonBuilder()
         .setCustomId("trades")
         .setLabel("Enable Trade Requests")
-        .setStyle("Success"),
+        .setStyle("Success")
     );
 
     if (voteenabled == true) {

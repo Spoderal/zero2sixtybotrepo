@@ -27,7 +27,9 @@ module.exports = {
     let barnmaps = userdata.barnmaps;
 
     if (barnmaps <= 0)
-      return await interaction.reply("You don't have any barn maps! You can earn them in drag races");
+      return await interaction.reply(
+        "You don't have any barn maps! You can earn them in drag races"
+      );
 
     let timeout = 3600000;
 

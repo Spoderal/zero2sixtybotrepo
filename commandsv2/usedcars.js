@@ -114,8 +114,9 @@ module.exports = {
     });
     let tobuy = car1;
     collector2.on("collect", async (i) => {
-      cooldowns =  (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
-      let timeout2 = 5000
+      cooldowns =
+        (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
+      let timeout2 = 5000;
       if (
         cooldowns.is_racing !== null &&
         timeout2 - (Date.now() - cooldowns.is_racing) > 0
@@ -125,8 +126,7 @@ module.exports = {
           content: `Wait for your race to finish to run other commands`,
           fetchReply: true,
           ephemeral: true,
-        })
-
+        });
       }
 
       if (i.customId.includes("jerry")) {

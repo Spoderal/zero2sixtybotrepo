@@ -763,10 +763,9 @@ module.exports = {
         }
 
         if (raceoption == "trackraceevent" && randcar >= 6) {
-          
-          let filteredcar = usercars.filter((car) => car.Name == car2.Name)
+          let filteredcar = usercars.filter((car) => car.Name == car2.Name);
 
-          if(!filteredcar[0]){
+          if (!filteredcar[0]) {
             let carobj = {
               ID: car2.alias,
               Name: car2.Name,
@@ -783,7 +782,6 @@ module.exports = {
             };
             rewards.push(`${carobj.Emote} ${carobj.Name} Won!`);
             userdata.cars.push(carobj);
-
           }
         }
         if (raceoption == "carseries") {
@@ -807,7 +805,7 @@ module.exports = {
             }
           );
 
-          userdata.seriestickets -= 1
+          userdata.seriestickets -= 1;
         }
         embed.addFields({
           name: `Rewards`,

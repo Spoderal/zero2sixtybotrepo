@@ -38,7 +38,9 @@ module.exports = {
       house = housedb[house];
       housearr.push(house);
       housearray.push(
-        `${house.Emote} ${house.Name} : ${toCurrency(house.Price)} **<:rank_newprestige:1114812459182723102> ${house.Prestige}**\`ID: ${
+        `${house.Emote} ${house.Name} : ${toCurrency(
+          house.Price
+        )} **<:rank_newprestige:1114812459182723102> ${house.Prestige}**\`ID: ${
           house.id
         }\``
       );
@@ -114,6 +116,6 @@ module.exports = {
         .setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
-    } 
+    }
   },
 };
