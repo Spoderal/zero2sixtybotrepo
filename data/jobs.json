@@ -87,7 +87,7 @@
       "This car is just too uncomfortable, 2 stars",
       "You missed Spoders destination now hes late for work...1 star."
     ],
-    "items":["star sticker"],
+    "items": ["star sticker"],
     "Positions": [
       {
         "name": "New Zuber Driver",
@@ -156,7 +156,7 @@
       "You took a photo of a Lamborghini Huracan!",
       "You took a photo of a Porsche 911!",
       "You took a photo of a Ford Mustang!",
-      
+
       "You took a photo of a Chevy Camaro!",
       "You took a photo of a McLaren F1!"
     ],
@@ -165,7 +165,7 @@
       "Your photo has a smudge...",
       "Your photo SUCKS..."
     ],
-    "items":["camera"],
+    "items": ["camera"],
     "Positions": [
       {
         "name": "Freelance Photographer",

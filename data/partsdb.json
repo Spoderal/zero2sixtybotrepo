@@ -2555,8 +2555,8 @@
       "Tier": "1",
       "Type": "bodykit",
       "DecreasedSpeed": "0",
-      "Stars":1,
-      "Image":"https://i.ibb.co/ySywtH2/bodykit1.png"
+      "Stars": 1,
+      "Image": "https://i.ibb.co/ySywtH2/bodykit1.png"
     },
     "t2bodykit": {
       "Name": "T2BodyKit",
@@ -2569,8 +2569,8 @@
       "Tier": "2",
       "Type": "bodykit",
       "DecreasedSpeed": "0",
-      "Stars":1.5,
-      "Image":"https://i.ibb.co/rMm4CLM/part-t1widebody.png"
+      "Stars": 1.5,
+      "Image": "https://i.ibb.co/rMm4CLM/part-t1widebody.png"
     },
     "t3bodykit": {
       "Name": "T3BodyKit",
@@ -2583,8 +2583,8 @@
       "Tier": "3",
       "Type": "bodykit",
       "DecreasedSpeed": "0",
-      "Stars":2,
-      "Image":"https://i.ibb.co/sJMw7Ch/part-t3widebody.png"
+      "Stars": 2,
+      "Image": "https://i.ibb.co/sJMw7Ch/part-t3widebody.png"
     },
     "t4bodykit": {
       "Name": "T4BodyKit",
@@ -2597,8 +2597,8 @@
       "Tier": "4",
       "Type": "bodykit",
       "DecreasedSpeed": "0",
-      "Stars":2.5,
-      "Image":"https://i.ibb.co/1r10X1k/part-t4widebody.png"
+      "Stars": 2.5,
+      "Image": "https://i.ibb.co/1r10X1k/part-t4widebody.png"
     },
     "t5bodykit": {
       "Name": "T5BodyKit",
@@ -2611,8 +2611,8 @@
       "Tier": "5",
       "Type": "bodykit",
       "DecreasedSpeed": "0",
-      "Stars":3,
-      "Image":"https://i.ibb.co/h9k60S1/part-t5widebody.png"
+      "Stars": 3,
+      "Image": "https://i.ibb.co/h9k60S1/part-t5widebody.png"
     },
     "t1spoiler": {
       "Name": "T1Spoiler",

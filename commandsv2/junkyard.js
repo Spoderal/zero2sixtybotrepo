@@ -73,27 +73,24 @@ module.exports = {
       cooldowndata.junk = Date.now();
       await cooldowndata.save();
       userdata.parts.push(part.Name.toLowerCase());
-      let part2
-  
+      let part2;
 
       await userdata.save();
       let embed = new Discord.EmbedBuilder()
         .setTitle(`${rarity.type} Part Find`)
         .addFields([{ name: `Part`, value: `${part.Name}` }])
         .setColor(colors.blue);
-      if(userdata.business && userdata.business.Business == "Car Mechanic"){
+      if (userdata.business && userdata.business.Business == "Car Mechanic") {
         let pIndex2 = Math.floor(Math.random() * 100);
         let rarity2 = rarities[probability[pIndex2]];
-      let barnfind2 = lodash.sample(barns.Parts[rarity2.type.toLowerCase()]);
+        let barnfind2 = lodash.sample(barns.Parts[rarity2.type.toLowerCase()]);
 
-       part2 = partsdb.Parts[barnfind2.toLowerCase()];
+        part2 = partsdb.Parts[barnfind2.toLowerCase()];
 
-      userdata.parts.push(part2.Name.toLowerCase());
-        embed.addFields(
-          {name: `Extra part`, value: `${part2.Name}`}
-        )
+        userdata.parts.push(part2.Name.toLowerCase());
+        embed.addFields({ name: `Extra part`, value: `${part2.Name}` });
       }
-        
+
       await interaction.reply({ embeds: [embed] });
     }
 

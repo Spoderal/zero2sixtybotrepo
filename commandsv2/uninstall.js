@@ -77,8 +77,8 @@ module.exports = {
       selected[0].Handling += partindb.HandlingMinus;
     }
 
-    if(partindb.Stars){
-      selected[0].Rating -= partindb.Stars
+    if (partindb.Stars) {
+      selected[0].Rating -= partindb.Stars;
     }
 
     selected[0][partindb.Type.toLowerCase()] = null;

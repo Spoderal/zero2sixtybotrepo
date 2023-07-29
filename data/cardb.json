@@ -39,7 +39,7 @@
       "Handling": 500,
       "Class": "A",
       "Weight": 3626,
-      "Drivetrain":"RWD"
+      "Drivetrain": "RWD"
     },
     "2021 acura tlx type s": {
       "alias": "2021 tlx type s",
@@ -56,7 +56,7 @@
       "Handling": 600,
       "Class": "B",
       "Weight": 4221,
-      "Drivetrain":"AWD",
+      "Drivetrain": "AWD",
       "Obtained": "Rare Imports"
     },
 
@@ -75,7 +75,7 @@
       "Handling": 500,
       "Starter": true,
       "Weight": 2293,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "D"
     },
 
@@ -94,7 +94,7 @@
       "Handling": 650,
       "Starter": true,
       "Weight": 2700,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Class": "D"
     },
     "2000 bmw series 3": {
@@ -112,7 +112,7 @@
       "Handling": 650,
       "Starter": true,
       "Weight": 3100,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Class": "D"
     },
     "1999 audi a4": {
@@ -130,7 +130,7 @@
       "Handling": 650,
       "Starter": true,
       "Weight": 2900,
-      "Drivetrain":"AWD",
+      "Drivetrain": "AWD",
       "Class": "D"
     },
 
@@ -146,7 +146,7 @@
       "0-60": 3,
       "Drift": 0,
       "Handling": 500,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Obtained": "Crew Season",
       "Weight": 3395
     },
@@ -165,7 +165,7 @@
       "Handling": 400,
       "Starter": true,
       "Class": "D",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 3069
     },
     "2012 hyundai veloster": {
@@ -183,7 +183,7 @@
       "Handling": 350,
       "Starter": true,
       "Class": "D",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 2813
     },
     "egg mobile": {
@@ -201,7 +201,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 1000
     },
     "2023 egg mobile": {
@@ -219,7 +219,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 green egg mobile": {
@@ -237,7 +237,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 pink egg mobile": {
@@ -255,7 +255,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
 
@@ -274,7 +274,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 steam egg mobile": {
@@ -292,7 +292,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 cracked egg mobile": {
@@ -310,7 +310,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 ferrari egg mobile": {
@@ -328,7 +328,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 time egg mobile": {
@@ -346,7 +346,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 space egg mobile": {
@@ -364,7 +364,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "2023 gold egg mobile": {
@@ -382,7 +382,7 @@
       "Handling": 500,
       "Obtained": "Event",
       "Class": "N",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 900
     },
     "1999 honda civic si": {
@@ -400,7 +400,7 @@
       "Handling": 375,
       "Starter": true,
       "Class": "D",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 2612
     },
     "1997 acura integra": {
@@ -418,7 +418,7 @@
       "Handling": 375,
       "Starter": true,
       "Class": "D",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 2500
     },
     "1997 acura integra type r": {
@@ -437,7 +437,7 @@
       "Starter": true,
       "Class": "D",
       "Weight": 2643,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Obtained": "Rare Garage"
     },
 
@@ -454,7 +454,7 @@
       "0-60": 8.4,
       "Drift": 0,
       "Handling": 475,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Squad": true,
       "Class": "D",
       "Weight": 2643
@@ -473,7 +473,7 @@
       "Drift": 0,
       "Handling": 425,
       "Class": "D",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Squad": true,
       "Weight": 2969
     },
@@ -492,7 +492,7 @@
       "Handling": 475,
       "Class": "D",
       "Squad": true,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 2765
     },
     "freds 2002 ford mustang": {
@@ -510,7 +510,7 @@
       "Handling": 450,
       "Class": "D",
       "Squad": true,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 3115,
       "Muscle": true
     },
@@ -528,7 +528,7 @@
       "Drift": 1,
       "Handling": 625,
       "Class": "D",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 3512
     },
@@ -546,7 +546,7 @@
       "Drift": 3,
       "Handling": 750,
       "Class": "C",
-      "Drivetrain":"AWD",
+      "Drivetrain": "AWD",
       "Squad": true,
       "Weight": 3230
     },
@@ -563,7 +563,7 @@
       "0-60": 4.6,
       "Drift": 3,
       "Handling": 750,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "C",
       "Squad": true,
       "Weight": 2778
@@ -583,7 +583,7 @@
       "Handling": 700,
       "Class": "C",
       "Squad": true,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 2813
     },
     "kaylas 2010 ford mustang": {
@@ -600,7 +600,7 @@
       "Drift": 5,
       "Handling": 300,
       "Class": "C",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 3601,
       "Muscle": true
@@ -619,7 +619,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "C",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 2000
     },
@@ -639,7 +639,7 @@
       "Handling": 500,
       "Class": "B",
       "Squad": true,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 3870,
       "Muscle": true
     },
@@ -658,7 +658,7 @@
       "Handling": 400,
       "Class": "B",
       "Squad": true,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 4170,
       "Muscle": true
     },
@@ -676,7 +676,7 @@
       "Drift": 0,
       "Handling": 950,
       "Class": "B",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 3390,
       "Muscle": true
@@ -696,7 +696,7 @@
       "Drift": 0,
       "Handling": 850,
       "Class": "B",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 3485
     },
@@ -714,7 +714,7 @@
       "0-60": 3.2,
       "Drift": 0,
       "Handling": 800,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "B",
       "Squad": true,
       "Weight": 3815
@@ -735,7 +735,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "A",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 3300
     },
@@ -754,7 +754,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 2500
     },
@@ -773,7 +773,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "A",
-      "Drivetrain":"AWD",
+      "Drivetrain": "AWD",
       "Squad": true,
       "Weight": 3933
     },
@@ -791,7 +791,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 3100
     },
@@ -807,7 +807,7 @@
       "Image": "https://i.ibb.co/YcDXHV6/2005-Pagani-Zonda-F-008-1600-1.jpg",
       "0-60": 2.5,
       "Drift": 0,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Class": "A",
       "Squad": true,
@@ -826,7 +826,7 @@
       "0-60": 2.5,
       "Drift": 0,
       "Handling": 500,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "S",
       "Squad": true,
       "Weight": 3100
@@ -846,7 +846,7 @@
       "Handling": 500,
       "Class": "S",
       "Squad": true,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 3300
     },
     "lukes 2018 lamborghini aventador s": {
@@ -863,7 +863,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "S",
-      "Drivetrain":"AWD",
+      "Drivetrain": "AWD",
       "Squad": true,
       "Weight": 2800
     },
@@ -882,7 +882,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "S",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 2000
     },
@@ -900,7 +900,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "S",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Squad": true,
       "Weight": 2000
     },
@@ -920,7 +920,7 @@
       "Handling": 375,
       "Obtained": "Common Imports",
       "Class": "D",
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Weight": 2765
     },
     "1991 toyota mr2": {
@@ -936,7 +936,7 @@
       "0-60": 6.0,
       "Drift": 0,
       "Handling": 550,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Starter": true,
       "Class": "D",
       "Weight": 2758
@@ -950,7 +950,7 @@
       "Price": 7200,
       "sellprice": 3540,
       "Engine": "I6",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Image": "https://i.ibb.co/bFxbHd7/maxresdefault-64.jpg",
       "0-60": 7.4,
       "Drift": 0,
@@ -974,7 +974,7 @@
       "Handling": 350,
       "Starter": true,
       "Class": "D",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 3429,
       "Muscle": true
     },
@@ -991,7 +991,7 @@
       "0-60": 8.1,
       "Drift": 0,
       "Class": "D",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Handling": 350,
       "Weight": 3370,
       "Muscle": true
@@ -1010,7 +1010,7 @@
       "Drift": 0,
       "Handling": 350,
       "Starter": true,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3630,
       "Muscle": true
@@ -1028,7 +1028,7 @@
       "Rear": "https://i.pinimg.com/originals/01/ad/8d/01ad8d448c54eb3b2fc7509880523f6f.jpg",
       "0-60": 6.5,
       "Drift": 2,
-      "Drivetrain":"FWD",
+      "Drivetrain": "FWD",
       "Handling": 400,
       "Starter": true,
       "Class": "D",
@@ -1045,7 +1045,7 @@
       "Engine": "V8",
       "Image": "https://i.ibb.co/nrywXLb/ntfziqrk8490yvwfjotn.png",
       "0-60": 5.1,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Drift": 4,
       "Handling": 395,
       "Class": "C",
@@ -1065,7 +1065,7 @@
       "0-60": 3.5,
       "Drift": 0,
       "Handling": 650,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 3820,
       "Muscle": true
@@ -1085,7 +1085,7 @@
       "0-60": 2.9,
       "Drift": 0,
       "Handling": 1000,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3300
     },
@@ -1101,7 +1101,7 @@
       "Image": "https://i.ibb.co/R4Wd6X6/p1.png",
       "0-60": 3.2,
       "Drift": 0,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Class": "S",
       "Weight": 3200
@@ -1120,7 +1120,7 @@
       "0-60": 3.1,
       "Drift": 0,
       "Handling": 500,
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Class": "S",
       "Weight": 3200
@@ -8344,7 +8344,7 @@
       "Handling": 1000,
       "Class": "A",
       "Weight": 2700,
-      "Obtained":"Track Legends",
+      "Obtained": "Track Legends",
       "Track": true
     },
     "2021 alpine a110 r": {
@@ -8589,9 +8589,9 @@
       "0-60": 4.5,
       "Drift": 0,
       "Handling": 750,
-      "Obtained":"Track Legends",
+      "Obtained": "Track Legends",
       "Class": "B",
-      "Muscle":true,
+      "Muscle": true,
       "Weight": 3200,
       "Track": true
     },
@@ -8608,7 +8608,7 @@
       "0-60": 2,
       "Drift": 0,
       "Handling": 1750,
-      "Obtained":"Track Legends",
+      "Obtained": "Track Legends",
       "Class": "S",
       "Weight": 2205,
       "Track": true
@@ -8626,7 +8626,7 @@
       "0-60": 2,
       "Drift": 0,
       "Handling": 1550,
-      "Obtained":"Track Legends",
+      "Obtained": "Track Legends",
       "Class": "S",
       "Weight": 2900,
       "Track": true
@@ -8644,7 +8644,7 @@
       "0-60": 3.7,
       "Drift": 0,
       "Handling": 1200,
-      "Obtained":"Track Legends",
+      "Obtained": "Track Legends",
       "Class": "A",
       "Weight": 2400,
       "Track": true
@@ -8665,7 +8665,7 @@
       "Class": "B",
       "Weight": 400,
       "Motorcycle": true
-    }, 
+    },
     "2020 kawasaki z900": {
       "alias": "2020 z900",
       "Name": "2020 Kawasaki Z900",
@@ -8677,7 +8677,7 @@
       "Image": "https://i.ibb.co/8YZGy9n/2020-kawasaki-z900-abs-main.jpg",
       "0-60": 3.5,
       "Drift": 0,
-      "Class":"D",
+      "Class": "D",
       "Handling": 1000,
       "Motorcycle": true,
       "Weight": 467
@@ -8693,7 +8693,7 @@
       "Image": "https://i.ibb.co/g7k2Lyn/ninja.png",
       "0-60": 4.2,
       "Drift": 0,
-      "Class":"D",
+      "Class": "D",
       "Handling": 750,
       "Motorcycle": true,
       "Weight": 423
@@ -8709,7 +8709,7 @@
       "Image": "https://i.ibb.co/LSBwJdG/97854153.png",
       "0-60": 5.2,
       "Drift": 0,
-      "Class":"D",
+      "Class": "D",
       "Handling": 700,
       "Motorcycle": true,
       "Weight": 313
