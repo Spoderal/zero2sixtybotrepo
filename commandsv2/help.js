@@ -21,19 +21,15 @@ module.exports = {
       new ButtonBuilder()
         .setStyle("Link")
         .setLabel("💙 Support Server")
-        .setURL("https://discord.gg/AK3m3CSn58"),
+        .setURL("https://discord.gg/5j8SYkrf4z"),
       new ButtonBuilder()
         .setStyle("Link")
         .setLabel("🗒️ Docs")
-        .setURL("http://zero2sixty.xyz/docs.html"),
+        .setURL("https://zero2sixty.app/commands"),
       new ButtonBuilder()
         .setStyle("Link")
         .setLabel("🧡 Patreon")
-        .setURL("https://www.patreon.com/zero2sixtybot"),
-      new ButtonBuilder()
-        .setStyle("Secondary")
-        .setLabel("🏆Achievements")
-        .setCustomId("achievements")
+        .setURL("https://www.patreon.com/zero2sixtybot")
     );
 
     const row2 = new ActionRowBuilder().addComponents(

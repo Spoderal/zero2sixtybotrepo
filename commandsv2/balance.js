@@ -75,37 +75,46 @@ module.exports = {
       } else {
         let embed = new EmbedBuilder()
           .setTitle(`${user.username}'s Balance`)
-          .setDescription(
-            `
-            ${emotes.cash} Z Cash: ${toCurrency(cash)} \u200b ${
-              emotes.gold
-            } Gold: ${gold}
-  
-            ${emotes.bounty} Bounty: ${bounty}
-
-            ${emotes.barnMapCommon} Barn Maps: ${barnmaps}
-
-            ${emotes.wheelSpin} Wheel spins: ${wheelspins}  
-            
-            ${emotes.superWheel} Super Wheel spins: ${swheelspins}  
-            
-            ${emotes.blueprints} Blueprints: ${blueprints}
-
-            ${emotes.seriestickets} Series Tickets: ${seriestickets}
-            `
-          )
+        
           .setColor(colors.blue)
           .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
           .setFooter(tipFooterRandom)
           .setFields([
             {
+              name: "Main",
+              value: `
+              ${emotes.cash} Z Cash: ${toCurrency(cash)} \u200b ${
+                emotes.gold
+              } Gold: ${gold}
+    
+              ${emotes.bounty} Bounty: ${bounty}
+  
+              ${emotes.barnMapCommon} Barn Maps: ${barnmaps}
+  
+              ${emotes.wheelSpin} Wheel spins: ${wheelspins}  
+              
+              ${emotes.superWheel} Super Wheel spins: ${swheelspins}  
+              
+              ${emotes.blueprints} Blueprints: ${blueprints}
+
+          ${emotes.seriestickets} Series Tickets: ${seriestickets}
+              `,
+              inline: true
+            },
+            {
               name: "Keys",
               value: `
-              ${emotes.commonKey} Common: ${ckeys} *Credits: ${commonCredits}*
-              ${emotes.rareKey} Rare: ${rkeys} *Credits: ${rareCredits}*
-              ${emotes.exoticKey} Exotic: ${ekeys} *Credits: ${exoticCredits}*
+              ${emotes.commonKey} Common: ${ckeys} 
+              *Credits: ${commonCredits}*
+
+              ${emotes.rareKey} Rare: ${rkeys} 
+              *Credits: ${rareCredits}*
+
+              ${emotes.exoticKey} Exotic: ${ekeys} 
+              *Credits: ${exoticCredits}*
+
               ${emotes.dirftKey} Event Keys ${evkeys}
-              
+
               <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
               `,
               inline: true,
@@ -114,6 +123,7 @@ module.exports = {
               name: "Event Items",
               value: `
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
+              
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
               `,
               inline: true,

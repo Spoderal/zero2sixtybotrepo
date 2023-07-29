@@ -268,7 +268,6 @@ module.exports = {
           console.log(usercash);
 
           userdata.rkeys = newamount;
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (rewardtoclaim.Item.includes("Common Keys")) {
@@ -281,7 +280,6 @@ module.exports = {
           console.log(usercash);
 
           userdata.ckeys = newamount;
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (rewardtoclaim.Item.includes("Exotic Keys")) {
@@ -294,7 +292,6 @@ module.exports = {
           console.log(usercash);
 
           userdata.ekeys = newamount;
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (rewardtoclaim.Item.includes("Garage Spaces")) {
@@ -307,7 +304,6 @@ module.exports = {
           console.log(usercash);
 
           userdata.garageLimit = newamount;
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (rewardtoclaim.Item.includes("RP")) {
@@ -320,7 +316,6 @@ module.exports = {
           console.log(usercash);
 
           userdata.rp4 = newamount;
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
@@ -341,35 +336,30 @@ module.exports = {
             MaxGas: 10,
           };
           userdata.cars.push(carobj);
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
           let car = partdb.Parts[rewardtoclaim.Item.toLowerCase()];
 
           userdata.parts.push(car.Name.toLowerCase());
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (itemdb[rewardtoclaim.Item.toLowerCase()]) {
           let car = itemdb[rewardtoclaim.Item.toLowerCase()];
 
           userdata.items.push(car.Name.toLowerCase());
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()]) {
           let car = pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()];
 
           userdata.pfps.push(rewardtoclaim.Item.toLowerCase());
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         } else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
           let car = titledb[rewardtoclaim.Item.toLowerCase()];
 
           userdata.titles.push(rewardtoclaim.Item.toLowerCase());
-          userdata.notoriety -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
         }

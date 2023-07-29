@@ -235,6 +235,7 @@ module.exports = {
     });
 
     cooldowndata.drift = Date.now();
+    cooldowndata.is_racing = Date.now();
     cooldowndata.save();
     let x = setInterval(async () => {
       timelimit -= 1;

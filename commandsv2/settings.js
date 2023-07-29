@@ -48,8 +48,7 @@ module.exports = {
         { name: "Daily Reward Reminder", value: `${demote}` },
         { name: "Top.gg Vote Reminder", value: `${vemote}` },
         { name: "Tips", value: `${temote}` },
-        { name: "Trade Requests", value: `${tremote}` },
-        { name: "Mode", value: `${memote}` }
+        { name: "Trade Requests", value: `${tremote}` }
       )
       .setColor(colors.blue);
 
@@ -73,11 +72,6 @@ module.exports = {
         .setCustomId("trades")
         .setLabel("Enable Trade Requests")
         .setStyle("Success"),
-      new Discord.ButtonBuilder()
-        .setCustomId("police")
-        .setLabel("Enable Police Mode")
-        .setEmoji("🚨")
-        .setStyle("Success")
     );
 
     if (voteenabled == true) {

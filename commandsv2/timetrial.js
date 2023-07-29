@@ -89,6 +89,7 @@ module.exports = {
       if (range) selected.Range -= 1;
 
       cooldowndata.timetrial = Date.now();
+      cooldowndata.is_racing = Date.now();
       cooldowndata.save();
 
       let mph = selected.Speed;

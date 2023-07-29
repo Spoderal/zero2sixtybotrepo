@@ -26,9 +26,6 @@ module.exports = {
     )
     .addSubcommand((cmd) =>
       cmd.setDescription("View the list of houses").setName("list")
-    )
-    .addSubcommand((cmd) =>
-      cmd.setDescription("View your houses").setName("view")
     ),
 
   async execute(interaction) {
@@ -41,7 +38,7 @@ module.exports = {
       house = housedb[house];
       housearr.push(house);
       housearray.push(
-        `${house.Emote} ${house.Name} : ${toCurrency(house.Price)} \`ID: ${
+        `${house.Emote} ${house.Name} : ${toCurrency(house.Price)} **<:rank_newprestige:1114812459182723102> ${house.Prestige}**\`ID: ${
           house.id
         }\``
       );
@@ -60,7 +57,7 @@ module.exports = {
         .setTitle("Houses For Sale")
         .setDescription(
           `
-          ${housearray.join("\n")}
+          ${housearray.join("\n\n")}
           `
         )
         .setColor(colors.blue);
@@ -117,29 +114,6 @@ module.exports = {
         .setColor(colors.blue);
 
       interaction.reply({ embeds: [embed] });
-    } else if (subcommand == "view") {
-      let uhouses = userdata.houses;
-      let houseuserarr = [];
-
-      if (!uhouses || uhouses.length == 0)
-        return interaction.reply("You don't own any houses!");
-
-      for (let h in uhouses) {
-        houseuserarr.push(`${uhouses[h].Emote} ${uhouses[h].Name}`);
-      }
-
-      let filteredprice = uhouses.sort(
-        (house, house2) => house2.Price - house.Price
-      );
-      console.log(filteredprice[0]);
-
-      let embed = new Discord.EmbedBuilder()
-        .setTitle(`Houses for ${interaction.user.username}`)
-        .setDescription(`${houseuserarr.join("\n")}`)
-        .setColor(colors.blue)
-        .setThumbnail(filteredprice[0].Image);
-
-      interaction.reply({ embeds: [embed] });
-    }
+    } 
   },
 };

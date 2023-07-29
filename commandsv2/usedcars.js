@@ -112,9 +112,23 @@ module.exports = {
     let collector2 = msg.createMessageComponentCollector({
       filter: filter2,
     });
-
     let tobuy = car1;
     collector2.on("collect", async (i) => {
+      cooldowns =  (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
+      let timeout2 = 5000
+      if (
+        cooldowns.is_racing !== null &&
+        timeout2 - (Date.now() - cooldowns.is_racing) > 0
+      ) {
+        cooldowns.command_ran = Date.now();
+        return await interaction.channel.send({
+          content: `Wait for your race to finish to run other commands`,
+          fetchReply: true,
+          ephemeral: true,
+        })
+
+      }
+
       if (i.customId.includes("jerry")) {
         tobuy = car1;
         embed = new Discord.EmbedBuilder()

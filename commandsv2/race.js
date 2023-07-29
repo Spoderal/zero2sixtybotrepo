@@ -588,63 +588,7 @@ module.exports = {
       console.log(winner);
     }
     //test
-    else if (raceoption == "trackraceevent") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
-
-      let weight2 = car2.Weight;
-      let speed2 = car2.Speed;
-      let acceleration2 = car2["0-60"];
-      let handling2 = car2.Handling;
-
-      let handlingscore = handling * 100;
-      let handlingscore2 = handling2 * 100;
-
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
-
-      let speedscore = speed * 15;
-      let speedscore2 = speed2 * 15;
-
-      let playerrace = dotrack(speed, acceleration, handling, weight);
-      let opponentrace = dotrack(speed2, acceleration2, handling2, weight2);
-
-      winner = playerrace > opponentrace;
-
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
-    } else if (raceoption == "crosscountry") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
-
-      let weight2 = car2.Weight;
-      let speed2 = car2.Speed;
-      let acceleration2 = car2["0-60"];
-      let handling2 = car2.Handling;
-
-      let handlingscore = handling * 150;
-      let handlingscore2 = handling2 * 150;
-
-      let weightscore = Math.floor(weight / 10);
-      let weightscore2 = Math.floor(weight2 / 10);
-
-      let speedscore = speed * 20;
-      let speedscore2 = speed2 * 20;
-
-      let playerrace = dorace(speed, acceleration, handling, weight);
-      let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
-
-      winner = playerrace > opponentrace;
-
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
-    } else if (raceoption == "motorcyclemad") {
+    else if (raceoption == "motorcyclemad") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -838,22 +782,28 @@ module.exports = {
         }
 
         if (raceoption == "trackraceevent" && randcar >= 6) {
-          let carobj = {
-            ID: car2.alias,
-            Name: car2.Name,
-            Speed: car2.Speed,
-            Acceleration: car2["0-60"],
-            Handling: car2.Handling,
-            Parts: [],
-            Emote: car2.Emote,
-            Livery: car2.Image,
-            Miles: 0,
-            WeightStat: car2.Weight,
-            Gas: 10,
-            MaxGas: 10,
-          };
-          rewards.push(`${carobj.Emote} ${carobj.Name} Won!`);
-          userdata.cars.push(carobj);
+          
+          let filteredcar = usercars.filter((car) => car.Name == car2.Name)
+
+          if(!filteredcar[0]){
+            let carobj = {
+              ID: car2.alias,
+              Name: car2.Name,
+              Speed: car2.Speed,
+              Acceleration: car2["0-60"],
+              Handling: car2.Handling,
+              Parts: [],
+              Emote: car2.Emote,
+              Livery: car2.Image,
+              Miles: 0,
+              WeightStat: car2.Weight,
+              Gas: 10,
+              MaxGas: 10,
+            };
+            rewards.push(`${carobj.Emote} ${carobj.Name} Won!`);
+            userdata.cars.push(carobj);
+
+          }
         }
         if (raceoption == "carseries") {
           rewards.push(`+1 Wins`);
@@ -876,7 +826,7 @@ module.exports = {
             }
           );
 
-          userdata.seriestickets -= 1;
+          userdata.seriestickets -= 1
         }
         embed.addFields({
           name: `Rewards`,
