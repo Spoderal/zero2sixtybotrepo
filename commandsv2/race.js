@@ -440,40 +440,21 @@ module.exports = {
       return interaction.reply("You need a motorcycle for this race!");
 
     if (tieroption == 1 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) => car.Speed <= 300 && car.Track
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 300 && car.Track);
     } else if (tieroption == 2 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) => car.Speed <= 400  && car.Track
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 400 && car.Track);
     } else if (tieroption == 3 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) => car.Speed <= 500  && car.Track
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 500 && car.Track);
     } else if (tieroption == 4 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) => car.Speed <= 600 && car.Track
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 600 && car.Track);
     } else if (tieroption == 5 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) =>
-          (car.Speed <= 700  && car.Track)
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 700 && car.Track);
     } else if (tieroption == 6 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) =>
-          (car.Speed <= 800 && car.Track) 
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 800 && car.Track);
     } else if (tieroption == 7 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) =>
-          (car.Speed <= 900 && car.Track)
-      );
+      cartofilter = carsarray.filter((car) => car.Speed <= 900 && car.Track);
     } else if (tieroption == 8 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter(
-        (car) =>  (car.Speed >= 900 && car.Track) 
-      );
+      cartofilter = carsarray.filter((car) => car.Speed >= 900 && car.Track);
     }
 
     car2 = lodash.sample(cartofilter);
