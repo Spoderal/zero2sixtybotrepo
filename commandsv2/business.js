@@ -256,7 +256,10 @@ module.exports = {
         await i.update(em);
 
         collector2.on("collect", async (i) => {
-          if (upgrades[i.customId]) {
+          let upgrade = upgrades.filter(
+            (upgrade) => upgrade.ID == i.customId
+          );
+          if (upgrade[0]) {
             let upgrade = upgrades.filter(
               (upgrade) => upgrade.ID == i.customId
             );
@@ -450,7 +453,7 @@ module.exports = {
         await i.update({ content: `✅`, fetchReply: true });
       } else if (businesses[i.customId]) {
         if (businesses[i.customId].Cost > userdata.cash)
-          return interaction.reply(
+          return interaction.channel.send(
             `You need ${businesses[i.customId].Cost} to open this business!`
           );
         embed.setTitle(
