@@ -58,7 +58,7 @@ module.exports = {
       userdata.blueprints -= 1;
       userdata.update();
 
-      userdata.save()
+      userdata.save();
       let embed = new EmbedBuilder()
         .setTitle(`Revealing blueprint...`)
         .setColor(`#60b0f4`);

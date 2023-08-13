@@ -60,7 +60,6 @@
       "Obtained": "Rare Imports"
     },
 
-
     "1995 mazda miata": {
       "alias": "1995 miata",
       "Name": "1995 Mazda Miata",
@@ -8211,7 +8210,7 @@
       "Handling": 1800,
       "Class": "S",
       "Weight": 4100,
-      "Obtained":"Event",
+      "Obtained": "Event",
       "Track": true
     },
     "2019 mclaren senna gtr": {
@@ -8229,7 +8228,7 @@
       "Handling": 3500,
       "Class": "S",
       "Weight": 2600,
-      "Obtained":"Event",
+      "Obtained": "Event",
       "Track": true
     },
     "2010 pagani zonda r evolution": {
@@ -8246,7 +8245,7 @@
       "Drift": 0,
       "Handling": 1500,
       "Class": "S",
-      "Obtained":"Event",
+      "Obtained": "Event",
       "Weight": 2300,
       "Track": true
     },
@@ -8282,7 +8281,7 @@
       "Drift": 0,
       "Handling": 850,
       "Class": "C",
-      "Obtained":"Event",
+      "Obtained": "Event",
       "Weight": 2700,
       "Track": true
     },
@@ -8648,11 +8647,11 @@
       "Image": "https://i.ibb.co/tPqcqJr/project7.png",
       "0-60": 4.3,
       "Drift": 0,
-      "Exclusive":7000,
+      "Exclusive": 7000,
       "Handling": 1000,
       "Class": "B",
       "Weight": 3495,
-      "Drivetrain":"RWD"
+      "Drivetrain": "RWD"
     },
     "2022 volkswagen golf r": {
       "alias": "2022 golf r",
@@ -8667,9 +8666,9 @@
       "0-60": 3.9,
       "Handling": 650,
       "Class": "C",
-      "Exclusive":500,
+      "Exclusive": 500,
       "Weight": 3400,
-      "Drivetrain":"AWD",
+      "Drivetrain": "AWD",
       "Obtained": "Event"
     },
     "2023 acura integra type s": {
@@ -8684,7 +8683,7 @@
       "Image": "https://i.ibb.co/t82YsX4/integra.png",
       "0-60": 7,
       "Drift": 0,
-      "Exclusive":1000,
+      "Exclusive": 1000,
       "Handling": 750,
       "Class": "B",
       "Weight": 3200,
@@ -8700,7 +8699,7 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "V10",
-      "Exclusive":8000,
+      "Exclusive": 8000,
       "Image": "https://i.ibb.co/QFSKYGT/2009-lamborghini-murcielago-sv-coupe-1.jpg",
       "0-60": 3.5,
       "Drift": 0,
@@ -8716,7 +8715,7 @@
       "kmh": 297,
       "Price": 0,
       "sellprice": 60000,
-      "Exclusive":2500,
+      "Exclusive": 2500,
       "Engine": "I4",
       "Image": "https://i.ibb.co/cCqGPGM/a45.png",
       "0-60": 4.1,
@@ -8733,7 +8732,7 @@
       "kmh": 233,
       "Speed": 305,
       "Price": 0,
-      "Exclusive":300,
+      "Exclusive": 300,
       "sellprice": 19200,
       "Engine": "B4",
       "Image": "https://i.ibb.co/YDtyCJV/subaru-impreza-wrx-2010-01.jpg",

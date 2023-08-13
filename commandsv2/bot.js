@@ -19,8 +19,8 @@ module.exports = {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
     let gas = global.gas;
-    
-    let fixed = gas.toFixed(1)
+
+    let fixed = gas.toFixed(1);
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Info for ${bot.username}`)

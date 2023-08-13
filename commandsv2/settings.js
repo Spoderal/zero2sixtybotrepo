@@ -17,7 +17,7 @@ module.exports = {
     let tipsenabled = userdata.settings.tips;
     let tradesenabled = userdata.settings.trades;
     let policemode = userdata.police;
-    let autogas = userdata.autogas
+    let autogas = userdata.autogas;
     if (!userdata.settings.trades || userdata.settings.trades == null) {
       userdata.settings.trades = true;
       userdata.update();
@@ -27,7 +27,7 @@ module.exports = {
     let vemote = "❌";
     let temote = "❌";
     let tremote = "❌";
-    let gasemote = "❌"
+    let gasemote = "❌";
     let memote = "🏎️";
 
     if (dailyenabled == true) {
@@ -42,7 +42,7 @@ module.exports = {
     if (autogas == true) {
       gasemote = "✅";
     }
-    
+
     if (policemode == true) {
       memote = "🚨";
     }
@@ -54,7 +54,7 @@ module.exports = {
         { name: "Top.gg Vote Reminder", value: `${vemote}` },
         { name: "Tips", value: `${temote}` },
         { name: "Trade Requests", value: `${tremote}` },
-        {name: "Auto Fill Gas", value: `${gasemote}`}
+        { name: "Auto Fill Gas", value: `${gasemote}` }
       )
       .setColor(colors.blue);
 
@@ -78,10 +78,10 @@ module.exports = {
         .setCustomId("trades")
         .setLabel("Enable Trade Requests")
         .setStyle("Success"),
-        new Discord.ButtonBuilder()
+      new Discord.ButtonBuilder()
         .setCustomId("gas")
         .setLabel("Enable Auto Fill Gas")
-        .setStyle("Success"),
+        .setStyle("Success")
     );
 
     if (voteenabled == true) {
@@ -148,7 +148,7 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            {name: "Auto Fill Gas", value: `${gasemote}`}
+            { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -156,8 +156,7 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      } 
-      else if (i.customId.includes("gas")) {
+      } else if (i.customId.includes("gas")) {
         if (userdata.autogas == true) {
           userdata.autogas = false;
           row.components[0].setStyle("Success");
@@ -181,8 +180,7 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            {name: "Auto Fill Gas", value: `${gasemote}`}
-            
+            { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -190,8 +188,7 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      } 
-      else if (i.customId.includes("police")) {
+      } else if (i.customId.includes("police")) {
         if (!userdata.work)
           return interaction.editReply(
             "You need to have the police job for this setting!"
@@ -224,7 +221,7 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            {name: "Auto Fill Gas", value: `${gasemote}`}
+            { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -256,7 +253,7 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            {name: "Auto Fill Gas", value: `${gasemote}`}
+            { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
         await i.update({
@@ -288,7 +285,7 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            {name: "Auto Fill Gas", value: `${gasemote}`}
+            { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
         await i.update({

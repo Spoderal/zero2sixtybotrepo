@@ -29,7 +29,7 @@ module.exports = {
     let carclassAarr = [];
     let carclassSarr = [];
     let carclassParr = [];
-    let carEventarr = []
+    let carEventarr = [];
     let newcars = [
       cars.Cars["2016 bmw m4 gts"],
       cars.Cars["2018 bmw m4cs"],
@@ -257,9 +257,7 @@ module.exports = {
               });
             }
           }
-        }
-
-        else if (car.Exclusive && car.Price == 0 && !car.Police) {
+        } else if (car.Exclusive && car.Price == 0 && !car.Police) {
           if (car.Stock) {
             let owned2 = usercars.filter((caru) => caru.Name == car.Name);
             if (owned2[0]) {
@@ -589,8 +587,8 @@ module.exports = {
       carclassSarr.map((a) => a),
       10
     );
-        carEventarr = lodash.chunk(
-          carEventarr.map((a) => a),
+    carEventarr = lodash.chunk(
+      carEventarr.map((a) => a),
       10
     );
     newcars = lodash.chunk(
@@ -624,7 +622,7 @@ module.exports = {
         .setCustomId("classS")
         .setEmoji("<:sclass:967698398314655754>")
         .setStyle("Secondary"),
-        new ButtonBuilder()
+      new ButtonBuilder()
         .setCustomId("classE")
         .setEmoji("<:eventclass:1140186232001933312>")
         .setStyle("Secondary")
@@ -1064,11 +1062,10 @@ module.exports = {
         });
 
         page = 1;
-      }
-      else if (i.customId.includes("classE")) {
+      } else if (i.customId.includes("classE")) {
         classpage = carEventarr;
         embed = new EmbedBuilder().setTitle("Event Dealership");
-        console.log(carEventarr)
+        console.log(carEventarr);
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/fDZg10f/eventclass.png")
           .setTitle("Event Dealership")
@@ -1078,14 +1075,18 @@ module.exports = {
         for (let b in carEventarr[0]) {
           let car = carEventarr[0][b];
           console.dir(car);
-       
-              embed.addFields({
-                name: `${car.Emote} ${car.Name}`,
-                value: `\`ID: ${car.alias}\`\nPrice: <:key_z:1140029565360668783> ${numberWithCommas(car.Exclusive)}\nOwned: ${car.owned}`,
-                inline: true,
-              });
-          }
-        
+
+          embed.addFields({
+            name: `${car.Emote} ${car.Name}`,
+            value: `\`ID: ${
+              car.alias
+            }\`\nPrice: <:key_z:1140029565360668783> ${numberWithCommas(
+              car.Exclusive
+            )}\nOwned: ${car.owned}`,
+            inline: true,
+          });
+        }
+
         await i.update({
           embeds: [embed],
           components: [row2, row5, row3, row9],
@@ -1093,8 +1094,7 @@ module.exports = {
         });
 
         page = 1;
-      }
-       else {
+      } else {
         console.log(page);
         let current = page;
         if (i.customId.includes("previous") && page !== 1) {

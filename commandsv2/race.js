@@ -107,7 +107,7 @@ module.exports = {
       let caroj = cardb.Cars[car1];
       carsarray.push(caroj);
     }
-    let globals = await Globals.findOne({})
+    let globals = await Globals.findOne({});
     let userdata = await User.findOne({ id: user.id });
     let prestigerank = userdata.prestige || 0;
     let bountyuser = userdata.bounty || 0;
@@ -345,7 +345,7 @@ module.exports = {
       let targetA = streettiers[tieroption].acc;
       let targetH = streettiers[tieroption].handling;
       let targetW = streettiers[tieroption].weight;
-      let sum = (hp) + (hp / a) + (h) + (w / 100)
+      let sum = hp + hp / a + h + w / 100;
       return sum / 4;
     };
     const dodrag = function (hp, a, h, w) {
@@ -353,18 +353,17 @@ module.exports = {
       let targetA = dragtiers[tieroption].acc;
       let targetH = dragtiers[tieroption].handling;
       let targetW = dragtiers[tieroption].weight;
-      let sum = (hp) + (hp / a) + (w / 100)
+      let sum = hp + hp / a + w / 100;
       return sum / 4;
     };
 
     const dotrack = function (hp, a, h, w) {
-      let targetHp = tracktiers[tieroption].hp
+      let targetHp = tracktiers[tieroption].hp;
       let targetA = tracktiers[tieroption].acc;
       let targetH = tracktiers[tieroption].handling;
       let targetW = tracktiers[tieroption].weight;
 
-      
-      let sum = (hp) + (hp / a) + (h) + (w / 100)
+      let sum = hp + hp / a + h + w / 100;
       return sum / 4;
     };
     const domotor = function (hp, a, h, w) {
@@ -372,7 +371,7 @@ module.exports = {
       let targetA = 3.0;
       let targetH = 1000;
       let targetW = 500;
-      let sum = (hp) + (hp / a) + (h) + (w / 100)
+      let sum = hp + hp / a + h + w / 100;
       return sum / 4;
     };
     let cartofilter = [];
@@ -634,7 +633,7 @@ module.exports = {
     let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];
     let cashwon = tieroption * raceindb.Reward;
-    let rpwon = 10
+    let rpwon = 10;
     if (userdata.prestige) {
       let prestige = userdata.prestige;
       let prestigebonus = prestige * 0.1;
@@ -706,74 +705,78 @@ module.exports = {
           rating += 1;
         }
 
-        if(userdata.using.includes("flat tire")){
-          let itemcooldown = cooldowndata.flattire
+        if (userdata.using.includes("flat tire")) {
+          let itemcooldown = cooldowndata.flattire;
 
           let timeout = 1800000;
-      console.log(timeout - (Date.now() - itemcooldown));
-      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("flat tire");
-        userdata.update();
-        interaction.channel.send("Your flat tire ran out!");
-      }
-      else {
-        cashwon += (cashwon * 0.05)
-      }
-
+          console.log(timeout - (Date.now() - itemcooldown));
+          if (
+            itemcooldown !== null &&
+            timeout - (Date.now() - itemcooldown) < 0
+          ) {
+            console.log("pulled");
+            userdata.using.pull("flat tire");
+            userdata.update();
+            interaction.channel.send("Your flat tire ran out!");
+          } else {
+            cashwon += cashwon * 0.05;
+          }
         }
 
-        if(userdata.using.includes("tequila shot")){
-          let itemcooldown = cooldowndata.tequilla
+        if (userdata.using.includes("tequila shot")) {
+          let itemcooldown = cooldowndata.tequilla;
 
           let timeout = 60000;
-      console.log(timeout - (Date.now() - itemcooldown));
-      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("tequila shot");
-        userdata.update();
-        interaction.channel.send("Your tequila shot ran out!");
-      }
-      else {
-        cashwon = cashwon * 5
-      }
-
+          console.log(timeout - (Date.now() - itemcooldown));
+          if (
+            itemcooldown !== null &&
+            timeout - (Date.now() - itemcooldown) < 0
+          ) {
+            console.log("pulled");
+            userdata.using.pull("tequila shot");
+            userdata.update();
+            interaction.channel.send("Your tequila shot ran out!");
+          } else {
+            cashwon = cashwon * 5;
+          }
         }
 
-        if(userdata.using.includes("radio")){
-          let itemcooldown = cooldowndata.radio
+        if (userdata.using.includes("radio")) {
+          let itemcooldown = cooldowndata.radio;
 
           let timeout = 300000;
-      console.log(timeout - (Date.now() - itemcooldown));
-      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("radio");
-        userdata.update();
-        interaction.channel.send("Your radio ran out!");
-      }
-      else {
-        cashwon = cashwon * 2
-        rpwon = rpwon * 2
-        rankwon = rankwon * 2
-      }
-
+          console.log(timeout - (Date.now() - itemcooldown));
+          if (
+            itemcooldown !== null &&
+            timeout - (Date.now() - itemcooldown) < 0
+          ) {
+            console.log("pulled");
+            userdata.using.pull("radio");
+            userdata.update();
+            interaction.channel.send("Your radio ran out!");
+          } else {
+            cashwon = cashwon * 2;
+            rpwon = rpwon * 2;
+            rankwon = rankwon * 2;
+          }
         }
 
-        if(userdata.using.includes("energy drink")){
-          let itemcooldown = cooldowndata.energydrink
+        if (userdata.using.includes("energy drink")) {
+          let itemcooldown = cooldowndata.energydrink;
 
           let timeout = 600000;
-      console.log(timeout - (Date.now() - itemcooldown));
-      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-        console.log("pulled");
-        userdata.using.pull("energy drink");
-        userdata.update();
-        interaction.channel.send("Your energy drink ran out!");
-      }
-      else {
-        rpwon = rpwon * 2
-      }
-
+          console.log(timeout - (Date.now() - itemcooldown));
+          if (
+            itemcooldown !== null &&
+            timeout - (Date.now() - itemcooldown) < 0
+          ) {
+            console.log("pulled");
+            userdata.using.pull("energy drink");
+            userdata.update();
+            interaction.channel.send("Your energy drink ran out!");
+          } else {
+            rpwon = rpwon * 2;
+          }
         }
 
         if (rating && rating >= 1) {
@@ -795,21 +798,23 @@ module.exports = {
         }
         if (raceoption == "trackrace" && possiblekey == 10 && tieroption <= 2) {
           let randomamount = randomRange(1, 3);
-          if(userdata.using.includes("milk")){
-            let itemcooldown = cooldowndata.milk
-  
+          if (userdata.using.includes("milk")) {
+            let itemcooldown = cooldowndata.milk;
+
             let timeout = 600000;
-        console.log(timeout - (Date.now() - itemcooldown));
-        if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-          console.log("pulled");
-          userdata.using.pull("milk");
-          userdata.update();
-          interaction.channel.send("Your milk ran out!");
-        }
-        else {
-          randomamount = randomamount * 2
-        }
-      }
+            console.log(timeout - (Date.now() - itemcooldown));
+            if (
+              itemcooldown !== null &&
+              timeout - (Date.now() - itemcooldown) < 0
+            ) {
+              console.log("pulled");
+              userdata.using.pull("milk");
+              userdata.update();
+              interaction.channel.send("Your milk ran out!");
+            } else {
+              randomamount = randomamount * 2;
+            }
+          }
           rewards.push(`${emotes.commonKey} ${randomamount}`);
           userdata.ckeys += randomamount;
         } else if (
@@ -818,21 +823,23 @@ module.exports = {
           tieroption <= 4
         ) {
           let randomamount = randomRange(1, 3);
-          if(userdata.using.includes("strawberry milk")){
-            let itemcooldown = cooldowndata.smilk
-  
+          if (userdata.using.includes("strawberry milk")) {
+            let itemcooldown = cooldowndata.smilk;
+
             let timeout = 600000;
-        console.log(timeout - (Date.now() - itemcooldown));
-        if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-          console.log("pulled");
-          userdata.using.pull("strawberry milk");
-          userdata.update();
-          interaction.channel.send("Your strawberry milk ran out!");
-        }
-        else {
-          randomamount = randomamount * 2
-        }
-      }
+            console.log(timeout - (Date.now() - itemcooldown));
+            if (
+              itemcooldown !== null &&
+              timeout - (Date.now() - itemcooldown) < 0
+            ) {
+              console.log("pulled");
+              userdata.using.pull("strawberry milk");
+              userdata.update();
+              interaction.channel.send("Your strawberry milk ran out!");
+            } else {
+              randomamount = randomamount * 2;
+            }
+          }
           rewards.push(`${emotes.rareKey} ${randomamount}`);
           userdata.rkeys += randomamount;
         } else if (
@@ -841,21 +848,23 @@ module.exports = {
           tieroption >= 5
         ) {
           let randomamount = randomRange(1, 3);
-          if(userdata.using.includes("chocolate milk")){
-            let itemcooldown = cooldowndata.cmilk
-  
+          if (userdata.using.includes("chocolate milk")) {
+            let itemcooldown = cooldowndata.cmilk;
+
             let timeout = 600000;
-        console.log(timeout - (Date.now() - itemcooldown));
-        if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
-          console.log("pulled");
-          userdata.using.pull("chocolate milk");
-          userdata.update();
-          interaction.channel.send("Your chocolate milk ran out!");
-        }
-        else {
-          randomamount = randomamount * 2
-        }
-      }
+            console.log(timeout - (Date.now() - itemcooldown));
+            if (
+              itemcooldown !== null &&
+              timeout - (Date.now() - itemcooldown) < 0
+            ) {
+              console.log("pulled");
+              userdata.using.pull("chocolate milk");
+              userdata.update();
+              interaction.channel.send("Your chocolate milk ran out!");
+            } else {
+              randomamount = randomamount * 2;
+            }
+          }
           rewards.push(`${emotes.exoticKey} ${randomamount}`);
           userdata.ekeys += randomamount;
         }
@@ -1047,14 +1056,17 @@ module.exports = {
           }
         }
 
-        if(userdata.autogas == true && selected.Gas == 0){
-          let gasprice = globals.gas
+        if (userdata.autogas == true && selected.Gas == 0) {
+          let gasprice = globals.gas;
 
-          let totalprice = Math.round(gasprice * 10)
+          let totalprice = Math.round(gasprice * 10);
 
-          if(userdata.cash < totalprice) return interaction.channel.send("You have auto gas enabled, but you cant afford to fill your car!")
+          if (userdata.cash < totalprice)
+            return interaction.channel.send(
+              "You have auto gas enabled, but you cant afford to fill your car!"
+            );
 
-          userdata.cash -= totalprice
+          userdata.cash -= totalprice;
 
           await User.findOneAndUpdate(
             {
@@ -1076,37 +1088,40 @@ module.exports = {
           );
         }
 
+        if (userdata.pet) {
+          let itemchance = randomRange(1, 10);
 
-        if(userdata.pet){
-          let itemchance = randomRange(1, 10)
-
-          if(itemchance > 5){
-            let itemarr = []
-            for(let i in itemdb){
-              if(itemdb[i].Findable == true && itemdb[i].Tier && itemdb[i].Tier <= userdata.pet.Tier){
-                itemarr.push(itemdb[i])
+          if (itemchance > 5) {
+            let itemarr = [];
+            for (let i in itemdb) {
+              if (
+                itemdb[i].Findable == true &&
+                itemdb[i].Tier &&
+                itemdb[i].Tier <= userdata.pet.Tier
+              ) {
+                itemarr.push(itemdb[i]);
               }
             }
-            let randomItem = lodash.sample(itemarr)
-            rewards.push(`${randomItem.Emote} ${randomItem.Name}`)
-            userdata.items.push(randomItem.Name.toLowerCase())
+            let randomItem = lodash.sample(itemarr);
+            rewards.push(`${randomItem.Emote} ${randomItem.Name}`);
+            userdata.items.push(randomItem.Name.toLowerCase());
           }
         }
 
-         peteggdrop = randomRange(1, 10)
+        peteggdrop = randomRange(1, 10);
 
-        if(peteggdrop == 2){
-          rewards.push(`${itemdb["pet egg"].Emote} ${itemdb["pet egg"].Name}`)
-          userdata.items.push(`pet egg`)
+        if (peteggdrop == 2) {
+          rewards.push(`${itemdb["pet egg"].Emote} ${itemdb["pet egg"].Name}`);
+          userdata.items.push(`pet egg`);
         }
-         tasks = userdata.tasks || []
-        if(tasks.length > 0){
-          let taskstreet = tasks.filter((task) => task.ID == "1")
-          let tasktrack = tasks.filter((task) => task.ID == "2")
+        tasks = userdata.tasks || [];
+        if (tasks.length > 0) {
+          let taskstreet = tasks.filter((task) => task.ID == "1");
+          let tasktrack = tasks.filter((task) => task.ID == "2");
 
-          if(taskstreet[0] && raceoption == "streetrace"){
-            if(taskstreet[0].Races < 10){
-              taskstreet[0].Races += 1
+          if (taskstreet[0] && raceoption == "streetrace") {
+            if (taskstreet[0].Races < 10) {
+              taskstreet[0].Races += 1;
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
@@ -1116,7 +1131,7 @@ module.exports = {
                     "tasks.$[task]": taskstreet[0],
                   },
                 },
-        
+
                 {
                   arrayFilters: [
                     {
@@ -1126,15 +1141,16 @@ module.exports = {
                 }
               );
             }
-            if(taskstreet[0].Races >= 10){
-              userdata.cash += 10000
-              userdata.tasks.pull(taskstreet[0])
-              interaction.channel.send(`Task completed! You earned ${toCurrency(taskstreet[0].Reward)}`)
+            if (taskstreet[0].Races >= 10) {
+              userdata.cash += 10000;
+              userdata.tasks.pull(taskstreet[0]);
+              interaction.channel.send(
+                `Task completed! You earned ${toCurrency(taskstreet[0].Reward)}`
+              );
             }
-          }
-          else if(tasktrack[0] && raceoption == "trackrace"){
-            if(tasktrack[0].Races < 10){
-              tasktrack[0].Races += 1
+          } else if (tasktrack[0] && raceoption == "trackrace") {
+            if (tasktrack[0].Races < 10) {
+              tasktrack[0].Races += 1;
               await User.findOneAndUpdate(
                 {
                   id: interaction.user.id,
@@ -1144,7 +1160,7 @@ module.exports = {
                     "tasks.$[task]": tasktrack[0],
                   },
                 },
-        
+
                 {
                   arrayFilters: [
                     {
@@ -1154,10 +1170,12 @@ module.exports = {
                 }
               );
             }
-            if(tasktrack[0].Races >= 10){
-              userdata.cash += 15000
-              userdata.tasks.pull(tasktrack[0])
-              interaction.channel.send(`Task completed! You earned ${toCurrency(tasktrack[0].Reward)}`)
+            if (tasktrack[0].Races >= 10) {
+              userdata.cash += 15000;
+              userdata.tasks.pull(tasktrack[0]);
+              interaction.channel.send(
+                `Task completed! You earned ${toCurrency(tasktrack[0].Reward)}`
+              );
             }
           }
         }
@@ -1166,7 +1184,7 @@ module.exports = {
           name: `Rewards`,
           value: `${rewards.join("\n")}`,
         });
-        
+
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} won!`);
       } else if (winner == false) {
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);

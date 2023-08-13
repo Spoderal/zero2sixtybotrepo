@@ -51,7 +51,7 @@ module.exports = {
     if (love < 50) {
       petimage = petdb[pet.pet].Saddest;
     }
-    let tier = petdb[pet.pet].Tier
+    let tier = petdb[pet.pet].Tier;
     console.log(pet);
     console.log(petimage);
 
@@ -67,7 +67,6 @@ module.exports = {
         { name: "Hunger", value: `${hunger}`, inline: true },
         { name: "Thirst", value: `${thirst}`, inline: true },
         { name: "Love", value: `${love}`, inline: true },
-
       ])
       .setDescription(`Can find items up to tier ${tier}`)
       .setThumbnail(petimage)
@@ -97,7 +96,6 @@ module.exports = {
     );
 
     let row2 = new ActionRowBuilder().addComponents(
-    
       new ButtonBuilder()
         .setLabel("Abandon")
         .setEmoji("❌")
@@ -257,21 +255,34 @@ module.exports = {
         collector2.on("collect", async (msg) => {
           nametoset = msg.content;
 
-          let slurs = ["nigger", "nigga", "niger", "nig", "bitch", "fuck", "shit", "shitter", "fag", "faggot"]
+          let slurs = [
+            "nigger",
+            "nigga",
+            "niger",
+            "nig",
+            "bitch",
+            "fuck",
+            "shit",
+            "shitter",
+            "fag",
+            "faggot",
+          ];
 
-      const isValidUrl = urlString=> {
-        try { 
-          return Boolean(new URL(urlString)); 
-        }
-        catch(e){ 
-          return false; 
-        }
-    }
+          const isValidUrl = (urlString) => {
+            try {
+              return Boolean(new URL(urlString));
+            } catch (e) {
+              return false;
+            }
+          };
 
-      if(slurs[nametoset]) return interaction.channel.send("You cant set your pet name to this word!")
+          if (slurs[nametoset])
+            return interaction.channel.send(
+              "You cant set your pet name to this word!"
+            );
 
-
-      if(isValidUrl(nametoset)) return interaction.channel.send("Pet names cant be links!")
+          if (isValidUrl(nametoset))
+            return interaction.channel.send("Pet names cant be links!");
 
           await User.findOneAndUpdate(
             {

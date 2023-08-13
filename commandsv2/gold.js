@@ -27,7 +27,7 @@ module.exports = {
             Barn maps: gold * 1\n
             Super wheel spins: gold * 0.05
           `,
-        }
+        },
       ]);
 
     embed

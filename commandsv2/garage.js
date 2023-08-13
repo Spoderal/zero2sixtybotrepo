@@ -144,9 +144,7 @@ module.exports = {
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
-      .setDescription(
-        `Garage Limit: ${ucars.length}/${garagelimit}`
-      )
+      .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}`)
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
     embed.setImage("attachment://profile-image.png");
@@ -304,9 +302,7 @@ module.exports = {
 
         embed = new EmbedBuilder()
           .setTitle(`Displaying cars for ${user.username}`)
-          .setDescription(
-            `Garage Limit: ${ucars.length}/${garagelimit}`
-          )
+          .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}`)
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
         for (let car in cars[0]) {
@@ -374,15 +370,15 @@ module.exports = {
         });
       } else if (i.customId.includes("items")) {
         if (!displayitems2[0])
-        return interaction.channel.send("You don't have any parts!");
+          return interaction.channel.send("You don't have any parts!");
         itempage = displayitems2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-       
-          embed.setDescription(`${displayitems2.join("\n")}`);
-        
+
+        embed.setDescription(`${displayitems2.join("\n")}`);
+
         await i.update({
           embeds: [embed],
           components: [row, row2],

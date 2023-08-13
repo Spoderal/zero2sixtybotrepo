@@ -5,7 +5,6 @@ const Cooldowns = require("../schema/cooldowns");
 const Globals = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 
-
 const {
   blacklistInteractionCheck,
   userGetFromInteraction,

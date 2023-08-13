@@ -67,7 +67,7 @@ module.exports = {
       rareCredits,
       exoticCredits,
       barnmaps,
-      typekeys
+      typekeys,
     } = profile;
 
     if (userdata.police == false) {

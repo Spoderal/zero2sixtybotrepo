@@ -80,7 +80,7 @@ module.exports = {
         "To use this command, specify the car you want to buy. Example: /buy 1995 Mazda Miata"
       );
 
-     let amount3 = Math.round(amount2)
+    let amount3 = Math.round(amount2);
 
     const carsList = cars.Cars;
     const partsList = parts.Parts;
@@ -170,7 +170,8 @@ module.exports = {
         boughtCarPrice == 0 &&
         !imports.common.Contents.includes(boughtCar.Name.toLowerCase()) &&
         !imports.rare.Contents.includes(boughtCar.Name.toLowerCase()) &&
-        !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase()) && !boughtCar.Exclusive
+        !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase()) &&
+        !boughtCar.Exclusive
       )
         return await interaction.reply("This car is not purchasable.");
 
@@ -267,8 +268,9 @@ module.exports = {
             if (userdata.exoticCredits < 25)
               return interaction.reply("You don't have enough common credits!");
           }
-          if(boughtCar.Exclusive){
-            if(userdata.typekeys < boughtCar.Exclusive) return interaction.reply("You don't have enough keys!")
+          if (boughtCar.Exclusive) {
+            if (userdata.typekeys < boughtCar.Exclusive)
+              return interaction.reply("You don't have enough keys!");
           }
 
           let idtoset = boughtCar.alias;
@@ -319,21 +321,22 @@ module.exports = {
           if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
             userdata.exoticCredits -= 25;
           }
-          let displayprice
-          let emote
+          let displayprice;
+          let emote;
           if (!goldpurchase) {
-            displayprice = boughtCarPrice
-            emote = emotes.cash
+            displayprice = boughtCarPrice;
+            emote = emotes.cash;
             userdata.cash -= boughtCarPrice;
-          }  if (goldpurchase) {
-            emote = "🪙"
-            displayprice = goldpurchase
+          }
+          if (goldpurchase) {
+            emote = "🪙";
+            displayprice = goldpurchase;
             userdata.gold -= cargoldprice;
           }
-           if(boughtCar.Exclusive > 0){
-            displayprice = boughtCar.Exclusive
-            emote = "<:key_z:1140029565360668783>"
-            userdata.typekeys -= boughtCar.Exclusive
+          if (boughtCar.Exclusive > 0) {
+            displayprice = boughtCar.Exclusive;
+            emote = "<:key_z:1140029565360668783>";
+            userdata.typekeys -= boughtCar.Exclusive;
           }
           userdata.cars.push(carobj);
           await userdata.save();
@@ -343,9 +346,7 @@ module.exports = {
             .addFields([
               {
                 name: "Price",
-                value: `${emote} ${numberWithCommas(
-                  displayprice
-                )}`,
+                value: `${emote} ${numberWithCommas(displayprice)}`,
               },
               { name: `ID`, value: `${idtoset}` },
               {
@@ -463,22 +464,22 @@ module.exports = {
           userdata.cars.push(carobj);
           await userdata.save();
 
-          let displayprice
-          let emote
+          let displayprice;
+          let emote;
           if (!goldpurchase) {
-            displayprice = boughtCarPrice
-            emote = emotes.cash
+            displayprice = boughtCarPrice;
+            emote = emotes.cash;
             userdata.cash -= boughtCarPrice;
-          } 
-           if (goldpurchase) {
-            emote = "🪙"
-            displayprice = goldpurchase
+          }
+          if (goldpurchase) {
+            emote = "🪙";
+            displayprice = goldpurchase;
             userdata.gold -= cargoldprice;
           }
-           if(boughtCar.Exclusive){
-            displayprice = boughtCar.Exclusive
-            emote = "<:key_z:1140029565360668783>"
-            userdata.typekeys -= boughtCar.Exclusive
+          if (boughtCar.Exclusive) {
+            displayprice = boughtCar.Exclusive;
+            emote = "<:key_z:1140029565360668783>";
+            userdata.typekeys -= boughtCar.Exclusive;
           }
 
           let embed = new EmbedBuilder()
@@ -573,9 +574,8 @@ module.exports = {
       let user1newarr = [];
 
       for (let i = 0; i < amount3; i++) user1newarr.push(bought);
-      for(let i2 in user1newarr){
-        userdata.items.push(bought)
-
+      for (let i2 in user1newarr) {
+        userdata.items.push(bought);
       }
       userdata.cash -= pricing;
 

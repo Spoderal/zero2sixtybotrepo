@@ -85,7 +85,8 @@ module.exports = {
 
     let acc = selected.Acceleration;
 
-    let weight = selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
+    let weight =
+      selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
 
     let handling = selected.Handling;
 
@@ -144,7 +145,7 @@ module.exports = {
     }
 
     let speed = velocity;
-    let weight2 = weight / 1000
+    let weight2 = weight / 1000;
     let momentum = speed / weight2;
 
     momentum = momentum / acc;
@@ -152,7 +153,7 @@ module.exports = {
     momentum = momentum * handling;
 
     let driftscore = momentum / velocity;
-    console.log(driftscore)
+    console.log(driftscore);
     await interaction.reply({
       content: "Revving engines...",
       fetchReply: true,
@@ -199,7 +200,6 @@ module.exports = {
       miles = 2;
     }
 
-    
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage(trackimg);
@@ -221,7 +221,13 @@ module.exports = {
       .setTitle(`Drifting on the ${trackemote} ${difficulty} ${track} track!`)
       .addFields({
         name: `${selected.Emote} ${selected.Name}`,
-        value: `${emotes.speed} Power: ${velocity.toFixed(1)}\n\n${emotes.zero2sixty} Acceleration: ${acc.toFixed(1)}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling.toFixed(1)}`,
+        value: `${emotes.speed} Power: ${velocity.toFixed(1)}\n\n${
+          emotes.zero2sixty
+        } Acceleration: ${acc.toFixed(1)}s\n\n${
+          emotes.weight
+        } Weight: ${weight}\n\n${emotes.handling} Handling: ${handling.toFixed(
+          1
+        )}`,
 
         inline: true,
       })

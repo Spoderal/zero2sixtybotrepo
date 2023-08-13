@@ -42,14 +42,14 @@ module.exports = {
 
   async execute(interaction) {
     var list = cars.Cars;
-    var list2 = houses
+    var list2 = houses;
     var item = interaction.options.getString("item");
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = (await User.findOne({ id: user.id })) || [];
     let global = await Global.findOne({});
     let settings = userdata.settings;
     let brandsarr = [];
-    let housesarr = []
+    let housesarr = [];
     for (let b in brands) {
       brandsarr.push(brands[b]);
     }
@@ -59,7 +59,7 @@ module.exports = {
     let weightemote = emotes.weight;
     let ucars = userdata.cars || [];
     let carindb = ucars.filter((c) => c.ID == item);
-    let houseindb = housesarr.filter((h) => h.id == item)
+    let houseindb = housesarr.filter((h) => h.id == item);
     if (
       !list[item.toLowerCase()] &&
       !carindb[0] &&
@@ -644,18 +644,19 @@ module.exports = {
       } else {
         price = toCurrency(itemindb.Price);
       }
-      let tier = itemindb.Tier || 0
+      let tier = itemindb.Tier || 0;
       let embed = new Discord.EmbedBuilder()
         .setAuthor({
           name: `Information for ${itemindb.Name}`,
           iconURL: itemindb.Image,
         })
         .setDescription(`${itemindb.Action}\n\nPrice: ${price}`)
-        .addFields({
-          name: "Type",
-          value: `${itemindb.Type}`},
-          {name: "Item Tier",
-          value: `${tier}`}
+        .addFields(
+          {
+            name: "Type",
+            value: `${itemindb.Type}`,
+          },
+          { name: "Item Tier", value: `${tier}` }
         )
         .setColor(colors.blue);
 
@@ -799,24 +800,22 @@ module.exports = {
           });
         }
       });
-    }
-    else if (houseindb[0]){
-
-      let house = houseindb[0]
+    } else if (houseindb[0]) {
+      let house = houseindb[0];
 
       let embed1 = new Discord.EmbedBuilder()
-      .setTitle(`Stats for ${house.Name}`)
-      .setImage(house.Image)
-      .setDescription(
-        `Price: ${toCurrency(house.Price)}\n\nPerk: ${
-          house.Perk
-        }\n\nGarage Space: ${
-          house.Space
-        }\n\nUnlocks at prestige: ${house.Prestige}`
-      )
-      .setColor(colors.blue);
+        .setTitle(`Stats for ${house.Name}`)
+        .setImage(house.Image)
+        .setDescription(
+          `Price: ${toCurrency(house.Price)}\n\nPerk: ${
+            house.Perk
+          }\n\nGarage Space: ${house.Space}\n\nUnlocks at prestige: ${
+            house.Prestige
+          }`
+        )
+        .setColor(colors.blue);
 
-     await interaction.editReply({embeds: [embed1]})
+      await interaction.editReply({ embeds: [embed1] });
     }
   },
 };

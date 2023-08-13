@@ -47,7 +47,7 @@ module.exports = {
     let userparts = userdata.parts;
     let selling = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount") || 1;
-    let amount2 = Math.round(amount)
+    let amount2 = Math.round(amount);
 
     let usercars = userdata.cars;
     if (!selling) return await interaction.reply("Specify a car or part!");
