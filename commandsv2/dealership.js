@@ -36,7 +36,7 @@ module.exports = {
       cars.Cars["2010 subaru wrx sti"],
       cars.Cars["2023 acura integra type s"],
       cars.Cars["2016 jaguar f type project 7"],
-      cars.Cars["2010 lamborghini murcielago sv"]
+      cars.Cars["2010 lamborghini murcielago sv"],
     ];
     let global = await Global.findOne();
     let carstock = global.stock;
