@@ -166,7 +166,7 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "view") {
-      let caroption = interaction.options.getString("car")
+      let caroption = interaction.options.getString("car");
       let livid = interaction.options.getString("id");
       let global = await Global.findOne();
       let liverieslist = global.liveries;
@@ -175,12 +175,13 @@ module.exports = {
       let list = cars.Cars;
       if (!list[caroption.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
-        console.log(caroption)
+      console.log(caroption);
       let cardata = liverieslist.filter(
         (car) => car.Name.toLowerCase() == caroption.toLowerCase()
       );
       console.log(cardata);
-      if (!cardata[0])  return await interaction.reply("This car doesn't have any livery id's");
+      if (!cardata[0])
+        return await interaction.reply("This car doesn't have any livery id's");
 
       let filtered = cardata.filter((e) => e.id == livid);
 
@@ -368,16 +369,13 @@ module.exports = {
       for (var i = 0; i < liveriesforcar.length; i++) {
         let actliv = liveriesforcar[i];
         liverylist.push(actliv);
-      
       }
       let shopItems = cardata;
       if (!shopItems || !shopItems.length)
         return await interaction.reply(`This car doesn't have any liveries!`);
-      shopItems = lodash.chunk(
-        shopItems.map(() => `${liverylist.join("\n")}`)
-      );
+      shopItems = lodash.chunk(shopItems.map(() => `${liverylist.join("\n")}`));
 
-      console.log(liverylist)
+      console.log(liverylist);
 
       const embed = new Discord.EmbedBuilder()
         .setTitle(`Liveries for ${cars.Cars[car].Name}`)
@@ -385,7 +383,7 @@ module.exports = {
         .setDescription(`ID: ${liverylist[0].id}`)
         .setFooter({ text: `Pages 1/${shopItems.length}` })
         .setThumbnail("https://i.ibb.co/Hq4p8bx/usedicon.png")
-        .setColor(colors.blue)
+        .setColor(colors.blue);
 
       await interaction
         .reply({ embeds: [embed], fetchReply: true })
@@ -409,12 +407,8 @@ module.exports = {
             else if (r.emoji.name === "⏭️") page = shopItems.length;
             else if (r.emoji.name === "⏹️") return collector.stop();
 
-            embed.setDescription(
-              `ID: ${liverylist[
-                page - 1
-              ].id}`
-            );
-            embed.setImage(liverylist[page - 1].image)
+            embed.setDescription(`ID: ${liverylist[page - 1].id}`);
+            embed.setImage(liverylist[page - 1].image);
 
             if (current !== page) {
               embed.setFooter({ text: `Pages ${page}/${shopItems.length}` });

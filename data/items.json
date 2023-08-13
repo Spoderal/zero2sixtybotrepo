@@ -7,7 +7,7 @@
     "Time": 5000,
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Emote": "<:item_trophy:971646473940910131>"
   },
   "checkered flag": {
@@ -18,7 +18,7 @@
     "Time": 600000,
     "Shop": false,
     "Findable": false,
-    "Tier":2,
+    "Tier": 2,
     "Emote": "<:item_checkflag:971646474360332298>"
   },
   "spikes": {
@@ -28,7 +28,7 @@
     "Type": "Usable",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Emote": "<:item_spikes:971639082935541761>"
   },
   "emp": {
@@ -39,7 +39,7 @@
     "Image": "https://i.ibb.co/12J5188/item-emp.gif",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Emote": "<a:item_emp2:1107945198757101642>"
   },
   "roadblock": {
@@ -50,7 +50,7 @@
     "Image": "https://i.ibb.co/smShBhY/item-policeblock.gif",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Emote": "<a:item_policeblock:1105320926221971496>"
   },
   "wrench": {
@@ -61,7 +61,7 @@
     "Emote": "<:item_wrench:971655125988966400>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/52sV3zY/1539872271436.jpg"
   },
   "water bottle": {
@@ -72,7 +72,7 @@
     "Emote": "<:item_waterbottle:1101001806462582834>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/jZP44f1/item-waterbottle.png",
     "Used": [
       "This can't be good for the planet, your race cooldowns have been reset",
@@ -87,7 +87,7 @@
     "Emote": "<:pinkslip:977442825186721863>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png",
     "Used": [
       "Great! Now you can bet your car and lose!",
@@ -103,7 +103,7 @@
     "Emote": "<:bankupgrade:974153111298007131>",
     "Items": 10,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Shop": false
   },
   "big bank increase": {
@@ -114,7 +114,7 @@
     "Emote": "<:bigbank:1008110998202372170>",
     "Items": 10,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Shop": false
   },
   "small vault": {
@@ -125,7 +125,7 @@
     "Emote": "<:item_smallvault:1101004960130408458>",
     "Shop": true,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/1Jxn8FJ/item-smallvault.png",
     "Used": ["You store some money in a small vault"]
   },
@@ -137,7 +137,7 @@
     "Emote": "<:item_mediumvault:1101004954405175379>",
     "Shop": true,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/8KDVHj3/item-mediumvault.png",
     "Used": ["You store some money in a medium vault"]
   },
@@ -149,7 +149,7 @@
     "Emote": "<:item_largevault:1101004951574024244>",
     "Shop": true,
     "Findable": false,
-    "Tier":3,
+    "Tier": 3,
     "Image": "https://i.ibb.co/n3MX4jM/item-largevault.png",
     "Used": ["You store some money in a large vault"]
   },
@@ -161,7 +161,7 @@
     "Emote": "<:item_hugevault:1101004947107106876>",
     "Shop": true,
     "Findable": true,
-    "Tier":3,
+    "Tier": 3,
     "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
     "Used": ["You store some money in a huge vault"]
   },
@@ -184,7 +184,7 @@
     "Emote": "<:item_grapejuice:1094894554097909760>",
     "Shop": true,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png",
     "Used": ["You sip on some grape juice"]
   },
@@ -196,7 +196,7 @@
     "Emote": "<:item_applejuice:1094894556983611423> ",
     "Shop": true,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png",
     "Used": ["You sip on some apple juice"]
   },
@@ -208,7 +208,7 @@
     "Emote": "<:item_orangejuice:1095474854775508993>",
     "Shop": true,
     "Findable": true,
-    "Tier":3,
+    "Tier": 3,
     "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png",
     "Used": ["You sip on some orange juice"]
   },
@@ -220,7 +220,7 @@
     "Emote": "<:item_fruitpunch:1095474852997120010>",
     "Shop": false,
     "Findable": false,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png",
     "Used": ["You sip on some fruit punch"]
   },
@@ -232,7 +232,7 @@
     "Emote": "<:item_flattire:1095474856306417756>",
     "Shop": true,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png",
     "Used": [
       "You're gonna receive 5% more cash from racing because we feel sorry for you racing with a flat tire"
@@ -246,7 +246,7 @@
     "Emote": "<:item_oil2:1101017605264900166>",
     "Shop": true,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/0ZB9W78/item-oil.png",
     "Used": ["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
   },
@@ -258,7 +258,7 @@
     "Emote": "<:item_stronglockpick:1095474858328064065>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png",
     "Used": ["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
   },
@@ -270,7 +270,7 @@
     "Emote": "<:item_treats:1095474851046752327>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/5MTkjcf/item-treats.png",
     "Used": ["You feed your pet treats and now it can find more xessence"]
   },
@@ -282,7 +282,7 @@
     "Emote": "<:item_blueberry:1095474857514385480>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png",
     "Used": [
       "Blue? BLUE? BLUE??? Berry. Your race rank was increased by 1",
@@ -297,7 +297,7 @@
     "Emote": "<:item_pizza:1098418923638095872>",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/xD6h9PB/item-pizza.png",
     "Used": [
       "Mmm pizza... Now your xp gain from working is increased!",
@@ -312,7 +312,7 @@
     "Emote": "<:item_veggiepizzaz:1098418931435311115>",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/k03wJJg/item-veggiepizzaz.png",
     "Used": [
       "Mmm veggie pizza... Now your salary is increased!",
@@ -327,7 +327,7 @@
     "Emote": "",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/DtDmcQP/item-spatula.png"
   },
   "cooking pot": {
@@ -338,7 +338,7 @@
     "Emote": "",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/vdjht6z/item-pot.gif"
   },
   "gem": {
@@ -349,7 +349,7 @@
     "Emote": "<a:item_gem:1098432365468061741>",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/2MB5SNd/item-gem.gif"
   },
   "star sticker": {
@@ -360,7 +360,7 @@
     "Emote": "<a:item_star:1130304126933282948>",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/4NCJ5N5/item-star.gif"
   },
   "camera": {
@@ -371,7 +371,7 @@
     "Emote": "<a:item_camera:1130305659888480377>",
     "Shop": false,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/g95JXdc/Soggy-Fantastic-Earwig-max-1mb.gif"
   },
   "taser": {
@@ -397,7 +397,7 @@
     "Emote": "<:item_petcollar:1098418926012076132>",
     "Shop": true,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/F0vMtpm/item-petcollar.png",
     "Used": [
       "You put a collar on your pet, now it wont get hungry, get thirsty, or run away! Thats definitely how it works right?"
@@ -411,7 +411,7 @@
     "Emote": "<:item_whiskey:1098418928046329967>",
     "Shop": true,
     "Findable": true,
-    "Tier":3,
+    "Tier": 3,
     "Image": "https://i.ibb.co/3mgKVRh/item-whiskey.png",
     "Used": [
       "You take a shot of tequila and you feel... interesting",
@@ -427,7 +427,7 @@
     "Emote": "<:item_radio:1101011638540312607>",
     "Shop": false,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/ByPdgcC/item-radio.png",
     "Used": [
       "You turn up the radio and hear Justin Bieber, you're now drifting to it",
@@ -442,7 +442,7 @@
     "Emote": "<:item_flowers:1103826126721265664>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/0sddpRj/item-flowers.png"
   },
 
@@ -454,7 +454,7 @@
     "Emote": "<:item_crowbar:1104299475691917444>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/RDWfNFb/item-crowbar.png"
   },
 
@@ -466,7 +466,7 @@
     "Emote": "<:item_mask:1104299478011367494>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/wBzGWGy/item-mask.png"
   },
 
@@ -478,7 +478,7 @@
     "Emote": "<:item_coconut:1103826134149374006>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/25y3tSq/item-coconut.png"
   },
   "dirt": {
@@ -489,7 +489,7 @@
     "Emote": "<a:item_dirt:1103827943039438930>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/SKs2HNs/item-dirt.gif"
   },
   "milk": {
@@ -500,7 +500,7 @@
     "Emote": "<:item_milk:1103826130819100795>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/KyyC3L7/item-milk.png",
     "Used": [
       "Mmm milk",
@@ -516,7 +516,7 @@
     "Emote": "<:item_strawberrymilk:1103826129657274488>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/hmMTL2Z/item-strawberrymilk.png",
     "Used": [
       "Mmm berry milk",
@@ -532,7 +532,7 @@
     "Emote": "<:item_chocolatemilk:1103826132949815327>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/RDdTW0S/item-chocolatemilk.png",
     "Used": [
       "Mmm choccy milk",
@@ -548,7 +548,7 @@
     "Emote": "<:item_icecube:1111580004942352414>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/PQs8pGD/item-icecube.png",
     "Used": [
       "You're not listening to ice cube, but your event cooldowns are reduced so thats good",
@@ -579,7 +579,7 @@
     "Emote": "<:item_oldkite:1111580006653628466>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/0MdP4Gz/item-oldkite.png"
   },
   "beach ball": {
@@ -601,7 +601,7 @@
     "Emote": "<:item_cocktail:1111580012534042634>",
     "Shop": true,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/Xstp72T/item-cocktail.png"
   },
 
@@ -635,7 +635,7 @@
     "Emote": "<:item_match:1116954447797567488>",
     "Shop": false,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/tBXd68Q/item-match.png"
   },
 
@@ -647,7 +647,7 @@
     "Emote": "<:item_chips:1116954446090469427>",
     "Shop": false,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/VBYx5fQ/item-chips.png"
   },
 
@@ -659,7 +659,7 @@
     "Emote": "<:item_match:1116954447797567488>",
     "Shop": false,
     "Findable": true,
-    "Tier":3,
+    "Tier": 3,
     "Image": "https://i.ibb.co/5hHSWCD/item-parkingbrake.png"
   },
   "gas": {
@@ -670,7 +670,7 @@
     "Emote": "<:item_gas:1116954444500848650>",
     "Shop": false,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/JRHjvrk/item-gas.png",
     "Used": [
       "You warm your hands around the fire and now your extra race ranks will transfer over to the next prestige"
@@ -684,14 +684,12 @@
     "Emote": "<:item_fireplace:1116954448976166962>",
     "Shop": false,
     "Findable": true,
-    "Tier":2,
+    "Tier": 2,
     "Image": "https://i.ibb.co/xXjThV3/item-fireplace.png",
     "Used": [
       "You warm your hands around the fire and now your extra drift ranks will transfer over to the next prestige"
     ]
   },
-
-
 
   "energy drink": {
     "Price": 0,
@@ -701,7 +699,7 @@
     "Emote": "<:item_energydrink:1101014779499384893>",
     "Shop": true,
     "Findable": true,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/mzf6rDT/item-energydrink.png",
     "Used": ["Don't drink too many of these, you get 2x RP for 10 minutes"]
   },
@@ -748,7 +746,7 @@
     "Emote": "<:item_petegg:1095138763446960128>",
     "Shop": true,
     "Findable": false,
-    "Tier":1,
+    "Tier": 1,
     "Image": "https://i.ibb.co/HF7NfGT/item-petegg.png"
   },
   "disguise": {

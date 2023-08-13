@@ -13,97 +13,118 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("typerace")
     .setDescription("Race your fingers in the type takeover event")
-    .addStringOption((option) => option
-    .setName("car")
-    .setDescription("The car to race with")
-    .setRequired(true)
-    
+    .addStringOption((option) =>
+      option
+        .setName("car")
+        .setDescription("The car to race with")
+        .setRequired(true)
     ),
 
   async execute(interaction) {
-    let userdata = await User.findOne({id: interaction.user.id}) || new User({id: interaction.user.id})
-    let cooldowns = await Cooldowns.findOne({id: interaction.user.id}) || new Cooldowns({id: interaction.user.id})
-    let caroption = interaction.options.getString("car")
-    let usercars = userdata.cars
+    let userdata =
+      (await User.findOne({ id: interaction.user.id })) ||
+      new User({ id: interaction.user.id });
+    let cooldowns =
+      (await Cooldowns.findOne({ id: interaction.user.id })) ||
+      new Cooldowns({ id: interaction.user.id });
+    let caroption = interaction.options.getString("car");
+    let usercars = userdata.cars;
 
-    let selected = usercars.filter((car) => car.ID.toLowerCase() == caroption.toLowerCase() || car.Name.toLowerCase() == caroption.toLowerCase())
+    let selected = usercars.filter(
+      (car) =>
+        car.ID.toLowerCase() == caroption.toLowerCase() ||
+        car.Name.toLowerCase() == caroption.toLowerCase()
+    );
 
-    let timeout = 300000
+    let timeout = 300000;
 
-    let gas = selected[0].Gas
+    let gas = selected[0].Gas;
 
-    if(gas <= 0) return interaction.reply("Your car is out of gas! Refill it with /gas")
-    let racing = cooldowns.eventCooldown
+    if (gas <= 0)
+      return interaction.reply("Your car is out of gas! Refill it with /gas");
+    let racing = cooldowns.eventCooldown;
 
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
-        let time = ms(timeout - (Date.now() - racing));
-        let timeEmbed = new Discord.EmbedBuilder()
-          .setColor(colors.blue)
-          .setDescription(
-            `Wait ${time} before type racing again.`
-          );
-        await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
-        return
-      }
+      let time = ms(timeout - (Date.now() - racing));
+      let timeEmbed = new Discord.EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`Wait ${time} before type racing again.`);
+      await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+      return;
+    }
 
     const collectorFilter = (m) => m.author.id == interaction.user.id;
     const collector = interaction.channel.createMessageCollector({
       filter: collectorFilter,
       time: 30000,
-    })
+    });
 
-    if(!selected[0]) return interaction.reply("You don't have this car!")
+    if (!selected[0]) return interaction.reply("You don't have this car!");
 
-    let timer = 0
+    let timer = 0;
 
-   let time = setInterval(() => {
-        timer++
+    let time = setInterval(() => {
+      timer++;
     }, 1000);
-    let words = ["race", "type", "fingers", "walter", "flame house", "win", "lost", "ferrari", "porsche", "zero2sixty"]
-    let wordcount = randomRange(2, 5)
-    let wordarr = []
-    let actualword = []
-    for(let i = 0; i < wordcount; i++){
-        let space = ' '
-        let randomword = lodash.sample(words)
+    let words = [
+      "race",
+      "type",
+      "fingers",
+      "walter",
+      "flame house",
+      "win",
+      "lost",
+      "ferrari",
+      "porsche",
+      "zero2sixty",
+    ];
+    let wordcount = randomRange(2, 5);
+    let wordarr = [];
+    let actualword = [];
+    for (let i = 0; i < wordcount; i++) {
+      let space = " ";
+      let randomword = lodash.sample(words);
 
-        for(let char of randomword){
-            wordarr.push(`${char}${space}`)
-        }
-        actualword.push(randomword)
+      for (let char of randomword) {
+        wordarr.push(`${char}${space}`);
+      }
+      actualword.push(randomword);
     }
-    let handling = selected[0].Handling
+    let handling = selected[0].Handling;
 
-    cooldowns.eventCooldown = Date.now()
-    cooldowns.save()
+    cooldowns.eventCooldown = Date.now();
+    cooldowns.save();
 
-    interaction.reply(`Type the following:\n\n${wordarr.join(' ')}`)
+    interaction.reply(`Type the following:\n\n${wordarr.join(" ")}`);
 
-    collector.on('collect', async (msg) => {
-        let content = msg.content
-        
-        let finalword = actualword.join(' ')
-        console.log(finalword)
-        console.log(content)
-        if(content !== finalword) return msg.channel.send(`You mistyped the words, so you lost!`)
-        else if (content.toLowerCase() == finalword) {
-            let score = Math.round((handling / 10) / timer)
-            msg.channel.send(`You won, your typing speed was ${timer.toLocaleString()}s! You also earned <:key_z:1140029565360668783> ${score} keys`)
+    collector.on("collect", async (msg) => {
+      let content = msg.content;
 
-            userdata.typekeys += score
+      let finalword = actualword.join(" ");
+      console.log(finalword);
+      console.log(content);
+      if (content !== finalword)
+        return msg.channel.send(`You mistyped the words, so you lost!`);
+      else if (content.toLowerCase() == finalword) {
+        let score = Math.round(handling / 10 / timer);
+        msg.channel.send(
+          `You won, your typing speed was ${timer.toLocaleString()}s! You also earned <:key_z:1140029565360668783> ${score} keys`
+        );
 
-            let typespeed = userdata.typespeed || 0
+        userdata.typekeys += score;
 
-            if(typespeed !== 0 && timer < typespeed){
-              userdata.typespeed = timer
-            }
+        let typespeed = userdata.typespeed || 0;
 
-            userdata.save()
+        if (typespeed !== 0 && timer < typespeed) {
+          userdata.typespeed = timer;
         }
 
-        clearInterval(time)
-        collector.stop()
-        return
-    })
+        userdata.save();
+      }
+
+      clearInterval(time);
+      collector.stop();
+      return;
+    });
   },
 };

@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
-const ranks = require("../data/ranks.json")
+const ranks = require("../data/ranks.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,8 +19,10 @@ module.exports = {
       cmd.setName("pvp").setDescription("See who has the best PVP rank")
     )
     .addSubcommand((cmd) =>
-    cmd.setName("typetakeover").setDescription("See who has the best typing speed")
-  ),
+      cmd
+        .setName("typetakeover")
+        .setDescription("See who has the best typing speed")
+    ),
 
   async execute(interaction) {
     await interaction.deferReply();
@@ -84,8 +86,7 @@ module.exports = {
       }
 
       embed.setDescription(desc);
-    } 
-    else if (leaderboardtype == "typetakeover") {
+    } else if (leaderboardtype == "typetakeover") {
       embed = new Discord.EmbedBuilder()
         .setTitle("Type Racer Leaderboard")
         .setColor(colors.blue)
@@ -135,8 +136,7 @@ module.exports = {
       }
 
       embed.setDescription(desc);
-    } 
-    else if (leaderboardtype == "prestige") {
+    } else if (leaderboardtype == "prestige") {
       embed = new Discord.EmbedBuilder()
         .setTitle("Prestige Leaderboard")
         .setThumbnail("https://i.ibb.co/n31P7rK/rank-prestige.png")
@@ -226,11 +226,14 @@ module.exports = {
           text: `Your position is #${currentUserPosition} on the PVP leaderboard!`,
         });
       }
-      
+
       let desc = "";
       for (let i = 0; i < onlyTaggedUsers.length; i++) {
-        let pvpemote = ranks[onlyTaggedUsers[i].pvprank.Rank.toLowerCase()].emote
-        desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${pvpemote} ${onlyTaggedUsers[i].pvprank.Wins}\n`;
+        let pvpemote =
+          ranks[onlyTaggedUsers[i].pvprank.Rank.toLowerCase()].emote;
+        desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${pvpemote} ${
+          onlyTaggedUsers[i].pvprank.Wins
+        }\n`;
       }
 
       embed.setDescription(desc);

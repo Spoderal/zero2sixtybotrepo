@@ -602,21 +602,21 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
-  autogas:{
+  autogas: {
     type: Boolean,
     required: false,
-    default: false
+    default: false,
   },
-  typekeys:{
+  typekeys: {
     type: Number,
     required: false,
-    default: 0
+    default: 0,
   },
-  typespeed:{
+  typespeed: {
     type: Number,
     required: false,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

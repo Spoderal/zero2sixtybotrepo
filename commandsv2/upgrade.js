@@ -104,9 +104,7 @@ module.exports = {
 
     let exhaustpower = 0;
     if (exhausttier <= 5) {
-      exhaustpower = (
-        parttiersdb[`exhaust1`].Power * selected[0].Speed
-      );
+      exhaustpower = parttiersdb[`exhaust1`].Power * selected[0].Speed;
     }
 
     let turbopower = 0;
@@ -407,14 +405,11 @@ module.exports = {
       let tier = selected[0][i.customId] || 0;
       let newtier = (tier += 1);
       let price = Math.round(parttiersdb[`${i.customId}1`].Cost) * newtier;
-      let newpower = (
-        selected[0].Speed * parttiersdb[`${i.customId}1`].Power
-      );
+      let newpower = selected[0].Speed * parttiersdb[`${i.customId}1`].Power;
       let acceleration = parttiersdb[`${i.customId}1`].Acceleration;
       console.log(parttiersdb[`${i.customId}1`]);
-      let handling = (
-        selected[0].Handling * parttiersdb[`${i.customId}1`].Handling
-      );
+      let handling =
+        selected[0].Handling * parttiersdb[`${i.customId}1`].Handling;
       if (price > userdata.cash) return i.update(`You don't have enough cash!`);
       let useracc = selected[0].Acceleration;
       let newacc = (useracc -= acceleration);

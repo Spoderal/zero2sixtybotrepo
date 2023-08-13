@@ -296,7 +296,8 @@ module.exports = {
           } else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.addFields(
+            embed
+              .addFields(
                 {
                   name: "Features ⭐",
                   value: `__Tons of bug fixes and improvements__\n

@@ -14,58 +14,45 @@ async function updateItemShop() {
   let timeout = 86400000;
   let itemshopalr = global.itemshop;
   setInterval(async () => {
+    try {
+      if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
+        let randomgas = lodash.sample([`up`, `down`]);
+        let randomupdown = [
+          0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1, 1,
+        ];
 
-    
-
-    try{
-      if(itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0){
-          let randomgas = lodash.sample([`up`, `down`]);
-          let randomupdown = [
-            0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1, 1,
-          ];
-          
         global.update();
-          let randominc = lodash.sample(randomupdown);
-          let gas = global.gas
-          if (randomgas == `up`) {
-            gas += randominc;
-            global.update();
-          } else if (randomgas == `down`) {
-            gas -= randominc;
-            global.update();
-          }
-          //test
-          if (gas < 1) {
-            gas = 6;
-            global.update();
-          }
-    
+        let randominc = lodash.sample(randomupdown);
+        let gas = global.gas;
+        if (randomgas == `up`) {
+          gas += randominc;
+          global.update();
+        } else if (randomgas == `down`) {
+          gas -= randominc;
+          global.update();
+        }
+        //test
+        if (gas < 1) {
+          gas = 6;
+          global.update();
+        }
+
         await Global.findOneAndUpdate(
-          {
-            
-          },
+          {},
           {
             $set: {
-              "gas": gas
+              gas: gas,
             },
-          },
-  
+          }
         );
-     
-        global.save()
 
-
-
-        
+        global.save();
       } else {
-        return
+        return;
       }
-      
-
+    } catch (err) {
+      console.log(err);
     }
-             catch (err) {
-          console.log(err);
-        }
   }, 5000);
 }
 

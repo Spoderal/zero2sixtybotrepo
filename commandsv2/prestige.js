@@ -22,7 +22,7 @@ module.exports = {
 
     let keeprace = userdata.keeprace;
     let keepdrift = userdata.keepdrift;
-    let oldrank = userdata.prestige
+    let oldrank = userdata.prestige;
     let newprestige2 = (prestigerank += 1);
 
     let raceprestige = newprestige2 * 30;
@@ -37,16 +37,15 @@ module.exports = {
         `Your race rank needs to be ${raceprestige}!`
       );
 
-      
-      let row = new ActionRowBuilder()
-      .setComponents(
-        new ButtonBuilder()
-        .setCustomId("yes")
-        .setLabel("Yes")
-        .setStyle("Success")
-        )
-    
-     let msg = await interaction.reply({content: `Are you sure? You'll lose all of your cash!`, fetchReply: true, components: [row]})
+    let row = new ActionRowBuilder().setComponents(
+      new ButtonBuilder().setCustomId("yes").setLabel("Yes").setStyle("Success")
+    );
+
+    let msg = await interaction.reply({
+      content: `Are you sure? You'll lose all of your cash!`,
+      fetchReply: true,
+      components: [row],
+    });
 
     let filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
@@ -54,13 +53,11 @@ module.exports = {
 
     let collector = msg.createMessageComponentCollector({
       filter: filter,
-      time: 10000
+      time: 10000,
     });
 
-
-    collector.on('collect', async (i) => {
-      if(i.customId == "yes"){
-
+    collector.on("collect", async (i) => {
+      if (i.customId == "yes") {
         userdata.prestige += 1;
         if (keeprace) {
           let oldraces = (racerank -= raceprestige);
@@ -116,9 +113,9 @@ module.exports = {
         if (vault && vault == "small vault") {
           let cash = userdata.cash;
           let cashtostore = 50000 - cash;
-    
+
           let cashtostore2 = 50000 - cashtostore;
-    
+
           if (cashtostore2 <= 0) {
             cashtostore2 = 50000;
           }
@@ -145,9 +142,9 @@ module.exports = {
         } else if (vault && vault == "medium vault") {
           let cash = userdata.cash;
           let cashtostore = 100000 - cash;
-    
+
           let cashtostore2 = 100000 - cashtostore;
-    
+
           if (cashtostore2 <= 0) {
             cashtostore2 = 100000;
           }
@@ -174,9 +171,9 @@ module.exports = {
         } else if (vault && vault == "large vault") {
           let cash = userdata.cash;
           let cashtostore = 500000 - cash;
-    
+
           let cashtostore2 = 500000 - cashtostore;
-    
+
           if (cashtostore2 <= 0) {
             cashtostore2 = 500000;
           }
@@ -203,9 +200,9 @@ module.exports = {
         } else if (vault && vault == "huge vault") {
           let cash = userdata.cash;
           let cashtostore = 1000000 - cash;
-    
+
           let cashtostore2 = 1000000 - cashtostore;
-    
+
           if (cashtostore2 <= 0) {
             cashtostore2 = 1000000;
           }
@@ -251,36 +248,40 @@ module.exports = {
             },
           }
         );
-    
+
         userdata.swheelspins += 1;
-    
+
         let upgrade = prestigerank * 1000;
         userdata.items.push("prestige crate");
         userdata.banklimit += upgrade;
-    
-        userdata.save();
-        
-        let newrank = oldrank ++
-        let embed = new EmbedBuilder()
-        .setTitle("Prestiged")
-        .setDescription(`+1 <:supplydropprestige:1044404462581719041> Prestige Crate`)
-        .addFields(
-          {
-            name: `${emotes.prestige} Old Rank`,
-            value: `${newrank}`
-          },
-          {
-            name: `${emotes.prestige} New Rank`,
-            value: `${oldrank}`
-          }
-        )
-        .setColor(colors.blue)
-    
-        await i.update(
-          {embeds: [embed], fetchReply: true, components: [], content: ""}
-        );
-      }
-    })
 
+        userdata.save();
+
+        let newrank = oldrank++;
+        let embed = new EmbedBuilder()
+          .setTitle("Prestiged")
+          .setDescription(
+            `+1 <:supplydropprestige:1044404462581719041> Prestige Crate`
+          )
+          .addFields(
+            {
+              name: `${emotes.prestige} Old Rank`,
+              value: `${newrank}`,
+            },
+            {
+              name: `${emotes.prestige} New Rank`,
+              value: `${oldrank}`,
+            }
+          )
+          .setColor(colors.blue);
+
+        await i.update({
+          embeds: [embed],
+          fetchReply: true,
+          components: [],
+          content: "",
+        });
+      }
+    });
   },
 };

@@ -43,10 +43,10 @@ module.exports = {
         )
     )
     .addSubcommand((command) =>
-    command
-      .setName("claim")
-      .setDescription("Claim a reward from a crew season")
-  )
+      command
+        .setName("claim")
+        .setDescription("Claim a reward from a crew season")
+    )
     .addSubcommand((command) =>
       command
         .setName("create")
@@ -120,10 +120,9 @@ module.exports = {
         if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
         let rp = newuserdata.rp4 || 0;
-        let filteruser = rparray.filter((use) => use.user == user)
-        if(!filteruser[0]){
+        let filteruser = rparray.filter((use) => use.user == user);
+        if (!filteruser[0]) {
           rparray.push({ rp, user, isOwner });
-
         }
         newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
@@ -196,9 +195,9 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let crewclaimed = userdata.crewseason || []
-          let redeemed = crewclaimed.length++
-          console.log(redeemed)
+          let crewclaimed = userdata.crewseason || [];
+          let redeemed = crewclaimed.length++;
+          console.log(redeemed);
           let crewseason = require("../data/seasons.json").Seasons.Crew1;
 
           collector.on("collect", async (i) => {
@@ -222,8 +221,6 @@ module.exports = {
                 .setThumbnail(icon)
                 .setColor(colors.blue);
 
-              
-
               await i.update({ embeds: [embed2], components: [row] });
             } else if (i.customId.includes("stats")) {
               embed
@@ -245,7 +242,7 @@ module.exports = {
               ];
 
               await i.update({ embeds: [embed], components: [row] });
-            } 
+            }
           });
         });
     } else if (option == "approveico") {
@@ -326,22 +323,21 @@ module.exports = {
       userdata.save();
 
       await interaction.reply(`✅ Joined ${crewname}`);
-    } 
-    else if (option == "claim") {
-      let crewseason = require("../data/seasons.json").Seasons.Crew1.Rewards
-      let seasonclaimed = userdata.crewseason || []
-      let crewname = userdata.crew.name
+    } else if (option == "claim") {
+      let crewseason = require("../data/seasons.json").Seasons.Crew1.Rewards;
+      let seasonclaimed = userdata.crewseason || [];
+      let crewname = userdata.crew.name;
       let crew2 = crews.filter(
         (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
       );
-      let rewnum = seasonclaimed.length += 1
-      console.log(rewnum)
-      let item = crewseason[`${rewnum}`]
-      console.log(item)
+      let rewnum = (seasonclaimed.length += 1);
+      console.log(rewnum);
+      let item = crewseason[`${rewnum}`];
+      console.log(item);
       if (item.Number > crew2.Rank3) {
         return;
       }
-      
+
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
         userdata.cash += Number(amount);
@@ -350,38 +346,28 @@ module.exports = {
       } else if (item.Item.endsWith("Notoriety")) {
         let amount = item.Item.split(" ")[0];
         userdata.notofall += Number(amount);
-         
       } else if (
         item.Item.endsWith("Legendary Barn Maps") ||
         item.Item.endsWith("Legendary Barn Map")
       ) {
         let amount = item.Item.split(" ")[0];
         userdata.lmaps += Number(amount);
-
-        
       } else if (item.Item.endsWith("Bank Increase")) {
         userdata.items.push("bank increase");
-
-         
       } else if (
         item.Item.endsWith("Super wheelspin") ||
         item.Item.endsWith("Super wheelspins")
       ) {
         let amount = item.Item.split(" ")[0];
         userdata.swheelspins += Number(amount);
-
-         
       } else if (item.Item.endsWith("Common Keys")) {
         let amount = item.Item.split(" ")[0];
         userdata.ckeys += Number(amount);
 
-         
         userdata.save();
       } else if (item.Item.endsWith("Drift Keys")) {
         let amount = item.Item.split(" ")[0];
         userdata.dkeys += Number(amount);
-
-         
       } else if (
         item.Item.endsWith("Garage Space") ||
         item.Item.endsWith("Garage Spaces")
@@ -390,22 +376,14 @@ module.exports = {
         parseInt(amount);
 
         userdata.garageLimit += Number(amount);
-
-         
       } else if (item.Item.endsWith("Rare Keys")) {
         let amount = item.Item.split(" ")[0];
         userdata.rkeys += Number(amount);
-
-         
       } else if (item.Item.endsWith("Exotic Keys")) {
         let amount = item.Item.split(" ")[0];
         userdata.ekeys += Number(amount);
-
-         
       } else if (partdb.Parts[item.Item.toLowerCase()]) {
         userdata.parts.push(item.Item.toLowerCase());
-
-         
       } else if (cardb.Cars[item.Item.toLowerCase()]) {
         let cartogive = cardb.Cars[item.Item.toLowerCase()];
         let carindb = cartogive;
@@ -425,13 +403,11 @@ module.exports = {
         };
         userdata.cars.push(carobj);
       }
-      userdata.crewseason.push(item.Number)
+      userdata.crewseason.push(item.Number);
       userdata.save();
 
-
-      interaction.reply(`Claimed ${item.Item}`)
-    }
-    else if (option == "create") {
+      interaction.reply(`Claimed ${item.Item}`);
+    } else if (option == "create") {
       let crewname = interaction.options.getString("name");
       if (!crewname)
         return await interaction.reply("Please specify a crew name!");

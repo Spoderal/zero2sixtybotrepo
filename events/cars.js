@@ -43,28 +43,28 @@ async function carfix() {
             cars[car] = carobj;
           }
         }
-        
+
         udata.cash = 0;
-        udata.items = []
-        udata.parts = []
-        udata.racerank = 0
-        udata.driftrank = 0
-        udata.prestige = 0
-        udata.work = null
-        udata.crew = {}
-        udata.rp4 = 0
-        udata.ckeys = 0
-        udata.ekeys = 0
-        udata.rkeys = 0
-        udata.barnmaps = 0
-        udata.blueprints = 0
-        udata.lockpicks = 0
-        udata.garageLimit = 10
-        udata.houses = []
-        udata.squads = []
-        udata.tier = 1
-        udata.crewseason = []
-        udata.business = {}
+        udata.items = [];
+        udata.parts = [];
+        udata.racerank = 0;
+        udata.driftrank = 0;
+        udata.prestige = 0;
+        udata.work = null;
+        udata.crew = {};
+        udata.rp4 = 0;
+        udata.ckeys = 0;
+        udata.ekeys = 0;
+        udata.rkeys = 0;
+        udata.barnmaps = 0;
+        udata.blueprints = 0;
+        udata.lockpicks = 0;
+        udata.garageLimit = 10;
+        udata.houses = [];
+        udata.squads = [];
+        udata.tier = 1;
+        udata.crewseason = [];
+        udata.business = {};
 
         udata.markModified("cars");
         udata.markModified("items");
