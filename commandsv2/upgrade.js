@@ -388,8 +388,10 @@ module.exports = {
     });
 
     collector.on("collect", async (i) => {
-      let cooldowns =  (await Cooldowns.findOne({ id: interaction.user.id })) || new Cooldowns({ id: interaction.user.id });
-      let timeout2 = 5000
+      let cooldowns =
+        (await Cooldowns.findOne({ id: interaction.user.id })) ||
+        new Cooldowns({ id: interaction.user.id });
+      let timeout2 = 5000;
       if (
         cooldowns.is_racing !== null &&
         timeout2 - (Date.now() - cooldowns.is_racing) > 0
@@ -399,8 +401,7 @@ module.exports = {
           content: `Wait for your race to finish to run other commands`,
           fetchReply: true,
           ephemeral: true,
-        })
-
+        });
       }
       console.log(selected[0]);
       let tier = selected[0][i.customId] || 0;

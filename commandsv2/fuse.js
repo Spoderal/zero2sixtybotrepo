@@ -22,7 +22,7 @@ module.exports = {
           { name: "Bodykit", value: "bodykit" },
           { name: "Weight Reduction", value: "weightreduction" },
           { name: "Weight", value: "weight" },
-          { name: "Fruit Punch", value: "fruit punch" },
+          { name: "Fruit Punch", value: "fruit punch" }
         )
         .setRequired(true)
     ),
@@ -41,7 +41,7 @@ module.exports = {
       );
 
     if (!parts) return await interaction.reply("You dont have any parts!");
-if (parttoinstall == "fruit punch") {
+    if (parttoinstall == "fruit punch") {
       let items = userdata.items;
       let juice1 = userdata.items.filter((item) => item == "apple juice");
       let juice2 = userdata.items.filter((item) => item == "grape juice");
@@ -87,7 +87,6 @@ if (parttoinstall == "fruit punch") {
         interaction.editReply({ embeds: [embed] });
       }, 2000);
       return;
-    
     } else {
       let parte = "";
       let partb = "";

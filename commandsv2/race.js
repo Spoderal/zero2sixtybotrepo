@@ -878,10 +878,9 @@ module.exports = {
         }
 
         if (raceoption == "trackraceevent" && randcar >= 6) {
-          
-          let filteredcar = usercars.filter((car) => car.Name == car2.Name)
+          let filteredcar = usercars.filter((car) => car.Name == car2.Name);
 
-          if(!filteredcar[0]){
+          if (!filteredcar[0]) {
             let carobj = {
               ID: car2.alias,
               Name: car2.Name,
@@ -898,7 +897,6 @@ module.exports = {
             };
             rewards.push(`${carobj.Emote} ${carobj.Name} Won!`);
             userdata.cars.push(carobj);
-
           }
         }
         if (raceoption == "carseries") {
@@ -922,7 +920,131 @@ module.exports = {
             }
           );
 
-          userdata.seriestickets -= 1
+          userdata.seriestickets -= 1;
+        }
+
+        if (userdata.autogas == true && selected.Gas == 0) {
+          let gasprice = globals.gas;
+
+          let totalprice = Math.round(gasprice * 10);
+
+          if (userdata.cash < totalprice)
+            return interaction.channel.send(
+              "You have auto gas enabled, but you cant afford to fill your car!"
+            );
+
+          userdata.cash -= totalprice;
+
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Gas": 10,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": selected.Name,
+                },
+              ],
+            }
+          );
+        }
+
+        if (userdata.pet) {
+          let itemchance = randomRange(1, 10);
+
+          if (itemchance > 5) {
+            let itemarr = [];
+            for (let i in itemdb) {
+              if (
+                itemdb[i].Findable == true &&
+                itemdb[i].Tier &&
+                itemdb[i].Tier <= userdata.pet.Tier
+              ) {
+                itemarr.push(itemdb[i]);
+              }
+            }
+            let randomItem = lodash.sample(itemarr);
+            rewards.push(`${randomItem.Emote} ${randomItem.Name}`);
+            userdata.items.push(randomItem.Name.toLowerCase());
+          }
+        }
+
+        let peteggdrop = randomRange(1, 10);
+
+        if (peteggdrop == 2) {
+          rewards.push(`${itemdb["pet egg"].Emote} ${itemdb["pet egg"].Name}`);
+          userdata.items.push(`pet egg`);
+        }
+        let tasks = userdata.tasks || [];
+        if (tasks.length > 0) {
+          let taskstreet = tasks.filter((task) => task.ID == "1");
+          let tasktrack = tasks.filter((task) => task.ID == "2");
+
+          if (taskstreet[0] && raceoption == "streetrace") {
+            if (taskstreet[0].Races < 10) {
+              taskstreet[0].Races += 1;
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "tasks.$[task]": taskstreet[0],
+                  },
+                },
+
+                {
+                  arrayFilters: [
+                    {
+                      "task.ID": "1",
+                    },
+                  ],
+                }
+              );
+            }
+            if (taskstreet[0].Races >= 10) {
+              userdata.cash += 10000;
+              userdata.tasks.pull(taskstreet[0]);
+              interaction.channel.send(
+                `Task completed! You earned ${toCurrency(taskstreet[0].Reward)}`
+              );
+            }
+          } else if (tasktrack[0] && raceoption == "trackrace") {
+            if (tasktrack[0].Races < 10) {
+              tasktrack[0].Races += 1;
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "tasks.$[task]": tasktrack[0],
+                  },
+                },
+
+                {
+                  arrayFilters: [
+                    {
+                      "task.ID": "1",
+                    },
+                  ],
+                }
+              );
+            }
+            if (tasktrack[0].Races >= 10) {
+              userdata.cash += 15000;
+              userdata.tasks.pull(tasktrack[0]);
+              interaction.channel.send(
+                `Task completed! You earned ${toCurrency(tasktrack[0].Reward)}`
+              );
+            }
+          }
         }
 
         if(userdata.autogas == true && selected.Gas == 0){
