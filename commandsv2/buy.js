@@ -397,6 +397,7 @@ module.exports = {
             if (userdata.exoticCredits < 25)
               return interaction.reply("You don't have enough common credits!");
           }
+     
           cash -= boughtCarPrice;
 
           if (carindb.Stock) {
@@ -478,8 +479,11 @@ module.exports = {
           }
           if (boughtCar.Exclusive) {
             displayprice = boughtCar.Exclusive;
+            if (userdata.typekeys < boughtCar.Exclusive) return interaction.reply("You don't have enough keys!");
             emote = "<:key_z:1140029565360668783>";
             userdata.typekeys -= boughtCar.Exclusive;
+          
+            
           }
 
           let embed = new EmbedBuilder()
