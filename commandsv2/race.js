@@ -1093,13 +1093,13 @@ module.exports = {
           }
         }
 
-        let peteggdrop = randomRange(1, 10)
+         peteggdrop = randomRange(1, 10)
 
         if(peteggdrop == 2){
           rewards.push(`${itemdb["pet egg"].Emote} ${itemdb["pet egg"].Name}`)
           userdata.items.push(`pet egg`)
         }
-        let tasks = userdata.tasks || []
+         tasks = userdata.tasks || []
         if(tasks.length > 0){
           let taskstreet = tasks.filter((task) => task.ID == "1")
           let tasktrack = tasks.filter((task) => task.ID == "2")
