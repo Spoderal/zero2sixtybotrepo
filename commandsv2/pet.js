@@ -51,7 +51,7 @@ module.exports = {
     if (love < 50) {
       petimage = petdb[pet.pet].Saddest;
     }
-
+    let tier = petdb[pet.pet].Tier
     console.log(pet);
     console.log(petimage);
 
@@ -68,12 +68,8 @@ module.exports = {
         { name: "Thirst", value: `${thirst}`, inline: true },
         { name: "Love", value: `${love}`, inline: true },
 
-        {
-          name: "Xessence Gain",
-          value: `Your pet can gain up to ${pet.xessence} xessence in street races`,
-          inline: true,
-        },
       ])
+      .setDescription(`Can find items up to tier ${tier}`)
       .setThumbnail(petimage)
       .setColor(colors.blue);
 
@@ -101,6 +97,7 @@ module.exports = {
     );
 
     let row2 = new ActionRowBuilder().addComponents(
+    
       new ButtonBuilder()
         .setLabel("Abandon")
         .setEmoji("❌")
@@ -259,6 +256,22 @@ module.exports = {
         let nametoset;
         collector2.on("collect", async (msg) => {
           nametoset = msg.content;
+
+          let slurs = ["nigger", "nigga", "niger", "nig", "bitch", "fuck", "shit", "shitter", "fag", "faggot"]
+
+      const isValidUrl = urlString=> {
+        try { 
+          return Boolean(new URL(urlString)); 
+        }
+        catch(e){ 
+          return false; 
+        }
+    }
+
+      if(slurs[nametoset]) return interaction.channel.send("You cant set your pet name to this word!")
+
+
+      if(isValidUrl(nametoset)) return interaction.channel.send("Pet names cant be links!")
 
           await User.findOneAndUpdate(
             {

@@ -102,6 +102,24 @@ module.exports = {
       return obj;
     }, {});
 
+    for (let item in items) {
+      item = items[item];
+      let itemindb = itemdb[item.toLowerCase()];
+      displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
+    }
+    let list2 = displayitems;
+    let displayitems2 = [];
+    let quantities2 = list2.reduce(function (obj, n) {
+      if (obj[n]) obj[n] += 1;
+      else obj[n] = 1;
+
+      return obj;
+    }, {});
+
+    for (let n in quantities2) {
+      displayitems2.push(`${n} x${quantities2[n]}`);
+    }
+
     for (let n in quantities) {
       displayparts2.push(`${n} x${quantities[n]}`);
     }
@@ -127,7 +145,7 @@ module.exports = {
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
       .setDescription(
-        `Garage Limit: ${ucars.length}/${garagelimit}\nXessence: ${xessence}`
+        `Garage Limit: ${ucars.length}/${garagelimit}`
       )
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
@@ -287,7 +305,7 @@ module.exports = {
         embed = new EmbedBuilder()
           .setTitle(`Displaying cars for ${user.username}`)
           .setDescription(
-            `Garage Limit: ${ucars.length}/${garagelimit}}\nXessence: ${xessence}`
+            `Garage Limit: ${ucars.length}/${garagelimit}`
           )
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
@@ -355,33 +373,16 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId.includes("items")) {
-        itempage = items;
+        if (!displayitems2[0])
+        return interaction.channel.send("You don't have any parts!");
+        itempage = displayitems2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(items);
-        for (let item in items) {
-          item = items[item];
-          let itemindb = itemdb[item.toLowerCase()];
-          displayitems.push(`${itemindb.Emote} ${itemindb.Name}`);
-        }
-        var list2 = displayitems;
-        let displayitems2 = [];
-        var quantities2 = list2.reduce(function (obj, n) {
-          if (obj[n]) obj[n]++;
-          else obj[n] = 1;
-
-          return obj;
-        }, {});
-
-        for (let n in quantities2) {
-          displayitems2.push(`${n} x${quantities2[n]}`);
-        }
-        if (displayitems2.length == 0) embed.setDescription(`No Items`);
-        else {
+       
           embed.setDescription(`${displayitems2.join("\n")}`);
-        }
+        
         await i.update({
           embeds: [embed],
           components: [row, row2],

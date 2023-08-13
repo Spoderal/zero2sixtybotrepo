@@ -4,6 +4,7 @@
     "Emote": "<:pet_cat:1095141553632186479>",
     "Names": ["Tigger", "Milo", "Oliver", "Z", "Milly"],
     "Xessence": 5,
+    "Tier":2,
     "Breed": "Orange Cat",
     "Sad": "https://i.ibb.co/ygWds3L/pet-cat-orange-sad.png",
     "Saddest": "https://i.ibb.co/J7hcxxB/pet-cat-orange-sadder.png"
@@ -13,6 +14,7 @@
     "Emote": "<:pet_cat_white:1095141555871952896>",
     "Names": ["George", "Milky", "Z", "Oscar", "Molly"],
     "Xessence": 5,
+    "Tier":1,
     "Breed": "White Cat",
     "Sad": "https://i.ibb.co/tsQyK0P/pet-cat-white-sad.png",
     "Saddest": "https://i.ibb.co/swwhvX8/pet-cat-white-saddest.png"
@@ -22,6 +24,7 @@
     "Emote": "<:pet_cat_black:1095166771465568287>",
     "Names": ["Crow", "Winnie", "Z", "Pluto", "Luna"],
     "Xessence": 10,
+    "Tier":1,
     "Breed": "Black Cat",
     "Sad": "https://i.ibb.co/LQw5D3b/pet-cat-black-sad.png",
     "Saddest": "https://i.ibb.co/XWC3frr/pet-cat-black-saddest.png"
@@ -31,6 +34,7 @@
     "Emote": "<:pet_snake:1095256976889491546>",
     "Names": ["Snakey", "Spike", "Z", "Pluto", "Luna"],
     "Xessence": 10,
+    "Tier":1,
     "Breed": "Green Snake",
     "Sad": "https://i.ibb.co/60MXh3N/pet-snake-sad.png",
     "Saddest": "https://i.ibb.co/1RrFr7G/pet-snake-saddest.png"
@@ -40,6 +44,7 @@
     "Emote": "<:pet_snake_rattle:1095256985542340648>",
     "Names": ["Snakey", "Spike", "Z", "Pluto", "Luna"],
     "Xessence": 15,
+    "Tier":2,
     "Breed": "Rattle Snake",
     "Sad": "https://i.ibb.co/2Fx2yqc/pet-snake-rattle-sad.png",
     "Saddest": "https://i.ibb.co/cLZdYsh/pet-snake-rattle-saddest.png"
@@ -49,6 +54,7 @@
     "Emote": "<:pet_alien:1096357037916569651>",
     "Names": ["ET", "George", "Weirdo", "Thing 1"],
     "Xessence": 20,
+    "Tier":3,
     "Breed": "Alien",
     "Sad": "https://i.ibb.co/5Lmb9GV/pet-alien-sad.png",
     "Saddest": "https://i.ibb.co/nPHHXqK/pet-alien-sadder.png"
@@ -58,6 +64,7 @@
     "Emote": "<:pet_cow:1102089091039899748>",
     "Names": ["Moo", "Moo moo", "Milky"],
     "Xessence": 20,
+    "Tier":1,
     "Breed": "Cow",
     "Sad": "https://i.ibb.co/SR4K0m2/pet-cow.png",
     "Saddest": "https://i.ibb.co/fNVQ4W6/pet-cow-sadder.png"
@@ -67,6 +74,7 @@
     "Emote": "<:pet_browncow:1102089090024865802>",
     "Names": ["Moo", "Chocolate Milky"],
     "Xessence": 20,
+    "Tier":1,
     "Breed": "Brown Cow",
     "Sad": "https://i.ibb.co/tPK5T7Z/pet-browncow-sad.png",
     "Saddest": "https://i.ibb.co/H476HW8/pet-browncow-sadder.png"
@@ -74,8 +82,9 @@
   "pig": {
     "Image": "https://i.ibb.co/sbvWxdv/pet-pig.png",
     "Emote": "<:pet_pig:1102089092398841966>",
-    "Names": ["Wilbur"],
+    "Names": ["Wilbur", "Piglet"],
     "Xessence": 20,
+    "Tier":1,
     "Breed": "Pig",
     "Sad": "https://i.ibb.co/hsHdkCV/pet-pig-sads.png",
     "Saddest": "https://i.ibb.co/19Y670k/pet-pig-sadder.png"
@@ -85,6 +94,7 @@
     "Emote": "<:pet_spoder:1102089093548081235>",
     "Names": ["Spoder"],
     "Xessence": 30,
+    "Tier":3,
     "Breed": "Spoder",
     "Sad": "https://i.ibb.co/Xj2H7g1/pet-spoder.png",
     "Saddest": "https://i.ibb.co/Xj2H7g1/pet-spoder.png"
@@ -94,6 +104,7 @@
     "Emote": "<:pet_widow:1102089087944511528>",
     "Names": ["Spoder"],
     "Xessence": 30,
+    "Tier":3,
     "Breed": "Widow Spoder",
     "Sad": "https://i.ibb.co/1sLyLpS/pet-widow.png",
     "Saddest": "https://i.ibb.co/1sLyLpS/pet-widow.png"

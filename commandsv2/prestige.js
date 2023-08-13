@@ -3,6 +3,9 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const ms = require("pretty-ms");
+const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
+const { emotes } = require("../common/emotes");
+const colors = require("../common/colors");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,7 +22,7 @@ module.exports = {
 
     let keeprace = userdata.keeprace;
     let keepdrift = userdata.keepdrift;
-
+    let oldrank = userdata.prestige
     let newprestige2 = (prestigerank += 1);
 
     let raceprestige = newprestige2 * 30;
@@ -34,211 +37,250 @@ module.exports = {
         `Your race rank needs to be ${raceprestige}!`
       );
 
-    userdata.prestige += 1;
-    if (keeprace) {
-      let oldraces = (racerank -= raceprestige);
-      userdata.keeprace = false;
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            racerank: oldraces,
-          },
-        }
-      );
-    } else {
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            racerank: 0,
-          },
-        }
-      );
-    }
-    if (keepdrift) {
-      let olddrift = (driftrank -= driftprestige);
-      userdata.keepdrift = false;
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            driftrank: olddrift,
-          },
-        }
-      );
-    } else {
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            driftrank: 0,
-          },
-        }
-      );
-    }
-    let vault = userdata.vault;
-    if (vault && vault == "small vault") {
-      let cash = userdata.cash;
-      let cashtostore = 50000 - cash;
+      
+      let row = new ActionRowBuilder()
+      .setComponents(
+        new ButtonBuilder()
+        .setCustomId("yes")
+        .setLabel("Yes")
+        .setStyle("Success")
+        )
+    
+     let msg = await interaction.reply({content: `Are you sure? You'll lose all of your cash!`, fetchReply: true, components: [row]})
 
-      let cashtostore2 = 50000 - cashtostore;
+    let filter = (btnInt) => {
+      return interaction.user.id === btnInt.user.id;
+    };
 
-      if (cashtostore2 <= 0) {
-        cashtostore2 = 50000;
+    let collector = msg.createMessageComponentCollector({
+      filter: filter,
+      time: 10000
+    });
+
+
+    collector.on('collect', async (i) => {
+      if(i.customId == "yes"){
+
+        userdata.prestige += 1;
+        if (keeprace) {
+          let oldraces = (racerank -= raceprestige);
+          userdata.keeprace = false;
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                racerank: oldraces,
+              },
+            }
+          );
+        } else {
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                racerank: 0,
+              },
+            }
+          );
+        }
+        if (keepdrift) {
+          let olddrift = (driftrank -= driftprestige);
+          userdata.keepdrift = false;
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                driftrank: olddrift,
+              },
+            }
+          );
+        } else {
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                driftrank: 0,
+              },
+            }
+          );
+        }
+        let vault = userdata.vault;
+        if (vault && vault == "small vault") {
+          let cash = userdata.cash;
+          let cashtostore = 50000 - cash;
+    
+          let cashtostore2 = 50000 - cashtostore;
+    
+          if (cashtostore2 <= 0) {
+            cashtostore2 = 50000;
+          }
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                vault: null,
+              },
+            }
+          );
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                cash: 25000,
+              },
+            }
+          );
+        } else if (vault && vault == "medium vault") {
+          let cash = userdata.cash;
+          let cashtostore = 100000 - cash;
+    
+          let cashtostore2 = 100000 - cashtostore;
+    
+          if (cashtostore2 <= 0) {
+            cashtostore2 = 100000;
+          }
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                vault: null,
+              },
+            }
+          );
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                cash: cashtostore2,
+              },
+            }
+          );
+        } else if (vault && vault == "large vault") {
+          let cash = userdata.cash;
+          let cashtostore = 500000 - cash;
+    
+          let cashtostore2 = 500000 - cashtostore;
+    
+          if (cashtostore2 <= 0) {
+            cashtostore2 = 500000;
+          }
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                vault: null,
+              },
+            }
+          );
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                cash: cashtostore2,
+              },
+            }
+          );
+        } else if (vault && vault == "huge vault") {
+          let cash = userdata.cash;
+          let cashtostore = 1000000 - cash;
+    
+          let cashtostore2 = 1000000 - cashtostore;
+    
+          if (cashtostore2 <= 0) {
+            cashtostore2 = 1000000;
+          }
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                vault: null,
+              },
+            }
+          );
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                cash: cashtostore2,
+              },
+            }
+          );
+        } else {
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                cash: 0,
+              },
+            }
+          );
+        }
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              rp: 0,
+            },
+          }
+        );
+    
+        userdata.swheelspins += 1;
+    
+        let upgrade = prestigerank * 1000;
+        userdata.items.push("prestige crate");
+        userdata.banklimit += upgrade;
+    
+        userdata.save();
+        
+        let newrank = oldrank ++
+        let embed = new EmbedBuilder()
+        .setTitle("Prestiged")
+        .setDescription(`+1 <:supplydropprestige:1044404462581719041> Prestige Crate`)
+        .addFields(
+          {
+            name: `${emotes.prestige} Old Rank`,
+            value: `${newrank}`
+          },
+          {
+            name: `${emotes.prestige} New Rank`,
+            value: `${oldrank}`
+          }
+        )
+        .setColor(colors.blue)
+    
+        await i.update(
+          {embeds: [embed], fetchReply: true, components: [], content: ""}
+        );
       }
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            vault: null,
-          },
-        }
-      );
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            cash: 25000,
-          },
-        }
-      );
-    } else if (vault && vault == "medium vault") {
-      let cash = userdata.cash;
-      let cashtostore = 100000 - cash;
+    })
 
-      let cashtostore2 = 100000 - cashtostore;
-
-      if (cashtostore2 <= 0) {
-        cashtostore2 = 100000;
-      }
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            vault: null,
-          },
-        }
-      );
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            cash: cashtostore2,
-          },
-        }
-      );
-    } else if (vault && vault == "large vault") {
-      let cash = userdata.cash;
-      let cashtostore = 500000 - cash;
-
-      let cashtostore2 = 500000 - cashtostore;
-
-      if (cashtostore2 <= 0) {
-        cashtostore2 = 500000;
-      }
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            vault: null,
-          },
-        }
-      );
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            cash: cashtostore2,
-          },
-        }
-      );
-    } else if (vault && vault == "huge vault") {
-      let cash = userdata.cash;
-      let cashtostore = 1000000 - cash;
-
-      let cashtostore2 = 1000000 - cashtostore;
-
-      if (cashtostore2 <= 0) {
-        cashtostore2 = 1000000;
-      }
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            vault: null,
-          },
-        }
-      );
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            cash: cashtostore2,
-          },
-        }
-      );
-    } else {
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            cash: 0,
-          },
-        }
-      );
-    }
-    await User.findOneAndUpdate(
-      {
-        id: interaction.user.id,
-      },
-      {
-        $set: {
-          rp: 0,
-        },
-      }
-    );
-
-    userdata.swheelspins += 1;
-
-    let upgrade = prestigerank * 1000;
-    userdata.items.push("prestige crate");
-    userdata.banklimit += upgrade;
-
-    userdata.save();
-
-    await interaction.reply(
-      `Prestiged to rank ${
-        userdata.prestige
-      }! Your bank limit is now increased by ${toCurrency(
-        upgrade
-      )}\n\n+1 <:supplydropprestige:1044404462581719041> Prestige Crate`
-    );
   },
 };

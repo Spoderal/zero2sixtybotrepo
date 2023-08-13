@@ -19,6 +19,7 @@ const cardata = require("./shopdata");
 const { isracing } = require("./is_racing");
 const { series } = require("./series");
 const { updateUsed } = require("./used");
+const { gas } = require("./gas");
 
 let mongoConfig = {
   keepAlive: true,
@@ -43,6 +44,7 @@ module.exports = {
     gold(client);
     stats(client);
     series(client);
+    gas()
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
@@ -91,6 +93,7 @@ module.exports = {
       `☀️ SUMMER ☀️  /season`,
       `⚙️ PATCH ⚙️ 7/14 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
+      "🔥 INSANE NEW UPDATE /updates 🔥"
     ];
 
     let randomstatus = lodash.sample(randomstatuses);

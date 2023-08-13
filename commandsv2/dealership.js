@@ -9,7 +9,7 @@ const {
 } = require("discord.js");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, numberWithCommas } = require("../common/utils");
 const { tipFooterPurchaseCar } = require("../common/tips");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
@@ -29,6 +29,7 @@ module.exports = {
     let carclassAarr = [];
     let carclassSarr = [];
     let carclassParr = [];
+    let carEventarr = []
     let newcars = [
       cars.Cars["2016 bmw m4 gts"],
       cars.Cars["2018 bmw m4cs"],
@@ -250,6 +251,50 @@ module.exports = {
               carclassSarr.push({
                 Name: car.Name,
                 Price: car.Price,
+                alias: car.alias,
+                Emote: car.Emote,
+                owned: "❌",
+              });
+            }
+          }
+        }
+
+        else if (car.Exclusive && car.Price == 0 && !car.Police) {
+          if (car.Stock) {
+            let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+            if (owned2[0]) {
+              carEventarr.push({
+                Name: car.Name,
+                Exclusive: car.Exclusive,
+                alias: car.alias,
+                Emote: car.Emote,
+                owned: "✅",
+                Stock: carstock[car.Name.toLowerCase()].Stock,
+              });
+            } else {
+              carEventarr.push({
+                Name: car.Name,
+                Exclusive: car.Exclusive,
+                alias: car.alias,
+                Emote: car.Emote,
+                owned: "❌",
+                Stock: carstock[car.Name.toLowerCase()].Stock,
+              });
+            }
+          } else {
+            let owned2 = usercars.filter((caru) => caru.Name == car.Name);
+            if (owned2[0]) {
+              carEventarr.push({
+                Name: car.Name,
+                Exclusive: car.Exclusive,
+                alias: car.alias,
+                Emote: car.Emote,
+                owned: "✅",
+              });
+            } else {
+              carEventarr.push({
+                Name: car.Name,
+                Exclusive: car.Exclusive,
                 alias: car.alias,
                 Emote: car.Emote,
                 owned: "❌",
@@ -513,6 +558,9 @@ module.exports = {
     carclassSarr = carclassSarr.sort((a, b) => {
       return a.Price - b.Price;
     });
+    carEventarr = carEventarr.sort((a, b) => {
+      return a.Price - b.Price;
+    });
     newcars = newcars.sort((a, b) => {
       return a.Price - b.Price;
     });
@@ -539,6 +587,10 @@ module.exports = {
 
     carclassSarr = lodash.chunk(
       carclassSarr.map((a) => a),
+      10
+    );
+        carEventarr = lodash.chunk(
+          carEventarr.map((a) => a),
       10
     );
     newcars = lodash.chunk(
@@ -571,6 +623,10 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("classS")
         .setEmoji("<:sclass:967698398314655754>")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
+        .setCustomId("classE")
+        .setEmoji("<:eventclass:1140186232001933312>")
         .setStyle("Secondary")
     );
 
@@ -1008,7 +1064,37 @@ module.exports = {
         });
 
         page = 1;
-      } else {
+      }
+      else if (i.customId.includes("classE")) {
+        classpage = carEventarr;
+        embed = new EmbedBuilder().setTitle("Event Dealership");
+        console.log(carEventarr)
+        embed = new EmbedBuilder()
+          .setThumbnail("https://i.ibb.co/fDZg10f/eventclass.png")
+          .setTitle("Event Dealership")
+          .setColor(colors.blue);
+        embed.setFooter({ text: `Pages 1/${classpage.length}` });
+        console.dir(carEventarr[0]);
+        for (let b in carEventarr[0]) {
+          let car = carEventarr[0][b];
+          console.dir(car);
+       
+              embed.addFields({
+                name: `${car.Emote} ${car.Name}`,
+                value: `\`ID: ${car.alias}\`\nPrice: <:key_z:1140029565360668783> ${numberWithCommas(car.Exclusive)}\nOwned: ${car.owned}`,
+                inline: true,
+              });
+          }
+        
+        await i.update({
+          embeds: [embed],
+          components: [row2, row5, row3, row9],
+          fetchReply: true,
+        });
+
+        page = 1;
+      }
+       else {
         console.log(page);
         let current = page;
         if (i.customId.includes("previous") && page !== 1) {

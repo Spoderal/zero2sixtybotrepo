@@ -295,13 +295,14 @@ async function updateUsed() {
         items.push(carobj2);
         items.push(carobj3);
         items.push(carobj4);
+        
+        global.update();
 
         global.usedcars = items;
         global.update();
         global.usedcooldown = Date.now();
         global.update();
         global.markModified("usedcars");
-        global.updateOne("usedcars");
         global.save();
       }
     }

@@ -33,8 +33,8 @@ module.exports = {
             emoji: "☀️",
           },
           {
-            label: "7/11/2023",
-            description: "Information for the recent huge overhaul!",
+            label: "8/13/2023",
+            description: "Information for the recent tiny update!",
             value: "5_update",
             customId: "up5",
             emoji: "🏎️",
@@ -57,7 +57,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 7/14/2023\n
             ☀️ Summer Update 5/31/2023\n
-            🏎️ Race Update 7/11/2023\n
+            🏎️ Tiny Update 8/13/2023\n
             ⬆️ New Update 7/26/2023
         `);
 
@@ -296,41 +296,50 @@ module.exports = {
           } else if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed
-              .addFields(
+            embed.addFields(
                 {
                   name: "Features ⭐",
-                  value: `__Race revamp__
-                  Quarter mile and half mile joined into 1 race\n
-                  Race menu removed, typing only\n
-                  Highway removed\n
-                  Track race added\n
-                  Tiers go up to 8 \n
-                  Bounty removed for the time being until its reworked\n
-                  Barn maps moved to drag race\n
-                  Cash cup removed\n
-                  Wheelspin cars are purchasable\n
-                  Stats changed for more cars\n
-
-                
-            `,
+                  value: `__Tons of bug fixes and improvements__\n
+                  • Blueprints cant be opened forever\n
+                  • Gas now shows the first decimal\n
+                  • Business visual bugs fixed\n
+                  • Crew visual bugs fixed\n
+                  • Drift formula tweaked for new stats\n
+                  • Item display numbers no longer duplicate in the garage, same with parts\n
+                  • Gold exchange updated\n
+                  • House stats moved to /stats\n
+                  • Untag added\n
+                  • Tag, and ID filters added to prevent abuse\n
+                  • Pet overhaul, pets collect items from races worth different tiers, each item has a rarity tier, and each pet can find items up to x tier\n
+                  • Type Takeover event with a new event style `,
                   inline: true,
                 },
                 {
                   name: "Features 2 ⭐",
-                  value: `  Keys earned in track race\n
-                  Key droprates, and barn droprates reduced\n
-                  Lockpicks only obtainable in wheelspins\n
-                  Wheelspins and super wheelspins obtainable in crates\n
-                  Upgrade system overhauled\n
-                  Restoration tweaked, now you must have 5 of the right junk parts in your inventory to restore a car\n
-                  New stats card\n
-                  GAS! You'll need gas for each of your cars to race, view the current gas price with /bot, and fill up with /gas, EVs are charged their car price / 1000 to charge the car\n
+                  value: ` 
+                  • Livery list now shows images for each livery\n
+                  • Installed parts on your car now show the benefits they give\n
+                  • Sell and buy amounts no longer restricted\n
+                  • **AUTO GAS**, you can enable it in settings. If you have enough money, you'll fill up at the end of a race. By default, your cars gain +1 gas every 5 minutes now.
+                  • Most items fixed\n
+                  • Pet overhaul, pets collect items from races worth different tiers, each item has a rarity tier, and each pet can find items up to x tier\n
+                  • Type Takeover event with a new event style
+            `,
+                  inline: true,
+                },
+                {
+                  name: "Cars 🚗",
+                  value: ` 
+                  <:subaru:931011550418976808> 2010 Subaru WRX STI
+                  <:mercedes_z:973000364410404924> 2016 Mercedes A45
+                  <:acura:931012624164978728> 2023 Acura Integra Type S
+                  <:jaguar:931011547826913330> 2016 Jaguar F Type Project 7
+                  <:lamborghini:931011549655617566> 2010 Lamborghini Murcielago SV
             `,
                   inline: true,
                 }
               )
-              .setFooter({ text: "7/11/2023" })
+              .setFooter({ text: "8/13/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

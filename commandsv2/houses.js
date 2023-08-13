@@ -14,23 +14,11 @@ module.exports = {
     .setName("houses")
     .setDescription("View houses for sale")
     .addSubcommand((cmd) =>
-      cmd
-        .setDescription("View the stats of a house")
-        .setName("stats")
-        .addStringOption((option) =>
-          option
-            .setName("house")
-            .setRequired(true)
-            .setDescription("The house to view")
-        )
-    )
-    .addSubcommand((cmd) =>
       cmd.setDescription("View the list of houses").setName("list")
     ),
 
   async execute(interaction) {
     let subcommand = interaction.options.getSubcommand();
-    let userdata = await User.findOne({ id: interaction.user.id });
     let housearray = [];
     let housearr = [];
 
@@ -93,27 +81,6 @@ module.exports = {
           i.update({ embeds: [embed] });
         }
       });
-    } else if (subcommand == "stats") {
-      let housetoview = interaction.options.getString("house").toLowerCase();
-      let filteredhouse = housearr.filter(
-        (house) =>
-          house.Name == housetoview.toLowerCase() ||
-          house.id == housetoview.toLowerCase()
-      );
-
-      let embed = new Discord.EmbedBuilder()
-        .setTitle(`Stats for ${filteredhouse[0].Name}`)
-        .setImage(filteredhouse[0].Image)
-        .setDescription(
-          `Price: ${toCurrency(filteredhouse[0].Price)}\n\nPerk: ${
-            filteredhouse[0].Perk
-          }\n\nGarage Space: ${
-            filteredhouse[0].Space
-          }\n\nUnlocks at prestige: ${filteredhouse[0].Prestige}`
-        )
-        .setColor(colors.blue);
-
-      interaction.reply({ embeds: [embed] });
-    } 
+    }
   },
 };

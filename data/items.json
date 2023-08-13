@@ -1,71 +1,78 @@
 {
   "trophy": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "Double your cash earnings for 30 minutes",
     "Name": "Trophy",
     "Multiply": 2,
     "Time": 5000,
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Emote": "<:item_trophy:971646473940910131>"
   },
   "checkered flag": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "Triple your cash earnings for 10 minutes",
     "Name": "Checkered Flag",
     "Multiply": 3,
     "Time": 600000,
     "Shop": false,
     "Findable": false,
+    "Tier":2,
     "Emote": "<:item_checkflag:971646474360332298>"
   },
   "spikes": {
-    "Price": 10000,
+    "Price": 0,
     "Action": "Slow down police cars",
     "Name": "Spikes",
     "Type": "Usable",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Emote": "<:item_spikes:971639082935541761>"
   },
   "emp": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "Remove 20 speed temporarily from a cop car chasing you",
     "Name": "EMP",
     "Type": "Usable",
     "Image": "https://i.ibb.co/12J5188/item-emp.gif",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Emote": "<a:item_emp2:1107945198757101642>"
   },
   "roadblock": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "Remove 20 speed temporarily from a racers car you're chasing",
     "Name": "RoadBlock",
     "Type": "Usable",
     "Image": "https://i.ibb.co/smShBhY/item-policeblock.gif",
     "Shop": true,
     "Findable": false,
+    "Tier":1,
     "Emote": "<a:item_policeblock:1105320926221971496>"
   },
   "wrench": {
-    "Price": 15000,
+    "Price": 0,
     "Action": "Fix any part on a junk car without needing the part",
     "Name": "Wrench",
     "Type": "Usable",
     "Emote": "<:item_wrench:971655125988966400>",
     "Shop": true,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/52sV3zY/1539872271436.jpg"
   },
   "water bottle": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "Clear all race cooldowns",
     "Name": "Water Bottle",
     "Type": "Usable",
     "Emote": "<:item_waterbottle:1101001806462582834>",
     "Shop": true,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/jZP44f1/item-waterbottle.png",
     "Used": [
       "This can't be good for the planet, your race cooldowns have been reset",
@@ -73,13 +80,14 @@
     ]
   },
   "pink slip": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "Use this to bet your car in races",
     "Name": "Pink Slip",
     "Type": "Currency",
     "Emote": "<:pinkslip:977442825186721863>",
     "Shop": true,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png",
     "Used": [
       "Great! Now you can bet your car and lose!",
@@ -95,6 +103,7 @@
     "Emote": "<:bankupgrade:974153111298007131>",
     "Items": 10,
     "Findable": false,
+    "Tier":1,
     "Shop": false
   },
   "big bank increase": {
@@ -105,49 +114,54 @@
     "Emote": "<:bigbank:1008110998202372170>",
     "Items": 10,
     "Findable": false,
+    "Tier":1,
     "Shop": false
   },
   "small vault": {
-    "Price": 20000,
+    "Price": 0,
     "Name": "Small Vault",
     "Action": "Store up to $50,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_smallvault:1101004960130408458>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/1Jxn8FJ/item-smallvault.png",
     "Used": ["You store some money in a small vault"]
   },
   "medium vault": {
-    "Price": 40000,
+    "Price": 0,
     "Name": "Medium Vault",
     "Action": "Store up to $100,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_mediumvault:1101004954405175379>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/8KDVHj3/item-mediumvault.png",
     "Used": ["You store some money in a medium vault"]
   },
   "large vault": {
-    "Price": 75000,
+    "Price": 0,
     "Name": "Large Vault",
     "Action": "Store up to $500,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_largevault:1101004951574024244>",
     "Shop": true,
     "Findable": false,
+    "Tier":3,
     "Image": "https://i.ibb.co/n3MX4jM/item-largevault.png",
     "Used": ["You store some money in a large vault"]
   },
   "huge vault": {
-    "Price": 100000,
+    "Price": 0,
     "Name": "Huge Vault",
     "Action": "Store up to $1,000,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_hugevault:1101004947107106876>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":3,
     "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
     "Used": ["You store some money in a huge vault"]
   },
@@ -163,35 +177,38 @@
   },
 
   "grape juice": {
-    "Price": 75000,
+    "Price": 0,
     "Action": "Extra luck when using lockpicks for 15 minutes",
     "Name": "Grape Juice",
     "Type": "Usable",
     "Emote": "<:item_grapejuice:1094894554097909760>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/x2vKdbX/item-grapejuice.png",
     "Used": ["You sip on some grape juice"]
   },
   "apple juice": {
-    "Price": 100000,
+    "Price": 0,
     "Action": "Only get cars in blueprints for 15 minutes",
     "Name": "Apple Juice",
     "Type": "Usable",
     "Emote": "<:item_applejuice:1094894556983611423> ",
     "Shop": true,
     "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/G9FGFtT/item-applejuice.png",
     "Used": ["You sip on some apple juice"]
   },
   "orange juice": {
-    "Price": 60000,
+    "Price": 0,
     "Action": "Only get t4parts in wheelspins for 60 seconds",
     "Name": "Orange Juice",
     "Type": "Usable",
     "Emote": "<:item_orangejuice:1095474854775508993>",
     "Shop": true,
     "Findable": true,
+    "Tier":3,
     "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png",
     "Used": ["You sip on some orange juice"]
   },
@@ -202,64 +219,70 @@
     "Type": "Usable",
     "Emote": "<:item_fruitpunch:1095474852997120010>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
+    "Tier":2,
     "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png",
     "Used": ["You sip on some fruit punch"]
   },
   "flat tire": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "Receive a 5% boost in cash when street racing for 30 minutes",
     "Name": "Flat Tire",
     "Type": "Usable",
     "Emote": "<:item_flattire:1095474856306417756>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/3dNv3PF/item-flattire.png",
     "Used": [
       "You're gonna receive 5% more cash from racing because we feel sorry for you racing with a flat tire"
     ]
   },
   "oil": {
-    "Price": 80000,
+    "Price": 0,
     "Action": "Gives 5x Daily rewards for 7 days, but there's a 5% chance you'll lose $100K to medical bills because you shouldn't drink oil...",
     "Name": "Oil",
     "Type": "Usable",
     "Emote": "<:item_oil2:1101017605264900166>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/0ZB9W78/item-oil.png",
     "Used": ["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
   },
   "epic lockpick": {
-    "Price": 450000,
+    "Price": 0,
     "Action": "While active (10 minutes), your lockpicks will not break",
     "Name": "Epic Lockpick",
     "Type": "Usable",
     "Emote": "<:item_stronglockpick:1095474858328064065>",
     "Shop": true,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png",
     "Used": ["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
   },
   "pet treats": {
-    "Price": 75000,
+    "Price": 0,
     "Action": "Use these to make the random xessence cap on your pet higher by **1** for 10 minutes **USING MULTIPLE STACKS UP TO 20**",
     "Name": "Pet Treats",
     "Type": "Usable",
     "Emote": "<:item_treats:1095474851046752327>",
     "Shop": true,
-    "Findable": true,
+    "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/5MTkjcf/item-treats.png",
     "Used": ["You feed your pet treats and now it can find more xessence"]
   },
   "blueberry": {
-    "Price": 350000,
+    "Price": 0,
     "Action": "Eat a blueberry to increase your race rank by 1",
     "Name": "Blueberry",
     "Type": "Usable",
     "Emote": "<:item_blueberry:1095474857514385480>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png",
     "Used": [
       "Blue? BLUE? BLUE??? Berry. Your race rank was increased by 1",
@@ -274,6 +297,7 @@
     "Emote": "<:item_pizza:1098418923638095872>",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/xD6h9PB/item-pizza.png",
     "Used": [
       "Mmm pizza... Now your xp gain from working is increased!",
@@ -288,6 +312,7 @@
     "Emote": "<:item_veggiepizzaz:1098418931435311115>",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/k03wJJg/item-veggiepizzaz.png",
     "Used": [
       "Mmm veggie pizza... Now your salary is increased!",
@@ -302,6 +327,7 @@
     "Emote": "",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/DtDmcQP/item-spatula.png"
   },
   "cooking pot": {
@@ -312,6 +338,7 @@
     "Emote": "",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/vdjht6z/item-pot.gif"
   },
   "gem": {
@@ -322,6 +349,7 @@
     "Emote": "<a:item_gem:1098432365468061741>",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/2MB5SNd/item-gem.gif"
   },
   "star sticker": {
@@ -332,6 +360,7 @@
     "Emote": "<a:item_star:1130304126933282948>",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/4NCJ5N5/item-star.gif"
   },
   "camera": {
@@ -342,6 +371,7 @@
     "Emote": "<a:item_camera:1130305659888480377>",
     "Shop": false,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/g95JXdc/Soggy-Fantastic-Earwig-max-1mb.gif"
   },
   "taser": {
@@ -360,26 +390,28 @@
     ]
   },
   "pet collar": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "Prevent your pet from getting hungry, thirsty, and running away for 1 hour",
     "Name": "Pet Collar",
     "Type": "Usable",
     "Emote": "<:item_petcollar:1098418926012076132>",
     "Shop": true,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/F0vMtpm/item-petcollar.png",
     "Used": [
       "You put a collar on your pet, now it wont get hungry, get thirsty, or run away! Thats definitely how it works right?"
     ]
   },
   "tequila shot": {
-    "Price": 50000,
-    "Action": "Get 5x race earnings for 1 minute. There is also 10% chance you lose $500K per race, why not find out?",
+    "Price": 0,
+    "Action": "Get 5x race earnings for 1 minute. There is also 10% chance you lose $50K apon usage, why not find out?",
     "Name": "Tequila Shot",
     "Type": "Usable",
     "Emote": "<:item_whiskey:1098418928046329967>",
     "Shop": true,
     "Findable": true,
+    "Tier":3,
     "Image": "https://i.ibb.co/3mgKVRh/item-whiskey.png",
     "Used": [
       "You take a shot of tequila and you feel... interesting",
@@ -388,13 +420,14 @@
     ]
   },
   "radio": {
-    "Price": 75000,
+    "Price": 0,
     "Action": "Obtain 2x cash, 2x RP, and 2x race rank while racing for 5 minutes",
     "Name": "Radio",
     "Type": "Usable",
     "Emote": "<:item_radio:1101011638540312607>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/ByPdgcC/item-radio.png",
     "Used": [
       "You turn up the radio and hear Justin Bieber, you're now drifting to it",
@@ -402,35 +435,38 @@
     ]
   },
   "flowers": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "With this in your inventory you can view the speed of each NPCs car",
     "Name": "Flowers",
     "Type": "Non-Usable",
     "Emote": "<:item_flowers:1103826126721265664>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/0sddpRj/item-flowers.png"
   },
 
   "crowbar": {
-    "Price": 50000,
+    "Price": 0,
     "Action": "You'll need this to rob banks",
     "Name": "Crowbar",
     "Type": "Non-Usable",
     "Emote": "<:item_crowbar:1104299475691917444>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/RDWfNFb/item-crowbar.png"
   },
 
   "mask": {
-    "Price": 75000,
+    "Price": 0,
     "Action": "You'll also need this to rob banks",
     "Name": "Mask",
     "Type": "Non-Usable",
     "Emote": "<:item_mask:1104299478011367494>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/wBzGWGy/item-mask.png"
   },
 
@@ -442,6 +478,7 @@
     "Emote": "<:item_coconut:1103826134149374006>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/25y3tSq/item-coconut.png"
   },
   "dirt": {
@@ -452,6 +489,7 @@
     "Emote": "<a:item_dirt:1103827943039438930>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/SKs2HNs/item-dirt.gif"
   },
   "milk": {
@@ -462,6 +500,7 @@
     "Emote": "<:item_milk:1103826130819100795>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/KyyC3L7/item-milk.png",
     "Used": [
       "Mmm milk",
@@ -477,6 +516,7 @@
     "Emote": "<:item_strawberrymilk:1103826129657274488>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/hmMTL2Z/item-strawberrymilk.png",
     "Used": [
       "Mmm berry milk",
@@ -492,6 +532,7 @@
     "Emote": "<:item_chocolatemilk:1103826132949815327>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/RDdTW0S/item-chocolatemilk.png",
     "Used": [
       "Mmm choccy milk",
@@ -500,13 +541,14 @@
   },
 
   "ice cube": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "Use this to reduce event cooldowns by half once! Be careful, you also have a 25% chance to slip on the ice and make your cooldown increase by x2",
     "Name": "Ice Cube",
     "Type": "Usable",
     "Emote": "<:item_icecube:1111580004942352414>",
     "Shop": true,
-    "Findable": true,
+    "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/PQs8pGD/item-icecube.png",
     "Used": [
       "You're not listening to ice cube, but your event cooldowns are reduced so thats good",
@@ -521,7 +563,7 @@
     "Type": "Usable",
     "Emote": "<:item_permissionslip:1111580007861596202>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Image": "https://i.ibb.co/n7qs0k6/item-permission-slip.png",
     "Used": [
       "You're not listening to ice cube, but your event cooldowns are reduced so thats good",
@@ -537,6 +579,7 @@
     "Emote": "<:item_oldkite:1111580006653628466>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/0MdP4Gz/item-oldkite.png"
   },
   "beach ball": {
@@ -546,18 +589,19 @@
     "Type": "Non-Usable",
     "Emote": "<a:item_beachball:1111097346072260758>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Image": "https://i.ibb.co/H4G1dqT/item-beachball.gif"
   },
 
   "cocktail": {
-    "Price": 75000,
+    "Price": 0,
     "Action": "While this is in your inventory, you'll receive a 25% discount when buying used cars, but there's also a 15% chance you'll need to pay 10% extra",
     "Name": "Cocktail",
     "Type": "Non-Usable",
     "Emote": "<:item_cocktail:1111580012534042634>",
     "Shop": true,
     "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/Xstp72T/item-cocktail.png"
   },
 
@@ -568,7 +612,7 @@
     "Type": "Usable",
     "Emote": "<:item_radar:1111580009853878272>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Image": "https://i.ibb.co/h18BFcm/item-radar.png"
   },
 
@@ -579,7 +623,7 @@
     "Type": "Usable",
     "Emote": "<:item_briefcase:1114027394660044800>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Image": "https://i.ibb.co/j35ztVR/item-briefcase.png"
   },
 
@@ -591,6 +635,7 @@
     "Emote": "<:item_match:1116954447797567488>",
     "Shop": false,
     "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/tBXd68Q/item-match.png"
   },
 
@@ -602,6 +647,7 @@
     "Emote": "<:item_chips:1116954446090469427>",
     "Shop": false,
     "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/VBYx5fQ/item-chips.png"
   },
 
@@ -613,6 +659,7 @@
     "Emote": "<:item_match:1116954447797567488>",
     "Shop": false,
     "Findable": true,
+    "Tier":3,
     "Image": "https://i.ibb.co/5hHSWCD/item-parkingbrake.png"
   },
   "gas": {
@@ -623,6 +670,7 @@
     "Emote": "<:item_gas:1116954444500848650>",
     "Shop": false,
     "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/JRHjvrk/item-gas.png",
     "Used": [
       "You warm your hands around the fire and now your extra race ranks will transfer over to the next prestige"
@@ -636,30 +684,24 @@
     "Emote": "<:item_fireplace:1116954448976166962>",
     "Shop": false,
     "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/xXjThV3/item-fireplace.png",
     "Used": [
       "You warm your hands around the fire and now your extra drift ranks will transfer over to the next prestige"
     ]
   },
-  "bubbles": {
-    "Price": 0,
-    "Action": "I'm gonna pop your bubbles\n\nBoost your race rank earnings by 3x",
-    "Name": "Bubbles",
-    "Type": "Usable",
-    "Emote": "<:item_bubbles:1116954441380286545>",
-    "Shop": false,
-    "Findable": true,
-    "Image": "https://i.ibb.co/7VV9Vgx/item-bubbles.png"
-  },
+
+
 
   "energy drink": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "2x RP for 10 minutes",
     "Name": "Energy Drink",
     "Type": "Usable",
     "Emote": "<:item_energydrink:1101014779499384893>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":1,
     "Image": "https://i.ibb.co/mzf6rDT/item-energydrink.png",
     "Used": ["Don't drink too many of these, you get 2x RP for 10 minutes"]
   },
@@ -699,17 +741,18 @@
     "Shop": false
   },
   "pet egg": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "Hatch a pet",
     "Name": "Pet Egg",
     "Type": "Usable",
     "Emote": "<:item_petegg:1095138763446960128>",
     "Shop": true,
     "Findable": false,
+    "Tier":1,
     "Image": "https://i.ibb.co/HF7NfGT/item-petegg.png"
   },
   "disguise": {
-    "Price": 75000,
+    "Price": 0,
     "Action": "Use this to steal from other users",
     "Name": "Disguise",
     "Type": "Usable",
@@ -723,7 +766,7 @@
     ]
   },
   "toolbox": {
-    "Price": 25000,
+    "Price": 0,
     "Action": "Use this to restore a car automatically",
     "Name": "Toolbox",
     "Type": "Non-Usable",

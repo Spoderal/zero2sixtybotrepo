@@ -166,21 +166,21 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "view") {
-      let car = interaction.options.getString("car").toLowerCase();
+      let caroption = interaction.options.getString("car")
       let livid = interaction.options.getString("id");
       let global = await Global.findOne();
       let liverieslist = global.liveries;
-      if (!car) return await interaction.reply("Specify a car!");
+      if (!caroption) return await interaction.reply("Specify a car!");
       if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
-      if (!list[car.toLowerCase()])
+      if (!list[caroption.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
+        console.log(caroption)
       let cardata = liverieslist.filter(
-        (car) => car.Name.toLowerCase() == car.toLowerCase()
+        (car) => car.Name.toLowerCase() == caroption.toLowerCase()
       );
       console.log(cardata);
-      if (!cardata[0])
-        return await interaction.reply("This car doesn't have any livery id's");
+      if (!cardata[0])  return await interaction.reply("This car doesn't have any livery id's");
 
       let filtered = cardata.filter((e) => e.id == livid);
 
@@ -192,7 +192,7 @@ module.exports = {
       )
         return await interaction.reply("Thats not a valid ID!");
       let embedapprove = new Discord.EmbedBuilder()
-        .setTitle(`Livery ${livid} for ${cars.Cars[car].Name}`)
+        .setTitle(`Livery ${livid} for ${cars.Cars[caroption].Name}`)
         .setImage(filtered[0].image)
         .setColor(colors.blue);
 
@@ -262,7 +262,7 @@ module.exports = {
         interaction.channel.send({ embeds: [embed] });
 
         let submitchannel =
-          interaction.client.channels.cache.get("931078225021521920");
+          interaction.client.channels.cache.get("942000340985872404");
 
         submitchannel.send({ embeds: [embed] });
       });
@@ -364,29 +364,28 @@ module.exports = {
           "This car doesn't have liveries yet, if you'd like to submit one, use /livery submit"
         );
       let liverylist = [];
+
       for (var i = 0; i < liveriesforcar.length; i++) {
         let actliv = liveriesforcar[i];
-        liverylist.push(`${actliv.id}`);
-        //Do something
+        liverylist.push(actliv);
+      
       }
       let shopItems = cardata;
       if (!shopItems || !shopItems.length)
         return await interaction.reply(`This car doesn't have any liveries!`);
       shopItems = lodash.chunk(
-        shopItems.map(() => `**${liverylist.join("\n")}**`)
+        shopItems.map(() => `${liverylist.join("\n")}`)
       );
+
+      console.log(liverylist)
 
       const embed = new Discord.EmbedBuilder()
         .setTitle(`Liveries for ${cars.Cars[car].Name}`)
-        .setDescription(
-          `View using \`/liveryview [id] [car]\`\nSet using \`/liveryinstall [id] [car]\`\n${shopItems[0].join(
-            "\n"
-          )}`
-        )
+        .setImage(liverylist[0].image)
+        .setDescription(`ID: ${liverylist[0].id}`)
         .setFooter({ text: `Pages 1/${shopItems.length}` })
         .setThumbnail("https://i.ibb.co/Hq4p8bx/usedicon.png")
         .setColor(colors.blue)
-        .setTimestamp();
 
       await interaction
         .reply({ embeds: [embed], fetchReply: true })
@@ -411,10 +410,11 @@ module.exports = {
             else if (r.emoji.name === "⏹️") return collector.stop();
 
             embed.setDescription(
-              `View using \`/livery view [car] [livery id]\nSet using /livery install [car id] [livery id]\`\n${shopItems[
+              `ID: ${liverylist[
                 page - 1
-              ].join("\n")}`
+              ].id}`
             );
+            embed.setImage(liverylist[page - 1].image)
 
             if (current !== page) {
               embed.setFooter({ text: `Pages ${page}/${shopItems.length}` });

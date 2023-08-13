@@ -68,7 +68,7 @@ module.exports = {
     let parttier = parttiersdb[`${removepart.toLowerCase()}1`];
 
     if (parttier.Power) {
-      selected[0].Speed -= selected[0].Speed * parttier.Power;
+      selected[0].Speed -= (selected[0].Speed * parttier.Power);
     }
     if (parttier.Handling) {
       selected[0].Handling -= selected[0].Handling * parttier.Handling;

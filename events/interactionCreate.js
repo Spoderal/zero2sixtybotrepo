@@ -5,11 +5,13 @@ const Cooldowns = require("../schema/cooldowns");
 const Globals = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 
+
 const {
   blacklistInteractionCheck,
   userGetFromInteraction,
 } = require("../common/user");
 const { InteractionType } = require("discord.js");
+const { gas } = require("./gas");
 
 //test
 //test

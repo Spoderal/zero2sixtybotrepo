@@ -85,8 +85,7 @@ module.exports = {
 
     let acc = selected.Acceleration;
 
-    let weight =
-      selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
+    let weight = selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
 
     let handling = selected.Handling;
 
@@ -131,29 +130,29 @@ module.exports = {
     let tracklength;
 
     if (track == "regular") {
-      tracklength = 10000;
+      tracklength = 500;
       notorietyreward = notorietyreward * 1;
       cashreward = cashreward * 1;
     } else if (track == "mountain") {
-      tracklength = 20000;
+      tracklength = 1000;
       notorietyreward = notorietyreward * 1.5;
       cashreward = cashreward * 2;
     } else if (track == "parking garage") {
-      tracklength = 30000;
+      tracklength = 2500;
       notorietyreward = notorietyreward * 2;
       cashreward = cashreward * 3;
     }
 
-    let speed = velocity / 2;
-    let momentum = speed * weight;
+    let speed = velocity;
+    let weight2 = weight / 1000
+    let momentum = speed / weight2;
 
     momentum = momentum / acc;
 
     momentum = momentum * handling;
 
-    momentum = momentum / time;
-
     let driftscore = momentum / velocity;
+    console.log(driftscore)
     await interaction.reply({
       content: "Revving engines...",
       fetchReply: true,
@@ -200,6 +199,7 @@ module.exports = {
       miles = 2;
     }
 
+    
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage(trackimg);
@@ -221,7 +221,7 @@ module.exports = {
       .setTitle(`Drifting on the ${trackemote} ${difficulty} ${track} track!`)
       .addFields({
         name: `${selected.Emote} ${selected.Name}`,
-        value: `${emotes.speed} Power: ${velocity}\n\n${emotes.zero2sixty} Acceleration: ${acc}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
+        value: `${emotes.speed} Power: ${velocity.toFixed(1)}\n\n${emotes.zero2sixty} Acceleration: ${acc.toFixed(1)}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling.toFixed(1)}`,
 
         inline: true,
       })
@@ -242,7 +242,7 @@ module.exports = {
       tracklength -= driftscore;
       console.log(timelimit);
       console.log(tracklength);
-      if (timelimit <= 0) {
+      if (timelimit <= 0 || tracklength <= 0) {
         if (tracklength > 0) {
           embed.setTitle(`${trackemote} ${difficulty} ${track} track lost.`);
           await interaction.editReply({ embeds: [embed] });

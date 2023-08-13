@@ -62,18 +62,46 @@ module.exports = {
             .setDescription("The tag to set, example: my porsches")
             .setRequired(true)
         )
-    ),
+    ) .addSubcommand((subcommand) =>
+    subcommand
+      .setName("untag")
+      .setDescription("Untag a car from a group, such as for sale")
+      .addStringOption((option) =>
+        option
+          .setName("car")
+          .setDescription("The car to untag")
+          .setRequired(true)
+      )
+  ),
   async execute(interaction) {
     let option = interaction.options.getSubcommand();
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+
+
     let uid = interaction.user.id;
 
     if (option == "select") {
       let cars = require("../data/cardb.json");
       let usercars = userdata.cars;
       let idtochoose = interaction.options.getString("id");
+
+      let slurs = ["nigger", "nigga", "niger", "nig", "bitch", "fuck", "shit", "shitter", "fag", "faggot"]
+
+      const isValidUrl = urlString=> {
+        try { 
+          return Boolean(new URL(urlString)); 
+        }
+        catch(e){ 
+          return false; 
+        }
+    }
+
+      if(slurs[idtochoose]) return interaction.reply("You cant set your ID to this word!")
+
+
+      if(isValidUrl(idtochoose)) return interaction.reply("IDs cant be links!")
 
       if (!usercars) return await interaction.reply("You don't own any cars!");
       let selecting = interaction.options.getString("car");
@@ -178,6 +206,22 @@ module.exports = {
       await interaction.reply({ embeds: [embed] });
     } else if (option == "tag") {
       let idtochoose = interaction.options.getString("car");
+
+      let slurs = ["nigger", "nigga", "niger", "nig", "bitch", "fuck", "shit", "shitter", "fag", "faggot"]
+
+      const isValidUrl = urlString=> {
+        try { 
+          return Boolean(new URL(urlString)); 
+        }
+        catch(e){ 
+          return false; 
+        }
+    }
+
+      if(slurs[idtochoose]) return interaction.reply("You cant set your tag to this word!")
+
+
+      if(isValidUrl(idtochoose)) return interaction.reply("Tags cant be links!")
       let carfiltered = userdata.cars.filter(
         (car) =>
           car.Name.toLowerCase() == idtochoose.toLowerCase() ||
@@ -226,7 +270,75 @@ module.exports = {
       userdata.save();
 
       await interaction.reply({ embeds: [embed] });
-    } else if (option == "unfavorite") {
+    } 
+    else if (option == "untag") {
+      let idtochoose = interaction.options.getString("car");
+
+      let slurs = ["nigger", "nigga", "niger", "nig", "bitch", "fuck", "shit", "shitter", "fag", "faggot"]
+
+      const isValidUrl = urlString=> {
+        try { 
+          return Boolean(new URL(urlString)); 
+        }
+        catch(e){ 
+          return false; 
+        }
+    }
+
+      if(slurs[idtochoose]) return interaction.reply("You cant set your tag to this word!")
+
+
+      if(isValidUrl(idtochoose)) return interaction.reply("Tags cant be links!")
+      let carfiltered = userdata.cars.filter(
+        (car) =>
+          car.Name.toLowerCase() == idtochoose.toLowerCase() ||
+          car.ID == idtochoose.toLowerCase()
+      );
+      
+      if (!carfiltered[0])
+        return interaction.reply(
+          `That car wasn't found in your cars, did you make sure to specify a car id, or its name?`
+        );
+
+      let embed = new Discord.EmbedBuilder()
+        .setTitle("Untagged")
+        .setColor(colors.blue)
+        .setDescription(
+          `${cars.Cars[carfiltered[0].Name.toLowerCase()].Emote} ${
+            carfiltered[0].Name
+          }`
+        )
+        .setThumbnail(`${cars.Cars[carfiltered[0].Name.toLowerCase()].Image}`);
+
+      carfiltered[0]["Tag"] = null;
+
+      console.log(carfiltered);
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": carfiltered[0],
+          },
+        },
+
+        {
+          arrayFilters: [
+            {
+              "car.Name": carfiltered[0].Name,
+            },
+          ],
+        }
+      );
+
+      userdata.markModified("cars");
+      userdata.save();
+
+      await interaction.reply({ embeds: [embed] });
+    } 
+    else if (option == "unfavorite") {
       let idtochoose = interaction.options.getString("car");
       let carfiltered = userdata.cars.filter(
         (car) =>

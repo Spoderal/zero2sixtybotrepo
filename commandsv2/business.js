@@ -23,11 +23,13 @@ module.exports = {
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
     let businessarr = [];
+    let repemote = `🤔`;
     let ubusiness = userdata.business;
     let businesscooldown = cooldowns.business;
     for (let bus in businesses) {
       businessarr.push(businesses[bus]);
     }
+    let msg
     let businessrow;
     let embed;
     let timeout = 86400000;
@@ -48,7 +50,9 @@ module.exports = {
         .setEmoji("❌")
         .setStyle("Danger")
     );
+    
     if (userdata.business.Name) {
+      
       businessrow = new ActionRowBuilder().setComponents(
         new ButtonBuilder()
           .setLabel("Edit Details")
@@ -61,7 +65,7 @@ module.exports = {
           .setEmoji("⬆️")
           .setStyle("Success"),
         new ButtonBuilder()
-          .setLabel("Serve Customer")
+          .setLabel("Serve Customers")
           .setCustomId("serve")
           .setEmoji("👤")
           .setStyle("Success"),
@@ -84,32 +88,9 @@ module.exports = {
 
       createdOn.setHours(0, 0, 0, 0);
       today.setHours(0, 0, 0, 0);
-      let repemote = `🤔`;
+      
 
-      if (ubusiness.Reputation <= 10) {
-        repemote = `🤔`;
-      }
-      if (ubusiness.Reputation >= 11) {
-        repemote = `🤨`;
-      }
-      if (ubusiness.Reputation >= 15) {
-        repemote = `☹️`;
-      }
-      if (ubusiness.Reputation >= 20) {
-        repemote = `😐`;
-      }
-      if (ubusiness.Reputation >= 30) {
-        repemote = `🙂`;
-      }
-      if (ubusiness.Reputation >= 50) {
-        repemote = `😯`;
-      }
-      if (ubusiness.Reputation >= 75) {
-        repemote = `😛`;
-      }
-      if (ubusiness.Reputation <= 100 && ubusiness.Reputation >= 95) {
-        repemote = `😛`;
-      }
+      
 
       var diff = (+today - +createdOn) / msInDay;
       console.log(diff);
@@ -147,6 +128,12 @@ module.exports = {
         )
         .setColor(colors.blue)
         .setThumbnail(`${ubusiness.Logo}`);
+
+       msg = await interaction.reply({
+          embeds: [embed],
+          components: [businessrow, row],
+          fetchReply: true,
+        });
     } else {
       embed = new EmbedBuilder()
         .setTitle("Business Menu")
@@ -160,13 +147,15 @@ module.exports = {
           .setEmoji("➕")
           .setStyle("Success")
       );
+       msg = await interaction.reply({
+        embeds: [embed],
+        components: [businessrow],
+        fetchReply: true,
+      });
     }
+    
 
-    let msg = await interaction.reply({
-      embeds: [embed],
-      components: [businessrow, row],
-      fetchReply: true,
-    });
+
 
     let filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
@@ -201,7 +190,7 @@ module.exports = {
         embed.setDescription(
           `Car Wash : Washing your car costs 50% less **10K to open**\n\nGas Station : Gas is 25% off**15K to open**\n\nCar Mechanic : Gain a bonus part when in the junkyard **20K to open**`
         );
-        await i.update({ embeds: [embed], components: [businessbuttons] });
+        await i.update({ embeds: [embed], components: [businessbuttons], fetchReply: true });
       } else if (i.customId == "upgrade") {
         console.log(userdata.business.Business);
         let business = businessarr.filter(
@@ -238,9 +227,9 @@ module.exports = {
           }
         }
         let embed1 = new EmbedBuilder();
-        let em = { embeds: [embed1], components: [businessrow, upgraderow] };
+        let em = { embeds: [embed1], components: [businessrow, upgraderow], fetchReply: true };
         if (upgraded.length == 0) {
-          em = { embeds: [embed1], components: [businessrow] };
+          em = { embeds: [embed1], components: [businessrow], fetchReply: true };
           upgraded = ["No upgrades to display, try leveling up your business!"];
         }
         console.log(upgraded);
@@ -262,31 +251,34 @@ module.exports = {
         await i.update(em);
 
         collector2.on("collect", async (i) => {
-          let upgrade = upgrades.filter((upgrade) => upgrade.ID == i.customId);
-          let upgradearr = userdata.business.Upgrades || [];
-          console.log(upgrade);
+          if(upgrades[i.customId]){
 
-          if (upgrade[0].Cost > userdata.cash) {
-            return i.update(`You don't have enough cash!`);
+            let upgrade = upgrades.filter((upgrade) => upgrade.ID == i.customId);
+            let upgradearr = userdata.business.Upgrades || [];
+            console.log(upgrade);
+  
+            if (upgrade[0].Cost > userdata.cash) {
+              return i.update(`You don't have enough cash!`);
+            }
+  
+            if (upgrade[0].Customers) {
+              userdata.business.Customers += upgrade[0].Customers;
+            }
+  
+            if (upgrade[0].Income) {
+              userdata.business.Income += upgrade[0].Income;
+            }
+  
+            userdata.cash -= upgrade[0].Cost;
+  
+            upgradearr.push(upgrade[0]);
+  
+            userdata.business.Upgrades = upgradearr;
+            userdata.markModified("business");
+            userdata.save();
+            collector2.stop();
+            await i.update({ embeds: [embed1], components: [businessrow], fetchReply: true });
           }
-
-          if (upgrade[0].Customers) {
-            userdata.business.Customers += upgrade[0].Customers;
-          }
-
-          if (upgrade[0].Income) {
-            userdata.business.Income += upgrade[0].Income;
-          }
-
-          userdata.cash -= upgrade[0].Cost;
-
-          upgradearr.push(upgrade[0]);
-
-          userdata.business.Upgrades = upgradearr;
-          userdata.markModified("business");
-          userdata.save();
-          collector2.stop();
-          await i.update({ embeds: [embed1], components: [businessrow] });
         });
       } else if (i.customId == "edit") {
         let editrow = new ActionRowBuilder().setComponents(
@@ -295,7 +287,7 @@ module.exports = {
             .setLabel("Edit Name")
             .setStyle("Secondary")
         );
-        i.update({ components: [editrow] });
+        i.update({ components: [editrow], fetchReply: true });
       } else if (i.customId == "name") {
         i.update({
           content: `Send the name you want to set`,
@@ -322,15 +314,16 @@ module.exports = {
           let tipchance = randomRange(1, 100);
           let tip = randomRange(1, 100);
           let income = userdata.business.Income;
+          let customersserve = userdata.business.CustomerD
           if (tipchance <= 10) {
             userdata.business.Tips += tip;
             userdata.business.TipsCollected += tip;
             interaction.channel.send(`You earned a tip of $${tip}!`);
           }
-          userdata.cash += income;
-          userdata.business.Earned += income;
-          userdata.business.Served += 1;
-          userdata.business.CustomerD -= 1;
+          userdata.cash += (income * customersserve);
+          userdata.business.Earned += (income * customersserve);
+          userdata.business.Served += userdata.business.Customers;
+          userdata.business.CustomerD -= userdata.business.Customers;
           let served = userdata.business.Served;
           let level = userdata.business.Level;
           let otherlevel = level * 10;
@@ -343,12 +336,71 @@ module.exports = {
           if (userdata.business.CustomerD == 0) {
             cooldowns.business = Date.now();
           }
+          userdata.update()
           if (userdata.business.Reputation < 100) {
             userdata.business.Reputation += 1;
           }
+          if (userdata.business.Reputation <= 10) {
+            repemote = `🤔`;
+          }
+          if (userdata.business.Reputation >= 11) {
+            repemote = `🤨`;
+          }
+          if (userdata.business.Reputation >= 15) {
+            repemote = `☹️`;
+          }
+          if (userdata.business.Reputation >= 20) {
+            repemote = `😐`;
+          }
+          if (userdata.business.Reputation >= 30) {
+            repemote = `🙂`;
+          }
+          if (userdata.business.Reputation >= 50) {
+            repemote = `😯`;
+          }
+          if (userdata.business.Reputation >= 75) {
+            repemote = `😛`;
+          }
+          if (userdata.business.Reputation <= 100 && userdata.business.Reputation >= 95) {
+            repemote = `😛`;
+          }
+           embed = new EmbedBuilder()
+        .setTitle("Business Menu")
+        .addFields(
+          {
+            name: `${ubusiness.Business} Name`,
+            value: `${ubusiness.Name}`,
+          },
+          {
+            name: `Income`,
+            value: `${emotes.cash} ${toCurrency(ubusiness.Income)}`,
+          },
+          {
+            name: `Customers/Day`,
+            value: `👥 ${userdata.business.CustomerD}/${ubusiness.Customers}`,
+          },
+          {
+            name: `Reputation`,
+            value: `${repemote} ${ubusiness.Reputation}`,
+          },
+          {
+            name: `Tips To Collect`,
+            value: `🫙 ${ubusiness.Tips}`,
+          },
+          {
+            name: `Level`,
+            value: `🔸${userdata.business.Level}`,
+          },
+          {
+            name: `Age`,
+            value: `⌚ ${diff} days`,
+          }
+        )
+        .setColor(colors.blue)
+        .setThumbnail(`${ubusiness.Logo}`);
           userdata.markModified("business");
           userdata.save();
-          i.update({ content: `✅`, fetchReply: true });
+          i.update({ embeds: [embed], fetchReply: true });
         } else {
           i.update(`You're out of customers!`);
         }
@@ -359,14 +411,14 @@ module.exports = {
           .setDescription(
             `
             👤 Customers Served: ${userdata.business.Served}\n
-            🫙 Tips Earned: ${userdata.business.TipsCollected}\n
-            ${emotes.cash} Cash Earned: ${userdata.business.Earned}\n
+            🫙 Tips Earned: ${toCurrency(userdata.business.TipsCollected)}\n
+            ${emotes.cash} Cash Earned: ${toCurrency(userdata.business.Earned)}\n
             `
           )
           .setColor(`${colors.blue}`)
           .setThumbnail(`${ubusiness.Logo}`);
 
-        await i.update({ embeds: [embed], fetchReply: true });
+        await i.update({ embeds: [embed], components: [businessrow], fetchReply: true });
       } else if (i.customId == "tips") {
         if (userdata.business.Tips) {
           userdata.cash += userdata.business.Tips;
@@ -408,7 +460,7 @@ module.exports = {
 
         userdata.save();
 
-        await i.update({ embeds: [embed], components: [] });
+        await i.update({ embeds: [embed], components: [], fetchReply: true });
       } else if (i.customId == "abandon") {
         let rowab = new ActionRowBuilder().setComponents(
           new ButtonBuilder()

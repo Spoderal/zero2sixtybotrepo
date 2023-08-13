@@ -21,6 +21,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
+  started: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   gold: {
     type: Number,
     required: false,
@@ -290,10 +295,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
-  crewseason2: {
-    type: Number,
+  crewseason: {
+    type: Array,
     required: false,
-    default: 0,
+    default: [],
   },
   crew: {
     type: Object,
@@ -516,11 +521,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  eventCooldown: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
+
   perfectengineering: {
     type: Boolean,
     required: false,
@@ -601,6 +602,21 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
+  autogas:{
+    type: Boolean,
+    required: false,
+    default: false
+  },
+  typekeys:{
+    type: Number,
+    required: false,
+    default: 0
+  },
+  typespeed:{
+    type: Number,
+    required: false,
+    default: 0
+  }
 });
 
 module.exports = mongoose.model("profile", Profile);

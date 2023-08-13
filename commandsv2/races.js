@@ -89,7 +89,7 @@ module.exports = {
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
           if (value === "pvp_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("PVP Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Race against other players!`);
@@ -102,7 +102,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "bot_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Race against bots for practice!`);
@@ -142,7 +142,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "qm_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Drag Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
@@ -184,7 +184,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "squad_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Squad Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Race squads to take their cars!`);
@@ -212,7 +212,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "driftrace") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Drifting");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Drift freely and earn money for it!`);
@@ -242,7 +242,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "track") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Track Race");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
@@ -284,7 +284,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "dpvp_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("PVP Drifting");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Drift against other players!`);
@@ -297,7 +297,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "police_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Wanted");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
@@ -316,7 +316,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "cash_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Cashcup");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
@@ -333,7 +333,7 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "bet_race") {
-            embed.fields = [];
+            embed = new EmbedBuilder()
             embed.setTitle("Bet racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(

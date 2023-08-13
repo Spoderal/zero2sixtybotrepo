@@ -29,11 +29,11 @@ module.exports = {
             emoji: "<a:season_1:1111097329836113920>",
           },
           {
-            label: "Snow Vs Sun",
+            label: "Type Takeover",
             description: "Information for the Snow Vs Sun Event",
             value: "event_1",
             customId: "event_1",
-            emoji: "❄️",
+            emoji: "🟢",
           },
           {
             label: "Track Legends",
@@ -82,7 +82,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 1 <a:season_1:1111097329836113920>\n
-          Snow vs Sun ☀️❄️\n
+          Type Takeover <:key_z:1140029565360668783>\n
           Track Legends <:tracklegends:1072357967652995174>
       `);
 
@@ -128,26 +128,28 @@ module.exports = {
           components: [row2],
         });
       } else if (value === "event_1") {
-        embed.setTitle("Snow Vs Sun");
+        embed.setTitle("Type Takeover");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Snowy has been missing, but why? Find out below!
+        embed.setDescription(`Welcome to Type Takeover! 
 
-        It was a cold Friday night, snowy was finishing his last race in his white Agera cheerfully when someone pulls up. 
+        Walter has just finished adjusting his mirrors on his murcielago sv, when he got word Snowy has left town because of Devil.
 
-        Its the police captain, Devil, and he wants to take snowy down, he's been chasing snowy for years for a reason, and now its his chance to get him back.
+        Snowy was like a brother to him, so he vows to take revenge on the ZPD, first step, claim the west side territory.
 
-        They race around the city, dodging civilians, sharp turns, tires screaming as their engines roar.
-        In the end, snowys car starts to sputter, the coolant level is low... He panicks, and turns a corner out of the city, Devil has ran him out.
-        Devil looks past the city, with a smug expression that quickly turns to anger. "YOU NEVER SHOULD HAVE STEPPED DOWN SNOWY!" he yells into the cold wind
+        He keeps taking over more and more territory, its up to you to make him and the W squad come to their senses.
 
-        Find out other parts to the story in the new limited edition race, cross country! Pick up the pieces as you pick up keys to unbox the snow vs sun crate to earn exclusive cars!
+        Stop walter, and get keys by type racing to BUY exclusive cars, thats right, BUY THEM, no RNG, no crates, nothing. Just win.
 
-            **Ends August 12th 2023**
+        Type the fastest you can in /typerace and earn z keys, and buy exclusive cars in the dealership event section!
+
+        Check how you score up vs the other racers with the /leaderboard type takeover functionality!
+
+            **Ends August 31st 2023**
 
                   `);
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/0M4qTB6/snowvssun.png");
+          .setImage("https://i.ibb.co/GJ8c96b/typetakeoverevent.png");
 
         await interaction.editReply({
           embeds: [embed],

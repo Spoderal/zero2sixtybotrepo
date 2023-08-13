@@ -56,13 +56,15 @@ module.exports = {
       if (userdata.blueprints <= 0)
         return interaction.reply(`You don't have any blueprints!`);
       userdata.blueprints -= 1;
+      userdata.update();
+
+      userdata.save()
       let embed = new EmbedBuilder()
         .setTitle(`Revealing blueprint...`)
         .setColor(`#60b0f4`);
 
       let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
 
-      userdata.update();
       cooldowndata.blueprint = Date.now();
       cooldowndata.save();
       const canvas = createCanvas(1280, 720);

@@ -5,18 +5,15 @@
     "2020 land rover range rover"
   ],
   "Parts": [
-    "t3exhaust",
-    "t4exhaust",
-    "t3tires",
-    "t4tires",
-    "t4intake",
-    "t4racesuspension",
-    "t4driftsuspension",
-    "t3drifttires",
-    "t3intake",
-    "t4turbo",
-    "t4drifttires",
-    "t4weightreduction"
+    "dualturbo",
+    "supercharger",
+    "t3weight",
+    "t4weight",
+    "t3weightreduction",
+    "t4weightreduction",
+    "driftsprings",
+    "racesprings",
+    "tracksprings"
   ],
   "Cash": [
     1000, 2000, 3000, 4000, 50000, 6000, 7000, 8000, 900, 1000, 15000, 2000,

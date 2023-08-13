@@ -31,11 +31,8 @@ module.exports = {
         .setName("amount")
         .setDescription("The amount to buy")
         .setRequired(false)
-        .addChoices(
-          { name: "1", value: 1 },
-          { name: "5", value: 5 },
-          { name: "10", value: 10 }
-        )
+        .setMinValue(1)
+        .setMaxValue(100)
     )
     .addBooleanOption((option) =>
       option
@@ -68,9 +65,9 @@ module.exports = {
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     const global = await Global.findOne({});
 
-    const amount = interaction.options.getNumber("amount");
+    let amount = interaction.options.getNumber("amount");
     let goldpurchase = interaction.options.getBoolean("gold");
-    const amount2 = amount || 1;
+    let amount2 = amount || 1;
     let cash = userdata.cash;
     const gold = userdata.gold;
     const usercars = userdata.cars;
@@ -82,6 +79,8 @@ module.exports = {
       return await interaction.reply(
         "To use this command, specify the car you want to buy. Example: /buy 1995 Mazda Miata"
       );
+
+     let amount3 = Math.round(amount2)
 
     const carsList = cars.Cars;
     const partsList = parts.Parts;
@@ -171,7 +170,7 @@ module.exports = {
         boughtCarPrice == 0 &&
         !imports.common.Contents.includes(boughtCar.Name.toLowerCase()) &&
         !imports.rare.Contents.includes(boughtCar.Name.toLowerCase()) &&
-        !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())
+        !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase()) && !boughtCar.Exclusive
       )
         return await interaction.reply("This car is not purchasable.");
 
@@ -268,6 +267,9 @@ module.exports = {
             if (userdata.exoticCredits < 25)
               return interaction.reply("You don't have enough common credits!");
           }
+          if(boughtCar.Exclusive){
+            if(userdata.typekeys < boughtCar.Exclusive) return interaction.reply("You don't have enough keys!")
+          }
 
           let idtoset = boughtCar.alias;
           let carobj = {
@@ -317,10 +319,21 @@ module.exports = {
           if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
             userdata.exoticCredits -= 25;
           }
+          let displayprice
+          let emote
           if (!goldpurchase) {
+            displayprice = boughtCarPrice
+            emote = emotes.cash
             userdata.cash -= boughtCarPrice;
-          } else if (goldpurchase) {
+          }  if (goldpurchase) {
+            emote = "🪙"
+            displayprice = goldpurchase
             userdata.gold -= cargoldprice;
+          }
+           if(boughtCar.Exclusive > 0){
+            displayprice = boughtCar.Exclusive
+            emote = "<:key_z:1140029565360668783>"
+            userdata.typekeys -= boughtCar.Exclusive
           }
           userdata.cars.push(carobj);
           await userdata.save();
@@ -330,9 +343,9 @@ module.exports = {
             .addFields([
               {
                 name: "Price",
-                value: `${toCurrency(
-                  boughtCarPrice
-                )} (${cargoldprice} if you bought it with gold)`,
+                value: `${emote} ${numberWithCommas(
+                  displayprice
+                )}`,
               },
               { name: `ID`, value: `${idtoset}` },
               {
@@ -439,6 +452,9 @@ module.exports = {
           if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
             userdata.exoticCredits -= 25;
           }
+          if (boughtCar.Exclusive) {
+            userdata.typekeys -= boughtCar.Exclusive;
+          }
           if (goldpurchase == true) {
             userdata.gold -= cargoldprice;
           } else {
@@ -447,12 +463,30 @@ module.exports = {
           userdata.cars.push(carobj);
           await userdata.save();
 
+          let displayprice
+          let emote
+          if (!goldpurchase) {
+            displayprice = boughtCarPrice
+            emote = emotes.cash
+            userdata.cash -= boughtCarPrice;
+          } 
+           if (goldpurchase) {
+            emote = "🪙"
+            displayprice = goldpurchase
+            userdata.gold -= cargoldprice;
+          }
+           if(boughtCar.Exclusive){
+            displayprice = boughtCar.Exclusive
+            emote = "<:key_z:1140029565360668783>"
+            userdata.typekeys -= boughtCar.Exclusive
+          }
+
           let embed = new EmbedBuilder()
             .setTitle(`✅ Bought ${boughtCar.Name}`)
             .addFields([
               {
                 name: "Price",
-                value: `${emotes.cash} ${toCurrency(boughtCarPrice)}`,
+                value: `${emote} ${numberWithCommas(displayprice)}`,
                 inline: true,
               },
               {
@@ -530,7 +564,7 @@ module.exports = {
       if (itemindb.Price == 0)
         return interaction.reply("This item isn't purchasable!");
 
-      let pricing = parseInt(itemindb.Price) * amount2;
+      let pricing = parseInt(itemindb.Price) * amount3;
       if (userdata.cash < pricing)
         return await interaction.reply(
           `You cant afford this! You need ${toCurrency(pricing)}`
@@ -538,16 +572,17 @@ module.exports = {
 
       let user1newarr = [];
 
-      for (let i = 0; i < amount2; i++) user1newarr.push(bought);
-      for (i in user1newarr) {
-        userdata.items.push(bought);
+      for (let i = 0; i < amount3; i++) user1newarr.push(bought);
+      for(let i2 in user1newarr){
+        userdata.items.push(bought)
+
       }
       userdata.cash -= pricing;
 
       await userdata.save();
 
       await interaction.reply(
-        `Purchased x${amount2} ${itemsList[bought].Emote} ${
+        `Purchased x${amount3} ${itemsList[bought].Emote} ${
           itemsList[bought].Name
         } for ${toCurrency(pricing)}`
       );

@@ -21,6 +21,8 @@ const lodash = require("lodash");
 const { ImgurClient } = require("imgur");
 
 let currencies = require("../data/currencydb.json");
+const houses = require("../data/houses.json");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("stats")
@@ -40,21 +42,28 @@ module.exports = {
 
   async execute(interaction) {
     var list = cars.Cars;
+    var list2 = houses
     var item = interaction.options.getString("item");
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = (await User.findOne({ id: user.id })) || [];
     let global = await Global.findOne({});
     let settings = userdata.settings;
     let brandsarr = [];
+    let housesarr = []
     for (let b in brands) {
       brandsarr.push(brands[b]);
+    }
+    for (let h in list2) {
+      housesarr.push(list2[h]);
     }
     let weightemote = emotes.weight;
     let ucars = userdata.cars || [];
     let carindb = ucars.filter((c) => c.ID == item);
+    let houseindb = housesarr.filter((h) => h.id == item)
     if (
       !list[item.toLowerCase()] &&
       !carindb[0] &&
+      !houseindb[0] &&
       !itemdb[item.toLowerCase()] &&
       !partdb.Parts[item.toLowerCase()]
     )
@@ -96,7 +105,7 @@ module.exports = {
 
       ctx.font = "bold 55px sans-serif";
 
-      ctx.fillText(carindb.Speed, 15, 120);
+      ctx.fillText(Math.round(carindb.Speed), 15, 120);
       ctx.fillText(carindb["0-60"], 215, 120);
       ctx.fillText(carindb.Handling, 400, 120);
 
@@ -635,7 +644,7 @@ module.exports = {
       } else {
         price = toCurrency(itemindb.Price);
       }
-
+      let tier = itemindb.Tier || 0
       let embed = new Discord.EmbedBuilder()
         .setAuthor({
           name: `Information for ${itemindb.Name}`,
@@ -644,8 +653,10 @@ module.exports = {
         .setDescription(`${itemindb.Action}\n\nPrice: ${price}`)
         .addFields({
           name: "Type",
-          value: `${itemindb.Type}`,
-        })
+          value: `${itemindb.Type}`},
+          {name: "Item Tier",
+          value: `${tier}`}
+        )
         .setColor(colors.blue);
 
       if (itemindb.Image) {
@@ -788,6 +799,24 @@ module.exports = {
           });
         }
       });
+    }
+    else if (houseindb[0]){
+
+      let house = houseindb[0]
+
+      let embed1 = new Discord.EmbedBuilder()
+      .setTitle(`Stats for ${house.Name}`)
+      .setImage(house.Image)
+      .setDescription(
+        `Price: ${toCurrency(house.Price)}\n\nPerk: ${
+          house.Perk
+        }\n\nGarage Space: ${
+          house.Space
+        }\n\nUnlocks at prestige: ${house.Prestige}`
+      )
+      .setColor(colors.blue);
+
+     await interaction.editReply({embeds: [embed1]})
     }
   },
 };

@@ -374,6 +374,7 @@ module.exports = {
         hunger: 100,
         thirst: 100,
         love: 100,
+        tier: randcat.Tier,
         pet: petdb[randcat.Breed.toLowerCase()].Breed.toLowerCase(),
         xessence: 5,
       };

@@ -262,6 +262,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  gas:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  eventCooldown: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   milk: {
     type: Number,
     required: false,

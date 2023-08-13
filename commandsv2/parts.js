@@ -5,10 +5,11 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const partdb = require("../data/partsdb.json");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("fuseparts")
+    .setName("parts")
     .setDescription("View fuse parts on a car")
     .addStringOption((option) =>
       option.setDescription("The car to view").setName("car").setRequired(true)
@@ -35,33 +36,40 @@ module.exports = {
     let springs = selected[0].springs;
     let bodykit = selected[0].bodykit;
 
+    
     let fuses = [];
     if (turbo) {
+      let turboindb = partdb.Parts[turbo.toLowerCase()]
       fuses.push(
         `${partdb.Parts[turbo.toLowerCase()].Emote} ${
           partdb.Parts[turbo.toLowerCase()].Name
-        }`
+        } : ${emotes.speed} + ${turboindb.Power} ${emotes.zero2sixty} + ${turboindb.Acceleration} ${emotes.handling} - ${turboindb.HandlingMinus}`
       );
     }
     if (weight) {
+      let weightindb = partdb.Parts[weight.toLowerCase()]
       fuses.push(
         `${partdb.Parts[weight.toLowerCase()].Emote} ${
           partdb.Parts[weight.toLowerCase()].Name
-        }`
+        } ${emotes.weight} + ${weightindb.Weight} - ${weightindb.WeightMinus}`
       );
     }
     if (springs) {
+      let springsindb = partdb.Parts[springs.toLowerCase()]
+
       fuses.push(
         `${partdb.Parts[springs.toLowerCase()].Emote} ${
           partdb.Parts[springs.toLowerCase()].Name
-        }`
+        } `
       );
     }
     if (bodykit) {
+      let bodykitindb = partdb.Parts[bodykit.toLowerCase()]
+
       fuses.push(
         `${partdb.Parts[bodykit.toLowerCase()].Emote} ${
           partdb.Parts[bodykit.toLowerCase()].Name
-        }`
+        } : ⭐ ${bodykitindb.Stars} Rating`
       );
     }
 

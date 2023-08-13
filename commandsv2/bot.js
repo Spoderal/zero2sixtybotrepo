@@ -19,7 +19,9 @@ module.exports = {
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = Math.floor(totalSeconds % 60);
     let gas = global.gas;
-    let rounded = Math.round(gas * 10) / 10;
+    
+    let fixed = gas.toFixed(1)
+
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Info for ${bot.username}`)
       .setThumbnail(bot.displayAvatarURL())
@@ -37,7 +39,7 @@ module.exports = {
             interaction.client.ws.ping
           )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n\nGas Price: ${
             emotes.cash
-          } ${toCurrency(rounded)}`,
+          } $${fixed}`,
           inline: true,
         },
         {

@@ -571,6 +571,7 @@
       "Power": 25,
       "AddedSnow": 0,
       "AddedSixty": 0,
+      "Acceleration": 0,
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:t2turbo:989758549330649118>",
@@ -2340,6 +2341,7 @@
       "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 100,
+      "Weight": 0,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t2weightreduction": {
@@ -2359,6 +2361,7 @@
       "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 200,
+      "Weight": 0,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t3weightreduction": {
@@ -2378,6 +2381,7 @@
       "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 300,
+      "Weight": 0,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t4weightreduction": {
@@ -2397,6 +2401,7 @@
       "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 400,
+      "Weight": 0,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t5weightreduction": {
@@ -2416,6 +2421,7 @@
       "Fuse": true,
       "DecreasedSpeed": "0",
       "WeightMinus": 500,
+      "Weight": 0,
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
     "t1weight": {
@@ -2434,6 +2440,7 @@
       "Type": "weightupgrade",
       "Fuse": true,
       "Weight": 100,
+      "WeightMinus":0,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/vxkzCRD/part-t1bodykit.png"
     },
@@ -2448,6 +2455,7 @@
       "Emote": "<:part_t2bodykit:1115309922876403883>",
       "Tier": "2",
       "AddedDrift": 0,
+      "WeightMinus":0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
 
@@ -2467,6 +2475,7 @@
       "Emote": "<:part_t3bodykit:1115309921685217460>",
       "Tier": "3",
       "AddedDrift": 0,
+      "WeightMinus":0,
       "DecreasedDrift": "0",
       "DecreasedSixty": "0",
 
@@ -2492,6 +2501,7 @@
       "Type": "weightupgrade",
       "Fuse": true,
       "Weight": 400,
+      "WeightMinus":0,
       "Image": "https://i.ibb.co/KLJK1Gz/part-t4bodykit.png"
     },
     "t5weight": {
@@ -2511,6 +2521,7 @@
       "Fuse": true,
       "DecreasedSpeed": "0",
       "Weight": 500,
+      "WeightMinus":0,
       "Image": "https://i.ibb.co/Rp5K7N9/part-t5bodykit.png"
     },
 

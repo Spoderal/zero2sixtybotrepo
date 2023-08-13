@@ -17,6 +17,7 @@ module.exports = {
     let tipsenabled = userdata.settings.tips;
     let tradesenabled = userdata.settings.trades;
     let policemode = userdata.police;
+    let autogas = userdata.autogas
     if (!userdata.settings.trades || userdata.settings.trades == null) {
       userdata.settings.trades = true;
       userdata.update();
@@ -26,6 +27,7 @@ module.exports = {
     let vemote = "❌";
     let temote = "❌";
     let tremote = "❌";
+    let gasemote = "❌"
     let memote = "🏎️";
 
     if (dailyenabled == true) {
@@ -37,7 +39,10 @@ module.exports = {
     if (tipsenabled == true) {
       temote = "✅";
     }
-
+    if (autogas == true) {
+      gasemote = "✅";
+    }
+    
     if (policemode == true) {
       memote = "🚨";
     }
@@ -48,7 +53,8 @@ module.exports = {
         { name: "Daily Reward Reminder", value: `${demote}` },
         { name: "Top.gg Vote Reminder", value: `${vemote}` },
         { name: "Tips", value: `${temote}` },
-        { name: "Trade Requests", value: `${tremote}` }
+        { name: "Trade Requests", value: `${tremote}` },
+        {name: "Auto Fill Gas", value: `${gasemote}`}
       )
       .setColor(colors.blue);
 
@@ -72,6 +78,10 @@ module.exports = {
         .setCustomId("trades")
         .setLabel("Enable Trade Requests")
         .setStyle("Success"),
+        new Discord.ButtonBuilder()
+        .setCustomId("gas")
+        .setLabel("Enable Auto Fill Gas")
+        .setStyle("Success"),
     );
 
     if (voteenabled == true) {
@@ -89,6 +99,10 @@ module.exports = {
     if (tradesenabled == true) {
       row2.components[0].setStyle("Danger");
       row2.components[0].setLabel("Disable Trade Requests");
+    }
+    if (autogas == true) {
+      row2.components[0].setStyle("Danger");
+      row2.components[0].setLabel("Disable Auto Fill Gas");
     }
     if (policemode == true) {
       row2.components[1].setStyle("Danger");
@@ -134,15 +148,50 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            { name: "Mode", value: `${memote}` }
+            {name: "Auto Fill Gas", value: `${gasemote}`}
           )
           .setColor(colors.blue);
         await i.update({
           embeds: [embed],
-          components: [row],
+          components: [row, row2],
           fetchReply: true,
         });
-      } else if (i.customId.includes("police")) {
+      } 
+      else if (i.customId.includes("gas")) {
+        if (userdata.autogas == true) {
+          userdata.autogas = false;
+          row.components[0].setStyle("Success");
+          row.components[0].setLabel("Enable Auto Fill Gas");
+        } else if (userdata.autogas == false) {
+          userdata.autogas = true;
+          row.components[0].setStyle("Danger");
+          row.components[0].setLabel("Disable Daily Reward Reminders");
+        }
+        userdata.markModified("settings");
+        userdata.save();
+        if (userdata.autogas == true) {
+          gasemote = "✅";
+        } else {
+          gasemote = "❌";
+        }
+
+        embed = new Discord.EmbedBuilder()
+          .setTitle(`Settings for ${user.username}`)
+          .addFields(
+            { name: "Daily Reward Reminder", value: `${demote}` },
+            { name: "Top.gg Vote Reminder", value: `${vemote}` },
+            { name: "Tips", value: `${temote}` },
+            {name: "Auto Fill Gas", value: `${gasemote}`}
+            
+          )
+          .setColor(colors.blue);
+        await i.update({
+          embeds: [embed],
+          components: [row, row2],
+          fetchReply: true,
+        });
+      } 
+      else if (i.customId.includes("police")) {
         if (!userdata.work)
           return interaction.editReply(
             "You need to have the police job for this setting!"
@@ -175,7 +224,7 @@ module.exports = {
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
             { name: "Tips", value: `${temote}` },
-            { name: "Mode", value: `${memote}` }
+            {name: "Auto Fill Gas", value: `${gasemote}`}
           )
           .setColor(colors.blue);
         await i.update({
@@ -206,12 +255,13 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` }
+            { name: "Tips", value: `${temote}` },
+            {name: "Auto Fill Gas", value: `${gasemote}`}
           )
           .setColor(colors.blue);
         await i.update({
           embeds: [embed],
-          components: [row],
+          components: [row, row2],
           fetchReply: true,
         });
       } else if (i.customId.includes("tips")) {
@@ -237,12 +287,13 @@ module.exports = {
           .addFields(
             { name: "Daily Reward Reminder", value: `${demote}` },
             { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` }
+            { name: "Tips", value: `${temote}` },
+            {name: "Auto Fill Gas", value: `${gasemote}`}
           )
           .setColor(colors.blue);
         await i.update({
           embeds: [embed],
-          components: [row],
+          components: [row, row2],
           fetchReply: true,
         });
       }
