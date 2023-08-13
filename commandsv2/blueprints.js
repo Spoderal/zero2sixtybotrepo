@@ -72,10 +72,24 @@ module.exports = {
       const bg = await loadImage("https://i.ibb.co/6WwF0gJ/crateunbox.png");
       ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
       let x = 0;
+      let itemcooldown = cooldowndata.applejuice
+      let timeout = 30000
       let rewards = [];
+      
       let i = setInterval(() => {
         x++;
-        let reward = lodash.sample(boughtindb.Contents);
+        let contents = boughtindb.Contents
+        if (itemcooldown !== null && timeout - (Date.now() - itemcooldown) < 0) {
+          console.log("pulled");
+          userdata.using.pull("apple juice");
+          userdata.update();
+          interaction.channel.send("Your apple juice ran out!");
+          contents = boughtindb.Contents
+        }
+        else {
+          contents = boughtindb.Cars
+        }
+        let reward = lodash.sample(contents);
         rewards.push(reward);
 
         if (x == 3) {
@@ -84,6 +98,7 @@ module.exports = {
       }, 1000);
 
       setTimeout(async () => {
+
         let reward1 = rewards[0];
         let reward2 = rewards[1];
         let reward3 = rewards[2];

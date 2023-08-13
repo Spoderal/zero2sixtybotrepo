@@ -190,7 +190,7 @@
   },
   "apple juice": {
     "Price": 0,
-    "Action": "Only get cars in blueprints for 15 minutes",
+    "Action": "Only get cars in blueprints for 30 seconds",
     "Name": "Apple Juice",
     "Type": "Usable",
     "Emote": "<:item_applejuice:1094894556983611423> ",
