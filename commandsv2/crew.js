@@ -389,7 +389,7 @@ module.exports = {
         let amount = item.Item.split(" ")[0];
         parseInt(amount);
 
-        userdata.garagelimit += Number(amount);
+        userdata.garageLimit += Number(amount);
 
          
       } else if (item.Item.endsWith("Rare Keys")) {

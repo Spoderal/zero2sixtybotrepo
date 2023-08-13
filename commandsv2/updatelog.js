@@ -323,7 +323,8 @@ module.exports = {
                   • **AUTO GAS**, you can enable it in settings. If you have enough money, you'll fill up at the end of a race. By default, your cars gain +1 gas every 5 minutes now.
                   • Most items fixed\n
                   • Pet overhaul, pets collect items from races worth different tiers, each item has a rarity tier, and each pet can find items up to x tier\n
-                  • Type Takeover event with a new event style
+                  • Type Takeover event with a new event style\n
+                  • Tasks fixed!
             `,
                   inline: true,
                 },
