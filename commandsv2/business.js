@@ -256,9 +256,7 @@ module.exports = {
         await i.update(em);
 
         collector2.on("collect", async (i) => {
-          let upgrade = upgrades.filter(
-            (upgrade) => upgrade.ID == i.customId
-          );
+          let upgrade = upgrades.filter((upgrade) => upgrade.ID == i.customId);
           if (upgrade[0]) {
             let upgrade = upgrades.filter(
               (upgrade) => upgrade.ID == i.customId
