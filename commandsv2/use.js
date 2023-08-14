@@ -557,7 +557,7 @@ module.exports = {
       interaction.reply(`${randomeffect}`);
 
       return;
-    } 
+    }
     if (!cratedb.Crates[itemtouse.toLowerCase()]) {
       if (itemdb[itemtouse.toLowerCase()]) {
         emote = itemdb[itemtouse.toLowerCase()].Emote;
