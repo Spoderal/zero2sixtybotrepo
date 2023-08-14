@@ -334,8 +334,9 @@ module.exports = {
       console.log(rewnum);
       let item = crewseason[`${rewnum}`];
       console.log(item);
-      if (item.Number > crew2.Rank3) {
-        return;
+      console.log(crew2[0].Rank3)
+      if (item.Number > crew2[0].Rank3) {
+        return interaction.reply(`Your crew needs to be rank ${item.Number}`)
       }
 
       if (item.Item.endsWith("Cash")) {
