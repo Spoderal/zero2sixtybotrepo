@@ -108,9 +108,11 @@ module.exports = {
         }
       };
 
-      if (slurs.includes(idtochoose)) return interaction.reply("You cant set your ID to this word!");
+      if (slurs.includes(idtochoose))
+        return interaction.reply("You cant set your ID to this word!");
 
-      if (isValidUrl(idtochoose))  return interaction.reply("IDs cant be links!");
+      if (isValidUrl(idtochoose))
+        return interaction.reply("IDs cant be links!");
 
       if (!usercars) return await interaction.reply("You don't own any cars!");
       let selecting = interaction.options.getString("car");
@@ -314,7 +316,8 @@ module.exports = {
         }
       };
 
-      if (slurs.includes(idtochoose)) return interaction.reply("You cant set your tag to this word!");
+      if (slurs.includes(idtochoose))
+        return interaction.reply("You cant set your tag to this word!");
 
       if (isValidUrl(idtochoose))
         return interaction.reply("Tags cant be links!");

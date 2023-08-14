@@ -47,7 +47,7 @@ module.exports = {
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
       return;
     }
-    let boughtindb = crates.Crates[bought.toLowerCase()]
+    let boughtindb = crates.Crates[bought.toLowerCase()];
     console.log(boughtindb);
 
     if (!inv.includes(bought))
@@ -90,9 +90,8 @@ module.exports = {
       let name1;
       let name2;
       let name3;
-      userdata = await User.findOne({id: interaction.user.id})
+      userdata = await User.findOne({ id: interaction.user.id });
       if (pfps.Pfps[reward1]) {
-        
         let helmetimg = pfps.Pfps[reward1].Image;
         name1 = pfps.Pfps[reward1].Name;
         let loadedhelm = await loadImage(helmetimg);
@@ -100,7 +99,7 @@ module.exports = {
         ctx.drawImage(loadedhelm, 150, 200, 150, 150);
         ctx.save();
         userdata.pfps.push(name1.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
       if (pfps.Pfps[reward2]) {
         let helmetimg = pfps.Pfps[reward2].Image;
@@ -110,7 +109,7 @@ module.exports = {
         ctx.drawImage(loadedhelm, 570, 200, 150, 150);
         ctx.save();
         userdata.pfps.push(name2.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
       if (pfps.Pfps[reward3]) {
         let helmetimg = pfps.Pfps[reward3].Image;
@@ -120,7 +119,7 @@ module.exports = {
         ctx.drawImage(loadedhelm, 970, 200, 150, 150);
         ctx.save();
         userdata.pfps.push(name3.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
 
       ctx.restore();
@@ -133,7 +132,7 @@ module.exports = {
         name1 = `${amount} Cash`;
         ctx.drawImage(imageload, 150, 200, 150, 150);
         userdata.cash += amount;
-        userdata.update()
+        userdata.update();
       }
 
       if (reward2.endsWith(`Cash`)) {
@@ -141,7 +140,7 @@ module.exports = {
         name2 = `${amount2} Cash`;
         ctx.drawImage(imageload, 570, 200, 150, 150);
         userdata.cash += amount2;
-        userdata.update()
+        userdata.update();
       }
 
       if (reward3.endsWith(`Cash`)) {
@@ -149,23 +148,23 @@ module.exports = {
         name3 = `${amount3} Cash`;
         ctx.drawImage(imageload, 970, 200, 150, 150);
         userdata.cash += amount3;
-        userdata.update()
+        userdata.update();
       }
 
       if (titledb[reward1]) {
         name1 = titledb[reward1].Name;
         userdata.titles.push(name1.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
       if (titledb[reward2]) {
         name2 = titledb[reward2].Name;
         userdata.titles.push(name2.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
       if (titledb[reward3]) {
         name3 = titledb[reward3].Name;
         userdata.titles.push(name3.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
 
       if (partdb.Parts[reward1]) {
@@ -176,7 +175,7 @@ module.exports = {
         ctx.drawImage(loadedpart, 150, 200, 150, 150);
         ctx.save();
         userdata.parts.push(name1.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
       if (partdb.Parts[reward2]) {
         let partimg = partdb.Parts[reward2].Image;
@@ -186,7 +185,7 @@ module.exports = {
         ctx.drawImage(loadedpart, 570, 200, 150, 150);
         ctx.save();
         userdata.parts.push(name2.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
       if (partdb.Parts[reward3]) {
         let partimg = partdb.Parts[reward3].Image;
@@ -196,9 +195,8 @@ module.exports = {
         ctx.drawImage(loadedpart, 970, 200, 150, 150);
         ctx.save();
         userdata.parts.push(name3.toLowerCase());
-        userdata.update()
+        userdata.update();
       }
- 
 
       await userdata.save();
       ctx.fillText(name1, 100, 565);
