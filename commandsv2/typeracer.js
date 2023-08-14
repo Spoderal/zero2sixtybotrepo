@@ -82,12 +82,11 @@ module.exports = {
     let wordarr = [];
     let actualword = [];
     for (let i = 0; i < wordcount; i++) {
-
       let randomword = lodash.sample(words);
 
-      let splitted = randomword.split('').join(' ');
-      
-      wordarr.push(`${splitted} / `)
+      let splitted = randomword.split("").join(" ");
+
+      wordarr.push(`${splitted} / `);
       actualword.push(randomword);
     }
     let handling = selected[0].Handling;
