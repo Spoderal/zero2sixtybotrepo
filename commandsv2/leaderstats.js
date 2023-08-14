@@ -94,7 +94,7 @@ module.exports = {
 
       const filteredUsers = users
         .filter((value) => value.typespeed > 0)
-        .sort((b, a) => a.typespeed - b.typespeed)
+        .sort((b, a) => b.typespeed - a.typespeed)
         .slice(0, 20);
 
       if (!filteredUsers?.length) {
