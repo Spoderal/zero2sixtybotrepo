@@ -98,17 +98,16 @@ module.exports = {
     interaction.reply(`Type the following:\n\n${wordarr.join(" ")}`);
 
     collector.on("collect", async (msg) => {
-      let content = msg.content.toLowerCase()
+      let content = msg.content.toLowerCase();
 
       let finalword = actualword.join(" ");
       console.log(finalword);
       console.log(content);
-      if (content !== finalword)  {
+      if (content !== finalword) {
         collector.stop();
         msg.channel.send(`You mistyped the words, so you lost!`);
-        return
-      } 
-      else if (content.toLowerCase() == finalword) {
+        return;
+      } else if (content.toLowerCase() == finalword) {
         let score = Math.round(handling / 10 / timer);
         msg.channel.send(
           `You won, your typing speed was ${timer.toLocaleString()}s! You also earned <:key_z:1140029565360668783> ${score} keys`
