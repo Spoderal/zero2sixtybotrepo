@@ -879,12 +879,7 @@ module.exports = {
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
           userdata.barnmaps += randomamount;
         }
-        if (raceoption == "crosscountry" && randkey >= 6) {
-          let randomamount = 1;
-          rewards.push(`${emotes.dirftKey} ${randomamount}`);
-          rewards.push(`${randstory}`);
-          userdata.evkeys += randomamount;
-        }
+  
 
         if (raceoption == "trackraceevent" && randcar >= 6) {
           let filteredcar = usercars.filter((car) => car.Name == car2.Name);
