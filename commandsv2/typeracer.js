@@ -116,10 +116,14 @@ module.exports = {
 
         let typespeed = userdata.typespeed || 0;
 
-        if (typespeed > 0 && timer < typespeed) {
-          userdata.typespeed = timer;
+        if(typespeed == 0){
+          userdata.typespeed = timer
         }
 
+        if (timer < typespeed) {
+          userdata.typespeed = timer;
+        }
+        
         collector.stop();
         userdata.save();
       }
