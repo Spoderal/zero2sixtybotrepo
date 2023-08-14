@@ -879,7 +879,6 @@ module.exports = {
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
           userdata.barnmaps += randomamount;
         }
-  
 
         if (raceoption == "trackraceevent" && randcar >= 6) {
           let filteredcar = usercars.filter((car) => car.Name == car2.Name);
