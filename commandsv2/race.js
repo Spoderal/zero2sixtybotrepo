@@ -617,10 +617,7 @@ module.exports = {
       console.log(playerrace);
       console.log(opponentrace);
       console.log(winner);
-    }
-
-    else if (raceoption == "crosscountry") {
-
+    } else if (raceoption == "crosscountry") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
