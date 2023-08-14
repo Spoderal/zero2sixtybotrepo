@@ -263,7 +263,7 @@ module.exports = {
         interaction.channel.send({ embeds: [embed] });
 
         let submitchannel =
-          interaction.client.channels.cache.get("942000340985872404");
+          interaction.client.channels.cache.get("931078225021521920");
 
         submitchannel.send({ embeds: [embed] });
       });
