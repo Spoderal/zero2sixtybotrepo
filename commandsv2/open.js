@@ -22,7 +22,8 @@ module.exports = {
         .addChoices(
           { name: "Common Crate", value: "common crate" },
           { name: "Rare Crate", value: "rare crate" },
-          { name: "Prestige Crate", value: "prestige crate" }
+          { name: "Prestige Crate", value: "prestige crate" },
+          { name: "Vote Crate", value: "vote crate" }
         )
         .setRequired(true)
     ),
