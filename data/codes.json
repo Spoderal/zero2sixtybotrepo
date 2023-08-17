@@ -2,17 +2,14 @@
   "Twitter": {
     "SUMMER2022PART2": {
       "Reward": 2000
+    },
+    "BACK2SCHOOL2023":{
+      "Reward":5000
     }
   },
   "Discord": {
-    "LIMITED": {
-      "Reward": 10000
-    },
     "CARZCA11": {
       "Reward": 2500
-    },
-    "APRILFIRST": {
-      "Reward": 10000
     }
   },
   "Patreon": {

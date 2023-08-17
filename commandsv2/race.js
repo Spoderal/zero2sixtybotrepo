@@ -35,13 +35,13 @@ module.exports = {
       option
         .setName("race")
         .setChoices(
-          { name: `Street Race`, value: `streetrace` },
-          { name: `Drag Race`, value: `dragrace` },
-          { name: `Track Race`, value: `trackrace` },
-          { name: `Track Race (EVENT)`, value: `trackraceevent` },
-          { name: `Cross Country`, value: `crosscountry` },
-          { name: "Car Series", value: "carseries" },
-          { name: "Motorcycle Madness", value: "motorcyclemad" }
+          { name: `🚗 Street Race`, value: `streetrace` },
+          { name: `🏁 Drag Race`, value: `dragrace` },
+          { name: `🟢 Track Race`, value: `trackrace` },
+          { name: `🟢 Track Race (EVENT)`, value: `trackraceevent` },
+          { name: `🌍 Cross Country`, value: `crosscountry` },
+          { name: "🚀 Car Series", value: "carseries" },
+          { name: "🚲 Motorcycle Madness", value: "motorcyclemad" }
         )
         .setRequired(true)
         .setDescription(`The race to start`)
