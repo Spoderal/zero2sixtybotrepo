@@ -38,9 +38,9 @@ async function updateItemShop() {
           gas = 6;
           global.update();
         }
-        if(gas > 15){
-          gas = 6
-          global.update()
+        if (gas > 15) {
+          gas = 6;
+          global.update();
         }
 
         await Global.findOneAndUpdate(
