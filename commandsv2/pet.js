@@ -172,7 +172,8 @@ module.exports = {
           }
         );
         userdata = await User.findOne({ id: i.user.id });
-      if(userdata.cash < 2000) return interaction.reply("You need $2k to feed your pet!")
+        if (userdata.cash < 2000)
+          return interaction.reply("You need $2k to feed your pet!");
         userdata.cash -= 2000;
         userdata.save();
         let newhunger = await userdata.newpet.hunger;
