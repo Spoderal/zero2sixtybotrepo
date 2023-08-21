@@ -50,9 +50,14 @@ module.exports = {
         `Thats not a car! Did you make sure to put the cars ID?`
       );
 
-    if (!uparts.includes(partoption.toLowerCase()))   return interaction.reply(`You don't have this part!`);
+    if (!uparts.includes(partoption.toLowerCase()))
+      return interaction.reply(`You don't have this part!`);
 
-    if(!selected[0][partindb.Type.toLowerCase()] || selected[0][partindb.Type.toLowerCase()] == null) return interaction.reply("This car doesn't have this part!")
+    if (
+      !selected[0][partindb.Type.toLowerCase()] ||
+      selected[0][partindb.Type.toLowerCase()] == null
+    )
+      return interaction.reply("This car doesn't have this part!");
 
     let partindb = partdb.Parts[partoption.toLowerCase()];
     let partoncar = selected[0][partindb.Type.toLowerCase()];
