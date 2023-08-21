@@ -61,12 +61,12 @@ module.exports = {
       .setColor(`#60b0f4`);
 
     interaction.reply({ embeds: [embed] });
-    for (var s = 0; s < 1; s++)
-      inv.splice(inv.indexOf(bought.toLowerCase()), 1);
+    for (var s = 0; s < 1; s++)  inv.splice(inv.indexOf(bought.toLowerCase()), 1);
     userdata.items = inv;
     userdata.update();
     cooldowndata.crate = Date.now();
     cooldowndata.save();
+    userdata.save()
     const canvas = createCanvas(1280, 720);
     const ctx = canvas.getContext("2d");
     const bg = await loadImage("https://i.ibb.co/6WwF0gJ/crateunbox.png");
