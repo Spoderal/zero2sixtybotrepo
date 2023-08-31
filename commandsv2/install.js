@@ -58,7 +58,8 @@ module.exports = {
 
     let partoncardb = partdb.Parts[partoncar];
 
-    if (partoncardb)   return interaction.reply("This car part already has a fuse slot in use!");
+    if (partoncardb)
+      return interaction.reply("This car part already has a fuse slot in use!");
 
     if (partindb.Power) {
       selected[0].Speed += partindb.Power;
@@ -103,9 +104,13 @@ module.exports = {
         ],
       }
     );
-    let userparts = userdata.parts
-    for (var i2 = 0; i2 < 1; i2++) userparts.splice(userparts.indexOf(partindb.Name.toLowerCase.toLowerCase()), 1);
-  userdata.parts = userparts;
+    let userparts = userdata.parts;
+    for (var i2 = 0; i2 < 1; i2++)
+      userparts.splice(
+        userparts.indexOf(partindb.Name.toLowerCase.toLowerCase()),
+        1
+      );
+    userdata.parts = userparts;
 
     userdata.save();
 

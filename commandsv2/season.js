@@ -34,12 +34,19 @@ module.exports = {
     for (let rew in seasonRewards) {
       let re = seasonRewards[rew];
       let rewardobj = {
-        Number: re.Number, Item: re.Item, Required: re.Required
-      }
-      if(re.Path1){
+        Number: re.Number,
+        Item: re.Item,
+        Required: re.Required,
+      };
+      if (re.Path1) {
         rewardobj = {
-          Number: re.Number, Item: re.Item, Required: re.Required, Path1: re.Path1, Path2: re.Path2, Path3: re.Path3
-        }
+          Number: re.Number,
+          Item: re.Item,
+          Required: re.Required,
+          Path1: re.Path1,
+          Path2: re.Path2,
+          Path3: re.Path3,
+        };
       }
       rewards.push(rewardobj);
     }
@@ -49,7 +56,7 @@ module.exports = {
       6
     );
 
-    console.log(rewards)
+    console.log(rewards);
 
     let claimable = userdata.season1claimed || 1;
 
@@ -59,9 +66,7 @@ module.exports = {
       let time = ms(timeout - (Date.now() - opened));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(
-          `You need to wait ${time} to open the season again.`
-        );
+        .setDescription(`You need to wait ${time} to open the season again.`);
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
 
@@ -103,11 +108,9 @@ module.exports = {
     let page = 0;
     let vispage = 1;
 
-  
+    let pageofuser = 0;
 
-    let pageofuser = 0
-
-    console.log(pageofuser)
+    console.log(pageofuser);
     let embed = new EmbedBuilder()
       .setTitle(`Season 2 Page ${vispage}`)
       .setColor(colors.blue)
@@ -116,7 +119,7 @@ module.exports = {
 
     for (let field in rewards[page]) {
       let data = rewards[page][field];
-      console.log(data)
+      console.log(data);
       if (data.Item.endsWith("Cash")) {
         let amount = data.Item.split(" ");
         embed.addFields({
@@ -164,48 +167,42 @@ module.exports = {
           }`,
           inline: true,
         });
-      } 
-      else if(data.Item.toLowerCase() == "path car"){
-        console.log("path")
-        if(userdata.path == "none" || !userdata.path){
+      } else if (data.Item.toLowerCase() == "path car") {
+        console.log("path");
+        if (userdata.path == "none" || !userdata.path) {
           embed.addFields({
             name: `Reward ${data.Number}`,
-            value: `Path Car\n${numberWithCommas(
-              data.Required
-            )} ${emotes.notoriety}`,
+            value: `Path Car\n${numberWithCommas(data.Required)} ${
+              emotes.notoriety
+            }`,
+            inline: true,
+          });
+        } else if (userdata.path == "1") {
+          embed.addFields({
+            name: `Reward ${data.Number}`,
+            value: `${cardb.Cars[data.Path1.toLowerCase()].Emote} ${
+              cardb.Cars[data.Path1.toLowerCase()].Name
+            }\n${numberWithCommas(data.Required)} ${emotes.notoriety}`,
+            inline: true,
+          });
+        } else if (userdata.path == "2") {
+          embed.addFields({
+            name: `Reward ${data.Number}`,
+            value: `${cardb.Cars[data.Path2.toLowerCase()].Emote} ${
+              cardb.Cars[data.Path2.toLowerCase()].Name
+            }\n${numberWithCommas(data.Required)} ${emotes.notoriety}`,
+            inline: true,
+          });
+        } else if (userdata.path == "3") {
+          embed.addFields({
+            name: `Reward ${data.Number}`,
+            value: `${cardb.Cars[data.Path3.toLowerCase()].Emote} ${
+              cardb.Cars[data.Path3.toLowerCase()].Name
+            }\n${numberWithCommas(data.Required)} ${emotes.notoriety}`,
             inline: true,
           });
         }
-        else if(userdata.path == "1"){
-            embed.addFields({
-              name: `Reward ${data.Number}`,
-              value: `${cardb.Cars[data.Path1.toLowerCase()].Emote} ${cardb.Cars[data.Path1.toLowerCase()].Name}\n${numberWithCommas(
-                data.Required
-              )} ${emotes.notoriety}`,
-              inline: true,
-            });
-          }
-          else if(userdata.path == "2"){
-            embed.addFields({
-              name: `Reward ${data.Number}`,
-              value: `${cardb.Cars[data.Path2.toLowerCase()].Emote} ${cardb.Cars[data.Path2.toLowerCase()].Name}\n${numberWithCommas(
-                data.Required
-              )} ${emotes.notoriety}`,
-              inline: true,
-            });
-          }
-          else if(userdata.path == "3"){
-            embed.addFields({
-              name: `Reward ${data.Number}`,
-              value: `${cardb.Cars[data.Path3.toLowerCase()].Emote} ${cardb.Cars[data.Path3.toLowerCase()].Name}\n${numberWithCommas(
-                data.Required
-              )} ${emotes.notoriety}`,
-              inline: true,
-            });
-          }
-        
-      }
-      else if (data.Item.includes("RP")) {
+      } else if (data.Item.includes("RP")) {
         let amount = data.Item.split(" ");
         embed.addFields({
           name: `Reward ${data.Number}`,
@@ -260,8 +257,6 @@ module.exports = {
           inline: true,
         });
       }
-      
-      
     }
 
     let msg = await interaction.reply({
@@ -296,32 +291,33 @@ module.exports = {
         page = 0;
         vispage = 1;
       } else if (i.customId == "claim") {
-        let path = userdata.path || "none"
-        console.log(path)
-        if(path == null || path == "none"){
-
+        let path = userdata.path || "none";
+        console.log(path);
+        if (path == null || path == "none") {
           let pathrow = new ActionRowBuilder().setComponents(
             new ButtonBuilder()
-            .setCustomId("1")
-            .setLabel("1")
-            .setStyle("Secondary"),
+              .setCustomId("1")
+              .setLabel("1")
+              .setStyle("Secondary"),
             new ButtonBuilder()
-            .setCustomId("2")
-            .setLabel("2")
-            .setStyle("Secondary"),
+              .setCustomId("2")
+              .setLabel("2")
+              .setStyle("Secondary"),
             new ButtonBuilder()
-            .setCustomId("3")
-            .setLabel("3")
-            .setStyle("Secondary")
-          )
+              .setCustomId("3")
+              .setLabel("3")
+              .setStyle("Secondary")
+          );
 
           let embed = new EmbedBuilder()
-          .setTitle("Choose a path to start the season!")
-          .setImage("https://i.ibb.co/JH3hZsX/PATHS.png")
-          .setColor(colors.blue)
+            .setTitle("Choose a path to start the season!")
+            .setImage("https://i.ibb.co/JH3hZsX/PATHS.png")
+            .setColor(colors.blue);
 
-          let msg2 = await interaction.channel.send({embeds: [embed], components: [pathrow]})
-
+          let msg2 = await interaction.channel.send({
+            embeds: [embed],
+            components: [pathrow],
+          });
 
           let filter3 = (btnInt) => {
             return interaction.user.id == btnInt.user.id;
@@ -331,54 +327,45 @@ module.exports = {
             time: 15000,
           });
 
-          collector3.on('collect', async (i) => {
+          collector3.on("collect", async (i) => {
+            userdata.path = i.customId.toString();
+            userdata.save();
+            i.update(`✅`);
 
-            userdata.path = i.customId.toString()
-            userdata.save()
-            i.update(`✅`)
-
-            try{
-              msg2.delete()
-
-            } catch (err){
-              console.log(err)
+            try {
+              msg2.delete();
+            } catch (err) {
+              console.log(err);
             }
-          })
+          });
+        } else {
+          notoriety = userdata.notoriety;
+          console.log(`required ${rewardtoclaim.Required}`);
 
-        }
-        else {
-          
-        
-        notoriety = userdata.notoriety;
-        console.log(`required ${rewardtoclaim.Required}`);
+          if (rewardtoclaim.Required > notoriety) return;
 
-        if (rewardtoclaim.Required > notoriety) return;
-
-        if (rewardtoclaim.Item.endsWith("Cash")) {
-          let amount = rewardtoclaim.Item.split(" ");
-          let num = parseInt(amount[0]);
-          let usercash = parseInt(userdata.cash);
-          let newamount = parseInt((usercash += num));
-          console.log(newamount);
-          console.log(usercash);
-          let oldnoto = userdata.notoriety;
-          userdata.cash = newamount;
-          userdata.notoriety = oldnoto -= rewardtoclaim.Required;
-          userdata.season1claimed += 1;
-          userdata.save();
-        } 
-        else if(rewardtoclaim.Item.toLowerCase() == "path car"){
-          let carin 
-          if(userdata.path == "1"){
-            carin = rewardtoclaim.Path1
-          }
-         else if(userdata.path == "2"){
-            carin = rewardtoclaim.Path2
-          }
-          else if(userdata.path == "3"){
-            carin = rewardtoclaim.Path3
-          }
-          let car = cardb.Cars[carin.toLowerCase()];
+          if (rewardtoclaim.Item.endsWith("Cash")) {
+            let amount = rewardtoclaim.Item.split(" ");
+            let num = parseInt(amount[0]);
+            let usercash = parseInt(userdata.cash);
+            let newamount = parseInt((usercash += num));
+            console.log(newamount);
+            console.log(usercash);
+            let oldnoto = userdata.notoriety;
+            userdata.cash = newamount;
+            userdata.notoriety = oldnoto -= rewardtoclaim.Required;
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (rewardtoclaim.Item.toLowerCase() == "path car") {
+            let carin;
+            if (userdata.path == "1") {
+              carin = rewardtoclaim.Path1;
+            } else if (userdata.path == "2") {
+              carin = rewardtoclaim.Path2;
+            } else if (userdata.path == "3") {
+              carin = rewardtoclaim.Path3;
+            }
+            let car = cardb.Cars[carin.toLowerCase()];
 
             let carobj = {
               ID: car.alias,
@@ -394,125 +381,119 @@ module.exports = {
               Gas: 10,
               MaxGas: 10,
             };
-              userdata.cars.push(carobj)
-              userdata.season1claimed += 1;
-            userdata.save()
-          
-          
+            userdata.cars.push(carobj);
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (rewardtoclaim.Item.includes("Rare Keys")) {
+            let amount = rewardtoclaim.Item.split(" ");
+
+            let num = parseInt(amount[0]);
+            let usercash = parseInt(userdata.rkeys);
+            let newamount = parseInt((usercash += num));
+            console.log(newamount);
+            console.log(usercash);
+
+            userdata.rkeys = newamount;
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (rewardtoclaim.Item.includes("Common Keys")) {
+            let amount = rewardtoclaim.Item.split(" ");
+
+            let num = parseInt(amount[0]);
+            let usercash = parseInt(userdata.ckeys);
+            let newamount = parseInt((usercash += num));
+            console.log(newamount);
+            console.log(usercash);
+
+            userdata.ckeys = newamount;
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (rewardtoclaim.Item.includes("Exotic Keys")) {
+            let amount = rewardtoclaim.Item.split(" ");
+
+            let num = parseInt(amount[0]);
+            let usercash = parseInt(userdata.ekeys);
+            let newamount = parseInt((usercash += num));
+            console.log(newamount);
+            console.log(usercash);
+
+            userdata.ekeys = newamount;
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (rewardtoclaim.Item.includes("Garage Spaces")) {
+            let amount = rewardtoclaim.Item.split(" ");
+
+            let num = parseInt(amount[0]);
+            let usercash = parseInt(userdata.garageLimit);
+            let newamount = parseInt((usercash += num));
+            console.log(newamount);
+            console.log(usercash);
+
+            userdata.garageLimit = newamount;
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (rewardtoclaim.Item.includes("RP")) {
+            let amount = rewardtoclaim.Item.split(" ");
+
+            let num = parseInt(amount[0]);
+            let usercash = parseInt(userdata.rp4);
+            let newamount = parseInt((usercash += num));
+            console.log(newamount);
+            console.log(usercash);
+
+            userdata.rp4 = newamount;
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
+            let car = cardb.Cars[rewardtoclaim.Item.toLowerCase()];
+            let carobj = {
+              ID: car.alias,
+              Name: car.Name,
+              Speed: car.Speed,
+              Acceleration: car["0-60"],
+              Handling: car.Handling,
+              Parts: [],
+              Emote: car.Emote,
+              Livery: car.Image,
+              Miles: 0,
+              Resale: 0,
+              WeightStat: car.Weight,
+              Gas: 10,
+              MaxGas: 10,
+            };
+            userdata.cars.push(carobj);
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
+            let car = partdb.Parts[rewardtoclaim.Item.toLowerCase()];
+
+            userdata.parts.push(car.Name.toLowerCase());
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (itemdb[rewardtoclaim.Item.toLowerCase()]) {
+            let car = itemdb[rewardtoclaim.Item.toLowerCase()];
+
+            userdata.items.push(car.Name.toLowerCase());
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()]) {
+            let car = pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()];
+
+            userdata.pfps.push(rewardtoclaim.Item.toLowerCase());
+            userdata.season1claimed += 1;
+            userdata.save();
+          } else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
+            let car = titledb[rewardtoclaim.Item.toLowerCase()];
+
+            userdata.titles.push(rewardtoclaim.Item.toLowerCase());
+            userdata.season1claimed += 1;
+            userdata.save();
+          }
         }
-        
-        else if (rewardtoclaim.Item.includes("Rare Keys")) {
-          let amount = rewardtoclaim.Item.split(" ");
-
-          let num = parseInt(amount[0]);
-          let usercash = parseInt(userdata.rkeys);
-          let newamount = parseInt((usercash += num));
-          console.log(newamount);
-          console.log(usercash);
-
-          userdata.rkeys = newamount;
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (rewardtoclaim.Item.includes("Common Keys")) {
-          let amount = rewardtoclaim.Item.split(" ");
-
-          let num = parseInt(amount[0]);
-          let usercash = parseInt(userdata.ckeys);
-          let newamount = parseInt((usercash += num));
-          console.log(newamount);
-          console.log(usercash);
-
-          userdata.ckeys = newamount;
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (rewardtoclaim.Item.includes("Exotic Keys")) {
-          let amount = rewardtoclaim.Item.split(" ");
-
-          let num = parseInt(amount[0]);
-          let usercash = parseInt(userdata.ekeys);
-          let newamount = parseInt((usercash += num));
-          console.log(newamount);
-          console.log(usercash);
-
-          userdata.ekeys = newamount;
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (rewardtoclaim.Item.includes("Garage Spaces")) {
-          let amount = rewardtoclaim.Item.split(" ");
-
-          let num = parseInt(amount[0]);
-          let usercash = parseInt(userdata.garageLimit);
-          let newamount = parseInt((usercash += num));
-          console.log(newamount);
-          console.log(usercash);
-
-          userdata.garageLimit = newamount;
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (rewardtoclaim.Item.includes("RP")) {
-          let amount = rewardtoclaim.Item.split(" ");
-
-          let num = parseInt(amount[0]);
-          let usercash = parseInt(userdata.rp4);
-          let newamount = parseInt((usercash += num));
-          console.log(newamount);
-          console.log(usercash);
-
-          userdata.rp4 = newamount;
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
-          let car = cardb.Cars[rewardtoclaim.Item.toLowerCase()];
-          let carobj = {
-            ID: car.alias,
-            Name: car.Name,
-            Speed: car.Speed,
-            Acceleration: car["0-60"],
-            Handling: car.Handling,
-            Parts: [],
-            Emote: car.Emote,
-            Livery: car.Image,
-            Miles: 0,
-            Resale: 0,
-            WeightStat: car.Weight,
-            Gas: 10,
-            MaxGas: 10,
-          };
-          userdata.cars.push(carobj);
-          userdata.season1claimed += 1;
-          userdata.save();
-        }
-        
-        else if (partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
-          let car = partdb.Parts[rewardtoclaim.Item.toLowerCase()];
-
-          userdata.parts.push(car.Name.toLowerCase());
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (itemdb[rewardtoclaim.Item.toLowerCase()]) {
-          let car = itemdb[rewardtoclaim.Item.toLowerCase()];
-
-          userdata.items.push(car.Name.toLowerCase());
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()]) {
-          let car = pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()];
-
-          userdata.pfps.push(rewardtoclaim.Item.toLowerCase());
-          userdata.season1claimed += 1;
-          userdata.save();
-        } else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
-          let car = titledb[rewardtoclaim.Item.toLowerCase()];
-
-          userdata.titles.push(rewardtoclaim.Item.toLowerCase());
-          userdata.season1claimed += 1;
-          userdata.save();
-        }
-      }
       }
 
       notoriety = userdata.notoriety;
-      console.log(page)
+      console.log(page);
       embed = new EmbedBuilder()
         .setTitle(`Season 2 Page ${vispage}`)
         .setColor(colors.blue)
@@ -586,49 +567,42 @@ module.exports = {
             )} ${emotes.notoriety}`,
             inline: true,
           });
-        } 
-        
-        else if(data.Item.toLowerCase() == "path car"){
-          console.log("path")
-          if(userdata.path == "none" || !userdata.path){
+        } else if (data.Item.toLowerCase() == "path car") {
+          console.log("path");
+          if (userdata.path == "none" || !userdata.path) {
             embed.addFields({
               name: `Reward ${data.Number}`,
-              value: `Path Car\n${numberWithCommas(
-                data.Required
-              )} ${emotes.notoriety}`,
+              value: `Path Car\n${numberWithCommas(data.Required)} ${
+                emotes.notoriety
+              }`,
+              inline: true,
+            });
+          } else if (userdata.path == "1") {
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `${cardb.Cars[data.Path1.toLowerCase()].Emote} ${
+                cardb.Cars[data.Path1.toLowerCase()].Name
+              }\n${numberWithCommas(data.Required)} ${emotes.notoriety}`,
+              inline: true,
+            });
+          } else if (userdata.path == "2") {
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `${cardb.Cars[data.Path2.toLowerCase()].Emote} ${
+                cardb.Cars[data.Path2.toLowerCase()].Name
+              }\n${numberWithCommas(data.Required)} ${emotes.notoriety}`,
+              inline: true,
+            });
+          } else if (userdata.path == "3") {
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `${cardb.Cars[data.Path3.toLowerCase()].Emote} ${
+                cardb.Cars[data.Path3.toLowerCase()].Name
+              }\n${numberWithCommas(data.Required)} ${emotes.notoriety}`,
               inline: true,
             });
           }
-          else if(userdata.path == "1"){
-              embed.addFields({
-                name: `Reward ${data.Number}`,
-                value: `${cardb.Cars[data.Path1.toLowerCase()].Emote} ${cardb.Cars[data.Path1.toLowerCase()].Name}\n${numberWithCommas(
-                  data.Required
-                )} ${emotes.notoriety}`,
-                inline: true,
-              });
-            }
-            else if(userdata.path == "2"){
-              embed.addFields({
-                name: `Reward ${data.Number}`,
-                value: `${cardb.Cars[data.Path2.toLowerCase()].Emote} ${cardb.Cars[data.Path2.toLowerCase()].Name}\n${numberWithCommas(
-                  data.Required
-                )} ${emotes.notoriety}`,
-                inline: true,
-              });
-            }
-            else if(userdata.path == "3"){
-              embed.addFields({
-                name: `Reward ${data.Number}`,
-                value: `${cardb.Cars[data.Path3.toLowerCase()].Emote} ${cardb.Cars[data.Path3.toLowerCase()].Name}\n${numberWithCommas(
-                  data.Required
-                )} ${emotes.notoriety}`,
-                inline: true,
-              });
-            }
-          
-        }
-        else if (partdb.Parts[data.Item.toLowerCase()]) {
+        } else if (partdb.Parts[data.Item.toLowerCase()]) {
           let car = partdb.Parts[data.Item.toLowerCase()];
           embed.addFields({
             name: `Reward ${data.Number}`,

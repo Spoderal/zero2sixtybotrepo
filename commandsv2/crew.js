@@ -10,8 +10,8 @@ const { numberWithCommas } = require("../common/utils");
 const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
-const ms = require("pretty-ms")
-const cardsdb = require("../data/cards.json")
+const ms = require("pretty-ms");
+const cardsdb = require("../data/cards.json");
 const partdb = require("../data/partsdb.json");
 
 module.exports = {
@@ -49,10 +49,8 @@ module.exports = {
         .setDescription("Claim a reward from a crew season")
     )
     .addSubcommand((command) =>
-    command
-      .setName("cards")
-      .setDescription("View and activate cards")
-  )
+      command.setName("cards").setDescription("View and activate cards")
+    )
     .addSubcommand((command) =>
       command
         .setName("create")
@@ -81,17 +79,17 @@ module.exports = {
         )
     )
     .addSubcommand((command) =>
-    command
-      .setName("kick")
-      .setDescription("Kick a crew member (CREW OWNER)")
+      command
+        .setName("kick")
+        .setDescription("Kick a crew member (CREW OWNER)")
 
-      .addUserOption((option) =>
-        option
-          .setName("user")
-          .setDescription("The user to kick")
-          .setRequired(true)
-      )
-  )
+        .addUserOption((option) =>
+          option
+            .setName("user")
+            .setDescription("The user to kick")
+            .setRequired(true)
+        )
+    )
     .addSubcommand((command) =>
       command.setName("delete").setDescription("Delete a crew (CREW OWNER)")
     ),
@@ -310,7 +308,8 @@ module.exports = {
       let actcrew = crew2[0];
       if (crew) return await interaction.reply("You're already in a crew!");
 
-      if(crew2[0].members.length >= 30) return interaction.reply("The max members a crew can have is 30!")
+      if (crew2[0].members.length >= 30)
+        return interaction.reply("The max members a crew can have is 30!");
 
       let newarray = [];
       actcrew.members.push(`${uid}`);
@@ -355,25 +354,23 @@ module.exports = {
       console.log(rewnum);
       let item = crewseason[`${crew2[0].Rank3}`];
       console.log(crew2[0].Rank3);
-      console.log(item.Number)
+      console.log(item.Number);
       if (item.Number > crew2[0].Rank3) {
         return interaction.reply(`Your crew needs to be rank ${item.Number}`);
       }
-
 
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
         userdata.cash += Number(amount);
 
         console.log("done");
-      } 
+      }
       if (item.Item.endsWith("Crew Respect")) {
         let amount = item.Item.split(" ")[0];
         userdata.crewrespect += Number(amount);
 
         console.log("done");
-      } 
-      else if (item.Item.endsWith("Notoriety")) {
+      } else if (item.Item.endsWith("Notoriety")) {
         let amount = item.Item.split(" ")[0];
         userdata.notofall += Number(amount);
       } else if (
@@ -462,28 +459,27 @@ module.exports = {
         RP: 0,
         Cards: [
           {
-          name: "crush card",
-          points: 0,
-          pointsmax: 100,
-          rp: 20,
-          time: 0
-        },
-        {
-          name: "sting card",
-          points: 0,
-          pointsmax: 200,
-          rp: 50,
-          time: 0
-        },
-        {
-          name: "gt card",
-          points: 0,
-          pointsmax: 750,
-          rp: 120,
-          time: 0
-        },
-      
-      ]
+            name: "crush card",
+            points: 0,
+            pointsmax: 100,
+            rp: 20,
+            time: 0,
+          },
+          {
+            name: "sting card",
+            points: 0,
+            pointsmax: 200,
+            rp: 50,
+            time: 0,
+          },
+          {
+            name: "gt card",
+            points: 0,
+            pointsmax: 750,
+            rp: 120,
+            time: 0,
+          },
+        ],
       };
 
       if (!globalModel) {
@@ -734,8 +730,7 @@ module.exports = {
           }
         });
       }
-    } 
-    else if (option == "kick") {
+    } else if (option == "kick") {
       let crewname = userdata.crew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
@@ -744,38 +739,37 @@ module.exports = {
 
       let tokick = interaction.options.getString("user");
       console.log(crew2[0]);
-      if (crew2[0].owner.id !== interaction.user.id) return interaction.reply("You need to be the crew owner!");
+      if (crew2[0].owner.id !== interaction.user.id)
+        return interaction.reply("You need to be the crew owner!");
 
       let actcrew = crew2;
-          let newmem = actcrew.members;
-          let uid = tokick.id 
-      let utokickdata = await User.findOne({id: uid})
+      let newmem = actcrew.members;
+      let uid = tokick.id;
+      let utokickdata = await User.findOne({ id: uid });
 
+      for (var i2 = 0; i2 < 1; i2++) newmem.splice(newmem.indexOf(`${uid}`), 1);
+      console.log(actcrew);
+      console.log(newmem);
+      await Global.findOneAndUpdate(
+        {},
+        {
+          $set: {
+            "crews.$[crew].members": newmem,
+          },
+        },
 
-          for (var i2 = 0; i2 < 1; i2++)  newmem.splice(newmem.indexOf(`${uid}`), 1);
-          console.log(actcrew);
-          console.log(newmem);
-          await Global.findOneAndUpdate(
-            {},
+        {
+          arrayFilters: [
             {
-              $set: {
-                "crews.$[crew].members": newmem,
-              },
+              "crew.name": actcrew.name,
             },
-
-            {
-              arrayFilters: [
-                {
-                  "crew.name": actcrew.name,
-                },
-              ],
-            }
-          );
-          globalModel.save();
-          utokickdata.crew = null;
-          userdata.save();
-      }
-    else if (option == "delete") {
+          ],
+        }
+      );
+      globalModel.save();
+      utokickdata.crew = null;
+      userdata.save();
+    } else if (option == "delete") {
       let crewname = userdata.crew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
@@ -896,128 +890,127 @@ module.exports = {
 
       if (!crew2) return await interaction.reply("That crew doesn't exist!");
 
-    
-      let row = new ActionRowBuilder()
-      .addComponents(
+      let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
+          .setCustomId("crush_card")
+          .setLabel("Add 10 Crew Respect")
+          .setEmoji(`${cardsdb["crush card"].emote}`)
+          .setStyle("Primary"),
         new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
+          .setCustomId("sting_card")
+          .setLabel("Add 10 Crew Respect")
+          .setEmoji(`${cardsdb["sting card"].emote}`)
+          .setStyle("Primary"),
         new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          .setCustomId("gt_card")
+          .setLabel("Add 10 Crew Respect")
+          .setEmoji(`${cardsdb["gt card"].emote}`)
+          .setStyle("Primary")
+      );
 
-      let row2 = new ActionRowBuilder()
-      .addComponents(
+      let row2 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
+          .setCustomId("activate_crush_card")
+          .setLabel("Activate")
+          .setEmoji(`${cardsdb["crush card"].emote}`)
+          .setDisabled(true)
+          .setStyle("Success"),
         new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
+          .setCustomId("activate_sting_card")
+          .setLabel("Activate")
+          .setEmoji(`${cardsdb["sting card"].emote}`)
+          .setDisabled(true)
+          .setStyle("Success"),
         new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          .setCustomId("activate_gt_card")
+          .setLabel("Activate")
+          .setEmoji(`${cardsdb["gt card"].emote}`)
+          .setDisabled(true)
+          .setStyle("Success")
+      );
 
+      let cards = crew2.Cards;
 
-      let cards = crew2.Cards
+      let card1filt = cards.filter((card) => card.name == "crush card");
+      let card2filt = cards.filter((card) => card.name == "sting card");
+      let card3filt = cards.filter((card) => card.name == "gt card");
 
-      let card1filt = cards.filter((card) => card.name == "crush card")
-      let card2filt = cards.filter((card) => card.name == "sting card")
-      let card3filt = cards.filter((card) => card.name == "gt card")
-
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
+      if (card1filt[0].points >= card1filt[0].pointsmax) {
+        row2.components[0].setDisabled(false);
       }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
+      if (card2filt[0].points >= card2filt[0].pointsmax) {
+        row2.components[1].setDisabled(false);
       }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
+      if (card3filt[0].points >= card3filt[0].pointsmax) {
+        row2.components[2].setDisabled(false);
       }
 
       let timeout1 = 14400000;
       let timeout4 = 7200000;
       let timeout5 = 3600000;
 
-      let time1 = "0 Hours"
+      let time1 = "0 Hours";
 
-      let time2 = "0 Hours"
+      let time2 = "0 Hours";
 
-      let time3 = "0 Hours"
+      let time3 = "0 Hours";
       if (
-        card1filt[0].time !== null  &&
+        card1filt[0].time !== null &&
         timeout1 - (Date.now() - card1filt[0].time) < 0
       ) {
-        console.log("no card")
+        console.log("no card");
       } else {
-        time1 = `${ms(timeout1 - (Date.now() - card1filt[0].time))}`
+        time1 = `${ms(timeout1 - (Date.now() - card1filt[0].time))}`;
       }
 
       if (
-        card2filt[0].time !== null  &&
+        card2filt[0].time !== null &&
         timeout4 - (Date.now() - card2filt[0].time) < 0
       ) {
-        console.log("no card")
+        console.log("no card");
       } else {
-        time2 = `${ms(timeout4 - (Date.now() - card2filt[0].time))}`
+        time2 = `${ms(timeout4 - (Date.now() - card2filt[0].time))}`;
       }
 
       if (
-        card3filt[0].time !== null  &&
+        card3filt[0].time !== null &&
         timeout5 - (Date.now() - card3filt[0].time) < 0
       ) {
-        console.log("no card")
+        console.log("no card");
       } else {
-        time3 = `${ms(timeout5 - (Date.now() - card3filt[0].time))}`
+        time3 = `${ms(timeout5 - (Date.now() - card3filt[0].time))}`;
       }
 
       let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\nTime remaining: ${time1}\n
+        .setTitle(`Your crews cards`)
+        .addFields(
+          {
+            name: `Crush Card`,
+            value: `${cardsdb["crush card"].emote}\nTime remaining: ${time1}\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\nTime remaining: ${time2}\n
+            inline: true,
+          },
+          {
+            name: `Sting Card`,
+            value: `${cardsdb["sting card"].emote}\nTime remaining: ${time2}\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\nTime remaining: ${time3}\n
+            inline: true,
+          },
+          {
+            name: `GT Card`,
+            value: `${cardsdb["gt card"].emote}\nTime remaining: ${time3}\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+            inline: true,
+          }
+        )
+        .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+        .setColor(colors.blue);
 
-      let msg = await interaction.reply({embeds: [embed], components: [row, row2]})
+      let msg = await interaction.reply({
+        embeds: [embed],
+        components: [row, row2],
+      });
 
       const filter = (m) => {
         return m.user.id === interaction.user.id;
@@ -1029,43 +1022,44 @@ module.exports = {
       });
       let actcrew = crew2;
       collector.on("collect", async (i) => {
-        if(i.customId == "crush_card"){
-          let crewresp = userdata.crewrespect || 0
+        if (i.customId == "crush_card") {
+          let crewresp = userdata.crewrespect || 0;
 
-          if(crewresp < 10) return i.update("You don't have enough crew respect!")
+          if (crewresp < 10)
+            return i.update("You don't have enough crew respect!");
 
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
           if (
-            card1filt[0].time !== null  &&
+            card1filt[0].time !== null &&
             timeout - (Date.now() - card1filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card2filt[0].time !== null  &&
+            card2filt[0].time !== null &&
             timeout2 - (Date.now() - card2filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card3filt[0].time !== null  &&
+            card3filt[0].time !== null &&
             timeout3 - (Date.now() - card3filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
-          card1filt[0].points += 10
-          userdata.crewrespect -= 10
+          card1filt[0].points += 10;
+          userdata.crewrespect -= 10;
           await Global.findOneAndUpdate(
             {},
             {
@@ -1077,141 +1071,138 @@ module.exports = {
             {
               arrayFilters: [
                 {
-                  "crew.name": actcrew.name
+                  "crew.name": actcrew.name,
                 },
               ],
             }
           );
 
-          await globalModel.save()
-          await userdata.save()
+          await globalModel.save();
+          await userdata.save();
           crews = globalModel?.crews;
-           crewname = crew.name;
-       crew2 = crews.find((crew) => crew.name == crewname);
+          crewname = crew.name;
+          crew2 = crews.find((crew) => crew.name == crewname);
 
-       row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("crush_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("sting_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("gt_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setStyle("Primary")
+          );
 
-       row2 = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          row2 = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("activate_crush_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_sting_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_gt_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success")
+          );
 
+          cards = crew2.Cards;
 
-       cards = crew2.Cards
+          card1filt = cards.filter((card) => card.name == "crush card");
+          card2filt = cards.filter((card) => card.name == "sting card");
+          card3filt = cards.filter((card) => card.name == "gt card");
 
-       card1filt = cards.filter((card) => card.name == "crush card")
-       card2filt = cards.filter((card) => card.name == "sting card")
-       card3filt = cards.filter((card) => card.name == "gt card")
+          if (card1filt[0].points >= card1filt[0].pointsmax) {
+            row2.components[0].setDisabled(false);
+          }
 
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
-      }
+          if (card2filt[0].points >= card2filt[0].pointsmax) {
+            row2.components[1].setDisabled(false);
+          }
+          if (card3filt[0].points >= card3filt[0].pointsmax) {
+            row2.components[2].setDisabled(false);
+          }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
-      }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
-      }
-
-      let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\n\n
+          let embed = new EmbedBuilder()
+            .setTitle(`Your crews cards`)
+            .addFields(
+              {
+                name: `Crush Card`,
+                value: `${cardsdb["crush card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `Sting Card`,
+                value: `${cardsdb["sting card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `GT Card`,
+                value: `${cardsdb["gt card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+                inline: true,
+              }
+            )
+            .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+            .setColor(colors.blue);
 
-      await i.update({embeds: [embed], components: [row, row2]})
-        }
-        else  if(i.customId == "sting_card"){
-          let crewresp = userdata.crewrespect || 0
+          await i.update({ embeds: [embed], components: [row, row2] });
+        } else if (i.customId == "sting_card") {
+          let crewresp = userdata.crewrespect || 0;
 
-          if(crewresp < 10) return i.update("You don't have enough crew respect!")
+          if (crewresp < 10)
+            return i.update("You don't have enough crew respect!");
 
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
           if (
-            card1filt[0].time !== null  &&
+            card1filt[0].time !== null &&
             timeout - (Date.now() - card1filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card2filt[0].time !== null  &&
+            card2filt[0].time !== null &&
             timeout2 - (Date.now() - card2filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card3filt[0].time !== null  &&
+            card3filt[0].time !== null &&
             timeout3 - (Date.now() - card3filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
-          card2filt[0].points += 10
-          userdata.crewrespect -= 10
+          card2filt[0].points += 10;
+          userdata.crewrespect -= 10;
           await Global.findOneAndUpdate(
             {},
             {
@@ -1223,141 +1214,138 @@ module.exports = {
             {
               arrayFilters: [
                 {
-                  "crew.name": actcrew.name
+                  "crew.name": actcrew.name,
                 },
               ],
             }
           );
 
-          await globalModel.save()
-          await userdata.save()
+          await globalModel.save();
+          await userdata.save();
           crews = globalModel?.crews;
-           crewname = crew.name;
-       crew2 = crews.find((crew) => crew.name == crewname);
+          crewname = crew.name;
+          crew2 = crews.find((crew) => crew.name == crewname);
 
-       row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("crush_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("sting_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("gt_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setStyle("Primary")
+          );
 
-       row2 = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          row2 = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("activate_crush_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_sting_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_gt_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success")
+          );
 
+          cards = crew2.Cards;
 
-       cards = crew2.Cards
+          card1filt = cards.filter((card) => card.name == "crush card");
+          card2filt = cards.filter((card) => card.name == "sting card");
+          card3filt = cards.filter((card) => card.name == "gt card");
 
-       card1filt = cards.filter((card) => card.name == "crush card")
-       card2filt = cards.filter((card) => card.name == "sting card")
-       card3filt = cards.filter((card) => card.name == "gt card")
+          if (card1filt[0].points >= card1filt[0].pointsmax) {
+            row2.components[0].setDisabled(false);
+          }
 
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
-      }
+          if (card2filt[0].points >= card2filt[0].pointsmax) {
+            row2.components[1].setDisabled(false);
+          }
+          if (card3filt[0].points >= card3filt[0].pointsmax) {
+            row2.components[2].setDisabled(false);
+          }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
-      }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
-      }
-
-      let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\n\n
+          let embed = new EmbedBuilder()
+            .setTitle(`Your crews cards`)
+            .addFields(
+              {
+                name: `Crush Card`,
+                value: `${cardsdb["crush card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `Sting Card`,
+                value: `${cardsdb["sting card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `GT Card`,
+                value: `${cardsdb["gt card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+                inline: true,
+              }
+            )
+            .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+            .setColor(colors.blue);
 
-      await i.update({embeds: [embed], components: [row, row2]})
-        }
-        else  if(i.customId == "gt_card"){
-          let crewresp = userdata.crewrespect || 0
+          await i.update({ embeds: [embed], components: [row, row2] });
+        } else if (i.customId == "gt_card") {
+          let crewresp = userdata.crewrespect || 0;
 
-          if(crewresp < 10) return i.update("You don't have enough crew respect!")
+          if (crewresp < 10)
+            return i.update("You don't have enough crew respect!");
 
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
           if (
-            card1filt[0].time !== null  &&
+            card1filt[0].time !== null &&
             timeout - (Date.now() - card1filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card2filt[0].time !== null  &&
+            card2filt[0].time !== null &&
             timeout2 - (Date.now() - card2filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card3filt[0].time !== null  &&
+            card3filt[0].time !== null &&
             timeout3 - (Date.now() - card3filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
-          card3filt[0].points += 10
-          userdata.crewrespect -= 10
+          card3filt[0].points += 10;
+          userdata.crewrespect -= 10;
           await Global.findOneAndUpdate(
             {},
             {
@@ -1369,138 +1357,133 @@ module.exports = {
             {
               arrayFilters: [
                 {
-                  "crew.name": actcrew.name
+                  "crew.name": actcrew.name,
                 },
               ],
             }
           );
 
-          await globalModel.save()
-          await userdata.save()
+          await globalModel.save();
+          await userdata.save();
           crews = globalModel?.crews;
-           crewname = crew.name;
-       crew2 = crews.find((crew) => crew.name == crewname);
+          crewname = crew.name;
+          crew2 = crews.find((crew) => crew.name == crewname);
 
-       row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("crush_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("sting_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("gt_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setStyle("Primary")
+          );
 
-       row2 = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          row2 = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("activate_crush_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_sting_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_gt_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success")
+          );
 
+          cards = crew2.Cards;
 
-       cards = crew2.Cards
+          card1filt = cards.filter((card) => card.name == "crush card");
+          card2filt = cards.filter((card) => card.name == "sting card");
+          card3filt = cards.filter((card) => card.name == "gt card");
 
-       card1filt = cards.filter((card) => card.name == "crush card")
-       card2filt = cards.filter((card) => card.name == "sting card")
-       card3filt = cards.filter((card) => card.name == "gt card")
+          if (card1filt[0].points >= card1filt[0].pointsmax) {
+            row2.components[0].setDisabled(false);
+          }
 
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
-      }
+          if (card2filt[0].points >= card2filt[0].pointsmax) {
+            row2.components[1].setDisabled(false);
+          }
+          if (card3filt[0].points >= card3filt[0].pointsmax) {
+            row2.components[2].setDisabled(false);
+          }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
-      }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
-      }
-
-      let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\n\n
+          let embed = new EmbedBuilder()
+            .setTitle(`Your crews cards`)
+            .addFields(
+              {
+                name: `Crush Card`,
+                value: `${cardsdb["crush card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `Sting Card`,
+                value: `${cardsdb["sting card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `GT Card`,
+                value: `${cardsdb["gt card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+                inline: true,
+              }
+            )
+            .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+            .setColor(colors.blue);
 
-      await i.update({embeds: [embed], components: [row, row2]})
-        }
-        else  if(i.customId == "activate_crush_card"){
-          
+          await i.update({ embeds: [embed], components: [row, row2] });
+        } else if (i.customId == "activate_crush_card") {
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
           if (
-            card1filt[0].time !== null  &&
+            card1filt[0].time !== null &&
             timeout - (Date.now() - card1filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card2filt[0].time !== null  &&
+            card2filt[0].time !== null &&
             timeout2 - (Date.now() - card2filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card3filt[0].time !== null  &&
+            card3filt[0].time !== null &&
             timeout3 - (Date.now() - card3filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
-          card1filt[0].points = 0
-          card1filt[0].time = Date.now()
+          card1filt[0].points = 0;
+          card1filt[0].time = Date.now();
           await Global.findOneAndUpdate(
             {},
             {
@@ -1512,138 +1495,133 @@ module.exports = {
             {
               arrayFilters: [
                 {
-                  "crew.name": actcrew.name
+                  "crew.name": actcrew.name,
                 },
               ],
             }
           );
 
-          await globalModel.save()
-          await userdata.save()
+          await globalModel.save();
+          await userdata.save();
           crews = globalModel?.crews;
-           crewname = crew.name;
-       crew2 = crews.find((crew) => crew.name == crewname);
+          crewname = crew.name;
+          crew2 = crews.find((crew) => crew.name == crewname);
 
-       row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("crush_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("sting_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("gt_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setStyle("Primary")
+          );
 
-       row2 = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          row2 = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("activate_crush_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_sting_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_gt_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success")
+          );
 
+          cards = crew2.Cards;
 
-       cards = crew2.Cards
+          card1filt = cards.filter((card) => card.name == "crush card");
+          card2filt = cards.filter((card) => card.name == "sting card");
+          card3filt = cards.filter((card) => card.name == "gt card");
 
-       card1filt = cards.filter((card) => card.name == "crush card")
-       card2filt = cards.filter((card) => card.name == "sting card")
-       card3filt = cards.filter((card) => card.name == "gt card")
+          if (card1filt[0].points >= card1filt[0].pointsmax) {
+            row2.components[0].setDisabled(false);
+          }
 
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
-      }
+          if (card2filt[0].points >= card2filt[0].pointsmax) {
+            row2.components[1].setDisabled(false);
+          }
+          if (card3filt[0].points >= card3filt[0].pointsmax) {
+            row2.components[2].setDisabled(false);
+          }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
-      }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
-      }
-
-      let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\n\n
+          let embed = new EmbedBuilder()
+            .setTitle(`Your crews cards`)
+            .addFields(
+              {
+                name: `Crush Card`,
+                value: `${cardsdb["crush card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `Sting Card`,
+                value: `${cardsdb["sting card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `GT Card`,
+                value: `${cardsdb["gt card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+                inline: true,
+              }
+            )
+            .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+            .setColor(colors.blue);
 
-      await i.update({embeds: [embed], components: [row, row2]})
-        }
-        else  if(i.customId == "activate_sting_card"){
-          
+          await i.update({ embeds: [embed], components: [row, row2] });
+        } else if (i.customId == "activate_sting_card") {
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
           if (
-            card1filt[0].time !== null  &&
+            card1filt[0].time !== null &&
             timeout - (Date.now() - card1filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card2filt[0].time !== null  &&
+            card2filt[0].time !== null &&
             timeout2 - (Date.now() - card2filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card3filt[0].time !== null  &&
+            card3filt[0].time !== null &&
             timeout3 - (Date.now() - card3filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
-          card2filt[0].points = 0
-          card2filt[0].time = Date.now()
+          card2filt[0].points = 0;
+          card2filt[0].time = Date.now();
           await Global.findOneAndUpdate(
             {},
             {
@@ -1655,138 +1633,133 @@ module.exports = {
             {
               arrayFilters: [
                 {
-                  "crew.name": actcrew.name
+                  "crew.name": actcrew.name,
                 },
               ],
             }
           );
 
-          await globalModel.save()
-          await userdata.save()
+          await globalModel.save();
+          await userdata.save();
           crews = globalModel?.crews;
-           crewname = crew.name;
-       crew2 = crews.find((crew) => crew.name == crewname);
+          crewname = crew.name;
+          crew2 = crews.find((crew) => crew.name == crewname);
 
-       row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("crush_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("sting_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("gt_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setStyle("Primary")
+          );
 
-       row2 = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          row2 = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("activate_crush_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_sting_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_gt_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success")
+          );
 
+          cards = crew2.Cards;
 
-       cards = crew2.Cards
+          card1filt = cards.filter((card) => card.name == "crush card");
+          card2filt = cards.filter((card) => card.name == "sting card");
+          card3filt = cards.filter((card) => card.name == "gt card");
 
-       card1filt = cards.filter((card) => card.name == "crush card")
-       card2filt = cards.filter((card) => card.name == "sting card")
-       card3filt = cards.filter((card) => card.name == "gt card")
+          if (card1filt[0].points >= card1filt[0].pointsmax) {
+            row2.components[0].setDisabled(false);
+          }
 
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
-      }
+          if (card2filt[0].points >= card2filt[0].pointsmax) {
+            row2.components[1].setDisabled(false);
+          }
+          if (card3filt[0].points >= card3filt[0].pointsmax) {
+            row2.components[2].setDisabled(false);
+          }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
-      }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
-      }
-
-      let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\n\n
+          let embed = new EmbedBuilder()
+            .setTitle(`Your crews cards`)
+            .addFields(
+              {
+                name: `Crush Card`,
+                value: `${cardsdb["crush card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `Sting Card`,
+                value: `${cardsdb["sting card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `GT Card`,
+                value: `${cardsdb["gt card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+                inline: true,
+              }
+            )
+            .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+            .setColor(colors.blue);
 
-      await i.update({embeds: [embed], components: [row, row2]})
-        }
-        else  if(i.customId == "activate_gt_card"){
-          
+          await i.update({ embeds: [embed], components: [row, row2] });
+        } else if (i.customId == "activate_gt_card") {
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
           if (
-            card1filt[0].time !== null  &&
+            card1filt[0].time !== null &&
             timeout - (Date.now() - card1filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card2filt[0].time !== null  &&
+            card2filt[0].time !== null &&
             timeout2 - (Date.now() - card2filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
           if (
-            card3filt[0].time !== null  &&
+            card3filt[0].time !== null &&
             timeout3 - (Date.now() - card3filt[0].time) < 0
           ) {
-            console.log("no card")
+            console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!")
+            return i.update("Wait for your other card to run out!");
           }
 
-          card3filt[0].points = 0
-          card3filt[0].time = Date.now()
+          card3filt[0].points = 0;
+          card3filt[0].time = Date.now();
           await Global.findOneAndUpdate(
             {},
             {
@@ -1798,103 +1771,100 @@ module.exports = {
             {
               arrayFilters: [
                 {
-                  "crew.name": actcrew.name
+                  "crew.name": actcrew.name,
                 },
               ],
             }
           );
 
-          await globalModel.save()
-          await userdata.save()
+          await globalModel.save();
+          await userdata.save();
           crews = globalModel?.crews;
-           crewname = crew.name;
-       crew2 = crews.find((crew) => crew.name == crewname);
+          crewname = crew.name;
+          crew2 = crews.find((crew) => crew.name == crewname);
 
-       row = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("crush_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("sting_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("gt_card")
-        .setLabel("Add 10 Crew Respect")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setStyle("Primary")
-      )
+          row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("crush_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("sting_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setStyle("Primary"),
+            new ButtonBuilder()
+              .setCustomId("gt_card")
+              .setLabel("Add 10 Crew Respect")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setStyle("Primary")
+          );
 
-       row2 = new ActionRowBuilder()
-      .addComponents(
-        new ButtonBuilder()
-        .setCustomId("activate_crush_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["crush card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_sting_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["sting card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-        new ButtonBuilder()
-        .setCustomId("activate_gt_card")
-        .setLabel("Activate")
-        .setEmoji(`${cardsdb["gt card"].emote}`)
-        .setDisabled(true)
-        .setStyle("Success"),
-      )
+          row2 = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+              .setCustomId("activate_crush_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["crush card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_sting_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["sting card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success"),
+            new ButtonBuilder()
+              .setCustomId("activate_gt_card")
+              .setLabel("Activate")
+              .setEmoji(`${cardsdb["gt card"].emote}`)
+              .setDisabled(true)
+              .setStyle("Success")
+          );
 
+          cards = crew2.Cards;
 
-       cards = crew2.Cards
+          card1filt = cards.filter((card) => card.name == "crush card");
+          card2filt = cards.filter((card) => card.name == "sting card");
+          card3filt = cards.filter((card) => card.name == "gt card");
 
-       card1filt = cards.filter((card) => card.name == "crush card")
-       card2filt = cards.filter((card) => card.name == "sting card")
-       card3filt = cards.filter((card) => card.name == "gt card")
+          if (card1filt[0].points >= card1filt[0].pointsmax) {
+            row2.components[0].setDisabled(false);
+          }
 
-      if(card1filt[0].points >= card1filt[0].pointsmax){
-        row2.components[0].setDisabled(false)
-      }
+          if (card2filt[0].points >= card2filt[0].pointsmax) {
+            row2.components[1].setDisabled(false);
+          }
+          if (card3filt[0].points >= card3filt[0].pointsmax) {
+            row2.components[2].setDisabled(false);
+          }
 
-      if(card2filt[0].points >= card2filt[0].pointsmax){
-        row2.components[1].setDisabled(false)
-      }
-      if(card3filt[0].points >= card3filt[0].pointsmax){
-        row2.components[2].setDisabled(false)
-      }
-
-      let embed = new EmbedBuilder()
-      .setTitle(`Your crews cards`)
-      .addFields(
-        {
-          name: `Crush Card`,
-          value: `${cardsdb["crush card"].emote}\n\n
+          let embed = new EmbedBuilder()
+            .setTitle(`Your crews cards`)
+            .addFields(
+              {
+                name: `Crush Card`,
+                value: `${cardsdb["crush card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card1filt[0].points}/100`,
-          inline: true
-        },
-            {
-          name: `Sting Card`,
-          value: `${cardsdb["sting card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `Sting Card`,
+                value: `${cardsdb["sting card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card2filt[0].points}/200`,
-          inline: true
-        },
-        {
-          name: `GT Card`,
-          value: `${cardsdb["gt card"].emote}\n\n
+                inline: true,
+              },
+              {
+                name: `GT Card`,
+                value: `${cardsdb["gt card"].emote}\n\n
           <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
-          inline: true
-        }
-      )
-      .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
-      .setColor(colors.blue)
+                inline: true,
+              }
+            )
+            .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
+            .setColor(colors.blue);
 
-      await i.update({embeds: [embed], components: [row, row2]})
+          await i.update({ embeds: [embed], components: [row, row2] });
         }
       });
     }

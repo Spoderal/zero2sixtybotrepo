@@ -61,7 +61,8 @@ module.exports = {
       .setColor(`#60b0f4`);
 
     interaction.reply({ embeds: [embed] });
-    for (var s = 0; s < 1; s++)  inv.splice(inv.indexOf(bought.toLowerCase()), 1);
+    for (var s = 0; s < 1; s++)
+      inv.splice(inv.indexOf(bought.toLowerCase()), 1);
     userdata.items = inv;
     userdata.update();
     cooldowndata.crate = Date.now();

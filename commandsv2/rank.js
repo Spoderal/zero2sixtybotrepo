@@ -21,67 +21,65 @@ module.exports = {
     let newprestige2 = prestigerank + 1;
     let bountycooldown = prestigerank * 1000;
     let bonus = prestigerank * 0.05;
-    let rpbonus = 0
+    let rpbonus = 0;
     let globals = await globalSchema.findOne();
-    let crews = globals.crews
+    let crews = globals.crews;
 
-    let usercrew = userdata.crew
+    let usercrew = userdata.crew;
 
-    if(usercrew){
-      let crew = crews.filter((cre) => cre.name == usercrew.name)
+    if (usercrew) {
+      let crew = crews.filter((cre) => cre.name == usercrew.name);
 
       let timeout = 14400000;
       let timeout2 = 7200000;
       let timeout3 = 3600000;
-          
-          if (
-            crew[0].Cards[0].time !== null  &&
-            timeout - (Date.now() - crew[0].Cards[0].time) < 0
-          ) {
-            console.log("no card")
-          } else {
-            rpbonus += 0.20
-          }
 
-          if (
-            crew[0].Cards[1].time !== null && 
-            timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
-          ) {
-            console.log("no card")
-          } else {
-            rpbonus += 0.50
-          }
+      if (
+        crew[0].Cards[0].time !== null &&
+        timeout - (Date.now() - crew[0].Cards[0].time) < 0
+      ) {
+        console.log("no card");
+      } else {
+        rpbonus += 0.2;
+      }
 
-          if (
-            crew[0].Cards[2].time !== null && 
-            timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
-          ) {
-            console.log("no card")
-          } else {
-            rpbonus += 1.20
-          }
+      if (
+        crew[0].Cards[1].time !== null &&
+        timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
+      ) {
+        console.log("no card");
+      } else {
+        rpbonus += 0.5;
+      }
 
+      if (
+        crew[0].Cards[2].time !== null &&
+        timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
+      ) {
+        console.log("no card");
+      } else {
+        rpbonus += 1.2;
+      }
     }
 
-    if(userdata.using.includes("radio")){
-      rpbonus += 0.50
+    if (userdata.using.includes("radio")) {
+      rpbonus += 0.5;
     }
 
-     if(userdata.using.includes("energy drink")){
-      rpbonus += 0.10
+    if (userdata.using.includes("energy drink")) {
+      rpbonus += 0.1;
     }
 
-    if(userdata.using.includes("energy drink")){
-      rpbonus += 0.10
+    if (userdata.using.includes("energy drink")) {
+      rpbonus += 0.1;
     }
 
-    console.log(rpbonus)
+    console.log(rpbonus);
 
-    rpbonus += (prestigerank / 100)
-    console.log(rpbonus)
-    let crew2 = userdata.crew
-    let rounded = rpbonus * 100
-   
+    rpbonus += prestigerank / 100;
+    console.log(rpbonus);
+    let crew2 = userdata.crew;
+    let rounded = rpbonus * 100;
 
     let racerank = userdata.racerank;
 

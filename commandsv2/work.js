@@ -43,7 +43,7 @@ module.exports = {
               { name: "Criminal", value: "criminal" },
               { name: "Zuber Driver", value: "zuber driver" },
               { name: "Photographer", value: "photographer" },
-              { name: "Doctor", value: "doctor" },
+              { name: "Doctor", value: "doctor" }
             )
         )
     )

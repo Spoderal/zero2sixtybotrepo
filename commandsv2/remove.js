@@ -58,7 +58,8 @@ module.exports = {
     }
     let removepart = interaction.options.getString("part");
 
-    if (!selected[0][removepart.toLowerCase()])  return interaction.reply("Your car doesn't have this part!");
+    if (!selected[0][removepart.toLowerCase()])
+      return interaction.reply("Your car doesn't have this part!");
 
     if (selected[0][removepart.toLowerCase()] == 0)
       return interaction.reply("This part cant go any lower!");

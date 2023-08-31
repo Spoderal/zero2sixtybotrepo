@@ -30,7 +30,7 @@ async function updateCrew(interaction) {
         totalrp += userrp;
       }
       console.log(totalrp);
-      let nextrank = crewrank += 1
+      let nextrank = (crewrank += 1);
       let requiredrp = nextrank * 1000;
       if (parseInt(totalrp) >= parseInt(requiredrp)) {
         let rank = crew2.Rank3;
