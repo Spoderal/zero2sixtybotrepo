@@ -66,11 +66,7 @@ module.exports = {
     userdata.update();
     cooldowndata.crate = Date.now();
     cooldowndata.save();
-    userdata.save()
     const canvas = createCanvas(1280, 720);
-    const ctx = canvas.getContext("2d");
-    const bg = await loadImage("https://i.ibb.co/6WwF0gJ/crateunbox.png");
-    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     let x = 0;
     let rewards = [];
     let i = setInterval(() => {
