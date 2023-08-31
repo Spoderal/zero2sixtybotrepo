@@ -126,8 +126,6 @@ module.exports = {
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
-
-              <:key_z:1140029565360668783> Keys: ${numberWithCommas(typekeys)}
               `,
               inline: true,
             },

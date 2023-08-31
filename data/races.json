@@ -24,6 +24,10 @@
     "Name": "Cross Country",
     "Reward": 45
   },
+  "rustbowl": {
+    "Name": "Rust Bowl",
+    "Reward": 45
+  },
   "mountain": {
     "Name": "Mountain Climb",
     "Reward": 50

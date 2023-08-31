@@ -40,6 +40,7 @@ module.exports = {
           { name: `🟢 Track Race`, value: `trackrace` },
           { name: `🌍 Cross Country`, value: `crosscountry` },
           { name: `⛰️ Mountain Climb (SEASON)`, value: `mountain` },
+          { name: `🌋 Rust Bowl (EVENT)`, value: `rustbowl` },
           { name: "🚀 Car Series", value: "carseries" },
           { name: "🚲 Motorcycle Madness", value: "motorcyclemad" }
         )
@@ -417,6 +418,42 @@ module.exports = {
       );
     }
 
+    if (tieroption == 1 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 200 && car.RestoreOnly
+      );
+    } else if (tieroption == 2 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 200 && car.RestoreOnly
+      );
+    } else if (tieroption == 3 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 300 && car.RestoreOnly
+      );
+    } else if (tieroption == 4 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 400 && car.RestoreOnly
+      );
+    } else if (tieroption == 5 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 450 && car.RestoreOnly
+      );
+    } else if (tieroption == 6 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 500 && car.RestoreOnly
+      );
+    } else if (tieroption == 7 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 600 && car.RestoreOnly
+      );
+    } else if (tieroption == 8 && raceoption == "rustbowl") {
+      cartofilter = carsarray.filter(
+        (car) => car.Speed <= 700 && car.RestoreOnly
+      );
+    }
+
+
+
     if (tieroption == 1 && raceoption == "motorcyclemad") {
       cartofilter = carsarray.filter(
         (car) => car.Motorcycle && car.Speed <= 150
@@ -436,6 +473,8 @@ module.exports = {
       !cardb.Cars[selected.Name.toLowerCase()].Motorcycle
     )
       return interaction.reply("You need a motorcycle for this race!");
+
+
 
     car2 = lodash.sample(cartofilter);
     console.log(cartofilter);
@@ -648,6 +687,35 @@ module.exports = {
       console.log(opponentrace);
       console.log(winner);
     } else if (raceoption == "crosscountry") {
+      let weight = selected.WeightStat;
+      let speed = selected.Speed;
+      let acceleration = selected.Acceleration;
+      let handling = selected.Handling;
+
+      let weight2 = car2.Weight;
+      let speed2 = car2.Speed;
+      let acceleration2 = car2["0-60"];
+      let handling2 = car2.Handling;
+
+      let weightscore = Math.floor(weight / 100);
+      let weightscore2 = Math.floor(weight2 / 100);
+
+      let speedscore = speed * 10;
+      let speedscore2 = speed2 * 10;
+
+      let playerrace = dorace(speed, acceleration, handling, weight);
+      let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
+
+      winner = playerrace > opponentrace;
+
+      console.log(playerrace);
+      console.log(opponentrace);
+      console.log(winner);
+    }
+    else if (raceoption == "rustbowl") {
+
+      if(!cardb.Cars[selected.Name.toLowerCase()].RestoreOnly && !cardb.Cars[selected.Name.toLowerCase()].restored) return interaction.reply("You need to use a barn find!")
+
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -926,6 +994,43 @@ module.exports = {
 
         if (raceoption == "mountain") {
           notorietywon = notorietywon * 2;
+        }
+
+        if(raceoption == "rustbowl"){
+          let randomr = randomRange(1, 50)
+
+          if(randomr <= 10){
+            let parts = ["t6exhaust", "t6tires", "t6turbo"]
+
+            let randompart = lodash.sample(parts)
+
+            userdata.parts.push(randompart)
+
+            rewards.push(`T6 Part!`)
+          }
+        let wins = userdata.rustwins 
+
+        if(wins >= 100 && userdata.rustwon == false){
+          let carobj = {
+            ID: cardb.Cars["2014 hennessey venom gt"].alias,
+      Name: cardb.Cars["2014 hennessey venom gt"].Name,
+      Speed: cardb.Cars["2014 hennessey venom gt"].Speed,
+      Acceleration: cardb.Cars["2014 hennessey venom gt"]["0-60"],
+      Handling: cardb.Cars["2014 hennessey venom gt"].Handling,
+      Parts: [],
+      Emote: cardb.Cars["2014 hennessey venom gt"].Emote,
+      Livery: cardb.Cars["2014 hennessey venom gt"].Image,
+      Miles: 0,
+      Weight: cardb.Cars["2014 hennessey venom gt"].Weight,
+      Gas: 10,
+      MaxGas: 10,
+          }
+
+          userdata.cars.push(carobj)
+          userdata.rustwon = true
+          rewards.push(`${cardb.Cars["2014 hennessey venom gt"].Emote} ${cardb.Cars["2014 hennessey venom gt"].Name}`)
+        }
+
         }
 
         rewards.push(`<:rank_race:1103913420320944198> +${rankwon} Rank`);

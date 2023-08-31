@@ -116,10 +116,33 @@ module.exports = {
             **Ends September 31st 2023**
 
                   `);
-        embed.setThumbnail(seasondb.Seasons.Summer.Image);
+        embed.setThumbnail(seasondb.Seasons.Fall.Image);
         embed
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/89DwwfN/season2image.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+     else if (value === "rust_bowl") {
+        embed.setTitle("Rust Bowl");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Welcome to the rust bowl of Zero2Sixty!
+
+            An all new event, focused on restoring cars! Gain tier 6 parts at random, by racing your barn finds in the rust bowl in /race!
+
+            You will also earn restoration parts for your other barn finds!
+
+            Win 100 rust bowl races and earn the brand new hennessey venom gt!
+
+            **Ends September 31st 2023**
+
+                  `);
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/CnmpN47/season2.png");
 
         await interaction.editReply({
           embeds: [embed],
