@@ -277,6 +277,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  cookie: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  compass: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   cmilk: {
     type: Number,
     required: false,

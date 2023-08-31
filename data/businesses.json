@@ -75,6 +75,42 @@
         "Customers": 4,
         "Level": 4,
         "Cost": 4000
+      },
+      {
+        "ID": "fastsponges",
+        "Name": "Fast Sponges",
+        "Emote": "🧽",
+        "Description": "The spinning sponges are super fast now, so you charge +$500 extra",
+        "Income": 500,
+        "Level": 5,
+        "Cost": 5000
+      },
+      {
+        "ID": "mediumbillboard",
+        "Name": "Medium Billboard",
+        "Emote": "🪧",
+        "Description": "Make a medium billboard, gain +5 customers per day",
+        "Customers": 5,
+        "Level": 5,
+        "Cost": 5500
+      },
+      {
+        "ID": "evenbettersoap",
+        "Name": "Even better soap",
+        "Emote": "🫧",
+        "Description": "Use even better soap, gain +$150 per customer",
+        "Income": 150,
+        "Level": 6,
+        "Cost": 6000
+      },
+      {
+        "ID": "twotter",
+        "Name": "Twotter",
+        "Emote": "🪧",
+        "Description": "Make a twotter account, gain +10 customers per day",
+        "Customers": 10,
+        "Level": 6,
+        "Cost": 6000
       }
     ],
     "Cost": 10000,
@@ -156,6 +192,42 @@
         "Customers": 4,
         "Level": 4,
         "Cost": 4500
+      },
+      {
+        "ID": "chips",
+        "Name": "Chips",
+        "Emote": "🍟",
+        "Description": "Start selling chips, now you gain +$350 per customer",
+        "Income": 350,
+        "Level": 5,
+        "Cost": 5000
+      },
+      {
+        "ID": "mediumbillboard",
+        "Name": "Medium Billboard",
+        "Emote": "🪧",
+        "Description": "Make a medium billboard, gain +5 customers per day",
+        "Customers": 5,
+        "Level": 5,
+        "Cost": 5500
+      },
+      {
+        "ID": "bestgas",
+        "Name": "Best gas",
+        "Emote": "⛽",
+        "Description": "Use the best gas, gain +$150 per customer",
+        "Income": 150,
+        "Level": 6,
+        "Cost": 6000
+      },
+      {
+        "ID": "twotter",
+        "Name": "Twotter",
+        "Emote": "🪧",
+        "Description": "Make a twotter account, gain +10 customers per day",
+        "Customers": 10,
+        "Level": 6,
+        "Cost": 6000
       }
     ],
     "Cost": 15000,
@@ -237,6 +309,42 @@
         "Customers": 4,
         "Level": 4,
         "Cost": 4000
+      },
+      {
+        "ID": "fasthands",
+        "Name": "Fast Hands",
+        "Emote": "🤚",
+        "Description": "You're super fast now, so you charge +$500 extra",
+        "Income": 500,
+        "Level": 5,
+        "Cost": 5000
+      },
+      {
+        "ID": "mediumbillboard",
+        "Name": "Medium Billboard",
+        "Emote": "🪧",
+        "Description": "Make a medium billboard, gain +5 customers per day",
+        "Customers": 5,
+        "Level": 5,
+        "Cost": 5500
+      },
+      {
+        "ID": "bettertires",
+        "Name": "Better Tires",
+        "Emote": "🛞",
+        "Description": "Use better tires, gain +$250 per customer",
+        "Income": 250,
+        "Level": 6,
+        "Cost": 6000
+      },
+      {
+        "ID": "twotter",
+        "Name": "Twotter",
+        "Emote": "🪧",
+        "Description": "Make a twotter account, gain +10 customers per day",
+        "Customers": 10,
+        "Level": 6,
+        "Cost": 6000
       }
     ],
     "Cost": 20000,

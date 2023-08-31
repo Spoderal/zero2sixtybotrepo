@@ -4,7 +4,7 @@ const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const colors = require("../common/colors");
-const { toCurrency } = require("../common/utils");
+const { toCurrency, randomRange } = require("../common/utils");
 
 const User = require("../schema/profile-schema");
 module.exports = {
@@ -15,12 +15,7 @@ module.exports = {
       cmd
         .setName("claim")
         .setDescription("Claim a task by id")
-        .addStringOption((option) =>
-          option
-            .setName("task_id")
-            .setDescription("The task id to claim")
-            .setRequired(true)
-        )
+
     )
     .addSubcommand((cmd) =>
       cmd.setName("list").setDescription("List the tasks you can claim")
@@ -52,15 +47,11 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommand == "claim") {
-      let taskid = interaction.options.getString("task_id");
+      let taskid = randomRange(1, 6)
       let filteredtask = usertasks.filter((task) => task.ID == taskid);
       let taskindb = tasksdb[taskid];
-      if (!taskindb)
-        return interaction.reply(
-          "Thats not a task! Try using the ID of the task"
-        );
-      if (filteredtask[0])
-        return interaction.reply("You already have this task in progress!");
+    
+      if (filteredtask.length > 0) return interaction.reply("You already have a task in progress!");
       let filteredtime = usertasks.filter(
         (task) => task.ID == `T${taskindb.ID}`
       );
@@ -101,7 +92,7 @@ module.exports = {
       userdata.tasks.push(taskobj);
       userdata.save();
 
-      interaction.reply(`You claimed the task "${taskindb.Task}"`);
+      interaction.reply(`You claimed the task **"${taskindb.Task}"**`);
     } else if (subcommand == "view") {
       let tasksarr = [];
 

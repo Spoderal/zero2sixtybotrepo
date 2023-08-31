@@ -67,6 +67,12 @@ module.exports = {
             value: "page_h",
             customId: "pageh",
           },
+          {
+            label: "Restoring Barn Finds",
+            description: "Information on restorations",
+            value: "page_r",
+            customId: "pager",
+          },
         ])
     );
 
@@ -215,6 +221,24 @@ module.exports = {
             **race - Race your car in numerous races**\n
             **races - View all the current race modes**\n
             **upgrade - Upgrade parts on your car**\n
+          `);
+          break;
+        }
+        case "page_r": {
+          pageEmbed = new EmbedBuilder();
+          pageEmbed.setColor(colors.blue);
+          pageEmbed.setDescription(`
+            Restoring barn finds is a complex function on the bot, so we'll dive in and go one step at a time!
+
+            First, you'll want barn finds, which can be received from crates, or racing in drag races!
+
+            Once you have your barn map, you're going to run \`/barn\` and you'll either find a common, rare, or legendary barn find.
+
+            Now that you've got the car you want to restore, its time to find parts for that car. You can find parts with \`/junkyard\` (TIP: If you have the **mechanic** business, you'll get 1 more part per junkyard run!)
+
+            Ok, you've got your parts, what do you do? You collect them until you own 1 exhaust, 1 engine, 1 suspension, 1 body, and 1 intake!
+
+            You just need to have them in your inventory so when you've collected them all, run \`/restore\` and now you've got yourself an oldie but a goodie!
           `);
           break;
         }

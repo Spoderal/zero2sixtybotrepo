@@ -1194,6 +1194,7 @@
       "0-60": 5,
       "Drift": 0,
       "Handling": 650,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 4133
     },
@@ -1210,6 +1211,7 @@
       "0-60": 12.7,
       "Drift": 0,
       "Handling": 325,
+      "Drivetrain": "RWD",
       "Obtained": "Common Imports",
       "Class": "D",
       "Weight": 3655
@@ -1227,6 +1229,7 @@
       "0-60": 7.6,
       "Drift": 4,
       "Handling": 950,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Class": "D",
       "Weight": 3000
@@ -1244,6 +1247,7 @@
       "0-60": 8.5,
       "Drift": 2,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Weight": 3500
     },
@@ -1260,6 +1264,7 @@
       "Drift": 4,
       "Obtained": "Drift Imports",
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3200
     },
@@ -1275,6 +1280,7 @@
       "0-60": 6.8,
       "Drift": 4,
       "Handling": 760,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Class": "D",
       "Weight": 3100
@@ -1292,6 +1298,7 @@
       "0-60": 5.9,
       "Drift": 4,
       "Handling": 1000,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Class": "C",
       "Weight": 3400,
@@ -1312,6 +1319,7 @@
       "Obtained": "Drift Imports",
       "Class": "C",
       "Weight": 3250,
+      "Drivetrain": "RWD",
       "Squad": true
     },
     "drift 2001 lexus is300": {
@@ -1328,6 +1336,7 @@
       "Handling": 780,
       "Obtained": "Drift Imports",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "drift 2014 lamborghini huracan": {
@@ -1342,6 +1351,7 @@
       "0-60": 2.5,
       "Obtained": "Season",
       "Drift": 4,
+      "Drivetrain": "RWD",
       "Handling": 3000,
       "Class": "D",
       "Weight": 4100
@@ -1358,6 +1368,7 @@
       "0-60": 5.5,
       "Drift": 4,
       "Handling": 1050,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Class": "C",
       "Weight": 3500,
@@ -1378,6 +1389,7 @@
       "Obtained": "Drift Imports",
       "Class": "C",
       "Weight": 3600,
+      "Drivetrain": "RWD",
       "Squad": true
     },
 
@@ -1396,6 +1408,7 @@
       "Handling": 700,
       "Obtained": "Drift Imports",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3700
     },
     "drift 1998 bmw m3 e36": {
@@ -1412,6 +1425,7 @@
       "Drift": 6,
       "Handling": 740,
       "Obtained": "Drift Imports",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3500
     },
@@ -1430,6 +1444,7 @@
       "0-60": 5,
       "Drift": 5,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Class": "D",
       "Weight": 4000
@@ -1450,6 +1465,7 @@
       "Drift": 8,
       "Handling": 750,
       "Obtained": "Drift Imports",
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3000
     },
@@ -1466,6 +1482,7 @@
       "0-60": 5,
       "Drift": 4,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Obtained": "Drift Imports",
       "Class": "C",
       "Weight": 3000
@@ -1483,6 +1500,7 @@
       "Drift": 6,
       "Handling": 710,
       "Obtained": "Drift Imports",
+      "Drivetrain": "RWD",
       "Weight": 3000
     },
     "drift 1999 mitsubishi eclipse": {
@@ -1499,6 +1517,7 @@
       "Drift": 6,
       "Handling": 800,
       "Obtained": "Drift Imports",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3000
     },
@@ -1515,6 +1534,7 @@
       "Drift": 4,
       "Handling": 800,
       "Obtained": "Drift Imports",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3600
     },
@@ -1530,6 +1550,7 @@
       "Image": "https://i.ibb.co/sFMPvYn/maxresdefault-50.jpg",
       "0-60": 5.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 400,
       "Class": "C",
       "Weight": 3900,
@@ -1548,6 +1569,7 @@
       "0-60": 2.9,
       "Drift": 0,
       "Handling": 850,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 3555,
       "Muscle": true
@@ -1564,6 +1586,7 @@
       "Image": "https://i.ibb.co/Yd19qvN/maxresdefault-51.jpg",
       "0-60": 6.7,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 350,
       "Class": "D",
       "Weight": 3075,
@@ -1582,6 +1605,7 @@
       "0-60": 7.6,
       "Drift": 1,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Handling": 375,
       "Weight": 2293
     },
@@ -1597,6 +1621,7 @@
       "Image": "https://i.ibb.co/WnfYVGj/rp-giulia-fr.png",
       "0-60": 8.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 450,
       "Class": "B",
       "Weight": 3300
@@ -1615,6 +1640,7 @@
       "0-60": 5.1,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Trims": ["2020 porsche 718 cayman gt4"],
       "Class": "B",
       "Weight": 3000
@@ -1631,6 +1657,7 @@
       "Image": "https://i.ibb.co/DG0054k/2020-porsche-718-cayman-gt4-017.png",
       "0-60": 5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Class": "A",
       "Weight": 3200
@@ -1647,6 +1674,7 @@
       "Image": "https://cdn.motor1.com/images/mgl/8Nj6W/s1/2013-435420-2014-porsche-918-spyder1.jpg",
       "0-60": 2.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 800,
       "Class": "S",
       "Weight": 3700
@@ -1664,6 +1692,7 @@
       "Image": "https://i0.wp.com/theshopclubs.com/wp-content/uploads/2019/02/IMG_8122.jpg?fit=1024%2C683&ssl=1",
       "0-60": 3.4,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Obtained": "Exotic Imports",
       "Class": "B",
@@ -1681,6 +1710,7 @@
       "Image": "https://i.ibb.co/G5nJbVQ/mer-024-0-0.jpg",
       "0-60": 3.6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 525,
       "Obtained": "Exotic Imports",
       "Class": "A",
@@ -1695,6 +1725,7 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "V12",
+      "Drivetrain": "AWD",
       "Image": "https://cdn1.mecum.com/auctions/ca0816/ca0816-261907/images/ca0816-261907_1@2x.jpg?1471460115000",
       "Rear": "https://cdn1.mecum.com/auctions/ca0816/ca0816-261907/images/ca0816-261907_2@2x.jpg?1471460115000",
       "0-60": 3.4,
@@ -1717,6 +1748,7 @@
       "0-60": 3,
       "Drift": 0,
       "Handling": 700,
+      "Drivetrain": "AWD",
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 4500
@@ -1733,6 +1765,7 @@
       "Image": "https://i.ibb.co/3S0d0wM/257404-front-3-4.jpg",
       "0-60": 5.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Obtained": "Exotic Imports",
       "Class": "B",
@@ -1751,6 +1784,7 @@
       "0-60": 3.2,
       "Drift": 0,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 2200
@@ -1768,6 +1802,7 @@
       "0-60": 6.9,
       "Drift": 0,
       "Handling": 425,
+      "Drivetrain": "RWD",
       "Obtained": "Rare Imports",
       "Class": "C",
       "Weight": 2690
@@ -1785,6 +1820,7 @@
       "0-60": 5.7,
       "Drift": 0,
       "Handling": 475,
+      "Drivetrain": "RWD",
       "Obtained": "Rare Imports",
       "Class": "C",
       "Weight": 2976
@@ -1802,6 +1838,7 @@
       "Rear": "https://cdn1.mecum.com/auctions/fl0116/fl0116-230115/images/fl0116-230115_3.jpg?1453311959000",
       "0-60": 8.2,
       "Drift": 1,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Class": "B",
       "Weight": 3300
@@ -1815,6 +1852,7 @@
       "Price": 67500,
       "sellprice": 26250,
       "Engine": "I5",
+      "Drivetrain": "RWD",
       "Image": "https://i.ibb.co/JnH05vS/A191516-blog.jpg",
       "0-60": 4.8,
       "Drift": 0,
@@ -1834,6 +1872,7 @@
       "Image": "https://i.ibb.co/wQTZGt7/2022-audi-rs3-sportback.jpg",
       "0-60": 3.7,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 600,
       "Obtained": "Rare Imports",
       "Class": "C",
@@ -1854,6 +1893,7 @@
       "Handling": 600,
       "Obtained": "Rare Imports",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 4300
     },
     "2022 bmw m4": {
@@ -1869,6 +1909,7 @@
       "0-60": 6.5,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Obtained": "Super Wheelspin",
       "Class": "C",
       "Weight": 3900
@@ -1887,6 +1928,7 @@
       "0-60": 4.5,
       "Drift": 0,
       "Handling": 400,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 3870,
       "Muscle": true
@@ -1902,6 +1944,7 @@
       "Engine": "V8",
       "Image": "https://i.ibb.co/PTJsYbc/challenger.png",
       "0-60": 4.5,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 450,
       "Class": "B",
@@ -1919,6 +1962,7 @@
       "Engine": "V10",
       "Image": "https://i.ibb.co/m93k7JG/viper.png",
       "0-60": 3.1,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 1000,
       "Class": "A",
@@ -1938,6 +1982,7 @@
       "Image": "https://i.ibb.co/mCrVSRz/97d1551a0e984a53a994d51fcb99f4f7.jpg",
       "0-60": 3.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Class": "A",
       "Weight": 3450,
@@ -1956,6 +2001,7 @@
       "0-60": 5.9,
       "Drift": 4,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3153
     },
@@ -1972,6 +2018,7 @@
       "0-60": 5.3,
       "Drift": 0,
       "Handling": 900,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3100
     },
@@ -1989,6 +2036,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 3100
     },
 
@@ -2005,6 +2053,7 @@
       "0-60": 5.9,
       "Drift": 2,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3200
     },
@@ -2021,6 +2070,7 @@
       "0-60": 6.0,
       "Drift": 0,
       "Handling": 425,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2900
     },
@@ -2037,6 +2087,7 @@
       "0-60": 4.9,
       "Drift": 0,
       "Handling": 375,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3600,
       "Muscle": true
@@ -2053,6 +2104,7 @@
       "Image": "https://i.ibb.co/PZsHZdB/2024mustang.png",
       "0-60": 4.6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 400,
       "Class": "C",
       "Weight": 3700,
@@ -2071,6 +2123,7 @@
       "Image": "https://www.mustangspecs.com/wp-content/uploads/2019/10/1987-ford-mustang-gt-v2.jpg",
       "0-60": 6.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 350,
       "Obtained": "Event",
       "Class": "C",
@@ -2089,6 +2142,7 @@
       "Image": "https://bringatrailer.com/wp-content/uploads/2021/05/2014_ford_shelby_gt500_162334723023faa64bab2ceGT500-28.jpg?fit=940%2C626",
       "0-60": 3.5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 350,
       "Obtained": "Rare Imports",
       "Class": "C",
@@ -2103,6 +2157,7 @@
       "kmh": 289,
       "Price": 0,
       "sellprice": 0,
+      "Drivetrain": "RWD",
       "Engine": "V8",
       "Image": "https://i.ibb.co/4YW5RJP/maxresdefault-95.jpg",
       "0-60": 3.3,
@@ -2125,6 +2180,7 @@
       "Image": "https://i.ibb.co/NF3Q4mv/maxresdefault.jpg",
       "0-60": 10,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 300,
       "Obtained": "Season",
       "Weight": 3090,
@@ -2145,6 +2201,7 @@
       "Handling": 350,
       "Obtained": "Season",
       "Weight": 3530,
+      "Drivetrain": "RWD",
       "Muscle": true
     },
     "2020 chevy camaro ss": {
@@ -2163,6 +2220,7 @@
       "Obtained": "Season",
       "Class": "B",
       "Weight": 3000,
+      "Drivetrain": "RWD",
       "Muscle": true
     },
     "2021 dodge durango hellcat": {
@@ -2180,6 +2238,7 @@
       "Handling": 550,
       "Obtained": "Season",
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 5710,
       "Muscle": true
     },
@@ -2196,6 +2255,7 @@
       "0-60": 3.5,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 3800,
@@ -2214,6 +2274,7 @@
       "0-60": 5.1,
       "Drift": 0,
       "Handling": 575,
+      "Drivetrain": "AWD",
       "Obtained": "Wheelspin",
       "Class": "C",
       "Weight": 5500
@@ -2230,6 +2291,7 @@
       "Image": "https://i.ibb.co/gFJhWFV/la-porsche-911-turbo-del-film-bad-boys.jpg",
       "0-60": 6.5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Class": "C",
       "Weight": 3200
@@ -2246,6 +2308,7 @@
       "Image": "https://i.ibb.co/JtBJJQn/2021-ferrari-sf90-stradale-104-1593128789-1.jpg",
       "0-60": 2.5,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 750,
       "Class": "S",
       "Weight": 3600
@@ -2262,6 +2325,7 @@
       "Image": "https://i.ibb.co/2Ywdq09/snowys.png",
       "0-60": 1.8,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Squad": true,
       "Handling": 560,
       "Weight": 3600
@@ -2278,6 +2342,7 @@
       "Image": "https://i.ibb.co/PDBkP1f/2016-bugatti-chiron.jpg",
       "0-60": 2.3,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 750,
       "Class": "S",
       "Weight": 4500
@@ -2296,6 +2361,7 @@
       "0-60": 5.3,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "AWD",
       "Class": "S",
       "Weight": 4100
     },
@@ -2313,6 +2379,7 @@
       "0-60": 2.8,
       "Drift": 0,
       "Handling": 900,
+      "Drivetrain": "AWD",
       "Class": "S",
       "Weight": 4300
     },
@@ -2329,6 +2396,7 @@
       "0-60": 3,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "AWD",
       "Weight": 4300
     },
     "2022 aston martin valkyrie": {
@@ -2344,6 +2412,7 @@
       "0-60": 5.4,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 2200,
       "Obtained": "Exotic Imports"
@@ -2360,6 +2429,7 @@
       "Image": "https://i.ibb.co/GH49gz6/aston-martin-valhalla-1.jpg",
       "0-60": 2.7,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 1000,
       "Class": "S",
       "Obtained": "Exotic Imports",
@@ -2376,6 +2446,7 @@
       "Engine": "V6",
       "Image": "https://i.pinimg.com/originals/21/c3/46/21c34652896a3871b2162f9777d42dcd.jpg",
       "0-60": 3.8,
+      "Drivetrain": "AWD",
       "Drift": 3,
       "Handling": 900,
       "Class": "A",
@@ -2393,6 +2464,7 @@
       "Price": 28645,
       "sellprice": 17187,
       "Engine": "I4",
+      "Drivetrain": "RWD",
       "Image": "https://www.carscoops.com/wp-content/uploads/2019/09/79a59712-2019-subaru-brz-straightpipes-1024x554.jpg",
       "Rear": "https://cdn.drivingline.com/media/2316193/2019-subaru-brz-review-photo-benjamin-hunting-driving-line00017.jpg?quality=70&mode=pad&copymetadata=true&w=400",
       "0-60": 6.5,
@@ -2413,6 +2485,7 @@
       "Image": "https://www.motortrend.com/uploads/sites/5/2016/02/2016-Jaguar-F-Type-AWD-R-Coupe-front-three-quarter-in-motion.jpg?fit=around%7C480:270",
       "Rear": "http://o.aolcdn.com/hss/storage/midas/845e66dcd0c93ed4a9fa25137ca06267/201110195/2016-jaguar-f-type-s-convertible-manual-2.jpg",
       "0-60": 5.3,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 625,
       "Class": "B",
@@ -2431,6 +2504,7 @@
       "Image": "https://i.ibb.co/Ch3XgGg/2009-honda-s2000-cr-with-123-miles.png",
       "0-60": 6.4,
       "Drift": 3,
+      "Drivetrain": "RWD",
       "Handling": 600,
       "Class": "C",
       "Weight": 2813
@@ -2448,6 +2522,7 @@
       "0-60": 5.2,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3725,
       "Muscle": true
@@ -2463,6 +2538,7 @@
       "Engine": "V8",
       "Image": "https://i.ibb.co/hYsCMb8/2020-aston-martin-vantage-coupe-106-1592917437.jpg",
       "0-60": 4.4,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 525,
       "Class": "A",
@@ -2482,6 +2558,7 @@
       "0-60": 8.5,
       "Drift": 2,
       "Handling": 450,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2138
     },
@@ -2497,6 +2574,7 @@
       "0-60": 5.9,
       "Handling": 550,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 2300
     },
     "2005 ford gt": {
@@ -2512,6 +2590,7 @@
       "0-60": 3.4,
       "Drift": 0,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 3485
@@ -2528,6 +2607,7 @@
       "Image": "https://i.ibb.co/pR0td3T/maxresdefault-42.jpg",
       "0-60": 4.6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Class": "B",
       "Weight": 3700
@@ -2544,6 +2624,7 @@
       "Image": "https://i.ibb.co/nQnCkGw/maxresdefault-43.jpg",
       "0-60": 11.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Class": "C",
       "Weight": 4100
@@ -2562,6 +2643,7 @@
       "0-60": 2.6,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 2900
     },
@@ -2579,6 +2661,7 @@
       "Drift": 0,
       "Handling": 800,
       "Obtained": "Wheelspin",
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3010
     },
@@ -2595,6 +2678,7 @@
       "Junked": true,
       "restored": "1969 ford mustang",
       "0-60": 17,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 200,
       "Weight": 3400
@@ -2612,6 +2696,7 @@
       "Junked": true,
       "restored": "1992 dodge viper",
       "0-60": 15,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 225,
       "Weight": 3450,
@@ -2631,6 +2716,7 @@
       "0-60": 4.6,
       "Drift": 0,
       "Handling": 475,
+      "Drivetrain": "RWD",
       "Obtained": "Legendary Barn Find",
       "Weight": 3470,
       "Muscle": true
@@ -2649,6 +2735,7 @@
       "restored": "2002 koenigsegg cc8s",
       "0-60": 2.7,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 95,
       "Weight": 1090
     },
@@ -2665,6 +2752,7 @@
       "RestoreOnly": true,
       "0-60": 3.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 600,
       "Obtained": "Legendary Barn Find",
       "Weight": 2590
@@ -2682,6 +2770,7 @@
       "Junked": true,
       "restored": "1969 dodge daytona",
       "0-60": 27,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 25,
       "Weight": 1900
@@ -2695,6 +2784,7 @@
       "Price": 0,
       "sellprice": 1000,
       "Engine": "V4",
+      "Drivetrain": "RWD",
       "Image": "https://barnfinds.com/wp-content/uploads/2019/06/1969-VW-Beetle.jpg",
       "Junked": true,
       "restored": "1969 volkswagen beetle",
@@ -2715,6 +2805,7 @@
       "Image": "https://i.ibb.co/pwNQfL4/1-1593441239015-2x.jpg",
       "RestoreOnly": true,
       "0-60": 22.5,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 350,
       "Obtained": "Common Barn Find",
@@ -2733,6 +2824,7 @@
       "RestoreOnly": true,
       "0-60": 6.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 385,
       "Obtained": "Rare Barn Find",
       "Weight": 3250
@@ -2752,6 +2844,7 @@
       "0-60": 14.3,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "1973 nissan skyline": {
@@ -2767,6 +2860,7 @@
       "RestoreOnly": true,
       "0-60": 9.1,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 450,
       "Obtained": "Uncommon Barn Find",
       "Weight": 3600
@@ -2784,6 +2878,7 @@
       "Junked": true,
       "restored": "1970 chevy chevelle ss",
       "0-60": 44.4,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 120,
       "Weight": 2205
@@ -2800,6 +2895,7 @@
       "Image": "https://i.ibb.co/Jk3fxN8/chevrolet-chevelle-ss-99251-1280x720.jpg",
       "RestoreOnly": true,
       "0-60": 5.8,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 325,
       "Obtained": "Common Barn Find",
@@ -2818,6 +2914,7 @@
       "RestoreOnly": true,
       "0-60": 7.0,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 300,
       "Obtained": "Common Barn Find",
       "Weight": 3940
@@ -2836,6 +2933,7 @@
       "0-60": 19.4,
       "Drift": 0,
       "Handling": 35,
+      "Drivetrain": "RWD",
       "Junked": true,
       "restored": "1972 chevy monte carlo",
       "Obtained": "Common Barn Find",
@@ -2855,6 +2953,7 @@
       "0-60": 5.6,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Obtained": "Uncommon Barn Find",
       "Weight": 3600,
       "Muscle": true
@@ -2872,6 +2971,7 @@
       "Junked": true,
       "restored": "1973 pontiac trans am",
       "0-60": 22.6,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 50,
       "Weight": 2900,
@@ -2891,6 +2991,7 @@
       "restored": "1966 lamborghini miura",
       "0-60": 5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 125,
       "Weight": 3600
     },
@@ -2909,6 +3010,7 @@
       "0-60": 69.9,
       "Drift": 0,
       "Handling": 96,
+      "Drivetrain": "RWD",
       "Obtained": "Legendary Barn Find",
       "Weight": 3269
     },
@@ -2924,6 +3026,7 @@
       "Image": "https://bringatrailer.com/wp-content/uploads/2019/11/1989_lotus_esprit_turbo_1574776016f523f24deee1DSC00343-28129.jpg?fit=940%2C626",
       "RestoreOnly": true,
       "0-60": 4.7,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 350,
       "Obtained": "Legendary Barn Find",
@@ -2943,6 +3046,7 @@
       "restored": "1986 lamborghini countach",
       "0-60": 4.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Weight": 3600
     },
@@ -2959,6 +3063,7 @@
       "RestoreOnly": true,
       "0-60": 4.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 450,
       "Obtained": "Legendary Barn Find",
       "Weight": 3600
@@ -2976,6 +3081,7 @@
       "RestoreOnly": true,
       "0-60": 5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 525,
       "Obtained": "Legendary Barn Find",
       "Weight": 3600
@@ -2993,6 +3099,7 @@
       "RestoreOnly": true,
       "0-60": 8.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 525,
       "Obtained": "Uncommon Barn Find",
       "Weight": 3600
@@ -3011,6 +3118,7 @@
       "restored": "1954 mercedes 300sl",
       "0-60": 12.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Weight": 3600
     },
@@ -3029,6 +3137,7 @@
       "0-60": 12.8,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Weight": 3600,
       "Muscle": true
     },
@@ -3045,6 +3154,7 @@
       "RestoreOnly": true,
       "0-60": 5.7,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 305,
       "Obtained": "Common Barn Find",
       "Weight": 3410
@@ -3063,6 +3173,7 @@
       "0-60": 6.8,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Obtained": "Rare Barn Find",
       "Weight": 3600,
       "Muscle": true
@@ -3079,6 +3190,7 @@
       "Image": "https://wayfarerinsurancegroup.com/wp-content/uploads/2021/09/xl_5104-photographie-3871.jpg",
       "RestoreOnly": true,
       "0-60": 8.6,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 450,
       "Obtained": "Rare Barn Find",
@@ -3098,6 +3210,7 @@
       "0-60": 26,
       "restored": "1969 toyota 2000gt",
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 175,
       "Weight": 2469
     },
@@ -3116,6 +3229,7 @@
       "0-60": 27,
       "Drift": 0,
       "Handling": 175,
+      "Drivetrain": "RWD",
       "Weight": 2684
     },
     "barn 1984 audi quattro": {
@@ -3134,6 +3248,7 @@
       "Handling": 525,
       "Obtained": "Rare Barn Find",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "1984 audi quattro": {
@@ -3151,6 +3266,7 @@
       "Handling": 550,
       "Obtained": "Rare Barn Find",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "barn 1973 ferrari dino": {
@@ -3166,6 +3282,7 @@
       "Junked": true,
       "restored": "1973 ferrari dino",
       "0-60": 11,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 500,
       "Weight": 3600
@@ -3185,6 +3302,7 @@
       "0-60": 12.5,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Weight": 3600,
       "Muscle": true
     },
@@ -3204,6 +3322,7 @@
       "Drift": 0,
       "Handling": 350,
       "Weight": 3600,
+      "Drivetrain": "RWD",
       "Muscle": true
     },
     "barn 1965 porsche 911": {
@@ -3220,6 +3339,7 @@
       "restored": "1965 porsche 911",
       "0-60": 12.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Weight": 3600
     },
@@ -3238,6 +3358,7 @@
       "0-60": 12.5,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Obtained": "Common Barn Find",
       "Weight": 3600
     },
@@ -3255,6 +3376,7 @@
       "0-60": 9.1,
       "Drift": 0,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Obtained": "Common Barn Find",
       "Weight": 2800
     },
@@ -3271,6 +3393,7 @@
       "RestoreOnly": true,
       "0-60": 5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 700,
       "Obtained": "Legendary Barn Find",
       "Weight": 3600
@@ -3289,6 +3412,7 @@
       "restored": "1970 porsche 917",
       "0-60": 10.9,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 700,
       "Weight": 3600
     },
@@ -3306,6 +3430,7 @@
       "restored": "1972 datsun 240z",
       "0-60": 28,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 150,
       "Weight": 2355
     },
@@ -3323,6 +3448,7 @@
       "0-60": 10.8,
       "restored": "1979 aston martin v8 vantage",
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Weight": 3600
     },
@@ -3340,6 +3466,7 @@
       "0-60": 8,
       "Drift": 0,
       "Handling": 450,
+      "Drivetrain": "RWD",
       "Obtained": "Uncommon Barn Find",
       "Weight": 2355
     },
@@ -3357,6 +3484,7 @@
       "0-60": 9,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "1980 porsche 911": {
@@ -3374,6 +3502,7 @@
       "Handling": 600,
       "Weight": 3600,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Obtained": "Car Series",
       "Series": true
     },
@@ -3391,6 +3520,7 @@
       "0-60": 7,
       "Series": true,
       "Drift": 0,
+      "Drivetrain": "FWD",
       "Handling": 750,
       "Obtained": "Car Series",
       "Weight": 3500
@@ -3411,6 +3541,7 @@
       "Handling": 850,
       "Obtained": "Car Series",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 2800,
       "Series": true
     },
@@ -3429,6 +3560,7 @@
       "Class": "A",
       "Obtained": "Car Series",
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Weight": 2100,
       "Series": true
     },
@@ -3448,6 +3580,7 @@
       "Handling": 350,
       "Obtained": "Rare Barn Find",
       "Weight": 3649,
+      "Drivetrain": "RWD",
       "Muscle": true
     },
     "1979 aston martin v8 vantage": {
@@ -3463,6 +3596,7 @@
       "RestoreOnly": true,
       "0-60": 10.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Weight": 3600
     },
@@ -3482,6 +3616,7 @@
       "Handling": 600,
       "Obtained": "Legendary Barn Find",
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "barn 1967 ferrari 330 p4": {
@@ -3499,6 +3634,7 @@
       "restored": "1967 ferrari 330 p4",
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 3600
     },
@@ -3516,6 +3652,7 @@
       "0-60": 9,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Obtained": "Common Barn Find",
       "Weight": 3600,
       "Muscle": true
@@ -3534,6 +3671,7 @@
       "0-60": 13,
       "restored": "1973 plymouth barracuda",
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 350,
       "Weight": 3600,
       "Muscle": true
@@ -3552,6 +3690,7 @@
       "0-60": 5.1,
       "Drift": 0,
       "Handling": 305,
+      "Drivetrain": "RWD",
       "Weight": 3880,
       "Muscle": true
     },
@@ -3572,6 +3711,7 @@
       "HighPrice": 50000,
       "LowPrice": 10100,
       "Handling": 450,
+      "Drivetrain": "RWD",
       "Obtained": "Common Barn Find",
       "Weight": 2684
     },
@@ -3588,6 +3728,7 @@
       "0-60": 5.4,
       "Drift": 0,
       "Handling": 375,
+      "Drivetrain": "RWD",
       "Obtained": "Common Barn Find",
       "Weight": 3350,
       "Muscle": true
@@ -3608,6 +3749,7 @@
       "Handling": 60,
       "Obtained": "Common Barn Find",
       "Junked": true,
+      "Drivetrain": "RWD",
       "restored": "1967 chevy impala",
       "Weight": 4085
     },
@@ -3624,6 +3766,7 @@
       "0-60": 6.2,
       "Drift": 0,
       "Handling": 300,
+      "Drivetrain": "RWD",
       "Obtained": "Common Barn Find",
       "Weight": 4085
     },
@@ -3643,6 +3786,7 @@
       "0-60": 13,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Weight": 3600,
       "Muscle": true
     },
@@ -3658,6 +3802,7 @@
       "Image": "https://i.ibb.co/j6sZ1TZ/maxresdefault-74.jpg",
       "0-60": 6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Obtained": "Legendary Barn Find",
       "Weight": 3600
@@ -3679,6 +3824,7 @@
       "Obtained": "Rare Barn Find",
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Weight": 3600
     },
     "1990 bmw m3": {
@@ -3695,6 +3841,7 @@
       "0-60": 7,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Weight": 2800
     },
     "barn 1971 chevy corvette": {
@@ -3712,6 +3859,7 @@
       "0-60": 13,
       "Drift": 0,
       "Handling": 350,
+      "Drivetrain": "RWD",
       "Weight": 3600,
       "Muscle": true
     },
@@ -3728,6 +3876,7 @@
       "0-60": 5.7,
       "Drift": 0,
       "Handling": 375,
+      "Drivetrain": "RWD",
       "Obtained": "Uncommon Barn Find",
       "Weight": 3380,
       "Muscle": true
@@ -3746,6 +3895,7 @@
       "restored": "1969 ford gt40",
       "0-60": 24.7,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 166,
       "Weight": 2205
     },
@@ -3761,6 +3911,7 @@
       "Image": "https://cdn.dealeraccelerate.com/franks/1/71/2485/1920x1440/1996-nissan-300zx-twin-turbo",
       "0-60": 6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Obtained": "Booster Reward",
       "Class": "C",
@@ -3779,6 +3930,7 @@
       "0-60": 4.7,
       "Drift": 0,
       "Handling": 650,
+      "Drivetrain": "RWD",
       "Obtained": "Legendary Barn Find",
       "Weight": 2205
     },
@@ -3795,6 +3947,7 @@
       "0-60": 2.5,
       "Drift": 0,
       "Handling": 650,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3100
     },
@@ -3810,6 +3963,7 @@
       "Image": "https://i.ibb.co/hCVjTh4/huracan.png",
       "0-60": 3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Obtained": "Exotic Imports",
       "Class": "A",
@@ -3827,6 +3981,7 @@
       "Image": "https://www.topcarrating.com/lamborghini/2013-lamborghini-veneno-19.jpg",
       "0-60": 2.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Class": "S",
       "Weight": 3100
@@ -3844,6 +3999,7 @@
       "Image": "https://i.ibb.co/Jd68ShJ/bugatti-bolide-daylight-1.jpg",
       "0-60": 2.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 800,
       "Class": "S",
       "Weight": 3100
@@ -3862,6 +4018,7 @@
       "0-60": 3.4,
       "Drift": 0,
       "Handling": 650,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3200
     },
@@ -3878,6 +4035,7 @@
       "0-60": 6.3,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3200
     },
@@ -3892,6 +4050,7 @@
       "Engine": "V12",
       "Image": "https://www.topgear.com/sites/default/files/2022/07/20-Ferrari-Daytona-SP3.jpg",
       "0-60": 3,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 700,
       "Weight": 3200
@@ -3908,6 +4067,7 @@
       "Image": "https://cdn.vox-cdn.com/thumbor/DIzS-b4uls7g46HCF8HOmBRguMI=/31x0:642x407/1200x800/filters:focal(31x0:642x407)/cdn.vox-cdn.com/uploads/chorus_image/image/47486271/Screenshot_2015-10-21_16.58.21.0.0.png",
       "0-60": 6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Weight": 3200
     },
@@ -3925,6 +4085,7 @@
       "Drift": 0,
       "Handling": 650,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 2700
     },
     "2012 pagani huayra": {
@@ -3940,6 +4101,7 @@
       "Drift": 0,
       "Handling": 600,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2700
     },
     "2017 pagani huayra roadster": {
@@ -3956,6 +4118,7 @@
       "Handling": 600,
       "Class": "S",
       "Weight": 2700,
+      "Drivetrain": "RWD",
       "Obtained": "Car Pack"
     },
     "2021 aston martin vantage roadster": {
@@ -3972,6 +4135,7 @@
       "Handling": 600,
       "Class": "S",
       "Weight": 3500,
+      "Drivetrain": "RWD",
       "Obtained": "Car Pack"
     },
     "2022 bmw z4 roadster": {
@@ -3987,6 +4151,7 @@
       "Drift": 0,
       "Handling": 600,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2800,
       "Obtained": "Car Pack"
     },
@@ -4003,6 +4168,7 @@
       "0-60": 4.4,
       "Drift": 0,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3800
     },
@@ -4019,6 +4185,7 @@
       "0-60": 4.8,
       "Drift": 0,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 2900
     },
@@ -4035,6 +4202,7 @@
       "0-60": 5.9,
       "Drift": 0,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Obtained": "Ferrari Imports",
       "Class": "A",
       "Weight": 3100
@@ -4054,6 +4222,7 @@
       "Drift": 4,
       "Handling": 575,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3616
     },
     "1992 toyota supra mk3": {
@@ -4071,6 +4240,7 @@
       "Drift": 2,
       "Handling": 550,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3534
     },
     "2002 mazda rx7 fd": {
@@ -4087,6 +4257,7 @@
       "Drift": 0,
       "Handling": 650,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 2778
     },
     "1989 mazda rx7 fc": {
@@ -4104,6 +4275,7 @@
       "Handling": 600,
       "Obtained": "Rare Imports",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 2888
     },
 
@@ -4122,6 +4294,7 @@
       "Handling": 550,
       "Obtained": "Z Crate 1",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3040
     },
 
@@ -4140,6 +4313,7 @@
       "Handling": 550,
       "Obtained": "Z Crate 1",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 2474
     },
     "2007 mitsubishi evo ix": {
@@ -4156,6 +4330,7 @@
       "0-60": 5.7,
       "Drift": 3,
       "Handling": 650,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3230
     },
@@ -4173,6 +4348,7 @@
       "0-60": 4.6,
       "Drift": 2,
       "Rally": 1,
+      "Drivetrain": "AWD",
       "Handling": 650,
       "Class": "C",
       "Weight": 3260
@@ -4192,6 +4368,7 @@
       "Handling": 575,
       "Class": "C",
       "Weight": 3500,
+      "Drivetrain": "RWD",
       "Obtained": "Rare Garage"
     },
     "2016 bmw m6": {
@@ -4208,6 +4385,7 @@
       "Drift": 0,
       "Handling": 565,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Obtained": "Rare Imports",
       "Weight": 4200
     },
@@ -4225,6 +4403,7 @@
       "Drift": 0,
       "Handling": 600,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Weight": 3200
     },
@@ -4240,6 +4419,7 @@
       "Image": "https://i.ibb.co/wMwQY3L/2018-audi-r8-v10-plus-competition.jpg",
       "0-60": 3.9,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Class": "A",
       "Weight": 3500
@@ -4258,6 +4438,7 @@
       "0-60": 2.9,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3400
     },
@@ -4274,6 +4455,7 @@
       "0-60": 4.1,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Obtained": "Crew Season",
       "Weight": 3400
@@ -4291,6 +4473,7 @@
       "Image": "https://cdn.motor1.com/images/mgl/01yvV/s1/lamborghini-sc20.jpg",
       "0-60": 2.7,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Class": "S",
       "Obtained": "Legendary Garage",
@@ -4308,6 +4491,7 @@
       "Image": "https://i.ibb.co/cty7yHh/New-Project.png",
       "0-60": 3.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 800,
       "Class": "B",
       "Weight": 2500
@@ -4325,6 +4509,7 @@
       "0-60": 3.8,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 2200,
       "Obtained": "Event"
@@ -4335,15 +4520,17 @@
       "Emote": "<:lotus:931011548317642814>",
       "kmh": 201,
       "Speed": 345,
-      "Price": 77600,
-      "sellprice": 32250,
+      "Price": 0,
+      "sellprice": 0,
       "Engine": "V6",
       "Image": "https://i.ibb.co/NjcxRjY/ndl-Bo-Yf-Jeq.png",
       "0-60": 4.9,
       "Drift": 0,
       "Handling": 650,
       "Class": "B",
-      "Weight": 3000
+      "Drivetrain": "RWD",
+      "Weight": 3000,
+      "Obtained":"Rare Imports"
     },
     "2021 lotus evora gt": {
       "alias": "2021 evora gt",
@@ -4359,6 +4546,7 @@
       "Drift": 0,
       "Handling": 700,
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 2900,
       "Obtained": "Rare Garage"
     },
@@ -4375,6 +4563,7 @@
       "0-60": 7.6,
       "Drift": 2,
       "Handling": 525,
+      "Drivetrain": "FWD",
       "Class": "D",
       "Weight": 3100
     },
@@ -4391,6 +4580,7 @@
       "Drift": 0,
       "Handling": 400,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3298,
       "Muscle": true
     },
@@ -4408,6 +4598,7 @@
       "Drift": 2,
       "Handling": 525,
       "Class": "D",
+      "Drivetrain": "FWD",
       "Weight": 2900,
       "Obtained": "Rare Garage"
     },
@@ -4425,6 +4616,7 @@
       "0-60": 6.5,
       "Drift": 0,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 2788,
       "Obtained": "Blueprints",
@@ -4442,6 +4634,7 @@
       "Rear": "https://images.cars.com/cldstatic/wp-content/uploads/img26451699-1478030871802.jpg",
       "0-60": 4.9,
       "Drift": 1,
+      "Drivetrain": "FWD",
       "Class": "C",
       "Handling": 675,
       "Weight": 3117
@@ -4459,6 +4652,7 @@
       "0-60": 4.3,
       "Drift": 2,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 3902
     },
@@ -4473,6 +4667,7 @@
       "Image": "https://s1.cdn.autoevolution.com/images/gallery/LEXUS-LFA-4155_23.jpg",
       "0-60": 3.6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 925,
       "Class": "A",
       "Weight": 3428
@@ -4490,6 +4685,7 @@
       "0-60": 5.4,
       "Drift": 3,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2868
     },
@@ -4506,6 +4702,7 @@
       "Drift": 0,
       "Handling": 500,
       "Obtained": "Wheelspin",
+      "Drivetrain": "RWD",
       "Weight": 3300
     },
     "1991 bmw m5": {
@@ -4521,6 +4718,7 @@
       "Drift": 0,
       "Handling": 600,
       "Obtained": "Wheelspin",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3800
     },
@@ -4535,6 +4733,7 @@
       "Image": "https://i.ibb.co/wBZPCSF/gnx.png",
       "0-60": 8.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 475,
       "Obtained": "Wheelspin",
       "Class": "D",
@@ -4552,6 +4751,7 @@
       "0-60": 4.2,
       "Drift": 0,
       "Handling": 650,
+      "Drivetrain": "RWD",
       "Obtained": "Rare Imports",
       "Class": "B",
       "Weight": 5000
@@ -4567,6 +4767,7 @@
       "Image": "https://static.wikia.nocookie.net/batman/images/5/57/Thedarkknight17po4.jpg/revision/latest?cb=20120113141554",
       "0-60": 6,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 1000,
       "Class": "A",
       "Weight": 5000
@@ -4584,6 +4785,7 @@
       "0-60": 5,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 5000
     },
@@ -4599,6 +4801,7 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/2020-nissan-370z-nismo-rear-angle-view-carbuzz-529352.jpg",
       "0-60": 4.6,
       "Drift": 6,
+      "Drivetrain": "RWD",
       "Handling": 675,
       "Class": "B",
       "Weight": 3457
@@ -4614,6 +4817,7 @@
       "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2023-nissan-z-mmp-1-1629244720.jpg",
       "Rear": "https://cdn.motor1.com/images/mgl/jb8j7/s3/2023-nissan-z.jpg",
       "0-60": 4.5,
+      "Drivetrain": "RWD",
       "Drift": 4,
       "Handling": 675,
       "Class": "B",
@@ -4631,6 +4835,7 @@
       "Rear": "https://blogmedia.dealerfire.com/wp-content/uploads/sites/638/2017/11/2018-Kia-Stinger-GT2-AWD_o.jpg",
       "0-60": 5.9,
       "Drift": 1,
+      "Drivetrain": "RWD",
       "Handling": 475,
       "Class": "C",
       "Weight": 4023
@@ -4646,6 +4851,7 @@
       "Image": "https://i.ibb.co/MkgcBbN/ca0816-256815-1-2x.jpg",
       "0-60": 2.6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 875,
       "Class": "S",
       "Weight": 2900
@@ -4664,6 +4870,7 @@
       "Drift": 0,
       "Handling": 875,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 3100
     },
     "2021 mclaren 765lt": {
@@ -4679,6 +4886,7 @@
       "Drift": 0,
       "Handling": 885,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 3100,
       "Obtained": "Event"
     },
@@ -4694,6 +4902,7 @@
       "Image": "https://www.millermotorcars.com/imagetag/3463/main/l/New-2020-McLaren-570S-Coupe.jpg",
       "Rear": "https://www.paganiofgreenwich.com/imagetag/3463/6/l/New-2020-McLaren-570S-Coupe.jpg",
       "0-60": 2.5,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 650,
       "Class": "A",
@@ -4711,6 +4920,7 @@
       "Image": "https://i.gaw.to/vehicles/photos/08/27/082723_2017_mclaren_650S.jpg?1024x640",
       "0-60": 3.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 800,
       "Class": "A",
       "Weight": 3200,
@@ -4729,6 +4939,7 @@
       "0-60": 2.3,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3200,
       "Obtained": "Event"
@@ -4746,6 +4957,7 @@
       "0-60": 2.9,
       "Drift": 0,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3100
     },
@@ -4762,6 +4974,7 @@
       "Drift": 0,
       "Handling": 675,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 3100
     },
     "2013 mazda speed3": {
@@ -4776,6 +4989,7 @@
       "0-60": 6.5,
       "Drift": 3,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3281
     },
@@ -4792,6 +5006,7 @@
       "0-60": 5.3,
       "Drift": 4,
       "Handling": 625,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3395
     },
@@ -4807,6 +5022,7 @@
       "0-60": 6.7,
       "Drift": 0,
       "Handling": 575,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2965
     },
@@ -4822,6 +5038,7 @@
       "0-60": 5.3,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 2400
     },
@@ -4836,6 +5053,7 @@
       "Image": "https://i.ibb.co/8YdLVLb/p50.png",
       "0-60": 20,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 300,
       "Obtained": "Wheelspin",
       "Weight": 130
@@ -4851,6 +5069,7 @@
       "Image": "https://i.ibb.co/4ptDmkY/maxresdefault-62.jpg",
       "0-60": 4.6,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 435,
       "Class": "B",
       "Weight": 4365,
@@ -4867,6 +5086,7 @@
       "Image": "https://i.ibb.co/6yGSbTV/charger.png",
       "0-60": 7.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 325,
       "Class": "C",
       "Weight": 3727,
@@ -4884,6 +5104,7 @@
       "0-60": 3.6,
       "Drift": 0,
       "Handling": 450,
+      "Drivetrain": "RWD",
       "Obtained": "Wheelspin",
       "Class": "B",
       "Weight": 4586,
@@ -4903,6 +5124,7 @@
       "Handling": 400,
       "Obtained": "Season",
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 4400,
       "Muscle": true
     },
@@ -4917,6 +5139,7 @@
       "Image": "https://i.ytimg.com/vi/5_Y7Mo3EA2c/maxresdefault.jpg",
       "0-60": 3.5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 450,
       "Obtained": "Wheelspin",
       "Class": "B",
@@ -4934,6 +5157,7 @@
       "0-60": 9.2,
       "Drift": 0,
       "Handling": 300,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Obtained": "Wheelspin",
       "Weight": 4390
@@ -4949,6 +5173,7 @@
       "Image": "https://media.ed.edmunds-media.com/porsche/cayenne-coupe/2021/oem/2021_porsche_cayenne-coupe_4dr-suv_base_fq_oem_1_1600.jpg",
       "0-60": 7,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 800,
       "Class": "C",
       "Weight": 4600
@@ -4964,6 +5189,7 @@
       "Image": "https://i.insider.com/5f0df0143f73702ff36b1012?width=1200&format=jpeg",
       "0-60": 7.7,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 350,
       "Class": "C",
       "Weight": 4705
@@ -4979,6 +5205,7 @@
       "Image": "https://i.ibb.co/1nhx1wP/2007-25579-2009-corvette-zr11-1.jpg",
       "0-60": 3.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 300,
       "Class": "B",
       "Weight": 3324,
@@ -4995,6 +5222,7 @@
       "Image": "https://i.ibb.co/z8PLPns/2019-chevy-corvette-z06.jpg",
       "0-60": 2.95,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 450,
       "Trims": ["2019 chevy corvette c7 zr1"],
       "Class": "B",
@@ -5012,6 +5240,7 @@
       "Image": "https://i.ibb.co/hW2wMf3/zr1.png",
       "0-60": 2.9,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 470,
       "Class": "A",
       "Weight": 3560,
@@ -5029,6 +5258,7 @@
       "Image": "https://i.ibb.co/31jtmz9/seivni7nzbs51.jpg",
       "0-60": 4.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 500,
       "Police": 20,
       "Rank": "Chief",
@@ -5045,6 +5275,7 @@
       "Engine": "V10",
       "Image": "https://i.ibb.co/sHzDfgZ/2e1ui-KJa-My.png",
       "0-60": 4.3,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 500,
       "Police": 17,
@@ -5062,6 +5293,7 @@
       "Engine": "V10",
       "Image": "https://i.ibb.co/Jsg3z5Z/2006-Lamborghini-Gallardo.jpg",
       "0-60": 4,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 700,
       "Trims": ["2006 lamborghini gallardo spyder"],
@@ -5077,6 +5309,7 @@
       "Price": 195000,
       "sellprice": 0,
       "Engine": "V10",
+      "Drivetrain": "RWD",
       "Image": "https://bringatrailer.com/wp-content/uploads/2020/05/2006_lamborghini_gallardo_1590156717b75fe8d2B4737D0A-EDDE-4AC9-98BE-3D837ED96CB5.jpeg?fit=940%2C627",
       "0-60": 4,
       "Drift": 0,
@@ -5092,6 +5325,7 @@
       "kmh": 346,
       "Price": 0,
       "sellprice": 0,
+      "Drivetrain": "RWD",
       "Engine": "V8",
       "Image": "https://i.ibb.co/kgCmnJ6/ringolds-vitins-cop2.jpg",
       "0-60": 8.5,
@@ -5109,6 +5343,7 @@
       "kmh": 273,
       "Price": 87000,
       "sellprice": 0,
+      "Drivetrain": "RWD",
       "Engine": "I4",
       "Image": "https://i.ibb.co/g4dq2Nq/porsche-cayman-gt4-police-car.jpg",
       "0-60": 4.6,
@@ -5125,6 +5360,7 @@
       "Emote": "<:bmw:931011550054056007>",
       "Speed": 350,
       "kmh": 257,
+      "Drivetrain": "RWD",
       "Price": 85000,
       "sellprice": 0,
       "Engine": "V8",
@@ -5149,6 +5385,7 @@
       "0-60": 4.4,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Police": "3",
       "Rank": "Sergeant",
       "Weight": 3100,
@@ -5167,6 +5404,7 @@
       "Drift": 0,
       "Handling": 575,
       "Rank": "Sergeant",
+      "Drivetrain": "RWD",
       "Weight": 3705,
       "Muscle": true
     },
@@ -5184,6 +5422,7 @@
       "Handling": 500,
       "Police": "1",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Rank": "Cadet",
       "Weight": 3100,
       "Muscle": true
@@ -5203,6 +5442,7 @@
       "Police": 2,
       "Rank": "Cadet",
       "Class": "D",
+      "Drivetrain": "AWD",
       "Weight": 3100
     },
     "police 2012 mercedes c63": {
@@ -5218,6 +5458,7 @@
       "Drift": 0,
       "Handling": 650,
       "Police": 3,
+      "Drivetrain": "RWD",
       "Rank": "Cadet III",
       "Class": "C",
       "Weight": 3100
@@ -5235,6 +5476,7 @@
       "Drift": 0,
       "Handling": 750,
       "Police": 5,
+      "Drivetrain": "RWD",
       "Rank": "Sergeant",
       "Class": "B",
       "Weight": 3100,
@@ -5254,6 +5496,7 @@
       "Handling": 750,
       "Police": 5,
       "Rank": "Sergeant",
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 3100,
       "Muscle": true
@@ -5270,6 +5513,7 @@
       "0-60": 8.5,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Police": 5,
       "Rank": "Sergeant",
       "Class": "B",
@@ -5287,6 +5531,7 @@
       "0-60": 6,
       "Drift": 0,
       "Handling": 1500,
+      "Drivetrain": "AWD",
       "Police": 5,
       "Rank": "Lieutenant",
       "Class": "A",
@@ -5305,6 +5550,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Police": 5,
+      "Drivetrain": "RWD",
       "Rank": "Lieutenant",
       "Class": "A",
       "Weight": 3100
@@ -5322,6 +5568,7 @@
       "Drift": 0,
       "Handling": 850,
       "Police": 5,
+      "Drivetrain": "RWD",
       "Rank": "Lieutenant",
       "Class": "A",
       "Weight": 3100
@@ -5338,6 +5585,7 @@
       "0-60": 3.2,
       "Drift": 0,
       "Handling": 1000,
+      "Drivetrain": "RWD",
       "Police": 5,
       "Rank": "Captain",
       "Class": "S",
@@ -5355,6 +5603,7 @@
       "0-60": 3.6,
       "Drift": 0,
       "Handling": 950,
+      "Drivetrain": "RWD",
       "Police": 5,
       "Rank": "Captain",
       "Class": "S",
@@ -5373,6 +5622,7 @@
       "0-60": 2,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Weight": 3100
     },
     "colsons 2014 porsche 918 spyder": {
@@ -5390,6 +5640,7 @@
       "Handling": 650,
       "Class": "S",
       "Weight": 3700,
+      "Drivetrain": "RWD",
       "Squad": true
     },
     "destinys 2020 mclaren speedtail": {
@@ -5405,6 +5656,7 @@
       "0-60": 2.5,
       "Drift": 0,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3500,
       "Squad": true
@@ -5420,6 +5672,7 @@
       "Engine": "V8",
       "Image": "https://www.zero2turbo.com/wp-content/uploads/2019/07/blue-apollo-ie-hypercar-goodwood-1.jpg",
       "0-60": 2.2,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 800,
       "Class": "S",
@@ -5437,6 +5690,7 @@
       "Engine": "V8",
       "Image": "https://i.gaw.to/content/photos/48/00/480075-la-koenigsegg-jesko-a-4-millions-est-enfin-prete.jpg",
       "0-60": 2,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 900,
       "Class": "S",
@@ -5455,6 +5709,7 @@
       "Image": "https://hips.hearstapps.com/hmg-prod/images/porsche-carrera-gt-sideview-1641568594.jpeg",
       "0-60": 1.5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 1000,
       "Weight": 3000,
       "Squad": true
@@ -5467,6 +5722,7 @@
       "kmh": 273,
       "Price": 0,
       "sellprice": 0,
+      "Drivetrain": "RWD",
       "Engine": "I6",
       "Image": "https://www.autoguide.com/blog/wp-content/gallery/2021-porsche-911-targa-4-review-2020-12-23/2021-Porsche-911-Targa-4-Review-10.jpg",
       "0-60": 2,
@@ -5482,6 +5738,7 @@
       "kmh": 273,
       "Price": 0,
       "sellprice": 0,
+      "Drivetrain": "RWD",
       "Engine": "I6",
       "Image": "http://www.rhodo.citymax.com/i/non-rhodo/quarterad_1.jpg",
       "0-60": 2,
@@ -5503,6 +5760,7 @@
       "Obtained": "Exotic Imports",
       "Drift": 0,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3600
     },
@@ -5519,6 +5777,7 @@
       "0-60": 2.6,
       "Obtained": "Exotic Imports",
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 700,
       "Class": "A",
       "Weight": 3500
@@ -5534,6 +5793,7 @@
       "Image": "https://i.ibb.co/xGN4Bkv/2011-audi-rs5-photo-342111-s-original.jpg",
       "0-60": 5.4,
       "Drift": 1,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Class": "C",
       "Weight": 3800
@@ -5546,6 +5806,7 @@
       "Price": 0,
       "sellprice": 32625,
       "Engine": "V8",
+      "Drivetrain": "RWD",
       "Image": "https://i.ibb.co/QQrkrPy/maxresdefault-36.jpg",
       "0-60": 4.7,
       "Drift": 1,
@@ -5567,6 +5828,7 @@
       "0-60": 5.8,
       "Drift": 1,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 5000
     },
@@ -5582,6 +5844,7 @@
       "0-60": 3.9,
       "Drift": 1,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 4700,
       "Stock": 50
@@ -5597,6 +5860,7 @@
       "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/img-7295-10-1666813703.jpg",
       "0-60": 5.1,
       "Drift": 2,
+      "Drivetrain": "FWD",
       "Handling": 700,
       "Weight": 3188,
       "Stock": 100,
@@ -5613,6 +5877,7 @@
       "Image": "https://i.ibb.co/sm1rKtP/1990-mercedes-benz-190e-25-16-evolution-ii-1.jpg",
       "0-60": 6.9,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 600,
       "Weight": 3100,
       "Stock": 25,
@@ -5631,6 +5896,7 @@
       "Drift": 0,
       "Handling": 700,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 2700,
       "Stock": 10
     },
@@ -5648,6 +5914,7 @@
       "Handling": 700,
       "Class": "S",
       "Weight": 2700,
+      "Drivetrain": "RWD",
       "Stock": 10
     },
     "1995 mclaren f1": {
@@ -5662,6 +5929,7 @@
       "0-60": 2.8,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Weight": 2300
     },
@@ -5677,6 +5945,7 @@
       "Rear": "https://colinsclassicauto.com/wp-content/uploads/2018/06/Exterior-3.jpeg",
       "0-60": 8.2,
       "Drift": 1,
+      "Drivetrain": "RWD",
       "Handling": 400,
       "Class": "D",
       "Weight": 2400,
@@ -5694,6 +5963,7 @@
       "Rear": "https://www.cnet.com/a/img/dEZIfSsWIitkRvo5JtFmfoD8moE=/940x0/2020/05/11/8ba33e51-e71f-465c-88f4-cff678504df5/2021-toyota-supra-6.jpg",
       "0-60": 5.1,
       "Drift": 4,
+      "Drivetrain": "RWD",
       "Handling": 800,
       "Class": "B",
       "Weight": 3400
@@ -5711,6 +5981,7 @@
       "0-60": 8.5,
       "Drift": 4,
       "Handling": 475,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2403
     },
@@ -5728,6 +5999,7 @@
       "Handling": 440,
       "Class": "C",
       "Weight": 3200,
+      "Drivetrain": "RWD",
       "Muscle": true
     },
 
@@ -5743,6 +6015,7 @@
       "Rear": "https://s3.amazonaws.com/images.wheels.ca/wp-content/uploads/2019/04/1988-Porsche-959-Komfort_4.jpg",
       "0-60": 4,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 700,
       "Class": "B",
       "Weight": 3100,
@@ -5758,6 +6031,7 @@
       "Engine": "FLAT6",
       "Image": "https://cdn1.mecum.com/auctions/ca0815/ca0815-219979/images/ca0815-219979_2@2x.jpg?1439592391000",
       "0-60": 6,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 550,
       "Obtained": "Super Wheelspin",
@@ -5775,6 +6049,7 @@
       "Image": "https://i.ibb.co/Df7ddFc/lykan.png",
       "0-60": 3.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 600,
       "Obtained": "Super Wheelspin",
       "Class": "A",
@@ -5790,6 +6065,7 @@
       "Engine": "W16",
       "Image": "https://i.ibb.co/XxmMf7t/buggatiii.png",
       "0-60": 4,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 750,
       "Obtained": "Super Wheelspin",
@@ -5803,6 +6079,7 @@
       "Speed": 592,
       "Price": 75,
       "sellprice": 0,
+      "Drivetrain": "RWD",
       "Engine": "FLAT6",
       "Image": "https://cimg3.ibsrv.net/ibimg/hgm/1024x576-1/100/554/1997-porsche-911-gt1-evolution_100554475.jpg",
       "0-60": 4.5,
@@ -5818,6 +6095,7 @@
       "Emote": "<:jaguar:931011547826913330>",
       "Speed": 542,
       "Price": 0,
+      "Drivetrain": "RWD",
       "sellprice": 68062,
       "Engine": "V12",
       "Image": "https://cdn1.mecum.com/auctions/fl0121/fl0121-454645/images/1-1608325968034@2x.jpg?1609879705000",
@@ -5840,6 +6118,7 @@
       "Image": "https://i.ibb.co/ZKYjX6Y/2d0d7f34ff5d9e645527967558591fd3.jpg",
       "Rally": 1,
       "0-60": 8.9,
+      "Drivetrain": "FWD",
       "Drift": 0,
       "Handling": 550,
       "Class": "D",
@@ -5857,6 +6136,7 @@
       "Image": "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/pnr/2020/Scene-and-Passion/Christophorus-The-Drift-Dance/b-tanz-044.jpeg/jcr:content/b-tanz-044.jpeg",
       "Rally": 3,
       "0-60": 7,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 600,
       "Obtained": "Season",
@@ -5875,6 +6155,7 @@
       "Rear": "https://cdn.carbuzz.com/gallery-images/840x560/437000/800/437836.jpg",
       "Rally": 2,
       "0-60": 4.5,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 625,
       "Class": "C",
@@ -5892,6 +6173,7 @@
       "0-60": 4.3,
       "Drift": 0,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Class": "A",
       "Weight": 2700
@@ -5908,6 +6190,7 @@
       "0-60": 2.3,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Class": "S",
       "Weight": 2700
@@ -5925,6 +6208,7 @@
       "Drift": 0,
       "Handling": 750,
       "Obtained": "Season",
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3400
     },
@@ -5941,6 +6225,7 @@
       "Drift": 0,
       "Handling": 600,
       "Obtained": "Season",
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3000
     },
@@ -5957,6 +6242,7 @@
       "Drift": 0,
       "Handling": 600,
       "Obtained": "Exotic Imports",
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 2700
     },
@@ -5975,6 +6261,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Obtained": "Season",
+      "Drivetrain": "AWD",
       "Weight": 3300
     },
     "2015 mitsubishi lancer evolution we": {
@@ -5992,6 +6279,7 @@
       "Drift": 0,
       "Handling": 1200,
       "Obtained": "Season",
+      "Drivetrain": "RWD",
       "Weight": 3500
     },
     "2016 mercedes benz g63 we": {
@@ -6009,6 +6297,7 @@
       "Drift": 0,
       "Handling": 1300,
       "Obtained": "Season",
+      "Drivetrain": "RWD",
       "Weight": 4000
     },
 
@@ -6028,6 +6317,7 @@
       "Drift": 3,
       "Handling": 825,
       "Obtained": "Rare Imports",
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 2822
     },
@@ -6047,6 +6337,7 @@
       "Drift": 3,
       "Handling": 750,
       "Obtained": "Season",
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 2800
     },
@@ -6064,6 +6355,7 @@
       "Drift": 5,
       "Handling": 825,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3673
     },
 
@@ -6083,6 +6375,7 @@
       "Handling": 500,
       "Exhaust": "T3Exhaust",
       "Turbo": "Turbo",
+      "Drivetrain": "RWD",
       "Tires": "T3Tires",
       "Intake": "T2Intake",
       "Weight": 3400
@@ -6101,6 +6394,7 @@
       "0-60": 4.2,
       "Drift": 0,
       "Handling": 950,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 2000
     },
@@ -6115,6 +6409,7 @@
       "Image": "https://i.ibb.co/ncZsdwY/2015-koenigsegg-one1-first-drive-review-car-and-driver-photo-654233-s-original.jpg",
       "0-60": 3.9,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 900,
       "Class": "S",
       "Weight": 2500
@@ -6130,6 +6425,7 @@
       "Image": "https://www.supercars.net/blog/wp-content/uploads/2019/06/koenigsegg-jesko-in-lucerne.jpg",
       "Rear": "https://billionairetoys.com/wp-content/uploads/Koenigsegg-Jesko-original-Rear-profile-view-tailights-exhaust-fins.jpg",
       "0-60": 2.7,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 900,
       "Class": "S",
@@ -6147,6 +6443,7 @@
       "0-60": 2,
       "Drift": 0,
       "Handling": 1000,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 2000
     },
@@ -6162,6 +6459,7 @@
       "0-60": 2.5,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 2000
     },
@@ -6178,6 +6476,7 @@
       "0-60": 3.2,
       "Drift": 0,
       "Handling": 800,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 4000
     },
@@ -6192,6 +6491,7 @@
       "Image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/koenigsegg-regera-mmp-1-1591115837.jpg?crop=0.801xw:0.601xh;0.0929xw,0.200xh&resize=1200:*",
       "Rear": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/koenigsegg-regera-mmp-2-1591116009.jpg?crop=1.00xw:0.918xh;0,0.0816xh&resize=480:*",
       "0-60": 2.8,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 650,
       "Class": "S",
@@ -6210,6 +6510,7 @@
       "Drift": 0,
       "Handling": 440,
       "Obtained": "Season",
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 4200,
       "Muscle": true
@@ -6226,6 +6527,7 @@
       "0-60": 4,
       "Drift": 0,
       "Handling": 400,
+      "Drivetrain": "RWD",
       "Obtained": "Season",
       "Class": "A",
       "Weight": 4200,
@@ -6244,6 +6546,7 @@
       "Image": "https://i.ibb.co/TgrtqcS/maxresdefault-6.jpg",
       "0-60": 5.7,
       "Drift": 1,
+      "Drivetrain": "RWD",
       "Handling": 525,
       "Class": "D",
       "Weight": 3512
@@ -6262,6 +6565,7 @@
       "0-60": 4.8,
       "Drift": 1,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 4024
     },
@@ -6278,6 +6582,7 @@
       "Rear": "https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/Hyundai-Tiburon-2005.jpg",
       "0-60": 7.3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 325,
       "Starter": true,
       "Class": "D",
@@ -6295,6 +6600,7 @@
       "0-60": 2.4,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3700
     },
@@ -6311,6 +6617,7 @@
       "0-60": 5.2,
       "Drift": 6,
       "Handling": 625,
+      "Drivetrain": "RWD",
       "Obtained": "Rare Imports",
       "Class": "B",
       "Weight": 3516
@@ -6325,6 +6632,7 @@
       "Engine": "I4",
       "Image": "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1562227927/autoexpress/0/18/honda-civic-ek9-54e0cfb452d5d.jpg",
       "0-60": 6.7,
+      "Drivetrain": "FWD",
       "Drift": 2,
       "Handling": 550,
       "Obtained": "Common Imports",
@@ -6340,6 +6648,7 @@
       "Engine": "I6",
       "Image": "https://cdn.dealeraccelerate.com/international/1/740/33777/1920x1440/2002-nissan-silvia",
       "0-60": 5.4,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 600,
       "Obtained": "Rare Imports",
@@ -6358,6 +6667,7 @@
       "0-60": 4.4,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 4700
@@ -6375,6 +6685,7 @@
       "0-60": 8.2,
       "Drift": 0,
       "Handling": 500,
+      "Drivetrain": "RWD",
       "Obtained": "Common Imports",
       "Class": "D",
       "Weight": 2700
@@ -6391,6 +6702,7 @@
       "0-60": 5.5,
       "Drift": 0,
       "Handling": 525,
+      "Drivetrain": "RWD",
       "Obtained": "Common Imports",
       "Class": "D",
       "Weight": 3400
@@ -6408,6 +6720,7 @@
       "Drift": 0,
       "Handling": 525,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 2800,
       "Obtained": "Event"
     },
@@ -6423,6 +6736,7 @@
       "0-60": 4.9,
       "Drift": 0,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2800,
       "Obtained": "Common Imports"
@@ -6438,6 +6752,7 @@
       "Image": "https://i.gaw.to/content/photos/37/69/376984_2019_Porsche_911.jpg",
       "0-60": 3.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Obtained": "Rare Imports",
       "Class": "B",
@@ -6456,6 +6771,7 @@
       "Drift": 0,
       "Electric": true,
       "Range": "3",
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Class": "A",
       "Weight": 4500
@@ -6473,6 +6789,7 @@
       "Drift": 0,
       "Electric": true,
       "Range": "2",
+      "Drivetrain": "RWD",
       "Handling": 600,
       "Class": "B",
       "Weight": 4500
@@ -6488,6 +6805,7 @@
       "Image": "https://www.motortrend.com/uploads/sites/5/2021/08/Rimac-Nevera-4.jpg",
       "0-60": 2.8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Electric": true,
       "Range": "7",
       "Handling": 750,
@@ -6508,6 +6826,7 @@
       "Electric": true,
       "Range": "4",
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 4500
     },
@@ -6525,6 +6844,7 @@
       "Electric": true,
       "Range": "1",
       "Handling": 355,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 4920,
       "Muscle": true
@@ -6544,6 +6864,7 @@
       "Range": "8",
       "Handling": 500,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 3000
     },
     "2021 tesla model s plaid": {
@@ -6560,6 +6881,7 @@
       "Electric": true,
       "Range": "5",
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 4500
     },
@@ -6576,6 +6898,7 @@
       "Drift": 0,
       "Electric": true,
       "Range": "5",
+      "Drivetrain": "AWD",
       "Handling": 800,
       "Class": "S",
       "Weight": 4500
@@ -6595,6 +6918,7 @@
       "Range": "5",
       "Handling": 700,
       "Class": "A",
+      "Drivetrain": "AWD",
       "Weight": 5200,
       "Obtained": "Exotic Imports"
     },
@@ -6610,6 +6934,7 @@
       "0-60": 5.6,
       "Drift": 0,
       "Handling": 450,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 4100
     },
@@ -6624,6 +6949,7 @@
       "Image": "https://di-uploads-pod23.dealerinspire.com/maseratisantamonica/uploads/2021/08/Maserati-MC20-1.jpg",
       "0-60": 3.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 600,
       "Class": "A",
       "Weight": 3300
@@ -6639,6 +6965,7 @@
       "Image": "https://i.ibb.co/80rwRxD/mc12.png",
       "0-60": 4.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Obtained": "Super Wheelspin",
       "Class": "A",
@@ -6671,6 +6998,7 @@
       "0-60": 4.5,
       "Drift": 0,
       "Handling": 670,
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Class": "B",
       "Weight": 3900
@@ -6687,6 +7015,7 @@
       "0-60": 2.8,
       "Drift": 0,
       "Handling": 700,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3500
     },
@@ -6704,6 +7033,7 @@
       "Handling": 575,
       "Obtained": "Common Imports",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3086
     },
     "1989 toyota celica": {
@@ -6720,6 +7050,7 @@
       "Handling": 575,
       "Obtained": "Common Imports",
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 3109
     },
     "2021 nissan gtr nismo": {
@@ -6736,6 +7067,7 @@
       "Handling": 1500,
       "Class": "A",
       "Weight": 4000,
+      "Drivetrain": "AWD",
       "Obtained": "Track Legends"
     },
     "2023 porsche 911 gt3 rs": {
@@ -6751,6 +7083,7 @@
       "0-60": 5,
       "Drift": 0,
       "Handling": 1800,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 4000,
       "Obtained": "Track Legends",
@@ -6770,6 +7103,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 3500,
       "Obtained": "Track Legends",
       "Track": true
@@ -6789,6 +7123,7 @@
       "Handling": 1200,
       "Class": "B",
       "Weight": 3500,
+      "Drivetrain": "RWD",
       "Obtained": "Track Legends",
       "Track": true
     },
@@ -6807,6 +7142,7 @@
       "Handling": 1100,
       "Class": "B",
       "Weight": 3300,
+      "Drivetrain": "RWD",
       "Obtained": "Track Legends",
       "Track": true
     },
@@ -6824,6 +7160,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 3200,
       "Obtained": "Event"
     },
@@ -6842,6 +7179,7 @@
       "Handling": 1200,
       "Class": "B",
       "Weight": 3500,
+      "Drivetrain": "RWD",
       "Obtained": "Track Legends",
       "Track": true
     },
@@ -6860,6 +7198,7 @@
       "Handling": 1500,
       "Class": "B",
       "Weight": 3500,
+      "Drivetrain": "FWD",
       "Obtained": "Track Legends",
       "Track": true
     },
@@ -6876,6 +7215,7 @@
       "0-60": 5,
       "Drift": 0,
       "Handling": 1250,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3400,
       "Obtained": "Track Legends",
@@ -6895,6 +7235,7 @@
       "Drift": 0,
       "Handling": 1250,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3300,
       "Obtained": "Track Legends",
       "Track": true
@@ -6914,6 +7255,7 @@
       "Handling": 2200,
       "Class": "S",
       "Weight": 4300,
+      "Drivetrain": "RWD",
       "Obtained": "Track Legends",
       "Track": true
     },
@@ -6932,6 +7274,7 @@
       "Handling": 1800,
       "Class": "S",
       "Weight": 4100,
+      "Drivetrain": "RWD",
       "Obtained": "Track Legends",
       "Track": true
     },
@@ -6950,6 +7293,7 @@
       "Handling": 1500,
       "Class": "S",
       "Weight": 2500,
+      "Drivetrain": "RWD",
       "Obtained": "Event"
     },
     "2021 pagani huayra r": {
@@ -6967,6 +7311,7 @@
       "Handling": 1500,
       "Class": "S",
       "Weight": 2500,
+      "Drivetrain": "RWD",
       "Obtained": "Blueprints"
     },
     "2006 saleen s7": {
@@ -6984,6 +7329,7 @@
       "Handling": 675,
       "Class": "S",
       "Weight": 2900,
+      "Drivetrain": "RWD",
       "Obtained": "Blueprints"
     },
     "2020 audi rs q3": {
@@ -7000,6 +7346,7 @@
       "Drift": 0,
       "Handling": 1500,
       "Class": "B",
+      "Drivetrain": "AWD",
       "Weight": 3900,
       "Obtained": "Blueprints"
     },
@@ -7017,6 +7364,7 @@
       "Drift": 0,
       "Handling": 650,
       "Class": "B",
+      "Drivetrain": "FWD",
       "Weight": 3203,
       "Obtained": "Blueprints"
     },
@@ -7034,6 +7382,7 @@
       "Drift": 0,
       "Handling": 1300,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2700,
       "Obtained": "Blueprints"
     },
@@ -7052,6 +7401,7 @@
       "Handling": 1300,
       "Class": "S",
       "Weight": 2900,
+      "Drivetrain": "RWD",
       "Obtained": "Blueprints"
     },
     "1984 renault 5 turbo 2": {
@@ -7069,6 +7419,7 @@
       "Handling": 1000,
       "Class": "C",
       "Weight": 2300,
+      "Drivetrain": "RWD",
       "Obtained": "Blueprints"
     },
     "1989 toyota mr2": {
@@ -7085,6 +7436,7 @@
       "Drift": 0,
       "Handling": 525,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 2425,
       "Obtained": "Blueprints"
     },
@@ -7102,6 +7454,7 @@
       "Drift": 0,
       "Handling": 2550,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 1830,
       "Obtained": "Blueprints"
     },
@@ -7120,6 +7473,7 @@
       "Handling": 1000,
       "Class": "S",
       "Weight": 1800,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7137,6 +7491,7 @@
       "Drift": 0,
       "Handling": 950,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 1800,
       "Obtained": "Event",
       "F1": true
@@ -7156,6 +7511,7 @@
       "Handling": 950,
       "Class": "S",
       "Weight": 1800,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7174,6 +7530,7 @@
       "Handling": 1000,
       "Class": "S",
       "Weight": 1800,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7192,6 +7549,7 @@
       "Handling": 1100,
       "Class": "S",
       "Weight": 1900,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7209,6 +7567,7 @@
       "Drift": 0,
       "Handling": 1100,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 1900,
       "Obtained": "Event",
       "F1": true
@@ -7228,6 +7587,7 @@
       "Handling": 1200,
       "Class": "S",
       "Weight": 1700,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7246,6 +7606,7 @@
       "Handling": 1200,
       "Class": "S",
       "Weight": 1900,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7264,6 +7625,7 @@
       "Handling": 1200,
       "Class": "S",
       "Weight": 1900,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "F1": true
     },
@@ -7282,6 +7644,7 @@
       "Drift": 0,
       "Handling": 600,
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 2500,
       "Obtained": "Event"
     },
@@ -7301,6 +7664,7 @@
       "Obtained": "Event",
       "Class": "B",
       "Weight": 4500,
+      "Drivetrain": "AWD",
       "HighPrice": 100000,
       "LowPrice": 50000
     },
@@ -7317,6 +7681,7 @@
       "Drift": 0,
       "Handling": 525,
       "Obtained": "Event",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 3500
     },
@@ -7336,6 +7701,7 @@
       "Class": "D",
       "Weight": 2987,
       "HighPrice": 60000,
+      "Drivetrain": "RWD",
       "LowPrice": 30000
     },
     "2008 porsche 911 gt2": {
@@ -7352,6 +7718,7 @@
       "Handling": 750,
       "Obtained": "Rare Garage",
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 2800
     },
     "2013 porsche 911 turbo": {
@@ -7368,6 +7735,7 @@
       "Handling": 750,
       "Obtained": "Blueprints",
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 2800
     },
     "2015 mercedes c class": {
@@ -7384,6 +7752,7 @@
       "Handling": 550,
       "Obtained": "Blueprints",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 2800
     },
     "1969 toyota corolla": {
@@ -7399,6 +7768,7 @@
       "Drift": 0,
       "Handling": 275,
       "Obtained": "Blueprints",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 1640
     },
@@ -7417,6 +7787,7 @@
       "Handling": 650,
       "Class": "A",
       "Weight": 3800,
+      "Drivetrain": "RWD",
       "Obtained": "Blueprints"
     },
     "2023 acura integra": {
@@ -7433,6 +7804,7 @@
       "Handling": 525,
       "Obtained": "Rare Garage",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3109
     },
     "1987 toyota corolla": {
@@ -7448,6 +7820,7 @@
       "Drift": 0,
       "Handling": 450,
       "Obtained": "Blueprints",
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2105
     },
@@ -7466,6 +7839,7 @@
       "Handling": 700,
       "Obtained": "Legendary Garage",
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 3200
     },
     "2010 ferrari 599xx": {
@@ -7482,6 +7856,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 3200,
       "Stock": 10
     },
@@ -7499,6 +7874,7 @@
       "Drift": 0,
       "Handling": 1200,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 3200,
       "Stock": 15
     },
@@ -7513,6 +7889,7 @@
       "Engine": "V8",
       "Image": "https://i.ibb.co/RDVqVNH/maxresdefault-84.jpg",
       "0-60": 3.6,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 800,
       "Class": "S",
@@ -7534,6 +7911,7 @@
       "Handling": 475,
       "Class": "C",
       "Weight": 3400,
+      "Drivetrain": "RWD",
       "Stock": 50
     },
     "mars rover": {
@@ -7548,6 +7926,7 @@
       "Image": "https://i.ibb.co/TKctKbM/220117145008-03-curiosity-rover-mars-carbon.jpg",
       "0-60": 7,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 500,
       "Class": "C",
       "Weight": 2600,
@@ -7566,6 +7945,7 @@
       "0-60": 3,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 3200,
       "Obtained": "Super Wheelspin"
@@ -7583,6 +7963,7 @@
       "0-60": 3.5,
       "Drift": 0,
       "Handling": 600,
+      "Drivetrain": "RWD",
       "Class": "A",
       "Weight": 3400
     },
@@ -7599,6 +7980,7 @@
       "0-60": 2.5,
       "Drift": 0,
       "Handling": 575,
+      "Drivetrain": "RWD",
       "Class": "S",
       "Obtained": "Exotic Imports",
       "Weight": 3600
@@ -7617,6 +7999,7 @@
       "Drift": 0,
       "Handling": 750,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Obtained": "Exotic Imports",
       "Weight": 3600
     },
@@ -7634,6 +8017,7 @@
       "Drift": 0,
       "Handling": 325,
       "Class": "D",
+      "Drivetrain": "AWD",
       "Obtained": "Wheelspin",
       "Weight": 3291
     },
@@ -7650,6 +8034,7 @@
       "0-60": 7.5,
       "Drift": 0,
       "Class": "B",
+      "Drivetrain": "AWD",
       "Handling": 850,
       "Obtained": "Car Pack",
       "Weight": 5000
@@ -7666,6 +8051,7 @@
       "Image": "https://i.ibb.co/ZS2Xxf4/maxresdefault-86.jpg",
       "0-60": 7.3,
       "Drift": 0,
+      "Drivetrain": "AWD",
       "Handling": 800,
       "Class": "B",
       "Obtained": "Car Pack",
@@ -7684,6 +8070,7 @@
       "0-60": 9,
       "Drift": 0,
       "Handling": 900,
+      "Drivetrain": "AWD",
       "Class": "B",
       "Obtained": "Car Pack",
       "Weight": 3200
@@ -7698,6 +8085,7 @@
       "sellprice": 1000,
       "LowPrice": 100000,
       "HighPrice": 200000,
+      "Drivetrain": "RWD",
       "Engine": "FLAT6",
       "Image": "https://i.ibb.co/N2Hxc2H/2021-porsche-911-turbo-s-coupe-first-drive.jpg",
       "0-60": 5,
@@ -7730,6 +8118,7 @@
       "LowPrice": 200000,
       "HighPrice": 500000,
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 3879,
       "Muscle": true,
       "Obtained": "Used Cars"
@@ -7748,6 +8137,7 @@
       "Drift": 0,
       "LowPrice": 1000000,
       "HighPrice": 850000,
+      "Drivetrain": "RWD",
       "Handling": 650,
       "Class": "S",
       "Weight": 3100,
@@ -7767,6 +8157,7 @@
       "Drift": 0,
       "LowPrice": 2000000,
       "HighPrice": 100000,
+      "Drivetrain": "RWD",
       "Handling": 800,
       "Class": "S",
       "Weight": 3300,
@@ -7788,6 +8179,7 @@
       "Weight": 5300,
       "LowPrice": 800000,
       "HighPrice": 500000,
+      "Drivetrain": "RWD",
       "Obtained": "Used Cars"
     },
     "2020 land rover range rover": {
@@ -7804,6 +8196,7 @@
       "Handling": 950,
       "Class": "B",
       "Weight": 4900,
+      "Drivetrain": "AWD",
       "Obtained": "Super Wheelspin"
     },
     "1959 cadillac series 62": {
@@ -7820,6 +8213,7 @@
       "Handling": 450,
       "LowPrice": 30000,
       "HighPrice": 500000,
+      "Drivetrain": "RWD",
       "Class": "D",
       "Weight": 2900,
       "Obtained": "Used Cars"
@@ -7838,6 +8232,7 @@
       "Handling": 750,
       "Class": "A",
       "Weight": 3500,
+      "Drivetrain": "RWD",
       "Obtained": "Blueprints"
     },
     "2021 audi r8 lms gt3": {
@@ -7853,6 +8248,7 @@
       "Drift": 1,
       "Handling": 1350,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 3500,
       "Obtained": "Blueprints",
       "Team": "Audi"
@@ -7871,6 +8267,7 @@
       "Drift": 0,
       "Handling": 555,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 3000,
       "Obtained": "Legendary Garage"
     },
@@ -7889,6 +8286,7 @@
       "Handling": 400,
       "Class": "D",
       "Weight": 3623,
+      "Drivetrain": "RWD",
       "Obtained": "Used Cars",
       "LowPrice": 15000,
       "HighPrice": 25000
@@ -7907,6 +8305,7 @@
       "Drift": 0,
       "Handling": 550,
       "Class": "B",
+      "Drivetrain": "RWD",
       "Weight": 2000,
       "Obtained": "Used Cars",
       "LowPrice": 750000,
@@ -7929,6 +8328,7 @@
       "Class": "D",
       "Weight": 3254,
       "Obtained": "Used Cars",
+      "Drivetrain": "RWD",
       "LowPrice": 15000,
       "HighPrice": 25000
     },
@@ -7948,6 +8348,7 @@
       "Starter": true,
       "Class": "D",
       "Weight": 2522,
+      "Drivetrain": "RWD",
       "Obtained": "Used Cars",
       "LowPrice": 10000,
       "HighPrice": 15000
@@ -7968,6 +8369,7 @@
       "Starter": true,
       "Class": "A",
       "Weight": 2100,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Team": "Porsche"
     },
@@ -7987,6 +8389,7 @@
       "Starter": true,
       "Class": "B",
       "Weight": 2100,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Team": "Audi"
     },
@@ -8005,6 +8408,7 @@
       "Handling": 1400,
       "Starter": true,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2100,
       "Obtained": "Event",
       "Team": "Audi"
@@ -8024,6 +8428,7 @@
       "Handling": 1050,
       "Starter": true,
       "Class": "A",
+      "Drivetrain": "RWD",
       "Weight": 2100,
       "Obtained": "Event",
       "Team": "Peugeot"
@@ -8044,6 +8449,7 @@
       "Class": "D",
       "Weight": 2100,
       "Obtained": "Event",
+      "Drivetrain": "RWD",
       "Team": "Chevrolet",
       "Muscle": true
     },
@@ -8063,6 +8469,7 @@
       "Starter": true,
       "Class": "S",
       "Weight": 2100,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Team": "Ferrari"
     },
@@ -8081,6 +8488,7 @@
       "Handling": 1150,
       "Starter": true,
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 2700,
       "Obtained": "Event",
       "Team": "Porsche"
@@ -8100,6 +8508,7 @@
       "Handling": 1500,
       "Starter": true,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2200,
       "Obtained": "Event",
       "Team": "Toyota"
@@ -8119,6 +8528,7 @@
       "Handling": 1300,
       "Starter": true,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2270,
       "Obtained": "Event",
       "Team": "Peugeot"
@@ -8137,6 +8547,7 @@
       "Drift": 0,
       "Handling": 750,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Obtained": "Crew Season",
       "Weight": 2668
     },
@@ -8154,6 +8565,7 @@
       "Drift": 0,
       "Handling": 400,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Obtained": "Season",
       "Weight": 2668,
       "Muscle": true
@@ -8172,6 +8584,7 @@
       "Drift": 0,
       "Handling": 750,
       "Obtained": "Car Series",
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3900,
       "Series": true
@@ -8192,6 +8605,7 @@
       "Handling": 600,
       "Obtained": "Car Series",
       "Class": "C",
+      "Drivetrain": "RWD",
       "Weight": 3900,
       "Series": true
     },
@@ -8209,6 +8623,7 @@
       "Drift": 0,
       "Handling": 1800,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 4100,
       "Obtained": "Event",
       "Track": true
@@ -8227,6 +8642,7 @@
       "Drift": 0,
       "Handling": 3500,
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2600,
       "Obtained": "Event",
       "Track": true
@@ -8243,6 +8659,7 @@
       "Image": "https://i.ibb.co/yXQymGr/rm-zondar-033.jpg",
       "0-60": 3,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 1500,
       "Class": "S",
       "Obtained": "Event",
@@ -8261,6 +8678,7 @@
       "Image": "https://i.ibb.co/Y3dfhYW/1280px-AF-Corse-Ferrari-488-GTE-Calado-Silverstone-2018.jpg",
       "0-60": 3.2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 1000,
       "Class": "A",
       "Weight": 2700,
@@ -8279,6 +8697,7 @@
       "Image": "https://i.ibb.co/0QLDw4S/090-alpine-a110-r-alonso-front.jpg",
       "0-60": 7,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 850,
       "Class": "C",
       "Obtained": "Event",
@@ -8296,6 +8715,7 @@
       "Engine": "V8",
       "Image": "https://i.ibb.co/sK6wF0s/slamg.png",
       "0-60": 4,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 750,
       "Class": "A",
@@ -8317,6 +8737,7 @@
       "Handling": 500,
       "Class": "D",
       "Weight": 4500,
+      "Drivetrain": "RWD",
       "Obtained": "Common Imports"
     },
     "2024 porsche mission x": {
@@ -8326,10 +8747,11 @@
       "Speed": 1500,
       "Price": 1000000000,
       "sellprice": 0,
-      "Engine": "V12",
+      "Engine": "EV",
       "Image": "https://i.ibb.co/NpZWZ19/DSF4710-ret-lores.jpg",
       "0-60": 2,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 1000,
       "Class": "X",
       "Weight": 3300
@@ -8345,6 +8767,7 @@
       "Image": "https://i.ibb.co/w6FX518/porsche-panamera-turbo-s-2021-klassische-dreiviertelansicht-von-schrag-vorne.jpg",
       "0-60": 8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 675,
       "Class": "B",
       "Obtained": "Rare Imports",
@@ -8360,6 +8783,7 @@
       "Engine": "V12",
       "Image": "https://i.ibb.co/TY112vr/DSF4308-ret-lores.jpg",
       "0-60": 2,
+      "Drivetrain": "RWD",
       "Drift": 0,
       "Handling": 1500,
       "Class": "X",
@@ -8378,6 +8802,7 @@
       "Image": "https://i.ibb.co/d53FBHf/911.png",
       "0-60": 9,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Obtained": "Event",
       "Class": "B",
@@ -8394,6 +8819,7 @@
       "Image": "https://i.ibb.co/YXnk2Z1/lm002.jpg",
       "0-60": 3.5,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Obtained": "Event",
       "Class": "C",
@@ -8411,6 +8837,7 @@
       "0-60": 11,
       "Drift": 0,
       "Handling": 900,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Class": "D",
       "Weight": 2100
@@ -8428,6 +8855,7 @@
       "0-60": 2.3,
       "Drift": 0,
       "Handling": 1000,
+      "Drivetrain": "RWD",
       "Obtained": "Event",
       "Class": "S",
       "Weight": 3000
@@ -8446,6 +8874,7 @@
       "Drift": 0,
       "Handling": 1200,
       "Obtained": "Event",
+      "Drivetrain": "RWD",
       "Class": "S",
       "Weight": 2200
     },
@@ -8463,6 +8892,7 @@
       "Drift": 0,
       "Handling": 650,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Weight": 2200
     },
     "2022 genisis g70": {
@@ -8478,6 +8908,7 @@
       "0-60": 4.7,
       "Drift": 0,
       "Handling": 550,
+      "Drivetrain": "RWD",
       "Class": "C",
       "Weight": 3500
     },
@@ -8493,6 +8924,7 @@
       "Image": "https://i.ibb.co/HG6Tj44/2016-dodge-dart-review-car-and-driver-photo-669246-s-original.jpg",
       "0-60": 8,
       "Drift": 0,
+      "Drivetrain": "RWD",
       "Handling": 550,
       "Class": "D",
       "Weight": 3000
@@ -8510,6 +8942,7 @@
       "0-60": 4.5,
       "Drift": 0,
       "Handling": 750,
+      "Drivetrain": "RWD",
       "Obtained": "Track Legends",
       "Class": "B",
       "Muscle": true,
@@ -8525,6 +8958,7 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "V12",
+      "Drivetrain": "RWD",
       "Image": "https://i.ibb.co/Lr1Mhph/solus.png",
       "0-60": 2,
       "Drift": 0,
@@ -8549,18 +8983,20 @@
       "Handling": 1550,
       "Obtained": "Track Legends",
       "Class": "S",
+      "Drivetrain": "RWD",
       "Weight": 2900,
       "Track": true
     },
     "1997 tvr cerbera speed 12": {
       "alias": "1997 speed 12",
       "Name": "1997 TVR Cerbera Speed 12",
-      "Emote": "<:apollo:1066081882896351332>",
+      "Emote": "<:tvr:1143411888399589457>",
       "Speed": 800,
       "kmh": 233,
       "Price": 0,
       "sellprice": 0,
       "Engine": "V12",
+      "Drivetrain": "RWD",
       "Image": "https://i.ibb.co/1T0vKwG/1997-TVR-Cerbera-Speed-12-14365252789.jpg",
       "0-60": 3.7,
       "Drift": 0,
@@ -8583,6 +9019,7 @@
       "0-60": 2.8,
       "Drift": 0,
       "Handling": 1000,
+      "Drivetrain": "RWD",
       "Class": "B",
       "Weight": 400,
       "Motorcycle": true
@@ -8599,6 +9036,7 @@
       "0-60": 3.5,
       "Drift": 0,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Handling": 1000,
       "Motorcycle": true,
       "Weight": 467
@@ -8615,6 +9053,7 @@
       "0-60": 4.2,
       "Drift": 0,
       "Class": "D",
+      "Drivetrain": "RWD",
       "Handling": 750,
       "Motorcycle": true,
       "Weight": 423
@@ -8633,6 +9072,7 @@
       "Class": "D",
       "Handling": 700,
       "Motorcycle": true,
+      "Drivetrain": "RWD",
       "Weight": 408
     },
     "2016 jaguar f type project 7": {
@@ -8705,7 +9145,9 @@
       "Drift": 0,
       "Handling": 750,
       "Class": "A",
-      "Weight": 3600
+      "Drivetrain": "AWD",
+      "Weight": 3600,
+      "Obtained": "Event"
     },
     "2016 mercedes a45": {
       "alias": "2016 a45",
@@ -8723,7 +9165,8 @@
       "Handling": 750,
       "Class": "A",
       "Weight": 3306,
-      "Drivetrain": "AWD"
+      "Drivetrain": "AWD",
+      "Obtained": "Event"
     },
     "2010 subaru wrx sti": {
       "alias": "2010 wrx sti",
@@ -8741,7 +9184,172 @@
       "Rally": 1,
       "Handling": 650,
       "Class": "C",
-      "Weight": 3395
+      "Weight": 3395,
+      "Drivetrain": "AWD"
+    },
+    "2014 hennessey venom gt": {
+      "alias": "2014 venom gt",
+      "Name": "2014 Hennessey Venom GT",
+      "Emote": "<:hennessey:933637608549023765>",
+      "Speed": 1244,
+      "kmh": 257,
+      "Price": 0,
+      "sellprice": 712500,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/q9kR8XV/gt.png",
+      "0-60": 2.4,
+      "Drift": 0,
+      "Handling": 400,
+      "Class": "S",
+      "Weight": 2700,
+      "Obtained": "Crew Season",
+      "Drivetrain": "RWD"
+    },
+    "2019 brabham bt62": {
+      "alias": "2019 bt62",
+      "Name": "2019 Brabham BT62",
+      "Emote": "<:brabham:1141648434185650246>",
+      "Speed": 691,
+      "kmh": 257,
+      "Price": 0,
+      "sellprice": 712500,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/jVp6G6b/brabham-bt62-competition.jpg",
+      "0-60": 2.8,
+      "Drift": 0,
+      "Handling": 650,
+      "Class": "S",
+      "Weight": 2100,
+      "Obtained": "Season",
+      "Drivetrain": "RWD"
+    },
+    "2023 cadillac ct5": {
+      "alias": "2023 ct5",
+      "Name": "2023 Cadillac ct5",
+      "Emote": "<:logo_cadillac:1094883208170049646>",
+      "Speed": 335,
+      "kmh": 321,
+      "Price": 0,
+      "sellprice": 150000,
+      "Engine": "I4",
+      "Image": "https://i.ibb.co/JBjcYCg/maxresdefault-2023-08-19-T232515-827.jpg",
+      "0-60": 4.6,
+      "Drift": 0,
+      "Handling": 550,
+      "Class": "C",
+      "Obtained": "Season",
+      "Weight": 3400,
+      "Drivetrain": "RWD"
+    
+    },
+    "2023 bmw m2 g87": {
+      "alias": "2023 m2 g87",
+      "Name": "2023 BMW M2 G87",
+      "Emote": "<:bmw:931011550054056007>",
+      "Speed": 453,
+      "kmh": 321,
+      "Price": 0,
+      "sellprice": 150000,
+      "Engine": "I6",
+      "Image": "https://i.ibb.co/JCH6nGL/2023-bmw-m2.jpg",
+      "0-60": 3.6,
+      "Drift": 0,
+      "Handling": 450,
+      "Class": "C",
+      "Obtained": "Season",
+      "Weight": 3700,
+      "Drivetrain": "RWD"
+    
+    },
+    "2019 subaru brz rocket bunny": {
+      "alias": "2019 brz rb",
+      "Name": "2019 Subaru BRZ Rocket Bunny",
+      "Emote": "<:subaru:931011550418976808>",
+      "Speed": 205,
+      "kmh": 216,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "I4",
+      "Image": "https://i.ibb.co/Cn5qbJX/10034277536-1454f4e382-b.jpg",
+      "0-60": 6.5,
+      "Drift": 4,
+      "Obtained": "Season",
+      "Handling": 750,
+      "Class": "D",
+      "Weight": 3000
+    },
+    "2022 porsche 911 gt3 touring": {
+      "alias": "2022 911 gt3 t",
+      "Name": "2022 Porsche 911 GT3 Touring",
+      "Emote": "<:porsche:931011550880338011>",
+      "Speed": 504,
+      "kmh": 315,
+      "Price": 0,
+      "sellprice": 69750,
+      "Engine": "FLAT6",
+      "Image": "https://i.ibb.co/jkFPGjz/2022-porsche-911-gt3-touring-exterior.jpg",
+      "0-60": 2.9,
+      "Drift": 0,
+      "Handling": 950,
+      "Class": "A",
+      "Obtained": "Season",
+      "Drivetrain": "RWD",
+      "Weight": 3164
+    },
+    "2023 chevy corvette c8 z06": {
+      "alias": "2023 c8 z06",
+      "Name": "2023 Chevy Corvette C8 Z06",
+      "Emote": "<:chevy:931012624039182406>",
+      "Speed": 670,
+      "kmh": 313,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "V8",
+      "Image": "https://i.ibb.co/Jvp3gYG/2023-chevrolet-corvette-z06.jpg",
+      "0-60": 2.8,
+      "Drift": 0,
+      "Handling": 850,
+      "Drivetrain": "RWD",
+      "Class": "A",
+      "Obtained": "Season",
+      "Weight": 3700,
+      "Muscle": true
+    },
+    "2017 lamborghini centenario": {
+      "alias": "2017 centenario",
+      "Name": "2017 Lamborghini Centenario",
+      "Emote": "<:lamborghini:931011549655617566>",
+      "Speed": 770,
+      "kmh": 346,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "V10",
+      "Image": "https://i.ibb.co/rxSz7Jx/lamborghini-centenario-main.jpg",
+      "0-60": 2.9,
+      "Drift": 0,
+      "Handling": 850,
+      "Class": "A",
+      "Obtained": "Season",
+      "Drivetrain": "AWD",
+      "Weight": 3400
+    },
+    "2021 aston martin dbs superleggera": {
+      "alias": "2021 dbs s",
+      "Name": "2021 Aston Martin DBS Superleggera",
+      "Emote": "<:aston:931011548682534962>",
+      "Speed": 715,
+      "Price": 0,
+      "sellprice": 0,
+      "Engine": "V12",
+      "Image": "https://i.ibb.co/cYqF3rn/dbs.png",
+      "0-60": 3.8,
+      "Drift": 0,
+      "Handling": 560,
+      "Obtained": "Exotic Imports",
+      "Class": "S",
+      "Drivetrain":"RWD",
+      "Weight": 4068
     }
+    
   }
 }

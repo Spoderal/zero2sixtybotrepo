@@ -21,25 +21,35 @@ const ms = require("ms");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("season")
-    .setDescription("Check the summer season rewards page"),
+    .setDescription("Check the season 2 rewards page"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata = await Cooldown.findOne({ id: interaction.user.id });
-    let seasonRewards = seasons.Seasons.Summer.Rewards;
+    let seasonRewards = seasons.Seasons.Fall.Rewards;
     let notoriety = userdata.notoriety;
 
     let rewards = [];
 
     for (let rew in seasonRewards) {
       let re = seasonRewards[rew];
-      rewards.push({ Number: re.Number, Item: re.Item, Required: re.Required });
+      let rewardobj = {
+        Number: re.Number, Item: re.Item, Required: re.Required
+      }
+      if(re.Path1){
+        rewardobj = {
+          Number: re.Number, Item: re.Item, Required: re.Required, Path1: re.Path1, Path2: re.Path2, Path3: re.Path3
+        }
+      }
+      rewards.push(rewardobj);
     }
 
     rewards = lodash.chunk(
       rewards.map((a) => a),
       6
     );
+
+    console.log(rewards)
 
     let claimable = userdata.season1claimed || 1;
 
@@ -50,7 +60,7 @@ module.exports = {
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
         .setDescription(
-          `You need to wait to open the season again for ${time}.`
+          `You need to wait ${time} to open the season again.`
         );
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
@@ -93,23 +103,25 @@ module.exports = {
     let page = 0;
     let vispage = 1;
 
-    let clai = Math.ceil(claimable / 6);
+  
 
-    let pageofuser = (clai -= 1);
+    let pageofuser = 0
 
+    console.log(pageofuser)
     let embed = new EmbedBuilder()
-      .setTitle(`Season 1 Page ${vispage}`)
+      .setTitle(`Season 2 Page ${vispage}`)
       .setColor(colors.blue)
-      .setThumbnail(seasons.Seasons.Summer.Image)
-      .setFooter({ text: `May 31st - July 12th` });
+      .setThumbnail(seasons.Seasons.Fall.Image)
+      .setFooter({ text: `August 31st - September 31st` });
 
-    for (let field in rewards[pageofuser]) {
-      let data = rewards[pageofuser][field];
+    for (let field in rewards[page]) {
+      let data = rewards[page][field];
+      console.log(data)
       if (data.Item.endsWith("Cash")) {
         let amount = data.Item.split(" ");
         embed.addFields({
           name: `Reward ${data.Number}`,
-          value: `${toCurrency(amount[0])}\n${numberWithCommas(
+          value: `${emotes.cash} ${toCurrency(amount[0])}\n${numberWithCommas(
             data.Required
           )} ${emotes.notoriety}`,
           inline: true,
@@ -152,7 +164,48 @@ module.exports = {
           }`,
           inline: true,
         });
-      } else if (data.Item.includes("RP")) {
+      } 
+      else if(data.Item.toLowerCase() == "path car"){
+        console.log("path")
+        if(userdata.path == "none" || !userdata.path){
+          embed.addFields({
+            name: `Reward ${data.Number}`,
+            value: `Path Car\n${numberWithCommas(
+              data.Required
+            )} ${emotes.notoriety}`,
+            inline: true,
+          });
+        }
+        else if(userdata.path == "1"){
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `${cardb.Cars[data.Path1.toLowerCase()].Emote} ${cardb.Cars[data.Path1.toLowerCase()].Name}\n${numberWithCommas(
+                data.Required
+              )} ${emotes.notoriety}`,
+              inline: true,
+            });
+          }
+          else if(userdata.path == "2"){
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `${cardb.Cars[data.Path2.toLowerCase()].Emote} ${cardb.Cars[data.Path2.toLowerCase()].Name}\n${numberWithCommas(
+                data.Required
+              )} ${emotes.notoriety}`,
+              inline: true,
+            });
+          }
+          else if(userdata.path == "3"){
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `${cardb.Cars[data.Path3.toLowerCase()].Emote} ${cardb.Cars[data.Path3.toLowerCase()].Name}\n${numberWithCommas(
+                data.Required
+              )} ${emotes.notoriety}`,
+              inline: true,
+            });
+          }
+        
+      }
+      else if (data.Item.includes("RP")) {
         let amount = data.Item.split(" ");
         embed.addFields({
           name: `Reward ${data.Number}`,
@@ -197,8 +250,8 @@ module.exports = {
           }`,
           inline: true,
         });
-      } else if (itemdb[rewardtoclaim.Item.toLowerCase()]) {
-        let car = itemdb[rewardtoclaim.Item.toLowerCase()];
+      } else if (itemdb[data.Item.toLowerCase()]) {
+        let car = itemdb[data.Item.toLowerCase()];
         embed.addFields({
           name: `Reward ${data.Number}`,
           value: `${car.Emote} ${car.Name}\n${numberWithCommas(
@@ -207,6 +260,8 @@ module.exports = {
           inline: true,
         });
       }
+      
+      
     }
 
     let msg = await interaction.reply({
@@ -226,8 +281,8 @@ module.exports = {
 
     collector.on("collect", async (i) => {
       if (i.customId == "next") {
-        if ((page += 1) > 17) return interaction.reply("No more pages!");
-        page++;
+        if (page == 9) return interaction.reply("No more pages!");
+        page += 1;
         vispage++;
       } else if (i.customId == "previous") {
         if ((page -= 1) < 1) return interaction.reply("No more pages!");
@@ -241,6 +296,59 @@ module.exports = {
         page = 0;
         vispage = 1;
       } else if (i.customId == "claim") {
+        let path = userdata.path || "none"
+        console.log(path)
+        if(path == null || path == "none"){
+
+          let pathrow = new ActionRowBuilder().setComponents(
+            new ButtonBuilder()
+            .setCustomId("1")
+            .setLabel("1")
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId("2")
+            .setLabel("2")
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId("3")
+            .setLabel("3")
+            .setStyle("Secondary")
+          )
+
+          let embed = new EmbedBuilder()
+          .setTitle("Choose a path to start the season!")
+          .setImage("https://i.ibb.co/JH3hZsX/PATHS.png")
+          .setColor(colors.blue)
+
+          let msg2 = await interaction.channel.send({embeds: [embed], components: [pathrow]})
+
+
+          let filter3 = (btnInt) => {
+            return interaction.user.id == btnInt.user.id;
+          };
+          const collector3 = msg2.createMessageComponentCollector({
+            filter: filter3,
+            time: 15000,
+          });
+
+          collector3.on('collect', async (i) => {
+
+            userdata.path = i.customId.toString()
+            userdata.save()
+            i.update(`✅`)
+
+            try{
+              msg2.delete()
+
+            } catch (err){
+              console.log(err)
+            }
+          })
+
+        }
+        else {
+          
+        
         notoriety = userdata.notoriety;
         console.log(`required ${rewardtoclaim.Required}`);
 
@@ -258,7 +366,42 @@ module.exports = {
           userdata.notoriety = oldnoto -= rewardtoclaim.Required;
           userdata.season1claimed += 1;
           userdata.save();
-        } else if (rewardtoclaim.Item.includes("Rare Keys")) {
+        } 
+        else if(rewardtoclaim.Item.toLowerCase() == "path car"){
+          let carin 
+          if(userdata.path == "1"){
+            carin = rewardtoclaim.Path1
+          }
+         else if(userdata.path == "2"){
+            carin = rewardtoclaim.Path2
+          }
+          else if(userdata.path == "3"){
+            carin = rewardtoclaim.Path3
+          }
+          let car = cardb.Cars[carin.toLowerCase()];
+
+            let carobj = {
+              ID: car.alias,
+              Name: car.Name,
+              Speed: car.Speed,
+              Acceleration: car["0-60"],
+              Handling: car.Handling,
+              Parts: [],
+              Emote: car.Emote,
+              Livery: car.Image,
+              Miles: 0,
+              WeightStat: car.Weight,
+              Gas: 10,
+              MaxGas: 10,
+            };
+              userdata.cars.push(carobj)
+              userdata.season1claimed += 1;
+            userdata.save()
+          
+          
+        }
+        
+        else if (rewardtoclaim.Item.includes("Rare Keys")) {
           let amount = rewardtoclaim.Item.split(" ");
 
           let num = parseInt(amount[0]);
@@ -338,7 +481,9 @@ module.exports = {
           userdata.cars.push(carobj);
           userdata.season1claimed += 1;
           userdata.save();
-        } else if (partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
+        }
+        
+        else if (partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
           let car = partdb.Parts[rewardtoclaim.Item.toLowerCase()];
 
           userdata.parts.push(car.Name.toLowerCase());
@@ -364,14 +509,15 @@ module.exports = {
           userdata.save();
         }
       }
+      }
 
       notoriety = userdata.notoriety;
-
+      console.log(page)
       embed = new EmbedBuilder()
-        .setTitle(`Season 1 Page ${vispage}`)
+        .setTitle(`Season 2 Page ${vispage}`)
         .setColor(colors.blue)
-        .setThumbnail(seasons.Seasons.Summer.Image)
-        .setFooter({ text: `May 31st - July 12th` });
+        .setThumbnail(seasons.Seasons.Fall.Image)
+        .setFooter({ text: `August 31st - September 31st` });
 
       for (let field in rewards[page]) {
         let data = rewards[page][field];
@@ -440,7 +586,49 @@ module.exports = {
             )} ${emotes.notoriety}`,
             inline: true,
           });
-        } else if (partdb.Parts[data.Item.toLowerCase()]) {
+        } 
+        
+        else if(data.Item.toLowerCase() == "path car"){
+          console.log("path")
+          if(userdata.path == "none" || !userdata.path){
+            embed.addFields({
+              name: `Reward ${data.Number}`,
+              value: `Path Car\n${numberWithCommas(
+                data.Required
+              )} ${emotes.notoriety}`,
+              inline: true,
+            });
+          }
+          else if(userdata.path == "1"){
+              embed.addFields({
+                name: `Reward ${data.Number}`,
+                value: `${cardb.Cars[data.Path1.toLowerCase()].Emote} ${cardb.Cars[data.Path1.toLowerCase()].Name}\n${numberWithCommas(
+                  data.Required
+                )} ${emotes.notoriety}`,
+                inline: true,
+              });
+            }
+            else if(userdata.path == "2"){
+              embed.addFields({
+                name: `Reward ${data.Number}`,
+                value: `${cardb.Cars[data.Path2.toLowerCase()].Emote} ${cardb.Cars[data.Path2.toLowerCase()].Name}\n${numberWithCommas(
+                  data.Required
+                )} ${emotes.notoriety}`,
+                inline: true,
+              });
+            }
+            else if(userdata.path == "3"){
+              embed.addFields({
+                name: `Reward ${data.Number}`,
+                value: `${cardb.Cars[data.Path3.toLowerCase()].Emote} ${cardb.Cars[data.Path3.toLowerCase()].Name}\n${numberWithCommas(
+                  data.Required
+                )} ${emotes.notoriety}`,
+                inline: true,
+              });
+            }
+          
+        }
+        else if (partdb.Parts[data.Item.toLowerCase()]) {
           let car = partdb.Parts[data.Item.toLowerCase()];
           embed.addFields({
             name: `Reward ${data.Number}`,

@@ -42,7 +42,8 @@ module.exports = {
               { name: "Chef", value: "chef" },
               { name: "Criminal", value: "criminal" },
               { name: "Zuber Driver", value: "zuber driver" },
-              { name: "Photographer", value: "photographer" }
+              { name: "Photographer", value: "photographer" },
+              { name: "Doctor", value: "doctor" },
             )
         )
     )
@@ -358,6 +359,14 @@ module.exports = {
                 });
 
                 userdata.items.push("gem");
+              }
+              if (itemchance2 == 6 && userdata.work.name == "Doctor") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["pills"].Emote} ${itemdb["pills"].Name}`,
+                });
+
+                userdata.items.push("pills");
               }
               let salary = userdata.work.salary;
               if (

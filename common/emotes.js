@@ -1,7 +1,7 @@
 const emotes = {
   // General / Random
   zero2sixty: "<:zerosixtyemote:983963210304614410>",
-  rp: "<:rp:1077420588185956434>",
+  rp: "<:rpnew:1141948290066292767>",
   zerorp: "<:zerorp:939078761234698290>",
   featuresUpdate: "<:features_update:974452301920104509>",
   x: "❌",

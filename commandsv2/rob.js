@@ -63,6 +63,9 @@ module.exports = {
       }
     }
 
+
+    
+
     let cash = user2data.cash;
 
     if (cash < 1000)
@@ -74,15 +77,25 @@ module.exports = {
       return interaction.reply(
         `You need a disguise to steal from other players!`
       );
+      let username = user
+
+      if (userdata.using.includes("fake id")) {
+        userdata.using.pull("fake id")
+          username = "Someone"
+        
+      }
 
     let chance = lodash.random(100);
+    if(userdata.inventory.includes("pills")){
+      chance = lodash.random(75);
+    }
     let fails = [
-      `${user}, you failed to steal from ${usertorob.username}`,
-      `${usertorob}, ${user} just tried to steal from you but failed!`,
+      `${username}, you failed to steal from ${usertorob.username}`,
+      `${usertorob}, ${username} just tried to steal from you but failed!`,
     ];
     let successs = [
-      `${user}, you stole from ${usertorob.username}`,
-      `${usertorob}, ${user} just tried to steal from you and succeeded!`,
+      `${username}, you stole from ${usertorob.username}`,
+      `${usertorob}, ${username} just tried to steal from you and succeeded!`,
     ];
 
     let fail = lodash.sample(fails);
@@ -108,10 +121,16 @@ module.exports = {
         newcash = 1000000;
       }
       let randcash = randomRange(1, newcash);
+      if(username == "Someone"){
+        interaction.reply({content: `✅`, ephemeral : true})
+        interaction.channel.send(`${successe}\nGot away with $${numberWithCommas(randcash)}`)
+      }
+      else {
+        interaction.reply(
+          `${successe}\nGot away with $${numberWithCommas(randcash)}`
+        );
 
-      interaction.reply(
-        `${successe}\nGot away with $${numberWithCommas(randcash)}`
-      );
+      }
       cooldowndata.rob = Date.now();
       userdata.using.pull("disguise");
       cooldowndata.save();

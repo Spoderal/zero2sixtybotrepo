@@ -26,11 +26,11 @@ module.exports = {
             emoji: "⚙️",
           },
           {
-            label: "5/31/2023",
-            description: "Information for the recent summer season update!",
+            label: "8/31/2023",
+            description: "Information for the recent fall season update!",
             value: "4_update",
             customId: "up4",
-            emoji: "☀️",
+            emoji: "🍂",
           },
           {
             label: "8/13/2023",
@@ -56,7 +56,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             ⚙️ Latest Patch 7/14/2023\n
-            ☀️ Summer Update 5/31/2023\n
+            🍂 Fall Update 8/31/2023\n
             🏎️ Tiny Update 8/13/2023\n
             ⬆️ New Update 7/26/2023
         `);
@@ -106,65 +106,54 @@ module.exports = {
           } else if (value === "4_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Big Update`);
+            embed.setTitle(`Fall Update`);
             embed
               .addFields(
                 {
                   name: "Features ⭐",
-                  value: `New season design, shorter seasons, more unique themes and better rewards\n
-                Garage images (BETA, PLEASE WAIT 3 SECONDS BEFORE SCROLLING THROUGH YOUR GARAGE)\n
+                  value: `New season, shorter seasons, more unique themes, better rewards, and paths!\n
+                Tier 6 upgrades! Find tier 6 parts, and upgrade the car like you normally would to use the part\n
                 New Crew season\n
-                New Crew command design\n
-                Police racing rewards nerfed\n
-                Imports and super wheelspins are now limited to users who have beaten the 2nd squad.\n
-                Police racing now ranks your police rank up\n
-                Item shop changed to daily instead of weekly\n
-                New titles and helmets\n
-                editprofile removed, moved to /profile edit\n
-                Profile now shows buttons to view helmets and titles\n
-                Miles and "power total" shows in garage now instead of full stats\n
-                Bounty conversion nerfed\n
-                Race rewards nerfed\n
-                TXGearbox, TXECU`,
+                Kick people from crews\n
+                Crew VIP Cards, put crew points into a card you'd like to activate, and once you activate it, get the perks!
+                Restoration guide in help\n
+                Trading is now limited to people who have beaten the 3rd squad instead\n
+                New job: doctor\n
+                New business upgrades\n
+                New helmet designs\n
+                Stats cards are easier to read\n
+                Drivetrains for all cars\n
+                New tasks\n
+                PVP gives more rp than regular races\n
+                /rank will show your RP bonus\n
+                Bug fixes`,
                   inline: true,
                 },
                 {
                   name: "Cars 🚗",
                   value: `
-                ${cardb.Cars["2020 chevy camaro ss"].Emote} ${cardb.Cars["2020 chevy camaro ss"].Name}
-
-                ${cardb.Cars["2020 ford mustang gt500"].Emote} ${cardb.Cars["2020 ford mustang gt500"].Name}
-
-                ${cardb.Cars["2019 dodge challenger hellcat redeye"].Emote} ${cardb.Cars["2019 dodge challenger hellcat redeye"].Name}
-
-                ${cardb.Cars["2015 dodge charger hellcat"].Emote} ${cardb.Cars["2015 dodge charger hellcat"].Name}
-
-                 ${cardb.Cars["1969 ford mustang boss"].Emote} ${cardb.Cars["1969 ford mustang boss"].Name}
-
-                 ${cardb.Cars["2021 dodge durango hellcat"].Emote} ${cardb.Cars["2021 dodge durango hellcat"].Name}
-
-                 ${cardb.Cars["1968 plymouth roadrunner"].Emote} ${cardb.Cars["1968 plymouth roadrunner"].Name}
-
-                 ${cardb.Cars["2021 mclaren 720s gt3x"].Emote} ${cardb.Cars["2021 mclaren 720s gt3x"].Name}
-
-                 ${cardb.Cars["1973 ford mustang mach 1"].Emote} ${cardb.Cars["1973 ford mustang mach 1"].Name} *RETURNED*
+                ${cardb.Cars["2019 subaru brz rocket bunny"].Emote} ${cardb.Cars["2019 subaru brz rocket bunny"].Name}\n
+                ${cardb.Cars["2023 bmw m2 g87"].Emote} ${cardb.Cars["2023 bmw m2 g87"].Name}\n
+                ${cardb.Cars["2023 cadillac ct5"].Emote} ${cardb.Cars["2023 cadillac ct5"].Name}\n
+                ${cardb.Cars["2019 brabham bt62"].Emote} ${cardb.Cars["2019 brabham bt62"].Name}\n
+                ${cardb.Cars["2022 porsche 911 gt3 touring"].Emote} ${cardb.Cars["2022 porsche 911 gt3 touring"].Name}\n
+                ${cardb.Cars["2023 chevy corvette c8 z06"].Emote} ${cardb.Cars["2023 chevy corvette c8 z06"].Name}\n
+                ${cardb.Cars["2021 aston martin dbs superleggera"].Emote} ${cardb.Cars["2021 aston martin dbs superleggera"].Name}
                 `,
                   inline: true,
                 },
                 {
                   name: `Items 🪛`,
                   value: `
-                ${itemdb["beach ball"].Emote} ${itemdb["beach ball"].Name}\n
-                ${itemdb["cocktail"].Emote} ${itemdb["cocktail"].Name}\n
-                ${itemdb["ice cube"].Emote} ${itemdb["ice cube"].Name}\n
-                ${itemdb["old kite"].Emote} ${itemdb["old kite"].Name}\n
-                ${itemdb["permission slip"].Emote} ${itemdb["permission slip"].Name}\n
-                ${itemdb.radar.Emote} ${itemdb.radar.Name}\n
+                ${itemdb["cookie"].Emote} ${itemdb["cookie"].Name}\n
+                ${itemdb["fake id"].Emote} ${itemdb["fake id"].Name}\n
+                ${itemdb["pills"].Emote} ${itemdb["pills"].Name}\n
+                ${itemdb["compass"].Emote} ${itemdb["compass"].Name}
                 `,
                   inline: true,
                 }
               )
-              .setFooter({ text: "7/14/2023" })
+              .setFooter({ text: "8/31/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

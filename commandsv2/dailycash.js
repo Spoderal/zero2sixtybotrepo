@@ -127,6 +127,18 @@ module.exports = {
           interaction.channel.send("Your oil ran out! :(");
         }
       }
+
+      let tasks = userdata.tasks 
+      let taskdaily = tasks.filter((task) => task.ID == "4");
+
+      if(taskdaily[0]){
+        userdata.cash += 2500
+
+        userdata.tasks.pull(taskdaily[0])
+
+        interaction.channel.send(`Completed your task!`)
+      }
+
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
       cooldowndata.lastDaily = Date.now();

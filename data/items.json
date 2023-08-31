@@ -526,7 +526,7 @@
 
   "chocolate milk": {
     "Price": 0,
-    "Action": "Use this to receive x2 exotic keys while racing for 10 minutes",
+    "Action": "Use this to receive x3 rare keys while racing for 10 minutes",
     "Name": "Chocolate Milk",
     "Type": "Usable",
     "Emote": "<:item_chocolatemilk:1103826132949815327>",
@@ -702,6 +702,56 @@
     "Tier": 1,
     "Image": "https://i.ibb.co/mzf6rDT/item-energydrink.png",
     "Used": ["Don't drink too many of these, you get 2x RP for 10 minutes"]
+  },
+
+  
+  "cookie": {
+    "Price": 0,
+    "Action": "3x RP for 5 minutes",
+    "Name": "Cookie",
+    "Type": "Usable",
+    "Emote": "<:item_cookie:1144108323373854770>",
+    "Shop": true,
+    "Findable": true,
+    "Tier": 1,
+    "Image": "https://i.ibb.co/hgpbR6T/pixil-frame-0.png",
+    "Used": ["Did grandma give you one of these?"]
+  },
+  "fake id": {
+    "Price": 0,
+    "Action": "When you rob someone, your name wont show up",
+    "Name": "Fake ID",
+    "Type": "Usable",
+    "Emote": "<:item_fakeid:1145561045381951509>",
+    "Shop": true,
+    "Findable": true,
+    "Tier": 2,
+    "Image": "https://i.ibb.co/y5D3Jqp/item-fakeid.png",
+    "Used": ["Who'd you steal this from?", "HELP! MY ID WAS STOLEN"]
+  },
+  "compass": {
+    "Price": 0,
+    "Action": "Have a small chance to double your cash, and notoriety when racing for 20 minutes",
+    "Name": "Compass",
+    "Type": "Usable",
+    "Emote": "<:item_compass:1145561048645124107>",
+    "Shop": true,
+    "Findable": true,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/17pPJzm/item-compass.png",
+    "Used": ["Lets find home", "Where are you?"]
+  },
+  "pills": {
+    "Price": 0,
+    "Action": "Extra luck when robbing someone with pills in your inventory",
+    "Name": "Pills",
+    "Type": "Usable",
+    "Emote": "<:item_pills:1145582676674367488>",
+    "Shop": false,
+    "Findable": false,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/VYCqGyf/item-pills.png",
+    "Used": ["YUM", "This will cure your inability to rob"]
   },
   "super wheelspin": {
     "Price": 0,

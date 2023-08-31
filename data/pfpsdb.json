@@ -1,8 +1,8 @@
 {
   "Pfps": {
     "default": {
-      "Image": "https://i.ibb.co/vjFfBwj/newdefault.png",
-      "Emote": "<:default_helmet:985041491133095966>",
+      "Image": "https://i.ibb.co/CvmJv46/helmet-default.png",
+      "Emote": "<:helmet_default:1145564497587744799>",
       "Name": "Default"
     },
     "red helmet": {
@@ -27,8 +27,8 @@
     },
     "flame helmet": {
       "Name": "Flame Helmet",
-      "Image": "https://i.ibb.co/VDBnwGF/helmet-flame.png",
-      "Emote": "<:helmet_flame:965083189196492851>"
+      "Image": "<:helmet_flames:1145561413130141859>",
+      "Emote": "https://i.ibb.co/Fb5RrNF/helmet-flames.png"
     },
     "rainbow helmet": {
       "Name": "Rainbow Helmet",
@@ -190,6 +190,11 @@
       "Image": "https://i.ibb.co/DWVN31G/helmet-darkmodde.png",
       "Emote": "<:helmet_darkmodde:965083188512833537>"
     },
+    "dark helmet": {
+      "Name": "Dark Helmet",
+      "Image": "https://i.ibb.co/WxQgSQZ/helmet-dark-remaster.png",
+      "Emote": "<:helmet_dark_remaster:1145561406247292928>"
+    },
     "grass helmet": {
       "Name": "Grass Helmet",
       "Image": "https://i.ibb.co/6wD5DND/helmet-grass.png",
@@ -212,8 +217,8 @@
     },
     "stig helmet": {
       "Name": "Stig Helmet",
-      "Image": "https://i.ibb.co/9ZHFk4y/helmet-stig.png",
-      "Emote": "<:helmet_stig:965083188894519316>"
+      "Image": "https://i.ibb.co/MBCZfjF/helmet-crimson.png",
+      "Emote": "<:helmet_stig3:1145562525421809724>"
     },
     "underwater helmet": {
       "Name": "Underwater Helmet",
@@ -367,8 +372,8 @@
     },
     "touch grass helmet": {
       "Name": "Touch Grass Helmet",
-      "Image": "https://i.ibb.co/X5DgSw8/helmet-touchgrass.png",
-      "Emote": "<:helmet_touchgrass:1080280722700509276>"
+      "Image": "https://i.ibb.co/3W2B5mK/helmet-grass.png",
+      "Emote": "<:helmet_grass:1145561409191694376>"
     },
     "glitch helmet": {
       "Name": "Glitch Helmet",
@@ -449,6 +454,16 @@
       "Name": "Rockstar Helmet",
       "Image": "https://i.ibb.co/3F9RSbD/helmet-rockstar.png",
       "Emote": "<:helmet_rockstar:1111948535911419924>"
+    },
+    "spade helmet": {
+      "Name": "Spade Helmet",
+      "Image": "https://i.ibb.co/jw7G2G8/helmet-spades.png",
+      "Emote": "<:helmet_spades:1145561414958841858>"
+    },
+    "crimson helmet": {
+      "Name": "Crimson Helmet",
+      "Image": "https://i.ibb.co/MBCZfjF/helmet-crimson.png",
+      "Emote": "<:helmet_crimson:1145562523035242519>"
     }
   }
 }

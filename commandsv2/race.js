@@ -38,8 +38,8 @@ module.exports = {
           { name: `🚗 Street Race`, value: `streetrace` },
           { name: `🏁 Drag Race`, value: `dragrace` },
           { name: `🟢 Track Race`, value: `trackrace` },
-          { name: `🟢 Track Race (EVENT)`, value: `trackraceevent` },
           { name: `🌍 Cross Country`, value: `crosscountry` },
+          { name: `⛰️ Mountain Climb (SEASON)`, value: `mountain` },
           { name: "🚀 Car Series", value: "carseries" },
           { name: "🚲 Motorcycle Madness", value: "motorcyclemad" }
         )
@@ -437,23 +437,7 @@ module.exports = {
     )
       return interaction.reply("You need a motorcycle for this race!");
 
-    if (tieroption == 1 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 300 && car.Track);
-    } else if (tieroption == 2 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 400 && car.Track);
-    } else if (tieroption == 3 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 500 && car.Track);
-    } else if (tieroption == 4 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 600 && car.Track);
-    } else if (tieroption == 5 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 700 && car.Track);
-    } else if (tieroption == 6 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 800 && car.Track);
-    } else if (tieroption == 7 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed <= 900 && car.Track);
-    } else if (tieroption == 8 && raceoption == "trackraceevent") {
-      cartofilter = carsarray.filter((car) => car.Speed >= 900 && car.Track);
-    }
+    
 
     car2 = lodash.sample(cartofilter);
     console.log(cartofilter);
@@ -484,7 +468,50 @@ module.exports = {
       console.log(playerrace);
       console.log(opponentrace);
       console.log(winner);
-    } else if (raceoption == "dragrace") {
+    } 
+   else if (raceoption == "mountain") {
+      let weight = selected.WeightStat;
+      let speed = selected.Speed;
+      let acceleration = selected.Acceleration;
+      let handling = selected.Handling;
+
+      let weight2 = car2.Weight;
+      let speed2 = car2.Speed;
+      let acceleration2 = car2["0-60"];
+      let handling2 = car2.Handling;
+
+      let weightscore = Math.floor(weight * 10);
+      let weightscore2 = Math.floor(weight2 *10);
+
+    
+
+      let speedscore = speed / 10;
+      let speedscore2 = speed2 / 10;
+
+      if(cardb.Cars[selected.Name.toLowerCase()].Drivetrain && cardb.Cars[selected.Name.toLowerCase()].Drivetrain == "AWD"){
+        speedscore += 100
+      }
+      else {
+        speedscore -= 100
+      }
+
+      if(cardb.Cars[car2.Name.toLowerCase()].Drivetrain && cardb.Cars[car2.Name.toLowerCase()].Drivetrain == "AWD"){
+        speedscore += 100
+      }
+      else {
+        speedscore -= 10
+      }
+
+      let playerrace = dorace(speedscore, acceleration, handling, weightscore);
+      let opponentrace = dorace(speedscore2, acceleration2, handling2, weightscore2);
+
+      winner = playerrace > opponentrace;
+
+      console.log(playerrace);
+      console.log(opponentrace);
+      console.log(winner);
+    }
+    else if (raceoption == "dragrace") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -721,6 +748,7 @@ module.exports = {
     await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(async () => {
+      let notorietywon = 100
       console.log(winner);
       if (winner == true) {
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
@@ -804,12 +832,104 @@ module.exports = {
           }
         }
 
+        if (userdata.using.includes("cookie")) {
+          let itemcooldown = cooldowndata.cookie;
+
+          let timeout = 300000;
+          console.log(timeout - (Date.now() - itemcooldown));
+          if (
+            itemcooldown !== null &&
+            timeout - (Date.now() - itemcooldown) < 0
+          ) {
+            console.log("pulled");
+            userdata.using.pull("cookie");
+            userdata.update();
+            interaction.channel.send("Your cookie ran out!");
+          } else {
+            rpwon = rpwon * 3;
+          }
+        }
+
+        if (userdata.using.includes("compass")) {
+          let itemcooldown = cooldowndata.compass;
+
+          let timeout = 1200000;
+          console.log(timeout - (Date.now() - itemcooldown));
+          if (
+            itemcooldown !== null &&
+            timeout - (Date.now() - itemcooldown) < 0
+          ) {
+            console.log("pulled");
+            userdata.using.pull("compass");
+            userdata.update();
+            interaction.channel.send("Your compass ran out!");
+          } else {
+            let chancer = randomRange(1, 10)
+
+            if(chancer == 5){
+              cashwon = cashwon * 2
+              notorietywon = notorietywon * 2
+            }
+          }
+        }
+
+        let usercrew = userdata.crew
+
+        let crews = globals.crews
+
+        if(usercrew){
+          let rpbonus = 0
+          let crew = crews.filter((cre) => cre.name == usercrew.name)
+    
+          let timeout = 14400000;
+          let timeout2 = 7200000;
+          let timeout3 = 3600000;
+              
+              if (
+                crew[0].Cards[0].time !== null  &&
+                timeout - (Date.now() - crew[0].Cards[0].time) < 0
+              ) {
+                console.log("no card")
+              } else {
+                rpbonus += 0.20
+              }
+    
+              if (
+                crew[0].Cards[1].time !== null && 
+                timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
+              ) {
+                console.log("no card")
+              } else {
+                rpbonus += 0.50
+              }
+    
+              if (
+                crew[0].Cards[2].time !== null && 
+                timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
+              ) {
+                console.log("no card")
+              } else {
+                rpbonus += 1.20
+              }
+
+              if(rpbonus > 0){
+                rpwon = rpwon += (rpwon * rpbonus)
+              }
+    
+        }
+
         if (rating && rating >= 1) {
           rankwon = rankwon += rankwon * rating;
         }
 
+        if(raceoption == "mountain"){
+            notorietywon = notorietywon * 2
+        }
+
         rewards.push(`<:rank_race:1103913420320944198> +${rankwon} Rank`);
+        rewards.push(`${emotes.notoriety} ${notorietywon}`)
         userdata.cash += cashwon;
+        userdata.notoriety += notorietywon
         userdata.racerank += rankwon;
         let cratechance = randomRange(1, 20);
         if (cratechance > 10) {
@@ -887,15 +1007,19 @@ module.exports = {
               userdata.update();
               interaction.channel.send("Your chocolate milk ran out!");
             } else {
-              randomamount = randomamount * 2;
+              randomamount = randomamount * 3;
             }
           }
-          rewards.push(`${emotes.exoticKey} ${randomamount}`);
-          userdata.ekeys += randomamount;
+          rewards.push(`${emotes.rareKey} ${randomamount}`);
+          userdata.rkeys += randomamount;
         }
         if (raceoption == "dragrace") {
           rewards.push(`${emotes.notoriety} +25 Notoriety`);
           userdata.notoriety += 25;
+        }
+        if(userdata.prestige > 0){
+          let prestige = userdata.prestige
+          rpwon = rpwon += (rpwon * (prestige * 0.10))
         }
         rewards.push(`${emotes.rp} + ${rpwon} RP`);
         userdata.rp4 += 10;
@@ -1013,6 +1137,7 @@ module.exports = {
         if (tasks.length > 0) {
           let taskstreet = tasks.filter((task) => task.ID == "1");
           let tasktrack = tasks.filter((task) => task.ID == "2");
+          let taskdrag = tasks.filter((task) => task.ID == "3");
 
           if (taskstreet[0] && raceoption == "streetrace") {
             if (taskstreet[0].Races < 10) {
@@ -1059,7 +1184,7 @@ module.exports = {
                 {
                   arrayFilters: [
                     {
-                      "task.ID": "1",
+                      "task.ID": "2",
                     },
                   ],
                 }
@@ -1070,6 +1195,36 @@ module.exports = {
               userdata.tasks.pull(tasktrack[0]);
               interaction.channel.send(
                 `Task completed! You earned ${toCurrency(tasktrack[0].Reward)}`
+              );
+            }
+          }
+          else if (taskdrag[0] && raceoption == "dragrace") {
+            if (taskdrag[0].Races < 10) {
+              taskdrag[0].Races += 1;
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "tasks.$[task]": taskdrag[0],
+                  },
+                },
+
+                {
+                  arrayFilters: [
+                    {
+                      "task.ID": "3",
+                    },
+                  ],
+                }
+              );
+            }
+            if (tasktrack[0].Races >= 10) {
+              userdata.cash += 12000;
+              userdata.tasks.pull(taskdrag[0]);
+              interaction.channel.send(
+                `Task completed! You earned ${toCurrency(taskdrag[0].Reward)}`
               );
             }
           }

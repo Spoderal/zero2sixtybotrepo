@@ -35,6 +35,12 @@
     "name": "Shelby",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
+    "brabham": {
+    "image": "https://i.ibb.co/CKTVQQV/brabham.png",
+    "emote": "<:brabham:1141648434185650246>",
+    "name": "Brabham",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
+  },
   "bentley": {
     "image": "https://i.ibb.co/pZ2Kpj0/logo-bently.png",
     "emote": "<:bently:979618638539669505>",
@@ -305,6 +311,12 @@
     "emote": "<:toyota:931012829283233883>",
     "name": "Toyota",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
+  },
+  "tvr": {
+    "image": "https://i.ibb.co/QYP0LsF/tvr.png",
+    "emote": "<:tvr:1143411888399589457>",
+    "name": "TVR",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
   "volkswagen": {
     "image": "https://i.ibb.co/FzJrYW7/logo-vw.png",

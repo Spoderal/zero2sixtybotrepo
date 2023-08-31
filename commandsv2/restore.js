@@ -85,6 +85,11 @@ module.exports = {
     for (var i6 = 0; i6 < 1; i6++)
       userparts.splice(userparts.indexOf("j1body"), 1);
 
+      if(toolbox){
+        for (var i7 = 0; i7 < 1; i7++)
+      userdata.items.splice(userdata.items.indexOf("toolbox"), 1);
+      }
+
     userdata.save();
 
     await interaction.reply(`Restored ✅`);

@@ -152,6 +152,24 @@
       "Color": "#1859d0",
       "Obtained": "Fusing 2 T4Exhaust"
     },
+    "t6exhaust": {
+      "Name": "T6Exhaust",
+      "AddedSpeed": 10,
+      "AddedSixty": 2,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "exhaustupgrade",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
     "txexhaust": {
       "Name": "TXExhaust",
       "AddedSpeed": 45,
@@ -647,6 +665,24 @@
       "Image": "https://i.ibb.co/yQGswVn/t5turbo.png",
       "Obtained": "Fusing 2 T4Turbo"
     },
+    "t6turbo": {
+      "Name": "T6Turbo",
+      "AddedSpeed": 25,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
     "txturbo": {
       "Name": "TXTurbo",
       "AddedSpeed": 70,
@@ -1053,6 +1089,24 @@
       "Color": "#00ae00",
       "Image": "https://i.ibb.co/987LLbp/part-t5intake.png"
     },
+    "t6intake": {
+      "Name": "T6Intake",
+      "AddedSpeed": 10,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "exhaustupgrade",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
 
     "txintake": {
       "Name": "TXIntake",
@@ -1071,6 +1125,100 @@
       "DecreasedSpeed": "0",
       "AddHandling": "5",
       "Color": "#ffffff"
+    },
+
+    "t6engine": {
+      "Name": "T6Engine",
+      "AddedSpeed": 35,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "engine",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
+
+    "t6intercooler": {
+      "Name": "T6Intercooler",
+      "AddedSpeed": 15,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "intercooler",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
+
+        "t6ecu": {
+      "Name": "T6ECU",
+      "AddedSpeed": 15,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "ecu",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
+    "t6clutch": {
+      "Name": "T6Clutch",
+      "AddedSpeed": 15,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "clutch",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
+    },
+
+    "t6gearbox": {
+      "Name": "T6Gearbox",
+      "AddedSpeed": 100,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "gearbox",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 0,
+      "Color": "#1859d0"
     },
 
     "2jz-gte": {
@@ -1547,6 +1695,24 @@
       "AddHandling": "0",
       "Color": "#7b0000",
       "Image": "https://i.ibb.co/cbf7jR8/part-t5tires.png"
+    },
+    "t6tires": {
+      "Name": "T6Tires",
+      "AddedSpeed": 15,
+      "AddedSixty": 1,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 75,
+      "Color": "#1859d0"
     },
     "txslicks": {
       "Name": "TXSlicks",
@@ -2108,6 +2274,24 @@
       "AddHandling": 0,
       "Image": "https://i.ibb.co/G3D36j3/t5suspension.png",
       "Height": 4.5
+    },
+    "t6suspension": {
+      "Name": "T6Suspension",
+      "AddedSpeed": 20,
+      "AddedSixty": 0,
+      "sellprice": 0,
+      "AddedSnow": 0,
+      "Price": 0,
+      "Emote": "<:PART_T6:1142274349815058521>",
+      "Tier": "6",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "DecreasedSixty": "0",
+      "Type": "tires",
+      "Image": "https://i.ibb.co/qkTMYdq/PART-T6.png",
+      "DecreasedSpeed": "0",
+      "AddHandling": 150,
+      "Color": "#1859d0"
     },
 
     "wintertires": {

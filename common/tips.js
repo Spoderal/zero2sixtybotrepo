@@ -10,6 +10,7 @@ function tipGetRandom() {
     "Use keys to purchase import crates with exclusive cars **Turn off tips in /settings**",
     "View events with /events **Turn off tips in /settings**",
     "View the blackmarket with /blackmarket for exclusive cars and parts **Turn off tips in /settings**",
+    "Restore old cars with /restore, find old cars with /barn when you receive maps!"
   ]);
 }
 

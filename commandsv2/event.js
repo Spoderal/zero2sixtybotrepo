@@ -22,11 +22,11 @@ module.exports = {
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Season 1",
-            description: "Information for the Season 1 Z Pass",
+            label: "Season 2",
+            description: "Information for the Season 2 Z Pass",
             value: "spring_event",
             customId: "spring",
-            emoji: "<a:season_1:1111097329836113920>",
+            emoji: "<:season2_ico:1146637806354047007>",
           },
           {
             label: "Type Takeover",
@@ -81,9 +81,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Season 1 <a:season_1:1111097329836113920>\n
-          Type Takeover <:key_z:1140029565360668783>\n
-          Track Legends <:tracklegends:1072357967652995174>
+          Season 2 <:season2_ico:1146637806354047007>\n
       `);
 
     embed.setColor(colors.blue);
@@ -105,83 +103,29 @@ module.exports = {
     collector.on("collect", async (collected) => {
       const value = collected.values[0];
       if (value === "spring_event") {
-        embed.setTitle("Season 1");
+        embed.setTitle("Season 2");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to the first season on Zero2Sixty!
+        embed.setDescription(`Welcome to the second season on Zero2Sixty!
 
-            Welcome to summer! With new summer themed items, summer helmets, a whole new Z Pass, and muscle cars, there's so many things to do!
+            Welcome to fall! With new fall items, brand new designed helmets, a whole new Z Pass, and 2 different paths for which cars you earn on the season pass, there's so many things to do!
 
-            Try out the new limited time race, Muscle Drag Race, where you can only use muscle cars and get even more notoriety!
+            Try out the new limited time race, Mountain Climb, where you will need AWD, and lots of weight to get even more notoriety!
 
             Earn notoriety from street race, and use that towards the Z Pass in /season!
 
-            **Ends August 31st 2023**
+            **Ends September 31st 2023**
 
                   `);
         embed.setThumbnail(seasondb.Seasons.Summer.Image);
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/85G4t6R/season1-image.png");
+          .setImage("https://i.ibb.co/89DwwfN/season2image.png");
 
         await interaction.editReply({
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "event_1") {
-        embed.setTitle("Type Takeover");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to Type Takeover! 
-
-        Walter has just finished adjusting his mirrors on his murcielago sv, when he got word Snowy has left town because of Devil.
-
-        Snowy was like a brother to him, so he vows to take revenge on the ZPD, first step, claim the west side territory.
-
-        He keeps taking over more and more territory, its up to you to make him and the W squad come to their senses.
-
-        Stop walter, and get keys by type racing to BUY exclusive cars, thats right, BUY THEM, no RNG, no crates, nothing. Just win.
-
-        Type the fastest you can in /typerace and earn z keys, and buy exclusive cars in the dealership event section!
-
-        Check how you score up vs the other racers with the /leaderboard type takeover functionality!
-
-            **Ends August 31st 2023**
-
-                  `);
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/GJ8c96b/typetakeoverevent.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } else if (value === "event_2") {
-        embed.setTitle("Track Legends");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to the track! There's tons of track toys to choose from, and win!
-
-        Handling and weight are the MOST important thing, without that, you stand no chance, you can have all the speed in the world, but you need to be able to handle the speed!
-
-        Win against the opponent in the event track race in /race and have a chance to obtain the car!
-
-        Can you earn all of the cars before the event ends?
-
-        Cars to obtain:
-
-        ${eventcararr.join("\n")}
-
-            **Ends August 31st 2023**
-
-                  `);
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/MfWrndh/tracklegends2.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      }
+      } 
     });
   },
 };

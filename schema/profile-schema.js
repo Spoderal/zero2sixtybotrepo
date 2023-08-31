@@ -617,6 +617,21 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  path:{
+    type: String,
+    required: false,
+    default: "none"
+  },
+  tparts:{
+    type: Array,
+    required: false,
+    default: []
+  },
+  crewrespect: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

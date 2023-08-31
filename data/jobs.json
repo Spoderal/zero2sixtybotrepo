@@ -1,7 +1,7 @@
 {
   "pizza delivery": {
     "prestige": 1,
-    "salary": 100,
+    "salary": 1000,
     "name": "Pizza Delivery",
     "winprompts": [
       "You skrrrrt and deliver the pizza to 132 Zero ST",
@@ -75,7 +75,7 @@
   },
   "zuber driver": {
     "prestige": 1,
-    "salary": 100,
+    "salary": 1000,
     "name": "Zuber Driver",
     "winprompts": [
       "You drove Spoder to work and received 5 stars!",
@@ -150,7 +150,7 @@
 
   "photographer": {
     "prestige": 3,
-    "salary": 150,
+    "salary": 1500,
     "name": "Photographer",
     "winprompts": [
       "You took a photo of a Lamborghini Huracan!",
@@ -227,7 +227,7 @@
   },
   "police": {
     "prestige": 2,
-    "salary": 200,
+    "salary": 2000,
     "name": "Police",
     "winprompts": [
       "You caught someone running a red light",
@@ -302,7 +302,7 @@
   },
   "chef": {
     "prestige": 3,
-    "salary": 300,
+    "salary": 3000,
     "name": "Chef",
     "winprompts": [
       "You made a pizza",
@@ -377,7 +377,7 @@
   },
   "criminal": {
     "prestige": 7,
-    "salary": 500,
+    "salary": 5000,
     "name": "Criminal",
     "winprompts": [
       "You robbed an old lady of her purse... You're sick",
@@ -456,6 +456,90 @@
         "fail": 3500,
         "xp": 100000,
         "emote": "🏆",
+        "rank": 7
+      }
+    ]
+  },
+  "doctor": {
+    "prestige": 8,
+    "salary": 10000,
+    "name": "Doctor",
+    "winprompts": [
+      "You just cured the biggest disease!",
+      "You gave a baby a shot",
+      "You gave someone allergy medicine",
+      "You diagnosed someone with **too fast in a car** disease after you lost a race",
+      "You're writing down a patients information",
+      "You took someones bloodwork"
+    ],
+    "loseprompts": [
+      "You gave the wrong shot, now they're dead",
+      "You gave someone the wrong medication",
+      "You diagnosed the wrong disease"
+    ],
+    "items": ["pills"],
+    "Positions": [
+      {
+        "name": "Nurse Assistant",
+        "salary": 10000,
+        "min": 1000,
+        "fail": 2000,
+        "xp": 0,
+        "emote": "👩‍⚕️",
+        "rank": 1
+      },
+      {
+        "name": "Nurse",
+        "salary": 15000,
+        "min": 2000,
+        "fail": 3000,
+        "xp": 5000,
+        "emote": "👩‍⚕️",
+        "rank": 2
+      },
+      {
+        "name": "Head Nurse",
+        "salary": 18000,
+        "min": 3000,
+        "fail": 5000,
+        "xp": 10000,
+        "emote": "👩‍⚕️",
+        "rank": 3
+      },
+      {
+        "name": "Supervisor Nurse",
+        "salary": 20000,
+        "min": 5000,
+        "fail": 10000,
+        "xp": 15000,
+        "emote": "🥼",
+        "rank": 4
+      },
+      {
+        "name": "Doctor",
+        "salary": 50000,
+        "min": 7500,
+        "fail": 25000,
+        "xp": 25000,
+        "emote": "🩺",
+        "rank": 5
+      },
+      {
+        "name": "Head Doctor",
+        "salary": 100000,
+        "min": 20000,
+        "fail": 50000,
+        "xp": 50000,
+        "emote": "💉",
+        "rank": 6
+      },
+      {
+        "name": "Hospital Owner",
+        "salary": 250000,
+        "min": 50000,
+        "fail": 75000,
+        "xp": 100000,
+        "emote": "🏥",
         "rank": 7
       }
     ]

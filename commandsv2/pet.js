@@ -10,6 +10,7 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const Cooldowns = require("../schema/cooldowns");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const tasks = require("../data/tasks.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -172,7 +173,16 @@ module.exports = {
           }
         );
         userdata = await User.findOne({ id: i.user.id });
+      if(userdata.cash < 2000) return interaction.channel.send("You need $2k to feed your pet!")
         userdata.cash -= 2000;
+        let usertasks = userdata.tasks
+          let taskfeed = usertasks.filter((task) => task.ID == "6");
+        if (taskfeed[0]) {
+          interaction.channel.send("Completed task **Feed your pet**")
+          userdata.tasks.pull(taskfeed[0]);
+          userdata.cash += 5000
+        }
+
         userdata.save();
         let newhunger = await userdata.newpet.hunger;
 

@@ -45,6 +45,18 @@
     "Title": "ACE",
     "Achieve": "Event"
   },
+  "on fire": {
+    "Title": "ON FIRE",
+    "Achieve": "Season"
+  },
+  "spade": {
+    "Title": "SPADE",
+    "Achieve": "Season"
+  },
+  "hell raiser": {
+    "Title": "HELL RAISER",
+    "Achieve": "Season"
+  },
   "drift king": {
     "Title": "DRIFT KING",
     "Achieve": "Event"

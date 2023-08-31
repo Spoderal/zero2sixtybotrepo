@@ -103,56 +103,56 @@ module.exports = {
       gearboxcost2;
 
     let exhaustpower = 0;
-    if (exhausttier <= 5) {
+    if (exhausttier <= 6) {
       exhaustpower = parttiersdb[`exhaust1`].Power * selected[0].Speed;
     }
 
     let turbopower = 0;
-    if (turbotier <= 5) {
+    if (turbotier <= 6) {
       turbopower = Math.round(parttiersdb[`turbo1`].Power * selected[0].Speed);
     }
     let tirepower = 0;
-    if (tiretier <= 5) {
+    if (tiretier <= 6) {
       tirepower = Math.round(
         parttiersdb[`tires1`].Handling * selected[0].Handling
       );
     }
     let suspensionpower = 0;
-    if (suspensiontier <= 5) {
+    if (suspensiontier <= 6) {
       suspensionpower = Math.round(
         parttiersdb[`suspension1`].Handling * selected[0].Handling
       );
     }
     let enginepower = 0;
-    if (enginetier <= 5) {
+    if (enginetier <= 6) {
       enginepower = Math.round(
         parttiersdb[`engine1`].Power * selected[0].Speed
       );
     }
     let clutchpower = 0;
-    if (clutchtier <= 5) {
+    if (clutchtier <= 6) {
       clutchpower = Math.round(
         parttiersdb[`clutch1`].Power * selected[0].Speed
       );
     }
     let intercoolerpower = 0;
-    if (intercoolertier <= 5) {
+    if (intercoolertier <= 6) {
       intercoolerpower = Math.round(
         parttiersdb[`intercooler1`].Power * selected[0].Speed
       );
     }
     let intakepower = 0;
-    if (intaketier <= 5) {
+    if (intaketier <= 6) {
       intakepower = Math.round(
         parttiersdb[`intake1`].Power * selected[0].Speed
       );
     }
     let ecupower = 0;
-    if (ecutier <= 5) {
+    if (ecutier <= 6) {
       ecupower = Math.round(parttiersdb[`ecu1`].Power * selected[0].Speed);
     }
     let gearboxpower = 0;
-    if (gearboxtier <= 5) {
+    if (gearboxtier <= 6) {
       gearboxpower = Math.round(
         parttiersdb[`gearbox1`].Handling * selected[0].Handling
       );
@@ -170,15 +170,15 @@ module.exports = {
     let gearboxemote = partdb.Parts[`t1gearbox`].Emote;
 
     let exhaustacc = 0;
-    if (exhausttier <= 5) {
+    if (exhausttier <= 6) {
       exhaustacc = parttiersdb[`exhaust1`].Acceleration;
     }
     let turboacc = 0;
-    if (turbotier <= 5) {
+    if (turbotier <= 6) {
       turboacc = parttiersdb[`turbo1`].Acceleration;
     }
     let intakeacc = 0;
-    if (intaketier <= 5) {
+    if (intaketier <= 6) {
       intakeacc = parttiersdb[`intake1`].Acceleration;
     }
 
@@ -325,7 +325,7 @@ module.exports = {
       console.log(button.data.custom_id);
       let newtier = (tier += 1);
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-      if (oldtier >= 5) {
+      if (oldtier >= 6) {
         button.setDisabled(true);
       }
       if (price > userdata.cash) {
@@ -342,7 +342,7 @@ module.exports = {
       let newtier = (tier += 1);
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
       console.log(tier);
-      if (oldtier >= 5) {
+      if (oldtier >= 6) {
         button.setDisabled(true);
       }
       if (price > userdata.cash) {
@@ -361,7 +361,7 @@ module.exports = {
       let newtier = (tier += 1);
 
       let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-      if (oldtier >= 5) {
+      if (oldtier >= 6) {
         button.setDisabled(true);
       }
 
@@ -403,7 +403,10 @@ module.exports = {
       }
       console.log(selected[0]);
       let tier = selected[0][i.customId] || 0;
+
       let newtier = (tier += 1);
+      let t6p = partdb.Parts[`t6${i.customId}`].Name.toLowerCase()
+      if(newtier == 6 && !userdata.tparts.includes(t6p)) return i.update(`You need a ${partdb.Parts[`t6${i.customId}`].Name} for this upgrade!`)
       let price = Math.round(parttiersdb[`${i.customId}1`].Cost) * newtier;
       let newpower = selected[0].Speed * parttiersdb[`${i.customId}1`].Power;
       let acceleration = parttiersdb[`${i.customId}1`].Acceleration;
@@ -450,6 +453,12 @@ module.exports = {
         }
       );
 
+      if(newtier == 6){
+        let userparts = userdata.tparts
+        for (var i2 = 0; i2 < 1; i2++) userparts.splice(userparts.indexOf(t6p.toLowerCase()), 1);
+      userdata.tparts = userparts;
+      }
+
       userdata.save();
 
       for (let butt in row.components) {
@@ -458,7 +467,11 @@ module.exports = {
         let oldtier = tier;
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-        if (oldtier >= 5) {
+        console.log(button.data.custom_id)
+        let t6part = partdb.Parts[`t6${button.data.custom_id}`].Name.toLowerCase()
+       
+
+        if (oldtier >= 6) {
           button.setDisabled(true);
         }
         if (price > userdata.cash) {
@@ -467,8 +480,8 @@ module.exports = {
           button.setDisabled(true);
         }
       }
-      if (newtier > 5) {
-        newtier = 5;
+      if (newtier > 6) {
+        newtier = 6;
       }
 
       for (let butt in row2.components) {
@@ -479,7 +492,7 @@ module.exports = {
 
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         console.log(tier);
-        if (oldtier >= 5) {
+        if (oldtier >= 6) {
           button.setDisabled(true);
         }
         if (price > userdata.cash) {
@@ -497,7 +510,7 @@ module.exports = {
 
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-        if (oldtier >= 5) {
+        if (oldtier >= 6) {
           button.setDisabled(true);
         }
 
@@ -545,72 +558,72 @@ module.exports = {
       gearboxcost = parttiersdb.gearbox1.Cost * newtier9;
 
       let exhaustacc = 0;
-      if (exhausttier <= 5) {
+      if (exhausttier <= 6) {
         exhaustacc = parttiersdb[`exhaust1`].Acceleration;
       }
       let turboacc = 0;
-      if (turbotier <= 5) {
+      if (turbotier <= 6) {
         turboacc = parttiersdb[`turbo1`].Acceleration;
       }
       let intakeacc = 0;
-      if (intaketier <= 5) {
+      if (intaketier <= 6) {
         intakeacc = parttiersdb[`intake1`].Acceleration;
       }
       exhaustpower = 0;
-      if (exhausttier <= 5) {
+      if (exhausttier <= 6) {
         exhaustpower = Math.round(
           parttiersdb[`exhaust1`].Power * selected[0].Speed
         );
       }
 
       turbopower = 0;
-      if (turbotier <= 5) {
+      if (turbotier <= 6) {
         turbopower = Math.round(
           parttiersdb[`turbo1`].Power * selected[0].Speed
         );
       }
       tirepower = 0;
-      if (tiretier <= 5) {
+      if (tiretier <= 6) {
         tirepower = Math.round(
           parttiersdb[`tires1`].Handling * selected[0].Handling
         );
       }
       suspensionpower = 0;
-      if (suspensiontier <= 5) {
+      if (suspensiontier <= 6) {
         suspensionpower = Math.round(
           parttiersdb[`suspension1`].Handling * selected[0].Handling
         );
       }
       enginepower = 0;
-      if (enginetier <= 5) {
+      if (enginetier <= 6) {
         enginepower = Math.round(
           parttiersdb[`engine1`].Power * selected[0].Speed
         );
       }
       clutchpower = 0;
-      if (clutchtier <= 5) {
+      if (clutchtier <= 6) {
         clutchpower = Math.round(
           parttiersdb[`clutch1`].Power * selected[0].Speed
         );
       }
       intercoolerpower = 0;
-      if (intercoolertier <= 5) {
+      if (intercoolertier <= 6) {
         intercoolerpower = Math.round(
           parttiersdb[`intercooler1`].Power * selected[0].Speed
         );
       }
       intakepower = 0;
-      if (intaketier <= 5) {
+      if (intaketier <= 6) {
         intakepower = Math.round(
           parttiersdb[`intake1`].Power * selected[0].Speed
         );
       }
       ecupower = 0;
-      if (ecutier <= 5) {
+      if (ecutier <= 6) {
         ecupower = Math.round(parttiersdb[`ecu1`].Power * selected[0].Speed);
       }
       gearboxpower = 0;
-      if (gearboxtier <= 5) {
+      if (gearboxtier <= 6) {
         gearboxpower = Math.round(
           parttiersdb[`gearbox1`].Handling * selected[0].Handling
         );

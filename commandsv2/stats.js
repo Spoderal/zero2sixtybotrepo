@@ -98,7 +98,7 @@ module.exports = {
         ctx.drawImage(policeimg, 920, 600, 150, 150);
       }
 
-      ctx.font = "bold 54px sans-serif";
+      ctx.font = "bold 45px sans-serif";
       ctx.fillStyle = "#ffffff";
 
       ctx.fillText(carindb.Name, 125, 670);
@@ -116,28 +116,32 @@ module.exports = {
 
       ctx.fillText(carindb.Class, 1160, 110);
 
-      ctx.font = "bold 55px sans-serif";
+      ctx.font = "bold 25px sans-serif";
       let price = `${toCurrency(carindb.Price)}`;
 
       if (carindb.Drivetrain) {
         let drivetrain = carindb.Drivetrain;
 
-        ctx.fillText(drivetrain, 900, 640);
+        ctx.fillText(drivetrain, 1050, 50);
       }
 
       if (carindb.Engine) {
         let engine = carindb.Engine;
 
-        ctx.fillText(engine, 900, 690);
+        ctx.fillText(engine, 1050, 100);
       }
 
+      ctx.font = "bold 25px sans-serif";
+      let obttext = "Price"
       if (carindb.Price <= 0) {
         let obtained = carindb.Obtained || "Not Obtainable";
-        price = `Obtained: ${obtained}`;
+        obttext = "Obtained"
+        price = `${obtained}`;
       } else if (carindb.Squad) {
-        price = `Obtained: Squad`;
+        obttext = `Squad Car`;
       }
 
+        ctx.fillText(obttext, 800, 50);
       ctx.fillText(price, 800, 100);
 
       let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
