@@ -998,6 +998,13 @@ module.exports = {
 
         if(raceoption == "rustbowl"){
           let randomr = randomRange(1, 50)
+          let restparts = ["j1exhaust", "j1engine", "j1suspension", "intake", "body"]
+
+          let randomrest = lodash.sample(restparts)
+
+          rewards.push(randomrest)
+
+          userdata.parts.push(randomrest)
 
           if(randomr <= 10){
             let parts = ["t6exhaust", "t6tires", "t6turbo"]
