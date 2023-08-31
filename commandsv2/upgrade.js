@@ -405,8 +405,11 @@ module.exports = {
       let tier = selected[0][i.customId] || 0;
 
       let newtier = (tier += 1);
-      let t6p = partdb.Parts[`t6${i.customId}`].Name.toLowerCase()
-      if(newtier == 6 && !userdata.tparts.includes(t6p)) return i.update(`You need a ${partdb.Parts[`t6${i.customId}`].Name} for this upgrade!`)
+      let t6p = partdb.Parts[`t6${i.customId}`].Name.toLowerCase();
+      if (newtier == 6 && !userdata.tparts.includes(t6p))
+        return i.update(
+          `You need a ${partdb.Parts[`t6${i.customId}`].Name} for this upgrade!`
+        );
       let price = Math.round(parttiersdb[`${i.customId}1`].Cost) * newtier;
       let newpower = selected[0].Speed * parttiersdb[`${i.customId}1`].Power;
       let acceleration = parttiersdb[`${i.customId}1`].Acceleration;
@@ -453,10 +456,11 @@ module.exports = {
         }
       );
 
-      if(newtier == 6){
-        let userparts = userdata.tparts
-        for (var i2 = 0; i2 < 1; i2++) userparts.splice(userparts.indexOf(t6p.toLowerCase()), 1);
-      userdata.tparts = userparts;
+      if (newtier == 6) {
+        let userparts = userdata.tparts;
+        for (var i2 = 0; i2 < 1; i2++)
+          userparts.splice(userparts.indexOf(t6p.toLowerCase()), 1);
+        userdata.tparts = userparts;
       }
 
       userdata.save();
@@ -467,9 +471,9 @@ module.exports = {
         let oldtier = tier;
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
-        console.log(button.data.custom_id)
-        let t6part = partdb.Parts[`t6${button.data.custom_id}`].Name.toLowerCase()
-       
+        console.log(button.data.custom_id);
+        let t6part =
+          partdb.Parts[`t6${button.data.custom_id}`].Name.toLowerCase();
 
         if (oldtier >= 6) {
           button.setDisabled(true);

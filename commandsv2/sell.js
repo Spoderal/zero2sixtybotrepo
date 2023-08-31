@@ -133,7 +133,8 @@ module.exports = {
         finalamount = amount2 * resale;
         userdata.cash += finalamount;
       }
-      for (var i2 = 0; i2 < amount2; i2++) userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
+      for (var i2 = 0; i2 < amount2; i2++)
+        userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
       userdata.parts = userparts;
       await interaction.reply(
         `You sold your ${selling} for ${toCurrency(finalamount)}!`

@@ -15,7 +15,7 @@ const { toCurrency } = require("../common/utils");
 const emotes = require("../common/emotes").emotes;
 const pvpranks = require("../data/ranks.json");
 const helmetdb = require("../data/pfpsdb.json");
-const Global = require("../schema/global-schema")
+const Global = require("../schema/global-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -304,12 +304,12 @@ module.exports = {
           setTimeout(async () => {
             if (winner == "Player") {
               let earnings = [];
-              let rpwon = 350
-              
+              let rpwon = 350;
+
               userdata.pvprank.Wins = userdata.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
               userdata.update();
-              let tasks = userdata2.tasks 
+              let tasks = userdata2.tasks;
               let taskpvp = tasks.filter((task) => task.ID == "5");
 
               if (taskpvp[0]) {
@@ -324,7 +324,7 @@ module.exports = {
                         "tasks.$[task]": taskpvp[0],
                       },
                     },
-    
+
                     {
                       arrayFilters: [
                         {
@@ -338,56 +338,57 @@ module.exports = {
                   userdata.cash += 20000;
                   userdata.tasks.pull(taskpvp[0]);
                   interaction.channel.send(
-                    `${user} Task completed! You earned ${toCurrency(taskpvp[0].Reward)}`
+                    `${user} Task completed! You earned ${toCurrency(
+                      taskpvp[0].Reward
+                    )}`
                   );
                 }
               }
               let globals = await Global.findOne();
-              let usercrew = userdata.crew
+              let usercrew = userdata.crew;
 
-              let crews = globals.crews
-      
-              if(usercrew){
-                let rpbonus = 0
-                let crew = crews.filter((cre) => cre.name == usercrew.name)
-          
+              let crews = globals.crews;
+
+              if (usercrew) {
+                let rpbonus = 0;
+                let crew = crews.filter((cre) => cre.name == usercrew.name);
+
                 let timeout = 14400000;
                 let timeout2 = 7200000;
                 let timeout3 = 3600000;
-                    
-                    if (
-                      crew[0].Cards[0].time !== null  &&
-                      timeout - (Date.now() - crew[0].Cards[0].time) < 0
-                    ) {
-                      console.log("no card")
-                    } else {
-                      rpbonus += 0.20
-                    }
-          
-                    if (
-                      crew[0].Cards[1].time !== null && 
-                      timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
-                    ) {
-                      console.log("no card")
-                    } else {
-                      rpbonus += 0.50
-                    }
-          
-                    if (
-                      crew[0].Cards[2].time !== null && 
-                      timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
-                    ) {
-                      console.log("no card")
-                    } else {
-                      rpbonus += 1.20
-                    }
-      
-                    if(rpbonus > 0){
-                      rpwon = rpwon += (rpwon * rpbonus)
-                    }
-          
+
+                if (
+                  crew[0].Cards[0].time !== null &&
+                  timeout - (Date.now() - crew[0].Cards[0].time) < 0
+                ) {
+                  console.log("no card");
+                } else {
+                  rpbonus += 0.2;
+                }
+
+                if (
+                  crew[0].Cards[1].time !== null &&
+                  timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
+                ) {
+                  console.log("no card");
+                } else {
+                  rpbonus += 0.5;
+                }
+
+                if (
+                  crew[0].Cards[2].time !== null &&
+                  timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
+                ) {
+                  console.log("no card");
+                } else {
+                  rpbonus += 1.2;
+                }
+
+                if (rpbonus > 0) {
+                  rpwon = rpwon += rpwon * rpbonus;
+                }
               }
-              earnings.push(`${rpwon}`)
+              earnings.push(`${rpwon}`);
               let rewardtogive = userpvprank.Wins;
               let rewardinreward =
                 userrank[0].rewards.filter(
@@ -474,38 +475,40 @@ module.exports = {
             }
             // lost
             else if (winner == "Opponent") {
-              let tasks2 = userdata2.tasks 
+              let tasks2 = userdata2.tasks;
               let taskpvp2 = tasks2.filter((task) => task.ID == "5");
               if (taskpvp2[0]) {
-            if (taskpvp2[0].Races < 10) {
-              taskpvp2[0].Races += 1;
-              await User.findOneAndUpdate(
-                {
-                  id: interaction.user.id,
-                },
-                {
-                  $set: {
-                    "tasks.$[task]": taskpvp2[0],
-                  },
-                },
-
-                {
-                  arrayFilters: [
+                if (taskpvp2[0].Races < 10) {
+                  taskpvp2[0].Races += 1;
+                  await User.findOneAndUpdate(
                     {
-                      "task.ID": "3",
+                      id: interaction.user.id,
                     },
-                  ],
+                    {
+                      $set: {
+                        "tasks.$[task]": taskpvp2[0],
+                      },
+                    },
+
+                    {
+                      arrayFilters: [
+                        {
+                          "task.ID": "3",
+                        },
+                      ],
+                    }
+                  );
                 }
-              );
-            }
-            if (taskpvp2[0].Races >= 10) {
-              userdata.cash += 20000;
-              userdata.tasks.pull(taskpvp2[0]);
-              interaction.channel.send(
-                `${user2} Task completed! You earned ${toCurrency(taskpvp2[0].Reward)}`
-              );
-            }
-          }
+                if (taskpvp2[0].Races >= 10) {
+                  userdata.cash += 20000;
+                  userdata.tasks.pull(taskpvp2[0]);
+                  interaction.channel.send(
+                    `${user2} Task completed! You earned ${toCurrency(
+                      taskpvp2[0].Reward
+                    )}`
+                  );
+                }
+              }
               let earnings = [];
               userdata2.pvprank.Wins = userdata2.pvprank.Wins += 1;
               userdata2.pvprank.Losses = userdata2.pvprank.Losses += 1;
@@ -547,51 +550,50 @@ module.exports = {
                   earnings.push(`${emotes.gold} +${amount}`);
                 }
               }
-              let usercrew2 = userdata2.crew
+              let usercrew2 = userdata2.crew;
               let globals = await Global.findOne();
-              let crews = globals.crews
-              let rpwon = 350
-              if(usercrew2){
-                let rpbonus = 0
-                let crew = crews.filter((cre) => cre.name == usercrew2.name)
-          
+              let crews = globals.crews;
+              let rpwon = 350;
+              if (usercrew2) {
+                let rpbonus = 0;
+                let crew = crews.filter((cre) => cre.name == usercrew2.name);
+
                 let timeout = 14400000;
                 let timeout2 = 7200000;
                 let timeout3 = 3600000;
-                    
-                    if (
-                      crew[0].Cards[0].time !== null  &&
-                      timeout - (Date.now() - crew[0].Cards[0].time) < 0
-                    ) {
-                      console.log("no card")
-                    } else {
-                      rpbonus += 0.20
-                    }
-          
-                    if (
-                      crew[0].Cards[1].time !== null && 
-                      timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
-                    ) {
-                      console.log("no card")
-                    } else {
-                      rpbonus += 0.50
-                    }
-          
-                    if (
-                      crew[0].Cards[2].time !== null && 
-                      timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
-                    ) {
-                      console.log("no card")
-                    } else {
-                      rpbonus += 1.20
-                    }
-      
-                    if(rpbonus > 0){
-                      rpwon = rpwon += (rpwon * rpbonus)
-                    }
-          
+
+                if (
+                  crew[0].Cards[0].time !== null &&
+                  timeout - (Date.now() - crew[0].Cards[0].time) < 0
+                ) {
+                  console.log("no card");
+                } else {
+                  rpbonus += 0.2;
+                }
+
+                if (
+                  crew[0].Cards[1].time !== null &&
+                  timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
+                ) {
+                  console.log("no card");
+                } else {
+                  rpbonus += 0.5;
+                }
+
+                if (
+                  crew[0].Cards[2].time !== null &&
+                  timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
+                ) {
+                  console.log("no card");
+                } else {
+                  rpbonus += 1.2;
+                }
+
+                if (rpbonus > 0) {
+                  rpwon = rpwon += rpwon * rpbonus;
+                }
               }
-              earnings.push(`${rpwon}`)
+              earnings.push(`${rpwon}`);
               if (earnings.length > 0) {
                 embed.setDescription(`${earnings.join("\n")}`);
               }

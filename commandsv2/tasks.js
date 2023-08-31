@@ -12,10 +12,7 @@ module.exports = {
     .setName("tasks")
     .setDescription("View your tasks and claim them")
     .addSubcommand((cmd) =>
-      cmd
-        .setName("claim")
-        .setDescription("Claim a task by id")
-
+      cmd.setName("claim").setDescription("Claim a task by id")
     )
     .addSubcommand((cmd) =>
       cmd.setName("list").setDescription("List the tasks you can claim")
@@ -47,11 +44,12 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
     } else if (subcommand == "claim") {
-      let taskid = randomRange(1, 6)
+      let taskid = randomRange(1, 6);
       let filteredtask = usertasks.filter((task) => task.ID == taskid);
       let taskindb = tasksdb[taskid];
-    
-      if (filteredtask.length > 0) return interaction.reply("You already have a task in progress!");
+
+      if (filteredtask.length > 0)
+        return interaction.reply("You already have a task in progress!");
       let filteredtime = usertasks.filter(
         (task) => task.ID == `T${taskindb.ID}`
       );

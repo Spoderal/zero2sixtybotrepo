@@ -63,9 +63,6 @@ module.exports = {
       }
     }
 
-
-    
-
     let cash = user2data.cash;
 
     if (cash < 1000)
@@ -77,16 +74,15 @@ module.exports = {
       return interaction.reply(
         `You need a disguise to steal from other players!`
       );
-      let username = user
+    let username = user;
 
-      if (userdata.using.includes("fake id")) {
-        userdata.using.pull("fake id")
-          username = "Someone"
-        
-      }
+    if (userdata.using.includes("fake id")) {
+      userdata.using.pull("fake id");
+      username = "Someone";
+    }
 
     let chance = lodash.random(100);
-    if(userdata.inventory.includes("pills")){
+    if (userdata.inventory.includes("pills")) {
       chance = lodash.random(75);
     }
     let fails = [
@@ -121,15 +117,15 @@ module.exports = {
         newcash = 1000000;
       }
       let randcash = randomRange(1, newcash);
-      if(username == "Someone"){
-        interaction.reply({content: `✅`, ephemeral : true})
-        interaction.channel.send(`${successe}\nGot away with $${numberWithCommas(randcash)}`)
-      }
-      else {
+      if (username == "Someone") {
+        interaction.reply({ content: `✅`, ephemeral: true });
+        interaction.channel.send(
+          `${successe}\nGot away with $${numberWithCommas(randcash)}`
+        );
+      } else {
         interaction.reply(
           `${successe}\nGot away with $${numberWithCommas(randcash)}`
         );
-
       }
       cooldowndata.rob = Date.now();
       userdata.using.pull("disguise");

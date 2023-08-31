@@ -51,9 +51,9 @@
         "10": {
           "Number": 10,
           "Item": "Path Car",
-          "Path1":"2019 subaru brz rocket bunny",
-          "Path2":"2023 bmw m2 g87",
-          "Path3":"2023 cadillac ct5",
+          "Path1": "2019 subaru brz rocket bunny",
+          "Path2": "2023 bmw m2 g87",
+          "Path3": "2023 cadillac ct5",
           "Required": 5000
         },
         "11": {
@@ -189,10 +189,10 @@
         "37": {
           "Number": 37,
           "Item": "Path Car",
-          "Path1":"2019 brabham bt62",
-          "Path2":"2022 porsche 911 gt3 touring",
-          "Path3":"2023 chevy corvette c8 z06",
-          
+          "Path1": "2019 brabham bt62",
+          "Path2": "2022 porsche 911 gt3 touring",
+          "Path3": "2023 chevy corvette c8 z06",
+
           "Required": 110000
         },
         "38": {
@@ -260,7 +260,6 @@
           "Item": "500 Cash",
           "Required": 350000
         }
-       
       }
     },
     "Crew1": {

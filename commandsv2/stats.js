@@ -132,16 +132,16 @@ module.exports = {
       }
 
       ctx.font = "bold 25px sans-serif";
-      let obttext = "Price"
+      let obttext = "Price";
       if (carindb.Price <= 0) {
         let obtained = carindb.Obtained || "Not Obtainable";
-        obttext = "Obtained"
+        obttext = "Obtained";
         price = `${obtained}`;
       } else if (carindb.Squad) {
         obttext = `Squad Car`;
       }
 
-        ctx.fillText(obttext, 800, 50);
+      ctx.fillText(obttext, 800, 50);
       ctx.fillText(price, 800, 100);
 
       let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {

@@ -1,23 +1,23 @@
 {
-    "crush card":{
-        "rp":20,
-        "name":"Crush Card",
-        "requirement":100,
-        "image":"https://i.ibb.co/n6cKX41/vip-card1.png",
-        "emote":"<:vip_card1_emote:1143414485672005734>"
-    },
-    "sting card":{
-        "rp":50,
-        "name":"Sting Card",
-        "requirement":200,
-        "image":"https://i.ibb.co/6B1VXrW/vip-card2.png",
-        "emote":"<:vip_card2_emote:1143414895744921620>"
-    },
-    "gt card":{
-        "rp":120,
-        "name":"GT Card",
-        "requirement":750,
-        "image":"https://i.ibb.co/XCPqPK5/vip-card3.png",
-        "emote":"<:vip_card3_emote:1143414896999014470>"
-    }
+  "crush card": {
+    "rp": 20,
+    "name": "Crush Card",
+    "requirement": 100,
+    "image": "https://i.ibb.co/n6cKX41/vip-card1.png",
+    "emote": "<:vip_card1_emote:1143414485672005734>"
+  },
+  "sting card": {
+    "rp": 50,
+    "name": "Sting Card",
+    "requirement": 200,
+    "image": "https://i.ibb.co/6B1VXrW/vip-card2.png",
+    "emote": "<:vip_card2_emote:1143414895744921620>"
+  },
+  "gt card": {
+    "rp": 120,
+    "name": "GT Card",
+    "requirement": 750,
+    "image": "https://i.ibb.co/XCPqPK5/vip-card3.png",
+    "emote": "<:vip_card3_emote:1143414896999014470>"
+  }
 }

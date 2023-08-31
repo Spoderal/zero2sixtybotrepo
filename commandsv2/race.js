@@ -437,8 +437,6 @@ module.exports = {
     )
       return interaction.reply("You need a motorcycle for this race!");
 
-    
-
     car2 = lodash.sample(cartofilter);
     console.log(cartofilter);
     let winner;
@@ -468,8 +466,7 @@ module.exports = {
       console.log(playerrace);
       console.log(opponentrace);
       console.log(winner);
-    } 
-   else if (raceoption == "mountain") {
+    } else if (raceoption == "mountain") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -481,37 +478,43 @@ module.exports = {
       let handling2 = car2.Handling;
 
       let weightscore = Math.floor(weight * 10);
-      let weightscore2 = Math.floor(weight2 *10);
-
-    
+      let weightscore2 = Math.floor(weight2 * 10);
 
       let speedscore = speed / 10;
       let speedscore2 = speed2 / 10;
 
-      if(cardb.Cars[selected.Name.toLowerCase()].Drivetrain && cardb.Cars[selected.Name.toLowerCase()].Drivetrain == "AWD"){
-        speedscore += 100
-      }
-      else {
-        speedscore -= 100
+      if (
+        cardb.Cars[selected.Name.toLowerCase()].Drivetrain &&
+        cardb.Cars[selected.Name.toLowerCase()].Drivetrain == "AWD"
+      ) {
+        speedscore += 100;
+      } else {
+        speedscore -= 100;
       }
 
-      if(cardb.Cars[car2.Name.toLowerCase()].Drivetrain && cardb.Cars[car2.Name.toLowerCase()].Drivetrain == "AWD"){
-        speedscore += 100
-      }
-      else {
-        speedscore -= 10
+      if (
+        cardb.Cars[car2.Name.toLowerCase()].Drivetrain &&
+        cardb.Cars[car2.Name.toLowerCase()].Drivetrain == "AWD"
+      ) {
+        speedscore += 100;
+      } else {
+        speedscore -= 10;
       }
 
       let playerrace = dorace(speedscore, acceleration, handling, weightscore);
-      let opponentrace = dorace(speedscore2, acceleration2, handling2, weightscore2);
+      let opponentrace = dorace(
+        speedscore2,
+        acceleration2,
+        handling2,
+        weightscore2
+      );
 
       winner = playerrace > opponentrace;
 
       console.log(playerrace);
       console.log(opponentrace);
       console.log(winner);
-    }
-    else if (raceoption == "dragrace") {
+    } else if (raceoption == "dragrace") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -748,7 +751,7 @@ module.exports = {
     await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(async () => {
-      let notorietywon = 100
+      let notorietywon = 100;
       console.log(winner);
       if (winner == true) {
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
@@ -864,72 +867,71 @@ module.exports = {
             userdata.update();
             interaction.channel.send("Your compass ran out!");
           } else {
-            let chancer = randomRange(1, 10)
+            let chancer = randomRange(1, 10);
 
-            if(chancer == 5){
-              cashwon = cashwon * 2
-              notorietywon = notorietywon * 2
+            if (chancer == 5) {
+              cashwon = cashwon * 2;
+              notorietywon = notorietywon * 2;
             }
           }
         }
 
-        let usercrew = userdata.crew
+        let usercrew = userdata.crew;
 
-        let crews = globals.crews
+        let crews = globals.crews;
 
-        if(usercrew){
-          let rpbonus = 0
-          let crew = crews.filter((cre) => cre.name == usercrew.name)
-    
+        if (usercrew) {
+          let rpbonus = 0;
+          let crew = crews.filter((cre) => cre.name == usercrew.name);
+
           let timeout = 14400000;
           let timeout2 = 7200000;
           let timeout3 = 3600000;
-              
-              if (
-                crew[0].Cards[0].time !== null  &&
-                timeout - (Date.now() - crew[0].Cards[0].time) < 0
-              ) {
-                console.log("no card")
-              } else {
-                rpbonus += 0.20
-              }
-    
-              if (
-                crew[0].Cards[1].time !== null && 
-                timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
-              ) {
-                console.log("no card")
-              } else {
-                rpbonus += 0.50
-              }
-    
-              if (
-                crew[0].Cards[2].time !== null && 
-                timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
-              ) {
-                console.log("no card")
-              } else {
-                rpbonus += 1.20
-              }
 
-              if(rpbonus > 0){
-                rpwon = rpwon += (rpwon * rpbonus)
-              }
-    
+          if (
+            crew[0].Cards[0].time !== null &&
+            timeout - (Date.now() - crew[0].Cards[0].time) < 0
+          ) {
+            console.log("no card");
+          } else {
+            rpbonus += 0.2;
+          }
+
+          if (
+            crew[0].Cards[1].time !== null &&
+            timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
+          ) {
+            console.log("no card");
+          } else {
+            rpbonus += 0.5;
+          }
+
+          if (
+            crew[0].Cards[2].time !== null &&
+            timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
+          ) {
+            console.log("no card");
+          } else {
+            rpbonus += 1.2;
+          }
+
+          if (rpbonus > 0) {
+            rpwon = rpwon += rpwon * rpbonus;
+          }
         }
 
         if (rating && rating >= 1) {
           rankwon = rankwon += rankwon * rating;
         }
 
-        if(raceoption == "mountain"){
-            notorietywon = notorietywon * 2
+        if (raceoption == "mountain") {
+          notorietywon = notorietywon * 2;
         }
 
         rewards.push(`<:rank_race:1103913420320944198> +${rankwon} Rank`);
-        rewards.push(`${emotes.notoriety} ${notorietywon}`)
+        rewards.push(`${emotes.notoriety} ${notorietywon}`);
         userdata.cash += cashwon;
-        userdata.notoriety += notorietywon
+        userdata.notoriety += notorietywon;
         userdata.racerank += rankwon;
         let cratechance = randomRange(1, 20);
         if (cratechance > 10) {
@@ -1017,9 +1019,9 @@ module.exports = {
           rewards.push(`${emotes.notoriety} +25 Notoriety`);
           userdata.notoriety += 25;
         }
-        if(userdata.prestige > 0){
-          let prestige = userdata.prestige
-          rpwon = rpwon += (rpwon * (prestige * 0.10))
+        if (userdata.prestige > 0) {
+          let prestige = userdata.prestige;
+          rpwon = rpwon += rpwon * (prestige * 0.1);
         }
         rewards.push(`${emotes.rp} + ${rpwon} RP`);
         userdata.rp4 += 10;
@@ -1197,8 +1199,7 @@ module.exports = {
                 `Task completed! You earned ${toCurrency(tasktrack[0].Reward)}`
               );
             }
-          }
-          else if (taskdrag[0] && raceoption == "dragrace") {
+          } else if (taskdrag[0] && raceoption == "dragrace") {
             if (taskdrag[0].Races < 10) {
               taskdrag[0].Races += 1;
               await User.findOneAndUpdate(

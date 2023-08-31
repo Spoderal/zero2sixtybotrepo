@@ -4530,7 +4530,7 @@
       "Class": "B",
       "Drivetrain": "RWD",
       "Weight": 3000,
-      "Obtained":"Rare Imports"
+      "Obtained": "Rare Imports"
     },
     "2021 lotus evora gt": {
       "alias": "2021 evora gt",
@@ -9240,7 +9240,6 @@
       "Obtained": "Season",
       "Weight": 3400,
       "Drivetrain": "RWD"
-    
     },
     "2023 bmw m2 g87": {
       "alias": "2023 m2 g87",
@@ -9259,7 +9258,6 @@
       "Obtained": "Season",
       "Weight": 3700,
       "Drivetrain": "RWD"
-    
     },
     "2019 subaru brz rocket bunny": {
       "alias": "2019 brz rb",
@@ -9347,9 +9345,8 @@
       "Handling": 560,
       "Obtained": "Exotic Imports",
       "Class": "S",
-      "Drivetrain":"RWD",
+      "Drivetrain": "RWD",
       "Weight": 4068
     }
-    
   }
 }

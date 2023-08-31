@@ -617,15 +617,15 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  path:{
+  path: {
     type: String,
     required: false,
-    default: "none"
+    default: "none",
   },
-  tparts:{
+  tparts: {
     type: Array,
     required: false,
-    default: []
+    default: [],
   },
   crewrespect: {
     type: Number,
