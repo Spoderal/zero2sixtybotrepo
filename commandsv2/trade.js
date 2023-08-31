@@ -62,17 +62,17 @@ module.exports = {
     let user1items = userdata.items;
     let user2items = userdata2.items;
 
-    let pre = userdata.prestige;
-    let pre2 = userdata2.prestige;
+    let pre = userdata.tier;
+    let pre2 = userdata2.tier;
 
-    if (pre < 1)
+    if (pre < 4)
       return await interaction.reply(
-        `${user1}, you need to be prestige 1 before you can trade`
+        `${user1}, you need to beat the 3rd squad before you can trade`
       );
 
-    if (pre2 < 1)
+    if (pre2 < 4)
       return await interaction.reply(
-        `${user2}, you need to be prestige 1 before you can trade`
+        `${user2}, you need to beat the 3rd squad before you can trade`
       );
 
     if (user1 == user2)
