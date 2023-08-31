@@ -496,12 +496,12 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
-  rustwins:{
+  rustwins: {
     type: Number,
     required: false,
     default: 0,
   },
-  rustwon:{
+  rustwon: {
     type: Boolean,
     required: false,
     default: false,

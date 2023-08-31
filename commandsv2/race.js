@@ -452,8 +452,6 @@ module.exports = {
       );
     }
 
-
-
     if (tieroption == 1 && raceoption == "motorcyclemad") {
       cartofilter = carsarray.filter(
         (car) => car.Motorcycle && car.Speed <= 150
@@ -473,8 +471,6 @@ module.exports = {
       !cardb.Cars[selected.Name.toLowerCase()].Motorcycle
     )
       return interaction.reply("You need a motorcycle for this race!");
-
-
 
     car2 = lodash.sample(cartofilter);
     console.log(cartofilter);
@@ -711,10 +707,12 @@ module.exports = {
       console.log(playerrace);
       console.log(opponentrace);
       console.log(winner);
-    }
-    else if (raceoption == "rustbowl") {
-
-      if(!cardb.Cars[selected.Name.toLowerCase()].RestoreOnly && !cardb.Cars[selected.Name.toLowerCase()].restored) return interaction.reply("You need to use a barn find!")
+    } else if (raceoption == "rustbowl") {
+      if (
+        !cardb.Cars[selected.Name.toLowerCase()].RestoreOnly &&
+        !cardb.Cars[selected.Name.toLowerCase()].restored
+      )
+        return interaction.reply("You need to use a barn find!");
 
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -996,48 +994,55 @@ module.exports = {
           notorietywon = notorietywon * 2;
         }
 
-        if(raceoption == "rustbowl"){
-          let randomr = randomRange(1, 50)
-          let restparts = ["j1exhaust", "j1engine", "j1suspension", "intake", "body"]
+        if (raceoption == "rustbowl") {
+          let randomr = randomRange(1, 50);
+          let restparts = [
+            "j1exhaust",
+            "j1engine",
+            "j1suspension",
+            "intake",
+            "body",
+          ];
 
-          let randomrest = lodash.sample(restparts)
+          let randomrest = lodash.sample(restparts);
 
-          rewards.push(randomrest)
+          rewards.push(randomrest);
 
-          userdata.parts.push(randomrest)
+          userdata.parts.push(randomrest);
 
-          if(randomr <= 10){
-            let parts = ["t6exhaust", "t6tires", "t6turbo"]
+          if (randomr <= 10) {
+            let parts = ["t6exhaust", "t6tires", "t6turbo"];
 
-            let randompart = lodash.sample(parts)
+            let randompart = lodash.sample(parts);
 
-            userdata.parts.push(randompart)
+            userdata.parts.push(randompart);
 
-            rewards.push(`T6 Part!`)
+            rewards.push(`T6 Part!`);
           }
-        let wins = userdata.rustwins 
+          let wins = userdata.rustwins;
 
-        if(wins >= 100 && userdata.rustwon == false){
-          let carobj = {
-            ID: cardb.Cars["2014 hennessey venom gt"].alias,
-      Name: cardb.Cars["2014 hennessey venom gt"].Name,
-      Speed: cardb.Cars["2014 hennessey venom gt"].Speed,
-      Acceleration: cardb.Cars["2014 hennessey venom gt"]["0-60"],
-      Handling: cardb.Cars["2014 hennessey venom gt"].Handling,
-      Parts: [],
-      Emote: cardb.Cars["2014 hennessey venom gt"].Emote,
-      Livery: cardb.Cars["2014 hennessey venom gt"].Image,
-      Miles: 0,
-      Weight: cardb.Cars["2014 hennessey venom gt"].Weight,
-      Gas: 10,
-      MaxGas: 10,
+          if (wins >= 100 && userdata.rustwon == false) {
+            let carobj = {
+              ID: cardb.Cars["2014 hennessey venom gt"].alias,
+              Name: cardb.Cars["2014 hennessey venom gt"].Name,
+              Speed: cardb.Cars["2014 hennessey venom gt"].Speed,
+              Acceleration: cardb.Cars["2014 hennessey venom gt"]["0-60"],
+              Handling: cardb.Cars["2014 hennessey venom gt"].Handling,
+              Parts: [],
+              Emote: cardb.Cars["2014 hennessey venom gt"].Emote,
+              Livery: cardb.Cars["2014 hennessey venom gt"].Image,
+              Miles: 0,
+              Weight: cardb.Cars["2014 hennessey venom gt"].Weight,
+              Gas: 10,
+              MaxGas: 10,
+            };
+
+            userdata.cars.push(carobj);
+            userdata.rustwon = true;
+            rewards.push(
+              `${cardb.Cars["2014 hennessey venom gt"].Emote} ${cardb.Cars["2014 hennessey venom gt"].Name}`
+            );
           }
-
-          userdata.cars.push(carobj)
-          userdata.rustwon = true
-          rewards.push(`${cardb.Cars["2014 hennessey venom gt"].Emote} ${cardb.Cars["2014 hennessey venom gt"].Name}`)
-        }
-
         }
 
         rewards.push(`<:rank_race:1103913420320944198> +${rankwon} Rank`);
