@@ -957,7 +957,7 @@ module.exports = {
           let timeout3 = 3600000;
 
           if (
-            crew[0].Cards[0].time !== null &&
+            crew[0] && crew[0].Cards[0].time !== null &&
             timeout - (Date.now() - crew[0].Cards[0].time) < 0
           ) {
             console.log("no card");
@@ -966,7 +966,7 @@ module.exports = {
           }
 
           if (
-            crew[0].Cards[1].time !== null &&
+            crew[0] && crew[0].Cards[1].time !== null &&
             timeout2 - (Date.now() - crew[0].Cards[1].time) < 0
           ) {
             console.log("no card");
@@ -975,7 +975,7 @@ module.exports = {
           }
 
           if (
-            crew[0].Cards[2].time !== null &&
+            crew[0] && crew[0].Cards[2].time !== null &&
             timeout3 - (Date.now() - crew[0].Cards[2].time) < 0
           ) {
             console.log("no card");
