@@ -34,14 +34,12 @@ module.exports = {
             value: "event_1",
             customId: "event_1",
             emoji: "🌋",
-          }
+          },
         ])
     );
 
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-
-    
 
     let embed = new EmbedBuilder();
     embed.setTitle("Events Menu");
@@ -94,8 +92,7 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      }
-     else if (value === "event_1") {
+      } else if (value === "event_1") {
         embed.setTitle("Rust Bowl");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Welcome to the rust bowl of Zero2Sixty!
