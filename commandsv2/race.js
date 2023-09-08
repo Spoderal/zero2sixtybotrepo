@@ -1343,14 +1343,18 @@ module.exports = {
             if (taskdrag[0].Races >= 10) {
               userdata.cash += 12000;
               userdata.tasks.pull(taskdrag[0]);
-              userdata.update()
-              userdata.save()
+              userdata.updateOne('cash')
+              userdata.updateOne('rp4')
+              userdata.updateOne('items')
+              userdata.updateOne('tasks')
               interaction.channel.send(
                 `Task completed! You earned ${toCurrency(taskdrag[0].Reward)}`
               );
             }
           }
         }
+        userdata.update()
+
 
         if (userdata.autogas == true && selected.Gas == 0) {
           let gasprice = globals.gas;
