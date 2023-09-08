@@ -18,7 +18,6 @@ const stats = require("./stats").stats;
 const cardata = require("./shopdata");
 const { isracing } = require("./is_racing");
 const { series } = require("./series");
-const { updateUsed } = require("./used");
 const { gas } = require("./gas");
 
 let mongoConfig = {
@@ -105,7 +104,6 @@ module.exports = {
     }, 20000);
 
     updateItemShop();
-    updateUsed();
 
     try {
       const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

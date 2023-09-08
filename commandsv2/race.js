@@ -1258,6 +1258,8 @@ module.exports = {
           let tasktrack = tasks.filter((task) => task.ID == "2");
           let taskdrag = tasks.filter((task) => task.ID == "3");
 
+          console.log(taskdrag)
+
           if (taskstreet[0] && raceoption == "streetrace") {
             if (taskstreet[0].Races < 10) {
               taskstreet[0].Races += 1;
@@ -1338,7 +1340,7 @@ module.exports = {
                 }
               );
             }
-            if (tasktrack[0].Races >= 10) {
+            if (taskdrag[0].Races >= 10) {
               userdata.cash += 12000;
               userdata.tasks.pull(taskdrag[0]);
               interaction.channel.send(
