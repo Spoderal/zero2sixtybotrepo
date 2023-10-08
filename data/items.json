@@ -324,11 +324,18 @@
     "Action": "While in your inventory you get 5% more xp while doing the Chef job\n\nFound while doing the Chef job",
     "Name": "Spatula",
     "Type": "Non-Usable",
-    "Emote": "",
+    "Emote": "<:item_spatula2:1155765925262413874>",
     "Shop": false,
+    "Skins":[{
+      "Emote":"<:item_goldenspatula:1155765936733822986>",
+      "Image":"https://i.ibb.co/1n4Zm6S/item-goldenspatula.png",
+      "Increase":10,
+      "Name":"Golden Spatula",
+      "Action":"While in your inventory you get 10% more xp while doing the Chef job\n\nFound while doing the Chef while already having a spatula"
+    }],
     "Findable": false,
     "Tier": 1,
-    "Image": "https://i.ibb.co/DtDmcQP/item-spatula.png"
+    "Image": "https://i.ibb.co/p0ststp/item-spatula2.png"
   },
   "cooking pot": {
     "Price": 0,
@@ -763,21 +770,35 @@
   },
   "zero bar": {
     "Price": 0,
-    "Action": "No idea",
+    "Action": "Get a random effect! Could be good, could be bad.",
     "Name": "Zero Bar",
     "Type": "Usable",
-    "Emote": "<:zerobar:1025128975216947210>",
+    "Emote": "<:item_zbar:1155305593620398162>",
     "Effects": [
       "One of your cars just got +1 speed",
       "One of your cars just got +1 acceleration",
       "One of your cars just got -20 handling",
       "You stink, no effect for you",
       "One of your cars just got +5 speed",
-      "You just got your weekly reward now!"
+      "You just got your weekly reward now!",
+      "You just earned $500!",
+      "You cant race for 10 minutes, HAH!",
+      "All of your cooldowns have been cleared",
+      "I'm picking a number between 1 and 10000, you're being sued for this amount",
+      "I'm picking a number between 1 and 10000, you won this amount!",
+      "You won the Dead Car",
+      "You won the Patty Wagon",
+      "You won the Scary Mclarey",
+      "You won the Zombie Crusher",
+      "You won the Batmobile",
+      "You won the Ectomobile",
+      "You won Christine"
     ],
-    "Findable": false,
-    "Shop": false
+    "Findable": true,
+    "Shop": false,
+    "Image":"https://i.ibb.co/VvtFPrB/item-zbar.png"
   },
+
   "sponsor": {
     "Price": 0,
     "Action": "2x Cash in races for 10 minutes",

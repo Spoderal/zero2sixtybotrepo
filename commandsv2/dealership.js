@@ -670,7 +670,7 @@ module.exports = {
         Class ${randomcar.Class}
         ${emotes.cash} Price: ${toCurrency(randomcar.Price)}
         ${emotes.speed} Power: ${randomcar.Speed}
-        ${emotes.zero2sixty} Acceleration: ${randomcar["0-60"]}
+        ${emotes.acceleration} Acceleration: ${randomcar["0-60"]}
         ${emotes.handling} Handling: ${randomcar.Handling}`
       );
 

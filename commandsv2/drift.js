@@ -222,7 +222,7 @@ module.exports = {
       .addFields({
         name: `${selected.Emote} ${selected.Name}`,
         value: `${emotes.speed} Power: ${velocity.toFixed(1)}\n\n${
-          emotes.zero2sixty
+          emotes.acceleration
         } Acceleration: ${acc.toFixed(1)}s\n\n${
           emotes.weight
         } Weight: ${weight}\n\n${emotes.handling} Handling: ${handling.toFixed(

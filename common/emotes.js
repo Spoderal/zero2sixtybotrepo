@@ -74,9 +74,10 @@ const emotes = {
   classRecentlyReleased: "<:zero2sixty:966453514425495602>",
 
   // Car Properties
-  speed: "<:newspeedemote:1049569265730195466>",
-  handling: "<:handling:983963211403505724>",
-  weight: "<:weighticon:1052742413963243520>",
+  speed: "<:icon_power:1152827354691940362>",
+  handling: "<:icon_handling:1152827359473451069>",
+  weight: "<:icon_weight:1152827356411609138>",
+  acceleration:"<:icon_acceleration:1152827358185783326>",
   none: "<:z_none:898352936785178645>",
   spoiler: "<:spoilerdefault:932419391868526612>",
   spoilerRestored: "<:spoilerrestored:941546331716063232>",

@@ -30,10 +30,17 @@ module.exports = {
           },
           {
             label: "Rust Bowl",
-            description: "Information for the Snow Vs Sun Event",
+            description: "Information for the Rust Bowl Event",
             value: "event_1",
             customId: "event_1",
             emoji: "🌋",
+          },
+          {
+            label: "British Championship",
+            description: "Information for the British Championship Event",
+            value: "event_3",
+            customId: "event_3",
+            emoji: "⚽",
           },
         ])
     );
@@ -49,6 +56,7 @@ module.exports = {
           **__Events__**
           Season 2 <:season2_ico:1146637806354047007>\n
           Rust Bowl 🌋
+          British Championship ⚽
       `);
 
     embed.setColor(colors.blue);
@@ -109,6 +117,31 @@ module.exports = {
         embed
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/CnmpN47/season2.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      }
+      else if (value === "event_3") {
+        embed.setTitle("Zalloween");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Welcome to the the Zalloween event!
+
+            Try not to get spooked by these event cars! All of the event cars from last years halloween event return, and with new ways to collect z bars, you'll love this event!
+
+            What are Z Bars you may ask? Well, they give you a random effect every time you use one! Collect them by racing in any race until halloween!
+
+            Z Bars have a 20% chance to drop from racing, so make sure you race a bunch!
+
+            Z Bars will also have a chance to drop the halloween cars when you use them! 
+
+            **Ends October 31st 2023**
+
+                  `);
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/BK753Qg/EVENT-HALLOWEEN.png");
 
         await interaction.editReply({
           embeds: [embed],

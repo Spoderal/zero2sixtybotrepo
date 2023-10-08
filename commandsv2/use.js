@@ -5,7 +5,7 @@ const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency, randomRange, randomNoRepeats } = require("../common/utils");
+const { toCurrency, randomRange, randomNoRepeats, numberWithCommas } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
@@ -13,7 +13,7 @@ const cratedb = require("../data/cratedb.json");
 const partdb = require("../data/partsdb.json");
 const titledb = require("../data/titles.json");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
-
+const cardb = require("../data/cardb.json")
 const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
@@ -452,6 +452,8 @@ module.exports = {
           }
         );
 
+        interaction.channel.send(`${randomcar.Name} was effected!`)
+
         userdata.update();
       } else if (randomeffect == "One of your cars just got +1 acceleration") {
         let randomcar = lodash.sample(userdata.cars);
@@ -474,7 +476,7 @@ module.exports = {
             ],
           }
         );
-
+        interaction.channel.send(`${randomcar.Name} was effected!`)
         userdata.update();
       } else if (randomeffect == "One of your cars just got -20 handling") {
         let randomcar = lodash.sample(userdata.cars);
@@ -497,7 +499,7 @@ module.exports = {
             ],
           }
         );
-
+        interaction.channel.send(`${randomcar.Name} was effected!`)
         userdata.update();
       } else if (randomeffect == "One of your cars just got +5 speed") {
         let randomcar = lodash.sample(userdata.cars);
@@ -520,7 +522,7 @@ module.exports = {
             ],
           }
         );
-
+        interaction.channel.send(`${randomcar.Name} was effected!`)
         userdata.update();
       } else if (randomeffect == "You stink, no effect for you") {
         return interaction.reply(`${randomeffect}`);
@@ -549,6 +551,264 @@ module.exports = {
         }
         userdata.cash += cash;
         userdata.update();
+      }
+      else if (randomeffect == "You just earned $500!") {
+        let cash = 500;
+        let patron = userdata.patron;
+        let prestige = userdata.prestige;
+        if (patron && patron.tier == "1") {
+          cash *= 2;
+        }
+        if (patron && patron.tier == "2") {
+          cash *= 3;
+        }
+        if (patron && patron.tier == "3") {
+          cash *= 5;
+        }
+        if (patron && patron.tier == "4") {
+          cash *= 6;
+        }
+        if (prestige > 0) {
+          let mult = prestige * 0.05;
+
+          let multy = mult * cash;
+
+          cash = cash += multy;
+        }
+        userdata.cash += cash;
+        userdata.update();
+      }
+      else if (randomeffect == "You cant race for 10 minutes, HAH!") {
+        
+        userdata.racedisabled = true
+        cooldowndata.racedisabled = Date.now()
+        userdata.update();
+        cooldowndata.update()
+        cooldowndata.save()
+      }
+      else if (randomeffect == "All of your cooldowns have been cleared") {
+        
+  
+        cooldowndata.racedisabled = 0
+        cooldowndata.racing = 0
+        cooldowndata.dragracing = 0
+        cooldowndata.trackracing = 0
+        cooldowndata.daily = 0
+        cooldowndata.weekly = 0
+        cooldowndata.drift = 0
+        cooldowndata.pvp = 0
+        cooldowndata.save()
+        userdata.update();
+      }
+      else if (randomeffect == "I'm picking a number between 1 and 10000, you're being sued for this amount") {
+        
+        let randomnum = randomRange(1, 10000)
+        let oldcash = userdata.cash
+        if(oldcash < 0){
+          userdata.cash = 0
+        }
+        else {
+
+          userdata.cash -= randomnum
+        }
+
+
+        userdata.update()
+  
+        await interaction.channel.send(`You just lost $${numberWithCommas(randomnum)}`)
+      }
+
+      else if (randomeffect == "I'm picking a number between 1 and 10000, you won this amount!") {
+        
+        let randomnum = randomRange(1, 10000)
+
+        userdata.cash += randomnum
+
+        userdata.update()
+  
+        await interaction.channel.send(`You just won $${numberWithCommas(randomnum)}`)
+      }
+      else if (randomeffect == "You won the Dead Car") {
+        
+        let car = cardb.Cars["dead car"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.update()
+      }
+      else if (randomeffect == "You won the Patty Wagon") {
+        
+        let car = cardb.Cars["patty wagon"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.update()
+      }
+      else if (randomeffect == "You won the Scary Mclarey") {
+        
+        let car = cardb.Cars["scary mclarey"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.update()
+      }
+      else if (randomeffect == "You won the Zombie Crusher") {
+        
+        let car = cardb.Cars["zombie crusher"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.update()
+      }
+      else if (randomeffect == "You won the Batmobile") {
+        
+        let car = cardb.Cars["batmobile"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.update()
+      }
+      else if (randomeffect == "You won the Ectomobile") {
+        
+        let car = cardb.Cars["the ectomobile"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.cars.update()
+      }
+      else if (randomeffect == "You won Christine") {
+        
+        let car = cardb.Cars["christine"]
+        let obj = {
+          ID: car.alias,
+          Name: car.Name,
+          Speed: car.Speed,
+          Acceleration: car["0-60"],
+          Handling: car.Handling,
+          Parts: [],
+          Emote: car.Emote,
+          Image: car.Image,
+          Miles: 0,
+          Drift: 0,
+          WeightStat: car.Weight,
+          Gas: 10,
+          MaxGas: 10,
+        };
+
+        let cars = userdata.cars
+        let filteredobj = cars.filter((car)=> car.Name == obj.Name)
+        if(!filteredobj[0]){
+          userdata.cars.push(obj)
+        }
+        userdata.update()
       }
       for (var b = 0; i < amount2; b++)
         items.splice(items.indexOf("zero bar"), 1);

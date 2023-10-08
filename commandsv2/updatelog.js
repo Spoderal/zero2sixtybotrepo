@@ -19,7 +19,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "7/14/2023",
+            label: "9/24/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -55,7 +55,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 7/14/2023\n
+            ⚙️ Latest Patch 9/24/2023\n
             🍂 Fall Update 8/31/2023\n
             🏎️ Tiny Update 8/13/2023\n
             ⬆️ New Update 7/26/2023
@@ -83,19 +83,15 @@ module.exports = {
             embed.setTitle(`Latest Patch`);
             embed
               .setDescription(
-                `• New car series\n
-                 • New fuse parts in crates\n
-                 • Import cars are buyable with credits obtained from selling them\n
-                 • New business upgrades\n
-                 • Business leveling\n
-                 • /uninstall, /install and /fuseparts for fuse parts\n
-                 • Weight fuse parts for reducing or increasing car weight\n
-                 • Crates fixed\n
-                 • Car series is raceable\n
-                 • Races give miles
+                `• Halloween Event\n
+                 • New icons for car stats\n
+                 • Win records on profiles\n
+                 • New profile design\n
+                 • Fixed crates\n
+                 
                 `
               )
-              .setFooter({ text: "7/14/2023" })
+              .setFooter({ text: "10/7/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

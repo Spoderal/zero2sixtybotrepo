@@ -42,7 +42,7 @@ module.exports = {
       fuses.push(
         `${partdb.Parts[turbo.toLowerCase()].Emote} ${
           partdb.Parts[turbo.toLowerCase()].Name
-        } : ${emotes.speed} + ${turboindb.Power} ${emotes.zero2sixty} + ${
+        } : ${emotes.speed} + ${turboindb.Power} ${emotes.acceleration} + ${
           turboindb.Acceleration
         } ${emotes.handling} - ${turboindb.HandlingMinus}`
       );

@@ -66,6 +66,7 @@ module.exports = {
       commonCredits,
       rareCredits,
       exoticCredits,
+      zcandy,
       barnmaps,
       typekeys,
     } = profile;
@@ -126,6 +127,8 @@ module.exports = {
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
+
+              <:item_candy:1155765935022559342> Candy: ${numberWithCommas(zcandy)}
               `,
               inline: true,
             },

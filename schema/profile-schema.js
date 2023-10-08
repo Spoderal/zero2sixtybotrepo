@@ -16,6 +16,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 10,
   },
+  racedisabled:{
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   hasvoted: {
     type: Boolean,
     required: false,
@@ -73,6 +78,11 @@ const Profile = new mongoose.Schema({
   },
 
   cars: {
+    type: Array,
+    required: false,
+    default: [],
+  },
+  vault: {
     type: Array,
     required: false,
     default: [],
@@ -638,6 +648,26 @@ const Profile = new mongoose.Schema({
     default: [],
   },
   crewrespect: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  dragwins: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  streetwins: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  trackwins: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  zcandy: {
     type: Number,
     required: false,
     default: 0,

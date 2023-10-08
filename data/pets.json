@@ -108,5 +108,45 @@
     "Breed": "Widow Spoder",
     "Sad": "https://i.ibb.co/1sLyLpS/pet-widow.png",
     "Saddest": "https://i.ibb.co/1sLyLpS/pet-widow.png"
+  },
+  "pumpkin": {
+    "Image": "https://i.ibb.co/n0xnd2t/pet-pumpkin.png",
+    "Emote": "<:pet_pumpkin:1155765933718126662>",
+    "Names": ["Jack", "Lantern"],
+    "Xessence": 50,
+    "Tier": 3,
+    "Breed": "Pumpkin",
+    "Sad": "https://i.ibb.co/n0xnd2t/pet-pumpkin.png",
+    "Saddest": "https://i.ibb.co/n0xnd2t/pet-pumpkin.png"
+  },
+  "eyeball": {
+    "Image": "https://i.ibb.co/QpG6jVN/item-eyeball.png",
+    "Emote": "<:pet_eyeball:1159584622573781002>",
+    "Names": ["Iris", "John"],
+    "Xessence": 50,
+    "Tier": 3,
+    "Breed": "Eyeball",
+    "Sad": "https://i.ibb.co/QpG6jVN/item-eyeball.png",
+    "Saddest": "https://i.ibb.co/QpG6jVN/item-eyeball.png"
+  },
+  "skull": {
+    "Image": "https://i.ibb.co/jVt74RY/pet-skull.gif",
+    "Emote": "<a:pet_skull:1155765929452503070>",
+    "Names": ["Rust T Bones", "Boney-Wan Kenobi", "Jerry Spinefeld", "Ben Rattling"],
+    "Xessence": 50,
+    "Tier": 3,
+    "Breed": "Skull",
+    "Sad": "https://i.ibb.co/jVt74RY/pet-skull.gif",
+    "Saddest": "https://i.ibb.co/jVt74RY/pet-skull.gif"
+  },
+  "ghost": {
+    "Image": "https://i.ibb.co/M1hSG2t/pet-ghost.png",
+    "Emote": "<:pet_ghost:1155765930702405662>",
+    "Names": ["Casper", "Buster", "The Flying Dutchman"],
+    "Xessence": 50,
+    "Tier": 3,
+    "Breed": "Ghost",
+    "Sad": "https://i.ibb.co/M1hSG2t/pet-ghost.png",
+    "Saddest": "https://i.ibb.co/M1hSG2t/pet-ghost.png"
   }
 }

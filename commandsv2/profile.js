@@ -68,6 +68,9 @@ module.exports = {
       let driftrank = userdata.driftrank;
       let racerank = userdata.racerank;
       let prestige = userdata.prestige;
+      let dragwins = userdata.dragwins || 0
+      let streetwins = userdata.streetwins || 0
+      let trackwins = userdata.trackwins || 0
       let tier = userdata.tier;
       let cars = userdata.cars;
       let finalprice = 0;
@@ -116,37 +119,36 @@ module.exports = {
         achivarr = ["No achievements"];
       }
       console.log(achivarr);
-
+      
       let cash = userdata.cash;
       finalprice += cash;
-
+      
       let acthelmet = profilepics[helmet.toLowerCase()].Image;
       let showcase = userdata.showcase;
-
+      
+      console.log(fastcar)
       let embed = new EmbedBuilder()
-        .setTitle(title)
         .setAuthor({ name: user.username, iconURL: acthelmet })
-        .setDescription(
-          `
-        ${emotes.race} Race Rank: ${racerank}\n
-        ${emotes.drift} Drift Rank: ${driftrank}\n
-        ${emotes.prestige} Prestige: ${prestige}\n
-        ${emotes.tier} **Tier**: ${tier}\n
-        ${pvpindb.emote} PVP Rank: ${pvpname} ${pvprank.Wins}\n
-        `
-        )
-        .addFields(
+      
+          .addFields(
+            {
+              name: title,
+              value: `
+              ${emotes.race} Race Rank: ${racerank}\n
+              ${emotes.drift} Drift Rank: ${driftrank}\n
+              ${emotes.prestige} Prestige: ${prestige}\n
+              ${emotes.tier} **Tier**: ${tier}\n
+              ${pvpindb.emote} PVP Rank: ${pvpname} ${pvprank.Wins}\n
+              <:WINS_street:1152813248756842598> Street Race W/L: ${streetwins}\n
+              <:WINS_DRAG:1152813251508305920> Drag Race W/L: ${dragwins}\n
+              <:wins_track:1152813252502360075> Track Race W/L: ${trackwins}\n
+            
+            `,
+            inline: true
+          },
           {
             name: "Achievements",
             value: `${achivarr.join(" ")}`,
-            inline: true,
-          },
-          {
-            name: "Job",
-            value: `
-         ${jobemote} __${userjob.name}__
-          ${userjob.position}
-          `,
             inline: true,
           },
           {
@@ -154,22 +156,17 @@ module.exports = {
             value: `
           **${fastcar.Emote} ${fastcar.Name}**
           ${emotes.speed} ${fastcar.Speed}
-          ${emotes.zero2sixty} ${fastcar.Acceleration}s
+          ${emotes.acceleration} ${fastcar.Acceleration}s
           ${emotes.handling} ${fastcar.Handling}
           ${emotes.weight} ${fastcar.WeightStat}
           `,
             inline: true,
-          },
-          {
-            name: "Networth",
-            value: `
-         ${toCurrency(finalprice)}
-          `,
           }
         )
         .setColor(`${colors.blue}`)
-        .setThumbnail(showcase);
-
+        .setImage(showcase)
+        .setFooter({text: `Networth: ${toCurrency(finalprice)}`})
+        .setThumbnail(fastcar.Livery)
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Helmets")

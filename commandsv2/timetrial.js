@@ -127,7 +127,7 @@ module.exports = {
             name: `Your ${carInLocalDB.Emote} ${carInLocalDB.Name}`,
             value: `
               ${emotes.speed} Power: ${mph}\n
-              ${emotes.zero2sixty} 0-60: ${acceleration}s\n
+              ${emotes.acceleration} 0-60: ${acceleration}s\n
               ${emotes.handling} Handling: ${handling}\n
               ${emotes.weight} Weight: ${weight}\n
             `,

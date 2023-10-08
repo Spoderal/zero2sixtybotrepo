@@ -67,7 +67,6 @@ module.exports = {
     userdata.update();
     cooldowndata.crate = Date.now();
     cooldowndata.save();
-    const canvas = createCanvas(1280, 720);
     let x = 0;
     let rewards = [];
     let i = setInterval(() => {
@@ -84,6 +83,8 @@ module.exports = {
       let reward1 = rewards[0];
       let reward2 = rewards[1];
       let reward3 = rewards[2];
+      let rewardsarr = []
+      
 
       let name1;
       let name2;
@@ -91,60 +92,45 @@ module.exports = {
       userdata = await User.findOne({ id: interaction.user.id });
       if (pfps.Pfps[reward1]) {
         let helmetimg = pfps.Pfps[reward1].Image;
-        name1 = pfps.Pfps[reward1].Name;
-        let loadedhelm = await loadImage(helmetimg);
-
-        ctx.drawImage(loadedhelm, 150, 200, 150, 150);
-        ctx.save();
-        userdata.pfps.push(name1.toLowerCase());
+        name1 = `${pfps.Pfps[reward1].Emote} ${pfps.Pfps[reward1].Name}`
+        
+        userdata.pfps.push(pfps.Pfps[reward1].Name.toLowerCase());
         userdata.update();
       }
       if (pfps.Pfps[reward2]) {
         let helmetimg = pfps.Pfps[reward2].Image;
-        name2 = pfps.Pfps[reward2].Name;
-        let loadedhelm = await loadImage(helmetimg);
-
-        ctx.drawImage(loadedhelm, 570, 200, 150, 150);
-        ctx.save();
-        userdata.pfps.push(name2.toLowerCase());
+        name2 = `${pfps.Pfps[reward2].Emote} ${pfps.Pfps[reward2].Name}`
+        userdata.pfps.push(pfps.Pfps[reward2].Name.toLowerCase());
         userdata.update();
       }
       if (pfps.Pfps[reward3]) {
         let helmetimg = pfps.Pfps[reward3].Image;
-        name3 = pfps.Pfps[reward3].Name;
-        let loadedhelm = await loadImage(helmetimg);
+        name3 = `${pfps.Pfps[reward3].Emote} ${pfps.Pfps[reward3].Name}`
 
-        ctx.drawImage(loadedhelm, 970, 200, 150, 150);
-        ctx.save();
-        userdata.pfps.push(name3.toLowerCase());
+        userdata.pfps.push(pfps.Pfps[reward3].Name.toLowerCase());
         userdata.update();
       }
 
-      ctx.restore();
-      ctx.font = "40px sans-serif";
-      ctx.fillStyle = "#00000";
-      let imageload = await loadImage("https://i.ibb.co/y8RDM5v/cash.png");
+      
 
       if (reward1.endsWith(`Cash`)) {
         let amount = Number(reward1.split(" ")[0]);
-        name1 = `${amount} Cash`;
-        ctx.drawImage(imageload, 150, 200, 150, 150);
+        name1 = `$${amount} Cash`
         userdata.cash += amount;
         userdata.update();
       }
 
       if (reward2.endsWith(`Cash`)) {
         let amount2 = Number(reward2.split(" ")[0]);
-        name2 = `${amount2} Cash`;
-        ctx.drawImage(imageload, 570, 200, 150, 150);
+        name2 = `$${amount2} Cash`
         userdata.cash += amount2;
         userdata.update();
       }
 
       if (reward3.endsWith(`Cash`)) {
         let amount3 = Number(reward3.split(" ")[0]);
-        name3 = `${amount3} Cash`;
-        ctx.drawImage(imageload, 970, 200, 150, 150);
+        name3 = `$${amount3} Cash`
+
         userdata.cash += amount3;
         userdata.update();
       }
@@ -168,45 +154,34 @@ module.exports = {
       if (partdb.Parts[reward1]) {
         let partimg = partdb.Parts[reward1].Image;
         name1 = partdb.Parts[reward1].Name;
-        let loadedpart = await loadImage(partimg);
-
-        ctx.drawImage(loadedpart, 150, 200, 150, 150);
-        ctx.save();
+        
         userdata.parts.push(name1.toLowerCase());
         userdata.update();
       }
       if (partdb.Parts[reward2]) {
         let partimg = partdb.Parts[reward2].Image;
         name2 = partdb.Parts[reward2].Name;
-        let loadedpart = await loadImage(partimg);
 
-        ctx.drawImage(loadedpart, 570, 200, 150, 150);
-        ctx.save();
         userdata.parts.push(name2.toLowerCase());
         userdata.update();
       }
       if (partdb.Parts[reward3]) {
         let partimg = partdb.Parts[reward3].Image;
         name3 = partdb.Parts[reward3].Name;
-        let loadedpart = await loadImage(partimg);
-
-        ctx.drawImage(loadedpart, 970, 200, 150, 150);
-        ctx.save();
+       
         userdata.parts.push(name3.toLowerCase());
         userdata.update();
       }
 
       await userdata.save();
-      ctx.fillText(name1, 100, 565);
-      ctx.fillText(name2, 520, 565);
-      ctx.fillText(name3, 920, 565);
+      rewardsarr.push(`${name1}`)
+      rewardsarr.push(`${name2}`)
+      rewardsarr.push(`${name3}`)
 
-      let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-        name: "profile-image.png",
-      });
-      embed.setImage(`attachment://profile-image.png`);
+ 
+      embed.setDescription(`${rewardsarr.join('\n')}`);
       console.log(rewards);
-      await interaction.editReply({ embeds: [embed], files: [attachment] });
+      await interaction.editReply({ embeds: [embed] });
     }, 5000);
   },
 };

@@ -468,7 +468,7 @@ module.exports = {
 
       if (partindb.Acceleration > 0) {
         stats.push(
-          `${emotes.zero2sixty} Acceleration: -${partindb.Acceleration}`
+          `${emotes.acceleration} Acceleration: -${partindb.Acceleration}`
         );
       }
       if (partindb.Stars > 0) {
@@ -654,7 +654,7 @@ module.exports = {
           name: `Information for ${itemindb.Name}`,
           iconURL: itemindb.Image,
         })
-        .setDescription(`${itemindb.Action}\n\nPrice: ${price}`)
+        .setDescription(`${itemindb.Action}`)
         .addFields(
           {
             name: "Type",
@@ -663,6 +663,21 @@ module.exports = {
           { name: "Item Tier", value: `${tier}` }
         )
         .setColor(colors.blue);
+
+      if(itemindb.Skins){
+        let skinarr = []
+        let skins = itemindb.Skins
+        for(let skin in skins){
+          console.log(skins)
+          skinarr.push(`${skins[skin].Emote} ${skins[skin].Name} **${skins[skin].Action}**`)
+        }
+        embed.addFields(
+          {
+            name: "Skins",
+            value: `${skinarr.join('\n')}`
+          }
+        )
+      }
 
       if (itemindb.Image) {
         embed.setThumbnail(`${itemindb.Image}`);

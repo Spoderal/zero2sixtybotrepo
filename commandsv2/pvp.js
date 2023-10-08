@@ -223,11 +223,11 @@ module.exports = {
         .addFields([
           {
             name: `${user.username}'s ${carindb1.Emote} ${carindb1.Name}`,
-            value: `${emotes.speed} Power: ${speed}\n\n${emotes.zero2sixty} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
+            value: `${emotes.speed} Power: ${speed}\n\n${emotes.acceleration} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
           },
           {
             name: `${user2.username}'s ${carindb2.Emote} ${carindb2.Name}`,
-            value: `${emotes.speed} Power: ${speed2}\n\n${emotes.zero2sixty} 0-60: ${acceleration2}s\n\n${emotes.handling} Handling: ${handling2}\n\n${emotes.weight} Weight: ${weight2}`,
+            value: `${emotes.speed} Power: ${speed2}\n\n${emotes.acceleration} 0-60: ${acceleration2}s\n\n${emotes.handling} Handling: ${handling2}\n\n${emotes.weight} Weight: ${weight2}`,
           },
         ])
         .setImage(carimage1)

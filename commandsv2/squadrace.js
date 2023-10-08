@@ -151,13 +151,13 @@ module.exports = {
       .addFields(
         {
           name: `${selected.Emote} ${selected.Name}`,
-          value: `${emotes.speed} Power: ${mph}\n\n${emotes.zero2sixty} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
+          value: `${emotes.speed} Power: ${mph}\n\n${emotes.acceleration} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
 
           inline: true,
         },
         {
           name: `${car2.Emote} ${car2.Name}`,
-          value: `${emotes.speed} Power: ${mph2}\n\n${emotes.zero2sixty} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
+          value: `${emotes.speed} Power: ${mph2}\n\n${emotes.acceleration} Acceleration: ${acceleration2}s\n\n${emotes.weight} Weight: ${weight2}\n\n${emotes.handling} Handling: ${handling2}`,
           inline: true,
         }
       )

@@ -509,9 +509,8 @@ module.exports = {
 
       if (!crew) return await interaction.reply("You're not in a crew!");
 
-      let currentCrew = crews.find(({ name }) => name == crew.name);
-      if (!currentCrew)
-        return await interaction.reply("That crew doesn't exist!");
+      let currentCrew = crews.find(({ name }) => name == crew.name) || {owner: {id: 0}, members: 1}
+     
 
       if (currentCrew.owner.id == uid)
         return await interaction.reply(

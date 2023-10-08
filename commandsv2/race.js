@@ -131,6 +131,18 @@ module.exports = {
         .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
+    let timeout2 = 600000
+    
+    if (
+      cooldowndata.racedisabled !== null &&
+      timeout2 - (Date.now() - cooldowndata.racedisabled) > 0
+    ) {
+      let time = ms(timeout2 - (Date.now() - cooldowndata.racedisabled));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`You can race again in ${time}`);
+      return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+    }
     let bountytimeout = 3600000;
 
     let usercars = userdata.cars;
@@ -774,13 +786,13 @@ module.exports = {
           name: `${helmetdb.Pfps[userpfp.toLowerCase()].Emote} Your ${
             selected.Emote
           } ${selected.Name}`,
-          value: `${emotes.speed} HP: ${selected.Speed}\n${emotes.zero2sixty} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${selected.Handling}\n${emotes.weight} Weight: ${selected.WeightStat}`,
+          value: `${emotes.speed} HP: ${selected.Speed}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${selected.Handling}\n${emotes.weight} Weight: ${selected.WeightStat}`,
           inline: true,
         },
         {
           name: `${car2.Emote} ${car2.Name}`,
           value: `${emotes.speed} HP: ${car2.Speed}\n${
-            emotes.zero2sixty
+            emotes.acceleration
           } Acceleration: ${car2[`0-60`]}s\n${emotes.handling} Handling: ${
             car2.Handling
           }\n${emotes.weight} Weight: ${car2.Weight}`,
@@ -1480,10 +1492,32 @@ module.exports = {
           }
         }
 
+        let randcandy = randomRange(1, 25)
+
+        rewards.push(`<:item_candy:1155765935022559342> Candy`)
+
+        userdata.zcandy += randcandy
+        let randomcandybar = randomRange(1, 4)
+
+        if(randomcandybar == 2){
+          rewards.push(`<:item_zbar:1155305593620398162> Zero Bar`)
+          userdata.items.push(`zero bar`)
+        }
+
         embed.addFields({
           name: `Rewards`,
           value: `${rewards.join("\n")}`,
         });
+
+        if(raceindb.Name == "Street Race"){
+          userdata.streetwins += 1
+        }
+        if(raceindb.Name == "Drag Race"){
+          userdata.dragwins += 1
+        }
+        if(raceindb.Name == "Track Race"){
+          userdata.trackwins += 1
+        }
 
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} won!`);
       } else if (winner == false) {
