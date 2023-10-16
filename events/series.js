@@ -91,7 +91,16 @@ async function series() {
               cooldowns.series1 = 0;
               udata.pressure = false;
             }
-            udata.update();
+            await User.findOneAndUpdate(
+              {
+                id: udata.id,
+              },
+              {
+                $set: {
+                  
+                },
+              }
+            );            
             cooldowns.update();
             udata.save();
             cooldowns.save();

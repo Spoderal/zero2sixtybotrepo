@@ -119,5 +119,16 @@
     "Type": "House",
     "Space": 0,
     "Prestige": 0
+  },
+  "haunted manor": {
+    "id": "haunted",
+    "Name": "Haunted Manor",
+    "Price": 10000000,
+    "Perk": "Earn 2x more candy in races",
+    "Image": "https://i.ibb.co/zRzkXCX/2167609.jpg",
+    "Emote": "🎃",
+    "Type": "House",
+    "Space": 20,
+    "Prestige": 2
   }
 }

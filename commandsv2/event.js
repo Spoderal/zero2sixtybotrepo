@@ -36,11 +36,11 @@ module.exports = {
             emoji: "🌋",
           },
           {
-            label: "British Championship",
-            description: "Information for the British Championship Event",
-            value: "event_3",
-            customId: "event_3",
-            emoji: "⚽",
+            label: "Halloween Event",
+            description: "Information for the Halloween Event",
+            value: "event_4",
+            customId: "event_4",
+            emoji: "🎃",
           },
         ])
     );
@@ -54,9 +54,9 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Season 2 <:season2_ico:1146637806354047007>\n
+          Season 2 <:season2_ico:1146637806354047007>
           Rust Bowl 🌋
-          British Championship ⚽
+          Halloween Event 🎃
       `);
 
     embed.setColor(colors.blue);
@@ -123,7 +123,7 @@ module.exports = {
           components: [row2],
         });
       }
-      else if (value === "event_3") {
+      else if (value === "event_4") {
         embed.setTitle("Zalloween");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`Welcome to the the Zalloween event!
@@ -136,7 +136,9 @@ module.exports = {
 
             Z Bars will also have a chance to drop the halloween cars when you use them! 
 
-            **Ends October 31st 2023**
+            **Check /shop to see the event shop**
+
+            **Ends November 10th 2023**
 
                   `);
         embed

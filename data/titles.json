@@ -60,5 +60,9 @@
   "drift king": {
     "Title": "DRIFT KING",
     "Achieve": "Event"
+  },
+  "spooky":{
+    "Title": "Spooky",
+    "Achieve": "Event"
   }
 }

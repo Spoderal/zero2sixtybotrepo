@@ -15,7 +15,7 @@ module.exports = {
     let userdata = await User.findOne({ id: userid });
 
     if (userdata) return await interaction.reply("You have an account!");
-
+    interaction.reply({content: "Please wait...", fetchReply: true})
     let startersjp = [
       "1995 mazda miata",
       "2011 scion tc",
@@ -83,7 +83,7 @@ module.exports = {
       description:
         "The police, or better known, the ZPD, has raided every racers garage in ZeroCity! You'll need to climb your way up to earn the reputation to take on the police captain, Devil. Choose a car below to start your racing journey!\n\nCheck out the [getting started tutorial](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty) on YouTube\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!",
     });
-    let msg = await interaction.reply({
+    let msg = await interaction.editReply({
       content: `Starting the tutorial, pick a car from the buttons below to choose a car! Make sure you choose wisely`,
       embeds: [embed],
       components: [rowjp, rowam, roweu],

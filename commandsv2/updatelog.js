@@ -33,11 +33,11 @@ module.exports = {
             emoji: "🍂",
           },
           {
-            label: "8/13/2023",
-            description: "Information for the recent tiny update!",
+            label: "10/16/2023",
+            description: "Information for the recent halloween update!",
             value: "5_update",
             customId: "up5",
-            emoji: "🏎️",
+            emoji: "🎃",
           },
           {
             label: "7/26/2023",
@@ -57,7 +57,7 @@ module.exports = {
             **__Updates__**
             ⚙️ Latest Patch 9/24/2023\n
             🍂 Fall Update 8/31/2023\n
-            🏎️ Tiny Update 8/13/2023\n
+            🎃 Halloween Update 10/16/2023\n
             ⬆️ New Update 7/26/2023
         `);
 
@@ -76,11 +76,11 @@ module.exports = {
 
         collector.on("collect", async (collected) => {
           const value = collected.values[0];
-          if (value === "3_update") {
+          if (value === "5_update") {
             embed.fields = [];
             embed.setDescription("\u200b");
 
-            embed.setTitle(`Latest Patch`);
+            embed.setTitle(`Halloween Update`);
             embed
               .setDescription(
                 `• Halloween Event\n
@@ -88,10 +88,11 @@ module.exports = {
                  • Win records on profiles\n
                  • New profile design\n
                  • Fixed crates\n
+                 • New cars in /dealer
                  
                 `
               )
-              .setFooter({ text: "10/7/2023" })
+              .setFooter({ text: "10/15/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 
@@ -278,63 +279,7 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "5_update") {
-            embed.fields = [];
-            embed.setDescription("\u200b");
-            embed
-              .addFields(
-                {
-                  name: "Features ⭐",
-                  value: `__Tons of bug fixes and improvements__\n
-                  • Blueprints cant be opened forever\n
-                  • Gas now shows the first decimal\n
-                  • Business visual bugs fixed\n
-                  • Crew visual bugs fixed\n
-                  • Drift formula tweaked for new stats\n
-                  • Item display numbers no longer duplicate in the garage, same with parts\n
-                  • Gold exchange updated\n
-                  • House stats moved to /stats\n
-                  • Untag added\n
-                  • Tag, and ID filters added to prevent abuse\n
-                  • Pet overhaul, pets collect items from races worth different tiers, each item has a rarity tier, and each pet can find items up to x tier\n
-                  • Type Takeover event with a new event style `,
-                  inline: true,
-                },
-                {
-                  name: "Features 2 ⭐",
-                  value: ` 
-                  • Livery list now shows images for each livery\n
-                  • Installed parts on your car now show the benefits they give\n
-                  • Sell and buy amounts no longer restricted\n
-                  • **AUTO GAS**, you can enable it in settings. If you have enough money, you'll fill up at the end of a race. By default, your cars gain +1 gas every 5 minutes now.
-                  • Most items fixed\n
-                  • Pet overhaul, pets collect items from races worth different tiers, each item has a rarity tier, and each pet can find items up to x tier\n
-                  • Type Takeover event with a new event style\n
-                  • Tasks fixed!
-            `,
-                  inline: true,
-                },
-                {
-                  name: "Cars 🚗",
-                  value: ` 
-                  <:subaru:931011550418976808> 2010 Subaru WRX STI
-                  <:mercedes_z:973000364410404924> 2016 Mercedes A45
-                  <:acura:931012624164978728> 2023 Acura Integra Type S
-                  <:jaguar:931011547826913330> 2016 Jaguar F Type Project 7
-                  <:lamborghini:931011549655617566> 2010 Lamborghini Murcielago SV
-            `,
-                  inline: true,
-                }
-              )
-              .setFooter({ text: "8/13/2023" })
-              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
-              .setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          }
+          } 
         });
       });
   },

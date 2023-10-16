@@ -16,7 +16,7 @@ async function gas() {
         userdata.id !== null
       ) {
         try {
-          let udata = await User.findOne({ id: userdata.id });
+          let udata = await User.findOne({ id: userdata.id }, { versionKey: '_somethingElse' });
           if (udata !== null) {
             let timeout = 300000;
 
@@ -36,15 +36,24 @@ async function gas() {
 
                 cars[car] = carf;
               }
-              console.log(cars);
               udata.cars = cars;
               cooldowns.gas = Date.now();
               cooldowns.save();
             }
           }
-
           udata.markModified("cars");
-          udata.save();
+          let cars = udata.cars
+          await User.findOneAndUpdate(
+            {
+              id: udata.id,
+            },
+            {
+              $set: {
+                cars: cars,
+              },
+            }
+          );
+           udata.save();
         } catch (err) {
           console.log(err);
         }

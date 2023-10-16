@@ -31,12 +31,13 @@ module.exports = {
     let carclassParr = [];
     let carEventarr = [];
     let newcars = [
-      cars.Cars["2022 volkswagen golf r"],
-      cars.Cars["2016 mercedes a45"],
-      cars.Cars["2010 subaru wrx sti"],
-      cars.Cars["2023 acura integra type s"],
-      cars.Cars["2016 jaguar f type project 7"],
-      cars.Cars["2010 lamborghini murcielago sv"],
+      cars.Cars["2023 bentley mulliner bacalar"],
+      cars.Cars["2010 jaguar cx75"],
+      cars.Cars["scary mclarey"],
+      cars.Cars["patty wagon"],
+      cars.Cars["dead car"],
+      cars.Cars["christine"],
+      cars.Cars["zombie crusher"],
     ];
     let global = await Global.findOne();
     let carstock = global.stock;

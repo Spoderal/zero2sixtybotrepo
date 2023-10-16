@@ -21,7 +21,7 @@ const partdb = require("../data/partsdb.json");
 const squaddb = require("../data/squads.json");
 const ms = require("pretty-ms");
 const itemdb = require("../data/items.json");
-
+const houses = require("../data/houses.json")
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const weather = require("../data/weather.json");
 
@@ -1494,7 +1494,13 @@ module.exports = {
 
         let randcandy = randomRange(1, 25)
 
-        rewards.push(`<:item_candy:1155765935022559342> Candy`)
+        let filteredhouse1 = userdata.houses.filter((house) => house.id == "haunted")
+
+        if(userdata.houses && filteredhouse1[0]){
+          randcandy = randcandy * 2
+        }
+
+        rewards.push(`<:item_candy:1155765935022559342> ${randcandy} Candy`)
 
         userdata.zcandy += randcandy
         let randomcandybar = randomRange(1, 4)

@@ -36,6 +36,10 @@ module.exports = {
       .setCustomId("buy_ghost")
       .setLabel("Buy Ghost")
       .setEmoji("<:pet_ghost:1155765930702405662>")
+      .setStyle("Secondary"),
+      new Discord.ButtonBuilder()
+      .setCustomId("buy_spooky")
+      .setLabel("Buy Spooky Title")
       .setStyle("Secondary")
      
     )
@@ -43,7 +47,7 @@ module.exports = {
     let embed = new Discord.EmbedBuilder()
     .setTitle("Zalloween Shop")
     .setDescription("Buy items from the Zalloween Shop!")
-    .addFields({name:"For Sale", value: "<:pet_pumpkin:1155765933718126662> Pet Pumpkin : <:item_candy:1155765935022559342> 250 Candy\n<a:pet_skull:1155765929452503070> Pet Skull: <:item_candy:1155765935022559342> 250 Candy\n<:pet_eyeball:1159584622573781002> Pet Eyeball <:item_candy:1155765935022559342> 250 Candy\n<:pet_ghost:1155765930702405662> Pet Ghost: <:item_candy:1155765935022559342> 250 Candy"})
+    .addFields({name:"For Sale", value: "<:pet_pumpkin:1155765933718126662> Pet Pumpkin : <:item_candy:1155765935022559342> 250 Candy\n<a:pet_skull:1155765929452503070> Pet Skull: <:item_candy:1155765935022559342> 250 Candy\n<:pet_eyeball:1159584622573781002> Pet Eyeball <:item_candy:1155765935022559342> 250 Candy\n<:pet_ghost:1155765930702405662> Pet Ghost: <:item_candy:1155765935022559342> 250 Candy\nSpooky Title: <:item_candy:1155765935022559342> 500 Candy"})
     .setColor(colors.blue)
     
 
@@ -61,8 +65,9 @@ module.exports = {
    })
 
    collector.on("collect", async (i) => {
-    if(userdata.zcandy < 250) return i.update(`You need 250 candy to get a pet!`)
+
       if(i.customId.includes("buy_pumpkin")){
+        if(userdata.zcandy < 250) return i.update(`You need 250 candy to get a pet!`)
         let randname = lodash.sample(petdb.pumpkin)
         let petobj = {
           name: randname,
@@ -81,6 +86,7 @@ module.exports = {
         await i.update(`✅`)
       }
       else if(i.customId.includes("buy_skull")){
+        if(userdata.zcandy < 250) return i.update(`You need 250 candy to get a pet!`)
         let randname = lodash.sample(petdb.skull)
         let petobj = {
           name: randname,
@@ -99,6 +105,7 @@ module.exports = {
         await i.update(`✅`)
       }
       else if(i.customId.includes("buy_eyeball")){
+        if(userdata.zcandy < 250) return i.update(`You need 250 candy to get a pet!`)
         let randname = lodash.sample(petdb.eyeball)
         let petobj = {
           name: randname,
@@ -117,6 +124,7 @@ module.exports = {
         await i.update(`✅`)
       }
       else if(i.customId.includes("buy_ghost")){
+        if(userdata.zcandy < 250) return i.update(`You need 250 candy to get a pet!`)
         let randname = lodash.sample(petdb.ghost)
         let petobj = {
           name: randname,
@@ -129,6 +137,15 @@ module.exports = {
         };
         userdata.zcandy -= 250
         userdata.pet = petobj
+
+        userdata.save()
+
+        await i.update(`✅`)
+      }
+      else if(i.customId.includes("buy_spooky")){
+        if(userdata.zcandy < 500) return i.update(`You need 250 candy to get this title!`)
+        userdata.zcandy -= 500
+        userdata.titles.push("spooky")
 
         userdata.save()
 

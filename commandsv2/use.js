@@ -105,7 +105,10 @@ module.exports = {
       if (userdata.banklimit >= 2500000) {
         userdata.banklimit = 2500000;
       }
-    } else if (itemtouse.toLowerCase() == "big bank increase") {
+    } 
+    
+   
+    else if (itemtouse.toLowerCase() == "big bank increase") {
       let banklimit = userdata.banklimit;
 
       if (banklimit >= 10000000)

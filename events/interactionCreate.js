@@ -61,18 +61,18 @@ module.exports = {
               ephemeral: true,
             });
           } else {
-            await updateCrew(interaction);
-            if (userdata) {
-              if (Number.isInteger(userdata.cash) == false) {
-                let bal1 = userdata.cash;
-                console.log(bal1);
-                let bal = Math.trunc(bal1);
-                console.log("bal fixed");
-                console.log(bal);
-                userdata.cash = bal;
-                userdata.save();
-              }
-            }
+            // await updateCrew(interaction);
+            // if (userdata) {
+            //   if (Number.isInteger(userdata.cash) == false) {
+            //     let bal1 = userdata.cash;
+            //     console.log(bal1);
+            //     let bal = Math.trunc(bal1);
+            //     console.log("bal fixed");
+            //     console.log(bal);
+            //     userdata.cash = bal;
+            //     userdata.save();
+            //   }
+            // }
             await command.execute(interaction);
           }
         } catch (err) {

@@ -21,8 +21,7 @@ const { series } = require("./series");
 const { gas } = require("./gas");
 
 let mongoConfig = {
-  keepAlive: true,
-  authSource: "admin"
+  keepAlive: true
 };
 
 // MongoDB SSL for production only
@@ -38,7 +37,7 @@ module.exports = {
   name: "ready",
   once: true,
   async execute(client, commands) {
-    await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
+    await mongoose.connect('mongodb+srv://Z3roSpoder:Spideral3@cluster0.voofy.mongodb.net/build?retryWrites=true&w=majority', mongoConfig);
 
     patron(client);
     double(client);
@@ -94,7 +93,7 @@ module.exports = {
       `🍂 FALL 🍂  /season`,
       `⚙️ PATCH ⚙️ 7/14 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
-      "🎃 HALLOWEEN EVENT /events 🎃",
+      "🔥 INSANE NEW UPDATE /updates 🔥",
     ];
 
     let randomstatus = lodash.sample(randomstatuses);

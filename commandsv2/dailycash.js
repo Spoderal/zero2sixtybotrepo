@@ -12,13 +12,16 @@ module.exports = {
     .setName("daily")
     .setDescription("Collect your daily cash"),
   async execute(interaction) {
+   await interaction.reply("Please wait...")
     let uid = interaction.user.id;
     let dcash = 250;
     let userdata = (await User.findOne({ id: uid })) || new User({ id: uid });
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: uid });
+    var isWeekend = ([0,6].indexOf(new Date().getDay()) != -1);
 
+console.log(isWeekend)
     let daily = cooldowndata.daily;
     let patreon = userdata.patron;
     let lastDaily = cooldowndata.lastDaily;
@@ -28,7 +31,6 @@ module.exports = {
 
     let timestamp = lastDailyTime.getTime();
     let now = new Date(Date.now()).getTime();
-
     console.log(now);
 
     let delta = now - timestamp;
@@ -62,13 +64,14 @@ module.exports = {
       dcash = dcash += multy;
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
+      console.log('false')
       let time = ms(timeout - (Date.now() - daily));
       let timeEmbed = new Discord.EmbedBuilder()
         .setColor(colors.blue)
         .setDescription(
           `You've already collected your daily cash\n\nCollect it again in ${time}.`
         );
-      await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+     return await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
     } else {
       let house = userdata.house;
       if (house && house.perks.includes("Daily $300")) {
@@ -153,7 +156,7 @@ module.exports = {
       }
       embed.setColor(colors.blue);
 
-      await interaction.reply({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
       console.log(userdata.settings.dailyStreak);
     }
   },
