@@ -18,7 +18,7 @@ async function series() {
           let cooldowns = await Cooldown.findOne({ id: userdata.id });
           let bountycool = cooldowns.series1;
           let ticketscool = cooldowns.series1tickets;
-          let udata = await User.findOne({ id: userdata.id });
+          let udata = await User.findOne({ id: userdata.id }, { versionKey: '_somethingElse' });
           if (udata) {
             let timeout = 86400000;
             let timeout2 = 600000;

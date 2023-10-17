@@ -39,6 +39,7 @@ module.exports = {
       cars.Cars["christine"],
       cars.Cars["zombie crusher"],
     ];
+    //test
     let global = await Global.findOne();
     let carstock = global.stock;
     let carsarray = [];
