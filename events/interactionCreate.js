@@ -10,7 +10,6 @@ const {
   userGetFromInteraction,
 } = require("../common/user");
 const { InteractionType } = require("discord.js");
-const { gas } = require("./gas");
 
 //test
 //test
