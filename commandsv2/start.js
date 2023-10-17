@@ -81,16 +81,19 @@ module.exports = {
       color: 3447003,
       thumbnail: { url: "https://i.ibb.co/5n1ts36/newlogoshadow.png" },
       description:
-        "The police, or better known, the ZPD, has raided every racers garage in ZeroCity! You'll need to climb your way up to earn the reputation to take on the police captain, Devil. Choose a car below to start your racing journey!\n\nCheck out the [getting started tutorial](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty) on YouTube\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!",
+        "The police, or better known, the ZPD, has raided every racers garage in ZeroCity! You'll need to climb your way up to earn the reputation to take on the police captain, Devil. Choose a car below to start your racing journey!\n\nCheck out the [getting started tutorial](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty) on YouTube\n\nAny Questions? Join our [community server](https://discord.gg/bHwqpxJnJk)!\n\nHave fun!\n\nYou have 30 seconds to choose or the bot will choose for you!",
     });
-    let msg = await interaction.editReply({
-      content: `Starting the tutorial, pick a car from the buttons below to choose a car! Make sure you choose wisely`,
-      embeds: [embed],
-      components: [rowjp, rowam, roweu],
-      fetchReply: true,
-    });
-
-    let filter = (btnInt) => {
+    let msg
+    setTimeout(async () => {
+      
+    msg = await interaction.editReply({
+        content: `Starting the tutorial, pick a car from the buttons below to choose a car! Make sure you choose wisely`,
+        embeds: [embed],
+        components: [rowjp, rowam, roweu],
+        fetchReply: true,
+      });
+      
+      let filter = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
     };
     let collector = msg.createMessageComponentCollector({
@@ -104,6 +107,7 @@ module.exports = {
       stage: 1,
     };
     newuser.cash += 500;
+    
 
     collector.on("collect", async (i) => {
       let car = i.customId;
@@ -125,12 +129,13 @@ module.exports = {
         Gas: 10,
         MaxGas: 10,
       };
-
+      
       newuser.cars.push(carobj);
       newuser.save();
       await i.update(
         `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, run /garage to see your cars ID, go ahead and try running \`/race car: ${carobj.ID}\`, and **select street race**, then **select Tier 1**`
-      );
-    });
-  },
-};
+        );
+      });
+    }, 3000);
+    },
+  };
