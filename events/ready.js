@@ -18,7 +18,6 @@ const stats = require("./stats").stats;
 const cardata = require("./shopdata");
 const { isracing } = require("./is_racing");
 const { series } = require("./series");
-const { gas } = require("./gas");
 
 let mongoConfig = {
   keepAlive: true,
@@ -45,7 +44,6 @@ module.exports = {
     gold(client);
     stats(client);
     series(client);
-    gas();
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
