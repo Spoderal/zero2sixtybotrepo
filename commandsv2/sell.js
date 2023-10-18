@@ -1,3 +1,5 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
@@ -6,7 +8,6 @@ let parts = require("../data/partsdb.json");
 let profilestuff = require("../data/pfpsdb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
-const lodash = require("lodash");
 const itemdb = require("../data/items.json");
 const imports = require("../data/imports.json");
 

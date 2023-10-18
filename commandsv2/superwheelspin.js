@@ -7,7 +7,7 @@ const partsdb = require("../data/partsdb.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency, numberWithCommas } = require("../common/utils");
+const { toCurrency } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
@@ -36,10 +36,8 @@ module.exports = {
     if (wheelspins <= 0)
       return await interaction.reply("You're out of super wheel spins!");
     let items = ["🏎️", "⚙️", "💵"];
-    let item = lodash.sample(items);
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
-    let maps = wheelspinrewards.Maps;
     let parts = wheelspinrewards.Parts;
     let tier4 = wheelspinrewards.Tier4;
     let garagespaces = userdata.garagelimit;
@@ -74,7 +72,6 @@ module.exports = {
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
         if (item == "⚙️") {
-          let randomnum = lodash.random(10);
           let reward;
 
           reward = lodash.sample(parts);
@@ -195,7 +192,6 @@ module.exports = {
             }
           });
         } else if (item == "💵") {
-          let randomnum = lodash.random(10);
           let reward;
 
           reward = lodash.sample(cash);

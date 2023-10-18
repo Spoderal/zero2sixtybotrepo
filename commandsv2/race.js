@@ -1,8 +1,7 @@
+"use strict";
+
 const {
-  ActionRowBuilder,
   EmbedBuilder,
-  ButtonBuilder,
-  AttachmentBuilder,
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
@@ -13,19 +12,11 @@ const Cooldowns = require("../schema/cooldowns");
 const Globals = require("../schema/global-schema");
 let cardb = require("../data/cardb.json");
 const lodash = require("lodash");
-const petdb = require("../data/pets.json");
 const { toCurrency, randomRange } = require("../common/utils");
-const cratedb = require("../data/cratedb.json");
 const helmetdb = require("../data/pfpsdb.json");
-const partdb = require("../data/partsdb.json");
-const squaddb = require("../data/squads.json");
 const ms = require("pretty-ms");
 const itemdb = require("../data/items.json");
-const houses = require("../data/houses.json")
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const weather = require("../data/weather.json");
-
-const cardata = require("../events/shopdata");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -111,12 +102,8 @@ module.exports = {
     let globals = await Globals.findOne({});
     let userdata = await User.findOne({ id: user.id });
     let prestigerank = userdata.prestige || 0;
-    let bountyuser = userdata.bounty || 0;
     console.log(prestigerank);
-    let bonus = prestigerank * 0.05;
-    let usinginv = userdata.using;
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let pet = userdata.newpet;
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: user.id });
@@ -143,7 +130,6 @@ module.exports = {
         .setDescription(`You can race again in ${time}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
-    let bountytimeout = 3600000;
 
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car").toLowerCase();
@@ -200,190 +186,25 @@ module.exports = {
     let raceoption = interaction.options.getString("race");
     let tieroption = interaction.options.getNumber("tier");
 
-    let streettiers = {
-      1: {
-        hp: 300,
-        acc: 5,
-        handling: 500,
-        weight: 3000,
-      },
-      2: {
-        hp: 400,
-        acc: 5,
-        handling: 600,
-        weight: 2800,
-      },
-      3: {
-        hp: 500,
-        acc: 4,
-        handling: 700,
-        weight: 2600,
-      },
-      4: {
-        hp: 600,
-        acc: 4,
-        handling: 700,
-        weight: 2600,
-      },
-      5: {
-        hp: 700,
-        acc: 3,
-        handling: 800,
-        weight: 2500,
-      },
-      6: {
-        hp: 800,
-        acc: 3,
-        handling: 800,
-        weight: 2400,
-      },
-      7: {
-        hp: 1000,
-        acc: 2,
-        handling: 1000,
-        weight: 2400,
-      },
-      8: {
-        hp: 4000,
-        acc: 2,
-        handling: 1200,
-        weight: 2300,
-      },
-    };
-
-    let dragtiers = {
-      1: {
-        hp: 400,
-        acc: 5,
-        handling: 500,
-        weight: 3000,
-      },
-      2: {
-        hp: 500,
-        acc: 5,
-        handling: 500,
-        weight: 2800,
-      },
-      3: {
-        hp: 600,
-        acc: 4,
-        handling: 500,
-        weight: 2600,
-      },
-      4: {
-        hp: 700,
-        acc: 4,
-        handling: 500,
-        weight: 2600,
-      },
-      5: {
-        hp: 800,
-        acc: 3,
-        handling: 500,
-        weight: 2500,
-      },
-      6: {
-        hp: 900,
-        acc: 3,
-        handling: 500,
-        weight: 2400,
-      },
-      7: {
-        hp: 1000,
-        acc: 2,
-        handling: 500,
-        weight: 2400,
-      },
-      8: {
-        hp: 3000,
-        acc: 2,
-        handling: 500,
-        weight: 2300,
-      },
-    };
-
-    let tracktiers = {
-      1: {
-        hp: 200,
-        acc: 6,
-        handling: 750,
-        weight: 3500,
-      },
-      2: {
-        hp: 400,
-        acc: 5,
-        handling: 800,
-        weight: 3400,
-      },
-      3: {
-        hp: 500,
-        acc: 4,
-        handling: 1000,
-        weight: 3300,
-      },
-      4: {
-        hp: 600,
-        acc: 4,
-        handling: 1500,
-        weight: 3200,
-      },
-      5: {
-        hp: 700,
-        acc: 3,
-        handling: 2000,
-        weight: 3100,
-      },
-      6: {
-        hp: 800,
-        acc: 3,
-        handling: 2500,
-        weight: 3000,
-      },
-      7: {
-        hp: 1000,
-        acc: 2,
-        handling: 3000,
-        weight: 2900,
-      },
-      8: {
-        hp: 3000,
-        acc: 2,
-        handling: 3500,
-        weight: 2800,
-      },
-    };
-
     const dorace = function (hp, a, h, w) {
-      let targetHp = streettiers[tieroption].hp;
-      let targetA = streettiers[tieroption].acc;
-      let targetH = streettiers[tieroption].handling;
-      let targetW = streettiers[tieroption].weight;
+      
       let sum = hp + hp / a + h + w / 100;
       return sum / 4;
     };
     const dodrag = function (hp, a, h, w) {
-      let targetHp = dragtiers[tieroption].hp;
-      let targetA = dragtiers[tieroption].acc;
-      let targetH = dragtiers[tieroption].handling;
-      let targetW = dragtiers[tieroption].weight;
+      
       let sum = hp + hp / a + w / 100;
       return sum / 4;
     };
 
     const dotrack = function (hp, a, h, w) {
-      let targetHp = tracktiers[tieroption].hp;
-      let targetA = tracktiers[tieroption].acc;
-      let targetH = tracktiers[tieroption].handling;
-      let targetW = tracktiers[tieroption].weight;
+      
 
       let sum = hp + hp / a + h + w / 100;
       return sum / 4;
     };
     const domotor = function (hp, a, h, w) {
-      let targetHp = 300;
-      let targetA = 3.0;
-      let targetH = 1000;
-      let targetW = 500;
+      
       let sum = hp + hp / a + h + w / 100;
       return sum / 4;
     };
@@ -499,11 +320,6 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
-
-      let speedscore = speed * 10;
-      let speedscore2 = speed2 * 10;
 
       let playerrace = dorace(speed, acceleration, handling, weight);
       let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
@@ -572,11 +388,7 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let weightscore = Math.floor(weight / 50);
-      let weightscore2 = Math.floor(weight2 / 50);
-
-      let speedscore = speed * 5;
-      let speedscore2 = speed2 * 5;
+      
 
       let playerrace = dodrag(speed, acceleration, handling, weight);
       let opponentrace = dodrag(speed2, acceleration2, handling2, weight2);
@@ -597,14 +409,6 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let handlingscore = handling * 100;
-      let handlingscore2 = handling2 * 100;
-
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
-
-      let speedscore = speed * 15;
-      let speedscore2 = speed2 * 15;
 
       let playerrace = dotrack(speed, acceleration, handling, weight);
       let opponentrace = dotrack(speed2, acceleration2, handling2, weight2);
@@ -625,14 +429,7 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let handlingscore = handling * 100;
-      let handlingscore2 = handling2 * 100;
-
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
-
-      let speedscore = speed * 15;
-      let speedscore2 = speed2 * 15;
+    
 
       let playerrace = dotrack(speed, acceleration, handling, weight);
       let opponentrace = dotrack(speed2, acceleration2, handling2, weight2);
@@ -680,11 +477,7 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
-
-      let speedscore = speed * 10;
-      let speedscore2 = speed2 * 10;
+  
 
       let playerrace = dorace(speed, acceleration, handling, weight);
       let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
@@ -705,11 +498,6 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
-
-      let speedscore = speed * 10;
-      let speedscore2 = speed2 * 10;
 
       let playerrace = dorace(speed, acceleration, handling, weight);
       let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
@@ -736,11 +524,7 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let weightscore = Math.floor(weight / 100);
-      let weightscore2 = Math.floor(weight2 / 100);
 
-      let speedscore = speed * 10;
-      let speedscore2 = speed2 * 10;
 
       let playerrace = dorace(speed, acceleration, handling, weight);
       let opponentrace = dorace(speed2, acceleration2, handling2, weight2);
@@ -752,16 +536,8 @@ module.exports = {
       console.log(winner);
     }
     let randombarn = randomRange(1, 20);
-    let randomstory = [
-      "Snowy is the leader of the oldest squad in the city.",
-      "Snowy gained his Agera from Devil by beating him in a race",
-      "You are snowy's son",
-      "Snowy has now been missing for 3 years",
-      "Zero City is heavily controlled by Devil, the ZPD Captain",
-      "Snowy used to be the ZPD Captain",
-    ];
-    let randstory = lodash.sample(randomstory);
-    let randkey = randomRange(1, 10);
+
+
     let randcar = randomRange(1, 10);
     let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];

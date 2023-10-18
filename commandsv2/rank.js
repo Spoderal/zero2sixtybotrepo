@@ -1,9 +1,10 @@
+"use strict";
+
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const ms = require("pretty-ms");
 const globalSchema = require("../schema/global-schema");
 const emotes = require("../common/emotes").emotes;
 
@@ -19,8 +20,6 @@ module.exports = {
     let prestigerank = userdata.prestige;
     let driftrank = userdata.driftrank;
     let newprestige2 = prestigerank + 1;
-    let bountycooldown = prestigerank * 1000;
-    let bonus = prestigerank * 0.05;
     let rpbonus = 0;
     let globals = await globalSchema.findOne();
     let crews = globals.crews;
@@ -78,7 +77,6 @@ module.exports = {
 
     rpbonus += prestigerank / 100;
     console.log(rpbonus);
-    let crew2 = userdata.crew;
     let rounded = rpbonus * 100;
 
     let racerank = userdata.racerank;

@@ -3,9 +3,7 @@ const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
-const { capitalize } = require("lodash");
 const colors = require("../common/colors");
-const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json").Cars;
 const parttiersdb = require("../data/parttiers.json");
@@ -39,12 +37,6 @@ module.exports = {
       );
     let carimage =
       selected[0].Image || cardb[selected[0].Name.toLowerCase()].Image;
-    let carindb = cardb[selected[0].Name.toLowerCase()];
-    let carprice = carindb.Price;
-    if (carindb.Price == 0) {
-      carprice = 5000;
-    }
-
     let exhausttier = selected[0].exhaust || 0;
     let turbotier = selected[0].turbo || 0;
     let tiretier = selected[0].tires || 0;
@@ -52,7 +44,6 @@ module.exports = {
     let enginetier = selected[0].engine || 0;
     let clutchtier = selected[0].clutch || 0;
     let intercoolertier = selected[0].intercooler || 0;
-    let braketier = selected[0].brakes || 0;
     let intaketier = selected[0].intake || 0;
     let ecutier = selected[0].ecu || 0;
     let gearboxtier = selected[0].gearbox || 0;
@@ -472,8 +463,7 @@ module.exports = {
         let newtier = (tier += 1);
         let price = parttiersdb[`${button.data.custom_id}1`].Cost * newtier;
         console.log(button.data.custom_id);
-        let t6part =
-          partdb.Parts[`t6${button.data.custom_id}`].Name.toLowerCase();
+
 
         if (oldtier >= 6) {
           button.setDisabled(true);
@@ -534,7 +524,6 @@ module.exports = {
       enginetier = selected[0].engine || 0;
       clutchtier = selected[0].clutch || 0;
       intercoolertier = selected[0].intercooler || 0;
-      braketier = selected[0].brakes || 0;
       intaketier = selected[0].intake || 0;
       ecutier = selected[0].ecu || 0;
       gearboxtier = selected[0].gearbox || 0;

@@ -1,8 +1,9 @@
+"use strict";
+
 const {
   EmbedBuilder,
   ActionRowBuilder,
-  ButtonBuilder,
-  ActionRow,
+  ButtonBuilder
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { numberWithCommas, toCurrency } = require("../common/utils");
@@ -14,10 +15,7 @@ const { tipFooterRandom } = require("../common/tips");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const achievementsdb = require("../data/achievements.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const ms = require("pretty-ms");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -34,32 +32,20 @@ module.exports = {
     const user = userGetFromInteraction(interaction);
     const profile = await userFindOrCreateInDB(user);
     let userdata = await User.findOne({ id: interaction.user.id });
-    let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
 
     let {
       cash,
       gold,
       rp4,
-      rmaps: rbarnmaps,
-      lmaps: lbarnmaps,
       ckeys,
       rkeys,
       ekeys,
-      fkeys,
-      dkeyst: dkeys,
       notoriety,
       wheelspins,
       lockpicks: lockpicks,
       swheelspins,
-      moontokens,
-      stockpoints,
       achievements,
       blueprints,
-      f1blueprints,
-      spacetokens,
-      foolskeys,
-      raintrophy,
-      lekeys,
       evkeys,
       bounty,
       seriestickets,
@@ -68,7 +54,6 @@ module.exports = {
       exoticCredits,
       zcandy,
       barnmaps,
-      typekeys,
     } = profile;
 
     if (userdata.police == false) {

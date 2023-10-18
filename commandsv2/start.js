@@ -2,9 +2,7 @@ const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Global = require("../schema/global-schema");
 const cardb = require("../data/cardb.json");
-const houses = require("../data/houses.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,7 +30,6 @@ module.exports = {
       "2001 volkswagen golf",
     ];
 
-    let globals = await Global.findOne({});
 
     let rowjp = new discord.ActionRowBuilder();
     let rowam = new discord.ActionRowBuilder();

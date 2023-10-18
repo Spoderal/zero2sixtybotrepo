@@ -1,3 +1,5 @@
+"use strict";
+
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
@@ -5,12 +7,8 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { userGetPatreonTimeout } = require("../common/user");
-const { toCurrency } = require("../common/utils");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const lodash = require("lodash");
-const cratedb = require("../data/cratedb.json");
 
 const { createCanvas, loadImage } = require("canvas");
 module.exports = {
@@ -90,37 +88,30 @@ module.exports = {
 
     let handling = selected.Handling;
 
-    let time;
-
     let timelimit;
 
     let notorietyreward;
 
     let cashreward;
-    let crater;
 
     let dranks;
     if (difficulty == "easy") {
-      time = 100;
       timelimit = 15;
       notorietyreward = 50;
       cashreward = 100;
       dranks = 1;
     } else if (difficulty == "medium") {
-      time = 250;
       timelimit = 10;
       notorietyreward = 100;
       cashreward = 250;
       dranks = 2;
     } else if (difficulty == "hard") {
-      time = 500;
       timelimit = 7;
 
       notorietyreward = 200;
       cashreward = 500;
       dranks = 2;
     } else if (difficulty == "master") {
-      time = 550;
       timelimit = 5;
 
       notorietyreward = 300;

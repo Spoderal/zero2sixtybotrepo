@@ -1,3 +1,5 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");

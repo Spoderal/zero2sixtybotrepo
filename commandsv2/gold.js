@@ -1,8 +1,5 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const lodash = require("lodash");
-const User = require("../schema/profile-schema");
-const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,7 +7,6 @@ module.exports = {
     .setDescription("View gold pricing and what it can buy"),
 
   async execute(interaction) {
-    let userdata = await User.findOne({ id: interaction.user.id });
 
     let embed = new Discord.EmbedBuilder()
       .setTitle("Gold Pricing")

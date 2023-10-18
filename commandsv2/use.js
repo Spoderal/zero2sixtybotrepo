@@ -5,16 +5,13 @@ const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency, randomRange, randomNoRepeats, numberWithCommas } = require("../common/utils");
+const { toCurrency, randomRange, numberWithCommas } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
 const cratedb = require("../data/cratedb.json");
-const partdb = require("../data/partsdb.json");
-const titledb = require("../data/titles.json");
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const cardb = require("../data/cardb.json")
-const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,7 +1,4 @@
 const Cooldowns = require(`../schema/cooldowns`);
-const cardb = require("../data/cardb.json");
-const partdb = require("../data/partsdb.json");
-const ocardb = require("../data/oldcars.json");
 const User = require(`../schema/profile-schema`);
 const Global = require("../schema/global-schema");
 

@@ -1,4 +1,4 @@
-const discord = require("discord.js");
+"use strict";
 
 const seasons = require("../data/seasons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -6,7 +6,6 @@ const User = require("../schema/profile-schema");
 const Cooldown = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { numberWithCommas, toCurrency } = require("../common/utils");
-const { tipFooterSeasonPages } = require("../common/tips");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const partdb = require("../data/partsdb.json");
@@ -477,13 +476,11 @@ module.exports = {
             userdata.season1claimed += 1;
             userdata.save();
           } else if (pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()]) {
-            let car = pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()];
 
             userdata.pfps.push(rewardtoclaim.Item.toLowerCase());
             userdata.season1claimed += 1;
             userdata.save();
           } else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
-            let car = titledb[rewardtoclaim.Item.toLowerCase()];
 
             userdata.titles.push(rewardtoclaim.Item.toLowerCase());
             userdata.season1claimed += 1;

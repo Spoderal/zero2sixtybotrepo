@@ -1,3 +1,5 @@
+"use strict";
+
 const {
   EmbedBuilder,
   ActionRowBuilder,
@@ -11,7 +13,6 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const emotes = require("../common/emotes");
 const itemdb = require("../data/items.json");
-const ms = require("pretty-ms");
 const { createCanvas, loadImage } = require("canvas");
 const cardb = require("../data/cardb.json");
 const { numberWithCommas } = require("../common/utils");
@@ -54,7 +55,6 @@ module.exports = {
     let items = udata.items;
     let houses = udata.houses;
     let garagelimit = udata.garageLimit;
-    let xessence = udata.xessence;
 
     if (filter && filter == "favorites") {
       ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true);
@@ -138,7 +138,6 @@ module.exports = {
       10
     );
 
-    let showcaseimg = udata.showcase;
     console.log(parts);
 
     let itempage = cars;

@@ -1,10 +1,11 @@
+"use strict";
+
 const cars = require("../data/cardb.json");
 const partdb = require("../data/partsdb.json").Parts;
 const {
   EmbedBuilder,
   ButtonBuilder,
   ActionRowBuilder,
-  ActionRow,
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
@@ -12,7 +13,7 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const garagedb = require("../data/garages.json");
-const { toCurrency, randomNoRepeats, randomRange } = require("../common/utils");
+const {  randomNoRepeats, randomRange } = require("../common/utils");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("lockpick")
@@ -52,7 +53,6 @@ module.exports = {
       garages.push({ chance: garage.Rarity, type: garage.Name.toLowerCase() });
     }
 
-    let rarity;
     let fil = 200;
     if (using.includes("grape juice") || using.includes("Grape Juice")) {
       let cooldown = cooldowns.grapejuice;
@@ -111,7 +111,6 @@ module.exports = {
     }
     console.log(rand1);
 
-    let randcash = lodash.random(garageindb.MaxCash);
     let randomarray = [rand1, rand2, rand3];
     console.log(randomarray);
     let rand2arr = [];

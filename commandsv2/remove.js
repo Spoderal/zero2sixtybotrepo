@@ -1,15 +1,7 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
-const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const { capitalize } = require("lodash");
-const colors = require("../common/colors");
-const emotes = require("../common/emotes").emotes;
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const cardb = require("../data/cardb.json").Cars;
 const parttiersdb = require("../data/parttiers.json");
-const { toCurrency } = require("../common/utils");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("remove")
@@ -51,11 +43,7 @@ module.exports = {
       return interaction.reply(
         "Thats not a car! Make sure to specify a car ID, or car name"
       );
-    let carindb = cardb[selected[0].Name.toLowerCase()];
-    let carprice = carindb.Price;
-    if (carindb.Price == 0) {
-      carprice = 1000;
-    }
+
     let removepart = interaction.options.getString("part");
 
     if (!selected[0][removepart.toLowerCase()])

@@ -1,16 +1,13 @@
+"use strict";
+
 const Discord = require("discord.js");
-const ms = require("ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const lodash = require("lodash");
-const partdb = require("../data/partsdb.json");
-const itemdb = require("../data/items.json");
 const petdb = require("../data/pets.json");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const Cooldowns = require("../schema/cooldowns");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const tasks = require("../data/tasks.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,7 +39,6 @@ module.exports = {
     let name = pet.name || "N/A";
 
     let petimage = petdb[pet.pet].Image;
-    let petemote = petdb[pet.pet].Emote;
     let petbreed = petdb[pet.pet].Breed;
 
     if (love < 75) {
@@ -159,7 +155,6 @@ module.exports = {
         });
       } else if (i.customId.includes("feed")) {
         let pet = userdata.newpet;
-        let hunger = pet.hunger;
         let thirst = pet.thirst;
         let love = pet.love;
         await User.findOneAndUpdate(
@@ -208,7 +203,6 @@ module.exports = {
         });
       } else if (i.customId.includes("water")) {
         let pet = userdata.newpet;
-        let thirst = pet.thirst;
         let hunger = pet.hunger;
         let love = pet.love;
 
@@ -348,6 +342,3 @@ module.exports = {
   },
 };
 
-function randomRange(min, max) {
-  return Math.round(Math.random() * (max - min)) + min;
-}

@@ -1,17 +1,11 @@
 const Global = require(`../schema/global-schema`);
-const itemsdb = require("../data/items.json");
 const lodash = require("lodash");
-const { randomNoRepeats, randomRange } = require("../common/utils");
-const User = require("../schema/profile-schema")
 async function updateItemShop() {
   let global = await Global.findOne();  
-  let user = await User.findOne({id: "937967206652837928"})
 
   console.log(global)
   let itemcooldown = global.itemshopcooldown;
-  let items = [];
   let timeout = 86400000;
-  let itemshopalr = global.itemshop;
   setInterval(async () => {
     try {
       global = await Global.findOne();

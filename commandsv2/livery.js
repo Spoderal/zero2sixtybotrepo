@@ -1,14 +1,13 @@
+"use strict";
+
 const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
-const Car = require("../schema/car");
 const Global = require("../schema/global-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const { ImgurClient } = require("imgur");
-const { createReadStream } = require("fs");
 const imgbb = require("imgbb-uploader");
 
 module.exports = {

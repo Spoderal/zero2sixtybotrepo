@@ -1,3 +1,5 @@
+"use strict";
+
 const codes = require("../data/codes.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");

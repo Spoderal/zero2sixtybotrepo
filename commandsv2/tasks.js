@@ -1,8 +1,6 @@
-const db = require("quick.db");
 const Discord = require("discord.js");
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const lodash = require("lodash");
 const colors = require("../common/colors");
 const { toCurrency, randomRange } = require("../common/utils");
 

@@ -1,3 +1,5 @@
+"use strict";
+
 const Discord = require("discord.js");
 const barns = require("../data/barns.json");
 const lodash = require("lodash");
@@ -7,7 +9,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { toCurrency, randomRange } = require("../common/utils");
+const { randomRange } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -66,23 +68,19 @@ module.exports = {
 
     // Create an array of 100 elements, based on the chances field
     let barnfind = lodash.sample(barns.Barns[rarity.toLowerCase()]);
-    let resale;
     let namefor;
     let color;
     switch (rarity) {
       case "common":
         color = "#388eff";
-        resale = 1000;
         namefor = "Common";
         break;
       case "rare":
         color = "#a80000";
-        resale = 10000;
         namefor = "Rare";
         break;
       case "legendary":
         color = "#44e339";
-        resale = 25000;
         namefor = "Legendary";
         break;
     }

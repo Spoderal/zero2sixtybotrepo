@@ -1,3 +1,5 @@
+"use strict";
+
 const Discord = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const icons = require("../data/crewicons.json");
@@ -882,7 +884,6 @@ module.exports = {
         interaction.editReply({ embeds: [embed] });
       }, 3000);
     } else if (option == "cards") {
-      let uid = interaction.user.id;
       let crew = userdata.crew;
       let crewname = crew.name;
       let crew2 = crews.find((crew) => crew.name == crewname);

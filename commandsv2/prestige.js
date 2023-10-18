@@ -1,8 +1,8 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
-const ms = require("pretty-ms");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");

@@ -1,14 +1,14 @@
+"use strict";
+
 const {
   ActionRowBuilder,
   EmbedBuilder,
-  SelectMenuBuilder,
-  ButtonBuilder,
+  SelectMenuBuilder
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
-const cardb = require("../data/cardb.json");
 let seasondb = require("../data/seasons.json");
 
 module.exports = {

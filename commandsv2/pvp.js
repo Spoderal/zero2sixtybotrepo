@@ -1,14 +1,14 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
   ActionRowBuilder,
   ButtonBuilder,
-  AttachmentBuilder,
   EmbedBuilder,
 } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const ms = require("pretty-ms");
-const lodash = require("lodash");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
@@ -248,39 +248,9 @@ module.exports = {
         time: 30000,
       });
 
-      let filter2 = (btnInt) => {
-        return user.id == btnInt.user.id;
-      };
-      const collector2 = msg.createMessageComponentCollector({
-        filter: filter2,
-        time: 30000,
-      });
+   
 
-      let rowstrat = new ActionRowBuilder().setComponents(
-        new ButtonBuilder()
-          .setCustomId("careful")
-          .setLabel("Careful")
-          .setEmoji("🟢")
-          .setStyle("Success"),
-        new ButtonBuilder()
-          .setCustomId("fast")
-          .setLabel("Fast")
-          .setEmoji("🔴")
-          .setStyle("Success")
-      );
 
-      let rowstrat2 = new ActionRowBuilder().setComponents(
-        new ButtonBuilder()
-          .setCustomId("careful")
-          .setLabel("Careful")
-          .setEmoji("🟢")
-          .setStyle("Danger"),
-        new ButtonBuilder()
-          .setCustomId("fast")
-          .setLabel("Fast")
-          .setEmoji("🔴")
-          .setStyle("Danger")
-      );
 
       collector.on("collect", async (i) => {
         if (i.customId.includes("approve")) {
@@ -683,16 +653,4 @@ module.exports = {
   },
 };
 
-function roundedImage(ctx, x, y, width, height, radius) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-}
+

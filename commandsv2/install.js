@@ -1,8 +1,8 @@
-const cars = require("../data/cardb.json");
-const Discord = require("discord.js");
+"use strict";
+
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
-const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const partdb = require("../data/partsdb.json");
 
@@ -25,7 +25,6 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let uid = interaction.user.id;
 
     let caroption = interaction.options.getString("car");
     let partoption = interaction.options.getString("part");

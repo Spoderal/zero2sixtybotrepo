@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const carsdb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const ms = require("ms");
@@ -10,9 +9,7 @@ const colors = require("../common/colors");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const {
   toCurrency,
-  blankInlineField,
   randomRange,
-  convertMPHtoKPH,
   numberWithCommas,
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");

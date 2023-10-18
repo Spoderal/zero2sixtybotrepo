@@ -1,7 +1,6 @@
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { AttachmentBuilder } = require("discord.js");
 const Cooldowns = require("../schema/cooldowns");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
@@ -10,7 +9,6 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const Global = require("../schema/global-schema");
 const cardb = require("../data/cardb.json");
 const { toCurrency } = require("../common/utils");
-const { createCanvas, loadImage } = require("canvas");
 const achievementdb = require("../data/achievements.json");
 
 module.exports = {

@@ -1,16 +1,15 @@
-const codes = require("../data/codes.json");
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
   EmbedBuilder,
   ButtonBuilder,
-  ActionRowBuilder,
-  ActionRow,
+  ActionRowBuilder
 } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 
 const { toCurrency, randomRange } = require("../common/utils");
-const cardb = require("../data/cardb.json");
 const colors = require("../common/colors");
 const businesses = require("../data/businesses.json");
 const { emotes } = require("../common/emotes");

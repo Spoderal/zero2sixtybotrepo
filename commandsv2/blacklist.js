@@ -1,3 +1,5 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { userGetFromInteraction, blacklistCheck } = require("../common/user");
 const { EmbedBuilder } = require("discord.js");

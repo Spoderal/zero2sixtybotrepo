@@ -1,4 +1,5 @@
-const cars = require("../data/cardb.json");
+"use strict";
+
 const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
@@ -17,12 +18,10 @@ module.exports = {
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let uid = interaction.user.id;
 
     let caroption = interaction.options.getString("car");
 
     let ucars = userdata.cars;
-    let uparts = userdata.parts;
 
     let selected = ucars.filter((car) => car.ID == caroption.toLowerCase());
 
@@ -56,7 +55,6 @@ module.exports = {
       );
     }
     if (springs) {
-      let springsindb = partdb.Parts[springs.toLowerCase()];
 
       fuses.push(
         `${partdb.Parts[springs.toLowerCase()].Emote} ${

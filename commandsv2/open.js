@@ -1,11 +1,12 @@
+"use strict";
+
 const lodash = require("lodash");
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const titledb = require("../data/titles.json");
-const { createCanvas, loadImage } = require("canvas");
 const partdb = require("../data/partsdb.json");
 
 const ms = require("ms");
@@ -91,20 +92,17 @@ module.exports = {
       let name3;
       userdata = await User.findOne({ id: interaction.user.id });
       if (pfps.Pfps[reward1]) {
-        let helmetimg = pfps.Pfps[reward1].Image;
         name1 = `${pfps.Pfps[reward1].Emote} ${pfps.Pfps[reward1].Name}`
         
         userdata.pfps.push(pfps.Pfps[reward1].Name.toLowerCase());
         userdata.update();
       }
       if (pfps.Pfps[reward2]) {
-        let helmetimg = pfps.Pfps[reward2].Image;
         name2 = `${pfps.Pfps[reward2].Emote} ${pfps.Pfps[reward2].Name}`
         userdata.pfps.push(pfps.Pfps[reward2].Name.toLowerCase());
         userdata.update();
       }
       if (pfps.Pfps[reward3]) {
-        let helmetimg = pfps.Pfps[reward3].Image;
         name3 = `${pfps.Pfps[reward3].Emote} ${pfps.Pfps[reward3].Name}`
 
         userdata.pfps.push(pfps.Pfps[reward3].Name.toLowerCase());
@@ -152,21 +150,18 @@ module.exports = {
       }
 
       if (partdb.Parts[reward1]) {
-        let partimg = partdb.Parts[reward1].Image;
         name1 = partdb.Parts[reward1].Name;
         
         userdata.parts.push(name1.toLowerCase());
         userdata.update();
       }
       if (partdb.Parts[reward2]) {
-        let partimg = partdb.Parts[reward2].Image;
         name2 = partdb.Parts[reward2].Name;
 
         userdata.parts.push(name2.toLowerCase());
         userdata.update();
       }
       if (partdb.Parts[reward3]) {
-        let partimg = partdb.Parts[reward3].Image;
         name3 = partdb.Parts[reward3].Name;
        
         userdata.parts.push(name3.toLowerCase());

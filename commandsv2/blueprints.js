@@ -1,3 +1,5 @@
+"use strict";
+
 const lodash = require("lodash");
 const {
   EmbedBuilder,
@@ -9,7 +11,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const titledb = require("../data/titles.json");
 const { createCanvas, loadImage } = require("canvas");
 const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
@@ -50,7 +51,6 @@ module.exports = {
     }
     //fix
     if (type == "blueprints") {
-      let using = userdata.using;
       let boughtindb = blueprints;
 
       if (userdata.blueprints <= 0)

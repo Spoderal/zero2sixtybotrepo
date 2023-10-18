@@ -8,7 +8,6 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const {
-  numberWithCommas,
   toCurrency,
   randomRange,
 } = require("../common/utils");
@@ -37,11 +36,6 @@ module.exports = {
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
     let items = ["🏎️", "💵", "⚙️", "🔩"];
-    let item = lodash.sample(items);
-    let using = userdata.using;
-
-    let cash = wheelspinrewards.Cash;
-    let maps = wheelspinrewards.Maps;
     let items2 = wheelspinrewards.Items;
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
@@ -91,7 +85,6 @@ module.exports = {
           );
           interaction.editReply({ embeds: [embed] });
         } else if (item == "🏎️") {
-          let randomnum = lodash.random(5);
           let reward;
 
           reward = lodash.sample(cars);

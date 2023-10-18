@@ -1,9 +1,10 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
 const squadsdb = require("../data/squads.json");
 const { EmbedBuilder } = require("discord.js");
-const { primary } = require("../common/colors");
 
 const { toCurrency } = require("../common/utils");
 module.exports = {

@@ -1,3 +1,5 @@
+"use strict";
+
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const partdb = require("../data/partsdb.json");

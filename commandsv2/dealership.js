@@ -1,16 +1,15 @@
+"use strict";
+
 const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
   ActionRowBuilder,
-  SelectMenuBuilder,
   EmbedBuilder,
-  ButtonBuilder,
-  CommandInteractionOptionResolver,
+  ButtonBuilder
 } = require("discord.js");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const { toCurrency, numberWithCommas } = require("../common/utils");
-const { tipFooterPurchaseCar } = require("../common/tips");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
@@ -28,7 +27,6 @@ module.exports = {
     let carclassBarr = [];
     let carclassAarr = [];
     let carclassSarr = [];
-    let carclassParr = [];
     let carEventarr = [];
     let newcars = [
       cars.Cars["2023 bentley mulliner bacalar"],
@@ -750,24 +748,7 @@ module.exports = {
       } else if (i.customId.includes("classC")) {
         classpage = carclassCarr;
         embed = new EmbedBuilder().setTitle("Class C Dealership");
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
+   
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/fYgt2kj/cclass.png")
           .setTitle("Class C Dealership")
@@ -821,24 +802,7 @@ module.exports = {
       } else if (i.customId.includes("classB")) {
         classpage = carclassBarr;
         embed = new EmbedBuilder().setTitle("Class B Dealership");
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
+      
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/k5ByyvZ/Bclass.png")
           .setTitle("Class B Dealership")
@@ -892,24 +856,7 @@ module.exports = {
       } else if (i.customId.includes("classA")) {
         classpage = carclassAarr;
         embed = new EmbedBuilder();
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
+     
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/mDNbCrR/aclass.png")
           .setTitle("Class A Dealership")
@@ -963,24 +910,7 @@ module.exports = {
       } else if (i.customId.includes("classS")) {
         classpage = carclassSarr;
         embed = new EmbedBuilder().setTitle("Class S Dealership");
-        let row = new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId("previous")
-            .setEmoji("◀️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("next")
-            .setEmoji("▶️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("first")
-            .setEmoji("⏮️")
-            .setStyle("Secondary"),
-          new ButtonBuilder()
-            .setCustomId("last")
-            .setEmoji("⏭️")
-            .setStyle("Secondary")
-        );
+      
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/tqY1mCf/sclass.png")
           .setTitle("Class S Dealership")

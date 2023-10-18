@@ -1,3 +1,5 @@
+"use strict";
+
 const Discord = require("discord.js");
 const barns = require("../data/junkparts.json");
 const lodash = require("lodash");
@@ -7,7 +9,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()

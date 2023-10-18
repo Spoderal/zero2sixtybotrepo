@@ -1,3 +1,5 @@
+"use strict";
+
 const profilepics = require("../data/pfpsdb.json").Pfps;
 const cardb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -9,10 +11,8 @@ const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
 const titledb = require("../data/titles.json");
 const emotes = require("../common/emotes").emotes;
-const jobdb = require("../data/jobs.json");
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 
-const { createCanvas, loadImage } = require("canvas");
 const lodash = require("lodash");
 
 module.exports = {
@@ -92,22 +92,10 @@ module.exports = {
       if (pvpname == undefined) {
         pvpname = "Silver";
       }
-      let jobemote = "";
 
       let pvpindb = pvpranks[pvpname.toLowerCase()];
       let achievements = userdata.achievements;
-      let userjob = userdata.work || {
-        name: "No Job",
-        position: "No Position",
-      };
-
-      if (userjob.name !== "No Job") {
-        let userjobfilter = jobdb[userjob.name.toLowerCase()];
-        let positionfilter = userjobfilter.Positions.filter(
-          (pos) => pos.name.toLowerCase() == userjob.position.toLowerCase()
-        );
-        jobemote = positionfilter[0].emote;
-      }
+ 
       let achivarr = [];
       for (let ach in achievements) {
         let achiev = achievements[ach];

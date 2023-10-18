@@ -1,7 +1,9 @@
+"use strict";
+
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const { numberWithCommas, toCurrency } = require("../common/utils");
+const { numberWithCommas } = require("../common/utils");
 const Global = require("../schema/global-schema");
 const { emotes } = require("../common/emotes");
 module.exports = {

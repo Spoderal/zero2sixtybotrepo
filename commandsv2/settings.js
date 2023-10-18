@@ -28,7 +28,6 @@ module.exports = {
     let temote = "❌";
     let tremote = "❌";
     let gasemote = "❌";
-    let memote = "🏎️";
 
     if (dailyenabled == true) {
       demote = "✅";
@@ -43,9 +42,6 @@ module.exports = {
       gasemote = "✅";
     }
 
-    if (policemode == true) {
-      memote = "🚨";
-    }
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Settings for ${user.username}`)
@@ -188,48 +184,8 @@ module.exports = {
           components: [row, row2],
           fetchReply: true,
         });
-      } else if (i.customId.includes("police")) {
-        if (!userdata.work)
-          return interaction.editReply(
-            "You need to have the police job for this setting!"
-          );
-        if (userdata.work.name !== "Police")
-          return interaction.editReply(
-            "You need to have the police job for this setting!"
-          );
-        if (userdata.police == true) {
-          userdata.police = false;
-          row2.components[1].setStyle("Success");
-          row2.components[1].setLabel("Enable Police Mode");
-          row2.components[1].setEmoji("🚨");
-        } else if (userdata.police == false) {
-          userdata.police = true;
-          row2.components[1].setStyle("Danger");
-          row2.components[1].setLabel("Enable Race Mode");
-          row2.components[1].setEmoji("🏎️");
-        }
-        userdata.save();
-        if (userdata.police == true) {
-          memote = "✅";
-        } else {
-          memote = "❌";
-        }
-
-        embed = new Discord.EmbedBuilder()
-          .setTitle(`Settings for ${user.username}`)
-          .addFields(
-            { name: "Daily Reward Reminder", value: `${demote}` },
-            { name: "Top.gg Vote Reminder", value: `${vemote}` },
-            { name: "Tips", value: `${temote}` },
-            { name: "Auto Fill Gas", value: `${gasemote}` }
-          )
-          .setColor(colors.blue);
-        await i.update({
-          embeds: [embed],
-          components: [row, row2],
-          fetchReply: true,
-        });
-      } else if (i.customId.includes("top")) {
+      }
+      else if (i.customId.includes("top")) {
         if (userdata.settings.vote == true) {
           userdata.settings.vote = false;
           row.components[1].setStyle("Success");

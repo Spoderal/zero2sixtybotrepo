@@ -3,7 +3,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { invisibleSpace } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {

@@ -1,3 +1,5 @@
+"use strict";
+
 const {
   ActionRowBuilder,
   EmbedBuilder,
@@ -10,7 +12,6 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const cardb = require("../data/cardb.json");
-let seasondb = require("../data/seasons.json");
 const ms = require("ms");
 
 module.exports = {
@@ -77,7 +78,6 @@ module.exports = {
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let series1 = userdata.perfectengineering;
     let wins = userdata.cars.filter(
       (car) => car.Name == "1980 Porsche 911" && car.Wins
     );

@@ -1,3 +1,5 @@
+"use strict";
+
 const Discord = require("discord.js");
 const pfpdb = require("../data/pfpsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -60,7 +62,6 @@ module.exports = {
 
       let pfp = interaction.options.getString("item");
       if (!pfp) return await interaction.reply("Specify a title!");
-      let pfplist = pfpdb;
       if (!titlesdb[pfp.toLowerCase()])
         return await interaction.reply("Thats not a title.");
       if (!userpfps)

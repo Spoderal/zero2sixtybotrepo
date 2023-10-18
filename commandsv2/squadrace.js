@@ -1,7 +1,7 @@
 const ms = require("pretty-ms");
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { AttachmentBuilder, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
@@ -12,7 +12,6 @@ const squadsdb = require("../data/squads.json");
 const cardb = require("../data/cardb.json");
 const helmetdb = require("../data/pfpsdb.json");
 
-const { createCanvas, loadImage } = require("canvas");
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,3 +1,5 @@
+"use strict";
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const items = require("../data/items.json");
 const User = require("../schema/profile-schema");
@@ -6,13 +8,11 @@ let warehousedb = require("../data/warehouses.json");
 let cars = require("../data/cardb.json");
 let houses = require("../data/houses.json");
 const { EmbedBuilder } = require("discord.js");
-let parts = require("../data/partsdb.json");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
-const { toCurrency, numberWithCommas, isInt } = require("../common/utils");
+const { toCurrency, numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const carpacks = require("../data/carpacks.json");
-const cardata = require("../events/shopdata");
 const imports = require("../data/imports.json");
 
 module.exports = {
@@ -83,7 +83,6 @@ module.exports = {
     let amount3 = Math.round(amount2);
 
     const carsList = cars.Cars;
-    const partsList = parts.Parts;
     const itemsList = items;
     let carrarray = [];
     let housearry = [];
@@ -574,12 +573,9 @@ module.exports = {
           `You cant afford this! You need ${toCurrency(pricing)}`
         );
 
-      let user1newarr = [];
 
-      for (let i = 0; i < amount3; i++) user1newarr.push(bought);
-      for (let i2 in user1newarr) {
-        userdata.items.push(bought);
-      }
+      for (let i = 0; i < amount3; i++) userdata.items.push(bought);
+
       userdata.cash -= pricing;
 
       await userdata.save();

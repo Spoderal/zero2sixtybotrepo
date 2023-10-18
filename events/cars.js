@@ -1,7 +1,5 @@
 const User = require(`../schema/profile-schema`);
 const cardb = require("../data/cardb.json");
-const partdb = require("../data/partsdb.json");
-const ocardb = require("../data/oldcars.json");
 
 async function carfix() {
   let users = await User.find();

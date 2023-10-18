@@ -1,3 +1,5 @@
+"use strict";
+
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
@@ -12,8 +14,6 @@ module.exports = {
     let key1emote = emotes.commonKey;
     let key2emote = emotes.rareKey;
     let key3emote = emotes.exoticKey;
-    let key4emote = emotes.mclaren;
-    let goldemote = emotes.gold;
     let key5emote = emotes.dirftKey;
 
     let embed = new Discord.EmbedBuilder()

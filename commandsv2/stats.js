@@ -1,6 +1,6 @@
 const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
-const { SlashCommandBuilder, EmbedBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Global = require("../schema/global-schema");
@@ -8,11 +8,8 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const {
-  toCurrency,
-  blankInlineField,
-  convertMPHtoKPH,
+  toCurrency
 } = require("../common/utils");
-const { GET_STARTED_MESSAGE } = require("../common/constants");
 const itemdb = require("../data/items.json");
 const { createCanvas, loadImage } = require("canvas");
 const brands = require("../data/brands.json");
@@ -47,7 +44,6 @@ module.exports = {
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = (await User.findOne({ id: user.id })) || [];
     let global = await Global.findOne({});
-    let settings = userdata.settings;
     let brandsarr = [];
     let housesarr = [];
     for (let b in brands) {
@@ -56,7 +52,6 @@ module.exports = {
     for (let h in list2) {
       housesarr.push(list2[h]);
     }
-    let weightemote = emotes.weight;
     let ucars = userdata.cars || [];
     let carindb = ucars.filter((c) => c.ID == item);
     let houseindb = housesarr.filter((h) => h.id == item);
@@ -320,7 +315,6 @@ module.exports = {
       let ecu = carindb[0].ecu || 0;
       let intercooler = carindb[0].intercooler || 0;
 
-      let drivetrain = carindb[0].Drivetrain;
 
       // let suspensionimg = await loadImage(partdb.Parts[suspension.toLowerCase()].Image)
       // let engineimg = await loadImage(partdb.Parts[engine.toLowerCase()].Image)

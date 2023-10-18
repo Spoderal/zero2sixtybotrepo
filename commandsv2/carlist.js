@@ -1,7 +1,9 @@
+"use strict";
+
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const { numberWithCommas, toCurrency } = require("../common/utils");
+const {  toCurrency } = require("../common/utils");
 const cardb = require("../data/cardb.json").Cars;
 const lodash = require("lodash");
 const branddb = require("../data/brands.json");

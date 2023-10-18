@@ -1,15 +1,14 @@
+"use strict";
+
 const {
   EmbedBuilder,
   ButtonBuilder,
-  ActionRowBuilder,
-  ActionRow,
+  ActionRowBuilder
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const ms = require("pretty-ms");
-const emotes = require("../common/emotes").emotes;
 let cardb = require("../data/cardb.json");
 const { numberWithCommas } = require("../common/utils");
 

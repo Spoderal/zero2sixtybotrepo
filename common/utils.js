@@ -23,10 +23,7 @@ const blankInlineField = {
   inline: true,
 };
 
-const doubleCashWeekendField = {
-  name: "Double Cash Weekend!",
-  value: invisibleSpace,
-};
+
 function padTo2Digits(num) {
   return num.toString().padStart(2, "0");
 }
@@ -50,11 +47,7 @@ function convertMPHtoKPH(mph) {
   return mph * 1.60934;
 }
 
-function isInt(n) {
-  var er = /^-?[0-9]+$/;
 
-  return er.test(n);
-}
 
 function randomNoRepeats(array) {
   var copy = array.slice(0);
@@ -76,10 +69,8 @@ module.exports = {
   invisibleSpace,
   blankField,
   blankInlineField,
-  doubleCashWeekendField,
   randomNoRepeats,
   wait,
   formatDate,
   convertMPHtoKPH,
-  isInt,
 };
