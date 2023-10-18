@@ -17,7 +17,6 @@ const gold = require("../gold");
 const stats = require("./stats").stats;
 const cardata = require("./shopdata");
 const { isracing } = require("./is_racing");
-const { series } = require("./series");
 
 let mongoConfig = {
   keepAlive: true,
@@ -43,7 +42,6 @@ module.exports = {
     double(client);
     gold(client);
     stats(client);
-    series(client);
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
@@ -84,8 +82,8 @@ module.exports = {
       );
     }
 
-    app.listen(8080, function () {
-      console.log("Listening on port 8080.");
+    app.listen(8081, function () {
+      console.log("Listening on port 8081.");
     });
 
     let randomstatuses = [
