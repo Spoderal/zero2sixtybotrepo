@@ -1,4 +1,4 @@
-"use strict";
+
 
 const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -996,7 +996,6 @@ module.exports = {
       } else if (i.customId.includes("classE")) {
         classpage = carEventarr;
         embed = new EmbedBuilder().setTitle("Event Dealership");
-        console.log(carEventarr);
         embed = new EmbedBuilder()
           .setThumbnail("https://i.ibb.co/fDZg10f/eventclass.png")
           .setTitle("Event Dealership")
@@ -1026,7 +1025,6 @@ module.exports = {
 
         page = 1;
       } else {
-        console.log(page);
         let current = page;
         if (i.customId.includes("previous") && page !== 1) {
           embed.data.fields = null;
@@ -1047,7 +1045,6 @@ module.exports = {
         }
         for (let e in classpage[page - 1]) {
           let car = classpage[page - 1][e];
-          console.log(car);
           if (car.Stock) {
             embed.addFields({
               name: `${car.Emote} ${car.Name}`,

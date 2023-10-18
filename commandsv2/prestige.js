@@ -1,4 +1,4 @@
-"use strict";
+
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { GET_STARTED_MESSAGE } = require("../common/constants");

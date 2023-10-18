@@ -1,4 +1,4 @@
-"use strict";
+
 
 const seasons = require("../data/seasons.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -55,7 +55,6 @@ module.exports = {
       6
     );
 
-    console.log(rewards);
 
     let claimable = userdata.season1claimed || 1;
 
@@ -97,7 +96,6 @@ module.exports = {
     );
 
     let rewardtoclaim = seasonRewards[`${claimable}`];
-    console.log(rewardtoclaim);
 
     if (rewardtoclaim.Required > notoriety) {
       rowclaim.components[0].setEmoji("✖️");
@@ -107,9 +105,7 @@ module.exports = {
     let page = 0;
     let vispage = 1;
 
-    let pageofuser = 0;
 
-    console.log(pageofuser);
     let embed = new EmbedBuilder()
       .setTitle(`Season 2 Page ${vispage}`)
       .setColor(colors.blue)
@@ -118,7 +114,6 @@ module.exports = {
 
     for (let field in rewards[page]) {
       let data = rewards[page][field];
-      console.log(data);
       if (data.Item.endsWith("Cash")) {
         let amount = data.Item.split(" ");
         embed.addFields({
@@ -167,7 +162,6 @@ module.exports = {
           inline: true,
         });
       } else if (data.Item.toLowerCase() == "path car") {
-        console.log("path");
         if (userdata.path == "none" || !userdata.path) {
           embed.addFields({
             name: `Reward ${data.Number}`,
@@ -283,7 +277,6 @@ module.exports = {
         page--;
         vispage--;
       } else if (i.customId == "last") {
-        console.log(rewards[16]);
         page = 16;
         vispage = rewards.length;
       } else if (i.customId == "first") {
@@ -291,7 +284,6 @@ module.exports = {
         vispage = 1;
       } else if (i.customId == "claim") {
         let path = userdata.path || "none";
-        console.log(path);
         if (path == null || path == "none") {
           let pathrow = new ActionRowBuilder().setComponents(
             new ButtonBuilder()
@@ -334,12 +326,10 @@ module.exports = {
             try {
               msg2.delete();
             } catch (err) {
-              console.log(err);
             }
           });
         } else {
           notoriety = userdata.notoriety;
-          console.log(`required ${rewardtoclaim.Required}`);
 
           if (rewardtoclaim.Required > notoriety) return;
 
@@ -348,8 +338,7 @@ module.exports = {
             let num = parseInt(amount[0]);
             let usercash = parseInt(userdata.cash);
             let newamount = parseInt((usercash += num));
-            console.log(newamount);
-            console.log(usercash);
+
             let oldnoto = userdata.notoriety;
             userdata.cash = newamount;
             userdata.notoriety = oldnoto -= rewardtoclaim.Required;
@@ -389,8 +378,7 @@ module.exports = {
             let num = parseInt(amount[0]);
             let usercash = parseInt(userdata.rkeys);
             let newamount = parseInt((usercash += num));
-            console.log(newamount);
-            console.log(usercash);
+
 
             userdata.rkeys = newamount;
             userdata.season1claimed += 1;
@@ -401,8 +389,6 @@ module.exports = {
             let num = parseInt(amount[0]);
             let usercash = parseInt(userdata.ckeys);
             let newamount = parseInt((usercash += num));
-            console.log(newamount);
-            console.log(usercash);
 
             userdata.ckeys = newamount;
             userdata.season1claimed += 1;
@@ -413,8 +399,7 @@ module.exports = {
             let num = parseInt(amount[0]);
             let usercash = parseInt(userdata.ekeys);
             let newamount = parseInt((usercash += num));
-            console.log(newamount);
-            console.log(usercash);
+
 
             userdata.ekeys = newamount;
             userdata.season1claimed += 1;
@@ -425,8 +410,7 @@ module.exports = {
             let num = parseInt(amount[0]);
             let usercash = parseInt(userdata.garageLimit);
             let newamount = parseInt((usercash += num));
-            console.log(newamount);
-            console.log(usercash);
+
 
             userdata.garageLimit = newamount;
             userdata.season1claimed += 1;
@@ -437,8 +421,7 @@ module.exports = {
             let num = parseInt(amount[0]);
             let usercash = parseInt(userdata.rp4);
             let newamount = parseInt((usercash += num));
-            console.log(newamount);
-            console.log(usercash);
+
 
             userdata.rp4 = newamount;
             userdata.season1claimed += 1;
@@ -490,7 +473,7 @@ module.exports = {
       }
 
       notoriety = userdata.notoriety;
-      console.log(page);
+
       embed = new EmbedBuilder()
         .setTitle(`Season 2 Page ${vispage}`)
         .setColor(colors.blue)
@@ -565,7 +548,6 @@ module.exports = {
             inline: true,
           });
         } else if (data.Item.toLowerCase() == "path car") {
-          console.log("path");
           if (userdata.path == "none" || !userdata.path) {
             embed.addFields({
               name: `Reward ${data.Number}`,
@@ -648,7 +630,6 @@ module.exports = {
       );
 
       rewardtoclaim = seasonRewards[`${claimable}`];
-      console.log(rewardtoclaim);
 
       if (rewardtoclaim.Required > notoriety) {
         rowclaim.components[0].setEmoji("✖️");

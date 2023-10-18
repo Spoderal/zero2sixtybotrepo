@@ -1,4 +1,4 @@
-"use strict";
+
 
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -62,7 +62,6 @@ module.exports = {
           .catch(() => {});
         if (!user?.username) continue;
         filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
-        console.log(user.id);
         currentUserPosition =
           filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
       }
@@ -112,7 +111,6 @@ module.exports = {
           .catch(() => {});
         if (!user?.username) continue;
         filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
-        console.log(user.id);
         currentUserPosition =
           filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
       }
@@ -162,7 +160,6 @@ module.exports = {
           .catch(() => {});
         if (!user?.username) continue;
         filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
-        console.log(user.id);
         currentUserPosition =
           filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
       }
@@ -211,7 +208,6 @@ module.exports = {
           .catch(() => {});
         if (!user?.username) continue;
         filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
-        console.log(user.id);
         currentUserPosition =
           filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
       }

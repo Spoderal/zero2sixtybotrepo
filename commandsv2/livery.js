@@ -1,4 +1,4 @@
-"use strict";
+
 
 const cars = require("../data/cardb.json");
 const Discord = require("discord.js");
@@ -114,7 +114,6 @@ module.exports = {
       let cardata = liverieslist.filter(
         (car) => car.Name.toLowerCase() == carindb.Name.toLowerCase()
       );
-      console.log(cardata);
       if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
       if (!list[selected.Name.toLowerCase()])
@@ -124,7 +123,6 @@ module.exports = {
         return await interaction.reply("This car doesn't have any livery id's");
 
       let filtered = cardata.filter((e) => e.id == livid && e.approved == true);
-      console.log(filtered);
       if (!filtered[0]) return await interaction.reply("Thats not a valid ID!");
 
       if (userdata.cash < 500)
@@ -174,11 +172,9 @@ module.exports = {
       let list = cars.Cars;
       if (!list[caroption.toLowerCase()])
         return await interaction.reply("That isnt an available car!");
-      console.log(caroption);
       let cardata = liverieslist.filter(
         (car) => car.Name.toLowerCase() == caroption.toLowerCase()
       );
-      console.log(cardata);
       if (!cardata[0])
         return await interaction.reply("This car doesn't have any livery id's");
 
@@ -212,7 +208,6 @@ module.exports = {
           (car) => car.Name.toLowerCase() == cartosubmit.toLowerCase()
         ) || [];
 
-      console.log(cardata);
       interaction.reply(
         "Please send an image file, size 1280x720 is highly recommended"
       );
@@ -237,7 +232,6 @@ module.exports = {
 
         let response = await imgbb(options);
 
-        console.log(response.display_url);
 
         let livobj = {
           image: response.display_url,
@@ -302,7 +296,6 @@ module.exports = {
       let cardata = liverieslist.filter(
         (car) => car.Name.toLowerCase() == cartoapprove.toLowerCase()
       );
-      console.log(cardata);
       let idfiltered = cardata.filter((id) => id.id == idtoapprove);
 
       if (idfiltered && idfiltered.approved == true)
@@ -310,7 +303,6 @@ module.exports = {
           "This car livery is already approved or this ID doesn't exist"
         );
 
-      console.log(idfiltered);
 
       if (idfiltered.length == 0)
         return await interaction.reply("Thats not a valid ID!");
@@ -353,7 +345,6 @@ module.exports = {
         return await interaction.reply(
           "That isnt an available car yet! If you'd like to suggest it, use /suggest."
         );
-      console.log(lglobal.liveries);
       let cardata = lglobal.liveries.filter(
         (livery) => livery.Name.toLowerCase() == car.toLowerCase()
       );
@@ -374,7 +365,6 @@ module.exports = {
         return await interaction.reply(`This car doesn't have any liveries!`);
       shopItems = lodash.chunk(shopItems.map(() => `${liverylist.join("\n")}`));
 
-      console.log(liverylist);
 
       const embed = new Discord.EmbedBuilder()
         .setTitle(`Liveries for ${cars.Cars[car].Name}`)

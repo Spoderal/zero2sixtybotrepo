@@ -1,4 +1,4 @@
-"use strict";
+
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { userGetFromInteraction, blacklistCheck } = require("../common/user");

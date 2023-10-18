@@ -1,4 +1,4 @@
-"use strict";
+
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
@@ -62,8 +62,7 @@ module.exports = {
       speed2 = speed2 * 100;
       let player = (handling + speed - weight) / acceleration;
       let opponent = (handling2 + speed2 - weight2) / acceleration2;
-      console.log(player);
-      console.log(opponent);
+      
       const playerRegression = player;
       const opponentRegression = opponent;
       winner = playerRegression >= opponentRegression ? "Player" : "Opponent";
@@ -364,7 +363,6 @@ module.exports = {
                 userrank[0].rewards.filter(
                   (reward) => reward.number == rewardtogive
                 ) || 0;
-              console.log(rewardinreward);
               if (rewardinreward.length !== 0) {
                 if (rewardinreward[0].reward.endsWith("Cash")) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);
@@ -404,13 +402,11 @@ module.exports = {
               await interaction.editReply({
                 embeds: [embed],
               });
-              console.log(nextuser1rank[0]);
               userdata.update();
               if (
                 userdata.pvprank.Wins >= nextuser1rank[0].wins &&
                 userdata.pvprank.Name !== "Onyx"
               ) {
-                console.log("ranked up");
                 userdata.pvprank.Wins = 0;
                 userdata.pvprank.Losses = 0;
                 userdata.pvprank.Rank = `${nextuser1rank[0].name}`;
@@ -489,7 +485,6 @@ module.exports = {
                 userrank2[0].rewards.filter(
                   (reward) => reward.number == rewardtogive
                 ) || 0;
-              console.log(rewardinreward);
               if (rewardinreward.length !== 0) {
                 if (rewardinreward[0].reward.endsWith("Cash")) {
                   let amount = Number(rewardinreward[0].reward.split(" ")[0]);

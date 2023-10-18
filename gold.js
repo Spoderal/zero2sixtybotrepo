@@ -9,9 +9,7 @@ module.exports = (client) => {
     ) {
       const args = message.content.slice().trim().split(/ +/);
       let user = args[0];
-      console.log(args);
-
-      console.log(user);
+      
 
       let userdata = await User.findOne({ id: user });
 

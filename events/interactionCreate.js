@@ -1,6 +1,14 @@
+const { createBugCard } = require("../services/trello");
 const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
+const { updateCrew } = require("./crews/updateCrew");
 const Cooldowns = require("../schema/cooldowns");
+const Globals = require("../schema/global-schema");
+const User = require("../schema/profile-schema");
 
+const {
+  blacklistInteractionCheck,
+  userGetFromInteraction,
+} = require("../common/user");
 const { InteractionType } = require("discord.js");
 
 //test
@@ -10,7 +18,10 @@ module.exports = {
   once: false,
   async execute(interaction) {
     let command;
-
+    let options = interaction.options;
+    let user = interaction.user;
+    let guild = interaction.guild;
+    let client = interaction.client;
     let timeout2 = 5000;
     try {
       if (interaction.isSelectMenu()) {
@@ -22,10 +33,12 @@ module.exports = {
         if (!command) return;
 
         // Command
+        const commandExecutionTimeName = `Command ${interaction.commandName} execution time`;
 
         let cooldowndata =
           (await Cooldowns.findOne({ id: interaction.user.id })) ||
           new Cooldowns({ id: interaction.user.id });
+        let userdata = await User.findOne({ id: interaction.user.id });
 
         try {
           let timeout = 3000;
@@ -67,6 +80,7 @@ module.exports = {
 
         cooldowndata.save();
         // Pets
+        const petExecutionTimeName = "Pet update time";
 
         await updatePetOnCommands(interaction);
       } else if (
@@ -82,7 +96,14 @@ module.exports = {
     } catch (error) {
       if (error) {
         console.log({ interactionCreateExecuteError: error });
-        
+        createBugCard({
+          error,
+          event: "interactionCreate",
+          command,
+          options,
+          user,
+          guild,
+        });
       }
       try {
         await interaction.reply({

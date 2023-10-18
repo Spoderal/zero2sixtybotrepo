@@ -1,4 +1,4 @@
-"use strict";
+
 
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -49,8 +49,7 @@ module.exports = {
       petimage = petdb[pet.pet].Saddest;
     }
     let tier = petdb[pet.pet].Tier;
-    console.log(pet);
-    console.log(petimage);
+
 
     let embed = new Discord.EmbedBuilder()
       .setAuthor({ name: `${petbreed}`, iconURL: petimage })

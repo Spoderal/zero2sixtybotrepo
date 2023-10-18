@@ -1,4 +1,4 @@
-"use strict";
+
 
 const Discord = require("discord.js");
 const barns = require("../data/barns.json");
@@ -87,7 +87,6 @@ module.exports = {
 
     let cars = userdata.cars;
     let carindb = carsdb.Cars[barnfind.toLowerCase()];
-    console.log(carindb);
     let carobj = {
       ID: carindb.alias,
       Name: carindb.Name,
@@ -105,7 +104,6 @@ module.exports = {
     userdata.barnmaps -= 1;
 
     let arrByID = cars.filter((item) => item.Name == carobj.Name);
-    console.log(arrByID);
     if (arrByID[0]) {
       await interaction.reply(
         `You found a ${carindb.Name} but you already have this car..`

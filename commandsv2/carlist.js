@@ -1,4 +1,4 @@
-"use strict";
+
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -78,7 +78,6 @@ module.exports = {
         if (price == `**Found: undefined**`) {
           price = "**Not Obtainable**";
         }
-        console.log(brand);
         if (
           brand[0] &&
           brand[0].name.toLowerCase() == brandtofilter.toLowerCase()
@@ -97,11 +96,9 @@ module.exports = {
       try {
         return a.Brand.name.localeCompare(b.Brand.name);
       } catch (err) {
-        console.log("no brand");
       }
     });
 
-    console.log(carslist[0]);
 
     let displaycars = [];
 

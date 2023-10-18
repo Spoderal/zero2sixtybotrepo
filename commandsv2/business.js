@@ -1,4 +1,4 @@
-"use strict";
+
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
@@ -88,7 +88,6 @@ module.exports = {
       today.setHours(0, 0, 0, 0);
 
       var diff = (+today - +createdOn) / msInDay;
-      console.log(diff);
       embed = new EmbedBuilder()
         .setTitle("Business Menu")
         .addFields(
@@ -188,21 +187,18 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId == "upgrade") {
-        console.log(userdata.business.Business);
         let business = businessarr.filter(
           (business) => business.Name == userdata.business.Business
         );
         let upgrades = business[0].Upgrades;
         let upgraded = [];
         let upgraderow = new ActionRowBuilder();
-        console.log(upgrades);
         for (let u in upgrades) {
           let upg = upgrades[u];
           let upgradefilt = userdata.business.Upgrades.filter(
             (u) => u.ID == upg.ID
           );
-          console.log(upg.Level);
-          console.log(userdata.business.Level);
+       
           if (userdata.business.Level >= upg.Level) {
             if (userdata.business.Upgrades && !upgradefilt[0]) {
               upgraded.push(
@@ -236,7 +232,7 @@ module.exports = {
           };
           upgraded = ["No upgrades to display, try leveling up your business!"];
         }
-        console.log(upgraded);
+       
 
         embed1
           .setTitle("Business Upgrades")
@@ -261,7 +257,6 @@ module.exports = {
               (upgrade) => upgrade.ID == i.customId
             );
             let upgradearr = userdata.business.Upgrades || [];
-            console.log(upgrade);
 
             if (upgrade[0].Cost > userdata.cash) {
               return i.update(`You don't have enough cash!`);
@@ -312,7 +307,6 @@ module.exports = {
         });
 
         collector3.on("collect", (msg) => {
-          console.log(msg);
           userdata.business.Name = msg.content;
 
           userdata.markModified("business");

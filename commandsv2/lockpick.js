@@ -1,4 +1,4 @@
-"use strict";
+
 
 const cars = require("../data/cardb.json");
 const partdb = require("../data/partsdb.json").Parts;
@@ -30,9 +30,7 @@ module.exports = {
     if (using.includes("epic lockpick") || using.includes("Epic Lockpick")) {
       let cooldown = cooldowns.epiclockpick;
       let timeout = 600000;
-      console.log(timeout - (Date.now() - cooldown));
       if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
         udata.using.pull("epic lockpick");
         udata.update();
         interaction.channel.send("Your grape juice ran out! :(");
@@ -57,16 +55,13 @@ module.exports = {
     if (using.includes("grape juice") || using.includes("Grape Juice")) {
       let cooldown = cooldowns.grapejuice;
       let timeout = 900000;
-      console.log(timeout - (Date.now() - cooldown));
       if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
-        console.log("pulled");
         udata.using.pull("grape juice");
         udata.update();
         interaction.channel.send("Your grape juice ran out! :(");
       }
       fil = 50;
     }
-    console.log(fil);
 
     let garagepicked;
     // Calculate chances for common
@@ -82,7 +77,6 @@ module.exports = {
       garagepicked = "legendary garage";
     }
 
-    console.log(chance);
 
     let garageindb = garagedb[garagepicked];
     let carchance1 = randomRange(1, 10);
@@ -109,10 +103,8 @@ module.exports = {
     } else {
       rand3 = chooser2();
     }
-    console.log(rand1);
 
     let randomarray = [rand1, rand2, rand3];
-    console.log(randomarray);
     let rand2arr = [];
     let sellrow = new ActionRowBuilder();
     let cararray = [];
@@ -183,18 +175,14 @@ module.exports = {
       collector.on("collect", async (i) => {
         let car = cars.Cars[i.customId.toLowerCase()];
 
-        console.log(car);
 
         if (car) {
-          console.log("car");
           let button = sellrow.components.filter(
             (b) => b.data.custom_id !== i.customId
           );
-          console.log(button[0]);
           for (var i2 = 0; i2 < cararray.length; i2++) {
             if (cararray[i2].Name.toLowerCase() == i.customId.toLowerCase()) {
               udata.cash += 5000;
-              console.log("spliced");
               cararray.splice(i2, 1);
               break;
             }
@@ -202,7 +190,6 @@ module.exports = {
 
           sellrow = sellrow.setComponents(button);
 
-          console.log(sellrow.components.length);
           if (sellrow.components.length == 0) {
             await i.update({ components: [], content: "Sold all cars!" });
           } else {
@@ -213,7 +200,6 @@ module.exports = {
     }
 
     setTimeout(() => {
-      console.log(cararray);
       for (let ca in cararray) {
         udata.cars.push(cararray[ca]);
       }

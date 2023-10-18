@@ -1,4 +1,4 @@
-"use strict";
+
 
 const lodash = require("lodash");
 const {
@@ -83,7 +83,6 @@ module.exports = {
           itemcooldown !== null &&
           timeout - (Date.now() - itemcooldown) < 0
         ) {
-          console.log("pulled");
           userdata.using.pull("apple juice");
           userdata.update();
           interaction.channel.send("Your apple juice ran out!");
@@ -99,7 +98,7 @@ module.exports = {
         }
       }, 1000);
 
-      setTimeout(async () => {
+      let xt = setTimeout(async () => {
         let reward1 = rewards[0];
         let reward2 = rewards[1];
         let reward3 = rewards[2];
@@ -180,14 +179,11 @@ module.exports = {
           ctx.save();
         }
 
-        console.log(reward1);
-        console.log(reward2);
-        console.log(reward3);
+   
         if (cardb.Cars[reward1]) {
           let carimg = cardb.Cars[reward1].Image;
           name1 = cardb.Cars[reward1].Name;
           let loadedpart = await loadImage(carimg);
-          console.log(`name ${name1}`);
 
           ctx.drawImage(loadedpart, 80, 200, 320, 180);
           ctx.save();
@@ -196,7 +192,6 @@ module.exports = {
           let carimg = cardb.Cars[reward2].Image;
           name2 = cardb.Cars[reward2].Name;
           let loadedpart = await loadImage(carimg);
-          console.log(`name ${name2}`);
           ctx.drawImage(loadedpart, 500, 200, 320, 180);
           ctx.save();
         }
@@ -204,7 +199,6 @@ module.exports = {
           let carimg = cardb.Cars[reward3].Image;
           name3 = cardb.Cars[reward3].Name;
           let loadedpart = await loadImage(carimg);
-          console.log(`name ${name3}`);
 
           ctx.drawImage(loadedpart, 900, 200, 320, 180);
           ctx.save();
@@ -372,8 +366,8 @@ module.exports = {
             }
           }
         });
-
-        console.log(rewards);
+        
+        clearTimeout(xt)
       }, 5000);
     } else if (type == "f1blueprints") {
       blueprints = require("../data/imports.json").f1blueprints;
@@ -410,7 +404,7 @@ module.exports = {
         }
       }, 1000);
 
-      setTimeout(async () => {
+      let yt = setTimeout(async () => {
         let reward1 = rewards[0];
         let reward2 = rewards[1];
         let reward3 = rewards[2];
@@ -491,14 +485,11 @@ module.exports = {
           ctx.save();
         }
 
-        console.log(reward1);
-        console.log(reward2);
-        console.log(reward3);
+        
         if (cardb.Cars[reward1]) {
           let carimg = cardb.Cars[reward1].Image;
           name1 = cardb.Cars[reward1].Name;
           let loadedpart = await loadImage(carimg);
-          console.log(`name ${name1}`);
 
           ctx.drawImage(loadedpart, 80, 200, 320, 180);
           ctx.save();
@@ -507,7 +498,6 @@ module.exports = {
           let carimg = cardb.Cars[reward2].Image;
           name2 = cardb.Cars[reward2].Name;
           let loadedpart = await loadImage(carimg);
-          console.log(`name ${name2}`);
           ctx.drawImage(loadedpart, 500, 200, 320, 180);
           ctx.save();
         }
@@ -515,7 +505,6 @@ module.exports = {
           let carimg = cardb.Cars[reward3].Image;
           name3 = cardb.Cars[reward3].Name;
           let loadedpart = await loadImage(carimg);
-          console.log(`name ${name3}`);
 
           ctx.drawImage(loadedpart, 900, 200, 320, 180);
           ctx.save();
@@ -675,7 +664,9 @@ module.exports = {
           }
         });
 
-        console.log(rewards);
+        
+        clearTimeout(yt)
+
       }, 5000);
     }
   },

@@ -1,4 +1,4 @@
-"use strict";
+
 
 const lodash = require("lodash");
 const { EmbedBuilder } = require("discord.js");
@@ -50,7 +50,6 @@ module.exports = {
       return;
     }
     let boughtindb = crates.Crates[bought.toLowerCase()];
-    console.log(boughtindb);
 
     if (!inv.includes(bought))
       return interaction.reply(
@@ -175,7 +174,6 @@ module.exports = {
 
  
       embed.setDescription(`${rewardsarr.join('\n')}`);
-      console.log(rewards);
       await interaction.editReply({ embeds: [embed] });
     }, 5000);
   },

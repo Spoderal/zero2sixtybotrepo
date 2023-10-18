@@ -1,4 +1,4 @@
-"use strict";
+
 
 const Discord = require("discord.js");
 const ms = require("ms");

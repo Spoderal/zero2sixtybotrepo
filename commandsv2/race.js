@@ -1,4 +1,4 @@
-"use strict";
+
 
 const {
   EmbedBuilder,
@@ -101,8 +101,6 @@ module.exports = {
     }
     let globals = await Globals.findOne({});
     let userdata = await User.findOne({ id: user.id });
-    let prestigerank = userdata.prestige || 0;
-    console.log(prestigerank);
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata =
       (await Cooldowns.findOne({ id: user.id })) ||
@@ -134,7 +132,6 @@ module.exports = {
     let usercars = userdata.cars;
     let idtoselect = interaction.options.getString("car").toLowerCase();
 
-    console.log(idtoselect);
     let carsfiltered = [];
     for (let cr in userdata.cars) {
       let car = userdata.cars[cr];
@@ -306,7 +303,6 @@ module.exports = {
       return interaction.reply("You need a motorcycle for this race!");
 
     car2 = lodash.sample(cartofilter);
-    console.log(cartofilter);
     let winner;
     let rewards = [];
     if (raceoption == "streetrace") {
@@ -326,9 +322,7 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
+
     } else if (raceoption == "mountain") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -374,9 +368,7 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
+
     } else if (raceoption == "dragrace") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -395,9 +387,6 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
     } else if (raceoption == "trackrace") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -415,9 +404,6 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
     } else if (raceoption == "trackraceevent") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -436,9 +422,7 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
+
     }
     //test
     else if (raceoption == "motorcyclemad") {
@@ -457,9 +441,6 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
     } else if (raceoption == "carseries") {
       if (userdata.seriestickets <= 0)
         return interaction.reply("You need a series ticket to race!");
@@ -484,9 +465,7 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
+
     } else if (raceoption == "crosscountry") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -504,9 +483,7 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
+
     } else if (raceoption == "rustbowl") {
       if (
         !cardb.Cars[selected.Name.toLowerCase()].RestoreOnly &&
@@ -531,9 +508,7 @@ module.exports = {
 
       winner = playerrace > opponentrace;
 
-      console.log(playerrace);
-      console.log(opponentrace);
-      console.log(winner);
+
     }
     let randombarn = randomRange(1, 20);
 
@@ -604,10 +579,10 @@ module.exports = {
     cooldowndata.save();
     await interaction.reply({ embeds: [embed], fetchReply: true });
 
-    setTimeout(async () => {
+   let xt =  setTimeout(async () => {
       let notorietywon = 100;
-      console.log(winner);
       if (winner == true) {
+        clearTimeout(xt)
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
         let rankwon = 1;
         let rating = selected.Rating;
@@ -619,12 +594,10 @@ module.exports = {
           let itemcooldown = cooldowndata.flattire;
 
           let timeout = 1800000;
-          console.log(timeout - (Date.now() - itemcooldown));
           if (
             itemcooldown !== null &&
             timeout - (Date.now() - itemcooldown) < 0
           ) {
-            console.log("pulled");
             userdata.using.pull("flat tire");
             userdata.update();
             interaction.channel.send("Your flat tire ran out!");
@@ -637,12 +610,10 @@ module.exports = {
           let itemcooldown = cooldowndata.tequilla;
 
           let timeout = 60000;
-          console.log(timeout - (Date.now() - itemcooldown));
           if (
             itemcooldown !== null &&
             timeout - (Date.now() - itemcooldown) < 0
           ) {
-            console.log("pulled");
             userdata.using.pull("tequila shot");
             userdata.update();
             interaction.channel.send("Your tequila shot ran out!");
@@ -655,12 +626,10 @@ module.exports = {
           let itemcooldown = cooldowndata.radio;
 
           let timeout = 300000;
-          console.log(timeout - (Date.now() - itemcooldown));
           if (
             itemcooldown !== null &&
             timeout - (Date.now() - itemcooldown) < 0
           ) {
-            console.log("pulled");
             userdata.using.pull("radio");
             userdata.update();
             interaction.channel.send("Your radio ran out!");
@@ -675,12 +644,10 @@ module.exports = {
           let itemcooldown = cooldowndata.energydrink;
 
           let timeout = 600000;
-          console.log(timeout - (Date.now() - itemcooldown));
           if (
             itemcooldown !== null &&
             timeout - (Date.now() - itemcooldown) < 0
           ) {
-            console.log("pulled");
             userdata.using.pull("energy drink");
             userdata.update();
             interaction.channel.send("Your energy drink ran out!");
@@ -693,12 +660,10 @@ module.exports = {
           let itemcooldown = cooldowndata.cookie;
 
           let timeout = 300000;
-          console.log(timeout - (Date.now() - itemcooldown));
           if (
             itemcooldown !== null &&
             timeout - (Date.now() - itemcooldown) < 0
           ) {
-            console.log("pulled");
             userdata.using.pull("cookie");
             userdata.update();
             interaction.channel.send("Your cookie ran out!");
@@ -711,12 +676,10 @@ module.exports = {
           let itemcooldown = cooldowndata.compass;
 
           let timeout = 1200000;
-          console.log(timeout - (Date.now() - itemcooldown));
           if (
             itemcooldown !== null &&
             timeout - (Date.now() - itemcooldown) < 0
           ) {
-            console.log("pulled");
             userdata.using.pull("compass");
             userdata.update();
             interaction.channel.send("Your compass ran out!");
@@ -854,12 +817,10 @@ module.exports = {
             let itemcooldown = cooldowndata.milk;
 
             let timeout = 600000;
-            console.log(timeout - (Date.now() - itemcooldown));
             if (
               itemcooldown !== null &&
               timeout - (Date.now() - itemcooldown) < 0
             ) {
-              console.log("pulled");
               userdata.using.pull("milk");
               userdata.update();
               interaction.channel.send("Your milk ran out!");
@@ -879,12 +840,10 @@ module.exports = {
             let itemcooldown = cooldowndata.smilk;
 
             let timeout = 600000;
-            console.log(timeout - (Date.now() - itemcooldown));
             if (
               itemcooldown !== null &&
               timeout - (Date.now() - itemcooldown) < 0
             ) {
-              console.log("pulled");
               userdata.using.pull("strawberry milk");
               userdata.update();
               interaction.channel.send("Your strawberry milk ran out!");
@@ -904,12 +863,10 @@ module.exports = {
             let itemcooldown = cooldowndata.cmilk;
 
             let timeout = 600000;
-            console.log(timeout - (Date.now() - itemcooldown));
             if (
               itemcooldown !== null &&
               timeout - (Date.now() - itemcooldown) < 0
             ) {
-              console.log("pulled");
               userdata.using.pull("chocolate milk");
               userdata.update();
               interaction.channel.send("Your chocolate milk ran out!");
@@ -1046,7 +1003,6 @@ module.exports = {
           let tasktrack = tasks.filter((task) => task.ID == "2");
           let taskdrag = tasks.filter((task) => task.ID == "3");
 
-          console.log(taskdrag)
 
           if (taskstreet[0] && raceoption == "streetrace") {
             if (taskstreet[0].Races < 10) {
@@ -1303,6 +1259,8 @@ module.exports = {
 
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} won!`);
       } else if (winner == false) {
+        
+        clearTimeout(xt)
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);
       }
 

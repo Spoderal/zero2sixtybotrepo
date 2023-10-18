@@ -1,4 +1,4 @@
-"use strict";
+
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const items = require("../data/items.json");
@@ -97,7 +97,6 @@ module.exports = {
 
     let boughtCar =
       carrarray.filter((car) => car.alias == bought.toLowerCase()) || "NO ID";
-    console.log(boughtCar);
     if (
       (boughtCar.length == 0 && !boughtCar[0]) ||
       (boughtCar == [] && !boughtCar[0])
@@ -108,7 +107,6 @@ module.exports = {
     }
     boughtCar = boughtCar[0];
 
-    console.log(boughtCar);
 
     const boughtHouse = housearry.filter(
       (house) => house.id == bought.toLowerCase()
@@ -255,7 +253,6 @@ module.exports = {
               `You need to be rank ${boughtCar.Rank} to buy this car!`
             );
           if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
-            console.log("common");
             if (userdata.commonCredits < 25)
               return interaction.reply("You don't have enough common credits!");
           }
@@ -367,7 +364,6 @@ module.exports = {
           let filteredcar =
             carrarray.filter((car) => car.alias == bought.toLowerCase()) ||
             "NO ID";
-          console.log(boughtCar);
           if (filteredcar.length == 0 || filteredcar == []) {
             filteredcar = carrarray.filter(
               (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
@@ -384,7 +380,6 @@ module.exports = {
           if (cash < boughtCarPrice)
             return await interaction.reply("You don't have enough cash!");
           if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
-            console.log("common");
             if (userdata.commonCredits < 25)
               return interaction.reply("You don't have enough common credits!");
           }
@@ -521,7 +516,6 @@ module.exports = {
       );
       if (houseobj[0]) return interaction.reply("You already own this house!");
 
-      console.log(houseobj);
       userdata.garageLimit += boughtHouse[0].Space;
       userdata.houses.push(boughtHouse[0]);
 

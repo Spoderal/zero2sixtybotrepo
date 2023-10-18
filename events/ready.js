@@ -1,5 +1,6 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
+const crews = require("./crews/updateCrew");
 const lodash = require("lodash");
 require("dotenv").config();
 const patron = require("../patreon");
@@ -11,8 +12,11 @@ const fs = require("fs");
 const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
+const cars = require("./cars").carfix;
 const gold = require("../gold");
 const stats = require("./stats").stats;
+const cardata = require("./shopdata");
+const { isracing } = require("./is_racing");
 const { series } = require("./series");
 
 let mongoConfig = {

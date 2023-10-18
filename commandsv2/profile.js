@@ -1,4 +1,4 @@
-"use strict";
+
 
 const profilepics = require("../data/pfpsdb.json").Pfps;
 const cardb = require("../data/cardb.json");
@@ -64,7 +64,6 @@ module.exports = {
         title = "noob racer";
       }
       title = titledb[title.toLowerCase()].Title;
-      console.log(title);
       let driftrank = userdata.driftrank;
       let racerank = userdata.racerank;
       let prestige = userdata.prestige;
@@ -102,11 +101,9 @@ module.exports = {
         let achindb = achievementsdb.Achievements[achiev.name.toLowerCase()];
         achivarr.push(`${achindb.Emote}`);
       }
-      console.log(achivarr);
       if (achivarr.length == 0) {
         achivarr = ["No achievements"];
       }
-      console.log(achivarr);
       
       let cash = userdata.cash;
       finalprice += cash;
@@ -114,7 +111,6 @@ module.exports = {
       let acthelmet = profilepics[helmet.toLowerCase()].Image;
       let showcase = userdata.showcase;
       
-      console.log(fastcar)
       let embed = new EmbedBuilder()
         .setAuthor({ name: user.username, iconURL: acthelmet })
       

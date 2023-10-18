@@ -1,4 +1,4 @@
-"use strict";
+
 
 const discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -74,7 +74,7 @@ module.exports = {
 
       await interaction.reply({ embeds: [embed] });
 
-      setTimeout(() => {
+      let xt = setTimeout(() => {
         embed.setTitle("Fused!");
         embed.setColor("#ffffff");
         embed.fields = [];
@@ -87,6 +87,8 @@ module.exports = {
         userdata.items.push("fruit punch");
         userdata.save();
         interaction.editReply({ embeds: [embed] });
+        
+        clearTimeout(xt)
       }, 2000);
       return;
     } else {
@@ -202,7 +204,7 @@ module.exports = {
       let yesno = ["yes", "no", "no"];
       let randomblueprint = lodash.sample(yesno);
 
-      setTimeout(() => {
+      let xt = setTimeout(() => {
         embed.setTitle("Fused!");
         embed.fields = [];
         embed.addFields([
@@ -225,6 +227,8 @@ module.exports = {
           );
         }
         userdata.save();
+        
+        clearTimeout(xt)
       }, 2000);
     }
   },

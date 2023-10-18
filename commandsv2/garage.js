@@ -1,4 +1,4 @@
-"use strict";
+
 
 const {
   EmbedBuilder,
@@ -58,11 +58,9 @@ module.exports = {
 
     if (filter && filter == "favorites") {
       ucars = udata.cars.filter((car) => car.Favorite && car.Favorite == true);
-      console.log(ucars);
     }
     if (filtertag) {
       ucars = udata.cars.filter((car) => car.Tag && car.Tag == filtertag);
-      console.log(ucars);
     }
 
     let displayparts = [];
@@ -138,7 +136,6 @@ module.exports = {
       10
     );
 
-    console.log(parts);
 
     let itempage = cars;
     let embed = new EmbedBuilder()
@@ -233,7 +230,7 @@ module.exports = {
     let defaulty = 50;
     let defaultx = 5;
     for (let ca in cars[0]) {
-      console.log(ca);
+  
       if (ca == 0) {
         defaulty = 40;
         defaultx = 5;
@@ -259,7 +256,6 @@ module.exports = {
         defaultx = 300;
       }
       let car = cars[0][ca];
-      console.log(car);
       let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image;
       let carimage = await loadImage(carimg);
       try {
@@ -270,7 +266,7 @@ module.exports = {
         ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
         ctx.restore();
       } catch (err) {
-        console.log("error loading image");
+        console.log("error")
       }
     }
     let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
@@ -342,7 +338,6 @@ module.exports = {
           .setTitle(`Displaying parts for ${user.username}`)
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(parts);
 
         embed.setDescription(`${displayparts2[0].join("\n")}`);
         await i.update({
@@ -358,7 +353,6 @@ module.exports = {
           .setTitle(`Displaying houses for ${user.username}`)
           .setColor(colors.blue)
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
-        console.log(parts);
 
         embed.setDescription(`${displayhouses2[0].join("\n")}`);
         await i.update({
@@ -446,7 +440,6 @@ module.exports = {
             let defaulty = 50;
             let defaultx = 5;
             for (let ca in itempage[page - 1]) {
-              console.log(ca);
               if (ca == 0) {
                 defaulty = 40;
                 defaultx = 5;
@@ -472,7 +465,6 @@ module.exports = {
                 defaultx = 300;
               }
               let car = itempage[page - 1][ca];
-              console.log(car);
 
               let carimg =
                 car.Image || cardb.Cars[car.Name.toLowerCase()].Image;

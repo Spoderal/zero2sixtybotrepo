@@ -190,7 +190,6 @@ module.exports = {
 
       carfiltered[0]["Favorite"] = true;
 
-      console.log(carfiltered);
 
       await User.findOneAndUpdate(
         {
@@ -267,7 +266,6 @@ module.exports = {
 
       carfiltered[0]["Tag"] = tagtoset;
 
-      console.log(carfiltered);
 
       await User.findOneAndUpdate(
         {
@@ -344,7 +342,6 @@ module.exports = {
 
       carfiltered[0]["Tag"] = null;
 
-      console.log(carfiltered);
 
       await User.findOneAndUpdate(
         {
@@ -393,7 +390,6 @@ module.exports = {
 
       carfiltered[0]["Favorite"] = false;
 
-      console.log(carfiltered);
 
       await User.findOneAndUpdate(
         {

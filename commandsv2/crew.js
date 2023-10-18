@@ -1,4 +1,4 @@
-"use strict";
+
 
 const Discord = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
@@ -216,7 +216,6 @@ module.exports = {
           });
           let crewclaimed = userdata.crewseason || [];
           let redeemed = crewclaimed.length++;
-          console.log(redeemed);
           let crewseason = require("../data/seasons.json").Seasons.Crew1;
 
           collector.on("collect", async (i) => {
@@ -233,7 +232,6 @@ module.exports = {
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
-              console.log(reward);
               let embed2 = new Discord.EmbedBuilder()
                 .setTitle(`Season 2 for ${crew2.name}`)
                 .addFields([{ name: "Rewards", value: `${reward.join("\n")}` }])
@@ -353,10 +351,8 @@ module.exports = {
         (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
       );
       let rewnum = (seasonclaimed.length += 1);
-      console.log(rewnum);
       let item = crewseason[`${crew2[0].Rank3}`];
-      console.log(crew2[0].Rank3);
-      console.log(item.Number);
+
       if (item.Number > crew2[0].Rank3) {
         return interaction.reply(`Your crew needs to be rank ${item.Number}`);
       }
@@ -365,13 +361,11 @@ module.exports = {
         let amount = item.Item.split(" ")[0];
         userdata.cash += Number(amount);
 
-        console.log("done");
       }
       if (item.Item.endsWith("Crew Respect")) {
         let amount = item.Item.split(" ")[0];
         userdata.crewrespect += Number(amount);
 
-        console.log("done");
       } else if (item.Item.endsWith("Notoriety")) {
         let amount = item.Item.split(" ")[0];
         userdata.notofall += Number(amount);
@@ -548,8 +542,7 @@ module.exports = {
 
           for (var i2 = 0; i2 < 1; i2++)
             newmem.splice(newmem.indexOf(`${uid}`), 1);
-          console.log(actcrew);
-          console.log(newmem);
+          
           await Global.findOneAndUpdate(
             {},
             {
@@ -588,7 +581,6 @@ module.exports = {
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       let toedit = interaction.options.getString("option");
-      console.log(crew2[0]);
       if (crew2[0].owner.id !== interaction.user.id)
         return interaction.reply("You need to be the crew owner!");
       if (toedit == "icon") {
@@ -739,7 +731,6 @@ module.exports = {
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       let tokick = interaction.options.getString("user");
-      console.log(crew2[0]);
       if (crew2[0].owner.id !== interaction.user.id)
         return interaction.reply("You need to be the crew owner!");
 
@@ -749,8 +740,7 @@ module.exports = {
       let utokickdata = await User.findOne({ id: uid });
 
       for (var i2 = 0; i2 < 1; i2++) newmem.splice(newmem.indexOf(`${uid}`), 1);
-      console.log(actcrew);
-      console.log(newmem);
+
       await Global.findOneAndUpdate(
         {},
         {
@@ -777,7 +767,6 @@ module.exports = {
       let crew2 = crews.filter((crew) => crew.name == crewname.name);
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
-      console.log(crew2[0]);
       if (crew2[0].owner.id !== interaction.user.id)
         return interaction.reply("You need to be the crew owner!");
 
@@ -880,8 +869,10 @@ module.exports = {
         .setColor(colors.blue)
         .setDescription(desc);
 
-      setTimeout(() => {
+      let xt = setTimeout(() => {
         interaction.editReply({ embeds: [embed] });
+        
+        clearTimeout(xt)
       }, 3000);
     } else if (option == "cards") {
       let crew = userdata.crew;

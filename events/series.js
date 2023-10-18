@@ -1,13 +1,14 @@
-const Cooldowns = require(`../schema/cooldowns`);
 const partdb = require("../data/partsdb.json");
 const User = require(`../schema/profile-schema`);
 const Cooldown = require(`../schema/cooldowns`);
 
-async function series() {
-  setInterval(async () => {
-    let users = await Cooldowns.find();
-    for (let u in users) {
-      let userdata = users[u];
+async function series(interaction) {
+
+  let user = interaction.user
+
+    let cooldowns = await Cooldown.findOne({id: user.id});
+    
+      let userdata = await User.findOne({id: user.id})
       if (
         userdata !== undefined &&
         userdata !== null &&
@@ -15,10 +16,10 @@ async function series() {
         userdata.id !== null
       ) {
         try {
-          let cooldowns = await Cooldown.findOne({ id: userdata.id });
+       
           let bountycool = cooldowns.series1;
           let ticketscool = cooldowns.series1tickets;
-          let udata = await User.findOne({ id: userdata.id }, { versionKey: '_somethingElse' });
+          let udata = await User.findOne({ id: user.id }, { versionKey: '_somethingElse' });
           if (udata) {
             let timeout = 86400000;
             let timeout2 = 600000;
@@ -91,16 +92,7 @@ async function series() {
               cooldowns.series1 = 0;
               udata.pressure = false;
             }
-            await User.findOneAndUpdate(
-              {
-                id: udata.id,
-              },
-              {
-                $set: {
-                  
-                },
-              }
-            );            
+             udata.update()
             cooldowns.update();
             udata.save();
             cooldowns.save();
@@ -109,8 +101,7 @@ async function series() {
           console.log(err);
         }
       }
-    }
-  }, 10000);
+    
 }
 
 module.exports = {

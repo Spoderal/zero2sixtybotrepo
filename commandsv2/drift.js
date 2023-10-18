@@ -1,4 +1,4 @@
-"use strict";
+
 
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -144,7 +144,6 @@ module.exports = {
     momentum = momentum * handling;
 
     let driftscore = momentum / velocity;
-    console.log(driftscore);
     await interaction.reply({
       content: "Revving engines...",
       fetchReply: true,
@@ -237,8 +236,7 @@ module.exports = {
     let x = setInterval(async () => {
       timelimit -= 1;
       tracklength -= driftscore;
-      console.log(timelimit);
-      console.log(tracklength);
+
       if (timelimit <= 0 || tracklength <= 0) {
         if (tracklength > 0) {
           embed.setTitle(`${trackemote} ${difficulty} ${track} track lost.`);
