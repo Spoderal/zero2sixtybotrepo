@@ -810,8 +810,7 @@ module.exports = {
         }
         userdata.update()
       }
-      for (var b = 0; i < amount2; b++)
-        items.splice(items.indexOf("zero bar"), 1);
+       items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
       userdata.save();
       interaction.reply(`${randomeffect}`);
@@ -826,8 +825,7 @@ module.exports = {
 
       fullname = `${emote} ${name}`;
 
-      for (var i5 = 0; i5 < amount2; i5++)
-        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+      for (var i5 = 0; i5 < amount2; i5++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
       cooldowndata.save();
       userdata.save();

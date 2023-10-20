@@ -66,7 +66,7 @@ module.exports = {
             //   }
             // }
             await command.execute(interaction);
-            series(user)
+            series(interaction)
           }
         } catch (err) {
           console.log(err);

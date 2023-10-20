@@ -6,7 +6,7 @@ async function series(interaction) {
 
   let user = interaction.user
 
-    let cooldowns = await Cooldown.findOne({id: user.id});
+    let cooldowns = await Cooldown.findOne({id: user.id}) || new Cooldown({id: user.id})
     
       let userdata = await User.findOne({id: user.id})
       if (
