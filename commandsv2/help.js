@@ -24,10 +24,6 @@ module.exports = {
         .setURL("https://discord.gg/5j8SYkrf4z"),
       new ButtonBuilder()
         .setStyle("Link")
-        .setLabel("🗒️ Docs")
-        .setURL("https://zero2sixty.app/commands"),
-      new ButtonBuilder()
-        .setStyle("Link")
         .setLabel("🧡 Patreon")
         .setURL("https://www.patreon.com/zero2sixtybot")
     );
@@ -85,8 +81,6 @@ module.exports = {
         `
         Here you will find all the help you need to get started with the bot\n
         Run \`/start\` to begin the interactive tutorial that'll help you start the bot\n
-        If you need anymore help, make sure to check out the docs by clicking the "docs" button\n
-        We're doing a Live Q&A at 500 servers! Make sure to ask questions and get answers to anything!\n
         [YouTube tutorial on Zero2Sixty](https://www.youtube.com/watch?v=HA5lm8UImWo&ab_channel=Zero2Sixty)\n
         To get started, choose an option from the menu.\n
         Invite the bot to your server by using this [link.](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=321600&scope=bot%20applications.commands)\n
@@ -261,7 +255,7 @@ module.exports = {
             value: `${achievement.Task}`,
           });
         }
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row2, row],
         });

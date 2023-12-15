@@ -10,7 +10,7 @@ const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const petdb = require("../data/pets.json");
 const cratedb = require("../data/cratedb.json");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
 const cardb = require("../data/cardb.json")
 
 module.exports = {
@@ -51,22 +51,22 @@ module.exports = {
       itemtouse.toLowerCase() !== "gold" &&
       itemdb[itemtouse.toLowerCase()].Type == "Non-Usable"
     )
-      return interaction.reply(`Thats not a usable item!`);
+      return await interaction.reply(`Thats not a usable item!`);
     if (
       !items.includes(itemtouse.toLowerCase()) &&
       itemtouse.toLowerCase() !== "gold"
     )
-      return interaction.reply("You don't have this item!");
+      return await interaction.reply("You don't have this item!");
     let filtereduser = items.filter(function hasmany(part) {
       return part === itemtouse.toLowerCase();
     });
     if (amount2 > 50 && itemtouse.toLowerCase() !== "gold")
-      return interaction.reply(
+      return await interaction.reply(
         `The max amount you can use in one command is 50!`
       );
 
     if (amount2 > filtereduser.length && itemtouse.toLowerCase() !== "gold")
-      return interaction.reply("You don't have that many of that item!");
+      return await interaction.reply("You don't have that many of that item!");
     let fullname;
 
     if (itemdb[itemtouse.toLowerCase()]) {
@@ -80,7 +80,7 @@ module.exports = {
       let banklimit = userdata.banklimit || 0;
 
       if (banklimit >= 2500000)
-        return interaction.reply(
+        return await interaction.reply(
           `The bank limit cap is currently ${toCurrency(
             2500000
           )} for regular bank increases! Try using a big bank increase`
@@ -109,7 +109,7 @@ module.exports = {
       let banklimit = userdata.banklimit;
 
       if (banklimit >= 10000000)
-        return interaction.reply(
+        return await interaction.reply(
           `The bank limit cap is currently ${toCurrency(
             10000000
           )} for big bank increases!`
@@ -137,7 +137,7 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "ice cube") {
       console.log(using);
       if (using.includes("ice cube"))
-        return interaction.reply("You're already using an ice cube!");
+        return await interaction.reply("You're already using an ice cube!");
       let chance = randomRange(1, 100);
       if (chance <= 25) {
         interaction.channel.send(
@@ -149,7 +149,7 @@ module.exports = {
       userdata.eventCooldown = cooldowns / 2;
     } else if (itemtouse.toLowerCase() == "permission slip") {
       if (userdata.using.includes("permission slip"))
-        return interaction.reply("You're already using a permission slip!");
+        return await interaction.reply("You're already using a permission slip!");
       userdata.using.push(`permission slip`);
       cooldowndata.permissionslip = Date.now();
     } else if (itemtouse.toLowerCase() == "radar") {
@@ -198,9 +198,9 @@ module.exports = {
       cooldowndata.epiclockpick = Date.now();
     } else if (itemtouse.toLowerCase() == "pet treats") {
       if (!userdata.newpet.name)
-        return interaction.reply("You don't have a pet!");
+        return await interaction.reply("You don't have a pet!");
       if (userdata.newpet.xessence >= 20)
-        return interaction.reply(
+        return await interaction.reply(
           "Your xessence cap is at 20, you cant give your pet any more treats!"
         );
       userdata.using.push(`pet treats`);
@@ -209,17 +209,17 @@ module.exports = {
       cooldowndata.pettreats = Date.now();
     } else if (itemtouse.toLowerCase() == "chips") {
       if (userdata.chips >= 50)
-        return interaction.reply("You can only stack up to 50%!");
+        return await interaction.reply("You can only stack up to 50%!");
       userdata.using.push(`chips`);
       userdata.chips += 5;
       cooldowndata.chips = Date.now();
     } else if (itemtouse.toLowerCase() == "fireplace") {
       if (userdata.keepdrift == true)
-        return interaction.reply("You already used a fireplace!");
+        return await interaction.reply("You already used a fireplace!");
       userdata.keepdrift = true;
     } else if (itemtouse.toLowerCase() == "gas") {
       if (userdata.keeprace == true)
-        return interaction.reply("You already used gas!");
+        return await interaction.reply("You already used gas!");
       userdata.keeprace = true;
     } else if (itemtouse.toLowerCase() == "sponsor") {
       userdata.using.push(`sponsor`);
@@ -227,28 +227,28 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "small vault") {
       let vault = userdata.vault;
       if (vault)
-        return interaction.reply(
+        return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
       userdata.vault = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "medium vault") {
       let vault = userdata.vault;
       if (vault)
-        return interaction.reply(
+        return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
       userdata.vault = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "large vault") {
       let vault = userdata.vault;
       if (vault)
-        return interaction.reply(
+        return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
       userdata.vault = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "huge vault") {
       let vault = userdata.vault;
       if (vault)
-        return interaction.reply(
+        return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
       userdata.vault = itemtouse.toLowerCase();
@@ -258,7 +258,7 @@ module.exports = {
       let job = userdata.work;
 
       if (job == null || !job || job == {})
-        return interaction.reply("You don't have a job! Use /job");
+        return await interaction.reply("You don't have a job! Use /job");
       let xpmult = job.xpmult || 0;
 
       userdata.work.xpmult = xpmult += 0.5;
@@ -268,7 +268,7 @@ module.exports = {
       let job = userdata.work;
 
       if (job == null || !job || job == {})
-        return interaction.reply("You don't have a job! Use /job");
+        return await interaction.reply("You don't have a job! Use /job");
 
       userdata.work.salary += 500;
 
@@ -289,7 +289,7 @@ module.exports = {
       userdata.markModified("work");
     } else if (itemtouse.toLowerCase() == "secret brief case") {
       if (userdata.work.name !== "Police")
-        return interaction.reply(
+        return await interaction.reply(
           "You need to be a police officer to use this item!"
         );
       userdata.bounty += 1000;
@@ -302,7 +302,7 @@ module.exports = {
         userdata.itemeffects.push({ item: "tequila shot", earning: "good" });
       }
       cooldowndata.tequila = Date.now();
-
+      userdata.using.push("tequila shot")
       userdata.markModified("itemeffects");
     } else if (itemtouse.toLowerCase() == "dirt") {
       let timeout = 3600000;
@@ -339,7 +339,7 @@ module.exports = {
         let usertothrow = interaction.options.getUser("user");
 
         if (!usertothrow)
-          return interaction.reply("You need to specify a user!");
+          return await interaction.reply("You need to specify a user!");
 
         let userdatathrow = await User.findOne({ id: usertothrow.id });
 
@@ -357,7 +357,46 @@ module.exports = {
         );
         return;
       }
-    } else if (itemtouse.toLowerCase() == "pet egg") {
+    } 
+    else if (itemtouse.toLowerCase() == "snowball") {
+  
+       
+        let usertothrow = interaction.options.getUser("user");
+
+        if (!usertothrow)  return await interaction.reply("You need to specify a user!");
+
+        let userdatathrow = await User.findOne({ id: usertothrow.id });
+
+
+      let prompts = ["now you gained $1K, woohoo!", "now you lost $1K, womp womp.", "brrrr cold", "throw it back or you're a chicken!"]
+
+      let promp = lodash.sample(prompts)
+
+      if(promp == "now you gained $1K, woohoo!"){
+        userdatathrow.cash += 1000
+      }
+      if(promp == "now you lost $1K, womp womp."){
+        let u2cash = userdatathrow.cash
+        if((u2cash -= 1000) < 0){
+          userdatathrow.cash = 0
+        }
+        else {
+          userdatathrow.cash -= 1000
+
+        }
+      }
+        for (var i3 = 0; i3 < amount2; i3++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+        userdata.items = items;
+        userdata.save();
+        userdatathrow.save()
+        interaction.reply(
+          `${usertothrow}, ${interaction.user} threw a ${itemdb.snowball.Emote} snowball at you, ${promp}`
+        );
+        return;
+      
+    }
+    
+    else if (itemtouse.toLowerCase() == "pet egg") {
       let petsarr = [];
       for (let pet in petdb) {
         petsarr.push(petdb[pet]);
@@ -365,7 +404,7 @@ module.exports = {
       let randcat = lodash.sample(petsarr);
       console.log(randcat);
       let pet = userdata.newpet;
-      if (pet.name) return interaction.reply(`You already have a pet!`);
+      if (pet.name) return await interaction.reply(`You already have a pet!`);
       let petindb = petdb[randcat.Breed.toLowerCase()];
       let randname = lodash.sample(petindb.Names);
 
@@ -525,7 +564,7 @@ module.exports = {
         interaction.channel.send(`${randomcar.Name} was effected!`)
         userdata.update();
       } else if (randomeffect == "You stink, no effect for you") {
-        return interaction.reply(`${randomeffect}`);
+        return await interaction.reply(`${randomeffect}`);
       } else if (randomeffect == "You just got your weekly reward now!") {
         let cash = 750;
         let patron = userdata.patron;

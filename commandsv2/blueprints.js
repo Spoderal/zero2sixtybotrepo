@@ -85,7 +85,6 @@ module.exports = {
         ) {
           userdata.using.pull("apple juice");
           userdata.update();
-          interaction.channel.send("Your apple juice ran out!");
           contents = boughtindb.Contents;
         } else {
           contents = boughtindb.Cars;
@@ -264,7 +263,7 @@ module.exports = {
 
               userdata.cars.push(carobj);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -273,14 +272,14 @@ module.exports = {
 
               userdata.cash += parseInt(amount);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward1.toLowerCase()]) {
               userdata.parts.push(reward1.toLowerCase());
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -304,7 +303,7 @@ module.exports = {
 
               userdata.cars.push(carobj);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -313,14 +312,14 @@ module.exports = {
 
               userdata.cash += parseInt(amount);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward2.toLowerCase()]) {
               userdata.parts.push(reward2.toLowerCase());
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -344,7 +343,7 @@ module.exports = {
 
               userdata.cars.push(carobj);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -353,14 +352,14 @@ module.exports = {
 
               userdata.cash += parseInt(amount);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward3.toLowerCase()]) {
               userdata.parts.push(reward3.toLowerCase());
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -567,7 +566,7 @@ module.exports = {
 
               userdata.cars.push(carobj);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -576,14 +575,14 @@ module.exports = {
 
               userdata.cash += parseInt(amount);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward1.toLowerCase()]) {
               userdata.parts.push(reward1.toLowerCase());
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -604,7 +603,7 @@ module.exports = {
 
               userdata.cars.push(carobj);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -613,14 +612,14 @@ module.exports = {
 
               userdata.cash += parseInt(amount);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward2.toLowerCase()]) {
               userdata.parts.push(reward2.toLowerCase());
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -641,7 +640,7 @@ module.exports = {
 
               userdata.cars.push(carobj);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
@@ -650,14 +649,14 @@ module.exports = {
 
               userdata.cash += parseInt(amount);
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward3.toLowerCase()]) {
               userdata.parts.push(reward3.toLowerCase());
               userdata.save();
-              await i.update({ content: "✅" });
+              await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }

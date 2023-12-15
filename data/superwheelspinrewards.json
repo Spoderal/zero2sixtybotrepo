@@ -7,13 +7,12 @@
   "Parts": [
     "dualturbo",
     "supercharger",
-    "t3weight",
+    "t4exhaust",
+    "t4turbo",
+    "t4clutch",
+    "t4tires",
     "t4weight",
-    "t3weightreduction",
-    "t4weightreduction",
-    "driftsprings",
-    "racesprings",
-    "tracksprings"
+    "t4weightreduction"
   ],
   "Cash": [
     1000, 2000, 3000, 4000, 50000, 6000, 7000, 8000, 900, 1000, 15000, 2000,

@@ -432,9 +432,9 @@
 
 //           if (current !== page) {
 //             embed1.setFooter({ text: `Page ${page}/${marketdisplay.length}` });
-//             i.update({ embeds: [embed1] });
+//             interaction.editReply({ embeds: [embed1] });
 //           } else {
-//             return i.update({ content: "No pages left!" });
+//             return interaction.editReply({ content: "No pages left!" });
 //           }
 //         });
 //       }

@@ -3,6 +3,8 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const items = require("../data/items.json");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
+
 const Global = require("../schema/global-schema");
 let warehousedb = require("../data/warehouses.json");
 let cars = require("../data/cardb.json");
@@ -14,6 +16,7 @@ const { toCurrency, numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const carpacks = require("../data/carpacks.json");
 const imports = require("../data/imports.json");
+const partdb = require("../data/partsdb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -80,6 +83,20 @@ module.exports = {
         "To use this command, specify the car you want to buy. Example: /buy 1995 Mazda Miata"
       );
 
+      let cooldowns =
+      (await Cooldowns.findOne({ id: interaction.user.id })) ||
+      new Cooldowns({ id: interaction.user.id });
+    let timeout2 = 30000;
+    if (
+      cooldowns.upgrading !== null &&
+      timeout2 - (Date.now() - cooldowns.is_racing) > 0
+    ) {
+      return await interaction.channel.send({
+        content: `Wait for your upgrade command to stop, then try buying a car`,
+        fetchReply: true,
+        ephemeral: true,
+      });
+    }
     let amount3 = Math.round(amount2);
 
     const carsList = cars.Cars;
@@ -146,7 +163,7 @@ module.exports = {
       return interaction.reply("Bought car pack!");
     }
 
-    if (!boughtCar && !boughtWarehouse && !boughtHouse && !itemsList[bought])
+    if (!boughtCar && !boughtWarehouse && !boughtHouse && !itemsList[bought] && !partdb.Parts[bought])
       return await interaction.reply(
         "That car or item isn't available yet, suggest it in the support server! **Parts are no longer purchasable**."
       );
@@ -370,10 +387,10 @@ module.exports = {
             );
           }
           let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
-          if (cars.Tiers[carindb.Class].level > tier)
+          if (cars.Tiers[carindb.Class.toLowerCase()].level > tier)
             return interaction.reply(
               `Your tier is not high enough! You need to beat the **Tier ${
-                cars.Tiers[carindb.Class].level
+                cars.Tiers[carindb.Class.toLowerCase()].level
               } Squad** to unlock this car!`
             );
 
@@ -552,12 +569,13 @@ module.exports = {
         } for ${toCurrency(boughtWarehouse.Price)}`
       );
     } else if (itemsList[bought]) {
-      let itemshopweek = global.itemshop;
-      let itemindb = itemsList[bought];
-      if (!itemshopweek.includes(itemindb.Name))
-        return interaction.reply(
-          "That item isn't purchasable today! Check back tomorrow **THE SHOP REFRESHES WEEKLY**"
-        );
+      let itemshopweek = global.itemshop.filter((item) => item.Name.toLowerCase() == bought.toLowerCase())[0]
+      console.log(itemshopweek)
+      if (!itemshopweek)
+      return interaction.reply(
+    "That item isn't purchasable today! Check back tomorrow **THE SHOP REFRESHES WEEKLY**"
+    );
+    let itemindb = itemsList[itemshopweek.Name.toLowerCase()];
       if (itemindb.Price == 0)
         return interaction.reply("This item isn't purchasable!");
 
@@ -579,7 +597,31 @@ module.exports = {
           itemsList[bought].Name
         } for ${toCurrency(pricing)}`
       );
-    } else {
+    } 
+    else if(partdb.Parts[bought]){
+      let partindb = partdb.Parts[bought]
+      if (partindb.Price == 0) return interaction.reply("This part isn't purchasable!");
+      let pricing = parseInt(partindb.Price) * amount3;
+
+      if (userdata.cash < pricing)
+      return await interaction.reply(
+        `You cant afford this! You need ${toCurrency(pricing)}`
+      );
+
+
+      for (let i = 0; i < amount3; i++) userdata.parts.push(bought);
+
+      userdata.cash -= pricing
+
+      await userdata.save()
+
+      await interaction.reply(
+        `Purchased x${amount3} ${partindb.Emote} ${
+          partindb.Name
+        } for ${toCurrency(pricing)}`
+      );
+    }
+    else {
       await interaction.reply(
         `Thats not a purchasable item, car, house, or part!`
       );

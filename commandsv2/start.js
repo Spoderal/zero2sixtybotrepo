@@ -110,7 +110,7 @@ module.exports = {
       let car = i.customId;
       let carindb = cardb.Cars[car];
       userdata = await User.findOne({ id: userid });
-      if (userdata) return await i.update("You have an account!");
+      if (userdata) return await interaction.editReply("You have an account!");
       let carobj = {
         ID: carindb.alias,
         Name: carindb.Name,
@@ -129,7 +129,7 @@ module.exports = {
       
       newuser.cars.push(carobj);
       newuser.save();
-      await i.update(
+      await interaction.editReply(
         `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, run /garage to see your cars ID, go ahead and try running \`/race car: ${carobj.ID}\`, and **select street race**, then **select Tier 1**`
         );
       });

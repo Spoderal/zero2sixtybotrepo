@@ -1,56 +1,60 @@
-// const cardb = require("../data/cardb.json");
-// const itemdb = require("../data/items.json");
-// const partdb = require("../data/partsdb.json").Parts;
-// const Global = require("../schema/global-schema");
+const cardb = require("../data/cardb.json");
+const itemdb = require("../data/items.json");
+const partdb = require("../data/partsdb.json").Parts;
+const Global = require("../schema/global-schema");
+const lodash = require("lodash")
+let array = [];
+let array2 = [];
 
-// let array = [];
-// let array2 = [];
+async function itemshop() {
+    setInterval(async () => {
+        
 
-// async function cardata() {
-//   let global;
-//   try {
-//     global = await Global.findOne({});
-//   } catch (err) {
-//     console.log(err);
-//   }
+  let global;
+  try {
+    global = await Global.findOne({});
+  } catch (err) {
+    console.log(err);
+  }
 
-//   for (let car in cardb.Cars) {
-//     let carindb = cardb.Cars[car];
-//     if (carindb.Price > 0) {
-//       if (!global.shopitems.includes(carindb.Name)) {
-//         global.shopitems.push(carindb.Name);
-//       }
-//     }
-//   }
+  let daily = global.itemshopcooldown
 
-//   for (let part in partdb) {
-//     let partindb = partdb[part];
+  let timeout = 604800000
 
-//     if (partindb.Price > 0) {
-//       if (!global.shopitems.includes(partindb.Name)) {
-//         global.shopitems.push(partindb.Name);
-//       }
-//     }
-//   }
+  if (daily !== null && timeout - (Date.now() - daily) > 0) {
+    
+   return 
+  } else {
+    let itemshops = []
+    let itemshop = []
+    for(let item in itemdb){
+        if(itemdb[item].Shop == true && itemdb[item].Price > 0){
+            itemshops.push(itemdb[item])
 
-//   for (let item in itemdb) {
-//     let itemindb = itemdb[item];
+        }
+    }
+    console.log(itemshops[0])
+    for (let i = 0; i < 5; i++) {
+        var random_item = lodash.sample(itemshops);
+        itemshop.push(random_item);
+        itemshops.splice(itemshops.indexOf(random_item), 1);
+     }
+     global.itemshop = itemshop
+     global.itemshopcooldown = Date.now()
+     console.log(global.shopitems)
 
-//     if (itemindb.Shop == true) {
-//       if (!global.shopitems.includes(itemindb.Name)) {
-//         global.shopitems.push(itemindb.Name);
-//       }
-//     }
-//   }
 
-//   try {
-//     global.save();
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+}
+  try {
+    global.save();
+  } catch (err) {
+    console.log(err);
+  }
+}, 5000);
+}
 
-// cardata();
 
-// exports.shopitems = array2;
-// exports.cars = array;
+module.exports = {
+    itemshop,
+  };
+  

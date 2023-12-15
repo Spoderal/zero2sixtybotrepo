@@ -21,6 +21,22 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
+  location:{
+    type: String,
+    required: false,
+    default: "USA",
+  },
+  landmarks:{
+    type: Array,
+    required: false,
+    default: [],
+  },
+
+  speedometer:{
+    type: Number,
+    required: false,
+    default:  0
+  },
   hasvoted: {
     type: Boolean,
     required: false,
@@ -527,6 +543,11 @@ const Profile = new mongoose.Schema({
     default: 0,
   },
   season1claimed: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
+  seasonclaimed: {
     type: Number,
     required: false,
     default: 1,

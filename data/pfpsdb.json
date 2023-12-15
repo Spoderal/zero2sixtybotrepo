@@ -117,8 +117,8 @@
     },
     "snow helmet": {
       "Name": "Snow Helmet",
-      "Image": "https://i.ibb.co/YRdbQrG/snowy-helmet.png",
-      "Emote": "<:helmet_snow:965086963256422471>"
+      "Image": "https://i.ibb.co/TMy9Njk/helmet-snow.png",
+      "Emote": "<:helmet_snow:1183249182094528532>"
     },
     "festive helmet": {
       "Name": "Festive Helmet",
@@ -127,8 +127,13 @@
     },
     "rudolph helmet": {
       "Name": "Rudolph Helmet",
-      "Image": "https://i.ibb.co/DDBtsHs/rudolph-helmet.png",
-      "Emote": "<:helmet_rudolph:965086962543362129>"
+      "Image": "https://i.ibb.co/9Yk6bqJ/helmet-rudolph.png",
+      "Emote": "<:helmet_rudolph:1183249191137460275>"
+    },
+    "ice helmet": {
+      "Name": "Ice Helmet",
+      "Image": "https://i.ibb.co/LrKzxwx/helmet-ice.png",
+      "Emote": "<:helmet_ice:1183249185202520146>"
     },
     "cracked helmet": {
       "Name": "Cracked Helmet",
@@ -137,8 +142,8 @@
     },
     "tree helmet": {
       "Name": "Tree Helmet",
-      "Image": "https://i.ibb.co/Tq8YmZr/christmas-tree-helmet.png",
-      "Emote": "<:helmet_tree:965086963432579092>"
+      "Image": "https://i.ibb.co/LRLFgmC/helmet-treev3.png",
+      "Emote": "<:helmet_treev3:1183249188272750662>"
     },
     "gold helmet": {
       "Name": "Gold Helmet",

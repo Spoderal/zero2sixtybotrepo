@@ -2,6 +2,7 @@ const User = require(`../schema/profile-schema`);
 const cardb = require("../data/cardb.json");
 const partdb = require("../data/partsdb.json");
 const ocardb = require("../data/oldcars.json");
+const parttiersdb = require("../data/parttiers.json");
 
 async function carfix() {
   let users = await User.find();
@@ -22,6 +23,43 @@ async function carfix() {
 
           for (let car in cars) {
             let carf = cars[car].Name;
+            if(cars[car].Exhaust){
+              let price = parttiersdb[`exhaust1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Turbo){
+              let price = parttiersdb[`turbo1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Clutch){
+              let price = parttiersdb[`clutch1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].ECU){
+              let price = parttiersdb[`ecu1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Gearbox){
+              let price = parttiersdb[`gearbox1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Tires){
+              let price = parttiersdb[`tires1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Intake){
+              let price = parttiersdb[`intake1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Intercooler){
+              let price = parttiersdb[`intercooler1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+            if(cars[car].Suspension){
+              let price = parttiersdb[`suspension1`].Cost * cars[car].Exhaust;
+              userdata.cash += price
+            }
+
 
             let carindb = cardb.Cars[carf.toLowerCase()];
 
@@ -33,7 +71,7 @@ async function carfix() {
               Handling: carindb.Handling,
               Parts: [],
               Emote: carindb.Emote,
-              Image: carindb.Image,
+              Image: cars[car].Image,
               Miles: 0,
               Drift: 0,
               WeightStat: carindb.Weight,
@@ -44,31 +82,9 @@ async function carfix() {
           }
         }
 
-        udata.cash = 0;
-        udata.items = [];
-        udata.parts = [];
-        udata.racerank = 0;
-        udata.driftrank = 0;
-        udata.prestige = 0;
-        udata.work = null;
-        udata.crew = {};
-        udata.rp4 = 0;
-        udata.ckeys = 0;
-        udata.ekeys = 0;
-        udata.rkeys = 0;
-        udata.barnmaps = 0;
-        udata.blueprints = 0;
-        udata.lockpicks = 0;
-        udata.garageLimit = 10;
-        udata.houses = [];
-        udata.squads = [];
-        udata.tier = 1;
-        udata.crewseason = [];
-        udata.business = {};
+        
 
         udata.markModified("cars");
-        udata.markModified("items");
-        udata.markModified("parts");
         udata.save();
       } catch (err) {
         console.log(err);

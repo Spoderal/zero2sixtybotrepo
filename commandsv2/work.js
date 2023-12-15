@@ -392,7 +392,7 @@ module.exports = {
               userdata.markModified("work");
               userdata.save();
               cooldowns.save();
-              await i.update({ embeds: [embed], components: [] });
+              await interaction.editReply({ embeds: [embed], components: [] });
             } else {
               let prompt = lodash.sample(userjobfilter[0].loseprompts);
               embed.setDescription(
@@ -400,7 +400,7 @@ module.exports = {
                   positionfilter[0].fail
                 )} for not doing your job.`
               );
-              await i.update({ embeds: [embed], components: [] });
+              await interaction.editReply({ embeds: [embed], components: [] });
               userdata.cash += positionfilter[0].fail;
               userdata.work.earned += positionfilter[0].fail;
               userdata.work.fails += 1;

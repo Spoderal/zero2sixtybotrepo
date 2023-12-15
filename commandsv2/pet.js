@@ -148,7 +148,7 @@ module.exports = {
           ])
           .setThumbnail(petimage)
           .setColor(colors.blue);
-        i.update({
+        interaction.editReply({
           content: `You pet your ${petbreed}!`,
           embeds: [embed],
         });
@@ -196,7 +196,7 @@ module.exports = {
           ])
           .setThumbnail(petimage)
           .setColor(colors.blue);
-        i.update({
+        interaction.editReply({
           content: `You fed your ${petbreed} costing you $2,000`,
           embeds: [embed],
         });
@@ -235,7 +235,7 @@ module.exports = {
           ])
           .setThumbnail(petimage)
           .setColor(colors.blue);
-        i.update({
+        interaction.editReply({
           content: `You gave your ${petbreed} water costing you $500`,
           embeds: [embed],
         });
@@ -317,7 +317,7 @@ module.exports = {
             ])
             .setThumbnail(petimage)
             .setColor(colors.blue);
-          i.update({ content: `You changed your pets name`, embeds: [embed] });
+          interaction.editReply({ content: `You changed your pets name`, embeds: [embed] });
         });
       } else if (i.customId.includes("leave")) {
         await User.findOneAndUpdate(
@@ -331,7 +331,7 @@ module.exports = {
           }
         );
 
-        i.update({
+        interaction.editReply({
           content: `Left your ${petbreed} :(`,
           embeds: [],
           components: [],

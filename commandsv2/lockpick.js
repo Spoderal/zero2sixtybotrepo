@@ -191,9 +191,9 @@ module.exports = {
           sellrow = sellrow.setComponents(button);
 
           if (sellrow.components.length == 0) {
-            await i.update({ components: [], content: "Sold all cars!" });
+            await interaction.editReply({ components: [], content: "Sold all cars!" });
           } else {
-            await i.update({ components: [sellrow] });
+            await interaction.editReply({ components: [sellrow] });
           }
         }
       });

@@ -15,8 +15,9 @@ const Topgg = require("@top-gg/sdk");
 const cars = require("./cars").carfix;
 const gold = require("../gold");
 const stats = require("./stats").stats;
-const cardata = require("./shopdata");
+const {itemshop} = require("./shopdata");
 const { isracing } = require("./is_racing");
+const { season } = require("./season");
 
 let mongoConfig = {
   keepAlive: true,
@@ -42,6 +43,10 @@ module.exports = {
     double(client);
     gold(client);
     stats(client);
+    cars(client)
+    season(client)
+    itemshop(client)
+
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
@@ -87,10 +92,10 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `🍂 FALL 🍂  /season`,
-      `⚙️ PATCH ⚙️ 7/14 /updates`,
+      `🌨️ WINTER 🌨️  /season`,
+      `⚙️ HUGE UPDATE ⚙️ 12/15 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
-      "🎃 HALLOWEEN EVENT /events 🎃",
+      "🎄 CHRISTMAS EVENT /events 🎄",
     ];
 
     let randomstatus = lodash.sample(randomstatuses);

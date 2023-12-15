@@ -123,7 +123,7 @@ const {
                     selected.Speed += Math.floor(psi / 5)
                 }
                 if((selected.PSI += 1) > partdb[selected.Turbo.toLowerCase()].MaxPSI){
-                   return await i.update("Max PSI!")
+                   return await interaction.editReply("Max PSI!")
                 }
                 selected.PSI = psi += 1
 
@@ -250,7 +250,7 @@ const {
                 }
 
                 if((psi * 100) > revlimit){
-                    return await i.update(`Your PSI is too high! Lower it first`)
+                    return await interaction.editReply(`Your PSI is too high! Lower it first`)
                 }
                 
                 selected.RevLimit -= 100
@@ -286,7 +286,7 @@ const {
         .setColor(colors.blue)
             }
 
-            await i.update({embeds: [embed]})
+            await interaction.editReply({embeds: [embed]})
           })
       
 

@@ -1,72 +1,112 @@
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
+const Cooldowns = require("../schema/cooldowns");
+const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const cardb = require("../data/cardb.json").Cars;
 const parttiersdb = require("../data/parttiers.json");
+const { toCurrency } = require("../common/utils");
+const emotes = require("../common/emotes").emotes
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("remove")
-    .setDescription("Remove a part from your car")
-    .addStringOption((option) =>
-      option.setName("car").setDescription("Your car ID").setRequired(true)
-    )
+    .setDescription("Remove a part on your car")
     .addStringOption((option) =>
       option
-        .setName("part")
-        .setDescription("The part to remove")
+        .setName("car")
+        .setDescription("Your car ID or Name")
         .setRequired(true)
-        .addChoices(
-          { name: "Exhaust", value: "exhaust" },
-          { name: "Tires", value: "tires" },
-          { name: "Suspension", value: "suspension" },
-          { name: "Turbo", value: "turbo" },
-          { name: "Intake", value: "intake" },
-          { name: "Engine", value: "engine" },
-          { name: "Intercooler", value: "intercooler" },
-          { name: "ECU", value: "ecu" },
-          { name: "Clutch", value: "clutch" },
-          { name: "Gearbox", value: "gearbox" }
-        )
-    ),
+    )
+    .addStringOption((option) =>
+    option
+      .setName("part")
+      .setDescription("What you want to remove")
+      .setRequired(true)
+  )
+    ,
+
   async execute(interaction) {
     let inputCarIdOrName = interaction.options.getString("car");
+    let inputUpgrade = interaction.options.getString("part");
+
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let usercars = userdata.cars || [];
-
+    let cooldowns =
+    (await Cooldowns.findOne({ id: interaction.user.id })) ||
+    new Cooldowns({ id: interaction.user.id });
     let selected = usercars.filter(
       (car) =>
         car.Name.toLowerCase() == inputCarIdOrName.toLowerCase() ||
         car.ID == inputCarIdOrName
     );
 
+    let timeout3 = 30000
+
+    cooldowns.upgrading = Date.now()
+
+    cooldowns.save()
+
+
+
     if (selected.length == 0)
       return interaction.reply(
         "Thats not a car! Make sure to specify a car ID, or car name"
       );
+    let carimage =  selected[0].Image || cardb[selected[0].Name.toLowerCase()].Image;
+    let carspeed = selected[0].Speed
+    let caracc = selected[0].Acceleration
+    let carhandling = selected[0].Handling
+    let carweight = selected[0].WeightStat
 
-    let removepart = interaction.options.getString("part");
 
-    if (!selected[0][removepart.toLowerCase()])
-      return interaction.reply("Your car doesn't have this part!");
+    let partindb = partdb.Parts[inputUpgrade.toLowerCase()]
 
-    if (selected[0][removepart.toLowerCase()] == 0)
-      return interaction.reply("This part cant go any lower!");
-    let partoncar = selected[0][removepart.toLowerCase()];
+    if(!selected[0][partindb.Type] || selected[0][partindb.Type] == null) return interaction.reply(`Your car doesn't have a ${partindb.Type}, use /upgrade first!`)
 
-    let parttier = parttiersdb[`${removepart.toLowerCase()}1`];
-
-    if (parttier.Power) {
-      selected[0].Speed -= selected[0].Speed * parttier.Power;
+    let acc = selected[0].Acceleration
+    let newacc = acc -= partindb.AddAcceleration
+    
+    if(partindb.Handling > 0){
+      selected[0].Handling -= Number(partindb.Handling)
     }
-    if (parttier.Handling) {
-      selected[0].Handling -= selected[0].Handling * parttier.Handling;
+    if(partindb.Power > 0){
+      selected[0].Speed -= Number(partindb.Power)
     }
-    if (parttier.Acceleration) {
-      selected[0].Acceleration +=
-        selected[0].Acceleration * parttier.Acceleration;
+    if(partindb.AddAcceleration > 0){
+      
+      selected[0].Acceleration += (Math.floor(partindb.AddAcceleration * 100) / 100)
+    }
+    if(partindb.RemoveAcceleration > 0){
+      if(newacc < 2){
+        selected[0].Acceleration = 2
+      } 
+      else {
+        selected[0].Acceleration -= (Math.floor(partindb.RemoveAcceleration * 100) / 100)
+
+      }
+    }
+    if(partindb.RemovePower > 0){
+      selected[0].Power -= Number(partindb.RemovePower)
+    }
+    if(partindb.DecreaseHandling > 0){
+      selected[0].Handling += Number(partindb.DecreaseHandling)
     }
 
-    selected[0][removepart.toLowerCase()] -= 1;
+    if(partindb.RemoveWeight > 0){
+      selected[0].WeightStat += Number(partindb.RemoveWeight)
+    }
+    if(partindb.Weight > 0 && (selected[0].WeightStat - partindb.Weight >= 1000)){
+      selected[0].WeightStat -= Number(partindb.Weight)
+    }
+    if(partindb.Stars > 0){
+      selected[0].Rating -= Number(partindb.Stars)
+    }
+    userdata.parts.push(selected[0][partindb.Type])
+
+    selected[0][partindb.Type] = null
 
     await User.findOneAndUpdate(
       {
@@ -87,12 +127,18 @@ module.exports = {
       }
     );
 
-    let partcost = partoncar * parttier.Cost;
 
-    userdata.cash += partcost;
+    userdata.save()
 
-    userdata.save();
+    
+    let embed = new EmbedBuilder()
+    .setTitle(`Removed ${partindb.Emote} ${partindb.Name}`)
+    .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${Math.floor(caracc * 100) / 100} -> ${Math.floor(selected[0].Acceleration * 100) / 100}`)
+    .setColor(colors.blue)
+    .setImage(`${carimage}`)
+    .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
 
-    interaction.reply("✅");
+    await interaction.reply({embeds: [embed]})
+     
   },
 };

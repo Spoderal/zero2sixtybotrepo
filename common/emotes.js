@@ -14,6 +14,7 @@ const emotes = {
   race: "<:rank_newrace:1114815495959486504>",
   drift: "<:rank_newdrift:1114815498056638506> ",
   tier: "<:rank_tier:1114816526076362803>",
+  OVR:"<:ovricon:1185036043087532183>",
 
   // Currency
   cash: "<a:emote_cash:1114822702461616168>",

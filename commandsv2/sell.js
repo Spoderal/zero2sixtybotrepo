@@ -62,6 +62,8 @@ module.exports = {
 
     let selected = filteredcar[0] || "No ID";
     console.log(selected);
+
+
     if (selected !== "No ID") {
       let price = selected.Resale || selected.Price || 0;
 
@@ -96,6 +98,8 @@ module.exports = {
       if (imports.rare.Contents.includes(selected.Name.toLowerCase())) {
         userdata.rareCredits += 5;
       }
+      if(userdata.cars.length <= 1) return interaction.reply("You need to have at least 1 car!")
+
 
       await interaction.reply(
         `You sold ${amount2} ${selected.Name} for ${toCurrency(price)}!`
@@ -107,11 +111,7 @@ module.exports = {
         )
       )
         return await interaction.reply("You dont have that part!");
-      if (
-        parts.Parts[selling.toLowerCase()].sellprice == "N/A" ||
-        !parts.Parts[selling.toLowerCase()].sellprice
-      )
-        return await interaction.reply("That part is unsellable!");
+      
       let filtereduser = userparts.filter(function hasmany(part) {
         return part === selling.toLowerCase();
       });
@@ -188,10 +188,12 @@ module.exports = {
       );
     } else if (itemdb[selling.toLowerCase()]) {
       let useritems = userdata.items;
+      let finalprice = itemdb[selling.toLowerCase()].Price * 0.35;
       useritems.splice(useritems.indexOf(selling.toLowerCase()), 1);
       userdata.items = useritems;
+      userdata.cash +=finalprice
 
-      await interaction.reply(`You sold your ${selling} for $0!`);
+      await interaction.reply(`You sold your ${selling} for ${toCurrency(finalprice)}!`);
     } else if (profilestuff.Pfps[selling.toLowerCase()]) {
       userdata.pfps.pull(selling.toLowerCase());
 

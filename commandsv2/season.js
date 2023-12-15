@@ -20,12 +20,12 @@ const ms = require("ms");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("season")
-    .setDescription("Check the season 2 rewards page"),
+    .setDescription("Check the season 3 rewards page"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata = await Cooldown.findOne({ id: interaction.user.id });
-    let seasonRewards = seasons.Seasons.Fall.Rewards;
+    let seasonRewards = seasons.Seasons.Winter.Rewards;
     let notoriety = userdata.notoriety;
 
     let rewards = [];
@@ -54,9 +54,11 @@ module.exports = {
       rewards.map((a) => a),
       6
     );
+    
+    console.log(rewards.length)
 
 
-    let claimable = userdata.season1claimed || 1;
+    let claimable = userdata.seasonclaimed || 1;
 
     let opened = cooldowndata.opened;
     let timeout = 15000;
@@ -76,14 +78,6 @@ module.exports = {
       new ButtonBuilder()
         .setCustomId("next")
         .setEmoji("▶️")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setCustomId("first")
-        .setEmoji("⏮️")
-        .setStyle("Secondary"),
-      new ButtonBuilder()
-        .setCustomId("last")
-        .setEmoji("⏭️")
         .setStyle("Secondary")
     );
 
@@ -107,10 +101,10 @@ module.exports = {
 
 
     let embed = new EmbedBuilder()
-      .setTitle(`Season 2 Page ${vispage}`)
+      .setTitle(`Season 3 Page ${vispage}`)
       .setColor(colors.blue)
-      .setThumbnail(seasons.Seasons.Fall.Image)
-      .setFooter({ text: `August 31st - September 31st` });
+      .setThumbnail(seasons.Seasons.Winter.Image)
+      .setFooter({ text: `December 12th - March 1st` });
 
     for (let field in rewards[page]) {
       let data = rewards[page][field];
@@ -266,69 +260,19 @@ module.exports = {
       filter: filter,
       time: 15000,
     });
-
     collector.on("collect", async (i) => {
+      
       if (i.customId == "next") {
-        if (page == 9) return interaction.reply("No more pages!");
-        page += 1;
+        if (page >= 8) return interaction.editReply("No more pages!");
+        page ++ ;
         vispage++;
       } else if (i.customId == "previous") {
-        if ((page -= 1) < 1) return interaction.reply("No more pages!");
+        if ((page <= 0)) return interaction.editReply("No more pages!");
         page--;
         vispage--;
-      } else if (i.customId == "last") {
-        page = 16;
-        vispage = rewards.length;
-      } else if (i.customId == "first") {
-        page = 0;
-        vispage = 1;
       } else if (i.customId == "claim") {
         let path = userdata.path || "none";
-        if (path == null || path == "none") {
-          let pathrow = new ActionRowBuilder().setComponents(
-            new ButtonBuilder()
-              .setCustomId("1")
-              .setLabel("1")
-              .setStyle("Secondary"),
-            new ButtonBuilder()
-              .setCustomId("2")
-              .setLabel("2")
-              .setStyle("Secondary"),
-            new ButtonBuilder()
-              .setCustomId("3")
-              .setLabel("3")
-              .setStyle("Secondary")
-          );
-
-          let embed = new EmbedBuilder()
-            .setTitle("Choose a path to start the season!")
-            .setImage("https://i.ibb.co/JH3hZsX/PATHS.png")
-            .setColor(colors.blue);
-
-          let msg2 = await interaction.channel.send({
-            embeds: [embed],
-            components: [pathrow],
-          });
-
-          let filter3 = (btnInt) => {
-            return interaction.user.id == btnInt.user.id;
-          };
-          const collector3 = msg2.createMessageComponentCollector({
-            filter: filter3,
-            time: 15000,
-          });
-
-          collector3.on("collect", async (i) => {
-            userdata.path = i.customId.toString();
-            userdata.save();
-            i.update(`✅`);
-
-            try {
-              msg2.delete();
-            } catch (err) {
-            }
-          });
-        } else {
+        userdata = await User.findOne({id: interaction.user.id})
           notoriety = userdata.notoriety;
 
           if (rewardtoclaim.Required > notoriety) return;
@@ -341,8 +285,7 @@ module.exports = {
 
             let oldnoto = userdata.notoriety;
             userdata.cash = newamount;
-            userdata.notoriety = oldnoto -= rewardtoclaim.Required;
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (rewardtoclaim.Item.toLowerCase() == "path car") {
             let carin;
@@ -370,7 +313,7 @@ module.exports = {
               MaxGas: 10,
             };
             userdata.cars.push(carobj);
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (rewardtoclaim.Item.includes("Rare Keys")) {
             let amount = rewardtoclaim.Item.split(" ");
@@ -381,7 +324,7 @@ module.exports = {
 
 
             userdata.rkeys = newamount;
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (rewardtoclaim.Item.includes("Common Keys")) {
             let amount = rewardtoclaim.Item.split(" ");
@@ -391,7 +334,7 @@ module.exports = {
             let newamount = parseInt((usercash += num));
 
             userdata.ckeys = newamount;
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (rewardtoclaim.Item.includes("Exotic Keys")) {
             let amount = rewardtoclaim.Item.split(" ");
@@ -402,7 +345,7 @@ module.exports = {
 
 
             userdata.ekeys = newamount;
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (rewardtoclaim.Item.includes("Garage Spaces")) {
             let amount = rewardtoclaim.Item.split(" ");
@@ -413,7 +356,7 @@ module.exports = {
 
 
             userdata.garageLimit = newamount;
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (rewardtoclaim.Item.includes("RP")) {
             let amount = rewardtoclaim.Item.split(" ");
@@ -424,7 +367,7 @@ module.exports = {
 
 
             userdata.rp4 = newamount;
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
             let car = cardb.Cars[rewardtoclaim.Item.toLowerCase()];
@@ -444,49 +387,48 @@ module.exports = {
               MaxGas: 10,
             };
             userdata.cars.push(carobj);
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
             let car = partdb.Parts[rewardtoclaim.Item.toLowerCase()];
 
             userdata.parts.push(car.Name.toLowerCase());
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (itemdb[rewardtoclaim.Item.toLowerCase()]) {
             let car = itemdb[rewardtoclaim.Item.toLowerCase()];
 
             userdata.items.push(car.Name.toLowerCase());
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()]) {
 
             userdata.pfps.push(rewardtoclaim.Item.toLowerCase());
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           } else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
 
             userdata.titles.push(rewardtoclaim.Item.toLowerCase());
-            userdata.season1claimed += 1;
+            userdata.seasonclaimed += 1;
             userdata.save();
           }
-        }
+        
       }
 
       notoriety = userdata.notoriety;
 
       embed = new EmbedBuilder()
-        .setTitle(`Season 2 Page ${vispage}`)
+        .setTitle(`Season 3 Page ${vispage}`)
         .setColor(colors.blue)
-        .setThumbnail(seasons.Seasons.Fall.Image)
-        .setFooter({ text: `August 31st - September 31st` });
-
+        .setThumbnail(seasons.Seasons.Winter.Image)
+        .setFooter({ text: `December 12th - March 1st` });
       for (let field in rewards[page]) {
         let data = rewards[page][field];
         if (data.Item.endsWith("Cash")) {
           let amount = data.Item.split(" ");
           embed.addFields({
             name: `Reward ${data.Number}`,
-            value: `${toCurrency(amount[0])}\n${numberWithCommas(
+            value: `${emotes.cash} ${toCurrency(amount[0])}\n${numberWithCommas(
               data.Required
             )} ${emotes.notoriety}`,
             inline: true,
@@ -619,7 +561,7 @@ module.exports = {
           });
         }
       }
-      claimable = userdata.season1claimed;
+      claimable = userdata.seasonclaimed;
 
       rowclaim = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -636,7 +578,7 @@ module.exports = {
         rowclaim.components[0].setStyle("Danger");
       }
 
-      await i.update({
+      await interaction.editReply({
         embeds: [embed],
         fetchReply: true,
         components: [row9, rowclaim],

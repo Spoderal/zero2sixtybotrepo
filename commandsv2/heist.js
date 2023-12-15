@@ -135,7 +135,7 @@ module.exports = {
             .setDescription(
               `You've already done a heist today!\n\nRob again in ${time}.`
             );
-          await i.update({ embeds: [timeEmbed], fetchReply: true });
+          await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
           return;
         }
 
@@ -152,7 +152,7 @@ module.exports = {
               .setDescription(
                 `${user2} has already done a heist today!\n\nRob again in ${time}.`
               );
-            await i.update({ embeds: [timeEmbed], fetchReply: true });
+            await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
             return;
           }
 
@@ -178,7 +178,7 @@ module.exports = {
           )
           .setColor(colors.blue);
 
-        await i.update({ embeds: [embed], fetchReply: true });
+        await interaction.editReply({ embeds: [embed], fetchReply: true });
 
         setTimeout(async () => {
           embed.setDescription(
@@ -279,7 +279,7 @@ module.exports = {
             .setDescription(
               `You've already done a heist today!\n\nRob again in ${time}.`
             );
-          await i.update({ embeds: [timeEmbed], fetchReply: true });
+          await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
           return;
         }
 
@@ -296,7 +296,7 @@ module.exports = {
               .setDescription(
                 `${user2} has already done a heist today!\n\nRob again in ${time}.`
               );
-            await i.update({ embeds: [timeEmbed], fetchReply: true });
+            await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
             return;
           }
 
@@ -322,7 +322,7 @@ module.exports = {
           )
           .setColor(colors.blue);
 
-        await i.update({ embeds: [embed], fetchReply: true });
+        await interaction.editReply({ embeds: [embed], fetchReply: true });
 
         setTimeout(async () => {
           embed.setDescription(

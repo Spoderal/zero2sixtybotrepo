@@ -8,9 +8,10 @@ const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const titledb = require("../data/titles.json");
 const partdb = require("../data/partsdb.json");
-
+const itemdb = require("../data/items.json")
 const ms = require("ms");
 const Cooldowns = require("../schema/cooldowns");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,7 +25,8 @@ module.exports = {
           { name: "Common Crate", value: "common crate" },
           { name: "Rare Crate", value: "rare crate" },
           { name: "Prestige Crate", value: "prestige crate" },
-          { name: "Vote Crate", value: "vote crate" }
+          { name: "Vote Crate", value: "vote crate" },
+          {name: "Present", value: "present"}
         )
         .setRequired(true)
     ),
@@ -61,10 +63,7 @@ module.exports = {
       .setColor(`#60b0f4`);
 
     interaction.reply({ embeds: [embed] });
-    for (var s = 0; s < 1; s++)
-      inv.splice(inv.indexOf(bought.toLowerCase()), 1);
-    userdata.items = inv;
-    userdata.update();
+
     cooldowndata.crate = Date.now();
     cooldowndata.save();
     let x = 0;
@@ -85,6 +84,9 @@ module.exports = {
       let reward3 = rewards[2];
       let rewardsarr = []
       
+      console.log(reward1)
+      console.log(reward2)
+      console.log(reward3)
 
       let name1;
       let name2;
@@ -108,6 +110,68 @@ module.exports = {
         userdata.update();
       }
 
+      if(reward1 == "super wheelspin"){
+        name1 = `${emotes.superWheel} Super Wheelspin`
+
+        userdata.swheelspins += 1
+        userdata.update();
+      }
+
+      if(reward2 == "super wheelspin"){
+        name2 = `${emotes.superWheel} Super Wheelspin`
+
+        userdata.swheelspins += 1
+        userdata.update();
+      }
+
+      if(reward3 == "super wheelspin"){
+        name3 = `${emotes.superWheel} Super Wheelspin`
+
+        userdata.swheelspins += 1
+        userdata.update();
+      }
+
+      if(reward1 == "wheelspin"){
+        name1 = `${emotes.wheelspins} Wheelspin`
+
+        userdata.wheelspins += 1
+        userdata.update();
+      }
+
+      if(reward2 == "wheelspin"){
+        name2 = `${emotes.wheelspins} Wheelspin`
+
+        userdata.wheelspins += 1
+        userdata.update();
+      }
+
+      if(reward3 == "wheelspin"){
+        name3 = `${emotes.wheelspins} Wheelspin`
+
+        userdata.wheelspins += 1
+        userdata.update();
+      }
+
+      if(reward1 == "lockpick"){
+        name1 = `${emotes.lockpicks} Lockpick`
+
+        userdata.lockpicks += 1
+        userdata.update();
+      }
+
+      if(reward2 == "lockpick"){
+        name2 = `${emotes.lockpicks} Lockpick`
+
+        userdata.lockpicks += 1
+        userdata.update();
+      }
+
+      if(reward3 == "lockpick"){
+        name3 = `${emotes.lockpicks} Lockpick`
+
+        userdata.lockpicks += 1
+        userdata.update();
+      }
       
 
       if (reward1.endsWith(`Cash`)) {
@@ -167,7 +231,12 @@ module.exports = {
         userdata.update();
       }
 
+      for (var s = 0; s < 1; s++)  inv.splice(inv.indexOf(bought.toLowerCase()), 1);
+      userdata.items = inv;
+      userdata.update();
+
       await userdata.save();
+      console.log(`${name1} ${name2} ${name3}`)
       rewardsarr.push(`${name1}`)
       rewardsarr.push(`${name2}`)
       rewardsarr.push(`${name3}`)

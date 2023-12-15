@@ -43,7 +43,11 @@ module.exports = {
       return await interaction.reply(
         "Specify how much gold you'd like to exchange!"
       );
-    if (isNaN(toturnin)) return await interaction.reply("Specify a number!");
+    if (isNaN(toturnin)) return await interaction.reply("Specify a valid number!");
+    if (toturnin < 0) return await interaction.reply("Specify a valid number!");
+    
+    toturnin = Math.floor(toturnin)
+
     if (toturnin > gold)
       return await interaction.reply("You don't have enough gold!");
     if (toconv == "cash") {

@@ -198,8 +198,8 @@ module.exports = {
         row.addComponents(
           new ButtonBuilder()
             .setCustomId("season")
-            .setEmoji("https://i.ibb.co/qdX6mmW/season2-ico.png")
-            .setLabel("Season 2")
+            .setEmoji("<:season3:1183248587774238741>")
+            .setLabel("Season 3")
             .setStyle("Secondary")
         );
       }
@@ -216,11 +216,11 @@ module.exports = {
           });
           let crewclaimed = userdata.crewseason || [];
           let redeemed = crewclaimed.length++;
-          let crewseason = require("../data/seasons.json").Seasons.Crew1;
+          let crewseason = require("../data/seasons.json").Seasons.Crew2;
 
           collector.on("collect", async (i) => {
             if (i.customId.includes("season")) {
-              crewseason = require("../data/seasons.json").Seasons.Crew1
+              crewseason = require("../data/seasons.json").Seasons.Crew2
                 .Rewards;
               let reward = [];
               for (var w in crewseason) {
@@ -232,13 +232,14 @@ module.exports = {
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
               }
+              console.log(reward)
               let embed2 = new Discord.EmbedBuilder()
-                .setTitle(`Season 2 for ${crew2.name}`)
-                .addFields([{ name: "Rewards", value: `${reward.join("\n")}` }])
+                .setTitle(`Season 3 for ${crew2.name}`)
+                .addFields([{ name: "Rewards", value: `${reward.join("\n")}`}])
                 .setThumbnail(icon)
                 .setColor(colors.blue);
 
-              await i.update({ embeds: [embed2], components: [row] });
+              await interaction.editReply({ embeds: [embed2], components: [row] });
             } else if (i.customId.includes("stats")) {
               embed
                 .setTitle(`Info for ${crew2.name}`)
@@ -258,7 +259,7 @@ module.exports = {
                 { name: "Leaderboard", value: `${finalLb}`, inline: true },
               ];
 
-              await i.update({ embeds: [embed], components: [row] });
+              await interaction.editReply({ embeds: [embed], components: [row] });
             }
           });
         });
@@ -344,7 +345,7 @@ module.exports = {
 
       await interaction.reply(`✅ Joined ${crewname}`);
     } else if (option == "claim") {
-      let crewseason = require("../data/seasons.json").Seasons.Crew1.Rewards;
+      let crewseason = require("../data/seasons.json").Seasons.Crew2.Rewards;
       let seasonclaimed = userdata.crewseason || [];
       let crewname = userdata.crew.name;
       let crew2 = crews.filter(
@@ -352,10 +353,14 @@ module.exports = {
       );
       let rewnum = (seasonclaimed.length += 1);
       let item = crewseason[`${crew2[0].Rank3}`];
-
+      let iteminuser = seasonclaimed.filter(
+        (claimed) => claimed == item.Number
+      );
+      console.log(iteminuser)
       if (item.Number > crew2[0].Rank3) {
         return interaction.reply(`Your crew needs to be rank ${item.Number}`);
       }
+      if(iteminuser[0]) return interaction.reply("You've already claimed this reward!")
 
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
@@ -564,11 +569,11 @@ module.exports = {
           userdata.save();
           row.components[0].setDisabled();
           row.components[1].setDisabled();
-          i.update({ components: [row] });
+          interaction.editReply({ components: [row] });
         } else {
           row.components[0].setDisabled();
           row.components[1].setDisabled();
-          i.update({ components: [row] });
+          interaction.editReply({ components: [row] });
 
           return;
         }
@@ -648,7 +653,7 @@ module.exports = {
               .setDescription(`Icon ${iconum}`)
               .setImage(`${iconsdisplay[iconum]}`);
 
-            await i.update({
+            await interaction.editReply({
               embeds: [embed],
               fetchReply: true,
               components: [row9, row],
@@ -662,7 +667,7 @@ module.exports = {
               .setDescription(`Icon ${iconum}`)
               .setImage(`${iconsdisplay[iconum]}`);
 
-            await i.update({
+            await interaction.editReply({
               embeds: [embed],
               fetchReply: true,
               components: [row9, row],
@@ -676,7 +681,7 @@ module.exports = {
               .setDescription(`Icon ${iconum}`)
               .setImage(`${iconsdisplay[iconum]}`);
 
-            await i.update({
+            await interaction.editReply({
               embeds: [embed],
               fetchReply: true,
               components: [row9, row],
@@ -690,7 +695,7 @@ module.exports = {
               .setDescription(`Icon ${iconum}`)
               .setImage(`${iconsdisplay[iconum]}`);
 
-            await i.update({
+            await interaction.editReply({
               embeds: [embed],
               fetchReply: true,
               components: [row9, row],
@@ -719,7 +724,7 @@ module.exports = {
             );
 
             globalModel.save();
-            await i.update(`✅`);
+            await interaction.editReply(`✅`);
           }
         });
       }
@@ -1017,7 +1022,7 @@ module.exports = {
           let crewresp = userdata.crewrespect || 0;
 
           if (crewresp < 10)
-            return i.update("You don't have enough crew respect!");
+            return interaction.editReply("You don't have enough crew respect!");
 
           let timeout = 14400000;
           let timeout2 = 7200000;
@@ -1028,7 +1033,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1037,7 +1042,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1046,7 +1051,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           card1filt[0].points += 10;
@@ -1155,12 +1160,12 @@ module.exports = {
             .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
             .setColor(colors.blue);
 
-          await i.update({ embeds: [embed], components: [row, row2] });
+          await interaction.editReply({ embeds: [embed], components: [row, row2] });
         } else if (i.customId == "sting_card") {
           let crewresp = userdata.crewrespect || 0;
 
           if (crewresp < 10)
-            return i.update("You don't have enough crew respect!");
+            return interaction.editReply("You don't have enough crew respect!");
 
           let timeout = 14400000;
           let timeout2 = 7200000;
@@ -1171,7 +1176,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1180,7 +1185,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1189,7 +1194,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           card2filt[0].points += 10;
@@ -1298,12 +1303,12 @@ module.exports = {
             .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
             .setColor(colors.blue);
 
-          await i.update({ embeds: [embed], components: [row, row2] });
+          await interaction.editReply({ embeds: [embed], components: [row, row2] });
         } else if (i.customId == "gt_card") {
           let crewresp = userdata.crewrespect || 0;
 
           if (crewresp < 10)
-            return i.update("You don't have enough crew respect!");
+            return interaction.editReply("You don't have enough crew respect!");
 
           let timeout = 14400000;
           let timeout2 = 7200000;
@@ -1314,7 +1319,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1323,7 +1328,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1332,7 +1337,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           card3filt[0].points += 10;
@@ -1441,7 +1446,7 @@ module.exports = {
             .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
             .setColor(colors.blue);
 
-          await i.update({ embeds: [embed], components: [row, row2] });
+          await interaction.editReply({ embeds: [embed], components: [row, row2] });
         } else if (i.customId == "activate_crush_card") {
           let timeout = 14400000;
           let timeout2 = 7200000;
@@ -1452,7 +1457,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1461,7 +1466,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1470,7 +1475,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           card1filt[0].points = 0;
@@ -1579,7 +1584,7 @@ module.exports = {
             .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
             .setColor(colors.blue);
 
-          await i.update({ embeds: [embed], components: [row, row2] });
+          await interaction.editReply({ embeds: [embed], components: [row, row2] });
         } else if (i.customId == "activate_sting_card") {
           let timeout = 14400000;
           let timeout2 = 7200000;
@@ -1590,7 +1595,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1599,7 +1604,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1608,7 +1613,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           card2filt[0].points = 0;
@@ -1717,7 +1722,7 @@ module.exports = {
             .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
             .setColor(colors.blue);
 
-          await i.update({ embeds: [embed], components: [row, row2] });
+          await interaction.editReply({ embeds: [embed], components: [row, row2] });
         } else if (i.customId == "activate_gt_card") {
           let timeout = 14400000;
           let timeout2 = 7200000;
@@ -1728,7 +1733,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1737,7 +1742,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           if (
@@ -1746,7 +1751,7 @@ module.exports = {
           ) {
             console.log("no card");
           } else {
-            return i.update("Wait for your other card to run out!");
+            return interaction.editReply("Wait for your other card to run out!");
           }
 
           card3filt[0].points = 0;
@@ -1855,7 +1860,7 @@ module.exports = {
             .setImage("https://i.ibb.co/f4ChHG0/vipcards.png")
             .setColor(colors.blue);
 
-          await i.update({ embeds: [embed], components: [row, row2] });
+          await interaction.editReply({ embeds: [embed], components: [row, row2] });
         }
       });
     }

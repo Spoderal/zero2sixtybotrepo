@@ -57,6 +57,18 @@
     "Title": "HELL RAISER",
     "Achieve": "Season"
   },
+  "festive": {
+    "Title": "FESTIVE",
+    "Achieve": "Season"
+  },
+  "jolly": {
+    "Title": "JOLLY",
+    "Achieve": "Season"
+  },
+  "icey": {
+    "Title": "ICEY",
+    "Achieve": "Season"
+  },
   "drift king": {
     "Title": "DRIFT KING",
     "Achieve": "Event"

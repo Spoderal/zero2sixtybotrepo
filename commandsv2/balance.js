@@ -69,9 +69,9 @@ module.exports = {
             {
               name: "Main",
               value: `
-              ${emotes.cash} Z Cash: ${toCurrency(cash)} \u200b ${
-                emotes.gold
-              } Gold: ${gold}
+              ${emotes.cash} Z Cash: ${toCurrency(cash)}
+              
+              ${emotes.gold} Gold: ${gold}
     
               ${emotes.bounty} Bounty: ${bounty}
   
@@ -99,8 +99,6 @@ module.exports = {
               ${emotes.exoticKey} Exotic: ${ekeys} 
               *Credits: ${exoticCredits}*
 
-              ${emotes.dirftKey} Event Keys ${evkeys}
-
               <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
               `,
               inline: true,
@@ -111,8 +109,6 @@ module.exports = {
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
-
-              <:item_candy:1155765935022559342> Candy: ${numberWithCommas(zcandy)}
               `,
               inline: true,
             },

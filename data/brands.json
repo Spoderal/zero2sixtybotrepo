@@ -71,6 +71,12 @@
     "name": "Chevy",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
+  "chrysler": {
+    "image": "https://i.ibb.co/BtBFxFd/logo-chrysler.png",
+    "emote": "<:logo_chrysler:1178584868595187813>",
+    "name": "Chrysler",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
   "cadillac": {
     "image": "https://i.ibb.co/wwckDF8/cadillac.png",
     "emote": "<:logo_cadillac:1094883208170049646>",
@@ -101,6 +107,12 @@
     "emote": "<:ferrari:931011838374727730>",
     "name": "Ferrari",
     "country": "https://i.ibb.co/120BJky/flag-italy.png"
+  },
+  "gmc": {
+    "image": "https://i.ibb.co/d7pwfkP/logo-gmc.png",
+    "emote": "<:logo_gmc:1178924605650518107>",
+    "name": "GMC",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "haas": {
     "image": "https://i.ibb.co/ypF0MNw/Logo-Haas-F1.png",
@@ -168,6 +180,12 @@
     "name": "Lamborghini",
     "country": "https://i.ibb.co/120BJky/flag-italy.png"
   },
+  "gordon murray": {
+    "image": "https://i.ibb.co/PtsxZxm/gordonmurray.png",
+    "emote": "<:gordonmurray:1185059320681988227>",
+    "name": "Gordon Murray",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
+  },
   "lotus": {
     "image": "https://i.ibb.co/WsP5bfh/logo-lotus.png",
     "emote": "<:lotus:931011548317642814>",
@@ -179,6 +197,12 @@
     "emote": "<:lexus:932776357124001823>",
     "name": "Lexus",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
+  },
+  "lucid": {
+    "image": "https://i.ibb.co/Nx4hr71/logo-lucid.png",
+    "emote": "<:logo_lucid:1178575717114589295>",
+    "name": "Lucid",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "maserati": {
     "image": "https://i.ibb.co/0F7xq9Y/logo-masterati.png",
@@ -218,7 +242,7 @@
   },
   "mitsubishi": {
     "image": "https://i.ibb.co/fxyJgvv/logo-mitsubishi.png",
-    "emote": "<:mitsubishi_z:931068489844789248>",
+    "emote": "<:mistu:931012414479147038>",
     "name": "Mitsubishi",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },

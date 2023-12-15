@@ -285,7 +285,7 @@ module.exports = {
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.perfectengineering;
         let cooldown = 86400000;
-        if (eng == true) return i.update("You already started this series!");
+        if (eng == true) return interaction.editReply("You already started this series!");
         if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
           let time = ms(cooldown - (Date.now() - series1cool));
           let timeEmbed = new EmbedBuilder()
@@ -293,7 +293,7 @@ module.exports = {
             .setDescription(
               `You've already started this series\n\nStart it again in ${time}.`
             );
-          await i.update({ embeds: [timeEmbed], fetchReply: true });
+          await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
         }
         let carobj = cardb.Cars["1980 porsche 911"];
 
@@ -321,13 +321,13 @@ module.exports = {
         userdata.save();
         cooldowndata.save();
 
-        i.update("✅");
+        interaction.editReply("✅");
       } else if (i.customId == "claimcar2") {
         let series1cool = cooldowndata.series1;
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.pressure;
         let cooldown = 86400000;
-        if (eng == true) return i.update("You already started this series!");
+        if (eng == true) return interaction.editReply("You already started this series!");
         if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
           let time = ms(cooldown - (Date.now() - series1cool));
           let timeEmbed = new EmbedBuilder()
@@ -335,7 +335,7 @@ module.exports = {
             .setDescription(
               `You've already started a series\n\nStart one again in ${time}.`
             );
-          await i.update({ embeds: [timeEmbed], fetchReply: true });
+          await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
         }
         let carobj = cardb.Cars["2018 bmw m4cs"];
 
@@ -363,13 +363,13 @@ module.exports = {
         userdata.save();
         cooldowndata.save();
 
-        i.update("✅");
+        interaction.editReply("✅");
       } else if (i.customId == "claimcar3") {
         let series1cool = cooldowndata.series1;
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.fiestafamilia;
         let cooldown = 86400000;
-        if (eng == true) return i.update("You already started this series!");
+        if (eng == true) return interaction.editReply("You already started this series!");
         if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
           let time = ms(cooldown - (Date.now() - series1cool));
           let timeEmbed = new EmbedBuilder()
@@ -377,7 +377,7 @@ module.exports = {
             .setDescription(
               `You've already started a series\n\nStart one again in ${time}.`
             );
-          await i.update({ embeds: [timeEmbed], fetchReply: true });
+          await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
         }
         let carobj = cardb.Cars["2017 ford fiesta st"];
 
@@ -405,7 +405,7 @@ module.exports = {
         userdata.save();
         cooldowndata.save();
 
-        i.update("✅");
+        interaction.editReply("✅");
       } else if (
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
@@ -413,7 +413,7 @@ module.exports = {
         let carobj = cardb.Cars["2018 singer dls"];
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.perfectengineeringcomplete;
-        if (eng == true) return i.update("You already finished this series!");
+        if (eng == true) return interaction.editReply("You already finished this series!");
         let newobj = {
           ID: carobj.alias,
           Name: carobj.Name,
@@ -436,7 +436,7 @@ module.exports = {
         userdata.cars.push(newobj);
         userdata.save();
 
-        i.update("✅");
+        interaction.editReply("✅");
       } else if (
         i.customId == "claimcarfinal2" &&
         userdata.pressurecomplete !== true
@@ -444,7 +444,7 @@ module.exports = {
         let carobj = cardb.Cars["2016 bmw m4 gts"];
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.pressurecomplete;
-        if (eng == true) return i.update("You already finished this series!");
+        if (eng == true) return interaction.editReply("You already finished this series!");
         let newobj = {
           ID: carobj.alias,
           Name: carobj.Name,
@@ -468,7 +468,7 @@ module.exports = {
         userdata.cars.push(newobj);
         userdata.save();
 
-        i.update("✅");
+        interaction.editReply("✅");
       } else if (
         i.customId == "claimcarfinal3" &&
         userdata.fiestafamiliacomplete !== true
@@ -476,7 +476,7 @@ module.exports = {
         let carobj = cardb.Cars["2016 ford focus rs"];
         userdata = await User.findOne({ id: interaction.user.id });
         let eng = userdata.fiestafamiliacomplete;
-        if (eng == true) return i.update("You already finished this series!");
+        if (eng == true) return interaction.editReply("You already finished this series!");
         let newobj = {
           ID: carobj.alias,
           Name: carobj.Name,
@@ -500,7 +500,7 @@ module.exports = {
         userdata.cars.push(newobj);
         userdata.save();
 
-        i.update("✅");
+        interaction.editReply("✅");
       }
     });
   },

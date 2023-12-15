@@ -29,19 +29,13 @@ module.exports = {
             emoji: "<:season2_ico:1146637806354047007>",
           },
           {
-            label: "Rust Bowl",
-            description: "Information for the Rust Bowl Event",
+            label: "Christmas",
+            description: "Information for the Christmas Event",
             value: "event_1",
             customId: "event_1",
-            emoji: "🌋",
+            emoji: "🎅🏼",
           },
-          {
-            label: "Halloween Event",
-            description: "Information for the Halloween Event",
-            value: "event_4",
-            customId: "event_4",
-            emoji: "🎃",
-          },
+    
         ])
     );
 
@@ -54,9 +48,8 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Season 2 <:season2_ico:1146637806354047007>
-          Rust Bowl 🌋
-          Halloween Event 🎃
+          Season 3 <:season3:1183248587774238741>
+          Christmas Event 🎅🏼
       `);
 
     embed.setColor(colors.blue);
@@ -78,78 +71,51 @@ module.exports = {
     collector.on("collect", async (collected) => {
       const value = collected.values[0];
       if (value === "spring_event") {
-        embed.setTitle("Season 2");
+        embed.setTitle("Season 3");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to the second season on Zero2Sixty!
+        embed.setDescription(`Welcome to the third season on Zero2Sixty!
 
-            Welcome to fall! With new fall items, brand new designed helmets, a whole new Z Pass, and 2 different paths for which cars you earn on the season pass, there's so many things to do!
+            Welcome to winter! With new winter items, brand new designed helmets, and a whole new Z Pass there's so many things to do!
 
-            Try out the new limited time race, Mountain Climb, where you will need AWD, and lots of weight to get even more notoriety!
+            Try out the new limited time race, Snow Race, where you will need AWD, and lots of handling to get even more notoriety!
 
-            Earn notoriety from street race, and use that towards the Z Pass in /season!
+            Earn notoriety from snow race, and use that towards the Z Pass in /season!
 
-            **Ends September 31st 2023**
+            **Ends March 1st 2023**
 
                   `);
-        embed.setThumbnail(seasondb.Seasons.Fall.Image);
+        embed.setThumbnail(seasondb.Seasons.Winter.Image);
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/89DwwfN/season2image.png");
+          .setImage("https://i.ibb.co/dMnN6LL/season3image.png");
 
         await interaction.editReply({
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "event_1") {
-        embed.setTitle("Rust Bowl");
+      } 
+      else  if (value === "event_1") {
+        embed.setTitle("Christmas Event");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to the rust bowl of Zero2Sixty!
+        embed.setDescription(`The Christmas event is here!
 
-            An all new event, focused on restoring cars! Gain tier 6 parts at random, by racing your barn finds in the rust bowl in /race!
+        Get <:zpresent:1183910541194956871> presents from racing in the snow race, and obtain snowballs, exclusive cars, and more!
 
-            You will also earn restoration parts for your other barn finds!
+        During the event, daily and weekly rewards are **doubled**! Its a Christmas miracle!
 
-            Win 100 rust bowl races and earn the brand new hennessey venom gt!
-
-            **Ends September 31st 2023**
+        **Ends December 31st 2023**
 
                   `);
+        embed.setThumbnail();
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/CnmpN47/season2.png");
+          .setImage("https://i.ibb.co/kySCd7y/CHRISTMASEVENT.png");
 
         await interaction.editReply({
           embeds: [embed],
           components: [row2],
         });
-      }
-      else if (value === "event_4") {
-        embed.setTitle("Zalloween");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to the the Zalloween event!
-
-            Try not to get spooked by these event cars! All of the event cars from last years halloween event return, and with new ways to collect z bars, you'll love this event!
-
-            What are Z Bars you may ask? Well, they give you a random effect every time you use one! Collect them by racing in any race until halloween!
-
-            Z Bars have a 20% chance to drop from racing, so make sure you race a bunch!
-
-            Z Bars will also have a chance to drop the halloween cars when you use them! 
-
-            **Check /shop to see the event shop**
-
-            **Ends November 10th 2023**
-
-                  `);
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/BK753Qg/EVENT-HALLOWEEN.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      }
+      } 
     });
   },
 };

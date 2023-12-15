@@ -80,7 +80,7 @@ module.exports = {
               warehousedb.t2warehouse.Space
             } Garage Spaces`
           );
-          i.update({ embeds: [embed] });
+          interaction.editReply({ embeds: [embed] });
         }
       });
     }

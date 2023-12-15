@@ -1,39 +1,40 @@
 {
   "streetrace": {
     "Name": "Street Race",
-    "Reward": 50
+    "Reward": 200
   },
   "dragrace": {
     "Name": "Drag Race",
-    "Reward": 75
+    "Reward": 250
   },
   "trackrace": {
     "Name": "Track Race",
-    "Reward": 65
+    "Reward": 225
   },
 
   "trackraceevent": {
     "Name": "Track Race (EVENT)",
-    "Reward": 65
+    "Reward": 225
   },
   "motorcyclemad": {
     "Name": "Motorcycle Madness",
-    "Reward": 70
+    "Reward": 220
   },
   "crosscountry": {
     "Name": "Cross Country",
-    "Reward": 45
+    "Reward": 275
   },
-  "rustbowl": {
-    "Name": "Rust Bowl",
-    "Reward": 45
+  "junkrace": {
+    "Name": "Junk Race",
+    "Reward": 100
   },
-  "mountain": {
-    "Name": "Mountain Climb",
-    "Reward": 50
+
+  "snow": {
+    "Name": "Snow Race",
+    "Reward": 200
   },
   "carseries": {
     "Name": "Car Series",
-    "Reward": 20
+    "Reward": 100
   }
 }

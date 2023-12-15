@@ -147,7 +147,7 @@ module.exports = {
             { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
@@ -179,7 +179,7 @@ module.exports = {
             { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
@@ -212,7 +212,7 @@ module.exports = {
             { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
@@ -244,7 +244,7 @@ module.exports = {
             { name: "Auto Fill Gas", value: `${gasemote}` }
           )
           .setColor(colors.blue);
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,

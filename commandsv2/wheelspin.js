@@ -180,14 +180,14 @@ module.exports = {
               }
               userdata.save();
               embed.setTitle("✅");
-              await i.update({ embeds: [embed] });
+              await interaction.editReply({ embeds: [embed] });
               return;
             } else if (i.customId.includes("sell")) {
               collector.stop();
 
               userdata.save();
               embed.setTitle("✅");
-              await i.update({ embeds: [embed] });
+              await interaction.editReply({ embeds: [embed] });
               return;
             }
           });

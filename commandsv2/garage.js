@@ -160,13 +160,15 @@ module.exports = {
       }
       let spe = car.Speed;
       let acc = Math.floor(car.Acceleration);
-      let hp = spe / acc;
+      let weigh = Math.floor(car.WeightStat);
+      let hand = Math.floor(car.Handling);
+      let hp = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4
       hp = Math.round(hp);
       embed.addFields({
         name: `${car.Emote} ${car.Name} ${favorite}`,
         value: `${tag}\n${
-          emotes.emotes.PT
-        } PT: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n⛽ Gas: ${
+          emotes.emotes.OVR
+        } OVR: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n⛽ Gas: ${
           car.Gas
         }\n\`ID: ${car.ID}\``,
         inline: true,
@@ -215,6 +217,20 @@ module.exports = {
         .setLabel("Houses")
         .setStyle("Secondary")
     );
+
+    if(udata.parts.length == 0){
+      row2.components[1].setDisabled(true)
+      row2.components[1].setLabel("No Parts")
+    }
+    if(udata.items.length == 0){
+      row2.components[2].setDisabled(true)
+      row2.components[2].setLabel("No Items")
+    }
+    if(udata.houses.length == 0){
+      row2.components[3].setDisabled(true)
+      row2.components[3].setLabel("No Houses")
+    }
+
     let msg = await interaction.reply({
       content: "Loading garage...",
       embeds: [embed],
@@ -311,28 +327,30 @@ module.exports = {
             tag = `🏷️ ${car.Tag}`;
           }
           let spe = car.Speed;
-          let acc = Math.floor(car.Acceleration);
-          let hp = spe / acc;
+            let acc = Math.floor(car.Acceleration);
+            let weigh = Math.floor(car.WeightStat);
+            let hand = Math.floor(car.Handling);
+            let hp = ((spe - acc) + (hand - (weigh / 100))) / 4
           hp = Math.round(hp);
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
             value: `${tag}\n${
-              emotes.emotes.PT
-            } PT: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
+              emotes.emotes.OVR
+            } OVR: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
               car.ID
             }\n⛽ Gas: ${car.Gas}\``,
             inline: true,
           });
         }
 
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
           fetchReply: true,
         });
       } else if (i.customId.includes("parts")) {
         if (!displayparts2[0])
-          return interaction.channel.send("You don't have any parts!");
+          return await interaction.editReply("You don't have any parts!");
         itempage = displayparts2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying parts for ${user.username}`)
@@ -340,9 +358,8 @@ module.exports = {
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
 
         embed.setDescription(`${displayparts2[0].join("\n")}`);
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
-
           files: [],
           components: [row, row2],
           fetchReply: true,
@@ -355,7 +372,7 @@ module.exports = {
           .setFooter({ text: `Pages ${page}/${itempage.length}` });
 
         embed.setDescription(`${displayhouses2[0].join("\n")}`);
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
           files: [],
@@ -372,7 +389,7 @@ module.exports = {
 
         embed.setDescription(`${displayitems2.join("\n")}`);
 
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [row, row2],
 
@@ -411,13 +428,15 @@ module.exports = {
             }
             let spe = car.Speed;
             let acc = Math.floor(car.Acceleration);
-            let hp = spe / acc;
+            let weigh = Math.floor(car.WeightStat);
+            let hand = Math.floor(car.Handling);
+            let hp = ((spe - acc) + (hand - (weigh / 100))) / 4
             hp = Math.round(hp);
             embed.addFields({
               name: `${car.Emote} ${car.Name} ${favorite}`,
               value: `${tag}\n${
-                emotes.emotes.PT
-              } PT: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
+                emotes.emotes.OVR
+              } OVR: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
                 car.ID
               }\n⛽ Gas: ${car.Gas}\``,
               inline: true,
@@ -431,7 +450,7 @@ module.exports = {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
           if (itempage == cars) {
             embed.setFooter({ text: `Loading car image...` });
-            i.update({ embeds: [embed], fetchReply: true });
+            interaction.editReply({ embeds: [embed], fetchReply: true });
             let canvas = createCanvas(426, 240);
             let ctx = canvas.getContext("2d");
             let bg = await loadImage("https://i.ibb.co/QMZ0Hch/garage.png");
@@ -493,10 +512,10 @@ module.exports = {
               });
             }, 5000);
           } else {
-            i.update({ embeds: [embed], fetchReply: true });
+            interaction.editReply({ embeds: [embed], fetchReply: true });
           }
         } else {
-          return i.update({ content: "No pages left!" });
+          return interaction.editReply({ content: "No pages left!" });
         }
       }
     });

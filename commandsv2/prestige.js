@@ -275,7 +275,7 @@ module.exports = {
           )
           .setColor(colors.blue);
 
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           fetchReply: true,
           components: [],

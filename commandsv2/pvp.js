@@ -258,7 +258,7 @@ module.exports = {
           cooldowndata.save();
           cooldowndata2.save();
           embed.setTitle("Racing!");
-          i.update({ embeds: [embed], components: [] });
+          interaction.editReply({ embeds: [embed], components: [] });
 
           dorace(
             speedscore,
@@ -604,7 +604,7 @@ module.exports = {
           row.components[0].setDisabled(true);
           row.components[1].setDisabled(true);
 
-          i.update({ embeds: [embed], components: [row] });
+          interaction.editReply({ embeds: [embed], components: [row] });
         }
       });
     } else if (subcommand == "rank") {

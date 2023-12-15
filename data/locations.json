@@ -1,0 +1,764 @@
+{
+    "Locations":{
+
+        "peru":{
+            "Name":"Peru",
+            "Image":"https://i.ibb.co/D492DVr/map-peru-filled.png",
+            "Services":["Gas Station", "Shop"],
+            "Events":["Service", "Service",  "NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race","Landmark", "Nothing", "Fine", "Speedometer"],
+            "NoEvents":["You're driving and its just a normal day", "You see a squirrel! You decide to name it Rin"],
+            "Perks":"2x cash when racing NPCs",
+            "Shop":"Tires",
+            "Jobs":[
+                {
+                    "Name":"Maria",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":200,
+                    "Chance":50,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Jose",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":300,
+                    "Chance":45,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+
+            ],
+            "Landmark":{
+                "Name":"Machu Picchu",
+                "Image":"https://i.ibb.co/hYBdYtG/location-peru-full.png",
+                "Emote":"<:location_peru_full:1175567260614660096>",
+                "Reward":5000
+            },
+        
+          
+            "ForSale":[{"name": "T1Slicks", "price":5000, "emote": "<:part_t1tires:1101042346231070773>", "id": 1}],
+            "Racers":["Maria", "Jose", "Lucia", "Luis"]
+        },
+        "india":{
+            "Name":"India",
+            "Image":"https://i.ibb.co/0cfpXGp/map-india-filled.png",
+            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race","Landmark", "Nothing", "Fine", "Speedometer"],
+            "NoEvents":["You're driving and its just a normal day", "You see a camel! You decide to name it Spoder"],
+            "Perks":"2x cash when racing in drag races",
+            "Jobs":[
+                {
+                    "Name":"Maria",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":200,
+                    "Chance":50,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Jose",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":300,
+                    "Chance":45,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+
+            ],
+            "Landmark":{
+                "Name":"Taj Mahal",
+                "Image":"https://i.ibb.co/LzZwZLh/location-india-full.png",
+                "Emote":"<:location_india_full:1175582707808481300>",
+                "Reward":2500
+            },
+            "Racers":["Hassan", "Amir", "Ishaan", "Aisha"]
+        },
+        "spain":{
+            "Name":"Spain",
+            "Image":"https://i.ibb.co/2WMg13m/location-spain-filled.png",
+            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer", "Market"],
+            "NoEvents":["You're driving and its just a normal day", "You found a taco! You decide to eat it"],
+            "Services":["Gas Station", "Shop"],
+            "Perks":"2x cash when helping NPCs",
+            "Shop":"Tires",
+            "ForSale":[{"name": "T1Slicks", "price":5000, "emote": "<:part_t1tires:1101042346231070773>", "id": 1}],
+            "Jobs":[
+                {
+                    "Name":"Antonio",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":450,
+                    "Chance":40,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Carlos",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":180,
+                    "Chance":60,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+            ],
+            "Racers":["Antonio", "Carlos", "Mateo", "Diego"]
+        },
+        "italy":{
+            "Name":"Italy",
+            "Image":"https://i.ibb.co/QrFYn7k/map-italy-filled.png",
+            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer", "Market"],
+            "NoEvents":["You're driving and its just a normal day", "You found pizza! You decide to eat it"],
+            "Services":["Gas Station"],
+            "Perks":"2x cash when racing in street races",
+            "BlackMarket":[
+                {
+                    "Name":"1985 Lamborghini Jalpa",
+                    "Price":500000,
+                    "Emote":"<:lamborghini:931011549655617566>"
+                },
+                {
+                    "Name":"2023 Ferrari Purosangue",
+                    "Price":2000000,
+                    "Emote":"<:ferrari:931011838374727730>"
+                },
+                {
+                    "Name":"2019 Pagani Zonda King",
+                    "Price":2500000,
+                    "Emote":"<:pagani:933622884126056498>"
+                },
+                {
+                    "Name":"2010 Maserati Grancabrio",
+                    "Price":750000,
+                    "Emote":"<:maserati:961332832767184987>"
+                }
+            ],
+            "Jobs":[
+                {
+                    "Name":"Leonardo",
+                    "Job":"My car tire has just vanished! Can you replace my tire for me?",
+                    "Reward":500,
+                    "Chance":50,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+            ],
+            "Racers":["Leonardo", "Luca", "Andrea", "Bianca"]
+        },
+        "japan":{
+            "Name":"Japan",
+            "Image":"https://i.ibb.co/tJVjs11/map-japan-filled.png",
+            "Events":["NPC Race", "NPC Job", "NPC Job","NPC Race", "Nothing", "Nothing", "Fine", "Speedometer", "Market"],
+            "NoEvents":["You found some noodles, don't play with your food", "You're driving and its a normal day"],
+            "Services":["Gas Station", "Shop"],
+            "Jobs":[
+                {
+                    "Name":"Han",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":450,
+                    "Chance":40,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Aoi",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":180,
+                    "Chance":60,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+            ],
+            "Perks":"2x cash when drifting",
+            "Shop":"Drift",
+            "BlackMarket":[
+                {
+                    "Name":"1989 Mitsubishi Starion",
+                    "Price":19000,
+                    "Emote":"<:mistu:931012414479147038>"
+                },
+                {
+                    "Name":"1996 Subaru SVX",
+                    "Price":27000,
+                    "Emote":"<:subaru:931011550418976808>"
+                },
+                {
+                    "Name":"2020 Hyundai Veloster N ETCR",
+                    "Price":35000,
+                    "Emote":"<:hyundai:931015215447941200>"
+                },
+                {
+                    "Name":"2008 Mazda Furai",
+                    "Price":15000000,
+                    "Emote":"<:mazda:931011549680779364>"
+                }
+            ],
+            "ForSale":[],
+            "Racers":["Han", "Aoi", "Emi", "Hana"]
+        },
+        "usa":{
+            "Name":"USA",
+            "Image":"https://i.ibb.co/d036CfJ/map-usa-filled.png",
+            "Services":["Gas Station", "Shop"],  
+            "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
+            "NoEvents":["You're driving and its just a normal day", "You see a deer! It just stands there"],
+            "Perks":"2x gas when filling up in USA",
+            "Shop":"Tires",
+            "Jobs":[
+                {
+                    "Name":"George",
+                    "Job":"My car tire has just vanished! Can you replace my tire for me?",
+                    "Reward":500,
+                    "Chance":50,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+            ],
+            "BlackMarket":[
+                {
+                    "Name":"2021 Chrysler 300 S",
+                    "Price":50000,
+                    "Emote":"<:logo_chrysler:1178584868595187813>"
+                },
+                {
+                    "Name":"2010 Chevy cobalt SS",
+                    "Price":15000,
+                    "Emote":"<:chevy:931012624039182406>"
+                },
+                {
+                    "Name":"2017 Chevy SS",
+                    "Price":25000,
+                    "Emote":"<:chevy:931012624039182406>"
+                },
+                {
+                    "Name":"2023 GMC Hummer EV",
+                    "Price":1500000,
+                    "Emote":"<:logo_gmc:1178924605650518107>"
+                }
+
+            ],
+            "Racers":["George", "John", "Alex", "Matt"]
+        },
+        "germany":{
+            "Name":"Germany",
+            "Image":"https://i.ibb.co/hgz9hdS/map-germany-filled.png",
+            
+            "Services":["Gas Station"],
+            "Jobs":[
+                {
+                    "Name":"Otto",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":350,
+                    "Chance":40,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Hans",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":150,
+                    "Chance":60,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+
+            ],
+            "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
+            "NoEvents":["You're driving in the rain and its just a normal day", "You see a beer! You do NOT drink it because you're driving"],
+            "Perks":"2x cash when racing in track races",
+            "BlackMarket":[
+                {
+                    "Name":"2021 Mercedes B Class",
+                    "Price":15000,
+                    "Emote":"<:mercedes_z:973000364410404924>"
+                },
+                {
+                    "Name":"2021 Volkswagen Jetta GLI",
+                    "Price":28000,
+                    "Emote":"<:vw:931011548372168714>"
+                },
+                {
+                    "Name":"2001 Audi A2 TDI",
+                    "Price":5000,
+                    "Emote":"<:audi:931011548758048828>"
+                },
+                {
+                    "Name":"2014 Porsche 911 GT3",
+                    "Price":150000,
+                    "Emote":"<:porsche:931011550880338011>"
+                },
+                {
+                    "Name":"2000 BMW M5",
+                    "Price":50000,
+                    "Emote":"<:bmw:931011550054056007>"
+                }
+
+            ],
+            "Racers":["Emma", "Otto", "Hans", "Friedrich"]
+        }
+    },
+    "NPCs":[
+        {
+            "Name":"Maria",
+            "Car":{
+                "Name":"2013 Ford Mustang GT",
+                "Image":"https://i.ibb.co/w4ND7qr/80ecf111a1-1280.jpg",
+                "Speed":444,
+                "Acceleration":5.3,
+                "Handling":350,
+                "Weight":3601,
+                "Logo":"<:ford:931012624152399902>"
+                
+            },
+            "Location":"Peru",
+            "Reward":2500,
+            "Prompt":"Hey fool! Wanna race for $2.5k? Winner takes all! Or are you chicken...",
+            "Win":"Hah, might wanna upgrade that car of yours before taking me on again! Hand over that 2.5k",
+            "Lost":"Wait...I lost? Damn ok, well fine take my $2.5k"
+        },
+        {
+            "Name":"Luis",
+            "Car":{
+                "Name":"1993 Nissan 300ZX",
+                "Image":"https://i.ibb.co/L9zzHcg/image.png",
+                "Speed":350,
+                "Acceleration":5.1,
+                "Handling":500,
+                "Weight":3200,
+                "Logo":"<:nissan:931011548678352916>"
+            },
+            "Location":"Peru",
+            "Reward":1000,
+            "Prompt":"Hey pal! Wanna race for $1k? Winner takes all!",
+            "Win":"Aw don't be sad, let me hang on to your $1k for you",
+            "Lost":"How did I even lose, the $1k is yours I guess."
+        },
+        {
+            "Name":"Jose",
+            "Car":{
+                "Name":"1990 BMW M3",
+                "Image":"https://i.ibb.co/wdKN9nF/image.png",
+                "Speed":198,
+                "Acceleration":8,
+                "Handling":450,
+                "Weight":2800,
+                "Logo":"<:bmw:931011550054056007>"
+            },
+            "Location":"Peru",
+            "Reward":500,
+            "Prompt":"Hey bud! Lets race for 500! Winner takes all! I might win though...",
+            "Win":"Hah, told you I'd win, hand over the $500",
+            "Lost":"HOW DID I LOSE??? THAT 500 WILL BE MINE AGAIN!"
+        },
+        {
+            "Name":"Lucia",
+            "Car":{
+                "Name":"2016 Mercedes A45",
+                "Image":"https://i.ibb.co/3k79yKJ/image.png",
+                "Speed":500,
+                "Acceleration":4,
+                "Handling":700,
+                "Weight":3300,
+                "Logo":"<:mercedes_z:973000364410404924>"
+            },
+            "Location":"Peru",
+            "Reward":5000,
+            "Prompt":"...Lets race for $5k. Winner takes all.",
+            "Win":"Gimme that 5k",
+            "Lost":"Damnit, here's your $5k"
+        },
+        {
+            "Name":"Aisha",
+            "Car":{
+                "Name":"1989 Mistubishi Starion",
+                "Image":"https://i.ibb.co/3k79yKJ/image.png",
+                "Speed":197,
+                "Acceleration":6.2,
+                "Handling":550,
+                "Weight":2500,
+                "Logo":"<:mistu:931012414479147038>"
+            },
+            "Location":"India",
+            "Reward":500,
+            "Prompt":"...Lets race for $500! Winner takes it all!",
+            "Win":"Gimme that $500",
+            "Lost":"Wow, you sped like right past me...take the $500"
+        },
+        {
+            "Name":"Hassan",
+            "Car":{
+                "Name":"2018 Kia Stinger",
+                "Image":"https://i.ibb.co/qWt0Cr4/image.png",
+                "Speed":380,
+                "Acceleration":5.9,
+                "Handling":500,
+                "Weight":4023,
+                "Logo":"<:kia:937123149596745780>"
+            },
+            "Location":"India",
+            "Reward":1000,
+            "Prompt":"Up for a little race? Winner gets $1k",
+            "Win":"Give me your $1k, magic! Its mine!",
+            "Lost":"Whaaaaat??? That $1k just disappeared!"
+        },
+        {
+            "Name":"Ishaan",
+            "Car":{
+                "Name":"2023 Nissan Z",
+                "Image":"https://i.ibb.co/tsXtgFK/image.png",
+                "Speed":420,
+                "Acceleration":4.5,
+                "Handling":675,
+                "Weight":3519,
+                "Logo":"<:nissan:931011548678352916>"
+            },
+            "Location":"India",
+            "Reward":2500,
+            "Prompt":"Up for a small itty bitty race? Winner gets $2.5k",
+            "Win":"So...that $2.5k? Give it.",
+            "Lost":"Uhhh...about that $2.5k...I might not have it...but take my retirement fund instead!"
+        },
+        {
+            "Name":"Amir",
+            "Car":{
+                "Name":"1991 BMW M5",
+                "Image":"https://i.ibb.co/TY730nT/image.png",
+                "Speed":450,
+                "Acceleration":4,
+                "Handling":700,
+                "Weight":3600,
+                "Logo":"<:bmw:931011550054056007>"
+            },
+            "Location":"India",
+            "Reward":2500,
+            "Prompt":"Would you perhaps want to race? For money? $5K?",
+            "Win":"Well well well, I won, you know what that means",
+            "Lost":"Darnit. Take your $5K and you better hope you never see me again."
+        },
+        {
+            "Name":"George",
+            "Car":{
+                "Name":"2002 Ford Mustang Cobra",
+                "Image":"https://i.ibb.co/2gwh100/maxresdefault-2023-11-21-T150746-784.jpg",
+                "Speed":300,
+                "Acceleration":6,
+                "Handling":400,
+                "Weight":3400,
+                "Logo":"<:ford:931012624152399902>"
+            },
+            "Location":"USA",
+            "Reward":500,
+            "Prompt":"Hey there bud, wanna race for $500?",
+            "Win":"$500 extra money for me to upgrade my ride!",
+            "Lost":"You cheated for sure but here, have $500"
+        },
+        {
+            "Name":"Alex",
+            "Car":{
+                "Name":"1986 Ford Escort RS Turbo",
+                "Image":"https://i.ibb.co/9TfWB2D/image.png",
+                "Speed":200,
+                "Acceleration":8,
+                "Handling":900,
+                "Weight":2100,
+                "Logo":"<:ford:931012624152399902>"
+            },
+            "Location":"USA",
+            "Reward":1000,
+            "Prompt":"Hey there feller, wanna race for 1k dabloons?",
+            "Win":"Yeehaw! Man, I cant believe I beat you but give me $1k!",
+            "Lost":"How..."
+        },
+        {
+            "Name":"John",
+            "Car":{
+                "Name":"2024 Ford Mustang",
+                "Image":"https://i.ibb.co/09YzqZX/image.png",
+                "Speed":400,
+                "Acceleration":4.3,
+                "Handling":450,
+                "Weight":3700,
+                "Logo":"<:ford:931012624152399902>"
+            },
+            "Location":"USA",
+            "Reward":2500,
+            "Prompt":"Hey buster, wanna race for $2.5k?",
+            "Win":"Thats American muscle for you! Give me that $2.5k!",
+            "Lost":"Guess American muscle aint as good as they say, here..."
+        },
+        {
+            "Name":"Matt",
+            "Car":{
+                "Name":"2017 Ford GT",
+                "Image":"https://i.ibb.co/Q80xsgg/image.png",
+                "Speed":647,
+                "Acceleration":2.9,
+                "Handling":1000,
+                "Weight":3300,
+                "Logo":"<:ford:931012624152399902>"
+            },
+            "Location":"USA",
+            "Reward":10000,
+            "Prompt":"Hey buster, wanna race for $10k?",
+            "Win":"10k for me, -10k for you",
+            "Lost":"10k for you, crippling debt for me."
+        },
+        {
+            "Name":"Emma",
+            "Car":{
+                "Name":"1984 Porsche 944",
+                "Image":"https://i.ibb.co/89pQHSN/image.png",
+                "Speed":163,
+                "Acceleration":8.3,
+                "Handling":750,
+                "Weight":2700,
+                "Logo":"<:porsche:931011550880338011>"
+            },
+            "Location":"Germany",
+            "Reward":500,
+            "Prompt":"Hi!!! Wanna race for $500? :)",
+            "Win":"$500!!! I won $500!",
+            "Lost":"NOOOO I'm gonna cry"
+        },
+        {
+            "Name":"Otto",
+            "Car":{
+                "Name":"2008 BMW M3",
+                "Image":"https://i.ibb.co/56r49tk/image.png",
+                "Speed":414,
+                "Acceleration":4.3,
+                "Handling":650,
+                "Weight":3704,
+                "Logo":"<:bmw:931011550054056007>"
+            },
+            "Location":"Germany",
+            "Reward":1000,
+            "Prompt":"Hey man, wanna race for some cash? I got 1k on me",
+            "Win":"Now I got 2k on me!",
+            "Lost":"Now I got $0 to my name"
+        },
+        {
+            "Name":"Hans",
+            "Car":{
+                "Name":"2008 Audi RS6",
+                "Image":"https://i.ibb.co/sWTGK6L/image.png",
+                "Speed":580,
+                "Acceleration":4.9,
+                "Handling":650,
+                "Weight":2800,
+                "Logo":"<:audi:931011548758048828>"
+            },
+            "Location":"Germany",
+            "Reward":2000,
+            "Prompt":"Wanna uh, race? Thats how you say it in American right?",
+            "Win":"I just got $2k USD",
+            "Lost":"How did you beat my beautiful car!"
+        },
+        {
+            "Name":"Friedrich",
+            "Car":{
+                "Name":"2015 Mercedes AMG GTS",
+                "Image":"https://i.ibb.co/Gnvf93q/image.png",
+                "Speed":503,
+                "Acceleration":3.7,
+                "Handling":750,
+                "Weight":3626,
+                "Logo":"<:mercedes_z:973000364410404924>"
+            },
+            "Location":"Germany",
+            "Reward":5000,
+            "Prompt":"Typical tourist, thinking they can beat MY car, how about $5k to the winner?",
+            "Win":"Exactly, don't try and even think about racing me again",
+            "Lost":"You cheated, but ok."
+        },
+        {
+            "Name":"Antonio",
+            "Car":{
+                "Name":"2005 Dodge Neon SRT4",
+                "Image":"https://i.ibb.co/Z63yRmg/image.png",
+                "Speed":230,
+                "Acceleration":6.0,
+                "Handling":425,
+                "Weight":2900,
+                "Logo":"<:dodge:931011880040951828>"
+            },
+            "Location":"Spain",
+            "Reward":500,
+            "Prompt":"Wanna race my tin can for $500?",
+            "Win":"How did I even win? Oh well, give me $500",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Carlos",
+            "Car":{
+                "Name":"2020 Chevy Camaro SS",
+                "Image":"https://i.ibb.co/0Bk5t8c/image.png",
+                "Speed":455,
+                "Acceleration":4,
+                "Handling":675,
+                "Weight":3000,
+                "Logo":"<:chevy:931012624039182406>"
+            },
+            "Location":"Spain",
+            "Reward":1000,
+            "Prompt":"Wanna race? You'll win anyway but lets do it for $1K",
+            "Win":"I lied! Ha! Give me that $1K",
+            "Lost":"Yep, exactly, have $1K"
+        },
+        {
+            "Name":"Mateo",
+            "Car":{
+                "Name":"1994 Porsche 911",
+                "Image":"https://i.ibb.co/bXYxcgc/image.png",
+                "Speed":500,
+                "Acceleration":6.5,
+                "Handling":650,
+                "Weight":3200,
+                "Logo":"<:porsche:931011550880338011>"
+            },
+            "Location":"Spain",
+            "Reward":2000,
+            "Prompt":"Hola friend! Lets race for 2k!",
+            "Win":"Aww thats ok, Ill take that 2k though",
+            "Lost":"Good job! Have my 2k"
+        },
+        {
+            "Name":"Diego",
+            "Car":{
+                "Name":"2016 Bugatti Chiron",
+                "Image":"https://i.ibb.co/c6dKmph/image.png",
+                "Speed":1478,
+                "Acceleration":2.3,
+                "Handling":750,
+                "Weight":4500,
+                "Logo":"<:bugatti:931012624110460979>"
+            },
+            "Location":"Spain",
+            "Reward":5000,
+            "Prompt":"Vamos! Lets race for 5k!",
+            "Win":"No eres muy buena! Hand over that 5k!",
+            "Lost":"...Fine, take my 5k"
+        },
+        {
+            "Name":"Han",
+            "Car":{
+                "Name":"2009 Honda S2000 CR",
+                "Image":"https://i.ibb.co/zX8PBQ5/image.png",
+                "Speed":237,
+                "Acceleration":6.4,
+                "Handling":600,
+                "Weight":2813,
+                "Logo":"<:honda:931011549705957397>"
+            },
+            "Location":"Japan",
+            "Reward":500,
+            "Prompt":"Wanna race my blue car for $500?",
+            "Win":"How did I even win? Oh well, give me $500",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Hana",
+            "Car":{
+                "Name":"1986 Toyota AE86",
+                "Image":"https://i.ibb.co/Ky4wXBB/image.png",
+                "Speed":250,
+                "Acceleration":6,
+                "Handling":750,
+                "Weight":2000,
+                "Logo":"<:toyota:931012829283233883>"
+            },
+            "Location":"Japan",
+            "Reward":1000,
+            "Prompt":"Wanna race? You'll win anyway but lets do it for $1K",
+            "Win":"I lied! Ha! Give me that $1K",
+            "Lost":"Yep, exactly, have $1K"
+        },
+        {
+            "Name":"Aoi",
+            "Car":{
+                "Name":"1991 Acura NSX",
+                "Image":"https://i.ibb.co/JqKcPN1/image.png",
+                "Speed":400,
+                "Acceleration":5.5,
+                "Handling":800,
+                "Weight":3010,
+                "Logo":"<:acura:931012624164978728>"
+            },
+            "Location":"Japan",
+            "Reward":2000,
+            "Prompt":"Hi friend! Lets race for 2k!",
+            "Win":"Aww thats ok, Ill take that 2k though",
+            "Lost":"Good job! Have my 2k"
+        },
+        {
+            "Name":"Emi",
+            "Car":{
+                "Name":"1995 Mazda Miata",
+                "Image":"https://i.ibb.co/j6zCyNY/image.png",
+                "Speed":650,
+                "Acceleration":3,
+                "Handling":800,
+                "Weight":1900,
+                "Logo":"<:mazda:931011549680779364>"
+            },
+            "Location":"Japan",
+            "Reward":5000,
+            "Prompt":"Lets go! Lets race for 5k!",
+            "Win":"You're not very good... Hand over that 5k!",
+            "Lost":"...Fine, take my 5k"
+        },
+        {
+            "Name":"Leonardo",
+            "Car":{
+                "Name":"2016 Alfa Romeo 4C Spider",
+                "Image":"",
+                "Speed":237,
+                "Acceleration":5.3,
+                "Handling":750,
+                "Weight":2400,
+                "Logo":"<:alfaromeo:931011550704173056>"
+            },
+            "Location":"Italy",
+            "Reward":500,
+            "Prompt":"Wanna race my red car for $500?",
+            "Win":"How did I even win? Oh well, give me $500",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Luca",
+            "Car":{
+                "Name":"2001 Lamborghini Diablo",
+                "Image":"https://i.ibb.co/RCGmsBx/image.png",
+                "Speed":550,
+                "Acceleration":3.4,
+                "Handling":525,
+                "Weight":3500,
+                "Logo":"<:lamborghini:931011549655617566>"
+            },
+            "Location":"Italy",
+            "Reward":1000,
+            "Prompt":"Wanna race? You'll win anyway but lets do it for $1K",
+            "Win":"I lied! Ha! Give me that $1K",
+            "Lost":"Yep, exactly, have $1K"
+        },
+        {
+            "Name":"Andrea",
+            "Car":{
+                "Name":"1987 Ferrari F40 Competizione",
+                "Image":"https://i.ibb.co/89tRpFb/image.png",
+                "Speed":691,
+                "Acceleration":3.3,
+                "Handling":700,
+                "Weight":2700,
+                "Logo":"<:ferrari:931011838374727730>"
+            },
+            "Location":"Italy",
+            "Reward":2000,
+            "Prompt":"Hi friend! Lets race for 2k!",
+            "Win":"Aww thats ok, Ill take that 2k though",
+            "Lost":"Good job! Have my 2k"
+        },
+        {
+            "Name":"Bianca",
+            "Car":{
+                "Name":"2021 Pagani Huayra R",
+                "Image":"https://i.ibb.co/n0vrNdC/FFS-Oliver-Top-Gear-0001-FF27437.jpg",
+                "Speed":850,
+                "Acceleration":3.5,
+                "Handling":1500,
+                "Weight":2500,
+                "Logo":"<:pagani:933622884126056498>"
+            },
+            "Location":"Italy",
+            "Reward":5000,
+            "Prompt":"Lets go! Lets race for 5k!",
+            "Win":"You're not very good... Hand over that 5k!",
+            "Lost":"...Fine, take my 5k"
+        }
+    ]
+}

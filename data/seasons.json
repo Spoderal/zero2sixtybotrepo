@@ -1,22 +1,22 @@
 {
   "Seasons": {
-    "Fall": {
-      "Image": "https://i.ibb.co/qdX6mmW/season2-ico.png",
+    "Winter": {
+      "Image": "https://i.ibb.co/sHz0krQ/season3.png",
       "Rewards": {
         "1": {
           "Number": 1,
-          "Item": "1500 Cash",
+          "Item": "1250 Cash",
           "Required": 500
         },
         "2": {
           "Number": 2,
-          "Item": "1500 Cash",
+          "Item": "2020 Toyota GR Yaris WE",
           "Required": 1000
         },
         "3": {
           "Number": 3,
-          "Item": "2000 Cash",
-          "Required": 1500
+          "Item": "jolly",
+          "Required": 1250
         },
         "4": {
           "Number": 4,
@@ -25,12 +25,12 @@
         },
         "5": {
           "Number": 5,
-          "Item": "spade",
+          "Item": "20000 Cash",
           "Required": 2500
         },
         "6": {
           "Number": 6,
-          "Item": "stig helmet",
+          "Item": "tree helmet",
           "Required": 3000
         },
         "7": {
@@ -40,7 +40,7 @@
         },
         "8": {
           "Number": 8,
-          "Item": "T6Exhaust",
+          "Item": "5000 Cash",
           "Required": 4000
         },
         "9": {
@@ -50,20 +50,17 @@
         },
         "10": {
           "Number": 10,
-          "Item": "Path Car",
-          "Path1": "2019 subaru brz rocket bunny",
-          "Path2": "2023 bmw m2 g87",
-          "Path3": "2023 cadillac ct5",
+          "Item": "2015 mitsubishi lancer evolution we",
           "Required": 5000
         },
         "11": {
           "Number": 11,
-          "Item": "1 Garage Spaces",
+          "Item": "5 Garage Spaces",
           "Required": 5500
         },
         "12": {
           "Number": 12,
-          "Item": "Compass",
+          "Item": "snowball",
           "Required": 6000
         },
         "13": {
@@ -73,17 +70,17 @@
         },
         "14": {
           "Number": 14,
-          "Item": "flame Helmet",
+          "Item": "ice Helmet",
           "Required": 7000
         },
         "15": {
           "Number": 15,
-          "Item": "3000 Cash",
+          "Item": "30000 Cash",
           "Required": 7500
         },
         "16": {
           "Number": 16,
-          "Item": "ace helmet",
+          "Item": "snow helmet",
           "Required": 8000
         },
         "17": {
@@ -98,37 +95,37 @@
         },
         "19": {
           "Number": 19,
-          "Item": "Fake ID",
+          "Item": "snowball",
           "Required": 9500
         },
         "20": {
           "Number": 20,
-          "Item": "5000 Cash",
+          "Item": "50000 Cash",
           "Required": 10000
         },
         "21": {
           "Number": 21,
-          "Item": "Touch Grass Helmet",
+          "Item": "festive helmet",
           "Required": 12000
         },
         "22": {
           "Number": 22,
           "Item": "3000 Cash",
-          "Required": 15000
+          "Required": 12500
         },
         "23": {
           "Number": 23,
-          "Item": "T6Tires",
+          "Item": "snowball",
           "Required": 20000
         },
         "24": {
           "Number": 24,
-          "Item": "hell raiser",
+          "Item": "festive",
           "Required": 25000
         },
         "25": {
           "Number": 25,
-          "Item": "1 Garage Spaces",
+          "Item": "2017 ford fiesta rs",
           "Required": 30000
         },
         "26": {
@@ -153,17 +150,17 @@
         },
         "30": {
           "Number": 30,
-          "Item": "gas",
+          "Item": "gordon murray t50",
           "Required": 60000
         },
         "31": {
           "Number": 31,
-          "Item": "T6Turbo",
+          "Item": "snowball",
           "Required": 65000
         },
         "32": {
           "Number": 32,
-          "Item": "10000 Cash",
+          "Item": "10 Garage Spaces",
           "Required": 70000
         },
         "33": {
@@ -178,46 +175,42 @@
         },
         "35": {
           "Number": 35,
-          "Item": "5000 Cash",
+          "Item": "50000 Cash",
           "Required": 90000
         },
         "36": {
           "Number": 36,
-          "Item": "1 Garage Spaces",
+          "Item": "5 Garage Spaces",
           "Required": 100000
         },
         "37": {
           "Number": 37,
-          "Item": "Path Car",
-          "Path1": "2019 brabham bt62",
-          "Path2": "2022 porsche 911 gt3 touring",
-          "Path3": "2023 chevy corvette c8 z06",
-
+          "Item": "100 Common Keys",
           "Required": 110000
         },
         "38": {
           "Number": 38,
-          "Item": "Dark Helmet",
+          "Item": "2020 subaru outback",
           "Required": 120000
         },
         "39": {
           "Number": 39,
-          "Item": "T6Engine",
+          "Item": "snowball",
           "Required": 130000
         },
         "40": {
           "Number": 40,
-          "Item": "100 Common Keys",
+          "Item": "2018 subaru wrx sti we",
           "Required": 140000
         },
         "41": {
           "Number": 41,
-          "Item": "2500 Cash",
+          "Item": "500 RP",
           "Required": 165000
         },
         "42": {
           "Number": 42,
-          "Item": "on fire",
+          "Item": "icey",
           "Required": 170000
         },
         "43": {
@@ -227,12 +220,12 @@
         },
         "44": {
           "Number": 44,
-          "Item": "Fire Helmet",
+          "Item": "cracked helmet",
           "Required": 180000
         },
         "45": {
           "Number": 45,
-          "Item": "500 RP",
+          "Item": "2016 mercedes benz g63 we",
           "Required": 185000
         },
         "46": {
@@ -247,32 +240,32 @@
         },
         "48": {
           "Number": 48,
-          "Item": "10 Rare Keys",
+          "Item": "200 Rare Keys",
           "Required": 200000
         },
         "49": {
           "Number": 49,
-          "Item": "2 Exotic Keys",
+          "Item": "100 Exotic Keys",
           "Required": 250000
         },
         "50": {
           "Number": 50,
-          "Item": "500 Cash",
+          "Item": "gordon murray t50 we",
           "Required": 350000
         }
       }
     },
-    "Crew1": {
-      "Image": "https://i.ibb.co/qdX6mmW/season2-ico.png",
+    "Crew2": {
+      "Image": "https://i.ibb.co/sHz0krQ/season3.png",
       "Rewards": {
         "1": {
           "Number": 1,
-          "Item": "5 Exotic Keys",
+          "Item": "15 Exotic Keys",
           "Required": 10000
         },
         "2": {
           "Number": 2,
-          "Item": "5000 Cash",
+          "Item": "10000 Cash",
           "Required": 20000
         },
         "3": {
@@ -287,7 +280,7 @@
         },
         "5": {
           "Number": 5,
-          "Item": "15000 Cash",
+          "Item": "12500 Cash",
           "Required": 50000
         },
         "6": {
@@ -302,7 +295,7 @@
         },
         "8": {
           "Number": 8,
-          "Item": "4500 Cash",
+          "Item": "snowball",
           "Required": 80000
         },
         "9": {
@@ -332,13 +325,13 @@
         },
         "14": {
           "Number": 14,
-          "Item": "Crimson Helmet",
+          "Item": "doge helmet",
           "Required": 140000
         },
         "15": {
           "Number": 15,
           "Item": "3000 Cash",
-          "Required": 150000
+          "Required": 125000
         },
         "16": {
           "Number": 16,
@@ -417,102 +410,52 @@
         },
         "31": {
           "Number": 31,
-          "Item": "10 Rare Keys",
-          "Required": 310000
+          "Item": "5000 Cash",
+          "Required": 410000
         },
         "32": {
           "Number": 32,
-          "Item": "2500 Cash",
-          "Required": 320000
-        },
-        "33": {
-          "Number": 33,
-          "Item": "5000 Cash",
-          "Required": 33000
-        },
-        "34": {
-          "Number": 34,
-          "Item": "5000 Cash",
-          "Required": 340000
-        },
-        "35": {
-          "Number": 35,
-          "Item": "15000 Cash",
-          "Required": 350000
-        },
-        "36": {
-          "Number": 36,
-          "Item": "10 Rare Keys",
-          "Required": 360000
-        },
-        "37": {
-          "Number": 37,
-          "Item": "5 Crew Respect",
-          "Required": 370000
-        },
-        "38": {
-          "Number": 38,
-          "Item": "2000 Notoriety",
-          "Required": 380000
-        },
-        "39": {
-          "Number": 39,
-          "Item": "5000 Cash",
-          "Required": 390000
-        },
-        "40": {
-          "Number": 40,
-          "Item": "5 Garage Spaces",
-          "Required": 400000
-        },
-        "41": {
-          "Number": 41,
-          "Item": "T6Tires",
-          "Required": 410000
-        },
-        "42": {
-          "Number": 42,
           "Item": "100 Crew Respect",
           "Required": 420000
         },
-        "43": {
-          "Number": 43,
+        "33": {
+          "Number": 33,
           "Item": "Cookie",
           "Required": 430000
         },
-        "44": {
-          "Number": 44,
+        "34": {
+          "Number": 34,
           "Item": "10 Rare Keys",
           "Required": 440000
         },
-        "45": {
-          "Number": 45,
+        "35": {
+          "Number": 35,
           "Item": "30000 Cash",
           "Required": 450000
         },
-        "46": {
-          "Number": 46,
+        "36": {
+          "Number": 36,
           "Item": "50 Crew Respect",
           "Required": 460000
         },
-        "47": {
-          "Number": 47,
+        "37": {
+          "Number": 37,
           "Item": "200 Crew Respect",
           "Required": 470000
         },
-        "48": {
-          "Number": 48,
+        "38": {
+          "Number": 38,
           "Item": "250000 Cash",
           "Required": 500000
         },
-        "49": {
-          "Number": 49,
+        "39": {
+          "Number": 39,
           "Item": "20000 Cash",
           "Required": 750000
         },
-        "50": {
-          "Number": 20,
-          "Item": "2017 lamborghini centenario",
+        "40": {
+          "Number": 40,
+          "Item": "2021 mclaren 720s gt3x",
           "Required": 1000000
         }
       }

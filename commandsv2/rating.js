@@ -138,7 +138,7 @@ module.exports = {
 
         userdata.save();
 
-        i.update({ content: `Washed!`, fetchReply: true });
+        interaction.editReply({ content: `Washed!`, fetchReply: true });
       }
     });
   },

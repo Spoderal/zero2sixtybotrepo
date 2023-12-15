@@ -1,0 +1,14 @@
+{
+   "machu picchu": {
+    "Name":"Machu Picchu",
+    "Image":"https://i.ibb.co/hYBdYtG/location-peru-full.png",
+    "Emote":"<:location_peru_full:1175567260614660096>",
+    "Reward":5000
+},
+"taj mahal": {
+    "Name":"Taj Mahal",
+    "Image":"https://i.ibb.co/LzZwZLh/location-india-full.png",
+    "Emote":"<:location_india_full:1175582707808481300>",
+    "Reward":2500
+}
+}

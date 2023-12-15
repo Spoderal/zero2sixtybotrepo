@@ -148,5 +148,35 @@
     "Breed": "Ghost",
     "Sad": "https://i.ibb.co/M1hSG2t/pet-ghost.png",
     "Saddest": "https://i.ibb.co/M1hSG2t/pet-ghost.png"
+  },
+  "rudolph": {
+    "Image": "https://i.ibb.co/jbrDNYN/pet-rudolph.png",
+    "Emote": "<:pet_rudolph:1185105007582924850>",
+    "Names": ["Rudolph"],
+    "Xessence": 25,
+    "Tier": 2,
+    "Breed": "Rudolph",
+    "Sad": "https://i.ibb.co/jbrDNYN/pet-rudolph.png",
+    "Saddest": "https://i.ibb.co/jbrDNYN/pet-rudolph.png"
+  },
+  "snowman": {
+    "Image": "https://i.ibb.co/CbBFzNV/pet-snowman.png",
+    "Emote": "<:pet_tree:1185105010233725048>",
+    "Names": ["Frosty", "Bob", "Mr Snowman"],
+    "Xessence": 100,
+    "Tier": 3,
+    "Breed": "Snowman",
+    "Sad": "https://i.ibb.co/CbBFzNV/pet-snowman.png",
+    "Saddest": "https://i.ibb.co/CbBFzNV/pet-snowman.png"
+  },
+  "mr tree": {
+    "Image": "https://i.ibb.co/vqtYXn2/pet-tree.png",
+    "Emote": "<:pet_snowman:1185105009084485714>",
+    "Names": ["Oak", "Pine", "Rose"],
+    "Xessence": 75,
+    "Tier": 3,
+    "Breed": "Tree",
+    "Sad": "https://i.ibb.co/vqtYXn2/pet-tree.png",
+    "Saddest": "https://i.ibb.co/vqtYXn2/pet-tree.png"
   }
 }

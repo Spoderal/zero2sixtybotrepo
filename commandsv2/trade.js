@@ -260,18 +260,18 @@ module.exports = {
         userdata.save();
         userdata2.save();
         embed.setTitle("Trade accepted! ✅");
-        await i.update({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
         return;
       } else {
         embed.setTitle("Trade declined! ❌");
-        await i.update({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] });
         return;
       }
     });
 
     collector.on("end", async (i) => {
       embed.setTitle("Trade expired!");
-      await i.update({ embeds: [embed] });
+      await interaction.editReply({ embeds: [embed] });
     });
   },
 };

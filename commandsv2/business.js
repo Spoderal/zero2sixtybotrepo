@@ -176,12 +176,13 @@ module.exports = {
     );
 
     collector.on("collect", async (i) => {
+      let udata = await User.findOne({ id: interaction.user.id });
       if (i.customId == "create") {
         embed.setTitle(`Select a business to create`);
         embed.setDescription(
           `Car Wash : Washing your car costs 50% less **10K to open**\n\nGas Station : Gas is 25% off**15K to open**\n\nCar Mechanic : Gain a bonus part when in the junkyard **20K to open**`
         );
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [businessbuttons],
           fetchReply: true,
@@ -195,12 +196,12 @@ module.exports = {
         let upgraderow = new ActionRowBuilder();
         for (let u in upgrades) {
           let upg = upgrades[u];
-          let upgradefilt = userdata.business.Upgrades.filter(
+          let upgradefilt = udata.business.Upgrades.filter(
             (u) => u.ID == upg.ID
           );
        
-          if (userdata.business.Level >= upg.Level) {
-            if (userdata.business.Upgrades && !upgradefilt[0]) {
+          if (udata.business.Level >= upg.Level) {
+            if (udata.business.Upgrades && !upgradefilt[0]) {
               upgraded.push(
                 `${upg.Emote} **${upg.Name}** ${upg.Description} : ${toCurrency(
                   upg.Cost
@@ -248,37 +249,40 @@ module.exports = {
           time: 30000,
         });
 
-        await i.update(em);
+ 
+        await interaction.editReply(em);
 
         collector2.on("collect", async (i) => {
+          let udata = await User.findOne({ id: interaction.user.id });
+
           let upgrade = upgrades.filter((upgrade) => upgrade.ID == i.customId);
           if (upgrade[0]) {
             let upgrade = upgrades.filter(
               (upgrade) => upgrade.ID == i.customId
             );
-            let upgradearr = userdata.business.Upgrades || [];
+            let upgradearr = udata.business.Upgrades || [];
 
-            if (upgrade[0].Cost > userdata.cash) {
-              return i.update(`You don't have enough cash!`);
+            if (upgrade[0].Cost > udata.cash) {
+              return interaction.editReply(`You don't have enough cash!`);
             }
 
             if (upgrade[0].Customers) {
-              userdata.business.Customers += upgrade[0].Customers;
+              udata.business.Customers += upgrade[0].Customers;
             }
 
             if (upgrade[0].Income) {
-              userdata.business.Income += upgrade[0].Income;
+              udata.business.Income += upgrade[0].Income;
             }
 
-            userdata.cash -= upgrade[0].Cost;
+            udata.cash -= upgrade[0].Cost;
 
             upgradearr.push(upgrade[0]);
 
-            userdata.business.Upgrades = upgradearr;
-            userdata.markModified("business");
-            userdata.save();
+            udata.business.Upgrades = upgradearr;
+            udata.markModified("business");
+            udata.save();
             collector2.stop();
-            await i.update({
+            await interaction.editReply({
               embeds: [embed1],
               components: [businessrow],
               fetchReply: true,
@@ -292,9 +296,9 @@ module.exports = {
             .setLabel("Edit Name")
             .setStyle("Secondary")
         );
-        i.update({ components: [editrow], fetchReply: true });
+        interaction.editReply({ components: [editrow], fetchReply: true });
       } else if (i.customId == "name") {
-        i.update({
+        interaction.editReply({
           content: `Send the name you want to set`,
           fetchReply: true,
         });
@@ -306,7 +310,8 @@ module.exports = {
           filter: filter,
         });
 
-        collector3.on("collect", (msg) => {
+        collector3.on("collect", async (msg) => {
+          userdata = await User.findOne({ id: interaction.user.id });
           userdata.business.Name = msg.content;
 
           userdata.markModified("business");
@@ -314,6 +319,7 @@ module.exports = {
           collector3.stop();
         });
       } else if (i.customId == "serve") {
+        userdata = await User.findOne({ id: interaction.user.id });
         if (userdata.business.CustomerD > 0) {
           let tipchance = randomRange(1, 100);
           let tip = randomRange(1, 100);
@@ -407,9 +413,9 @@ module.exports = {
             .setThumbnail(`${ubusiness.Logo}`);
           userdata.markModified("business");
           userdata.save();
-          i.update({ embeds: [embed], fetchReply: true });
+          interaction.editReply({ embeds: [embed], fetchReply: true });
         } else {
-          i.update(`You're out of customers!`);
+          interaction.editReply(`You're out of customers!`);
         }
       } else if (i.customId == "stats") {
         embed = new EmbedBuilder();
@@ -427,7 +433,7 @@ module.exports = {
           .setColor(`${colors.blue}`)
           .setThumbnail(`${ubusiness.Logo}`);
 
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           components: [businessrow],
           fetchReply: true,
@@ -441,7 +447,7 @@ module.exports = {
           userdata.save();
         }
 
-        await i.update({ content: `✅`, fetchReply: true });
+        await interaction.editReply({ content: `✅`, fetchReply: true });
       } else if (businesses[i.customId]) {
         if (businesses[i.customId].Cost > userdata.cash)
           return interaction.channel.send(
@@ -473,7 +479,7 @@ module.exports = {
 
         userdata.save();
 
-        await i.update({ embeds: [embed], components: [], fetchReply: true });
+        await interaction.editReply({ embeds: [embed], components: [], fetchReply: true });
       } else if (i.customId == "abandon") {
         let rowab = new ActionRowBuilder().setComponents(
           new ButtonBuilder()
@@ -482,7 +488,7 @@ module.exports = {
             .setStyle("Success")
         );
 
-        i.update({
+        interaction.editReply({
           content: `Are you sure?`,
           components: [rowab],
           fetchReply: true,
@@ -491,7 +497,7 @@ module.exports = {
         userdata.business = {};
         userdata.save();
         collector.stop();
-        i.update("✅");
+        interaction.editReply("✅");
       }
     });
   },

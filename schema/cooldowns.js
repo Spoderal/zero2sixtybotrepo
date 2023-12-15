@@ -21,6 +21,21 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  upgrading:{
+    type:  Number,
+    required: false,
+    default: 0
+  },
+  businessopen:{
+    type:  Boolean,
+    required: false,
+    default: false
+  },
+  driven:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
   energydrink: {
     type: Number,
     required: false,

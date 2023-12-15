@@ -30,9 +30,9 @@ module.exports = {
           { name: `🏁 Drag Race`, value: `dragrace` },
           { name: `🟢 Track Race`, value: `trackrace` },
           { name: `🌍 Cross Country`, value: `crosscountry` },
-          { name: `⛰️ Mountain Climb (SEASON)`, value: `mountain` },
-          { name: `🌋 Rust Bowl (EVENT)`, value: `rustbowl` },
+          { name: `🌨️ Snow Race (SEASON)`, value: `snow` },
           { name: "🚀 Car Series", value: "carseries" },
+          { name: "🔧 Junk Race", value: "junkrace" },
           { name: "🚲 Motorcycle Madness", value: "motorcyclemad" }
         )
         .setRequired(true)
@@ -248,35 +248,35 @@ module.exports = {
       );
     }
 
-    if (tieroption == 1 && raceoption == "rustbowl") {
+    if (tieroption == 1 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 200 && car.RestoreOnly
       );
-    } else if (tieroption == 2 && raceoption == "rustbowl") {
+    } else if (tieroption == 2 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 200 && car.RestoreOnly
       );
-    } else if (tieroption == 3 && raceoption == "rustbowl") {
+    } else if (tieroption == 3 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 300 && car.RestoreOnly
       );
-    } else if (tieroption == 4 && raceoption == "rustbowl") {
+    } else if (tieroption == 4 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 400 && car.RestoreOnly
       );
-    } else if (tieroption == 5 && raceoption == "rustbowl") {
+    } else if (tieroption == 5 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 450 && car.RestoreOnly
       );
-    } else if (tieroption == 6 && raceoption == "rustbowl") {
+    } else if (tieroption == 6 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 500 && car.RestoreOnly
       );
-    } else if (tieroption == 7 && raceoption == "rustbowl") {
+    } else if (tieroption == 7 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 600 && car.RestoreOnly
       );
-    } else if (tieroption == 8 && raceoption == "rustbowl") {
+    } else if (tieroption == 8 && raceoption == "junkrace") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 700 && car.RestoreOnly
       );
@@ -323,7 +323,7 @@ module.exports = {
       winner = playerrace > opponentrace;
 
 
-    } else if (raceoption == "mountain") {
+    } else if (raceoption == "snow") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -334,8 +334,8 @@ module.exports = {
       let acceleration2 = car2["0-60"];
       let handling2 = car2.Handling;
 
-      let weightscore = Math.floor(weight * 10);
-      let weightscore2 = Math.floor(weight2 * 10);
+      let handscore = Math.floor(handling * 10);
+      let handscore2 = Math.floor(handling2 * 10);
 
       let speedscore = speed / 10;
       let speedscore2 = speed2 / 10;
@@ -358,12 +358,12 @@ module.exports = {
         speedscore -= 10;
       }
 
-      let playerrace = dorace(speedscore, acceleration, handling, weightscore);
+      let playerrace = dorace(speedscore, acceleration, weight, handscore);
       let opponentrace = dorace(
         speedscore2,
         acceleration2,
-        handling2,
-        weightscore2
+        weight2,
+        handscore2
       );
 
       winner = playerrace > opponentrace;
@@ -484,7 +484,7 @@ module.exports = {
       winner = playerrace > opponentrace;
 
 
-    } else if (raceoption == "rustbowl") {
+    } else if (raceoption == "junkrace") {
       if (
         !cardb.Cars[selected.Name.toLowerCase()].RestoreOnly &&
         !cardb.Cars[selected.Name.toLowerCase()].restored
@@ -741,11 +741,13 @@ module.exports = {
           rankwon = rankwon += rankwon * rating;
         }
 
-        if (raceoption == "mountain") {
+        if (raceoption == "snow") {
           notorietywon = notorietywon * 2;
+          rewards.push(`<:zpresent:1183910541194956871> Present`)
+          userdata.items.push("present")
         }
 
-        if (raceoption == "rustbowl") {
+        if (raceoption == "junkrace") {
           let randomr = randomRange(1, 50);
           let restparts = [
             "j1exhaust",
@@ -772,28 +774,29 @@ module.exports = {
           }
           let wins = userdata.rustwins;
 
-          if (wins >= 100 && userdata.rustwon == false) {
-            let carobj = {
-              ID: cardb.Cars["2014 hennessey venom gt"].alias,
-              Name: cardb.Cars["2014 hennessey venom gt"].Name,
-              Speed: cardb.Cars["2014 hennessey venom gt"].Speed,
-              Acceleration: cardb.Cars["2014 hennessey venom gt"]["0-60"],
-              Handling: cardb.Cars["2014 hennessey venom gt"].Handling,
-              Parts: [],
-              Emote: cardb.Cars["2014 hennessey venom gt"].Emote,
-              Livery: cardb.Cars["2014 hennessey venom gt"].Image,
-              Miles: 0,
-              Weight: cardb.Cars["2014 hennessey venom gt"].Weight,
-              Gas: 10,
-              MaxGas: 10,
-            };
+       
+        }
 
-            userdata.cars.push(carobj);
-            userdata.rustwon = true;
-            rewards.push(
-              `${cardb.Cars["2014 hennessey venom gt"].Emote} ${cardb.Cars["2014 hennessey venom gt"].Name}`
-            );
+        if (raceoption == "crosscountry") {
+          let randomr = randomRange(1, 2);
+        
+         
+          if(randomr == 1){
+            if (tieroption < 5) {
+  
+              rewards.push(`${emotes.wheelSpin} Wheelspin`);
+              userdata.wheelspins += 1
+  
+            }
+            else if(tieroption >= 5) {
+              rewards.push(`${emotes.superWheel} Super Wheelspin`);
+  
+              userdata.swheelspins +=1 
+            }
+
           }
+
+       
         }
 
         rewards.push(`<:rank_race:1103913420320944198> +${rankwon} Rank`);
@@ -878,8 +881,15 @@ module.exports = {
           userdata.rkeys += randomamount;
         }
         if (raceoption == "dragrace") {
-          rewards.push(`${emotes.notoriety} +25 Notoriety`);
-          userdata.notoriety += 25;
+          if(tieroption <= 3){
+            rewards.push(`${emotes.barnMapCommon}`)
+            userdata.barnmaps += 1;
+          }
+          else if(tieroption >= 4){
+            rewards.push(`${emotes.barnMapCommon}`)
+            userdata.barnmaps += 2;
+          }
+          
         }
         if (userdata.prestige > 0) {
           let prestige = userdata.prestige;
@@ -1241,6 +1251,15 @@ module.exports = {
           rewards.push(`<:item_zbar:1155305593620398162> Zero Bar`)
           userdata.items.push(`zero bar`)
         }
+        if(userdata.location == "italy" && raceindb.Name == "Street Race"){
+          cashwon = cashwon * 2
+        }
+         if(userdata.location == "germany" && raceindb.Name == "Track Race"){
+          cashwon = cashwon * 2
+        }
+         if(userdata.location == "india" && raceindb.Name == "Drag Race"){
+          cashwon = cashwon * 2
+        }
 
         embed.addFields({
           name: `Rewards`,
@@ -1248,6 +1267,7 @@ module.exports = {
         });
 
         if(raceindb.Name == "Street Race"){
+    
           userdata.streetwins += 1
         }
         if(raceindb.Name == "Drag Race"){
@@ -1264,7 +1284,6 @@ module.exports = {
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);
       }
 
-      await interaction.editReply({ embeds: [embed] });
       selected.Miles += 15;
       let dirt = selected.Dirt || 100;
 
@@ -1294,6 +1313,9 @@ module.exports = {
       );
 
       userdata.save();
+
+      await interaction.editReply({ embeds: [embed] });
+
     }, 5000);
   },
 };

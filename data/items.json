@@ -48,13 +48,13 @@
     "Name": "RoadBlock",
     "Type": "Usable",
     "Image": "https://i.ibb.co/smShBhY/item-policeblock.gif",
-    "Shop": true,
+    "Shop": false,
     "Findable": false,
     "Tier": 1,
     "Emote": "<a:item_policeblock:1105320926221971496>"
   },
   "wrench": {
-    "Price": 0,
+    "Price": 2500,
     "Action": "Fix any part on a junk car without needing the part",
     "Name": "Wrench",
     "Type": "Usable",
@@ -65,7 +65,7 @@
     "Image": "https://i.ibb.co/52sV3zY/1539872271436.jpg"
   },
   "water bottle": {
-    "Price": 0,
+    "Price": 5000,
     "Action": "Clear all race cooldowns",
     "Name": "Water Bottle",
     "Type": "Usable",
@@ -85,7 +85,7 @@
     "Name": "Pink Slip",
     "Type": "Currency",
     "Emote": "<:pinkslip:977442825186721863>",
-    "Shop": true,
+    "Shop": false,
     "Findable": false,
     "Tier": 1,
     "Image": "https://i.ibb.co/Yy6rQ5K/pinkslip.png",
@@ -118,7 +118,7 @@
     "Shop": false
   },
   "small vault": {
-    "Price": 0,
+    "Price": 55000,
     "Name": "Small Vault",
     "Action": "Store up to $50,000 cash before prestiging",
     "Type": "Usable",
@@ -130,7 +130,7 @@
     "Used": ["You store some money in a small vault"]
   },
   "medium vault": {
-    "Price": 0,
+    "Price": 105000,
     "Name": "Medium Vault",
     "Action": "Store up to $100,000 cash before prestiging",
     "Type": "Usable",
@@ -142,7 +142,7 @@
     "Used": ["You store some money in a medium vault"]
   },
   "large vault": {
-    "Price": 0,
+    "Price": 750000,
     "Name": "Large Vault",
     "Action": "Store up to $500,000 cash before prestiging",
     "Type": "Usable",
@@ -159,7 +159,7 @@
     "Action": "Store up to $1,000,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_hugevault:1101004947107106876>",
-    "Shop": true,
+    "Shop": false,
     "Findable": true,
     "Tier": 3,
     "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
@@ -177,7 +177,7 @@
   },
 
   "grape juice": {
-    "Price": 0,
+    "Price": 50000,
     "Action": "Extra luck when using lockpicks for 15 minutes",
     "Name": "Grape Juice",
     "Type": "Usable",
@@ -189,7 +189,7 @@
     "Used": ["You sip on some grape juice"]
   },
   "apple juice": {
-    "Price": 0,
+    "Price": 50000,
     "Action": "Only get cars in blueprints for 30 seconds",
     "Name": "Apple Juice",
     "Type": "Usable",
@@ -201,7 +201,7 @@
     "Used": ["You sip on some apple juice"]
   },
   "orange juice": {
-    "Price": 0,
+    "Price": 50000,
     "Action": "Only get t4parts in wheelspins for 60 seconds",
     "Name": "Orange Juice",
     "Type": "Usable",
@@ -212,6 +212,18 @@
     "Image": "https://i.ibb.co/Nyc5Nwd/item-orangejuice.png",
     "Used": ["You sip on some orange juice"]
   },
+  "snowball": {
+    "Price": 0,
+    "Action": "Throw this at another user and see what happens",
+    "Name": "Snowball",
+    "Type": "Usable",
+    "Emote": "<:item_snowball:1183251693320798240>",
+    "Shop": true,
+    "Findable": true,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/Kh0y0Kf/item-snowball.png"
+  },
+
   "fruit punch": {
     "Price": 0,
     "Action": "Receive x2 ranks when racing and drifting **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
@@ -223,6 +235,29 @@
     "Tier": 2,
     "Image": "https://i.ibb.co/k6tHGzn/item-fruitpunch.png",
     "Used": ["You sip on some fruit punch"]
+  },
+  "present": {
+    "Price": 0,
+    "Action": "Open it up!",
+    "Name": "Present",
+    "Type": "Non-Usable",
+    "Emote": "<:zpresent:1183910541194956871>",
+    "Shop": false,
+    "Findable": false,
+    "Tier": 2,
+    "Image": ""
+  },
+  "airplane": {
+    "Price": 150000,
+    "Action": "Relocate to a country of your choosing for FREE!",
+    "Name": "Airplane",
+    "Type": "Usable",
+    "Emote": "<:item_plane:1185047177110761512>",
+    "Shop": true,
+    "Findable": true,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/H2pPXJy/item-plane.png",
+    "Used":["How did you even get this?", "How'd this fit in your item inventory"]
   },
   "flat tire": {
     "Price": 0,
@@ -239,7 +274,7 @@
     ]
   },
   "oil": {
-    "Price": 0,
+    "Price": 75000,
     "Action": "Gives 5x Daily rewards for 7 days, but there's a 5% chance you'll lose $100K to medical bills because you shouldn't drink oil...",
     "Name": "Oil",
     "Type": "Usable",
@@ -251,7 +286,7 @@
     "Used": ["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
   },
   "epic lockpick": {
-    "Price": 0,
+    "Price": 50000,
     "Action": "While active (10 minutes), your lockpicks will not break",
     "Name": "Epic Lockpick",
     "Type": "Usable",
@@ -263,7 +298,7 @@
     "Used": ["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
   },
   "pet treats": {
-    "Price": 0,
+    "Price": 5000,
     "Action": "Use these to make the random xessence cap on your pet higher by **1** for 10 minutes **USING MULTIPLE STACKS UP TO 20**",
     "Name": "Pet Treats",
     "Type": "Usable",
@@ -275,12 +310,12 @@
     "Used": ["You feed your pet treats and now it can find more xessence"]
   },
   "blueberry": {
-    "Price": 0,
+    "Price": 25000,
     "Action": "Eat a blueberry to increase your race rank by 1",
     "Name": "Blueberry",
     "Type": "Usable",
     "Emote": "<:item_blueberry:1095474857514385480>",
-    "Shop": false,
+    "Shop": true,
     "Findable": true,
     "Tier": 1,
     "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png",
@@ -397,7 +432,7 @@
     ]
   },
   "pet collar": {
-    "Price": 0,
+    "Price": 10000,
     "Action": "Prevent your pet from getting hungry, thirsty, and running away for 1 hour",
     "Name": "Pet Collar",
     "Type": "Usable",
@@ -411,7 +446,7 @@
     ]
   },
   "tequila shot": {
-    "Price": 0,
+    "Price": 15000,
     "Action": "Get 5x race earnings for 1 minute. There is also 10% chance you lose $50K apon usage, why not find out?",
     "Name": "Tequila Shot",
     "Type": "Usable",
@@ -427,12 +462,12 @@
     ]
   },
   "radio": {
-    "Price": 0,
+    "Price": 25000,
     "Action": "Obtain 2x cash, 2x RP, and 2x race rank while racing for 5 minutes",
     "Name": "Radio",
     "Type": "Usable",
     "Emote": "<:item_radio:1101011638540312607>",
-    "Shop": false,
+    "Shop": true,
     "Findable": true,
     "Tier": 2,
     "Image": "https://i.ibb.co/ByPdgcC/item-radio.png",

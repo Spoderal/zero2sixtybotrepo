@@ -11,6 +11,7 @@ const achievementsdb = require("../data/achievements.json");
 const pvpranks = require("../data/ranks.json");
 const titledb = require("../data/titles.json");
 const emotes = require("../common/emotes").emotes;
+const landmarkdb = require("../data/landmarks.json")
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 
 const lodash = require("lodash");
@@ -71,6 +72,8 @@ module.exports = {
       let streetwins = userdata.streetwins || 0
       let trackwins = userdata.trackwins || 0
       let tier = userdata.tier;
+      let speedometer = userdata.speedometer
+      let landmarks = userdata.landmarks
       let cars = userdata.cars;
       let finalprice = 0;
 
@@ -91,6 +94,16 @@ module.exports = {
       if (pvpname == undefined) {
         pvpname = "Silver";
       }
+
+      let landmarksarr = []
+
+      if(landmarks.length > 0){
+        for(let land in landmarks){
+          landmarksarr.push(landmarkdb[landmarks[land]].Emote)
+        }
+      }
+
+
 
       let pvpindb = pvpranks[pvpname.toLowerCase()];
       let achievements = userdata.achievements;
@@ -126,7 +139,8 @@ module.exports = {
               <:WINS_street:1152813248756842598> Street Race W/L: ${streetwins}\n
               <:WINS_DRAG:1152813251508305920> Drag Race W/L: ${dragwins}\n
               <:wins_track:1152813252502360075> Track Race W/L: ${trackwins}\n
-            
+              <:location_speedometer:1175570810740682843> Highest Speedometer: ${speedometer} MPH\n
+              🗺️ Landmarks Discovered: ${landmarksarr.join(" ")}
             `,
             inline: true
           },
@@ -248,7 +262,7 @@ module.exports = {
             .setFooter({ text: `Page ${vispage}` })
             .setDescription(`${displayhelms.join("\n")}`);
 
-          i.update({
+          interaction.editReply({
             embeds: [embed],
             components: [row, row2],
             fetchReply: true,
@@ -269,7 +283,7 @@ module.exports = {
             .setFooter({ text: `Page ${vispage}` })
             .setDescription(`${displaytitles.join("\n")}`);
 
-          i.update({
+          interaction.editReply({
             embeds: [embed],
             components: [row, row2],
             fetchReply: true,
@@ -279,7 +293,7 @@ module.exports = {
           vispage++;
 
           if (page > items.length)
-            return i.update({ content: "You don't have anymore pages!" });
+            return interaction.editReply({ content: "You don't have anymore pages!" });
 
           if (items == helmlist) {
             let displayhelms = [];
@@ -299,7 +313,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -318,7 +332,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displaytitles.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -329,7 +343,7 @@ module.exports = {
           vispage--;
 
           if (page > items.length)
-            return i.update({ content: "You don't have anymore pages!" });
+            return interaction.editReply({ content: "You don't have anymore pages!" });
 
           if (items == helmlist) {
             let displayhelms = [];
@@ -349,7 +363,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -368,7 +382,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displaytitles.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -379,7 +393,7 @@ module.exports = {
           vispage = 1;
 
           if (page > items.length)
-            return i.update({ content: "You don't have anymore pages!" });
+            return interaction.editReply({ content: "You don't have anymore pages!" });
 
           if (items == helmlist) {
             let displayhelms = [];
@@ -399,7 +413,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -418,7 +432,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displaytitles.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -429,7 +443,7 @@ module.exports = {
           vispage = items.length += 1;
 
           if (page > items.length)
-            return i.update({ content: "You don't have anymore pages!" });
+            return interaction.editReply({ content: "You don't have anymore pages!" });
 
           if (items == helmlist) {
             let displayhelms = [];
@@ -449,7 +463,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,
@@ -468,7 +482,7 @@ module.exports = {
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displaytitles.join("\n")}`);
 
-            i.update({
+            interaction.editReply({
               embeds: [embed],
               components: [row, row2],
               fetchReply: true,

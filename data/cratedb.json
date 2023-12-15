@@ -101,6 +101,26 @@
       "Emote": "<:supplydropprestige:1044404462581719041>",
       "Image": "https://i.ibb.co/bvzk1VL/supplydropprestige.png"
     },
+    "present": {
+      "Contents": [
+       "5000 Cash",
+       "1 Cash",
+       "2022 subaru forester",
+       "1000 Cash",
+       "2000 Cash",
+       "2018 dodge challenger sleigh",
+       "snowball",
+       "wheelspin",
+       "super wheelspin",
+       "grass helmet",
+       "t4tires",
+       "t4turbo",
+       "dualturbo"
+      ],
+      "Name": "Present",
+      "Emote": "<:zpresent:1183910541194956871>",
+      "Image": "https://i.ibb.co/ZdYCfMZ/present.png"
+    },
     "seasonal crate": {
       "Contents": [
         "100000 Cash",

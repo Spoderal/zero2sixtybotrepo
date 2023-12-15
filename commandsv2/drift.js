@@ -69,6 +69,11 @@ module.exports = {
         );
       return await interaction.reply({ embeds: [errembed] });
     }
+
+    if (selected.Gas <= 0)
+    return interaction.reply(
+      `You're out of gas! Use \`/gas\` to fill up for the price of gas today! Check the daily price of gas with \`/bot\``
+    );
     if (driftcooldown !== null && timeout - (Date.now() - driftcooldown) > 0) {
       let timel = ms(timeout - (Date.now() - driftcooldown));
       let timeEmbed = new EmbedBuilder()
@@ -78,8 +83,7 @@ module.exports = {
     }
     let velocity = selected.Speed;
 
-    if (velocity >= 700)
-      return interaction.reply("Your car is too fast so it crashed!");
+
 
     let acc = selected.Acceleration;
 
@@ -263,6 +267,9 @@ module.exports = {
           if (userdata.items.includes("parking brake")) {
             dranks = dranks * 4;
           }
+          if(userdata.location == "japan" ){
+            cashreward = cashreward * 2
+          }
 
           earnings.push(`+${dranks} Drift Rank`);
 
@@ -293,6 +300,29 @@ module.exports = {
               userdata.titles.push("drift king");
             }
           }
+
+          selected.Gas -= 1;
+    if (selected.Gas <= 0) {
+      selected.Gas = 0;
+    }
+    await User.findOneAndUpdate(
+      {
+        id: interaction.user.id,
+      },
+      {
+        $set: {
+          "cars.$[car]": selected,
+        },
+      },
+
+      {
+        arrayFilters: [
+          {
+            "car.Name": selected.Name,
+          },
+        ],
+      }
+    );
           userdata.save();
           embed.setDescription(`${earnings.join("\n")}`);
           embed.setTitle(`${trackemote} ${difficulty} ${track} track won!`);

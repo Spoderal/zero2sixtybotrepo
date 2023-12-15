@@ -177,12 +177,12 @@ module.exports = {
 
         embed.setDescription(`${displaycars[page - 1].join("\n")}`);
 
-        await i.update({
+        await interaction.editReply({
           embeds: [embed],
           fetchReply: true,
         });
       } else {
-        return i.update({ content: "No pages left!" });
+        return interaction.editReply({ content: "No pages left!" });
       }
     });
   },

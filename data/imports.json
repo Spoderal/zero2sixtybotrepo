@@ -9,7 +9,10 @@
       "1989 toyota celica",
       "1996 ford f250 power stroke",
       "1995 porsche 928",
-      "2008 audi rs6"
+      "2008 audi rs6",
+      "2007 subaru wrx wagon",
+      "2002 subaru wrx sti",
+      "1994 chevy impala ss"
     ]
   },
   "rare": {
@@ -54,10 +57,12 @@
       "2006 koenigsegg ccx",
       "2007 koenigsegg ccgt",
       "2024 lotus eletra",
+      "2023 lucid air sapphire",
       "2021 aston martin dbs superleggera",
       "1993 porsche 959",
       "2011 mercedes sl65 amg black series",
-      "2017 dodge viper acr"
+      "2017 dodge viper acr",
+      "2023 lucid air sapphire"
     ]
   },
   "le mans": {

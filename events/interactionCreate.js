@@ -17,8 +17,13 @@ module.exports = {
     let user = interaction.user;
     let guild = interaction.guild;
     let timeout2 = 5000;
+    let timeout3 = 30000;
+
     try {
       if (interaction.isSelectMenu()) {
+        await interaction.deferUpdate();
+      }
+      if (interaction.isButton()) {
         await interaction.deferUpdate();
       }
       if (interaction.isChatInputCommand()) {
@@ -52,7 +57,10 @@ module.exports = {
               fetchReply: true,
               ephemeral: true,
             });
-          } else {
+          } 
+          
+        
+          else {
             // await updateCrew(interaction);
             // if (userdata) {
             //   if (Number.isInteger(userdata.cash) == false) {

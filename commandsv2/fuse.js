@@ -21,6 +21,14 @@ module.exports = {
         .setDescription("The part to upgrade")
         .addChoices(
           { name: "Tires", value: "tires" },
+          { name: "Slicks", value: "slicks" },
+          { name: "Exhaust", value: "exhaust" },
+          { name: "Clutch", value: "clutch" },
+          { name: "ECU", value: "ecu" },
+          { name: "Race Suspension", value: "rsuspension" },
+          { name: "Drift Suspension", value: "dsuspension" },
+          { name: "Intercooler", value: "intercooler" },
+          { name: "Brakes", value: "brakes" },
           { name: "Bodykit", value: "bodykit" },
           { name: "Weight Reduction", value: "weightreduction" },
           { name: "Weight", value: "weight" },
@@ -97,7 +105,11 @@ module.exports = {
       if (parttoinstall == "tires") {
         parte = "t4tires";
         partb = "t5slicks";
-      } else if (parttoinstall == "exhaust") {
+      } 
+      if (parttoinstall == "slicks") {
+        parte = "t4slicks";
+        partb = "t5slicks";
+      }else if (parttoinstall == "exhaust") {
         parte = "t4exhaust";
         partb = "t5exhaust";
       } else if (parttoinstall == "intake") {
