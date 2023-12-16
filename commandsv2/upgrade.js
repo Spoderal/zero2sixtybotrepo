@@ -70,7 +70,7 @@ module.exports = {
 
 
     let acc = selected[0].Acceleration
-    let newacc = acc -= partindb.AddAcceleration
+    let newacc = acc -= partindb.Acceleration
     
     if(partindb.Handling > 0){
       selected[0].Handling += Number(partindb.Handling)
@@ -78,12 +78,12 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed += Number(partindb.Power)
     }
-    if(partindb.AddAcceleration > 0){
+    if(partindb.Acceleration > 0){
     if(newacc < 2){
       selected[0].Acceleration = 2
     } 
     else {
-      selected[0].Acceleration -= partindb.AddAcceleration
+      selected[0].Acceleration -= partindb.Acceleration
 
     }
   }
@@ -104,7 +104,7 @@ module.exports = {
       selected[0].WeightStat += Number(partindb.Weight)
     }
     if(partindb.Stars > 0){
-      selected[0].Rating += Number(partindb.Stars)
+      selected[0].Rating += partindb.Stars
     }
 
     selected[0][partindb.Type] = partindb.Name.toLowerCase()

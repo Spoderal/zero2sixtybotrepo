@@ -387,7 +387,7 @@ module.exports = {
       let stats = [];
 
       if (partindb.Power > 0) {
-        stats.push(`${emotes.speed} Speed: +${partindb.Power}`);
+        stats.push(`${emotes.speed} Power: +${partindb.Power}`);
       }
 
       if (partindb.Weight > 0) {
@@ -403,9 +403,9 @@ module.exports = {
         );
       }
 
-      if (partindb.AddAcceleration > 0) {
+      if (partindb.Acceleration > 0) {
         stats.push(
-          `${emotes.acceleration} Acceleration: -${partindb.AddAcceleration}`
+          `${emotes.acceleration} Acceleration: -${partindb.Acceleration}`
         );
       }
       if (partindb.RemoveAcceleration > 0) {

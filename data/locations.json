@@ -4,7 +4,7 @@
         "peru":{
             "Name":"Peru",
             "Image":"https://i.ibb.co/D492DVr/map-peru-filled.png",
-            "Services":["Gas Station", "Shop"],
+            "Services":["Gas Station"],
             "Events":["Service", "Service",  "NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race","Landmark", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving and its just a normal day", "You see a squirrel! You decide to name it Rin"],
             "Perks":"2x cash when racing NPCs",
@@ -71,9 +71,9 @@
         "spain":{
             "Name":"Spain",
             "Image":"https://i.ibb.co/2WMg13m/location-spain-filled.png",
-            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer", "Market"],
+            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving and its just a normal day", "You found a taco! You decide to eat it"],
-            "Services":["Gas Station", "Shop"],
+            "Services":["Gas Station"],
             "Perks":"2x cash when helping NPCs",
             "Shop":"Tires",
             "ForSale":[{"name": "T1Slicks", "price":5000, "emote": "<:part_t1tires:1101042346231070773>", "id": 1}],
@@ -140,7 +140,7 @@
             "Image":"https://i.ibb.co/tJVjs11/map-japan-filled.png",
             "Events":["NPC Race", "NPC Job", "NPC Job","NPC Race", "Nothing", "Nothing", "Fine", "Speedometer", "Market"],
             "NoEvents":["You found some noodles, don't play with your food", "You're driving and its a normal day"],
-            "Services":["Gas Station", "Shop"],
+            "Services":["Gas Station"],
             "Jobs":[
                 {
                     "Name":"Han",
@@ -187,7 +187,7 @@
         "usa":{
             "Name":"USA",
             "Image":"https://i.ibb.co/d036CfJ/map-usa-filled.png",
-            "Services":["Gas Station", "Shop"],  
+            "Services":["Gas Station"],
             "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving and its just a normal day", "You see a deer! It just stands there"],
             "Perks":"2x gas when filling up in USA",
@@ -252,11 +252,6 @@
             "NoEvents":["You're driving in the rain and its just a normal day", "You see a beer! You do NOT drink it because you're driving"],
             "Perks":"2x cash when racing in track races",
             "BlackMarket":[
-                {
-                    "Name":"2021 Mercedes B Class",
-                    "Price":15000,
-                    "Emote":"<:mercedes_z:973000364410404924>"
-                },
                 {
                     "Name":"2021 Volkswagen Jetta GLI",
                     "Price":28000,
@@ -356,7 +351,7 @@
             "Name":"Aisha",
             "Car":{
                 "Name":"1989 Mistubishi Starion",
-                "Image":"https://i.ibb.co/3k79yKJ/image.png",
+                "Image":"https://i.ibb.co/CH3fNpC/starion.png",
                 "Speed":197,
                 "Acceleration":6.2,
                 "Handling":550,

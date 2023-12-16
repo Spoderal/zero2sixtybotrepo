@@ -43,8 +43,6 @@ module.exports = {
     double(client);
     gold(client);
     stats(client);
-    cars(client)
-    season(client)
     itemshop(client)
 
     var express = require("express");

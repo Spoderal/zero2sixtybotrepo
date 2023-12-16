@@ -98,7 +98,7 @@ module.exports = {
       if (imports.rare.Contents.includes(selected.Name.toLowerCase())) {
         userdata.rareCredits += 5;
       }
-      if(userdata.cars.length <= 1) return interaction.reply("You need to have at least 1 car!")
+      if(userdata.cars.length <= 0) return interaction.reply("You need to have at least 1 car!")
 
 
       await interaction.reply(
@@ -120,11 +120,11 @@ module.exports = {
           "You don't have that many of that part!"
         );
       let finalamount = 0;
-      if (parts.Parts[selling.toLowerCase()].sellprice > 0) {
+
         let resale = parts.Parts[selling.toLowerCase()].Price * 0.35;
         finalamount = amount2 * resale;
         userdata.cash += finalamount;
-      }
+      
       if (parts.Parts[selling.toLowerCase()].Tier == "4") {
         let resale = 1000;
         finalamount = amount2 * resale;

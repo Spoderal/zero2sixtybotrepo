@@ -196,6 +196,28 @@ module.exports = {
         userdata.update();
       }
 
+      if (reward1.endsWith(`Garage Spaces`)) {
+        let amount = Number(reward1.split(" ")[0]);
+        name1 = `${amount} Garage Spaces`
+        userdata.garageLimit += amount;
+        userdata.update();
+      }
+
+      if (reward2.endsWith(`Garage Spaces`)) {
+        let amount2 = Number(reward2.split(" ")[0]);
+        name2 = `${amount2} Garage Spaces`
+        userdata.garageLimit += amount2;
+        userdata.update();
+      }
+
+      if (reward3.endsWith(`Garage Spaces`)) {
+        let amount3 = Number(reward3.split(" ")[0]);
+        name3 = `${amount3} Garage Spaces`
+
+        userdata.garageLimit += amount3;
+        userdata.update();
+      }
+
       if (titledb[reward1]) {
         name1 = titledb[reward1].Name;
         userdata.titles.push(name1.toLowerCase());
@@ -230,6 +252,26 @@ module.exports = {
         userdata.parts.push(name3.toLowerCase());
         userdata.update();
       }
+
+      if (itemdb[reward1]) {
+        name1 = itemdb[reward1].Name;
+       
+        userdata.items.push(name1.toLowerCase());
+        userdata.update();
+      }
+      if (itemdb[reward2]) {
+        name2 = itemdb[reward2].Name;
+       
+        userdata.items.push(name1.toLowerCase());
+        userdata.update();
+      }
+      if (itemdb[reward3]) {
+        name3 = itemdb[reward2].Name;
+       
+        userdata.items.push(name1.toLowerCase());
+        userdata.update();
+      }
+
 
       for (var s = 0; s < 1; s++)  inv.splice(inv.indexOf(bought.toLowerCase()), 1);
       userdata.items = inv;

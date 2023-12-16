@@ -130,6 +130,7 @@ module.exports = {
       let caroption = interaction.options.getString("car")
       let cartodrive = userdata.cars.filter((car) => car.ID.toLowerCase() == caroption.toLowerCase())[0]
 
+      if(cartodrive.Gas <= 0) return interaction.reply(`You need gas to drive!`)
       let embed = new EmbedBuilder()
       .setTitle(`Driving in ${locationindb.Name} with your ${cartodrive.Name}`)
       .setImage(cartodrive.Image)
@@ -209,19 +210,23 @@ module.exports = {
       .setComponents(
         new ButtonBuilder()
         .setCustomId("1")
-        .setLabel("Buy car 1")
+        .setLabel(`Buy ${shop[0].Name}`)
+        .setEmoji(`${shop[0].Emote}`)
         .setStyle("Primary"),
         new ButtonBuilder()
         .setCustomId("2")
-        .setLabel("Buy car 2")
+        .setLabel(`Buy ${shop[1].Name}`)
+        .setEmoji(`${shop[1].Emote}`)
         .setStyle("Primary"),
         new ButtonBuilder()
         .setCustomId("3")
-        .setLabel("Buy car 3")
+        .setLabel(`Buy ${shop[2].Name}`)
+        .setEmoji(`${shop[2].Emote}`)
         .setStyle("Primary"),
         new ButtonBuilder()
         .setCustomId("4")
-        .setLabel("Buy car 4")
+        .setLabel(`Buy ${shop[3].Name}`)
+        .setEmoji(`${shop[3].Emote}`)
         .setStyle("Primary")
       )
       let shoparr = []
@@ -266,7 +271,25 @@ module.exports = {
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
           userdata.cars.push(carobj)
-          
+          let gas = cartodrive.Gas
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Gas": gas - 1,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": cartodrive.Name,
+                },
+              ],
+            }
+          );
           userdata.cash -= carprice
 
           userdata.save()
@@ -298,7 +321,25 @@ module.exports = {
           userdata.cars.push(carobj)
           
           userdata.cash -= carprice
+          let gas = cartodrive.Gas
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Gas": gas - 1,
+              },
+            },
 
+            {
+              arrayFilters: [
+                {
+                  "car.Name": cartodrive.Name,
+                },
+              ],
+            }
+          );
           userdata.save()
 
           interaction.editReply("✅")
@@ -328,7 +369,25 @@ module.exports = {
           userdata.cars.push(carobj)
           
           userdata.cash -= carprice
+          let gas = cartodrive.Gas
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Gas": gas - 1,
+              },
+            },
 
+            {
+              arrayFilters: [
+                {
+                  "car.Name": cartodrive.Name,
+                },
+              ],
+            }
+          );
           userdata.save()
 
           interaction.editReply("✅")
@@ -356,7 +415,25 @@ module.exports = {
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
           userdata.cars.push(carobj)
-          
+          let gas = cartodrive.Gas
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Gas": gas - 1,
+              },
+            },
+
+            {
+              arrayFilters: [
+                {
+                  "car.Name": cartodrive.Name,
+                },
+              ],
+            }
+          );
           userdata.cash -= carprice
 
           userdata.save()
@@ -383,6 +460,25 @@ module.exports = {
         else {
           userdata.cash -= fine
         }
+        let gas = cartodrive.Gas
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car].Gas": gas - 1,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": cartodrive.Name,
+              },
+            ],
+          }
+        );
         interaction.editReply({embeds: [embed], fetchReply: true})
         userdata.save()
       }
@@ -393,11 +489,30 @@ module.exports = {
         embed.setImage(`${locationindb.Landmark.Image}`)
         userdata.cash += reward
         userdata.landmarks.push(locationindb.Landmark.Name.toLowerCase())
+        let gas = cartodrive.Gas
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car].Gas": gas - 1,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": cartodrive.Name,
+              },
+            ],
+          }
+        );
         interaction.editReply({embeds: [embed], fetchReply: true})
         userdata.save()
       }
       else if(event == "Speedometer"){
-        let speed3 = cartodrive.Speed / 2
+        let speed3 = cartodrive.Speed
         let topspeed = randomRange(1, speed3)
 
         embed.setDescription(`You found **${locationindb.Name}'s** <:location_speedometer:1175570810740682843> Speedometer! You achieved ${topspeed} MPH and earned $${topspeed}`)
@@ -407,6 +522,26 @@ module.exports = {
           userdata.speedometer = topspeed
 
         }
+
+        let gas = cartodrive.Gas
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "cars.$[car].Gas": gas - 1,
+            },
+          },
+
+          {
+            arrayFilters: [
+              {
+                "car.Name": cartodrive.Name,
+              },
+            ],
+          }
+        );
         interaction.editReply({embeds: [embed], fetchReply: true})
         userdata.save()
       }
@@ -458,9 +593,28 @@ module.exports = {
               else {
                 userdata.cash -= job.Reward
               }
-              embed.setDescription(`You helped the NPC with their issue and failed! You lost $${job.Reward}`)
+              embed.setDescription(`"Wow dude, you messed my whole car up... That'll cost me ${job.Reward}" You lost $${job.Reward}`)
             }
             interaction.editReply({embeds: [embed], components: []})
+            let gas = cartodrive.Gas
+            await User.findOneAndUpdate(
+              {
+                id: interaction.user.id,
+              },
+              {
+                $set: {
+                  "cars.$[car].Gas": gas - 1,
+                },
+              },
+  
+              {
+                arrayFilters: [
+                  {
+                    "car.Name": cartodrive.Name,
+                  },
+                ],
+              }
+            );
             userdata.save()
 
 
@@ -469,6 +623,26 @@ module.exports = {
             embed.setDescription(`NPC: Well fine then! Go away!`)
             interaction.editReply({embeds: [embed], components: []})
 
+            let gas = cartodrive.Gas
+            await User.findOneAndUpdate(
+              {
+                id: interaction.user.id,
+              },
+              {
+                $set: {
+                  "cars.$[car].Gas": gas - 1,
+                },
+              },
+  
+              {
+                arrayFilters: [
+                  {
+                    "car.Name": cartodrive.Name,
+                  },
+                ],
+              }
+            );
+            userdata.save()
           }
 
         })
@@ -496,25 +670,15 @@ module.exports = {
         embed.setImage(`${npc[0].Car.Image}`)
         embed.addFields(
           {
-            name: `Speed`,
-            value: `${npc[0].Car.Speed}`,
+            name: `NPC Car`,
+            value: `${emotes.speed} ${npc[0].Car.Speed}\n${emotes.acceleration} ${npc[0].Car.Acceleration}s\n${emotes.handling} ${npc[0].Car.Handling}\n${emotes.weight} ${npc[0].Car.Weight}`,
             inline: true
           },
           {
-            name: `Acceleration`,
-            value: `${npc[0].Car.Acceleration}s`,
+            name: `Your Car`,
+            value: `${emotes.speed} ${cartodrive.Speed}\n${emotes.acceleration} ${cartodrive.Acceleration}s\n${emotes.handling} ${cartodrive.Handling}\n${emotes.weight} ${cartodrive.WeightStat}`,
             inline: true
           },
-          {
-            name: `Handling`,
-            value: `${npc[0].Car.Handling}`,
-            inline: true
-          },
-          {
-            name: `Weight`,
-            value: `${npc[0].Car.Weight}`,
-            inline: true
-          }
 
         )
          interaction.editReply({embeds: [embed], fetchReply: true, components: [actionrow]})
@@ -544,9 +708,9 @@ module.exports = {
               let w2 = npc[0].Car.Weight
               let h2 = npc[0].Car.Handling
               
-              let sum = hp + hp / a + h + w / 100;
+              let sum = (hp + hp / a + h + w / 100) / 4;
 
-              let sum2 = hp2 + hp2 / a2 + h2 + w2 / 100;
+              let sum2 = (hp2 + hp2 / a2 + h2 + w2 / 100) / 4;
 
               if(sum > sum2){
                 embed.setTitle(`You won!`)
@@ -572,6 +736,27 @@ module.exports = {
                   userdata.cash -= npc[0].Reward
                 }
               }
+              let gas = cartodrive.Gas
+              await User.findOneAndUpdate(
+                {
+                  id: interaction.user.id,
+                },
+                {
+                  $set: {
+                    "cars.$[car].Gas": gas - 1,
+                  },
+                },
+    
+                {
+                  arrayFilters: [
+                    {
+                      "car.Name": cartodrive.Name,
+                    },
+                  ],
+                }
+              );
+            
+
               userdata.save()
               await i.editReply({embeds: [embed], fetchReply: true})
             }, 3000);
@@ -579,6 +764,7 @@ module.exports = {
         })
           
       }
+      
     }, 5000);
     }
   },

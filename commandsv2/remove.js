@@ -67,7 +67,7 @@ module.exports = {
     if(!selected[0][partindb.Type] || selected[0][partindb.Type] == null) return interaction.reply(`Your car doesn't have a ${partindb.Type}, use /upgrade first!`)
 
     let acc = selected[0].Acceleration
-    let newacc = acc -= partindb.AddAcceleration
+    let newacc = acc -= partindb.Acceleration
     
     if(partindb.Handling > 0){
       selected[0].Handling -= Number(partindb.Handling)
@@ -75,9 +75,9 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed -= Number(partindb.Power)
     }
-    if(partindb.AddAcceleration > 0){
+    if(partindb.Acceleration > 0){
       
-      selected[0].Acceleration += (Math.floor(partindb.AddAcceleration * 100) / 100)
+      selected[0].Acceleration += (Math.floor(partindb.Acceleration * 100) / 100)
     }
     if(partindb.RemoveAcceleration > 0){
       if(newacc < 2){
@@ -104,7 +104,7 @@ module.exports = {
     if(partindb.Stars > 0){
       selected[0].Rating -= Number(partindb.Stars)
     }
-    userdata.parts.push(selected[0][partindb.Type])
+    userdata.parts.push(selected[0][partindb.Type.toLowerCase()])
 
     selected[0][partindb.Type] = null
 
