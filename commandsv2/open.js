@@ -262,13 +262,13 @@ module.exports = {
       if (itemdb[reward2]) {
         name2 = itemdb[reward2].Name;
        
-        userdata.items.push(name1.toLowerCase());
+        userdata.items.push(name2.toLowerCase());
         userdata.update();
       }
       if (itemdb[reward3]) {
-        name3 = itemdb[reward2].Name;
+        name3 = itemdb[reward3].Name;
        
-        userdata.items.push(name1.toLowerCase());
+        userdata.items.push(name3.toLowerCase());
         userdata.update();
       }
 

@@ -28,6 +28,7 @@ console.log(isWeekend)
     let patreon = userdata.patron;
     let lastDaily = cooldowndata.lastDaily;
     let streak = userdata.settings.dailyStreak || 0;
+    let premium = userdata.premium
 
     let lastDailyTime = new Date(lastDaily);
 
@@ -88,18 +89,10 @@ console.log(isWeekend)
       if (house && house.perks.includes("Daily $1500")) {
         dcash += 1500;
       }
-      if (patreon && patreon.tier == 1) {
+      if (premium == true) {
         dcash *= 2;
       }
-      if (patreon && patreon.tier == 2) {
-        dcash *= 3;
-      }
-      if (patreon && patreon.tier == 3) {
-        dcash *= 5;
-      }
-      if (patreon && patreon.tier == 4) {
-        dcash *= 5;
-      }
+  
       let filteredhouse = userdata.houses.filter(
         (house) => house.Name == "Albergo Delle Meraviglie"
       );

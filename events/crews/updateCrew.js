@@ -12,14 +12,15 @@ async function updateCrew(interaction) {
       crew2 = crews.filter((crew) => crew.name == ucrew.name);
     }
 
+    console.log(`crew2`)
     if (ucrew && crew2[0]) {
       crew2 = crew2[0];
       let totalrp = 0;
 
       let crewmembers = crew2.members;
-      let crewrank = crew2.Rank3;
-      if (!crew2.Rank3) {
-        crew2.Rank3 = 1;
+      let crewrank = crew2.Rank4;
+      if (!crew2.Rank4) {
+        crew2.Rank4 = 1;
         global.update();
       }
       for (let i in crewmembers) {
@@ -29,15 +30,15 @@ async function updateCrew(interaction) {
         console.log(userrp);
         totalrp += userrp;
       }
-      console.log(totalrp);
-      let nextrank = (crewrank += 1);
+      console.log(`rp: ${totalrp}`);
+      let nextrank = (crewrank + 1);
       let requiredrp = nextrank * 1000;
-      if (parseInt(totalrp) >= parseInt(requiredrp)) {
-        let rank = crew2.Rank3;
+      if (totalrp >= requiredrp) {
+        let rank = crew2.Rank4;
 
-        let newrank = (rank += 1);
+        let newrank = nextrank
 
-        crew2.Rank3 = newrank;
+        crew2.Rank4 = newrank;
         console.log("ranked");
       }
     }

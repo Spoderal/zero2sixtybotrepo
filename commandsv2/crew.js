@@ -157,8 +157,8 @@ module.exports = {
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
       let owner = newrparray.find((u) => u?.isOwner);
-      if (!crew2.Rank3) {
-        crew2.Rank3 = 1;
+      if (!crew2.Rank4) {
+        crew2.Rank4 = 1;
 
         globalModel.update();
         globalModel.markModified("crews");
@@ -172,7 +172,7 @@ module.exports = {
             name: "Information",
             value: `
               ${mlength}/30 members\n
-              Rank ${crew2.Rank3}\n
+              Rank ${crew2.Rank4}\n
               RP: ${total}\n
               ${
                 owner
@@ -227,7 +227,7 @@ module.exports = {
                 let item = crewseason[w];
                 let required = item.Number;
                 let emote = "❌";
-                if (required <= crew2.Rank3) {
+                if (required <= crew2.Rank4) {
                   emote = "✅";
                 }
                 reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
@@ -250,7 +250,7 @@ module.exports = {
                   name: "Information",
                   value: `
                       ${crew2.members.length} members\n
-                      Rank ${crew2.Rank3}\n
+                      Rank ${crew2.Rank4}\n
                       RP: ${total}\n
                       Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
                     `,
@@ -352,12 +352,12 @@ module.exports = {
         (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
       );
       let rewnum = (seasonclaimed.length += 1);
-      let item = crewseason[`${crew2[0].Rank3}`];
+      let item = crewseason[`${crew2[0].Rank4}`];
       let iteminuser = seasonclaimed.filter(
         (claimed) => claimed == item.Number
       );
       console.log(iteminuser)
-      if (item.Number > crew2[0].Rank3) {
+      if (item.Number > crew2[0].Rank4) {
         return interaction.reply(`Your crew needs to be rank ${item.Number}`);
       }
       if(iteminuser[0]) return interaction.reply("You've already claimed this reward!")
@@ -456,7 +456,7 @@ module.exports = {
         members: [interaction.user.id],
         owner: interaction.user,
         icon: icons.Icons.default,
-        Rank3: 1,
+        Rank4: 1,
         RP: 0,
         Cards: [
           {
@@ -852,11 +852,11 @@ module.exports = {
       }
 
       members = members.sort(function (b, a) {
-        return a.Rank3 - b.Rank3;
+        return a.Rank4 - b.Rank4;
       });
 
       members = members.filter(function BigEnough(value) {
-        return value.Rank3 > 0;
+        return value.Rank4 > 0;
       });
 
       members = members.slice(0, 10);
@@ -866,7 +866,7 @@ module.exports = {
       for (let i = 0; i < members.length; i++) {
         let user = members[i].name;
         if (!user) return;
-        let bal = members[i].Rank3;
+        let bal = members[i].Rank4;
         desc += `${i + 1}. ${user} - Rank ${numberWithCommas(bal)}\n`;
       }
       let embed = new Discord.EmbedBuilder()

@@ -693,6 +693,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  premium: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("profile", Profile);

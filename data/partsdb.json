@@ -197,7 +197,6 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "clutch",
-      "AddedHandling": 10,
       "DecreasedSpeed": "0",
       "Handling": 10,
       "Image": "https://i.ibb.co/qCGvj7R/part-t1clutch.png"
@@ -215,7 +214,6 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "clutch",
-      "AddedHandling": 15,
       "DecreasedSpeed": "0",
       "Handling": 15,
       "Image": "https://i.ibb.co/h17HMDz/part-t2clutch.png"
@@ -233,7 +231,6 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "clutch",
-      "AddedHandling": 25,
       "DecreasedSpeed": "0",
       "Handling": 25,
       "Image": "https://i.ibb.co/gPXNJBX/part-t3clutch.png"
@@ -251,7 +248,6 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "clutch",
-      "AddedHandling": 30,
       "DecreasedSpeed": "0",
       "Handling": 30,
       "Image": "https://i.ibb.co/TTT3Nn8/part-t4clutch.png",
@@ -270,7 +266,6 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "clutch",
-      "AddedHandling": 50,
       "DecreasedSpeed": "0",
       "Handling": 50,
       "Image": "https://i.ibb.co/PD5RWwY/part-t5clutch.png",
@@ -289,7 +284,6 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "clutch",
-      "AddedHandling": 100,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/3W7fCy6/part-txclutch.png",
       "Obtained": "Fusing T5Clutch with 100 Xessence",
@@ -583,7 +577,6 @@
       "Name": "DualTurbo",
       "Power": 25,
       "AddedSnow": 0,
-      "Acceleration": 0,
       "Acceleration": 0,
       "sellprice": 0,
       "Price": 10000,
@@ -1233,6 +1226,7 @@
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/P14CH3W/2jz.png"
     },
+
     "j1engine": {
       "Name": "J1Engine",
       "Power": 0,
@@ -1449,6 +1443,23 @@
       "Weight":400,
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/3Bg38LF/v12.png"
+    },
+    "w16": {
+      "Name": "W16",
+      "Power": 30,
+      "Acceleration": 2,
+      "AddedSnow": 0,
+      "sellprice": 18750,
+      "Price": 500000,
+      "Emote": "",
+      "Tier": "5",
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "RemoveAcceleration": "0",
+      "Type": "engine",
+      "Weight":500,
+      "DecreasedSpeed": "0",
+      "Image": "https://i.ibb.co/P14CH3W/2jz.png"
     },
     "rocket engine": {
       "Name": "Rocket Engine",
@@ -1901,7 +1912,6 @@
       "RemoveAcceleration": 0.5,
       "Type": "tires",
       "Image": "https://i.ibb.co/SyGFb0c/t1dtires.png",
-      "AddedHandling": 10,
       "Handling": 10
     },
     "t2drifttires": {
@@ -1922,7 +1932,6 @@
       "DecreasedSpeed": 5,
       "RemovePower": 5,
       "Image": "https://i.ibb.co/2FHgqCd/t2dtires.png",
-      "AddedHandling": 20,
       "Handling": 20
     },
     "t3drifttires": {
@@ -1942,7 +1951,6 @@
       "Type": "tires",
       "DecreasedSpeed": 5,
       "Image": "https://i.ibb.co/12Dc8KQ/t3dtires.png",
-      "AddedHandling": 30,
       "Handling": 30
     },
     "t4drifttires": {
@@ -1961,7 +1969,6 @@
       "RemoveAcceleration": "0",
       "Type": "tires",
       "DecreasedSpeed": 2,
-      "AddedHandling": 40,
       "Handling": 40,
       "Image": "https://i.ibb.co/hZdMFK5/t4dtires.png"
     },
@@ -1981,7 +1988,6 @@
       "RemoveAcceleration": "0",
       "Type": "tires",
       "DecreasedSpeed": 2,
-      "AddedHandling": 50,
       "Handling": 50,
       "Image": "https://i.ibb.co/8DG2rzf/t5dtires.png"
     },
@@ -2000,7 +2006,6 @@
       "RemoveAcceleration": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling": 100,
       "Handling": 100,
       "Image": "https://i.ibb.co/SQm6cs0/t1ducktail.png"
     },
@@ -2019,7 +2024,6 @@
       "RemoveAcceleration": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling": 200,
       "Handling": 200,
       "Image": "https://i.ibb.co/1JvyK0V/t1dspoiler.png"
     },
@@ -2038,7 +2042,6 @@
       "RemoveAcceleration": "0",
       "Type": "spoiler",
       "DecreasedSpeed": 3,
-      "AddedHandling": 300,
       "Handling": 300,
       "Image": "https://i.ibb.co/PzpqNLj/t3dspoiler.png"
     },

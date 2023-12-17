@@ -106,6 +106,11 @@ module.exports = {
       (await Cooldowns.findOne({ id: user.id })) ||
       new Cooldowns({ id: user.id });
     let timeout = 45 * 1000;
+
+    if(userdata.premium == true) {
+      timeout = 15 * 1000
+    }
+
     if (
       cooldowndata.racing !== null &&
       timeout - (Date.now() - cooldowndata.racing) > 0
@@ -517,6 +522,9 @@ module.exports = {
     let possiblekey = randomRange(1, 15);
     let raceindb = racedb[raceoption.toLowerCase()];
     let cashwon = tieroption * raceindb.Reward;
+    if(userdata.premium == true) {
+      cashwon = cashwon * 1.5
+    }
     let rpwon = 10;
     if (userdata.prestige) {
       let prestige = userdata.prestige;

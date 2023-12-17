@@ -62,7 +62,11 @@ module.exports = {
     let carweight = selected[0].WeightStat
 
 
-    let partindb = partdb.Parts[inputUpgrade.toLowerCase()]
+    let partoncar = selected[0][inputUpgrade.toLowerCase()]
+
+    if(!partoncar) return interaction.reply("Try specifying the part type you want to remove. Ex; exhaust, ecu, tires")
+
+    let partindb = partdb.Parts[partoncar.toLowerCase()]
 
     if(!selected[0][partindb.Type] || selected[0][partindb.Type] == null) return interaction.reply(`Your car doesn't have a ${partindb.Type}, use /upgrade first!`)
 

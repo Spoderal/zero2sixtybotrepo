@@ -5,6 +5,7 @@ const User = require("../schema/profile-schema");
 const {series} = require("./series")
 
 const { InteractionType } = require("discord.js");
+const { updateCrew } = require("./crews/updateCrew");
 
 //test
 //test
@@ -37,6 +38,13 @@ module.exports = {
           (await Cooldowns.findOne({ id: interaction.user.id })) ||
           new Cooldowns({ id: interaction.user.id });
         let userdata = await User.findOne({ id: interaction.user.id });
+
+        try {
+          updateCrew(interaction)
+        }
+        catch (err){
+          console.log("err")
+        }
 
         try {
           let timeout = 3000;
