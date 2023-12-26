@@ -28,6 +28,10 @@
     "Name": "Junk Race",
     "Reward": 100
   },
+  "spacerace": {
+    "Name": "Space Race",
+    "Reward": 100
+  },
 
   "snow": {
     "Name": "Snow Race",

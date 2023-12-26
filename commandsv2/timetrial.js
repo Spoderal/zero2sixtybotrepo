@@ -189,20 +189,26 @@ module.exports = {
             interaction.channel.send(`You just completed your task!`);
           }
 
+          let timeglobal = global.trialtimes.filter((time) => time.user == interaction.user)
+
+          console.log(timeglobal)
+
+          if(timeglobal[0]){
+            timeglobal[timeglobal.indexOf(timeglobal[0])].time = time
+
+
+          }
+          else {
+            global.trialtimes.push({time: time, user: interaction.user})
+          }
+
           await interaction.editReply({ embeds: [embed] });
           userdata.save();
         }
 
-        let timeuser = global.trialtimes.filter(
-          (user) => user.user.id == interaction.user.id
-        );
-
-        if (timeuser.length == 0 || time > timeuser.time) {
-          timeuser.time = time;
-          timeuser.user = interaction.user;
-        }
-        global.markModified();
-        global.save();
+      
+      global.markModified("trialtimes");
+      global.save();
 
         console.log(`track length ${tracklength}`);
       }, 1000);

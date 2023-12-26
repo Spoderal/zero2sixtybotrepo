@@ -64,14 +64,20 @@ module.exports = {
     });
     console.log("Registered endpoint: /webhooks/zero2sixtybotgold");
 
-    const webhookAuth = process.env.TOPGG_WEBHOOK_AUTHORIZATION;
+    const webhookAuth = "ZeroSpideral3!";
     if (webhookAuth) {
       const webhook = new Topgg.Webhook(webhookAuth);
       app.post(
         "/vote",
         webhook.listener(async (vote) => {
+          console.log(vote.user)
+          let users = await User.find();
+
+          
           console.log("User with id - " + vote.user + " voted!");
-          let userdata = await User.findOne({ id: vote.user });
+          let userdata = await User.findOne({ id: `${vote.user}` });
+          
+          console.log(userdata)
           if (!userdata) return;
           userdata.hasvoted = true;
           userdata.votetimer = Date.now();
@@ -85,8 +91,8 @@ module.exports = {
       );
     }
 
-    app.listen(8081, function () {
-      console.log("Listening on port 8081.");
+    app.listen(8080, function () {
+      console.log("Listening on port 8080.");
     });
 
     let randomstatuses = [

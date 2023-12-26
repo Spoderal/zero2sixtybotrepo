@@ -603,15 +603,33 @@ module.exports = {
       if (partindb.Price == 0) return interaction.reply("This part isn't purchasable!");
       let pricing = parseInt(partindb.Price) * amount3;
 
-      if (userdata.cash < pricing)
-      return await interaction.reply(
-        `You cant afford this! You need ${toCurrency(pricing)}`
-      );
+
+      if(partindb.Type == "event"){
+        if(userdata.moontokens < pricing){
+          return await interaction.reply(
+            `You cant afford this! You need ${emotes.moontokens} ${numberWithCommas(pricing)}`
+          );
+        }
+      }
+      else {
+
+        if (userdata.cash < pricing)
+        return await interaction.reply(
+          `You cant afford this! You need ${toCurrency(pricing)}`
+        );
+      }
+
 
 
       for (let i = 0; i < amount3; i++) userdata.parts.push(bought);
 
-      userdata.cash -= pricing
+      if(partindb.Type == "event"){
+        userdata.moontokens -= pricing
+      } else {
+
+        userdata.cash -= pricing
+      }
+
 
       await userdata.save()
 

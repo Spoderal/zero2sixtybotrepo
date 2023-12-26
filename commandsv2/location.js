@@ -67,6 +67,7 @@ module.exports = {
   
         let embed = new EmbedBuilder()
         .setTitle(`Where do you want to travel to?`)
+        .setColor(colors.blue)
         let row2 = new ActionRowBuilder()
         .setComponents(
           new StringSelectMenuBuilder()
@@ -79,7 +80,8 @@ module.exports = {
             {label: "Spain", value: "spain"},
             {label: "Italy", value: "italy"},
             {label: "Japan", value: "japan"},
-            {label: "Germany", value: "germany"}
+            {label: "Germany", value: "germany"},
+            {label: "UK", value: "united kingdom"}
           )
         )
       
@@ -98,6 +100,8 @@ module.exports = {
   
         userdata.location = locationchosen
         for (var i5 = 0; i5 < 1; i5++) userdata.items.splice(userdata.items.indexOf("airplane"), 1);
+        embed.setTitle(`You flew to **${locationchosen}**`)
+        await interaction.editReply({embeds: [embed], components: []})
         userdata.save()
         return
       })
@@ -235,7 +239,7 @@ module.exports = {
         shoparr.push(`${shop[it].Emote} ${shop[it].Name} : **${toCurrency(shop[it].Price)}**`)
       }
 
-      embed.setDescription(`You've arrived at a Black Market Would you like to buy anything?\n\n${shoparr.join('\n')}`)
+      embed.setDescription(`You've arrived at a Black Market! Would you like to buy anything?\n\n${shoparr.join('\n')}`)
       interaction.editReply({embeds: [embed], fetchReply: true, components: [actionrow]})
 
       let filter3 = (btnInt) => {
@@ -267,6 +271,8 @@ module.exports = {
           };
 
           let carprice = shop[0].Price
+
+          console.log(carprice)
 
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
@@ -314,7 +320,7 @@ module.exports = {
             MaxGas: 10,
           };
 
-          let carprice = shop[0].Price
+          let carprice = shop[1].Price
 
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
@@ -362,7 +368,7 @@ module.exports = {
             MaxGas: 10,
           };
 
-          let carprice = shop[0].Price
+          let carprice = shop[2].Price
 
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
@@ -410,7 +416,7 @@ module.exports = {
             MaxGas: 10,
           };
 
-          let carprice = shop[0].Price
+          let carprice = shop[3].Price
 
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
@@ -488,7 +494,10 @@ module.exports = {
         embed.setDescription(`You found **${locationindb.Name}'s** Landmark **${locationindb.Landmark.Name}*** and earned ${reward}!`)
         embed.setImage(`${locationindb.Landmark.Image}`)
         userdata.cash += reward
-        userdata.landmarks.push(locationindb.Landmark.Name.toLowerCase())
+        if(!userdata.landmarks.includes(locationindb.Landmark.Name.toLowerCase())){
+          userdata.landmarks.push(locationindb.Landmark.Name.toLowerCase())
+
+        }
         let gas = cartodrive.Gas
         await User.findOneAndUpdate(
           {
@@ -576,9 +585,9 @@ module.exports = {
         collector2.on('collect', async (i) => {
           if(i.customId =="yesjob"){
             let chance = job.chance
-            let randomnum = randomRange(1, 100)
+            let randomnum = randomRange(1, 2)
 
-            if(randomnum <= chance){
+            if(randomnum == 1){
               userdata.cash += job.Reward
               
               embed.setDescription(`You helped the NPC with their issue and succeeded! You earn $${job.Reward}`)
@@ -700,7 +709,7 @@ module.exports = {
 
               let hp = cartodrive.Speed
               let a = cartodrive.Acceleration
-              let w = cartodrive.Weight
+              let w = cartodrive.WeightStat
               let h = cartodrive.Handling
 
               let hp2 = npc[0].Car.Speed
@@ -711,6 +720,9 @@ module.exports = {
               let sum = (hp + hp / a + h + w / 100) / 4;
 
               let sum2 = (hp2 + hp2 / a2 + h2 + w2 / 100) / 4;
+
+              console.log(sum)
+              console.log(sum2)
 
               if(sum > sum2){
                 embed.setTitle(`You won!`)

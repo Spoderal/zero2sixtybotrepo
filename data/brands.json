@@ -218,7 +218,7 @@
   },
   "mini": {
     "image": "https://i.ibb.co/7z9wm2w/mini.png",
-    "emote": "<:mini:900283310012510228>",
+    "emote": "<:mini:931011548447657984>",
     "name": "MINI",
     "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
@@ -299,6 +299,12 @@
     "emote": "<:rimac:962776154761216050>",
     "name": "Rimac",
     "country": "https://i.ibb.co/Rvf0Fr2/flag-crotia.png"
+  },
+  "rolls royce": {
+    "image": "https://i.ibb.co/M6gtyb8/logo-rollsroyce.png",
+    "emote": "<:logo_rollsroyce:1186905226091970600>",
+    "name": "Rolls Royce",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
   "saleen": {
     "image": "https://i.ibb.co/4RP7TDf/logo-saleen.png",

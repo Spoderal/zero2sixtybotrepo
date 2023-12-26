@@ -693,6 +693,12 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  snowflakes: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+
   premium: {
     type: Boolean,
     required: false,

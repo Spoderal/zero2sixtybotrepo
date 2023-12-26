@@ -95,6 +95,22 @@
       "BigReward": 25000,
       "Name": "Double 0",
       "Emote": "<:squad_0:1067616351579033600>"
+    },
+    "the classics": {
+      "Tier": 7,
+      "Class": "S",
+      "Cars": [
+        "Jeremys 2021 Nissan GTR Nismo",
+        "Larrys 2008 Bugatti Veyron",
+        "Frostys 2016 Bugatti Chiron",
+        "Aidens 2020 Aston Martin Vantage",
+        "Snowys 2018 Koenigsegg Agera"
+      ],
+      "Reward": 10000,
+      "Icon": "https://i.ibb.co/7CyrzpG/squad-classics.png",
+      "BigReward": 100000,
+      "Name": "The Classics",
+      "Emote": "<:squad_classics:1188382384375214140>"
     }
   }
 }

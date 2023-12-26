@@ -1,0 +1,26 @@
+{
+    "spafrancorchamps":{
+        "Name":"Spa-Francorchamps",
+        "Image":"https://i.ibb.co/C5MMXbY/spafranco.png",
+        "Racers":3,
+        "Traction":25,
+        "Class":"B",
+        "Handling":500
+    },
+    "suzuka":{
+        "Name":"Suzuka",
+        "Image":"https://i.ibb.co/LYtsVd8/suzuka.png",
+        "Racers":4,
+        "Traction":50,
+        "Class":"A",
+        "Handling":750
+    },
+    "nurburgring":{
+        "Name":"Nürburgring",
+        "Image":"https://i.ibb.co/86WyCHX/image.png",
+        "Racers":5,
+        "Class":"S",
+        "Traction":100,
+        "Handling":1000
+    }
+}

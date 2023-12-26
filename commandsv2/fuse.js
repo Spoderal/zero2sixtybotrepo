@@ -25,6 +25,7 @@ module.exports = {
           { name: "Exhaust", value: "exhaust" },
           { name: "Clutch", value: "clutch" },
           { name: "ECU", value: "ecu" },
+          { name: "Turbo", value: "turbo" },
           { name: "Race Suspension", value: "rsuspension" },
           { name: "Drift Suspension", value: "dsuspension" },
           { name: "Intercooler", value: "intercooler" },
@@ -32,7 +33,8 @@ module.exports = {
           { name: "Bodykit", value: "bodykit" },
           { name: "Weight Reduction", value: "weightreduction" },
           { name: "Weight", value: "weight" },
-          { name: "Fruit Punch", value: "fruit punch" }
+          { name: "Fruit Punch", value: "fruit punch" },
+          {name: "Epic Rocket Engine", value: "epic rocket engine"}
         )
         .setRequired(true)
     ),
@@ -99,7 +101,82 @@ module.exports = {
         clearTimeout(xt)
       }, 2000);
       return;
-    } else {
+    } 
+    else if (parttoinstall == "epic rocket engine") {
+
+      if(userdata.moontokens < 1000) return interaction.reply(`You need 1000 moon tokens to fuse these parts!`)
+
+      let items = userdata.parts;
+      let item1 = userdata.parts.filter((item) => item == "nuclear core");
+      let item2 = userdata.parts.filter((item) => item == "metal frame");
+      let item3 = userdata.parts.filter((item) => item == "zionite pistons");
+      let item4 = userdata.parts.filter((item) => item == "alien oil");
+      let item5 = userdata.parts.filter((item) => item == "car hook");
+      let item6 = userdata.parts.filter((item) => item == "heat panels");
+
+      console.log(item1)
+      if (item1.length == 0)
+        return await interaction.reply(`You're missing a nuclear core!`);
+      if (item2.length == 0)
+        return await interaction.reply(`You're missing a metal frame!`);
+      if (item3.length == 0)
+        return await interaction.reply(`You're missing zionite pistons!`);
+        if (item4.length == 0)
+        return await interaction.reply(`You're missing alien oil!`);
+        if (item5.length == 0)
+        return await interaction.reply(`You're missing a car hook!`);
+        if (item6.length == 0)
+        return await interaction.reply(`You're missing heat panels!`);
+
+      for (var i1 = 0; i1 < 1; i1++) items.splice(items.indexOf("nuclear core"), 1);
+      for (var i2 = 0; i2 < 1; i2++)
+        items.splice(items.indexOf("metal frame"), 1);
+      for (var i3 = 0; i3 < 1; i3++)
+        items.splice(items.indexOf("zionite pistons"), 1);
+        for (var i4 = 0; i4 < 1; i4++)
+        items.splice(items.indexOf("alien oil"), 1);
+        for (var i5 = 0; i5 < 1; i5++)
+        items.splice(items.indexOf("car hook"), 1);
+        for (var i6 = 0; i6 < 1; i6++)
+        items.splice(items.indexOf("heat panels"), 1);
+      userdata.parts = items;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into an epic rocket engine...")
+        .addFields([
+          {
+            name: `Items`,
+            value: `${partdb.Parts["nuclear core"].Emote} ${partdb.Parts["nuclear core"].Name}
+            \n${partdb.Parts["metal frame"].Emote} ${partdb.Parts["metal frame"].Name}
+            \n${partdb.Parts["zionite pistons"].Emote} ${partdb.Parts["zionite pistons"].Name}
+            \n${partdb.Parts["alien oil"].Emote} ${partdb.Parts["alien oil"].Name}
+            \n${partdb.Parts["car hook"].Emote} ${partdb.Parts["car hook"].Name}
+            \n${partdb.Parts["heat panels"].Emote} ${partdb.Parts["heat panels"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      let xt = setTimeout(() => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Item`,
+            value: `${partdb.Parts["epic rocket engine"].Emote} ${partdb.Parts["epic rocket engine"].Name}`,
+          },
+        ]);
+        userdata.parts.push("epic rocket engine");
+        userdata.save();
+        interaction.editReply({ embeds: [embed] });
+        
+        clearTimeout(xt)
+      }, 2000);
+      return;
+    }
+    else {
       let parte = "";
       let partb = "";
       if (parttoinstall == "tires") {

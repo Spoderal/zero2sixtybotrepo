@@ -367,6 +367,11 @@ module.exports = {
         userdata.cash += Number(amount);
 
       }
+      if (item.Item.endsWith("Gold")) {
+        let amount = item.Item.split(" ")[0];
+        userdata.gold += Number(amount);
+
+      }
       if (item.Item.endsWith("Crew Respect")) {
         let amount = item.Item.split(" ")[0];
         userdata.crewrespect += Number(amount);
@@ -851,23 +856,29 @@ module.exports = {
         }
       }
 
-      members = members.sort(function (b, a) {
-        return a.Rank4 - b.Rank4;
-      });
+
+      members = members.sort((a, b) => {
+         if (a.Rank4 > b.Rank4) {
+           return -1;
+         }
+         if (a.Rank4 < b.Rank4) {
+           return 1;
+         }
+         return 0;
+       });
 
       members = members.filter(function BigEnough(value) {
-        return value.Rank4 > 0;
+        return value.Rank4 > 1;
       });
 
-      members = members.slice(0, 10);
 
       let desc = "";
 
-      for (let i = 0; i < members.length; i++) {
-        let user = members[i].name;
-        if (!user) return;
+      for (let i = 0; i < 10; i++) {
+        let crew = members[i].name;
+        if (!crew) return;
         let bal = members[i].Rank4;
-        desc += `${i + 1}. ${user} - Rank ${numberWithCommas(bal)}\n`;
+        desc += `${i + 1}. ${crew} - Rank ${numberWithCommas(bal)}\n`;
       }
       let embed = new Discord.EmbedBuilder()
         .setTitle("Crew Leaderboard")

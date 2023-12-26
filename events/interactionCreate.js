@@ -40,6 +40,7 @@ module.exports = {
         let userdata = await User.findOne({ id: interaction.user.id });
 
         try {
+          console.log("updating")
           updateCrew(interaction)
         }
         catch (err){

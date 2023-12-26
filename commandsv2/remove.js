@@ -79,11 +79,11 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed -= Number(partindb.Power)
     }
-    if(partindb.Acceleration > 0){
+    if(partindb.Acceleration > 0 && selected[0].Name !== "Snowys 2018 Koenigsegg Agera"){
       
       selected[0].Acceleration += (Math.floor(partindb.Acceleration * 100) / 100)
     }
-    if(partindb.RemoveAcceleration > 0){
+    if(partindb.RemoveAcceleration > 0 && selected[0].Name !== "Snowys 2018 Koenigsegg Agera"){
       if(newacc < 2){
         selected[0].Acceleration = 2
       } 
@@ -110,6 +110,10 @@ module.exports = {
     }
     userdata.parts.push(selected[0][partindb.Type.toLowerCase()])
 
+    let partvalue = partindb.Price * 0.35
+    let resale = selected[0].Resale
+
+    selected[0].Resale = resale -= partvalue
     selected[0][partindb.Type] = null
 
     await User.findOneAndUpdate(

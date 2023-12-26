@@ -315,6 +315,11 @@ module.exports = {
         .setCustomId("parts")
         .setLabel("Parts")
         .setEmoji("⚙️")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
+        .setCustomId("remove")
+        .setLabel("Set Stock")
+        .setEmoji("❌")
         .setStyle("Secondary")
       )
 
@@ -375,6 +380,78 @@ module.exports = {
 
           await interaction.editReply({embeds: [embed]})
 
+        }
+        else if(i.customId == "remove"){
+          if(exhaust){
+            userdata.parts.push(exhaust.toLowerCase())
+          }
+          if(turbo){
+            userdata.parts.push(turbo)
+          }
+          if(intake){
+            userdata.parts.push(intake)
+          }
+          if(engine){
+            userdata.parts.push(engine)
+          }
+          if(tires){
+            userdata.parts.push(tires)
+          }
+          if(suspension){
+            userdata.parts.push(suspension)
+          }
+          if(gearbox){
+            userdata.parts.push(gearbox)
+          }
+          if(clutch){
+            userdata.parts.push(clutch)
+          }
+          if(intercooler){
+            userdata.parts.push(intercooler)
+          }
+          if(ecu){
+            userdata.parts.push(ecu)
+          }
+          let ogcar = cars.Cars[carindb[0].Name.toLowerCase()]
+          console.log(ogcar)
+
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Speed": ogcar.Speed,
+                "cars.$[car].Acceleration": ogcar["0-60"],
+                "cars.$[car].Handling": ogcar.Handling,
+                "cars.$[car].WeightStat": ogcar.Weight,
+                "cars.$[car].exhaust": null,
+                "cars.$[car].turbo": null,
+                "cars.$[car].intake": null,
+                "cars.$[car].engine": null,
+                "cars.$[car].tires": null,
+                "cars.$[car].suspension": null,
+                "cars.$[car].gearbox": null,
+                "cars.$[car].clutch": null,
+                "cars.$[car].intercooler": null,
+                "cars.$[car].ecu": null,
+
+                
+
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "car.Name": carindb[0].Name,
+                },
+              ],
+            }
+          );
+
+          userdata.save()
+          collector.stop()
         }
       })
 

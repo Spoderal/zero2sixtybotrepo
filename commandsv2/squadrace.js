@@ -72,7 +72,7 @@ module.exports = {
         );
       }
     }
-    if (tier >= 7) return interaction.reply("You've beaten all the squads!");
+    if (tier >= 8) return interaction.reply("You've beaten all the squads!");
 
     let squadsarr = [];
     for (let s in squadsdb.Squads) {
@@ -84,9 +84,17 @@ module.exports = {
     let sqlevels = userdata.squads || [
       { name: "flame squad", car: 0 },
       { name: "x squad", car: 0 },
+      {name: "muscle brains", car: 0},
+      {name: "cool cobras", car: 0},
+      {name: "the ws", car: 0}
     ];
     if (!sqlevels.includes({ name: "double 0", car: 0 })) {
       sqlevels.push({ name: "double 0", car: 0 });
+      userdata.markModified("squads");
+      userdata.update();
+    }
+    if (!sqlevels.includes({ name: "the classics", car: 0 })) {
+      sqlevels.push({ name: "the classics", car: 0 });
       userdata.markModified("squads");
       userdata.update();
     }

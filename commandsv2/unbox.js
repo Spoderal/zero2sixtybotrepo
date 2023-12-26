@@ -180,6 +180,8 @@ module.exports = {
           Livery: carindb.Image,
           Miles: 0,
           Blueprints: 0,
+          Gas: 10,
+           MaxGas: 10,
         };
       }
       let filtered = usercars.filter((car) => car.Name == carobj.Name);

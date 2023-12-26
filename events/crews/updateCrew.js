@@ -42,11 +42,17 @@ async function updateCrew(interaction) {
         console.log("ranked");
       }
     }
-    await global.update();
+    await global.updateOne();
     await global.markModified("crews");
     await global.update();
 
-    await global.save();
+    try {
+      await global.save();
+
+    } 
+    catch(err){
+      return console.log(err)
+    }
   }
 }
 

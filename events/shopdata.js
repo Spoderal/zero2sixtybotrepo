@@ -33,7 +33,6 @@ async function itemshop() {
 
         }
     }
-    console.log(itemshops[0])
     for (let i = 0; i < 5; i++) {
         var random_item = lodash.sample(itemshops);
         itemshop.push(random_item);
@@ -41,7 +40,6 @@ async function itemshop() {
      }
      global.itemshop = itemshop
      global.itemshopcooldown = Date.now()
-     console.log(global.shopitems)
 
 
 }

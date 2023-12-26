@@ -16,6 +16,9 @@ const emotes = {
   tier: "<:rank_tier:1114816526076362803>",
   OVR:"<:ovricon:1185036043087532183>",
 
+  moontokens: "<:moontokens:1044726056680161371>",
+  
+  snowflakes: "<:snowflakes:1188390387207905370>",
   // Currency
   cash: "<a:emote_cash:1114822702461616168>",
   gold: "<:z_gold:933929482518167552>",

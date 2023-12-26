@@ -19,7 +19,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "10/27/2023",
+            label: "12/25/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -42,7 +42,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 10/27/2023\n
+            ⚙️ Latest Patch 12/25/2023\n
             ⬆️ New Update 12/15/2023
         `);
 
@@ -64,7 +64,7 @@ module.exports = {
          
           
   if (value === "2_update") {
-            embed.fields = [];
+    embed.data.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Big Update`);
             embed
@@ -105,63 +105,46 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "6_update") {
-            embed.fields = [];
+          } else if (value === "3_update") {
+            embed.data.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Big Update`);
+            embed.setTitle(`Latest Patch`);
             embed
               .addFields(
                 {
                   name: "Features ⭐",
-                  value: `Used car dealership\n
-                Favorite cars filtering in garage\n
-                Steal changed to rob\n
-                Pet statuses\n
-                New parts store design\n
-                Drift is easier\n
-                New part, and item skins\n
-                F1 Event ended`,
+                  value: `Crime! Try \`/crime\`\n
+                  New location: UK\n
+                  New track race revamp\n
+                  2 New events, try \`/events\`\n
+                  New squad\n
+                  Crew top doesn't show rank 1 crews to clear space
+                  
+                  `,
                   inline: true,
                 },
                 {
                   name: "Cars 🚗",
                   value: `
-                ${cardb.Cars["2021 porsche 911 turbo"].Emote} ${cardb.Cars["2021 porsche 911 turbo"].Name}
+                ${cardb.Cars["2023 rolls royce ghost"].Emote} ${cardb.Cars["2023 rolls royce ghost"].Name}
 
-                ${cardb.Cars["1992 bugatti eb110"].Emote} ${cardb.Cars["1992 bugatti eb110"].Name}
+                ${cardb.Cars["2023 audi rs6 performance"].Emote} ${cardb.Cars["2023 audi rs6 performance"].Name}
 
-                ${cardb.Cars["2021 porsche mission r"].Emote} ${cardb.Cars["2021 porsche mission r"].Name}
+                ${cardb.Cars["2021 mini jcw"].Emote} ${cardb.Cars["2021 mini jcw"].Name}
 
-                ${cardb.Cars["2023 bentley bentayga"].Emote} ${cardb.Cars["2023 bentley bentayga"].Name}
+                ${cardb.Cars["2024 mclaren artura"].Emote} ${cardb.Cars["2024 mclaren artura"].Name}
 
-                 ${cardb.Cars["2020 land rover range rover"].Emote} ${cardb.Cars["2020 land rover range rover"].Name}
+                ${cardb.Cars["2017 rolls royce wraith"].Emote} ${cardb.Cars["2017 rolls royce wraith"].Name}
 
-                 ${cardb.Cars["2021 audi r8 lms gt3"].Emote} ${cardb.Cars["2021 audi r8 lms gt3"].Name}
+                ${cardb.Cars["2012 jaguar xkrs"].Emote} ${cardb.Cars["2012 jaguar xkrs"].Name}
 
-                 ${cardb.Cars["2021 audi r8 green hell"].Emote} ${cardb.Cars["2021 audi r8 green hell"].Name}
-
-                 ${cardb.Cars["1959 cadillac series 62"].Emote} ${cardb.Cars["1959 cadillac series 62"].Name}
-
-                 ${cardb.Cars["1981 dmc delorean"].Emote} ${cardb.Cars["1981 dmc delorean"].Name} *RETURNED*
+                ${cardb.Cars["1989 toyota corolla"].Emote} ${cardb.Cars["1989 toyota corolla"].Name}
                 `,
                   inline: true,
                 },
-                {
-                  name: `Items 🪛`,
-                  value: `
-                ${itemdb.gem.Emote} ${itemdb.gem.Name}\n
-                ${itemdb["pet collar"].Emote} ${itemdb["pet collar"].Name}\n
-                ${itemdb["huge vault"].Emote} ${itemdb["huge vault"].Name}\n
-                ${itemdb.pizza.Emote} ${itemdb.pizza.Name}\n
-                ${itemdb["veggie pizza"].Emote} ${itemdb["veggie pizza"].Name}\n
-                ${itemdb.radio.Emote} ${itemdb.radio.Name}\n
-                ${itemdb.taser.Emote} ${itemdb.taser.Name}\n
-                ${itemdb["tequila shot"].Emote} ${itemdb["tequila shot"].Name}\n
-                `,
-                  inline: true,
-                }
+               
               )
-              .setFooter({ text: "4/31/2023" })
+              .setFooter({ text: "12/25/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

@@ -56,7 +56,8 @@
     "t4weightreduction",
     "driftsprings",
     "racesprings",
-    "tracksprings"
+    "tracksprings",
+    "rocket engine"
   ],
   "Tier4": ["t4weight", "t4weightreduction"],
   "Cash": 1000,

@@ -1,0 +1,21 @@
+{
+    "pickpocket":{
+        "Description":"Small reward, small risk",
+        "Chance":50,
+        "RewardMin":100,
+        "RewardMax":5000,
+        "Success":["You successfully pick pocketed an old man, how rude, he had ", "You successfully pick pocketed a drug dealer, watch out, but you gained ", "You pick pocketed Spoder! Hes gonna be at your door any minute, in the meantime, spend your "],
+        "Fail":["You failed to pick pocket an old man...how... you were fined ", "You failed to pick pocket a drug dealer now hes angry, you lost ", "You tried to pick pocket Spoder and he slapped you with a fine of "]
+    },
+    "gta":{
+        "Description":"Steal a car, big risk",
+        "Chance":20,
+        "Cars":["2023 Rolls Royce Ghost", "1989 Toyota Corolla", "1987 Ford Mustang GT", "2005 Honda S2000"]
+    },
+    "robbery":{
+        "Description":"Steal anything, medium risk",
+        "Chance":40,
+        "Items":["toolbox", "blueberry", "gem", "coconut", "match"]
+    }
+  }
+  

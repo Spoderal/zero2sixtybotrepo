@@ -165,13 +165,13 @@ module.exports = {
     }
     if (partdb.Parts[trading2]) {
       if (!userdata2.parts.includes(trading2))
-        return interaction.reply("You don't have this part!");
+        return interaction.reply("The user you're trading with doesn't have this part!");
       let filtereduser = userparts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
       if (amount2 > filtereduser.length)
         return await interaction.reply(
-          "You don't have that many of that part!"
+          "The user you're trading with doesn't have that many of that part!"
         );
       item2 = `${partdb.Parts[trading2].Emote} ${partdb.Parts[trading2].Name} x${amount2}`;
       for (var p3 = 0; p3 < amount2; p3++) userparts.push(trading2);

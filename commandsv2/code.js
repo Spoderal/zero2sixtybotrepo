@@ -43,35 +43,8 @@ module.exports = {
       codesredeemed.push(code);
       userdata.save();
     } else if (codes.Discord[code]) {
-      if (codesredeemed.includes(code))
-        return await interaction.reply("You've already redeemed this code!");
-      if (cardb.Cars[codes.Discord[code].Reward.toLowerCase()]) {
-        let car = codes.Discord[code].Reward.toLowerCase();
-        let filteredegg = userdata.cars.filter((car) => car.Name == car);
-
-        let carindb = cardb.Cars[car];
-        if (!filteredegg[0]) {
-          let eggobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Livery: carindb.Image,
-            Miles: 0,
-            Resale: 0,
-            Weight: carindb.Weight,
-          };
-          userdata.cars.push(eggobj);
-          codesredeemed.push(code);
-          userdata.save();
-        }
-
-        interaction.reply(`Found egg car "${carindb.Name}"!`);
-        return;
-      }
+      if (codesredeemed.includes(code)) return await interaction.reply("You've already redeemed this code!");
+      
 
       await interaction.reply(
         `Redeemed code ${code} and earned ${toCurrency(

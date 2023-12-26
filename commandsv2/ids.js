@@ -132,9 +132,14 @@ module.exports = {
       let filteredcar = userdata.cars.filter(
         (car) => car.Name == cars.Cars[selecting.toLowerCase()].Name
       );
+      let filteredid = userdata.cars.filter(
+        (car) => car.ID == idtochoose
+      );
       let selected = filteredcar[0] || "No ID";
       if (selected == "No ID")
         return await interaction.reply("You don't own that car!");
+
+        if(filteredid[0]) return interaction.reply("You already have a car set to this ID")
 
       await User.findOneAndUpdate(
         {

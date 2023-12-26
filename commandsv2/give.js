@@ -46,7 +46,7 @@ module.exports = {
           Handling: carindb.Handling,
           Parts: [],
           Emote: carindb.Emote,
-          Livery: carindb.Image,
+          Image: carindb.Image,
           Miles: 0,
           WeightStat: carindb.Weight,
           Gas: 10,

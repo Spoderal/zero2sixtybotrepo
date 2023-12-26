@@ -218,6 +218,45 @@ module.exports = {
         userdata.update();
       }
 
+      if (reward1 == "super wheelspin") {
+        let amount = 1
+        name1 = `${amount} Super Wheelspin`
+        userdata.swheelspins += amount;
+        userdata.update();
+      }
+      if (reward2 == "super wheelspin") {
+        let amount = 1
+        name2 = `${amount} Super Wheelspin`
+        userdata.swheelspins += amount;
+        userdata.update();
+      }
+      if (reward3 == "super wheelspin") {
+        let amount = 1
+        name3 = `${amount} Super Wheelspin`
+        userdata.swheelspins += amount;
+        userdata.update();
+      }
+
+      if (reward1 == "wheelspin") {
+        let amount = 1
+        name1 = `${amount} Super Wheelspin`
+        userdata.swheelspins += amount;
+        userdata.update();
+      }
+      if (reward2 == "wheelspin") {
+        let amount = 1
+        name2 = `${amount} Super Wheelspin`
+        userdata.swheelspins += amount;
+        userdata.update();
+      }
+      if (reward3 == "wheelspin") {
+        let amount = 1
+        name3 = `${amount} Wheelspin`
+        userdata.swheelspins += amount;
+        userdata.update();
+      }
+
+
       if (titledb[reward1]) {
         name1 = titledb[reward1].Name;
         userdata.titles.push(name1.toLowerCase());
@@ -276,6 +315,16 @@ module.exports = {
       for (var s = 0; s < 1; s++)  inv.splice(inv.indexOf(bought.toLowerCase()), 1);
       userdata.items = inv;
       userdata.update();
+
+      if(name1 == undefined){
+        name1 = "Coal"
+      }
+      if(name2 == undefined){
+        name2 = "Coal"
+      }
+      if(name3 == undefined){
+        name3 = "Coal"
+      }
 
       await userdata.save();
       console.log(`${name1} ${name2} ${name3}`)

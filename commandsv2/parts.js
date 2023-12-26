@@ -113,6 +113,11 @@ module.exports = {
 					.setDescription('View the list of spoilers')
           .setEmoji(`${partdb.t1spoiler.Emote}`)
 					.setValue('spoiler'),
+          new StringSelectMenuOptionBuilder()
+					.setLabel('Event Parts')
+					.setDescription('View the list of event parts')
+          .setEmoji(`${partdb["epic rocket engine"].Emote}`)
+					.setValue('event'),
      
       )
     )
@@ -137,7 +142,7 @@ module.exports = {
 
     collector.on('collect', async (i) => {
         let partf = i.values[0]
-
+        console.log(partf)
         let partsfilter = partarray.filter((part) => part.Type == partf && part.Price > 0)
 
         let embed = new EmbedBuilder()
@@ -174,9 +179,17 @@ module.exports = {
             if(par.Stars > 0){
               stats.push(`⭐ Rating: +${par.Stars}`)
             }
-            embed.addFields(
-                {name: `${par.Emote} ${par.Name}`, value: `${emotes.cash} Cost: ${toCurrency(par.Price)}\n${stats.join("\n")}`, inline: true}
+            if(par.Type == "event"){
+              embed.addFields(
+                {name: `${par.Emote} ${par.Name}`, value: `${emotes.moontokens} Cost: ${numberWithCommas(par.Price)}\n*Used for Epic Rocket Engine*`, inline: true}
             )
+            }
+            else {
+              embed.addFields(
+                  {name: `${par.Emote} ${par.Name}`, value: `${emotes.cash} Cost: ${toCurrency(par.Price)}\n${stats.join("\n")}`, inline: true}
+              )
+
+            }
         }
         
         await msg.edit({embeds: [embed]})

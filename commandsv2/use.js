@@ -295,15 +295,34 @@ module.exports = {
       userdata.bounty += 1000;
     } else if (itemtouse.toLowerCase() == "tequila shot") {
       let chance = randomRange(1, 100);
-
+      console.log(chance)
       if (chance <= 10) {
-        userdata.itemeffects.push({ item: "tequila shot", earning: "bad" });
+        let cash = userdata.cash
+
+        if(cash - 50000 < 0){
+          userdata.cash = 0
+        }
+        else {
+          userdata.cash -= 50000
+          
+          
+        }
+        interaction.channel.send("You lost $50K!")
+
       } else {
-        userdata.itemeffects.push({ item: "tequila shot", earning: "good" });
+        console.log("done")
+        userdata.using.push("tequila shot")
+        cooldowndata.tequilla = Date.now();
       }
-      cooldowndata.tequila = Date.now();
-      userdata.using.push("tequila shot")
-      userdata.markModified("itemeffects");
+      for (var i5 = 0; i5 < amount2; i5++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+      userdata.items = items;
+      userdata.save()
+      cooldowndata.save()
+      let randommessage = lodash.sample(itemdb[itemtouse.toLowerCase()].Used);
+
+      return await interaction.reply(
+        `${randommessage}\n\nUsed x${amount2} ${fullname}!`
+      );
     } else if (itemtouse.toLowerCase() == "dirt") {
       let timeout = 3600000;
       if (

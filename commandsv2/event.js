@@ -35,6 +35,20 @@ module.exports = {
             customId: "event_1",
             emoji: "🎅🏼",
           },
+          {
+            label: "Snowys Street",
+            description: "Information for the Snowys Street",
+            value: "event_2",
+            customId: "event_2",
+            emoji: "❄️",
+          },
+          {
+            label: "Space Race",
+            description: "Information for the Space Race",
+            value: "event_3",
+            customId: "event_3",
+            emoji: "🚀",
+          },
     
         ])
     );
@@ -50,6 +64,8 @@ module.exports = {
           **__Events__**
           Season 3 <:season3:1183248587774238741>
           Christmas Event 🎅🏼
+          Snowys Street ❄️
+          Space Race 🚀
       `);
 
     embed.setColor(colors.blue);
@@ -110,6 +126,53 @@ module.exports = {
         embed
           .setColor(colors.blue)
           .setImage("https://i.ibb.co/kySCd7y/CHRISTMASEVENT.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } 
+      else  if (value === "event_2") {
+        embed.setTitle("Snowys Street");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Snowy is back and MAD!
+
+        He believes the racer community is stealing his spotlight, so he wants it back.
+
+        Have a chance to race him in street race tier 8, if you beat him, you get snowflakes, 1000 snowflakes and you can get HIS car!
+
+        You'll be able to win his car when you find 1000 snowflakes!
+
+        Ends January 2nd 2024
+                  `);
+        embed.setThumbnail();
+        embed
+          .setColor(colors.blue)
+          .setImage();
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } 
+      else  if (value === "event_3") {
+        embed.setTitle("Space Race");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Space Race is back!
+
+        Race in the space themed race with space tires and earn moon tokens!
+
+        Use moon tokens to buy parts from the limited event parts store in \`/parts\`
+
+        Use those parts you find to fuse an **epic rocket engine**! :)
+
+        Ends January 30th 2024
+
+                  `);
+        embed.setThumbnail();
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/0D2CR9X/Msk-UHw-UJ2z.png");
 
         await interaction.editReply({
           embeds: [embed],

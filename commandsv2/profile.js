@@ -139,14 +139,14 @@ module.exports = {
               <:WINS_street:1152813248756842598> Street Race W/L: ${streetwins}\n
               <:WINS_DRAG:1152813251508305920> Drag Race W/L: ${dragwins}\n
               <:wins_track:1152813252502360075> Track Race W/L: ${trackwins}\n
-              <:location_speedometer:1175570810740682843> Highest Speedometer: ${speedometer} MPH\n
               🗺️ Landmarks Discovered: ${landmarksarr.join(" ")}
-            `,
-            inline: true
-          },
-          {
-            name: "Achievements",
-            value: `${achivarr.join(" ")}`,
+              `,
+              inline: true
+            },
+            {
+              name: "Achievements",
+              value: `<:location_speedometer:1175570810740682843> Highest Speedometer: ${speedometer} MPH\n${achivarr.join(" ")}`,
+              
             inline: true,
           },
           {

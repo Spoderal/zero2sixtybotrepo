@@ -275,6 +275,56 @@
 
             ],
             "Racers":["Emma", "Otto", "Hans", "Friedrich"]
+        },
+        "united kingdom":{
+            "Name":"United Kingdom",
+            "Image":"https://i.ibb.co/bKBY0Wv/map-uk-filled.png",
+            
+            "Services":["Gas Station"],
+            "Jobs":[
+                {
+                    "Name":"Noah",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":350,
+                    "Chance":60,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Olivia",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":150,
+                    "Chance":60,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+
+            ],
+            "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
+            "NoEvents":["You're driving in the rain and its just a normal day", "You see a british guy! You look the other way"],
+            "Perks":"1.5x cash when selling cars",
+            "BlackMarket":[
+                {
+                    "Name":"2021 Mini JCW",
+                    "Price":15000,
+                    "Emote":"<:mini:931011548447657984>"
+                },
+                {
+                    "Name":"2012 Jaguar XKRS",
+                    "Price":500000,
+                    "Emote":"<:jaguar:931011547826913330>"
+                },
+                {
+                    "Name":"2017 Rolls Royce Wraith",
+                    "Price":1200000,
+                    "Emote":"<:logo_rollsroyce:1186905226091970600>"
+                },
+                {
+                    "Name":"2024 McLaren Artura",
+                    "Price":2000000,
+                    "Emote":"<:mclaren:931011546354692137>"
+                }
+
+            ],
+            "Racers":["Noah", "Ivy", "Arthur", "Amelia"]
         }
     },
     "NPCs":[
@@ -754,6 +804,74 @@
             "Prompt":"Lets go! Lets race for 5k!",
             "Win":"You're not very good... Hand over that 5k!",
             "Lost":"...Fine, take my 5k"
+        },
+        {
+            "Name":"Noah",
+            "Car":{
+                "Name":"2016 Jaguar F Type",
+                "Image":"https://www.motortrend.com/uploads/sites/5/2016/02/2016-Jaguar-F-Type-AWD-R-Coupe-front-three-quarter-in-motion.jpg?fit=around%7C480:270",
+                "Speed":400,
+                "Acceleration":5.3,
+                "Handling":625,
+                "Weight":3400,
+                "Logo":"<:jaguar:931011547826913330>"
+            },
+            "Location":"United Kingdom",
+            "Reward":2000,
+            "Prompt":"Wanna race my car for $2,000?",
+            "Win":"How did I even win? Oh well, give me $2,000",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Olivia",
+            "Car":{
+                "Name":"2007 Aston Martin DBS",
+                "Image":"https://i.ibb.co/hK15YVJ/2007-aston-martin-dbs-1280x720px.jpg",
+                "Speed":517,
+                "Acceleration":4.5,
+                "Handling":670,
+                "Weight":3900,
+                "Logo":"<:aston:931011548682534962>"
+            },
+            "Location":"United Kingdom",
+            "Reward":2000,
+            "Prompt":"Wanna race my car for $1,000?",
+            "Win":"How did I even win? Oh well, give me $1,000",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Arthur",
+            "Car":{
+                "Name":"2023 Rolls Royce Ghost",
+                "Image":"https://i.ibb.co/ZmbY3bZ/22-RR-Ghost-1.jpg",
+                "Speed":563,
+                "Acceleration":4.6,
+                "Handling":750,
+                "Weight":5445,
+                "Logo":"<:logo_rollsroyce:1186905226091970600>"
+            },
+            "Location":"United Kingdom",
+            "Reward":3000,
+            "Prompt":"Wanna race my car for $3,000?",
+            "Win":"How did I even win? Oh well, give me $3,000",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Amelia",
+            "Car":{
+                "Name":"2021 McLaren 720S",
+                "Image":"https://www.mclarencf.com/imagetag/120/2/l/New-2021-McLaren-720S-Spider-Performance.jpg",
+                "Speed":710,
+                "Acceleration":3.6,
+                "Handling":875,
+                "Weight":3100,
+                "Logo":"<:mclaren:931011546354692137>"
+            },
+            "Location":"United Kingdom",
+            "Reward":5000,
+            "Prompt":"Wanna race my cool car for $5,000?",
+            "Win":"How did I even win!? Oh well, give me $5,000 :D",
+            "Lost":"Yep, I figured you'd win."
         }
     ]
 }

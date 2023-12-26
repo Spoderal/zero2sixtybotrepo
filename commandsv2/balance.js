@@ -51,6 +51,8 @@ module.exports = {
       commonCredits,
       rareCredits,
       exoticCredits,
+      moontokens,
+      snowflakes,
       zcandy,
       barnmaps,
     } = profile;
@@ -109,6 +111,10 @@ module.exports = {
               ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
               
               ${emotes.rp}  RP: ${numberWithCommas(rp4)}
+
+              ${emotes.moontokens}  Moon Tokens: ${numberWithCommas(moontokens)}
+
+              ${emotes.snowflakes} Snowflakes ${numberWithCommas(snowflakes)}
               `,
               inline: true,
             },

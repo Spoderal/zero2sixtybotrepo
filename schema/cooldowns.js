@@ -16,6 +16,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  crime: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   racedisabled:{
     type: Number,
     required: false,

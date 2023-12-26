@@ -68,7 +68,18 @@ module.exports = {
       let price = selected.Resale || selected.Price || 0;
 
       if (selected.Resale == 0 || !selected.Resale) {
-        price = cardb.Cars[selected.Name.toLowerCase()].sellprice;
+        if(cardb.Cars[selected.Name.toLowerCase()].Price == 0 && cardb.Cars[selected.Name.toLowerCase()].sellprice > 0){
+          price = cardb.Cars[selected.Name.toLowerCase()].sellprice
+        }
+        else {
+          if(userdata.location == "united kingdom"){
+            price = cardb.Cars[selected.Name.toLowerCase()].Price * 1.5;
+          }
+          else {
+            price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.75;
+
+          }
+        }
       }
 
       if (amount2 > filteredcar.length)
