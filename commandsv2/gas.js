@@ -44,6 +44,7 @@ module.exports = {
         `You don't have this car! Make sure to put the cars **ID**, not full name.`
       );
 
+
     if (selected[0].Electric) {
       let charge = 10000;
 
@@ -89,6 +90,7 @@ module.exports = {
       return;
     } else {
       let gas = global.gas;
+      let usergas = selected[0].Gas
       let gallons = Number(interaction.options.getString(`gallons`));
 
       let finalprice = gas * gallons;
@@ -103,6 +105,34 @@ module.exports = {
         return interaction.reply(
           `You need ${toCurrency(finalprice)} to fill ${gallons} gallons`
         );
+        console.log(usergas)
+        if(usergas == null || !usergas){
+          console.log("true")
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car].Gas": 10,
+                "cars.$[car].MaxGas": 10
+              },
+            },
+    
+            {
+              arrayFilters: [
+                {
+                  "car.Name": selected[0].Name,
+                },
+              ],
+            }
+          );
+
+          await userdata.save()
+
+          return interaction.reply("Your cars gas tank blew up but now its fixed")
+
+        }
 
       if (selected[0].Gas == selected[0].MaxGas)
         return interaction.reply(`Your cars gas tank is full!`);

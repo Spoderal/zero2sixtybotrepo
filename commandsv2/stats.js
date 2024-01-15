@@ -87,7 +87,7 @@ module.exports = {
       let policeimg = await loadImage("https://i.ibb.co/cwr7WLB/police.png");
       ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
       ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
-      ctx.drawImage(brimg, 250, 0, 60, 60);
+      ctx.drawImage(brimg, 350, 0, 60, 60);
       ctx.drawImage(flag, 1020, 565, 250, 150);
       if (carindb.Police) {
         ctx.drawImage(policeimg, 920, 600, 150, 150);
@@ -100,14 +100,18 @@ module.exports = {
       let hand = Math.floor(carindb.Handling);
       let ovr = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4
 
+      
       ovr = Math.round(ovr)
-
       ctx.font = "bold 30px sans-serif";
       ctx.fillStyle = "#ffffff";
 
       let nametxt = `${carindb.Name} (ID: ${carindb.alias})`
-      ctx.fillText(nametxt, 320, 40);
+      ctx.fillText(nametxt, 420, 40);
+      
+      let ovrimg = await loadImage("https://i.ibb.co/TvHngT2/ovricon.png");
+      ctx.drawImage(ovrimg, 1180, 130, 100, 100);
 
+      ctx.fillText(ovr, 1130, 200);
       ctx.font = "bold 65px sans-serif";
 
       
@@ -115,10 +119,6 @@ module.exports = {
       ctx.fillText(carindb["0-60"], 60, 260);
       ctx.fillText(carindb.Handling, 60, 380);
       ctx.fillText(carindb.Weight, 60, 500);
-      let ovrimg = await loadImage("https://i.ibb.co/TvHngT2/ovricon.png");
-      ctx.drawImage(ovrimg, 1120, 20, 150, 150);
-
-      ctx.fillText(ovr, 1130, 200);
 
       ctx.font = "regular 35px sans-serif";
       ctx.fillText("Horsepower", 30, 80);
@@ -132,14 +132,13 @@ module.exports = {
 
       if (carindb.Drivetrain) {
         let drivetrain = carindb.Drivetrain;
-        ctx.fillText(drivetrain, 1150, 40);
+        ctx.fillText(drivetrain, 1150, 150);
       }
 
       if (carindb.Engine) {
         let engine = carindb.Engine;
-        let engineimg = await loadImage("https://i.ibb.co/5LCbWbd/engineicon.png")
-        ctx.drawImage(engineimg, 1000, 70, 40, 40);
-        ctx.fillText(engine, 1220, 40);
+
+        ctx.fillText(engine, 1220, 150);
       }
 
       ctx.font = "bold 30px sans-serif";
@@ -183,16 +182,16 @@ module.exports = {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
       }
 
-      let exhaust = carindb[0].exhaust || 0;
-      let intake = carindb[0].intake || 0;
-      let tires = carindb[0].tires || 0;
-      let turbo = carindb[0].turbo || 0;
-      let suspension = carindb[0].suspension || 0;
-      let engine = carindb[0].engine || 0;
-      let gearbox = carindb[0].gearbox || 0;
-      let clutch = carindb[0].clutch || 0;
-      let ecu = carindb[0].ecu || 0;
-      let intercooler = carindb[0].intercooler || 0;
+      let exhaust = carindb[0].exhaust || "stock exhaust"
+      let intake = carindb[0].intake || "stock intake"
+      let tires = carindb[0].tires || "stock tires"
+      let turbo = carindb[0].turbo || "no turbo"
+      let suspension = carindb[0].suspension || "stock suspension"
+      let engine = carindb[0].engine || cars.Cars[carindb[0].Name.toLowerCase()].Engine
+      let gearbox = carindb[0].gearbox || "stock gearbox"
+      let clutch = carindb[0].clutch || "stock clutch"
+      let ecu = carindb[0].ecu || "stock ecu"
+      let intercooler = carindb[0].intercooler || "no intercooler"
 
 
       // let suspensionimg = await loadImage(partdb.Parts[suspension.toLowerCase()].Image)
@@ -236,7 +235,7 @@ module.exports = {
 
       ctx.font = "bold 20px sans-serif";
 
-      if (exhaust) {
+      if (exhaust !== "stock exhaust") {
         let exhaustimg = await loadImage(
           partdb.Parts[`${exhaust}`].Image
         );
@@ -244,37 +243,37 @@ module.exports = {
         ctx.fillText(exhaust, 810, 29);
       }
 
-      if (intake) {
+      if (intake !== "stock intake") {
         let intakeimg = await loadImage(partdb.Parts[`${intake}`].Image);
         ctx.drawImage(intakeimg, 875, 30, 50, 50);
         ctx.fillText(intake, 870, 29);
       }
 
-      if (tires) {
+      if (tires !== "stock tires") {
         let tiresimg = await loadImage(partdb.Parts[`${tires}`].Image);
         ctx.drawImage(tiresimg, 935, 30, 50, 50);
         ctx.fillText(tires, 930, 29);
       }
 
-      if (turbo) {
+      if (turbo !== "no turbo") {
         let turboimg = await loadImage(partdb.Parts[`${turbo}`].Image);
         ctx.drawImage(turboimg, 995, 30, 50, 50);
         ctx.fillText(turbo, 990, 29);
       }
 
-      if (clutch) {
+      if (clutch !== "stock clutch") {
         let clutchimg = await loadImage(partdb.Parts[`${clutch}`].Image);
         ctx.drawImage(clutchimg, 1045, 30, 50, 50);
         ctx.fillText(clutch, 1045, 29);
       }
 
-      if (ecu) {
+      if (ecu !== "stock ecu") {
         let ecuimg = await loadImage(partdb.Parts[`${ecu}`].Image);
         ctx.drawImage(ecuimg, 1105, 30, 50, 50);
         ctx.fillText(ecu, 1100, 29);
       }
 
-      if (intercooler) {
+      if (intercooler !== "no intercooler") {
         let intercoolerimg = await loadImage(
           partdb.Parts[`${intercooler}`].Image
         );
@@ -282,7 +281,7 @@ module.exports = {
         ctx.fillText(intercooler, 1160, 29);
       }
 
-      if (suspension) {
+      if (suspension !== "stock suspension") {
         let suspensionimg = await loadImage(
           partdb.Parts[`${suspension}`].Image
         );
@@ -296,7 +295,7 @@ module.exports = {
         ctx.fillText(engine, 810, 99);
       }
 
-      if (gearbox) {
+      if (gearbox !== "stock gearbox") {
         let gearboximg = await loadImage(
           partdb.Parts[`${gearbox}`].Image
         );
@@ -340,42 +339,53 @@ module.exports = {
       
       collector.on('collect', async (i) => {
         if(i.customId == "parts"){
-          let partsarr = []
+     
 
-          if(exhaust){
-            partsarr.push(`Exhaust: ${partdb.Parts[exhaust].Emote} ${partdb.Parts[exhaust].Name}`)
-          }
-          if(turbo){
-            partsarr.push(`Turbo: ${partdb.Parts[turbo].Emote} ${partdb.Parts[turbo].Name}`)
-          }
-          if(intake){
-            partsarr.push(`Intake: ${partdb.Parts[intake].Emote} ${partdb.Parts[intake].Name}`)
-          }
-          if(engine){
-            partsarr.push(`Engine: ${partdb.Parts[engine].Emote} ${partdb.Parts[engine].Name}`)
-          }
-          if(tires){
-            partsarr.push(`Tires: ${partdb.Parts[tires].Emote} ${partdb.Parts[tires].Name}`)
-          }
-          if(suspension){
-            partsarr.push(`Suspension: ${partdb.Parts[suspension].Emote} ${partdb.Parts[suspension].Name}`)
-          }
-          if(gearbox){
-            partsarr.push(`Gearbox: ${partdb.Parts[gearbox].Emote} ${partdb.Parts[gearbox].Name}`)
-          }
-          if(clutch){
-            partsarr.push(`Clutch: ${partdb.Parts[clutch].Emote} ${partdb.Parts[clutch].Name}`)
-          }
-          if(intercooler){
-            partsarr.push(`Intercooler: ${partdb.Parts[intercooler].Emote} ${partdb.Parts[intercooler].Name}`)
-          }
-          if(ecu){
-            partsarr.push(`ECU: ${partdb.Parts[ecu].Emote} ${partdb.Parts[ecu].Name}`)
-          }
+          // if(exhaust){
+          //   partsarr.push(`Exhaust: ${partdb.Parts[exhaust].Emote} ${partdb.Parts[exhaust].Name}`)
+          // }
+          // if(turbo){
+          //   partsarr.push(`Turbo: ${partdb.Parts[turbo].Emote} ${partdb.Parts[turbo].Name}`)
+          // }
+          // if(intake){
+          //   partsarr.push(`Intake: ${partdb.Parts[intake].Emote} ${partdb.Parts[intake].Name}`)
+          // }
+          // if(engine){
+          //   partsarr.push(`Engine: ${partdb.Parts[engine].Emote} ${partdb.Parts[engine].Name}`)
+          // }
+          // if(tires){
+          //   partsarr.push(`Tires: ${partdb.Parts[tires].Emote} ${partdb.Parts[tires].Name}`)
+          // }
+          // if(suspension){
+          //   partsarr.push(`Suspension: ${partdb.Parts[suspension].Emote} ${partdb.Parts[suspension].Name}`)
+          // }
+          // if(gearbox){
+          //   partsarr.push(`Gearbox: ${partdb.Parts[gearbox].Emote} ${partdb.Parts[gearbox].Name}`)
+          // }
+          // if(clutch){
+          //   partsarr.push(`Clutch: ${partdb.Parts[clutch].Emote} ${partdb.Parts[clutch].Name}`)
+          // }
+          // if(intercooler){
+          //   partsarr.push(`Intercooler: ${partdb.Parts[intercooler].Emote} ${partdb.Parts[intercooler].Name}`)
+          // }
+          // if(ecu){
+          //   partsarr.push(`ECU: ${partdb.Parts[ecu].Emote} ${partdb.Parts[ecu].Name}`)
+          // }
 
           let embed = new Discord.EmbedBuilder()
           .setTitle(`Your ${carindb[0].Emote} ${carindb[0].Name}'s parts`)
-          .setDescription(`${partsarr.join('\n')}`)
+          .addFields(
+            {name: `Exhaust`, value: `${partdb.Parts[exhaust.toLowerCase()].Emote} ${partdb.Parts[exhaust.toLowerCase()].Name}`, inline: true},
+            {name: `Turbo`, value: `${partdb.Parts[turbo.toLowerCase()].Emote} ${partdb.Parts[turbo.toLowerCase()].Name}`, inline: true},
+            {name: `Intake`, value: `${partdb.Parts[intake.toLowerCase()].Emote} ${partdb.Parts[intake.toLowerCase()].Name}`, inline: true},
+            {name: `Engine`, value: `${partdb.Parts[engine.toLowerCase()].Emote} ${partdb.Parts[engine.toLowerCase()].Name}`, inline: true},
+            {name: `Tires`, value: `${partdb.Parts[tires.toLowerCase()].Emote} ${partdb.Parts[tires.toLowerCase()].Name}`, inline: true},
+            {name: `Suspension`, value: `${partdb.Parts[suspension.toLowerCase()].Emote} ${partdb.Parts[suspension.toLowerCase()].Name}`, inline: true},
+            {name: `Gearbox`, value: `${partdb.Parts[gearbox.toLowerCase()].Emote} ${partdb.Parts[gearbox.toLowerCase()].Name}`, inline: true},
+            {name: `Clutch`, value: `${partdb.Parts[clutch.toLowerCase()].Emote} ${partdb.Parts[clutch.toLowerCase()].Name}`, inline: true},
+            {name: `Intercooler`, value: `${partdb.Parts[intercooler.toLowerCase()].Emote} ${partdb.Parts[intercooler.toLowerCase()].Name}`, inline: true},
+            {name: `ECU`, value: `${partdb.Parts[ecu.toLowerCase()].Emote} ${partdb.Parts[ecu.toLowerCase()].Name}`, inline: true}
+            )
           .setColor(colors.blue)
 
           await interaction.editReply({embeds: [embed]})

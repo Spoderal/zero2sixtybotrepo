@@ -97,7 +97,7 @@ module.exports = {
       Emote: carindb.Emote,
       Livery: carindb.Image,
       Miles: 0,
-      Weight: carindb.Weight,
+      WeightStat: carindb.Weight,
       Gas: 10,
       MaxGas: 10,
     };
@@ -113,6 +113,11 @@ module.exports = {
       return;
     }
 
+    if(userdata.tutorial && userdata.tutorial.started == true){
+      userdata.tutorial.started = false
+
+    }
+
     userdata.cars.push(carobj);
     userdata.save();
 
@@ -125,9 +130,19 @@ module.exports = {
         { name: "Car", value: carobj.Name },
         { name: "ID", value: carobj.ID },
       ])
+      .setDescription(`You found a barn car! How do you restore it and use it? Run \`/restore\` for more information on restoring barn finds!`)
       .setImage(carobj.Livery)
       .setColor(`${color}`);
 
+  
+
     await interaction.reply({ embeds: [embed] });
+
+
+    if(userdata.tutorial && userdata.tutorial.started == true){
+
+      await interaction.channel.send(`You've finished the tutorial! If you want to see the other features run \`/help\`, have fun!`)
+
+    }
   },
 };

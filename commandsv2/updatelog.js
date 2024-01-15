@@ -19,7 +19,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "12/25/2023",
+            label: "1/15/2023",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -27,7 +27,7 @@ module.exports = {
           },
         
           {
-            label: "12/15/2023",
+            label: "1/5/2024",
             description: "Information for the recent update!",
             value: "2_update",
             customId: "up5",
@@ -42,8 +42,8 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 12/25/2023\n
-            ⬆️ New Update 12/15/2023
+            ⚙️ Latest Patch 1/15/2023\n
+            ⬆️ New Update 1/5/2024
         `);
 
     embed.setColor(colors.blue);
@@ -72,33 +72,48 @@ module.exports = {
                 {
                   name: "Features ⭐",
                   value: `• Bug fixes\n
-                  • Car stat cards have a new design showcasing the cars OVR\n
-                  • Christmas event!\n
-                  • New season\n
-                  • **New drive feature**, use /location help to learn more!\n
-                  • 30 new cars\n
-                  • New dealership design\n
-                  • Old upgrade system is back!\n
-                  • Race to earn junk parts instead of junk yards\n
-                  • Race earnings buffed\n
-                  • Cross country gives wheelspins\n
-                  • /races command updated to be more accurate\n
-                  • 30+ new cars /dealer\n
-                  • Weekly Item shop is back!\n
-                  • Tons of bug fixes and performance improvements`,
+                  • Gambling commands, /dice, /blackjack, /coinflip\n
+                  • New profile card\n
+                  • Achievements fixed\n
+                  • New house, Casa Haus\n
+                  • House perks fixed\n
+                  • New custom racers with helmets, accessories, and outfits!\n
+                  • New event, fictional powerhouse\n
+                  • Added list to remove command\n
+                  • Added featured part to parts store\n
+                  • Added price to featured cars in the dealership\n
+                  • Better and more realistic engine swapping, your engines were given back to you if you had one as an upgrade\n
+                  • Vote crate buffed\n
+                  • For 2024, everyone has received a 2024 crown to customize their racer with!\n
+                  • New brand logos for low quality brand logos`,
                   inline: true,
                 },
                 {
-                  name: `Items 🪛`,
-                  value: `
-                ${itemdb["snowball"].Emote} ${itemdb["snowball"].Name}\n
-                ${itemdb["airplane"].Emote} ${itemdb["airplane"].Name}
-                `,
+                  name: "Nerfs 📉",
+                  value: `<:ssc:979620786757337098>2020 SSC Tuatara -> Increased price, more weight, nerfed acceleration, nerfed handling\n
+                  <:lotus:931011548317642814> 2020 Lotus Evija -> Decreased handling\n
+                  <:ferrari:931011838374727730> 2010 Ferrari 599XX -> Moved to Legendary Garage\n
+                  2001 Lexus IS300 -> Moved to Common Garage\n
+                  1998 Pontiac Fiero -> Moved to Common Garage\n
+                  <:toyota:931012829283233883> 1986 Toyota AE86 -> Moved to Common Garage\n
+                  <:lexus:932776357124001823> 1989 Nissan Silvia S13 -> Moved to Common Garage\n
+                  <:mercedes_z:973000364410404924> 2001 Mercedes SL600 -> Moved to Common Garage\n
+                  <:bugatti:931012624110460979> 2008 Bugatti Veyron -> Price increased`,
+                  inline: true,
+                },
+                {
+                  name: "Buffs 📈",
+                  value: `<:maserati:961332832767184987> 2022 Maserati MC20 -> Increased handling, new image\n
+                  <:bmw:931011550054056007> 2016 BMW i8 -> Better acceleration\n
+                  <:brand_ford:1192958185863118889> 2010 Ford Mustang -> Better handling\n
+                  <:brand_ford:1192958185863118889> 2024 Ford Mustang -> Better acceleration, better handling, less weight\n
+                  <:hyundai:931015215447941200> 2012 Hyundai Veloster -> Better handling, decreased price\n
+                  <:aston:931011548682534962> 2016 Aston Martin Vulkan -> Decreased price`,
                   inline: true,
                 }
               )
-              .setFooter({ text: "12/15/2023" })
-              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setFooter({ text: "1/5/2024" })
+              .setThumbnail(`https://i.ibb.co/xH4L53M/Icon-01.jpg`)
               .setColor(colors.blue);
 
             await interaction.editReply({
@@ -113,38 +128,34 @@ module.exports = {
               .addFields(
                 {
                   name: "Features ⭐",
-                  value: `Crime! Try \`/crime\`\n
-                  New location: UK\n
-                  New track race revamp\n
-                  2 New events, try \`/events\`\n
-                  New squad\n
-                  Crew top doesn't show rank 1 crews to clear space
-                  
+                  value: `Vault for your extra cars! Try \`/vault\`\n
+                  User market returns! Market your items for other users to purchase\n
+                  Improved parts list so it shows what parts are missing\n
+                  Improved information for restoring barn finds\n
+                  Junkyard returns!\n
+                  Improved tutorial\n
+                  New event: Swan Song, see \`/events\`\n
+                  Fixed EV engine swapping\n
+                  Garage usability improved by removing the parking lot image\n
+                  New item: reverse card
                   `,
                   inline: true,
                 },
                 {
                   name: "Cars 🚗",
                   value: `
-                ${cardb.Cars["2023 rolls royce ghost"].Emote} ${cardb.Cars["2023 rolls royce ghost"].Name}
+                ${cardb.Cars["2020 porsche 718 cayman gt4"].Emote} ${cardb.Cars["2020 porsche 718 cayman gt4"].Name} -> Added to Super wheelspin\n
+                ${cardb.Cars["2022 porsche 911 gt3"].Emote} ${cardb.Cars["2022 porsche 911 gt3"].Name} -> Added to Super wheelspin\n
+                ${cardb.Cars["2019 subaru brz"].Emote} ${cardb.Cars["2019 subaru brz"].Name} -> Added to Wheelspin\n
+                ${cardb.Cars["1994 mitsubishi 3000gt vr4"].Emote} ${cardb.Cars["1994 mitsubishi 3000gt vr4"].Name} -> Added to Wheelspin\n
+                ${cardb.Cars["2010 chevy camaro v6"].Emote} ${cardb.Cars["2010 chevy camaro v6"].Name} -> Added to Wheelspin\n
 
-                ${cardb.Cars["2023 audi rs6 performance"].Emote} ${cardb.Cars["2023 audi rs6 performance"].Name}
 
-                ${cardb.Cars["2021 mini jcw"].Emote} ${cardb.Cars["2021 mini jcw"].Name}
-
-                ${cardb.Cars["2024 mclaren artura"].Emote} ${cardb.Cars["2024 mclaren artura"].Name}
-
-                ${cardb.Cars["2017 rolls royce wraith"].Emote} ${cardb.Cars["2017 rolls royce wraith"].Name}
-
-                ${cardb.Cars["2012 jaguar xkrs"].Emote} ${cardb.Cars["2012 jaguar xkrs"].Name}
-
-                ${cardb.Cars["1989 toyota corolla"].Emote} ${cardb.Cars["1989 toyota corolla"].Name}
                 `,
                   inline: true,
-                },
-               
+                }
               )
-              .setFooter({ text: "12/25/2023" })
+              .setFooter({ text: "1/15/2023" })
               .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
               .setColor(colors.blue);
 

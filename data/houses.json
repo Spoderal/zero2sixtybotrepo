@@ -3,9 +3,20 @@
     "id": "ct",
     "Name": "Casa Tranquilla",
     "Price": 500000,
-    "Perk": "Earn 5% more cash when racing on quarter mile tracks.",
+    "Perk": "Earn 5% more cash when racing on drag race tracks.",
     "Image": "https://track-pm.s3.amazonaws.com/vacationperfect/image/16cd275a-4132-4f5b-96f9-84e3f562a703",
     "Emote": "<:housecasa:1049184066567688222>",
+    "Type": "House",
+    "Space": 5,
+    "Prestige": 1
+  },
+  "casa haus": {
+    "id": "ch",
+    "Name": "Casa Haus",
+    "Price": 25000,
+    "Perk": "Earn lockpicks in all races.",
+    "Image": "https://i.ibb.co/prsFTgs/image.png",
+    "Emote": "🛖",
     "Type": "House",
     "Space": 5,
     "Prestige": 1
@@ -76,6 +87,7 @@
     "Space": 3,
     "Prestige": 3
   },
+  
   "casa spaziale": {
     "id": "spaziale",
     "Name": "Casa Spaziale",
@@ -102,7 +114,7 @@
     "id": "verde",
     "Name": "Castello Verde",
     "Price": 20000000,
-    "Perk": "Earn 10% more cash in highway races",
+    "Perk": "Earn 10% more cash in cross country races",
     "Image": "https://i.ibb.co/p2cm0tj/large-Sauerthal-E2-80-931-1.jpg",
     "Emote": "🏰",
     "Type": "House",
@@ -113,7 +125,7 @@
     "id": "appartamento",
     "Name": "Patrimonio Dell'Appartamento",
     "Price": 0,
-    "Perk": "Earn 0.1x more cash in street races",
+    "Perk": "Earn 10% more cash in street races",
     "Image": "https://i.ibb.co/XVssx3z/italian-homes-vs-american-homes-balcony-vs-porch.jpg",
     "Emote": "🛖",
     "Type": "House",
@@ -123,7 +135,7 @@
   "haunted manor": {
     "id": "haunted",
     "Name": "Haunted Manor",
-    "Price": 10000000,
+    "Price": 0,
     "Perk": "Earn 2x more candy in races",
     "Image": "https://i.ibb.co/zRzkXCX/2167609.jpg",
     "Emote": "🎃",

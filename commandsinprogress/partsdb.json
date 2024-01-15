@@ -568,16 +568,16 @@
       "RemoveAcceleration": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": 50,
+      "HandlingMinus": 50,
       "PSI": 24,
       "MaxPSI": 30,
       "Image": "https://i.ibb.co/170X5fw/t1turbo.png"
     },
     "dualturbo": {
       "Name": "DualTurbo",
-      "Power": 30,
+      "Power": 25,
       "AddedSnow": 0,
-      "Acceleration": 0.5,
+      "Acceleration": 0,
       "sellprice": 0,
       "Price": 10000,
       "Emote": "<:t2turbo:989758549330649118>",
@@ -587,7 +587,7 @@
       "RemoveAcceleration": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": 50,
+      "HandlingMinus": 50,
       "PSI": 24,
       "MaxPSI": 30,
       "Fuse": true,
@@ -607,7 +607,7 @@
       "RemoveAcceleration": "0",
       "Type": "turbo",
       "DecreasedSpeed": "0",
-      "DecreaseHandling": 100,
+      "HandlingMinus": 100,
       "PSI": 17,
       "MaxPSI": 40,
       "Fuse": true,
@@ -1209,9 +1209,9 @@
       "Color": "#1859d0"
     },
 
-    "2jz": {
-      "Name": "2JZ",
-      "Power": 217,
+    "2jz-gte": {
+      "Name": "2JZ-GTE",
+      "Power": 15,
       "Acceleration": 0.2,
       "AddedSnow": 0,
       "sellprice": 18750,
@@ -1244,7 +1244,40 @@
       "Type": "engine",
       "DecreasedSpeed": "0"
     },
-
+    "v8": {
+      "Name": "V8",
+      "Power": 6,
+      "AddedSnow": 0,
+      "Acceleration": 0.2,
+      "sellprice": 100,
+      "Price": 0,
+      "Emote": "<:enginerestored:941546331808333864>",
+      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+      "Tier": "j",
+      "JunkOnly": true,
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "RemoveAcceleration": "0",
+      "Type": "engine",
+      "DecreasedSpeed": "0"
+    },
+    "v6": {
+      "Name": "V6",
+      "Power": "0",
+      "AddedSnow": 0,
+      "Acceleration": "0",
+      "sellprice": 100,
+      "Price": 0,
+      "Emote": "<:enginerestored:941546331808333864>",
+      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+      "Tier": "j",
+      "JunkOnly": true,
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "RemoveAcceleration": "0",
+      "Type": "engine",
+      "DecreasedSpeed": "0"
+    },
     "rotary": {
       "Name": "Rotary",
       "Power": "0",
@@ -1378,162 +1411,26 @@
       "Type": "body",
       "DecreasedSpeed": "0"
     },
-    "v6": {
-      "Name": "V6",
-      "Power": 100,
-      "AddedSnow": 0,
-      "Acceleration": "0",
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_v6:1191488058864959558>",
-      "Image": "https://i.ibb.co/74fph9W/engine-v6.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "v8": {
-      "Name": "V8",
-      "Power": 250,
-      "AddedSnow": 0,
-      "Acceleration": 0.2,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_v8:1191488061276696680>",
-      "Image": "https://i.ibb.co/qFyq2GC/engine-v8.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "ev": {
-      "Name": "EV",
-      "Power": 100,
-      "AddedSnow": 0,
-      "Acceleration": 5,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:ev:1196288292602257499>",
-      "Image": "https://i.ibb.co/ZLf5pxM/ev.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "i4": {
-      "Name": "I4",
-      "Power": 100,
-      "AddedSnow": 0,
-      "Acceleration": 0.2,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_i4:1191487014185467904>",
-      "Image": "https://i.ibb.co/5xyRWNb/engine-i4.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "i6": {
-      "Name": "I6",
-      "Power": 150,
-      "AddedSnow": 0,
-      "Acceleration": 0.2,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_i4:1191487014185467904>",
-      "Image": "https://i.ibb.co/5xyRWNb/engine-i4.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "flat6": {
-      "Name": "FLAT6",
-      "Power": 160,
-      "AddedSnow": 0,
-      "Acceleration": 0.2,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_flat6:1191597437245210735>",
-      "Image": "hthttps://i.ibb.co/Lrg8wcG/engine-flat6.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "flat12": {
-      "Name": "FLAT12",
-      "Power": 175,
-      "AddedSnow": 0,
-      "Acceleration": 2,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_flat12:1191597441447903274>",
-      "Image": "https://i.ibb.co/pZyJ9j2/engine-flat12.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
-    "b4": {
-      "Name": "B4",
-      "Power": 100,
-      "AddedSnow": 0,
-      "Acceleration": 0.2,
-      "sellprice": 100,
-      "Price": 0,
-      "Emote": "<:engine_b4:1191597439988281405>",
-      "Image": "https://i.ibb.co/hWJ2bgJ/engine-b4.png",
-      "Tier": "1",
-      "JunkOnly": true,
-      "AddedDrift": "0",
-      "DecreasedDrift": "0",
-      "RemoveAcceleration": "0",
-      "Type": "engine",
-      "DecreasedSpeed": "0"
-    },
     "v10": {
       "Name": "V10",
-      "Power": 300,
+      "Power": 20,
       "Acceleration": 0.3,
       "AddedSnow": 0,
       "sellprice": 37500,
       "Price": 100000,
-      "Emote": "<:engine_v10:1191488062451109948>",
-      "Image":"https://i.ibb.co/Q6bxPbr/engine-v10.png",
+      "Emote": "<:v10:1069491172889862194>",
       "Tier": "2",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "engine",
       "DecreasedSpeed": "0",
-      "Weight":200
+      "Weight":200,
+      "Image": "https://i.ibb.co/BsBFbT0/v10.png"
     },
     "v12": {
       "Name": "V12",
-      "Power": 400,
+      "Power": 25,
       "Acceleration": 0.5,
       "AddedSnow": 0,
       "sellprice": 112500,
@@ -1550,12 +1447,12 @@
     },
     "w16": {
       "Name": "W16",
-      "Power": 500,
+      "Power": 30,
       "Acceleration": 2,
       "AddedSnow": 0,
       "sellprice": 18750,
       "Price": 500000,
-      "Emote": "<:w16img:1190929675065770055>",
+      "Emote": "",
       "Tier": "5",
       "AddedDrift": "0",
       "DecreasedDrift": "0",
@@ -1563,11 +1460,11 @@
       "Type": "engine",
       "Weight":500,
       "DecreasedSpeed": "0",
-      "Image": "https://i.ibb.co/3mXdX0q/w16img.png"
+      "Image": "https://i.ibb.co/P14CH3W/2jz.png"
     },
     "rocket engine": {
       "Name": "Rocket Engine",
-      "Power": 600,
+      "Power": 35,
       "Acceleration": 1,
       "AddedSnow": 0,
       "sellprice": 112500,
@@ -1603,7 +1500,7 @@
     },
     "super rocket engine": {
       "Name": "Super Rocket Engine",
-      "Power": 700,
+      "Power": 50,
       "Acceleration": 2,
       "AddedSnow": 0,
       "sellprice": 0,
@@ -1621,7 +1518,7 @@
     },
     "epic rocket engine": {
       "Name": "Epic Rocket Engine",
-      "Power": 800,
+      "Power": 75,
       "Acceleration": 4,
       "AddedSnow": 0,
       "sellprice": 0,
@@ -3259,58 +3156,41 @@
       "Emote": "<:intakedefault:932419391734292561>"
     },
     "no turbo": {
-      "Name":"None",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:t1turbo:989758553340383272>"
-    },
-    "no intercooler": {
-      "Name":"None",
-      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1intercooler:1123148189999038514>"
+      "Emote": "<:turbodefault:932419392145354814>"
     },
     "stock engine": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:enginedefault:932419391587483688>"
     },
     "stock intake": {
-      "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1intake:1101659642095992882>"
+      "Emote": "<:intakedefault:932419391734292561>"
     },
     "stock exhaust": {
-      "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1exhaust:1101027462932086855>"
+      "Emote": "<:exhaustdefault:932419391650418709>"
     },
     "stock tires": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Name": "Stock",
-      "Emote": "<:part_t1tires:1101042346231070773>"
+      "Name": "Stock Tires",
+      "Emote": "<:tiresdefault:932419392036306954>"
     },
     "stock suspension": {
-      "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:t1suspension:1127391271271538748>"
+      "Emote": "<:suspensiondefault:932419391847563314>"
     },
     "stock ecu": {
-      "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1ecu:1102062324371693599>"
+      "Emote": "<:defaultecu:935084786341543977>"
     },
     "stock clutch": {
-      "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:clutch1:1063291889282990171>"
+      "Emote": "<:defaultclutch:935084786748370954>"
     },
     "stock turbo": {
-      "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:t1turbo:989758553340383272>"
-    },
-    "stock gearbox": {
-      "Name":"Stock",
-      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1gearbox:1101757211123908618>"
+      "Emote": "<:turbodefault:932419392145354814>"
     },
     "broken": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",

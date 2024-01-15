@@ -176,10 +176,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-  vault: {
-    type: String,
-    required: false,
-  },
+
   banklimit: {
     type: Number,
     required: false,
@@ -253,11 +250,37 @@ const Profile = new mongoose.Schema({
     required: false,
     default: "Default",
   },
+  outfit: {
+    type: String,
+    required: false,
+    default: "Default",
+  },
+  accessory: {
+    type: String,
+    required: false,
+    default: "None",
+  },
+  outfits: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   title: {
     type: String,
     required: false,
     default: "Noob Racer",
   },
+  gambletimes: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  gamblewins: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  
   seasonrewards: {
     type: Array,
     required: false,
@@ -308,7 +331,7 @@ const Profile = new mongoose.Schema({
     required: false,
   },
   showcase: {
-    type: String,
+    type: Object,
     required: false,
   },
   joinedcrew: {
@@ -688,6 +711,31 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  eventwins: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  dragloss: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  streetloss: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  trackloss: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  eventloss: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   zcandy: {
     type: Number,
     required: false,
@@ -698,7 +746,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
-
+  warehouses:{
+    type: Array,
+    required: false,
+    default: [],
+  },
   premium: {
     type: Boolean,
     required: false,

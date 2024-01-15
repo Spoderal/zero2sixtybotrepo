@@ -21,6 +21,11 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  gamble: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
   racedisabled:{
     type: Number,
     required: false,
@@ -353,6 +358,16 @@ const Cooldowns = new mongoose.Schema({
     default: 0,
   },
   chips: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  vault: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  reverse: {
     type: Number,
     required: false,
     default: 0,

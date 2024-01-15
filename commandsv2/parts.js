@@ -123,10 +123,38 @@ module.exports = {
     )
 
 
-
+    let stats = []
+    if(featurepart.Power > 0){
+      stats.push(`${emotes.speed} Speed: +${featurepart.Power}`)
+    }
+    if(featurepart.RemovePower > 0){
+      stats.push(`${emotes.speed} Speed: -${featurepart.RemovePower}`)
+    }
+    if(featurepart.Acceleration > 0){
+      stats.push(`${emotes.acceleration} Acceleration: -${featurepart.Acceleration}`)
+    }
+    if(featurepart.RemoveAcceleration > 0){
+      stats.push(`${emotes.acceleration} Acceleration: +${featurepart.RemoveAcceleration}`)
+    }
+    if(featurepart.Handling > 0){
+      stats.push(`${emotes.handling} Handling: +${featurepart.Handling}`)
+    }
+    if(featurepart.RemoveHandling > 0){
+      stats.push(`${emotes.handling} Handling: -${featurepart.RemoveHandling}`)
+    }
+    if(featurepart.RemoveWeight > 0){
+      stats.push(`${emotes.weight} Weight: -${featurepart.RemoveWeight}`)
+    }
+    if(featurepart.Weight > 0){
+      stats.push(`${emotes.weight} Weight: +${featurepart.Weight}`)
+    }
+    if(featurepart.Stars > 0){
+      stats.push(`⭐ Rating: +${featurepart.Stars}`)
+    }
     let embed = new EmbedBuilder()
     .setTitle("Parts Store")
     .setThumbnail(`${featurepart.Image}`)
+    .addFields({name: `Featured Part`, value: `__${featurepart.Emote} ${featurepart.Name}__\n${toCurrency(featurepart.Price)}\n${stats.join(`\n`)}`})
     .setColor(colors.blue)
 
    let msg = await interaction.reply({embeds: [embed], components: [row], fetchReply: true})

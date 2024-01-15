@@ -1,0 +1,99 @@
+{
+    "Helmets":{
+        "default":{
+            "Image":"https://i.ibb.co/R2ft86T/racer-helmet-default.png",
+            "Name":"Default",
+            "Emote":"<:racer_helmet_default:1191492622078967869>"
+        },
+        "stig":{
+            "Image":"https://i.ibb.co/VM3pTfc/racer-helmet-stig.png",
+            "Name":"Stig",
+            "Emote":"<:racer_helmet_stig:1191492613648433203>"
+        },
+        "black":{
+            "Image":"https://i.ibb.co/kJykbPG/racer-helmet-black.png",
+            "Name":"Black",
+            "Emote":"<:racer_helmet_black:1191492620812304424>"
+        },
+        "crimson":{
+            "Image":"https://i.ibb.co/8jRBy5M/racer-helmet-crimson.png",
+            "Name":"Crimson",
+            "Emote":"<:racer_helmet_crimson:1191604490370023495>"
+        },
+        "vote":{
+            "Image":"https://i.ibb.co/q942Qbg/racer-helmet-vote.png",
+            "Name":"Vote",
+            "Emote":"<:racer_helmet_vote:1191882737255194674>"
+        },
+        "sky":{
+            "Image":"https://i.ibb.co/hYhXbcN/racer-helmet-sky.png",
+            "Name":"Sky",
+            "Emote":"<:racer_helmet_sky:1191882739549474896>"
+        },
+        "orange":{
+            "Image":"https://i.ibb.co/v30SqNK/racer-helmet-orange.png",
+            "Name":"Orange",
+            "Emote":"<:racer_helmet_orange:1191882741655019632>"
+        }
+    },
+    "Outfits":{
+        "default":{
+            "Image":"https://i.ibb.co/2syKxR3/racer-outfit-default.png",
+            "Name":"Default",
+            "Emote":"<:racer_outfit_default:1191492617318432858>"
+        },
+        "stig":{
+            "Image":"https://i.ibb.co/dkgYmxD/racer-outfit-stig.png",
+            "Name":"Stig",
+            "Emote":"<:racer_outfit_stig:1191492618845179945>"
+        },
+        "black":{
+            "Image":"https://i.ibb.co/0MLN6Qf/racer-outfit-black.png",
+            "Name":"Black",
+            "Emote":"<:racer_outfit_black:1191492616114667520>"
+        },
+        "crimson":{
+            "Image":"https://i.ibb.co/N1m2qbz/racer-outfit-crimson.png",
+            "Name":"Crimson",
+            "Emote":"<:racer_outfit_crimson:1191604491590574192>"
+        },
+        "vote":{
+            "Image":"https://i.ibb.co/fFVdt7J/racer-outfit-vote.png",
+            "Name":"Vote",
+            "Emote":"<:racer_outfit_vote:1191882734872838224>"
+        },
+        "sky":{
+            "Image":"https://i.ibb.co/mJcn9dP/racer-outfit-sky.png",
+            "Name":"Sky",
+            "Emote":"<:racer_outfit_sky:1191882742770712586>"
+        },
+        "orange":{
+            "Image":"https://i.ibb.co/3hSXtdh/racer-outfit-orange.png",
+            "Name":"Orange",
+            "Emote":"<:racer_outfit_orange:1191882744700088380>"
+        }
+    },
+    "Accessories":{
+        "2024 crown":{
+            "Image":"https://i.ibb.co/m65Bdkj/racer-accessory-2024.png",
+            "Name":"2024 Crown",
+            "Emote":"<:racer_accessory_2024:1191601578944254052>"
+        },
+        "unicorn horn":{
+            "Image":"https://i.ibb.co/wR1dVP3/racer-accessory-unicorn.png",
+            "Name":"Unicorn Horn",
+            "Emote":"<:racer_accessory_unicorn:1191883090130387105>"
+        },
+        "top hat":{
+            "Image":"https://i.ibb.co/PGHvLLZ/racer-accessory-tophat.png",
+            "Name":"Top Hat",
+            "Emote":"<:racer_accessory_tophat:1191883087546687609>"
+        },
+        "halo":{
+            "Image":"https://i.ibb.co/xqRYq3Q/racer-accessory-halo.png",
+            "Name":"Halo",
+            "Emote":"<:racer_accessory_halo:1191883085998989352>"
+        }
+      
+    }
+}

@@ -12,7 +12,8 @@
       "2008 audi rs6",
       "2007 subaru wrx wagon",
       "2002 subaru wrx sti",
-      "1994 chevy impala ss"
+      "1994 chevy impala ss",
+      "2015 toyota gt86"
     ]
   },
   "rare": {
@@ -76,6 +77,19 @@
       "2019 porsche 911 rsr-19",
       "2023 toyota gr010 hybrid",
       "2022 peugeot 9x8"
+    ]
+  },
+  "fictional": {
+    "Contents": [
+      "flintstones family car",
+      "2022 batmobile",
+      "mach five",
+      "kitt",
+      "2017 alpine vision gt",
+      "2021 porsche vision gran turismo",
+      "2058 quadra turbo r vtech",
+      "2069 chryslus rocket 69",
+      "2554 warthog"
     ]
   },
   "snowvssun": {

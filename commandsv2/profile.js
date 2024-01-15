@@ -1,5 +1,3 @@
-
-
 const profilepics = require("../data/pfpsdb.json").Pfps;
 const cardb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
@@ -12,9 +10,14 @@ const pvpranks = require("../data/ranks.json");
 const titledb = require("../data/titles.json");
 const emotes = require("../common/emotes").emotes;
 const landmarkdb = require("../data/landmarks.json")
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, AttachmentBuilder } = require("discord.js");
+const outfits = require("../data/characters.json")
 
+const { createCanvas, loadImage, registerFont } = require("canvas");
 const lodash = require("lodash");
+
+const { resolve } = require("path");
+
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -56,6 +59,9 @@ module.exports = {
     let command = interaction.options.getSubcommand();
 
     if (command == "view") {
+
+      await interaction.reply(`${emotes.loading} Please wait...`)
+
       let user = interaction.options.getUser("user") || interaction.user;
       let userdata = await User.findOne({ id: user.id });
       if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -71,9 +77,12 @@ module.exports = {
       let dragwins = userdata.dragwins || 0
       let streetwins = userdata.streetwins || 0
       let trackwins = userdata.trackwins || 0
-      let tier = userdata.tier;
-      let speedometer = userdata.speedometer
-      let landmarks = userdata.landmarks
+      let eventwins = userdata.eventwins || 0
+      let dragloss = userdata.dragloss || 0
+      let streetloss = userdata.streetloss || 0
+      let trackloss = userdata.trackloss || 0
+      let eventloss = userdata.eventloss || 0
+
       let cars = userdata.cars;
       let finalprice = 0;
 
@@ -95,13 +104,7 @@ module.exports = {
         pvpname = "Silver";
       }
 
-      let landmarksarr = []
 
-      if(landmarks.length > 0){
-        for(let land in landmarks){
-          landmarksarr.push(landmarkdb[landmarks[land]].Emote)
-        }
-      }
 
 
 
@@ -112,7 +115,7 @@ module.exports = {
       for (let ach in achievements) {
         let achiev = achievements[ach];
         let achindb = achievementsdb.Achievements[achiev.name.toLowerCase()];
-        achivarr.push(`${achindb.Emote}`);
+        achivarr.push(`${achindb.Image}`);
       }
       if (achivarr.length == 0) {
         achivarr = ["No achievements"];
@@ -120,61 +123,129 @@ module.exports = {
       
       let cash = userdata.cash;
       finalprice += cash;
+
+      finalprice = toCurrency(finalprice)
       
-      let acthelmet = profilepics[helmet.toLowerCase()].Image;
-      let showcase = userdata.showcase;
+      let acthelmet = outfits.Helmets[helmet.toLowerCase()].Image;
+      let outfit = outfits.Outfits[userdata.outfit.toLowerCase()].Image;
+
+      let showcase = userdata.showcase || {}
+
+      registerFont(resolve("./assets/images/DaysOne-Regular.ttf"), { family: "Days One" })
+
+      let canvas = createCanvas(1280, 720);
+      let ctx = canvas.getContext("2d");
+      let bg = await loadImage("https://i.ibb.co/rmNXyZx/profile-image.png");
+      ctx.imageSmoothingQuality = "high";
+
+      ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+       let helmimg = await loadImage(acthelmet);
+       let outfitimg = await loadImage(outfit);
+
+       ctx.drawImage(outfitimg, 25, 35, 200, 200);
+      ctx.drawImage(helmimg, 25, 35, 200, 200);
+      if(userdata.accessory !== "None"){
+        let acc = outfits.Accessories[userdata.accessory.toLowerCase()].Image
+
+        let accimg = await loadImage(acc)
+        ctx.drawImage(accimg, 25, 35, 200, 200);
+
+      }
+
+      ctx.font = "30px Days One";
+      ctx.fillStyle = "#ffffff";
+      if(showcase && showcase !== null && showcase.Image){
+        console.log(showcase.Image)
+        let showcasedimg = await loadImage(`${showcase.Image}`)
+        ctx.drawImage(showcasedimg, 850, 15, 410, 250);
+        ctx.font = "20px Days One";
+
+        ctx.fillText(`P: ${showcase.Speed}`, 720, 50);
+        ctx.fillText(`A: ${showcase.Acceleration}s`, 720, 80);
+        ctx.fillText(`W: ${showcase.Weight}`, 720, 110);
+        ctx.fillText(`H: ${showcase.Handling}`, 720, 140);
+
+      }
+      else {
+        ctx.fillText("/showcase", 950, 140);
+
+      }
+
+      ctx.font = "20px Days One";
+      let wins = userdata.gamblewins
+      let times = userdata.gambletimes
+      let losses = times - wins
+
+      ctx.fillText(`Gamble Commands Sent: ${userdata.gambletimes}`, 860, 300);
+      ctx.fillText(`Gambles W/L: ${wins}/${losses}`, 860, 330);
+
       
-      let embed = new EmbedBuilder()
-        .setAuthor({ name: user.username, iconURL: acthelmet })
+      ctx.font = "40px Days One";
+      ctx.fillStyle = "#ffffff";
+      ctx.fillText(user.username, 25, 300);
+
+      ctx.font = "20px Days One";
       
-          .addFields(
-            {
-              name: title,
-              value: `
-              ${emotes.race} Race Rank: ${racerank}\n
-              ${emotes.drift} Drift Rank: ${driftrank}\n
-              ${emotes.prestige} Prestige: ${prestige}\n
-              ${emotes.tier} **Tier**: ${tier}\n
-              ${pvpindb.emote} PVP Rank: ${pvpname} ${pvprank.Wins}\n
-              <:WINS_street:1152813248756842598> Street Race W/L: ${streetwins}\n
-              <:WINS_DRAG:1152813251508305920> Drag Race W/L: ${dragwins}\n
-              <:wins_track:1152813252502360075> Track Race W/L: ${trackwins}\n
-              🗺️ Landmarks Discovered: ${landmarksarr.join(" ")}
-              `,
-              inline: true
-            },
-            {
-              name: "Achievements",
-              value: `<:location_speedometer:1175570810740682843> Highest Speedometer: ${speedometer} MPH\n${achivarr.join(" ")}`,
-              
-            inline: true,
-          },
-          {
-            name: "Best Car",
-            value: `
-          **${fastcar.Emote} ${fastcar.Name}**
-          ${emotes.speed} ${fastcar.Speed}
-          ${emotes.acceleration} ${fastcar.Acceleration}s
-          ${emotes.handling} ${fastcar.Handling}
-          ${emotes.weight} ${fastcar.WeightStat}
-          `,
-            inline: true,
-          }
-        )
-        .setColor(`${colors.blue}`)
-        .setImage(showcase)
-        .setFooter({text: `Networth: ${toCurrency(finalprice)}`})
-        .setThumbnail(fastcar.Livery)
+      ctx.fillText(finalprice, 170, 360);
+      
+      let pvpimg = await loadImage(pvpindb.icon)
+      ctx.fillText(`${streetwins}/${streetloss}`, 220, 465);
+      ctx.fillText(`${dragwins}/${dragloss}`, 200, 525);
+      ctx.fillText(`${trackwins}/${trackloss}`, 210, 580);
+      ctx.fillText(`${eventwins}/${eventloss}`, 210, 640);
+
+
+
+      ctx.fillText(`${racerank}`, 420, 70);
+      ctx.fillText(`${driftrank}`, 420, 120);
+      ctx.fillText(`${prestige}`, 390, 170);
+      ctx.fillText(`${pvprank.Wins}`, 440, 225);
+      ctx.drawImage(pvpimg, 410, 205, 25, 25)
+
+      if(achivarr.includes("https://i.ibb.co/4fTVjPX/ach-fusionmaster.png")){
+        let achiev = await loadImage("https://i.ibb.co/4fTVjPX/ach-fusionmaster.png")
+        ctx.drawImage(achiev, 400, 570, 50, 50)
+      }
+
+      if(achivarr.includes("https://i.ibb.co/Zf8bGrN/achievement-rich.png")){
+        let achiev = await loadImage("https://i.ibb.co/Zf8bGrN/achievement-rich.png")
+        ctx.drawImage(achiev, 450, 570, 50, 50)
+      }
+
+      if(achivarr.includes("https://i.ibb.co/4Py8NZ6/achievement-richer.png")){
+        let achiev = await loadImage("https://i.ibb.co/4Py8NZ6/achievement-richer.png")
+        ctx.drawImage(achiev, 500, 570, 50, 50)
+      }
+      if(achivarr.includes("https://i.ibb.co/ZK046Gf/achievement-richest.png")){
+        let achiev = await loadImage("https://i.ibb.co/ZK046Gf/achievement-richest.png")
+        ctx.drawImage(achiev, 500, 570, 50, 50)
+      }
+      if(achivarr.includes("https://i.ibb.co/n3XDmjg/ach-timemaster.png")){
+        let achiev = await loadImage("https://i.ibb.co/n3XDmjg/ach-timemaster.png")
+        ctx.drawImage(achiev, 500, 570, 50, 50)
+      }
+      if(achivarr.includes("https://i.ibb.co/5GxBJbp/achievement-bugsmasher.png")){
+        let achiev = await loadImage("https://i.ibb.co/5GxBJbp/achievement-bugsmasher.png")
+        ctx.drawImage(achiev, 550, 570, 50, 50)
+      }
+      if(achivarr.includes("https://i.ibb.co/vkfr887/ACH-driftking.png")){
+        let achiev = await loadImage("https://i.ibb.co/vkfr887/ACH-driftking.png")
+        ctx.drawImage(achiev, 550, 570, 50, 50)
+      }
+      if(achivarr.includes("https://i.ibb.co/0hTDFp9/ach-legacy.png")){
+        let achiev = await loadImage("https://i.ibb.co/0hTDFp9/ach-legacy.png")
+        ctx.drawImage(achiev, 600, 570, 50, 50)
+      }
+      if(achivarr.includes("https://i.ibb.co/y42g3dh/achievement-gamble.png")){
+        let achiev = await loadImage("https://i.ibb.co/y42g3dh/achievement-gamble.png")
+        ctx.drawImage(achiev, 650, 570, 50, 50)
+      }
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-          .setLabel("Helmets")
+          .setLabel("Outfits")
           .setStyle("Secondary")
-          .setEmoji("<:helmet_vibrant:1044407040862339112>")
+          .setEmoji("<:racer_outfit_default:1191492617318432858>")
           .setCustomId("helmets"),
-        new ButtonBuilder()
-          .setLabel("Titles")
-          .setStyle("Secondary")
-          .setCustomId("titles")
       );
 
       let row2 = new ActionRowBuilder().addComponents(
@@ -195,16 +266,22 @@ module.exports = {
           .setEmoji("⏭️")
           .setStyle("Secondary")
       );
-
+      let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
+        name: "stats-image.png",
+      });
       let msg;
       if (user == interaction.user) {
-        msg = await interaction.reply({
-          embeds: [embed],
+        msg = await interaction.editReply({
+          files: [attachment],
+          content: "",
           components: [row],
           fetchReply: true,
         });
       } else {
-        msg = await interaction.reply({ embeds: [embed], fetchReply: true });
+        msg = await interaction.editReply({        
+             files: [attachment],
+          content: "",
+          fetchReply: true, });
       }
 
       let filter = (btnInt) => {
@@ -214,33 +291,24 @@ module.exports = {
         filter: filter,
       });
       let helmlist = [];
-      let titlelist = [];
 
-      for (let helm in userdata.pfps) {
-        let helmet = userdata.pfps[helm];
-
+      for (let helm in userdata.outfits) {
+        let helmet = userdata.outfits[helm];
         helmlist.push(helmet);
       }
 
-      for (let helm in userdata.titles) {
-        let title = userdata.titles[helm];
-
-        titlelist.push(title);
-      }
+     
 
       helmlist = lodash.chunk(
         helmlist.map((a) => a),
         10
       );
 
-      titlelist = lodash.chunk(
-        titlelist.map((a) => a),
-        10
-      );
 
       let page = 0;
       let vispage = 1;
       let items;
+      let embed = new EmbedBuilder()
       collector.on("collect", async (i) => {
         if (i.customId == "helmets") {
           items = helmlist;
@@ -249,39 +317,37 @@ module.exports = {
 
           for (let h in helmlist[page]) {
             let helm = helmlist[page][h];
-            displayhelms.push(
-              `${profilepics[helm.toLowerCase()].Emote} ${
-                profilepics[helm.toLowerCase()].Name
-              }`
-            );
+            if(outfits.Accessories[helm.toLowerCase()]){
+              displayhelms.push(
+                `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                  outfits.Accessories[helm.toLowerCase()].Name
+                }`
+              );
+
+            }
+            else if(outfits.Outfits[helm.toLowerCase()]){
+              displayhelms.push(
+                `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                  outfits.Outfits[helm.toLowerCase()].Name
+                }`
+              );
+
+            }
+            else if(outfits.Helmets[helm.toLowerCase()]){
+              displayhelms.push(
+                `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                  outfits.Helmets[helm.toLowerCase()].Name
+                }`
+              );
+
+            }
           }
 
           embed = new EmbedBuilder()
             .setColor(colors.blue)
-            .setTitle("Your Helmets")
+            .setTitle("Your Outfits")
             .setFooter({ text: `Page ${vispage}` })
             .setDescription(`${displayhelms.join("\n")}`);
-
-          interaction.editReply({
-            embeds: [embed],
-            components: [row, row2],
-            fetchReply: true,
-          });
-        } else if (i.customId == "titles") {
-          items = titlelist;
-
-          let displaytitles = [];
-
-          for (let h in titlelist[page]) {
-            let helm = titlelist[page][h];
-            displaytitles.push(`${titledb[helm.toLowerCase()].Title}`);
-          }
-
-          embed = new EmbedBuilder()
-            .setColor(colors.blue)
-            .setTitle("Your Titles")
-            .setFooter({ text: `Page ${vispage}` })
-            .setDescription(`${displaytitles.join("\n")}`);
 
           interaction.editReply({
             embeds: [embed],
@@ -309,7 +375,7 @@ module.exports = {
 
             embed = new EmbedBuilder()
               .setColor(colors.blue)
-              .setTitle("Your Helmets")
+              .setTitle("Your Outfits")
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
@@ -318,26 +384,7 @@ module.exports = {
               components: [row, row2],
               fetchReply: true,
             });
-          } else if (items == titlelist) {
-            let displaytitles = [];
-
-            for (let h in titlelist[page]) {
-              let helm = titlelist[page][h];
-              displaytitles.push(`${titledb[helm.toLowerCase()].Title}`);
-            }
-
-            embed = new EmbedBuilder()
-              .setColor(colors.blue)
-              .setTitle("Your Titles")
-              .setFooter({ text: `Page ${vispage}` })
-              .setDescription(`${displaytitles.join("\n")}`);
-
-            interaction.editReply({
-              embeds: [embed],
-              components: [row, row2],
-              fetchReply: true,
-            });
-          }
+          } 
         } else if (i.customId == "previous") {
           page--;
           vispage--;
@@ -350,16 +397,35 @@ module.exports = {
 
             for (let h in items[page]) {
               let helm = items[page][h];
-              displayhelms.push(
-                `${profilepics[helm.toLowerCase()].Emote} ${
-                  profilepics[helm.toLowerCase()].Name
-                }`
-              );
+              if(outfits.Accessories[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                    outfits.Accessories[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Outfits[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                    outfits.Outfits[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Helmets[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                    outfits.Helmets[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
             }
 
             embed = new EmbedBuilder()
               .setColor(colors.blue)
-              .setTitle("Your Helmets")
+              .setTitle("Your Outfits")
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
@@ -368,26 +434,7 @@ module.exports = {
               components: [row, row2],
               fetchReply: true,
             });
-          } else if (items == titlelist) {
-            let displaytitles = [];
-
-            for (let h in titlelist[page]) {
-              let helm = titlelist[page][h];
-              displaytitles.push(`${titledb[helm.toLowerCase()].Title}`);
-            }
-
-            embed = new EmbedBuilder()
-              .setColor(colors.blue)
-              .setTitle("Your Titles")
-              .setFooter({ text: `Page ${vispage}` })
-              .setDescription(`${displaytitles.join("\n")}`);
-
-            interaction.editReply({
-              embeds: [embed],
-              components: [row, row2],
-              fetchReply: true,
-            });
-          }
+          } 
         } else if (i.customId == "first") {
           page = 0;
           vispage = 1;
@@ -400,16 +447,35 @@ module.exports = {
 
             for (let h in items[page]) {
               let helm = items[page][h];
-              displayhelms.push(
-                `${profilepics[helm.toLowerCase()].Emote} ${
-                  profilepics[helm.toLowerCase()].Name
-                }`
-              );
+              if(outfits.Accessories[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                    outfits.Accessories[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Outfits[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                    outfits.Outfits[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Helmets[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                    outfits.Helmets[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
             }
 
             embed = new EmbedBuilder()
               .setColor(colors.blue)
-              .setTitle("Your Helmets")
+              .setTitle("Your Outfits")
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
@@ -418,26 +484,7 @@ module.exports = {
               components: [row, row2],
               fetchReply: true,
             });
-          } else if (items == titlelist) {
-            let displaytitles = [];
-
-            for (let h in titlelist[page]) {
-              let helm = titlelist[page][h];
-              displaytitles.push(`${titledb[helm.toLowerCase()].Title}`);
-            }
-
-            embed = new EmbedBuilder()
-              .setColor(colors.blue)
-              .setTitle("Your Titles")
-              .setFooter({ text: `Page ${vispage}` })
-              .setDescription(`${displaytitles.join("\n")}`);
-
-            interaction.editReply({
-              embeds: [embed],
-              components: [row, row2],
-              fetchReply: true,
-            });
-          }
+          } 
         } else if (i.customId == "last") {
           page = items.length;
           vispage = items.length += 1;
@@ -450,16 +497,35 @@ module.exports = {
 
             for (let h in items[page]) {
               let helm = items[page][h];
-              displayhelms.push(
-                `${profilepics[helm.toLowerCase()].Emote} ${
-                  profilepics[helm.toLowerCase()].Name
-                }`
-              );
+              if(outfits.Accessories[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                    outfits.Accessories[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Outfits[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                    outfits.Outfits[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Helmets[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                    outfits.Helmets[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
             }
 
             embed = new EmbedBuilder()
               .setColor(colors.blue)
-              .setTitle("Your Helmets")
+              .setTitle("Your Outfits")
               .setFooter({ text: `Page ${vispage}` })
               .setDescription(`${displayhelms.join("\n")}`);
 
@@ -468,26 +534,7 @@ module.exports = {
               components: [row, row2],
               fetchReply: true,
             });
-          } else if (items == titlelist) {
-            let displaytitles = [];
-
-            for (let h in titlelist[page]) {
-              let helm = titlelist[page][h];
-              displaytitles.push(`${titledb[helm.toLowerCase()].Title}`);
-            }
-
-            embed = new EmbedBuilder()
-              .setColor(colors.blue)
-              .setTitle("Your Titles")
-              .setFooter({ text: `Page ${vispage}` })
-              .setDescription(`${displaytitles.join("\n")}`);
-
-            interaction.editReply({
-              embeds: [embed],
-              components: [row, row2],
-              fetchReply: true,
-            });
-          }
+          } 
         }
       });
     } else if (command == "edit") {

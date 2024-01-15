@@ -23,6 +23,23 @@ module.exports = {
     option
       .setName("part")
       .setDescription("What you want to remove")
+      .addChoices(
+        {name: `Exhaust`, value: "exhaust"},
+        {name: `Intake`, value: "intake"},
+        {name: `Turbo`, value: "turbo"},
+        {name: `Tires`, value: "tires"},
+        {name: `Clutch`, value: "clutch"},
+        {name: `Suspension`, value: "suspension"},
+        {name: `Brakes`, value: "brakes"},
+        {name: `Gearbox`, value: "gearbox"},
+        {name: `Drivetrain`, value: "drivetrain"},
+        {name: `ECU`, value: "ecu"},
+        {name: `Intercooler`, value: "intercooler"},
+        {name: `Body`, value: "body"},
+        {name: `Weight`, value: "weight"},
+        {name: `Spoiler`, value: "spoiler"},
+        {name: `Tires`, value: "tires"}
+      )
       .setRequired(true)
   )
     ,

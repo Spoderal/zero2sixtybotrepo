@@ -3,7 +3,8 @@
     "2021 lexus rc f",
     "2012 dodge charger srt8",
     "2020 land rover range rover",
-    "2023 audi rs6 performance"
+    "2023 audi rs6 performance",
+    "2020 porsche 718 cayman gt4"
   ],
   "Parts": [
     "dualturbo",
@@ -13,9 +14,28 @@
     "t4clutch",
     "t4tires",
     "t4weight",
+    "t4suspension",
+    "t4ecu",
+    "t4bodykit",
+    "t4brakes",
+    "t4spoiler",
+    "t4gearbox",
     "t4weightreduction",
     "super rocket engine"
   ],
+  "Tier4": [
+    "t4weight", 
+    "t4weightreduction", 
+    "t4suspension",
+  "t4ecu",
+  "t4bodykit",
+  "t4brakes",
+  "t4spoiler",
+  "t4gearbox",
+  "t4tires",
+  "t4clutch"
+  
+],
   "Cash": [
     1000, 2000, 3000, 4000, 50000, 6000, 7000, 8000, 900, 1000, 15000, 2000,
     2500, 10000
@@ -29,6 +49,7 @@
     "2017 lykan hypersport",
     "2019 bugatti la voiture noire",
     "2005 maserati mc12",
-    "2020 aston martin victor"
+    "2020 aston martin victor",
+    "2022 porsche 911 gt3"
   ]
 }

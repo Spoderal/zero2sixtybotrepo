@@ -73,7 +73,7 @@ module.exports = {
         }
         else {
           if(userdata.location == "united kingdom"){
-            price = cardb.Cars[selected.Name.toLowerCase()].Price * 1.5;
+            price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.80;
           }
           else {
             price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.75;

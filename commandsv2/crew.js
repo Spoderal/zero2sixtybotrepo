@@ -875,10 +875,13 @@ module.exports = {
       let desc = "";
 
       for (let i = 0; i < 10; i++) {
-        let crew = members[i].name;
-        if (!crew) return;
-        let bal = members[i].Rank4;
-        desc += `${i + 1}. ${crew} - Rank ${numberWithCommas(bal)}\n`;
+        if(members[i]){
+          let crew = members[i].name;
+          if (!crew) return;
+          let bal = members[i].Rank4;
+          desc += `${i + 1}. ${crew} - Rank ${numberWithCommas(bal)}\n`;
+
+        }
       }
       let embed = new Discord.EmbedBuilder()
         .setTitle("Crew Leaderboard")

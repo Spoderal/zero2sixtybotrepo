@@ -4,6 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
+const partdb = require("../data/partsdb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -37,19 +38,34 @@ module.exports = {
     if (!cars.Cars[selected.Name.toLowerCase()])
       return await interaction.reply("Thats not a car!");
     car = car.Name.toLowerCase();
-
+    let required = []
+    if(!userdata.parts.includes("j1exhaust")){
+      required.push(`${partdb.Parts.j1exhaust.Emote} ${partdb.Parts.j1exhaust.Name}`)
+    }
+    if(!userdata.parts.includes("j1engine")){
+      required.push(`${partdb.Parts.j1engine.Emote} ${partdb.Parts.j1engine.Name}`)
+    }
+    if(!userdata.parts.includes("body")){
+      required.push(`${partdb.Parts.body.Emote} ${partdb.Parts.body.Name}`)
+    }
+    if(!userdata.parts.includes("j1intake")){
+      required.push(`${partdb.Parts.j1intake.Emote} ${partdb.Parts.j1intake.Name}`)
+    }
+    if(!userdata.parts.includes("j1suspension")){
+      required.push(`${partdb.Parts.j1suspension.Emote} ${partdb.Parts.j1suspension.Name}`)
+    }
     let requiredp =
       userdata.parts.includes("j1exhaust") &&
       userdata.parts.includes("j1engine") &&
       userdata.parts.includes("body") &&
       userdata.parts.includes("j1intake") &&
       userdata.parts.includes("j1suspension");
-    let toolbox = userdata.parts.includes("toolbox");
+    let toolbox = userdata.items.includes("toolbox");
     if (!cars.Cars[car].Junked)
       return await interaction.reply("Thats not a junk car!");
     if (!requiredp && !toolbox)
       return interaction.reply(
-        "You can't restore this car without the required parts in your inventory! You'll need a j1exhaust, a j1engine, a j1body, a j1intake, and a j1suspension!"
+        `You can't restore this car without the required parts in your inventory! **DON'T UPGRADE YOUR CAR WITH THEM**\nThe parts you need are: ${required.join(', ')}\n\nYou can find these parts by racing your barn find in **junk race**, wheelspins, or \`/junkyard\``
       );
 
     let carindb = cars.Cars[selected.Name.toLowerCase()].restored;

@@ -5,6 +5,7 @@
         "Racers":3,
         "Traction":25,
         "Class":"B",
+        "Difficulty":"Easy",
         "Handling":500
     },
     "suzuka":{
@@ -13,6 +14,7 @@
         "Racers":4,
         "Traction":50,
         "Class":"A",
+        "Difficulty":"Medium",
         "Handling":750
     },
     "nurburgring":{
@@ -21,6 +23,7 @@
         "Racers":5,
         "Class":"S",
         "Traction":100,
+        "Difficulty":"Hard",
         "Handling":1000
     }
 }

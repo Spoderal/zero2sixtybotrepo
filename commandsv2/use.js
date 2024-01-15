@@ -193,7 +193,12 @@ module.exports = {
     } else if (itemtouse.toLowerCase() == "flat tire") {
       userdata.using.push(`flat tire`);
       cooldowndata.flattire = Date.now();
-    } else if (itemtouse.toLowerCase() == "epic lockpick") {
+    } 
+    else if (itemtouse.toLowerCase() == "reverse card") {
+      userdata.using.push(`reverse card`);
+      cooldowndata.reverse = Date.now();
+    } 
+    else if (itemtouse.toLowerCase() == "epic lockpick") {
       userdata.using.push(`epic lockpick`);
       cooldowndata.epiclockpick = Date.now();
     } else if (itemtouse.toLowerCase() == "pet treats") {
@@ -483,7 +488,55 @@ module.exports = {
       );
 
       cooldowndata.markModified();
-    } else if (itemtouse.toLowerCase() == "zero bar") {
+    } 
+    else if (itemtouse.toLowerCase() == "swan note") {
+      let randomcar = ["Nothing", "2023 dodge challenger srt demon 170", "Nothing", "Nothing", "Nothing", "2023 maserati granturismo folgore", "Nothing", "Nothing", "Nothing", "2015 mitsubishi lancer evo x", "Nothing", "Nothing", "2023 audi tt roadster", "Nothing", "2023 audi r8 gt", "Nothing", "Nothing", "Nothing", "2024 chevrolet camaro zl1"]
+      for (var i8 = 0; i8 < amount2; i8++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+      userdata.items = items;
+      let rand= lodash.sample(randomcar)
+
+      if(rand == "Nothing"){
+        userdata.save()
+        return await interaction.reply(`You used a swan note and found nothing`)
+
+      }
+      else {
+        let carindb = cardb.Cars[rand.toLowerCase()]
+        let carobj = {
+          ID: carindb.alias,
+          Name: carindb.Name,
+          Speed: carindb.Speed,
+          Acceleration: carindb["0-60"],
+          Handling: carindb.Handling,
+          Parts: [],
+          Emote: carindb.Emote,
+          Livery: carindb.Image,
+          Miles: 0,
+          Gas: 10,
+          MaxGas: 10,
+          WeightStat: carindb.Weight,
+        };
+
+        if (userdata.cars.length >= userdata.garageLimit) {
+          let vault = userdata.vault || []
+
+          interaction.channel.send("You garage is full so this car has been sent to your vault!");
+     
+            console.log("pushed")
+            vault.push(carobj);
+            userdata.vault = vault
+            userdata.save();
+          
+            
+          }
+          else {
+            userdata.cars.push(carobj);
+            userdata.save();
+          }
+         return await interaction.reply(`You used a swan note and found the ${cardb.Cars[rand.toLowerCase()].Emote} ${cardb.Cars[rand.toLowerCase()].Name}`)
+    }
+    }
+    else if (itemtouse.toLowerCase() == "zero bar") {
       let effects = itemdb["zero bar"].Effects;
 
       let randomeffect = lodash.sample(effects);
@@ -883,7 +936,7 @@ module.exports = {
 
       fullname = `${emote} ${name}`;
 
-      for (var i5 = 0; i5 < amount2; i5++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
+      for (var i7 = 0; i7 < amount2; i7++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
       cooldowndata.save();
       userdata.save();

@@ -12,7 +12,13 @@
     "Cars": [
       "1969 ford mustang",
       "1969 volkswagen beetle",
-      "1973 plymouth barracuda"
+      "1973 plymouth barracuda",
+      "2015 toyota gt86",
+      "2001 lexus is300",
+      "1998 pontiac fiero",
+      "1986 toyota ae86",
+      "1989 nissan silvia s13",
+      "2001 mercedes sl600"
     ],
     "MaxCash": 3000,
     "Emoji": "<:commongarage:1036380413695897651>",
@@ -40,7 +46,8 @@
       "2008 porsche 911 gt2",
       "2023 acura integra",
       "2015 bmw m3",
-      "2021 evora gt"
+      "2021 evora gt",
+      "2019 lexus lc500"
     ],
     "Emoji": "<:raregarage:1036380412940918944>",
     "MaxCash": 10000,
@@ -64,7 +71,8 @@
       "1989 lotus esprit",
       "2021 lamborghini sc20",
       "2022 ferrari 812 competizione",
-      "2003 ferrari enzo"
+      "2003 ferrari enzo",
+      "2010 ferrari 599xx"
     ],
     "MaxCash": 25000,
     "Emoji": "<:legendarygarage:1036380411942670458>",

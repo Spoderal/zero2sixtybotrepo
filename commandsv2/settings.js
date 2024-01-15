@@ -49,7 +49,6 @@ module.exports = {
         { name: "Daily Reward Reminder", value: `${demote}` },
         { name: "Top.gg Vote Reminder", value: `${vemote}` },
         { name: "Tips", value: `${temote}` },
-        { name: "Trade Requests", value: `${tremote}` },
         { name: "Auto Fill Gas", value: `${gasemote}` }
       )
       .setColor(colors.blue);
@@ -70,10 +69,6 @@ module.exports = {
     );
 
     let row2 = new Discord.ActionRowBuilder().addComponents(
-      new Discord.ButtonBuilder()
-        .setCustomId("trades")
-        .setLabel("Enable Trade Requests")
-        .setStyle("Success"),
       new Discord.ButtonBuilder()
         .setCustomId("gas")
         .setLabel("Enable Auto Fill Gas")

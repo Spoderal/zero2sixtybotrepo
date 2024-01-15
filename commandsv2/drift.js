@@ -9,7 +9,7 @@ const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-
+const achievementdb = require("../data/achievements.json")
 const { createCanvas, loadImage } = require("canvas");
 module.exports = {
   data: new SlashCommandBuilder()
@@ -294,11 +294,16 @@ module.exports = {
             }
           );
 
-          if (difficulty == "master" && track == "mountain") {
-            userdata.dkeyst += 2;
-            if (!userdata.titles.includes("drift king")) {
-              userdata.titles.push("drift king");
-            }
+          let ach2 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["drift king"].Name)
+          if (difficulty == "master" && track == "parking garage" && ach2.length <= 0) {
+            interaction.channel.send(
+              'You just earned the "Drift King" achievement!'
+            );
+            userdata.achievements.push({
+              name: achievementdb.Achievements["drift king"].Name,
+              id: achievementdb.Achievements["drift king"].Name.toLowerCase(),
+              completed: true,
+            });
           }
 
           selected.Gas -= 1;

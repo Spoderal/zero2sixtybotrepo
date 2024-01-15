@@ -25,10 +25,17 @@ module.exports = {
     if (selected == "No ID")
       return await interaction.reply(`This car doesn't have an ID!`);
 
-    let carimage =
-      selected.Image || carsdb.Cars[selected.Name.toLowerCase()].Image;
+    let carimage = selected.Image || carsdb.Cars[selected.Name.toLowerCase()].Image;
 
-    userdata.showcase = carimage;
+    let showcase = {
+      Speed: selected.Speed,
+      Acceleration: selected.Acceleration,
+      Handling: selected.Handling,
+      Weight: selected.WeightStat,
+      Image: carimage
+    }
+
+    userdata.showcase = showcase;
 
     userdata.save();
 

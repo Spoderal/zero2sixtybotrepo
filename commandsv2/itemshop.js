@@ -19,7 +19,7 @@ const partdb = require("../data/partsdb.json").Parts
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("itemshop")
-    .setDescription("The daily item store"),
+    .setDescription("The weekly item store"),
   async execute(interaction) {
 
     let globals = (await Global.findOne())
@@ -28,7 +28,7 @@ module.exports = {
 
 
     let embed = new EmbedBuilder()
-    .setTitle(`Daily Item Shop`)
+    .setTitle(`Weekly Item Shop`)
     .setColor(colors.blue)
     for(let i in itemshop){
         let item = itemshop[i]

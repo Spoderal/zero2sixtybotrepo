@@ -2,22 +2,14 @@
   "Crates": {
     "common crate": {
       "Contents": [
-        "green helmet",
-        "red helmet",
-        "blue helmet",
-        "blue helmet",
-        "yellow helmet",
-        "yellow helmet",
-        "yellow helmet",
-        "dark matter helmet",
-        "dark matter helmet",
-        "cherry blossom helmet",
         "t1driftsprings",
         "t1tracksprings",
         "t1racesprings",
         "dualturbo",
         "supercharger",
-        "cherry blossom helmet",
+        "helmet",
+        "outfit",
+        "accessory",
         "1000 Cash",
         "500 Cash",
         "500 Cash",
@@ -29,23 +21,17 @@
     },
     "vote crate": {
       "Contents": [
-        "green helmet",
-        "red helmet",
-        "blue helmet",
-        "cat helmet",
         "t1weightreduction",
-        "yellow helmet",
-        "touch grass helmet",
-        "dark matter helmet",
-        "dark matter helmet",
-
-        "cherry blossom helmet",
-        "cardboard helmet",
-        "cherry blossom helmet",
+        "helmet",
+        "outfit",
+        "accessory",
         "450 Cash",
+        "lockpick",
+        "t3clutch",
+        "t3tires",
         "1000 Cash",
-        "500 Cash",
-        "250 Cash",
+        "5000 Cash",
+        "2500 Cash",
         "500 Cash"
       ],
       "Name": "Vote Crate",
@@ -54,12 +40,6 @@
     },
     "rare crate": {
       "Contents": [
-        "flame helmet",
-        "purple helmet",
-        "rainbow helmet",
-        "turqoise helmet",
-        "saturn helmet",
-        "trillionaire helmet",
         "1000 Cash",
         "1000 Cash",
         "1000 Cash",
@@ -70,6 +50,9 @@
         "t3weight",
         "t4weight",
         "t3clutch",
+        "helmet",
+        "outfit",
+        "accessory",
         "2000 Cash",
         "t3tires",
         "accelerator"
@@ -81,10 +64,6 @@
     "prestige crate": {
       "Contents": [
         "1000 Cash",
-        "dark mode helmet",
-        "dark mode helmet",
-        "stig helmet",
-        "vibrant helmet",
         "5000 Cash",
         "500 Cash",
         "dualturbo",
@@ -112,7 +91,6 @@
        "snowball",
        "wheelspin",
        "super wheelspin",
-       "grass helmet",
        "t4tires",
        "t4turbo",
        "5 garage spaces",
@@ -125,16 +103,11 @@
     "seasonal crate": {
       "Contents": [
         "100000 Cash",
-        "darkest helmet",
-        "evil helmet",
-        "abstract helmet",
         "glitch helmet",
         "t3driftspoiler",
         "t2driftspoiler",
         "t1driftspoiler",
-        "t1driftspoiler",
-        "rave helmet",
-        "touch grass helmet"
+        "t1driftspoiler"
       ],
       "Name": "Seasonal Crate",
       "Emote": "<:crate_seasonal:1080285947733737483>",

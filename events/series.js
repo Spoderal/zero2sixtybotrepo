@@ -19,7 +19,7 @@ async function series(interaction) {
        
           let bountycool = cooldowns.series1;
           let ticketscool = cooldowns.series1tickets;
-          let udata = await User.findOne({ id: user.id }, { versionKey: '_somethingElse' });
+          let udata = await User.findOne({ id: user.id })
           if (udata) {
             let timeout = 86400000;
             let timeout2 = 600000;
@@ -27,7 +27,6 @@ async function series(interaction) {
               udata.perfectengineeringcomplete !== true &&
               udata.perfectengineering == true &&
               udata.seriestickets < 10 &&
-              ticketscool !== null &&
               timeout2 - (Date.now() - ticketscool) < 0
             ) {
               udata.seriestickets += 1;

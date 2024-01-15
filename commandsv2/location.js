@@ -8,7 +8,9 @@ const Cooldowns = require("../schema/cooldowns");
 const cardb = require("../data/cardb.json")
 const lodash = require("lodash");
 const colors = require("../common/colors");
+const partdb = require("../data/partsdb.json")
 const { toCurrency, randomRange } = require("../common/utils");
+const landmarkdb = require("../data/landmarks.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -49,12 +51,22 @@ module.exports = {
     let locationindb = locationdb.Locations[location.toLowerCase()]
 
     if (command == "view") {
+      let landmarks = userdata.landmarks
 
+      let speedometer = userdata.speedometer
+
+      let landmarksarr = []
+
+      if(landmarks.length > 0){
+        for(let land in landmarks){
+          landmarksarr.push(landmarkdb[landmarks[land]].Emote)
+        }
+      }
 
       let embed = new EmbedBuilder()
       .setTitle(`${locationindb.Name}`)
       .setImage(`${locationindb.Image}`)
-      .setDescription(`${locationindb.Perks}`)
+      .setDescription(`${locationindb.Perks}\n\n<:location_speedometer:1175570810740682843> Top Speed Trap Speed: ${speedometer}\nLandmarks: ${landmarksarr.join(" ")}`)
       .setColor(colors.blue)
 
       await interaction.reply({embeds: [embed]})
@@ -194,16 +206,14 @@ module.exports = {
           interaction.editReply({embeds: [embed], fetchReply: true})
           userdata.save()
         }
-        else if(service == "Shop"){
-          let shop = locationindb.ForSale
+        else if(service == "Part"){
+          let parts = ["j1engine", "body", "j1suspension", "j1intake", "j1exhaust"]
+          let part = lodash.sample(parts)
 
-          let shoparr = []
+          embed.setDescription(`You're driving and find a ${partdb.Parts[part].Emote} ${partdb.Parts[part].Name} on the side of the road!`)
 
-          for(let it in shop){
-            shoparr.push(`${shop[it].emote} ${shop[it].name} : **${toCurrency(shop[it].price)}**`)
-          }
-
-          embed.setDescription(`You've arrived at a Tire Shop! Would you like to buy anything?\n\n${shoparr.join('\n')}`)
+          userdata.parts.push(part)
+          userdata.save()
           interaction.editReply({embeds: [embed], fetchReply: true, components: [actionrow]})
         }
       }
@@ -521,10 +531,10 @@ module.exports = {
         userdata.save()
       }
       else if(event == "Speedometer"){
-        let speed3 = cartodrive.Speed
+        let speed3 = (cartodrive.Speed / 5)
         let topspeed = randomRange(1, speed3)
 
-        embed.setDescription(`You found **${locationindb.Name}'s** <:location_speedometer:1175570810740682843> Speedometer! You achieved ${topspeed} MPH and earned $${topspeed}`)
+        embed.setDescription(`You found **${locationindb.Name}'s** <:location_speedometer:1175570810740682843> Speed Trap! You achieved ${topspeed} MPH and earned $${topspeed}`)
         
         userdata.cash += topspeed
         if(topspeed > userdata.speedometer) {

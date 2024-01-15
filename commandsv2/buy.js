@@ -275,11 +275,11 @@ module.exports = {
           }
           if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
             if (userdata.rareCredits < 25)
-              return interaction.reply("You don't have enough common credits!");
+              return interaction.reply("You don't have enough rare credits!");
           }
           if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
             if (userdata.exoticCredits < 25)
-              return interaction.reply("You don't have enough common credits!");
+              return interaction.reply("You don't have enough exotic credits!");
           }
           if (boughtCar.Exclusive) {
             if (userdata.typekeys < boughtCar.Exclusive)
@@ -545,7 +545,7 @@ module.exports = {
         .setDescription(`Price: ${toCurrency(boughtHouse[0].Price)}`);
       await interaction.reply({ embeds: [embed] });
     } else if (boughtWarehouse) {
-      let warehouses = userdata.warehouses;
+      let warehouses = userdata.warehouses || [];
       let prestige = userdata.prestige;
       let wareprice = parseInt(boughtWarehouse.Price);
       if (cash < wareprice)

@@ -114,7 +114,7 @@ module.exports = {
 
               ${emotes.moontokens}  Moon Tokens: ${numberWithCommas(moontokens)}
 
-              ${emotes.snowflakes} Snowflakes ${numberWithCommas(snowflakes)}
+              <:key_limited:1103923572063354880> Fictional Keys: ${userdata.evkeys} 
               `,
               inline: true,
             },

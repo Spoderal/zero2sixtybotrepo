@@ -75,8 +75,9 @@ module.exports = {
         `${user2}, you need to beat the 3rd squad before you can trade`
       );
 
-    if (user1 == user2)
-      return await interaction.reply(`You cant trade yourself!`);
+    if (user1 == user2) return await interaction.reply(`You cant trade yourself!`);
+
+
 
     if (trading.endsWith("cash") && trading2.endsWith("cash"))
       return interaction.reply("You can't trade cash for cash!");
@@ -257,6 +258,53 @@ module.exports = {
 
     collector.on("collect", async (i) => {
       if (i.customId.includes(`accept`)) {
+        let udata1 = await User.findOne({id: user1.id})
+        let udata2 = await User.findOne({id: user2.id})
+
+        if(cardb.Cars[trading.toLowerCase()]){
+          let filtercar = udata1.cars.filter((car) => car.Name.toLowerCase() == trading.toLowerCase())
+          if(!filtercar[0]) return interaction.editReply("You're missing this car!")
+        }
+        if(cardb.Cars[trading2.toLowerCase()]){
+          let filtercar = udata2.cars.filter((car) => car.Name.toLowerCase() == trading2.toLowerCase())
+          if(!filtercar[0]) return interaction.editReply("You're missing this car!")
+        }
+        if (trading.endsWith("cash")) {
+          let cashamount = Number(trading.split(" ")[0]);
+          let newamount = Math.round((cashamount -= cashamount * 0.1));
+          console.log(newamount);
+          item = `${toCurrency(newamount)}`;
+          if (cashamount > udata1.cash)
+            return interaction.editReply("You don't have enough cash!");
+
+        }
+
+        if (trading2.endsWith("cash")) {
+          let cashamount = Number(trading2.split(" ")[0]);
+          let newamount = Math.round((cashamount -= cashamount * 0.1));
+          console.log(newamount);
+          item = `${toCurrency(newamount)}`;
+          if (cashamount > udata2.cash)
+            return interaction.editReply("You don't have enough cash!");
+
+        }
+
+        if (partdb.Parts[trading2]) {
+          if (!udata2.parts.includes(trading2)) return interaction.editReply("You don't have this part!");
+        }
+        if (partdb.Parts[trading]) {
+          if (!udata1.parts.includes(trading)) return interaction.editReply("You don't have this part!");
+        }
+
+        if (itemdb[trading]) {
+          if (!udata1.items.includes(trading)) return interaction.editReply("You don't have this item!");
+        }
+
+        if (itemdb[trading2]) {
+          if (!udata2.items.includes(trading2)) return interaction.editReply("You don't have this item!");
+        }
+
+
         userdata.save();
         userdata2.save();
         embed.setTitle("Trade accepted! ✅");

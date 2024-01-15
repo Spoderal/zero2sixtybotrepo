@@ -135,7 +135,7 @@ module.exports = {
       displayhouses2.map((a) => a),
       10
     );
-
+    
 
     let itempage = cars;
     let embed = new EmbedBuilder()
@@ -143,11 +143,11 @@ module.exports = {
       .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}`)
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
-    embed.setImage("attachment://profile-image.png");
+      if(udata.showcase){
+        embed.setImage(`${udata.showcase.Image}`)
+      }
 
-    if (udata.showcase) {
-      embed.setThumbnail(udata.showcase);
-    }
+
     for (let car in cars[0]) {
       car = cars[0][car];
       let favorite = "";
@@ -164,6 +164,7 @@ module.exports = {
       let hand = Math.floor(car.Handling);
       let hp = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4
       hp = Math.round(hp);
+
       embed.addFields({
         name: `${car.Emote} ${car.Name} ${favorite}`,
         value: `${tag}\n${
@@ -238,74 +239,14 @@ module.exports = {
       fetchReply: true,
     });
 
-    let canvas = createCanvas(426, 240);
-    let ctx = canvas.getContext("2d");
-    let bg = await loadImage("https://i.ibb.co/QMZ0Hch/garage.png");
-    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-    let defaulty = 50;
-    let defaultx = 5;
-    for (let ca in cars[0]) {
-  
-      if (ca == 0) {
-        defaulty = 40;
-        defaultx = 5;
-      }
-      if (ca == 1) {
-        defaulty = 40;
-        defaultx = 150;
-      }
-      if (ca == 2) {
-        defaulty = 40;
-        defaultx = 300;
-      }
-      if (ca == 3) {
-        defaulty = 125;
-        defaultx = 5;
-      }
-      if (ca == 4) {
-        defaulty = 125;
-        defaultx = 150;
-      }
-      if (ca == 5) {
-        defaulty = 125;
-        defaultx = 300;
-      }
-      let car = cars[0][ca];
-      let carimg = car.Image || cardb.Cars[car.Name.toLowerCase()].Image;
-      let carimage = await loadImage(carimg);
-      try {
-        ctx.save();
-        roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
-        ctx.stroke();
-        ctx.clip();
-        ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
-        ctx.restore();
-      } catch (err) {
-        console.log("error")
-      }
-    }
-    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-      name: "profile-image.png",
-    });
-
-    setTimeout(async () => {
-      embed.setImage("attachment://profile-image.png");
-      await interaction.editReply({
-        content: "Loaded!",
-        embeds: [embed],
-        components: [row, row2],
-        files: [attachment],
-        fetchReply: true,
-      });
-    }, 3000);
-
     let filter2 = (btnInt) => {
       return interaction.user.id === btnInt.user.id;
     };
     let collector2 = msg.createMessageComponentCollector({
       filter: filter2,
     });
+
+
 
     collector2.on("collect", async (i) => {
       if (i.customId == "cars") {
@@ -451,66 +392,8 @@ module.exports = {
           if (itempage == cars) {
             embed.setFooter({ text: `Loading car image...` });
             interaction.editReply({ embeds: [embed], fetchReply: true });
-            let canvas = createCanvas(426, 240);
-            let ctx = canvas.getContext("2d");
-            let bg = await loadImage("https://i.ibb.co/QMZ0Hch/garage.png");
-            ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
-
-            let defaulty = 50;
-            let defaultx = 5;
-            for (let ca in itempage[page - 1]) {
-              if (ca == 0) {
-                defaulty = 40;
-                defaultx = 5;
-              }
-              if (ca == 1) {
-                defaulty = 40;
-                defaultx = 150;
-              }
-              if (ca == 2) {
-                defaulty = 40;
-                defaultx = 300;
-              }
-              if (ca == 3) {
-                defaulty = 125;
-                defaultx = 5;
-              }
-              if (ca == 4) {
-                defaulty = 125;
-                defaultx = 150;
-              }
-              if (ca == 5) {
-                defaulty = 125;
-                defaultx = 300;
-              }
-              let car = itempage[page - 1][ca];
-
-              let carimg =
-                car.Image || cardb.Cars[car.Name.toLowerCase()].Image;
-              let carimage = await loadImage(carimg);
-              try {
-                ctx.save();
-                roundedImage(ctx, defaultx, defaulty, 123, 70, 20);
-                ctx.stroke();
-                ctx.clip();
-                ctx.drawImage(carimage, defaultx, defaulty, 123, 70);
-                ctx.restore();
-              } catch (err) {
-                console.log("error loading image");
-              }
-            }
-            let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-              name: "profile-image.png",
-            });
-            setTimeout(() => {
-              embed.setImage("attachment://profile-image.png");
-              embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
-              interaction.editReply({
-                embeds: [embed],
-                fetchReply: true,
-                files: [attachment],
-              });
-            }, 5000);
+      
+            
           } else {
             interaction.editReply({ embeds: [embed], fetchReply: true });
           }
@@ -519,6 +402,8 @@ module.exports = {
         }
       }
     });
+    
+
   },
 };
 function roundedImage(ctx, x, y, width, height, radius) {

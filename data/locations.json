@@ -4,7 +4,7 @@
         "peru":{
             "Name":"Peru",
             "Image":"https://i.ibb.co/D492DVr/map-peru-filled.png",
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Events":["Service", "Service",  "NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race","Landmark", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving and its just a normal day", "You see a squirrel! You decide to name it Rin"],
             "Perks":"2x cash when racing NPCs",
@@ -40,7 +40,8 @@
         "india":{
             "Name":"India",
             "Image":"https://i.ibb.co/0cfpXGp/map-india-filled.png",
-            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race","Landmark", "Nothing", "Fine", "Speedometer"],
+            "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race","Landmark", "Nothing", "Fine", "Speedometer", "Serivce"],
+            "Services":["Gas Station", "Part"],
             "NoEvents":["You're driving and its just a normal day", "You see a camel! You decide to name it Spoder"],
             "Perks":"2x cash when racing in drag races",
             "Jobs":[
@@ -73,7 +74,7 @@
             "Image":"https://i.ibb.co/2WMg13m/location-spain-filled.png",
             "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving and its just a normal day", "You found a taco! You decide to eat it"],
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Perks":"2x cash when helping NPCs",
             "Shop":"Tires",
             "ForSale":[{"name": "T1Slicks", "price":5000, "emote": "<:part_t1tires:1101042346231070773>", "id": 1}],
@@ -100,7 +101,7 @@
             "Image":"https://i.ibb.co/QrFYn7k/map-italy-filled.png",
             "Events":["NPC Race", "Nothing", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer", "Market"],
             "NoEvents":["You're driving and its just a normal day", "You found pizza! You decide to eat it"],
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Perks":"2x cash when racing in street races",
             "BlackMarket":[
                 {
@@ -140,7 +141,7 @@
             "Image":"https://i.ibb.co/tJVjs11/map-japan-filled.png",
             "Events":["NPC Race", "NPC Job", "NPC Job","NPC Race", "Nothing", "Nothing", "Fine", "Speedometer", "Market"],
             "NoEvents":["You found some noodles, don't play with your food", "You're driving and its a normal day"],
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Jobs":[
                 {
                     "Name":"Han",
@@ -187,7 +188,7 @@
         "usa":{
             "Name":"USA",
             "Image":"https://i.ibb.co/d036CfJ/map-usa-filled.png",
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving and its just a normal day", "You see a deer! It just stands there"],
             "Perks":"2x gas when filling up in USA",
@@ -230,7 +231,7 @@
             "Name":"Germany",
             "Image":"https://i.ibb.co/hgz9hdS/map-germany-filled.png",
             
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Jobs":[
                 {
                     "Name":"Otto",
@@ -280,7 +281,7 @@
             "Name":"United Kingdom",
             "Image":"https://i.ibb.co/bKBY0Wv/map-uk-filled.png",
             
-            "Services":["Gas Station"],
+            "Services":["Gas Station", "Part"],
             "Jobs":[
                 {
                     "Name":"Noah",
@@ -300,7 +301,7 @@
             ],
             "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving in the rain and its just a normal day", "You see a british guy! You look the other way"],
-            "Perks":"1.5x cash when selling cars",
+            "Perks":"80% cash when selling cars",
             "BlackMarket":[
                 {
                     "Name":"2021 Mini JCW",

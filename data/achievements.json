@@ -38,14 +38,14 @@
     },
     "bug smasher": {
       "Emote": "<:achievement_bugsmasher:1074597420131942490>",
-      "Task": "Find a bug",
+      "Task": "Find 5 bugs",
       "Name": "Bug Smasher",
       "Reward": 0,
       "Image": "https://i.ibb.co/5GxBJbp/achievement-bugsmasher.png"
     },
     "drift king": {
       "Emote": "<:ACH_driftking:1088280543684198430>",
-      "Task": "Complete 20 drifts on master difficulty",
+      "Task": "Complete a drift on master parking garage difficulty",
       "Name": "Drift King",
       "Reward": 0,
       "Image": "https://i.ibb.co/vkfr887/ACH-driftking.png"
@@ -56,6 +56,13 @@
       "Name": "Legacy",
       "Reward": 0,
       "Image": "https://i.ibb.co/0hTDFp9/ach-legacy.png"
+    },
+    "gambling god": {
+      "Emote": "<:achievement_gamble:1192271544899076156>",
+      "Task": "Gamble and win 1000 times",
+      "Name": "Gambling God",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/y42g3dh/achievement-gamble.png"
     },
     "s1 spring badge": {
       "Emote": "<:badge_springs1:1078234569972666421>",

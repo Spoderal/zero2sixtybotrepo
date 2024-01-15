@@ -65,9 +65,57 @@ module.exports = {
 
     let partindb = partdb.Parts[inputUpgrade.toLowerCase()]
 
-    if(selected[0][partindb.Type]) return interaction.reply(`Your car already has a ${partindb.Type}, use /remove first!`)
+    let engine = selected[0].engine || cardb[selected[0].Name.toLowerCase()].Engine
+    if(selected[0][partindb.Type] && partindb.Type !== "engine") return interaction.reply(`Your car already has a ${partindb.Type}, use /remove first!`)
 
+    if(engine.toLowerCase() == partindb.Name.toLowerCase()) return interaction.reply(`Your car already has this engine!`)
 
+    if(partindb.Type == "engine"){
+      let hpengine = partindb.Power
+      let oldhp = partdb.Parts[engine.toLowerCase()]
+
+      let oldcarhp = selected[0].Speed
+
+      selected[0].Speed -= oldhp.Power
+      selected[0].Speed += hpengine
+
+      console.log(selected[0].Speed)
+      
+      let embed = new EmbedBuilder()
+      .setTitle(`Engine swap`)
+      .addFields({name: "Old Engine", value: `${oldhp.Emote} ${oldhp.Name}\n${emotes.speed} HP ${oldhp.Power}`, inline: true}, {name: "New Engine", value: `${partindb.Emote} ${partindb.Name}\n${emotes.speed} HP ${hpengine}`, inline: true})
+      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}`)
+      .setColor(colors.blue)
+      .setImage(`${carimage}`)
+      .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
+
+      selected[0].engine = partindb.Name.toLowerCase()
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": selected[0],
+          },
+        },
+  
+        {
+          arrayFilters: [
+            {
+              "car.Name": selected[0].Name,
+            },
+          ],
+        }
+      );
+
+      userdata.parts.push(oldhp.Name.toLowerCase())
+
+      userdata.save()
+  
+      return await interaction.reply({embeds: [embed]})
+    }
 
     let acc = selected[0].Acceleration
     let newacc = acc -= partindb.Acceleration
@@ -149,6 +197,11 @@ module.exports = {
     .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
 
     await interaction.reply({embeds: [embed]})
+
+    if(userdata.tutorial && userdata.tutorial.started == true){
+      await interaction.channel.send(`Awesome! Your car is even faster! You can buy more parts with \`/parts\` and make sure to use the \`/buy\` command to purchase them! To finish the tutorial, win a drag race and you'll get a barn map, then run \`/barn\``)
+      
+    }
      
   },
 };

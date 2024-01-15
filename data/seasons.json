@@ -15,7 +15,7 @@
         },
         "3": {
           "Number": 3,
-          "Item": "jolly",
+          "Item": "5000 Cash",
           "Required": 1250
         },
         "4": {
@@ -120,7 +120,7 @@
         },
         "24": {
           "Number": 24,
-          "Item": "festive",
+          "Item": "5000 Cash",
           "Required": 25000
         },
         "25": {
@@ -210,7 +210,7 @@
         },
         "42": {
           "Number": 42,
-          "Item": "icey",
+          "Item": "5000 Cash",
           "Required": 170000
         },
         "43": {

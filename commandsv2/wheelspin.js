@@ -13,6 +13,7 @@ const {
 } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { emotes } = require("../common/emotes");
+const outfits = require("../data/characters.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -35,13 +36,31 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-    let items = ["🏎️", "💵", "⚙️", "🔩"];
+   let items = ["🏎️", "💵", "⚙️", "🔩", "🪖", "👕", "🪛"];
+
     let items2 = wheelspinrewards.Items;
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
     let tier4 = wheelspinrewards.Tier4;
     let garagespaces = userdata.garageLimit;
-
+    let item = lodash.sample(items);
+    if (userdata.using.includes("orange juice")) {
+     
+      let cooldown = cooldowns.orangejuice;
+      let timeout = 60000;
+      console.log(timeout - (Date.now() - cooldown));
+      if (
+        timeout !== null &&
+        (timeout - (Date.now() - cooldown)) < 0
+      ) {
+        console.log("pulled")
+        userdata.using.pull("orange juice");
+        userdata.update();
+        interaction.channel.send("Your orange juice ran out!");
+      } else {
+        item = `🪛`
+      }
+    }
     let usercars = userdata.cars;
     userdata.wheelspins -= 1;
     cooldowns.wheelspin = Date.now();
@@ -52,7 +71,6 @@ module.exports = {
     let msg = await interaction.reply({ embeds: [embed], fetchReply: true });
 
     setTimeout(() => {
-      let item = lodash.sample(items);
       if (item == "🏎️") {
         item = lodash.sample(items);
       }
@@ -74,7 +92,7 @@ module.exports = {
             userdata.lockpicks += 1;
           }
 
-          embed.setDescription(`You won a $${emotes.lockpicks} lockpick!`);
+          embed.setDescription(`You won a ${emotes.lockpicks} lockpick!`);
           interaction.editReply({ embeds: [embed] });
         } else if (item == "🪛") {
           let reward = lodash.sample(tier4);
@@ -84,7 +102,26 @@ module.exports = {
             `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
-        } else if (item == "🏎️") {
+        } 
+        else if (item == "👕") {
+          let reward = lodash.sample(wheelspinrewards.Outfits);
+          userdata.outfits.push(reward.toLowerCase());
+
+          embed.setDescription(
+            `You won a ${outfits.Outfits[reward].Emote} ${outfits.Outfits[reward].Name}!`
+          );
+          interaction.editReply({ embeds: [embed] });
+        } 
+        else if (item == "🪖") {
+          let reward = lodash.sample(wheelspinrewards.Helmets);
+          userdata.outfits.push(reward.toLowerCase());
+
+          embed.setDescription(
+            `You won a ${outfits.Helmets[reward].Emote} ${outfits.Helmets[reward].Name}!`
+          );
+          interaction.editReply({ embeds: [embed] });
+        } 
+        else if (item == "🏎️") {
           let reward;
 
           reward = lodash.sample(cars);
@@ -98,12 +135,10 @@ module.exports = {
               .setStyle("Success"),
             new Discord.ButtonBuilder()
               .setCustomId("sell")
-              .setLabel(`Sell for $0`)
+              .setLabel(`Sell for $${sellprice}`)
               .setStyle("Danger")
           );
-          embed.setDescription(
-            `You won a ${carsdb.Cars[reward].Emote} ${carsdb.Cars[reward].Name}!`
-          );
+          
           let carname = carsdb.Cars[reward].Name;
           embed.setImage(carsdb.Cars[reward].Image);
           embed.addFields([
@@ -133,10 +168,27 @@ module.exports = {
           }
           collector.on("collect", async (i) => {
             if (i.customId.includes("keep")) {
+              let carindb = carsdb.Cars[reward];
+
               collector.stop();
               if (usercars.length >= garagespaces) {
-                interaction.channel.send("You garage is full!");
-                return;
+                let carobj = {
+                  ID: carindb.alias,
+                  Name: carindb.Name,
+                  Speed: carindb.Speed,
+                  Acceleration: carindb["0-60"],
+                  Handling: carindb.Handling,
+                  Parts: [],
+                  Emote: carindb.Emote,
+                  Livery: carindb.Image,
+                  Miles: 0,
+                  Gas: 10,
+                  MaxGas: 10,
+                  WeightStat: carindb.Weight,
+                };
+                userdata.vault.push(carobj)
+                
+                embed.setDescription("You garage is full! The car has been deposited into your vault, run /vault");
               } else {
                 let carindb = carsdb.Cars[reward];
 

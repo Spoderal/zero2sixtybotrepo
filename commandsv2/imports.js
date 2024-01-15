@@ -25,7 +25,7 @@ module.exports = {
           <:crate_common:1103921687818407936> Common Import Crate: 50 ${key1emote} Keys *Car Cost: 25 Common Credits*
           <:crate_rare:1103921686765637703> Rare Import Crate : 25 ${key2emote} Keys *Car Cost: 25 Rare Credits*
           <:crate_esxotic:1103921685972922449> Exotic Import Crate : 20 ${key3emote} Keys *Car Cost: 25 Exotic Credits*
-          <:crate_limited:1103921683968032829> Sun Vs Snow Import Crate : 100 ${key5emote} Keys
+          <:crate_limited:1103921683968032829> Fictional Import Crate : 250 <:key_limited:1103923572063354880> Keys
           `,
         },
       ])

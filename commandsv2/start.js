@@ -130,7 +130,7 @@ module.exports = {
       newuser.cars.push(carobj);
       newuser.save();
       await interaction.editReply(
-        `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, run /garage to see your cars ID, go ahead and try running \`/race car: ${carobj.ID}\`, and **select street race**, then **select Tier 1**`
+        `Nice choice! Now that you've bought your first car, you can race with it! All cars have an ID, Thats what you're going to type in the box when it asks for the car, **run /garage** to see your cars ID, go ahead and try running \`/race race: street race tier: tier 1 car: ${carobj.ID}\``
         );
       });
     }, 3000);

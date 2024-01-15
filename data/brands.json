@@ -5,6 +5,12 @@
     "name": "Acura",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
+  "abarth": {
+    "image": "https://i.ibb.co/pJKCZ4X/brand-abarth.png",
+    "emote": "<:brand_abarth:1192963172722815026>",
+    "name": "Abarth",
+    "country": "https://i.ibb.co/120BJky/flag-italy.png"
+  },
   "alfa romeo": {
     "image": "https://i.ibb.co/1s6S42L/logo-alfa.png",
     "emote": "<:alfaromeo:931011550704173056>",
@@ -33,6 +39,12 @@
     "image": "https://i.ibb.co/Q6x4vzv/shelby-2-logo-png-transparent-1.png",
     "emote": "<:shelby:978870450505515018>",
     "name": "Shelby",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "batman": {
+    "image": "https://i.ibb.co/jDBcfj9/batman.png",
+    "emote": "<:batmanemoji:938282455046176788>",
+    "name": "Brabham",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "brabham": {
@@ -98,7 +110,7 @@
   },
   "ford": {
     "image": "https://i.ibb.co/Wp6qLJs/logo-ford.png",
-    "emote": "<:ford:931012624152399902>",
+    "emote": "<:brand_ford:1192958185863118889>",
     "name": "Ford",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
@@ -118,6 +130,12 @@
     "image": "https://i.ibb.co/ypF0MNw/Logo-Haas-F1.png",
     "emote": "<:haas:1085065203659587584>",
     "name": "Haas",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "halo": {
+    "image": "https://i.ibb.co/hcNVVTf/brand-halo.png",
+    "emote": "<:brand_halo:1192964420305961000>",
+    "name": "Halo",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "hennessey": {
@@ -251,6 +269,36 @@
     "emote": "<:nissan:931011548678352916>",
     "name": "Nissan",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
+  },
+  "oldsmobile": {
+    "image": "https://i.ibb.co/RgHRVzb/logo-oldsmobile.png",
+    "emote": "<:logo_oldsmobile:1196245980937457707>",
+    "name": "Oldsmobile",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "quadra": {
+    "image": "https://i.ibb.co/nCtjwVZ/quadra.png",
+    "emote": "<:quadra:1189432313180852315>",
+    "name": "Quadra",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "mach": {
+    "image": "https://i.ibb.co/7G2N4nL/machfive.png",
+    "emote": "<:machfive:1191614689407402024>",
+    "name": "Mach Five",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "ghost busters": {
+    "image": "https://i.ibb.co/ZTBrDWB/ghostbusters.png",
+    "emote": "<:ghostbusters:938282455268470796>",
+    "name": "Ghost Busters",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "flintstones": {
+    "image": "https://i.ibb.co/SVfjQCs/flintstoneslogo.png",
+    "emote": "<:flintstoneslogo:1192256495463698452>",
+    "name": "Flintstones",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "pagani": {
     "image": "https://i.ibb.co/tccJCS2/logo-pagani.png",

@@ -35,12 +35,12 @@ module.exports = {
     let wheelspins = userdata.swheelspins;
     if (wheelspins <= 0)
       return await interaction.reply("You're out of super wheel spins!");
-    let items = ["🏎️", "⚙️", "💵"];
+    let items = ["🏎️", "⚙️", "💵", "🪛"];
     let cash = wheelspinrewards.Cash;
     let cars = wheelspinrewards.Cars;
     let parts = wheelspinrewards.Parts;
     let tier4 = wheelspinrewards.Tier4;
-    let garagespaces = userdata.garagelimit;
+    let garagespaces = userdata.garageLimit;
 
     let usercars = userdata.cars;
     userdata.swheelspins -= 1;
@@ -56,19 +56,22 @@ module.exports = {
     setTimeout(() => {
       let item = lodash.sample(items);
       if (userdata.using.includes("orange juice")) {
+     
         let cooldown = cooldowndata.orangejuice;
         let timeout = 60000;
         console.log(timeout - (Date.now() - cooldown));
-        if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
-          console.log("pulled");
+        if (
+          timeout !== null &&
+          (timeout - (Date.now() - cooldown)) < 0
+        ) {
+          console.log("pulled")
           userdata.using.pull("orange juice");
           userdata.update();
-          interaction.channel.send("Your orange juice ran out! :(");
+          interaction.channel.send("Your orange juice ran out!");
         } else {
-          item = "🪛";
+          item = `🪛`
         }
       }
-      embed.setDescription(`${item}`);
       interaction.editReply({ embeds: [embed] });
       setTimeout(() => {
         if (item == "⚙️") {
@@ -132,10 +135,7 @@ module.exports = {
           }
           collector.on("collect", async (i) => {
             if (i.customId.includes("keep")) {
-              if (usercars.length >= garagespaces) {
-                interaction.channel.send("You garage is full!");
-                return;
-              } else {
+           
                 let carindb = carsdb.Cars[reward];
 
                 let ecarobj = {
@@ -170,13 +170,32 @@ module.exports = {
                   WeightStat: carindb.Weight,
                 };
 
-                if (carsdb.Cars[reward.toLowerCase()].Range) {
-                  userdata.cars.push(ecarobj);
-                } else {
-                  userdata.cars.push(carobj);
+                if (usercars.length >= garagespaces) {
+                  let vault = userdata.vault || []
+  
+                  interaction.channel.send("You garage is full so this car has been sent to your vault!");
+                  if (carsdb.Cars[reward.toLowerCase()].Range) {
+                    vault.push(ecarobj);
+                    userdata.vault = vault
+                    userdata.save();
+                  } else {
+                    console.log("pushed")
+                    vault.push(carobj);
+                    userdata.vault = vault
+                    userdata.save();
+                  }
+                  
                 }
-              }
-              userdata.save();
+                else {
+                  if (carsdb.Cars[reward.toLowerCase()].Range) {
+                    userdata.cars.push(ecarobj);
+                    userdata.save();
+                  } else {
+                    userdata.cars.push(carobj);
+                    userdata.save();
+                  }
+                }
+   
               embed.setTitle("✅");
               await interaction.editReply({ embeds: [embed] });
               collector.stop();

@@ -36,12 +36,8 @@ const Global = new mongoose.Schema({
     required: false,
     default: [],
   },
-  market: {
-    type: Array,
-    required: false,
-    default: [],
-  },
-  newmarket: {
+
+  umarket: {
     type: Array,
     required: false,
     default: [],

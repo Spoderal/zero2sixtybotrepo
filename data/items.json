@@ -1,58 +1,5 @@
 {
-  "trophy": {
-    "Price": 0,
-    "Action": "Double your cash earnings for 30 minutes",
-    "Name": "Trophy",
-    "Multiply": 2,
-    "Time": 5000,
-    "Shop": false,
-    "Findable": false,
-    "Tier": 1,
-    "Emote": "<:item_trophy:971646473940910131>"
-  },
-  "checkered flag": {
-    "Price": 0,
-    "Action": "Triple your cash earnings for 10 minutes",
-    "Name": "Checkered Flag",
-    "Multiply": 3,
-    "Time": 600000,
-    "Shop": false,
-    "Findable": false,
-    "Tier": 2,
-    "Emote": "<:item_checkflag:971646474360332298>"
-  },
-  "spikes": {
-    "Price": 0,
-    "Action": "Slow down police cars",
-    "Name": "Spikes",
-    "Type": "Usable",
-    "Shop": false,
-    "Findable": false,
-    "Tier": 1,
-    "Emote": "<:item_spikes:971639082935541761>"
-  },
-  "emp": {
-    "Price": 0,
-    "Action": "Remove 20 speed temporarily from a cop car chasing you",
-    "Name": "EMP",
-    "Type": "Usable",
-    "Image": "https://i.ibb.co/12J5188/item-emp.gif",
-    "Shop": false,
-    "Findable": false,
-    "Tier": 1,
-    "Emote": "<a:item_emp2:1107945198757101642>"
-  },
-  "roadblock": {
-    "Price": 0,
-    "Action": "Remove 20 speed temporarily from a racers car you're chasing",
-    "Name": "RoadBlock",
-    "Type": "Usable",
-    "Image": "https://i.ibb.co/smShBhY/item-policeblock.gif",
-    "Shop": false,
-    "Findable": false,
-    "Tier": 1,
-    "Emote": "<a:item_policeblock:1105320926221971496>"
-  },
+
   "wrench": {
     "Price": 2500,
     "Action": "Fix any part on a junk car without needing the part",
@@ -161,6 +108,7 @@
     "Emote": "<:item_hugevault:1101004947107106876>",
     "Shop": false,
     "Findable": true,
+    "Market":500000,
     "Tier": 3,
     "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
     "Used": ["You store some money in a huge vault"]
@@ -220,6 +168,7 @@
     "Emote": "<:item_snowball:1183251693320798240>",
     "Shop": true,
     "Findable": true,
+    "Market":25000,
     "Tier": 3,
     "Image": "https://i.ibb.co/Kh0y0Kf/item-snowball.png"
   },
@@ -484,6 +433,7 @@
     "Emote": "<:item_flowers:1103826126721265664>",
     "Shop": false,
     "Findable": true,
+    "Market":5000,
     "Tier": 1,
     "Image": "https://i.ibb.co/0sddpRj/item-flowers.png"
   },
@@ -496,6 +446,7 @@
     "Emote": "<:item_crowbar:1104299475691917444>",
     "Shop": false,
     "Findable": true,
+    "Market":5000,
     "Tier": 1,
     "Image": "https://i.ibb.co/RDWfNFb/item-crowbar.png"
   },
@@ -508,6 +459,7 @@
     "Emote": "<:item_mask:1104299478011367494>",
     "Shop": false,
     "Findable": true,
+    "Market":5000,
     "Tier": 1,
     "Image": "https://i.ibb.co/wBzGWGy/item-mask.png"
   },
@@ -520,8 +472,34 @@
     "Emote": "<:item_coconut:1103826134149374006>",
     "Shop": false,
     "Findable": true,
+    "Market":5000,
     "Tier": 1,
     "Image": "https://i.ibb.co/25y3tSq/item-coconut.png"
+  },
+  "swan note": {
+    "Price": 0,
+    "Action": "Used to seek out event cars",
+    "Name": "Swan Note",
+    "Type": "Usable",
+    "Emote": "<:item_swannote:1196272038327881768>",
+    "Shop": false,
+    "Findable": false,
+    "Market":5000,
+    "Tier": 1,
+    "Image": "https://i.ibb.co/g7q4RfJ/item-swannote.png"
+  },
+  "reverse card": {
+    "Price": 0,
+    "Action": "Use this to only win races for 2 minutes",
+    "Name": "Reverse Card",
+    "Type": "Usable",
+    "Emote": "<:item_reverse:1196351265865744414>",
+    "Shop": false,
+    "Findable": true,
+    "Market":5000,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/2c62K9T/item-reverse.png",
+    "Used":["You used a reverse card on the bot...what?", "REVERSE REVERSE!", "Your friends probably hate you after this card"]
   },
   "dirt": {
     "Price": 0,

@@ -42,9 +42,8 @@ module.exports = {
     patron(client);
     double(client);
     gold(client);
-    stats(client);
+ //   stats(client);
     itemshop(client)
-
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
@@ -97,9 +96,11 @@ module.exports = {
 
     let randomstatuses = [
       `🌨️ WINTER 🌨️  /season`,
-      `⚙️ HUGE UPDATE ⚙️ 12/15 /updates`,
+      `⚙️ HUGE UPDATE ⚙️ 1/5 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
-      "🎄 CHRISTMAS EVENT /events 🎄",
+      "🧩 FICTIONAL EVENT /events 🧩",
+      "🦢 SWAN SONG EVENT /events 🦢",
+      "⚙️ NEW PATCH ⚙️ 1/15 /updates",
     ];
 
     let randomstatus = lodash.sample(randomstatuses);

@@ -17,7 +17,7 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Snow Vs Sun", value: "snowvssun" }
+          {name: "Fictional", value: "fictional"}
         )
         .setRequired(true)
     )
@@ -38,8 +38,7 @@ module.exports = {
       "exotic",
       "drift",
       "fools",
-      "le mans",
-      "snowvssun",
+      "fictional"
     ];
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -115,15 +114,12 @@ module.exports = {
         return await interaction.reply(
           `You dont have enough keys! This crate costs 50 drift keys`
         );
-      if (bought == "fools" && foolskeys < 25)
+      if (bought == "fictional" && eventkeys < 250)
         return await interaction.reply(
-          `You dont have enough keys! This crate costs 1K fools keys...APRIL FOOLS! Its 25 fools keys`
+          `You dont have enough keys! This crate costs 250 fictional keys`
         );
 
-      if (bought == "snowvssun" && eventkeys < 100)
-        return await interaction.reply(
-          `You dont have enough keys! This crate costs 100 Event Keys`
-        );
+
       if (bought == "le mans" && lekeys < 10)
         return await interaction.reply(
           `You dont have enough keys! This crate costs 10 Le Keys`
@@ -140,14 +136,13 @@ module.exports = {
         userdata.ekeys -= 20;
       } else if (bought == "drift") {
         userdata.dkeyst -= 50;
-      } else if (bought == "snowvssun") {
-        userdata.evkeys -= 100;
-      } else if (bought == "fools") {
+      } 
+      else if (bought == "fools") {
         userdata.foolskeys -= 25;
       } else if (bought == "le mans") {
         userdata.lekeys -= 10;
-      } else if (bought == "rain") {
-        userdata.raintrophy -= 25;
+      } else if (bought == "fictional") {
+        userdata.evkeys -= 250;
       }
 
       let cratecontents = crates[bought].Contents;
@@ -202,7 +197,20 @@ module.exports = {
 
       await interaction.reply({ embeds: [embedfinal] });
       setTimeout(() => {
-        userdata.cars.push(carobj);
+        if (userdata.cars.length >= userdata.garageLimit) {
+          let vault = userdata.vault || []
+
+          interaction.channel.send("You garage is full so this car has been sent to your vault!");
+     
+            console.log("pushed")
+            vault.push(carobj);
+            userdata.vault = vault
+          
+            
+          }
+          else {
+            userdata.cars.push(carobj);
+          }
         embedfinal.setTitle(`Unboxed ${bought} crate!`);
         embedfinal.addFields([
           {

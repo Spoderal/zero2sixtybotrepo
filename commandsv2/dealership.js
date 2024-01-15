@@ -96,7 +96,7 @@ module.exports = {
     let embed = new EmbedBuilder()
     .setTitle("Vehicle Dealership")
     .setThumbnail("https://i.ibb.co/MfdVnTd/icon-dealership.png")
-    .setDescription(`**Featured Car**\n${featurecar.Emote} ${featurecar.Name} ${classdb[featurecar.Class.toLowerCase()].Emote}\n${emotes.speed} Power: ${featurecar.Speed}\n${emotes.acceleration} Acceleration: ${featurecar["0-60"]}\n${emotes.handling} Handling: ${featurecar.Handling}\n${emotes.weight} Weight: ${featurecar.Weight}`)
+    .setDescription(`**Featured Car**\n${featurecar.Emote} ${featurecar.Name} ${classdb[featurecar.Class.toLowerCase()].Emote}\n${emotes.cash} ${(toCurrency(featurecar.Price))}\n${emotes.speed} Power: ${featurecar.Speed}\n${emotes.acceleration} Acceleration: ${featurecar["0-60"]}\n${emotes.handling} Handling: ${featurecar.Handling}\n${emotes.weight} Weight: ${featurecar.Weight}`)
     .setImage(`${featurecar.Image}`)
     .setColor(colors.blue)
 

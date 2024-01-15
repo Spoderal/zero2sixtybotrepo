@@ -207,7 +207,7 @@ module.exports = {
         }
 
       
-      global.markModified("trialtimes");
+      global.updateOne("trialtimes");
       global.save();
 
         console.log(`track length ${tracklength}`);

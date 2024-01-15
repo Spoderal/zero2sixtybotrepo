@@ -22,25 +22,11 @@ module.exports = {
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Season 2",
-            description: "Information for the Season 2 Z Pass",
+            label: "Season 3",
+            description: "Information for the Season 3 Z Pass",
             value: "spring_event",
             customId: "spring",
             emoji: "<:season2_ico:1146637806354047007>",
-          },
-          {
-            label: "Christmas",
-            description: "Information for the Christmas Event",
-            value: "event_1",
-            customId: "event_1",
-            emoji: "🎅🏼",
-          },
-          {
-            label: "Snowys Street",
-            description: "Information for the Snowys Street",
-            value: "event_2",
-            customId: "event_2",
-            emoji: "❄️",
           },
           {
             label: "Space Race",
@@ -48,6 +34,20 @@ module.exports = {
             value: "event_3",
             customId: "event_3",
             emoji: "🚀",
+          },
+          {
+            label: "Fictional Powerhouse",
+            description: "Information for the Fictional Powerhouse event",
+            value: "event_1",
+            customId: "event_1",
+            emoji: "🧩",
+          },
+          {
+            label: "Swan Song",
+            description: "Information for the Swan Song event",
+            value: "event_2",
+            customId: "event_2",
+            emoji: "🦢",
           },
     
         ])
@@ -63,9 +63,9 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 3 <:season3:1183248587774238741>
-          Christmas Event 🎅🏼
-          Snowys Street ❄️
           Space Race 🚀
+          Fictional Powerhouse 🧩
+          Swan Song 🦢
       `);
 
     embed.setColor(colors.blue);
@@ -111,21 +111,23 @@ module.exports = {
         });
       } 
       else  if (value === "event_1") {
-        embed.setTitle("Christmas Event");
+        embed.setTitle("Fictional Powerhouse");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`The Christmas event is here!
+        embed.setDescription(`Fictional Powerhouse is here!
 
-        Get <:zpresent:1183910541194956871> presents from racing in the snow race, and obtain snowballs, exclusive cars, and more!
+        The universes are colliding with one another and the only way for them to get back is to beat someone in a race!
 
-        During the event, daily and weekly rewards are **doubled**! Its a Christmas miracle!
+        Get <:key_limited:1103923572063354880> Fictional Keys from racing in street races, and obtain fictional cars from your favorite universes!
 
-        **Ends December 31st 2023**
+        
+
+        **Ends January 31st 2023**
 
                   `);
         embed.setThumbnail();
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/kySCd7y/CHRISTMASEVENT.png");
+          .setImage("https://i.ibb.co/bsxTKFG/event-fiction.png");
 
         await interaction.editReply({
           embeds: [embed],
@@ -133,22 +135,25 @@ module.exports = {
         });
       } 
       else  if (value === "event_2") {
-        embed.setTitle("Snowys Street");
+        embed.setTitle("Swan Song");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Snowy is back and MAD!
+        embed.setDescription(`Welcome to Swan Song!
+        
+        As the age of electric cars draws nearer, the petrol-powered cars we know and love are being phased out one by one.\n
+        Participate in what may well be the last hurrah of the internal combustion engine, driving various cars that are getting or have gotten axed over the previous years.\n\n
+        Because, after all, nothing can replace good old rumbles and horsepower.
 
-        He believes the racer community is stealing his spotlight, so he wants it back.
+        Obtain <:item_swannote:1196272038327881768> Swan Notes from street racing with an EV and run /use for a chance at a swan song vehicle
 
-        Have a chance to race him in street race tier 8, if you beat him, you get snowflakes, 1000 snowflakes and you can get HIS car!
+        If you don't own an EV, may I suggest the 2011 Tesla Roadster?
 
-        You'll be able to win his car when you find 1000 snowflakes!
+        **Ends Febuary 14th 2023**
 
-        Ends January 2nd 2024
                   `);
         embed.setThumbnail();
         embed
           .setColor(colors.blue)
-          .setImage();
+          .setImage("https://i.ibb.co/QMtjMVz/EVENT-SWANSONG.png");
 
         await interaction.editReply({
           embeds: [embed],
