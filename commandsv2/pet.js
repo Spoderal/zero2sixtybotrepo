@@ -32,7 +32,7 @@ module.exports = {
     ];
     let personality = lodash.sample(personalities);
     let pet = userdata.newpet;
-    if (!pet.name) return interaction.reply(`You don't have a pet!`);
+    if (pet == null || !pet || pet == undefined) return interaction.reply(`You don't have a pet!`);
     let hunger = pet.hunger;
     let thirst = pet.thirst;
     let love = pet.love;

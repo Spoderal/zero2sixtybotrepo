@@ -206,7 +206,7 @@
       "Price": 3700,
       "sellprice": 3240,
       "Engine": "I4",
-      "Image": "https://www.motortrend.com/uploads/sites/5/2011/09/2012-Hyundai-Veloster-promo.jpg",
+      "Image": "https://i.ibb.co/wCvgwcb/image.png",
       "0-60": 8.5,
       "Drift": 0,
       "Handling": 600,
@@ -2628,8 +2628,8 @@
       "Weight": 2813
     },
     "2005 honda s2000": {
-      "alias": "2005 s2000 ",
-      "Name": "2005 Honda S2000",
+      "alias": "2005 s2000 cr",
+      "Name": "2005 Honda S2000 CR",
       "Emote": "<:honda:931011549705957397>",
       "Speed": 240,
       "kmh": 257,
@@ -2642,8 +2642,7 @@
       "Drivetrain": "RWD",
       "Handling": 500,
       "Class": "C",
-      "Weight": 2835,
-      "Obtained":"Wheelspin"
+      "Weight": 2835
     },
     "2006 pontiac gto": {
       "alias": "2006 gto",
@@ -2765,8 +2764,7 @@
       "Drivetrain": "RWD",
       "Handling": 500,
       "Class": "C",
-      "Weight": 4100,
-      "Obtained":"Wheelspin"
+      "Weight": 4100
     },
     "2021 hennessey f5": {
       "alias": "2021 f5",
@@ -2816,7 +2814,6 @@
       "0-60": 9.1,
       "Drift": 0,
       "Junked": true,
-      
       "Drivetrain": "FWD",
       "Handling": 650,
       "Obtained": "Common Barn Find",
@@ -3881,7 +3878,6 @@
       "Class": "B",
       "Drivetrain": "RWD",
       "Handling": 550,
-      "Obtained":"Rare Barn Find",
       "Weight": 3600
     },
     "1967 ferrari 330 p4": {
@@ -3919,7 +3915,6 @@
       "Drift": 0,
       "Handling": 500,
       "Drivetrain": "RWD",
-      "Obtained":"Legendary Barn Find",
       "Class": "B",
       "Weight": 3600
     },
@@ -4348,48 +4343,12 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "V12",
-      "Image": "https://i.ibb.co/nwGM43X/sp3.png",
+      "Image": "https://www.topgear.com/sites/default/files/2022/07/20-Ferrari-Daytona-SP3.jpg",
       "0-60": 3,
       "Drivetrain": "RWD",
       "Drift": 0,
       "Class": "S",
       "Handling": 700,
-      "Weight": 3200
-    },
-    "1991 ferrari 348tb": {
-      "alias": "1991 348tb",
-      "Name": "1991 Ferrari 348tb",
-      "Emote": "<:ferrari:931011838374727730>",
-      "Speed": 296,
-      "kmh": 321,
-      "Price": 0,
-      "sellprice": 0,
-      "Engine": "V8",
-      "Image": "https://i.ibb.co/rM54yW1/IMG-0637.jpg",
-      "0-60": 6.0,
-      "Drivetrain": "RWD",
-      "Drift": 0,
-      "Class": "C",
-      "Obtained":"Car Series",
-      "Handling": 700,
-      "Weight": 3071
-    },
-    "2023 ferrari daytona sp8": {
-      "alias": "2023 daytona sp8",
-      "Name": "2023 Ferrari Daytona SP8",
-      "Emote": "<:ferrari:931011838374727730>",
-      "Speed": 710,
-      "kmh": 321,
-      "Price": 0,
-      "sellprice": 0,
-      "Engine": "V12",
-      "Image": "https://i.ibb.co/9hknDMP/sp8.png",
-      "0-60": 2.9,
-      "Drivetrain": "RWD",
-      "Drift": 0,
-      "Obtained":"Car Series",
-      "Class": "S",
-      "Handling": 750,
       "Weight": 3200
     },
     "pizza delivery car": {
@@ -4957,7 +4916,6 @@
       "Class": "A",
       "Weight": 2788,
       "Obtained": "Blueprints",
-      "Blueprints":20,
       "Series": true
     },
     "2018 honda civic type r": {
@@ -6415,7 +6373,7 @@
       "sellprice": 0,
       "Drivetrain": "RWD",
       "Engine": "FLAT6",
-      "Image": "",
+      "Image": "https://cimg3.ibsrv.net/ibimg/hgm/1024x576-1/100/554/1997-porsche-911-gt1-evolution_100554475.jpg",
       "0-60": 4.5,
       "Drift": 0,
       "Class": "A",
@@ -6433,13 +6391,13 @@
       "Drivetrain": "RWD",
       "sellprice": 68062,
       "Engine": "V12",
-      "Image": "https://i.ibb.co/x6f8f0Z/xj.png",
+      "Image": "https://cdn1.mecum.com/auctions/fl0121/fl0121-454645/images/1-1608325968034@2x.jpg?1609879705000",
+      "Rear": "https://cdn1.mecum.com/auctions/fl0121/fl0121-454645/images/3-1608325968638@2x.jpg?1609879705000",
       "0-60": 8.2,
       "Drift": 0,
       "Handling": 750,
       "Class": "A",
-      "Weight": 3200,
-      "Obtained":"Crew Season"
+      "Weight": 3200
     },
 
     "1967 mini cooper s": {
@@ -7141,7 +7099,7 @@
       "Price": 2050000,
       "sellprice": 0,
       "Engine": "EV",
-      "Image": "https://www.motortrend.com/uploads/sites/5/2021/08/Rimac-Nevera-4.jpg",
+      "Image": "https://i.ibb.co/R7JV2gD/image.png",
       "0-60": 2.8,
       "Drift": 0,
       "Drivetrain": "RWD",
@@ -7651,7 +7609,6 @@
       "Class": "S",
       "Weight": 2500,
       "Drivetrain": "RWD",
-      "Blueprints":50,
       "Obtained": "Blueprints"
     },
     "2006 saleen s7": {
@@ -7670,7 +7627,6 @@
       "Class": "S",
       "Weight": 2900,
       "Drivetrain": "RWD",
-      "Blueprints":50,
       "Obtained": "Blueprints"
     },
     "2020 audi rs q3": {
@@ -7689,7 +7645,6 @@
       "Class": "B",
       "Drivetrain": "AWD",
       "Weight": 3900,
-      "Blueprints":50,
       "Obtained": "Blueprints"
     },
     "2015 honda civic type r": {
@@ -7708,7 +7663,6 @@
       "Class": "B",
       "Drivetrain": "FWD",
       "Weight": 3203,
-      "Blueprints":20,
       "Obtained": "Blueprints"
     },
     "2020 lamborghini essenza scv12": {
@@ -7727,7 +7681,6 @@
       "Class": "S",
       "Drivetrain": "RWD",
       "Weight": 2700,
-      "Blueprints":50,
       "Obtained": "Blueprints"
     },
     "2021 lamborghini sian": {
@@ -9074,7 +9027,7 @@
       "Speed": 215,
       "kmh": 346,
       "Price": 0,
-      "sellprice": 5000,
+      "sellprice": 375000,
       "Engine": "I5",
       "Image": "https://i.ibb.co/gvJm93K/Snapchat-736842070.jpg",
       "0-60": 9,
@@ -9090,7 +9043,7 @@
       "Name": "2024 Porsche Mission X",
       "Emote": "<:porsche:931011550880338011>",
       "Speed": 1500,
-      "Price": 0,
+      "Price": 1000000000,
       "sellprice": 0,
       "Engine": "EV",
       "Image": "https://i.ibb.co/NpZWZ19/DSF4710-ret-lores.jpg",
@@ -9421,7 +9374,6 @@
       "Drivetrain": "RWD",
       "Weight": 408
     },
-
     "2016 jaguar f type project 7": {
       "alias": "2016 f type p7",
       "Name": "2016 Jaguar F Type Project 7",
@@ -10478,6 +10430,7 @@
       "Drift": 0,
       "Handling": 3500,
       "Class": "S",
+      "New":true,
       "Weight": 2700
     },
     "2058 quadra turbo r vtech": {
@@ -10495,6 +10448,7 @@
       "Drift": 0,
       "Handling": 1000,
       "Class": "S",
+      "New":true,
       "Obtained":"Event",
       "Weight": 2756
     },
@@ -10514,6 +10468,7 @@
       "Handling": 500,
       "Class": "S",
       "Electric":true,
+      "New":true,
       "Obtained":"Event",
       "Weight": 4100
     },
@@ -10532,6 +10487,7 @@
       "Drift": 0,
       "Handling": 1500,
       "Class": "S",
+      "New":true,
       "Obtained":"Event",
       "Weight": 2100
     },
@@ -10550,6 +10506,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "A",
+      "New":true,
       "Obtained":"Event",
       "Weight": 2800
     },
@@ -10568,6 +10525,7 @@
       "Drift": 0,
       "Handling": 400,
       "Class": "S",
+      "New":true,
       "Obtained":"Event",
       "Weight": 2800
     },
@@ -10586,6 +10544,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "D",
+      "New":true,
       "Obtained":"Common Garage",
       "Weight": 2818
     },
@@ -10604,6 +10563,7 @@
       "Drift": 0,
       "Handling": 500,
       "Class": "B",
+      "New":true,
       "Obtained":"Rare Garage",
       "Weight": 4280
     } ,
@@ -10690,6 +10650,7 @@
       "Handling": 550,
       "Drivetrain": "RWD",
       "Class": "C",
+      "New":true,
       "Obtained":"Blueprints",
       "Weight": 3500
     },
@@ -10708,6 +10669,7 @@
       "Handling": 700,
       "Drivetrain": "FWD",
       "Class": "D",
+      "New":true,
       "Weight": 2500
     },
     "2019 abarth 595 competizione": {
@@ -10725,6 +10687,7 @@
       "Handling": 600,
       "Drivetrain": "FWD",
       "Class": "D",
+      "New":true,
       "Weight": 2300
     },
     "2017 abarth 124 spider": {
@@ -10742,6 +10705,7 @@
       "Handling": 800,
       "Drivetrain": "RWD",
       "Class": "D",
+      "New":true,
       "Weight": 2400
     },
     "2024 chevrolet camaro zl1": {
@@ -10759,6 +10723,7 @@
       "Handling": 700,
       "Drivetrain": "RWD",
       "Class": "A",
+      "New":true,
       "Obtained":"Event",
       "Weight": 3907
     },
@@ -10777,6 +10742,7 @@
       "Handling": 750,
       "Drivetrain": "RWD",
       "Class": "A",
+      "New":true,
       "Obtained":"Event",
       "Weight": 3594
     },
@@ -10795,6 +10761,7 @@
       "Handling": 675,
       "Drivetrain": "RWD",
       "Class": "C",
+      "New":true,
       "Obtained":"Event",
       "Weight": 4068
     },
@@ -10813,6 +10780,7 @@
       "Handling": 700,
       "Drivetrain": "AWD",
       "Class": "B",
+      "New":true,
       "Obtained":"Event",
       "Weight": 2888
     },
@@ -10831,6 +10799,7 @@
       "Handling": 325,
       "Drivetrain": "RWD",
       "Class": "B",
+      "New":true,
       "Obtained":"Event",
       "Weight": 4323
     },
@@ -10848,6 +10817,7 @@
       "Electric": true,
       "Range": "8",
       "Handling": 750,
+      "New":true,
       "Class": "D",
       "Drivetrain": "RWD",
       "Weight": 2723
@@ -10860,17 +10830,19 @@
       "Price": 0,
       "sellprice": 0,
       "Engine": "EV",
-      "Image": "https://i.ibb.co/D9pBb7m/roadster00.png",
+      "Image": "https://i.ibb.co/FgZH4dW/image.png",
       "0-60": 2.7,
       "Drift": 0,
       "Electric": true,
       "Range": "8",
       "Handling": 850,
+      "New":true,
       "Class": "S",
       "Obtained":"Event",
       "Drivetrain": "AWD",
       "Weight": 4982
-    },
+    }
+   ,
    "1990 buick reatta": {
     "alias": "1990 reatta",
     "Name": "1990 Buick Reatta",
@@ -10884,6 +10856,7 @@
     "Drift": 0,
     "RestoreOnly": true,
     "Drivetrain": "FWD",
+    "New":true, 
     "Handling": 650,
     "Obtained": "Common Barn Find",
     "Class": "D",
@@ -10904,224 +10877,11 @@
     "Handling": 550,
     "Obtained": "Rare Barn Find",
     "Class": "C",
+    "New":true,
     "Drivetrain": "RWD",
     "Weight": 3600
-  },
-  "2010 lexus is350": {
-    "alias": "2010 is350",
-    "Name": "2010 Lexus IS350",
-    "Emote": "<:lexus:932776357124001823>",
-    "Speed": 306,
-    "kmh": 232,
-    "Price": 0,
-    "sellprice": 3540,
-    "Engine": "V6",
-    "Drivetrain": "RWD",
-    "Image": "https://i.ibb.co/JspsQds/350.png",
-    "0-60": 5.6,
-    "Drift": 0,
-    "Handling": 500,
-    "Class": "D",
-    "Weight": 3527,
-    "New":true,
-    "Obtained":"Blueprints"
-  },
-
-  "2023 hennessey venom f5 revolution": {
-    "alias": "2023 venom f5 r",
-    "Name": "2023 Hennessey Venom F5 Revolution",
-    "Emote": "<:hennessey:933637608549023765>",
-    "Speed": 1817,
-    "Price": 50000000,
-    "sellprice": 0,
-    "Engine": "V8",
-    "Image": "https://i.ibb.co/F7wPxDP/revolution.png",
-    "0-60": 1.5,
-    "Drift": 0,
-    "Drivetrain": "RWD",
-    "Handling": 2000,
-    "Class": "S",
-    "New":true,
-    "Weight": 3053
-  },
-
-  "2017 volkswagen scirocco": {
-    "alias": "2017 scirocco",
-    "Name": "2017 Volkswagen Scirocco",
-    "Emote": "<:vw:931011548372168714>",
-    "kmh": 201,
-    "Speed": 220,
-    "Price": 0,
-    "sellprice": 5250,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/hWKT3TC/image.png",
-    "0-60": 5.5,
-    "Handling": 550,
-    "Class": "C",
-    "Weight": 2967,
-    "Drivetrain": "FWD",
-    "New":true,
-    "Obtained":"Black Market"
-  },
-  "1985 ferrari 156": {
-    "alias": "1985 156",
-    "Name": "1985 Ferrari 156",
-    "Emote": "<:ferrari:931011838374727730>",
-    "kmh": 201,
-    "Speed": 750,
-    "Price": 0,
-    "sellprice": 5250,
-    "Engine": "V6",
-    "Image": "https://i.ibb.co/0Jc2BJP/ferrarif1.png",
-    "0-60": 6.3,
-    "Handling": 750,
-    "Class": "S",
-    "Weight": 1230,
-    "Drivetrain": "RWD",
-    "New":true,
-    "Obtained":"F1 Blueprint",
-    "F1": true
-  },
-  "2024 harley davidson sportster": {
-    "alias": "2024 sportster",
-    "Name": "2024 Harley Davidson Sportster",
-    "Emote": "<:harley:1198189219806453861>",
-    "Speed": 121,
-    "Price": 0,
-    "sellprice": 0,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/31sKdKk/image.png",
-    "0-60": 6.5,
-    "Drift": 0,
-    "Class": "D",
-    "Drivetrain": "RWD",
-    "Handling": 750,
-    "Motorcycle": true,
-    "Weight": 489,
-    "New":true,
-    "Obtained":"Black Market"
-  },
-  "2016 renault clio rs": {
-    "alias": "2016 clio rs",
-    "Name": "2016 Renault Clio RS",
-    "Emote": "<:renault:1083645583782330388>",
-    "Speed": 200,
-    "kmh": 315,
-    "Price": 0,
-    "sellprice": 75000,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/t3jxWD6/renaultthing.png",
-    "0-60": 6.7,
-    "Drift": 0,
-    "Handling": 750,
-    "Class": "D",
-    "Weight": 2654,
-    "Carver":true, 
-    "New":true,
-    "Drivetrain": "FWD",
-    "Obtained": "Event"
-  },
-  "2018 honda fit sport": {
-    "alias": "2018 fit s",
-    "Name": "2018 Honda Fit Sport",
-    "Emote": "<:honda:931011549705957397>",
-    "Speed": 130,
-    "kmh": 315,
-    "Price": 0,
-    "sellprice": 75000,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/7bxXsj1/IMG-0891.jpg",
-    "0-60": 8.7,
-    "Drift": 0,
-    "Handling": 650,
-    "Class": "D",
-    "Weight": 2434,
-    "Carver":true, 
-    "New":true,
-    "Drivetrain": "FWD",
-    "Obtained": "Event"
-  },
-  "2014 kia proceed gt": {
-    "alias": "2014 proceed gt",
-    "Name": "2014 Kia Proceed GT",
-    "Emote": "<:kia:937123149596745780>",
-    "Speed": 201,
-    "kmh": 315,
-    "Price": 0,
-    "sellprice": 75000,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/7YJ9D84/IMG-0896.jpg",
-    "0-60": 7.4,
-    "Drift": 0,
-    "Handling": 650,
-    "Class": "D",
-    "Weight": 2996,
-    "Carver":true, 
-    "New":true,
-    "Drivetrain": "FWD",
-    "Obtained": "Event"
-  },
-  "2015 vauxhall corsa vxr": {
-    "alias": "2015 corsa vxr",
-    "Name": "2015 Vauxhall Corsa VXR",
-    "Emote": "<:vauxh:1200662071084322846>",
-    "Speed": 192,
-    "kmh": 315,
-    "Price": 0,
-    "sellprice": 75000,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/k6jLCXK/vaxx.png",
-    "0-60": 6.8,
-    "Drift": 0,
-    "Handling": 650,
-    "Class": "D",
-    "Weight": 2850,
-    "Carver":true, 
-    "New":true,
-    "Drivetrain": "FWD",
-    "Obtained": "Event"
-  },
-  "2022 hyundai i20n": {
-    "alias": "2022 hyundai i20n",
-    "Name": "2022 Hyundai i20N",
-    "Emote": "<:hyundai:931015215447941200>",
-    "Speed": 204,
-    "kmh": 315,
-    "Price": 0,
-    "sellprice": 75000,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/K652hgj/IMG-0927.jpg",
-    "0-60": 6.2,
-    "Drift": 0,
-    "Handling": 700,
-    "Carver":true, 
-    "New":true,
-    "Class": "D",
-    "Weight": 2623,
-    "Drivetrain": "FWD",
-    "Obtained": "Event"
-  },
-  "2021 mercedes amg gla": {
-    "alias": "2021 amg gla",
-    "Name": "2021 Mercedes AMG GLA",
-    "Emote": "<:mercedes_z:973000364410404924>",
-    "Speed": 416,
-    "kmh": 315,
-    "Price": 0,
-    "sellprice": 75000,
-    "Engine": "I4",
-    "Image": "https://i.ibb.co/CJd8DM2/IMG-0880-2.jpg",
-    "0-60": 4.3,
-    "Drift": 0,
-    "Handling": 650,
-    "Carver":true, 
-    "New":true,
-    "Class": "D",
-    "Weight": 3494,
-    "Drivetrain": "AWD",
-    "Obtained": "Event"
   }
-
-  }
+}
+  
 
 }

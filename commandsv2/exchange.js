@@ -17,11 +17,11 @@ module.exports = {
           { name: "Cash", value: "cash" },
           { name: "Rare Keys", value: "rkeys" },
           { name: "Exotic Keys", value: "ekeys" },
-          { name: "Uncommon Barn Maps", value: "ubmaps" },
+          { name: "Barn Maps", value: "barnmaps" },
           { name: "Notoriety", value: "notoriety" },
-          { name: "Rare Barn Maps", value: "rbmaps" },
-          { name: "Legendary Barn Maps", value: "lbmaps" },
-          { name: "Super Wheel Spins", value: "swspins" }
+          { name: "Super Wheel Spins", value: "swspins" },
+          { name: "T5 Voucher", value: "t5vouch" },
+          { name: "Series Tickets", value: "stickets" }
         )
         .setRequired(true)
     )
@@ -70,36 +70,54 @@ module.exports = {
     } else if (toconv == "notoriety") {
       let finalamount = toturnin * 100;
       userdata.gold -= toturnin;
-      userdata.noto5 += finalamount;
+      userdata.notoriety += finalamount;
       userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} notoriety`
       );
     } else if (toconv == "ekeys") {
       let finalamount = toturnin * 0.5;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 exotic key! You need at least 2 gold`)
+
       userdata.gold -= toturnin;
       userdata.ekeys += finalamount;
       userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} exotic keys`
       );
-    } else if (toconv == "rbmaps") {
-      let finalamount = toturnin * 2;
+    } else if (toconv == "barnmaps") {
+      let finalamount = toturnin * 0.5;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 barn map! You need at least 2 gold`)
+
       userdata.gold -= toturnin;
-      userdata.rmaps += finalamount;
+      userdata.barnmaps += finalamount;
       userdata.save();
       await interaction.reply(
-        `Converted ${toturnin} gold into ${finalamount} rare barn maps`
+        `Converted ${toturnin} gold into ${finalamount} barn maps`
       );
-    } else if (toconv == "lbmaps") {
-      let finalamount = toturnin * 0.2;
+    }  
+    else if (toconv == "t5vouch") {
+      let finalamount = toturnin * 0.5;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 t5voucher! You need at least 2 gold`)
       userdata.gold -= toturnin;
-      userdata.lmaps += finalamount;
+      userdata.t5vouchers += finalamount;
       userdata.save();
       await interaction.reply(
-        `Converted ${toturnin} gold into ${finalamount} legendary barn maps`
+        `Converted ${toturnin} gold into ${finalamount} t5 vouchers`
       );
-    } else if (toconv == "swspins") {
+    }
+    
+    else if (toconv == "stickets") {
+      let finalamount = toturnin * 0.5;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 series ticket! You need at least 2 gold`)
+      userdata.gold -= toturnin;
+      userdata.seriestickets += finalamount;
+      userdata.save();
+      await interaction.reply(
+        `Converted ${toturnin} gold into ${finalamount} series tickets`
+      );
+      }
+    else if (toconv == "swspins") {
       let finalamount = toturnin * 1;
       userdata.gold -= toturnin;
       userdata.swheelspins += finalamount;

@@ -1,33 +1,33 @@
 {
-  "common keys": {
+  "commonkeys": {
     "Emote": "<:ckey:993011409132728370>",
     "Name": "Common Keys",
     "nameindb": "ckeys"
   },
-  "rare keys": {
+  "rarekeys": {
     "Emote": "<:rkey:993011407681486868>",
     "Name": "Rare Keys",
     "nameindb": "rkeys"
   },
-  "exotic keys": {
+  "exotickeys": {
     "Emote": "<:ekey:993011410210672671>",
     "Name": "Exotic Keys",
     "nameindb": "ekeys"
   },
-  "common barn maps": {
+  "wheelspins": {
+    "Emote": "<a:currency_wheelspin:1103930502467047437>",
+    "Name": "Wheelspins",
+    "nameindb": "wheelspins"
+  },
+  "superwheelspins": {
+    "Emote": "<a:currency_superwheelspin:1103930501619793943>",
+    "Name": "Super Wheelspins",
+    "nameindb": "swheelspins"
+  },
+  "barnmaps": {
     "Emote": "<:zbarns:941571059600195594>",
-    "Name": "Common Barn Maps",
-    "nameindb": "cmaps"
-  },
-  "rare barn maps": {
-    "Emote": "<:zbarns_r:958539547828965406>",
-    "Name": "Rare Barn Maps",
-    "nameindb": "rmaps"
-  },
-  "legendary barn maps": {
-    "Emote": "<:zbarns_l:958539547736674314>",
-    "Name": "Legendary Barn Maps",
-    "nameindb": "lmaps"
+    "Name": "Barn Maps",
+    "nameindb": "barnmaps"
   },
   "lockpicks": {
     "Emote": "<:lockpick:1040384727691051170>",

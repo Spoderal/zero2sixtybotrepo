@@ -96,8 +96,8 @@ module.exports = {
     
           collector2.on('collect', async (i) => {
             if(i.customId == "next"){
-                page++
-                if(vault[page] == undefined) {
+              page++
+                if(vault2[page] == undefined) {
                     page--
                     embed.setDescription("No more pages!")
     
@@ -107,8 +107,8 @@ module.exports = {
                 
                  displaypage++
                 embed.data.fields = []
-                for(let v in vault2[0]){
-                    let car = vault2[0][v]
+                for(let v in vault2[page]){
+                    let car = vault2[page][v]
             
                     embed.addFields({name: `${car.Emote} ${car.Name}`, value: `\`ID: ${car.ID}\`\nPower: ${car.Speed}`, inline: true})
                 }
@@ -154,7 +154,7 @@ module.exports = {
 
         console.log(newlength)
         
-        if(garageL <= newlength) return interaction.reply(`You don't have enough garage space!`) 
+        if(garageL < newlength) return interaction.reply(`You don't have enough garage space!`) 
         let filt = uservault.filter((car) => car.Name.toLowerCase() == cartoremove.toLowerCase())
 
         if(!filt[0]) return await interaction.reply("You don't have this car! Try using the cars full name")

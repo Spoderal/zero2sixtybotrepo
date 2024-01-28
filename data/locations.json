@@ -214,6 +214,11 @@
                     "Emote":"<:chevy:931012624039182406>"
                 },
                 {
+                    "Name":"2024 Harley Davidson Sportster",
+                    "Price":20000,
+                    "Emote":"<:logo_gmc:1178924605650518107>"
+                },
+                {
                     "Name":"2017 Chevy SS",
                     "Price":25000,
                     "Emote":"<:chevy:931012624039182406>"
@@ -223,6 +228,7 @@
                     "Price":1500000,
                     "Emote":"<:logo_gmc:1178924605650518107>"
                 }
+           
 
             ],
             "Racers":["George", "John", "Alex", "Matt"]
@@ -249,7 +255,7 @@
                 }
 
             ],
-            "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
+            "Events":["Market"],
             "NoEvents":["You're driving in the rain and its just a normal day", "You see a beer! You do NOT drink it because you're driving"],
             "Perks":"2x cash when racing in track races",
             "BlackMarket":[
@@ -272,8 +278,12 @@
                     "Name":"2000 BMW M5",
                     "Price":50000,
                     "Emote":"<:bmw:931011550054056007>"
+                },
+                {
+                    "Name":"2017 Volkswagen Scirocco",
+                    "Price":45000,
+                    "Emote":"<:vw:931011548372168714>"
                 }
-
             ],
             "Racers":["Emma", "Otto", "Hans", "Friedrich"]
         },

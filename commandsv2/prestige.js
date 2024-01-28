@@ -25,7 +25,7 @@ module.exports = {
     let oldrank = userdata.prestige;
     let newprestige2 = (prestigerank += 1);
 
-    let raceprestige = newprestige2 * 30;
+    let raceprestige = newprestige2 * 20;
     let driftprestige = newprestige2 * 20;
 
     if (driftrank < driftprestige)
@@ -58,7 +58,14 @@ module.exports = {
 
     collector.on("collect", async (i) => {
       if (i.customId == "yes") {
-        userdata.prestige += 1;
+        let prestigetoadd = 1
+        if(userdata.items.includes("cheese")){
+          prestigetoadd = 2
+          let items = userdata.items
+          for (var i7 = 0; i7 < 1; i7++) {items.splice(items.indexOf("cheese"), 1)}
+          userdata.items = items;
+        }
+        userdata.prestige += prestigetoadd;
         if (keeprace) {
           let oldraces = (racerank -= raceprestige);
           userdata.keeprace = false;
@@ -254,10 +261,11 @@ module.exports = {
         let upgrade = prestigerank * 1000;
         userdata.items.push("prestige crate");
         userdata.banklimit += upgrade;
+      
 
         userdata.save();
-
-        let newrank = oldrank++;
+        
+        let newrank = oldrank + prestigetoadd;
         let embed = new EmbedBuilder()
           .setTitle("Prestiged")
           .setDescription(
@@ -266,11 +274,11 @@ module.exports = {
           .addFields(
             {
               name: `${emotes.prestige} Old Rank`,
-              value: `${newrank}`,
+              value: `${oldrank}`,
             },
             {
               name: `${emotes.prestige} New Rank`,
-              value: `${oldrank}`,
+              value: `${newrank}`,
             }
           )
           .setColor(colors.blue);

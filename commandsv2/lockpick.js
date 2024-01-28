@@ -14,6 +14,7 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const garagedb = require("../data/garages.json");
 const {  randomNoRepeats, randomRange } = require("../common/utils");
+const ms = require("pretty-ms")
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("lockpick")
@@ -23,9 +24,24 @@ module.exports = {
     let cooldowns = await Cooldowns.findOne({ id: interaction.user.id });
     let lockpicks = udata.lockpicks;
     let using = udata.using;
-    if (lockpicks == 0) return interaction.reply(`You're out of lockpicks!`);
+    if (lockpicks <= 0) return await interaction.reply(`You're out of lockpicks!`);
+
+    let cooldown = cooldowns.lockpicks;
+    let timeout = 15000;
+    if (cooldown !== null && timeout - (Date.now() - cooldown) > 0) {
+      console.log('false')
+      let time = ms(timeout - (Date.now() - cooldown));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(
+          `Wait ${time} before using lockpicks again.`
+        );
+     return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
+    } 
     let trypick = lodash.sample([true, false, true]);
-    udata.lockpicks -= 1;
+    udata.lockpicks = udata.lockpicks -= 1;
+    cooldowns.lockpicks = Date.now()
+    await cooldowns.save()
     udata.update();
     if (using.includes("epic lockpick") || using.includes("Epic Lockpick")) {
       let cooldown = cooldowns.epiclockpick;
@@ -33,7 +49,7 @@ module.exports = {
       if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
         udata.using.pull("epic lockpick");
         udata.update();
-        interaction.channel.send("Your grape juice ran out! :(");
+        interaction.channel.send("Your epic lockpick ran out! :(");
       } else {
         trypick = true;
       }
@@ -54,7 +70,7 @@ module.exports = {
     let fil = 200;
     if (using.includes("grape juice") || using.includes("Grape Juice")) {
       let cooldown = cooldowns.grapejuice;
-      let timeout = 900000;
+      let timeout = 120000;
       if (cooldown !== null && timeout - (Date.now() - cooldown) < 0) {
         udata.using.pull("grape juice");
         udata.update();

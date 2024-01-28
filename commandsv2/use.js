@@ -76,62 +76,12 @@ module.exports = {
     }
     if (itemtouse.toLowerCase() == "pink slip") {
       userdata.pinkslips += 1;
-    } else if (itemtouse.toLowerCase() == "bank increase") {
-      let banklimit = userdata.banklimit || 0;
-
-      if (banklimit >= 2500000)
-        return await interaction.reply(
-          `The bank limit cap is currently ${toCurrency(
-            2500000
-          )} for regular bank increases! Try using a big bank increase`
-        );
-
-      let finalbanklimit = 5000 * amount2;
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            banklimit: (banklimit += finalbanklimit),
-          },
-        }
-      );
-      userdata.update();
-
-      if (userdata.banklimit >= 2500000) {
-        userdata.banklimit = 2500000;
-      }
     } 
+    else if (itemtouse.toLowerCase() == "comet") {
+      userdata.seriestickets += 1;
+    }
     
-   
-    else if (itemtouse.toLowerCase() == "big bank increase") {
-      let banklimit = userdata.banklimit;
-
-      if (banklimit >= 10000000)
-        return await interaction.reply(
-          `The bank limit cap is currently ${toCurrency(
-            10000000
-          )} for big bank increases!`
-        );
-
-      let finalbanklimit = 25000 * amount2;
-      await User.findOneAndUpdate(
-        {
-          id: interaction.user.id,
-        },
-        {
-          $set: {
-            banklimit: (banklimit += finalbanklimit),
-          },
-        }
-      );
-      userdata.update();
-
-      if (userdata.banklimit >= 10000000) {
-        userdata.banklimit = 10000000;
-      }
-    } else if (itemtouse.toLowerCase() == "energy drink") {
+else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push(`energy drink`);
       cooldowndata.energydrink = Date.now();
     } else if (itemtouse.toLowerCase() == "ice cube") {

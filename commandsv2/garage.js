@@ -131,20 +131,25 @@ module.exports = {
       10
     );
 
+    displayitems2 = lodash.chunk(
+      displayitems2.map((a) => a),
+      10
+    );
+
     displayhouses2 = lodash.chunk(
       displayhouses2.map((a) => a),
       10
     );
     
-
+      let showcase = udata.showcase
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`Displaying cars for ${user.username}`)
       .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}`)
       .setColor(colors.blue)
       .setFooter({ text: `Pages ${page}/${itempage.length}` });
-      if(udata.showcase){
-        embed.setImage(`${udata.showcase.Image}`)
+      if(showcase && showcase.Image){
+        embed.setImage(`${showcase.Image}`)
       }
 
 
@@ -171,7 +176,7 @@ module.exports = {
           emotes.emotes.OVR
         } OVR: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n⛽ Gas: ${
           car.Gas
-        }\n\`ID: ${car.ID}\``,
+        }/${car.MaxGas}\n\`ID: ${car.ID}\``,
         inline: true,
       });
     }
@@ -233,7 +238,6 @@ module.exports = {
     }
 
     let msg = await interaction.reply({
-      content: "Loading garage...",
       embeds: [embed],
       components: [row, row2],
       fetchReply: true,
@@ -279,7 +283,7 @@ module.exports = {
               emotes.emotes.OVR
             } OVR: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
               car.ID
-            }\n⛽ Gas: ${car.Gas}\``,
+            }\n⛽ Gas: ${car.Gas}/${car.MaxGas}\``,
             inline: true,
           });
         }
@@ -320,15 +324,14 @@ module.exports = {
           fetchReply: true,
         });
       } else if (i.customId.includes("items")) {
-        if (!displayitems2[0])
-          return interaction.channel.send("You don't have any parts!");
+        if (!displayitems2[0])  return interaction.channel.send("You don't have any items!");
         itempage = displayitems2;
         embed = new EmbedBuilder()
           .setTitle(`Displaying items for ${user.username}`)
           .setColor(colors.blue)
-          .setFooter({ text: `Pages ${page}/${itempage.length}` });
+          .setFooter({ text: `Pages ${page}/${displayitems2.length}` });
 
-        embed.setDescription(`${displayitems2.join("\n")}`);
+        embed.setDescription(`${displayitems2[0].join("\n")}`);
 
         await interaction.editReply({
           embeds: [embed],
@@ -379,18 +382,20 @@ module.exports = {
                 emotes.emotes.OVR
               } OVR: ${hp}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n\`ID: ${
                 car.ID
-              }\n⛽ Gas: ${car.Gas}\``,
+              }\n⛽ Gas: ${car.Gas}/${car.MaxGas}\``,
               inline: true,
             });
           } else if (itempage == displayparts2) {
             embed.setDescription(`${displayparts2[page - 1].join("\n")}`);
+          }
+          else if (itempage == displayitems2) {
+            embed.setDescription(`${displayitems2[page - 1].join("\n")}`);
           }
         }
 
         if (current !== page) {
           embed.setFooter({ text: `Pages ${page}/${itempage.length}` });
           if (itempage == cars) {
-            embed.setFooter({ text: `Loading car image...` });
             interaction.editReply({ embeds: [embed], fetchReply: true });
       
             

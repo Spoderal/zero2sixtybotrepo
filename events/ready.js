@@ -3,7 +3,7 @@ const { Routes } = require("discord-api-types/v10");
 const crews = require("./crews/updateCrew");
 const lodash = require("lodash");
 require("dotenv").config();
-const patron = require("../patreon");
+
 const { updateItemShop } = require("./itemshop");
 const double = require("../doublecash");
 const mongoose = require("mongoose");
@@ -18,6 +18,8 @@ const stats = require("./stats").stats;
 const {itemshop} = require("./shopdata");
 const { isracing } = require("./is_racing");
 const { season } = require("./season");
+;
+
 
 let mongoConfig = {
   keepAlive: true,
@@ -39,7 +41,7 @@ module.exports = {
   async execute(client, commands) {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
 
-    patron(client);
+
     double(client);
     gold(client);
  //   stats(client);
@@ -96,7 +98,7 @@ module.exports = {
 
     let randomstatuses = [
       `🌨️ WINTER 🌨️  /season`,
-      `⚙️ HUGE UPDATE ⚙️ 1/5 /updates`,
+      `⚙️ UPDATE ⚙️ 1/28 /updates`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
       "🧩 FICTIONAL EVENT /events 🧩",
       "🦢 SWAN SONG EVENT /events 🦢",

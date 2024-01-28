@@ -228,7 +228,7 @@ module.exports = {
 
             Once you have your barn map, you're going to run \`/barn\` and you'll either find a common, rare, or legendary barn find.
 
-            Now that you've got the car you want to restore, its time to find parts for that car. You can find parts with \`/junkyard\` (TIP: If you have the **mechanic** business, you'll get 1 more part per junkyard run!)
+            Now that you've got the car you want to restore, its time to find parts for that car. You can find parts with \`/junkyard\`, or junk races!
 
             Ok, you've got your parts, what do you do? You collect them until you own 1 exhaust, 1 engine, 1 suspension, 1 body, and 1 intake!
 

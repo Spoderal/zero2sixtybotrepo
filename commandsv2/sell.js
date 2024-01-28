@@ -5,7 +5,6 @@ const { toCurrency } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 let parts = require("../data/partsdb.json");
-let profilestuff = require("../data/pfpsdb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 const itemdb = require("../data/items.json");
@@ -204,18 +203,11 @@ module.exports = {
       userdata.items = useritems;
       userdata.cash +=finalprice
 
+      if(!userdata.items.includes(selling.toLowerCase())) return interaction.reply('You dont have that item!')
+
       await interaction.reply(`You sold your ${selling} for ${toCurrency(finalprice)}!`);
-    } else if (profilestuff.Pfps[selling.toLowerCase()]) {
-      userdata.pfps.pull(selling.toLowerCase());
+    } 
 
-      await interaction.reply(`You sold your ${selling} for $0!`);
-    } else {
-      await interaction.reply({
-        content: `You don't have "${selling}". Maybe it was a typo?`,
-        ephemeral: true,
-      });
-    }
-
-    userdata.save();
+    await userdata.save();
   },
 };

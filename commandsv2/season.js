@@ -13,7 +13,6 @@ const cardb = require("../data/cardb.json");
 const lodash = require("lodash");
 const itemdb = require("../data/items.json");
 const emotes = require("../common/emotes").emotes;
-const pfpdb = require("../data/pfpsdb.json");
 const titledb = require("../data/titles.json");
 const ms = require("ms");
 
@@ -216,16 +215,7 @@ module.exports = {
           )} ${emotes.notoriety}`,
           inline: true,
         });
-      } else if (pfpdb.Pfps[data.Item.toLowerCase()]) {
-        let car = pfpdb.Pfps[data.Item.toLowerCase()];
-        embed.addFields({
-          name: `Reward ${data.Number}`,
-          value: `${car.Emote} ${car.Name}\n${numberWithCommas(
-            data.Required
-          )} ${emotes.notoriety}`,
-          inline: true,
-        });
-      } else if (titledb[data.Item.toLowerCase()]) {
+      }else if (titledb[data.Item.toLowerCase()]) {
         let car = titledb[data.Item.toLowerCase()];
         embed.addFields({
           name: `Reward ${data.Number}`,
@@ -362,11 +352,11 @@ module.exports = {
             let amount = rewardtoclaim.Item.split(" ");
 
             let num = parseInt(amount[0]);
-            let usercash = parseInt(userdata.rp4);
+            let usercash = parseInt(userdata.rp);
             let newamount = parseInt((usercash += num));
 
 
-            userdata.rp4 = newamount;
+            userdata.rp = newamount;
             userdata.seasonclaimed += 1;
             userdata.save();
           } else if (cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
@@ -401,12 +391,7 @@ module.exports = {
             userdata.items.push(car.Name.toLowerCase());
             userdata.seasonclaimed += 1;
             userdata.save();
-          } else if (pfpdb.Pfps[rewardtoclaim.Item.toLowerCase()]) {
-
-            userdata.pfps.push(rewardtoclaim.Item.toLowerCase());
-            userdata.seasonclaimed += 1;
-            userdata.save();
-          } else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
+          }  else if (titledb[rewardtoclaim.Item.toLowerCase()]) {
 
             userdata.titles.push(rewardtoclaim.Item.toLowerCase());
             userdata.seasonclaimed += 1;
@@ -532,16 +517,7 @@ module.exports = {
             )} ${emotes.notoriety}`,
             inline: true,
           });
-        } else if (pfpdb.Pfps[data.Item.toLowerCase()]) {
-          let car = pfpdb.Pfps[data.Item.toLowerCase()];
-          embed.addFields({
-            name: `Reward ${data.Number}`,
-            value: `${car.Emote} ${car.Name}\n${numberWithCommas(
-              data.Required
-            )} ${emotes.notoriety}`,
-            inline: true,
-          });
-        } else if (titledb[data.Item.toLowerCase()]) {
+        }  else if (titledb[data.Item.toLowerCase()]) {
           let car = titledb[data.Item.toLowerCase()];
           embed.addFields({
             name: `Reward ${data.Number}`,

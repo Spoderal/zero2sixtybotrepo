@@ -51,6 +51,13 @@ module.exports = {
             customId: "fiesta",
             emoji: "<:ford:931012624152399902>",
           },
+          {
+            label: "Italian Heritage",
+            description: "Information for the Italian Heritage Series",
+            value: "italian",
+            customId: "italian",
+            emoji: "<:ferrari:931011838374727730>",
+          },
         ])
     );
     let row3 = new ActionRowBuilder().addComponents(
@@ -74,6 +81,13 @@ module.exports = {
         .setCustomId("claimcar3")
         .setStyle("Secondary")
     );
+    let row7 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel("Claim 1991 Ferrari 348tb")
+        .setEmoji("<:ferrari:931011838374727730>")
+        .setCustomId("claimcar4")
+        .setStyle("Secondary")
+    );
     let userdata = await User.findOne({ id: interaction.user.id });
     let cooldowndata = await Cooldowns.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -86,6 +100,9 @@ module.exports = {
     );
     let wins3 = userdata.cars.filter(
       (car) => car.Name == "2017 Ford Fiesta ST" && car.Wins
+    );
+    let wins4 = userdata.cars.filter(
+      (car) => car.Name == "1991 Ferrari 348tb" && car.Wins
     );
     let winstext = "";
     if (wins[0]) {
@@ -101,6 +118,10 @@ module.exports = {
     if (wins3[0]) {
       winstext3 = `Wins: ${wins3[0].Wins}`;
     }
+    let winstext4 = "";
+    if (wins4[0]) {
+      winstext4 = `Wins: ${wins4[0].Wins}`;
+    }
     let embed = new EmbedBuilder();
     embed.setTitle("Series Menu");
     embed.setFooter({ text: 'Prefix is "/"' });
@@ -113,7 +134,8 @@ module.exports = {
 
             Fiesta Familia <:ford:931012624152399902> *Prestige 2* ${winstext3}
 
-            You only have **1 day** to complete a car series
+            Italian Heritage <:ferrari:931011838374727730> *Prestige 8* ${winstext4}
+
         `);
 
     embed.setColor(colors.blue);
@@ -134,6 +156,9 @@ module.exports = {
 
     let seriescomplfilt3 = userdata.cars.filter(
       (car) => car.Name == "2017 Ford Fiesta ST"
+    );
+    let seriescomplfilt4 = userdata.cars.filter(
+      (car) => car.Name == "1991 Ferrari 348tb"
     );
 
     if (
@@ -173,6 +198,19 @@ module.exports = {
           .setLabel("Claim 2016 Ford Focus RS")
           .setEmoji("<:ford:931012624152399902>")
           .setCustomId("claimcarfinal3")
+          .setStyle("Secondary")
+      );
+    }
+    if (
+      seriescomplfilt4[0] &&
+      seriescomplfilt4[0].Wins >= 50 &&
+      userdata.italiancomplete !== true
+    ) {
+      row7.addComponents(
+        new ButtonBuilder()
+          .setLabel("Claim 2023 Ferrari Daytona SP8")
+          .setEmoji("<:ferrari:931011838374727730>")
+          .setCustomId("claimcarfinal4")
           .setStyle("Secondary")
       );
     }
@@ -275,6 +313,26 @@ module.exports = {
         await interaction.editReply({
           embeds: [embed],
           components: [row2, row6],
+        });
+      }
+      else if (value === "italian" && userdata.prestige >= 2) {
+        embed.setTitle("Italian Heritage");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`
+          You've been chosen to race for Ferrari, start with the 348tb and work your way up!
+
+          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2023 Ferrari Daytona SP8**
+
+          Once you have 50 wins, come back and claim your 2023 Ferrari Daytona SP8
+                    `);
+        embed.setThumbnail("https://i.ibb.co/Ttth621/carseries.png");
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/4gnHMqz/qwa-IDFhgmm.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2, row7],
         });
       }
     });
@@ -406,7 +464,51 @@ module.exports = {
         cooldowndata.save();
 
         interaction.editReply("✅");
-      } else if (
+      }
+      else if (i.customId == "claimcar4") {
+        let series1cool = cooldowndata.series1;
+        userdata = await User.findOne({ id: interaction.user.id });
+        let eng = userdata.italian;
+        let cooldown = 86400000;
+        if (eng == true) return interaction.editReply("You already started this series!");
+        if (series1cool !== null && cooldown - (Date.now() - series1cool) > 0) {
+          let time = ms(cooldown - (Date.now() - series1cool));
+          let timeEmbed = new EmbedBuilder()
+            .setColor(colors.blue)
+            .setDescription(
+              `You've already started a series\n\nStart one again in ${time}.`
+            );
+          await interaction.editReply({ embeds: [timeEmbed], fetchReply: true });
+        }
+        let carobj = cardb.Cars["1991 ferrari 348tb"];
+
+        let newobj = {
+          ID: carobj.alias,
+          Name: carobj.Name,
+          Speed: carobj.Speed,
+          Acceleration: carobj["0-60"],
+          Handling: carobj.Handling,
+          Parts: [],
+          Emote: carobj.Emote,
+          Image: carobj.Image,
+          Miles: 0,
+          Drift: 0,
+          Loan: true,
+          WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
+          Wins: 0,
+        };
+
+        cooldowndata.series1 = Date.now();
+        userdata.italian = true;
+        userdata.cars.push(newobj);
+        userdata.save();
+        cooldowndata.save();
+
+        interaction.editReply("✅");
+      }
+      else if (
         i.customId == "claimcarfinal" &&
         userdata.perfectengineeringcomplete !== true
       ) {
@@ -497,6 +599,39 @@ module.exports = {
 
         userdata.fiestafamilia = true;
         userdata.fiestafamiliacomplete = true;
+        userdata.cars.push(newobj);
+        userdata.save();
+
+        interaction.editReply("✅");
+      }
+      else if (
+        i.customId == "claimcarfinal4" &&
+        userdata.italiancomplete !== true
+      ) {
+        let carobj = cardb.Cars["2023 ferrari daytona sp8"];
+        userdata = await User.findOne({ id: interaction.user.id });
+        let eng = userdata.italiancomplete;
+        if (eng == true) return interaction.editReply("You already finished this series!");
+        let newobj = {
+          ID: carobj.alias,
+          Name: carobj.Name,
+          Speed: carobj.Speed,
+          Acceleration: carobj["0-60"],
+          Handling: carobj.Handling,
+          Parts: [],
+          Emote: carobj.Emote,
+          Image: carobj.Image,
+          Miles: 0,
+          Drift: 0,
+          Loan: true,
+          WeightStat: carobj.Weight,
+          Gas: 10,
+          MaxGas: 10,
+          Wins: 0,
+        };
+
+        userdata.italian = true;
+        userdata.italiancomplete = true;
         userdata.cars.push(newobj);
         userdata.save();
 

@@ -25,13 +25,11 @@ module.exports = {
           { name: "Common Crate", value: "common crate" },
           { name: "Rare Crate", value: "rare crate" },
           { name: "Prestige Crate", value: "prestige crate" },
-          { name: "Vote Crate", value: "vote crate" },
-          {name: "Present", value: "present"}
+          { name: "Vote Crate", value: "vote crate" }
         )
         .setRequired(true)
     ),
   async execute(interaction) {
-    let pfps = require("../data/pfpsdb.json");
     let crates = require("../data/cratedb.json");
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -58,14 +56,14 @@ module.exports = {
         `You don't have a ${boughtindb.Emote} ${boughtindb.Name}!`
       );
 
+      cooldowndata.crate = Date.now();
+     await cooldowndata.save();
     let embed = new EmbedBuilder()
       .setTitle(`Unboxing ${boughtindb.Emote} ${boughtindb.Name}...`)
       .setColor(`#60b0f4`);
 
     interaction.reply({ embeds: [embed] });
 
-    cooldowndata.crate = Date.now();
-    cooldowndata.save();
     let x = 0;
     let rewards = [];
     let i = setInterval(() => {
@@ -92,23 +90,7 @@ module.exports = {
       let name2;
       let name3;
       userdata = await User.findOne({ id: interaction.user.id });
-      if (pfps.Pfps[reward1]) {
-        name1 = `${pfps.Pfps[reward1].Emote} ${pfps.Pfps[reward1].Name}`
-        
-        userdata.pfps.push(pfps.Pfps[reward1].Name.toLowerCase());
-        userdata.update();
-      }
-      if (pfps.Pfps[reward2]) {
-        name2 = `${pfps.Pfps[reward2].Emote} ${pfps.Pfps[reward2].Name}`
-        userdata.pfps.push(pfps.Pfps[reward2].Name.toLowerCase());
-        userdata.update();
-      }
-      if (pfps.Pfps[reward3]) {
-        name3 = `${pfps.Pfps[reward3].Emote} ${pfps.Pfps[reward3].Name}`
-
-        userdata.pfps.push(pfps.Pfps[reward3].Name.toLowerCase());
-        userdata.update();
-      }
+    
 
       if(reward1 == "super wheelspin"){
         name1 = `${emotes.superWheel} Super Wheelspin`

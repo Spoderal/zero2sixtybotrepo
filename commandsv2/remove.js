@@ -38,7 +38,9 @@ module.exports = {
         {name: `Body`, value: "body"},
         {name: `Weight`, value: "weight"},
         {name: `Spoiler`, value: "spoiler"},
-        {name: `Tires`, value: "tires"}
+        {name: `Springs`, value: "springs"},
+        {name: `Bodykit`, value: "bodykit"},
+
       )
       .setRequired(true)
   )

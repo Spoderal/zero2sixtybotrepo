@@ -21,24 +21,9 @@ module.exports = {
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 
     let daily = cooldowns.weekly;
-    let patron = userdata.patron;
+    let patron = userdata.zpass;
     let gold;
-    if (patron && patron.tier == "1") {
-      cash *= 2;
-      gold = 20;
-    }
-    if (patron && patron.tier == "2") {
-      cash *= 3;
-      gold = 50;
-    }
-    if (patron && patron.tier == "3") {
-      cash *= 5;
-      gold = 100;
-    }
-    if (patron && patron.tier == "4") {
-      cash *= 6;
-      gold = 250;
-    }
+ 
     let timeout = 604800000;
     let prestige = userdata.prestige;
     if (prestige) {
@@ -47,6 +32,11 @@ module.exports = {
       let multy = mult * cash;
 
       cash = cash += multy;
+    }
+
+    if(patron == true){
+      cash = cash * 2
+      gold = 100
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       let time = ms(timeout - (Date.now() - daily));
@@ -64,7 +54,7 @@ module.exports = {
         .setTitle(`Weekly Cash for ${interaction.user.username}`)
         .addFields([{ name: "Earned Cash", value: `${toCurrency(cash)}` }])
         .setColor(colors.blue);
-      if (gold) {
+      if (gold > 0) {
         userdata.gold += Number(gold);
         embed.addFields([
           {

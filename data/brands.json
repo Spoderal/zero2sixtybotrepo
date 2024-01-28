@@ -457,6 +457,12 @@
     "name": "Volvo",
     "country": "https://i.ibb.co/tcVzQ2d/Flag-of-Sweden-svg.png"
   },
+  "vauxhall": {
+    "image": "https://i.ibb.co/bsF2v6D/vauxh.png",
+    "emote": "<:vauxh:1200662071084322846>",
+    "name": "Vauxhall",
+    "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
+  },
   "genisis": {
     "image": "https://i.ibb.co/2Y7LsvV/logo-genisis.png",
     "emote": "<:logo_genisis:1130354503732957286>",
@@ -474,11 +480,22 @@
     "name": "No Logo",
     "country": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
   },
-
+  "harley": {
+    "emote": "<:harley:1198189219806453861>",
+    "image": "https://i.ibb.co/bH6dLF6/harley.png",
+    "name": "Harley",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
   "horse": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
     "emote": "🐎",
     "name": "Horse",
     "country": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
+  },
+  "plane": {
+    "image": "https://i.ibb.co/fkJLd8G/airplane.png",
+    "emote": "🛩️",
+    "name": "Plane",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   }
 }

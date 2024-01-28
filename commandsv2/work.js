@@ -40,7 +40,8 @@ module.exports = {
               { name: "Criminal", value: "criminal" },
               { name: "Zuber Driver", value: "zuber driver" },
               { name: "Photographer", value: "photographer" },
-              { name: "Doctor", value: "doctor" }
+              { name: "Doctor", value: "doctor" },
+              { name: "Astronaut", value: "astronaut" }
             )
         )
     )
@@ -364,6 +365,22 @@ module.exports = {
                 });
 
                 userdata.items.push("pills");
+              }
+              if (itemchance2 == 6 && userdata.work.name == "Astronaut") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["moon"].Emote} ${itemdb["moon"].Name}`,
+                });
+
+                userdata.items.push("moon");
+              }
+              if (itemchance2 == 5 && userdata.work.name == "Astronaut") {
+                embed.addFields({
+                  name: "Found Item",
+                  value: `${itemdb["comet"].Emote} ${itemdb["comet"].Name}`,
+                });
+
+                userdata.items.push("comet");
               }
               let salary = userdata.work.salary;
               if (

@@ -1,11 +1,11 @@
 const { createBugCard } = require("../services/trello");
-const { updatePetOnCommands } = require("./pets/updatePetOnCommands");
 const Cooldowns = require("../schema/cooldowns");
 const User = require("../schema/profile-schema");
 const {series} = require("./series")
 
 const { InteractionType } = require("discord.js");
 const { updateCrew } = require("./crews/updateCrew");
+const { patreon } = require("./patreon");
 
 //test
 //test
@@ -54,19 +54,19 @@ module.exports = {
             await interaction.reply({
               content: "Wait 3 seconds before running another command!",
               fetchReply: true,
-              ephemeral: true,
             });
           } else if (
             cooldowndata.is_racing !== null &&
             timeout2 - (Date.now() - cooldowndata.is_racing) > 0
           ) {
             cooldowndata.command_ran = Date.now();
+      
             return await interaction.reply({
               content: `Wait for your race to finish to run other commands`,
               fetchReply: true,
               ephemeral: true,
             });
-          } 
+          }
           
         
           else {
@@ -82,8 +82,12 @@ module.exports = {
             //     userdata.save();
             //   }
             // }
+
+            cooldowndata.command_ran = Date.now();
+            await cooldowndata.save()
             await command.execute(interaction);
             series(interaction)
+            patreon(interaction)
           }
         } catch (err) {
           console.log(err);
@@ -93,7 +97,6 @@ module.exports = {
         // Pets
         const petExecutionTimeName = "Pet update time";
 
-        await updatePetOnCommands(interaction);
       } else if (
         interaction.type == InteractionType.ApplicationCommandAutocomplete
       ) {

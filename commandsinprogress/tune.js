@@ -8,7 +8,7 @@ const {
   const User = require("../schema/profile-schema")
   const partdb = require("../data/partsdb.json").Parts
   const emotes = require("../common/emotes").emotes
-
+  const cardb = require('../data/cardb.json')
   module.exports = {
     data: new SlashCommandBuilder()
       .setName("tune")
@@ -20,274 +20,73 @@ const {
       ),
     async execute(interaction) {
 
-        let cartofind = interaction.options.getString("car")
-        let userdata = await User.findOne({id: interaction.user.id}) 
+      let caroption = interaction.options.getString("car")
 
-        let selected = userdata.cars.filter((car) => car.ID.toLowerCase() == cartofind.toLowerCase())
+      let carindb = cardb.Cars[caroption]
 
-        selected = selected[0]
-        let tunes = []
-        let rowturbo = new ActionRowBuilder()
-        let rowsuspension = new ActionRowBuilder()
-        let rowecu = new ActionRowBuilder()
-        let rows = []
+        // player's car
+let car = {
+  name: carindb.Name,
+  power: carindb.Speed,
+  accel: carindb["0-60"],
+  handling: carindb.Handling,
+  weight: carindb.Weight
+};
 
-        if(selected.Turbo){
-            rowturbo.addComponents(
-                new ButtonBuilder()
-                .setEmoji("➕")
-                .setCustomId("plusturbo")
-                .setStyle("Success")
-                .setLabel("1 PSI"),
-                new ButtonBuilder()
-                .setEmoji("➖")
-                .setCustomId("minusturbo")
-                .setLabel("1 PSI")
-                .setStyle("Danger")
-            )
-            rows.push(rowturbo)
-                let psi = selected.PSI || partdb[selected.Turbo.toLowerCase()].PSI
-                tunes.push(`${partdb[selected.Turbo.toLowerCase()].Emote} PSI: ${psi}`)
+// player's input
+const powerPoints = 10;
+const accelPoints = 0;
+const handlingPoints = 0;
+const weightPoints = 0;
 
-            
-        }
-        
-        if(selected.Suspension){
-            if(partdb[selected.Suspension.toLowerCase()].Tier >= 3){
-                rowsuspension.addComponents(
-                    new ButtonBuilder()
-                    .setEmoji("➕")
-                    .setCustomId("plusheight")
-                    .setStyle("Success")
-                    .setLabel("1 Ride Height"),
-                    new ButtonBuilder()
-                    .setEmoji("➖")
-                    .setCustomId("minusheight")
-                    .setLabel("1 Ride Height")
-                    .setStyle("Danger")
-                )
-                rows.push(rowsuspension)
-                let rideheight = selected.Height || partdb[selected.Suspension.toLowerCase()].Height
-                tunes.push(`${partdb[selected.Suspension.toLowerCase()].Emote} Ride Height: ${rideheight} in`)
+function hash(seed) {
+  const min = -10;
+  const max = 10;
 
-            }
-        }
+  const sine = Math.sin(seed) + 1;
+  const offset = 1_000_000_000_000_000;
 
-        if(selected.ECU){
-            if(partdb[selected.ECU.toLowerCase()].Tier >= 3){
-                rowecu.addComponents(
-                    new ButtonBuilder()
-                    .setEmoji("➕")
-                    .setCustomId("plusrev")
-                    .setStyle("Success")
-                    .setLabel("100 Rev Limit"),
-                    new ButtonBuilder()
-                    .setEmoji("➖")
-                    .setCustomId("minusrev")
-                    .setLabel("100 Rev Limit")
-                    .setStyle("Danger")
-                )
-                rows.push(rowecu)
-                let revlimit = selected.revlimit || partdb[selected.ECU.toLowerCase()].RevLimit
-                tunes.push(`${partdb[selected.ECU.toLowerCase()].Emote} Rev Limit: ${revlimit}`)
+  const hash = Math.floor(sine * offset);
+  const range = (max - min) + 1;
 
-            }
-        }
-        
+  return ((((hash - min) % range) + range) % range) + min;
+}
 
-        let embed = new EmbedBuilder()
-        .setTitle(`Tune`)
-        .setDescription(`${emotes.speed} Power: ${selected.Speed}\n${tunes.join('\n')}`)
-        .setColor(colors.blue)
+const seed = Array
+  .from(car.name)
+  .reduce((seed, char) => seed + char.charCodeAt(0), 0);
 
-       let msg = await interaction.reply({embeds: [embed], components: rows})
+const powerTune = hash(seed + powerPoints + accelPoints + handlingPoints + weightPoints);
+const accelTune = hash(powerTune);
+const handlingTune = hash(accelTune);
+const weightTune = hash(handlingTune);
 
-        let filter = (btnInt) => {
-            return interaction.user.id === btnInt.user.id;
-          };
-          let collector = msg.createMessageComponentCollector({
-            filter: filter,
-            time: 60000,
-          });
+function total(stock, tune) {
+  const percentage = (stock * tune) / 100;
+  return stock + percentage;
+}
 
-          
-          collector.on('collect', async (i) => {
-            if(i.customId == "plusturbo"){
-                let psi = selected.PSI || partdb[selected.Turbo.toLowerCase()].PSI
-                let revlimit = selected.RevLimit || 2000
+const tunedCar = {
+  name: car.name,
+  power: Math.round(total(car.power, powerTune)),
+  accel: Math.round(total(car.accel, accelTune) * 10) / 10,
+  handling: Math.round(total(car.handling, handlingTune)),
+  weight: Math.round(total(car.weight, weightTune))
+};
 
-                if((psi * 100) > revlimit) {
-                    selected.Speed -= Math.floor(psi / 5)
-                }
-                else if((psi * 100) < revlimit) {
-                    selected.Speed += Math.floor(psi / 5)
-                }
-                if((selected.PSI += 1) > partdb[selected.Turbo.toLowerCase()].MaxPSI){
-                   return await interaction.editReply("Max PSI!")
-                }
-                selected.PSI = psi += 1
-
-                
-
-                await User.findOneAndUpdate(
-                    {
-                      id: interaction.user.id,
-                    },
-                    {
-                      $set: {
-                        "cars.$[car]": selected,
-                      },
-                    },
-              
-                    {
-                      arrayFilters: [
-                        {
-                          "car.Name": selected.Name,
-                        },
-                      ],
-                    }
-                  );
-                  userdata.save()
-                  selected = userdata.cars.filter((car) => car.ID.toLowerCase() == cartofind.toLowerCase())
-                  selected = selected[0]
-                  console.log(selected)
-                  psi = selected.PSI || partdb[selected.Turbo.toLowerCase()].PSI
-                  tunes = [`${partdb[selected.Turbo.toLowerCase()].Emote} PSI: ${psi}`]
-             embed = new EmbedBuilder()
-        .setTitle(`Tune`)
-        .setDescription(`${emotes.speed} Power: ${selected.Speed}\n${tunes.join('\n')}`)
-        .setColor(colors.blue)
-            }
-            else if(i.customId == "minusturbo"){
-                let psi = selected.PSI || partdb[selected.Turbo.toLowerCase()].PSI
-                let revlimit = selected.RevLimit || 2000
-
-                if((psi * 100) < revlimit) {
-                    selected.Speed -= Math.floor(psi / 5)
-                }
-                else if((psi * 100) > revlimit) {
-                    selected.Speed += Math.floor(psi / 5)
-                }
-                selected.PSI = psi -= 1
-
-
-                await User.findOneAndUpdate(
-                    {
-                      id: interaction.user.id,
-                    },
-                    {
-                      $set: {
-                        "cars.$[car]": selected,
-                      },
-                    },
-              
-                    {
-                      arrayFilters: [
-                        {
-                          "car.Name": selected.Name,
-                        },
-                      ],
-                    }
-                  );
-                  userdata.save()
-                  selected = userdata.cars.filter((car) => car.ID.toLowerCase() == cartofind.toLowerCase())
-                  selected = selected[0]
-                  console.log(selected)
-                  psi = selected.PSI || partdb[selected.Turbo.toLowerCase()].PSI
-                  tunes = [`${partdb[selected.Turbo.toLowerCase()].Emote} PSI: ${psi}`]
-             embed = new EmbedBuilder()
-        .setTitle(`Tune`)
-        .setDescription(`${emotes.speed} Power: ${selected.Speed}\n${tunes.join('\n')}`)
-        .setColor(colors.blue)
-            }
-            else if(i.customId == "plusrev"){
-                let speed = selected.Speed
-                let revlimit = selected.RevLimit || 2000
-
-                if((speed * 10) < revlimit) {
-                    selected.Speed -= 5
-                }
-                
-                selected.RevLimit += 100
-
-
-                await User.findOneAndUpdate(
-                    {
-                      id: interaction.user.id,
-                    },
-                    {
-                      $set: {
-                        "cars.$[car]": selected,
-                      },
-                    },
-              
-                    {
-                      arrayFilters: [
-                        {
-                          "car.Name": selected.Name,
-                        },
-                      ],
-                    }
-                  );
-                  userdata.save()
-                  selected = userdata.cars.filter((car) => car.ID.toLowerCase() == cartofind.toLowerCase())
-                  selected = selected[0]
-                  console.log(selected)
-                  revlimit = selected.RevLimit
-                  tunes = [`${partdb[selected.ECU.toLowerCase()].Emote} Rev Limit: ${revlimit}`]
-             embed = new EmbedBuilder()
-        .setTitle(`Tune`)
-        .setDescription(`${emotes.speed} Power: ${selected.Speed}\n${tunes.join('\n')}`)
-        .setColor(colors.blue)
-            }
-            else if(i.customId == "minusrev"){
-                let speed = selected.Speed
-                let revlimit = selected.RevLimit || 2000
-                let psi = selected.PSI || 17
-
-                if((speed * 10) < revlimit) {
-                    selected.Speed += 5
-                }
-
-                if((psi * 100) > revlimit){
-                    return await interaction.editReply(`Your PSI is too high! Lower it first`)
-                }
-                
-                selected.RevLimit -= 100
-
-
-                await User.findOneAndUpdate(
-                    {
-                      id: interaction.user.id,
-                    },
-                    {
-                      $set: {
-                        "cars.$[car]": selected,
-                      },
-                    },
-              
-                    {
-                      arrayFilters: [
-                        {
-                          "car.Name": selected.Name,
-                        },
-                      ],
-                    }
-                  );
-                  userdata.save()
-                  selected = userdata.cars.filter((car) => car.ID.toLowerCase() == cartofind.toLowerCase())
-                  selected = selected[0]
-                  console.log(selected)
-                  revlimit = selected.RevLimit
-                  tunes = [`${partdb[selected.ECU.toLowerCase()].Emote} Rev Limit: ${revlimit}`]
-             embed = new EmbedBuilder()
-        .setTitle(`Tune`)
-        .setDescription(`${emotes.speed} Power: ${selected.Speed}\n${tunes.join('\n')}`)
-        .setColor(colors.blue)
-            }
-
-            await interaction.editReply({embeds: [embed]})
-          })
+console.log(powerTune, accelTune, handlingTune, weightTune);
+// 7 -5 6 1
+interaction.reply(`__OG__\n${carindb.Speed} HP\n${carindb["0-60"]} Acceleration\n${carindb.Handling} Handling\n${carindb.Weight} Weight\n__Tuned__${tunedCar.name}\n${tunedCar.power} hp\n${tunedCar.accel} Acceleration\n${tunedCar.handling} Handling\n${tunedCar.weight}`)
+console.log(tunedCar);
+/*
+{
+name: '2023 GMC Hummer EV',
+power: 1052,
+accel: 2.9,
+handling: 663,
+weight: 9154
+}
+*/
       
 
     },

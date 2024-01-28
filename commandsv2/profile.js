@@ -1,4 +1,3 @@
-const profilepics = require("../data/pfpsdb.json").Pfps;
 const cardb = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
@@ -32,27 +31,6 @@ module.exports = {
             .setName("user")
             .setDescription("View the profile of another user")
             .setRequired(false)
-        )
-    )
-    .addSubcommand((cmd) =>
-      cmd
-        .setName("edit")
-        .setDescription("Edit your profile")
-        .addStringOption((option) =>
-          option
-            .setName("option")
-            .setDescription("The field to edit")
-            .setChoices(
-              { name: "Helmet", value: "helmet" },
-              { name: "Title", value: "title" }
-            )
-            .setRequired(true)
-        )
-        .addStringOption((option) =>
-          option
-            .setName("item")
-            .setDescription("The helmet or title to set")
-            .setRequired(true)
         )
     ),
   async execute(interaction) {
@@ -364,13 +342,32 @@ module.exports = {
           if (items == helmlist) {
             let displayhelms = [];
 
-            for (let h in items[page]) {
-              let helm = items[page][h];
-              displayhelms.push(
-                `${profilepics[helm.toLowerCase()].Emote} ${
-                  profilepics[helm.toLowerCase()].Name
-                }`
-              );
+            for (let h in helmlist[page]) {
+              let helm = helmlist[page][h];
+              if(outfits.Accessories[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                    outfits.Accessories[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Outfits[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                    outfits.Outfits[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Helmets[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                    outfits.Helmets[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
             }
 
             embed = new EmbedBuilder()
@@ -537,44 +534,6 @@ module.exports = {
           } 
         }
       });
-    } else if (command == "edit") {
-      let option = interaction.options.getString("option");
-      let userdata = await User.findOne({ id: interaction.user.id });
-      let item = interaction.options.getString("item").toLowerCase();
-
-      if (option == "helmet") {
-        let userpfps = userdata.pfps;
-
-        let pfp = interaction.options.getString("item");
-        if (!pfp) return await interaction.reply("Specify a helmet!");
-        let pfplist = profilepics;
-        if (!pfplist[pfp.toLowerCase()])
-          return await interaction.reply("Thats not a profile picture.");
-        if (!userpfps)
-          return await interaction.reply("You dont have any profile pictures.");
-        if (!userpfps.includes(pfp.toLowerCase()))
-          return await interaction.reply("You dont own that profile picture.");
-
-        userdata.helmet = pfp.toLowerCase();
-        userdata.save();
-
-        await interaction.reply(`Set your helmet to "${pfp}"`);
-      } else if (option == "title") {
-        let userpfps = userdata.titles;
-
-        if (!item) return await interaction.reply("Specify a title!");
-        if (!titledb[item.toLowerCase()])
-          return await interaction.reply("Thats not a title.");
-        if (!userpfps)
-          return await interaction.reply("You dont have any titles.");
-        if (!userpfps.includes(item.toLowerCase()))
-          return await interaction.reply("You dont own that title.");
-
-        userdata.title = item.toLowerCase();
-        userdata.save();
-
-        await interaction.reply(`Set your title to "${item}"`);
-      }
-    }
+    } 
   },
 };

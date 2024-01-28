@@ -221,28 +221,18 @@ module.exports = {
     else if(event == "Market"){
       let shop = locationindb.BlackMarket
       let actionrow = new ActionRowBuilder()
-      .setComponents(
-        new ButtonBuilder()
-        .setCustomId("1")
-        .setLabel(`Buy ${shop[0].Name}`)
-        .setEmoji(`${shop[0].Emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("2")
-        .setLabel(`Buy ${shop[1].Name}`)
-        .setEmoji(`${shop[1].Emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("3")
-        .setLabel(`Buy ${shop[2].Name}`)
-        .setEmoji(`${shop[2].Emote}`)
-        .setStyle("Primary"),
-        new ButtonBuilder()
-        .setCustomId("4")
-        .setLabel(`Buy ${shop[3].Name}`)
-        .setEmoji(`${shop[3].Emote}`)
-        .setStyle("Primary")
-      )
+      for(let s in shop){
+        let itemshop = shop[s]
+
+        actionrow.addComponents(
+          new ButtonBuilder()
+          .setCustomId(`${itemshop.Name.toLowerCase()}`)
+          .setLabel(`Buy ${itemshop.Name}`)
+          .setEmoji(`${itemshop.Emote}`)
+          .setStyle("Primary"),
+        )
+      }
+   
       let shoparr = []
 
       for(let it in shop){
@@ -262,8 +252,10 @@ module.exports = {
       });
 
       collector3.on('collect', async (i) => {
-        if(i.customId == "1"){
-          let carindb = cardb.Cars[`${shop[0].Name.toLowerCase()}`]
+        userdata = await User.findOne({id: interaction.user.id})
+       let carid = i.customId
+       console.log(carid)
+          let carindb = cardb.Cars[`${carid.toLowerCase()}`]
           let carobj = {
             ID: carindb.alias,
             Name: carindb.Name,
@@ -311,151 +303,7 @@ module.exports = {
           userdata.save()
 
           interaction.editReply("✅")
-        }
-        else if(i.customId == "2"){
-          let carindb = cardb.Cars[`${shop[1].Name.toLowerCase()}`]
-          let carobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Image: carindb.Image,
-            Miles: 0,
-            Drift: 0,
-            WeightStat: carindb.Weight,
-            Gas: 10,
-            MaxGas: 10,
-          };
-
-          let carprice = shop[1].Price
-
-          if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
-
-          userdata.cars.push(carobj)
-          
-          userdata.cash -= carprice
-          let gas = cartodrive.Gas
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car].Gas": gas - 1,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": cartodrive.Name,
-                },
-              ],
-            }
-          );
-          userdata.save()
-
-          interaction.editReply("✅")
-        }
-        else if(i.customId == "3"){
-          let carindb = cardb.Cars[`${shop[2].Name.toLowerCase()}`]
-          let carobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Image: carindb.Image,
-            Miles: 0,
-            Drift: 0,
-            WeightStat: carindb.Weight,
-            Gas: 10,
-            MaxGas: 10,
-          };
-
-          let carprice = shop[2].Price
-
-          if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
-
-          userdata.cars.push(carobj)
-          
-          userdata.cash -= carprice
-          let gas = cartodrive.Gas
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car].Gas": gas - 1,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": cartodrive.Name,
-                },
-              ],
-            }
-          );
-          userdata.save()
-
-          interaction.editReply("✅")
-        }
-        if(i.customId == "4"){
-          let carindb = cardb.Cars[`${shop[3].Name.toLowerCase()}`]
-          let carobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Image: carindb.Image,
-            Miles: 0,
-            Drift: 0,
-            WeightStat: carindb.Weight,
-            Gas: 10,
-            MaxGas: 10,
-          };
-
-          let carprice = shop[3].Price
-
-          if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
-
-          userdata.cars.push(carobj)
-          let gas = cartodrive.Gas
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car].Gas": gas - 1,
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": cartodrive.Name,
-                },
-              ],
-            }
-          );
-          userdata.cash -= carprice
-
-          userdata.save()
-
-          interaction.editReply("✅")
-        }
+        
       })
     }
       else if(event == "Nothing"){
@@ -598,7 +446,13 @@ module.exports = {
             let randomnum = randomRange(1, 2)
 
             if(randomnum == 1){
-              userdata.cash += job.Reward
+              let reward = job.Reward
+
+              if(userdata.items.includes("flowers")){
+                reward = reward * 2
+              }
+
+              userdata.cash += reward
               
               embed.setDescription(`You helped the NPC with their issue and succeeded! You earn $${job.Reward}`)
             }

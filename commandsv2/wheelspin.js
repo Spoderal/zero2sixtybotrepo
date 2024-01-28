@@ -36,7 +36,7 @@ module.exports = {
       );
     let wheelspins = userdata.wheelspins || 0;
     if (wheelspins <= 0) return interaction.reply("You're out of wheel spins!");
-   let items = ["🏎️", "💵", "⚙️", "🔩", "🪖", "👕", "🪛"];
+   let items = ["🏎️", "💵", "⚙️", "🔩", "👕", "🪛"];
 
     let items2 = wheelspinrewards.Items;
     let cars = wheelspinrewards.Cars;
@@ -64,6 +64,7 @@ module.exports = {
     let usercars = userdata.cars;
     userdata.wheelspins -= 1;
     cooldowns.wheelspin = Date.now();
+    await cooldowns.save()
     let embed = new Discord.EmbedBuilder()
       .setTitle("Wheel Spin!")
       .setColor(colors.blue)
@@ -108,16 +109,17 @@ module.exports = {
           userdata.outfits.push(reward.toLowerCase());
 
           embed.setDescription(
-            `You won a ${outfits.Outfits[reward].Emote} ${outfits.Outfits[reward].Name}!`
+            `You won an outfit ${outfits.Outfits[reward].Emote} ${outfits.Outfits[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
         } 
-        else if (item == "🪖") {
-          let reward = lodash.sample(wheelspinrewards.Helmets);
+      
+        else if (item == "🎩") {
+          let reward = lodash.sample(wheelspinrewards.Accessories);
           userdata.outfits.push(reward.toLowerCase());
 
           embed.setDescription(
-            `You won a ${outfits.Helmets[reward].Emote} ${outfits.Helmets[reward].Name}!`
+            `You won an accessory ${outfits.Accessories[reward].Emote} ${outfits.Accessories[reward].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
         } 

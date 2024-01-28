@@ -40,6 +40,7 @@ module.exports = {
     let locationindb = heistdb[location.toLowerCase()];
     let timeout = 86400000;
     let itemsrequired = locationindb.items;
+    if(user == user2) return interaction.reply("You can't start a heist with yourself!")
 
     for (let it in itemsrequired) {
       if (!userdata.items.includes(itemsrequired[it]))
@@ -70,6 +71,7 @@ module.exports = {
     if (user2ready == false) {
       user2emote = "❌";
     }
+
 
     let embed = new EmbedBuilder()
       .setTitle(`Waiting to start heist...`)

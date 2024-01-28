@@ -87,9 +87,6 @@ module.exports = {
 
     let price = 100;
 
-    if (userdata.business && userdata.business.Business == "Car Wash") {
-      price = 50;
-    }
 
     let row = new ActionRowBuilder().setComponents(
       new ButtonBuilder()

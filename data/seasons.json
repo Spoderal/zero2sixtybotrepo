@@ -30,7 +30,7 @@
         },
         "6": {
           "Number": 6,
-          "Item": "tree helmet",
+          "Item": "5000 Cash",
           "Required": 3000
         },
         "7": {
@@ -70,7 +70,7 @@
         },
         "14": {
           "Number": 14,
-          "Item": "ice Helmet",
+          "Item": "5000 Cash",
           "Required": 7000
         },
         "15": {
@@ -80,7 +80,7 @@
         },
         "16": {
           "Number": 16,
-          "Item": "snow helmet",
+          "Item": "5000 Cash",
           "Required": 8000
         },
         "17": {
@@ -105,7 +105,7 @@
         },
         "21": {
           "Number": 21,
-          "Item": "festive helmet",
+          "Item": "5000 Cash",
           "Required": 12000
         },
         "22": {
@@ -220,7 +220,7 @@
         },
         "44": {
           "Number": 44,
-          "Item": "cracked helmet",
+          "Item": "5000 Cash",
           "Required": 180000
         },
         "45": {
@@ -275,7 +275,7 @@
         },
         "4": {
           "Number": 4,
-          "Item": "5000 Cash",
+          "Item": "T2GasTank",
           "Required": 40000
         },
         "5": {
@@ -295,7 +295,7 @@
         },
         "8": {
           "Number": 8,
-          "Item": "snowball",
+          "Item": "record",
           "Required": 80000
         },
         "9": {
@@ -320,12 +320,12 @@
         },
         "13": {
           "Number": 13,
-          "Item": "Pet Egg",
+          "Item": "T4Turbo",
           "Required": 130000
         },
         "14": {
           "Number": 14,
-          "Item": "doge helmet",
+          "Item": "5000 Cash",
           "Required": 140000
         },
         "15": {
@@ -390,7 +390,7 @@
         },
         "27": {
           "Number": 27,
-          "Item": "T4Intake",
+          "Item": "T4GasTank",
           "Required": 270000
         },
         "28": {
@@ -420,7 +420,7 @@
         },
         "33": {
           "Number": 33,
-          "Item": "Cookie",
+          "Item": "Headphones",
           "Required": 430000
         },
         "34": {
@@ -455,7 +455,7 @@
         },
         "40": {
           "Number": 40,
-          "Item": "2021 mclaren 720s gt3x",
+          "Item": "1993 jaguar xj220",
           "Required": 1000000
         }
       }

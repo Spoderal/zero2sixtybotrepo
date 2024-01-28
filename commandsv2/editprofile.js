@@ -1,7 +1,6 @@
 
 
 const Discord = require("discord.js");
-const pfpdb = require("../data/pfpsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");

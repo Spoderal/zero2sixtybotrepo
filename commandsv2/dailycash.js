@@ -25,7 +25,7 @@ module.exports = {
 
 console.log(isWeekend)
     let daily = cooldowndata.daily;
-    let patreon = userdata.patron;
+    let patreon = userdata.zpass;
     let lastDaily = cooldowndata.lastDaily;
     let streak = userdata.settings.dailyStreak || 0;
     let premium = userdata.premium
@@ -66,6 +66,11 @@ console.log(isWeekend)
 
       dcash = dcash += multy;
     }
+
+    if(patreon == true){
+      dcash = dcash * 2
+    }
+
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       console.log('false')
       let time = ms(timeout - (Date.now() - daily));

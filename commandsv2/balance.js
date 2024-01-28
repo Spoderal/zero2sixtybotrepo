@@ -1,15 +1,7 @@
-
-const {
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder
-} = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { numberWithCommas, toCurrency } = require("../common/utils");
-const {
-  userFindOrCreateInDB,
-  userGetFromInteraction,
-} = require("../common/user");
+const { userFindOrCreateInDB, userGetFromInteraction } = require("../common/user");
 const { tipFooterRandom } = require("../common/tips");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
@@ -30,135 +22,134 @@ module.exports = {
   async execute(interaction) {
     const user = userGetFromInteraction(interaction);
     const profile = await userFindOrCreateInDB(user);
-    let userdata = await User.findOne({ id: interaction.user.id });
+    const userdata = await User.findOne({ id: interaction.user.id });
 
     let {
       cash,
       gold,
-      rp4,
+      rp,
       ckeys,
       rkeys,
       ekeys,
       notoriety,
       wheelspins,
-      lockpicks: lockpicks,
+      lockpicks,
       swheelspins,
       achievements,
       blueprints,
-      evkeys,
-      bounty,
       seriestickets,
+      f1blueprint,
       commonCredits,
       rareCredits,
       exoticCredits,
-      moontokens,
-      snowflakes,
-      zcandy,
+      carver,
       barnmaps,
+      t5vouchers,
     } = profile;
 
-    if (userdata.police == false) {
+    let embed = new EmbedBuilder()
+      .setTitle(`${user.username}'s Balance`)
+      .setColor(colors.blue)
+      .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png");
+
+    if (userdata.police === false) {
       if (typeof cash === "undefined") {
         await interaction.reply(GET_STARTED_MESSAGE);
-      } else {
-        let embed = new EmbedBuilder()
-          .setTitle(`${user.username}'s Balance`)
+        return;
+      }
 
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/FB8RwK9/Logo-Makr-5-Toeui.png")
-          .setFooter(tipFooterRandom)
-          .setFields([
-            {
-              name: "Main",
-              value: `
-              ${emotes.cash} Z Cash: ${toCurrency(cash)}
-              
-              ${emotes.gold} Gold: ${gold}
-    
-              ${emotes.bounty} Bounty: ${bounty}
-  
-              ${emotes.barnMapCommon} Barn Maps: ${barnmaps}
-  
-              ${emotes.wheelSpin} Wheel spins: ${wheelspins}  
-              
-              ${emotes.superWheel} Super Wheel spins: ${swheelspins}  
-              
-              ${emotes.blueprints} Blueprints: ${blueprints}
+      embed.setFields([
+        {
+          name: "Main",
+          value: `
+            ${emotes.cash} Z Cash: ${toCurrency(cash)}
+            ${emotes.gold} Gold: ${gold}
+            ${emotes.t5voucher} T5 Vouchers: ${t5vouchers}
+            ${emotes.barnMapCommon} Barn Maps: ${barnmaps}
+            ${emotes.wheelSpin} Wheel spins: ${wheelspins}
+            ${emotes.superWheel} Super Wheel spins: ${swheelspins}
+            ${emotes.blueprints} Blueprints: ${blueprints}
+            ${emotes.f1blueprint} F1 Blueprints: ${f1blueprint}
+            ${emotes.seriestickets} Series Tickets: ${seriestickets}
+          `,
+          inline: true,
+        },
+        {
+          name: "Keys",
+          value: `
+            ${emotes.commonKey} Common: ${ckeys} 
+            *Credits: ${commonCredits}*
+            ${emotes.rareKey} Rare: ${rkeys} 
+            *Credits: ${rareCredits}*
+            ${emotes.exoticKey} Exotic: ${ekeys} 
+            *Credits: ${exoticCredits}*
+            <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
+          `,
+          inline: true,
+        },
+        {
+          name: "Event Items",
+          value: `
+            ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
+            ${emotes.rp}  RP: ${numberWithCommas(rp)}
+            🌆 Carver Cash: ${carver}
+          `,
+          inline: true,
+        },
+      ]);
 
-          ${emotes.seriestickets} Series Tickets: ${seriestickets}
-              `,
-              inline: true,
-            },
-            {
-              name: "Keys",
-              value: `
-              ${emotes.commonKey} Common: ${ckeys} 
-              *Credits: ${commonCredits}*
+      let row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setStyle("Link")
+          .setEmoji("🪙")
+          .setLabel("Buy Gold")
+          .setURL("https://zero2sixty-store.tebex.io/"),
+      
+      );
 
-              ${emotes.rareKey} Rare: ${rkeys} 
-              *Credits: ${rareCredits}*
 
-              ${emotes.exoticKey} Exotic: ${ekeys} 
-              *Credits: ${exoticCredits}*
+      if (userdata.settings.tips === true) {
+        embed.setFooter(tipFooterRandom);
+      }
 
-              <:lockpick:1040384727691051170> Lockpicks: ${lockpicks}
-              `,
-              inline: true,
-            },
-            {
-              name: "Event Items",
-              value: `
-              ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
-              
-              ${emotes.rp}  RP: ${numberWithCommas(rp4)}
-
-              ${emotes.moontokens}  Moon Tokens: ${numberWithCommas(moontokens)}
-
-              <:key_limited:1103923572063354880> Fictional Keys: ${userdata.evkeys} 
-              `,
-              inline: true,
-            },
-          ]);
-        let row = new ActionRowBuilder().addComponents(
+      if(userdata.zpass == false){
+        row.addComponents(
           new ButtonBuilder()
-            .setStyle("Link")
-            .setEmoji("🪙")
-            .setLabel("Buy Gold")
-            .setURL("https://zero2sixty-store.tebex.io/")
-        );
-
+        .setStyle("Link")
+        .setEmoji("<:zpass:1200657440304283739>")
+        .setLabel("Buy Z Pass")
+        .setURL("https://www.patreon.com/zero2sixtybot")
+        )
+      }
+   
         await interaction.reply({
           embeds: [embed],
           components: [row],
           content: "Make sure to check out the 2 seasonal events with /events!",
         });
-        if (!achievements) {
-          achievements = ["None"];
-        }
+
+      
+
+      if (!achievements) {
+        achievements = ["None"];
       }
-    } else if (userdata.police == true) {
+    } else if (userdata.police === true) {
       let bountyemote = emotes.bounty;
       let bounty = userdata.bounty;
-      let embed = new EmbedBuilder()
+
+      embed
         .setTitle(`${user.username}'s Police Balance`)
-        .setDescription(
-          `
-        ${bountyemote} Bounty: ${bounty}
-        `
-        )
-        .setColor(colors.blue)
+        .setDescription(`${bountyemote} Bounty: ${bounty}`)
         .setThumbnail("https://i.ibb.co/6gps3DT/police.gif")
         .setFooter(tipFooterRandom)
-        .setFields([
-          {
-            name: "Event Items",
-            value: `
-          ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
-          ${emotes.rp}  RP: ${numberWithCommas(rp4)}
+        .addFields({
+          name: "Event Items",
+          value: `
+            ${emotes.notoriety} Notoriety: ${numberWithCommas(notoriety)}
+            ${emotes.rp}  RP: ${numberWithCommas(rp)}
           `,
-            inline: true,
-          },
-        ]);
+          inline: true,
+        });
 
       await interaction.reply({ embeds: [embed] });
     }

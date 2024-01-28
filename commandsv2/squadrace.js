@@ -10,7 +10,7 @@ const { userGetPatreonTimeout } = require("../common/user");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const squadsdb = require("../data/squads.json");
 const cardb = require("../data/cardb.json");
-const helmetdb = require("../data/pfpsdb.json");
+const outfits = require("../data/characters.json");
 
 
 module.exports = {
@@ -115,8 +115,7 @@ module.exports = {
     }
     let squadinfo = squadfiltered[0];
     let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
-    let carimage =
-      selected.Image || cardb.Cars[selected.Name.toLowerCase()].Imager;
+    let carimage = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image;
     let botcarindb = cars.Cars[botcar.toLowerCase()];
     let car2 = botcarindb;
 
@@ -149,15 +148,16 @@ module.exports = {
     let speed = 0;
     let speed2 = 0;
 
-    let helmet = helmetdb.Pfps[userdata.helmet.toLowerCase()];
+    let userpfp = userdata.helmet || "default";
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing Squad ${squadfiltered[0].Name}`)
 
-      .setAuthor({ name: `${user.username}`, iconURL: `${helmet.Image}` })
       .addFields(
         {
-          name: `${selected.Emote} ${selected.Name}`,
+          name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} Your ${
+            selected.Emote
+          } ${selected.Name}`,
           value: `${emotes.speed} Power: ${mph}\n\n${emotes.acceleration} Acceleration: ${acceleration}s\n\n${emotes.weight} Weight: ${weight}\n\n${emotes.handling} Handling: ${handling}`,
 
           inline: true,

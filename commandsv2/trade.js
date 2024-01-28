@@ -127,10 +127,9 @@ module.exports = {
     }
     if (cardb.Cars[trading]) {
       item = `${cardb.Cars[trading].Emote} ${cardb.Cars[trading].Name}`;
+      userdata = await User.findOne({id: user1.id})
       let carindb = userdata.cars.filter(
-        (car) =>
-          car.Name.toLowerCase() == trading.toLowerCase() ||
-          car.ID.toLowerCase() == trading.toLowerCase()
+        (car) => car.Name.toLowerCase() == trading.toLowerCase() ||  car.ID.toLowerCase() == trading.toLowerCase()
       );
       let carobj = carindb[0];
       if (!carobj) return interaction.reply("You don't have this car!");
@@ -182,17 +181,15 @@ module.exports = {
       userdata2.parts = user2parts;
     }
     if (cardb.Cars[trading2]) {
+      userdata2 = await User.findOne({id: user2.id})
+
       item2 = `${cardb.Cars[trading2].Emote} ${cardb.Cars[trading2].Name}`;
       console.log("car");
-      let carindb = userdata2.cars.filter(
-        (car) =>
-          car.Name.toLowerCase() == trading2.toLowerCase() ||
-          car.ID.toLowerCase() == trading2.toLowerCase()
-      );
-      let carobj = carindb[0];
-      if (!carobj) return interaction.reply("You don't have this car!");
-      userdata2.cars.pull(carobj);
-      userdata.cars.push(carobj);
+      let carindb2 = userdata2.cars.filter( (car) => car.Name.toLowerCase() == trading2.toLowerCase() || car.ID.toLowerCase() == trading2.toLowerCase() );
+      let carobj2 = carindb2[0];
+      if (!carobj2) return interaction.reply("You don't have this car!");
+      userdata2.cars.pull(carobj2);
+      userdata.cars.push(carobj2);
     }
     if (itemdb[trading2]) {
       let filtereduser = user2items.filter(function hasmany(part) {

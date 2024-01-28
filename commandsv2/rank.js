@@ -39,7 +39,7 @@ module.exports = {
       ) {
         console.log("no card");
       } else {
-        rpbonus += 0.2;
+        rpbonus + 0.2;
       }
 
       if (
@@ -48,7 +48,7 @@ module.exports = {
       ) {
         console.log("no card");
       } else {
-        rpbonus += 0.5;
+        rpbonus + 0.5;
       }
 
       if (
@@ -57,31 +57,31 @@ module.exports = {
       ) {
         console.log("no card");
       } else {
-        rpbonus += 1.2;
+        rpbonus + 1.2;
       }
     }
 
     if (userdata.using.includes("radio")) {
-      rpbonus += 0.5;
+      rpbonus + 0.5;
     }
 
     if (userdata.using.includes("energy drink")) {
-      rpbonus += 0.1;
+      rpbonus + 0.1;
     }
 
     if (userdata.using.includes("energy drink")) {
-      rpbonus += 0.1;
+      rpbonus + 0.1;
     }
 
     console.log(rpbonus);
 
     rpbonus += prestigerank / 100;
     console.log(rpbonus);
-    let rounded = rpbonus * 100;
+    let rounded = Math.round(rpbonus * 100);
 
     let racerank = userdata.racerank;
 
-    let required1 = newprestige2 * 30;
+    let required1 = newprestige2 * 20;
     let required2 = newprestige2 * 20;
 
     let embed = new Discord.EmbedBuilder()

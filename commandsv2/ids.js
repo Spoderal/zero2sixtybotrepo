@@ -147,7 +147,7 @@ module.exports = {
         },
         {
           $set: {
-            "cars.$[car].ID": idtochoose,
+            "cars.$[car].ID": idtochoose.toLowerCase(),
           },
         },
 

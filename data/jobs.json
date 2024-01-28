@@ -543,5 +543,88 @@
         "rank": 7
       }
     ]
+  },
+  "astronaut": {
+    "prestige": 9,
+    "salary": 15000,
+    "name": "Astronatut",
+    "winprompts": [
+      "You've discovered a new planet!",
+      "You just stepped foot on the moon, thats one step for man kind, and uhhh....",
+      "You just found alien life on mars!",
+      "You repaired something on the ISS",
+      "You just stepped foot onto a desert planet in a galaxy far far away"
+    ],
+    "loseprompts": [
+      "You just got sucked into a black hole!",
+      "Your space helmet broke",
+      "The space mission was delayed..."
+    ],
+    "items": ["moon", "comet"],
+    "Positions": [
+      {
+        "name": "Intern Astronaut",
+        "salary": 15000,
+        "min": 1500,
+        "fail": 2000,
+        "xp": 0,
+        "emote": "🧑🏼‍🚀",
+        "rank": 1
+      },
+      {
+        "name": "Astronaut",
+        "salary": 20000,
+        "min": 2000,
+        "fail": 3000,
+        "xp": 5000,
+        "emote": "🧑🏼‍🚀",
+        "rank": 2
+      },
+      {
+        "name": "Lead Astronaut",
+        "salary": 25000,
+        "min": 3000,
+        "fail": 5000,
+        "xp": 10000,
+        "emote": "🧑🏼‍🚀",
+        "rank": 3
+      },
+      {
+        "name": "Galaxy Explorer",
+        "salary": 30000,
+        "min": 5000,
+        "fail": 10000,
+        "xp": 15000,
+        "emote": "🌌",
+        "rank": 4
+      },
+      {
+        "name": "Universe Explorer",
+        "salary": 50000,
+        "min": 7500,
+        "fail": 25000,
+        "xp": 25000,
+        "emote": "🌌",
+        "rank": 5
+      },
+      {
+        "name": "Space Agency Director",
+        "salary": 100000,
+        "min": 20000,
+        "fail": 50000,
+        "xp": 50000,
+        "emote": "🌌",
+        "rank": 6
+      },
+      {
+        "name": "Space Agency Owner",
+        "salary": 300000,
+        "min": 50000,
+        "fail": 75000,
+        "xp": 100000,
+        "emote": "🌌",
+        "rank": 7
+      }
+    ]
   }
 }

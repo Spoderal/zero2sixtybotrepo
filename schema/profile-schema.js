@@ -344,11 +344,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
-  crewseason: {
-    type: Array,
-    required: false,
-    default: [],
-  },
+  
   crew: {
     type: Object,
     required: false,
@@ -444,7 +440,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-  f1blueprints: {
+  f1blueprint: {
     type: Number,
     required: false,
     default: 0,
@@ -575,7 +571,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 1,
   },
-  rp4: {
+  rp: {
     type: Number,
     required: false,
     default: 0,
@@ -755,6 +751,36 @@ const Profile = new mongoose.Schema({
     type: Boolean,
     required: false,
     default: false,
+  },  
+  t5vouchers: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  zpass: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  crewseasonclaimed: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  italian:{
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  italiancomplete:{
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  carver: {
+    type: Number,
+    required: false,
+    default: 0,
   },
 });
 

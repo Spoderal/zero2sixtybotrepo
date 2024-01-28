@@ -16,6 +16,7 @@ const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
 const ms = require("ms");
 const Cooldowns = require("../schema/cooldowns");
+const outfits = require("../data/characters.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -26,10 +27,10 @@ module.exports = {
         .setName("blueprint_type")
         .setDescription("The blueprint to use")
         .setRequired(true)
-        .setChoices({ name: "Blueprint", value: "blueprints" })
+        .setChoices({ name: "Blueprint", value: "blueprint" },
+        { name: "F1 Blueprint", value: "f1blueprint" }, )
     ),
   async execute(interaction) {
-    let pfps = require("../data/pfpsdb.json");
     let blueprints = require("../data/imports.json").blueprints;
     let type = interaction.options.getString("blueprint_type");
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -50,7 +51,7 @@ module.exports = {
       return;
     }
     //fix
-    if (type == "blueprints") {
+    if (type == "blueprint") {
       let boughtindb = blueprints;
 
       if (userdata.blueprints <= 0)
@@ -105,30 +106,7 @@ module.exports = {
         let name1;
         let name2;
         let name3;
-        if (pfps.Pfps[reward1]) {
-          let helmetimg = pfps.Pfps[reward1].Image;
-          name1 = pfps.Pfps[reward1].Name;
-          let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 150, 200, 150, 150);
-          ctx.save();
-        }
-        if (pfps.Pfps[reward2]) {
-          let helmetimg = pfps.Pfps[reward2].Image;
-          name2 = pfps.Pfps[reward2].Name;
-          let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 570, 200, 150, 150);
-          ctx.save();
-        }
-        if (pfps.Pfps[reward3]) {
-          let helmetimg = pfps.Pfps[reward3].Image;
-          name3 = pfps.Pfps[reward3].Name;
-          let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 970, 200, 150, 150);
-          ctx.save();
-        }
+      
 
         ctx.restore();
         ctx.font = "40px sans-serif";
@@ -203,6 +181,32 @@ module.exports = {
           ctx.save();
         }
 
+
+        if (reward1 == "f1 blueprint") {
+          let carimg = "https://i.ibb.co/QvRFqvC/blueprintf1.png";
+          name1 = "F1 Blueprint";
+          let loadedpart = await loadImage(carimg);
+
+          ctx.drawImage(loadedpart, 80, 200, 320, 180);
+          ctx.save();
+        }
+        if (reward2 == "f1 blueprint") {
+          let carimg ="https://i.ibb.co/QvRFqvC/blueprintf1.png";
+          name2 = "F1 Blueprint";
+          let loadedpart = await loadImage(carimg);
+          ctx.drawImage(loadedpart, 500, 200, 320, 180);
+          ctx.save();
+        }
+        if (reward3 == "f1 blueprint") {
+          let carimg ="https://i.ibb.co/QvRFqvC/blueprintf1.png";
+          name3 = "F1 Blueprint";
+          let loadedpart = await loadImage(carimg);
+
+          ctx.drawImage(loadedpart, 900, 200, 320, 180);
+          ctx.save();
+        }
+
+
         let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("reward1")
@@ -276,6 +280,15 @@ module.exports = {
               collector.stop();
               return;
             }
+            if (reward1 == "f1 blueprint") {
+ 
+
+              userdata.f1blueprint += 1
+              userdata.save();
+              await interaction.editReply({ content: "✅" });
+              collector.stop();
+              return;
+            }
             if (partdb.Parts[reward1.toLowerCase()]) {
               userdata.parts.push(reward1.toLowerCase());
               userdata.save();
@@ -311,6 +324,15 @@ module.exports = {
               let amount = Number(reward2.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
+              userdata.save();
+              await interaction.editReply({ content: "✅" });
+              collector.stop();
+              return;
+            }
+            if (reward2 == "f1 blueprint") {
+ 
+
+              userdata.f1blueprint += 1
               userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
@@ -356,6 +378,15 @@ module.exports = {
               collector.stop();
               return;
             }
+            if (reward3 == "f1 blueprint") {
+ 
+
+              userdata.f1blueprint += 1
+              userdata.save();
+              await interaction.editReply({ content: "✅" });
+              collector.stop();
+              return;
+            }
             if (partdb.Parts[reward3.toLowerCase()]) {
               userdata.parts.push(reward3.toLowerCase());
               userdata.save();
@@ -368,16 +399,16 @@ module.exports = {
         
         clearTimeout(xt)
       }, 5000);
-    } else if (type == "f1blueprints") {
+    } else if (type == "f1blueprint") {
       blueprints = require("../data/imports.json").f1blueprints;
 
       let boughtindb = blueprints;
 
-      if (userdata.f1blueprints < 25)
+      if (userdata.f1blueprint < 5)
         return interaction.reply(
-          `You don't have enough F1 Blueprints! You need 25`
+          `You don't have enough F1 Blueprints! You need 5`
         );
-      userdata.f1blueprints -= 25;
+      userdata.f1blueprint -= 5;
       let embed = new EmbedBuilder()
         .setTitle(`Revealing blueprint...`)
         .setColor(`#60b0f4`);
@@ -411,30 +442,7 @@ module.exports = {
         let name1;
         let name2;
         let name3;
-        if (pfps.Pfps[reward1]) {
-          let helmetimg = pfps.Pfps[reward1].Image;
-          name1 = pfps.Pfps[reward1].Name;
-          let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 150, 200, 150, 150);
-          ctx.save();
-        }
-        if (pfps.Pfps[reward2]) {
-          let helmetimg = pfps.Pfps[reward2].Image;
-          name2 = pfps.Pfps[reward2].Name;
-          let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 570, 200, 150, 150);
-          ctx.save();
-        }
-        if (pfps.Pfps[reward3]) {
-          let helmetimg = pfps.Pfps[reward3].Image;
-          name3 = pfps.Pfps[reward3].Name;
-          let loadedhelm = await loadImage(helmetimg);
-
-          ctx.drawImage(loadedhelm, 970, 200, 150, 150);
-          ctx.save();
-        }
+      
 
         ctx.restore();
         ctx.font = "40px sans-serif";
@@ -503,6 +511,29 @@ module.exports = {
         if (cardb.Cars[reward3]) {
           let carimg = cardb.Cars[reward3].Image;
           name3 = cardb.Cars[reward3].Name;
+          let loadedpart = await loadImage(carimg);
+
+          ctx.drawImage(loadedpart, 900, 200, 320, 180);
+          ctx.save();
+        }
+        if (reward1 == "f1 blueprint") {
+          let carimg = "https://i.ibb.co/QvRFqvC/blueprintf1.png";
+          name1 = "F1 Blueprint";
+          let loadedpart = await loadImage(carimg);
+
+          ctx.drawImage(loadedpart, 80, 200, 320, 180);
+          ctx.save();
+        }
+        if (reward2 == "f1 blueprint") {
+          let carimg ="https://i.ibb.co/QvRFqvC/blueprintf1.png";
+          name2 = "F1 Blueprint";
+          let loadedpart = await loadImage(carimg);
+          ctx.drawImage(loadedpart, 500, 200, 320, 180);
+          ctx.save();
+        }
+        if (reward3 == "f1 blueprint") {
+          let carimg ="https://i.ibb.co/QvRFqvC/blueprintf1.png";
+          name3 = "F1 Blueprint";
           let loadedpart = await loadImage(carimg);
 
           ctx.drawImage(loadedpart, 900, 200, 320, 180);
@@ -581,6 +612,14 @@ module.exports = {
               collector.stop();
               return;
             }
+            if (reward1 == "f1 blueprint") {
+
+              userdata.f1blueprints += 1
+              userdata.save();
+              await interaction.editReply({ content: "✅" });
+              collector.stop();
+              return;
+            }
             if (partdb.Parts[reward1.toLowerCase()]) {
               userdata.parts.push(reward1.toLowerCase());
               userdata.save();
@@ -620,6 +659,14 @@ module.exports = {
               collector.stop();
               return;
             }
+            if (reward2 == "f1 blueprint") {
+
+              userdata.f1blueprints += 1
+              userdata.save();
+              await interaction.editReply({ content: "✅" });
+              collector.stop();
+              return;
+            }
             if (partdb.Parts[reward2.toLowerCase()]) {
               userdata.parts.push(reward2.toLowerCase());
               userdata.save();
@@ -654,6 +701,14 @@ module.exports = {
               let amount = Number(reward3.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
+              userdata.save();
+              await interaction.editReply({ content: "✅" });
+              collector.stop();
+              return;
+            }
+            if (reward3 == "f1 blueprint") {
+
+              userdata.f1blueprint += 1
               userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();

@@ -6,6 +6,9 @@ const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
 const ranks = require("../data/ranks.json");
+const { createCanvas, loadImage, registerFont } = require("canvas");
+const { resolve } = require("path");
+const outfits = require("../data/characters.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -83,82 +86,153 @@ module.exports = {
 
       embed.setDescription(desc);
     } else if (leaderboardtype == "prestige") {
-      embed = new Discord.EmbedBuilder()
-        .setTitle("Prestige Leaderboard")
-        .setThumbnail("https://i.ibb.co/n31P7rK/rank-prestige.png")
-        .setColor(colors.blue);
+      let canvas = createCanvas(3840, 2400);
+      let ctx = canvas.getContext("2d");
 
-      const filteredUsers = users
-        .filter((value) => value.prestige > 0)
-        .sort((b, a) => a.prestige - b.prestige)
-        .slice(0, 40);
+      let leaderbg = await loadImage("https://i.ibb.co/jLc4NTC/prestige-leaderstats-template-1.png");
+      ctx.drawImage(leaderbg, 0, 0, canvas.width, canvas.height);
+      await registerFont(resolve("./assets/images/DaysOne-Regular.ttf"), { family: "Days One" })
 
-      if (!filteredUsers?.length) {
-        return await interaction.editReply(
-          "The prestige leaderboard is currently empty!"
-        );
+
+
+      let filteredUsers = users
+      .filter((value) => value.cash > 0)
+      .sort((b, a) => a.prestige - b.prestige)
+
+      filteredUsers.slice(0 ,10)
+      
+      let top1 = await interaction.client.users.fetch(filteredUsers[0].id).catch(() => {});
+      console.log(top1)
+      let top2 = await interaction.client.users.fetch(filteredUsers[1].id).catch(() => {});
+      let top3 = await interaction.client.users.fetch(filteredUsers[2].id).catch(() => {});
+      let top4 = await interaction.client.users.fetch(filteredUsers[3].id).catch(() => {});
+      let top5 = await interaction.client.users.fetch(filteredUsers[4].id).catch(() => {});
+      let top6 = await interaction.client.users.fetch(filteredUsers[5].id).catch(() => {});
+      let top7 = await interaction.client.users.fetch(filteredUsers[6].id).catch(() => {});
+      let top8 = await interaction.client.users.fetch(filteredUsers[7].id).catch(() => {});
+      let top9 = await interaction.client.users.fetch(filteredUsers[8].id).catch(() => {});
+       let top10 = await interaction.client.users.fetch(filteredUsers[9].id).catch(() => {});
+      ctx.font = "150px Days One";
+      ctx.fillStyle = "#48dcfe";
+
+      if(top1 !== undefined){
+        let username = truncate(top1.username, 20)
+        ctx.fillText(`${username} - ${filteredUsers[0].prestige}`, 310, 560);  
+
+
+        ctx.font = "250px Days One";
+        ctx.fillStyle = "#ffffff";
+        let helmet = filteredUsers[0].helmet || "default";
+        let fit = filteredUsers[0].outfit
+        let acthelmet = outfits.Helmets[helmet.toLowerCase()].Image;
+        let outfit = outfits.Outfits[fit.toLowerCase()].Image;
+        let helmimg = await loadImage(acthelmet);
+       let outfitimg = await loadImage(outfit);
+
+       ctx.drawImage(outfitimg, 2050, 35, 2000, 2000);
+      ctx.drawImage(helmimg, 2050, 35, 2000, 2000);
+      ctx.textAlign = "center";
+
+        ctx.fillText(`${username}`, 3060, 2240);  
+        ctx.textAlign = "left";
+
+      }
+      ctx.font = "150px Days One";
+      ctx.fillStyle = "#fed700";
+      if(top2 !== undefined){
+        let username = truncate(top2.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[1].prestige}`, 310, 720);  
+
+      }
+      ctx.font = "150px Days One";
+      ctx.fillStyle = "#c0c0c0";
+  
+
+      if(top3 !== undefined){
+        let username = truncate(top3.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[2].prestige}`, 310, 900);  
+
+      }
+      ctx.font = "120px Days One";
+      ctx.fillStyle = "#cd8032";
+      if(top4 !== undefined){
+        let username = truncate(top4.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[3].prestige}`, 410, 1107);  
+
+      }
+      if(top5 !== undefined){
+        let username = truncate(top5.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[4].prestige}`, 410, 1315);  
+
+      }
+      if(top6 !== undefined){
+        let username = truncate(top6.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[5].prestige}`, 410, 1500);  
+
+      }
+      if(top7 !== undefined){
+        let username = truncate(top7.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[6].prestige}`, 410, 1700);  
+
+      }
+      if(top8 !== undefined){
+        let username = truncate(top8.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[7].prestige}`, 410, 1900);  
+
+      }
+      if(top9 !== undefined){
+        let username = truncate(top9.username, 10)
+        ctx.fillText(`${username} - ${filteredUsers[8].prestige}`, 410, 2094);  
+
+      }
+      if(top10 !== undefined){
+        let username = truncate(top10.username, 20)
+        ctx.fillText(`${username} - ${filteredUsers[9].prestige}`, 410, 2300);  
+
       }
 
-      let currentUserPosition = 0;
-      for (let i = 0; i < filteredUsers?.length; i++) {
-        const user = await interaction.client.users
-          .fetch(filteredUsers[i].id)
-          .catch(() => {});
-        if (!user?.username) continue;
-        filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
-        currentUserPosition =
-          filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
-      }
-
-      const onlyTaggedUsers = filteredUsers.filter((u) => u.tag).slice(0, 10);
-      if (!onlyTaggedUsers?.length) {
-        return await interaction.editReply(
-          "The prestige leaderboard is currently empty!"
-        );
-      }
-
-      if (currentUserPosition > 0) {
-        embed.setFooter({
-          text: `Your position is #${currentUserPosition} on the prestige leaderboard!`,
-        });
-      }
-
-      let desc = "";
-      for (let i = 0; i < onlyTaggedUsers.length; i++) {
-        desc += `${i + 1}. ${onlyTaggedUsers[i].tag} - ${
-          onlyTaggedUsers[i].prestige
-        } <:rank_newprestige:1114812459182723102>\n`;
-      }
-
-      embed.setDescription(desc);
+      
+      
+      let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
+        name: "lb-image.png",
+      });
+      return await interaction.editReply({
+        embeds: [],
+        files: [attachment],
+        fetchReply: true,
+      });
+      
     } else if (leaderboardtype == "pvp") {
       embed = new Discord.EmbedBuilder()
         .setTitle("PVP Leaderboard")
         .setColor(colors.blue);
 
-      const filteredUsers = users
+      let filteredUsers = users
         .filter((value) => value.pvprank.Wins > 0)
         .sort((b, a) => a.pvprank.Wins - b.pvprank.Wins)
         .slice(0, 40);
+        let pvpdb = require("../data/ranks.json")
 
-      if (!filteredUsers?.length) {
+        let pvpfilter2 = filteredUsers.sort((b, a) => pvpdb[a.pvprank.Rank.toLowerCase()].rank - pvpdb[b.pvprank.Rank.toLowerCase()].rank)
+
+      if (!pvpfilter2?.length) {
         return await interaction.editReply(
           "The PVP leaderboard is currently empty!"
         );
       }
 
       let currentUserPosition = 0;
-      for (let i = 0; i < filteredUsers?.length; i++) {
+      for (let i = 0; i < pvpfilter2?.length; i++) {
         const user = await interaction.client.users
-          .fetch(filteredUsers[i].id)
+          .fetch(pvpfilter2[i].id)
           .catch(() => {});
         if (!user?.username) continue;
-        filteredUsers[i].tag = `${user.username}#${user.discriminator}`;
+        pvpfilter2[i].tag = `${user.username}#${user.discriminator}`;
         currentUserPosition =
-          filteredUsers[i].id == interaction.user.id ? i + 1 : 0;
+        pvpfilter2[i].id == interaction.user.id ? i + 1 : 0;
       }
 
-      const onlyTaggedUsers = filteredUsers.filter((u) => u.tag).slice(0, 10);
+      const onlyTaggedUsers = pvpfilter2.filter((u) => u.tag).slice(0, 10);
       if (!onlyTaggedUsers?.length) {
         return await interaction.editReply(
           "The PVP leaderboard is currently empty!"
@@ -186,3 +260,9 @@ module.exports = {
     await interaction.editReply({ embeds: [embed] });
   },
 };
+
+
+function truncate(str, maxlength) {
+  return (str.length > maxlength) ?
+    str.slice(0, maxlength - 1) + '…' : str;
+}

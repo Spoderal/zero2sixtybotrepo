@@ -125,6 +125,7 @@
       "Type": "exhaust",
       "Image": "https://i.ibb.co/QPC2rQp/part-t4exhaust.png",
       "DecreasedSpeed": "0",
+      "Fused":"t5exhaust",
       "Handling": 5,
       "Obtained": "Wheelspin"
     },
@@ -250,6 +251,7 @@
       "Type": "clutch",
       "DecreasedSpeed": "0",
       "Handling": 30,
+      "Fused":"t5clutch",
       "Image": "https://i.ibb.co/TTT3Nn8/part-t4clutch.png",
       "Obtained": "Wheelspin"
     },
@@ -353,6 +355,7 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "intercooler",
+      "Fused":"t5intercooler",
       "DecreasedSpeed": "0",
       "Handling": "13",
       "Image": "https://i.ibb.co/cydzWCp/part-t4intercooler.png",
@@ -465,6 +468,7 @@
       "RevLimit": 3000,
       "DecreasedSpeed": "0",
       "Handling": "8",
+      "Fused":"t4ecu",
       "Image": "https://i.ibb.co/W2pJJgs/part-t4ecu.png",
       "Obtained": "Wheelspin"
     },
@@ -629,6 +633,7 @@
       "DecreasedSpeed": "0",
       "DecreaseHandling": 10,
       "PSI": 25,
+      "Fused":"t5turbo",
       "MaxPSI": 35,
       "Image": "https://i.ibb.co/1MSBNVk/t4turbo.png",
       "Obtained": "Wheelspin"
@@ -760,6 +765,7 @@
       "Type": "brakes",
       "DecreasedSpeed": "0",
       "Handling": 20,
+      "Fused":"t5brakes",
       "Image": "https://i.ibb.co/1rkjcVD/part-t4brakesd.png",
       "Obtained": "Wheelspin"
     },
@@ -956,6 +962,42 @@
       "Fuse": true,
       "Image": "https://i.imgur.com/7i2TUiE.png"
     },
+    "t2racesprings": {
+      "Name": "T1RaceSprings",
+      "Power": 5,
+      "AddedSnow": 0,
+      "Acceleration": "0",
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:racesprings:1014009323531280414>",
+      "Tier": "1",
+      "AddedDrift": "0",
+      "DecreasedDrift": 0,
+      "RemoveAcceleration": 0,
+      "Type": "springs",
+      "DecreasedSpeed": "0",
+      "Handling": 5,
+      "Fuse": true,
+      "Image": "https://i.imgur.com/7i2TUiE.png"
+    },
+    "t3racesprings": {
+      "Name": "T1RaceSprings",
+      "Power": 5,
+      "AddedSnow": 0,
+      "Acceleration": "0",
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:racesprings:1014009323531280414>",
+      "Tier": "1",
+      "AddedDrift": "0",
+      "DecreasedDrift": 0,
+      "RemoveAcceleration": 0,
+      "Type": "springs",
+      "DecreasedSpeed": "0",
+      "Handling": 5,
+      "Fuse": true,
+      "Image": "https://i.imgur.com/7i2TUiE.png"
+    },
     "t1tracksprings": {
       "Name": "T1TrackSprings",
       "Power": 0,
@@ -1055,6 +1097,7 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "intake",
+      "Fused":"t5intake",
       "DecreasedSpeed": "0",
       "Handling": 5,
       "Image": "https://i.ibb.co/1n4jnGM/part-t4intake.png"
@@ -1247,7 +1290,7 @@
 
     "rotary": {
       "Name": "Rotary",
-      "Power": "0",
+      "Power": 100,
       "AddedSnow": 0,
       "Acceleration": "0",
       "sellprice": 100,
@@ -1455,6 +1498,23 @@
       "Price": 0,
       "Emote": "<:engine_i4:1191487014185467904>",
       "Image": "https://i.ibb.co/5xyRWNb/engine-i4.png",
+      "Tier": "1",
+      "JunkOnly": true,
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "RemoveAcceleration": "0",
+      "Type": "engine",
+      "DecreasedSpeed": "0"
+    },
+    "i5": {
+      "Name": "I5",
+      "Power": 125,
+      "AddedSnow": 0,
+      "Acceleration": 0.2,
+      "sellprice": 100,
+      "Price": 0,
+      "Emote": ":engine_i5:1200648288123240468>",
+      "Image": "https://i.ibb.co/vLsvr8T/engine-i5.png",
       "Tier": "1",
       "JunkOnly": true,
       "AddedDrift": "0",
@@ -1798,6 +1858,7 @@
       "Emote": "<:part_t4tires:1101042349125148782>",
       "Tier": "4",
       "Type": "tires",
+      "Fused":"t5tires",
       "Handling": 20,
       "Image": "https://i.ibb.co/CPYgzS6/part-t4tires.png"
     },
@@ -1909,6 +1970,7 @@
       "Type": "tires",
       "DecreasedSpeed": "0",
       "Fuse":true,
+      "Fused":"t5slicks",
       "DecreasedHandling": 75,
       "DecreaseHandling": 75,
       "Image": "https://i.ibb.co/6t7HR33/part-t4tires.png"
@@ -2360,6 +2422,7 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "gearbox",
+      "Fused":"t5gearbox",
       "DecreasedSpeed": "0",
       "Handling": 15,
       "Image": "https://i.ibb.co/nDtyQ65/part-t4gearbox.png"
@@ -2466,6 +2529,7 @@
       "Type": "suspension",
       "DecreasedSpeed": "0",
       "Handling": 0,
+      "Fused":"t5suspension",
       "Image": "https://i.ibb.co/82GHRC7/t4suspension.png",
       "Height": 4.5
     },
@@ -2688,6 +2752,7 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": 0.5,
       "Type": "suspension",
+      "Fused":"t5driftsuspension",
       "RemovePower": 5,
       "DecreasedSpeed": 5,
       "Handling": 40,
@@ -2795,6 +2860,7 @@
       "RemoveAcceleration": "0",
       "Type": "weight",
       "Fuse": true,
+      "Fused":"t5weightreduction",
       "DecreasedSpeed": "0",
       "RemoveWeight": 400,
       "Weight": 0,
@@ -2893,6 +2959,7 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
 
+      "Fused":"t5weight",
       "Type": "weight",
       "Fuse": true,
       "Weight": 400,
@@ -2992,6 +3059,7 @@
       "Emote": "<:part_t4widebody:1131431646550311042>",
       "Tier": "4",
       "Type": "bodykit",
+      "Fused":"t5bodykit",
       "DecreasedSpeed": "0",
       "Stars": 2.5,
       "Image": "https://i.ibb.co/1r10X1k/part-t4widebody.png"
@@ -3075,6 +3143,7 @@
       "DecreasedDrift": "0",
       "RemoveAcceleration": "0",
       "Type": "spoiler",
+      "Fused":"t5spoiler",
       "DecreasedSpeed": "0",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
     },
@@ -3219,8 +3288,51 @@
       "Emote": "<:z_nitrous:916531625444130817>",
       "Tier": "1"
     },
-
-   
+    "t1gastank":{
+      "Name": "T1GasTank",
+      "Gas": 15,
+      "Price": 0,
+      "Emote": "<:part_t1gastank:1199814051379818576>",
+      "Tier": "1",
+      "Type":"gastank",
+      "Image":"https://i.ibb.co/6yGtT6M/part-t1gastank.png"
+    },
+    "t2gastank":{
+      "Name": "T2GasTank",
+      "Gas": 20,
+      "Price": 0,
+      "Emote": "<:part_t2gastank:1199814049014239242>",
+      "Tier": "2",
+      "Type":"gastank",
+      "Image":"https://i.ibb.co/7W6060Q/part-t2gastank.png"
+    },
+    "t3gastank":{
+      "Name": "T3GasTank",
+      "Gas": 25,
+      "Price": 0,
+      "Type":"gastank",
+      "Emote": "<:part_t3gastank:1199814052629721228>",
+      "Tier": "3",
+      "Image":"https://i.ibb.co/2d2fQQN/part-t3gastank.png"
+    },
+    "t4gastank":{
+      "Name": "T4GasTank",
+      "Gas": 30,
+      "Price": 0,
+      "Type":"gastank",
+      "Emote": "<:part_t4gastank:1199820863021776976>",
+      "Tier": "4",
+      "Image":"https://i.ibb.co/LJZnjT2/part-t4gastank.png"
+    },
+    "t5gastank":{
+      "Name": "T5GasTank",
+      "Gas": 50,
+      "Price": 0,
+      "Type":"gastank",
+      "Emote": "<:part_t5gastank:1199820860555538593>",
+      "Tier": "5",
+      "Image":"https://i.ibb.co/C1HcsNZ/part-t5gastank.png"
+    },
     "cracked exhaust": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Emote": "<:exhaustdefault:932419391650418709>"
@@ -3261,56 +3373,76 @@
     "no turbo": {
       "Name":"None",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:t1turbo:989758553340383272>"
+      "Emote": ""
+    },
+    "no weight": {
+      "Name":"None",
+      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+      "Emote": ""
+    },
+    "no spoiler": {
+      "Name":"None",
+      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+      "Emote": ""
+    },
+    "stock springs": {
+      "Name":"Stock",
+      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+      "Emote": ""
     },
     "no intercooler": {
       "Name":"None",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1intercooler:1123148189999038514>"
+      "Emote": ""
     },
     "stock engine": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:enginedefault:932419391587483688>"
+      "Emote": ""
     },
     "stock intake": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1intake:1101659642095992882>"
+      "Emote": ""
     },
     "stock exhaust": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1exhaust:1101027462932086855>"
+      "Emote": ""
     },
     "stock tires": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
       "Name": "Stock",
-      "Emote": "<:part_t1tires:1101042346231070773>"
+      "Emote": ""
     },
     "stock suspension": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:t1suspension:1127391271271538748>"
+      "Emote": ""
     },
     "stock ecu": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1ecu:1102062324371693599>"
+      "Emote": ""
+    },
+    "stock gastank": {
+      "Name":"Stock",
+      "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+      "Emote": ""
     },
     "stock clutch": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:clutch1:1063291889282990171>"
+      "Emote": ""
     },
     "stock turbo": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:t1turbo:989758553340383272>"
+      "Emote": ""
     },
     "stock gearbox": {
       "Name":"Stock",
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
-      "Emote": "<:part_t1gearbox:1101757211123908618>"
+      "Emote": ""
     },
     "broken": {
       "Image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",

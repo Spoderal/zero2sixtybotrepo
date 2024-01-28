@@ -14,8 +14,8 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const { toCurrency } = require("../common/utils");
 const emotes = require("../common/emotes").emotes;
 const pvpranks = require("../data/ranks.json");
-const helmetdb = require("../data/pfpsdb.json");
 const Global = require("../schema/global-schema");
+const outfits = require("../data/characters.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -633,7 +633,7 @@ module.exports = {
       let embed = new EmbedBuilder()
         .setAuthor({
           name: `${user.username} - PVP Rank`,
-          iconURL: `${helmetdb.Pfps[userdata.helmet.toLowerCase()].Image}`,
+          iconURL: `${outfits.Helmets[userdata.helmet.toLowerCase()].Image}`,
         })
         .setDescription(
           `${pvpranks[pvprank.Rank.toLowerCase()].emote} ${

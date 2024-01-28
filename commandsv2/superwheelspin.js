@@ -46,7 +46,7 @@ module.exports = {
     userdata.swheelspins -= 1;
     userdata.update();
     cooldowndata.swheelspin = Date.now();
-    cooldowndata.save();
+    await cooldowndata.save();
     let embed = new Discord.EmbedBuilder()
       .setTitle("Super Wheel Spin!")
       .setColor(colors.blue)

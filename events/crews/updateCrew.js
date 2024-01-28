@@ -18,15 +18,15 @@ async function updateCrew(interaction) {
       let totalrp = 0;
 
       let crewmembers = crew2.members;
-      let crewrank = crew2.Rank4;
-      if (!crew2.Rank4) {
-        crew2.Rank4 = 1;
+      let crewrank = crew2.Rank;
+      if (!crew2.Rank) {
+        crew2.Rank = 1;
         global.update();
       }
       for (let i in crewmembers) {
         let user = crewmembers[i];
         let rpdata = await User.findOne({ id: user });
-        let userrp = rpdata.rp4;
+        let userrp = rpdata.rp;
         console.log(userrp);
         totalrp += userrp;
       }
@@ -34,11 +34,11 @@ async function updateCrew(interaction) {
       let nextrank = (crewrank + 1);
       let requiredrp = nextrank * 1000;
       if (totalrp >= requiredrp) {
-        let rank = crew2.Rank4;
+        let rank = crew2.Rank;
 
         let newrank = nextrank
 
-        crew2.Rank4 = newrank;
+        crew2.Rank = newrank;
         console.log("ranked");
       }
     }

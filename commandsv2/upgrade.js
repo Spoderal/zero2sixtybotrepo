@@ -110,9 +110,15 @@ module.exports = {
         }
       );
 
-      userdata.parts.push(oldhp.Name.toLowerCase())
+      let userparts = userdata.parts
+      for (var i2 = 0; i2 < 1; i2++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
+      userdata.parts = userparts
+      if(userdata.tutorial.started == true){
+        userdata.tutorial.started = false
 
-      userdata.save()
+      }
+
+      await userdata.save()
   
       return await interaction.reply({embeds: [embed]})
     }
@@ -136,7 +142,7 @@ module.exports = {
 
     }
   }
-    if(partindb.RemoveAcceleration > 0 && selected[0].Name !== "Snowys 2018 Koenigsegg Agera"){
+    if(partindb.RemoveAcceleration > 0 && selected[0].Name !== "Snowys 2018 Koenigsegg Agera" && selected[0].Name !== "2023 Hennessey Venom F5 Revolution"){
       selected[0].Acceleration += Number(partindb.RemoveAcceleration)
     }
     if(partindb.RemovePower > 0){
@@ -154,6 +160,9 @@ module.exports = {
     }
     if(partindb.Stars > 0){
       selected[0].Rating += partindb.Stars
+    }
+    if(partindb.Gas > 0){
+      selected[0].MaxGas = partindb.Gas
     }
 
     let partvalue = partindb.Price * 0.35
@@ -183,9 +192,13 @@ module.exports = {
     );
 
     let userparts = userdata.parts
+    let tutorial = userdata.tutorial
+    for (var i3 = 0; i3 < 1; i3++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
+    userdata.parts = userparts
+      if(userdata.tutorial.started == true){
+        userdata.tutorial.started = false
 
-    userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
-
+      }
     userdata.save()
     
     
@@ -198,9 +211,8 @@ module.exports = {
 
     await interaction.reply({embeds: [embed]})
 
-    if(userdata.tutorial && userdata.tutorial.started == true){
+    if(tutorial && tutorial.started == true){
       await interaction.channel.send(`Awesome! Your car is even faster! You can buy more parts with \`/parts\` and make sure to use the \`/buy\` command to purchase them! To finish the tutorial, win a drag race and you'll get a barn map, then run \`/barn\``)
-      
     }
      
   },

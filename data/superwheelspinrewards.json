@@ -20,6 +20,7 @@
     "t4brakes",
     "t4spoiler",
     "t4gearbox",
+  "t4gastank",
     "t4weightreduction",
     "super rocket engine"
   ],
@@ -33,7 +34,8 @@
   "t4spoiler",
   "t4gearbox",
   "t4tires",
-  "t4clutch"
+  "t4clutch",
+  "t4gastank"
   
 ],
   "Cash": [

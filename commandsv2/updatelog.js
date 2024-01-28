@@ -27,7 +27,7 @@ module.exports = {
           },
         
           {
-            label: "1/5/2024",
+            label: "1/28/2024",
             description: "Information for the recent update!",
             value: "2_update",
             customId: "up5",
@@ -43,7 +43,7 @@ module.exports = {
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
             ⚙️ Latest Patch 1/15/2023\n
-            ⬆️ New Update 1/5/2024
+            ⬆️ New Update 1/28/2024
         `);
 
     embed.setColor(colors.blue);
@@ -66,53 +66,37 @@ module.exports = {
   if (value === "2_update") {
     embed.data.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Big Update`);
+            embed.setTitle(`Update 1/28/2024`);
             embed
               .addFields(
                 {
                   name: "Features ⭐",
                   value: `• Bug fixes\n
-                  • Gambling commands, /dice, /blackjack, /coinflip\n
-                  • New profile card\n
-                  • Achievements fixed\n
-                  • New house, Casa Haus\n
-                  • House perks fixed\n
-                  • New custom racers with helmets, accessories, and outfits!\n
-                  • New event, fictional powerhouse\n
-                  • Added list to remove command\n
-                  • Added featured part to parts store\n
-                  • Added price to featured cars in the dealership\n
-                  • Better and more realistic engine swapping, your engines were given back to you if you had one as an upgrade\n
-                  • Vote crate buffed\n
-                  • For 2024, everyone has received a 2024 crown to customize their racer with!\n
-                  • New brand logos for low quality brand logos`,
+                  • New revamped Z Pass on the [patreon](https://www.patreon.com/zero2sixtybot) \`/zpass\`\n
+                  • You can now list currencies like barn maps and wheelspins on the market\n
+                  • Gold can be exchanged for T5 parts with T5 Vouchers\n
+                  • Gold can be exchanged for series tickets\n
+                  • New series: Italian Heritage\n
+                  • New command /itemlist displays all items in the game\n
+                  • Races are now harder depending on your prestige\n
+                  • New prestige leaderstats design\n
+                  • New parts, gas tanks! Obtain them from wheelspins and blueprints!\n
+                  • New crew season <:crew_season4:1200642745002373201>\n
+                  • F1 has returned with a PERMANENT new blueprint to obtain F1 cars!\n
+                  • New event: City carvers!\n`,
                   inline: true,
                 },
                 {
-                  name: "Nerfs 📉",
-                  value: `<:ssc:979620786757337098>2020 SSC Tuatara -> Increased price, more weight, nerfed acceleration, nerfed handling\n
-                  <:lotus:931011548317642814> 2020 Lotus Evija -> Decreased handling\n
-                  <:ferrari:931011838374727730> 2010 Ferrari 599XX -> Moved to Legendary Garage\n
-                  2001 Lexus IS300 -> Moved to Common Garage\n
-                  1998 Pontiac Fiero -> Moved to Common Garage\n
-                  <:toyota:931012829283233883> 1986 Toyota AE86 -> Moved to Common Garage\n
-                  <:lexus:932776357124001823> 1989 Nissan Silvia S13 -> Moved to Common Garage\n
-                  <:mercedes_z:973000364410404924> 2001 Mercedes SL600 -> Moved to Common Garage\n
-                  <:bugatti:931012624110460979> 2008 Bugatti Veyron -> Price increased`,
-                  inline: true,
-                },
-                {
-                  name: "Buffs 📈",
-                  value: `<:maserati:961332832767184987> 2022 Maserati MC20 -> Increased handling, new image\n
-                  <:bmw:931011550054056007> 2016 BMW i8 -> Better acceleration\n
-                  <:brand_ford:1192958185863118889> 2010 Ford Mustang -> Better handling\n
-                  <:brand_ford:1192958185863118889> 2024 Ford Mustang -> Better acceleration, better handling, less weight\n
-                  <:hyundai:931015215447941200> 2012 Hyundai Veloster -> Better handling, decreased price\n
-                  <:aston:931011548682534962> 2016 Aston Martin Vulkan -> Decreased price`,
+                  name: "Items 🪛",
+                  value: `<:item_headphones:1198182631968346112> Headphones - With this in your inventory the radio item will give 4x earnings instead of 2x\n
+                  <:item_record:1198183499019067412> Record - With this item in your inventory you boost your race rank earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS*\n
+                  <:item_comet:1200941172114341969> Comet - Found while doing the astroaut job\n
+                  <:item_moon:1200941169752948826> Moon - Found while doing the astronaut job\n
+                  <:item_cheese:1200941173712375889> Cheese - With this in your inventory, you can prestige TWICE while only needing the ranks for 1 prestige`,
                   inline: true,
                 }
               )
-              .setFooter({ text: "1/5/2024" })
+              .setFooter({ text: "1/28/2024" })
               .setThumbnail(`https://i.ibb.co/xH4L53M/Icon-01.jpg`)
               .setColor(colors.blue);
 

@@ -32,8 +32,38 @@
         },
         "orange":{
             "Image":"https://i.ibb.co/v30SqNK/racer-helmet-orange.png",
-            "Name":"Orange",
+            "Name":"Green",
             "Emote":"<:racer_helmet_orange:1191882741655019632>"
+        },
+        "dark blue":{
+            "Image":"https://i.ibb.co/zrWcHkC/racer-outfit-redbull.png",
+            "Name":"Dark Blue",
+            "Emote":"<:racer_outfit_redbull:1198837042201776189>"
+        },
+        "light blue":{
+            "Image":"https://i.ibb.co/Y3CLn7K/racer-outfit-lightblue.png",
+            "Name":"Light Blue",
+            "Emote":"<:racer_outfit_lightblue:1198837039995572234>"
+        },
+        "not porsche":{
+            "Image":"https://i.ibb.co/4NCXh37/racer-outfit-porsche.png",
+            "Name":"Not Porsche",
+            "Emote":"<:racer_outfit_porsche:1198837041165774940>"
+        },
+        "green":{
+            "Image":"https://i.ibb.co/jZDndcD/racer-outfit-green.png",
+            "Name":"Green",
+            "Emote":"<:racer_outfit_green:1198837038389141514>"
+        },
+        "yinyang":{
+            "Image":"https://i.ibb.co/tqJcCXM/racer-helmet-yinyang.png",
+            "Name":"YinYang",
+            "Emote":"<:racer_helmet_yinyang:1199824468802023454>"
+        },
+        "flowers":{
+            "Image":"https://i.ibb.co/G3J2G8N/racer-helmet-flowers.png",
+            "Name":"Flowers",
+            "Emote":"<:racer_helmet_flowers:1199824462049181706>"
         }
     },
     "Outfits":{
@@ -71,6 +101,36 @@
             "Image":"https://i.ibb.co/3hSXtdh/racer-outfit-orange.png",
             "Name":"Orange",
             "Emote":"<:racer_outfit_orange:1191882744700088380>"
+        },
+        "dark blue":{
+            "Image":"https://i.ibb.co/CPcQ6mB/racer-outfit-blue.png",
+            "Name":"Dark Blue",
+            "Emote":"<:racer_outfit_blue:1199825381671305389>"
+        },
+        "light blue":{
+            "Image":"https://i.ibb.co/DLR1KW1/racer-outfit-lightblue.png",
+            "Name":"Light Blue",
+            "Emote":"<:racer_outfit_lightblue:1198837039995572234>"
+        },
+        "not porsche":{
+            "Image":"https://i.ibb.co/L67354H/racer-outfit-porsche.png",
+            "Name":"Not Porsche",
+            "Emote":"<:racer_outfit_porsche:1198837041165774940>"
+        },
+        "green":{
+            "Image":"https://i.ibb.co/zFf2cT3/racer-outfit-green.png",
+            "Name":"Green",
+            "Emote":"<:racer_outfit_green:1198837038389141514>"
+        },
+        "yinyang":{
+            "Image":"https://i.ibb.co/T4NCZzC/racer-outfit-yinyang.png",
+            "Name":"YinYang",
+            "Emote":"<:racer_outfit_yinyang:1199824466532913193>"
+        },
+        "flowers":{
+            "Image":"https://i.ibb.co/2y6kXXv/racer-outfit-flowers.png",
+            "Name":"Flowers",
+            "Emote":"<:racer_outfit_flowers:1199824459771682856>"
         }
     },
     "Accessories":{
@@ -93,7 +153,11 @@
             "Image":"https://i.ibb.co/xqRYq3Q/racer-accessory-halo.png",
             "Name":"Halo",
             "Emote":"<:racer_accessory_halo:1191883085998989352>"
+        },
+        "flowers":{
+            "Image":"https://i.ibb.co/k5r4c7c/racer-accessory-flowers.png",
+            "Name":"Flowers",
+            "Emote":"<:racer_accessory_flowers:1199826722657423421>"
         }
-      
     }
 }

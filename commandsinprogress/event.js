@@ -49,13 +49,7 @@ module.exports = {
             customId: "event_2",
             emoji: "🦢",
           },
-          {
-            label: "City Carvers",
-            description: "Information for the City Carvers event",
-            value: "event_4",
-            customId: "event_4",
-            emoji: "🌆",
-          },
+    
         ])
     );
 
@@ -69,10 +63,9 @@ module.exports = {
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
           Season 3 <:season3:1183248587774238741>
-          Swan Song 🦢
           Space Race 🚀
           Fictional Powerhouse 🧩
-          City Carvers 🌆
+          Swan Song 🦢
       `);
 
     embed.setColor(colors.blue);
@@ -104,7 +97,7 @@ module.exports = {
 
             Earn notoriety from snow race, and use that towards the Z Pass in /season!
 
-            **Ends March 1st 2024**
+            **Ends March 1st 2023**
 
                   `);
         embed.setThumbnail(seasondb.Seasons.Winter.Image);
@@ -141,6 +134,40 @@ module.exports = {
           components: [row2],
         });
       } 
+      else  if (value === "event_2") {
+        embed.setTitle("Swan Song");
+        embed.setFooter({ text: 'Prefix is "/"' });
+        embed.setDescription(`Welcome to Swan Song!
+        
+        As the age of electric cars draws nearer, the petrol-powered cars we know and love are being phased out one by one.\n
+        Participate in what may well be the last hurrah of the internal combustion engine, driving various cars that are getting or have gotten axed over the previous years.\n\n
+        Because, after all, nothing can replace good old rumbles and horsepower.
+
+        Obtain <:item_swannote:1196272038327881768> Swan Notes from street racing with an EV and run /use for a chance at a swan song vehicle
+
+        If you don't own an EV, may I suggest the 2011 Tesla Roadster?
+        __List of event cars__
+
+        <:mistu:931012414479147038> 2015 Mitsubishi Lancer Evo X
+        <:audi:931011548758048828> 2023 Audi TT Roadster
+        <:audi:931011548758048828> 2023 Audi R8 GT
+        <:chevy:931012624039182406> 2024 Chevrolet Camaro ZL1
+        <:dodge:931011880040951828> 2023 Dodge Challenger SRT Demon 170
+        <:maserati:961332832767184987> 2023 Maserati Granturismo Folgore
+
+        **Ends Febuary 14th 2023**
+
+                  `);
+        embed.setThumbnail();
+        embed
+          .setColor(colors.blue)
+          .setImage("https://i.ibb.co/QMtjMVz/EVENT-SWANSONG.png");
+
+        await interaction.editReply({
+          embeds: [embed],
+          components: [row2],
+        });
+      } 
       else  if (value === "event_3") {
         embed.setTitle("Space Race");
         embed.setFooter({ text: 'Prefix is "/"' });
@@ -165,74 +192,6 @@ module.exports = {
           components: [row2],
         });
       } 
-      else  if (value === "event_2") {
-        embed.setTitle("Swan Song");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to Swan Song!
-        
-        As the age of electric cars draws nearer, the petrol-powered cars we know and love are being phased out one by one.\n
-        Participate in what may well be the last hurrah of the internal combustion engine, driving various cars that are getting or have gotten axed over the previous years.\n\n
-        Because, after all, nothing can replace good old rumbles and horsepower.
-
-        Obtain <:item_swannote:1196272038327881768> Swan Notes from street racing with an EV and run /use for a chance at a swan song vehicle
-
-        If you don't own an EV, may I suggest the 2011 Tesla Roadster?
-        __List of event cars__
-
-        <:mistu:931012414479147038> 2015 Mitsubishi Lancer Evo X
-        <:audi:931011548758048828> 2023 Audi TT Roadster
-        <:audi:931011548758048828> 2023 Audi R8 GT
-        <:chevy:931012624039182406> 2024 Chevrolet Camaro ZL1
-        <:dodge:931011880040951828> 2023 Dodge Challenger SRT Demon 170
-        <:maserati:961332832767184987> 2023 Maserati Granturismo Folgore
-
-        **Ends Febuary 14th 2024**
-
-                  `);
-        embed.setThumbnail();
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/QMtjMVz/EVENT-SWANSONG.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } 
-      else  if (value === "event_4") {
-        embed.setTitle("City Carvers");
-        embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to City Carvers!
-        
-        You don't need a lot of horsepower for this event, in fact, its recommended that you use the lowest HP possible!
-
-        Race in the city carvers race from /race and dodge oncoming traffic, obstacles, and cops to get cool rewards that anyone can earn!
-
-        Gain city cash by dodging the obstacles, the more you dodge the more you earn, and you can use that cash to buy the event cars!
-        
-        __List of event cars__
-
-        <:renault:1083645583782330388> 2016 Renault Clio RS - 500 Carver Cash
-        <:honda:931011549705957397> 2018 Honda Fit Sport - 500 Carver Cash
-        <:kia:937123149596745780> 2014 Kia Proceed GT - 500 Carver Cash
-        <:vauxh:1200662071084322846> 2015 Vauxhall Corsa VXR - 500 Carver Cash
-        <:hyundai:931015215447941200> 2022 Hyundai i20N - 500 Carver Cash
-        <:mercedes_z:973000364410404924> 2021 Mercedes AMG GLA - 500 Carver Cash
-
-        **Ends Febuary 20th 2024**
-
-                  `);
-        embed.setThumbnail();
-        embed
-          .setColor(colors.blue)
-          .setImage("https://i.ibb.co/sygffHP/EVENT-CITYCARVERS.png");
-
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row2],
-        });
-      } 
-   
     });
   },
 };

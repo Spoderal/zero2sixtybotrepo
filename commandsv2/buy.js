@@ -185,7 +185,7 @@ module.exports = {
         !imports.common.Contents.includes(boughtCar.Name.toLowerCase()) &&
         !imports.rare.Contents.includes(boughtCar.Name.toLowerCase()) &&
         !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase()) &&
-        !boughtCar.Exclusive
+        !boughtCar.Exclusive && !boughtCar.Carver
       )
         return await interaction.reply("This car is not purchasable.");
 
@@ -470,9 +470,16 @@ module.exports = {
           }
           if (goldpurchase == true) {
             userdata.gold -= cargoldprice;
-          } else {
+          } 
+          if (boughtCar.Carver) {
+            if(userdata.carver < 500) return interaction.reply("You need 500 carver cash to buy a carver event car!")
+            userdata.carver -= 500;
+          }
+          else {
             userdata.cash -= boughtCarPrice;
           }
+
+          
           userdata.cars.push(carobj);
           await userdata.save();
 

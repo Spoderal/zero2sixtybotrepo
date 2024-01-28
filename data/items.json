@@ -28,9 +28,9 @@
   },
   "pink slip": {
     "Price": 0,
-    "Action": "Use this to bet your car in races",
+    "Action": "This item is completely usleess for now...",
     "Name": "Pink Slip",
-    "Type": "Currency",
+    "Type": "Non-Usable",
     "Emote": "<:pinkslip:977442825186721863>",
     "Shop": false,
     "Findable": false,
@@ -42,28 +42,7 @@
     ]
   },
 
-  "bank increase": {
-    "Name": "Bank Increase",
-    "Price": 0,
-    "Action": "Increase your bank space by $5k",
-    "Type": "Usable",
-    "Emote": "<:bankupgrade:974153111298007131>",
-    "Items": 10,
-    "Findable": false,
-    "Tier": 1,
-    "Shop": false
-  },
-  "big bank increase": {
-    "Name": "Big Bank Increase",
-    "Action": "Increase your bank space by $25k",
-    "Type": "Usable",
-    "Price": 0,
-    "Emote": "<:bigbank:1008110998202372170>",
-    "Items": 10,
-    "Findable": false,
-    "Tier": 1,
-    "Shop": false
-  },
+
   "small vault": {
     "Price": 55000,
     "Name": "Small Vault",
@@ -126,7 +105,7 @@
 
   "grape juice": {
     "Price": 50000,
-    "Action": "Extra luck when using lockpicks for 15 minutes",
+    "Action": "Extra luck when using lockpicks for 2 minutes",
     "Name": "Grape Juice",
     "Type": "Usable",
     "Emote": "<:item_grapejuice:1094894554097909760>",
@@ -248,11 +227,11 @@
   },
   "pet treats": {
     "Price": 5000,
-    "Action": "Use these to make the random xessence cap on your pet higher by **1** for 10 minutes **USING MULTIPLE STACKS UP TO 20**",
+    "Action": "This item is completely usleess for now...",
     "Name": "Pet Treats",
     "Type": "Usable",
     "Emote": "<:item_treats:1095474851046752327>",
-    "Shop": true,
+    "Shop": false,
     "Findable": false,
     "Tier": 1,
     "Image": "https://i.ibb.co/5MTkjcf/item-treats.png",
@@ -427,7 +406,7 @@
   },
   "flowers": {
     "Price": 0,
-    "Action": "With this in your inventory you can view the speed of each NPCs car",
+    "Action": "With this in your inventory you get double cash when helping NPCs with jobs",
     "Name": "Flowers",
     "Type": "Non-Usable",
     "Emote": "<:item_flowers:1103826126721265664>",
@@ -578,7 +557,7 @@
 
   "permission slip": {
     "Price": 0,
-    "Action": "Who'd you get this from? Your mom? Using this item will make your car unimpoundable for 24 hours",
+    "Action": "Who'd you get this from? Your mom? This item is useless for now",
     "Name": "Permission Slip",
     "Type": "Usable",
     "Emote": "<:item_permissionslip:1111580007861596202>",
@@ -604,7 +583,7 @@
   },
   "beach ball": {
     "Price": 0,
-    "Action": "While this is in your inventory, you'll receive a 10% discount when unimpounding your car",
+    "Action": "This item is useless",
     "Name": "Beach Ball",
     "Type": "Non-Usable",
     "Emote": "<a:item_beachball:1111097346072260758>",
@@ -625,27 +604,6 @@
     "Image": "https://i.ibb.co/Xstp72T/item-cocktail.png"
   },
 
-  "radar": {
-    "Price": 0,
-    "Action": "Use radar to detect police officers, now you cant be chased for 12 hours",
-    "Name": "Radar",
-    "Type": "Usable",
-    "Emote": "<:item_radar:1111580009853878272>",
-    "Shop": false,
-    "Findable": false,
-    "Image": "https://i.ibb.co/h18BFcm/item-radar.png"
-  },
-
-  "secret brief case": {
-    "Price": 0,
-    "Action": "Top secret, you'll receive 1000 bounty for using this as a police officer, don't tell anyone.",
-    "Name": "Radar",
-    "Type": "Usable",
-    "Emote": "<:item_briefcase:1114027394660044800>",
-    "Shop": false,
-    "Findable": false,
-    "Image": "https://i.ibb.co/j35ztVR/item-briefcase.png"
-  },
 
   "match": {
     "Price": 0,
@@ -676,7 +634,7 @@
     "Action": "*TOKYO DRIFT MUSIC PLAYS*\n\nBoost your drift rank earnings to 4x PERMANENTLY\n*STACKS WITH OTHER ITEMS BESIDES PARKING BRAKES*",
     "Name": "Parking Brake",
     "Type": "Usable",
-    "Emote": "<:item_match:1116954447797567488>",
+    "Emote": "<:item_parkingbrake:1116954443481612328>",
     "Shop": false,
     "Findable": true,
     "Tier": 3,
@@ -847,16 +805,71 @@
     ]
   },
   "toolbox": {
-    "Price": 0,
+    "Price": 50000,
     "Action": "Use this to restore a car automatically",
     "Name": "Toolbox",
     "Type": "Non-Usable",
     "Emote": "<:item_toolbox:972207018045759549>",
     "Shop": true,
-    "Findable": false,
+    "Findable": true,
+    "Tier":2,
     "Image": "https://i.ibb.co/SNJ7BPC/item-toolboxc.png"
   },
-
+  "headphones": {
+    "Price": 75000,
+    "Action": "With this in your inventory the radio item will give 4x earnings instead of 2x",
+    "Name": "Headphones",
+    "Type": "Usable",
+    "Emote": "<:item_headphones:1198182631968346112>",
+    "Shop": true,
+    "Findable": true,
+    "Tier":2,
+    "Image": "https://i.ibb.co/R7cDwhv/item-headphones.png"
+  },
+  "record": {
+    "Price": 75000,
+    "Action": "With this item in your inventory you boost your race rank earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS*",
+    "Name": "Record",
+    "Type": "Usable",
+    "Emote": "<:item_record:1198183499019067412>",
+    "Shop": true,
+    "Findable": true,
+    "Tier":3,
+    "Image": "https://i.ibb.co/3dWJKn0/item-record.png"
+  },
+  "cheese": {
+    "Price": 0,
+    "Action": "With this item in your inventory you can prestige TWICE while only needing the ranks for 1 prestige\n\nOne time use only",
+    "Name": "Cheese",
+    "Type": "Non-Usable",
+    "Emote": "<:item_cheese:1200941173712375889>",
+    "Shop": false,
+    "Findable": true,
+    "Tier":3,
+    "Image": "https://i.ibb.co/0VLZ4ky/item-cheese.png"
+  },
+  "comet": {
+    "Price": 0,
+    "Action": "Can be used to refill your series tickets by 1\nFound while doing the astronaut job",
+    "Name": "Comet",
+    "Type": "Non-Usable",
+    "Emote": "<:item_comet:1200941172114341969>",
+    "Shop": false,
+    "Findable": false,
+    "Tier":3,
+    "Image": "https://i.ibb.co/9YK3mwS/item-comet.png"
+  },
+  "moon": {
+    "Price": 0,
+    "Action": "Is it made of cheese or not?\nFound while doing the astronaut job",
+    "Name": "Moon",
+    "Type": "Non-Usable",
+    "Emote": "<:item_moon:1200941169752948826>",
+    "Shop": false,
+    "Findable": true,
+    "Tier":3,
+    "Image": "https://i.ibb.co/tXZm76N/item-moon.png"
+  },
   "common crate": {
     "Price": 0,
     "Action": "Open a common crate to get cosmetics, cash, and more!",
@@ -892,14 +905,6 @@
     "Emote": "<:supplydropprestige:1044404462581719041>",
     "Findable": false,
     "Shop": false
-  },
-  "seasonal crate": {
-    "Price": 0,
-    "Action": "Open a prestige crate to get cosmetics, cash, and more!",
-    "Name": "Seasonal Crate",
-    "Type": "Usable",
-    "Emote": "<:crate_seasonal:1080285947733737483>",
-    "Findable": false,
-    "Shop": false
   }
+
 }

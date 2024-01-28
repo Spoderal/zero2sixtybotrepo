@@ -29,6 +29,8 @@ module.exports = {
     let tremote = "❌";
     let gasemote = "❌";
 
+    let zpass = "❌"
+
     if (dailyenabled == true) {
       demote = "✅";
     }
@@ -41,7 +43,9 @@ module.exports = {
     if (autogas == true) {
       gasemote = "✅";
     }
-
+    if (userdata.zpass == true) {
+      zpass = "✅";
+    }
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Settings for ${user.username}`)
@@ -51,7 +55,8 @@ module.exports = {
         { name: "Tips", value: `${temote}` },
         { name: "Auto Fill Gas", value: `${gasemote}` }
       )
-      .setColor(colors.blue);
+      .setColor(colors.blue)
+      .setDescription(`<:zpass:1200657440304283739> Z Pass Active: ${zpass}`)
 
     let row = new Discord.ActionRowBuilder().addComponents(
       new Discord.ButtonBuilder()

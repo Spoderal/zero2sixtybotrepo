@@ -15,6 +15,7 @@ const Global = require("../schema/global-schema");
 const partdb = require("../data/partsdb.json").Parts
 const cardb = require("../data/cardb.json").Cars
 const itemdb = require("../data/items.json")
+const currencydb = require('../data/currencydb.json')
 
 
 module.exports = {
@@ -147,6 +148,7 @@ module.exports = {
             for(let i in market[0]){
                 let itemname
                 let user
+                let currency = currencydb[market[0][i].Item.split(" ")[1]]
 
                 if(market[0][i].User == "Anonymous"){
                     user = "Anonymous"
@@ -164,6 +166,11 @@ module.exports = {
                 }
                else if(partdb[market[0][i].Item.toLowerCase()]){
                     itemname = `${partdb[market[0][i].Item.toLowerCase()].Emote} ${partdb[market[0][i].Item.toLowerCase()].Name}`
+                }
+                else if(market[0][i].Item.toLowerCase().includes("wheelspins") || market[0][i].Item.toLowerCase().includes("barnmaps")){
+                    let amount = Number(market[0][i].Item.split(" ")[0]);
+                    console.log(currency)
+                    itemname = `${amount}x ${currency.Emote} ${currency.Name}`
                 }
 
                 embed.addFields({name: `${itemname}`, value: `\`${market[0][i].ID}\`\n${toCurrency(market[0][i].Price)}\nListed by: ${user}`, inline: true})
@@ -295,10 +302,10 @@ module.exports = {
     else if(command == "list"){
         let itemtolist = interaction.options.getString("item")
         let price = interaction.options.getNumber("price")
-        if(price <= 0) return interaction.reply("Your items price needs to be more than 0!")
-
-
-        if(!cardb[itemtolist.toLowerCase()] && !itemdb[itemtolist.toLowerCase()] && !partdb[itemtolist.toLowerCase()]) return interaction.reply("Thats not a marketable item! If you're trying to list a car, make sure its the cars name, **NOT** the id")
+        if(price <= 1) return interaction.reply("Your items price needs to be more than 0!")
+        let itemto = itemtolist.split(" ")[1]
+        console.log(itemto)
+        if(!cardb[itemtolist.toLowerCase()] && !itemdb[itemtolist.toLowerCase()] && !partdb[itemtolist.toLowerCase()] && !currencydb[itemto.toLowerCase()]) return interaction.reply("Thats not a marketable item!\nIf you're trying to list a car, make sure its the cars name, **NOT** the id\nIf the currency includes a space, make sure to remove the space, so barn maps would be barnmaps")
 
         let minprice
         let maxprice
@@ -336,6 +343,97 @@ module.exports = {
                 maxprice = 200000000
             }
         }
+        else if(itemtolist.includes("wheelspins") || itemtolist.includes("wheelspin")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            minprice = amount * 10000
+                maxprice = 200000000
+
+                if(userdata.wheelspins < amount) return interaction.reply("You don't have this many wheelspins!")
+
+                userdata.wheelspins -= amount
+        }
+        else if(itemtolist.includes("superwheelspins") || itemtolist.includes("superwheelspin")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            minprice = amount * 20000
+                maxprice = 200000000
+
+                if(userdata.swheelspins < amount) return interaction.reply("You don't have this many wheelspins!")
+
+                userdata.swheelspins -= amount
+        }
+        else if(itemtolist.includes("lockpicks") || itemtolist.includes("lockpicks")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            minprice = amount * 5000
+                maxprice = 200000000
+
+                if(userdata.lockpicks < amount) return interaction.reply("You don't have this many wheelspins!")
+
+                userdata.lockpicks -= amount
+        }
+        else if(itemtolist.includes("exotickeys") || itemtolist.includes("exotickey")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            minprice = amount * 5000
+                maxprice = 200000000
+
+                if(userdata.ekeys < amount) return interaction.reply("You don't have this many wheelspins!")
+
+                userdata.ekeys -= amount
+        }
+        else if(itemtolist.includes("rarekeys") || itemtolist.includes("rarekey")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            minprice = amount * 3000
+                maxprice = 200000000
+
+                if(userdata.rkeys < amount) return interaction.reply("You don't have this many wheelspins!")
+
+                userdata.rkeys -= amount
+        }
+        else if(itemtolist.includes("commonkeys") || itemtolist.includes("commonkey")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            minprice = amount * 1000
+                maxprice = 200000000
+
+                if(userdata.ckeys < amount) return interaction.reply("You don't have this many wheelspins!")
+
+                userdata.ckeys -= amount
+        }
+        else if(itemtolist.includes("barnmaps")){
+            let amount = Math.round(Number(itemtolist.split(" ")[0]))
+            console.log(amount)
+            if(amount < 0) return interaction.reply("Your amount needs to be more than 0!")
+            if(!Number.isInteger(amount) ) return interaction.reply("You can't use decimals in your pricing!")
+            
+            minprice = amount * 1000
+                maxprice = 200000000
+
+                if(userdata.barnmaps < amount) return interaction.reply("You don't have this many barn maps!")
+
+                userdata.barnmaps -= amount
+        }
 
         console.log(maxprice)
         console.log(minprice)
@@ -370,6 +468,7 @@ module.exports = {
         
         if(cardb[itemtolist.toLowerCase()]){
             let carindb = userdata.cars.filter((car) => car.Name.toLowerCase() == itemtolist.toLowerCase())
+            if(!carindb) return interaction.reply("You dont have this car!")
             listing = {
                 User:uname,
                 UserID:interaction.user.id,
@@ -403,8 +502,10 @@ module.exports = {
             
         }
 
-        if(item){
+       else if(item){
             let useritems = userdata.items
+            if(!useritems.includes(itemtolist.toLowerCase())) return interaction.reply("You dont have this item!")
+
             for (var c = 0; c < useritems.length; c++){
                 console.log(useritems[c])
                 if (useritems[c].toLowerCase() === itemtolist.toLowerCase()) {
@@ -415,8 +516,10 @@ module.exports = {
             userdata.items = useritems
         }
 
-        if(part){
+        else  if(part){
+            
             let userparts = userdata.parts
+        if(!userparts.includes(itemtolist.toLowerCase())) return interaction.reply("You dont have this part!")
             for (var d = 0; d < userparts.length; d++){
                 console.log(userparts[d])
                 if (userparts[d].toLowerCase() === itemtolist.toLowerCase()) {
@@ -431,11 +534,11 @@ module.exports = {
 
         globals.marketId += 1
 
-        userdata.save()
+        await   userdata.save()
 
-        globals.save()
+        await  globals.save()
 
-        await interaction.reply(`Listed ${itemtolist}`)
+        return await interaction.reply(`Listed ${itemtolist}`)
 
     }
     else if(command == "buy"){
@@ -446,6 +549,7 @@ module.exports = {
 
         if(userdata.cash < itemindb.Price) return interaction.reply(`You cant afford this item! You need ${toCurrency(itemindb.Price)}`)
 
+        if(itemindb.UserID == interaction.user.id) return interaction.reply("You're the owner of this listing you cant buy it")
         console.log(itemindb)
         
         if(cardb[itemindb.Item.toLowerCase()]){
@@ -470,9 +574,48 @@ module.exports = {
             userdata.parts.push(itemindb.Item.toLowerCase())
         
         }
+        if(itemindb.Item.toLowerCase().includes("wheelspins") || itemindb.Item.toLowerCase().includes("wheelspin") ){
 
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.wheelspins += amount
         
+        }
+        if(itemindb.Item.toLowerCase().includes("barnmaps") || itemindb.Item.toLowerCase().includes("barnmap") ){
+
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.barnmaps += amount
         
+        }
+        if(itemindb.Item.toLowerCase().includes("lockpicks") || itemindb.Item.toLowerCase().includes("lockpick") ){
+
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.lockpicks += amount
+        
+        }
+        if(itemindb.Item.toLowerCase().includes("commonkeys") || itemindb.Item.toLowerCase().includes("commonkey") ){
+
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.ckeys += amount
+        
+        }
+        if(itemindb.Item.toLowerCase().includes("rarekeys") || itemindb.Item.toLowerCase().includes("rarekey") ){
+
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.rkeys += amount
+        
+        }
+        if(itemindb.Item.toLowerCase().includes("exotickeys") || itemindb.Item.toLowerCase().includes("exotickey") ){
+
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.ekeys += amount
+        
+        }
+        if(itemindb.Item.toLowerCase().includes("superwheelspins") || itemindb.Item.toLowerCase().includes("superwheelspin") ){
+
+            let amount = Number(itemindb.Item.split(" ")[0]);
+            userdata.swheelspins += amount
+        
+        }
         
         let userdata2 = await User.findOne({id: itemindb.UserID})
         
@@ -492,8 +635,8 @@ module.exports = {
         globals.updateOne(`umarket`)
         globals.save()
 
-        userdata.save()
-        userdata2.save()
+        await userdata.save()
+        await userdata2.save()
 
         await interaction.reply(`Bought ${itemindb.Item}`)
 

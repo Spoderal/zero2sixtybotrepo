@@ -15,7 +15,7 @@ const emotes = {
   drift: "<:rank_newdrift:1114815498056638506> ",
   tier: "<:rank_tier:1114816526076362803>",
   OVR:"<:ovricon:1185036043087532183>",
-
+  t5voucher:"<:t5vouchers:1199876227184472145>",
   moontokens: "<:moontokens:1044726056680161371>",
   
   snowflakes: "<:snowflakes:1188390387207905370>",

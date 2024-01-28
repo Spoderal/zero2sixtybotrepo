@@ -6,6 +6,7 @@ const User = require("../schema/profile-schema");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const Global = require("../schema/global-schema");
 const { toCurrency } = require("../common/utils");
+const { isNaN } = require("lodash");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,7 +25,7 @@ module.exports = {
         .setChoices(
           { name: `1`, value: `1` },
           { name: `5`, value: `5` },
-          { name: `Full`, value: `10` }
+          { name: `Full`, value: `full` }
         )
         .setRequired(true)
     ),
@@ -32,8 +33,9 @@ module.exports = {
     let global = await Global.findOne({});
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+    let gallons = interaction.options.getString(`gallons`)
 
-    let caroption = interaction.options.getString(`car`);
+    let caroption = interaction.options.getString(`car`)
 
     let usercars = userdata.cars;
 
@@ -88,16 +90,22 @@ module.exports = {
         `Charged up your ${selected[0].Name} for ${toCurrency(finalprice)}`
       );
       return;
-    } else {
+    } else  {
       let gas = global.gas;
-      let usergas = selected[0].Gas
-      let gallons = Number(interaction.options.getString(`gallons`));
-
-      let finalprice = gas * gallons;
-
-      if (userdata.business && userdata.business.Business == "Gas Station") {
-        finalprice = finalprice * 0.75;
+      let usergas = selected[0].Gas || 10
+      let maxgas = selected[0].MaxGas || 10
+      if(gallons == "full"){
+        gallons = maxgas
       }
+      else {
+        gallons = Number(gallons)
+      }
+      if(isNaN(usergas)){
+        usergas = 10
+      }
+      console.log(usergas)
+      console.log(gallons)
+      let finalprice = gas * gallons;
 
       finalprice = Math.round(finalprice);
 
@@ -105,8 +113,8 @@ module.exports = {
         return interaction.reply(
           `You need ${toCurrency(finalprice)} to fill ${gallons} gallons`
         );
-        console.log(usergas)
-        if(usergas == null || !usergas){
+
+        if(usergas == null || !usergas || isNaN(usergas)){
           console.log("true")
           await User.findOneAndUpdate(
             {
@@ -114,8 +122,7 @@ module.exports = {
             },
             {
               $set: {
-                "cars.$[car].Gas": 10,
-                "cars.$[car].MaxGas": 10
+                "cars.$[car].Gas": (usergas + gallons)
               },
             },
     
@@ -134,11 +141,11 @@ module.exports = {
 
         }
 
-      if (selected[0].Gas == selected[0].MaxGas)
+      if (selected[0].Gas == maxgas)
         return interaction.reply(`Your cars gas tank is full!`);
 
-      if (gallons == 10) {
-        selected[0].Gas = selected[0].MaxGas;
+      if (gallons == "full") {
+        selected[0].Gas = maxgas;
       } else {
         selected[0].Gas += gallons;
         if (selected[0].Gas > selected[0].MaxGas) {

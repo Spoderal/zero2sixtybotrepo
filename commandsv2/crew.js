@@ -8,13 +8,14 @@ const crewicons = require("../data/crewicons.json");
 const Global = require("../schema/global-schema");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { numberWithCommas } = require("../common/utils");
+const { numberWithCommas, toCurrency } = require("../common/utils");
 const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 const ms = require("pretty-ms");
 const cardsdb = require("../data/cards.json");
 const partdb = require("../data/partsdb.json");
+const itemdb = require("../data/items.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -138,7 +139,7 @@ module.exports = {
         let isOwner = false;
         if (user.id === crew2?.owner) isOwner = true;
         let newuserdata = await User.findOne({ id: user.id });
-        let rp = newuserdata.rp4 || 0;
+        let rp = newuserdata.rp || 0;
         let filteruser = rparray.filter((use) => use.user == user);
         if (!filteruser[0]) {
           rparray.push({ rp, user, isOwner });
@@ -157,8 +158,8 @@ module.exports = {
       let icon = crew2.icon || icons.Icons.default;
       let mlength = crew2.members.length;
       let owner = newrparray.find((u) => u?.isOwner);
-      if (!crew2.Rank4) {
-        crew2.Rank4 = 1;
+      if (!crew2.Rank) {
+        crew2.Rank = 1;
 
         globalModel.update();
         globalModel.markModified("crews");
@@ -172,7 +173,7 @@ module.exports = {
             name: "Information",
             value: `
               ${mlength}/30 members\n
-              Rank ${crew2.Rank4}\n
+              Rank ${crew2.Rank}\n
               RP: ${total}\n
               ${
                 owner
@@ -198,8 +199,8 @@ module.exports = {
         row.addComponents(
           new ButtonBuilder()
             .setCustomId("season")
-            .setEmoji("<:season3:1183248587774238741>")
-            .setLabel("Season 3")
+            .setEmoji("<:crew_season4:1200642745002373201>")
+            .setLabel("Season 4")
             .setStyle("Secondary")
         );
       }
@@ -214,8 +215,7 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let crewclaimed = userdata.crewseason || [];
-          let redeemed = crewclaimed.length++;
+          let crewclaimed = userdata.crewseason || 0
           let crewseason = require("../data/seasons.json").Seasons.Crew2;
 
           collector.on("collect", async (i) => {
@@ -227,15 +227,62 @@ module.exports = {
                 let item = crewseason[w];
                 let required = item.Number;
                 let emote = "❌";
-                if (required <= crew2.Rank4) {
+                if (required <= crew2.Rank) {
                   emote = "✅";
                 }
-                reward.push(`**${item.Number}** : ${item.Item} ${emote}`);
+                let item2 = item.Item.toLowerCase()
+                console.log(item2)
+                if(cardb.Cars[item2]){
+                  reward.push(`**${item.Number}** : ${cardb.Cars[item2].Emote} ${cardb.Cars[item2].Name} ${emote}`);
+
+                }
+                else if(itemdb[item2]){
+                  reward.push(`**${item.Number}** : ${itemdb[item2].Emote} ${itemdb[item2].Name} ${emote}`);
+
+                }
+                else if(partdb.Parts[item2]){
+                  reward.push(`**${item.Number}** : ${partdb.Parts[item2].Emote} ${partdb.Parts[item2].Name} ${emote}`);
+
+                }
+                else if(item2.endsWith("exotic keys")){
+                  reward.push(`**${item.Number}** : ${emotes.exoticKey} ${item2} ${emote}`);
+
+                }
+                else if(item2.endsWith("rare keys")){
+                  reward.push(`**${item.Number}** : ${emotes.rareKey} ${item2} ${emote}`);
+
+                }
+                else if(item2.endsWith("cash")){
+                  let amount = item2.split(" ")[0];
+                  reward.push(`**${item.Number}** : ${emotes.cash} ${toCurrency(amount)} Cash ${emote}`);
+
+                }
+                else if(item2.endsWith("garage spaces")){
+                  reward.push(`**${item.Number}** : ${emotes.garage} ${item2} ${emote}`);
+
+                }
+                else if(item2.endsWith("crew respect")){
+                  reward.push(`**${item.Number}** : <:crewrespect:1143422770173190245> ${item2} ${emote}`);
+
+                }
+                else if(item2.endsWith("gold")){
+                  reward.push(`**${item.Number}** : ${emotes.gold} ${item2} ${emote}`);
+
+                }
+                else if(item2.endsWith("race ranks")){
+                  reward.push(`**${item.Number}** : ${emotes.race} ${item2} ${emote}`);
+
+                }
+                else if(item2.endsWith("drift ranks")){
+                  reward.push(`**${item.Number}** : ${emotes.drift} ${item2} ${emote}`);
+
+                }
               }
               console.log(reward)
               let embed2 = new Discord.EmbedBuilder()
-                .setTitle(`Season 3 for ${crew2.name}`)
-                .addFields([{ name: "Rewards", value: `${reward.join("\n")}`}])
+                .setTitle(`Season 4 for ${crew2.name}`)
+                .setDescription(`${reward.join("\n")}`)
+                .setFooter({text: `Ends March 1st 2024`})
                 .setThumbnail(icon)
                 .setColor(colors.blue);
 
@@ -250,7 +297,7 @@ module.exports = {
                   name: "Information",
                   value: `
                       ${crew2.members.length} members\n
-                      Rank ${crew2.Rank4}\n
+                      Rank ${crew2.Rank}\n
                       RP: ${total}\n
                       Crew Leader: ${crew2.owner.username}#${crew2.owner.discriminator}
                     `,
@@ -339,29 +386,29 @@ module.exports = {
 
       userdata.crew = crew2[0];
 
-      userdata.rp4 = 0;
+      userdata.rp = 0;
       userdata.joinedcrew = Date.now();
       userdata.save();
 
       await interaction.reply(`✅ Joined ${crewname}`);
     } else if (option == "claim") {
       let crewseason = require("../data/seasons.json").Seasons.Crew2.Rewards;
-      let seasonclaimed = userdata.crewseason || [];
+      let seasonclaimed = userdata.crewseasonclaimed || 0
+
       let crewname = userdata.crew.name;
       let crew2 = crews.filter(
         (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
       );
-      let rewnum = (seasonclaimed.length += 1);
-      let item = crewseason[`${crew2[0].Rank4}`];
-      let iteminuser = seasonclaimed.filter(
-        (claimed) => claimed == item.Number
-      );
-      console.log(iteminuser)
-      if (item.Number > crew2[0].Rank4) {
+      if(!crew2 || crew2.length == 0 || crew2 == []) return interaction.reply("You need to be in a crew to claim rewards!")
+      let seasonnew = seasonclaimed + 1
+      let item = crewseason[`${seasonnew}`];
+      
+      if (item.Number > crew2[0].Rank) {
         return interaction.reply(`Your crew needs to be rank ${item.Number}`);
       }
-      if(iteminuser[0]) return interaction.reply("You've already claimed this reward!")
-
+      if (!item) {
+        return interaction.reply(`You've claimed all the rewards!`);
+      }
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
         userdata.cash += Number(amount);
@@ -437,7 +484,7 @@ module.exports = {
         userdata.cars.push(carobj);
       }
 
-      userdata.crewseason.push(item.Number);
+      userdata.crewseasonclaimed += 1
       userdata.save();
 
       interaction.reply(`Claimed ${item.Item}`);
@@ -448,7 +495,7 @@ module.exports = {
 
       let isCrewNameTaken = crews?.find((crew) => crew.name == crewname);
       if (isCrewNameTaken)
-        return await interaction.reply("That crew already exist!");
+        return await interaction.reply("That crew already exists!");
 
       let crew = userdata?.crew;
       if (crew)
@@ -461,7 +508,7 @@ module.exports = {
         members: [interaction.user.id],
         owner: interaction.user,
         icon: icons.Icons.default,
-        Rank4: 1,
+        Rank: 1,
         RP: 0,
         Cards: [
           {
@@ -858,17 +905,17 @@ module.exports = {
 
 
       members = members.sort((a, b) => {
-         if (a.Rank4 > b.Rank4) {
+         if (a.Rank > b.Rank) {
            return -1;
          }
-         if (a.Rank4 < b.Rank4) {
+         if (a.Rank < b.Rank) {
            return 1;
          }
          return 0;
        });
 
       members = members.filter(function BigEnough(value) {
-        return value.Rank4 > 1;
+        return value.Rank > 1;
       });
 
 
@@ -878,7 +925,7 @@ module.exports = {
         if(members[i]){
           let crew = members[i].name;
           if (!crew) return;
-          let bal = members[i].Rank4;
+          let bal = members[i].Rank;
           desc += `${i + 1}. ${crew} - Rank ${numberWithCommas(bal)}\n`;
 
         }
