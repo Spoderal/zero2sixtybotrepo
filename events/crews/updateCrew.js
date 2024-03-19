@@ -4,6 +4,9 @@ const Global = require(`../../schema/global-schema`);
 async function updateCrew(interaction) {
   let usredata = await User.findOne({ id: interaction.user.id });
   if (usredata && usredata.crew) {
+    try {
+      
+    
     let global = (await Global.findOne({})) || new Global({});
     let ucrew = usredata.crew;
     let crews = global.crews;
@@ -25,6 +28,7 @@ async function updateCrew(interaction) {
       }
       for (let i in crewmembers) {
         let user = crewmembers[i];
+        console.log(user)
         let rpdata = await User.findOne({ id: user });
         let userrp = rpdata.rp;
         console.log(userrp);
@@ -42,10 +46,20 @@ async function updateCrew(interaction) {
         console.log("ranked");
       }
     }
-    await global.updateOne();
-    await global.markModified("crews");
-    await global.update();
+    try {
 
+      await Global.findOneAndUpdate({  "crews.$[crew]": crew2, }, {"crew.Name": crew2.name,});
+    }
+    catch(err){
+      return console.log(err)
+    }
+    try {
+      await global.markModified("crews");
+
+    }
+    catch(err){
+      return console.log(err)
+    }
     try {
       await global.save();
 
@@ -53,6 +67,10 @@ async function updateCrew(interaction) {
     catch(err){
       return console.log(err)
     }
+  }
+  catch(err){
+    return console.log(err)
+  }
   }
 }
 

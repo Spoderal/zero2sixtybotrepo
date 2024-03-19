@@ -1,43 +1,42 @@
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const Global = require('../schema/global-schema');
+const { EmbedBuilder } = require('discord.js');
+const { toCurrency } = require('../common/utils');
+const colors = require('../common/colors');
+const ITEM_SHOP_COLOR = colors.blue; // Define a constant for the color
 
+// A function to fetch the item shop data
+async function fetchItemShopData() {
+  try {
+    const globalData = await Global.findOne();
+    return globalData.itemshop;
+  } catch (error) {
+    console.error('Failed to fetch item shop data:', error);
+  }
+}
 
-const cars = require("../data/cardb.json");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const {
-  ActionRowBuilder,
-  EmbedBuilder,
-  ButtonBuilder,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder
-} = require("discord.js");
-const colors = require("../common/colors");
-const { emotes } = require("../common/emotes");
-const { toCurrency, numberWithCommas } = require("../common/utils");
-const lodash = require("lodash");
-const User = require("../schema/profile-schema");
-const Global = require("../schema/global-schema");
-const partdb = require("../data/partsdb.json").Parts
+// A function to create an embed for an item
+function createItemEmbed(itemShop) {
+  let embed = new EmbedBuilder()
+    .setTitle('Daily Item Shop')
+    .setColor(ITEM_SHOP_COLOR);
+
+  for (const item of itemShop) {
+    console.log(item)
+    embed.addFields({name: `${item.Emote} ${item.Name}`, value: `**${toCurrency(item.Price)}** ${item.Action}`});
+  }
+
+  return embed;
+}
+
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("itemshop")
-    .setDescription("The weekly item store"),
+    .setName('itemshop')
+    .setDescription('Displays the weekly item shop.'),
+
   async execute(interaction) {
-
-    let globals = (await Global.findOne())
-    let itemshop = globals.itemshop
-    
-
-
-    let embed = new EmbedBuilder()
-    .setTitle(`Weekly Item Shop`)
-    .setColor(colors.blue)
-    for(let i in itemshop){
-        let item = itemshop[i]
-        embed.addFields({name: `${item.Emote} ${item.Name}`, value: `${toCurrency(item.Price)}\n${item.Action}`})
-    }
-
-   await interaction.reply({embeds: [embed]})
-    
-   
-
+    const itemshop = await fetchItemShopData();
+    const embed = createItemEmbed(itemshop);
+    await interaction.reply({ embeds: [embed] });
   },
 };

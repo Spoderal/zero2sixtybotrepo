@@ -1,8 +1,5 @@
 const User = require(`../schema/profile-schema`);
-const cardb = require("../data/cardb.json");
-const partdb = require("../data/partsdb.json");
-const ocardb = require("../data/oldcars.json");
-const oldpartdb = require("../data/oldparts.json")
+
 
 async function season() {
   let users = await User.find();
@@ -20,10 +17,11 @@ async function season() {
         console.log(`${u}`);
         if (udata !== null) {
    
-            udata.helmet = "default"
-       
+            udata.crewseasonclaimed = 0
+          
 
             udata.save();
+            console.log('done')
         }
 
 

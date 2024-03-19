@@ -66,16 +66,13 @@ module.exports = {
       } else if (partdb.Parts[togive.toLowerCase()]) {
         udata2.parts.push(togive.toLowerCase());
         udata2.save();
-        await interaction.reply(
-          `Gave <@${givingto.id}> a ${partdb.Parts[togive.toLowerCase()].Name}`
-        );
+        togive = partdb.Parts[togive.toLowerCase()].Name;
+
         console.log("given");
       } else if (itemdb[togive.toLowerCase()]) {
         udata2.items.push(togive.toLowerCase());
         udata2.save();
-        await interaction.reply(
-          `Gave <@${givingto.id}> a ${itemdb[togive.toLowerCase()].Name}`
-        );
+      togive = itemdb[togive.toLowerCase()].Name;
       } else {
         return await interaction.reply("Thats not an item!");
       }

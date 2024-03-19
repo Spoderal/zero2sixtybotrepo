@@ -1,44 +1,80 @@
 {
-  "streetrace": {
-    "Name": "Street Race",
-    "Reward": 200
+  "Races":{
+    "streetrace": {
+      "Name": "Street Race",
+      "Reward": 200
+    },
+    "dragrace": {
+      "Name": "Drag Race",
+      "Reward": 250
+    },
+    "trackrace": {
+      "Name": "Track Race",
+      "Reward": 225
+    },
+  
+    "trackraceevent": {
+      "Name": "Track Race (EVENT)",
+      "Reward": 225
+    },
+    "motorcyclemad": {
+      "Name": "Motorcycle Madness",
+      "Reward": 220
+    },
+    "crosscountry": {
+      "Name": "Cross Country",
+      "Reward": 275
+    },
+    "junkrace": {
+      "Name": "Junk Race",
+      "Reward": 100
+    },
+    "spacerace": {
+      "Name": "Space Race",
+      "Reward": 100
+    },
+  
+    "offroad": {
+      "Name": "Offroad Race",
+      "Reward": 300
+    },
+    "carseries": {
+      "Name": "Car Series",
+      "Reward": 100
+    }
   },
-  "dragrace": {
-    "Name": "Drag Race",
-    "Reward": 250
-  },
-  "trackrace": {
-    "Name": "Track Race",
-    "Reward": 225
-  },
+  "Surface":{
+    "asphalt": {
+      "Name": "Asphalt",
+      "Emote":"🛣️",
+      "Speed": 1,
+      "Handling":1
+    },
+    "dirt": {
+      "Name": "Dirt",
+      "Speed": 0.8,
+      "Emote":"⛰️",
+      "Handling":0.3
+    },
+    "wet": {
+      "Name": "Wet",
+      "Speed": 0.7,
+      "Emote":"🌧️",
+      "Handling":0.6
 
-  "trackraceevent": {
-    "Name": "Track Race (EVENT)",
-    "Reward": 225
-  },
-  "motorcyclemad": {
-    "Name": "Motorcycle Madness",
-    "Reward": 220
-  },
-  "crosscountry": {
-    "Name": "Cross Country",
-    "Reward": 275
-  },
-  "junkrace": {
-    "Name": "Junk Race",
-    "Reward": 100
-  },
-  "spacerace": {
-    "Name": "Space Race",
-    "Reward": 100
-  },
-
-  "snow": {
-    "Name": "Snow Race",
-    "Reward": 200
-  },
-  "carseries": {
-    "Name": "Car Series",
-    "Reward": 100
+    },
+    "snow": {
+      "Name": "Snow",
+      "Speed": 0.6,
+      "Emote":"❄️",
+      "Handling":0.5
+    },
+    "ice": {
+      "Name": "Ice",
+      "Speed": 0.3,
+      "Emote":"🧊",
+      "Handling":0.3
+    }
   }
+    
 }

@@ -16,6 +16,9 @@ module.exports = {
     .setDescription("Search barns for old cars to restore!"),
 
   async execute(interaction) {
+    try {
+
+    
     const userId = interaction.user.id;
 
     let userdata = (await User.findOne({ id: userId })) || new User({ id: userId });
@@ -46,29 +49,26 @@ module.exports = {
       await interaction.reply({ embeds: [timeEmbed] });
       return;
     }
-
-    let barnfind = lodash.sample(barns.Barns[rarity.toLowerCase()]);
     let color, namefor;
 
-    switch (rarity) {
-      case "common":
-        color = "#388eff";
-        namefor = "Common";
-        break;
-      case "rare":
-        color = "#a80000";
-        namefor = "Rare";
-        break;
-      case "legendary":
-        color = "#44e339";
-        namefor = "Legendary";
-        break;
-      default:
-        color = "#388eff";
-        namefor = "Common";
+    console.log(randomRarity)
+    if (randomRarity >= 40) {
+      rarity = "common";
+      namefor = "Common"
+      color = "#00FF00";
+    } else if (randomRarity < 10) {
+      rarity = "legendary";
+      namefor = "Legendary"
+      color = "#FFA500";
+    } else {
+      rarity = "rare";
+      namefor = "Rare"
+      color = "#FFD700";
     }
+    
+    let barnfind = lodash.sample(barns.Barns[rarity]);
     let cars = userdata.cars;
-
+    console.log(rarity)
     let carindb = carsdb.Cars[barnfind.toLowerCase()];
     let carobj = {
       ID: carindb.alias,
@@ -94,30 +94,51 @@ module.exports = {
       return;
     }
 
-    if (userdata.tutorial && userdata.tutorial.started) {
-      userdata.tutorial.started = false;
-    }
 
-    userdata.cars.push(carobj);
-    userdata.save();
 
+
+
+    
     cooldowns.barn = Date.now();
     cooldowns.save();
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${namefor} Barn Find`)
       .addFields([
-        { name: "Car", value: carobj.Name },
+        { name: "<:icons_classiccar:1203826559480369314> Car", value: `${carobj.Emote} ${carobj.Name}` },
         { name: "ID", value: carobj.ID },
       ])
       .setDescription(`You found a barn car! How do you restore it and use it? Run \`/restore\` for more information on restoring barn finds!`)
       .setImage(carobj.Livery)
-      .setColor(color);
-
-    await interaction.reply({ embeds: [embed] });
-
-    if (userdata.tutorial && userdata.tutorial.started) {
-      await interaction.channel.send(`You've finished the tutorial! If you want to see the other features run \`/help\`, have fun!`);
+      .setColor(color)
+      .setThumbnail("https://i.ibb.co/FwFWdC7/icons8-barn-240.png")
+      
+      await interaction.reply({ embeds: [embed] });
+      userdata.cars.push(carobj);
+      userdata.save();
+      
+      if(userdata.tutorial && userdata.tutorial.started == true && userdata.tutorial.stage == 1 && userdata.tutorial.type == "restore"){
+        console.log("tutorial")
+        let tut = userdata.tutorial
+        tut.stage += 1
+        await User.findOneAndUpdate(
+          {
+            id: interaction.user.id,
+          },
+          {
+            $set: {
+              "tutorial": tut,
+            },
+          },
+    
+        );
+    
+        interaction.channel.send(`**TUTORIAL:** Nice find! Now run \`/restore [${carobj.ID}]\` to learn how to restore the car to its former glory so it can race again!`)
+      }
     }
+    catch(err){
+      return console.log(err)
+    }
+  
   },
 };

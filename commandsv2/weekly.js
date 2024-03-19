@@ -12,7 +12,7 @@ module.exports = {
     .setName("weekly")
     .setDescription("Collect your weekly cash"),
   async execute(interaction) {
-    let cash = 750;
+    let cash = 25000;
     let uid = interaction.user.id;
     let userdata = await User.findOne({ id: uid });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
@@ -21,7 +21,7 @@ module.exports = {
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 
     let daily = cooldowns.weekly;
-    let patron = userdata.zpass;
+    let patron = userdata.zpass
     let gold;
  
     let timeout = 604800000;

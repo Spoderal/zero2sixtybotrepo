@@ -16,6 +16,7 @@ const ms = require("pretty-ms");
 const cardsdb = require("../data/cards.json");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json");
+const imgbb = require("imgbb-uploader");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -82,6 +83,28 @@ module.exports = {
         )
     )
     .addSubcommand((command) =>
+    command
+      .setName("custom_icon")
+      .setDescription("Submit a crew icon for your crew")
+      .addAttachmentOption((option) => option
+      .setName("icon")
+      .setDescription("The icon to submit")
+      .setRequired(true)
+      )
+
+  )
+  .addSubcommand((command) =>
+  command
+    .setName("approve_icon")
+    .setDescription("Approve a crew icon (BOT SUPPORT ONLY)")
+    .addStringOption((option) => option
+    .setName("crew")
+    .setDescription("The crew to approve the icon for")
+    .setRequired(true)
+    )
+
+)
+    .addSubcommand((command) =>
       command
         .setName("kick")
         .setDescription("Kick a crew member (CREW OWNER)")
@@ -144,15 +167,15 @@ module.exports = {
         if (!filteruser[0]) {
           rparray.push({ rp, user, isOwner });
         }
-        newrparray = rparray.sort((a, b) => b.rp - a.rp);
       }
+      newrparray = rparray.sort((a, b) => b.rp - a.rp);
       newrparray.length = 10;
       for (var i in newrparray) {
         let tag = newrparray[i].user.tag;
         total += newrparray[i].rp;
         finalLb += `**${
           newrparray.indexOf(newrparray[i]) + 1
-        }.** ${tag} - **${numberWithCommas(newrparray[i].rp)}** ${emoji}\n`;
+        }.** ${tag} - **${numberWithCommas(Math.floor(newrparray[i].rp))}** ${emoji}\n`;
       }
 
       let icon = crew2.icon || icons.Icons.default;
@@ -199,8 +222,8 @@ module.exports = {
         row.addComponents(
           new ButtonBuilder()
             .setCustomId("season")
-            .setEmoji("<:crew_season4:1200642745002373201>")
-            .setLabel("Season 4")
+            .setEmoji("<:crewseason5:1213402248361803786>")
+            .setLabel("Season 5")
             .setStyle("Secondary")
         );
       }
@@ -215,7 +238,6 @@ module.exports = {
           const collector = emb.createMessageComponentCollector({
             filter: filter,
           });
-          let crewclaimed = userdata.crewseason || 0
           let crewseason = require("../data/seasons.json").Seasons.Crew2;
 
           collector.on("collect", async (i) => {
@@ -231,7 +253,6 @@ module.exports = {
                   emote = "✅";
                 }
                 let item2 = item.Item.toLowerCase()
-                console.log(item2)
                 if(cardb.Cars[item2]){
                   reward.push(`**${item.Number}** : ${cardb.Cars[item2].Emote} ${cardb.Cars[item2].Name} ${emote}`);
 
@@ -278,11 +299,10 @@ module.exports = {
 
                 }
               }
-              console.log(reward)
               let embed2 = new Discord.EmbedBuilder()
-                .setTitle(`Season 4 for ${crew2.name}`)
+                .setTitle(`Season 5 for ${crew2.name}`)
                 .setDescription(`${reward.join("\n")}`)
-                .setFooter({text: `Ends March 1st 2024`})
+                .setFooter({text: `Ends April 1st 2024`})
                 .setThumbnail(icon)
                 .setColor(colors.blue);
 
@@ -310,18 +330,15 @@ module.exports = {
             }
           });
         });
-    } else if (option == "approveico") {
+    } else if (option == "approve_icon") {
       let whitelist = [
-        "275419902381260802",
-        "890390158241853470",
-        "699794627095429180",
-        "670895157016657920",
-        "576362830572421130",
         "937967206652837928",
-        "311554075298889729",
-        "474183542797107231",
-        "678558875846443034",
-        "211866621684219904",
+        "420584160495796225",
+        "937967206652837928",
+        "1045893604373176320",
+        "864095053945241610",
+        "808129119857541150",
+        "691886191704014918"
       ];
 
       if (!whitelist.includes(interaction.user.id))
@@ -329,20 +346,39 @@ module.exports = {
           content: `You don't have permission to use this command!`,
           ephemeral: true,
         });
-      let crewname = interaction.options.getString("name");
+      let crewname = interaction.options.getString("crew");
 
-      let crew2 = globalModel.crews.filter((crew) => crew.name == crewname);
-      if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
-
+      let crew2 = globalModel.crews.filter((crew) => crew.name == crewname)[0]
+      if (!crew2) return await interaction.reply("That crew doesn't exist!");
+    
       let iconchoice = crew2.icontoapprove;
 
       if (!iconchoice) return await interaction.reply(`Wrong name!`);
 
       crew2.icon = iconchoice;
+
+      await Global.findOneAndUpdate(
+        {},
+        {
+          $set: {
+            "crews.$[crew].icon": iconchoice,
+          },
+        },
+        {
+          arrayFilters: [
+            {
+              "crew.name": crew2.name,
+            },
+          ],
+        }
+      );
+
       globalModel.save();
 
       await interaction.reply(`✅`);
     } else if (option == "join") {
+      let userdata = await User.findOne({ id: interaction.user.id });
+      if(userdata.skill < 5) return interaction.reply("You need to be skill rank 5 to join crews!")
       let uid = interaction.user.id;
       let crewname = interaction.options.getString("name");
       if (!crewname)
@@ -426,15 +462,7 @@ module.exports = {
       } else if (item.Item.endsWith("Notoriety")) {
         let amount = item.Item.split(" ")[0];
         userdata.notofall += Number(amount);
-      } else if (
-        item.Item.endsWith("Legendary Barn Maps") ||
-        item.Item.endsWith("Legendary Barn Map")
-      ) {
-        let amount = item.Item.split(" ")[0];
-        userdata.lmaps += Number(amount);
-      } else if (item.Item.endsWith("Bank Increase")) {
-        userdata.items.push("bank increase");
-      } else if (
+      }  else if (
         item.Item.endsWith("Super wheelspin") ||
         item.Item.endsWith("Super wheelspins")
       ) {
@@ -456,7 +484,27 @@ module.exports = {
         parseInt(amount);
 
         userdata.garageLimit += Number(amount);
-      } else if (item.Item.endsWith("Rare Keys")) {
+      }
+      else if (
+        item.Item.toLowerCase().endsWith("xp") 
+      ) {
+        let amount = item.Item.split(" ")[0];
+        parseInt(amount);
+
+        userdata.xp += Number(amount);
+
+        let skill = userdata.skill
+
+        let requiredxp  = skill * 100
+
+        if(userdata.xp >= requiredxp){
+          userdata.skill += 1
+          userdata.xp = 0
+          interaction.channel.send(`Skill rank up!`)
+        }
+
+      }
+      else if (item.Item.endsWith("Rare Keys")) {
         let amount = item.Item.split(" ")[0];
         userdata.rkeys += Number(amount);
       } else if (item.Item.endsWith("Exotic Keys")) {
@@ -489,6 +537,8 @@ module.exports = {
 
       interaction.reply(`Claimed ${item.Item}`);
     } else if (option == "create") {
+      let userdata = await User.findOne({ id: interaction.user.id });
+      if(userdata.skill < 5) return interaction.reply("You need to be skill rank 5 to create crews!")
       let crewname = interaction.options.getString("name");
       if (!crewname)
         return await interaction.reply("Please specify a crew name!");
@@ -843,11 +893,12 @@ module.exports = {
         if (i.content.toLowerCase() == "y") {
           let crews = globalModel.crews;
 
-          for (var i2 = 0; i2 < crews.length; i2++)
+          for (var i2 = 0; i2 < crews.length; i2++){
             if (crews[i2].name === crew2[0].name) {
               crews.splice(i2, 1);
               break;
             }
+          }
 
           for (let mem in crew2[0].members) {
             let member = crew2[0].members[mem];
@@ -869,7 +920,11 @@ module.exports = {
             }
           }
 
-          globalModel.crews = crews;
+          await Global.findOneAndUpdate({ "crews": crews });
+          await globalModel.markModified("crews");
+
+
+          
 
           await User.findOneAndUpdate(
             {
@@ -883,12 +938,17 @@ module.exports = {
             {}
           );
 
-          userdata.save();
+          await  userdata.save();
 
-          globalModel.save();
+          try {
+            await globalModel.save();
+          }
+          catch(err){
+            console.log(err)
+          }
 
           await interaction.channel.send("Crew deleted");
-        }
+          }
       });
     } else if (option == "top") {
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
@@ -903,20 +963,12 @@ module.exports = {
         }
       }
 
+      
+            members = members.filter(function BigEnough(value) {
+              return value.Rank !== undefined && value.Rank > 1;
+            });
 
-      members = members.sort((a, b) => {
-         if (a.Rank > b.Rank) {
-           return -1;
-         }
-         if (a.Rank < b.Rank) {
-           return 1;
-         }
-         return 0;
-       });
-
-      members = members.filter(function BigEnough(value) {
-        return value.Rank > 1;
-      });
+      members = members.sort((b, a) => a.Rank - b.Rank);
 
 
       let desc = "";
@@ -992,14 +1044,16 @@ module.exports = {
       let card2filt = cards.filter((card) => card.name == "sting card");
       let card3filt = cards.filter((card) => card.name == "gt card");
 
-      if (card1filt[0].points >= card1filt[0].pointsmax) {
+      console.log(card1filt)
+
+      if (card1filt[0] && card1filt[0].points >= card1filt[0].pointsmax) {
         row2.components[0].setDisabled(false);
       }
 
-      if (card2filt[0].points >= card2filt[0].pointsmax) {
+      if (card2filt[0] &&  card2filt[0].points >= card2filt[0].pointsmax) {
         row2.components[1].setDisabled(false);
       }
-      if (card3filt[0].points >= card3filt[0].pointsmax) {
+      if (card3filt[0] &&  card3filt[0].points >= card3filt[0].pointsmax) {
         row2.components[2].setDisabled(false);
       }
 
@@ -1057,7 +1111,7 @@ module.exports = {
           {
             name: `GT Card`,
             value: `${cardsdb["gt card"].emote}\nTime remaining: ${time3}\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
             inline: true,
           }
         )
@@ -1214,7 +1268,7 @@ module.exports = {
               {
                 name: `GT Card`,
                 value: `${cardsdb["gt card"].emote}\n\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
                 inline: true,
               }
             )
@@ -1357,7 +1411,7 @@ module.exports = {
               {
                 name: `GT Card`,
                 value: `${cardsdb["gt card"].emote}\n\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
                 inline: true,
               }
             )
@@ -1500,7 +1554,7 @@ module.exports = {
               {
                 name: `GT Card`,
                 value: `${cardsdb["gt card"].emote}\n\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
                 inline: true,
               }
             )
@@ -1638,7 +1692,7 @@ module.exports = {
               {
                 name: `GT Card`,
                 value: `${cardsdb["gt card"].emote}\n\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
                 inline: true,
               }
             )
@@ -1776,7 +1830,7 @@ module.exports = {
               {
                 name: `GT Card`,
                 value: `${cardsdb["gt card"].emote}\n\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
                 inline: true,
               }
             )
@@ -1914,7 +1968,7 @@ module.exports = {
               {
                 name: `GT Card`,
                 value: `${cardsdb["gt card"].emote}\n\n
-          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/500`,
+          <:crewrespect:1143422770173190245> Crew Respect: ${card3filt[0].points}/750`,
                 inline: true,
               }
             )
@@ -1925,5 +1979,70 @@ module.exports = {
         }
       });
     }
+    else if(option == "custom_icon"){
+      let image = interaction.options.getAttachment("icon");
+      console.log(image.proxyURL)
+      let options = {
+        apiKey: "141e8760bc34356d461607deca22eeee",
+        imageUrl: image.proxyURL,
+      };
+      
+      let response = await imgbb(options);
+      console.log(response)
+
+      let icon = response.display_url;
+      let crewname = userdata.crew
+
+      if (!crewname) return await interaction.reply("You are not in a crew!");
+
+      let crew2 = crews.filter((crew) => crew.name == crewname.name);
+      if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
+
+      if (crew2[0].owner.id !== interaction.user.id) return await interaction.reply("You are not the leader of this crew!");
+    
+
+    let crew = crew2[0];
+
+    await Global.findOneAndUpdate(
+      {},
+      {
+        $set: {
+          "crews.$[crew].icontoapprove": icon,
+        },
+      },
+
+      {
+        arrayFilters: [
+          {
+            "crew.name": crew.name,
+          },
+        ],
+      }
+    );
+
+    await globalModel.save();
+
+    let embed = new EmbedBuilder()
+      .setTitle("Icon Change")
+      .setDescription(
+        `Your icon has been changed to [this](${icon}) and is pending approval! If your icon is approved your crews logo will update automatically`
+      )
+      .setColor(colors.blue);
+
+    await interaction.reply({ embeds: [embed] });
+
+      let submitchannel =   interaction.client.channels.cache.get("931078225021521920");
+
+      let embed2 = new EmbedBuilder()
+      .setTitle("Icon Change Request")
+      .setDescription(
+        `The crew **${crew.name}** has submitted a new icon!`
+      )
+      .setImage(icon)
+      .setColor(colors.blue);
+
+      await submitchannel.send({ embeds: [embed2] });
+    }
+
   },
 };

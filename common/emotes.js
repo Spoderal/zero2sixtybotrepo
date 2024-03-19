@@ -17,8 +17,12 @@ const emotes = {
   OVR:"<:ovricon:1185036043087532183>",
   t5voucher:"<:t5vouchers:1199876227184472145>",
   moontokens: "<:moontokens:1044726056680161371>",
-  
+  gas:"<:icon_fuel:1203819143648780319>",
   snowflakes: "<:snowflakes:1188390387207905370>",
+  rank:"<:emote_sr:1207132834666389504>",
+  pvptokens:"<:pvptokens:1208972617478963210>",
+  xp: "<:xp:1207136310893092914>",
+  xessence:"<:xessence:1218265749785677896>",
   // Currency
   cash: "<a:emote_cash:1114822702461616168>",
   gold: "<:z_gold:933929482518167552>",

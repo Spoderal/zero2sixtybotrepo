@@ -32,25 +32,26 @@ module.exports = {
           name: "Stats",
           value: `🌎 ${
             interaction.client.guilds.cache.size
-          } servers\n\n💙 ${numberWithCommas(
+          } servers\n\n👤 ${numberWithCommas(
             interaction.client.guilds.cache.reduce(
               (a, g) => a + g.memberCount,
               0
             )
           )} users\n\n🏓 Ping: ${Math.round(
             interaction.client.ws.ping
-          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n\nGas Price: ${
+          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\nShard ${interaction.client.shard.ids[0]}\n\n${emotes.gas} Gas Price: ${
             emotes.cash
-          } $${fixed}`,
+          } $${fixed}\n\nVoting helps us a lot! Use /vote to vote for us to get a vote crate AND refill all of your cars!\n
+          ||Egg time, <:egg_zero2sixty:1219112551045140570> \`CODE: ZERO2SIXTYISTHEBEST\`||
+          `,
           inline: true,
         },
         {
           name: "Links",
-          value: `[DONATE](https://www.buymeacoffee.com/zero2sixty)\n\n[SERVER](https://discord.gg/bHwqpxJnJk)\n\n[INVITE](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=59392&scope=bot%20applications.commands)`,
+          value: `[Community Server](https://discord.gg/bHwqpxJnJk)\n\n[Invite Bot](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=59392&scope=bot%20applications.commands)\n\n[Patreon](https://www.patreon.com/zero2sixtybot)`,
           inline: true,
         },
       ])
-      .setFooter({ text: "Created at " + bot.createdAt })
       .setColor(colors.blue);
 
     await interaction.reply({ embeds: [embed] });

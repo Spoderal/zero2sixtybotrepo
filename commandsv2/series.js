@@ -106,7 +106,6 @@ module.exports = {
     );
     let winstext = "";
     if (wins[0]) {
-      console.log(wins);
       winstext = `Wins: ${wins[0].Wins}`;
     }
 
@@ -135,6 +134,8 @@ module.exports = {
             Fiesta Familia <:ford:931012624152399902> *Prestige 2* ${winstext3}
 
             Italian Heritage <:ferrari:931011838374727730> *Prestige 8* ${winstext4}
+
+            ||<:egg_plastic:1219112539296632954> CODE: \`WHYPLASTIC\`||
 
         `);
 
@@ -214,7 +215,6 @@ module.exports = {
           .setStyle("Secondary")
       );
     }
-    console.log(seriescomplfilt2);
     const filter = (interaction2) =>
       interaction2.isSelectMenu() &&
       interaction2.user.id === interaction.user.id;

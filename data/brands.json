@@ -65,6 +65,7 @@
     "name": "BMW",
     "country": "https://i.ibb.co/MMctwtD/flag-german.png"
   },
+
   "bugatti": {
     "image": "https://i.ibb.co/D7SjNx2/logo-bugatti.png",
     "emote": "<:bugatti:931012624110460979>",
@@ -83,6 +84,12 @@
     "name": "Chevy",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
+  "citroen": {
+    "image": "https://i.ibb.co/rdg3Wqz/brand-citroen.png",
+    "emote": "<:brand_citroen:1214471582081220639>",
+    "name": "Citroen",
+    "country": "https://i.ibb.co/XzPKrPq/flag-french.png"
+  },
   "chrysler": {
     "image": "https://i.ibb.co/BtBFxFd/logo-chrysler.png",
     "emote": "<:logo_chrysler:1178584868595187813>",
@@ -95,7 +102,18 @@
     "name": "Cadillac",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
-
+  "datsun": {
+    "image": "https://i.ibb.co/DRFvyHr/Datsun-logo-1.png",
+    "emote": "<:datsun:931011550095998997>",
+    "name": "Datsun",
+    "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
+  },
+  "lykan": {
+    "image": "https://i.ibb.co/8zMmDGf/lykan.png",
+    "emote": "<:lykan:980253850286035007>",
+    "name": "Lykan",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
   "dmc": {
     "image": "https://i.ibb.co/fSCFjJg/logo-dmc.png",
     "emote": "<:dmclogo:938282454681280524>",
@@ -264,6 +282,12 @@
     "name": "Mitsubishi",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
+  "nio": {
+    "image": "https://i.ibb.co/CWDKC6F/nio.png",
+    "emote": "<:nio:1208706113722253332>",
+    "name": "NIO",
+    "country": "https://i.ibb.co/bPWMmrk/image.png"
+  },
   "nissan": {
     "image": "https://i.ibb.co/m85p50b/logo-nissan.png",
     "emote": "<:nissan:931011548678352916>",
@@ -282,7 +306,7 @@
     "name": "Quadra",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
-  "mach": {
+  "mach five": {
     "image": "https://i.ibb.co/7G2N4nL/machfive.png",
     "emote": "<:machfive:1191614689407402024>",
     "name": "Mach Five",
@@ -308,8 +332,14 @@
   },
   "plymouth": {
     "image": "https://i.ibb.co/Gvxdbp2/logo-plymouth.png",
-    "emote": "<:pagani:933622884126056498>",
-    "name": "<:plymouth:965096601829916672>",
+    "emote": "<:plymouth:965096601829916672>",
+    "name": "Plymouth",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "red bull": {
+    "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+    "emote": "<:RedBulllogo:1084695048681164850>",
+    "name": "Red Bull",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   },
   "pontiac": {
@@ -426,7 +456,12 @@
     "name": "Peel",
     "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
-
+  "lancia": {
+    "image": "https://i.ibb.co/1ZdRTMN/lancia.png",
+    "emote": "<:lancia:1209508900412461176>",
+    "name": "Lancia",
+    "country": "https://i.ibb.co/120BJky/flag-italy.png"
+  },
   "kawasaki": {
     "image": "https://i.ibb.co/nzJ3WTb/logo-kawasaki2.png",
     "emote": "<:logo_kawasaki:1089402371580379148>",
@@ -440,8 +475,8 @@
     "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
   "noble": {
-    "image": "https://i.ibb.co/8cJgnDM/logo-noble.png",
-    "emote": "<:logo_noble:1106692125153832960>",
+    "image": "https://i.ibb.co/jbFfmnx/noblelogo.png",
+    "emote": "<:noblelogo:1218306828467830914>",
     "name": "Noble",
     "country": "https://i.ibb.co/SNVKCsg/flag-brit.png"
   },
@@ -465,7 +500,7 @@
   },
   "genisis": {
     "image": "https://i.ibb.co/2Y7LsvV/logo-genisis.png",
-    "emote": "<:logo_genisis:1130354503732957286>",
+    "emote": "<:brand_genisis:1192958029759516744>",
     "name": "Genisis",
     "country": "https://i.ibb.co/frRGCVV/Flag-of-South-Korea-svg.png"
   },
@@ -475,7 +510,7 @@
     "name": "Yamaha",
     "country": "https://i.ibb.co/8mdqjG8/flag-jp.png"
   },
-  "no brand": {
+  "no logo": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
     "name": "No Logo",
     "country": "https://i.ibb.co/WtLGtCD/NOIMAGE.png"
@@ -485,6 +520,18 @@
     "image": "https://i.ibb.co/bH6dLF6/harley.png",
     "name": "Harley",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "marussia": {
+    "image": "https://i.ibb.co/Y3QVLvn/marussia.png",
+    "emote": "<:marussia:1208711421232418836>",
+    "name": "Marussia",
+    "country": "https://i.ibb.co/G3DvY90/image.png"
+  },
+  "zenvo": {
+    "image": "https://i.ibb.co/wCFyQhW/zenvo.png",
+    "emote": "<:zenvo:1208708450444644392>",
+    "name": "Zenvo",
+    "country": "https://i.ibb.co/v12Nyf3/image.png"
   },
   "horse": {
     "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
@@ -497,5 +544,11 @@
     "emote": "🛩️",
     "name": "Plane",
     "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+  },
+  "pizza": {
+    "image": "https://i.ibb.co/WtLGtCD/NOIMAGE.png",
+    "emote": "🍕",
+    "name": "Pizza",
+    "country": "https://i.ibb.co/120BJky/flag-italy.png"
   }
 }

@@ -53,6 +53,27 @@ module.exports = {
           cooldowndata.junk = Date.now()
           cooldowndata.save()
           userdata.parts.push(randomrest);
+          if(userdata.tutorial && userdata.tutorial.started == true && userdata.tutorial.stage == 3 && userdata.tutorial.type == "restore" ){
+            let tut = userdata.tutorial
+            tut.stage += 1
+            await User.findOneAndUpdate(
+              {
+                id: interaction.user.id,
+              },
+              {
+                $set: {
+                  "tutorial": tut,
+                },
+              },
+        
+            );
+            userdata.parts.push(`j1exhaust`)
+            userdata.parts.push(`j1engine`)
+            userdata.parts.push(`j1suspension`)
+            userdata.parts.push(`j1intake`)
+            userdata.parts.push(`body`)
+            interaction.channel.send(`**TUTORIAL:** Great! We found a part! Since we want this tutorial to go faster, I've given you all the parts you need to restore this classic car. Go ahead and run \`/restore [car id]\`!`)
+          }
           userdata.save()
           interaction.reply(`You found a ${partdb[randomrest].Emote} ${partdb[randomrest].Name}!`)
 

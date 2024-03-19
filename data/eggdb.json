@@ -1,0 +1,57 @@
+{
+    "green egg": {
+        "Reward": "2024 green egg mobile",
+        "Emote":"<:egg_green:1219112556426428547>",
+        "Egg":"Green egg"
+      },
+      "ferrari egg": {
+        "Reward": "2024 ferrari egg mobile",
+        "Emote":"<:egg_red:964250156981698651>",
+        "Egg":"Ferrari egg"
+      },
+      "porsche egg": {
+        "Reward": "2024 porsche egg mobile",
+        "Emote":"<:egg_porsche:1219112541347905607>",
+        "Egg":"Porsche egg"
+      },
+      "zero2sixty egg": {
+        "Reward": "2024 zero2sixty egg mobile",
+        "Emote":"<:egg_zero2sixty:1219112551045140570>",
+        "Egg":"Zero2Sixty Egg"
+      },
+      "fire egg": {
+        "Reward": "2024 fire egg mobile",
+        "Emote":"<:egg_flame:964250157229170708>",
+        "Egg":"Fire egg"
+      },
+      "plastic egg":{
+          "Reward":"2024 plastic egg mobile",
+          "Emote":"<:egg_plastic:1219112539296632954>",
+          "Egg":"Plastic egg"
+      },
+      "striped egg":{
+          "Reward":"2024 striped egg mobile",
+          "Emote":"<:egg_striped:1219112547916185660>",
+          "Egg":"Striped egg"
+      },
+      "turbo egg":{
+          "Reward":"2024 turbo egg mobile",
+          "Emote":"<:egg_turbo:1219112549187059804>",
+          "Egg":"Turbo egg"
+      },
+      "smiley egg":{
+          "Reward":"2024 smiley egg mobile",
+          "Emote":"<:egg_smiley:1219112544325861517>",
+          "Egg":"Smiley egg"
+      },
+      "egg egg":{
+          "Reward":"2024 egg egg mobile",
+          "Emote":"<:egg_egg:1219112552282456096>",
+          "Egg":"Egg egg"
+      },
+      "egg #2":{
+          "Reward":"2024 egg mobile 2",
+          "Emote":"<:egg_number2:1219756040942391326>",
+          "Egg":"Egg #2"
+      }
+}

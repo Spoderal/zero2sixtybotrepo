@@ -6,6 +6,8 @@ const {
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
+const squads = require("../data/squads.json");
+const { toCurrency } = require("../common/utils");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -53,6 +55,13 @@ module.exports = {
             customId: "qmrace",
           },
           {
+            label: "Offroad",
+            description: "Information about offroad racing",
+            value: "offroad",
+            emoji:"⛰️",
+            customId: "offroad",
+          },
+          {
             label: "Squad Race",
             description: "Information about squad racing",
             value: "squad_race",
@@ -78,14 +87,14 @@ module.exports = {
 
     let rpemote = emotes.rp;
     let cashemote = emotes.cash;
+
     let embed = new EmbedBuilder();
     embed.setTitle("Race Menu");
     embed.setFooter({ text: 'Prefix is "/"' });
-    embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-    embed.setDescription(`Here you can check out the race types and their rewards!\n\n
-        
+    embed.setThumbnail("https://i.ibb.co/Z1PqfDM/races-img.png");
+    embed.setDescription(`Here you can check out the race types and their rewards!\n
 
-          Choose an item from the drop down menu below, there are many different types such as drifting, pink slips, and more!\n
+          Choose an item from the drop down menu below, there are many different types such as PVP, street racing, drifting, and more!\n
           Use /race to race in any of these races!
 
           **Your cars rating will boost your race rank earnings in races! Check /rating for your cars rating and tips on how to boost it**
@@ -114,7 +123,7 @@ module.exports = {
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(`Race against other players!`);
             embed.addFields([{ name: `Rewards`, value: `$500\n10 RP` }]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/pxJBdC4/races-pvp.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -125,7 +134,7 @@ module.exports = {
             embed = new EmbedBuilder();
             embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Race against bots for practice!`);
+            embed.setDescription(`Race in the street!`);
             embed.addFields([
               {
                 name: `Tier 1`,
@@ -169,7 +178,7 @@ module.exports = {
               },
             ]);
 
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/2jSdP8K/races-street.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -181,7 +190,7 @@ module.exports = {
             embed.setTitle("Drag Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
-              `Race bots on the quarter mile track and earn maps for barns!`
+              `Race bots on the drag strip and earn maps for barn finds!`
             );
             embed.addFields([
               {
@@ -226,7 +235,51 @@ module.exports = {
               },
             ]);
 
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/fk35dwX/races-drag.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+          else if (value === "offroad") {
+            embed = new EmbedBuilder();
+            embed.setTitle("Offroad Racing");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(
+              `Race bots in the dirt, AWD helps a lot, and this race is very weight dependent, higher the weight the better!`
+            );
+            embed.addFields([
+              {
+                name: `Tier 1`,
+                value: `${cashemote} $300\n${rpemote} 1\n${emotes.notoriety} 10`,
+                inline: true,
+              },
+              {
+                name: `Tier 2`,
+                value: `${cashemote} $600\n${rpemote} 2\n${emotes.notoriety} 15`,
+                inline: true,
+              },
+              {
+                name: `Tier 3`,
+                value: `${cashemote} $900\n${rpemote} 3\n${emotes.notoriety} 20`,
+                inline: true,
+              },
+              {
+                name: `Tier 4`,
+                value: `${cashemote} $1100\n${rpemote} 4\n${emotes.notoriety} 25`,
+                inline: true,
+              },
+              {
+                name: `Tier 5`,
+                value: `${cashemote} $1400\n${rpemote} 5\n${emotes.notoriety} 30`,
+                inline: true,
+              }
+             
+            ]);
+
+            embed.setThumbnail("https://i.ibb.co/WVLPL6T/race-offroad.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -237,9 +290,16 @@ module.exports = {
             embed = new EmbedBuilder();
             embed.setTitle("Squad Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Race squads to take their cars!`);
-            embed.addFields([{ name: `Rewards`, value: `$600` }]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setDescription(`Race squads to reach the next class of cars, and unlock features`);
+            embed.addFields([{ name: `Rewards for ${squads.Squads["flame house"].Emote} ${squads.Squads["flame house"].Name}`, value: `Win: ${toCurrency(squads.Squads["flame house"].Reward)}\nBoss win: ${toCurrency(squads.Squads["flame house"].BigReward)}`, inline: true },
+            { name: `Rewards for ${squads.Squads["the astros"].Emote} ${squads.Squads["the astros"].Name}`, value: `Win: ${toCurrency(squads.Squads["the astros"].Reward)}\nBoss win: ${toCurrency(squads.Squads["the astros"].BigReward)}`, inline: true  },
+            { name: `Rewards for ${squads.Squads["muscle brains"].Emote} ${squads.Squads["muscle brains"].Name}`, value: `Win: ${toCurrency(squads.Squads["muscle brains"].Reward)}\nBoss win: ${toCurrency(squads.Squads["muscle brains"].BigReward)}`, inline: true  },
+            { name: `Rewards for ${squads.Squads["cool cobras"].Emote} ${squads.Squads["cool cobras"].Name}`, value: `Win: ${toCurrency(squads.Squads["cool cobras"].Reward)}\nBoss win: ${toCurrency(squads.Squads["cool cobras"].BigReward)}`, inline: true  },
+            { name: `Rewards for ${squads.Squads["demonz"].Emote} ${squads.Squads["demonz"].Name}`, value: `Win: ${toCurrency(squads.Squads["demonz"].Reward)}\nBoss win: ${toCurrency(squads.Squads["demonz"].BigReward)}`, inline: true  },
+            { name: `Rewards for ${squads.Squads["double 0"].Emote} ${squads.Squads["double 0"].Name}`, value: `Win: ${toCurrency(squads.Squads["double 0"].Reward)}\nBoss win: ${toCurrency(squads.Squads["double 0"].BigReward)}`, inline: true  },
+
+          ]);
+            embed.setThumbnail("https://i.ibb.co/d4ZHBbD/races-squad.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -247,14 +307,14 @@ module.exports = {
               components: [row2],
             });
           } else if (value === "tt_race") {
-            embed.fields = [];
+            embed.data.fields = [];
             embed.setTitle("Time Trial");
             embed.setFooter({ text: 'Prefix is "/"' });
             embed.setDescription(
               `Test your cars limits by doing a time trial!`
             );
             embed.addFields([{ name: `Rewards`, value: `$300 - time` }]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/WVBBPcH/races-time.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -269,22 +329,22 @@ module.exports = {
             embed.addFields([
               {
                 name: `Easy`,
-                value: `${cashemote} $200\n${rpemote} 2\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track\n25 Drift XP`,
+                value: `${cashemote} $200\n${rpemote} 2\n1 Drift Rank`,
                 inline: true,
               },
               {
                 name: `Medium`,
-                value: `${cashemote} $450\n${rpemote} 4\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track\n50 Drift XP`,
+                value: `${cashemote} $450\n${rpemote} 4\n2 Drift Rank`,
                 inline: true,
               },
               {
                 name: `Hard`,
-                value: `${cashemote} $800\n${rpemote} 6\n<:zeronotor:962785804202176574> Car Drift Rating * 5 - time to complete track\n100 Drift XP`,
+                value: `${cashemote} $800\n${rpemote} 6\n3 Drift Rank`,
                 inline: true,
               },
             ]);
 
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/tz0ygYM/races-drift.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -300,48 +360,23 @@ module.exports = {
             );
             embed.addFields([
               {
-                name: `Tier 1`,
-                value: `${cashemote} $225\n${rpemote} 1\n<:ckey:993011409132728370> 2`,
+                name: `Spa-Francorchamps`,
+                value: `${cashemote} $750\n${rpemote} 1\n<:ckey:993011409132728370> 5`,
                 inline: true,
               },
               {
-                name: `Tier 2`,
-                value: `${cashemote} $450\n${rpemote} 2\n<:ckey:993011409132728370> 4`,
+                name: `Suzuka`,
+                value: `${cashemote} $1,000\n${rpemote} 2\n<:rkey:993011407681486868> 3`,
                 inline: true,
               },
               {
-                name: `Tier 3`,
-                value: `${cashemote} $675\n${rpemote} 3\n<:rkey:993011407681486868> 1`,
-                inline: true,
-              },
-              {
-                name: `Tier 4`,
-                value: `${cashemote} $900\n${rpemote} 4\n<:rkey:993011407681486868> 2`,
-                inline: true,
-              },
-              {
-                name: `Tier 5`,
-                value: `${cashemote} $1125\n${rpemote} 5\n<:rkey:993011407681486868> 3`,
-                inline: true,
-              },
-              {
-                name: `Tier 6`,
-                value: `${cashemote} $1350\n${rpemote} 6\n<:rkey:993011407681486868> 3`,
-                inline: true,
-              },
-              {
-                name: `Tier 7`,
-                value: `${cashemote} $1575\n${rpemote} 7\n<:rkey:993011407681486868> 3`,
-                inline: true,
-              },
-              {
-                name: `Tier 8`,
-                value: `${cashemote} $1800\n${rpemote} 8\n<:rkey:993011407681486868> 3`,
+                name: `Nürburgring`,
+                value: `${cashemote} $1,250\n${rpemote} 3\n<:rkey:993011407681486868> 1`,
                 inline: true,
               },
             ]);
 
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/HV588CS/races-track.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -399,7 +434,7 @@ module.exports = {
               },
             ]);
 
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
+            embed.setThumbnail("https://i.ibb.co/557zSrr/races-cross.png");
             embed.setColor(colors.blue);
 
             await interaction.editReply({
@@ -407,73 +442,7 @@ module.exports = {
               components: [row2],
             });
           } 
-          else if (value === "dpvp_race") {
-            embed = new EmbedBuilder();
-            embed.setTitle("PVP Drifting");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(`Drift against other players!`);
-            embed.addFields([{ name: `Rewards`, value: `$500\n10 RP` }]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "police_race") {
-            embed = new EmbedBuilder();
-            embed.setTitle("Wanted");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Get away from the cops, but if you don't get away suffer a loss!`
-            );
-            embed.addFields([
-              { name: `Tier 1`, value: `${cashemote} $400`, inline: true },
-              { name: `Tier 2`, value: `${cashemote} $700`, inline: true },
-              { name: `Tier 3`, value: `${cashemote} $1000`, inline: true },
-            ]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "cash_race") {
-            embed = new EmbedBuilder();
-            embed.setTitle("Cashcup");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Rise up the ranks of cash cup, and earn more money from each tier!`
-            );
-            embed.addFields([
-              { name: `Rewards`, value: `Cash cup tier * $75` },
-            ]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          } else if (value === "bet_race") {
-            embed = new EmbedBuilder();
-            embed.setTitle("Bet racing");
-            embed.setFooter({ text: 'Prefix is "/"' });
-            embed.setDescription(
-              `Bet against the odds! Careful, the bot chooses any car from the game, so you could be racing a miata or a mclaren speedtail.`
-            );
-            embed.addFields([
-              { name: `Rewards`, value: `The amount you bet * 1.5` },
-            ]);
-            embed.setThumbnail("https://i.ibb.co/mXxfHbH/raceimg.png");
-            embed.setColor(colors.blue);
-
-            await interaction.editReply({
-              embeds: [embed],
-              components: [row2],
-            });
-          }
+     
         });
       });
   },

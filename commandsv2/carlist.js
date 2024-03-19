@@ -38,7 +38,8 @@ module.exports = {
     }
     let embed = new EmbedBuilder().setTitle("List of cars in the game");
     if (subcommand == "all") {
-      embed.setTitle("List of cars in the game");
+      embed.setTitle("List of cars in the game")
+      .setThumbnail("https://i.ibb.co/85TJTW4/icons8-f1-car-240.png")
       for (let car in cardb) {
         let brand = brands.filter((brand) => brand.emote == cardb[car].Emote);
         let price = cardb[car].Price;
@@ -65,7 +66,8 @@ module.exports = {
 
       embed.setTitle(
         `List of ${branddb[brandtofilter.toLowerCase()].name} cars in the game`
-      );
+      )
+      .setThumbnail(`${branddb[brandtofilter.toLowerCase()].image}`)
       for (let car in cardb) {
         let brand = brands.filter((brand) => brand.emote == cardb[car].Emote);
         let price = cardb[car].Price;
@@ -96,6 +98,8 @@ module.exports = {
       try {
         return a.Brand.name.localeCompare(b.Brand.name);
       } catch (err) {
+        console.log(b)
+        console.log(err)
       }
     });
 
@@ -109,10 +113,13 @@ module.exports = {
       displaycars.push(`${car2.Emote} ${car2.Name} : ${price}`);
     }
 
+
+
     displaycars = lodash.chunk(
       displaycars.map((a) => a),
       10
     );
+    console.log(displaycars)
 
     let page = 1;
 

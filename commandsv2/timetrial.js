@@ -142,15 +142,13 @@ module.exports = {
       let tracklength = 600;
 
       let i2 = setInterval(async () => {
-        console.log(speed);
         let calc = handling * (speed / 25);
         calc = calc / acceleration;
         sec = (6.5 * (weight / calc)) / acceleration;
         calc = calc / sec;
 
         tracklength -= calc;
-        console.log(`calc: ${calc}`);
-        console.log(`sec: ${sec}`);
+
         // car 2
 
         if (tracklength <= 0) {
@@ -191,7 +189,7 @@ module.exports = {
 
           let timeglobal = global.trialtimes.filter((time) => time.user == interaction.user)
 
-          console.log(timeglobal)
+        
 
           if(timeglobal[0]){
             timeglobal[timeglobal.indexOf(timeglobal[0])].time = time

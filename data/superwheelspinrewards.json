@@ -4,7 +4,8 @@
     "2012 dodge charger srt8",
     "2020 land rover range rover",
     "2023 audi rs6 performance",
-    "2020 porsche 718 cayman gt4"
+    "2020 porsche 718 cayman gt4",
+    "2023 bentley bentayga"
   ],
   "Parts": [
     "dualturbo",
@@ -20,9 +21,9 @@
     "t4brakes",
     "t4spoiler",
     "t4gearbox",
+    "t4allterraintires",
   "t4gastank",
-    "t4weightreduction",
-    "super rocket engine"
+    "t4weightreduction"
   ],
   "Tier4": [
     "t4weight", 
@@ -30,6 +31,7 @@
     "t4suspension",
   "t4ecu",
   "t4bodykit",
+  "t4allterraintires",
   "t4brakes",
   "t4spoiler",
   "t4gearbox",
@@ -50,7 +52,9 @@
     "2014 mclaren 12c",
     "2017 lykan hypersport",
     "2019 bugatti la voiture noire",
+    "1997 porsche 911 gt1",
     "2005 maserati mc12",
+    "2023 rolls royce ghost",
     "2020 aston martin victor",
     "2022 porsche 911 gt3"
   ]

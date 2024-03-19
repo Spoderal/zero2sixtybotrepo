@@ -6,43 +6,52 @@ const User = require("../schema/profile-schema");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
+const cardb = require("../data/cardb.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("prestige")
-    .setDescription("Prestige your rank, this will reset your cash."),
+    .setDescription("Prestige your rank, this will reset your cash.")
+    .addSubcommand((subcommand) => subcommand
+    .setName("car")
+    .setDescription("Prestige your car to X Class")
+    .addStringOption((option) => option
+    .setName("car")
+    .setDescription("The car to prestige")
+    .setRequired(true)
+    )
+    )
+    .addSubcommand((subcommand) => subcommand
+    .setName("rank")
+    .setDescription("Prestige your rank, this will reset your cash.")
+    ),
 
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+    let subcommand = interaction.options.getSubcommand();
 
-    let driftrank = userdata.driftrank;
-    let racerank = userdata.racerank;
+    if(subcommand == "rank"){
+
+    
+
+    let skillrank = userdata.skill;
     let prestigerank = userdata.prestige;
 
-    let keeprace = userdata.keeprace;
-    let keepdrift = userdata.keepdrift;
+
     let oldrank = userdata.prestige;
     let newprestige2 = (prestigerank += 1);
-
-    let raceprestige = newprestige2 * 20;
-    let driftprestige = newprestige2 * 20;
-
-    if (driftrank < driftprestige)
+    let prestigereq = newprestige2 * 100
+    if (skillrank < prestigereq)
       return await interaction.reply(
-        `Your drift rank needs to be ${driftprestige}!`
+        `Your skill rank needs to be ${prestigereq}!`
       );
-    if (racerank < raceprestige)
-      return await interaction.reply(
-        `Your race rank needs to be ${raceprestige}!`
-      );
-
     let row = new ActionRowBuilder().setComponents(
       new ButtonBuilder().setCustomId("yes").setLabel("Yes").setStyle("Success")
     );
 
     let msg = await interaction.reply({
-      content: `Are you sure? You'll lose all of your cash!`,
+      content: `Are you sure? Your skill rank will be set to 0`,
       fetchReply: true,
       components: [row],
     });
@@ -66,201 +75,24 @@ module.exports = {
           userdata.items = items;
         }
         userdata.prestige += prestigetoadd;
-        if (keeprace) {
-          let oldraces = (racerank -= raceprestige);
-          userdata.keeprace = false;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                racerank: oldraces,
-              },
-            }
-          );
-        } else {
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                racerank: 0,
-              },
-            }
-          );
-        }
-        if (keepdrift) {
-          let olddrift = (driftrank -= driftprestige);
-          userdata.keepdrift = false;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                driftrank: olddrift,
-              },
-            }
-          );
-        } else {
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                driftrank: 0,
-              },
-            }
-          );
-        }
-        let vault = userdata.vault;
-        if (vault && vault == "small vault") {
-          let cash = userdata.cash;
-          let cashtostore = 50000 - cash;
 
-          let cashtostore2 = 50000 - cashtostore;
-
-          if (cashtostore2 <= 0) {
-            cashtostore2 = 50000;
-          }
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                vault: null,
-              },
-            }
-          );
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                cash: 25000,
-              },
-            }
-          );
-        } else if (vault && vault == "medium vault") {
-          let cash = userdata.cash;
-          let cashtostore = 100000 - cash;
-
-          let cashtostore2 = 100000 - cashtostore;
-
-          if (cashtostore2 <= 0) {
-            cashtostore2 = 100000;
-          }
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                vault: null,
-              },
-            }
-          );
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                cash: cashtostore2,
-              },
-            }
-          );
-        } else if (vault && vault == "large vault") {
-          let cash = userdata.cash;
-          let cashtostore = 500000 - cash;
-
-          let cashtostore2 = 500000 - cashtostore;
-
-          if (cashtostore2 <= 0) {
-            cashtostore2 = 500000;
-          }
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                vault: null,
-              },
-            }
-          );
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                cash: cashtostore2,
-              },
-            }
-          );
-        } else if (vault && vault == "huge vault") {
-          let cash = userdata.cash;
-          let cashtostore = 1000000 - cash;
-
-          let cashtostore2 = 1000000 - cashtostore;
-
-          if (cashtostore2 <= 0) {
-            cashtostore2 = 1000000;
-          }
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                vault: null,
-              },
-            }
-          );
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                cash: cashtostore2,
-              },
-            }
-          );
-        } else {
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                cash: 0,
-              },
-            }
-          );
-        }
         await User.findOneAndUpdate(
           {
             id: interaction.user.id,
           },
           {
             $set: {
-              rp: 0,
+              skill: 0,
             },
           }
         );
+   
+        
+
 
         userdata.swheelspins += 1;
 
-        let upgrade = prestigerank * 1000;
         userdata.items.push("prestige crate");
-        userdata.banklimit += upgrade;
       
 
         userdata.save();
@@ -269,7 +101,8 @@ module.exports = {
         let embed = new EmbedBuilder()
           .setTitle("Prestiged")
           .setDescription(
-            `+1 <:supplydropprestige:1044404462581719041> Prestige Crate`
+            `+1 <:supplydropprestige:1044404462581719041> Prestige Crate\n
+            +1 ${emotes.superWheel} Super Wheel Spin\n`
           )
           .addFields(
             {
@@ -291,5 +124,71 @@ module.exports = {
         });
       }
     });
+  }
+  else if(subcommand == "car"){
+    let prestige = userdata.prestige;
+    if(prestige < 2) return await interaction.reply("You need prestige 2 to prestige a car to X Class!");
+    let car = interaction.options.getString("car");
+    let carindb = await userdata.cars.find((car2) => car2.ID.toLowerCase() == car.toLowerCase());
+    if (!carindb) return await interaction.reply("You don't have this car!");
+    let carobj = carindb;
+    
+    let xessence = carindb.Xessence || 0
+
+    let classxessencerequired = {
+      "D": 1000,
+      "C": 2000,
+      "B": 3000,
+      "A": 4000,
+      "S": 5000
+    }
+    let carclass = cardb.Cars[carobj.Name.toLowerCase()].Class;
+
+    let xessenceneeded = classxessencerequired[carclass]
+
+    if(xessence < xessenceneeded){
+      return await interaction.reply(`You need ${xessenceneeded} Xessence to prestige this car to X Class!`);
+    }
+
+    if(carobj.Class == "X") return await interaction.reply("This car is already X Class!");
+
+    let oldspeed = carobj.Speed;
+    let oldacc = carobj.Acceleration;
+    let oldhandling = carobj.Handling;
+
+    carobj.Class = "X";
+    carobj.Speed = oldspeed + (oldspeed * 0.25);
+    if(carobj.Acceleration > 1.5){
+      carobj.Acceleration =  oldacc - 0.5
+
+    }
+    carobj.Handling = oldhandling + (oldhandling * 0.25);
+
+    await User.findOneAndUpdate(
+      {
+        id: interaction.user.id,
+      },
+      {
+        $set: {
+          "cars.$[car]": carobj,
+        },
+      },
+
+      {
+        arrayFilters: [
+          {
+            "car.Name": carobj.Name,
+          },
+        ],
+      }
+    );
+
+    userdata.xess -= xessenceneeded;
+
+    userdata.save();
+
+    await interaction.reply(`Prestiged ${cardb.Cars[carobj.Name.toLowerCase()].Emote} ${carobj.Name} to X Class!`);
+
+  }
   },
 };

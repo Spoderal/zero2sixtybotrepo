@@ -38,7 +38,7 @@ module.exports = {
         );
      return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     } 
-    let trypick = lodash.sample([true, false, true]);
+    let trypick = lodash.sample([true, false, false, false, true]);
     udata.lockpicks = udata.lockpicks -= 1;
     cooldowns.lockpicks = Date.now()
     await cooldowns.save()
@@ -54,11 +54,11 @@ module.exports = {
         trypick = true;
       }
     }
-    if (trypick == false) {
-      interaction.reply("Your lockpick broke!");
-      udata.save();
-      return;
-    }
+    // if (trypick == false) {
+    //   interaction.reply("Your lockpick broke!");
+    //   udata.save();
+    //   return;
+    // }
 
     let garages = [];
     for (let g in garagedb) {
@@ -95,30 +95,21 @@ module.exports = {
 
 
     let garageindb = garagedb[garagepicked];
-    let carchance1 = randomRange(1, 10);
-    let carchance2 = randomRange(1, 10);
-    let carchance3 = randomRange(1, 10);
+    let carchance1 = randomRange(1, 6);
+
 
     var chooser = randomNoRepeats(garageindb.Contents);
     var chooser2 = randomNoRepeats(garageindb.Cars);
     let rand1;
     let rand2;
     let rand3;
-    if (carchance1 >= 6) {
+    if (carchance1 <= 4) {
       rand1 = chooser();
     } else {
       rand1 = chooser2();
     }
-    if (carchance2 >= 6) {
-      rand2 = chooser();
-    } else {
-      rand2 = chooser2();
-    }
-    if (carchance3 >= 6) {
-      rand3 = chooser();
-    } else {
-      rand3 = chooser2();
-    }
+    rand2 = chooser();
+    rand3 = chooser();
 
     let randomarray = [rand1, rand2, rand3];
     let rand2arr = [];
@@ -138,8 +129,8 @@ module.exports = {
           Livery: cars.Cars[it.toLowerCase()].Image,
           Miles: 0,
           WeightStat: cars.Cars[it.toLowerCase()].Weight,
-          Gas: 0,
-          MaxGas: 0,
+          Gas: 10,
+          MaxGas: 10,
         };
         rand2arr.push(
           `${cars.Cars[it.toLowerCase()].Emote} ${

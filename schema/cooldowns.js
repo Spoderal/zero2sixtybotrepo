@@ -21,6 +21,16 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  typecooldown:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  deodorant:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
   gamble: {
     type: Number,
     required: false,
@@ -373,6 +383,11 @@ const Cooldowns = new mongoose.Schema({
     default: 0,
   },
   lockpicks:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  location:{
     type: Number,
     required: false,
     default: 0,

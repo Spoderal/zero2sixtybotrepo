@@ -5,12 +5,11 @@ const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
-const { toCurrency, randomRange, numberWithCommas } = require("../common/utils");
+const {  randomRange, numberWithCommas } = require("../common/utils");
 const lodash = require("lodash");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const petdb = require("../data/pets.json");
 const cratedb = require("../data/cratedb.json");
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const cardb = require("../data/cardb.json")
 
 module.exports = {
@@ -85,7 +84,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push(`energy drink`);
       cooldowndata.energydrink = Date.now();
     } else if (itemtouse.toLowerCase() == "ice cube") {
-      console.log(using);
+
       if (using.includes("ice cube"))
         return await interaction.reply("You're already using an ice cube!");
       let chance = randomRange(1, 100);
@@ -105,8 +104,19 @@ else if (itemtouse.toLowerCase() == "energy drink") {
     } else if (itemtouse.toLowerCase() == "radar") {
       userdata.chased = Date.now();
     } else if (itemtouse.toLowerCase() == "blueberry") {
-      userdata.racerank += 1;
-    } else if (itemtouse.toLowerCase() == "grape juice") {
+      userdata.xp += 100;
+      let skill = userdata.skill
+      let requiredxp  =skill * 100
+      if(userdata.xp >= requiredxp){
+        userdata.skill += 1
+        userdata.xp = 0
+      }
+    } 
+    else if (itemtouse.toLowerCase() == "cash bomb") {
+      giveRandomCash(interaction, interaction.channel.members);
+      
+    } 
+    else if (itemtouse.toLowerCase() == "grape juice") {
       userdata.using.push(`grape juice`);
       cooldowndata.grapejuice = Date.now();
     } else if (itemtouse.toLowerCase() == "apple juice") {
@@ -118,8 +128,6 @@ else if (itemtouse.toLowerCase() == "energy drink") {
     } else if (itemtouse.toLowerCase() == "radio") {
       userdata.using.push(`radio`);
       cooldowndata.radio = Date.now();
-    } else if (itemtouse.toLowerCase() == "pet collar") {
-      cooldowndata.petcollar = Date.now();
     } else if (itemtouse.toLowerCase() == "oil") {
       let oilchance = randomRange(1, 100);
 
@@ -151,18 +159,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
     else if (itemtouse.toLowerCase() == "epic lockpick") {
       userdata.using.push(`epic lockpick`);
       cooldowndata.epiclockpick = Date.now();
-    } else if (itemtouse.toLowerCase() == "pet treats") {
-      if (!userdata.newpet.name)
-        return await interaction.reply("You don't have a pet!");
-      if (userdata.newpet.xessence >= 20)
-        return await interaction.reply(
-          "Your xessence cap is at 20, you cant give your pet any more treats!"
-        );
-      userdata.using.push(`pet treats`);
-      userdata.newpet.xessence = userdata.newpet.xessence += 1;
-      userdata.markModified("newpet");
-      cooldowndata.pettreats = Date.now();
-    } else if (itemtouse.toLowerCase() == "chips") {
+    }  else if (itemtouse.toLowerCase() == "chips") {
       if (userdata.chips >= 50)
         return await interaction.reply("You can only stack up to 50%!");
       userdata.using.push(`chips`);
@@ -180,33 +177,33 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push(`sponsor`);
       cooldowndata.sponsor = Date.now();
     } else if (itemtouse.toLowerCase() == "small vault") {
-      let vault = userdata.vault;
+      let vault = userdata.vaultuse;
       if (vault)
         return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
-      userdata.vault = itemtouse.toLowerCase();
+      userdata.vaultuse = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "medium vault") {
-      let vault = userdata.vault;
+      let vault = userdata.vaultuse;
       if (vault)
         return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
-      userdata.vault = itemtouse.toLowerCase();
+      userdata.vaultuse = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "large vault") {
-      let vault = userdata.vault;
+      let vault = userdata.vaultuse;
       if (vault)
         return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
-      userdata.vault = itemtouse.toLowerCase();
+      userdata.vaultuse = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "huge vault") {
-      let vault = userdata.vault;
+      let vault = userdata.vaultuse;
       if (vault)
         return await interaction.reply(
           `You already have a vault activated, prestige to deactivate it!`
         );
-      userdata.vault = itemtouse.toLowerCase();
+      userdata.vaultuse = itemtouse.toLowerCase();
     } else if (itemtouse.toLowerCase() == "disguise") {
       userdata.using.push("disguise");
     } else if (itemtouse.toLowerCase() == "pizza") {
@@ -370,37 +367,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       
     }
     
-    else if (itemtouse.toLowerCase() == "pet egg") {
-      let petsarr = [];
-      for (let pet in petdb) {
-        petsarr.push(petdb[pet]);
-      }
-      let randcat = lodash.sample(petsarr);
-      console.log(randcat);
-      let pet = userdata.newpet;
-      if (pet.name) return await interaction.reply(`You already have a pet!`);
-      let petindb = petdb[randcat.Breed.toLowerCase()];
-      let randname = lodash.sample(petindb.Names);
-
-      let petobj = {
-        name: randname,
-        hunger: 100,
-        thirst: 100,
-        love: 100,
-        tier: randcat.Tier,
-        pet: petdb[randcat.Breed.toLowerCase()].Breed.toLowerCase(),
-        xessence: 5,
-      };
-      for (var p = 0; p < amount2; p++)
-        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
-      userdata.items = items;
-      userdata.newpet = petobj;
-      userdata.save();
-
-      return await interaction.reply(
-        `You found a ${petindb.Breed} named ${randname}!`
-      );
-    } else if (itemtouse.toLowerCase() == "water bottle") {
+  else if (itemtouse.toLowerCase() == "water bottle") {
       let watercooldown = cooldowndata.waterbottle;
       let timeout = 18000000;
       if (
@@ -433,6 +400,33 @@ else if (itemtouse.toLowerCase() == "energy drink") {
         {
           $set: {
             canrace: 0,
+          },
+        }
+      );
+
+      cooldowndata.markModified();
+    } 
+    else if (itemtouse.toLowerCase() == "deodorant") {
+      let watercooldown = cooldowndata.deodorant;
+      let timeout = 60000;
+      if (
+        watercooldown !== null &&
+        timeout - (Date.now() - watercooldown) > 0
+      ) {
+        let time = ms(timeout - (Date.now() - watercooldown));
+        let timeEmbed = new Discord.EmbedBuilder()
+          .setColor(colors.blue)
+          .setDescription(`You can use deodorant again in ${time}.`);
+        return await interaction.reply({ embeds: [timeEmbed] });
+      }
+      await Cooldowns.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            waterbottle: 0,
+            deodorant: Date.now(),
           },
         }
       );
@@ -902,3 +896,24 @@ else if (itemtouse.toLowerCase() == "energy drink") {
     }
   },
 };
+
+async function giveRandomCash(interaction, users) {
+  console.log(users)
+  let userarr = users.map((user) => user.user)
+  console.log(userarr)
+  const randomUser = lodash.sample(userarr);
+  const randomAmount = Math.floor(Math.random() * 100000) + 1; // Random amount between 1 and 1000
+  console.log(randomUser)
+  let userdata = await User.findOne({ id: randomUser.id });
+
+  if(userdata){
+    userdata.cash += randomAmount;
+    userdata.save()
+
+  }
+
+
+  return await interaction.channel.send(
+    `You gave ${randomUser} $${randomAmount}!`
+  );
+}

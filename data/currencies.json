@@ -1,0 +1,90 @@
+{
+    "cash":{
+        "Name": "Cash",
+        "Emote":"<:emote_cash:1114819170794737675>",
+        "Use":"Can be used to purchase parts, cars, houses, and more"
+    },
+    "gold":{
+        "Name": "Gold",
+        "Emote":"<:z_gold:933929482518167552>",
+        "Use":"Can be used to purchase exclusive items, clear cooldowns, buy the season premium pass, and more"
+    },
+    "pvp tokens":{
+        "Name": "PvP Tokens",
+        "Emote":"<:pvptokens:1208972617478963210>",
+        "Use":"Can be used to purchase PVP store items such as cars, parts, and more"
+    },
+    "t5vouchers":{
+        "Name": "T5 Vouchers",
+        "Emote":"<:t5vouchers:1199876227184472145>",
+        "Use":"Can be used to fuse T5 parts without needing T4 parts"
+    },
+    "barn maps":{
+        "Name": "Barn Maps",
+        "Emote":"<:zbarns:941571059600195594>",
+        "Use":"Can be used to find classics to restore"
+    },
+    "wheel spins":{
+        "Name": "Wheel Spins",
+        "Emote":"<a:currency_wheelspin:1103930502467047437>",
+        "Use":"Can be used to win cash, gold, parts, cars, and more"
+    },
+    "super wheel spins":{
+        "Name": "Super Wheel Spins",
+        "Emote":"<a:currency_superwheelspin:1103930501619793943>",
+        "Use":"Can be used to win better cash, gold, parts, cars, and more"
+    },
+    "blueprints":{
+        "Name": "Blueprints",
+        "Emote":"<:blueprint:1076026198171328562>",
+        "Use":"When used you'll be able to choose between 3 cars, parts, and cash to receive"
+    },
+    "f1 blueprints":{
+        "Name": "F1 Blueprints",
+        "Emote":"<:blueprintf1:1085013478420525136>",
+        "Use":"When used you'll be able to choose between 3 F1 cars, parts, and cash to receive"
+    },
+    "series tickets":{
+        "Name": "Series Tickets",
+        "Emote":"<:stickets:1114077581898154064>",
+        "Use":"Can be used in car series races to unlock exclusive cars"
+    },
+    "common keys":{
+        "Name": "Common Keys",
+        "Emote":"<:key_common:1103921692566360154>",
+        "Use":"Can be used to open common import crates"
+    },
+    "rare keys":{
+        "Name": "Rare Keys",
+        "Emote":"<:key_rare:1103921690657968220>",
+        "Use":"Can be used to open rare import crates"
+    },
+    "exotic keys":{
+        "Name": "Exotic Keys",
+        "Emote":"<:key_exotic:1103923017576357969>",
+        "Use":"Can be used to open exotic import crates"
+    },
+    "lockpicks":{
+        "Name": "Lockpicks",
+        "Emote":"<:lockpick:1040384727691051170>",
+        "Use":"Get a chance to find garages that include cars, parts, cash, and more"
+    },
+    "notoriety":{
+        "Name": "Notoriety",
+        "Emote":"<:notoriety:1077420597388247170>",
+        "Use":"Can be used in the season pass to receive exclusive rewards, check it out with /season"
+    },
+    "rp":{
+        "Name": "RP",
+        "Emote":"<:rpnew:1141948290066292767>",
+        "Use":"Can be used in crews to unlock exclusive rewards, check it out with /crew"
+    },
+    "xessence":{
+        "Name": "Xessence",
+        "Emote":"<:xessence:1218265749785677896>",
+        "Use":"Used to prestige your car to X Class\n\nGives bonus stats\nSpeed: 25%\nAcceleration: -0.5s (applies to 2s cars)\nHandling: 25%"
+    }
+    
+    
+    
+}

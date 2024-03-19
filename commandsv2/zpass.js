@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const User = require("../schema/profile-schema");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,9 +7,9 @@ module.exports = {
     .setDescription("View the z pass and what it is"),
 
   async execute(interaction) {
-    let userdata = await User.findOne({ id: interaction.user.id });
     let zpass = "❌"
-    if (userdata.zpass == true) {
+    let zpassrole = interaction.member.roles.cache.has('976653429801885706');
+    if (zpassrole == true) {
         zpass = "✅";
       }
     let embed = new Discord.EmbedBuilder()

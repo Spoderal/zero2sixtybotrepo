@@ -1,256 +1,306 @@
 {
   "Seasons": {
-    "Winter": {
-      "Image": "https://i.ibb.co/sHz0krQ/season3.png",
+    "Spring": {
+      "Image": "https://i.ibb.co/8DcLPPD/season4-icon.png",
       "Rewards": {
         "1": {
           "Number": 1,
-          "Item": "1250 Cash",
+          "Item": "2012 audi a1",
+          "Premium":"2012 mercedes c63 amg black series",
           "Required": 500
         },
         "2": {
           "Number": 2,
-          "Item": "2020 Toyota GR Yaris WE",
+          "Item": "coffee bean",
+          "Premium":"Cash Bomb",
           "Required": 1000
         },
         "3": {
           "Number": 3,
           "Item": "5000 Cash",
+          "Premium":"10000 Cash",
           "Required": 1250
         },
         "4": {
           "Number": 4,
-          "Item": "toolbox",
+          "Item": "flower outfit",
+          "Premium":"yin yang outfit",
           "Required": 2000
         },
         "5": {
           "Number": 5,
-          "Item": "20000 Cash",
+          "Item": "2006 alfa romeo brera",
+          "Premium":"2022 acura nsx type s",
           "Required": 2500
         },
         "6": {
           "Number": 6,
-          "Item": "5000 Cash",
+          "Item": "fruit punch",
+          "Premium":"reverse card",
           "Required": 3000
         },
         "7": {
           "Number": 7,
-          "Item": "5000 Cash",
+          "Item": "10000 Cash",
+          "Premium":"20000 Cash",
           "Required": 3500
         },
         "8": {
           "Number": 8,
-          "Item": "5000 Cash",
+          "Item": "1 Garage Spaces",
+          "Premium":"5 Garage Spaces",
           "Required": 4000
         },
         "9": {
           "Number": 9,
-          "Item": "cookie",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 4500
         },
         "10": {
           "Number": 10,
-          "Item": "2015 mitsubishi lancer evolution we",
+          "Item": "2011 mercedes sls amg",
+          "Premium":"2014 mercedes sls amg black series",
           "Required": 5000
         },
         "11": {
           "Number": 11,
-          "Item": "5 Garage Spaces",
+          "Item": "1 Barn Map",
+          "Premium":"5 Barn Maps",
           "Required": 5500
         },
         "12": {
           "Number": 12,
-          "Item": "snowball",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 6000
         },
         "13": {
           "Number": 13,
-          "Item": "5000 Cash",
+          "Item": "10 Exotic Keys",
+          "Premium":"20 Exotic Keys",
           "Required": 6500
         },
         "14": {
           "Number": 14,
-          "Item": "5000 Cash",
+          "Item": "1993 lancia delta",
+          "Premium":"2012 aston martin v12 zagato",
           "Required": 7000
         },
         "15": {
           "Number": 15,
-          "Item": "30000 Cash",
+          "Item": "5 lockpicks",
+          "Premium":"10 Lockpicks",
           "Required": 7500
         },
         "16": {
           "Number": 16,
-          "Item": "5000 Cash",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 8000
         },
         "17": {
           "Number": 17,
-          "Item": "200 RP",
+          "Item": "1 T5Voucher",
+          "Premium":"100 Gold",
           "Required": 8500
         },
         "18": {
           "Number": 18,
-          "Item": "2500 Cash",
+          "Item": "5000 Cash",
+          "Premium":"50000 Cash",
           "Required": 9000
         },
         "19": {
           "Number": 19,
-          "Item": "snowball",
+          "Item": "2 Wheelspins",
+          "Premium":"2 SuperWheelspins",
           "Required": 9500
         },
         "20": {
           "Number": 20,
-          "Item": "50000 Cash",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 10000
         },
         "21": {
           "Number": 21,
-          "Item": "5000 Cash",
+          "Item": "1 Blueprint",
+          "Premium":"2 F1Blueprints",
           "Required": 12000
         },
         "22": {
           "Number": 22,
-          "Item": "3000 Cash",
+          "Item": "2005 jeep wrangler",
+          "Premium":"2020 jeep wrangler",
           "Required": 12500
         },
         "23": {
           "Number": 23,
-          "Item": "snowball",
+          "Item": "10 Rare Keys",
+          "Premium":"50 Rare Keys",
           "Required": 20000
         },
         "24": {
           "Number": 24,
-          "Item": "5000 Cash",
+          "Item": "20000 Cash",
+          "Premium":"100000 Cash",
           "Required": 25000
         },
         "25": {
           "Number": 25,
-          "Item": "2017 ford fiesta rs",
+          "Item": "Energy Drink",
+          "Premium":"donut",
           "Required": 30000
         },
         "26": {
           "Number": 26,
-          "Item": "25000 Cash",
+          "Item": "2022 Ford F150 Lightning",
+          "Premium":"2021 chevy colorado zr2",
           "Required": 35000
         },
         "27": {
           "Number": 27,
-          "Item": "Energy Drink",
+          "Item": "1000 XP",
+          "Premium":"5000 XP",
           "Required": 40000
         },
         "28": {
           "Number": 28,
-          "Item": "2000 RP",
+          "Item": "20000 Cash",
+          "Premium":"100000 Cash",
           "Required": 50000
         },
         "29": {
           "Number": 29,
-          "Item": "1000 RP",
+          "Item": "Toolbox",
+          "Premium":"orange juice",
           "Required": 55000
         },
         "30": {
           "Number": 30,
-          "Item": "gordon murray t50",
+          "Item": "50 gold",
+          "Premium":"200 Gold",
           "Required": 60000
         },
         "31": {
           "Number": 31,
-          "Item": "snowball",
+          "Item": "5000 XP",
+          "Premium":"10000 XP",
           "Required": 65000
         },
         "32": {
           "Number": 32,
-          "Item": "10 Garage Spaces",
+          "Item": "20000 Cash",
+          "Premium":"100000 Cash",
           "Required": 70000
         },
         "33": {
           "Number": 33,
-          "Item": "2000 Cash",
+          "Item": "Apple Juice",
+          "Premium":"cheese",
           "Required": 75000
         },
         "34": {
           "Number": 34,
-          "Item": "2500 Cash",
+          "Item": "10000 Cash",
+          "Premium":"2007 RUF RGT",
           "Required": 80000
         },
         "35": {
           "Number": 35,
-          "Item": "50000 Cash",
+          "Item": "50 Common Keys",
+          "Premium":"20 Exotic Keys",
           "Required": 90000
         },
         "36": {
           "Number": 36,
-          "Item": "5 Garage Spaces",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 100000
         },
         "37": {
           "Number": 37,
-          "Item": "100 Common Keys",
+          "Item": "Cyan Outfit",
+          "Premium":"Bling Outfit",
           "Required": 110000
         },
         "38": {
           "Number": 38,
-          "Item": "2020 subaru outback",
+          "Item": "2024 lexus gx",
+          "Premium":"2022 nissan frontier",
           "Required": 120000
         },
         "39": {
           "Number": 39,
-          "Item": "snowball",
+          "Item": "chips",
+          "Premium":"deodorant",
           "Required": 130000
         },
         "40": {
           "Number": 40,
-          "Item": "2018 subaru wrx sti we",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 140000
         },
         "41": {
           "Number": 41,
-          "Item": "500 RP",
+          "Item": "reverse card",
+          "Premium":"oil",
           "Required": 165000
         },
         "42": {
           "Number": 42,
-          "Item": "5000 Cash",
+          "Item": "1986 toyota 4runner",
+          "Premium":"1987 ferrari f40",
           "Required": 170000
         },
         "43": {
           "Number": 43,
-          "Item": "5000 Cash",
+          "Item": "milk",
+          "Premium":"chocolate milk",
           "Required": 175000
         },
         "44": {
           "Number": 44,
-          "Item": "5000 Cash",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 180000
         },
         "45": {
           "Number": 45,
-          "Item": "2016 mercedes benz g63 we",
+          "Item": "2 lockpicks",
+          "Premium":"5 lockpicks",
           "Required": 185000
         },
         "46": {
           "Number": 46,
-          "Item": "cookie",
+          "Item": "10000 Cash",
+          "Premium":"2 t5vouchers",
           "Required": 190000
         },
         "47": {
           "Number": 47,
-          "Item": "20000 Cash",
+          "Item": "t4offroadtires",
+          "Premium":"t4offroadtires",
           "Required": 195000
         },
         "48": {
           "Number": 48,
-          "Item": "200 Rare Keys",
+          "Item": "10000 Cash",
+          "Premium":"50000 Cash",
           "Required": 200000
         },
         "49": {
           "Number": 49,
-          "Item": "100 Exotic Keys",
+          "Item": "t4offroadtires",
+          "Premium":"t4offroadtires",
           "Required": 250000
         },
         "50": {
           "Number": 50,
-          "Item": "gordon murray t50 we",
+          "Item": "2024 lamborghini revuelto",
+          "Premium":"2021 lamborghini huracan trofeo evo 2",
           "Required": 350000
         }
       }
@@ -275,7 +325,7 @@
         },
         "4": {
           "Number": 4,
-          "Item": "T2GasTank",
+          "Item": "t4offroadtires",
           "Required": 40000
         },
         "5": {
@@ -295,7 +345,7 @@
         },
         "8": {
           "Number": 8,
-          "Item": "record",
+          "Item": "cheese",
           "Required": 80000
         },
         "9": {
@@ -385,12 +435,12 @@
         },
         "26": {
           "Number": 26,
-          "Item": "5 Race Ranks",
+          "Item": "500 XP",
           "Required": 260000
         },
         "27": {
           "Number": 27,
-          "Item": "T4GasTank",
+          "Item": "t4offroadtires",
           "Required": 270000
         },
         "28": {
@@ -400,7 +450,7 @@
         },
         "29": {
           "Number": 29,
-          "Item": "5 Drift Ranks",
+          "Item": "500 XP",
           "Required": 290000
         },
         "30": {
@@ -410,7 +460,7 @@
         },
         "31": {
           "Number": 31,
-          "Item": "5000 Cash",
+          "Item": "1994 audi rs4 avant",
           "Required": 410000
         },
         "32": {
@@ -420,7 +470,7 @@
         },
         "33": {
           "Number": 33,
-          "Item": "Headphones",
+          "Item": "water bottle",
           "Required": 430000
         },
         "34": {
@@ -455,7 +505,7 @@
         },
         "40": {
           "Number": 40,
-          "Item": "1993 jaguar xj220",
+          "Item": "2026 zenvo aurora agil",
           "Required": 1000000
         }
       }

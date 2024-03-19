@@ -1,35 +1,64 @@
-const ms = require("pretty-ms");
-const discord = require("discord.js");
+
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { EmbedBuilder } = require("discord.js");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
+const squadsdb = require("../data/squads.json");
+const { EmbedBuilder } = require("discord.js");
+const cardb = require("../data/cardb.json");
+const discord = require("discord.js");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
-const { userGetPatreonTimeout } = require("../common/user");
-const { GET_STARTED_MESSAGE } = require("../common/constants");
-const squadsdb = require("../data/squads.json");
-const cardb = require("../data/cardb.json");
-const outfits = require("../data/characters.json");
+const ms = require("pretty-ms");
 
-
+const { toCurrency } = require("../common/utils");
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("squadrace")
-    .setDescription("Race a squad and rank up")
-    .addStringOption((option) =>
+    .setName("squad")
+    .setDescription(
+      "Show the information of the squad you're at, or another squad"
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("list")
+        .setDescription("Show the list of squads")
+    )
+    .addSubcommand((subcommand) =>
+    subcommand
+      .setName("race")
+      .setDescription("Race a squad")
+      .addStringOption((option) =>
       option
         .setName("car")
-        .setDescription("The car id to use")
+        .setDescription("Car to use")
         .setRequired(true)
+    )
+  )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("info")
+        .setDescription("Show the information of a squad")
+        .addStringOption((option) =>
+          option
+            .setName("squad")
+            .setDescription("Squad to see the info of")
+            .setRequired(true)
+        )
     ),
   async execute(interaction) {
-    const cars = require("../data/cardb.json");
-
-    // let moneyearnedtxt = 50;
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let cooldowndata =
+    let tier = userdata.tier;
+    let squadsarr = [];
+    let option = interaction.options.getSubcommand();
+    for (let s in squadsdb.Squads) {
+      let sq = squadsdb.Squads[s];
+      squadsarr.push(sq);
+    }
+
+    if(option == "race"){
+      let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
 
@@ -46,7 +75,7 @@ module.exports = {
       return await interaction.reply({ embeds: [errembed] });
     }
 
-    let timeout = userGetPatreonTimeout(userdata);
+    let timeout = 45000
 
     let racing = cooldowndata.racing;
     if (racing !== null && timeout - (Date.now() - racing) > 0) {
@@ -60,12 +89,11 @@ module.exports = {
     let tracklength2 = 600;
     let cemote = emotes.cash;
     let tier = userdata.tier || 1;
-    let user = interaction.user;
 
     let prestige = userdata.prestige;
 
     let range = selected.Range;
-    if (cars.Cars[selected.Name.toLowerCase()].Electric) {
+    if (cardb.Cars[selected.Name.toLowerCase()].Electric) {
       if (range <= 0) {
         return await interaction.reply(
           "Your EV is out of range! Run /charge to charge it!"
@@ -73,6 +101,8 @@ module.exports = {
       }
     }
     if (tier >= 8) return interaction.reply("You've beaten all the squads!");
+
+    
 
     let squadsarr = [];
     for (let s in squadsdb.Squads) {
@@ -83,10 +113,10 @@ module.exports = {
     let squadfiltered = squadsarr.filter((squad) => squad.Tier == tier);
     let sqlevels = userdata.squads || [
       { name: "flame squad", car: 0 },
-      { name: "x squad", car: 0 },
+      { name: "the astros", car: 0 },
       {name: "muscle brains", car: 0},
       {name: "cool cobras", car: 0},
-      {name: "the ws", car: 0}
+      {name: "demonz", car: 0}
     ];
     if (!sqlevels.includes({ name: "double 0", car: 0 })) {
       sqlevels.push({ name: "double 0", car: 0 });
@@ -98,7 +128,6 @@ module.exports = {
       userdata.markModified("squads");
       userdata.update();
     }
-    console.log(squadfiltered[0]);
     let sqlevelfiltered = sqlevels.filter(
       (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
     );
@@ -116,9 +145,10 @@ module.exports = {
     let squadinfo = squadfiltered[0];
     let botcar = squadfiltered[0].Cars[sqlevelfiltered[0].car];
     let carimage = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image;
-    let botcarindb = cars.Cars[botcar.toLowerCase()];
+    let botcarindb = cardb.Cars[botcar.toLowerCase()];
     let car2 = botcarindb;
-
+    let carindb = cardb.Cars[selected.Name.toLowerCase()]
+    if(carindb.Class !== squadinfo.Class) return interaction.reply(`Your car class doesn't match the squad's class, use a ${squadinfo.Class} car!`)
     let racelevel = userdata.racerank;
 
     cooldowndata.racing = Date.now();
@@ -149,6 +179,7 @@ module.exports = {
     let speed2 = 0;
 
     let userpfp = userdata.helmet || "default";
+    let outfits = require("../data/characters.json")
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing Squad ${squadfiltered[0].Name}`)
@@ -184,10 +215,8 @@ module.exports = {
     speed2 = mph2 * 100;
 
     let player = (handling + speed - weightscore) / acceleration;
-    console.log(player);
     let opponent = (handling2 + speed2 - weightscore2) / acceleration2;
 
-    console.log(opponent);
     let winner;
     const dorace = () => {
       const playerRegression = player;
@@ -207,7 +236,7 @@ module.exports = {
       if (winner == "Player") {
         embed.setTitle(`${squadinfo.Name} race won!`);
 
-        if (cars.Cars[selected.Name.toLowerCase()].StatTrack) {
+        if (cardb.Cars[selected.Name.toLowerCase()].StatTrack) {
           selected.Wins += 1;
           userdata.save();
         }
@@ -278,5 +307,61 @@ module.exports = {
       console.log(tracklength);
       console.log(tracklength2);
     }, 3000);
+    }
+    else if (option == "list") {
+      let embed = new EmbedBuilder()
+        .setTitle("Squads List")
+        .setColor(`#60B0F4`);
+      for (let s in squadsarr) {
+        embed.addFields({
+          name: `${squadsarr[s].Emote} ${squadsarr[s].Name}`,
+          value: `Tier: ${squadsarr[s].Tier}`,
+          inline: true,
+        });
+      }
+
+      interaction.reply({ embeds: [embed] });
+    } else if (option == "info") {
+      let squatofind = interaction.options.getString("squad").toLowerCase();
+      let squadfiltered = squadsarr.filter(
+        (squad) => squad.Name.toLowerCase() == squatofind
+      );
+      if (!squadfiltered[0]) return interaction.reply("Thats not a squad!");
+
+      let squadinfo = squadfiltered[0];
+
+      let embed = new EmbedBuilder()
+        .setTitle(`Info for ${squadinfo.Emote} ${squadinfo.Name}`)
+        .setColor(`#60B0F4`)
+        .setDescription(
+          `Class: ${squadinfo.Class}\nTier: ${
+            squadinfo.Tier
+          }\nCash Earnings: ${toCurrency(
+            squadinfo.Reward
+          )}\nBoss Cash Earnings: ${toCurrency(squadinfo.BigReward)}`
+        )
+        .addFields({ name: "Cars", value: `${squadinfo.Cars.join("\n")}` })
+        .setThumbnail(`${squadinfo.Icon}`);
+
+      interaction.reply({ embeds: [embed] });
+    } else {
+      let squadfiltered = squadsarr.filter((squad) => squad.Tier == tier);
+      let squadinfo = squadfiltered[0];
+
+      let embed = new EmbedBuilder()
+        .setTitle(`Info for ${squadinfo.Emote} ${squadinfo.Name}`)
+        .setColor(`#60B0F4`)
+        .setDescription(
+          `Class: ${squadinfo.Class}\nTier: ${
+            squadinfo.Tier
+          }\nCash Earnings: ${toCurrency(
+            squadinfo.Reward
+          )}\nBoss Cash Earnings: ${toCurrency(squadinfo.BigReward)}`
+        )
+        .addFields({ name: "Cars", value: `${squadinfo.Cars.join("\n")}` })
+        .setThumbnail(`${squadinfo.Icon}`);
+
+      interaction.reply({ embeds: [embed] });
+    }
   },
 };

@@ -18,20 +18,47 @@ module.exports = {
     let voted = userdata.hasvoted;
 
     if (voted == false) return await interaction.reply({ embeds: [embed] });
+    let bot = interaction.client.user;
 
     userdata.cash += 2000;
     userdata.items.push("vote crate");
     userdata.hasvoted = false;
+    await interaction.reply({content: `Please wait...`})
+
+    for(let c in userdata.cars){
+      let car = userdata.cars[c]
+
+      car.Gas = car.MaxGas
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": car,
+          },
+        },
+  
+        {
+          arrayFilters: [
+            {
+              "car.Name": car.Name,
+            },
+          ],
+        }
+      );
+    }
 
     let embed2 = new Discord.EmbedBuilder()
-      .setThumbnail("https://i.ibb.co/JjrvkQs/smalllogo.png")
+      .setThumbnail(bot.displayAvatarURL())
       .setDescription(
-        "Thank you for voting! Here's a <:votecrate:1125629728175431761> vote crate! 💙\n\nTip: Support us even more by purchasing gold! Join the support server to learn more."
+        `Thank you for voting! Here's a <:votecrate:1125629728175431761> vote crate!\nAll of your cars gas have been refilled! 💙\n\nTip: Support us even more by purchasing gold! Join the support server to learn more or run \`/gold\`\n\nWanna vote for us on another site to grow the bot more? Try voting [here](https://discordbotlist.com/bots/zero2sixty-5237)`
       );
     embed.setColor(colors.blue);
 
     userdata.save();
 
-    await interaction.reply({ embeds: [embed2] });
+    await interaction.editReply({ embeds: [embed2] });
   },
 };

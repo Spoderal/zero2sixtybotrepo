@@ -14,7 +14,7 @@
     "id": "ch",
     "Name": "Casa Haus",
     "Price": 25000,
-    "Perk": "Earn lockpicks in all races.",
+    "Perk": "50% chance to earn lockpicks in all races.",
     "Image": "https://i.ibb.co/prsFTgs/image.png",
     "Emote": "🛖",
     "Type": "House",
@@ -80,7 +80,7 @@
     "id": "cabina",
     "Name": "Cabina Accogliente",
     "Price": 1700000,
-    "Perk": "Earn 1 free legendary barn find every day with /daily",
+    "Perk": "Earn 1 free barn find every day with /daily",
     "Image": "https://images.squarespace-cdn.com/content/v1/615f0e0c67cbd55a7753a1cd/1641645525091-08T8P93584UWUDIT7H6K/IMG_2285.JPG",
     "Emote": "🧺",
     "Type": "House",
@@ -99,17 +99,7 @@
     "Space": 10,
     "Prestige": 0
   },
-  "villa sull acqua": {
-    "id": "acqua",
-    "Name": "Villa Sull Acqua",
-    "Price": 2000000,
-    "Perk": "Earn 2x Xessence from your pet",
-    "Image": "https://i.ibb.co/XySsvd9/methode-times-prod-web-bin-4a1e487c-1050-11e9-a440-fb17d0e61415.jpg",
-    "Emote": "<:villawater:1114765089006948363>",
-    "Type": "House",
-    "Space": 6,
-    "Prestige": 5
-  },
+
   "castello verde": {
     "id": "verde",
     "Name": "Castello Verde",

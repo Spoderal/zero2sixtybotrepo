@@ -7,5 +7,15 @@
     "success": 35,
     "payoutrangehigh": 1000000,
     "payoutrangelow": 100000
+  },
+  "jewlery": {
+    "name": "Zero City Jewlery",
+    "emote": "<:heist_jewel:1203576782125662209>",
+    "image": "https://i.ibb.co/Wk1yRjb/heist-jewel.png",
+    "rewards":["necklace", "bracelet", "ring"],
+    "items": ["mask", "crowbar", "gem"],
+    "success": 25,
+    "payoutrangehigh": 5000000,
+    "payoutrangelow": 250000
   }
 }

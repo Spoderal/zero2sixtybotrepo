@@ -11,6 +11,8 @@ const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementdb = require("../data/achievements.json")
 const { createCanvas, loadImage } = require("canvas");
+const { toCurrency, isWeekend } = require("../common/utils");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("drift")
@@ -78,238 +80,224 @@ module.exports = {
       let timel = ms(timeout - (Date.now() - driftcooldown));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(`You can race again in ${timel}`);
+        .setDescription(`You can drift again in ${timel}`);
       return await interaction.reply({ embeds: [timeEmbed], fetchReply: true });
     }
-    let velocity = selected.Speed;
 
 
 
-    let acc = selected.Acceleration;
+  
 
-    let weight =
-      selected.WeightStat || cars.Cars[selected.Name.toLowerCase()].Weight;
+    function calculateDriftScore(currentSpeed, maxSpeed, currentAngle, maxAngle, currentControl, maxControl, weightSpeed, weightAngle, weightControl, trackDifficulty, trackType) {
+      // Normalize values
+      const normalizedSpeed = currentSpeed / maxSpeed;
+      const normalizedAngle = currentAngle / maxAngle;
+      const normalizedControl = currentControl / maxControl;
+  
+      // Invert weights by subtracting from 1
+      const invertedWeightSpeed = 1 - weightSpeed;
+      const invertedWeightAngle = 1 - weightAngle;
+      const invertedWeightControl = 1 - weightControl;
+  
+      // Adjust weights based on track difficulty
+      const weightedSpeed = invertedWeightSpeed * (1 - trackDifficulty);
+      const weightedAngle = invertedWeightAngle * (1 - trackDifficulty);
+      const weightedControl = invertedWeightControl * (1 - trackDifficulty);
+  
+      // Calculate Drift Score
+      const driftScore = (weightedSpeed * normalizedSpeed) + (weightedAngle * normalizedAngle) + (weightedControl * normalizedControl);
+  
+      // Define completion thresholds for different track types
+      const completionThresholds = {
+        "regular":0.5,
+          "parking garage": 0.7, 
+          "mountain": 0.8,
+      };
+  
+      // Determine the completion threshold for the current track type
+      const threshold = completionThresholds[trackType] || 0.5;  // Default threshold if track type is not defined
+  
+      // Check if the drift score meets the completion threshold for the current track type
+      const isTrackComplete = driftScore >= threshold;
+  
+      return { driftScore, isTrackComplete };
+  }
+  
+  
+  // Example usage with track difficulty
+  const currentSpeed = selected.Speed / selected.Acceleration; // Example current speed
+  const maxSpeed = selected.Speed; // Example maximum speed
+  const currentAngle = 45; // Example current angle
+  const maxAngle = 90; // Example maximum angle
+  const currentControl = (selected.Handling) / selected.Acceleration; // Example current control
+  const maxControl = (selected.Handling); // Example maximum control
+  
+  const weightSpeed = (selected.WeightStat / 100) / selected.Speed; // Base weight for speed
+  const weightAngle = (selected.WeightStat / 100) / selected.Speed; // Base weight for angle
+  const weightControl = (selected.WeightStat / 100) / selected.Handling; // Base weight for control
 
-    let handling = selected.Handling;
+  let tracks = {
+    easy: 0.2,
+    medium: 0.3,
+    hard: 0.4,
+    master: 0.5
+  }
 
-    let timelimit;
 
-    let notorietyreward;
+  
+  let trackDifficulty = tracks[difficulty];
 
-    let cashreward;
 
-    let dranks;
-    if (difficulty == "easy") {
-      timelimit = 15;
-      notorietyreward = 50;
-      cashreward = 100;
-      dranks = 1;
-    } else if (difficulty == "medium") {
-      timelimit = 10;
-      notorietyreward = 100;
-      cashreward = 250;
-      dranks = 2;
-    } else if (difficulty == "hard") {
-      timelimit = 7;
+  
+  const driftScore = calculateDriftScore(currentSpeed, maxSpeed, currentAngle, maxAngle, currentControl, maxControl, weightSpeed, weightAngle, weightControl, trackDifficulty, track);
 
-      notorietyreward = 200;
-      cashreward = 500;
-      dranks = 2;
-    } else if (difficulty == "master") {
-      timelimit = 5;
+  let didfail = "Failed"
+  if (driftScore.isTrackComplete) {
+    didfail = "Completed"
+  }
 
-      notorietyreward = 300;
-      cashreward = 600;
-      dranks = 3;
+  let rewards = []
+
+  let tracktypes = [
+    {
+      type: "regular",
+      name:"Regular",
+      image:"https://i.ibb.co/g3fLQ2T/drift-regular.png",
+      cash: 1000,
+      threshold: 0.5,
+      miles:1,
+      xp:10
+    },
+    {
+      type: "parking garage",
+      name: "Parking Garage",
+      image:"https://i.ibb.co/L9BM58b/drift-garage.png",
+      cash: 2000,
+      threshold: 0.7,
+      miles:3,
+      xp:25
+    },
+    {
+      type: "mountain",
+      name: "Mountain",
+      image:"https://i.ibb.co/CmYrVpy/drift-mountains.png",
+      cash: 3000,
+      threshold: 0.8,
+      miles:5,
+      xp:50
     }
+  ]
 
-    let tracklength;
-
-    if (track == "regular") {
-      tracklength = 500;
-      notorietyreward = notorietyreward * 1;
-      cashreward = cashreward * 1;
-    } else if (track == "mountain") {
-      tracklength = 1000;
-      notorietyreward = notorietyreward * 1.5;
-      cashreward = cashreward * 2;
-    } else if (track == "parking garage") {
-      tracklength = 2500;
-      notorietyreward = notorietyreward * 2;
-      cashreward = cashreward * 3;
+  let trackdifficulties = [
+    {
+      type: "easy",
+      name: "Easy",
+      cashbonus: 0,
+      keys:1,
+      xp:1
+    },
+    {
+      type: "medium",
+      name: "Medium",
+      cashbonus: 500,
+      xp:2,
+      keys:2,
+    },
+    {
+      type: "hard",
+      name: "Hard",
+      cashbonus: 1000,
+      xp:3,
+      keys:3,
+    },
+    {
+      type: "master",
+      name: "Master",
+      cashbonus: 2000,
+      xp:5,
+      keys:5,
     }
+  ]
 
-    let speed = velocity;
-    let weight2 = weight / 1000;
-    let momentum = speed / weight2;
+  let tracktype = tracktypes.find(t => t.type == track);
 
-    momentum = momentum / acc;
+  let trackdif = trackdifficulties.find(t => t.type == difficulty);
 
-    momentum = momentum * handling;
+  let livery = selected.Livery || selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
 
-    let driftscore = momentum / velocity;
-    await interaction.reply({
-      content: "Revving engines...",
-      fetchReply: true,
-    });
+  cooldowndata.drift = Date.now();
+  await cooldowndata.save();
 
-    let trackimg;
-    let trackemote;
-    let miles = 0;
-    if (track == "regular") {
-      trackemote = "🛣️";
-      if (difficulty == "easy") {
-        trackimg = "https://i.ibb.co/mtbZtS8/track-regular.png";
-      } else if (difficulty == "medium") {
-        trackimg = "https://i.ibb.co/YpzH8gZ/track-regular-medium.png";
-      } else if (difficulty == "hard") {
-        trackimg = "https://i.ibb.co/7bVpDKp/track-regular-hard.png";
-      } else if (difficulty == "master") {
-        trackimg = "https://i.ibb.co/YjXsvc2/track-regular-master.png";
-      }
-      miles = 3;
-    } else if (track == "mountain") {
-      trackemote = "🏔️";
-      if (difficulty == "easy") {
-        trackimg = "https://i.ibb.co/yRH20Hs/track-mountains.png";
-      } else if (difficulty == "medium") {
-        trackimg = "https://i.ibb.co/mqvt9Hw/track-mountains-medium.png";
-      } else if (difficulty == "hard") {
-        trackimg = "https://i.ibb.co/sKsTTFD/track-mountains-hard.png";
-      } else if (difficulty == "master") {
-        trackimg = "https://i.ibb.co/ZWg8Z83/track-mountains-master.png";
-      }
-      miles = 5;
-    } else if (track == "parking garage") {
-      trackemote = "🅿️";
-      if (difficulty == "easy") {
-        trackimg = "https://i.ibb.co/4Jb4Pqn/track-parking.png";
-      } else if (difficulty == "medium") {
-        trackimg = "https://i.ibb.co/zHKLphZ/track-parking-medium.png";
-      } else if (difficulty == "hard") {
-        trackimg = "https://i.ibb.co/WBkQHvm/track-parking-hard.png";
-      } else if (difficulty == "master") {
-        trackimg = "https://i.ibb.co/F00h1Rv/track-parking-master.png";
-      }
-      miles = 2;
-    }
+  let embed = new EmbedBuilder()
+  .setTitle(`Drifting`)
+  .setColor(colors.blue)
+  .addFields({name: "Track", value: `${trackdif.name} ${tracktype.name}`, inline: true})
+  .addFields({name: "Car", value: `${selected.Emote} ${selected.Name}`, inline: true})
+  .addFields({name: "Stats", value: `${emotes.speed} ${selected.Speed}\n${emotes.acceleration} ${selected.Acceleration}\n${emotes.handling} ${selected.Handling}\n${emotes.weight} ${selected.WeightStat}`, inline: true})
+  .addFields({name: "Drift Score Needed", value: `${tracktype.threshold}`, inline: true})
+  .setThumbnail(tracktype.image)
+  .setImage(livery)
 
-    const canvas = createCanvas(1280, 720);
-    const ctx = canvas.getContext("2d");
-    const bg = await loadImage(trackimg);
-    let img = selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
-    let selected1image = await loadImage(img);
-    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+  
+  await interaction.reply({ embeds: [embed], fetchReply: true});
 
-    ctx.save();
-    roundedImage(ctx, 320, 200, 640, 360, 20);
-    ctx.stroke();
-    ctx.clip();
-    ctx.drawImage(selected1image, 320, 200, 640, 360);
-    ctx.restore();
-
-    let attachment = new AttachmentBuilder(await canvas.toBuffer(), {
-      name: "profile-image.png",
-    });
+  setTimeout(async () => {
+    
+    driftScore.driftScore = Math.round(driftScore.driftScore * 100) / 100;
+    
     let embed = new EmbedBuilder()
-      .setTitle(`Drifting on the ${trackemote} ${difficulty} ${track} track!`)
-      .addFields({
-        name: `${selected.Emote} ${selected.Name}`,
-        value: `${emotes.speed} Power: ${velocity.toFixed(1)}\n\n${
-          emotes.acceleration
-        } Acceleration: ${acc.toFixed(1)}s\n\n${
-          emotes.weight
-        } Weight: ${weight}\n\n${emotes.handling} Handling: ${handling.toFixed(
-          1
-        )}`,
+  .setTitle(`Drift ${didfail}`)
+  .setColor(colors.blue)
+  .addFields({name: "Track", value: `${trackdif.name} ${tracktype.name}`, inline: true})
+  .addFields({name: "Car", value: `${selected.Emote} ${selected.Name}`, inline: true})
+  .addFields({name: "Stats", value: `${emotes.speed} ${selected.Speed}\n${emotes.acceleration} ${selected.Acceleration}\n${emotes.handling} ${selected.Handling}\n${emotes.weight} ${selected.WeightStat}`, inline: true})
+  .addFields({name: "Drift Score", value: `${driftScore.driftScore}`, inline: true})
+  .addFields({name: "Drift Score Needed", value: `${tracktype.threshold}`, inline: true})
+  .setThumbnail(tracktype.image)
+  .setImage(livery)
 
-        inline: true,
-      })
-      .setColor(colors.blue)
-      .setImage("attachment://profile-image.png");
+  if (driftScore.isTrackComplete) {
+    let xp = tracktype.xp * trackdif.xp
+    let cash = tracktype.cash + trackdif.cashbonus
 
-    await interaction.editReply({
-      embeds: [embed],
-      files: [attachment],
-      fetchReply: true,
-    });
+    //item bonuses
 
-    cooldowndata.drift = Date.now();
-    cooldowndata.is_racing = Date.now();
-    cooldowndata.save();
-    let x = setInterval(async () => {
-      timelimit -= 1;
-      tracklength -= driftscore;
+    let using = userdata.using;
+    if (using.includes("fruit punch")) {
+      xp = xp * 2;
+    }
 
-      if (timelimit <= 0 || tracklength <= 0) {
-        if (tracklength > 0) {
-          embed.setTitle(`${trackemote} ${difficulty} ${track} track lost.`);
-          await interaction.editReply({ embeds: [embed] });
-        } else if (tracklength <= 0) {
-          let earnings = [];
-          let filteredhouse = userdata.houses.filter(
-            (house) => house.Name == "Casa Sul Lago"
-          );
-          if (userdata.houses && filteredhouse[0]) {
-            notorietyreward = notorietyreward * 2;
-          }
+    if (userdata.items.includes("match")) {
+      xp = xp * 2;
+    }
+    if (userdata.items.includes("parking brake")) {
+      xp = xp * 4;
+    }
+    if(userdata.location == "japan" ){
+      cash = cash * 2
+    }
 
-          let using = userdata.using;
-          if (using.includes("fruit punch")) {
-            dranks = dranks * 2;
-          }
-          //test
-          earnings.push(`${emotes.cash} +${cashreward}`);
+    if(isWeekend()){
+      xp = xp * 2
+      cash = cash * 2
+      rewards.push("Double Cash & XP Weekend")
 
-          if (userdata.items.includes("match")) {
-            dranks = dranks * 2;
-          }
-          if (userdata.items.includes("parking brake")) {
-            dranks = dranks * 4;
-          }
-          if(userdata.location == "japan" ){
-            cashreward = cashreward * 2
-          }
+    }
 
-          earnings.push(`+${dranks} Drift Rank`);
-
-          userdata.driftrank += dranks;
-          userdata.cash += cashreward;
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car].Miles": (selected.Miles += miles),
-              },
-            },
-
-            {
-              arrayFilters: [
-                {
-                  "car.Name": selected.Name,
-                },
-              ],
-            }
-          );
-
-          let ach2 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["drift king"].Name)
-          if (difficulty == "master" && track == "parking garage" && ach2.length <= 0) {
-            interaction.channel.send(
-              'You just earned the "Drift King" achievement!'
-            );
-            userdata.achievements.push({
-              name: achievementdb.Achievements["drift king"].Name,
-              id: achievementdb.Achievements["drift king"].Name.toLowerCase(),
-              completed: true,
-            });
-          }
-
-          selected.Gas -= 1;
+    let ach2 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["drift king"].Name)
+    if (difficulty == "master" && track == "parking garage" && ach2.length <= 0) {
+      rewards.push(`Drift King Achievement`)
+      userdata.achievements.push({
+        name: achievementdb.Achievements["drift king"].Name,
+        id: achievementdb.Achievements["drift king"].Name.toLowerCase(),
+        completed: true,
+      });
+    }
+    selected.Gas -= 1;
     if (selected.Gas <= 0) {
       selected.Gas = 0;
     }
+    selected.Miles += tracktype.miles;
     await User.findOneAndUpdate(
       {
         id: interaction.user.id,
@@ -328,27 +316,32 @@ module.exports = {
         ],
       }
     );
-          userdata.save();
-          embed.setDescription(`${earnings.join("\n")}`);
-          embed.setTitle(`${trackemote} ${difficulty} ${track} track won!`);
-          await interaction.editReply({ embeds: [embed] });
-        }
-        clearInterval(x);
-        return;
-      }
-    }, 1000);
+    userdata.cash += cash
+
+    userdata.xp += xp
+    let keys = trackdif.keys
+    userdata.driftKeys += keys
+    let skill = userdata.skill
+
+    let requiredxp  = skill * 100
+
+    if(userdata.xp >= requiredxp){
+      userdata.skill += 1
+      userdata.xp = 0
+      rewards.push(`${emotes.rank} Skill Level Up!`)
+    }
+    rewards.push(`${emotes.cash} ${toCurrency(cash)}`)
+    rewards.push(`${emotes.xp} ${xp}`)
+    rewards.push(`${emotes.dirftKey} ${keys} Drift Keys`)
+    embed.addFields({name: "Rewards", value: rewards.join("\n"), inline: true})
+
+    userdata.save()
+  }
+  
+  
+  await interaction.editReply({ embeds: [embed] });
+}, 3000);
+  
   },
 };
-function roundedImage(ctx, x, y, width, height, radius) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + width - radius, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-  ctx.lineTo(x + width, y + height - radius);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-  ctx.lineTo(x + radius, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.closePath();
-}
+

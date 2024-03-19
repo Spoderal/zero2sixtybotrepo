@@ -1,11 +1,12 @@
-const { createBugCard } = require("../services/trello");
+
 const Cooldowns = require("../schema/cooldowns");
-const User = require("../schema/profile-schema");
 const {series} = require("./series")
 
 const { InteractionType } = require("discord.js");
 const { updateCrew } = require("./crews/updateCrew");
 const { patreon } = require("./patreon");
+const User = require("../schema/profile-schema");
+const { PermissionsBitField } = require('discord.js');
 
 //test
 //test
@@ -18,10 +19,10 @@ module.exports = {
     let user = interaction.user;
     let guild = interaction.guild;
     let timeout2 = 5000;
-    let timeout3 = 30000;
+
 
     try {
-      if (interaction.isSelectMenu()) {
+      if (interaction.isStringSelectMenu()) {
         await interaction.deferUpdate();
       }
       if (interaction.isButton()) {
@@ -40,19 +41,34 @@ module.exports = {
         let userdata = await User.findOne({ id: interaction.user.id });
 
         try {
+          if (userdata) {
+            let zpasstimer = userdata.zpasstimer;
+            let timeoutmonth = 2629746000;
+            if (zpasstimer !== null && timeoutmonth - (Date.now() - zpasstimer) > 0) {
+
+              userdata.zpass = false
+              userdata.save()
+            }
+          }
+        }
+        catch (err){
+          console.log(err)
+        }
+
+        try {
           console.log("updating")
           updateCrew(interaction)
         }
         catch (err){
-          console.log("err")
+          return console.log("err")
         }
 
         try {
-          let timeout = 3000;
+          let timeout = 1000;
           let commandran = cooldowndata.command_ran;
           if (commandran !== null && timeout - (Date.now() - commandran) > 0) {
             await interaction.reply({
-              content: "Wait 3 seconds before running another command!",
+              content: "Wait 1 second before running another command!",
               fetchReply: true,
             });
           } else if (
@@ -85,9 +101,40 @@ module.exports = {
 
             cooldowndata.command_ran = Date.now();
             await cooldowndata.save()
-            await command.execute(interaction);
+            try {
+              let permissions = interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)
+              let permissions2 = interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.SendMessages)
+
+
+              if(!permissions) return interaction.reply("I need the manage messages permission to run commands, it'll allow me to edit my own messages and delete them when needed.")
+              if(!permissions2) return 
+
+              await command.execute(interaction);
+            }
+            catch(err){
+              try {
+                console.log(err)
+
+                await interaction.reply({
+                  content:
+                    "An error occurred, please contact our support team with the details.",
+                  ephemeral: true,
+                  fetchReply: true,
+                });
+
+              }
+              catch(err){
+                console.log(err)
+                await interaction.channel.send({
+                  content:
+                    "An error occurred, please contact our support team with the details.",
+                  fetchReply: true,
+                });
+              
+              }
+            }
             series(interaction)
-            patreon(interaction)
+            patreon(interaction, interaction.client)
           }
         } catch (err) {
           console.log(err);
@@ -95,7 +142,7 @@ module.exports = {
 
         cooldowndata.save();
         // Pets
-        const petExecutionTimeName = "Pet update time";
+
 
       } else if (
         interaction.type == InteractionType.ApplicationCommandAutocomplete
@@ -110,14 +157,7 @@ module.exports = {
     } catch (error) {
       if (error) {
         console.log({ interactionCreateExecuteError: error });
-        createBugCard({
-          error,
-          event: "interactionCreate",
-          command,
-          options,
-          user,
-          guild,
-        });
+    
       }
       try {
         await interaction.reply({

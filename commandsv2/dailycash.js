@@ -8,15 +8,24 @@ const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { toCurrency } = require("../common/utils");
+const { GET_STARTED_MESSAGE } = require("../common/constants");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("daily")
     .setDescription("Collect your daily cash"),
   async execute(interaction) {
+
+    let profile = await User.findOne({ id: interaction.user.id });
+
+    if(!profile){
+      return interaction.reply({content: GET_STARTED_MESSAGE, ephemeral: true})
+    }
+
+
    await interaction.reply("Please wait...")
     let uid = interaction.user.id;
-    let dcash = 250;
+    let dcash = 5000;
     let userdata = (await User.findOne({ id: uid })) || new User({ id: uid });
     let cooldowndata =
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
@@ -109,8 +118,8 @@ console.log(isWeekend)
         interaction.channel.send("+1 Super Wheelspin");
       }
       if (userdata.houses && filteredhouse2[0]) {
-        userdata.lmaps += 1;
-        interaction.channel.send("+1 Legendary Barn Map");
+        userdata.barnmaps += 1;
+        interaction.channel.send("+1 Barn Map");
       }
       let dailystre = streak;
       if (streak > 1) {

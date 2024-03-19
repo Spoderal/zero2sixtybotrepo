@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Global = require("../schema/global-schema");
 const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
@@ -13,20 +12,17 @@ const {
 const itemdb = require("../data/items.json");
 const { createCanvas, loadImage } = require("canvas");
 const brands = require("../data/brands.json");
-const lodash = require("lodash");
+const currencies = require("../data/currencies.json");
+
 
 const { ImgurClient } = require("imgur");
 
-let currencies = require("../data/currencydb.json");
 const houses = require("../data/houses.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
   .setName("stats")
     .setDescription("View the default stats of a car or part")
-    .addSubcommand((cmd) => cmd
-    .setDescription("Your own cars stats or someone else's")
-    .setName("mycar")
     .addStringOption((option) =>
       option
         .setName("item")
@@ -38,17 +34,6 @@ module.exports = {
         .setName("user")
         .setRequired(false)
         .setDescription("See the stats of a users car")
-    )
-    )
-    .addSubcommand((cmd) => cmd
-    .setDescription("Default cars stats or parts and items")
-    .setName("default")
-    .addStringOption((option) =>
-      option
-        .setName("item")
-        .setRequired(true)
-        .setDescription("The item to see the stats for")
-    )
     ),
 
   async execute(interaction) {
@@ -58,11 +43,9 @@ module.exports = {
       carlist.push(list[car])
     }
     var list2 = houses;
-    let subcommand = interaction.options.getSubcommand()
     var item = interaction.options.getString("item");
     let user = interaction.options.getUser("user") || interaction.user;
     let userdata = (await User.findOne({ id: user.id })) || [];
-    let global = await Global.findOne({});
     let brandsarr = [];
     let housesarr = [];
     for (let b in brands) {
@@ -80,7 +63,7 @@ module.exports = {
       !carindb[0] &&
       !houseindb[0] &&
       !itemdb[item.toLowerCase()] &&
-      !partdb.Parts[item.toLowerCase()]
+      !partdb.Parts[item.toLowerCase()] && !currencies[item.toLowerCase()]
     )
       return interaction.reply(
         `I couldn't find that car! If you're checking default stats, put the full name, and if you want your stats, put the ID.`
@@ -90,79 +73,67 @@ module.exports = {
       .setDescription("Fetching data, this wont take too long!")
       .setColor(colors.blue);
     await interaction.reply({ embeds: [embedl], fetchReply: true });
-    if (subcommand == "default") {
+    if (list[item.toLowerCase()]) {
       if(defaultcar[0]){
         let canvas = createCanvas(1280, 720);
         let ctx = canvas.getContext("2d");
         let carindb = defaultcar[0]
+        console.log(carindb)
         let carbg = await loadImage(cars.Tiers[carindb.Class.toLowerCase()].Image);
         let carimg = await loadImage(carindb.Image);
         let brand = brandsarr.filter((br) => br.emote == carindb.Emote);
-        console.log(brand);
         if (!brand[0]) {
           brand[0] = brands["no brand"];
         }
-        console.log(brand);
         let brimg = await loadImage(brand[0].image);
         let flag = await loadImage(brand[0].country);
-        let policeimg = await loadImage("https://i.ibb.co/cwr7WLB/police.png");
         ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
         ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(brimg, 350, 0, 60, 60);
-        ctx.drawImage(flag, 1020, 565, 250, 150);
-        if (carindb.Police) {
-          ctx.drawImage(policeimg, 920, 600, 150, 150);
-        }
-       
-  
-        let spe = carindb.Speed;
-        let acc = Math.floor(carindb["0-60"]);
-        let weigh = Math.floor(carindb.Weight);
-        let hand = Math.floor(carindb.Handling);
-        let ovr = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4
+        ctx.drawImage(brimg, 150, 10, 75, 75);
+        ctx.drawImage(flag, 0, 0, 136, 90);
+
+
   
         
-        ovr = Math.round(ovr)
-        ctx.font = "bold 30px sans-serif";
+        ctx.font = "bold 50px sans-serif";
         ctx.fillStyle = "#ffffff";
   
-        let nametxt = `${carindb.Name} (ID: ${carindb.alias})`
-        ctx.fillText(nametxt, 420, 40);
+        let nametxt = `${carindb.Name}`
+        ctx.fillText(nametxt, 250, 70);
+        ctx.font = "bold 40px sans-serif";
+
+        let id = carindb.alias
+        ctx.fillText(id, 840, 700);
+
         
-        let ovrimg = await loadImage("https://i.ibb.co/TvHngT2/ovricon.png");
-        ctx.drawImage(ovrimg, 1180, 130, 100, 100);
   
-        ctx.fillText(ovr, 1130, 200);
-        ctx.font = "bold 65px sans-serif";
+        ctx.font = "bold 35px sans-serif";
   
         
-        ctx.fillText(Math.round(carindb.Speed), 60, 150);
-        ctx.fillText(carindb["0-60"], 60, 260);
-        ctx.fillText(carindb.Handling, 60, 380);
-        ctx.fillText(carindb.Weight, 60, 500);
+        ctx.fillText(Math.round(carindb.Speed), 80, 190);
+        ctx.fillText(carindb["0-60"], 90, 300);
+        ctx.fillText(carindb.Handling, 80, 420);
+        ctx.fillText(carindb.Weight, 75, 550);
   
         ctx.font = "regular 35px sans-serif";
-        ctx.fillText("Horsepower", 30, 80);
-        ctx.fillText("Acceleration", 30, 200);
-        ctx.fillText("Handling", 50, 320);
-        ctx.fillText("Weight", 60, 440);
+
   
   
-        ctx.font = "bold 25px sans-serif";
+        ctx.font = "bold 40px sans-serif";
         let price = `${toCurrency(carindb.Price)}`;
   
         if (carindb.Drivetrain) {
           let drivetrain = carindb.Drivetrain;
-          ctx.fillText(drivetrain, 1150, 150);
+          ctx.fillText(drivetrain, 75, 650);
         }
   
         if (carindb.Engine) {
           let engine = carindb.Engine;
   
-          ctx.fillText(engine, 1220, 150);
+          ctx.fillText(engine, 95, 700);
         }
   
-        ctx.font = "bold 30px sans-serif";
+        ctx.font = "bold 40px sans-serif";
         if (carindb.Price <= 0) {
           let obtained = carindb.Obtained || "Not Obtainable";
           price = `${obtained}`;
@@ -170,174 +141,267 @@ module.exports = {
           price = `Squad Car`;
         }
   
-        ctx.fillText(price, 30, 40);
+        ctx.fillText(price, 250, 700);
   
         let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
           name: "stats-image.png",
         });
+
+        let sellprice = Math.floor(carindb.Price * 0.75)
+
+        if(sellprice === 0){
+          sellprice = carindb.sellprice * 0.35 
+        }
   
-  
-  
-        let msg = await interaction.editReply({
+         await interaction.editReply({
           embeds: [],
+          content: `Sells for ${toCurrency(sellprice)}`,
           files: [attachment],
         });
 
       }
 
-      else if (partdb.Parts[item.toLowerCase()]) {
-        let part = interaction.options.getString("item");
-        part = part.toLowerCase();
-        let partindb = partdb.Parts[part];
-  
-        if (!partindb) return await interaction.editReply(`Thats not a part!`);
-        let stats = [];
-  
-        if (partindb.Power > 0) {
-          stats.push(`${emotes.speed} Power: +${partindb.Power}`);
-        }
-  
-        if (partindb.Weight > 0) {
-          stats.push(`${emotes.weight} Weight: +${partindb.Weight}`);
-        }
-        if (partindb.RemoveWeight > 0) {
-          stats.push(`${emotes.weight} Weight: -${partindb.RemoveWeight}`);
-        }
-        if (partindb.Gas > 0) {
-          stats.push(`⛽ Max Gas: ${partindb.Gas}`);
-        }
-        if (partindb.Handling > 0) {
-          stats.push(
-            `<:handling:983963211403505724> Handling: +${partindb.Handling}`
-          );
-        }
-  
-        if (partindb.Acceleration > 0) {
-          stats.push(
-            `${emotes.acceleration} Acceleration: -${partindb.Acceleration}`
-          );
-        }
-        if (partindb.RemoveAcceleration > 0) {
-          stats.push(
-            `${emotes.acceleration} Acceleration: +${partindb.RemoveAcceleration}`
-          );
-        }
-        if (partindb.RemovePower > 0) {
-          stats.push(
-            `${emotes.speed} Power: -${partindb.RemovePower}`
-          );
-        }
-        if (partindb.RemoveHandling > 0) {
-          stats.push(
-            `<:handling:983963211403505724> Handling: -${partindb.RemoveHandling}`
-          );
-        }
-        if (partindb.Stars > 0) {
-          stats.push(`⭐ Rating: +${partindb.Stars}`);
-        }
-        
-       
-        let embed = new Discord.EmbedBuilder()
-          .setTitle(`Stats for ${partindb.Emote} ${partindb.Name}`)
-          .setDescription(`${emotes.cash} Store Price: ${toCurrency(partindb.Price)}\n${stats.join('\n')}`)
-          .setColor(colors.blue);
-  
-        if (partindb.Image) {
-          embed.setThumbnail(`${partindb.Image}`);
-        }
-  
-   await interaction.editReply({
-          embeds: [embed],
-        });
-  
-  
-  
-      } else if (itemdb[item.toLowerCase()]) {
-        let itemindb = itemdb[item.toLowerCase()];
-        let price = itemindb.Price;
-  
-        if (price == 0 && itemindb.Findable == true) {
-          price = `Findable only`;
-        } else {
-          price = toCurrency(itemindb.Price);
-        }
-        let tier = itemindb.Tier || 0;
-        let embed = new Discord.EmbedBuilder()
-          .setAuthor({
-            name: `Information for ${itemindb.Name}`,
-            iconURL: itemindb.Image,
-          })
-          .setDescription(`${itemindb.Action}\n${price}`)
-          .addFields(
-            {
-              name: "Type",
-              value: `${itemindb.Type}`,
-            },
-            { name: "Item Tier", value: `${tier}` }
-          )
-          .setColor(colors.blue);
-  
-        if(itemindb.Skins){
-          let skinarr = []
-          let skins = itemindb.Skins
-          for(let skin in skins){
-            console.log(skins)
-            skinarr.push(`${skins[skin].Emote} ${skins[skin].Name} **${skins[skin].Action}**`)
-          }
-          embed.addFields(
-            {
-              name: "Skins",
-              value: `${skinarr.join('\n')}`
-            }
-          )
-        }
-  
-        if (itemindb.Image) {
-          embed.setThumbnail(`${itemindb.Image}`);
-        }
-  
-        
-  
-        let msg = await interaction.editReply({
-          embeds: [embed],
-        });
-  
-  
-      } else if (houseindb[0]) {
-        let house = houseindb[0];
-  
-        let embed1 = new Discord.EmbedBuilder()
-          .setTitle(`Stats for ${house.Name}`)
-          .setImage(house.Image)
-          .setDescription(
-            `Price: ${toCurrency(house.Price)}\n\nPerk: ${
-              house.Perk
-            }\n\nGarage Space: ${house.Space}\n\nUnlocks at prestige: ${
-              house.Prestige
-            }`
-          )
-          .setColor(colors.blue);
-  
-        await interaction.editReply({ embeds: [embed1] });
+    }
+
+    else if (partdb.Parts[item.toLowerCase()]) {
+      let part = interaction.options.getString("item");
+      part = part.toLowerCase();
+      let partindb = partdb.Parts[part];
+
+      if (!partindb) return await interaction.editReply(`Thats not a part!`);
+      let stats = [];
+
+      if (partindb.Power > 0) {
+        stats.push(`${emotes.speed} Power: +${partindb.Power}`);
+      }
+
+      if (partindb.Weight > 0) {
+        stats.push(`${emotes.weight} Weight: +${partindb.Weight}`);
+      }
+      if (partindb.RemoveWeight > 0) {
+        stats.push(`${emotes.weight} Weight: -${partindb.RemoveWeight}`);
+      }
+      if (partindb.Gas > 0) {
+        stats.push(`⛽ Max Gas: ${partindb.Gas}`);
+      }
+      if (partindb.Handling > 0) {
+        stats.push(
+          `<:handling:983963211403505724> Handling: +${partindb.Handling}`
+        );
+      }
+
+      if (partindb.Acceleration > 0) {
+        stats.push(
+          `${emotes.acceleration} Acceleration: -${partindb.Acceleration}`
+        );
+      }
+      if (partindb.RemoveAcceleration > 0) {
+        stats.push(
+          `${emotes.acceleration} Acceleration: +${partindb.RemoveAcceleration}`
+        );
+      }
+      if (partindb.RemovePower > 0) {
+        stats.push(
+          `${emotes.speed} Power: -${partindb.RemovePower}`
+        );
+      }
+      if (partindb.DecreaseHandling > 0) {
+        stats.push(
+          `<:handling:983963211403505724> Handling: -${partindb.DecreaseHandling}`
+        );
+      }
+      if (partindb.Stars > 0) {
+        stats.push(`⭐ Rating: +${partindb.Stars}`);
+      }
+      let sellprice = Math.floor(partindb.Price * 0.35)
+      let price = partindb.Price
+
+      if(price == 0 && partindb.Obtained){
+        price = partindb.Obtained
+      }
+      else{
+        price = `${emotes.cash} Store Price: ${toCurrency(price)}`
+      }
+     
+      let embed = new Discord.EmbedBuilder()
+        .setTitle(`Stats for ${partindb.Emote} ${partindb.Name}`)
+        .setDescription(`${price}\nSell for: ${toCurrency(sellprice)}\n${stats.join('\n')}`)
+        .setColor(colors.blue);
+
+      if (partindb.Image) {
+        embed.setThumbnail(`${partindb.Image}`);
+      }
+
+ await interaction.editReply({
+        embeds: [embed],
+      });
+
+
+
+    } else if (itemdb[item.toLowerCase()]) {
+      let itemindb = itemdb[item.toLowerCase()];
+      let price = itemindb.Price;
+      let sellprice = Math.floor(price * 0.35)
+      if (price == 0 && itemindb.Findable == true) {
+        price = `Findable only`;
+        sellprice = ""
+      } else {
+        price = toCurrency(itemindb.Price);
+        sellprice = toCurrency(sellprice)
       }
       
-    } else if (subcommand == "mycar") {
-      let canvas = createCanvas(1280, 720);
-      let ctx = canvas.getContext("2d");
+      let tier = itemindb.Tier || 0;
+      let embed = new Discord.EmbedBuilder()
+        .setAuthor({
+          name: `Information for ${itemindb.Name}`,
+          iconURL: itemindb.Image,
+        })
+        .setDescription(`${itemindb.Action}\n${price}\nSell for: ${sellprice}`)
+        .addFields(
+          {
+            name: "Type",
+            value: `${itemindb.Type}`,
+          },
+          { name: "Item Tier", value: `${tier}` }
+        )
+        .setColor(colors.blue);
 
-      if (carindb.length == 0) {
-        return interaction.editReply("Thats not an ID!");
+      if(itemindb.Skins){
+        let skinarr = []
+        let skins = itemindb.Skins
+        for(let skin in skins){
+          skinarr.push(`${skins[skin].Emote} ${skins[skin].Name} **${skins[skin].Action}**`)
+        }
+        embed.addFields(
+          {
+            name: "Skins",
+            value: `${skinarr.join('\n')}`
+          }
+        )
       }
 
-      console.log(carindb);
-      let ogcar = cars.Cars[carindb[0].Name.toLowerCase()].Image;
+      if (itemindb.Image) {
+        embed.setThumbnail(`${itemindb.Image}`);
+      }
+
+      
+
+      await interaction.editReply({
+        embeds: [embed],
+      });
+
+
+    } else if (houseindb[0]) {
+      let house = houseindb[0];
+
+      let embed1 = new Discord.EmbedBuilder()
+        .setTitle(`Stats for ${house.Name}`)
+        .setImage(house.Image)
+        .setDescription(
+          `Price: ${toCurrency(house.Price)}\n\nPerk: ${
+            house.Perk
+          }\n\nGarage Space: ${house.Space}`
+        )
+        .setColor(colors.blue);
+
+      await interaction.editReply({ embeds: [embed1] });
+    }
+     else if (carindb[0]) {
+      let canvas = createCanvas(1280, 720);
+      let ctx = canvas.getContext("2d");
+      let og = cars.Cars[carindb[0].Name.toLowerCase()];
+      let carbg = await loadImage(cars.Tiers[og.Class.toLowerCase()].Image);
+      if(carindb[0].Class && carindb[0].Class == "X"){
+        carbg = await loadImage(cars.Tiers["x"].Image);
+      }
+      let brand = brandsarr.filter((br) => br.emote == og.Emote);
+      if (!brand[0]) {
+        brand[0] = brands["no brand"];
+      }
+      let brimg = await loadImage(brand[0].image);
+      let flag = await loadImage(brand[0].country);
+      let ogcar = cars.Cars[og.Name.toLowerCase()].Image;
       new ImgurClient({ accessToken: process.env.imgur });
-      let carim = carindb[0].Image || ogcar;
-      console.log(carim);
+      let carim = carindb[0].Image || carindb[0].Livery || ogcar;
       let weight = carindb[0].WeightStat;
       if (!weight) {
         weight = cars.Cars[carindb[0].Name.toLowerCase()].Weight;
       }
+      let carimg = await loadImage(carim)
+      ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(brimg, 150, 10, 75, 75);
+      ctx.drawImage(flag, 0, 0, 136, 90);
+
+
+
+      
+      ctx.font = "bold 50px sans-serif";
+      ctx.fillStyle = "#ffffff";
+
+      let nametxt = `${carindb[0].Name}`
+      ctx.fillText(nametxt, 250, 70);
+      ctx.font = "bold 40px sans-serif";
+
+      let id = carindb[0].ID
+      ctx.fillText(id, 840, 700);
+
+      
+
+      ctx.font = "bold 35px sans-serif";
+      let acceleration = Math.round(carindb[0].Acceleration * 10) / 10;
+      let speed = Math.round(carindb[0].Speed);
+      let handling = Math.round(carindb[0].Handling);
+      
+      ctx.fillText(speed, 80, 190);
+      ctx.fillText(acceleration, 90, 300);
+      ctx.fillText(handling, 80, 420);
+      ctx.fillText(carindb[0].WeightStat, 75, 550);
+
+      ctx.font = "regular 35px sans-serif";
+
+
+
+      ctx.font = "bold 40px sans-serif";
+      let sellprice = Math.floor(carindb[0].Resale)
+      if(!sellprice && cars.Cars[carindb[0].Name.toLowerCase()].Price > 0){
+        sellprice = cars.Cars[carindb[0].Name.toLowerCase()].Price * 0.75
+      }
+      else if(cars.Cars[carindb[0].Name.toLowerCase()].Price  == 0) {
+        sellprice = cars.Cars[carindb[0].Name.toLowerCase()].sellprice * 0.35
+      }
+
+      if (carindb[0].drivetrain && carindb[0].drivetrain !== null) {
+        let drivetrain = carindb[0].drivetrain
+        ctx.fillText(partdb.Parts[drivetrain.toLowerCase()].Name, 75, 650);
+      }
+      else {
+        let drivetrain = cars.Cars[carindb[0].Name.toLowerCase()].Drivetrain;
+
+        ctx.fillText(drivetrain, 75, 650);
+      }
+
+      if (carindb[0].engine) {
+        let engine = partdb.Parts[carindb[0].engine].Name;
+
+        ctx.fillText(engine, 95, 700);
+      }
+      else {
+        let engine = cars.Cars[carindb[0].Name.toLowerCase()].Engine;
+
+        ctx.fillText(engine, 95, 700);
+      }
+
+      ctx.font = "bold 40px sans-serif";
+
+
+      ctx.fillText(`${toCurrency(sellprice)}`, 250, 700);
+
+      let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
+        name: "stats-image.png",
+      });
+
+    
 
       let exhaust = carindb[0].exhaust || "stock exhaust"
       let intake = carindb[0].intake || "stock intake"
@@ -354,120 +418,11 @@ module.exports = {
       let weightreduction = carindb[0].weight || "no weight"
       let gastank = carindb[0].gastank || "stock gastank"
 
+      let brakes = carindb[0].brakes || "stock brakes"
+      let drivetrain = carindb[0].drivetrain || cars.Cars[carindb[0].Name.toLowerCase()].Drivetrain
 
-      // let suspensionimg = await loadImage(partdb.Parts[suspension.toLowerCase()].Image)
-      // let engineimg = await loadImage(partdb.Parts[engine.toLowerCase()].Image)
-      // let gearboximg = await loadImage(partdb.Parts[gearbox.toLowerCase()].Image)
-      // let intercoolerimg = await loadImage(partdb.Parts[intercooler.toLowerCase()].Image)
-      let carbg = await loadImage("https://i.ibb.co/SNWzQ7X/statcard.png");
-      let carimg = await loadImage(carim);
-      console.log(carim);
-      let brand =
-        brandsarr.filter((br) => br.emote == carindb[0].Emote) || "no brand";
-      if (brand.length == 0) {
-        brand[0] = "no brand";
-      }
-      let brimg = await loadImage(brand[0].image);
-      let flag = await loadImage(brand[0].country);
-      ctx.drawImage(carimg, 0, 0, canvas.width, canvas.height);
-      console.log("car done");
-      ctx.drawImage(carbg, 0, 0, canvas.width, canvas.height);
-      console.log("bg done");
 
-      ctx.drawImage(brimg, 15, 600, 100, 100);
-      ctx.drawImage(flag, 1050, 573, 250, 150);
-
-      ctx.font = "bold 54px sans-serif";
-      ctx.fillStyle = "#ffffff";
-
-      ctx.fillText(carindb[0].Name, 125, 670);
-
-      ctx.font = "bold 55px sans-serif";
-      let acceleration = Math.round(carindb[0].Acceleration * 10) / 10;
-      let speed = Math.round(carindb[0].Speed);
-      let handling = Math.round(carindb[0].Handling);
-
-      ctx.fillText(speed, 15, 120);
-      ctx.fillText(acceleration, 215, 120);
-      ctx.fillText(handling, 400, 120);
-
-      ctx.font = "bold 35px sans-serif";
-      ctx.fillText(carindb[0].WeightStat, 595, 120);
-
-      ctx.font = "bold 20px sans-serif";
-
-      if (exhaust !== "stock exhaust") {
-        let exhaustimg = await loadImage(
-          partdb.Parts[`${exhaust}`].Image
-        );
-        ctx.drawImage(exhaustimg, 815, 30, 50, 50);
-        ctx.fillText(exhaust, 810, 29);
-      }
-
-      if (intake !== "stock intake") {
-        let intakeimg = await loadImage(partdb.Parts[`${intake}`].Image);
-        ctx.drawImage(intakeimg, 875, 30, 50, 50);
-        ctx.fillText(intake, 870, 29);
-      }
-
-      if (tires !== "stock tires") {
-        let tiresimg = await loadImage(partdb.Parts[`${tires}`].Image);
-        ctx.drawImage(tiresimg, 935, 30, 50, 50);
-        ctx.fillText(tires, 930, 29);
-      }
-
-      if (turbo !== "no turbo") {
-        let turboimg = await loadImage(partdb.Parts[`${turbo}`].Image);
-        ctx.drawImage(turboimg, 995, 30, 50, 50);
-        ctx.fillText(turbo, 990, 29);
-      }
-
-      if (clutch !== "stock clutch") {
-        let clutchimg = await loadImage(partdb.Parts[`${clutch}`].Image);
-        ctx.drawImage(clutchimg, 1045, 30, 50, 50);
-        ctx.fillText(clutch, 1045, 29);
-      }
-
-      if (ecu !== "stock ecu") {
-        let ecuimg = await loadImage(partdb.Parts[`${ecu}`].Image);
-        ctx.drawImage(ecuimg, 1105, 30, 50, 50);
-        ctx.fillText(ecu, 1100, 29);
-      }
-
-      if (intercooler !== "no intercooler") {
-        let intercoolerimg = await loadImage(
-          partdb.Parts[`${intercooler}`].Image
-        );
-        ctx.drawImage(intercoolerimg, 1165, 30, 50, 50);
-        ctx.fillText(intercooler, 1160, 29);
-      }
-
-      if (suspension !== "stock suspension") {
-        let suspensionimg = await loadImage(
-          partdb.Parts[`${suspension}`].Image
-        );
-        ctx.drawImage(suspensionimg, 1225, 30, 50, 50);
-        ctx.fillText(suspension, 1220, 29);
-      }
-
-      if (engine) {
-        let engineimg = await loadImage(partdb.Parts[`no engine`].Image);
-        ctx.drawImage(engineimg, 815, 100, 50, 50);
-        ctx.fillText(engine, 810, 99);
-      }
-
-      if (gearbox !== "stock gearbox") {
-        let gearboximg = await loadImage(
-          partdb.Parts[`${gearbox}`].Image
-        );
-        ctx.drawImage(gearboximg, 875, 100, 50, 50);
-        ctx.fillText(gearbox, 870, 99);
-      }
-
-      console.log("done");
-      let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
-        name: "car-image.png",
-      });
+    
 
       let row = new ActionRowBuilder()
       .setComponents(
@@ -475,16 +430,24 @@ module.exports = {
         .setCustomId("parts")
         .setLabel("Parts")
         .setEmoji("⚙️")
-        .setStyle("Secondary"),
-        new ButtonBuilder()
-        .setCustomId("remove")
-        .setLabel("Set Stock")
-        .setEmoji("❌")
         .setStyle("Secondary")
+
       )
 
+      let xessence = carindb[0].Xessence || 0
+      let classxessencerequired = {
+        "D": 1000,
+        "C": 2000,
+        "B": 3000,
+        "A": 4000,
+        "S": 5000
+      }
+      let carclass = cars.Cars[carindb[0].Name.toLowerCase()].Class;
+  
+      let xessenceneeded = classxessencerequired[carclass]
       let msg = await interaction.editReply({
         embeds: [],
+        content: `${emotes.cash} Sells for ${toCurrency(sellprice)}\n${emotes.xessence} Xessence: ${xessence}/${xessenceneeded}`,
         files: [attachment],
         components:[row],
         fetchReply: true,
@@ -495,43 +458,12 @@ module.exports = {
       };
       const collector = msg.createMessageComponentCollector({
         filter: filter,
-        time: 15000,
       });
       
       collector.on('collect', async (i) => {
         if(i.customId == "parts"){
      
 
-          // if(exhaust){
-          //   partsarr.push(`Exhaust: ${partdb.Parts[exhaust].Emote} ${partdb.Parts[exhaust].Name}`)
-          // }
-          // if(turbo){
-          //   partsarr.push(`Turbo: ${partdb.Parts[turbo].Emote} ${partdb.Parts[turbo].Name}`)
-          // }
-          // if(intake){
-          //   partsarr.push(`Intake: ${partdb.Parts[intake].Emote} ${partdb.Parts[intake].Name}`)
-          // }
-          // if(engine){
-          //   partsarr.push(`Engine: ${partdb.Parts[engine].Emote} ${partdb.Parts[engine].Name}`)
-          // }
-          // if(tires){
-          //   partsarr.push(`Tires: ${partdb.Parts[tires].Emote} ${partdb.Parts[tires].Name}`)
-          // }
-          // if(suspension){
-          //   partsarr.push(`Suspension: ${partdb.Parts[suspension].Emote} ${partdb.Parts[suspension].Name}`)
-          // }
-          // if(gearbox){
-          //   partsarr.push(`Gearbox: ${partdb.Parts[gearbox].Emote} ${partdb.Parts[gearbox].Name}`)
-          // }
-          // if(clutch){
-          //   partsarr.push(`Clutch: ${partdb.Parts[clutch].Emote} ${partdb.Parts[clutch].Name}`)
-          // }
-          // if(intercooler){
-          //   partsarr.push(`Intercooler: ${partdb.Parts[intercooler].Emote} ${partdb.Parts[intercooler].Name}`)
-          // }
-          // if(ecu){
-          //   partsarr.push(`ECU: ${partdb.Parts[ecu].Emote} ${partdb.Parts[ecu].Name}`)
-          // }
 
           let embed = new Discord.EmbedBuilder()
           .setTitle(`Your ${carindb[0].Emote} ${carindb[0].Name}'s parts`)
@@ -549,7 +481,9 @@ module.exports = {
             {name: `Springs`, value: `${partdb.Parts[springs.toLowerCase()].Emote} ${partdb.Parts[springs.toLowerCase()].Name}`, inline: true},
             {name: `Weight`, value: `${partdb.Parts[weightreduction.toLowerCase()].Emote} ${partdb.Parts[weightreduction.toLowerCase()].Name}`, inline: true},
             {name: `Spoiler`, value: `${partdb.Parts[spoiler.toLowerCase()].Emote} ${partdb.Parts[spoiler.toLowerCase()].Name}`, inline: true},
-            {name: `Gas tank`, value: `${partdb.Parts[gastank.toLowerCase()].Emote} ${partdb.Parts[gastank.toLowerCase()].Name}`, inline: true}
+            {name: `Gas tank`, value: `${partdb.Parts[gastank.toLowerCase()].Emote} ${partdb.Parts[gastank.toLowerCase()].Name}`, inline: true},
+            {name: `Brakes`, value: `${partdb.Parts[brakes.toLowerCase()].Emote} ${partdb.Parts[brakes.toLowerCase()].Name}`, inline: true},
+            {name: `Drivetrain`, value: `${partdb.Parts[drivetrain.toLowerCase()].Emote} ${partdb.Parts[drivetrain.toLowerCase()].Name}`, inline: true}
 
             )
           .setColor(colors.blue)
@@ -557,92 +491,18 @@ module.exports = {
           await interaction.editReply({embeds: [embed]})
 
         }
-        else if(i.customId == "remove"){
-          let ogcar = cars.Cars[carindb[0].Name.toLowerCase()]
-
-          if(exhaust !== "stock exhaust"){
-            userdata.parts.push(exhaust.toLowerCase())
-          }
-          if(turbo  !== "no turbo"){
-            userdata.parts.push(turbo)
-          }
-          if(intake  !== "stock intake"){
-            userdata.parts.push(intake)
-          }
-      
-          if(tires !== "stock tires"){
-            userdata.parts.push(tires)
-          }
-          if(suspension !== "stock suspension"){
-            userdata.parts.push(suspension)
-          }
-          if(gearbox !== "stock gearbox"){
-            userdata.parts.push(gearbox)
-          }
-          if(clutch !== "stock clutch"){
-            userdata.parts.push(clutch)
-          }
-          if(intercooler !== "no intercooler"){
-            userdata.parts.push(intercooler)
-          }
-          if(ecu !== "stock ecu"){
-            userdata.parts.push(ecu)
-          }
-          if(spoiler !== "no spoiler"){
-            userdata.parts.push(spoiler)
-          }
-          if(springs !== "stock springs"){
-            userdata.parts.push(springs)
-          }
-          if(engine !== ogcar.Engine){
-            userdata.parts.push(engine)
-          }
-          if(weightreduction !== "no weight"){
-            userdata.parts.push(weightreduction)
-          }
-
-          console.log(ogcar)
-
-          await User.findOneAndUpdate(
-            {
-              id: interaction.user.id,
-            },
-            {
-              $set: {
-                "cars.$[car].Speed": ogcar.Speed,
-                "cars.$[car].Acceleration": ogcar["0-60"],
-                "cars.$[car].Handling": ogcar.Handling,
-                "cars.$[car].WeightStat": ogcar.Weight,
-                "cars.$[car].exhaust": null,
-                "cars.$[car].turbo": null,
-                "cars.$[car].intake": null,
-                "cars.$[car].engine": null,
-                "cars.$[car].tires": null,
-                "cars.$[car].suspension": null,
-                "cars.$[car].gearbox": null,
-                "cars.$[car].clutch": null,
-                "cars.$[car].intercooler": null,
-                "cars.$[car].ecu": null,
-                "cars.$[car].spoiler": null,
-                "cars.$[car].weight": null,
-                "cars.$[car].springs": null,
-              },
-            },
-      
-            {
-              arrayFilters: [
-                {
-                  "car.Name": carindb[0].Name,
-                },
-              ],
-            }
-          );
-
-          userdata.save()
-          collector.stop()
-        }
+     
       })
 
-    } 
+     
+    } else if(currencies[item.toLowerCase()]){
+      let currency = currencies[item.toLowerCase()]
+      let embed = new Discord.EmbedBuilder()
+      .setTitle(`Stats for ${currency.Emote} ${currency.Name}`)
+      .setDescription(`${currency.Use}`)
+      .setColor(colors.blue)
+
+      await interaction.editReply({embeds: [embed]})
+    }
   },
 };

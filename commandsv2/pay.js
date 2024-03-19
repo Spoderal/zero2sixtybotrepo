@@ -29,7 +29,9 @@ module.exports = {
           { name: "Exotic Keys", value: "ekeys" },
           { name: "Barn Maps", value: "barnmaps" },
           { name: "Wheel spins", value: "wheelspins" },
-          { name: "Super wheel spins", value: "swheelspins" }
+          { name: "Super wheel spins", value: "swheelspins" },
+          {name: "PVP Tokens", value: "pvptokens"},
+          {name: "Gold", value: "gold"}
         )
         .setRequired(true)
     ),

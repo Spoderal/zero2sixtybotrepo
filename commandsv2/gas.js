@@ -7,6 +7,7 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const Global = require("../schema/global-schema");
 const { toCurrency } = require("../common/utils");
 const { isNaN } = require("lodash");
+const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -114,7 +115,7 @@ module.exports = {
           `You need ${toCurrency(finalprice)} to fill ${gallons} gallons`
         );
 
-        if(usergas == null || !usergas || isNaN(usergas)){
+        if(usergas == null || !usergas || isNaN(usergas) || maxgas == 0){
           console.log("true")
           await User.findOneAndUpdate(
             {
@@ -175,7 +176,7 @@ module.exports = {
       userdata.save();
 
       interaction.reply(
-        `Filled up your ${selected[0].Name} for ${toCurrency(finalprice)}`
+        `${emotes.gas} Filled up your ${selected[0].Name} for ${toCurrency(finalprice)}`
       );
     }
   },

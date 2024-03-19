@@ -28,6 +28,9 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    try {
+
+    
     if (
       interaction.user.id !== "937967206652837928" &&
       interaction.user.id !== "890390158241853470" &&
@@ -72,5 +75,9 @@ module.exports = {
         }
       }
     }
+  }
+  catch(err){
+    return console.log(err)
+  }
   },
 };

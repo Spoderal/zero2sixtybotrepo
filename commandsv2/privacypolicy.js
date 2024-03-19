@@ -30,6 +30,7 @@ module.exports = {
         Questions
         
         If you have any questions, please contact us via email at zero2sixtybot@gmail.com
+        
         How to remove your data
         
         If you would like us to remove your data, please contact us via email at zero2sixtybot@gmail.com

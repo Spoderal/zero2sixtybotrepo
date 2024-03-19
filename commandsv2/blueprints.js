@@ -16,7 +16,6 @@ const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
 const ms = require("ms");
 const Cooldowns = require("../schema/cooldowns");
-const outfits = require("../data/characters.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -31,6 +30,9 @@ module.exports = {
         { name: "F1 Blueprint", value: "f1blueprint" }, )
     ),
   async execute(interaction) {
+    try {
+
+    
     let blueprints = require("../data/imports.json").blueprints;
     let type = interaction.options.getString("blueprint_type");
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -354,11 +356,10 @@ module.exports = {
                 Speed: carindb.Speed,
                 Acceleration: carindb["0-60"],
                 Handling: carindb.Handling,
-                Parts: [],
+                WeightStat: carindb.Weight,
                 Emote: carindb.Emote,
                 Livery: carindb.Image,
                 Miles: 0,
-                WeightStat: carindb.Weight,
                 Gas: 10,
                 MaxGas: 10,
               };
@@ -404,11 +405,11 @@ module.exports = {
 
       let boughtindb = blueprints;
 
-      if (userdata.f1blueprint < 5)
+      if (userdata.f1blueprint < 2)
         return interaction.reply(
-          `You don't have enough F1 Blueprints! You need 5`
+          `You don't have enough F1 Blueprints! You need 2`
         );
-      userdata.f1blueprint -= 5;
+      userdata.f1blueprint -= 2;
       let embed = new EmbedBuilder()
         .setTitle(`Revealing blueprint...`)
         .setColor(`#60b0f4`);
@@ -589,12 +590,12 @@ module.exports = {
                 Speed: carindb.Speed,
                 Acceleration: carindb["0-60"],
                 Handling: carindb.Handling,
-                Parts: [],
+                WeightStat: carindb.Weight,
                 Emote: carindb.Emote,
                 Livery: carindb.Image,
                 Miles: 0,
-                Gas: 0,
-                MaxGas: 0,
+                Gas: 10,
+                MaxGas: 10,
               };
 
               userdata.cars.push(carobj);
@@ -640,8 +641,8 @@ module.exports = {
                 Emote: carindb.Emote,
                 Livery: carindb.Image,
                 Miles: 0,
-                Gas: 0,
-                MaxGas: 0,
+                Gas: 10,
+                MaxGas: 10,
               };
 
               userdata.cars.push(carobj);
@@ -687,8 +688,8 @@ module.exports = {
                 Emote: carindb.Emote,
                 Livery: carindb.Image,
                 Miles: 0,
-                Gas: 0,
-                MaxGas: 0,
+                Gas: 10,
+                MaxGas: 10,
               };
 
               userdata.cars.push(carobj);
@@ -729,5 +730,9 @@ module.exports = {
 
       }, 5000);
     }
+  }
+  catch(err){
+    return console.log(err)
+  }
   },
 };

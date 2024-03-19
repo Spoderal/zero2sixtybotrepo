@@ -1,3 +1,4 @@
+// Shards the bot
 const { ShardingManager } = require("discord.js");
 
 require("dotenv").config();

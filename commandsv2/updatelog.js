@@ -1,12 +1,11 @@
 const {
   ActionRowBuilder,
   EmbedBuilder,
-  SelectMenuBuilder,
+  StringSelectMenuBuilder,
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
-const cardb = require("../data/cardb.json");
-const itemdb = require("../data/items.json");
+const cardb = require("../data/cardb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -14,12 +13,12 @@ module.exports = {
     .setDescription("Check the update log"),
   async execute(interaction) {
     const row2 = new ActionRowBuilder().addComponents(
-      new SelectMenuBuilder()
+      new StringSelectMenuBuilder()
         .setCustomId("select")
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "1/15/2023",
+            label: "3/8/2024",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -27,11 +26,25 @@ module.exports = {
           },
         
           {
-            label: "1/28/2024",
+            label: "3/19/2024",
             description: "Information for the recent update!",
             value: "2_update",
-            customId: "up5",
+            customId: "up4",
             emoji: "⬆️",
+          },
+          {
+            label: "3/1/2024",
+            description: "Information for the recent season update!",
+            value: "1_update",
+            customId: "up1",
+            emoji: "⬆️",
+          },
+          {
+            label: "Roadmap",
+            description: "Information for the 2024 roadmap!",
+            value: "roadmap",
+            customId: "roadmap",
+            emoji: "🛣️",
           },
         ])
     );
@@ -42,8 +55,10 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch 1/15/2023\n
-            ⬆️ New Update 1/28/2024
+            ⚙️ Latest Patch *3/8/2024*\n
+            ⬆️ New Update *3/19/2024*\n
+            <:season4_icon:1211169992213794827> Season 4 *3/1/2024*\n
+            🛣️ Roadmap
         `);
 
     embed.setColor(colors.blue);
@@ -66,38 +81,28 @@ module.exports = {
   if (value === "2_update") {
     embed.data.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Update 1/28/2024`);
+            embed.setTitle(`Update 3/19/2024`);
             embed
               .addFields(
                 {
                   name: "Features ⭐",
-                  value: `• Bug fixes\n
-                  • New revamped Z Pass on the [patreon](https://www.patreon.com/zero2sixtybot) \`/zpass\`\n
-                  • You can now list currencies like barn maps and wheelspins on the market\n
-                  • Gold can be exchanged for T5 parts with T5 Vouchers\n
-                  • Gold can be exchanged for series tickets\n
-                  • New series: Italian Heritage\n
-                  • New command /itemlist displays all items in the game\n
-                  • Races are now harder depending on your prestige\n
-                  • New prestige leaderstats design\n
-                  • New parts, gas tanks! Obtain them from wheelspins and blueprints!\n
-                  • New crew season <:crew_season4:1200642745002373201>\n
-                  • F1 has returned with a PERMANENT new blueprint to obtain F1 cars!\n
-                  • New event: City carvers!\n`,
-                  inline: true,
-                },
-                {
-                  name: "Items 🪛",
-                  value: `<:item_headphones:1198182631968346112> Headphones - With this in your inventory the radio item will give 4x earnings instead of 2x\n
-                  <:item_record:1198183499019067412> Record - With this item in your inventory you boost your race rank earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS*\n
-                  <:item_comet:1200941172114341969> Comet - Found while doing the astroaut job\n
-                  <:item_moon:1200941169752948826> Moon - Found while doing the astronaut job\n
-                  <:item_cheese:1200941173712375889> Cheese - With this in your inventory, you can prestige TWICE while only needing the ranks for 1 prestige`,
+                  value: `
+                  - Car shows! Create one with \`/carshow create\` and join one with \`/carshow join\`\n
+                  - Garage parts now display similar to cars\n
+                  - Class X makes a return! Obtain xessence for a certain car by racing with it, and use \`/prestige car\` to make it X Class! **you need to be prestige 2 to prestige cars to X Class**\n
+                  - Prestiging no longe resets your cash\n
+                  - Surfaces, and tire overhaul, see /tires for more info\n
+                  - Referral system added, refer a friend to get rewards\n
+                  - Easter event! /events\n
+                  - You can now open multiple crates at once\n
+                  - New cars\n
+                  `,
                   inline: true,
                 }
+            
               )
-              .setFooter({ text: "1/28/2024" })
-              .setThumbnail(`https://i.ibb.co/xH4L53M/Icon-01.jpg`)
+              .setFooter({ text: "3/19/2024" })
+              .setThumbnail(`https://i.ibb.co/5WBX33k/icons8-upgrade-144.png`)
               .setColor(colors.blue);
 
             await interaction.editReply({
@@ -108,39 +113,144 @@ module.exports = {
             embed.data.fields = [];
             embed.setDescription("\u200b");
             embed.setTitle(`Latest Patch`);
-            embed
-              .addFields(
-                {
-                  name: "Features ⭐",
-                  value: `Vault for your extra cars! Try \`/vault\`\n
-                  User market returns! Market your items for other users to purchase\n
-                  Improved parts list so it shows what parts are missing\n
-                  Improved information for restoring barn finds\n
-                  Junkyard returns!\n
-                  Improved tutorial\n
-                  New event: Swan Song, see \`/events\`\n
-                  Fixed EV engine swapping\n
-                  Garage usability improved by removing the parking lot image\n
-                  New item: reverse card
-                  `,
-                  inline: true,
-                },
-                {
-                  name: "Cars 🚗",
-                  value: `
-                ${cardb.Cars["2020 porsche 718 cayman gt4"].Emote} ${cardb.Cars["2020 porsche 718 cayman gt4"].Name} -> Added to Super wheelspin\n
-                ${cardb.Cars["2022 porsche 911 gt3"].Emote} ${cardb.Cars["2022 porsche 911 gt3"].Name} -> Added to Super wheelspin\n
-                ${cardb.Cars["2019 subaru brz"].Emote} ${cardb.Cars["2019 subaru brz"].Name} -> Added to Wheelspin\n
-                ${cardb.Cars["1994 mitsubishi 3000gt vr4"].Emote} ${cardb.Cars["1994 mitsubishi 3000gt vr4"].Name} -> Added to Wheelspin\n
-                ${cardb.Cars["2010 chevy camaro v6"].Emote} ${cardb.Cars["2010 chevy camaro v6"].Name} -> Added to Wheelspin\n
-
-
+            embed.addFields(
+              {
+                name: "Features ⭐",
+                value: `
+                * Added buttons to purchase cars in the dealership\n
+                * Added double xp/double cash weekend\n
+                * Added tutorial for seasons\n
+                * Added custom crew icons **/custom-icon**\n
+                * Added task details for tutorials depending on what stage you're on if you forget what to do\n
+                * Type takeover returns! Part 2... See how the story progresses in \`/event\`!\n
+                * Updated livery submissions to require image in command options instead of sending the image after sending the command\n
+                * Suggest command added\n
+                * Legendary crates added\n
+                * Moved filter by favorites to a select menu in the garage\n
+                * Moved unobtainable cars to new methods of obtaining\n
+                * Moved owner commands to a separate bot\n
+                * Increased base daily reward to $5K\n
                 `,
-                  inline: true,
-                }
+                inline: true,
+              },
+         
+              {
+                name: "Cars 🚗",
+                value: `
+                ${cardb.Cars["2021 porsche 911 turbo"].Emote} 2021 Porsche 911 Turbo -> PVP Shop\n
+                ${cardb.Cars["2024 ford mustang dark horse"].Emote} 2024 Ford Mustang Dark Horse -> PVP Shop\n
+                ${cardb.Cars["2023 bentley bentayga"].Emote} 2023 Bentley Bentayga -> Super Wheelspin\n
+                ${cardb.Cars["1992 bugatti eb110"].Emote} 1992 Bugatti EB110 -> Exotic Imports\n
+                ${cardb.Cars["2008 acura tl"].Emote} 2008 Acura TL -> $12K in dealership\n
+                ${cardb.Cars["2010 noble m600"].Emote} 2010 Noble M600 -> Blueprints\n
+                ${cardb.Cars["2012 honda accord"].Emote} 2012 Honda Accord -> Blueprints\n
+                ${cardb.Cars["1997 honda civic del sol"].Emote} 1997 Honda Civic Del Sol -> Common Imports\n
+                ${cardb.Cars["1987 ford mustang gt"].Emote} 1987 Ford Mustang GT -> Common Garage\n
+                ${cardb.Cars["2023 rolls royce ghost"].Emote} 2023 Rolls Royce Ghost -> Super Wheelspin\n
+                ${cardb.Cars["1989 toyota corolla"].Emote} 1989 Toyota Corolla -> Common Imports\n
+                `,
+                inline: true
+              },
+              {
+                name: "Bug Fixes 🐞",
+                value: `
+                * Fixed undefined appearing in crates\n
+                * Fixed tutorial command saying you're already in a tutorial after completing one\n
+                * Fixed motorcycle races\n
+                `,
+                inline: true,
+              },
+              
+
               )
-              .setFooter({ text: "1/15/2023" })
-              .setThumbnail(`https://i.ibb.co/XXnHjYQ/newlogo2.png`)
+              .setFooter({ text: "3/8/2024" })
+              .setThumbnail("https://i.ibb.co/5WBX33k/icons8-upgrade-144.png")
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+          else if (value === "1_update") {
+            embed.data.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`Latest Patch`);
+            embed
+            .addFields(
+              {
+                name: "Features ⭐",
+                value: `
+                * New Season\n
+                * New event: McLaren Event\n
+                * New pictures for all McLarens\n
+                * New season look, premium season pass, and season visuals\n
+                * Offroad racing\n
+                * Cocktail usage changed\n
+                * Removed robbing and heists as it was hardly used, and doesn't fit the bots theme\n
+                * Removed jobs as it was hardly used, and doesn't fit the bots theme\n
+                * Removed pets as it was hardly used, and doesn't fit the bots theme\n
+                * Moved /parts to /dealer parts\n
+                * You can now obtain the original engine when engine swapping\n
+                * Brand new longer and more in depth tutorial to help new users\n
+                * Drift overhaul, drift crates are permanent\n
+                * Collection command to view all the cars you've collected so far\n
+                `,
+                inline: true,
+              },
+              
+
+              )
+              .setFooter({ text: "3/1/2024" })
+              .setThumbnail("https://i.ibb.co/5WBX33k/icons8-upgrade-144.png")
+              .setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          } 
+          else if (value === "roadmap") {
+            embed.data.fields = [];
+            embed.setDescription("\u200b");
+            embed.setTitle(`2024 Roadmap First Half`);
+            embed
+            .addFields(
+              {
+                name: "First Quarter",
+                value: `
+                * New Season\n
+                * New event: McLaren Event\n
+                * New pictures for all cars\n
+                * New uses for gold\n
+                * New race types\n
+                * Tire overhaul\n
+                * Track surfaces\n
+                * Weather overhaul\n
+                * New tasks\n
+                * Server tournaments
+                `,
+                inline: true,
+              },
+              {
+                name: "Second Quarter",
+                value: `
+                * New Season\n
+                * Event: World Championship returns\n
+                * Event: Type Takeover returns\n
+                * Balancing\n
+                * New drift squads\n
+                * More leaderboards\n
+                * More ways to compete with other players\n
+                * New engines\n
+                * Class changes with upgrades\n
+                * Tuning
+                `,
+                inline: true,
+              },
+
+              )
+              .setThumbnail("https://i.ibb.co/5WBX33k/icons8-upgrade-144.png")
               .setColor(colors.blue);
 
             await interaction.editReply({

@@ -10,8 +10,6 @@ const achievementsdb = require("../data/achievements.json");
 const { toCurrency } = require("../common/utils");
 const lodash = require("lodash");
 const itemdb = require("../data/items.json");
-const cardb = require("../data/cardb.json");
-const { emotes } = require("../common/emotes");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,22 +22,24 @@ module.exports = {
         .addChoices(
           { name: "Tires", value: "tires" },
           { name: "Slicks", value: "slicks" },
+          {name: "Offroad Tires", value: "offroadtires"},
           { name: "Exhaust", value: "exhaust" },
           { name: "Intake", value: "intake" },
           { name: "Clutch", value: "clutch" },
           { name: "ECU", value: "ecu" },
           { name: "Turbo", value: "turbo" },
           { name: "Drift Suspension", value: "dsuspension" },
+          { name: "Suspension", value: "suspension" },
           { name: "Intercooler", value: "intercooler" },
           { name: "Gearbox", value: "gearbox" },
           { name: "Spoiler", value: "spoiler" },
           { name: "Brakes", value: "brakes" },
-          { name: "Bodykit", value: "bodykit" },
           { name: "Weight Reduction", value: "weightreduction" },
           { name: "Weight", value: "weight" },
           { name: "Gas Tank", value: "gastank" },
           { name: "Fruit Punch", value: "fruit punch" },
-          {name: "Epic Rocket Engine", value: "epic rocket engine"}
+          {name: "Offroad Tires", value: "offroadtires"},
+          {name: "Crankshaft", value: "crankshaft"},  
         )
         .setRequired(true)
     ),

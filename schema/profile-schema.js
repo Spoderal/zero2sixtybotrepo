@@ -98,10 +98,19 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
+  carcollection: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   vault: {
     type: Array,
     required: false,
     default: [],
+  },
+  vaultuse: {
+    type: String,
+    required: false
   },
   houses: {
     type: Array,
@@ -113,11 +122,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [],
   },
-  rp3: {
-    type: Number,
-    required: false,
-    default: 0,
-  },
+
   candy: {
     type: Number,
     required: false,
@@ -133,10 +138,10 @@ const Profile = new mongoose.Schema({
     required: false,
     default: [
       { name: "flame house", car: 0 },
-      { name: "x squad", car: 0 },
+      { name: "the astros", car: 0 },
       { name: "muscle brains", car: 0 },
       { name: "cool cobras", car: 0 },
-      { name: "the ws", car: 0 },
+      { name: "demonz", car: 0 },
       { name: "double 0", car: 0 },
     ],
   },
@@ -197,6 +202,16 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 1,
   },
+  skill:{
+    type: Number,
+    required: false,
+    default: 1,
+  },
+  xp:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
   racexp: {
     type: Number,
     required: false,
@@ -231,10 +246,7 @@ const Profile = new mongoose.Schema({
     type: Object,
     required: false,
   },
-  pet: {
-    type: Object,
-    required: false,
-  },
+
   badges: {
     type: Array,
     required: false,
@@ -245,6 +257,7 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 0,
   },
+
   helmet: {
     type: String,
     required: false,
@@ -571,6 +584,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 1,
   },
+  seasonclaim: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   rp: {
     type: Number,
     required: false,
@@ -662,6 +680,11 @@ const Profile = new mongoose.Schema({
     required: false,
     default: {},
   },
+  zpasstimer:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
   autogas: {
     type: Boolean,
     required: false,
@@ -673,6 +696,11 @@ const Profile = new mongoose.Schema({
     default: 0,
   },
   typespeed: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  typespeed2:{
     type: Number,
     required: false,
     default: 0,
@@ -777,11 +805,42 @@ const Profile = new mongoose.Schema({
     required: false,
     default: false,
   },
-  carver: {
+  trackkeys: {
     type: Number,
     required: false,
     default: 0,
   },
+  pvptokens: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  driftKeys:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  mKeys:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  zkeys:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  eggs:{
+    type: Array,
+    required: false,
+    default: [],
+  },
+  xess:{
+    type: Number,
+    required: false,
+    default: 0,
+  }
+  
 });
 
 module.exports = mongoose.model("profile", Profile);

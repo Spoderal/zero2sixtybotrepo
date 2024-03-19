@@ -1,4 +1,4 @@
-// const db = require("quick.db");
+// Starts the bot and sets up the commands and events
 const fs = require("fs");
 require("dotenv").config();
 const express = require("express");
@@ -13,6 +13,7 @@ const client = new Client({
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMembers,
+    
     GatewayIntentBits.GuildMessageReactions,
   ],
   shards: "auto",
@@ -68,5 +69,5 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
     }
   }
 
-  client.login(process.env.TOKEN);
+  client.login();
 }

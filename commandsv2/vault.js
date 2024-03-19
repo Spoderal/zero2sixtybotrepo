@@ -152,7 +152,7 @@ module.exports = {
         let newlength = carl + 1
         let cartoremove = interaction.options.getString("car")
 
-        console.log(newlength)
+
         
         if(garageL < newlength) return interaction.reply(`You don't have enough garage space!`) 
         let filt = uservault.filter((car) => car.Name.toLowerCase() == cartoremove.toLowerCase())
@@ -160,7 +160,7 @@ module.exports = {
         if(!filt[0]) return await interaction.reply("You don't have this car! Try using the cars full name")
 
         for (var b = 0; b < uservault.length; b++){
-            console.log(uservault[b])
+
             if (uservault[b].Name.toLowerCase() === cartoremove.toLowerCase()) {
                 uservault.splice(b, 1);
               break;
@@ -176,21 +176,20 @@ module.exports = {
     }
 
     else if(command == "add"){
-        let garageL = userdata.garageLimit
-        let uservault = userdata.vault
+   
+        
         let usercars = userdata.cars
-        let carl = userdata.cars.length
-        let newlength = carl + 1
+
+ 
         let cartoremove = interaction.options.getString("car")
 
-        console.log(newlength)
         
         let filt = usercars.filter((car) => car.Name.toLowerCase() == cartoremove.toLowerCase())
 
         if(!filt[0]) return await interaction.reply("You don't have this car! Try using the cars full name")
         console.log(filt)
         for (var c = 0; c < usercars.length; c++){
-            console.log(usercars[c])
+  
             if (usercars[c].Name.toLowerCase() === cartoremove.toLowerCase()) {
                 usercars.splice(c, 1);
               break;
@@ -210,7 +209,7 @@ module.exports = {
         let final = 0
         
         for (let d in uservault){
-            console.log(uservault[d])
+
             let price = cardb.Cars[uservault[d].Name.toLowerCase()].Price
             if (price == 0 || !price) {
                 if(cardb.Cars[uservault[d].Name.toLowerCase()].Price == 0 && cardb.Cars[uservault[d].Name.toLowerCase()].sellprice > 0){
@@ -220,9 +219,7 @@ module.exports = {
                     price = cardb.Cars[uservault[d].Name.toLowerCase()].Price * 0.75;
                 }
               }
-              console.log(price)
          final += price
-          console.log(final)
         }
 
 

@@ -139,7 +139,7 @@
         "japan":{
             "Name":"Japan",
             "Image":"https://i.ibb.co/tJVjs11/map-japan-filled.png",
-            "Events":["NPC Race", "NPC Job", "NPC Job","NPC Race", "Nothing", "Nothing", "Fine", "Speedometer", "Market"],
+            "Events":[ "NPC Job", "NPC Job","NPC Race", "Nothing", "Nothing", "Fine", "Speedometer", "Market"],
             "NoEvents":["You found some noodles, don't play with your food", "You're driving and its a normal day"],
             "Services":["Gas Station", "Part"],
             "Jobs":[
@@ -172,6 +172,11 @@
                     "Emote":"<:subaru:931011550418976808>"
                 },
                 {
+                    "Name":"2018 Honda NC750X",
+                    "Price":30000,
+                    "Emote":"<:honda:931011549705957397>"
+                },
+                {
                     "Name":"2020 Hyundai Veloster N ETCR",
                     "Price":35000,
                     "Emote":"<:hyundai:931015215447941200>"
@@ -181,6 +186,7 @@
                     "Price":15000000,
                     "Emote":"<:mazda:931011549680779364>"
                 }
+    
             ],
             "ForSale":[],
             "Racers":["Han", "Aoi", "Emi", "Hana"]
@@ -231,7 +237,7 @@
            
 
             ],
-            "Racers":["George", "John", "Alex", "Matt"]
+            "Racers":["George", "John", "Alex", "Matt", "Tow Mater"]
         },
         "germany":{
             "Name":"Germany",
@@ -255,7 +261,7 @@
                 }
 
             ],
-            "Events":["Market"],
+            "Events":["Service", "Service",  "NPC Race", "Market", "NPC Job", "NPC Job", "NPC Job","NPC Race", "Nothing", "Fine", "Speedometer"],
             "NoEvents":["You're driving in the rain and its just a normal day", "You see a beer! You do NOT drink it because you're driving"],
             "Perks":"2x cash when racing in track races",
             "BlackMarket":[
@@ -336,6 +342,51 @@
 
             ],
             "Racers":["Noah", "Ivy", "Arthur", "Amelia"]
+        },
+        "australia":{
+            "Name":"Australia",
+            "Image":"https://i.ibb.co/GWSFsGH/map-australia-filled.png",
+            "Events":[ "NPC Race"],
+            "NoEvents":["You found a roo, mate!", "You're driving and its a normal day"],
+            "Services":["Gas Station"],
+            "Jobs":[
+                {
+                    "Name":"Joe",
+                    "Job":"My car fluid has just vanished! Can you refill my coolant for me?",
+                    "Reward":450,
+                    "Chance":40,
+                    "Image":"https://i.ibb.co/TT5wymy/image.png"
+                },
+                {
+                    "Name":"Johnathan",
+                    "Job":"My cars tire has just popped! Can you replace my tire?",
+                    "Reward":180,
+                    "Chance":60,
+                    "Image":"https://i.ibb.co/fDdZCZv/image.png"
+                }
+            ],
+            "Perks":"No perks",
+            "BlackMarket":[
+                {
+                    "Name":"2016 Ford Falcon XR6 Sprint",
+                    "Price":28000,
+                    "Emote":"<:brand_ford:1192958185863118889>"
+                },
+                {
+                    "Name":"1977 HSV Torana A9X",
+                    "Price":27000,
+                    "Emote":"<:hsv:964231712357879818>"
+                },
+                {
+                    "Name":"1988 HSV Commodore SS Group A SV",
+                    "Price":30000,
+                    "Emote":"<:hsv:964231712357879818>"
+                }
+           
+    
+            ],
+            "ForSale":[],
+            "Racers":["Joe", "Johnathan", "Josie", "Jeorge"]
         }
     },
     "NPCs":[
@@ -526,6 +577,23 @@
             "Prompt":"Hey buster, wanna race for $2.5k?",
             "Win":"Thats American muscle for you! Give me that $2.5k!",
             "Lost":"Guess American muscle aint as good as they say, here..."
+        },
+        {
+            "Name" :"Tow Mater",
+            "Car":{
+                "Name":"Tow Truck",
+                "Image":"https://i.ibb.co/F7v4CGc/image.png",
+                "Speed":1000,
+                "Acceleration":2.3,
+                "Handling":5000,
+                "Weight":2000,
+                "Logo":"<:ford:931012624152399902>"
+            },
+            "Location":"USA",
+            "Reward":10000,
+            "Prompt":"HEY FELLER, ITS ME TOW MATER WITHOUT THE TUH, HOW BOUT WE RACE FOR $10K",
+            "Win":"WOOOOOWEEEE I WAS DRIVING BACKWARDS $10K!",
+            "Lost":"Guess I should stick to towing... :("
         },
         {
             "Name":"Matt",
@@ -882,6 +950,74 @@
             "Reward":5000,
             "Prompt":"Wanna race my cool car for $5,000?",
             "Win":"How did I even win!? Oh well, give me $5,000 :D",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Joe",
+            "Car":{
+                "Name":"2012 Jaguar XKRS",
+                "Image":"https://i.ibb.co/grr9JrY/New-Project-15.png",
+                "Speed":550,
+                "Acceleration":5.2,
+                "Handling":600,
+                "Weight":3770,
+                "Logo":"<:jaguar:931011547826913330>"
+            },
+            "Location":"Australia",
+            "Reward":5000,
+            "Prompt":"Ay mate wanna race my cool car for $5,000?",
+            "Win":"How did I even win!? Oh well, give me $5,000 :D",
+            "Lost":"Yep, I figured you'd win."
+        },
+        {
+            "Name":"Johnathan",
+            "Car":{
+                "Name":"1989 Toyota Corolla",
+                "Image":"https://i.ibb.co/qrZ5wJJ/corolla3.png",
+                "Speed":90,
+                "Acceleration":6.6,
+                "Handling":875,
+                "Weight":2646,
+                "Logo":"<:mclaren:931011546354692137>"
+            },
+            "Location":"Australia",
+            "Reward":1000,
+            "Prompt":"Wanna race me for $1,000?",
+            "Win":"YESSSSSSSSSSS",
+            "Lost":"NOOOOOOOO."
+        },
+        {
+            "Name":"Josie",
+            "Car":{
+                "Name":"2017 Rolls Royce Wraith",
+                "Image":"https://i.ibb.co/3p0CsQw/wraith.png",
+                "Speed":624,
+                "Acceleration":4.4,
+                "Handling":765,
+                "Weight":5300,
+                "Logo":"<:logo_rollsroyce:1186905226091970600>"
+            },
+            "Location":"Australia",
+            "Reward":2000,
+            "Prompt":"Wanna race my cool car for $2,000?",
+            "Win":"Hehe thanks for the money",
+            "Lost":"Haha! Wait I lost?"
+        },
+        {
+            "Name":"Jeorge",
+            "Car":{
+                "Name":"2023 Audi RS6 Performance",
+                "Image":"https://i.ibb.co/qYKgv7d/IMG-0766.jpg",
+                "Speed":621,
+                "Acceleration":3.4,
+                "Handling":800,
+                "Weight":4600,
+                "Logo":"<:audi:931011548758048828>"
+            },
+            "Location":"Australia",
+            "Reward":3500,
+            "Prompt":"Wanna race my cool car for $3,500?",
+            "Win":"How did I even win!? Oh well, give me $3,500 :D",
             "Lost":"Yep, I figured you'd win."
         }
     ]

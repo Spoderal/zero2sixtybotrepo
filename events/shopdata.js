@@ -12,14 +12,14 @@ async function itemshop() {
 
   let global;
   try {
-    global = await Global.findOne({});
+    global = await Global.findOne({}) || new Global({})
   } catch (err) {
     console.log(err);
   }
 
   let daily = global.itemshopcooldown
 
-  let timeout = 604800000
+  let timeout = 86400000
 
   if (daily !== null && timeout - (Date.now() - daily) > 0) {
     

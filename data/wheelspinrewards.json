@@ -9,7 +9,10 @@
     "1994 mitsubishi 3000gt vr4",
     "2010 chevy camaro v6",
     "2005 honda s2000",
-    "1990 bmw 850i"
+    "1990 bmw 850i",
+    "2022 genesis gv70",
+    "2004 bmw m3",
+    "1959 cadillac series 62"
   ],
   "Items": ["lockpick"],
   "Parts": [
@@ -43,6 +46,7 @@
     "t3tires",
     "t4tires",
     "t1weight",
+    "t4allterraintires",
     "t1weight",
     "t1weight",
     "t1weight",

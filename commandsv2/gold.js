@@ -9,7 +9,7 @@ module.exports = {
   async execute(interaction) {
 
     let embed = new Discord.EmbedBuilder()
-      .setTitle("Gold Pricing")
+      .setTitle("Gold")
       .setDescription(`Buy gold [here!](https://zero2sixty-store.tebex.io/)`)
       .addFields([
         {
@@ -21,9 +21,17 @@ module.exports = {
             Exotic keys: gold * 0.5\n
             Cash: gold * 10000\n
             Barn maps: gold * 1\n
-            Super wheel spins: gold * 0.05
+            Super wheel spins: gold * 0.05\n
+            T5 Part vouchers: gold * 0.5\n
+            Garage Space: 1 per 10 gold\n
           `,
         },
+        {
+          name: `Features`,
+          value: `
+            - Exclusive Car Packs in /dealer
+          `,
+        }
       ]);
 
     embed

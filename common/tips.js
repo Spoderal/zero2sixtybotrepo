@@ -9,10 +9,11 @@ function tipGetRandom() {
     "Notoriety is used for seasons, check the current season with /season **Turn off tips in /settings**",
     "Use keys to purchase import crates with exclusive cars **Turn off tips in /settings**",
     "View events with /events **Turn off tips in /settings**",
-    "View the blackmarket with /blackmarket for exclusive cars and parts **Turn off tips in /settings**",
-    "Find character outfits in wheelspin!",
-    "Check out your profile and progress with /profile",
-    "Restore old cars with /restore, find old cars with /barn when you receive maps!",
+    "Find character outfits in wheelspin! **Turn off tips in /settings**",
+    "Check out gold with /gold to support us! **Turn off tips in /settings**",
+    "Check out your profile and progress with /profile **Turn off tips in /settings**",
+    "Restore old cars with /restore, find old cars with /barn when you receive maps! **Turn off tips in /settings**",
+    "Voting helps us a lot! Use /vote to vote for us to get a vote crate AND refill all of your cars! **Turn off tips in /settings**",
   ]);
 }
 

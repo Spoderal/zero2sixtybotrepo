@@ -24,7 +24,24 @@ module.exports = {
             .setDescription("The car you want to submit a livery for")
             .setRequired(true)
         )
+        .addAttachmentOption((option) =>
+        option
+          .setName("livery")
+          .setDescription("The livery image you want to submit")
+          .setRequired(true)
+      )
     )
+    .addSubcommand((cmd) =>
+    cmd
+      .setName("reset")
+      .setDescription("Set your cars image back to stock")
+      .addStringOption((option) =>
+        option
+          .setName("car")
+          .setDescription("The car you want to reset the livery for")
+          .setRequired(true)
+      )
+  )
     .addSubcommand((cmd) =>
       cmd
         .setName("view")
@@ -127,12 +144,8 @@ module.exports = {
 
       if (userdata.cash < 500)
         return interaction.reply("You need $500 to install liveries!");
-      let starrating = selected.Star || 0;
-      let addstar = 1;
-      if (!selected.HasLivery) {
-        addstar = 0;
-      }
-      let newstar = (starrating += addstar);
+
+
       await User.findOneAndUpdate(
         {
           id: uid,
@@ -140,7 +153,6 @@ module.exports = {
         {
           $set: {
             "cars.$[car].Image": filtered[0].image,
-            "cars.$[car].Rating": newstar,
             "cars.$[car].HasLivery": true,
           },
         },
@@ -197,37 +209,24 @@ module.exports = {
       let global = await Global.findOne();
       let liverieslist = global.liveries;
       let cartosubmit = interaction.options.getString("car");
-      if (!cartosubmit)
-        return await interaction.reply("Usage: /livery submit (car)");
+      let image = interaction.options.getAttachment("livery");
       let list = cars.Cars;
 
-      if (!list[cartosubmit.toLowerCase()])
-        return await interaction.reply("That isnt an available car yet!");
+      if (!list[cartosubmit.toLowerCase()])  return await interaction.reply("That isnt an available car yet!");
       let cardata =
         liverieslist.filter(
           (car) => car.Name.toLowerCase() == cartosubmit.toLowerCase()
         ) || [];
 
-      interaction.reply(
-        "Please send an image file, size 1280x720 is highly recommended"
-      );
-      const collectorFilter = (m) => m.author.id == interaction.user.id;
-      const collector2 = interaction.channel.createMessageCollector({
-        filter: collectorFilter,
-        time: 15000,
-      });
+ 
+      
 
-      collector2.on("collect", async (m) => {
-        let image = m.attachments.size > 0 ? m.attachments.first().url : null;
-
-        if (image == null)
-          return m.channel.send(
-            "Specify an image! Send submit again, and copy and paste an image, or upload an image"
-          );
+      
+         let imageurl = image.proxyURL
 
         let options = {
           apiKey: "141e8760bc34356d461607deca22eeee",
-          imageUrl: image,
+          imageUrl: imageurl,
         };
 
         let response = await imgbb(options);
@@ -259,7 +258,7 @@ module.exports = {
           interaction.client.channels.cache.get("931078225021521920");
 
         submitchannel.send({ embeds: [embed] });
-      });
+
     } else if (subcommand == "approve") {
       let whitelist = [
         "937967206652837928",
@@ -398,6 +397,51 @@ module.exports = {
             }
           });
         });
+    }
+    else if(subcommand == "reset"){
+      let idtoselect = interaction.options.getString("car");
+      let filteredcar = userdata.cars.filter(
+        (car) => car.ID == idtoselect.toLowerCase()
+      );
+      let selected = filteredcar[0] || "No ID";
+      if (selected == "No ID") {
+        let errembed = new Discord.EmbedBuilder()
+          .setTitle("Error!")
+          .setColor(colors.discordTheme.red)
+          .setDescription(
+            `That car/id isn't selected! Use \`/ids Select [id] [car to select] to select a car to your specified id!\n\n**Example: /ids Select 1 1995 mazda miata**`
+          );
+        return await interaction.reply({ embeds: [errembed] });
+      }
+      let livid = interaction.options.getString("id");
+
+    
+
+      await User.findOneAndUpdate(
+        {
+          id: uid,
+        },
+        {
+          $set: {
+            "cars.$[car].Image": selected.Image,
+            "cars.$[car].HasLivery": false,
+          },
+        },
+
+        {
+          arrayFilters: [
+            {
+              "car.Name": selected.Name,
+            },
+          ],
+        }
+      );
+      let embedapprove = new Discord.EmbedBuilder()
+        .setTitle(`Reset ${livid} Livery to stock`)
+        .setImage(selected.Image)
+        .setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embedapprove] });
     }
   },
 };

@@ -1,29 +1,27 @@
+// This event will run if the bot starts, and logs in, successfully.
+
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
-const crews = require("./crews/updateCrew");
 const lodash = require("lodash");
 require("dotenv").config();
 
 const { updateItemShop } = require("./itemshop");
-const double = require("../doublecash");
 const mongoose = require("mongoose");
 const path = require("path");
 const fs = require("fs");
 const { numberWithCommas } = require("../common/utils");
 const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
-const cars = require("./cars").carfix;
 const gold = require("../gold");
-const stats = require("./stats").stats;
 const {itemshop} = require("./shopdata");
-const { isracing } = require("./is_racing");
+const { updateCrew } = require("./crews/updateCrew");
+const { newseason } = require("./crews/newseason");
 const { season } = require("./season");
-;
+const {isWeekend} = require("../common/utils")
 
 
 let mongoConfig = {
   keepAlive: true,
-  authSource: "admin"
 };
 
 // MongoDB SSL for production only
@@ -42,15 +40,16 @@ module.exports = {
     await mongoose.connect(process.env.DATABASE_URL, mongoConfig);
 
 
-    double(client);
     gold(client);
  //   stats(client);
     itemshop(client)
+   
+ 
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
     app.use(bodyParser.json());
-
+  
     app.post("/webhooks/zero2sixtybotgold", function (request, response) {
       // Send OK so server knows we got the webhook
       response.sendStatus(200);
@@ -63,6 +62,8 @@ module.exports = {
         // var webhook = request.body;
       }
     });
+
+    
     console.log("Registered endpoint: /webhooks/zero2sixtybotgold");
 
     const webhookAuth = "ZeroSpideral3!";
@@ -72,7 +73,7 @@ module.exports = {
         "/vote",
         webhook.listener(async (vote) => {
           console.log(vote.user)
-          let users = await User.find();
+
 
           
           console.log("User with id - " + vote.user + " voted!");
@@ -97,13 +98,14 @@ module.exports = {
     });
 
     let randomstatuses = [
-      `🌨️ WINTER 🌨️  /season`,
-      `⚙️ UPDATE ⚙️ 1/28 /updates`,
+      `☀️ SPRING 🌸  /season`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
-      "🧩 FICTIONAL EVENT /events 🧩",
-      "🦢 SWAN SONG EVENT /events 🦢",
-      "⚙️ NEW PATCH ⚙️ 1/15 /updates",
+      "⚙️ NEW ROADMAP 2024 ⚙️ /updates",
+      "🪙 Gold starting as low as $0.99!🪙"
     ];
+    if(isWeekend() == true){
+      randomstatuses.push(`🎉 DOUBLE WEEKEND 🎉`)
+    }
 
     let randomstatus = lodash.sample(randomstatuses);
     client.user.setActivity(randomstatus);

@@ -18,8 +18,8 @@ module.exports = {
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
     let prestigerank = userdata.prestige;
-    let driftrank = userdata.driftrank;
-    let newprestige2 = prestigerank + 1;
+    let skill = userdata.skill;
+    let xp = userdata.xp;
     let rpbonus = 0;
     let globals = await globalSchema.findOne();
     let crews = globals.crews;
@@ -79,19 +79,32 @@ module.exports = {
     console.log(rpbonus);
     let rounded = Math.round(rpbonus * 100);
 
-    let racerank = userdata.racerank;
 
-    let required1 = newprestige2 * 20;
-    let required2 = newprestige2 * 20;
+    let required2 = skill * 100
 
+    let xpbarstart = "<:xpbar_start:1207122645208932382>"
+    let xpbarmiddle = "<:xpbar_middle:1207122643170623540>"
+    let xpbarend = "<:xpbar_end_empty:1207134135551008848>"
+
+    let xpbarstart_empty = "<:xpbar_start_empty:1207134134338588752>"
+    let xpbarmiddle_empty = "<:xpbar_middle_empty:1207134132874776596>"
+
+
+    const totalBars = 10;
+    const filledBars = Math.round((xp / required2) * totalBars);
+    const emptyBars = totalBars - filledBars;
+    let filledstart = `${xpbarstart_empty}`
+    if(filledBars > 1){
+      filledstart = `${xpbarstart}`
+    }
+    const xpBar = `${filledstart}` + `${xpbarmiddle}`.repeat(filledBars) + `${xpbarmiddle_empty}`.repeat(emptyBars) + xpbarend;
+
+    let ranks = `${emotes.prestige} **Prestige**: ${prestigerank}\n` + `${emotes.rank} Skill Rank: ${skill}\n` + `${emotes.rp} RP Bonus: ${rounded}%\n` + `${xpBar} ${xp}/${required2}`
     let embed = new Discord.EmbedBuilder()
       .setTitle(`${user.username}'s ranks`)
       .setDescription(
         `
-        ${emotes.prestige} **Prestige**: ${prestigerank}\n
-        ${emotes.race} Race Rank: ${racerank}/${required1}\n
-        ${emotes.drift} Drift Rank: ${driftrank}/${required2}\n
-        ${emotes.rp} RP Bonus: ${rounded}%\n
+        ${ranks}
         `
       )
 

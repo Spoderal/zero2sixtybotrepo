@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const partdb = require("../data/partsdb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
@@ -6,7 +6,6 @@ const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json").Cars;
-const parttiersdb = require("../data/parttiers.json");
 const { toCurrency } = require("../common/utils");
 const emotes = require("../common/emotes").emotes
 module.exports = {
@@ -66,25 +65,84 @@ module.exports = {
     let partindb = partdb.Parts[inputUpgrade.toLowerCase()]
 
     let engine = selected[0].engine || cardb[selected[0].Name.toLowerCase()].Engine
-    if(selected[0][partindb.Type] && partindb.Type !== "engine") return interaction.reply(`Your car already has a ${partindb.Type}, use /remove first!`)
-
+    if(engine == null){
+      engine = cardb[selected[0].Name.toLowerCase()].Engine
+    }
+    console.log(engine)
+    if(selected[0][partindb.Type] && partindb.Type !== "engine" && partindb.Type !== "gastank") return interaction.reply(`Your car already has a ${partindb.Type}, use /remove first!`)
+    let oldpart = selected[0][partindb.Type]
     if(engine.toLowerCase() == partindb.Name.toLowerCase()) return interaction.reply(`Your car already has this engine!`)
+    let partvalue = partindb.Price * 0.35
+    let resale = selected[0].Resale
+    let oldresale = 0
 
+
+
+    if(partvalue == 0){
+      partvalue = Number(partindb.Tier) * 5000
+    }
+    
+    let oldresalecar = selected[0].Resale
+    if(oldresalecar == 0 || !oldresalecar || oldresalecar == null || oldresalecar == undefined){
+      oldresalecar = cardb[selected[0].Name.toLowerCase()].Price * 0.75
+      resale = cardb[selected[0].Name.toLowerCase()].Price * 0.75
+      if(oldresalecar == 0){
+        resale = Number(cardb[selected[0].Name.toLowerCase()].sellprice)
+        oldresalecar = Number(cardb[selected[0].Name.toLowerCase()].sellprice)
+      }
+    }
     if(partindb.Type == "engine"){
+      if(oldpart !== undefined){
+        if(oldpart == null){
+          oldpart = cardb[selected[0].Name.toLowerCase()].Engine
+        }
+        oldresale = partdb.Parts[oldpart.toLowerCase()].Price * 0.35
+  
+        if(oldresale == 0){
+          oldresale = Number(partindb.Tier) * 5000
+        }
+      }
       let hpengine = partindb.Power
+      console.log(engine.toLowerCase())
       let oldhp = partdb.Parts[engine.toLowerCase()]
-
       let oldcarhp = selected[0].Speed
+      let oldcarweight = selected[0].WeightStat
 
+      console.log(`old value ${oldresale}`)
       selected[0].Speed -= oldhp.Power
       selected[0].Speed += hpengine
+      console.log(resale)
 
-      console.log(selected[0].Speed)
+     
+      oldresalecar -= oldresale
+      console.log(resale)
       
+      oldresalecar += partvalue
+      console.log(resale)
+      
+      console.log(`part value ${partvalue}`)
+
+      selected[0].Resale = oldresalecar
+
+      if(oldhp.Weight && oldhp.Weight > 0){
+        selected[0].WeightStat -= Number(oldhp.Weight)
+      }
+      if(oldhp.RemoveWeight && oldhp.RemoveWeight > 0){
+        selected[0].WeightStat += Number(oldhp.RemoveWeight)
+      }
+      if(partindb.Weight && partindb.Weight > 0){
+        selected[0].WeightStat += Number(partindb.Weight)
+      }
+      if(partindb.RemoveWeight && partindb.RemoveWeight > 0){
+        selected[0].WeightStat -= Number(partindb.RemoveWeight)
+      }
+
+      console.log(resale)
+
       let embed = new EmbedBuilder()
       .setTitle(`Engine swap`)
       .addFields({name: "Old Engine", value: `${oldhp.Emote} ${oldhp.Name}\n${emotes.speed} HP ${oldhp.Power}`, inline: true}, {name: "New Engine", value: `${partindb.Emote} ${partindb.Name}\n${emotes.speed} HP ${hpengine}`, inline: true})
-      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}`)
+      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}\n${emotes.weight} Weight ${oldcarweight} -> ${selected[0].WeightStat}\nValue: ${toCurrency(resale)} -> ${toCurrency(oldresalecar)}`)
       .setColor(colors.blue)
       .setImage(`${carimage}`)
       .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
@@ -113,8 +171,58 @@ module.exports = {
       let userparts = userdata.parts
       for (var i2 = 0; i2 < 1; i2++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
       userdata.parts = userparts
-      if(userdata.tutorial.started == true){
-        userdata.tutorial.started = false
+
+
+      userdata.parts.push(oldhp.Name.toLowerCase())
+
+
+
+      await userdata.save()
+  
+      return await interaction.reply({embeds: [embed]})
+    }
+
+  else if(partindb.Type == "gastank"){
+      let newgas = partindb.Gas
+      let oldgas = selected[0].gastank || "default"
+      let oldmax = selected[0].MaxGas
+      selected[0].MaxGas = newgas
+      
+      
+      let embed = new EmbedBuilder()
+      .setTitle(`GasTank swap`)
+      .setDescription(`⛽ Gas ${oldmax} -> ${selected[0].MaxGas}`)
+      .setColor(colors.blue)
+      .setImage(`${carimage}`)
+      .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
+      
+      selected[0].gastank = partindb.Name.toLowerCase() 
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": selected[0],
+          },
+        },
+  
+        {
+          arrayFilters: [
+            {
+              "car.Name": selected[0].Name,
+            },
+          ],
+        }
+      );
+
+      let userparts = userdata.parts
+      for (var i3 = 0; i3 < 1; i3++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
+      userdata.parts = userparts
+ 
+      if(oldgas !== "default"){
+        userdata.parts.push(oldgas)
 
       }
 
@@ -122,6 +230,7 @@ module.exports = {
   
       return await interaction.reply({embeds: [embed]})
     }
+    
 
     let acc = selected[0].Acceleration
     let newacc = acc -= partindb.Acceleration
@@ -133,7 +242,7 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed += Number(partindb.Power)
     }
-    if(partindb.Acceleration > 0 && selected[0].Name !== "Snowys 2018 Koenigsegg Agera"){
+    if(partindb.Acceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2 && selected[0].Class && selected[0].Class !== "X"){
     if(newacc < 2){
       selected[0].Acceleration = 2
     } 
@@ -142,7 +251,7 @@ module.exports = {
 
     }
   }
-    if(partindb.RemoveAcceleration > 0 && selected[0].Name !== "Snowys 2018 Koenigsegg Agera" && selected[0].Name !== "2023 Hennessey Venom F5 Revolution"){
+    if(partindb.RemoveAcceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2){
       selected[0].Acceleration += Number(partindb.RemoveAcceleration)
     }
     if(partindb.RemovePower > 0){
@@ -165,10 +274,16 @@ module.exports = {
       selected[0].MaxGas = partindb.Gas
     }
 
-    let partvalue = partindb.Price * 0.35
-    let resale = selected[0].Resale
+    
 
-    selected[0].Resale = resale += partvalue
+
+
+    if(partvalue == 0){
+      partvalue = Number(partindb.Tier) * 5000
+    }
+
+    selected[0].Resale = resale + partvalue
+
 
     selected[0][partindb.Type] = partindb.Name.toLowerCase()
 
@@ -193,26 +308,37 @@ module.exports = {
 
     let userparts = userdata.parts
     let tutorial = userdata.tutorial
-    for (var i3 = 0; i3 < 1; i3++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
+    for (var i4 = 0; i4 < 1; i4++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
     userdata.parts = userparts
-      if(userdata.tutorial.started == true){
-        userdata.tutorial.started = false
-
-      }
+    
     userdata.save()
     
     
     let embed = new EmbedBuilder()
     .setTitle(`Installed a ${partindb.Emote} ${partindb.Name}`)
-    .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${Math.floor(caracc * 100) / 100} -> ${Math.floor(selected[0].Acceleration * 100) / 100}`)
+    .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${Math.floor(caracc * 100) / 100} -> ${Math.floor(selected[0].Acceleration * 100) / 100}\nValue: ${toCurrency(resale)} -> ${toCurrency(resale + partvalue)}`)
     .setColor(colors.blue)
     .setImage(`${carimage}`)
     .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
 
     await interaction.reply({embeds: [embed]})
 
-    if(tutorial && tutorial.started == true){
-      await interaction.channel.send(`Awesome! Your car is even faster! You can buy more parts with \`/parts\` and make sure to use the \`/buy\` command to purchase them! To finish the tutorial, win a drag race and you'll get a barn map, then run \`/barn\``)
+    if(userdata.tutorial && userdata.tutorial.started == true && userdata.tutorial.stage == 7 && userdata.tutorial.type == "starter"){
+      let tut = userdata.tutorial
+      tut.stage += 1
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "tutorial": tut,
+          },
+        },
+  
+      );
+  
+      interaction.channel.send(`**TUTORIAL:** Your car is even faster now! Lets run \`/race\` to see how it performs! Remember to run \`/race [street race] [car id] [tier 1]\``)
     }
      
   },

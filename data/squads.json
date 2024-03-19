@@ -12,11 +12,11 @@
       ],
       "Reward": 500,
       "BigReward": 2000,
-      "Icon": "https://i.ibb.co/GTq0FM1/squad-flamehouse.png",
+      "Icon": "https://i.ibb.co/k9nw8MD/squad-flamehouse.png",
       "Name": "Flame House",
-      "Emote": "<:squad_flamehouse:1025142698807668736>"
+      "Emote": "<:squad_flamehouse:1206519055465447444>"
     },
-    "x squad": {
+    "the astros": {
       "Tier": 2,
       "Class": "C",
       "Cars": [
@@ -27,10 +27,10 @@
         "Toms 1994 Porsche 911"
       ],
       "Reward": 1000,
-      "Icon": "https://i.ibb.co/dpgdJzH/squad-xsquad.png",
+      "Icon": "https://i.ibb.co/4gxmSRH/squad-astros.png",
       "BigReward": 3500,
-      "Name": "X Squad",
-      "Emote": "<:squad_xsquad:1025142697553563649>"
+      "Name": "The Astros",
+      "Emote": "<:squad_astros:1206519054139924490>"
     },
     "muscle brains": {
       "Tier": 3,
@@ -43,10 +43,10 @@
         "Nathans 2022 Shelby Super Snake"
       ],
       "Reward": 1500,
-      "Icon": "https://i.ibb.co/DR3C0G2/squad-muscleheads.png",
+      "Icon": "https://i.ibb.co/s2rt3fH/squad-muscle.png",
       "BigReward": 5000,
       "Name": "Muscle Brains",
-      "Emote": "<:squad_muscleheads:1025581852683153428>"
+      "Emote": "<:squad_muscle:1206519052944801852>"
     },
     "cool cobras": {
       "Tier": 4,
@@ -59,12 +59,12 @@
         "Cobras 2005 Pagani Zonda F"
       ],
       "Reward": 2000,
-      "Icon": "https://i.ibb.co/dKnKg4s/squad-cobras.png",
+      "Icon": "https://i.ibb.co/G0VJYs7/squad-cobras.png",
       "BigReward": 7500,
       "Name": "Cool Cobras",
-      "Emote": "<:squad_cobras:1025856889730379776>"
+      "Emote": "<:squad_cobras:1206519050436616212>"
     },
-    "the ws": {
+    "demonz": {
       "Tier": 5,
       "Class": "S",
       "Cars": [
@@ -75,10 +75,10 @@
         "Walters 2012 Pagani Huayra"
       ],
       "Reward": 3500,
-      "Icon": "https://i.ibb.co/3mt2RZD/squad-w.png",
+      "Icon": "https://i.ibb.co/8cbHKwG/squad-demonz.png",
       "BigReward": 10000,
-      "Name": "The Ws",
-      "Emote": "<:squad_w:1026222214648963152>"
+      "Name": "Demonz",
+      "Emote": "<:squad_demonz:1206519059680731157>"
     },
     "double 0": {
       "Tier": 6,
@@ -91,26 +91,10 @@
         "Spoders 2005 Porsche Carrera GT"
       ],
       "Reward": 5000,
-      "Icon": "https://i.ibb.co/ckk8Xpz/squad-0.png",
+      "Icon": "https://i.ibb.co/D8c9K8P/squad-0.png",
       "BigReward": 25000,
       "Name": "Double 0",
-      "Emote": "<:squad_0:1067616351579033600>"
-    },
-    "the classics": {
-      "Tier": 7,
-      "Class": "S",
-      "Cars": [
-        "Jeremys 2021 Nissan GTR Nismo",
-        "Larrys 2008 Bugatti Veyron",
-        "Frostys 2016 Bugatti Chiron",
-        "Aidens 2020 Aston Martin Vantage",
-        "Snowys 2018 Koenigsegg Agera"
-      ],
-      "Reward": 10000,
-      "Icon": "https://i.ibb.co/7CyrzpG/squad-classics.png",
-      "BigReward": 100000,
-      "Name": "The Classics",
-      "Emote": "<:squad_classics:1188382384375214140>"
+      "Emote": "<:squad_0:1206519057184981062>"
     }
   }
 }

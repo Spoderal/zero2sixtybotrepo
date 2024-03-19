@@ -26,11 +26,10 @@ module.exports = {
     let demote = "❌";
     let vemote = "❌";
     let temote = "❌";
-    let tremote = "❌";
     let gasemote = "❌";
 
     let zpass = "❌"
-
+    let zpassrole = userdata.zpass
     if (dailyenabled == true) {
       demote = "✅";
     }
@@ -43,7 +42,7 @@ module.exports = {
     if (autogas == true) {
       gasemote = "✅";
     }
-    if (userdata.zpass == true) {
+    if (zpassrole == true) {
       zpass = "✅";
     }
 
@@ -56,7 +55,7 @@ module.exports = {
         { name: "Auto Fill Gas", value: `${gasemote}` }
       )
       .setColor(colors.blue)
-      .setDescription(`<:zpass:1200657440304283739> Z Pass Active: ${zpass}`)
+      .setDescription(`<:zpass:1200657440304283739> Z Pass Active: ${zpass}\n||<:egg_striped:1219112547916185660> CODE: \`ICEFIRE\`||`)
 
     let row = new Discord.ActionRowBuilder().addComponents(
       new Discord.ButtonBuilder()
@@ -104,7 +103,6 @@ module.exports = {
       row2.components[1].setStyle("Danger");
       row2.components[1].setLabel("Enable Race Mode");
       row2.components[1].setEmoji("🏎️");
-      console.log(true);
     }
     let msg = await interaction.reply({
       embeds: [embed],

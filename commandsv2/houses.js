@@ -25,13 +25,16 @@ module.exports = {
     for (let house in housedb) {
       house = housedb[house];
       housearr.push(house);
-      housearray.push(
-        `${house.Emote} ${house.Name} : ${toCurrency(
-          house.Price
-        )} **<:rank_newprestige:1114812459182723102> ${house.Prestige}**\`ID: ${
-          house.id
-        }\``
-      );
+      if(house.Price !== 0){
+
+        housearray.push(
+          `${house.Emote} ${house.Name} : ${toCurrency(
+            house.Price
+          )} **<:rank_newprestige:1114812459182723102> ${house.Prestige}**\`ID: ${
+            house.id
+          }\``
+        );
+      }
     }
 
     if (subcommand == "list") {

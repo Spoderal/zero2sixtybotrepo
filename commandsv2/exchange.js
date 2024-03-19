@@ -21,7 +21,8 @@ module.exports = {
           { name: "Notoriety", value: "notoriety" },
           { name: "Super Wheel Spins", value: "swspins" },
           { name: "T5 Voucher", value: "t5vouch" },
-          { name: "Series Tickets", value: "stickets" }
+          { name: "Series Tickets", value: "stickets" },
+          { name: "Garage Space", value: "garagespace" },
         )
         .setRequired(true)
     )
@@ -106,7 +107,16 @@ module.exports = {
         `Converted ${toturnin} gold into ${finalamount} t5 vouchers`
       );
     }
-    
+    else if (toconv == "garagespace") {
+      let finalamount = toturnin * 0.1;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 garage space! You need at least 10 gold`)
+      userdata.gold -= toturnin;
+      userdata.garageLimit += Math.floor(finalamount);
+      userdata.save();
+      await interaction.reply(
+        `Converted ${toturnin} gold into ${Math.floor(finalamount)} t5 vouchers`
+      );
+    }
     else if (toconv == "stickets") {
       let finalamount = toturnin * 0.5;
       if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 series ticket! You need at least 2 gold`)

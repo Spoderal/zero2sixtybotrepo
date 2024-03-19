@@ -16,6 +16,17 @@ const Global = new mongoose.Schema({
     required: false,
     default: false,
   },
+  cars:{
+    type: Array,
+    required: false,
+    default: [],
+  },
+  pvp:{
+    type: Array,
+    required: false,
+    default: [],
+  },
+  
   itemshopcooldown: {
     type: Number,
     required: false,

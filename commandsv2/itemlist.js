@@ -4,9 +4,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const {  toCurrency } = require("../common/utils");
-const cardb = require("../data/cardb.json").Cars;
 const lodash = require("lodash");
-const branddb = require("../data/brands.json");
 const itemdb = require("../data/items.json")
 
 module.exports = {

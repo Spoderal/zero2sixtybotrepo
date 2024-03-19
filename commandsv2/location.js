@@ -4,13 +4,14 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const emotes = require("../common/emotes").emotes;
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, StringSelectMenuBuilder } = require("discord.js");
 const locationdb = require("../data/locations.json")
-const Cooldowns = require("../schema/cooldowns");
 const cardb = require("../data/cardb.json")
 const lodash = require("lodash");
 const colors = require("../common/colors");
 const partdb = require("../data/partsdb.json")
 const { toCurrency, randomRange } = require("../common/utils");
 const landmarkdb = require("../data/landmarks.json")
+const Cooldowns = require("../schema/cooldowns");
+const ms = require("pretty-ms")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -42,9 +43,25 @@ module.exports = {
     let command = interaction.options.getSubcommand();
     let user =  interaction.user;
     let userdata = await User.findOne({ id: user.id });
-    let cooldowndata = await Cooldowns.findOne({ id: user.id });
-    let driven = cooldowndata.driven
-    let items = userdata.items || []
+    let cooldowns = await Cooldowns.findOne({ id: user.id });
+    let locationcool = cooldowns.location
+    let timeout = 10000
+
+    if (
+      locationcool !== null &&
+      timeout - (Date.now() - locationcool) > 0
+    ) {
+
+      let time = ms(timeout - (Date.now() - locationcool));
+      let timeEmbed = new EmbedBuilder()
+        .setColor(colors.blue)
+        .setDescription(`You can drive again in ${time}`);
+      await interaction.reply({ embeds: [timeEmbed], fetchReply: true})
+      
+    }
+
+   
+
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let location = userdata.location || "USA";
     
@@ -93,7 +110,8 @@ module.exports = {
             {label: "Italy", value: "italy"},
             {label: "Japan", value: "japan"},
             {label: "Germany", value: "germany"},
-            {label: "UK", value: "united kingdom"}
+            {label: "UK", value: "united kingdom"},
+            {label: "Australia", value: "australia"}
           )
         )
       
@@ -157,8 +175,17 @@ module.exports = {
       let events = locationindb.Events
 
       let event = lodash.sample(events)
+
+      if(userdata.items.includes("donut") && locationindb.BlackMarket){
+        let items = userdata.items
+        for (var i7 = 0; i7 < 1; i7++) items.splice(items.indexOf("donut"), 1);
+
+        event = "Market"
+        userdata.items = items
+        await userdata.save()
+      }
+
       setTimeout(async () => {
-      console.log(event)
 
       if(event == "Service"){
         let service = lodash.sample(locationindb.Services)
@@ -204,7 +231,7 @@ module.exports = {
           );
           embed.setDescription("You've arrived at a Gas Station! You filled your tank by **5**")
           interaction.editReply({embeds: [embed], fetchReply: true})
-          userdata.save()
+          await userdata.save()
         }
         else if(service == "Part"){
           let parts = ["j1engine", "body", "j1suspension", "j1intake", "j1exhaust"]
@@ -213,7 +240,7 @@ module.exports = {
           embed.setDescription(`You're driving and find a ${partdb.Parts[part].Emote} ${partdb.Parts[part].Name} on the side of the road!`)
 
           userdata.parts.push(part)
-          userdata.save()
+          await userdata.save()
           interaction.editReply({embeds: [embed], fetchReply: true, components: [actionrow]})
         }
       }
@@ -254,8 +281,10 @@ module.exports = {
       collector3.on('collect', async (i) => {
         userdata = await User.findOne({id: interaction.user.id})
        let carid = i.customId
-       console.log(carid)
           let carindb = cardb.Cars[`${carid.toLowerCase()}`]
+          let carinshop = shop.filter((car) => car.Name.toLowerCase() == carid.toLowerCase())[0]
+          console.log(carinshop)
+          let sellprice = carinshop.Price * 0.75
           let carobj = {
             ID: carindb.alias,
             Name: carindb.Name,
@@ -266,15 +295,14 @@ module.exports = {
             Emote: carindb.Emote,
             Image: carindb.Image,
             Miles: 0,
+            Resale: sellprice,
             Drift: 0,
             WeightStat: carindb.Weight,
             Gas: 10,
             MaxGas: 10,
           };
+          let carprice = carinshop.Price
 
-          let carprice = shop[0].Price
-
-          console.log(carprice)
 
           if(carprice > userdata.cash) return interaction.editReply("You can't afford this car!")
 
@@ -300,7 +328,7 @@ module.exports = {
           );
           userdata.cash -= carprice
 
-          userdata.save()
+          await  userdata.save()
 
           interaction.editReply("✅")
         
@@ -344,7 +372,7 @@ module.exports = {
           }
         );
         interaction.editReply({embeds: [embed], fetchReply: true})
-        userdata.save()
+        await userdata.save()
       }
       else if(event == "Landmark"){
         let reward = randomRange(1, locationindb.Landmark.Reward)
@@ -376,7 +404,7 @@ module.exports = {
           }
         );
         interaction.editReply({embeds: [embed], fetchReply: true})
-        userdata.save()
+        await userdata.save()
       }
       else if(event == "Speedometer"){
         let speed3 = (cartodrive.Speed / 5)
@@ -410,7 +438,7 @@ module.exports = {
           }
         );
         interaction.editReply({embeds: [embed], fetchReply: true})
-        userdata.save()
+        await userdata.save()
       }
       else if(event == "NPC Job"){
         let actionrow = new ActionRowBuilder()
@@ -425,7 +453,23 @@ module.exports = {
           .setStyle("Danger")
         )
         let job = lodash.sample(locationindb.Jobs)
-        console.log(job)
+        let randomnum = randomRange(1, 4)
+
+        let result
+
+        if(randomnum == 1){
+          result = "Success"
+        }
+        else  if(randomnum == 2){
+          result = "Scam"
+        }
+        if(randomnum == 3){
+          result = "Fail"
+        }
+        if(userdata.items.includes("magnifying glass")){
+          embed.addFields({name: `Result`, value: `${result}`})
+        }
+
         embed.setDescription(`${job.Job}`)
         embed.setImage(`${job.Image}`)
         interaction.editReply({embeds: [embed], fetchReply: true, components: [actionrow]})
@@ -442,9 +486,8 @@ module.exports = {
 
         collector2.on('collect', async (i) => {
           if(i.customId =="yesjob"){
-            let chance = job.chance
-            let randomnum = randomRange(1, 2)
-
+     
+            
             if(randomnum == 1){
               let reward = job.Reward
 
@@ -455,6 +498,13 @@ module.exports = {
               userdata.cash += reward
               
               embed.setDescription(`You helped the NPC with their issue and succeeded! You earn $${job.Reward}`)
+            }
+            else if(randomnum == 2){
+              let reward = job.Reward * 2
+
+              userdata.cash -= reward
+
+              embed.setDescription(`GET SCAMMED IDIOT HAHAHAHAHA! You lost $${reward}`)
             }
             else {
               let cash2 = userdata.cash
@@ -488,7 +538,7 @@ module.exports = {
                 ],
               }
             );
-            userdata.save()
+            await userdata.save()
 
 
           }
@@ -515,7 +565,7 @@ module.exports = {
                 ],
               }
             );
-            userdata.save()
+            await userdata.save()
           }
 
         })
@@ -536,7 +586,7 @@ module.exports = {
           .setStyle("Danger")
         )
         let npcs = lodash.sample(locationindb.Racers)
-
+        let carimg = cartodrive.Image || cartodrive.Livery || cardb.Cars[cartodrive.Name.toLowerCase()].Image
         let npc = locationdb.NPCs.filter((npc1) => npc1.Name.toLowerCase() == npcs.toLowerCase())
         embed.setDescription(`${npc[0].Prompt}`)
         embed.setTitle(`${npc[0].Name} wants to race in their ${npc[0].Car.Logo} ${npc[0].Car.Name}`)
@@ -568,7 +618,7 @@ module.exports = {
         collector.on('collect', async (i) => {
           interaction.editReply({embeds: [embed], components: [], fetchReply: true})
           if(i.customId =="yesrace"){
-            embed.setThumbnail(`${cartodrive.Image}`)
+            embed.setThumbnail(`${carimg}`)
             setTimeout(async () => {
 
               let hp = cartodrive.Speed
@@ -585,9 +635,7 @@ module.exports = {
 
               let sum2 = (hp2 + hp2 / a2 + h2 + w2 / 100) / 4;
 
-              console.log(sum)
-              console.log(sum2)
-
+    
               if(sum > sum2){
                 embed.setTitle(`You won!`)
                 embed.setDescription(`${npc[0].Lost}`)
@@ -633,7 +681,7 @@ module.exports = {
               );
             
 
-              userdata.save()
+              await userdata.save()
               await i.editReply({embeds: [embed], fetchReply: true})
             }, 3000);
           }

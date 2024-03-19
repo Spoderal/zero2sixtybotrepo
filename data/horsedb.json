@@ -1,0 +1,16 @@
+{
+    "Horses":{
+        "thoroughbred":{
+            "Name":"Thoroughbred",
+            "ID":"1",   
+            "Age":5,
+            "Color":"Brown",
+            "Speed": 40,
+            "Stamina": 50,
+            "Jump": 60,
+            "Strength": 70,
+            "Emote":"🐎",
+            "Image":""
+         }
+}
+}

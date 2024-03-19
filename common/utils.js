@@ -62,6 +62,13 @@ function randomNoRepeats(array) {
   };
 }
 
+function isWeekend() {
+  const today = new Date();
+  const day = today.getDay();
+  return day === 0 || day === 6;
+}
+
+
 module.exports = {
   numberWithCommas,
   toCurrency,
@@ -73,4 +80,5 @@ module.exports = {
   wait,
   formatDate,
   convertMPHtoKPH,
+  isWeekend
 };

@@ -491,7 +491,6 @@ module.exports = {
                 }
                 let usercars = userdata.cars
                 for (var b = 0; b < usercars.length; b++){
-                    console.log(usercars[b])
                     if (usercars[b].Name.toLowerCase() === itemtolist.toLowerCase()) {
                       usercars.splice(b, 1);
                       break;
@@ -550,11 +549,9 @@ module.exports = {
         if(userdata.cash < itemindb.Price) return interaction.reply(`You cant afford this item! You need ${toCurrency(itemindb.Price)}`)
 
         if(itemindb.UserID == interaction.user.id) return interaction.reply("You're the owner of this listing you cant buy it")
-        console.log(itemindb)
         
         if(cardb[itemindb.Item.toLowerCase()]){
 
-            console.log(itemindb.CarOBJ)
             
             userdata.cars.push(itemindb.CarOBJ)
         
@@ -625,7 +622,6 @@ module.exports = {
         
         let umarket = globals.umarket
         for (var e = 0; e < umarket.length; e++){
-            console.log(umarket[e])
             if (umarket[e].ID === itemindb.ID) {
                 umarket.splice(e, 1);
               break;
@@ -637,6 +633,15 @@ module.exports = {
 
         await userdata.save()
         await userdata2.save()
+
+        try{
+            let usertodm = await interaction.client.users.fetch(itemindb.UserID);
+
+            usertodm.send(`Your item ${itemindb.Item} has been bought! for ${itemindb.Price}`)
+        }
+        catch(err) {
+            console.log(err)
+        }
 
         await interaction.reply(`Bought ${itemindb.Item}`)
 
@@ -652,7 +657,6 @@ module.exports = {
 
         if(cardb[itemindb.Item.toLowerCase()]){
 
-            console.log(itemindb.CarOBJ)
             
             userdata.cars.push(itemindb.CarOBJ)
         
@@ -674,7 +678,6 @@ module.exports = {
         }
         let umarket = globals.umarket
         for (var e2 = 0; e2 < umarket.length; e2++){
-            console.log(umarket[e2])
             if (umarket[e2].ID === itemindb.ID) {
                 umarket.splice(e2, 1);
               break;
@@ -696,7 +699,6 @@ module.exports = {
         if(!itemindb) return interaction.reply(`Thats not an ID for an item! Try using the number you see \`in this format\``)
         if(!itemindb.CarOBJ) return interaction.reply('Thats not a car!')
         let carindb = itemindb.CarOBJ
-        console.log(carindb)
         let exhaust = carindb.exhaust || "stock exhaust"
         let intake = carindb.intake || "stock intake"
         let tires = carindb.tires || "stock tires"

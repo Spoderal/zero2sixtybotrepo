@@ -23,6 +23,7 @@
         "vote":{
             "Image":"https://i.ibb.co/q942Qbg/racer-helmet-vote.png",
             "Name":"Vote",
+            "Exclusive":true,
             "Emote":"<:racer_helmet_vote:1191882737255194674>"
         },
         "sky":{
@@ -64,6 +65,17 @@
             "Image":"https://i.ibb.co/G3J2G8N/racer-helmet-flowers.png",
             "Name":"Flowers",
             "Emote":"<:racer_helmet_flowers:1199824462049181706>"
+        },
+        "flame":{
+            "Image":"https://i.ibb.co/q1ZdY9T/racer-outfit-flames.png",
+            "Name":"Flame",
+            "Emote":"<:racer_helmet_flames:1203567817379684422>"
+        },
+        "pvp":{
+            "Image":"https://i.ibb.co/DgcBj5X/racer-helmet-pvp.png",
+            "Name":"PVP",
+            "Exclusive":true,
+            "Emote":"<:racer_helmet_pvp:1208977977296158800>"
         }
     },
     "Outfits":{
@@ -90,6 +102,7 @@
         "vote":{
             "Image":"https://i.ibb.co/fFVdt7J/racer-outfit-vote.png",
             "Name":"Vote",
+            "Exclusive":true,
             "Emote":"<:racer_outfit_vote:1191882734872838224>"
         },
         "sky":{
@@ -131,12 +144,24 @@
             "Image":"https://i.ibb.co/2y6kXXv/racer-outfit-flowers.png",
             "Name":"Flowers",
             "Emote":"<:racer_outfit_flowers:1199824459771682856>"
+        },
+        "flame":{
+            "Image":"https://i.ibb.co/r0fYZXr/racer-outfit-flames2.png",
+            "Name":"Flame",
+            "Emote":"<:racer_outfit_flames:1203567815936712724>"
+        },
+        "pvp":{
+            "Image":"https://i.ibb.co/3fRJTtf/racer-outfit-pvp.png",
+            "Name":"PVP",
+            "Exclusive":true,
+            "Emote":"<:racer_outfit_pvp:1208977978634014780>"
         }
     },
     "Accessories":{
         "2024 crown":{
             "Image":"https://i.ibb.co/m65Bdkj/racer-accessory-2024.png",
             "Name":"2024 Crown",
+            "Exclusive":true,
             "Emote":"<:racer_accessory_2024:1191601578944254052>"
         },
         "unicorn horn":{
@@ -158,6 +183,11 @@
             "Image":"https://i.ibb.co/k5r4c7c/racer-accessory-flowers.png",
             "Name":"Flowers",
             "Emote":"<:racer_accessory_flowers:1199826722657423421>"
+        },
+        "flame":{
+            "Image":"https://i.ibb.co/6WwTq8f/racer-outfit-flames2.png",
+            "Name":"Flame",
+            "Emote":"<:racer_outfit_flames:1203567815936712724>"
         }
     }
 }

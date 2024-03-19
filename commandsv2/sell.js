@@ -8,7 +8,6 @@ let parts = require("../data/partsdb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const cardb = require("../data/cardb.json");
 const itemdb = require("../data/items.json");
-const imports = require("../data/imports.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,7 +23,7 @@ module.exports = {
       option
         .setName("amount")
         .setDescription("The amount to sell")
-        .setRequired(true)
+        .setRequired(false)
         .setMinValue(1)
     ),
 
@@ -60,30 +59,24 @@ module.exports = {
     );
 
     let selected = filteredcar[0] || "No ID";
-    console.log(selected);
 
 
     if (selected !== "No ID") {
-      let price = selected.Resale || selected.Price || 0;
+      let price = selected.Resale
 
-      if (selected.Resale == 0 || !selected.Resale) {
-        if(cardb.Cars[selected.Name.toLowerCase()].Price == 0 && cardb.Cars[selected.Name.toLowerCase()].sellprice > 0){
-          price = cardb.Cars[selected.Name.toLowerCase()].sellprice
-        }
-        else {
-          if(userdata.location == "united kingdom"){
-            price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.80;
-          }
-          else {
-            price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.75;
-
-          }
-        }
+      if(!selected.Resale || selected.Resale == 0){
+        price = cardb.Cars[selected.Name.toLowerCase()].sellprice * 0.35
       }
 
-      if (amount2 > filteredcar.length)
-        return interaction.reply("You don't have that many of that car!");
 
+      if(userdata.location == "united kingdom"){
+        price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.30;
+      }
+
+        
+
+      if (amount2 > filteredcar.length)  return interaction.reply("You don't have that many of that car!");
+      console.log(price)
       price = price * amount2;
 
       if (userdata.items.includes("coconut")) {
@@ -99,15 +92,6 @@ module.exports = {
       }
       userdata.cars = usercars;
       userdata.cash += Number(price);
-      if (imports.common.Contents.includes(selected.Name.toLowerCase())) {
-        userdata.commonCredits += 5;
-      }
-      if (imports.exotic.Contents.includes(selected.Name.toLowerCase())) {
-        userdata.exoticCredits += 5;
-      }
-      if (imports.rare.Contents.includes(selected.Name.toLowerCase())) {
-        userdata.rareCredits += 5;
-      }
       if(userdata.cars.length <= 0) return interaction.reply("You need to have at least 1 car!")
 
 
@@ -135,11 +119,11 @@ module.exports = {
         finalamount = amount2 * resale;
         userdata.cash += finalamount;
       
-      if (parts.Parts[selling.toLowerCase()].Tier == "4") {
+      if (parts.Parts[selling.toLowerCase()].Tier == "4" && parts.Parts[selling.toLowerCase()].Price == 0) {
         let resale = 1000;
         finalamount = amount2 * resale;
         userdata.cash += finalamount;
-      } else if (parts.Parts[selling.toLowerCase()].Tier == "5") {
+      } else if (parts.Parts[selling.toLowerCase()].Tier == "5" && parts.Parts[selling.toLowerCase()].Price == 0) {
         let resale = 2500;
         finalamount = amount2 * resale;
         userdata.cash += finalamount;
@@ -150,60 +134,14 @@ module.exports = {
       await interaction.reply(
         `You sold your ${selling} for ${toCurrency(finalamount)}!`
       );
-    } else if (
-      selling.toLowerCase() == "legendary barn maps" ||
-      selling.toLowerCase() == "legendary barn map" ||
-      selling.toLowerCase() == "rare barn maps" ||
-      selling.toLowerCase() == "rare barn map" ||
-      selling.toLowerCase() == "uncommon barn maps" ||
-      selling.toLowerCase() == "uncommon barn map" ||
-      selling.toLowerCase() == "common barn maps" ||
-      selling.toLowerCase() == "common barn map"
-    ) {
-      let exchange;
-      let maps;
-
-      if (selling.startsWith("legendary")) {
-        exchange = 1000;
-        maps = userdata.lmaps;
-      } else if (selling.startsWith("rare")) {
-        exchange = 500;
-        maps = userdata.rmaps;
-      } else if (selling.startsWith("uncommon")) {
-        exchange = 100;
-        maps = userdata.ucmaps;
-      } else if (selling.startsWith("common")) {
-        exchange = 50;
-        maps = userdata.cmaps;
-      }
-      if (maps < amount2)
-        return await interaction.reply(`You dont have enough barn maps!`);
-
-      let finalam = exchange * amount2;
-
-      if (selling.startsWith("legendary")) {
-        userdata.lmaps -= amount2;
-      } else if (selling.startsWith("rare")) {
-        userdata.rmaps -= amount2;
-      } else if (selling.startsWith("uncommon")) {
-        userdata.ucmaps -= amount2;
-      } else if (selling.startsWith("common")) {
-        userdata.cmaps -= amount2;
-      }
-
-      userdata.cash += finalam;
-
-      await interaction.reply(
-        `Sold ${amount2} ${selling} for ${toCurrency(finalam)}`
-      );
-    } else if (itemdb[selling.toLowerCase()]) {
+    }  else if (itemdb[selling.toLowerCase()]) {
+      if(!userdata.items.includes(selling.toLowerCase())) return interaction.reply('You dont have that item!')
       let useritems = userdata.items;
       let finalprice = itemdb[selling.toLowerCase()].Price * 0.35;
       useritems.splice(useritems.indexOf(selling.toLowerCase()), 1);
       userdata.items = useritems;
-      userdata.cash +=finalprice
+      userdata.cash += finalprice
 
-      if(!userdata.items.includes(selling.toLowerCase())) return interaction.reply('You dont have that item!')
 
       await interaction.reply(`You sold your ${selling} for ${toCurrency(finalprice)}!`);
     } 

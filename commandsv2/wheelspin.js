@@ -24,8 +24,7 @@ module.exports = {
     let userdata = await User.findOne({ id: uid });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
 
-    let cooldowns =
-      (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
+    let cooldowns =  (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 
     let wheelspincool = cooldowns.wheelspin;
     let timeout = 5000;

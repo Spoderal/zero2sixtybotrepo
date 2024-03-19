@@ -1,22 +1,19 @@
 
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const items = require("../data/items.json");
+const itemdb = require("../data/items.json");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-
 const Global = require("../schema/global-schema");
 let warehousedb = require("../data/warehouses.json");
-let cars = require("../data/cardb.json");
+let cardb = require("../data/cardb.json").Cars
 let houses = require("../data/houses.json");
 const { EmbedBuilder } = require("discord.js");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
 const { toCurrency, numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const carpacks = require("../data/carpacks.json");
-const imports = require("../data/imports.json");
 const partdb = require("../data/partsdb.json")
+const carpacks = require("../data/carpacks.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,620 +33,344 @@ module.exports = {
         .setRequired(false)
         .setMinValue(1)
         .setMaxValue(100)
-    )
-    .addBooleanOption((option) =>
-      option
-        .setName("gold")
-        .setDescription("Purchase car with gold")
-        .setRequired(false)
     ),
 
-  // async autocomplete(interaction, client) {
-  //   let global2 = await Global.findOne({});
 
-  //   let focusedValue = interaction.options.getFocused();
-  //   let choices = global2.shopitems;
-  //   let filtered = choices.filter((choice) => choice.includes(focusedValue));
-
-  //   let options;
-
-  //   if (filtered.length > 25) {
-  //     options = filtered.slice(0, 25);
-  //   } else {
-  //     options = filtered;
-  //   }
-
-  //   await interaction.respond(
-  //     options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
-  //   );
-  // },
   async execute(interaction) {
+
     const userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     const global = await Global.findOne({});
 
-    let amount = interaction.options.getNumber("amount");
-    let goldpurchase = interaction.options.getBoolean("gold");
-    let amount2 = amount || 1;
+    let amount = interaction.options.getNumber("amount") || 1
+
     let cash = userdata.cash;
-    const gold = userdata.gold;
     const usercars = userdata.cars;
     const garagelimit = userdata.garageLimit;
     let tier = userdata.tier;
-    const bought = interaction.options.getString("item").toLowerCase();
+    let bought = interaction.options.getString("item").toLowerCase();
+   
 
-    if (!bought)
-      return await interaction.reply(
-        "To use this command, specify the car you want to buy. Example: /buy 1995 Mazda Miata"
-      );
 
-      let cooldowns =
-      (await Cooldowns.findOne({ id: interaction.user.id })) ||
-      new Cooldowns({ id: interaction.user.id });
-    let timeout2 = 30000;
-    if (
-      cooldowns.upgrading !== null &&
-      timeout2 - (Date.now() - cooldowns.is_racing) > 0
-    ) {
-      return await interaction.channel.send({
-        content: `Wait for your upgrade command to stop, then try buying a car`,
-        fetchReply: true,
-        ephemeral: true,
-      });
+    let cars = []
+    let hous = []
+    for(let car in cardb){
+
+      cars.push(cardb[car])
     }
-    let amount3 = Math.round(amount2);
-
-    const carsList = cars.Cars;
-    const itemsList = items;
-    let carrarray = [];
-    let housearry = [];
-    for (let car1 in carsList) {
-      let caroj = carsList[car1];
-      carrarray.push(caroj);
-    }
-    for (let house1 in houses) {
-      let houseobj = houses[house1];
-      housearry.push(houseobj);
+    for(let house in houses){
+      hous.push(houses[house])
     }
 
-    let boughtCar =
-      carrarray.filter((car) => car.alias == bought.toLowerCase()) || "NO ID";
-    if (
-      (boughtCar.length == 0 && !boughtCar[0]) ||
-      (boughtCar == [] && !boughtCar[0])
-    ) {
-      boughtCar = carrarray.filter(
-        (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
-      );
-    }
-    boughtCar = boughtCar[0];
+      // Use the findCar function
+      let car = cars.find(c => c.alias=== bought || c.Name.toLowerCase() === bought)
+      let item = itemdb[bought.toLowerCase()]
+      let part = partdb.Parts[bought.toLowerCase()]
+      let house = hous.find(h => h.id.toLowerCase() === bought)
+      let warehouse = warehousedb[bought.toLowerCase()]
+      let carpack = carpacks[bought.toLowerCase()]
 
 
-    const boughtHouse = housearry.filter(
-      (house) => house.id == bought.toLowerCase()
-    );
-    const boughtWarehouse = warehousedb[bought];
+  
 
-    if (carpacks[bought.toLowerCase()]) {
-      let pack = carpacks[bought.toLowerCase()];
-      if (gold < pack.Gold)
-        return interaction.reply("You need 500 gold for this pack!");
-
-      for (let ca in pack.cars) {
-        let car = pack.cars[ca];
-        let carindb = cars.Cars[car];
-
-        let obj = {
-          ID: carindb.alias,
-          Name: carindb.Name,
-          Speed: carindb.Speed,
-          Acceleration: carindb["0-60"],
-          Handling: carindb.Handling,
-          Parts: [],
-          Emote: carindb.Emote,
-          Image: carindb.Image,
-          Miles: 0,
-          Drift: 0,
-          WeightStat: carindb.Weight,
-          Gas: 10,
-          MaxGas: 10,
-        };
-        userdata.cars.push(obj);
-      }
-
-      userdata.gold -= Number(pack.Gold);
-
-      userdata.save();
-      return interaction.reply("Bought car pack!");
-    }
-
-    if (!boughtCar && !boughtWarehouse && !boughtHouse && !itemsList[bought] && !partdb.Parts[bought])
-      return await interaction.reply(
-        "That car or item isn't available yet, suggest it in the support server! **Parts are no longer purchasable**."
-      );
-
-    if (boughtCar) {
-      if (usercars?.length >= garagelimit)
-        return await interaction.reply(
-          "Your spaces are already filled. Sell a car or get more garage space!"
-        );
-      let boughtCarPrice = parseInt(boughtCar.Price);
-      if (cash < boughtCarPrice)
-        return await interaction.reply("You don't have enough cash!");
-      let cargoldprice = Math.round(boughtCarPrice / 150);
-      if (goldpurchase && cargoldprice > gold)
-        return await interaction.reply("You don't have enough gold!");
-
-      if (
-        boughtCarPrice == 0 &&
-        !imports.common.Contents.includes(boughtCar.Name.toLowerCase()) &&
-        !imports.rare.Contents.includes(boughtCar.Name.toLowerCase()) &&
-        !imports.exotic.Contents.includes(boughtCar.Name.toLowerCase()) &&
-        !boughtCar.Exclusive && !boughtCar.Carver
-      )
-        return await interaction.reply("This car is not purchasable.");
-
-      if (usercars.find((c) => c.Name == boughtCar.Name))
-        return await interaction.reply("You already own this car!");
-
-      if (boughtCar.Blackmarket) {
-        if (gold < boughtCarPrice)
-          return await interaction.reply("You don't have enough gold!");
-
-        let idtoset = boughtCar.alias;
-        let carindb = boughtCar;
-        let carobj = {
-          ID: carindb.alias,
-          Name: carindb.Name,
-          Speed: carindb.Speed,
-          Acceleration: carindb["0-60"],
-          Handling: carindb.Handling,
-          Parts: [],
-          Emote: carindb.Emote,
-          Image: carindb.Image,
-          Miles: 0,
-          Drift: 0,
-          WeightStat: carindb.Weight,
-          Gas: 10,
-          MaxGas: 10,
-        };
-        if (boughtCar.Range) {
-          carobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Image: carindb.Image,
-            Miles: 0,
-            Drift: 0,
-            Range: carindb.Range,
-            MaxRange: carindb.Range,
-            WeightStat: carindb.Weight,
-          };
+      if(item && bought !== "pvp crate"){
+        let itemprice = item.Price * amount
+        if(itemprice > cash){
+          return await interaction.reply({ content: `You don't have enough cash`, ephemeral: true })
         }
+        if(item.Price == 0 ) return interaction.reply("This item isn't purchasable!")
+        let iteminshop = global.itemshop.find(i => i.Name === item.Name)
+        if(iteminshop){
+          userdata.cash -= itemprice
+          for (let i = 0; i < amount; i++) {
+            userdata.items.push(item.Name.toLowerCase());
+          }
+        
 
-        userdata.gold -= boughtCarPrice;
-        userdata.cars.push(carobj);
-        await userdata.save();
+        await userdata.save()
 
         let embed = new EmbedBuilder()
-          .setTitle(`Bought ${boughtCar.Name}`)
-          .addFields([
-            { name: "Price", value: `${boughtCarPrice} ${emotes.gold}` },
-            { name: `ID`, value: `${idtoset}` },
-            { name: "New gold balance", value: `${gold} ${emotes.gold}` },
-          ])
-          .setColor(colors.blue)
-          .setThumbnail(`${boughtCar.Image}`);
+        .setTitle(`You bought a ${item.Name}`)
+        .setDescription(`You bought x${amount} ${item.Emote} ${item.Name} for ${emotes.cash} ${toCurrency(itemprice)}`)
+        .setColor(colors.blue)
+        .setThumbnail(item.Image)
+        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
 
-        await interaction.reply({ embeds: [embed] });
 
-        return;
-      } else {
-        let cargoldprice = Math.round(boughtCarPrice / 150);
-        if (userdata.cash < boughtCarPrice)
-          return await interaction.reply("You don't have enough cash!");
-        if (goldpurchase && cargoldprice > gold)
-          return await interaction.reply("You don't have enough gold!");
-        if (boughtCar.Rank) {
-          if (userdata.bounty < boughtCarPrice)
-            return await interaction.reply("You don't have enough bounty!");
+        await interaction.reply({ embeds: [embed] })
 
-          let job = userdata.work;
-          if (!job) return await interaction.reply("You don't have a job!");
-          if (job.name !== "Police")
-            return await interaction.reply(
-              "You don't work as a cop! Use `/work hire` to get a job!"
-            );
+        }
+        else {
+          return await interaction.reply({ content: `That item isn't in the weekly item shop`, ephemeral: true })
+        }
 
-          if (job.position.toLowerCase() !== boughtCar.Rank.toLowerCase())
-            return await interaction.reply(
-              `You need to be rank ${boughtCar.Rank} to buy this car!`
-            );
-          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
-            if (userdata.commonCredits < 25)
-              return interaction.reply("You don't have enough common credits!");
-          }
-          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
-            if (userdata.rareCredits < 25)
-              return interaction.reply("You don't have enough rare credits!");
-          }
-          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
-            if (userdata.exoticCredits < 25)
-              return interaction.reply("You don't have enough exotic credits!");
-          }
-          if (boughtCar.Exclusive) {
-            if (userdata.typekeys < boughtCar.Exclusive)
-              return interaction.reply("You don't have enough keys!");
-          }
+      }
+      else if(part){
+        
+        if(part.Price == 0) return interaction.reply("This part isn't purchasable!")
+        let itemprice = part.Price * amount
+        if(itemprice > cash){
+          return await interaction.reply({ content: `You don't have enough cash`, ephemeral: true })
+        }
+        if(part.Price > cash){
+          return await interaction.reply({ content: `You don't have enough cash to buy this part`, ephemeral: true })
+        }
+        userdata.cash -= itemprice
+        for (let i = 0; i < amount; i++) {
+          userdata.parts.push(part.Name.toLowerCase());
+        }
 
-          let idtoset = boughtCar.alias;
+        await userdata.save()
+
+        let embed = new EmbedBuilder()
+        .setTitle(`You bought a ${part.Name}`)
+        .setDescription(`You bought x${amount} ${part.Emote} ${part.Name} for ${emotes.cash} ${toCurrency(itemprice)}`)
+        .setColor(colors.blue)
+        .setThumbnail(part.Image)
+        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+
+        await interaction.reply({ embeds: [embed] })
+
+
+        if(userdata.tutorial && userdata.tutorial.started == true && userdata.tutorial.stage == 5 && userdata.tutorial.type == "starter"){
+          console.log("TUTORIAL")
+          let tut = userdata.tutorial
+          tut.stage += 1
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "tutorial": tut,
+              },
+            },
+      
+          );
+      
+          interaction.channel.send(`**TUTORIAL:** Nice purchase! Now where did it go you may ask? Well, run \`/garage\` again and select the parts button to see your newly aquired part`)
+        }
+
+      }
+      else if(carpack){
+        if(carpack.Gold > userdata.gold){
+          return await interaction.reply({ content: `You don't have enough gold to buy this car pack!`, ephemeral: true })
+        }
+        userdata.gold -= carpack.Gold
+        for(let car in carpack.cars){
           let carobj = {
-            ID: boughtCar.alias,
-            Name: boughtCar.Name,
-            Speed: boughtCar.Speed,
-            Acceleration: boughtCar["0-60"],
-            Handling: boughtCar.Handling,
-            Parts: [],
-            Emote: boughtCar.Emote,
-            Image: boughtCar.Image,
+            ID: cardb[carpack.cars[car]].alias,
+            Name: cardb[carpack.cars[car]].Name,
+            Speed: cardb[carpack.cars[car]].Speed,
+            Acceleration: cardb[carpack.cars[car]]["0-60"],
+            Handling: cardb[carpack.cars[car]].Handling,
+            WeightStat: cardb[carpack.cars[car]].Weight,
+            Emote: cardb[carpack.cars[car]].Emote,
+            Livery: cardb[carpack.cars[car]].Image,
             Miles: 0,
-            Drift: 0,
-            police: true,
-            WeightStat: boughtCar.Weight,
+            Gas: 10,
+            MaxGas: 10,
+          };
+          userdata.cars.push(carobj)
+        }
+        await userdata.save()
+
+        let embed = new EmbedBuilder()
+        .setTitle(`You bought a ${carpack.Name}`)
+        .setDescription(`You bought ${carpack.Name} for ${emotes.gold} ${toCurrency(carpack.Price)}`)
+        .setColor(colors.blue)
+        .setFooter({text: `You now have ${toCurrency(userdata.gold)}`})
+
+        await interaction.reply({ embeds: [embed] })
+
+      }
+
+      else if(house){
+        if(house.Price > cash){
+          return await interaction.reply({ content: `You don't have enough cash to buy this house`, ephemeral: true })
+        }
+        if(userdata.houses.find(h => h.id === house.id)){
+          return await interaction.reply({ content: `You already own this house`, ephemeral: true })
+        }
+        if(house.Price == 0 ) return interaction.reply("This house isn't purchasable!")
+        userdata.cash -= house.Price
+          userdata.houses.push(house)
+     userdata.garageLimit += house.Space
+        await userdata.save()
+
+        let embed = new EmbedBuilder()
+        .setTitle(`You bought a ${house.Name}`)
+        .setDescription(`You bought a ${house.Emote} ${house.Name} for ${emotes.cash} ${toCurrency(house.Price)}`)
+        .setColor(colors.blue)
+        .setThumbnail(house.Image)
+        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+
+        await interaction.reply({ embeds: [embed] })
+
+      }
+      else if(warehouse){
+        if(warehouse.Price > cash){
+          return await interaction.reply({ content: `You don't have enough cash to buy this warehouse`, ephemeral: true })
+        }
+        if(userdata.warehouses.find(w => w === warehouse.Name.toLowerCase())){
+          return await interaction.reply({ content: `You already own this warehouse`, ephemeral: true })
+        }
+        userdata.cash -= warehouse.Price
+        userdata.warehouses.push(warehouse.Name.toLowerCase())
+        userdata.garageLimit += warehouse.Space
+        await userdata.save()
+
+        let embed = new EmbedBuilder()
+        .setTitle(`You bought a ${warehouse.Name}`)
+        .setDescription(`You bought a ${warehouse.Emote} ${warehouse.Name} for ${emotes.cash} ${toCurrency(warehouse.Price)}`)
+        .setColor(colors.blue)
+        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+
+        await interaction.reply({ embeds: [embed] })
+
+      }
+      else if(car){
+        if(car.Price == 0 && !car.Heart && !car.Carver && !car.Tokens && !car.Exclusive) return interaction.reply("This car isn't purchasable!")
+
+        if(car.tier > tier){
+          return await interaction.reply({ content: `You need to be tier ${car.tier} to buy this car, try beating the tier ${car.tier} squad`, ephemeral: true })
+        }
+        if(usercars.length >= garagelimit){
+          return await interaction.reply({ content: `Your garage is full, you need to upgrade your garage to store more cars`, ephemeral: true })
+        }
+        let currency = `${emotes.cash} ${toCurrency(car.Price)}`
+      
+        if(car.Exclusive){
+          if(userdata.zkeys < car.Exclusive){
+            return await interaction.reply({ content: `You need ${car.Exclusive} carver cash to buy this car`, ephemeral: true })
+          }
+          userdata.zkeys -= car.Exclusive
+          let carobj = {
+            ID: car.alias,
+            Name: car.Name,
+            Speed: car.Speed,
+            Acceleration: car["0-60"],
+            Handling: car.Handling,
+            WeightStat: car.Weight,
+            Emote: car.Emote,
+            Livery: car.Image,
+            Miles: 0,
+            Resale:0,
             Gas: 10,
             MaxGas: 10,
           };
 
-          if (boughtCar.Range) {
-            carobj = {
-              ID: boughtCar.alias,
-              Name: boughtCar.Name,
-              Speed: boughtCar.Speed,
-              Acceleration: boughtCar["0-60"],
-              Handling: boughtCar.Handling,
-              Parts: [],
-              Emote: boughtCar.Emote,
-              Image: boughtCar.Image,
-              Miles: 0,
-              Drift: 0,
-              Range: boughtCar.Range,
-              MaxRange: boughtCar.Range,
-              police: true,
-              WeightStat: boughtCar.Weight,
-              Gas: 10,
-              MaxGas: 10,
-            };
-          }
-
-          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
-            userdata.commonCredits -= 25;
-          }
-          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
-            userdata.rareCredits -= 25;
-          }
-          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
-            userdata.exoticCredits -= 25;
-          }
-          let displayprice;
-          let emote;
-          if (!goldpurchase) {
-            displayprice = boughtCarPrice;
-            emote = emotes.cash;
-            userdata.cash -= boughtCarPrice;
-          }
-          if (goldpurchase) {
-            emote = "🪙";
-            displayprice = goldpurchase;
-            userdata.gold -= cargoldprice;
-          }
-          if (boughtCar.Exclusive > 0) {
-            displayprice = boughtCar.Exclusive;
-            emote = "<:key_z:1140029565360668783>";
-            userdata.typekeys -= boughtCar.Exclusive;
-          }
-          userdata.cars.push(carobj);
-          await userdata.save();
-
+          userdata.cars.push(carobj)
+          userdata.save()
+          currency = `<:key_z:1140029565360668783> ${numberWithCommas(car.Exclusive)}`
           let embed = new EmbedBuilder()
-            .setTitle(`Bought ${boughtCar.Name}`)
-            .addFields([
-              {
-                name: "Price",
-                value: `${emote} ${numberWithCommas(displayprice)}`,
-              },
-              { name: `ID`, value: `${idtoset}` },
-              {
-                name: "New cash balance",
-                value: `${emotes.cash} ${toCurrency(cash)}`,
-              },
-              {
-                name: "New gold balance",
-                value: `${emotes.gold} ${toCurrency(gold)}`,
-              },
-            ])
-            .setColor(colors.blue)
-            .setThumbnail(`${boughtCar.Image}`);
-
-          return await interaction.reply({ embeds: [embed] });
-        } else {
-          let sellprice = boughtCarPrice * 0.65;
-          let carstock = global.stock;
-          let filteredcar =
-            carrarray.filter((car) => car.alias == bought.toLowerCase()) ||
-            "NO ID";
-          if (filteredcar.length == 0 || filteredcar == []) {
-            filteredcar = carrarray.filter(
-              (car2) => car2.Name.toLowerCase() == bought.toLowerCase()
-            );
+          .setTitle(`You bought a ${car.Name}`)
+          .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
+          .setColor(colors.blue)
+          .setImage(car.Image)
+          .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+  
+         return await interaction.reply({ embeds: [embed] })
+        }
+        if(car.Tokens){
+          if(userdata.pvptokens < car.Tokens){
+            return await interaction.reply({ content: `You need ${car.Tokens} PVP Tokens to buy this car`, ephemeral: true })
           }
-          let carindb = filteredcar[0] || carsList[bought.toLowerCase()];
-          if (cars.Tiers[carindb.Class.toLowerCase()].level > tier)
-            return interaction.reply(
-              `Your tier is not high enough! You need to beat the **Tier ${
-                cars.Tiers[carindb.Class.toLowerCase()].level
-              } Squad** to unlock this car!`
-            );
-
-          if (cash < boughtCarPrice)
-            return await interaction.reply("You don't have enough cash!");
-          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
-            if (userdata.commonCredits < 25)
-              return interaction.reply("You don't have enough common credits!");
-          }
-          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
-            if (userdata.rareCredits < 25)
-              return interaction.reply("You don't have enough common credits!");
-          }
-          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
-            if (userdata.exoticCredits < 25)
-              return interaction.reply("You don't have enough common credits!");
-          }
-
-          cash -= boughtCarPrice;
-
-          if (carindb.Stock) {
-            if (carstock[carindb.Name.toLowerCase()].Stock <= 0) {
-              return interaction.reply("This car is out of stock!");
-            }
-            carstock[carindb.Name.toLowerCase()].Stock -= 1;
-            global.markModified("stock");
-            global.save();
-          }
-
-          let idtoset = filteredcar[0].alias;
+          userdata.pvptokens -= car.Tokens
           let carobj = {
-            ID: carindb.alias,
-            Name: carindb.Name,
-            Speed: carindb.Speed,
-            Acceleration: carindb["0-60"],
-            Handling: carindb.Handling,
-            Parts: [],
-            Emote: carindb.Emote,
-            Image: carindb.Image,
+            ID: car.alias,
+            Name: car.Name,
+            Speed: car.Speed,
+            Acceleration: car["0-60"],
+            Handling: car.Handling,
+            WeightStat: car.Weight,
+            Emote: car.Emote,
+            Livery: car.Image,
             Miles: 0,
-            Resale: sellprice,
-            WeightStat: carindb.Weight,
+            Resale:0,
             Gas: 10,
             MaxGas: 10,
           };
-          if (boughtCar.Range) {
-            carobj = {
-              ID: carindb.alias,
-              Name: carindb.Name,
-              Speed: carindb.Speed,
-              Acceleration: carindb["0-60"],
-              Handling: carindb.Handling,
-              Parts: [],
-              Emote: carindb.Emote,
-              Image: carindb.Image,
-              Miles: 0,
-              Resale: sellprice,
-              Drift: 0,
-              Range: carindb.Range,
-              MaxRange: carindb.Range,
-              WeightStat: carindb.Weight,
-              Gas: 10,
-              MaxGas: 10,
-            };
+          currency = `${emotes.pvptokens} ${numberWithCommas(car.Exclusive)}`
+          userdata.cars.push(carobj)
+          userdata.save()
+          let embed = new EmbedBuilder()
+          .setTitle(`You bought a ${car.Name}`)
+          .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
+          .setColor(colors.blue)
+          .setImage(car.Image)
+          .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+  
+         return await interaction.reply({ embeds: [embed] })
+        }
+        
+        else {
+
+          if(car.Price > cash){
+            return await interaction.reply({ content: `You don't have enough cash to buy this car`, ephemeral: true })
           }
-          if (imports.common.Contents.includes(boughtCar.Name.toLowerCase())) {
-            userdata.commonCredits -= 25;
+          if(usercars.find(c => c.alias === car.alias)){
+            return await interaction.reply({ content: `You already own this car`, ephemeral: true })
           }
-          if (imports.rare.Contents.includes(boughtCar.Name.toLowerCase())) {
-            userdata.rareCredits -= 25;
-          }
-          if (imports.exotic.Contents.includes(boughtCar.Name.toLowerCase())) {
-            userdata.exoticCredits -= 25;
-          }
-          if (boughtCar.Exclusive) {
-            userdata.typekeys -= boughtCar.Exclusive;
-          }
-          if (goldpurchase == true) {
-            userdata.gold -= cargoldprice;
-          } 
-          if (boughtCar.Carver) {
-            if(userdata.carver < 500) return interaction.reply("You need 500 carver cash to buy a carver event car!")
-            userdata.carver -= 500;
+          userdata.cash -= car.Price
+          let resale = car.Price * 0.75
+          let carobj = {
+            ID: car.alias,
+            Name: car.Name,
+            Speed: car.Speed,
+            Acceleration: car["0-60"],
+            Handling: car.Handling,
+            WeightStat: car.Weight,
+            Emote: car.Emote,
+            Livery: car.Image,
+            Miles: 0,
+            Resale:resale,
+            Gas: 10,
+            MaxGas: 10,
+          };
+          if(car.Electric){
+            carobj.Range = Number(car.Range)
+            carobj.MaxRange = Number(car.Range)
+  
           }
           else {
-            userdata.cash -= boughtCarPrice;
+            carobj.Gas = 10
+            carobj.MaxGas = 10
+  
           }
-
-          
-          userdata.cars.push(carobj);
-          await userdata.save();
-
-          let displayprice;
-          let emote;
-          if (!goldpurchase) {
-            displayprice = boughtCarPrice;
-            emote = emotes.cash;
-            userdata.cash -= boughtCarPrice;
-          }
-          if (goldpurchase) {
-            emote = "🪙";
-            displayprice = goldpurchase;
-            userdata.gold -= cargoldprice;
-          }
-          if (boughtCar.Exclusive) {
-            displayprice = boughtCar.Exclusive;
-            if (userdata.typekeys < boughtCar.Exclusive)
-              return interaction.reply("You don't have enough keys!");
-            emote = "<:key_z:1140029565360668783>";
-            userdata.typekeys -= boughtCar.Exclusive;
-          }
-
-          let embed = new EmbedBuilder()
-            .setTitle(`✅ Bought ${boughtCar.Name}`)
-            .addFields([
-              {
-                name: "Price",
-                value: `${emote} ${numberWithCommas(displayprice)}`,
-                inline: true,
-              },
-              {
-                name: `ID`,
-                value: `\`${idtoset}\``,
-                inline: true,
-              },
-            ])
-            .setColor(colors.blue)
-            .setImage(`${boughtCar.Image}`);
-
-          await interaction.reply({ embeds: [embed] });
+  
+          userdata.cars.push(carobj)
         }
-      }
-    } else if (boughtHouse[0]) {
-      let boughtHousePrice = boughtHouse[0].Price;
-      if (cash < boughtHousePrice)
-        return await interaction.reply("You don't have enough cash!");
-      if (userdata.prestige < boughtHouse[0].Prestige)
-        return await interaction.reply(
-          "Your prestige is not high enough to buy this house!"
-        );
 
-      if (boughtHousePrice == 0)
-        return interaction.reply("This house isn't purchasable!");
+        await userdata.save()
 
-      let houseobj = userdata.houses.filter(
-        (house) => house.Name == boughtHouse[0].Name
-      );
-      if (houseobj[0]) return interaction.reply("You already own this house!");
-
-      userdata.garageLimit += boughtHouse[0].Space;
-      userdata.houses.push(boughtHouse[0]);
-
-      userdata.cash -= boughtHousePrice;
-      await userdata.save();
-      let embed = new EmbedBuilder()
-        .setTitle(`Bought ${boughtHouse[0].Name}`)
-        .setImage(`${boughtHouse[0].Image}`)
+        let embed = new EmbedBuilder()
+        .setTitle(`You bought a ${car.Name}`)
+        .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
         .setColor(colors.blue)
-        .setDescription(`Price: ${toCurrency(boughtHouse[0].Price)}`);
-      await interaction.reply({ embeds: [embed] });
-    } else if (boughtWarehouse) {
-      let warehouses = userdata.warehouses || [];
-      let prestige = userdata.prestige;
-      let wareprice = parseInt(boughtWarehouse.Price);
-      if (cash < wareprice)
-        return await interaction.reply(`You cant afford this warehouse!`);
-      if (prestige < 11)
-        return await interaction.reply(
-          `Your prestige needs to be 11 before you can buy warehouses!`
-        );
-      if (warehouses.includes(bought))
-        return await interaction.reply(
-          `You've already purchased this warehouse!`
-        );
+        .setImage(car.Image)
+        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
 
-      userdata.warehouses.push(bought);
-      userdata.garageLimit += boughtWarehouse.Space;
-      await userdata.save();
-
-      await interaction.reply(
-        `You bought the ${boughtWarehouse.Emote} ${
-          boughtWarehouse.Name
-        } for ${toCurrency(boughtWarehouse.Price)}`
-      );
-    } else if (itemsList[bought]) {
-      let itemshopweek = global.itemshop.filter((item) => item.Name.toLowerCase() == bought.toLowerCase())[0]
-      console.log(itemshopweek)
-      if (!itemshopweek)
-      return interaction.reply(
-    "That item isn't purchasable today! Check back tomorrow **THE SHOP REFRESHES WEEKLY**"
-    );
-    let itemindb = itemsList[itemshopweek.Name.toLowerCase()];
-      if (itemindb.Price == 0)
-        return interaction.reply("This item isn't purchasable!");
-
-      let pricing = parseInt(itemindb.Price) * amount3;
-      if (userdata.cash < pricing)
-        return await interaction.reply(
-          `You cant afford this! You need ${toCurrency(pricing)}`
-        );
-
-
-      for (let i = 0; i < amount3; i++) userdata.items.push(bought);
-
-      userdata.cash -= pricing;
-
-      await userdata.save();
-
-      await interaction.reply(
-        `Purchased x${amount3} ${itemsList[bought].Emote} ${
-          itemsList[bought].Name
-        } for ${toCurrency(pricing)}`
-      );
-    } 
-    else if(partdb.Parts[bought]){
-      let partindb = partdb.Parts[bought]
-      if (partindb.Price == 0) return interaction.reply("This part isn't purchasable!");
-      let pricing = parseInt(partindb.Price) * amount3;
-
-
-      if(partindb.Type == "event"){
-        if(userdata.moontokens < pricing){
-          return await interaction.reply(
-            `You cant afford this! You need ${emotes.moontokens} ${numberWithCommas(pricing)}`
-          );
+        await interaction.reply({ embeds: [embed] })
+      }
+      else if(bought == "pvp crate"){
+        if(userdata.pvptokens < 100){
+          return await interaction.reply({ content: `You need 100 PVP Tokens to buy a PVP Crate`, ephemeral: true })
         }
+
+        userdata.pvptokens -= 100
+
+        userdata.items.push("pvp crate")
+        await userdata.save()
+
+        await interaction.reply({ content: `You bought a PVP Crate for 100 PVP Tokens`, ephemeral: true })
+
       }
       else {
-
-        if (userdata.cash < pricing)
-        return await interaction.reply(
-          `You cant afford this! You need ${toCurrency(pricing)}`
-        );
+        return await interaction.reply({ content: `I couldn't find that car or item`, ephemeral: true })
       }
 
 
 
-      for (let i = 0; i < amount3; i++) userdata.parts.push(bought);
-
-      if(partindb.Type == "event"){
-        userdata.moontokens -= pricing
-      } else {
-
-        userdata.cash -= pricing
-      }
-
-
-      await userdata.save()
-
-      await interaction.reply(
-        `Purchased x${amount3} ${partindb.Emote} ${
-          partindb.Name
-        } for ${toCurrency(pricing)}`
-      );
-    }
-    else {
-      await interaction.reply(
-        `Thats not a purchasable item, car, house, or part!`
-      );
-    }
   },
 };

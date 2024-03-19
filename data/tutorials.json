@@ -1,0 +1,78 @@
+{
+    "starter":{
+        "stages":[
+            {
+                "number":1,
+                "task":"Run **/garage** to see your car you've obtained"
+            },
+            {
+                "number":2,
+                "task":"Run **/race [street race] [car ID] [tier 1]** to race with your car"
+            },
+            {
+                "number":3,
+                "task":"Run **/bal** to view your cash"
+            },
+            {
+                "number":4,
+                "task":"Run **/dealer parts** to view the parts available for purchase"
+            },
+            {
+                "number":5,
+                "task":"Run **/buy [t1exhaust]** to buy a part"
+            },
+            {
+                "number":6,
+                "task":"Run **/garage** and click the **parts button** to view your parts"
+            },
+            {
+                "number":7,
+                "task":"Run **/upgrade [car id] t1exhaust** to upgrade your car"
+            },
+            {
+                "number":8,
+                "task":"Run **/race [street race] [car ID] [tier 1]** to race with your upgraded car"
+            }
+        ]
+    },
+    "restore":{
+        "stages":[
+            {
+                "number":1,
+                "task":"Run **/barn** to find a barn car to restore"
+            },
+            {
+                "number":2,
+                "task":"Run **/restore [car id]** to see what parts you need to restore your barn car"
+            },
+            {
+                "number":3,
+                "task":"Run **/junkyard** to find junk parts to restore your barn car"
+            },
+            {
+                "number":4,
+                "task":"Run **/restore [car id]** to restore your car completely"
+            }
+        ]
+    },
+    "season":{
+        "stages":[
+            {
+                "number":1,
+                "task":"Run **/events**"
+            },
+            {
+                "number":2,
+                "task":"Click the **season** button on the events drop down menu to view the season event"
+            },
+            {
+                "number":3,
+                "task":"Run **/season** to view the current season"
+            },
+            {
+                "number":4,
+                "task":"Click the **claim** button to claim your rewards"
+            }
+        ]
+    }
+}

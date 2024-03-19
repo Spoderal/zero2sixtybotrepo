@@ -25,5 +25,14 @@
         "Traction":100,
         "Difficulty":"Hard",
         "Handling":1000
+    },
+    "silverstone":{
+        "Name":"Silverstone",
+        "Image":"https://i.ibb.co/whHhTwJ/image.png",
+        "Racers":6,
+        "Class":"S",
+        "Traction":200,
+        "Difficulty":"Master",
+        "Handling":1200
     }
 }

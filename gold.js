@@ -1,5 +1,4 @@
 const User = require(`./schema/profile-schema`);
-const Global = require(`./schema/global-schema`);
 
 module.exports = (client) => {
   client.on("messageCreate", async (message) => {
@@ -13,7 +12,14 @@ module.exports = (client) => {
 
       let userdata = await User.findOne({ id: user });
 
+
       userdata.gold += Number(args[3]);
+   
+
+        userdata.zpass = true
+        userdata.zpasstimer = Date.now();
+      
+
 
       userdata.save();
     }

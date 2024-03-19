@@ -42,7 +42,52 @@ module.exports = {
 
       codesredeemed.push(code);
       userdata.save();
-    } else if (codes.Discord[code]) {
+    } 
+    else  if (codes.Eggs[code]) {
+      let eggs = userdata.eggs;
+      if (eggs.includes(codes.Eggs[code].Egg))  return await interaction.reply("You've already collected this egg!");
+      let eggmobile = cardb.Cars[codes.Eggs[code].Reward]
+      let carobj = {
+        ID: eggmobile.alias,
+        Name: eggmobile.Name,
+        Speed: eggmobile.Speed,
+        Acceleration: eggmobile["0-60"],
+        Handling: eggmobile.Handling,
+        WeightStat: eggmobile.Weight,
+        Emote: eggmobile.Emote,
+        Livery: eggmobile.Image,
+        Miles: 0,
+        Resale:0,
+        Gas: 10,
+        MaxGas: 10,
+      };
+      eggs.push(codes.Eggs[code].Egg);
+      userdata.cars.push(carobj)
+
+      if(eggs.length >= 11) {
+        let goldenegg = cardb.Cars["2024 gold egg mobile"]
+      let carobj = {
+        ID: goldenegg.alias,
+        Name: goldenegg.Name,
+        Speed: goldenegg.Speed,
+        Acceleration: goldenegg["0-60"],
+        Handling: goldenegg.Handling,
+        WeightStat: goldenegg.Weight,
+        Emote: goldenegg.Emote,
+        Livery: goldenegg.Image,
+        Miles: 0,
+        Resale:0,
+        Gas: 10,
+        MaxGas: 10,
+      };
+      userdata.push(carobj)
+        await interaction.channel.send(`Found <:egg_gold:1219112554236739674> The Golden Egg and earned ${goldenegg.Emote} ${goldenegg.Name}! You've collected all 11 eggs and earned the "Egg Hunter" achievement!`);
+
+      }
+      await interaction.reply(`Found ${codes.Eggs[code].Emote} ${codes.Eggs[code].Egg} and earned ${eggmobile.Emote} ${eggmobile.Name}!`);
+      userdata.save();
+    }
+    else if (codes.Discord[code]) {
       if (codesredeemed.includes(code)) return await interaction.reply("You've already redeemed this code!");
       
 

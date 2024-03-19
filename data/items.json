@@ -1,7 +1,7 @@
 {
 
   "wrench": {
-    "Price": 2500,
+    "Price": 5000,
     "Action": "Fix any part on a junk car without needing the part",
     "Name": "Wrench",
     "Type": "Usable",
@@ -9,7 +9,7 @@
     "Shop": true,
     "Findable": false,
     "Tier": 1,
-    "Image": "https://i.ibb.co/52sV3zY/1539872271436.jpg"
+    "Image": "https://i.ibb.co/x3XrXBm/item-wrench.png"
   },
   "water bottle": {
     "Price": 5000,
@@ -28,7 +28,7 @@
   },
   "pink slip": {
     "Price": 0,
-    "Action": "This item is completely usleess for now...",
+    "Action": "This item is completely useless for now...",
     "Name": "Pink Slip",
     "Type": "Non-Usable",
     "Emote": "<:pinkslip:977442825186721863>",
@@ -154,7 +154,7 @@
 
   "fruit punch": {
     "Price": 0,
-    "Action": "Receive x2 ranks when racing and drifting **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
+    "Action": "Receive x2 XP when racing and drifting **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
     "Name": "Fruit Punch",
     "Type": "Usable",
     "Emote": "<:item_fruitpunch:1095474852997120010>",
@@ -225,21 +225,10 @@
     "Image": "https://i.ibb.co/z8Sfx4H/item-stronglockpick.png",
     "Used": ["YES!!! NOW YOUR LOCKPICKS CAN'T BREAK!"]
   },
-  "pet treats": {
-    "Price": 5000,
-    "Action": "This item is completely usleess for now...",
-    "Name": "Pet Treats",
-    "Type": "Usable",
-    "Emote": "<:item_treats:1095474851046752327>",
-    "Shop": false,
-    "Findable": false,
-    "Tier": 1,
-    "Image": "https://i.ibb.co/5MTkjcf/item-treats.png",
-    "Used": ["You feed your pet treats and now it can find more xessence"]
-  },
+
   "blueberry": {
     "Price": 25000,
-    "Action": "Eat a blueberry to increase your race rank by 1",
+    "Action": "Eat a blueberry to increase your XP by 100",
     "Name": "Blueberry",
     "Type": "Usable",
     "Emote": "<:item_blueberry:1095474857514385480>",
@@ -248,8 +237,8 @@
     "Tier": 1,
     "Image": "https://i.ibb.co/XLskCMY/item-blueberry.png",
     "Used": [
-      "Blue? BLUE? BLUE??? Berry. Your race rank was increased by 1",
-      "You eat a blueberry and see your race rank increase by 1"
+      "Blue? BLUE? BLUE??? Berry. You gained 100 XP",
+      "You eat a blueberry and see your XP increase by 100"
     ]
   },
   "pizza": {
@@ -322,6 +311,42 @@
     "Tier": 1,
     "Image": "https://i.ibb.co/2MB5SNd/item-gem.gif"
   },
+  "bracelet": {
+    "Price": 0,
+    "Action": "Sell this for $100K or keep it as a souvenir\n\nFound while doing the Jewlery Store Heist",
+    "Name": "Bracelet",
+    "Type": "Non-Usable",
+    "Emote": "<:item_bracelet:1203571399785193544>",
+    "Shop": false,
+    "Findable": false,
+    "Tier": 1,
+    "Sellprice":100000,
+    "Image": "https://i.ibb.co/4MQCv9L/item-bracelet.png"
+  },
+  "ring": {
+    "Price": 0,
+    "Action": "Sell this for $500K or keep it as a souvenir\n\nFound while doing the Jewlery Store Heist",
+    "Name": "Ring",
+    "Type": "Non-Usable",
+    "Emote": "<:item_ring:1203571396924538910>",
+    "Shop": false,
+    "Findable": false,
+    "Tier": 1,
+    "Sellprice":500000,
+    "Image": "https://i.ibb.co/6BBDjgT/item-ring.png"
+  },
+  "necklace": {
+    "Price": 0,
+    "Action": "Sell this for $1M or keep it as a souvenir\n\nFound while doing the Jewlery Store Heist",
+    "Name": "Necklace",
+    "Type": "Non-Usable",
+    "Emote": "<:item_necklace:1203571399000719400>",
+    "Shop": false,
+    "Findable": false,
+    "Tier": 1,
+    "Sellprice":1000000,
+    "Image": "https://i.ibb.co/rHyqXKf/item-necklace.png"
+  },
   "star sticker": {
     "Price": 500000,
     "Action": "Your did it\n\nFound while doing the Zuber job",
@@ -359,20 +384,7 @@
       "You tase any intruder for 7 days"
     ]
   },
-  "pet collar": {
-    "Price": 10000,
-    "Action": "Prevent your pet from getting hungry, thirsty, and running away for 1 hour",
-    "Name": "Pet Collar",
-    "Type": "Usable",
-    "Emote": "<:item_petcollar:1098418926012076132>",
-    "Shop": true,
-    "Findable": true,
-    "Tier": 1,
-    "Image": "https://i.ibb.co/F0vMtpm/item-petcollar.png",
-    "Used": [
-      "You put a collar on your pet, now it wont get hungry, get thirsty, or run away! Thats definitely how it works right?"
-    ]
-  },
+
   "tequila shot": {
     "Price": 15000,
     "Action": "Get 5x race earnings for 1 minute. There is also 10% chance you lose $50K apon usage, why not find out?",
@@ -391,7 +403,7 @@
   },
   "radio": {
     "Price": 25000,
-    "Action": "Obtain 2x cash, 2x RP, and 2x race rank while racing for 5 minutes",
+    "Action": "Obtain 2x cash, 2x RP, and 2x XP while racing for 5 minutes",
     "Name": "Radio",
     "Type": "Usable",
     "Emote": "<:item_radio:1101011638540312607>",
@@ -419,12 +431,12 @@
 
   "crowbar": {
     "Price": 0,
-    "Action": "You'll need this to rob banks",
+    "Action": "This item is completely useless",
     "Name": "Crowbar",
     "Type": "Non-Usable",
     "Emote": "<:item_crowbar:1104299475691917444>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Market":5000,
     "Tier": 1,
     "Image": "https://i.ibb.co/RDWfNFb/item-crowbar.png"
@@ -432,12 +444,12 @@
 
   "mask": {
     "Price": 0,
-    "Action": "You'll also need this to rob banks",
+    "Action": "This item is completely useless",
     "Name": "Mask",
     "Type": "Non-Usable",
     "Emote": "<:item_mask:1104299478011367494>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Market":5000,
     "Tier": 1,
     "Image": "https://i.ibb.co/wBzGWGy/item-mask.png"
@@ -479,6 +491,32 @@
     "Tier": 3,
     "Image": "https://i.ibb.co/2c62K9T/item-reverse.png",
     "Used":["You used a reverse card on the bot...what?", "REVERSE REVERSE!", "Your friends probably hate you after this card"]
+  },
+  "cash bomb": {
+    "Price": 0,
+    "Action": "Use this to drop cash in the channel to a random person, including yourself",
+    "Name": "Cash Bomb",
+    "Type": "Usable",
+    "Emote": "<:item_cashbomb:1210875959969058846>",
+    "Shop": false,
+    "Findable": true,
+    "Market":50000,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/m9SbxtG/item-cashbomb.png",
+    "Used":["CASH BOMB GET DOWN!", "You drop a cash bomb, lets see who gets it"]
+  },
+  "coffee bean": {
+    "Price": 0,
+    "Action": "Get 2x XP permanently while in your inventory",
+    "Name": "Coffee Bean",
+    "Type": "Usable",
+    "Emote": "<:item_coffeebean:1210876241133969478>",
+    "Shop": false,
+    "Findable": true,
+    "Market":5000,
+    "Tier": 2,
+    "Image": "https://i.ibb.co/f23w9Df/item-coffeebean.png",
+    "Used":["Mmm coffee!", "HYPE HYPE HYPE!!!"]
   },
   "dirt": {
     "Price": 0,
@@ -594,7 +632,7 @@
 
   "cocktail": {
     "Price": 0,
-    "Action": "While this is in your inventory, you'll receive a 25% discount when buying used cars, but there's also a 15% chance you'll need to pay 10% extra",
+    "Action": "While this is in your inventory, you'll receive a 25% increase in XP while racing and drifting\nOne Use Only!",
     "Name": "Cocktail",
     "Type": "Non-Usable",
     "Emote": "<:item_cocktail:1111580012534042634>",
@@ -607,7 +645,7 @@
 
   "match": {
     "Price": 0,
-    "Action": "Light a match I cant see anything!\n\nWith this item in your inventory you boost your drift rank earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS BESIDES MATCHES*",
+    "Action": "Light a match I cant see anything!\n\nWith this item in your inventory you boost your XP earnings in drift to 2x PERMANENTLY *STACKS WITH OTHER ITEMS BESIDES MATCHES*",
     "Name": "Match",
     "Type": "Usable",
     "Emote": "<:item_match:1116954447797567488>",
@@ -631,7 +669,7 @@
 
   "parking brake": {
     "Price": 0,
-    "Action": "*TOKYO DRIFT MUSIC PLAYS*\n\nBoost your drift rank earnings to 4x PERMANENTLY\n*STACKS WITH OTHER ITEMS BESIDES PARKING BRAKES*",
+    "Action": "*TOKYO DRIFT MUSIC PLAYS*\n\nBoost your drift XP earnings to 4x PERMANENTLY\n*STACKS WITH OTHER ITEMS BESIDES PARKING BRAKES*",
     "Name": "Parking Brake",
     "Type": "Usable",
     "Emote": "<:item_parkingbrake:1116954443481612328>",
@@ -642,7 +680,7 @@
   },
   "gas": {
     "Price": 0,
-    "Action": "Wow this item is GASSS\n\nBring your previous race ranks with you when prestiging",
+    "Action": "This item currently has no use",
     "Name": "Gas",
     "Type": "Usable",
     "Emote": "<:item_gas:1116954444500848650>",
@@ -651,12 +689,12 @@
     "Tier": 2,
     "Image": "https://i.ibb.co/JRHjvrk/item-gas.png",
     "Used": [
-      "You warm your hands around the fire and now your extra race ranks will transfer over to the next prestige"
+      "You drink some gasoline, we've all done it right? Right??? Now your extra race ranks will transfer over to the next prestige"
     ]
   },
   "fireplace": {
     "Price": 0,
-    "Action": "Wait if we're underwater how can there be a-\n\nBring your previous drift ranks with you when prestiging",
+    "Action": "This item currently has no use",
     "Name": "Fireplace",
     "Type": "Usable",
     "Emote": "<:item_fireplace:1116954448976166962>",
@@ -696,12 +734,12 @@
   },
   "fake id": {
     "Price": 0,
-    "Action": "When you rob someone, your name wont show up",
+    "Action": "This item is completely useless",
     "Name": "Fake ID",
     "Type": "Usable",
     "Emote": "<:item_fakeid:1145561045381951509>",
-    "Shop": true,
-    "Findable": true,
+    "Shop": false,
+    "Findable": false,
     "Tier": 2,
     "Image": "https://i.ibb.co/y5D3Jqp/item-fakeid.png",
     "Used": ["Who'd you steal this from?", "HELP! MY ID WAS STOLEN"]
@@ -720,7 +758,7 @@
   },
   "pills": {
     "Price": 0,
-    "Action": "Extra luck when robbing someone with pills in your inventory",
+    "Action": "This item is completely useless",
     "Name": "Pills",
     "Type": "Usable",
     "Emote": "<:item_pills:1145582676674367488>",
@@ -779,24 +817,14 @@
     "Findable": false,
     "Shop": false
   },
-  "pet egg": {
-    "Price": 0,
-    "Action": "Hatch a pet",
-    "Name": "Pet Egg",
-    "Type": "Usable",
-    "Emote": "<:item_petegg:1095138763446960128>",
-    "Shop": true,
-    "Findable": false,
-    "Tier": 1,
-    "Image": "https://i.ibb.co/HF7NfGT/item-petegg.png"
-  },
+
   "disguise": {
     "Price": 0,
-    "Action": "Use this to steal from other users",
+    "Action": "This item is completely useless",
     "Name": "Disguise",
     "Type": "Usable",
     "Emote": "<:disguise:1008228542208802816>",
-    "Shop": true,
+    "Shop": false,
     "Findable": false,
     "Image": "https://i.ibb.co/M6DHckV/disguise.webp",
     "Used": [
@@ -828,7 +856,7 @@
   },
   "record": {
     "Price": 75000,
-    "Action": "With this item in your inventory you boost your race rank earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS*",
+    "Action": "With this item in your inventory you boost your race XP earnings to 2x PERMANENTLY *STACKS WITH OTHER ITEMS*",
     "Name": "Record",
     "Type": "Usable",
     "Emote": "<:item_record:1198183499019067412>",
@@ -848,25 +876,69 @@
     "Tier":3,
     "Image": "https://i.ibb.co/0VLZ4ky/item-cheese.png"
   },
+  "deodorant": {
+    "Price": 25000,
+    "Action": "Resets waterbottle cooldown",
+    "Name": "Deodorant",
+    "Type": "Usable",
+    "Emote": "<:item_deodorant:1203228408457461802>",
+    "Shop": true,
+    "Findable": true,
+    "Tier":3,
+    "Image": "https://i.ibb.co/1GJ5d0K/item-deodorant.png"
+  },
+  "magnifying glass": {
+    "Price": 50000,
+    "Action": "With this item in your inventory you can see what the result of NPC jobs will be",
+    "Name": "Magnifying Glass",
+    "Type": "Non-Usable",
+    "Emote": "<:item_magnifyingglass:1203228403508051988>",
+    "Shop": true,
+    "Findable": true,
+    "Tier":2,
+    "Image": "https://i.ibb.co/mRsKMFX/item-magnifyingglass.png"
+  },
+  "donut": {
+    "Price": 15000,
+    "Action": "With this in your inventory, your next location drive will be to a black market\n\nOne time use only",
+    "Name": "Donut",
+    "Type": "Non-Usable",
+    "Emote": "<:item_donut:1203228407022755840>",
+    "Shop": true,
+    "Findable": true,
+    "Tier":1,
+    "Image": "https://i.ibb.co/gwD9tT8/item-donut.png"
+  },
+  "cool stick": {
+    "Price": 100000,
+    "Action": "With this in your inventory, you gain 2 items instead of 1 per race\n\nOne time use only",
+    "Name": "Cool Stick",
+    "Type": "Non-Usable",
+    "Emote": "<:item_coolstick:1203230882773606440>",
+    "Shop": true,
+    "Findable": true,
+    "Tier":3,
+    "Image": "https://i.ibb.co/Snmh35s/item-coolstick.png"
+  },
   "comet": {
     "Price": 0,
-    "Action": "Can be used to refill your series tickets by 1\nFound while doing the astronaut job",
+    "Action": "Can be used to refill your series tickets by 1",
     "Name": "Comet",
     "Type": "Non-Usable",
     "Emote": "<:item_comet:1200941172114341969>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
     "Tier":3,
     "Image": "https://i.ibb.co/9YK3mwS/item-comet.png"
   },
   "moon": {
     "Price": 0,
-    "Action": "Is it made of cheese or not?\nFound while doing the astronaut job",
+    "Action": "Is it made of cheese or not?",
     "Name": "Moon",
     "Type": "Non-Usable",
     "Emote": "<:item_moon:1200941169752948826>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Tier":3,
     "Image": "https://i.ibb.co/tXZm76N/item-moon.png"
   },
@@ -874,7 +946,7 @@
     "Price": 0,
     "Action": "Open a common crate to get cosmetics, cash, and more!",
     "Name": "Common Crate",
-    "Type": "Usable",
+    "Type": "Non-Usable",
     "Emote": "<:supplydrop:1044404467119960085>",
     "Findable": false,
     "Shop": false
@@ -883,7 +955,7 @@
     "Price": 0,
     "Action": "Open a vote crate to get cosmetics, cash, and more!",
     "Name": "Vote Crate",
-    "Type": "Usable",
+    "Type": "Non-Usable",
     "Emote": "<:votecrate:1125629728175431761>",
     "Findable": false,
     "Shop": false
@@ -892,8 +964,36 @@
     "Price": 0,
     "Action": "Open a rare crate to get cosmetics, cash, and more!",
     "Name": "Rare Crate",
-    "Type": "Usable",
+    "Type": "Non-Usable",
     "Emote": "<:supplydroprare:1044404466096537731>",
+    "Findable": false,
+    "Shop": false
+  },
+  "legendary crate": {
+    "Price": 0,
+    "Action": "Open a legendary crate to get cosmetics, cash, and more!",
+    "Name": "Legendary Crate",
+    "Type": "Non-Usable",
+    "Emote": "",
+    "Image":"https://i.ibb.co/pPCprz0/supplydroplegend.png",
+    "Findable": false,
+    "Shop": false
+  },
+  "item crate": {
+    "Price": 0,
+    "Action": "Open a rare crate to get a random item!",
+    "Name": "Item Crate",
+    "Type": "Non-Usable",
+    "Emote": "<:supplydrop_item:1211181953982791720>",
+    "Findable": false,
+    "Shop": false
+  },
+  "pvp crate": {
+    "Price": 0,
+    "Action": "Open a pvp crate to get cosmetics, cash, and more!",
+    "Name": "PVP Crate",
+    "Type": "Non-Usable",
+    "Emote": "<:supplydroppvp:1208973835362238476>",
     "Findable": false,
     "Shop": false
   },

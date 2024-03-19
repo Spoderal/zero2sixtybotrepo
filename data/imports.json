@@ -13,6 +13,10 @@
       "2007 subaru wrx wagon",
       "2002 subaru wrx sti",
       "1994 chevy impala ss",
+      "1997 honda civic del sol",
+      "1989 toyota corolla",
+      "1997 citroen xantia activa",
+      "2012 audi a6",
       "2015 toyota gt86"
     ]
   },
@@ -45,6 +49,7 @@
       "2007 aston martin dbs",
       "2021 mercedes amg gt63",
       "2004 mercedes-mclaren slr",
+      "1992 bugatti eb110",
       "1990 ferrari testarossa",
       "1965 shelby cobra 427",
       "2005 ford gt",
@@ -52,6 +57,7 @@
       "2022 lamborghini countach",
       "2022 shelby super snake",
       "2020 mclaren senna",
+      "2024 porsche taycan gt",
       "2021 lamborghini huracan sto",
       "2021 lamborghini urus",
       "2022 ferrari br20",
@@ -110,25 +116,51 @@
       "horse"
     ]
   },
+  "track": {
+    "Contents": [
+     "1964 peel p50 te",
+     "1997 tvr cerbera speed 12",
+     "2014 chevy camaro z28",
+     "2014 marussia b2",
+     "2016 bugatti chiron pur sport",
+     "2016 apollo arrow",
+     "2016 nio ep9",
+     "2017 ferrari 488 gte",
+     "2017 acura nsx",
+     "2019 porsche 911 gt3 rs weissach",
+     "2019 porsche 935",
+     "2019 zenvo tsr s",
+     "2019 jaguar xe sv",
+     "2019 mclaren senna gtr",
+     "2020 mini",
+     "2020 hyundai i30 n",
+     "2020 ferrari f8 tributo",
+     "2021 bmw m2",
+     "2021 bac mono",
+     "2021 mercedes amg gt black series",
+     "2021 alpine a110 r",
+     "2023 mclaren solus gt",
+     "2023 porsche 911 gt3 rs",
+     "2023 ruf ctr3 evo",
+     "2026 hyundai n vision 74"
+    ]
+  },
   "drift": {
     "Contents": [
-      "drift 2002 mazda rx7 fd",
-      "drift 1995 mazda miata",
-      "drift 1989 nissan silvia s13",
-      "drift 1993 nissan silvia s14",
-      "drift 2002 nissan silvia s15",
-      "drift 1990 nissan 240sx",
-      "drift 2008 nissan 350z",
-      "drift 1989 nissan skyline r32",
-      "drift 1999 mitsubishi eclipse",
-      "drift 1993 bmw m3 e30",
-      "drift 1998 bmw m3 e36",
-      "drift 2000 lexus sc400",
-      "drift 2001 lexus is300",
-      "devils 1995 nissan skyline r33",
-      "devils 2001 toyota supra mk4",
-      "devils 2002 nissan skyline r34",
-      "devils 2009 honda s2000"
+      {"name": "drift 2002 mazda rx7 fd", "rarity":10},
+      {"name": "drift 1995 mazda miata", "rarity":40},
+      {"name": "drift 1989 nissan silvia s13", "rarity":20},
+      {"name": "drift 1993 nissan silvia s14", "rarity":20},
+      {"name": "drift 2002 nissan silvia s15", "rarity":20},
+      {"name": "drift 1990 nissan 240sx", "rarity":20},
+      {"name": "drift 2008 nissan 350z", "rarity":20},
+      {"name": "drift 1989 nissan skyline r32", "rarity":5},
+      {"name": "drift 1999 mitsubishi eclipse", "rarity":40},
+      {"name": "drift 1993 bmw m3 e30", "rarity":40},
+      {"name": "drift 1998 bmw m3 e36", "rarity":5},
+      {"name": "drift 2000 lexus sc400", "rarity":40},
+     { "name": "drift 2001 lexus is300", "rarity":5}
+    
     ]
   },
   "blueprints": {
@@ -145,7 +177,10 @@
       "2023 bentley mulliner bacalar",
       "2500 Cash",
       "2500 Cash",
+      "2010 noble m600",
+      "2012 honda accord",
       "2500 Cash",
+      "2016 bmw i8",
       "1981 dmc delorean",
       "t1gastank",
       "t2gastank",
@@ -229,6 +264,7 @@
       "1995 mclaren f1",
       "2020 mclaren 570s",
       "2021 mclaren 765lt",
+      "2021 mclaren elva",
       "2017 mclaren 650s",
       "2018 mclaren p1 gt"
     ]
