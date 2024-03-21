@@ -10,22 +10,21 @@ const { emotes } = require("../common/emotes");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("start")
-    .setDescription("Begin your racing career"),
+    .setDescription("Begin your horse career"),
   async execute(interaction) {
     let userid = interaction.user.id;
     let userdata = await User.findOne({ id: userid });
 
     if (userdata) return await interaction.reply("You have an account!");
-    interaction.reply({content: "Please wait...", fetchReply: true})
+   await  interaction.reply({content: "Please wait...", fetchReply: true})
 
 
 
-    let embed = new discord.EmbedBuilder({
-      title: "You've started your journey!",
-      thumbnail: { url: "https://tenor.com/view/la-merveille-des-merveilles-running-horses-gallop-beautiful-horse-gif-17031952" },
-      description:
-        `**Welcome to Horse2Sixty!**\nAllow me to introduce you to the world of Horse2Sixty, the year is 1859, and you're about to start your journey to become the best horse racer in the world!`,
-    })
+    let embed = new discord.EmbedBuilder()
+      .setTitle("You've started your journey!")
+      .setThumbnail("https://i.ibb.co/xmQMW2L/horse2sixty.png")
+      .setDescription("**Welcome to Horse2Sixty!**\nAllow me to introduce you to the world of Horse2Sixty, the year is 1859, and you're about to start your journey to become the best horse racer in the world!")
+      .addFields({name: "Your first horse", value: "You've been given a thoroughbred horse to start your journey, it's a fast horse, but it's not the best, you'll have to work hard to get the best horses"})
 
     embed.setColor(`${colors.blue}`)
     let msg

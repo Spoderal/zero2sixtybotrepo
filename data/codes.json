@@ -28,7 +28,8 @@
     },
     "ZERO2SIXTYISTHEBEST": {
       "Reward": "2024 zero2sixty egg mobile",
-      "Emote":"<:egg_zero2sixty:1219112551045140570>"
+      "Emote":"<:egg_zero2sixty:1219112551045140570>",
+      "Egg":"Zero2Sixty egg"
     },
     "IMONFIRE": {
       "Reward": "2024 fire egg mobile",
@@ -64,7 +65,12 @@
         "Reward":"2024 egg mobile 2",
         "Emote":"<:egg_number2:1219756040942391326>",
         "Egg":"Egg #2"
-    }
+    },
+    "LEGOEGGO":{
+      "Reward":"2024 lego egg mobile",
+      "Emote":"<:egg_lego:1219112533122748548>",
+      "Egg":"Lego Egg"
+  }
     
   },
   "Patreon": {

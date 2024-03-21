@@ -30,6 +30,7 @@
     "canvas": "^2.11.2",
     "canvas-filters": "^1.0.1",
     "discord-api-types": "^0.37.2",
+    "discord-hybrid-sharding": "^2.1.4",
     "discord.js": "^14.8.0",
     "discordbotlist": "^1.1.1",
     "dotenv": "^16.0.1",

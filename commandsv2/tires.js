@@ -14,10 +14,10 @@ module.exports = {
     .setDescription(`Tires are a crucial part of your car. So is the surface, both of these can affect your car's handling, acceleration, and top speed.\n
     The 5 types of surfaces are: Asphalt, Dirt, Snow, Wet, and Ice.\n
     Asphalt is the most common surface, and is the default surface, no stats are changed\n
-    Dirt is a surface thats primarly for offroading\n
-    Snow is a surface that is slippery, similar to dirt, and can cause your car to slide\n
-    Wet is a surface that is slippery, but not as slippery as snow\n
-    Ice is the most slippery surface, and can cause your car to slide a lot without the proper tires\n
+    Dirt is a surface thats primarly for offroading (stats are decreased without the proper tires)\n
+    Snow is a surface that is slippery, similar to dirt, and can cause your car to slide (stats are decreased without the proper tires)\n
+    Wet is a surface that is slippery, but not as slippery as snow (stats are decreased without the proper tires)\n
+    Ice is the most slippery surface, and can cause your car to slide a lot without the proper tires (stats are decreased without the proper tires)\n
 
     Tires are just as important as the surface\n
     The 5 types of tires are: Regular (t1tires), All surface (t1allsurfacetires), Slicks (t1slicks), Track (t1tracktires), and Offroad (t1offroadtires)\n

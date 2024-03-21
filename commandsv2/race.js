@@ -1121,6 +1121,9 @@ let tires = selected.tires || "t1tires"
       userpfp = "default";
     }
 
+    let speedpercent = surface.Speed * 100;
+    let handlingpercent = surface.Handling * 100;
+
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing tier ${tieroption} ${raceindb.Name} on ${surface.Emote} ${surface.Name}`)
@@ -1133,7 +1136,7 @@ let tires = selected.tires || "t1tires"
           name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} Your ${
             selected.Emote
           } ${selected.Name}`,
-          value: `${emotes.speed} HP: ${(Math.floor(selected.Speed * surface.Speed))}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Speed)}\n${emotes.weight} Weight: ${selected.WeightStat}`,
+          value: `${emotes.speed} HP: ${(Math.floor(selected.Speed * surface.Speed))} (${speedpercent}%)\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Speed)}(${handlingpercent}%)\n${emotes.weight} Weight: ${selected.WeightStat}`,
           inline: true,
         },
         {
@@ -1928,7 +1931,7 @@ let tires = selected.tires || "t1tires"
           rewards.push(`${emotes.rank} Skill Level Up!`)
         }
 
-        let xessence = randomRange(1, 10);
+        let xessence = randomRange(1, 5);
 
 
         if (selected.Xessence && prestige >= 2 && tieroption >= 7) {
@@ -1955,7 +1958,7 @@ let tires = selected.tires || "t1tires"
           rewards.push(`${emotes.xessence} ${xessence} Xessence`);
 
         }
-        else if(!selected.Xessence && prestige <= 2 && tieroption >= 7){ 
+        else if(!selected.Xessence && prestige >= 2 && tieroption >= 7){ 
           console.log("xessence")
 
           selected.Xessence = xessence

@@ -1475,6 +1475,24 @@
       "Type": "engine",
       "DecreasedSpeed": "0"
     },
+    "egg engine": {
+      "Name": "Egg Engine",
+      "Power": 50,
+      "AddedSnow": 0,
+      "Acceleration": 0,
+      "sellprice": 100,
+      "Price": 0,
+      "Emote": "🥚",
+      "Image": "https://i.ibb.co/rmfcxKD/brand-egg.png",
+      "Tier": "1",
+      "JunkOnly": true,
+      "AddedDrift": "0",
+      "DecreasedDrift": "0",
+      "Weight":0,
+      "RemoveAcceleration": "0",
+      "Type": "engine",
+      "DecreasedSpeed": "0"
+    },
     "ev": {
       "Name": "EV",
       "Power": 100,
@@ -1944,8 +1962,8 @@
       "Color": "#7b0000",
       "Image": "https://i.ibb.co/cbf7jR8/part-t5tires.png"
     },
-    "t1allterraintires": {
-      "Name": "T1AllTerrainTires",
+    "t1allsurfacetires": {
+      "Name": "T1AllSurfaceTires",
       "Power": 0,
       "AddedSnow": 0,
       "Acceleration": 0,
@@ -1957,7 +1975,7 @@
       "Handling": 5,
       "Image": "https://i.ibb.co/nQytgQV/part-t1tires.png"
     },
-    "t2allterraintires": {
+    "t2allsurfacetires": {
       "Name": "T2AllSurfaceTires",
       "Power": 0,
       "AddedSnow": 0,
@@ -1973,7 +1991,7 @@
       "Handling": 0,
       "Image": "https://i.ibb.co/SnjFnYD/part-t2tires.png"
     },
-    "t3allterraintires": {
+    "t3allsurfacetires": {
       "Name": "T3AllSurfaceTires",
       "Power": 0,
       "AddedSnow": 0,
@@ -1990,7 +2008,7 @@
       "Handling": 15,
       "Image": "https://i.ibb.co/Y3fsgJ6/part-t3tires.png"
     },
-    "t4allterraintires": {
+    "t4allsurfacetires": {
       "Name": "T4AllSurfaceTires",
       "Power": 0,
       "Acceleration": 0,
@@ -2004,7 +2022,7 @@
       "Handling": 0,
       "Image": "https://i.ibb.co/CPYgzS6/part-t4tires.png"
     },
-    "t5allterraintires": {
+    "t5allsurfacetires": {
       "Name": "T5AllSurfaceTires",
       "Power": 0,
       "Acceleration": 0,

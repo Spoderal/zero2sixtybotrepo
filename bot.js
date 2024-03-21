@@ -6,6 +6,7 @@ const app = express();
 
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const path = require("path");
+const { ClusterClient, getInfo } = require('discord-hybrid-sharding');
 
 const client = new Client({
   intents: [
@@ -16,7 +17,8 @@ const client = new Client({
     
     GatewayIntentBits.GuildMessageReactions,
   ],
-  shards: "auto",
+  shards: getInfo().SHARD_LIST,
+  shardCount: getInfo().TOTAL_SHARDS
 });
 
 // See .env-example for an explanation of FORCE_DISABLE_BOT
@@ -68,6 +70,6 @@ if (process.env.FORCE_DISABLE_BOT === "true") {
       client.on(event.name, (...args) => event.execute(...args, commands));
     }
   }
-
-  client.login();
+  client.cluster = new ClusterClient(client)
+  client.login(process.env.TOKEN);
 }

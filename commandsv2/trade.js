@@ -333,18 +333,18 @@ module.exports = {
         await udata1.save();
         await udata2.save();
         embed.setTitle("Trade accepted! ✅");
-        await interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed] , components: []});
         return;
       } else {
         embed.setTitle("Trade declined! ❌");
-        await interaction.editReply({ embeds: [embed] });
+        await interaction.editReply({ embeds: [embed], components: [] });
         return;
       }
     });
 
     collector.on("end", async () => {
       embed.setTitle("Trade expired!");
-      return await interaction.editReply({ embeds: [embed] });
+      return await interaction.editReply({ embeds: [embed], components: [] });
     });
   },
 };

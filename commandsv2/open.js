@@ -33,8 +33,9 @@ module.exports = {
         )
         .setRequired(true)
     )
-    .addStringOption((option) =>option
+    .addNumberOption((option) =>option
     .setName("amount")
+    .setMinValue(1)
     .setDescription("The amount of crates you want to open")
     .setRequired(false)
     ),
@@ -47,10 +48,14 @@ module.exports = {
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
     let bought = interaction.options.getString("crate");
-    let amount = interaction.options.getString("amount") || 1;
+    let amount = interaction.options.getNumber("amount") || 1;
     let inv = userdata.items;
     let cooldown = 10000;
     let cratecool = cooldowndata.crate;
+    if(amount <= 0) return interaction.reply("You can't open a negative amount of crates!")
+    if (!Number.isInteger(amount)) {
+      return interaction.reply("The amount of crates must be a whole number!");
+    } 
     if (cratecool !== null && cooldown - (Date.now() - cratecool) > 0) {
       let time = ms(cooldown - (Date.now() - cratecool));
       let timeEmbed = new EmbedBuilder()

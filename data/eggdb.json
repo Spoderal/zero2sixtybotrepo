@@ -53,5 +53,10 @@
           "Reward":"2024 egg mobile 2",
           "Emote":"<:egg_number2:1219756040942391326>",
           "Egg":"Egg #2"
-      }
+      },
+      "lego egg":{
+        "Reward":"2024 lego egg mobile",
+        "Emote":"<:egg_lego:1219112533122748548>",
+        "Egg":"Lego Egg"
+    }
 }

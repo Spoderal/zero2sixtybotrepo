@@ -63,7 +63,7 @@ module.exports = {
   + `${emotes.f1blueprint} F1 Blueprints: ${numberWithCommas(profile.f1blueprint)}\n`
   + `${emotes.seriestickets} Series Tickets: ${profile.seriestickets}\n`
   + `${emotes.xessence} Xessence: ${profile.xess}\n`
-  + `||Whats this? An egg? <:egg_green:1219112556426428547> : \`CODE: GRASSGREENER\`||`
+  + `||Whats this? An egg? <:egg_green:1219112556426428547> : \`CODE: GRASSGREEN\`||`
 
   const eventbalance = `${emotes.notoriety} Notoriety: ${numberWithCommas(profile.notoriety)}\n` +
   `${emotes.rp} RP: ${numberWithCommas(profile.rp)}\n` + `<:tracklegends:1072357967652995174> Track Keys: ${numberWithCommas(profile.trackkeys)}\n` 

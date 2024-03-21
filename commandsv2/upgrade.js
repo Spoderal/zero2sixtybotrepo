@@ -231,7 +231,7 @@ module.exports = {
       return await interaction.reply({embeds: [embed]})
     }
     
-
+    let xclass = selected[0].Class || cardb[selected[0].Name.toLowerCase()].Class
     let acc = selected[0].Acceleration
     let newacc = acc -= partindb.Acceleration
     
@@ -242,7 +242,7 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed += Number(partindb.Power)
     }
-    if(partindb.Acceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2 && selected[0].Class && selected[0].Class !== "X"){
+    if(partindb.Acceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2 && xclass !== "X"){
     if(newacc < 2){
       selected[0].Acceleration = 2
     } 

@@ -131,7 +131,10 @@ subcommand
         let theme = interaction.options.getString("theme");
         let prize = interaction.options.getNumber("prize");
         let players = interaction.options.getNumber("players");
-
+        let userdata = await User.findOne({id: user.id})
+        if(userdata.cash < prize){
+            return interaction.reply("You do not have enough cash to create this car show");
+        }
         let ownedamount = await Carshow.find({owner: user.id})
 
         if(ownedamount.length >= 5){
@@ -171,6 +174,10 @@ subcommand
             carshow.maxPlayers = players;
         }
         await carshow.save();
+
+        userdata.cash -= prize;
+
+        await userdata.save();
 
         
         await interaction.reply(`Car show created with id ${id}`);

@@ -212,6 +212,7 @@ module.exports = {
         });
       } 
       else  if (value === "easter") {
+        embed.data.fields = [];
         embed.setTitle("Easter Event");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`The Easter Car has come and taken all the eggs

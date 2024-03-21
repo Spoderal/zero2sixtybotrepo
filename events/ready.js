@@ -44,10 +44,17 @@ module.exports = {
  //   stats(client);
     itemshop(client)
    
- 
+    
     var express = require("express");
     var app = express();
     var bodyParser = require("body-parser");
+
+    for(let i of client.options.shards){
+      if(i == 0) {
+        app.listen(8080);
+        console.log("Listening on port 8080")
+      }
+    }
     app.use(bodyParser.json());
   
     app.post("/webhooks/zero2sixtybotgold", function (request, response) {
@@ -93,9 +100,6 @@ module.exports = {
       );
     }
 
-    app.listen(8080, function () {
-      console.log("Listening on port 8080.");
-    });
 
     let randomstatuses = [
       `☀️ SPRING 🌸  /season`,

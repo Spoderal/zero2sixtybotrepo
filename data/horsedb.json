@@ -2,15 +2,58 @@
     "Horses":{
         "thoroughbred":{
             "Name":"Thoroughbred",
-            "ID":"1",   
-            "Age":5,
+            "ID":"1", 
             "Color":"Brown",
-            "Speed": 40,
+            "Speed": 70,
             "Stamina": 50,
-            "Jump": 60,
-            "Strength": 70,
+            "Jump": 40,
+            "Strength": 40,
             "Emote":"🐎",
             "Image":""
-         }
-}
+         },
+        "clydesdale":{
+            "Name":"Clydesdale",
+            "ID":"2",
+            "Color":"Black",
+            "Speed": 40,
+            "Stamina": 70,
+            "Jump": 30,
+            "Strength": 70,
+            "Emote":"🐴",
+            "Image":""
+        },
+        "arabian":{
+            "Name":"Arabian",
+            "ID":"3",
+            "Color":"White",
+            "Speed": 80,
+            "Stamina": 60,
+            "Jump": 50,
+            "Strength": 30,
+            "Emote":"🐪",
+            "Image":""
+        },
+        "appaloosa":{
+            "Name":"Appaloosa",
+            "ID":"4",
+            "Color":"Spotted",
+            "Speed": 60,
+            "Stamina": 40,
+            "Jump": 60,
+            "Strength": 50,
+            "Emote":"🦓",
+            "Image":""
+        },
+        "mustang":{
+            "Name":"Mustang",
+            "ID":"5",
+            "Color":"Brown",
+            "Speed": 50,
+            "Stamina": 50,
+            "Jump": 40,
+            "Strength": 60,
+            "Emote":"🐴",
+            "Image":""
+        }
+    }
 }
