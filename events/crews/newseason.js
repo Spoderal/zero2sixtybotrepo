@@ -25,6 +25,7 @@ async function newseason() {
         let userrp = rpdata.rp;
         console.log(userrp);
         rpdata.rp = 0
+        rpdata.crewseasonclaimed = 0
         rpdata.save()
       }
       console.log(`rp: ${totalrp}`);
@@ -38,16 +39,6 @@ async function newseason() {
         crew2.Rank = newrank;
         console.log("ranked");
       }
-    }
-    await Global.findOneAndUpdate({  "crews.$[crew]": crew2, }, {"crew.Name": crew2.name,});
-    await global.markModified("crews");
-
-    try {
-      await global.save();
-
-    } 
-    catch(err){
-      return console.log(err)
     }
   
 }

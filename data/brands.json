@@ -112,7 +112,13 @@
     "image": "https://i.ibb.co/8zMmDGf/lykan.png",
     "emote": "<:lykan:980253850286035007>",
     "name": "Lykan",
-    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
+    "country": "https://i.ibb.co/0tmb1b0/Flag-of-the-United-Arab-Emirates-svg.png"
+  },
+  "devel":{
+    "emote":"<:logo_devel:1227989564379889774>",
+    "name":"Devel",
+    "image":"https://i.ibb.co/kHK8sPR/logo-devel.png",
+    "country":"https://i.ibb.co/0tmb1b0/Flag-of-the-United-Arab-Emirates-svg.png"
   },
   "dmc": {
     "image": "https://i.ibb.co/fSCFjJg/logo-dmc.png",
@@ -550,5 +556,11 @@
     "emote": "🍕",
     "name": "Pizza",
     "country": "https://i.ibb.co/120BJky/flag-italy.png"
+  },
+  "patty": {
+    "image": "https://i.ibb.co/LR26pMg/brand-spongebob.png",
+    "emote": "🍔",
+    "name": "Patty",
+    "country": "https://i.ibb.co/wZmtPcH/flag-us.png"
   }
 }

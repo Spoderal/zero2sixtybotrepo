@@ -22,10 +22,7 @@ module.exports = {
     let seconds = Math.floor(totalSeconds % 60);
     let gas = global.gas;
 
-    let fixed = gas.toFixed(1);
-    interaction.client.cluster
-    .broadcastEval(c => c.guilds.cache.size)
-    .then(results => console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`));
+    let fixed = gas.toFixed(2);
 
     let embed = new Discord.EmbedBuilder()
       .setTitle(`Info for ${bot.username}`)
@@ -44,8 +41,7 @@ module.exports = {
             interaction.client.ws.ping
           )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n${emotes.gas} Gas Price: ${
             emotes.cash
-          } $${fixed}\n\nVoting helps us a lot! Use /vote to vote for us to get a vote crate AND refill all of your cars!\n
-          ||Egg time, <:egg_zero2sixty:1219112551045140570> \`CODE: ZERO2SIXTYISTHEBEST\`||
+          } $${fixed}\n\nVoting helps us a lot! Use /vote to vote for us
           `,
           inline: true,
         },
@@ -56,6 +52,8 @@ module.exports = {
         },
       ])
       .setColor(colors.blue);
+
+      console.log("test log")
 
     await interaction.reply({ embeds: [embed] });
   },

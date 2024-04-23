@@ -62,16 +62,16 @@ module.exports = {
 
         udata2.cars.push(carobj);
 
-        udata2.save();
+        await udata2.save();
       } else if (partdb.Parts[togive.toLowerCase()]) {
         udata2.parts.push(togive.toLowerCase());
-        udata2.save();
+        await udata2.save();
         togive = partdb.Parts[togive.toLowerCase()].Name;
 
         console.log("given");
       } else if (itemdb[togive.toLowerCase()]) {
         udata2.items.push(togive.toLowerCase());
-        udata2.save();
+        await udata2.save();
       togive = itemdb[togive.toLowerCase()].Name;
       } else {
         return await interaction.reply("Thats not an item!");

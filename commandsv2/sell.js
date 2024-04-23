@@ -40,10 +40,11 @@ module.exports = {
       timeout - (Date.now() - cooldowns.trading) > 0
     ) {
       return interaction.reply({
-        content: `You need to wait to use this command because you're trading with someone! **IF SOMEONE IS ABUSING THIS, REPORT IT TO STAFF IMMEDIATELY**`,
+        content: `You need to wait to use this command because you're trading with someone!`,
       });
     }
     let userparts = userdata.parts;
+    let useritems = userdata.items
     let selling = interaction.options.getString("item");
     let amount = interaction.options.getNumber("amount") || 1;
     let amount2 = Math.round(amount);
@@ -60,18 +61,17 @@ module.exports = {
 
     let selected = filteredcar[0] || "No ID";
 
-
     if (selected !== "No ID") {
       let price = selected.Resale
 
-      if(!selected.Resale || selected.Resale == 0){
-        price = cardb.Cars[selected.Name.toLowerCase()].sellprice * 0.35
+      if(price == 0 || !price || price == undefined || price == null){
+        price = cardb.Cars[selected.Name.toLowerCase()].sellprice * 0.75
       }
-
 
       if(userdata.location == "united kingdom"){
-        price = cardb.Cars[selected.Name.toLowerCase()].Price * 0.30;
+        price += price * 0.05
       }
+
 
         
 
@@ -132,19 +132,38 @@ module.exports = {
         userparts.splice(userparts.indexOf(selling.toLowerCase()), 1);
       userdata.parts = userparts;
       await interaction.reply(
-        `You sold your ${selling} for ${toCurrency(finalamount)}!`
+        `You sold x${amount2} ${selling} for ${toCurrency(finalamount)}!`
       );
     }  else if (itemdb[selling.toLowerCase()]) {
-      if(!userdata.items.includes(selling.toLowerCase())) return interaction.reply('You dont have that item!')
-      let useritems = userdata.items;
-      let finalprice = itemdb[selling.toLowerCase()].Price * 0.35;
-      useritems.splice(useritems.indexOf(selling.toLowerCase()), 1);
+      if (
+        !useritems.includes(
+          itemdb[selling.toLowerCase()].Name.toLowerCase()
+        )
+      )
+        return await interaction.reply("You dont have that item!");
+      
+      let filtereduser = useritems.filter(function hasmany(item) {
+        return item === selling.toLowerCase();
+      });
+      if (amount2 > filtereduser.length)
+        return await interaction.reply(
+          "You don't have that many of that item!"
+        );
+      let finalamount = 0;
+
+        let resale = itemdb[selling.toLowerCase()].Price * 0.35;
+        finalamount = amount2 * resale;
+        userdata.cash += finalamount;
+      
+      for (var i3 = 0; i3 < amount2; i3++)
+        useritems.splice(useritems.indexOf(selling.toLowerCase()), 1);
       userdata.items = useritems;
-      userdata.cash += finalprice
-
-
-      await interaction.reply(`You sold your ${selling} for ${toCurrency(finalprice)}!`);
+      await interaction.reply(
+        `You sold x${amount2} ${selling} for ${toCurrency(finalamount)}!`
+      );
     } 
+
+    else if(selected == "No ID") return interaction.reply("You don't have that car or part!")
 
     await userdata.save();
   },

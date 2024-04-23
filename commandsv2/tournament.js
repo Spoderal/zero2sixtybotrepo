@@ -6,10 +6,7 @@ const {
   ActionRowBuilder, ButtonBuilder
 } = require("discord.js");
 const User = require("../schema/profile-schema");
-const Cooldowns = require("../schema/cooldowns");
-const ms = require("pretty-ms");
 const colors = require("../common/colors");
-const { GET_STARTED_MESSAGE } = require("../common/constants");
 const emotes = require("../common/emotes").emotes;
 const pvpranks = require("../data/ranks.json");
 const outfits = require("../data/characters.json")
@@ -42,21 +39,64 @@ module.exports = {
         )
         .addNumberOption((option) =>
         option
+          .setName("players")
+          .setDescription("The amount of players in the tournament")
+          .setRequired(true)
+          .addChoices(
+            {name: '4', value: 4},
+            {name: '8', value: 8},
+            {name: '16', value: 16},
+          )
+      )
+        .addNumberOption((option) =>
+        option
           .setName("maxhp")
           .setDescription("The max hp for the tournament")
-          .setRequired(true)
+          .setRequired(false)
       )
       .addNumberOption((option) =>
       option
-        .setName("players")
-        .setDescription("The amount of players in the tournament")
-        .setRequired(true)
-        .addChoices(
-          {name: '4', value: 4},
-          {name: '8', value: 8},
-          {name: '16', value: 16},
-        )
+        .setName("maxhandling")
+        .setDescription("The max handling for the tournament")
+        .setRequired(false)
     )
+    .addNumberOption((option) =>
+    option
+      .setName("maxacceleration")
+      .setDescription("The max acceleration for the tournament")
+      .setRequired(false)
+  )
+  .addNumberOption((option) =>
+  option
+    .setName("maxweight")
+    .setDescription("The max weight for the tournament")
+    .setRequired(false)
+)
+.addNumberOption((option) =>
+option
+  .setName("minhp")
+  .setDescription("The min hp for the tournament")
+  .setRequired(false)
+)
+.addNumberOption((option) =>
+option
+  .setName("minhandling")
+  .setDescription("The min handling for the tournament")
+  .setRequired(false)
+)
+.addNumberOption((option) =>
+option
+  .setName("minacceleration")
+  .setDescription("The min acceleration for the tournament")
+  .setRequired(false)
+)
+.addNumberOption((option) =>
+option
+  .setName("minweight")
+  .setDescription("The min weight for the tournament")
+  .setRequired(false)
+)
+     
     )
     .addSubcommand((subcommand) =>
       subcommand
@@ -117,6 +157,13 @@ module.exports = {
       let tournamentName = interaction.options.getString("name");
       let prize = interaction.options.getNumber("prize");
       let maxHP = interaction.options.getNumber("maxhp");
+      let maxHandling = interaction.options.getNumber("maxhandling");
+      let maxAcceleration = interaction.options.getNumber("maxacceleration");
+      let maxWeight = interaction.options.getNumber("maxweight");
+      let minHP = interaction.options.getNumber("minhp");
+      let minHandling = interaction.options.getNumber("minhandling");
+      let minAcceleration = interaction.options.getNumber("minacceleration");
+      let minWeight = interaction.options.getNumber("minweight");
       let players = interaction.options.getNumber("players");
      await interaction.reply({content: "Creating tournament...", fetchReply: true})
      
@@ -155,7 +202,7 @@ module.exports = {
       const tournamentDetails = {
         name: tournamentName,
         prize: prize,
-        maxhp: maxHP,
+  
         players: [],
         owner: interaction.user.id,
         maxPlayers: maxplayers,
@@ -163,6 +210,33 @@ module.exports = {
         losers: [],
         started: false
       };
+      if(maxHP){
+        tournamentDetails.maxhp = maxHP
+      }
+      if(maxHandling){
+        tournamentDetails.maxhandling = maxHandling
+      }
+      if(maxAcceleration){
+        tournamentDetails.maxacceleration = maxAcceleration
+      }
+      if(maxWeight){
+        tournamentDetails.maxweight = maxWeight
+      }
+      if(minHP){
+        tournamentDetails.minhp = minHP
+      }
+      if(minHandling){
+        tournamentDetails.minhandling = minHandling
+      }
+      if(minAcceleration){
+        tournamentDetails.minacceleration = minAcceleration
+      }
+      if(minWeight){
+        tournamentDetails.minweight = minWeight
+      }
+
+
+
       console.log(tournamentDetails);
 
 
@@ -202,9 +276,34 @@ module.exports = {
       if(!findcar){
         return await interaction.reply("You don't own that car")
       }
-      if(findcar.HP > tournament.maxhp){
+      // maximum stats
+      if(tournament.maxhp && findcar.Speed > tournament.maxhp){
         return await interaction.reply("Your car has too much HP for this tournament")
       }
+      if(tournament.maxhandling && findcar.Handling > tournament.maxhandling){
+        return await interaction.reply("Your car has too much Handling for this tournament")
+      }
+      if(tournament.maxweight && findcar.Weight > tournament.maxweight){
+        return await interaction.reply("Your car has too much Weight for this tournament")
+      }
+      if(tournament.maxacceleration && findcar.Acceleration > tournament.maxacceleration){
+        return await interaction.reply("Your car has too much Acceleration for this tournament")
+      }
+      // minimum stats
+      if(tournament.minhp && findcar.Speed < tournament.minhp){
+        return await interaction.reply("Your car doesn't have enough HP for this tournament")
+      }
+      if(tournament.minhandling && findcar.Handling < tournament.minhandling){
+        return await interaction.reply("Your car doesn't have enough Handling for this tournament")
+      }
+      if(tournament.minweight && findcar.Weight < tournament.minweight){
+        return await interaction.reply("Your car doesn't have enough Weight for this tournament")
+      }
+      if(tournament.minacceleration && findcar.Acceleration < tournament.minacceleration){
+        return await interaction.reply("Your car doesn't have enough Acceleration for this tournament")
+      }
+
+
       // Push the user's ID to the tournament's players array
       tournament.players.push({player: interaction.user.id, car: carid});
       await tournament.save();

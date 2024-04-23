@@ -104,12 +104,16 @@ else if (itemtouse.toLowerCase() == "energy drink") {
     } else if (itemtouse.toLowerCase() == "radar") {
       userdata.chased = Date.now();
     } else if (itemtouse.toLowerCase() == "blueberry") {
-      userdata.xp += 100;
+      userdata.xp += 100 * amount2;
       let skill = userdata.skill
-      let requiredxp  =skill * 100
+      let requiredxp  = skill * 100
       if(userdata.xp >= requiredxp){
-        userdata.skill += 1
-        userdata.xp = 0
+        const xpToNextRank = (userdata.skill + 1) * 100;
+        while(userdata.xp >= xpToNextRank){
+          userdata.skill += 1;
+          userdata.xp -= xpToNextRank;
+        }
+        interaction.channel.send(`You ranked up to ${userdata.skill}!`)
       }
     } 
     else if (itemtouse.toLowerCase() == "cash bomb") {
@@ -160,8 +164,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push(`epic lockpick`);
       cooldowndata.epiclockpick = Date.now();
     }  else if (itemtouse.toLowerCase() == "chips") {
-      if (userdata.chips >= 50)
-        return await interaction.reply("You can only stack up to 50%!");
+      if (userdata.chips >= 50)  return await interaction.reply("You can only stack up to 50%!");
       userdata.using.push(`chips`);
       userdata.chips += 5;
       cooldowndata.chips = Date.now();
@@ -228,7 +231,12 @@ else if (itemtouse.toLowerCase() == "energy drink") {
     } else if (itemtouse.toLowerCase() == "milk") {
       userdata.using.push("milk");
       cooldowndata.milk = Date.now();
-    } else if (itemtouse.toLowerCase() == "chocolate milk") {
+    } 
+    else if (itemtouse.toLowerCase() == "cookie") {
+      userdata.using.push("cookie");
+      cooldowndata.cookie = Date.now();
+    } 
+    else if (itemtouse.toLowerCase() == "chocolate milk") {
       userdata.using.push("chocolate milk");
       cooldowndata.cmilk = Date.now();
     } else if (itemtouse.toLowerCase() == "strawberry milk") {
@@ -239,7 +247,20 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       cooldowndata.canrob = Date.now();
 
       userdata.markModified("work");
-    } else if (itemtouse.toLowerCase() == "secret brief case") {
+    } 
+    else if (itemtouse.toLowerCase() == "pills") {
+      userdata.using.push("pills");
+      cooldowndata.pills = Date.now();
+    }
+    else if (itemtouse.toLowerCase() == "apple") {
+      userdata.using.push("apple");
+      cooldowndata.apple = Date.now();
+    }
+    else if (itemtouse.toLowerCase() == "applepie") {
+      userdata.using.push("applepie");
+      cooldowndata.applepie = Date.now();
+    }
+    else if (itemtouse.toLowerCase() == "secret brief case") {
       if (userdata.work.name !== "Police")
         return await interaction.reply(
           "You need to be a police officer to use this item!"
@@ -898,21 +919,16 @@ else if (itemtouse.toLowerCase() == "energy drink") {
 };
 
 async function giveRandomCash(interaction, users) {
-  console.log(users)
-  let userarr = users.map((user) => user.user)
-  console.log(userarr)
+  let userarr = users.filter((user) => !user.user.bot).map((user) => user.user);
   const randomUser = lodash.sample(userarr);
-  const randomAmount = Math.floor(Math.random() * 100000) + 1; // Random amount between 1 and 1000
+  const randomAmount = Math.floor(Math.random() * 100000) + 1; // Random amount between 1 and 100000
   console.log(randomUser)
   let userdata = await User.findOne({ id: randomUser.id });
-
   if(userdata){
     userdata.cash += randomAmount;
     userdata.save()
 
   }
-
-
   return await interaction.channel.send(
     `You gave ${randomUser} $${randomAmount}!`
   );

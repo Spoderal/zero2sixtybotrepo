@@ -10,8 +10,8 @@
         "Freds 2002 Ford Mustang",
         "Heathers 2007 Infiniti G35 Coupe"
       ],
-      "Reward": 500,
-      "BigReward": 2000,
+      "Reward": 1000,
+      "BigReward": 5000,
       "Icon": "https://i.ibb.co/k9nw8MD/squad-flamehouse.png",
       "Name": "Flame House",
       "Emote": "<:squad_flamehouse:1206519055465447444>"
@@ -26,9 +26,9 @@
         "Kaylas 2010 Ford Mustang",
         "Toms 1994 Porsche 911"
       ],
-      "Reward": 1000,
+      "Reward": 2500,
       "Icon": "https://i.ibb.co/4gxmSRH/squad-astros.png",
-      "BigReward": 3500,
+      "BigReward": 10000,
       "Name": "The Astros",
       "Emote": "<:squad_astros:1206519054139924490>"
     },
@@ -42,9 +42,9 @@
         "Ians 2005 Ford GT",
         "Nathans 2022 Shelby Super Snake"
       ],
-      "Reward": 1500,
+      "Reward": 5000,
       "Icon": "https://i.ibb.co/s2rt3fH/squad-muscle.png",
-      "BigReward": 5000,
+      "BigReward": 25000,
       "Name": "Muscle Brains",
       "Emote": "<:squad_muscle:1206519052944801852>"
     },
@@ -58,9 +58,9 @@
         "Mikes 2021 Lamborghini Huracan STO",
         "Cobras 2005 Pagani Zonda F"
       ],
-      "Reward": 2000,
+      "Reward": 10000,
       "Icon": "https://i.ibb.co/G0VJYs7/squad-cobras.png",
-      "BigReward": 7500,
+      "BigReward": 100000,
       "Name": "Cool Cobras",
       "Emote": "<:squad_cobras:1206519050436616212>"
     },
@@ -74,9 +74,9 @@
         "Kevins 2013 McLaren P1",
         "Walters 2012 Pagani Huayra"
       ],
-      "Reward": 3500,
+      "Reward": 25000,
       "Icon": "https://i.ibb.co/8cbHKwG/squad-demonz.png",
-      "BigReward": 10000,
+      "BigReward": 100000,
       "Name": "Demonz",
       "Emote": "<:squad_demonz:1206519059680731157>"
     },
@@ -90,11 +90,27 @@
         "Madisons 2020 Koenigsegg Jesko",
         "Spoders 2005 Porsche Carrera GT"
       ],
-      "Reward": 5000,
+      "Reward": 50000,
       "Icon": "https://i.ibb.co/D8c9K8P/squad-0.png",
-      "BigReward": 25000,
+      "BigReward": 250000,
       "Name": "Double 0",
       "Emote": "<:squad_0:1206519057184981062>"
+    },
+    "impossible defenders": {
+      "Tier": 7,
+      "Class": "S",
+      "Cars": [
+        "Joes 2006 Koenigsegg CCX",
+        "Morgans 2021 Toyota Supra",
+        "Bobs 2021 Porsche 911 Turbo",
+        "Teds 2021 Ferrari SF90 Stradale",
+        "Jasons 2021 Lamborghini Sian"
+      ],
+      "Reward": 100000,
+      "Icon": "https://i.ibb.co/FYRw37Z/squad-defenders.png",
+      "BigReward": 10000000,
+      "Name": "Impossible Defenders",
+      "Emote": "<:squad_defenders:1231077857791574026>"
     }
   }
 }

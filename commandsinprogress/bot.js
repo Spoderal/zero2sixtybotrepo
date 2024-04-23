@@ -1,59 +1,75 @@
+// Starts the bot and sets up the commands and events
+const fs = require("fs");
+require("dotenv").config();
+const express = require("express");
+const app = express();
 
+const { Client, GatewayIntentBits, Collection, Options } = require("discord.js");
+const path = require("path");
 
-const Discord = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const colors = require("../common/colors");
-const { numberWithCommas } = require("../common/utils");
-const Global = require("../schema/global-schema");
-const { emotes } = require("../common/emotes");
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("bot")
-    .setDescription("Check the bot information"),
-  async execute(interaction) {
-    let global = await Global.findOne({});
-    let bot = interaction.client.user;
-    let totalSeconds = interaction.client.uptime / 1000;
-    let days = Math.floor(totalSeconds / 86400);
-    totalSeconds %= 86400;
-    let hours = Math.floor(totalSeconds / 3600);
-    totalSeconds %= 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
-    let gas = global.gas;
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+    
+    GatewayIntentBits.GuildMessageReactions,
+  ],
 
-    let fixed = gas.toFixed(1);
+});
 
-    let embed = new Discord.EmbedBuilder()
-      .setTitle(`Info for ${bot.username}`)
-      .setThumbnail(bot.displayAvatarURL())
-      .addFields([
-        {
-          name: "Stats",
-          value: `🌎 ${
-            interaction.client.guilds.cache.size
-          } servers\n\n👤 ${numberWithCommas(
-            interaction.client.guilds.cache.reduce(
-              (a, g) => a + g.memberCount,
-              0
-            )
-          )} users\n\n🏓 Ping: ${Math.round(
-            interaction.client.ws.ping
-          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\nShard ${interaction.client.shard.ids[0]}\n\n${emotes.gas} Gas Price: ${
-            emotes.cash
-          } $${fixed}\n\nVoting helps us a lot! Use /vote to vote for us to get a vote crate AND refill all of your cars!\n
-          ||Egg time, <:egg_zero2sixty:1219112551045140570> \`CODE: ZERO2SIXTYISTHEBEST\`||
-          `,
-          inline: true,
-        },
-        {
-          name: "Links",
-          value: `[Community Server](https://discord.gg/bHwqpxJnJk)\n\n[Invite Bot](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=59392&scope=bot%20applications.commands)\n\n[Patreon](https://www.patreon.com/zero2sixtybot)`,
-          inline: true,
-        },
-      ])
-      .setColor(colors.blue);
+// See .env-example for an explanation of FORCE_DISABLE_BOT
+if (process.env.FORCE_DISABLE_BOT === "true") {
+  app.listen(8080);
+  console.warn(
+    `
+    !! WARNING - DISCORD BOT DISABLED !!
 
-    await interaction.reply({ embeds: [embed] });
-  },
-};
+    The env var 'FORCE_DISABLE_BOT' is set to 'true'.
+
+    This node process will continue to run and listen on port 8080.
+    This is only to ensure the CI/CD deployment succeeds.
+    
+    To re-enable, set 'FORCE_DISABLE_BOT' to 'true' and redeploy.
+
+    `
+  );
+} else {
+  const commands = [];
+  client.commands = new Collection();
+  const commandFiles = fs
+    .readdirSync("./commandsv2")
+    .filter((file) => file.endsWith(".js"));
+
+  for (const file of commandFiles) {
+    const command = require(`./commandsv2/${file}`);
+    const existingCommand = commands.find((c) => c.name === command.data.name);
+    if (existingCommand) {
+      console.warn(
+        `WARNING: The command '${existingCommand.name}' from file '${file}' was not added because it was already added from '${existingCommand.fileLocation}'!`
+      );
+    } else {
+      commands.push({ ...command.data.toJSON(), fileLocation: file });
+      client.commands.set(command.data.name, command);
+    }
+  }
+
+  client.on("debug", console.log)
+    client.on("warn", console.log)
+
+  const eventFiles = fs
+    .readdirSync("./events", { withFileTypes: true })
+    .filter((file) => !file.isDirectory() && path.extname(file.name) === ".js");
+
+  for (const file of eventFiles) {
+    const event = require(`./events/${file.name}`);
+
+    if (event.once) {
+      client.once(event.name, (...args) => event.execute(...args, commands));
+    } else {
+      client.on(event.name, (...args) => event.execute(...args, commands));
+    }
+  }
+  client.login(process.env.TOKEN);
+}

@@ -55,7 +55,7 @@ module.exports = {
         { name: "Auto Fill Gas", value: `${gasemote}` }
       )
       .setColor(colors.blue)
-      .setDescription(`<:zpass:1200657440304283739> Z Pass Active: ${zpass}\n||<:egg_striped:1219112547916185660> CODE: \`ICEFIRE\`||`)
+      .setDescription(`<:zpass:1200657440304283739> Z Pass Active: ${zpass}`)
 
     let row = new Discord.ActionRowBuilder().addComponents(
       new Discord.ButtonBuilder()

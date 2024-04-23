@@ -54,6 +54,9 @@ module.exports = {
         "Thats not a car! Make sure to specify a car ID, or car name"
       );
 
+      let selectedmany = usercars.filter((car) => car.Name.toLowerCase() == selected[0].Name.toLowerCase() || car.ID == selected[0].ID)
+      if(selectedmany.length > 1) return interaction.reply("You have multiple cars with the same ID/Name, please sell some of them until you only have 1")
+
     let carimage =  selected[0].Image || cardb[selected[0].Name.toLowerCase()].Image;
     let carspeed = selected[0].Speed
     let caracc = selected[0].Acceleration
@@ -65,13 +68,21 @@ module.exports = {
     let partindb = partdb.Parts[inputUpgrade.toLowerCase()]
 
     let engine = selected[0].engine || cardb[selected[0].Name.toLowerCase()].Engine
+    let drivetrain = selected[0].drivetrain || cardb[selected[0].Name.toLowerCase()].Drivetrain
+
     if(engine == null){
       engine = cardb[selected[0].Name.toLowerCase()].Engine
     }
+    if(drivetrain == null){
+      drivetrain = cardb[selected[0].Name.toLowerCase()].Drivetrain
+    }
     console.log(engine)
-    if(selected[0][partindb.Type] && partindb.Type !== "engine" && partindb.Type !== "gastank") return interaction.reply(`Your car already has a ${partindb.Type}, use /remove first!`)
+    if(selected[0][partindb.Type] && partindb.Type !== "engine" && partindb.Type !== "gastank" && partindb.Type !== "drivetrain") return interaction.reply(`Your car already has a ${partindb.Type}, use /remove first!`)
     let oldpart = selected[0][partindb.Type]
     if(engine.toLowerCase() == partindb.Name.toLowerCase()) return interaction.reply(`Your car already has this engine!`)
+    if(drivetrain.toLowerCase() == partindb.Name.toLowerCase()) return interaction.reply(`Your car already has this drivetrain!`)
+    if(partindb.JunkOnly) return interaction.reply("You cant upgrade your car with this")
+
     let partvalue = partindb.Price * 0.35
     let resale = selected[0].Resale
     let oldresale = 0
@@ -79,7 +90,13 @@ module.exports = {
 
 
     if(partvalue == 0){
-      partvalue = Number(partindb.Tier) * 5000
+      if(partindb.Tier == "X"){
+        partvalue = 50000
+      }
+      else {
+        partvalue = Number(partindb.Tier) * 5000
+
+      }
     }
     
     let oldresalecar = selected[0].Resale
@@ -92,17 +109,18 @@ module.exports = {
       }
     }
     if(partindb.Type == "engine"){
-      if(oldpart !== undefined){
-        if(oldpart == null){
+      if(oldpart == undefined || oldpart == null){
           oldpart = cardb[selected[0].Name.toLowerCase()].Engine
-        }
+      }
+      console.log(oldpart)
         oldresale = partdb.Parts[oldpart.toLowerCase()].Price * 0.35
   
         if(oldresale == 0){
           oldresale = Number(partindb.Tier) * 5000
         }
-      }
+      
       let hpengine = partindb.Power
+      let handlingengine = partindb.Handling
       console.log(engine.toLowerCase())
       let oldhp = partdb.Parts[engine.toLowerCase()]
       let oldcarhp = selected[0].Speed
@@ -111,6 +129,7 @@ module.exports = {
       console.log(`old value ${oldresale}`)
       selected[0].Speed -= oldhp.Power
       selected[0].Speed += hpengine
+
       console.log(resale)
 
      
@@ -230,11 +249,114 @@ module.exports = {
   
       return await interaction.reply({embeds: [embed]})
     }
+   else if(partindb.Type == "drivetrain"){
+      if(oldpart == undefined || oldpart == null){
+          oldpart = cardb[selected[0].Name.toLowerCase()].Drivetrain
+      }
+      console.log(oldpart)
+        oldresale = partdb.Parts[oldpart.toLowerCase()].Price * 0.35
+  
+        if(oldresale == 0){
+          oldresale = Number(partindb.Tier) * 5000
+        }
+      
+      let hpdrivetrain = partindb.Power
+      console.log(drivetrain.toLowerCase())
+      let oldhp = partdb.Parts[drivetrain.toLowerCase()]
+      let oldcarhp = selected[0].Speed
+      let oldcarhandling = selected[0].Handling
+      let oldcaracceleration = selected[0].Acceleration
+      let oldcarweight = selected[0].WeightStat
+
+      console.log(`old value ${oldresale}`)
+      selected[0].Speed -= oldhp.Power
+      selected[0].Speed += hpdrivetrain
+
+      oldresalecar -= oldresale
+      console.log(resale)
+      
+      oldresalecar += partvalue
+      console.log(resale)
+      
+      console.log(`part value ${partvalue}`)
+
+      selected[0].Resale = oldresalecar
+
+      if(oldhp.Weight && oldhp.Weight > 0){
+        selected[0].WeightStat -= Number(oldhp.Weight)
+      }
+      if(oldhp.RemoveWeight && oldhp.RemoveWeight > 0){
+        selected[0].WeightStat += Number(oldhp.RemoveWeight)
+      }
+      if(oldhp.Handling && oldhp.Handling > 0){
+        selected[0].Handling -= Number(oldhp.Handling)
+      }
+      if(oldhp.Acceleration && oldhp.Acceleration > 0){
+        selected[0].Acceleration += Number(oldhp.Acceleration)
+      }
+      if(partindb.Weight && partindb.Weight > 0){
+        selected[0].WeightStat += Number(partindb.Weight)
+      }
+      if(partindb.RemoveWeight && partindb.RemoveWeight > 0){
+        selected[0].WeightStat -= Number(partindb.RemoveWeight)
+      }
+      if(partindb.Handling && partindb.Handling > 0){
+        selected[0].Handling += Number(partindb.Handling)
+      }
+      if(partindb.Acceleration && partindb.Acceleration > 0){
+        selected[0].Acceleration -= Number(partindb.Acceleration)
+      }
+
+      console.log(resale)
+
+      let embed = new EmbedBuilder()
+      .setTitle(`Drivetrain swap`)
+      .addFields({name: "Old Drivetrain", value: `${oldhp.Emote} ${oldhp.Name}\n${emotes.speed} HP ${oldhp.Power}`, inline: true}, {name: "New Drivetrain", value: `${partindb.Emote} ${partindb.Name}\n${emotes.speed} HP ${hpdrivetrain}`, inline: true})
+      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}\n${emotes.weight} Weight ${oldcarweight} -> ${selected[0].WeightStat}\n${emotes.handling} Handling ${oldcarhandling} -> ${selected[0].Handling}\n${emotes.acceleration} Acceleration: ${oldcaracceleration} -> ${selected[0].Acceleration}\nValue: ${toCurrency(resale)} -> ${toCurrency(oldresalecar)}`)
+      .setColor(colors.blue)
+      .setImage(`${carimage}`)
+      .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
+
+      selected[0].drivetrain = partindb.Name.toLowerCase()
+
+      await User.findOneAndUpdate(
+        {
+          id: interaction.user.id,
+        },
+        {
+          $set: {
+            "cars.$[car]": selected[0],
+          },
+        },
+  
+        {
+          arrayFilters: [
+            {
+              "car.Name": selected[0].Name,
+            },
+          ],
+        }
+      );
+
+      let userparts = userdata.parts
+      for (var i5 = 0; i5 < 1; i5++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
+      userdata.parts = userparts
+
+
+      userdata.parts.push(oldhp.Name.toLowerCase())
+
+
+
+      await userdata.save()
+  
+      return await interaction.reply({embeds: [embed]})
+    }
     
     let xclass = selected[0].Class || cardb[selected[0].Name.toLowerCase()].Class
     let acc = selected[0].Acceleration
     let newacc = acc -= partindb.Acceleration
-    
+
+    console.log(selected[0])
     if(partindb.Handling > 0){
       selected[0].Handling += Number(partindb.Handling)
     }
@@ -242,12 +364,18 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed += Number(partindb.Power)
     }
-    if(partindb.Acceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2 && xclass !== "X"){
-    if(newacc < 2){
+    if(partindb.Acceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2){
+    if(newacc < 2 && xclass !== "X"){
       selected[0].Acceleration = 2
     } 
     else {
-      selected[0].Acceleration -= partindb.Acceleration
+      if(newacc < 2 && xclass == "X" || cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){  
+        selected[0].Acceleration = 1.5
+      }
+      else {
+        selected[0].Acceleration -= partindb.Acceleration
+
+      }
 
     }
   }
@@ -255,7 +383,7 @@ module.exports = {
       selected[0].Acceleration += Number(partindb.RemoveAcceleration)
     }
     if(partindb.RemovePower > 0){
-      selected[0].Power += Number(partindb.RemovePower)
+      selected[0].Speed -= Number(partindb.RemovePower)
     }
     if(partindb.DecreaseHandling > 0){
       selected[0].Handling -= Number(partindb.DecreaseHandling)
@@ -275,12 +403,20 @@ module.exports = {
     }
 
     
+    console.log(partvalue)
 
 
 
     if(partvalue == 0){
-      partvalue = Number(partindb.Tier) * 5000
+      if(partindb.Tier == "X"){
+        partvalue = 50000
+      }
+      else {
+
+        partvalue = Number(partindb.Tier) * 5000
+      }
     }
+    console.log(partvalue)
 
     selected[0].Resale = resale + partvalue
 

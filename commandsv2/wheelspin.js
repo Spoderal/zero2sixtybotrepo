@@ -46,7 +46,7 @@ module.exports = {
     if (userdata.using.includes("orange juice")) {
      
       let cooldown = cooldowns.orangejuice;
-      let timeout = 60000;
+      let timeout = 120000;
       console.log(timeout - (Date.now() - cooldown));
       if (
         timeout !== null &&

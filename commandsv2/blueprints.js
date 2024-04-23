@@ -79,7 +79,7 @@ module.exports = {
       let timeout = 30000;
       let rewards = [];
 
-      let i = setInterval(() => {
+      let i = setInterval(async () => {
         x++;
         let contents = boughtindb.Contents;
         if (
@@ -99,7 +99,12 @@ module.exports = {
           clearInterval(i);
         }
       }, 1000);
-
+      if (
+        itemcooldown !== null &&
+        timeout - (Date.now() - itemcooldown) < 0
+      ) {
+        await interaction.channel.send("Your apple juice ran out!")
+      } 
       let xt = setTimeout(async () => {
         let reward1 = rewards[0];
         let reward2 = rewards[1];

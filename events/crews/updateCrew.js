@@ -8,11 +8,11 @@ async function updateCrew(interaction) {
       
     
     let global = (await Global.findOne({})) || new Global({});
-    let ucrew = usredata.crew;
+    let ucrew = usredata.usercrew;
     let crews = global.crews;
     let crew2;
     if (ucrew) {
-      crew2 = crews.filter((crew) => crew.name == ucrew.name);
+      crew2 = crews.filter((crew) => crew.name == ucrew);
     }
 
     console.log(`crew2`)
@@ -47,7 +47,7 @@ async function updateCrew(interaction) {
       }
     }
     try {
-
+      
       await Global.findOneAndUpdate({  "crews.$[crew]": crew2, }, {"crew.Name": crew2.name,});
     }
     catch(err){

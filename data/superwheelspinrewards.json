@@ -21,6 +21,8 @@
     "t4brakes",
     "t4spoiler",
     "t4gearbox",
+    "rocket engine",
+    "super rocket engine",
     "t4allterraintires",
   "t4gastank",
     "t4weightreduction"
@@ -31,7 +33,7 @@
     "t4suspension",
   "t4ecu",
   "t4bodykit",
-  "t4allterraintires",
+  "t4allsurfacetires",
   "t4brakes",
   "t4spoiler",
   "t4gearbox",

@@ -78,7 +78,7 @@ module.exports = {
           option
             .setName("option")
             .setDescription("The option to edit")
-            .addChoices({ name: "Icon", value: "icon" })
+            .addChoices({ name: "Icon", value: "icon" }, { name: "Name", value: "name" })
             .setRequired(true)
         )
     )
@@ -137,12 +137,12 @@ module.exports = {
       let crewname = interaction.options.getString("name");
       let crew;
       if (!crewname) {
-        crew = userdata.crew;
+        crew = userdata.usercrew;
         if (!crew)
           return await interaction.reply(
             "You're not in a crew!\nJoin one with `/crew option join name [crew name]` or create one with `/crew option create name [crew name]`"
           );
-        crewname = crew.name;
+        crewname = crew;
       }
       let crew2 = crews.filter(
         (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
@@ -152,11 +152,11 @@ module.exports = {
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
       let rpmembers = crew2.members;
       let emoji = emotes.zerorp;
-      var finalLb = "";
+      let finalLb = "";
       let total = 0;
       let rparray = [];
       let newrparray = [];
-      for (i in rpmembers) {
+      for (let i in rpmembers) {
         let userId = rpmembers[i];
         let user = await interaction.client.users.fetch(userId);
         let isOwner = false;
@@ -167,19 +167,21 @@ module.exports = {
         if (!filteruser[0]) {
           rparray.push({ rp, user, isOwner });
         }
+        total += rp;
       }
-      newrparray = rparray.sort((a, b) => b.rp - a.rp);
-      newrparray.length = 10;
-      for (var i in newrparray) {
-        let tag = newrparray[i].user.tag;
-        total += newrparray[i].rp;
-        finalLb += `**${
-          newrparray.indexOf(newrparray[i]) + 1
-        }.** ${tag} - **${numberWithCommas(Math.floor(newrparray[i].rp))}** ${emoji}\n`;
+      console.log(rparray)
+      let filteredUsers = rparray
+      .sort((b, a) => a.rp - b.rp)
+
+      filteredUsers = filteredUsers.slice(0 ,10)
+      for (let i = 0; i < filteredUsers.length; i++) {
+        let user = filteredUsers[i];
+
+        finalLb += `#${i + 1} ${user.user.username} RP: ${emotes.rp} ${numberWithCommas(user.rp)}\n`
       }
 
       let icon = crew2.icon || icons.Icons.default;
-      let mlength = crew2.members.length;
+      let mlength = crew2.members.length
       let owner = newrparray.find((u) => u?.isOwner);
       if (!crew2.Rank) {
         crew2.Rank = 1;
@@ -218,12 +220,12 @@ module.exports = {
           .setStyle("Secondary")
       );
 
-      if (crew && crew.name == crew2.name) {
+      if (crew && crew == crew2.name) {
         row.addComponents(
           new ButtonBuilder()
             .setCustomId("season")
-            .setEmoji("<:crewseason5:1213402248361803786>")
-            .setLabel("Season 5")
+            .setEmoji("<:crew_season6:1224007183855910963>")
+            .setLabel("Season 6")
             .setStyle("Secondary")
         );
       }
@@ -300,7 +302,7 @@ module.exports = {
                 }
               }
               let embed2 = new Discord.EmbedBuilder()
-                .setTitle(`Season 5 for ${crew2.name}`)
+                .setTitle(`Season 6 for ${crew2.name}`)
                 .setDescription(`${reward.join("\n")}`)
                 .setFooter({text: `Ends April 1st 2024`})
                 .setThumbnail(icon)
@@ -378,17 +380,16 @@ module.exports = {
       await interaction.reply(`✅`);
     } else if (option == "join") {
       let userdata = await User.findOne({ id: interaction.user.id });
-      if(userdata.skill < 5) return interaction.reply("You need to be skill rank 5 to join crews!")
+      if(userdata.skill < 10) return interaction.reply("You need to be skill rank 10 to join crews!")
       let uid = interaction.user.id;
       let crewname = interaction.options.getString("name");
-      if (!crewname)
-        return await interaction.reply("Please specify a crew name!");
+      if (!crewname)  return await interaction.reply("Please specify a crew name!");
 
       let crew2 = globalModel.crews.filter((crew) => crew.name == crewname);
       if (crew2.length == 0)
         return await interaction.reply("That crew doesn't exist!");
 
-      let crew = userdata.crew;
+      let crew = userdata.usercrew;
       let actcrew = crew2[0];
       if (crew) return await interaction.reply("You're already in a crew!");
 
@@ -420,8 +421,8 @@ module.exports = {
       globalModel.save();
       globalModel.markModified("crews");
 
-      userdata.crew = crew2[0];
-
+      userdata.usercrew = crew2[0].name;
+      userdata.crewseasonclaimed = crew2[0].Rank
       userdata.rp = 0;
       userdata.joinedcrew = Date.now();
       userdata.save();
@@ -431,7 +432,7 @@ module.exports = {
       let crewseason = require("../data/seasons.json").Seasons.Crew2.Rewards;
       let seasonclaimed = userdata.crewseasonclaimed || 0
 
-      let crewname = userdata.crew.name;
+      let crewname = userdata.usercrew;
       let crew2 = crews.filter(
         (crew) => crew.name.toLowerCase() == crewname.toLowerCase()
       );
@@ -439,11 +440,12 @@ module.exports = {
       let seasonnew = seasonclaimed + 1
       let item = crewseason[`${seasonnew}`];
       
+      if (!item || item == [] || item == {} || item == null || item == undefined) {
+        return interaction.reply(`You've claimed all the rewards!`);
+      }
+      
       if (item.Number > crew2[0].Rank) {
         return interaction.reply(`Your crew needs to be rank ${item.Number}`);
-      }
-      if (!item) {
-        return interaction.reply(`You've claimed all the rewards!`);
       }
       if (item.Item.endsWith("Cash")) {
         let amount = item.Item.split(" ")[0];
@@ -538,7 +540,7 @@ module.exports = {
       interaction.reply(`Claimed ${item.Item}`);
     } else if (option == "create") {
       let userdata = await User.findOne({ id: interaction.user.id });
-      if(userdata.skill < 5) return interaction.reply("You need to be skill rank 5 to create crews!")
+      if(userdata.skill < 10) return interaction.reply("You need to be skill rank 10 to create crews!")
       let crewname = interaction.options.getString("name");
       if (!crewname)
         return await interaction.reply("Please specify a crew name!");
@@ -547,7 +549,7 @@ module.exports = {
       if (isCrewNameTaken)
         return await interaction.reply("That crew already exists!");
 
-      let crew = userdata?.crew;
+      let crew = userdata?.usercrew;
       if (crew)
         return await interaction.reply(
           "You're already in a crew! If you're a member, leave with `/crew leave`, and if you're the owner, delete it with `/crew delete`"
@@ -593,8 +595,8 @@ module.exports = {
         globalModel.crews.push(crewobj);
         await globalModel.save();
       }
-
-      userdata.crew = crewobj;
+      userdata.crewseasonclaimed = 0
+      userdata.usercrew = crewobj.name;
       userdata.save();
 
       let embed = new Discord.EmbedBuilder()
@@ -608,11 +610,11 @@ module.exports = {
       await interaction.reply({ embeds: [embed] });
     } else if (option == "leave") {
       let uid = interaction.user.id;
-      let crew = userdata.crew;
+      let crew = userdata.usercrew;
 
       if (!crew) return await interaction.reply("You're not in a crew!");
 
-      let currentCrew = crews.find(({ name }) => name == crew.name) || {owner: {id: 0}, members: 1}
+      let currentCrew = crews.find(({ name }) => name.toLowerCase() == crew.toLowerCase()) || {owner: {id: 0}, members: 1}
      
 
       if (currentCrew.owner.id == uid)
@@ -644,7 +646,7 @@ module.exports = {
 
       collector.on("collect", async (i) => {
         if (i.customId.includes("confirm")) {
-          let actcrew = crew;
+          let actcrew = currentCrew;
           let newmem = actcrew.members;
 
           for (var i2 = 0; i2 < 1; i2++)
@@ -667,7 +669,7 @@ module.exports = {
             }
           );
           globalModel.save();
-          userdata.crew = null;
+          userdata.usercrew = null;
           userdata.save();
           row.components[0].setDisabled();
           row.components[1].setDisabled();
@@ -681,10 +683,10 @@ module.exports = {
         }
       });
     } else if (option == "edit") {
-      let crewname = userdata.crew;
+      let crewname = userdata.usercrew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
-      let crew2 = crews.filter((crew) => crew.name == crewname.name);
+      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.toLowerCase());
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       let toedit = interaction.options.getString("option");
@@ -830,11 +832,64 @@ module.exports = {
           }
         });
       }
+      else if(toedit == "name"){
+        let filter = (m) => m.author.id == interaction.user.id;
+        let collector = interaction.channel.createMessageCollector({filter: filter, time: 10000})
+        interaction.reply("Please send a message with the new name for your crew! (10 seconds)")
+        collector.on("collect", async (m) => {
+          let newname = m.content
+          
+          if(crews.find((crew) => crew.name.toLowerCase() == newname.toLowerCase())) return await interaction.reply("That crew name is already taken!")
+          if (crew2[0].owner.id !== interaction.user.id)  return interaction.reply("You need to be the crew owner!");
+  
+          await Global.findOneAndUpdate(
+            {},
+  
+            {
+              $set: {
+                "crews.$[crew].name": newname,
+              },
+            },
+  
+            {
+              arrayFilters: [
+                {
+                  "crew.name": crew2[0].name,
+                },
+              ],
+            }
+          );
+  
+          for (let mem in crew2[0].members) {
+            let member = crew2[0].members[mem];
+  
+            let memberdata = await User.findOne({ id: member });
+  
+            if (memberdata.usercrew) {
+              await User.findOneAndUpdate(
+                {
+                  id: member,
+                },
+                {
+                  $set: {
+                    usercrew: newname,
+                  },
+                },
+                {}
+              );
+            }
+            memberdata.save();
+          }
+  
+          globalModel.save();
+          await interaction.channel.send(`✅`);
+        })
+      }
     } else if (option == "kick") {
-      let crewname = userdata.crew;
+      let crewname = userdata.usercrew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
-      let crew2 = crews.filter((crew) => crew.name == crewname.name);
+      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.name.toLowerCase());
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       let tokick = interaction.options.getString("user");
@@ -865,13 +920,13 @@ module.exports = {
         }
       );
       globalModel.save();
-      utokickdata.crew = null;
+      utokickdata.usercrew = null;
       userdata.save();
     } else if (option == "delete") {
-      let crewname = userdata.crew;
+      let crewname = userdata.usercrew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
-      let crew2 = crews.filter((crew) => crew.name == crewname.name);
+      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.toLowerCase());
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       if (crew2[0].owner.id !== interaction.user.id)
@@ -905,14 +960,14 @@ module.exports = {
 
             let memberdata = await User.findOne({ id: member });
 
-            if (memberdata.crew) {
+            if (memberdata.usercrew) {
               await User.findOneAndUpdate(
                 {
                   id: member,
                 },
                 {
                   $unset: {
-                    crew: {},
+                    usercrew: '',
                   },
                 },
                 {}
@@ -932,7 +987,7 @@ module.exports = {
             },
             {
               $unset: {
-                crew: {},
+                usercrew: '',
               },
             },
             {}
@@ -993,9 +1048,9 @@ module.exports = {
         clearTimeout(xt)
       }, 3000);
     } else if (option == "cards") {
-      let crew = userdata.crew;
+      let crew = userdata.usercrew;
       let crewname = crew.name;
-      let crew2 = crews.find((crew) => crew.name == crewname);
+      let crew2 = crews.find((crew) => crew.name.toLowerCase() == crewname.toLowerCase());
 
       if (!crew2) return await interaction.reply("That crew doesn't exist!");
 
@@ -1991,11 +2046,11 @@ module.exports = {
       console.log(response)
 
       let icon = response.display_url;
-      let crewname = userdata.crew
+      let crewname = userdata.usercrew
 
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
-      let crew2 = crews.filter((crew) => crew.name == crewname.name);
+      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.name.toLowerCase());
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       if (crew2[0].owner.id !== interaction.user.id) return await interaction.reply("You are not the leader of this crew!");

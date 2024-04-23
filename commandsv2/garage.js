@@ -13,7 +13,7 @@ const itemdb = require("../data/items.json");
 const { numberWithCommas } = require("../common/utils");
 const {GET_STARTED_MESSAGE} = require("../common/constants");
 const housedb = require("../data/houses.json")
-const eggsdb = require("../data/eggdb.json")
+const cardb = require("../data/cardb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -125,9 +125,17 @@ module.exports = {
       let hp = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4;
       hp = Math.round(hp);
       let xessence = car.Xessence || 0
+      let carclass = car.Class || cardb.Cars[car.Name.toLowerCase()].Class || "N/A"
+      let classindb
+      if(carclass !== "N/A"){
+       classindb = cardb.Tiers[carclass.toLowerCase()].Emote
+      }
+      else {
+         classindb = "N/A"
+      }
       embed.addFields({
         name: `${car.Emote} ${car.Name} ${favorite}`,
-        value: `${tag}\nID: \`${car.ID}\`\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
+        value: `${tag}\nID: \`${car.ID}\`\n${classindb} Class\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
         inline: true,
       });
     }
@@ -149,11 +157,7 @@ module.exports = {
         .setCustomId("last")
         .setEmoji("⏭️")
         .setStyle("Secondary"),
-        new ButtonBuilder()
-        .setCustomId("eggs")
-        .setEmoji("🥚")
-        .setLabel("Eggs")
-        .setStyle("Secondary")
+       
     );
 
     let row2 = new ActionRowBuilder().addComponents(
@@ -268,14 +272,24 @@ module.exports = {
           let tag = car.Tag ? `🏷️ ${car.Tag}` : "";
           let spe = car.Speed;
           let acc =(Math.round(car.Acceleration * 10) / 10).toFixed(1)
+          let carclass = car.Class || cardb.Cars[car.Name.toLowerCase()].Class || "N/A"
+          let classindb
+          if(carclass !== "N/A"){
+           classindb = cardb.Tiers[carclass.toLowerCase()].Emote
+          }
+          else {
+             classindb = "N/A"
+          }
           let weigh = Math.floor(car.WeightStat);
           let hand = Math.floor(car.Handling);
+          let xessence = car.Xessence || 0
+
           let hp = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4;
           hp = Math.round(hp);
 
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
-            value: `${tag}\nID: \`${car.ID}\`\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}`,
+            value: `${tag}\nID: \`${car.ID}\`\n${classindb} Class\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
             inline:true
       })
       await interaction.editReply({
@@ -305,11 +319,19 @@ module.exports = {
           let weigh = Math.floor(car.WeightStat);
           let hand = Math.floor(car.Handling);
           let hp = ((spe - acc) + (hand - (weigh / 100))) / 4;
+          let carclass = car.Class || cardb.Cars[car.Name.toLowerCase()].Class || "N/A"
+          let classindb
+          if(carclass !== "N/A"){
+           classindb = cardb.Tiers[carclass.toLowerCase()].Emote
+          }
+          else {
+             classindb = "N/A"
+          }
           let xessence = car.Xessence || 0
           hp = Math.round(hp);
           embed.addFields({
             name: `${car.Emote} ${car.Name} ${favorite}`,
-            value: `${tag}\nID: \`${car.ID}\`\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
+            value: `${tag}\nID: \`${car.ID}\`\n${classindb} Class\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
             inline: true,
           });
           
@@ -335,10 +357,7 @@ module.exports = {
           .setColor(colors.blue)
           .setFooter({ text: `Pages 1/${itempage.length}` })
           .setThumbnail("https://i.ibb.co/w66Pwgz/icons8-garage-240.png")
-          // .addFields({
-          //   name: "WHAT IS THIS",
-          //   value: `||I am the turbo egg <:egg_turbo:1219112549187059804> \`CODE: TURBOOO\`||`
-          // })
+    
           for (let part of displayparts2[0]) {
             console.log(displayparts2[0])
             
@@ -432,27 +451,7 @@ module.exports = {
           fetchReply: true,
         });
       }
-      else if (i.customId.includes("eggs")) {
-        let eggs = udata.eggs;
-        if (!eggs[0]) return interaction.channel.send("You don't have any eggs!");
-        let displayeggs = []
-        for(let egg of eggs){
-          console.log(egg)
-          let eggindb = eggsdb[egg.toLowerCase()]
-          displayeggs.push(`${eggindb.Emote}`)
-        }
-        embed = new EmbedBuilder()
-          .setTitle(`Displaying eggs for ${user.username}`)
-          .setColor(colors.blue)
-          .setThumbnail("https://i.ibb.co/w66Pwgz/icons8-garage-240.png")
-        embed.setDescription(`${displayeggs.join(" ")}`);
-        await interaction.editReply({
-          embeds: [embed],
-          components: [row, row2],
-          files: [],
-          fetchReply: true,
-        });
-      }
+ 
       
       else if (i.customId.includes("items")) {
         if (!displayitems2[0]) return interaction.channel.send("You don't have any items!");
@@ -500,11 +499,19 @@ module.exports = {
             let weigh = Math.floor(car.WeightStat);
             let hand = Math.floor(car.Handling);
             let hp = ((spe - acc) + (hand - (weigh / 100))) / 4;
+            let carclass = car.Class || cardb.Cars[car.Name.toLowerCase()].Class || "N/A"
+            let classindb
+            if(carclass !== "N/A"){
+             classindb = cardb.Tiers[carclass.toLowerCase()].Emote
+            }
+            else {
+               classindb = "N/A"
+            }
             hp = Math.round(hp);
             let xessence = car.Xessence || 0
             embed.addFields({
               name: `${car.Emote} ${car.Name} ${favorite}`,
-              value: `${tag}\nID: \`${car.ID}\`\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n🛣️ Miles: ${numberWithCommas(car.Miles)}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
+              value: `${tag}\nID: \`${car.ID}\`\n${classindb} Class\n${emotes.speed} Power: ${spe}\n${emotes.acceleration} Acceleration: ${acc}s\n${emotes.weight} Weight: ${weigh}\n${emotes.handling} Handling: ${hand}\n${emotes.gas} Gas: ${car.Gas}/${car.MaxGas}\n${emotes.xessence} Xessence: ${xessence}`,
               inline: true,
             });   
             if (showcase && showcase.Image) {

@@ -78,23 +78,6 @@ module.exports = {
     )
     .addSubcommand((cmd) =>
       cmd
-        .setName("approve")
-        .setDescription("Approve a livery (BOT SUPPORT ONLY)")
-        .addStringOption((option) =>
-          option
-            .setName("car")
-            .setDescription("The car you want to approve a livery for")
-            .setRequired(true)
-        )
-        .addStringOption((option) =>
-          option
-            .setName("id")
-            .setDescription("The id of the livery you want to approve")
-            .setRequired(true)
-        )
-    )
-    .addSubcommand((cmd) =>
-      cmd
         .setName("list")
         .setDescription("List the available liveries for a car")
         .addStringOption((option) =>
@@ -133,8 +116,7 @@ module.exports = {
       );
       if (!livid) return await interaction.reply("Specify an id!");
       let list = cars.Cars;
-      if (!list[selected.Name.toLowerCase()])
-        return await interaction.reply("That isnt an available car!");
+      if (!list[selected.Name.toLowerCase()])  return await interaction.reply("That isnt an available car!");
 
       if (!liverieslist[0])
         return await interaction.reply("This car doesn't have any livery id's");
@@ -423,7 +405,7 @@ module.exports = {
         },
         {
           $set: {
-            "cars.$[car].Image": selected.Image,
+            "cars.$[car].Image": cars.Cars[selected.Name.toLowerCase()].Image,
             "cars.$[car].HasLivery": false,
           },
         },

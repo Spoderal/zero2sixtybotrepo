@@ -69,7 +69,7 @@ const {
 
         let embed = new EmbedBuilder()
         .setTitle(`Your Collection of ${branddb[filter.toLowerCase()].name} cars`)
-        .setDescription(`${cardisplay.join('\n')}\n||EGG??? WHERE? <:egg_red:964250156981698651> CODE: FERRARIFOREVER||`)
+        .setDescription(`${cardisplay.join('\n')}`)
         .setColor(colors.blue)
         .setFooter({text: `Page 1 of ${cars.length}`})
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL({dynamic: true})})

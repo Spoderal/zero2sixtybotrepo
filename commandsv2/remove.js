@@ -37,7 +37,7 @@ module.exports = {
         {name: `Weight`, value: "weight"},
         {name: `Spoiler`, value: "spoiler"},
         {name: `Springs`, value: "springs"},
-        {name:"Drivetrain", value: "drivetrain"},
+        {name: "Crankshaft", value: "crankshaft"},
         {name: "All", value: "all"}
 
       )
@@ -70,6 +70,7 @@ module.exports = {
       let turbo = carindb.turbo || "no turbo"
       let suspension = carindb.suspension || "stock suspension"
       let engine = carindb.engine || cardb[carindb.Name.toLowerCase()].Engine
+      let drivetrain = carindb.drivetrain || "stock drivetrain"
       let gearbox = carindb.gearbox || "stock gearbox"
       let clutch = carindb.clutch || "stock clutch"
       let ecu = carindb.ecu || "stock ecu"
@@ -77,13 +78,13 @@ module.exports = {
       let springs = carindb.springs || "stock springs"
       let spoiler = carindb.spoiler || "no spoiler"
       let weightreduction = carindb.weight || "no weight"
-      let gastank = carindb.gastank || "stock gastank"
+      let crankshaft = carindb.crankshaft || "stock crankshaft"
 
       let brakes = carindb.brakes || "stock brakes"
 
           if(exhaust !== "stock exhaust"){
             speed -= partdb.Parts[exhaust.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[exhaust.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[exhaust.toLowerCase()].Acceleration)
             if(partdb.Parts[exhaust.toLowerCase()].Handling){
             handling -= partdb.Parts[exhaust.toLowerCase()].Handling
             }
@@ -91,15 +92,19 @@ module.exports = {
           }
           if(turbo  !== "no turbo"){
             speed -= partdb.Parts[turbo.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[turbo.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[turbo.toLowerCase()].Acceleration)
             if(partdb.Parts[turbo.toLowerCase()].Handling){
               handling -= partdb.Parts[turbo.toLowerCase()].Handling
               }
+              if(partdb.Parts[turbo.toLowerCase()].DecreaseHandling){
+                handling += partdb.Parts[turbo.toLowerCase()].DecreaseHandling
+                }
+              
               await userdata.parts.push(turbo)
           }
           if(intake  !== "stock intake"){
             speed -= partdb.Parts[intake.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[intake.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[intake.toLowerCase()].Acceleration)
             if(partdb.Parts[intake.toLowerCase()].Handling){
               handling -= partdb.Parts[intake.toLowerCase()].Handling
               }
@@ -108,15 +113,21 @@ module.exports = {
       
           if(tires !== "stock tires"){
             speed -= partdb.Parts[tires.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[tires.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[tires.toLowerCase()].Acceleration)
             if(partdb.Parts[tires.toLowerCase()].Handling){
               handling -= partdb.Parts[tires.toLowerCase()].Handling
               }
+              if(partdb.Parts[tires.toLowerCase()].DecreaseHandling){
+                handling += partdb.Parts[tires.toLowerCase()].DecreaseHandling
+                }
+                if(partdb.Parts[tires.toLowerCase()].Weight){
+                  handling -= partdb.Parts[tires.toLowerCase()].Weight
+                  }
               await  userdata.parts.push(carindb.tires)
           }
           if(suspension !== "stock suspension"){
             speed -= partdb.Parts[suspension.toLowerCase()].Power
-            speed += parseInt(partdb.Parts[suspension.toLowerCase()].Acceleration)
+            speed += parseFloat(partdb.Parts[suspension.toLowerCase()].Acceleration)
             if(partdb.Parts[suspension.toLowerCase()].Handling){
               handling -= partdb.Parts[suspension.toLowerCase()].Handling
               }
@@ -124,7 +135,7 @@ module.exports = {
           }
           if(gearbox !== "stock gearbox"){
             speed -= partdb.Parts[gearbox.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[gearbox.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[gearbox.toLowerCase()].Acceleration)
             if(partdb.Parts[gearbox.toLowerCase()].Handling){
               handling -= partdb.Parts[gearbox.toLowerCase()].Handling
               }
@@ -132,7 +143,7 @@ module.exports = {
           }
           if(clutch !== "stock clutch"){
             speed -= partdb.Parts[clutch.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[clutch.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[clutch.toLowerCase()].Acceleration)
             if(partdb.Parts[clutch.toLowerCase()].Handling){
               handling -= partdb.Parts[clutch.toLowerCase()].Handling
               }
@@ -140,7 +151,7 @@ module.exports = {
           }
           if(intercooler !== "no intercooler"){
             speed -= partdb.Parts[intercooler.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[intercooler.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[intercooler.toLowerCase()].Acceleration)
             if(partdb.Parts[intercooler.toLowerCase()].Handling){
               handling -= partdb.Parts[intercooler.toLowerCase()].Handling
               }
@@ -148,7 +159,7 @@ module.exports = {
           }
           if(ecu !== "stock ecu"){
             speed -= partdb.Parts[ecu.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[ecu.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[ecu.toLowerCase()].Acceleration)
             if(partdb.Parts[ecu.toLowerCase()].Handling){
               handling -= partdb.Parts[ecu.toLowerCase()].Handling
               }
@@ -156,7 +167,7 @@ module.exports = {
           }
           if(spoiler !== "no spoiler"){
             speed -= partdb.Parts[spoiler.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[spoiler.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[spoiler.toLowerCase()].Acceleration)
             if(partdb.Parts[spoiler.toLowerCase()].Handling){
               handling -= partdb.Parts[spoiler.toLowerCase()].Handling
               }
@@ -164,16 +175,34 @@ module.exports = {
           }
           if(brakes !== "stock brakes"){
             speed -= partdb.Parts[brakes.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[brakes.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[brakes.toLowerCase()].Acceleration)
             userdata.parts.push(brakes)
+            if(partdb.Parts[tires.toLowerCase()].Handling){
+              handling -= partdb.Parts[tires.toLowerCase()].Handling
+              }
           }
           if(springs !== "stock springs"){
             speed -= partdb.Parts[springs.toLowerCase()].Power
-            accel += parseInt(partdb.Parts[springs.toLowerCase()].Acceleration)
+            accel += parseFloat(partdb.Parts[springs.toLowerCase()].Acceleration)
             if(partdb.Parts[springs.toLowerCase()].Handling){
               handling -= partdb.Parts[springs.toLowerCase()].Handling
               }
+              if(partdb.Parts[springs.toLowerCase()].DecreaseHandling){
+                handling += partdb.Parts[springs.toLowerCase()].DecreaseHandling
+                }
               await   userdata.parts.push(springs)
+          }
+          if(crankshaft !== "stock crankshaft"){
+            speed -= partdb.Parts[crankshaft.toLowerCase()].Power
+            accel += parseFloat(partdb.Parts[crankshaft.toLowerCase()].Acceleration)
+            weight += partdb.Parts[crankshaft.toLowerCase()].RemoveWeight
+            if(partdb.Parts[crankshaft.toLowerCase()].Handling){
+              handling -= partdb.Parts[crankshaft.toLowerCase()].Handling
+              }
+              if(partdb.Parts[crankshaft.toLowerCase()].DecreaseHandling){
+                handling += partdb.Parts[crankshaft.toLowerCase()].DecreaseHandling
+                }
+              await   userdata.parts.push(crankshaft)
           }
  
           if(weightreduction.toLowerCase() !== "no weight"){
@@ -196,7 +225,13 @@ module.exports = {
               sellprice = sellprice += partdb.Parts[engine.toLowerCase()].Price * 0.35
 
             }
+            if(drivetrain !== "stock drivetrain"){
+              sellprice = sellprice += partdb.Parts[drivetrain.toLowerCase()].Price * 0.35
+
+            }
           }
+
+          console.log(sellprice)
           
           await User.findOneAndUpdate(
             {
@@ -220,6 +255,7 @@ module.exports = {
                 "cars.$[car].ecu": null,
                 "cars.$[car].spoiler": null,
                 "cars.$[car].weight": null,
+                "cars.$[car].crankshaft": null,
                 "cars.$[car].brakes": null,
                 "cars.$[car].springs": null,
               },
@@ -265,8 +301,7 @@ module.exports = {
   
       cooldowns.save()
   
-  
-  
+      
       if (selected.length == 0)
         return interaction.reply(
           "Thats not a car! Make sure to specify a car ID, or car name"
@@ -285,7 +320,13 @@ module.exports = {
       let partindb = partdb.Parts[partoncar.toLowerCase()]
   
       if(!selected[0][partindb.Type] || selected[0][partindb.Type] == null) return interaction.reply(`Your car doesn't have a ${partindb.Type}, use /upgrade first!`)
-  
+      
+      if(partindb.Type == "drivetrain"){
+        if(selected[0].drivetrain == "stock drivetrain"){
+          return interaction.reply("Your car doesn't have a drivetrain swapped, use /upgrade first!")
+        }
+      
+      }
       let acc = selected[0].Acceleration
       let newacc = acc -= partindb.Acceleration
       
@@ -312,7 +353,7 @@ module.exports = {
         }
       }
       if(partindb.RemovePower > 0){
-        selected[0].Power -= Number(partindb.RemovePower)
+        selected[0].Speed += Number(partindb.RemovePower)
       }
       if(partindb.DecreaseHandling > 0){
         selected[0].Handling += Number(partindb.DecreaseHandling)

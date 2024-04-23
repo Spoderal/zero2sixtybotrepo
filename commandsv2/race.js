@@ -26,24 +26,10 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("race")
     .setDescription("Start a race from the menu")
-    .addStringOption((option) =>
-      option
-        .setName("race")
-        .setChoices(
-          { name: `🚗 Street Race`, value: `streetrace` },
-          { name: `🏁 Drag Race`, value: `dragrace` },
-          { name: `🟢 Track Race`, value: `trackrace` },
-          { name: `🌍 Cross Country`, value: `crosscountry` },
-          { name: "🛻 Offroad Race", value: "offroad" },
-          { name: "🚀 Car Series", value: "carseries" },
-          { name: "🔧 Junk Race", value: "junkrace" },
-          { name: "🚲 Motorcycle Madness", value: "motorcyclemad" },
-
-        )
-        .setRequired(true)
-        .setDescription(`The race to start`)
-    )
-    .addNumberOption((option) =>
+    .addSubcommand((subcommand) => subcommand
+      .setName("street")
+      .setDescription("Start a street race")
+      .addNumberOption((option) =>
       option
         .setName("tier")
         .setDescription("The tier to race")
@@ -65,47 +51,253 @@ module.exports = {
       .setName("car")
       .setDescription("The car ID to race with")
       .setRequired(true)
-  ),
-
-  // async autocomplete(interaction, client) {
-  //   let userdata2 = await User.findOne({ id: interaction.user.id });
-  //   let focusedValue = interaction.options.getFocused();
-  //   let choices = userdata2.cars;
-  //   let filtered = choices.filter((choice) =>
-  //     choice.Name.toLowerCase().includes(focusedValue.toLowerCase())
-  //   );
-  //   let options;
-  //   filtered = userdata2.cars;
-  //   let filteredarr = [];
-  //   for (let ca in filtered) {
-  //     let carind = filtered[ca];
-  //     filteredarr.push(carind.Name);
-  //   }
-  //   if (filteredarr.length > 25) {
-  //     options = filteredarr.slice(0, 25);
-  //   } else {
-  //     options = filteredarr;
-  //   }
-
-  //   options = options.filter((option) =>
-  //     option.toLowerCase().includes(focusedValue.toLowerCase())
-  //   );
-
-  //   await interaction.respond(
-  //     options.map((choice) => ({ name: choice, value: choice.toLowerCase() }))
-  //   );
-  // },
-
+  )
+    )
+      
+    .addSubcommand((subcommand) => subcommand
+    .setName("drag")
+    .setDescription("Start a drag race")
+    .addNumberOption((option) =>
+    option
+      .setName("tier")
+      .setDescription("The tier to race")
+      .setRequired(true)
+      .setMaxValue(8)
+      .setChoices(
+        { name: `Tier 1`, value: 1 },
+        { name: `Tier 2`, value: 2 },
+        { name: `Tier 3`, value: 3 },
+        { name: `Tier 4`, value: 4 },
+        { name: `Tier 5`, value: 5 },
+        { name: `Tier 6`, value: 6 },
+        { name: `Tier 7`, value: 7 },
+        { name: `Tier 8`, value: 8 }
+      )
+      )
+  .addStringOption((option) =>
+  option
+    .setName("car")
+    .setDescription("The car ID to race with")
+    .setRequired(true)
+)
+  )
+  .addSubcommand((subcommand) => subcommand
+  .setName("track")
+  .setDescription("Start a track race")
+  .addStringOption((option) =>
+  option
+    .setName("track")
+    .setDescription("The track to race on")
+    .addChoices(
+      {name: "Spa-Francorchamps (EASY)", value: "spafrancorchamps"},
+      {name: "Suzuka (MEDIUM)", value: "suzuka"},
+      {name: "Nürburgring (HARD)", value: "nurburgring"},
+      {name: "Silverstone (EXTREME)", value: "silverstone"}
+    )
+    .setRequired(true)
+  )
+.addStringOption((option) =>
+option
+  .setName("car")
+  .setDescription("The car ID to race with")
+  .setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("crosscountry")
+.setDescription("Start a cross country race")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(8)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 },
+    { name: `Tier 5`, value: 5 },
+    { name: `Tier 6`, value: 6 },
+    { name: `Tier 7`, value: 7 },
+    { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("offroad")
+.setDescription("Start a offroad race")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(8)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 },
+    { name: `Tier 5`, value: 5 },
+    { name: `Tier 6`, value: 6 },
+    { name: `Tier 7`, value: 7 },
+    { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("series")
+.setDescription("Start a car series race")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(8)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 },
+    { name: `Tier 5`, value: 5 },
+    { name: `Tier 6`, value: 6 },
+    { name: `Tier 7`, value: 7 },
+    { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("junk")
+.setDescription("Start a junk race to earn junk parts")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(8)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 },
+    { name: `Tier 5`, value: 5 },
+    { name: `Tier 6`, value: 6 },
+    { name: `Tier 7`, value: 7 },
+    { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("spacerace")
+.setDescription("Start a space race (EVENT)")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(8)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 },
+    { name: `Tier 5`, value: 5 },
+    { name: `Tier 6`, value: 6 },
+    { name: `Tier 7`, value: 7 },
+    { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("motorcycle")
+.setDescription("Start a motorcycle race")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(8)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 },
+    { name: `Tier 5`, value: 5 },
+    { name: `Tier 6`, value: 6 },
+    { name: `Tier 7`, value: 7 },
+    { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("motorcycle")
+.setDescription("The motorcycle ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("dyno")
+.setDescription("View your car's dyno stats")
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to check the dyno of")
+.setRequired(true)
+)
+.addStringOption((option) => option
+.setName("surface")
+.setDescription("The surface to check the dyno on")
+.addChoices(
+  {name: "Asphalt", value: "asphalt"},
+  {name: "Dirt", value: "dirt"},
+  {name: "Snow", value: "snow"},
+  {name: "Ice", value: "ice"},
+  {name: "Wet", value: "wet"}
+)
+.setRequired(true)
+)
+)
+,
   async execute(interaction) {
     let carsarray = [];
-    let raceoption = interaction.options.getString("race");
+    let raceoption = interaction.options.getSubcommand();
     let playerrace
     let opponentrace
     const dorace = function(speed, acceleration, handling, weight, surface, tires) {
       let sspeed = surface.Speed
       let shandling = surface.Handling
       if(tires && tires !== null && tires !== undefined){
-        let tiresindb = partdb.Parts[tires]
+        let tiresindb = partdb.Parts[tires.toLowerCase()]
 
         if(tiresindb && tiresindb.Name.includes("allsurfacetires") && surface.Name.toLowerCase() !== "asphalt"){
           sspeed += 0.2
@@ -152,47 +344,47 @@ module.exports = {
   
       return score;
   }
+  const dospace = function(speed, acceleration, handling, weight) {
+
+    // Define the importance of each factor
+    var speedImportance = 0.30;
+    var accelerationImportance = 0.10;
+    var handlingImportance = 0.60;
+    var weightImportance = 0;
+
+
+
+    var normalizedSpeed = speed
+    var normalizedHandling = handling 
+    var normalizedAcceleration = acceleration  // Lower acceleration is better
+    var normalizedWeight = weight / 100  // Lower weight is better
+
+    // Calculate the final score
+    var score = (speedImportance * normalizedSpeed +
+                 accelerationImportance * normalizedAcceleration +
+                 handlingImportance * normalizedHandling -
+                 weightImportance - normalizedWeight);
+
+    return score;
+}
+
+  const dotrack = function(speed, acceleration, handling, weight, tires) {
+
+    if(tires.toLowerCase().includes("tracktires")){
+     handling += 100
+    }
+ 
   
-
-  const dotrack = function(speed, acceleration, handling, weight, surface, tires) {
-    let tiresindb = partdb.Parts[tires]
-    let sspeed = surface.Speed
-    let shandling = surface.Handling
-    if(tires && tires !== null && tires !== undefined){
-
-    if(tiresindb && tiresindb.Name.includes("allsurfacetires") && surface.Name.toLowerCase() !== "asphalt"){
-      sspeed += 0.1
-      shandling += 0.1
-    }
-    if(tiresindb && tiresindb.Name.includes("tracktires")){
-      sspeed += 0.5
-      shandling += 0.5
-    }
-    if(tiresindb && tiresindb.Name.includes("slicks") ){
-      sspeed -= 0.3
-      shandling -= 0.3
-    }
-    if(tiresindb && tiresindb.Name.includes("offroadtires")){
-      sspeed -= 0.2
-      shandling -= 0.2
-    }
-   else {
-    sspeed += 0
-    shandling += 0
-   }
-  }
     // Define the importance of each factor
     var speedImportance = 0.10;
     var accelerationImportance = 0.20;
     var handlingImportance = 0.40;
     var weightImportance = 0.30;
-    let surfacespeed = sspeed
-    let surfacehandling = shandling
 
 
 
-    var normalizedSpeed = speed * surfacespeed
-    var normalizedHandling = surfacehandling 
+    var normalizedSpeed = speed
+    var normalizedHandling = handling 
     var normalizedAcceleration = acceleration  // Lower acceleration is better
     var normalizedWeight = weight / 100  // Lower weight is better
 
@@ -323,7 +515,14 @@ let surface = racedb.Surface[surfacerandom];
     userdata = await User.findOne({ id: interaction.user.id });
     let zpass =  userdata.zpass
     let usercars = userdata.cars;
-    let idtoselect = interaction.options.getString("car").toLowerCase();
+    let idtoselect 
+
+    if(raceoption == "motorcycle"){
+      idtoselect = interaction.options.getString("motorcycle").toLowerCase();
+    }
+    else {
+      idtoselect = interaction.options.getString("car").toLowerCase();
+    }
 
     let carsfiltered = [];
     for (let cr in userdata.cars) {
@@ -348,18 +547,24 @@ let surface = racedb.Surface[surfacerandom];
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    if(cardb.Cars[selected.Name.toLowerCase()].Motorcycle && raceoption !== "motorcyclemad") return interaction.reply("You cant use a motorcycle for this race!")
+    if(cardb.Cars[selected.Name.toLowerCase()].Motorcycle && raceoption !== "motorcycle") return interaction.reply("You cant use a motorcycle for this race!")
+    if (raceoption == "motorcycle" &&  !cardb.Cars[selected.Name.toLowerCase()].Motorcycle || raceoption == "motorcycle" && cardb.Cars[selected.Name.toLowerCase()].Motorcycle == null || raceoption == "motorcycle" && cardb.Cars[selected.Name.toLowerCase()].Motorcycle == undefined ) return interaction.reply("You need a motorcycle for this race!");
 
     if(raceoption == "dyno"){
+      let surface = interaction.options.getString("surface")
+      let surfaceindb = racedb.Surface[surface]
       let speed = selected.Speed
       let acceleration = selected.Acceleration
       let handling = selected.Handling
       let weight = selected.WeightStat
       let image = selected.Image || selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image
+      let tires = selected.tires || "t1tires"
 
-      let dyno = dorace(speed, acceleration, handling, weight)
-      let dyno2 = dotrack(speed, acceleration, handling, weight)
-      let dyno3 = dodrag(speed, acceleration, handling, weight)
+      console.log(tires)
+
+      let dyno = dorace(speed, acceleration, handling, weight, surfaceindb, tires)
+      let dyno2 = dotrack(speed, acceleration, handling, weight, tires)
+      let dyno3 = dodrag(speed, acceleration, handling, weight, surfaceindb, tires)
 
       let dynoembed = new EmbedBuilder()
       .setTitle("Dyno")
@@ -378,7 +583,7 @@ let surface = racedb.Surface[surfacerandom];
     }
 
     if(zpass == true) {
-      timeout = 15 * 1000
+      timeout = 10 * 1000
     } else {
       timeout = 30 * 1000
     } 
@@ -400,7 +605,7 @@ let surface = racedb.Surface[surfacerandom];
       let time = ms(timeout - (Date.now() - cooldowndata.racing));
       let timeEmbed = new EmbedBuilder()
         .setColor(colors.blue)
-        .setDescription(`You can race again in ${time}\n\nYou can clear this cooldown for 10 gold!`);
+        .setDescription(`You can race again in ${time}\n\nYou can clear this cooldown for 5 gold!`);
       await interaction.reply({ embeds: [timeEmbed], fetchReply: true, components: [row]})
 
       let filter2 = (btnInt) => {
@@ -414,16 +619,16 @@ let surface = racedb.Surface[surfacerandom];
 
       collector2.on('collect', async (i) => {
         if(i.customId == "clearcooldown"){
-          if(userdata.gold < 10){
+          if(userdata.gold < 5){
             let errembed = new EmbedBuilder()
             .setTitle("Error!")
             .setColor(colors.discordTheme.red)
             .setDescription(
-              `You need 10 gold to clear this cooldown!`
+              `You need 5 gold to clear this cooldown!`
             );
           return await interaction.editReply({ embeds: [errembed] });
           }
-          userdata.gold -= 10
+          userdata.gold -= 5
           cooldowndata.racing = null
           await cooldowndata.save()
           await userdata.save()
@@ -431,7 +636,7 @@ let surface = racedb.Surface[surfacerandom];
           .setTitle("Success!")
           .setColor(colors.discordTheme.green)
           .setDescription(
-            `Cleared the cooldown for 10 gold!`
+            `Cleared the cooldown for 5 gold!`
           );
         return await interaction.editReply({ embeds: [successembed] });
         }
@@ -459,7 +664,7 @@ let surface = racedb.Surface[surfacerandom];
     }
 
     
-    if (cardb.Cars[selected.Name.toLowerCase()].Junked == true && raceoption !== "junkrace") {
+    if (cardb.Cars[selected.Name.toLowerCase()].Junked == true && raceoption !== "junk") {
       let errembed = new EmbedBuilder()
         .setTitle("Error!")
         .setColor(colors.discordTheme.red)
@@ -468,7 +673,7 @@ let surface = racedb.Surface[surfacerandom];
         );
       return await interaction.reply({ embeds: [errembed] });
     }
-    if (cardb.Cars[selected.Name.toLowerCase()].F1 == true && raceoption !== "trackrace") {
+    if (cardb.Cars[selected.Name.toLowerCase()].F1 == true && raceoption !== "track") {
       let errembed = new EmbedBuilder()
         .setTitle("Error!")
         .setColor(colors.discordTheme.red)
@@ -496,7 +701,7 @@ let surface = racedb.Surface[surfacerandom];
     if(raceoption == "cityrace"){
       if(selected.Speed > 350) return interaction.reply("Your car needs to be under 350 Power to do this race!")
     }
-  if(!tieroption) return interaction.reply("You need to select a tier!")
+  if(!tieroption && raceoption !== "track") return interaction.reply("You need to select a tier!")
 
     cooldowndata.racing = Date.now();
     cooldowndata.is_racing = Date.now();
@@ -504,76 +709,48 @@ let surface = racedb.Surface[surfacerandom];
     let msg =  await interaction.reply({content: `Revving engines...`, fetchReply: true})
 
     let image = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image
-    if(raceoption == "trackrace"){
+    if(raceoption == "track"){
       cooldowndata.racing = Date.now()
       await cooldowndata.save()
+      let newtrack = trackdb[interaction.options.getString("track")]
+      
       let trackembed = new EmbedBuilder()
-      .setTitle("Select a track")
-      .setFields({name: `Nürburgring`, value: `Hard`, inline: true}, {name: "Your car", value: `${selected.Emote} ${selected.Name}\n${emotes.speed}${selected.Speed}\n${emotes.acceleration}${selected.Acceleration}\n${emotes.handling}${selected.Handling}\n${emotes.weight}${selected.WeightStat}`, inline: true})
-      .addFields({name: "Surface", value: `${surface.Emote} ${surface.Name}`, inline: true})
-      .setImage("https://i.ibb.co/86WyCHX/image.png")
+      .setTitle(`Racing on ${newtrack.Name}`)
+      .setImage(newtrack.Image)
       .setColor(colors.blue)
-      .setThumbnail(`${image}`)
-
-      let row2 = new ActionRowBuilder()
-        .setComponents(
-          new StringSelectMenuBuilder()
-          .setCustomId("track")
-          .setPlaceholder("Track")
-          .setOptions(
-            {label: "Spa-Francorchamps", value: "spafrancorchamps"},
-            {label: "Suzuka", value: "suzuka"},
-            {label: "Nürburgring", value: "nurburgring"},
-            {label: "Silverstone", value: "silverstone"}
-          ),
-        )
-
-        let row3 = new ActionRowBuilder()
-        .setComponents(
-          new ButtonBuilder()
-          .setCustomId("confirm")
-          .setLabel("Confirm")
-          .setStyle("Success")
-        )
-
-       await interaction.editReply({embeds: [trackembed], components: [row2, row3], fetchReply: true})
-
-      let filter = (btnInt) => {
-        return interaction.user.id == btnInt.user.id;
-      };
-      const collector = msg.createMessageComponentCollector({
-        filter: filter,
-        time: 30000,
-      });
-      let newtrack = trackdb.nurburgring
-   
-      collector.on('collect', async (i) => {
-     
-        if(i.customId !== "confirm" && i.values[0]){
-          
-
-          
-        
-          
+              
         
 
-          newtrack = trackdb[i.values[0]]
-
-          trackembed.setImage(newtrack.Image)
-          .setFields({name: `${newtrack.Name}`, value: `${newtrack.Difficulty}`, inline: true}, {name: "Your car", value: `${selected.Emote} ${selected.Name}\n${emotes.speed}${selected.Speed}\n${emotes.acceleration}${selected.Acceleration}\n${emotes.handling}${selected.Handling}\n${emotes.weight}${selected.WeightStat}`, inline: true})
-
-          await interaction.editReply({embeds: [trackembed], components: [row2, row3], fetchReply: true})
-        }
-        if(i.customId == "confirm"){
-
-     
           let cashwinnings = 0
+          selected.Miles += 20
+          selected.Gas -= 1;
+          if (selected.Gas <= 0) {
+            selected.Gas = 0;
+          }
+          await User.findOneAndUpdate(
+            {
+              id: interaction.user.id,
+            },
+            {
+              $set: {
+                "cars.$[car]": selected,
+              },
+            },
+      
+            {
+              arrayFilters: [
+                {
+                  "car.Name": selected.Name,
+                },
+              ],
+            }
+          );
+      
           let oppcount = newtrack.Racers
           trackembed.setImage(newtrack.Image)
           trackembed.data.fields = []
           let racers = []
           trackembed.addFields( {name: "Your car", value: `${selected.Emote} ${selected.Name}\n${emotes.speed}${selected.Speed}\n${emotes.acceleration}${selected.Acceleration}\n${emotes.handling}${selected.Handling}\n${emotes.weight}${selected.WeightStat}`, inline: true})
-          .setTitle(`Racing on ${newtrack.Name}`)
            for (let i = 0; i < oppcount; i++) {
             cashwinnings += 250
             let carstopick = carsarray.filter((car) => car.Class == newtrack.Class && car.Handling >= newtrack.Handling)
@@ -583,7 +760,7 @@ let surface = racedb.Surface[surfacerandom];
             let randcar = lodash.sample(carstopick)
             trackembed.addFields(
               {name: `Opponent ${i + 1}`, 
-              value: `${randcar.Emote} ${randcar.Name}\n${emotes.speed}${Math.floor(randcar.Speed * surface.Handling)}\n${emotes.acceleration}${randcar["0-60"]}\n${emotes.handling}${randcar.Handling}\n${emotes.weight}${randcar.Weight}`, 
+              value: `${randcar.Emote} ${randcar.Name}\n${emotes.speed}${Math.floor(randcar.Speed)}\n${emotes.acceleration}${randcar["0-60"]}\n${emotes.handling}${randcar.Handling}\n${emotes.weight}${randcar.Weight}`, 
               inline: true})
             
               let carobj = {
@@ -605,52 +782,171 @@ let surface = racedb.Surface[surfacerandom];
           await interaction.editReply({embeds: [trackembed], components: [], fetchReply: true})
           let tires = selected.tires || "t1tires"
 
-          let formulauser = dotrack(selected.Speed, selected.Acceleration, selected.Handling, selected.WeightStat, surface, tires)
+          let formulauser = dotrack(selected.Speed, selected.Acceleration, selected.Handling, selected.WeightStat, tires)
          let racersformulas = []
           racersformulas.push({User: interaction.user.username, Score: formulauser, Image: `${image}`})
           for(let car in racers){
             let racercar = racers[car]
-            let formulabot= dotrack(racercar.Speed, racercar.Acceleration, racercar.Handling, racercar.WeightStat, surface, "t1tires")
+            let formulabot= dotrack(racercar.Speed, racercar.Acceleration, racercar.Handling, racercar.Weight, "t1tracktires")
             racersformulas.push({User: `Opponent ${racercar.Owner}`, Score: formulabot, Image: `${racercar.Image}`})
 
           }
 
-          racersformulas.sort(function(a, b){return b.Score - a.Score});
+        const winner = racersformulas.reduce((prev, curr) => {
+          console.log(prev.Score, curr.Score)
+          return prev.Score > curr.Score ? prev : curr;
+        });
 
+        console.log(`The winner is ${winner.User}`);
 
 
           setTimeout(async () => {
-            trackembed.setTitle(`${racersformulas[0].User} won!`)
-            trackembed.setThumbnail(`${racersformulas[0].Image}`)
+            trackembed.setTitle(`${winner.User} won!`)
+            trackembed.setThumbnail(`${winner.Image}`)
 
-            
 
-            if(racersformulas[0].User == interaction.user.username){
+            if (userdata.using.includes("milk")) {
+              let itemcooldown = cooldowndata.milk;
+  
+              let timeout = 600000;
+              if (
+                itemcooldown !== null &&
+                timeout - (Date.now() - itemcooldown) < 0
+              ) {
+                userdata.using.pull("milk");
+                userdata.update();
+                interaction.channel.send("Your milk ran out!");
+              } 
+            }
+
+            if (userdata.using.includes("strawberry milk")) {
+              let itemcooldown = cooldowndata.smilk;
+  
+              let timeout = 600000;
+              if (
+                itemcooldown !== null &&
+                timeout - (Date.now() - itemcooldown) < 0
+              ) {
+                userdata.using.pull("strawberry milk");
+                userdata.update();
+                interaction.channel.send("Your strawberry milk ran out!");
+              }
+            }
+
+            if (userdata.using.includes("chocolate milk")) {
+              let itemcooldown = cooldowndata.cmilk;
+  
+              let timeout = 600000;
+              if (
+                itemcooldown !== null &&
+                timeout - (Date.now() - itemcooldown) < 0
+              ) {
+                userdata.using.pull("chocolate milk");
+                userdata.update();
+                interaction.channel.send("Your chocolate milk ran out!");
+              } 
+            }
+
+            if(winner.User == interaction.user.username){
               let rewards = []
               if(isWeekend()){
                 cashwinnings = cashwinnings * 2
               }
-              rewards.push(`${toCurrency(cashwinnings)}`)
-
-              if(newtrack.Name == "Spa-Francorchamps"){
-                rewards.push(`${emotes.commonKey} 5`)
-                userdata.ckeys += 5
+              let randomChance = randomRange(1, 100)
+              if(newtrack.Name == "Spa-Francorchamps" && randomChance <= 50){
+                let amount = 5
+                if (userdata.using.includes("milk")) {
+                  let itemcooldown = cooldowndata.milk;
+      
+                  let timeout = 600000;
+                  if (
+                    itemcooldown !== null &&
+                    timeout - (Date.now() - itemcooldown) < 0
+                  ) {
+                    userdata.using.pull("milk");
+                    userdata.update();
+                    interaction.channel.send("Your milk ran out!");
+                  } else {
+                    amount = amount * 2;
+                  }
+                }
+                rewards.push(`${emotes.commonKey} ${amount}`)
+                userdata.ckeys += amount
               }
-              if(newtrack.Name == "Suzuka"){
-                rewards.push(`${emotes.rareKey} 3`)
-                userdata.rkeys += 3
+              if(newtrack.Name == "Suzuka" && randomChance <= 25){
+                let amount = 3
+                if (userdata.using.includes("strawberry milk")) {
+                  let itemcooldown = cooldowndata.smilk;
+      
+                  let timeout = 600000;
+                  if (
+                    itemcooldown !== null &&
+                    timeout - (Date.now() - itemcooldown) < 0
+                  ) {
+                    userdata.using.pull("strawberry milk");
+                    userdata.update();
+                    interaction.channel.send("Your strawberry milk ran out!");
+                  } else {
+                    amount = amount * 2;
+                  }
+                }
+                rewards.push(`${emotes.rareKey} ${amount}`)
+                userdata.rkeys += amount
               }
-              if(newtrack.Name == "Nürburgring"){
-                rewards.push(`${emotes.exoticKey} 1`)
-                userdata.ekeys += 1
+              if(newtrack.Name == "Nürburgring" && randomChance <= 10){
+                let amount = 1
+                if (userdata.using.includes("chocolate milk")) {
+                  let itemcooldown = cooldowndata.cmilk;
+      
+                  let timeout = 600000;
+                  if (
+                    itemcooldown !== null &&
+                    timeout - (Date.now() - itemcooldown) < 0
+                  ) {
+                    userdata.using.pull("chocolate milk");
+                    userdata.update();
+                    interaction.channel.send("Your chocolate milk ran out!");
+                  } else {
+                    amount = amount * 3;
+                  }
+                }
+                rewards.push(`${emotes.exoticKey} ${amount}`)
+                userdata.ekeys += amount
               }
-              if(newtrack.Name == "Silverstone"){
-                rewards.push(`${emotes.exoticKey} 3`)
-                userdata.ekeys += 3
+              if(newtrack.Name == "Silverstone" && randomChance <= 25){
+                let amount = 3
+                if (userdata.using.includes("chocolate milk")) {
+                  let itemcooldown = cooldowndata.cmilk;
+      
+                  let timeout = 600000;
+                  if (
+                    itemcooldown !== null &&
+                    timeout - (Date.now() - itemcooldown) < 0
+                  ) {
+                    userdata.using.pull("chocolate milk");
+                    userdata.update();
+                    interaction.channel.send("Your chocolate milk ran out!");
+                  } else {
+                    amount = amount * 3;
+                  }
+                }
+                rewards.push(`${emotes.exoticKey} ${amount}`)
+                userdata.ekeys += amount
               }
-              let trackkeys = oppcount
               if(zpass == true) {
                 cashwinnings = cashwinnings * 2
+              }
+              
+         
+              let xpwon = 10 * oppcount;
+              console.log(`XP won: ${xpwon}`)
+              if(isWeekend()){
+                xpwon = xpwon * 2
+                cashwinnings = cashwinnings * 2
+                rewards.push("Double Cash & XP Weekend")
+              }
+              if(userdata.items.includes("fake id")){
+                xpwon = xpwon * 2
               }
               if (userdata.using.includes("radio")) {
                 let itemcooldown = cooldowndata.radio;
@@ -668,43 +964,132 @@ let surface = racedb.Surface[surfacerandom];
                   if(userdata.items.includes("headphones")){
                     amounthead = 4
                   }
-                  cashwinnings = cashwinnings * amounthead;
+                  cashwinnings *= amounthead
+                  xpwon *= amounthead
                 }
               }
-         
-              let xpwon = 10 * tieroption;
-              console.log(`XP won: ${xpwon}`)
-              if(isWeekend()){
-                xpwon = xpwon * 2
-                cashwinnings = cashwinnings * 2
-                rewards.push("Double Cash & XP Weekend")
+              if (userdata.items.includes("record")) {
+                xpwon *= 2
+                
               }
+              if (userdata.using.includes("fruit punch")) {
+
+                xpwon * 2
+                
+              }
+              if (userdata.using.includes("tequila shot")) {
+                let itemcooldown = cooldowndata.tequilla;
+                let timeout = 60000;
+                if (
+                  itemcooldown !== null &&
+                  timeout - (Date.now() - itemcooldown) < 0
+                ) {
+                  userdata.using.pull("tequila shot");
+                  userdata.update();
+                  interaction.channel.send("Your tequila shot ran out!");
+                } else {
+                  cashwinnings = cashwinnings * 5;
+                
+                }
+              }
+              console.log(`before ${cashwinnings}`)
+
+              let leteam = globals.leteams.filter((team) => team.members.includes(interaction.user.id))[0]
+               if(leteam && leteam.name == "Porsche" && cardb.Cars[selected.Name.toLowerCase()].Emote == "<:porsche:931011550880338011>"){
+                cashwinnings += 5000
+    
+              }
+              console.log(`after ${cashwinnings}`)
               let skill = userdata.skill
               let requiredxp = 100 * skill
-              rewards.push(`<:tracklegends:1072357967652995174> ${trackkeys} Track Keys`)
-              cashwinnings = cashwinnings * 2
               userdata.cash += cashwinnings
-              userdata.trackkeys += trackkeys
               userdata.xp += xpwon
               rewards.push(`${emotes.xp} ${xpwon}`)
 
-              if (userdata.xp >= requiredxp) {
-                userdata.skill += 1;
-                userdata.xp = 0;
-               rewards.push(`🆙 Skill Level Up!`)
-              }
+              if(userdata.xp >= requiredxp){
+                  userdata.skill += 1;
+                  userdata.xp = 0;
+                  rewards.push(`${emotes.rank} x1 Skill Level Up!`);
+                }
               
+              rewards.push(`${toCurrency(cashwinnings)}`)
+              userdata.trackwins += 1
 
-              userdata.save()
+              let team1 = globals.leteams.filter((team) => team.members.includes(interaction.user.id))[0]
+
+              if(team1){
+                let randomkeys = randomRange(1, 5)
+                let teams = globals.leteams
+               teams.filter((team) => team.name == team1.name)[0].wins += 1
+        
+               try {
+                 await Globals.findOneAndUpdate(
+                   {},
+                   {
+                     $set: {
+                       "leteams": teams
+                     },
+                   },
+                 );
+                 globals.update()
+                 globals.markModified("leteams")
+                 globals.update()
+                 globals.save()
+                 console.log(globals.leteams)
+
+               }
+               catch (err) {
+                 console.log(err)
+               }
+                rewards.push(`${emotes.lekey} ${randomkeys} Le Mans Keys`)
+                userdata.lekeys += randomkeys
+              }
+
+              let ach1 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["1k miles"].Name)
+      if (selected.Miles && selected.Miles >= 1000 && ach1.length <= 0) {
+        interaction.channel.send(
+          'You just earned the "1K Miles" achievement!'
+        );
+        userdata.achievements.push({
+          name: achievementdb.Achievements["1k miles"].Name,
+          id: achievementdb.Achievements["1k miles"].Name.toLowerCase(),
+          completed: true,
+        });
+      }
+      let ach2 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["10k miles"].Name)
+      if (selected.Miles && selected.Miles >= 10000 && ach2.length <= 0) {
+        interaction.channel.send(
+          'You just earned the "1K Miles" achievement!'
+        );
+        userdata.achievements.push({
+          name: achievementdb.Achievements["10k miles"].Name,
+          id: achievementdb.Achievements["10k miles"].Name.toLowerCase(),
+          completed: true,
+        });
+      }
+      let ach3 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["100k miles"].Name)
+      if (selected.Miles && selected.Miles >= 100000 && ach3.length <= 0) {
+        interaction.channel.send(
+          'You just earned the "1K Miles" achievement!'
+        );
+        userdata.achievements.push({
+          name: achievementdb.Achievements["100k miles"].Name,
+          id: achievementdb.Achievements["100k miles"].Name.toLowerCase(),
+          completed: true,
+        });
+      }
+
               trackembed.setDescription(`${rewards.join('\n')}`)
             }
+            else {
+              userdata.trackloss += 1
+            }
+            
+            userdata.racetime += 5000
+            userdata.save()
 
             await interaction.editReply({embeds: [trackembed]})
           }, 5000);
-          
-        }
-      })
-
 
     }
    
@@ -798,35 +1183,35 @@ let surface = racedb.Surface[surfacerandom];
  
 
 
-    if (tieroption == 1 && raceoption == "junkrace") {
+    if (tieroption == 1 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 200 && car.Junked
       );
-    } else if (tieroption == 2 && raceoption == "junkrace") {
+    } else if (tieroption == 2 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 200 && car.Junked
       );
-    } else if (tieroption == 3 && raceoption == "junkrace") {
+    } else if (tieroption == 3 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 300 && car.Junked
       );
-    } else if (tieroption == 4 && raceoption == "junkrace") {
+    } else if (tieroption == 4 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 400 && car.Junked
       );
-    } else if (tieroption == 5 && raceoption == "junkrace") {
+    } else if (tieroption == 5 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 450 && car.Junked
       );
-    } else if (tieroption == 6 && raceoption == "junkrace") {
+    } else if (tieroption == 6 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 500 && car.Junked
       );
-    } else if (tieroption == 7 && raceoption == "junkrace") {
+    } else if (tieroption == 7 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 600 && car.Junked
       );
-    } else if (tieroption == 8 && raceoption == "junkrace") {
+    } else if (tieroption == 8 && raceoption == "junk") {
       cartofilter = carsarray.filter(
         (car) => car.Speed <= 700 && car.Junked
       );
@@ -855,40 +1240,37 @@ let surface = racedb.Surface[surfacerandom];
     } else if (tieroption > 5 && raceoption == "offroad")
     return interaction.editReply("The max tier for this race is 5!");
 
-    if (tieroption == 1 && raceoption == "motorcyclemad") {
+    if (tieroption == 1 && raceoption == "motorcycle") {
       cartofilter = carsarray.filter(
         (car) => car.Motorcycle && car.Speed <= 150
       );
-    } else if (tieroption == 2 && raceoption == "motorcyclemad") {
+    } else if (tieroption == 2 && raceoption == "motorcycle") {
       cartofilter = carsarray.filter(
         (car) => car.Motorcycle && car.Speed <= 200
       );
-    } else if (tieroption == 3 && raceoption == "motorcyclemad") {
+    } else if (tieroption == 3 && raceoption == "motorcycle") {
       cartofilter = carsarray.filter(
         (car) => car.Motorcycle && car.Speed <= 300
       );
-    } else if (tieroption > 3 && raceoption == "motorcyclemad")
+    } else if (tieroption > 3 && raceoption == "motorcycle")
       return interaction.editReply("The max tier for this race is 3!");
-    else if (
-      raceoption == "motorcyclemad" &&
-      !cardb.Cars[selected.Name.toLowerCase()].Motorcycle
-    )
-      return interaction.reply("You need a motorcycle for this race!");
 
       car2 = lodash.sample(cartofilter);
+
+      let apollochance = randomRange(1, 100)
+
+      if(apollochance <= 5 && raceoption == "spacerace"){
+        car2 = carsarray.filter((car) => car.Name == "2019 Apollo IE")[0]
+      }
+
       let speed2 = car2.Speed
       let handling2 = car2.Handling
       let prestige = userdata.prestige
   
       let winner;
     let rewards = [];
-      let mclarenkey = false
-    if (raceoption == "streetrace" || raceoption == "spacerace") {
-      let mclarenrandom = randomRange(1, 100)
+    if (raceoption == "street" ) {
 
-      if(mclarenrandom <= 10){
-        mclarenkey = true
-      }
    
 
       let weight = selected.WeightStat;
@@ -910,7 +1292,22 @@ let surface = racedb.Surface[surfacerandom];
       winner = playerrace > opponentrace;
 
 
-    } else if (raceoption == "offroad") {
+    } 
+    else if(raceoption == "spacerace"){
+      let weight = selected.WeightStat;
+      let speed = selected.Speed;
+      let acceleration = selected.Acceleration;
+      let handling = selected.Handling;
+
+      let weight2 = car2.Weight;
+      let acceleration2 = car2["0-60"];
+
+       playerrace = dospace(speed, acceleration, handling, weight);
+       opponentrace = dospace(speed2, acceleration2, handling2, weight2);
+
+      winner = playerrace > opponentrace;
+    }
+    else if (raceoption == "offroad") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -955,7 +1352,7 @@ let surface = racedb.Surface[surfacerandom];
       winner = playerrace > opponentrace;
 
 
-    } else if (raceoption == "dragrace") {
+    } else if (raceoption == "drag") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -971,7 +1368,7 @@ let surface = racedb.Surface[surfacerandom];
 
       winner = playerrace > opponentrace;
 
-    } else if (raceoption == "trackrace") {
+    } else if (raceoption == "track") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -1005,7 +1402,7 @@ let surface = racedb.Surface[surfacerandom];
 
     }
     //test
-    else if (raceoption == "motorcyclemad") {
+    else if (raceoption == "motorcycle") {
       let weight = selected.WeightStat;
       let speed = selected.Speed;
       let acceleration = selected.Acceleration;
@@ -1019,23 +1416,11 @@ let surface = racedb.Surface[surfacerandom];
 
       winner = playerrace > opponentrace;
 
-    } else if (raceoption == "carseries") {
-      let ticketscool = cooldowndata.series1tickets;
-      let timeoutfor =  86400000
-      if (
-        userdata.seriestickets == 0 &&
-        timeoutfor - (Date.now() - ticketscool) < 0
-      ) {
-        userdata.seriestickets = 10;
-        cooldowndata.series1tickets = Date.now()
-        userdata.save()
-        cooldowndata.save()
-        return interaction.editReply("Your series tickets have been refilled!")
-      }
+    } else if (raceoption == "series") {
+
       if (userdata.seriestickets <= 0) return interaction.editReply("You need a series ticket to race!");
 
-      if (!cardb.Cars[selected.Name.toLowerCase()].Series)
-        return interaction.channel.send("You need to use a series car!");
+      if (!cardb.Cars[selected.Name.toLowerCase()].Series)  return interaction.channel.send("You need to use a series car!");
 
       let weight = selected.WeightStat;
       let speed = selected.Speed;
@@ -1050,8 +1435,8 @@ let surface = racedb.Surface[surfacerandom];
   
       let tires = selected.tires || "t1tires"
 
-       playerrace = dorace(speed, acceleration, handling, weight, tires);
-       opponentrace = dorace(speed2, acceleration2, handling2, weight2, "t1tires");
+       playerrace = dorace(speed, acceleration, handling, weight, surface, tires);
+       opponentrace = dorace(speed2, acceleration2, handling2, weight2, surface, "t1tires");
 
       winner = playerrace > opponentrace;
 
@@ -1072,7 +1457,7 @@ let surface = racedb.Surface[surfacerandom];
       winner = playerrace > opponentrace;
 
 
-    } else if (raceoption == "junkrace") {
+    } else if (raceoption == "junk") {
       if (
         !cardb.Cars[selected.Name.toLowerCase()].RestoreOnly &&
         !cardb.Cars[selected.Name.toLowerCase()].restored
@@ -1131,12 +1516,12 @@ let tires = selected.tires || "t1tires"
       .setThumbnail(`${car2.Image}`)
       .setColor(colors.blue)
       .setFooter(tipFooterRandom)
-      .addFields(
+      .setFields(
         {
           name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} Your ${
             selected.Emote
           } ${selected.Name}`,
-          value: `${emotes.speed} HP: ${(Math.floor(selected.Speed * surface.Speed))} (${speedpercent}%)\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Speed)}(${handlingpercent}%)\n${emotes.weight} Weight: ${selected.WeightStat}`,
+          value: `${emotes.speed} HP: ${(Math.floor(selected.Speed * surface.Speed))} (${speedpercent}%)\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Handling)}(${handlingpercent}%)\n${emotes.weight} Weight: ${selected.WeightStat}`,
           inline: true,
         },
         {
@@ -1149,6 +1534,29 @@ let tires = selected.tires || "t1tires"
           inline: true,
         }
       )
+
+      if(raceoption == "spacerace"){
+        embed.setFields(
+          {
+            name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} Your ${
+              selected.Emote
+            } ${selected.Name}`,
+            value: `${emotes.speed} HP: ${(Math.floor(selected.Speed))}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling)}\n${emotes.weight} Weight: 0 (You're in space)`,
+            inline: true,
+          },
+          {
+            name: `${car2.Emote} ${car2.Name}`,
+            value: `${emotes.speed} HP: ${Math.floor(speed2)}\n${
+              emotes.acceleration
+            } Acceleration: ${car2[`0-60`]}s\n${emotes.handling} Handling: ${
+              Math.floor(handling2)
+            }\n${emotes.weight} Weight: 0 (You're in space)`,
+            inline: true,
+          }
+        )
+        .setTitle(`Racing tier ${tieroption} ${raceindb.Name} in space`)
+
+      }
 
       let row = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
@@ -1204,7 +1612,14 @@ let tires = selected.tires || "t1tires"
       rewards.push("Double Cash & XP Weekend")
 
     }
+    if(userdata.items.includes("fake id")){
+      xpwon = xpwon * 2
+    }
+    if (userdata.using.includes("fruit punch")) {
 
+      xpwon * 2
+      
+    }
       let notorietywon = 100;
       if (userdata.using.includes("reverse card")) {
         let itemcooldown = cooldowndata.reverse;
@@ -1237,17 +1652,17 @@ let tires = selected.tires || "t1tires"
           notorietywon = notorietywon * 2
         }
         if(house2[0]){
-          let rando = lodash.sample(["yes", "no"])
-          if(rando == "yes"){
+          let rando = randomRange(1, 100)
+          if(rando <= 20){
             rewards.push(`${emotes.lockpicks} 1 Lockpick`)
             userdata.lockpicks += 1
 
           }
         }
-        if(house3[0] && raceoption == "dragrace"){
+        if(house3[0] && raceoption == "drag"){
           cashwon = cashwon += (cashwon * 0.05)
         }
-        if(house4[0] && raceoption == "streetrace"){
+        if(house4[0] && raceoption == "street"){
           cashwon = cashwon += (cashwon * 0.05)
         }
         if(house5[0]){
@@ -1256,7 +1671,7 @@ let tires = selected.tires || "t1tires"
         if(house6[0] && raceoption == "crosscountry"){
           cashwon = cashwon += (cashwon * 0.10)
         }
-        if(house7[0] && raceoption == "streetrace"){
+        if(house7[0] && raceoption == "street"){
           cashwon = cashwon += (cashwon * 0.10)
         }
         clearTimeout(xt)
@@ -1281,11 +1696,7 @@ let tires = selected.tires || "t1tires"
             cashwon += cashwon * 0.05;
           }
         }
-        if (userdata.using.includes("fruit punch")) {
 
-          xpwon * 2
-          
-        }
         if (userdata.using.includes("tequila shot")) {
           let itemcooldown = cooldowndata.tequilla;
           let timeout = 60000;
@@ -1428,7 +1839,7 @@ let tires = selected.tires || "t1tires"
 
 
 
-        if (raceoption == "junkrace") {
+        if (raceoption == "junk") {
           let randomr = randomRange(1, 50);
           let restparts = [
             "j1exhaust",
@@ -1458,23 +1869,24 @@ let tires = selected.tires || "t1tires"
         }
 
         if (raceoption == "crosscountry") {
-          let randomr = randomRange(1, 2);
-        
+          let randomr = randomRange(1, 100);
          
-          if(randomr == 1){
-            if (tieroption < 5) {
+          if (tieroption < 5) {
+          if(randomr <= 20){
   
               rewards.push(`${emotes.wheelSpin} Wheelspin`);
               userdata.wheelspins += 1
   
             }
+          }
             else if(tieroption >= 5) {
+              if(randomr <= 20){
               rewards.push(`${emotes.superWheel} Super Wheelspin`);
   
               userdata.swheelspins +=1 
+              }
             }
 
-          }
 
        
         }
@@ -1486,12 +1898,44 @@ let tires = selected.tires || "t1tires"
           if(house1[0]){
             notorietywon = notorietywon * 2
           }
+          if (userdata.using.includes("apple")) {
+            let itemcooldown = cooldowndata.apple;
+
+            let timeout = 120000;
+            if (
+              itemcooldown !== null &&
+              timeout - (Date.now() - itemcooldown) < 0
+            ) {
+              userdata.using.pull("apple");
+              userdata.update();
+              interaction.channel.send("Your apple ran out!");
+            } else {
+              notorietywon = notorietywon * 1.5;
+            }
+          }
+
+          if (userdata.using.includes("applepie")) {
+            let itemcooldown = cooldowndata.apple;
+
+            let timeout = 120000;
+            if (
+              itemcooldown !== null &&
+              timeout - (Date.now() - itemcooldown) < 0
+            ) {
+              userdata.using.pull("applepie");
+              userdata.update();
+              interaction.channel.send("Your apple pie ran out!");
+            } else {
+              notorietywon = notorietywon * 5;
+            }
+          }
+
+
           rewards.push(`${emotes.notoriety} ${notorietywon}`);
 
           userdata.notoriety += notorietywon;
         }
-        cashwon = cashwon * 2
-        userdata.cash += cashwon;
+
 
         let cratechance = randomRange(1, 30);
      
@@ -1509,7 +1953,7 @@ let tires = selected.tires || "t1tires"
         } else {
           rewards.push("No crate");
         }
-        if (raceoption == "trackrace" && possiblekey == 10 && tieroption <= 2) {
+        if (raceoption == "track" && possiblekey == 10 && tieroption <= 2) {
           let randomamount = randomRange(1, 3);
           if (userdata.using.includes("milk")) {
             let itemcooldown = cooldowndata.milk;
@@ -1529,7 +1973,7 @@ let tires = selected.tires || "t1tires"
           rewards.push(`${emotes.commonKey} ${randomamount}`);
           userdata.ckeys += randomamount;
         } else if (
-          raceoption == "trackrace" &&
+          raceoption == "track" &&
           possiblekey == 10 &&
           tieroption <= 4
         ) {
@@ -1552,7 +1996,7 @@ let tires = selected.tires || "t1tires"
           rewards.push(`${emotes.rareKey} ${randomamount}`);
           userdata.rkeys += randomamount;
         } else if (
-          raceoption == "trackrace" &&
+          raceoption == "track" &&
           possiblekey == 10 &&
           tieroption >= 5
         ) {
@@ -1575,7 +2019,7 @@ let tires = selected.tires || "t1tires"
           rewards.push(`${emotes.rareKey} ${randomamount}`);
           userdata.rkeys += randomamount;
         }
-        if (raceoption == "dragrace") {
+        if (raceoption == "drag") {
           if(tieroption <= 3){
             rewards.push(`${emotes.barnMapCommon}`)
             userdata.barnmaps += 1;
@@ -1591,7 +2035,7 @@ let tires = selected.tires || "t1tires"
         }
         rewards.push(`${emotes.rp} + ${rpwon} RP`);
         userdata.rp += rpwon;
-        if (raceoption == "dragrace" && randombarn == 10) {
+        if (raceoption == "drag" && randombarn == 10) {
           let randomamount = 1;
           rewards.push(`${emotes.barnMapCommon} ${randomamount}`);
           userdata.barnmaps += randomamount;
@@ -1619,7 +2063,7 @@ let tires = selected.tires || "t1tires"
             userdata.cars.push(carobj);
           }
         }
-        if (raceoption == "carseries") {
+        if (raceoption == "series") {
           rewards.push(`+1 Wins`);
           await User.findOneAndUpdate(
             {
@@ -1680,10 +2124,38 @@ let tires = selected.tires || "t1tires"
 
         }
        
-          let itemtier = randomRange(1, 3);
-          let itemchance = randomRange(1, 10)
-          console.log(itemchance)
-          if (itemchance >= 5) {
+        let itemchance = randomRange(1, 100)
+        let tiers = {
+            Tier1: {
+              Tier: 1,
+              Chance: 60,
+            },
+            Tier2: {
+              Tier: 2,
+              Chance: 30,
+            },
+            Tier3: {
+              Tier: 3,
+              Chance: 10,
+            },
+      }
+          console.log(`chance: ${itemchance}`)
+          let itemtier
+          if (itemchance >= tiers.Tier1.Chance) {
+            itemtier = 1
+          } else if (itemchance >= tiers.Tier2.Chance) {
+            itemtier =2
+          } else if (itemchance >= tiers.Tier3.Chance) {
+            itemtier = 3
+          } else {
+            itemtier = 3
+          }
+      
+
+          let itemchance2 = randomRange(1, 10)
+          console.log(itemchance2)
+          console.log(itemtier)
+          if (itemchance2 >= 5) {
             let itemarr = [];
             for (let i in itemdb) {
               if (
@@ -1719,7 +2191,7 @@ let tires = selected.tires || "t1tires"
           let taskdrag = tasks.filter((task) => task.ID == "3");
 
 
-          if (taskstreet[0] && raceoption == "streetrace") {
+          if (taskstreet[0] && raceoption == "street") {
             if (taskstreet[0].Races < 10) {
               taskstreet[0].Races += 1;
               await User.findOneAndUpdate(
@@ -1748,7 +2220,7 @@ let tires = selected.tires || "t1tires"
                 `Task completed! You earned ${toCurrency(taskstreet[0].Reward)}`
               );
             }
-          } else if (tasktrack[0] && raceoption == "trackrace") {
+          } else if (tasktrack[0] && raceoption == "track") {
             if (tasktrack[0].Races < 10) {
               tasktrack[0].Races += 1;
               await User.findOneAndUpdate(
@@ -1777,7 +2249,7 @@ let tires = selected.tires || "t1tires"
                 `Task completed! You earned ${toCurrency(tasktrack[0].Reward)}`
               );
             }
-          } else if (taskdrag[0] && raceoption == "dragrace") {
+          } else if (taskdrag[0] && raceoption == "drag") {
             if (taskdrag[0].Races < 10) {
               taskdrag[0].Races += 1;
               await User.findOneAndUpdate(
@@ -1822,7 +2294,7 @@ let tires = selected.tires || "t1tires"
           let taskstreet = tasks.filter((task) => task.ID == "1");
           let tasktrack = tasks.filter((task) => task.ID == "2");
 
-          if (taskstreet[0] && raceoption == "streetrace") {
+          if (taskstreet[0] && raceoption == "street") {
             if (taskstreet[0].Races < 10) {
               taskstreet[0].Races += 1;
               await User.findOneAndUpdate(
@@ -1851,7 +2323,7 @@ let tires = selected.tires || "t1tires"
                 `Task completed! You earned ${toCurrency(taskstreet[0].Reward)}`
               );
             }
-          } else if (tasktrack[0] && raceoption == "trackrace") {
+          } else if (tasktrack[0] && raceoption == "track") {
             if (tasktrack[0].Races < 10) {
               tasktrack[0].Races += 1;
               await User.findOneAndUpdate(
@@ -1884,10 +2356,33 @@ let tires = selected.tires || "t1tires"
         }
 
         if(raceoption == "spacerace"){
-          let moontokens = 10 * tieroption
+          if(car2.Name == "2019 Apollo IE"){
+            rewards.push(`${cardb.Cars["2019apolloie"].Emote} 2019 Apollo IE Won!`)
+           
+            let carobj = {
+              ID: cardb.Cars["2019apolloie"].alias,
+              Name: "2019 Apollo IE",
+              Speed: cardb.Cars["2019apolloie"].Speed,
+              Acceleration: cardb.Cars["2019apolloie"]["0-60"],
+              Handling: cardb.Cars["2019apolloie"].Handling,
+              Emote: cardb.Cars["2019apolloie"].Emote,
+              Livery: cardb.Cars["2019apolloie"].Image,
+              Miles: 0,
+              WeightStat: cardb.Cars["2019apolloie"].Weight,
+              Gas: 10,
+              MaxGas: 10,
+            };
+            userdata.cars.push(carobj);
+          }
 
-          rewards.push(`${emotes.moontokens} ${moontokens}`)
-          userdata.moontokens += moontokens
+          let randompart = ["alien oil", "nuclear core", "metal frame", "zionite pistons", "car hook", "heat panels"]
+          let partchance = randomRange(1, 10)
+
+          if(partchance >= 5){
+            let randompart2 = lodash.sample(randompart);
+            rewards.push(`${partdb.Parts[randompart2].Emote} ${partdb.Parts[randompart2].Name}`)
+            userdata.parts.push(randompart2);
+          }
         }
 
         if(userdata.location == "italy" && raceindb.Name == "Street Race"){
@@ -1911,30 +2406,44 @@ let tires = selected.tires || "t1tires"
           userit.splice(userit.indexOf("cocktail"), 1);
           userdata.items = userit;
         }
- 
-        if(mclarenkey == true){
-          rewards.push(`<:key_mclaren:1211175403071348766> 5 McLaren Keys`)
-          userdata.mKeys += 5
+        if(zpass == true){
+          cashwon = cashwon * 2
         }
-       
+
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
         rewards.push(`${emotes.xp} ${xpwon}`);
-
+        
+        userdata.cash += cashwon;
         userdata.xp += xpwon
         let skill = userdata.skill
 
-        let requiredxp  =skill * 100
-
+        let requiredxp  = skill * 100
         if(userdata.xp >= requiredxp){
-          userdata.skill += 1
-          userdata.xp = 0
-          rewards.push(`${emotes.rank} Skill Level Up!`)
-        }
+            userdata.skill += 1;
+            userdata.xp = 0;
+            rewards.push(`${emotes.rank} x1 Skill Level Up!`);
+          }
+        
 
         let xessence = randomRange(1, 5);
 
+        let carclass = selected.Class || cardb.Cars[selected.Name.toLowerCase()].Class;
+        if (selected.Xessence && prestige >= 2 && tieroption >= 7 && carclass !== "X") {
+          if (userdata.using.includes("pills")) {
+            let itemcooldown = cooldowndata.pills;
 
-        if (selected.Xessence && prestige >= 2 && tieroption >= 7) {
+            let timeout = 300000;
+            if (
+              itemcooldown !== null &&
+              timeout - (Date.now() - itemcooldown) < 0
+            ) {
+              userdata.using.pull("pills");
+              userdata.update();
+              interaction.channel.send("Your pills ran out!");
+            } else {
+              xessence = xessence * 2;
+            }
+          }
           console.log("xessence")
           selected.Xessence += xessence;
           await User.findOneAndUpdate(
@@ -1987,9 +2496,27 @@ let tires = selected.tires || "t1tires"
           
         }
 
+        if(userdata.items.includes("xessence detector")){
+          let randompartxessence = randomRange(1, 10);
 
-        rewards.push(`||<:egg_flame:964250157229170708> CODE: \`IMONFIRE\`||`);
-    
+          if(randompartxessence >= 5){
+            let randomamount = randomRange(1, 3);
+            rewards.push(`${emotes.xessence} ${randomamount} Part Xessence`);
+            userdata.xessence += randomamount;
+          }
+        }
+        let leteam = globals.leteams.filter((team) => team.members.includes(interaction.user.id))[0]
+
+
+         if(leteam && leteam.name == "Ferrari" && raceoption == "street" && cardb.Cars[selected.Name.toLowerCase()].Emote == "<:ferrari:931011838374727730>"){
+          cashwon += 5000
+
+        }
+         if(leteam && leteam.name == "Audi" && raceoption == "drag" && cardb.Cars[selected.Name.toLowerCase()].Emote == "<:audi:931011548758048828>"){
+          cashwon += 5000
+
+        }
+
 
         embed.addFields({
           name: `Rewards`,
@@ -2011,7 +2538,7 @@ let tires = selected.tires || "t1tires"
         embed.data.fields[0].value = `${emotes.speed} HP: ${Math.floor(selected.Speed * surface.Speed)}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Handling)}\n${emotes.weight} Weight: ${selected.WeightStat}\n${emotes.OVR} Score: ${Math.round(playerrace)}`
         embed.data.fields[1].value = `${emotes.speed} HP: ${Math.floor(speed2) * surface.Speed}\n${emotes.acceleration} Acceleration: ${car2["0-60"]}s\n${emotes.handling} Handling: ${Math.floor(handling2 * surface.Handling)}\n${emotes.weight} Weight: ${car2.Weight}\n${emotes.OVR} Score: ${Math.round(opponentrace)}`;
 
-        embed.setTitle(`Tier ${tieroption} ${raceindb.Name} won!`);
+        embed.setTitle(`Tier ${tieroption} ${raceindb.Name} on ${surface.Emote} ${surface.Name} won!`);
       
       } else if (winner == false) {
         
@@ -2028,44 +2555,44 @@ let tires = selected.tires || "t1tires"
         }
         embed.data.fields[0].value = `${emotes.speed} HP: ${selected.Speed}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Handling)}\n${emotes.weight} Weight: ${selected.WeightStat}\n${emotes.OVR} Score: ${Math.round(playerrace)}`
         embed.data.fields[1].value = `${emotes.speed} HP: ${Math.floor(speed2 * surface.Handling)}\n${emotes.acceleration} Acceleration: ${car2["0-60"]}s\n${emotes.handling} Handling: ${Math.floor(handling2 * surface.Handling)}\n${emotes.weight} Weight: ${car2.Weight}\n${emotes.OVR} Score: ${Math.round(opponentrace)}`;
-        embed.setTitle(`Tier ${tieroption} ${raceindb.Name} lost!`);
+        embed.setTitle(`Tier ${tieroption} ${raceindb.Name} on ${surface.Emote} ${surface.Name} lost!`);
       }
 
-      let ach1 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["rich"].Name)
-      if (userdata.cash >= 100000 && ach1.length <= 0) {
-        interaction.channel.send(
-          'You just earned the "Rich" achievement!'
-        );
-        userdata.achievements.push({
-          name: achievementdb.Achievements["rich"].Name,
-          id: achievementdb.Achievements["rich"].Name.toLowerCase(),
-          completed: true,
-        });
-      }
-      let ach2 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["richer"].Name)
-      if (userdata.cash >= 1000000 && ach2.length <= 0) {
-        interaction.channel.send(
-          'You just earned the "Richer" achievement!'
-        );
-        userdata.achievements.push({
-          name: achievementdb.Achievements["richer"].Name,
-          id: achievementdb.Achievements["richer"].Name.toLowerCase(),
-          completed: true,
-        });
-      }
-      let ach3 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["richest"].Name)
-      if (userdata.cash >= 1000000000 && ach3.length <= 0) {
-        interaction.channel.send(
-          'You just earned the "Richest" achievement!'
-        );
-        userdata.achievements.push({
-          name: achievementdb.Achievements["richest"].Name,
-          id: achievementdb.Achievements["richest"].Name.toLowerCase(),
-          completed: true,
-        });
-      }
-
+      
       selected.Miles += 15;
+      let ach1 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["1k miles"].Name)
+      if (selected.Miles && selected.Miles >= 1000 && ach1.length <= 0) {
+        interaction.channel.send(
+          'You just earned the "1K Miles" achievement!'
+        );
+        userdata.achievements.push({
+          name: achievementdb.Achievements["1k miles"].Name,
+          id: achievementdb.Achievements["1k miles"].Name.toLowerCase(),
+          completed: true,
+        });
+      }
+      let ach2 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["10k miles"].Name)
+      if (selected.Miles && selected.Miles >= 10000 && ach2.length <= 0) {
+        interaction.channel.send(
+          'You just earned the "1K Miles" achievement!'
+        );
+        userdata.achievements.push({
+          name: achievementdb.Achievements["10k miles"].Name,
+          id: achievementdb.Achievements["10k miles"].Name.toLowerCase(),
+          completed: true,
+        });
+      }
+      let ach3 = userdata.achievements.filter((ach) => ach.name == achievementdb.Achievements["100k miles"].Name)
+      if (selected.Miles && selected.Miles >= 100000 && ach3.length <= 0) {
+        interaction.channel.send(
+          'You just earned the "1K Miles" achievement!'
+        );
+        userdata.achievements.push({
+          name: achievementdb.Achievements["100k miles"].Name,
+          id: achievementdb.Achievements["100k miles"].Name.toLowerCase(),
+          completed: true,
+        });
+      }
       let dirt = selected.Dirt || 100;
 
       let newdirt = (dirt -= 5);
@@ -2132,6 +2659,7 @@ let tires = selected.tires || "t1tires"
       }
 
 
+      userdata.racetime += 5000
       userdata.save();
 
 

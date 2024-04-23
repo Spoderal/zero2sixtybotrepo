@@ -40,16 +40,58 @@ module.exports = {
         .setDescription("The car id you want to race with")
         .setRequired(true)
     )
+    .addStringOption((option) => option
+    .setName("surface")
+    .setDescription("The surface you want to race on")
+    .setRequired(true)
+    .addChoices(
+      {name: "Asphalt", value: "asphalt"},
+      {name: "Dirt", value: "dirt"},
+      {name: "Snow", value: "snow"},
+      {name: "Ice", value: "ice"},
+      {name: "Wet", value: "wet"},
+    )
+    )
     )
    ,
   async execute(interaction) {
-    const dorace = function(speed, acceleration, handling, weight) {
+    const dorace = function(speed, acceleration, handling, weight, surface) {
       // Define the importance of each factor
       var speedImportance = 0.40;
       var accelerationImportance = 0.30;
       var handlingImportance = 0.25;
       var weightImportance = 0.05;
-  
+      
+      if(surface == "asphalt"){
+        speedImportance = 0.40
+        accelerationImportance = 0.30
+        handlingImportance = 0.25
+        weightImportance = 0.05
+      }
+      else if(surface == "dirt"){
+        speedImportance = 0.30
+        accelerationImportance = 0.40
+        handlingImportance = 0.20
+        weightImportance = 0.10
+      }
+      else if(surface == "snow"){
+        speedImportance = 0.20
+        accelerationImportance = 0.30
+        handlingImportance = 0.40
+        weightImportance = 0.10
+      }
+      else if(surface == "ice"){
+        speedImportance = 0.10
+        accelerationImportance = 0.30
+        handlingImportance = 0.40
+        weightImportance = 0.10
+      }
+      else if(surface == "wet"){
+        speedImportance = 0.30
+        accelerationImportance = 0.30
+        handlingImportance = 0.30
+        weightImportance = 0.10
+      }
 
   
       var normalizedSpeed = speed
@@ -111,29 +153,6 @@ module.exports = {
         selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
 
 
-      let embed = new EmbedBuilder()
-        .setTitle(`${user2.username}, what would you like to race ${user.username} in?`)
-        .setDescription(`**Type the Cars ID**`)
-        .addFields([
-          {
-            name: `${user.username}'s ${carindb1.Emote} ${carindb1.Name}`,
-            value: `${emotes.speed} Power: ${speed}\n\n${emotes.acceleration} 0-60: ${acceleration}s\n\n${emotes.handling} Handling: ${handling}\n\n${emotes.weight} Weight: ${weight}`,
-          },
-        ])
-        .setImage(carimage1)
-        .setColor(`#60b0f4`);
-
-
-
-  
-
-
- await interaction.editReply({
-        embeds: [embed],
-        fetchReply: true,
-      });
-
-
 
           console.log(car2)
           let filteredcar2 = userdata2.cars.filter((car) => car.ID == car2)
@@ -147,13 +166,13 @@ module.exports = {
           let handling2 = selected2.Handling;
 
           let carimage2 = selected2.Image || selected2.Livery || carindb2.Image;
+          let surface = interaction.options.getString("surface")
 
-          let user1car = dorace(speed, acceleration, handling, weight);
-          let user2car = dorace(speed2, acceleration2, handling2, weight2);
+          let user1car = dorace(speed, acceleration, handling, weight, surface);
+          let user2car = dorace(speed2, acceleration2, handling2, weight2, surface);
 
-
-           embed = new discord.EmbedBuilder()
-          .setTitle(`Racing`)
+           let embed = new discord.EmbedBuilder()
+          .setTitle(`${surface} Racing`)
           .setThumbnail(`${carimage2}`)
           .setImage(`${carimage1}`)
           .addFields(

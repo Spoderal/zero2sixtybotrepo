@@ -65,7 +65,7 @@ module.exports = {
 
       let user = interaction.options.getUser("user") || interaction.user;
       let userdata = await User.findOne({ id: user.id });
-      if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
+      if (!userdata?.id) return await interaction.editReply(GET_STARTED_MESSAGE);
       let helmet = userdata.helmet || "default";
       let title = userdata.title || "noob racer";
       if (!title || title == null || title == undefined) {
@@ -87,7 +87,7 @@ module.exports = {
 
       for (let car in cars) {
         let car2 = cars[car];
-        let price = cardb.Cars[car2.Name.toLowerCase()]?.Price;
+        let price = car2.Resale
         if (price) finalprice += Number(price);
       }
 
@@ -111,7 +111,10 @@ module.exports = {
       for (let ach in achievements) {
         let achiev = achievements[ach];
         let achindb = achievementsdb.Achievements[achiev.name.toLowerCase()];
-        achivarr.push(`${achindb.Image}`);
+        if(!achivarr.includes(`${achindb.Image}`)){
+          achivarr.push(`${achindb.Image}`);
+
+        }
       }
       if (achivarr.length == 0) {
         achivarr = ["No achievements"];
@@ -158,7 +161,7 @@ module.exports = {
 
         ctx.fillText(`P: ${showcase.Speed}`, 720, 50);
         ctx.fillText(`A: ${showcase.Acceleration}s`, 720, 80);
-        ctx.fillText(`W: ${showcase.WeightStat}`, 720, 110);
+        ctx.fillText(`W: ${showcase.Weight}`, 720, 110);
         ctx.fillText(`H: ${showcase.Handling}`, 720, 140);
 
       }
@@ -190,41 +193,15 @@ module.exports = {
 
       ctx.drawImage(pvpimg, 450, 130, 25, 25)
 
-      if(achivarr.includes("https://i.ibb.co/4fTVjPX/ach-fusionmaster.png")){
-        let achiev = await loadImage("https://i.ibb.co/4fTVjPX/ach-fusionmaster.png")
-        ctx.drawImage(achiev, 400, 570, 50, 50)
+      let x = 400;
+      let y = 570;
+      for (let i = 0; i < achivarr.length; i++) {
+        let achiev = await loadImage(achivarr[i]);
+        ctx.drawImage(achiev, x, y, 50, 50);
+        x += 55;
       }
 
-      if(achivarr.includes("https://i.ibb.co/Zf8bGrN/achievement-rich.png")){
-        let achiev = await loadImage("https://i.ibb.co/Zf8bGrN/achievement-rich.png")
-        ctx.drawImage(achiev, 450, 570, 50, 50)
-      }
-
-      if(achivarr.includes("https://i.ibb.co/4Py8NZ6/achievement-richer.png")){
-        let achiev = await loadImage("https://i.ibb.co/4Py8NZ6/achievement-richer.png")
-        ctx.drawImage(achiev, 500, 570, 50, 50)
-      }
-      if(achivarr.includes("https://i.ibb.co/ZK046Gf/achievement-richest.png")){
-        let achiev = await loadImage("https://i.ibb.co/ZK046Gf/achievement-richest.png")
-        ctx.drawImage(achiev, 500, 570, 50, 50)
-      }
-      if(achivarr.includes("https://i.ibb.co/n3XDmjg/ach-timemaster.png")){
-        let achiev = await loadImage("https://i.ibb.co/n3XDmjg/ach-timemaster.png")
-        ctx.drawImage(achiev, 500, 570, 50, 50)
-      }
-      if(achivarr.includes("https://i.ibb.co/Hh0qSBh/achievement-bugsmasher.png")){
-        let achiev = await loadImage("https://i.ibb.co/Hh0qSBh/achievement-bugsmasher.png")
-        ctx.drawImage(achiev, 650, 570, 50, 50)
-      }
-      if(achivarr.includes("https://i.ibb.co/vkfr887/ACH-driftking.png")){
-        let achiev = await loadImage("https://i.ibb.co/vkfr887/ACH-driftking.png")
-        ctx.drawImage(achiev, 550, 570, 50, 50)
-      }
-      if(achivarr.includes("https://i.ibb.co/0hTDFp9/ach-legacy.png")){
-        let achiev = await loadImage("https://i.ibb.co/0hTDFp9/ach-legacy.png")
-        ctx.drawImage(achiev, 600, 570, 50, 50)
-      }
-
+    
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Outfits")
@@ -279,7 +256,10 @@ module.exports = {
 
       for (let helm in userdata.outfits) {
         let helmet = userdata.outfits[helm];
-        helmlist.push(helmet);
+        if(!helmet.Name){
+          helmlist.push(helmet);
+
+        }
       }
 
      
@@ -300,31 +280,36 @@ module.exports = {
 
           let displayhelms = [];
 
+          if(!helmlist[0]) return interaction.editReply("You don't have any outfits!")
+
           for (let h in helmlist[page]) {
             let helm = helmlist[page][h];
-            if(outfits.Accessories[helm.Name.toLowerCase()]){
-              displayhelms.push(
-                `${outfits.Accessories[helm.Name.toLowerCase()].Emote} ${
-                  outfits.Accessories[helm.Name.toLowerCase()].Name
-                }`
-              );
+            if(!helm.Name){
 
-            }
-            else if(outfits.Outfits[helm.Name.toLowerCase()]){
-              displayhelms.push(
-                `${outfits.Outfits[helm.Name.toLowerCase()].Emote} ${
-                  outfits.Outfits[helm.Name.toLowerCase()].Name
-                }`
-              );
-
-            }
-            else if(outfits.Helmets[helm.Name.toLowerCase()]){
-              displayhelms.push(
-                `${outfits.Helmets[helm.Name.toLowerCase()].Emote} ${
-                  outfits.Helmets[helm.Name.toLowerCase()].Name
-                }`
-              );
-
+              if(outfits.Accessories[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                    outfits.Accessories[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Outfits[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                    outfits.Outfits[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
+              else if(outfits.Helmets[helm.toLowerCase()]){
+                displayhelms.push(
+                  `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                    outfits.Helmets[helm.toLowerCase()].Name
+                  }`
+                );
+  
+              }
             }
           }
 
@@ -351,29 +336,32 @@ module.exports = {
 
             for (let h in helmlist[page]) {
               let helm = helmlist[page][h];
-              if(outfits.Accessories[helm.Name.toLowerCase()]){
-                displayhelms.push(
-                  `${outfits.Accessories[helm.Name.toLowerCase()].Emote} ${
-                    outfits.Accessories[helm.Name.toLowerCase()].Name
-                  }`
-                );
-  
-              }
-              else if(outfits.Outfits[helm.Name.toLowerCase()]){
-                displayhelms.push(
-                  `${outfits.Outfits[helm.Name.toLowerCase()].Emote} ${
-                    outfits.Outfits[helm.Name.toLowerCase()].Name
-                  }`
-                );
-  
-              }
-              else if(outfits.Helmets[helm.Name.toLowerCase()]){
-                displayhelms.push(
-                  `${outfits.Helmets[helm.Name.toLowerCase()].Emote} ${
-                    outfits.Helmets[helm.Name.toLowerCase()].Name
-                  }`
-                );
-  
+              if(!helm.Name){
+
+                if(outfits.Accessories[helm.toLowerCase()]){
+                  displayhelms.push(
+                    `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                      outfits.Accessories[helm.toLowerCase()].Name
+                    }`
+                  );
+    
+                }
+                else if(outfits.Outfits[helm.toLowerCase()]){
+                  displayhelms.push(
+                    `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                      outfits.Outfits[helm.toLowerCase()].Name
+                    }`
+                  );
+    
+                }
+                else if(outfits.Helmets[helm.toLowerCase()]){
+                  displayhelms.push(
+                    `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                      outfits.Helmets[helm.toLowerCase()].Name
+                    }`
+                  );
+    
+                }
               }
             }
 
@@ -401,29 +389,32 @@ module.exports = {
 
             for (let h in items[page]) {
               let helm = items[page][h];
-              if(outfits.Accessories[helm.Name.toLowerCase()]){
-                displayhelms.push(
-                  `${outfits.Accessories[helm.Name.toLowerCase()].Emote} ${
-                    outfits.Accessories[helm.Name.toLowerCase()].Name
-                  }`
-                );
-  
-              }
-              else if(outfits.Outfits[helm.Name.toLowerCase()]){
-                displayhelms.push(
-                  `${outfits.Outfits[helm.Name.toLowerCase()].Emote} ${
-                    outfits.Outfits[helm.Name.toLowerCase()].Name
-                  }`
-                );
-  
-              }
-              else if(outfits.Helmets[helm.Name.toLowerCase()]){
-                displayhelms.push(
-                  `${outfits.Helmets[helm.Name.toLowerCase()].Emote} ${
-                    outfits.Helmets[helm.Name.toLowerCase()].Name
-                  }`
-                );
-  
+              if(!helm.Name){
+
+                if(outfits.Accessories[helm.toLowerCase()]){
+                  displayhelms.push(
+                    `${outfits.Accessories[helm.toLowerCase()].Emote} ${
+                      outfits.Accessories[helm.toLowerCase()].Name
+                    }`
+                  );
+    
+                }
+                else if(outfits.Outfits[helm.toLowerCase()]){
+                  displayhelms.push(
+                    `${outfits.Outfits[helm.toLowerCase()].Emote} ${
+                      outfits.Outfits[helm.toLowerCase()].Name
+                    }`
+                  );
+    
+                }
+                else if(outfits.Helmets[helm.toLowerCase()]){
+                  displayhelms.push(
+                    `${outfits.Helmets[helm.toLowerCase()].Emote} ${
+                      outfits.Helmets[helm.toLowerCase()].Name
+                    }`
+                  );
+    
+                }
               }
             }
 
@@ -443,8 +434,7 @@ module.exports = {
           page = 0;
           vispage = 1;
 
-          if (page > items.length)
-            return interaction.editReply({ content: "You don't have anymore pages!" });
+          if (page > items.length)  return interaction.editReply({ content: "You don't have anymore pages!" });
 
           if (items == helmlist) {
             let displayhelms = [];
@@ -555,7 +545,8 @@ module.exports = {
         if(!outfitdb.Helmets[helmet.toLowerCase()]){
           return await interaction.reply("That helmet doesn't exist!")
         }
-        let helmetinoutfits = outfits.filter((outfit) => outfit.Name.toLowerCase() == helmet.toLowerCase())
+        console.log(helmet)
+        let helmetinoutfits = outfits.filter((outfit) => outfit.toLowerCase() == helmet.toLowerCase())
         if(helmetinoutfits.length == 0){
           return await interaction.reply("You don't have that helmet!")
         }
@@ -565,7 +556,7 @@ module.exports = {
         if(!outfitdb.Outfits[outfit.toLowerCase()]){
           return await interaction.reply("That outfit doesn't exist!")
         }
-        let helmetinoutfits = outfits.filter((outfit) => outfit.Name.toLowerCase() == outfit.toLowerCase())
+        let helmetinoutfits = outfits.filter((outfit) => outfit.toLowerCase() == outfit.toLowerCase())
         if(helmetinoutfits.length == 0){
           return await interaction.reply("You don't have that outfit!")
         }
@@ -575,7 +566,7 @@ module.exports = {
         if(!outfitdb.Accessories[accessory.toLowerCase()]){
           return await interaction.reply("That accessory doesn't exist!")
         }
-        let helmetinoutfits = outfits.filter((outfit) => outfit.Name.toLowerCase() == accessory.toLowerCase())
+        let helmetinoutfits = outfits.filter((outfit) => outfit.toLowerCase() == accessory.toLowerCase())
         if(helmetinoutfits.length == 0){
           return await interaction.reply("You don't have that helmet!")
         }

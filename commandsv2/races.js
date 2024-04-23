@@ -82,6 +82,13 @@ module.exports = {
             emoji:"🛞",
             customId: "drift",
           },
+          {
+            label: "Motorcycle",
+            description: "Information about motorcycle racing",
+            value: "motorcycle",
+            emoji:"🏍️",
+            customId: "motorcycle",
+          }
         ])
     );
 
@@ -130,7 +137,21 @@ module.exports = {
               embeds: [embed],
               components: [row2],
             });
-          } else if (value === "bot_race") {
+          } 
+          else if(value == "motorcycle"){
+            embed.setTitle("Motorcycle Racing");
+            embed.setFooter({ text: 'Prefix is "/"' });
+            embed.setDescription(`Race on motorcycles!`);
+            embed.addFields([{ name: `Rewards`, value: `$220 * Tier` }])
+            embed.setThumbnail("https://i.ibb.co/JykDMPG/races-motorcyce.png");
+            embed.setColor(colors.blue);
+
+            await interaction.editReply({
+              embeds: [embed],
+              components: [row2],
+            });
+          }
+          else if (value === "bot_race") {
             embed = new EmbedBuilder();
             embed.setTitle("Street Racing");
             embed.setFooter({ text: 'Prefix is "/"' });
@@ -328,20 +349,35 @@ module.exports = {
             embed.setDescription(`Drift freely and earn money for it!`);
             embed.addFields([
               {
-                name: `Easy`,
-                value: `${cashemote} $200\n${rpemote} 2\n1 Drift Rank`,
+                name: `Regular`,
+                value: `${cashemote} $1000\n10 XP`,
                 inline: true,
               },
               {
-                name: `Medium`,
-                value: `${cashemote} $450\n${rpemote} 4\n2 Drift Rank`,
+                name: `Parking Garage`,
+                value: `${cashemote} $2000\n25 XP`,
                 inline: true,
               },
               {
-                name: `Hard`,
-                value: `${cashemote} $800\n${rpemote} 6\n3 Drift Rank`,
+                name: `Mountain`,
+                value: `${cashemote} $3000\n50 XP`,
                 inline: true,
               },
+            {
+              name: `Easy`,
+                value: `${cashemote} 1x cash\n1x XP`,
+                inline: true,
+            },
+            {
+              name: `Medium`,
+                value: `${cashemote} 2x cash\n2x XP`,
+                inline: true,
+            },
+            {
+              name: `Hard`,
+                value: `${cashemote} 3x cash\n3x XP`,
+                inline: true,
+            }
             ]);
 
             embed.setThumbnail("https://i.ibb.co/tz0ygYM/races-drift.png");
@@ -361,17 +397,22 @@ module.exports = {
             embed.addFields([
               {
                 name: `Spa-Francorchamps`,
-                value: `${cashemote} $750\n${rpemote} 1\n<:ckey:993011409132728370> 5`,
+                value: `${cashemote} $750\n50% Chance for <:ckey:993011409132728370> 5`,
                 inline: true,
               },
               {
                 name: `Suzuka`,
-                value: `${cashemote} $1,000\n${rpemote} 2\n<:rkey:993011407681486868> 3`,
+                value: `${cashemote} $1,000\n25% Chance for <:rkey:993011407681486868> 3`,
                 inline: true,
               },
               {
                 name: `Nürburgring`,
-                value: `${cashemote} $1,250\n${rpemote} 3\n<:rkey:993011407681486868> 1`,
+                value: `${cashemote} $1,250\n10% Chance for <:ekey:993011410210672671> 1`,
+                inline: true,
+              },
+              {
+                name: `Silverstone`,
+                value: `${cashemote} $1,500\n10% Chance for <:ekey:993011410210672671> 1`,
                 inline: true,
               },
             ]);
@@ -394,42 +435,42 @@ module.exports = {
             embed.addFields([
               {
                 name: `Tier 1`,
-                value: `${cashemote} $275\n${rpemote} 1\n50% Chance for 1 ${emotes.wheelSpin}`,
+                value: `${cashemote} $275\n${rpemote} 1\n25% Chance for 1 ${emotes.wheelSpin}`,
                 inline: true,
               },
               {
                 name: `Tier 2`,
-                value: `${cashemote} $550\n${rpemote} 2\n50% Chance for 1 ${emotes.wheelSpin}`,
+                value: `${cashemote} $550\n${rpemote} 2\n25% Chance for 1 ${emotes.wheelSpin}`,
                 inline: true,
               },
               {
                 name: `Tier 3`,
-                value: `${cashemote} $825\n${rpemote} 3\n50% Chance for 1 ${emotes.wheelSpin}`,
+                value: `${cashemote} $825\n${rpemote} 3\n25% Chance for 1 ${emotes.wheelSpin}`,
                 inline: true,
               },
               {
                 name: `Tier 4`,
-                value: `${cashemote} $1100\n${rpemote} 4\n50% Chance for 1 ${emotes.wheelSpin}`,
+                value: `${cashemote} $1100\n${rpemote} 4\n25% Chance for 1 ${emotes.wheelSpin}`,
                 inline: true,
               },
               {
                 name: `Tier 5`,
-                value: `${cashemote} $1375\n${rpemote} 5\n50% Chance for 1 ${emotes.superWheel}`,
+                value: `${cashemote} $1375\n${rpemote} 5\n25% Chance for 1 ${emotes.superWheel}`,
                 inline: true,
               },
               {
                 name: `Tier 6`,
-                value: `${cashemote} $1650\n${rpemote} 6\n50% Chance for 1 ${emotes.superWheel}`,
+                value: `${cashemote} $1650\n${rpemote} 6\n25% Chance for 1 ${emotes.superWheel}`,
                 inline: true,
               },
               {
                 name: `Tier 7`,
-                value: `${cashemote} $1925\n${rpemote} 7\n50% Chance for 1 ${emotes.superWheel}`,
+                value: `${cashemote} $1925\n${rpemote} 7\n25% Chance for 1 ${emotes.superWheel}`,
                 inline: true,
               },
               {
                 name: `Tier 8`,
-                value: `${cashemote} $2200\n${rpemote} 8\n50% Chance for 1 ${emotes.superWheel}`,
+                value: `${cashemote} $2200\n${rpemote} 8\n25% Chance for 1 ${emotes.superWheel}`,
                 inline: true,
               },
             ]);

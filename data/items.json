@@ -49,8 +49,8 @@
     "Action": "Store up to $50,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_smallvault:1101004960130408458>",
-    "Shop": true,
-    "Findable": true,
+    "Shop": false,
+    "Findable": false,
     "Tier": 1,
     "Image": "https://i.ibb.co/1Jxn8FJ/item-smallvault.png",
     "Used": ["You store some money in a small vault"]
@@ -61,8 +61,8 @@
     "Action": "Store up to $100,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_mediumvault:1101004954405175379>",
-    "Shop": true,
-    "Findable": true,
+    "Shop": false,
+    "Findable": false,
     "Tier": 2,
     "Image": "https://i.ibb.co/8KDVHj3/item-mediumvault.png",
     "Used": ["You store some money in a medium vault"]
@@ -73,7 +73,7 @@
     "Action": "Store up to $500,000 cash before prestiging",
     "Type": "Usable",
     "Emote": "<:item_largevault:1101004951574024244>",
-    "Shop": true,
+    "Shop": false,
     "Findable": false,
     "Tier": 3,
     "Image": "https://i.ibb.co/n3MX4jM/item-largevault.png",
@@ -86,7 +86,7 @@
     "Type": "Usable",
     "Emote": "<:item_hugevault:1101004947107106876>",
     "Shop": false,
-    "Findable": true,
+    "Findable": false,
     "Market":500000,
     "Tier": 3,
     "Image": "https://i.ibb.co/dftRnBZ/item-hugevault.png",
@@ -129,7 +129,7 @@
   },
   "orange juice": {
     "Price": 50000,
-    "Action": "Only get t4parts in wheelspins for 60 seconds",
+    "Action": "Only get t4parts in wheelspins for 2 minutes",
     "Name": "Orange Juice",
     "Type": "Usable",
     "Emote": "<:item_orangejuice:1095474854775508993>",
@@ -154,7 +154,7 @@
 
   "fruit punch": {
     "Price": 0,
-    "Action": "Receive x2 XP when racing and drifting **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
+    "Action": "Receive x2 XP when racing and drifting forever **OBTAIN WITH /FUSE WITH ALL 3 OTHER JUICES**",
     "Name": "Fruit Punch",
     "Type": "Usable",
     "Emote": "<:item_fruitpunch:1095474852997120010>",
@@ -212,6 +212,17 @@
     "Tier": 2,
     "Image": "https://i.ibb.co/0ZB9W78/item-oil.png",
     "Used": ["You...drink oil? Ok? Now you get 5x daily rewards for 7 days."]
+  },
+  "xessence detector": {
+    "Price": 100000,
+    "Action": "Detect part xessence in races while this item is in your inventory",
+    "Name": "Xessence Detector",
+    "Type": "Non-Usable",
+    "Emote": "<:item_xessencedetector:1229122030893404261>",
+    "Shop": true,
+    "Findable": true,
+    "Tier": 2,
+    "Image": "https://i.ibb.co/JdZt2XX/item-xessencedetector.png"
   },
   "epic lockpick": {
     "Price": 50000,
@@ -734,12 +745,12 @@
   },
   "fake id": {
     "Price": 0,
-    "Action": "This item is completely useless",
+    "Action": "Gain x2 XP permanently while in your inventory",
     "Name": "Fake ID",
-    "Type": "Usable",
+    "Type": "Non-Usable",
     "Emote": "<:item_fakeid:1145561045381951509>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
     "Tier": 2,
     "Image": "https://i.ibb.co/y5D3Jqp/item-fakeid.png",
     "Used": ["Who'd you steal this from?", "HELP! MY ID WAS STOLEN"]
@@ -758,16 +769,41 @@
   },
   "pills": {
     "Price": 0,
-    "Action": "This item is completely useless",
+    "Action": "Gain x2 Xessence for 5 minutes on use",
     "Name": "Pills",
     "Type": "Usable",
     "Emote": "<:item_pills:1145582676674367488>",
     "Shop": false,
-    "Findable": false,
+    "Findable": true,
     "Tier": 3,
     "Image": "https://i.ibb.co/VYCqGyf/item-pills.png",
-    "Used": ["YUM", "This will cure your inability to rob"]
+    "Used": ["YUM", "This will cure your Xessence headache"]
   },
+  "apple":{
+    "Price": 0,
+    "Action": "Gain 1.5x notoriety for 2 minutes on use",
+    "Name": "Apple",
+    "Type": "Usable",
+    "Emote": "<:item_apple:1227292354386591744>",
+    "Shop": false,
+    "Findable": true,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/WHmK10c/item-apple.png",
+    "Used": ["Hey apple", "An apple a day keeps the doctor away", "An apple a day keeps the doctor away, but not the police"]
+  },
+  "apple pie":{
+    "Price": 0,
+    "Action": "Gain 5x notoriety for 2 minutes on use\n**OBTAIN BY FUSING 5 APPLES**",
+    "Name": "Apple Pie",
+    "Type": "Usable",
+    "Emote": "<:item_applepie:1225439417737678848>",
+    "Shop": false,
+    "Findable": false,
+    "Tier": 3,
+    "Image": "https://i.ibb.co/Hx47Vt2/item-applepie.png",
+    "Used": ["Mmm pie", "*Throws pie at your face*", "Whats your favorite pie?"]
+  },
+  
   "super wheelspin": {
     "Price": 0,
     "Action": "Super wheelspin, /use",

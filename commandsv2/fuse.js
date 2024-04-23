@@ -20,29 +20,37 @@ module.exports = {
         .setName("part")
         .setDescription("The part to upgrade")
         .addChoices(
+          
+          { name: "Epic Rocket Engine (EVENT)", value: "epic rocket engine" },
           { name: "Tires", value: "tires" },
-          { name: "Slicks", value: "slicks" },
-          {name: "Offroad Tires", value: "offroadtires"},
           { name: "Exhaust", value: "exhaust" },
           { name: "Intake", value: "intake" },
           { name: "Clutch", value: "clutch" },
           { name: "ECU", value: "ecu" },
           { name: "Turbo", value: "turbo" },
-          { name: "Drift Suspension", value: "dsuspension" },
           { name: "Suspension", value: "suspension" },
           { name: "Intercooler", value: "intercooler" },
-          { name: "Gearbox", value: "gearbox" },
-          { name: "Spoiler", value: "spoiler" },
           { name: "Brakes", value: "brakes" },
+          { name: "Spoiler", value: "spoiler" },
+          { name: "Gearbox", value: "gearbox" },
           { name: "Weight Reduction", value: "weightreduction" },
           { name: "Weight", value: "weight" },
+          { name: "Slicks", value: "slicks" },
+          { name: "Drift Suspension", value: "dsuspension" },
           { name: "Gas Tank", value: "gastank" },
           { name: "Fruit Punch", value: "fruit punch" },
           {name: "Offroad Tires", value: "offroadtires"},
           {name: "Crankshaft", value: "crankshaft"},  
+          {name: "Apple Pie", value: "apple pie"},
         )
         .setRequired(true)
-    ),
+    )
+    .addStringOption((option) =>
+      option 
+      .setName("t5voucher")
+      .setDescription("Use a T5 Voucher to skip the fusion process")
+      .setRequired(false)
+  ),
 
   async execute(interaction) {
     let user1 = interaction.user;
@@ -56,6 +64,11 @@ module.exports = {
       return await interaction.reply(
         "Specify a part! Try: Exhaust, Tires, Clutch, or Intake"
       );
+
+      let t5vouch = interaction.options.getString("t5voucher")
+      let uservouchers = userdata.t5vouchers
+
+      if(t5vouch == true && uservouchers <= 0) return await interaction.reply("You dont have any T5 Vouchers!")
 
     if (!parts) return await interaction.reply("You dont have any parts!");
     if (parttoinstall == "fruit punch") {
@@ -107,11 +120,58 @@ module.exports = {
       }, 2000);
       return;
     } 
+    else  if (parttoinstall == "apple pie") {
+      let apples = userdata.items.filter(function hasmany(item) {
+        return item === "apple"
+      });
+      if (5 > apples.length)
+        return await interaction.reply(
+          "You need 5 apples to make an apple pie!"
+        );
+        let uitems = userdata.items
+        for (var i3 = 0; i3 < 5; i3++) uitems.splice(uitems.indexOf("apple"), 1);
+      userdata.items = uitems;
+
+      let embed = new discord.EmbedBuilder()
+        .setTitle("Fusing into apple pie...")
+        .addFields([
+          {
+            name: `Items`,
+            value: `5x ${itemdb["apple"].Emote} ${itemdb["apple"].Name}`,
+          },
+        ]);
+      embed.setColor(colors.blue);
+
+      await interaction.reply({ embeds: [embed] });
+
+      let xt = setTimeout(async () => {
+        embed.setTitle("Fused!");
+        embed.setColor("#ffffff");
+        embed.fields = [];
+        embed.addFields([
+          {
+            name: `Item`,
+            value: `${itemdb["apple pie"].Emote} ${itemdb["apple pie"].Name}`,
+          },
+        ]);
+        userdata.items.push("apple pie");
+        await userdata.save();
+        interaction.editReply({ embeds: [embed] });
+        
+        clearTimeout(xt)
+      }, 2000);
+      return;
+    } 
     else if (parttoinstall == "epic rocket engine") {
 
-      if(userdata.moontokens < 1000) return interaction.reply(`You need 1000 moon tokens to fuse these parts!`)
+      let epicalready = parts.filter((item) => item == "epic rocket engine");
+
+      if (epicalready.length > 0){
+        return await interaction.reply("You already have an epic rocket engine!")
+      }
 
       let items = userdata.parts;
+      let item7 = userdata.parts.filter((item) => item == "rocket engine");
       let item1 = userdata.parts.filter((item) => item == "nuclear core");
       let item2 = userdata.parts.filter((item) => item == "metal frame");
       let item3 = userdata.parts.filter((item) => item == "zionite pistons");
@@ -119,24 +179,47 @@ module.exports = {
       let item5 = userdata.parts.filter((item) => item == "car hook");
       let item6 = userdata.parts.filter((item) => item == "heat panels");
 
+      let missing = []
       console.log(item1)
-      if (item1.length == 0)
-        return await interaction.reply(`You're missing a nuclear core!`);
-      if (item2.length == 0)
-        return await interaction.reply(`You're missing a metal frame!`);
-      if (item3.length == 0)
-        return await interaction.reply(`You're missing zionite pistons!`);
-        if (item4.length == 0)
-        return await interaction.reply(`You're missing alien oil!`);
-        if (item5.length == 0)
-        return await interaction.reply(`You're missing a car hook!`);
-        if (item6.length == 0)
-        return await interaction.reply(`You're missing heat panels!`);
+      if (item7.length == 0){
+        missing.push(`rocket engine`)
 
+      }
+      if (item1.length == 0){
+        missing.push(`nuclear core`)
+
+      }
+      if (item2.length == 0){
+        missing.push(`metal frame`)
+
+      }
+      if (item3.length == 0){
+        missing.push(`zionite pistons`)
+
+      }
+        if (item4.length == 0){
+          missing.push(`alien oil`)
+
+        }
+        if (item5.length == 0){
+          missing.push(`car hook`)
+
+        }
+        if (item6.length == 0){
+
+          missing.push(`heat panels`)
+        }
+
+        if(missing.length > 0){
+          return await interaction.reply(`You're missing a ${missing.join(", ")}!`)
+
+        }
+
+        for (var i7 = 0; i7 < 1; i7++) items.splice(items.indexOf("rocket engine"), 1);
       for (var i1 = 0; i1 < 1; i1++) items.splice(items.indexOf("nuclear core"), 1);
       for (var i2 = 0; i2 < 1; i2++)
         items.splice(items.indexOf("metal frame"), 1);
-      for (var i3 = 0; i3 < 1; i3++)
+      for (var i8 = 0; i8 < 1; i8++)
         items.splice(items.indexOf("zionite pistons"), 1);
         for (var i4 = 0; i4 < 1; i4++)
         items.splice(items.indexOf("alien oil"), 1);
@@ -151,7 +234,9 @@ module.exports = {
         .addFields([
           {
             name: `Items`,
-            value: `${partdb.Parts["nuclear core"].Emote} ${partdb.Parts["nuclear core"].Name}
+            value: `
+            ${partdb.Parts["rocket engine"].Emote} ${partdb.Parts["rocket engine"].Name}
+            \n${partdb.Parts["nuclear core"].Emote} ${partdb.Parts["nuclear core"].Name}
             \n${partdb.Parts["metal frame"].Emote} ${partdb.Parts["metal frame"].Name}
             \n${partdb.Parts["zionite pistons"].Emote} ${partdb.Parts["zionite pistons"].Name}
             \n${partdb.Parts["alien oil"].Emote} ${partdb.Parts["alien oil"].Name}
@@ -163,7 +248,7 @@ module.exports = {
 
       await interaction.reply({ embeds: [embed] });
 
-      let xt = setTimeout(() => {
+      let xt = setTimeout(async () => {
         embed.setTitle("Fused!");
         embed.setColor("#ffffff");
         embed.fields = [];
@@ -174,7 +259,7 @@ module.exports = {
           },
         ]);
         userdata.parts.push("epic rocket engine");
-        userdata.save();
+        await userdata.save();
         interaction.editReply({ embeds: [embed] });
         
         clearTimeout(xt)
@@ -249,7 +334,7 @@ module.exports = {
         let yesno = ["yes", "no", "no"];
         let randomblueprint = lodash.sample(yesno);
   
-        let xt = setTimeout(() => {
+        let xt = setTimeout(async () => {
           embed.setTitle("Fused!");
           embed.fields = [];
           embed.addFields([
@@ -259,14 +344,15 @@ module.exports = {
             },
           ]);
           interaction.editReply({ embeds: [embed] });
-  
-          if(userdata.t5vouchers > 0){
+          let t5option = interaction.options.getString("t5voucher")
+          if(userdata.t5vouchers > 0 && t5option == true){
             userdata.t5vouchers -= 1
           }
+          else {
+            for (var i = 0; i < 2; i++) parts.splice(parts.indexOf(parte.toLowerCase()), 1);
 
-          for (var i = 0; i < 2; i++)
-            parts.splice(parts.indexOf(parte.toLowerCase()), 1);
-          userdata.parts = parts;
+            userdata.parts = parts;
+          }
   
           userdata.parts.push(partb);
           if (randomblueprint == "yes") {
@@ -275,7 +361,8 @@ module.exports = {
               "<:blueprint:1076026198171328562> +1 Blueprint!"
             );
           }
-          userdata.save();
+          console.log("t5")
+          await userdata.save();
           
           clearTimeout(xt)
         }, 2000);

@@ -229,6 +229,7 @@ module.exports = {
             race - Race your car in numerous races\n
             races - View all the current race modes\n
             upgrade - Upgrade parts on your car\n
+            xclass - View information on X Class prestige
           `);
           break;
         }

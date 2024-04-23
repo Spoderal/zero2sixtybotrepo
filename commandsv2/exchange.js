@@ -18,10 +18,8 @@ module.exports = {
           { name: "Rare Keys", value: "rkeys" },
           { name: "Exotic Keys", value: "ekeys" },
           { name: "Barn Maps", value: "barnmaps" },
-          { name: "Notoriety", value: "notoriety" },
           { name: "Super Wheel Spins", value: "swspins" },
           { name: "T5 Voucher", value: "t5vouch" },
-          { name: "Series Tickets", value: "stickets" },
           { name: "Garage Space", value: "garagespace" },
         )
         .setRequired(true)
@@ -61,20 +59,12 @@ module.exports = {
         `Converted ${toturnin} gold into ${toCurrency(finalamount)}`
       );
     } else if (toconv == "rkeys") {
-      let finalamount = toturnin * 2.5;
+      let finalamount = toturnin * 1;
       userdata.gold -= toturnin;
       userdata.rkeys += finalamount;
       userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} rare keys`
-      );
-    } else if (toconv == "notoriety") {
-      let finalamount = toturnin * 100;
-      userdata.gold -= toturnin;
-      userdata.notoriety += finalamount;
-      userdata.save();
-      await interaction.reply(
-        `Converted ${toturnin} gold into ${finalamount} notoriety`
       );
     } else if (toconv == "ekeys") {
       let finalamount = toturnin * 0.5;
@@ -87,8 +77,8 @@ module.exports = {
         `Converted ${toturnin} gold into ${finalamount} exotic keys`
       );
     } else if (toconv == "barnmaps") {
-      let finalamount = toturnin * 0.5;
-      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 barn map! You need at least 2 gold`)
+      let finalamount = toturnin * 0.2;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 barn map! You need at least 5 gold`)
 
       userdata.gold -= toturnin;
       userdata.barnmaps += finalamount;
@@ -98,8 +88,8 @@ module.exports = {
       );
     }  
     else if (toconv == "t5vouch") {
-      let finalamount = toturnin * 0.5;
-      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 t5voucher! You need at least 2 gold`)
+      let finalamount = toturnin * 0.2;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 t5voucher! You need at least 5 gold`)
       userdata.gold -= toturnin;
       userdata.t5vouchers += finalamount;
       userdata.save();
@@ -114,21 +104,13 @@ module.exports = {
       userdata.garageLimit += Math.floor(finalamount);
       userdata.save();
       await interaction.reply(
-        `Converted ${toturnin} gold into ${Math.floor(finalamount)} t5 vouchers`
+        `Converted ${toturnin} gold into ${Math.floor(finalamount)} garage spaces`
       );
     }
-    else if (toconv == "stickets") {
-      let finalamount = toturnin * 0.5;
-      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 series ticket! You need at least 2 gold`)
-      userdata.gold -= toturnin;
-      userdata.seriestickets += finalamount;
-      userdata.save();
-      await interaction.reply(
-        `Converted ${toturnin} gold into ${finalamount} series tickets`
-      );
-      }
     else if (toconv == "swspins") {
-      let finalamount = toturnin * 1;
+      let finalamount = toturnin * 0.1;
+      if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 garage space! You need at least 10 gold`)
+
       userdata.gold -= toturnin;
       userdata.swheelspins += finalamount;
       userdata.save();

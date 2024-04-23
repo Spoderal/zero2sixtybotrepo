@@ -123,8 +123,8 @@ module.exports = {
       userdata.markModified("squads");
       userdata.update();
     }
-    if (!sqlevels.includes({ name: "the classics", car: 0 })) {
-      sqlevels.push({ name: "the classics", car: 0 });
+    if (!sqlevels.includes({ name: "impossible defenders", car: 0 })) {
+      sqlevels.push({ name: "impossible defenders", car: 0 });
       userdata.markModified("squads");
       userdata.update();
     }

@@ -49,12 +49,7 @@ module.exports = {
     var app = express();
     var bodyParser = require("body-parser");
 
-    for(let i of client.options.shards){
-      if(i == 0) {
-        app.listen(8080);
-        console.log("Listening on port 8080")
-      }
-    }
+
     app.use(bodyParser.json());
   
     app.post("/webhooks/zero2sixtybotgold", function (request, response) {
@@ -105,6 +100,7 @@ module.exports = {
       `☀️ SPRING 🌸  /season`,
       `with ${numberWithCommas(client.guilds.cache.size)} drivers`,
       "⚙️ NEW ROADMAP 2024 ⚙️ /updates",
+      "⚙️ NEW UPDATE 4/14/2024 ⚙️",
       "🪙 Gold starting as low as $0.99!🪙"
     ];
     if(isWeekend() == true){

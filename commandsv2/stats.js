@@ -7,7 +7,7 @@ const partdb = require("../data/partsdb.json");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
 const {
-  toCurrency
+  toCurrency, numberWithCommas
 } = require("../common/utils");
 const itemdb = require("../data/items.json");
 const { createCanvas, loadImage } = require("canvas");
@@ -150,7 +150,7 @@ module.exports = {
         let sellprice = Math.floor(carindb.Price * 0.75)
 
         if(sellprice === 0){
-          sellprice = carindb.sellprice * 0.35 
+          sellprice = carindb.sellprice * 0.75 
         }
   
          await interaction.editReply({
@@ -212,6 +212,10 @@ module.exports = {
       }
       if (partindb.Stars > 0) {
         stats.push(`⭐ Rating: +${partindb.Stars}`);
+      }
+      if (partindb.TierX) {
+        let tierx = partdb.Parts[partindb.TierX.toLowerCase()].Xessence;
+        stats.push(`${emotes.xessence} TX Xessence Required: ${tierx}`);
       }
       let sellprice = Math.floor(partindb.Price * 0.35)
       let price = partindb.Price
@@ -394,8 +398,10 @@ module.exports = {
 
       ctx.font = "bold 40px sans-serif";
 
-
       ctx.fillText(`${toCurrency(sellprice)}`, 250, 700);
+      ctx.fillStyle = "#000000";
+
+      ctx.fillText(`Miles: ${numberWithCommas(carindb[0].Miles)}`, 500, 635);
 
       let attachment = new Discord.AttachmentBuilder(await canvas.toBuffer(), {
         name: "stats-image.png",
@@ -443,7 +449,7 @@ module.exports = {
         "S": 5000
       }
       let carclass = cars.Cars[carindb[0].Name.toLowerCase()].Class;
-  
+      sellprice = carindb[0].Resale
       let xessenceneeded = classxessencerequired[carclass]
       let msg = await interaction.editReply({
         embeds: [],

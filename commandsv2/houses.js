@@ -41,7 +41,6 @@ module.exports = {
       let row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setLabel("Warehouses")
-          .setEmoji(emotes.warehouse)
           .setCustomId("warehouse")
           .setStyle("Secondary")
       );

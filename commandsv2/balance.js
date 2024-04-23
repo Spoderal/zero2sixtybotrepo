@@ -57,23 +57,22 @@ module.exports = {
   + `${emotes.pvptokens} PVP Tokens: ${numberWithCommas(profile.pvptokens)}\n`
   + `${emotes.t5voucher} T5 Vouchers: ${numberWithCommas(profile.t5vouchers)}\n`
   + `${emotes.barnMapCommon} Barn Maps: ${numberWithCommas(profile.barnmaps)}\n`
-  + `${emotes.wheelSpin} Wheel spins: ${numberWithCommas(profile.wheelspins)}\n`
-  + `${emotes.superWheel} Super Wheel spins: ${numberWithCommas(profile.swheelspins)}\n`
+  + `${emotes.wheelSpin} Wheelspins: ${numberWithCommas(profile.wheelspins)}\n`
+  + `${emotes.superWheel} Super Wheelspins: ${numberWithCommas(profile.swheelspins)}\n`
   + `${emotes.blueprints} Blueprints: ${numberWithCommas(profile.blueprints)}\n`
   + `${emotes.f1blueprint} F1 Blueprints: ${numberWithCommas(profile.f1blueprint)}\n`
   + `${emotes.seriestickets} Series Tickets: ${profile.seriestickets}\n`
-  + `${emotes.xessence} Xessence: ${profile.xess}\n`
-  + `||Whats this? An egg? <:egg_green:1219112556426428547> : \`CODE: GRASSGREEN\`||`
+  + `${emotes.xessence} Part Xessence: ${profile.xessence}\n`
 
   const eventbalance = `${emotes.notoriety} Notoriety: ${numberWithCommas(profile.notoriety)}\n` +
   `${emotes.rp} RP: ${numberWithCommas(profile.rp)}\n` + `<:tracklegends:1072357967652995174> Track Keys: ${numberWithCommas(profile.trackkeys)}\n` 
-  + `<:key_mclaren:1211175403071348766> McLaren Keys: ${profile.mKeys}\n` + `<:key_z:1140029565360668783> ${numberWithCommas(profile.zkeys)}` 
 
 
   const keybalance = `${emotes.commonKey} Common: ${numberWithCommas(profile.ckeys)}\n` +
   `${emotes.rareKey} Rare: ${numberWithCommas(profile.rkeys)}\n` +
   `${emotes.exoticKey} Exotic: ${numberWithCommas(profile.ekeys)}\n` +
-  `<:lockpick:1040384727691051170> Lockpicks: ${numberWithCommas(profile.lockpicks)}\n`+ `${emotes.dirftKey} Drift Keys: ${profile.driftKeys}`
+  `<:lockpick:1040384727691051170> Lockpicks: ${numberWithCommas(profile.lockpicks)}\n`+ `${emotes.dirftKey} Drift Keys: ${profile.driftKeys}\n`
+  + `${emotes.lekey} Le Mans Keys: ${numberWithCommas(profile.lekeys)}\n`
 
 
     title = `${user.username}'s Balance`;

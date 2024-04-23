@@ -167,6 +167,8 @@ module.exports = {
             }
         }
 
+        userdata.vault = uservault
+
 
         userdata.cars.push(filt[0])
 
@@ -184,7 +186,7 @@ module.exports = {
         let cartoremove = interaction.options.getString("car")
 
         
-        let filt = usercars.filter((car) => car.Name.toLowerCase() == cartoremove.toLowerCase())
+        let filt = usercars.filter((car) => car.Name.toLowerCase() == cartoremove.toLowerCase()  )
 
         if(!filt[0]) return await interaction.reply("You don't have this car! Try using the cars full name")
         console.log(filt)
@@ -195,7 +197,8 @@ module.exports = {
               break;
             }
         }
-
+        console.log(usercars)
+        userdata.cars = usercars
 
         userdata.vault.push(filt[0])
 

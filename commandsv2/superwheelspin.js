@@ -27,10 +27,10 @@ module.exports = {
       (await Cooldowns.findOne({ id: uid })) || new Cooldowns({ id: uid });
 
     let wheelspincool = cooldowndata.swheelspin || 0;
-    let timeout = 5000;
+    let timeout = 2000;
     if (wheelspincool !== null && timeout - (Date.now() - wheelspincool) > 0)
       return await interaction.reply(
-        "Please wait 5 seconds before using this command again."
+        "Please wait 2 seconds before using this command again."
       );
     let wheelspins = userdata.swheelspins;
     if (wheelspins <= 0)
@@ -58,7 +58,7 @@ module.exports = {
       if (userdata.using.includes("orange juice")) {
      
         let cooldown = cooldowndata.orangejuice;
-        let timeout = 60000;
+        let timeout = 120000;
         console.log(timeout - (Date.now() - cooldown));
         if (
           timeout !== null &&
@@ -225,12 +225,12 @@ module.exports = {
           userdata.parts.push(reward.toLowerCase());
 
           embed.setDescription(
-            `You won a ${partsdb.Parts[reward].Emote} ${partsdb.Parts[reward].Name}!`
+            `You won a ${partsdb.Parts[reward.toLowerCase()].Emote} ${partsdb.Parts[reward.toLowerCase()].Name}!`
           );
           interaction.editReply({ embeds: [embed] });
         }
         userdata.save();
       }, 500);
-    }, 3000);
+    }, 2000);
   },
 };

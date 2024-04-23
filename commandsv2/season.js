@@ -28,6 +28,7 @@ module.exports = {
     let notoriety = userdata.notoriety;
     let premiumpass = userdata.premium
 
+
     if(premiumpass == false && userdata.zpass == true){
       userdata.premium = true
       premiumpass = true
@@ -36,16 +37,22 @@ module.exports = {
 
     let rewards = [];
 
-    for (let rew in seasonRewards) {
-      let re = seasonRewards[rew];
-      let rewardobj = {
-        Number: re.Number,
-        Item: re.Item,
-        Premium: re.Premium,
-        Required: re.Required,
-      };
+    if(userdata.seasonclaimed < 50){
 
-      rewards.push(rewardobj);
+      for (let rew in seasonRewards) {
+        let re = seasonRewards[rew];
+        let rewardobj = {
+          Number: re.Number,
+          Item: re.Item,
+          Premium: re.Premium,
+          Required: re.Required,
+        };
+  
+        rewards.push(rewardobj);
+      }
+    }
+    else {
+      rewards = [{Name: 1, Item: "N/A", Premium: "N/A", Required: 0}]
     }
 
     rewards = lodash.chunk(
@@ -156,7 +163,7 @@ module.exports = {
 
     let rewardtoclaim = seasonRewards[`${claimable}`];
 
-    if (rewardtoclaim.Required > notoriety) {
+    if (rewardtoclaim && rewardtoclaim.Required > notoriety) {
       rowclaim.components[0].setEmoji("✖️");
       rowclaim.components[0].setStyle("Danger");
     }
@@ -165,149 +172,163 @@ module.exports = {
     let vispage = 1;
     let rewarddisp = ""
     console.log(rewardtoclaim)
-    if(rewardtoclaim.Item.toLowerCase().endsWith("cash")) {
-      rewarddisp = `${emotes.cash} Cash: ${toCurrency(rewardtoclaim.Item.split(" ")[0])}`
+    if(claimable > 50){
+      rewarddisp = "N/A"
+      rewardtoclaim = {Required: "0"}
     }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("garage space") || rewardtoclaim.Item.toLowerCase().endsWith("garage spaces")) {
-      rewarddisp = `${emotes.garage} garage space: ${rewardtoclaim.Item.split(" ")[0]}`
+    else {
 
+      if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("cash")) {
+        rewarddisp = `${emotes.cash} Cash: ${toCurrency(rewardtoclaim.Item.split(" ")[0])}`
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("garage space") || rewardtoclaim.Item.toLowerCase().endsWith("garage spaces")) {
+        rewarddisp = `${emotes.garage} garage space: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && itemdb[rewardtoclaim.Item.toLowerCase()]) {
+        rewarddisp = `${itemdb[rewardtoclaim.Item.toLowerCase()].Emote} ${itemdb[rewardtoclaim.Item.toLowerCase()].Name}`
+  
+      }
+  
+      else if(rewardtoclaim !== undefined && cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
+        rewarddisp = `${cardb.Cars[rewardtoclaim.Item.toLowerCase()].Emote} ${cardb.Cars[rewardtoclaim.Item.toLowerCase()].Name}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("barn map") || rewardtoclaim.Item.toLowerCase().endsWith("barn maps")) {
+        rewarddisp = `${emotes.barnMapCommon} Barn Maps: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("t5voucher") || rewardtoclaim.Item.toLowerCase().endsWith("t5vouchers")) {
+        rewarddisp = `${emotes.t5voucher} T5Vouchers: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("exotic keys")) {
+        rewarddisp = `${emotes.ekey} Exotic Keys: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("rare keys")) {
+        rewarddisp = `${emotes.rkey} Rare Keys: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("common keys")) {
+        rewarddisp = `${emotes.ckey} Common Keys: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("lockpicks") || rewardtoclaim.Item.toLowerCase().endsWith("lockpick")) {
+        rewarddisp = `${emotes.lockpicks} Lockpicks: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("wheelspin") || rewardtoclaim.Item.toLowerCase().endsWith("wheelspins")) {
+        rewarddisp = `${emotes.wheelSpin} Wheelspins: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("superwheelspins") || rewardtoclaim.Item.toLowerCase().endsWith("superwheelspin")) {
+        rewarddisp = `${emotes.superWheel} Super Wheelspins: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("blueprint") || rewardtoclaim.Item.toLowerCase().endsWith("blueprints")) {
+        rewarddisp = `${emotes.blueprints} Blueprints: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("xp")) {
+        rewarddisp = `${emotes.xp} XP: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Item.toLowerCase().endsWith("gold")) {
+        rewarddisp = `${emotes.gold} Gold: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && outfitdb.Helmets[rewardtoclaim.Item.toLowerCase()]) {
+        rewarddisp = `${outfitdb.Helmets[rewardtoclaim.Item.toLowerCase()].Emote} ${outfitdb.Helmets[rewardtoclaim.Item.toLowerCase()].Name}`
+  
+      }
+      else if(rewardtoclaim !== undefined && partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
+        rewarddisp = `${partdb.Parts[rewardtoclaim.Item.toLowerCase()].Emote} ${partdb.Parts[rewardtoclaim.Item.toLowerCase()].Name}`
+  
+      }
     }
-    else if(itemdb[rewardtoclaim.Item.toLowerCase()]) {
-      rewarddisp = `${itemdb[rewardtoclaim.Item.toLowerCase()].Emote} ${itemdb[rewardtoclaim.Item.toLowerCase()].Name}`
-
-    }
-
-    else if(cardb.Cars[rewardtoclaim.Item.toLowerCase()]) {
-      rewarddisp = `${cardb.Cars[rewardtoclaim.Item.toLowerCase()].Emote} ${cardb.Cars[rewardtoclaim.Item.toLowerCase()].Name}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("barn map") || rewardtoclaim.Item.toLowerCase().endsWith("barn maps")) {
-      rewarddisp = `${emotes.barnMapCommon} Barn Maps: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("t5voucher") || rewardtoclaim.Item.toLowerCase().endsWith("t5vouchers")) {
-      rewarddisp = `${emotes.t5voucher} T5Vouchers: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("exotic keys")) {
-      rewarddisp = `${emotes.ekey} Exotic Keys: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("rare keys")) {
-      rewarddisp = `${emotes.rkey} Rare Keys: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("common keys")) {
-      rewarddisp = `${emotes.ckey} Common Keys: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("lockpicks") || rewardtoclaim.Item.toLowerCase().endsWith("lockpick")) {
-      rewarddisp = `${emotes.lockpicks} Lockpicks: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("wheelspin") || rewardtoclaim.Item.toLowerCase().endsWith("wheelspins")) {
-      rewarddisp = `${emotes.wheelSpin} Wheelspins: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("superwheelspins") || rewardtoclaim.Item.toLowerCase().endsWith("superwheelspin")) {
-      rewarddisp = `${emotes.superWheel} Super Wheelspins: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("blueprint") || rewardtoclaim.Item.toLowerCase().endsWith("blueprints")) {
-      rewarddisp = `${emotes.blueprints} Blueprints: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("xp")) {
-      rewarddisp = `${emotes.xp} XP: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Item.toLowerCase().endsWith("gold")) {
-      rewarddisp = `${emotes.gold} Gold: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(outfitdb.Helmets[rewardtoclaim.Item.toLowerCase()]) {
-      rewarddisp = `${outfitdb.Helmets[rewardtoclaim.Item.toLowerCase()].Emote} ${outfitdb.Helmets[rewardtoclaim.Item.toLowerCase()].Name}`
-
-    }
-    else if(partdb.Parts[rewardtoclaim.Item.toLowerCase()]) {
-      rewarddisp = `${partdb.Parts[rewardtoclaim.Item.toLowerCase()].Emote} ${partdb.Parts[rewardtoclaim.Item.toLowerCase()].Name}`
-
-    }
-
-    //premium
     let premiumreward = ""
-    if(rewardtoclaim.Premium.toLowerCase().endsWith("cash")) {
-      premiumreward = `${emotes.cash} Cash: ${toCurrency(rewardtoclaim.Premium.split(" ")[0])}`
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("garage space") || rewardtoclaim.Premium.toLowerCase().endsWith("garage spaces")) {
-      premiumreward = `${emotes.garage} garage space: ${rewardtoclaim.Premium.split(" ")[0]}`
 
+    if(claimable > 50){
+      premiumreward = "N/A"
+      rewardtoclaim = {Required: "0"}
     }
-    else if(itemdb[rewardtoclaim.Premium.toLowerCase()]) {
-      premiumreward = `${itemdb[rewardtoclaim.Item.toLowerCase()].Emote} ${itemdb[rewardtoclaim.Item.toLowerCase()].Name}`
+    else {
 
+      if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("cash")) {
+        premiumreward = `${emotes.cash} Cash: ${toCurrency(rewardtoclaim.Premium.split(" ")[0])}`
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("garage space") || rewardtoclaim.Premium.toLowerCase().endsWith("garage spaces")) {
+        premiumreward = `${emotes.garage} garage space: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && itemdb[rewardtoclaim.Premium.toLowerCase()]) {
+        premiumreward = `${itemdb[rewardtoclaim.Item.toLowerCase()].Emote} ${itemdb[rewardtoclaim.Item.toLowerCase()].Name}`
+  
+      }
+  
+      else if(rewardtoclaim !== undefined && cardb.Cars[rewardtoclaim.Premium.toLowerCase()]) {
+        premiumreward = `${cardb.Cars[rewardtoclaim.Premium.toLowerCase()].Emote} ${cardb.Cars[rewardtoclaim.Premium.toLowerCase()].Name}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("barn map") || rewardtoclaim.Premium.toLowerCase().endsWith("barn maps")) {
+        rewarddisp = `${emotes.barnMapCommon} Barn Maps: ${rewardtoclaim.Item.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("t5voucher") || rewardtoclaim.Premium.toLowerCase().endsWith("t5vouchers")) {
+        premiumreward = `${emotes.t5voucher} T5Vouchers: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("exotic keys")) {
+        premiumreward = `${emotes.ekey} Exotic Keys: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("rare keys")) {
+        premiumreward = `${emotes.rkey} Rare Keys: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("common keys")) {
+        premiumreward = `${emotes.ckey} Common Keys: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("lockpicks") || rewardtoclaim.Premium.toLowerCase().endsWith("lockpick")) {
+        premiumreward = `${emotes.lockpicks} Lockpicks: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("wheelspin") || rewardtoclaim.Premium.toLowerCase().endsWith("wheelspins")) {
+        premiumreward = `${emotes.wheelSpin} Wheelspins: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("superwheelspins") || rewardtoclaim.Premium.toLowerCase().endsWith("superwheelspin")) {
+        premiumreward = `${emotes.superWheel} Super Wheelspins: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("blueprint") || rewardtoclaim.Premium.toLowerCase().endsWith("blueprints")) {
+        premiumreward = `${emotes.blueprints} Blueprints: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("f1blueprint") || rewardtoclaim.Premium.toLowerCase().endsWith("f1blueprints")) {
+        premiumreward = `${emotes.f1blueprint} F1 Blueprints: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("xp")) {
+        premiumreward = `${emotes.xp} XP: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && rewardtoclaim.Premium.toLowerCase().endsWith("gold")) {
+        premiumreward = `${emotes.gold} Gold: ${rewardtoclaim.Premium.split(" ")[0]}`
+  
+      }
+      else if(rewardtoclaim !== undefined && outfitdb.Helmets[rewardtoclaim.Premium.toLowerCase()]) {
+        premiumreward = `${outfitdb.Helmets[rewardtoclaim.Premium.toLowerCase()].Emote} ${outfitdb.Helmets[rewardtoclaim.Premium.toLowerCase()].Name}`
+  
+      }
+      else if(rewardtoclaim !== undefined && partdb.Parts[rewardtoclaim.Premium.toLowerCase()]) {
+        premiumreward = `${partdb.Parts[rewardtoclaim.Premium.toLowerCase()].Emote} ${partdb.Parts[rewardtoclaim.Premium.toLowerCase()].Name}`
+  
+      }
     }
-
-    else if(cardb.Cars[rewardtoclaim.Premium.toLowerCase()]) {
-      premiumreward = `${cardb.Cars[rewardtoclaim.Premium.toLowerCase()].Emote} ${cardb.Cars[rewardtoclaim.Premium.toLowerCase()].Name}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("barn map") || rewardtoclaim.Premium.toLowerCase().endsWith("barn maps")) {
-      rewarddisp = `${emotes.barnMapCommon} Barn Maps: ${rewardtoclaim.Item.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("t5voucher") || rewardtoclaim.Premium.toLowerCase().endsWith("t5vouchers")) {
-      premiumreward = `${emotes.t5voucher} T5Vouchers: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("exotic keys")) {
-      premiumreward = `${emotes.ekey} Exotic Keys: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("rare keys")) {
-      premiumreward = `${emotes.rkey} Rare Keys: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("common keys")) {
-      premiumreward = `${emotes.ckey} Common Keys: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("lockpicks") || rewardtoclaim.Premium.toLowerCase().endsWith("lockpick")) {
-      premiumreward = `${emotes.lockpicks} Lockpicks: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("wheelspin") || rewardtoclaim.Premium.toLowerCase().endsWith("wheelspins")) {
-      premiumreward = `${emotes.wheelSpin} Wheelspins: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("superwheelspins") || rewardtoclaim.Premium.toLowerCase().endsWith("superwheelspin")) {
-      premiumreward = `${emotes.superWheel} Super Wheelspins: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("blueprint") || rewardtoclaim.Premium.toLowerCase().endsWith("blueprints")) {
-      premiumreward = `${emotes.blueprints} Blueprints: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("f1blueprint") || rewardtoclaim.Premium.toLowerCase().endsWith("f1blueprints")) {
-      premiumreward = `${emotes.f1blueprint} F1 Blueprints: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("xp")) {
-      premiumreward = `${emotes.xp} XP: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(rewardtoclaim.Premium.toLowerCase().endsWith("gold")) {
-      premiumreward = `${emotes.gold} Gold: ${rewardtoclaim.Premium.split(" ")[0]}`
-
-    }
-    else if(outfitdb.Helmets[rewardtoclaim.Premium.toLowerCase()]) {
-      premiumreward = `${outfitdb.Helmets[rewardtoclaim.Premium.toLowerCase()].Emote} ${outfitdb.Helmets[rewardtoclaim.Premium.toLowerCase()].Name}`
-
-    }
-    else if(partdb.Parts[rewardtoclaim.Premium.toLowerCase()]) {
-      premiumreward = `${partdb.Parts[rewardtoclaim.Premium.toLowerCase()].Emote} ${partdb.Parts[rewardtoclaim.Premium.toLowerCase()].Name}`
-
-    }
+    //premium
 
     let embed = new EmbedBuilder()
       .setTitle(`Season 4 Page ${vispage}/${pages.length}`)
@@ -377,9 +398,8 @@ module.exports = {
       else if(i.customId == "buy"){
         if(userdata.gold < 500) return interaction.editReply("You don't have enough gold to buy the premium pass!");
         userdata.gold -= 500;
-        userdata.premium = true;
+         userdata.premium = true;
         premiumpass = true;
-        userdata.save()
         rowclaim = new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId("claim")
@@ -389,8 +409,98 @@ module.exports = {
           
     
         );
+        await interaction.editReply({components: [rowclaim]})
 
-       await interaction.editReply({components: [rowclaim]})
+        await interaction.channel.send("You are now receiving any past premium rewards you missed, please be patient")
+
+        let missedRewards = [];
+        for (let i = 1; i < claimable; i++) {
+          let re = seasonRewards[`${i}`];
+          missedRewards.push(
+            {
+              Number: re.Number,
+              Item: re.Item,
+              Premium: re.Premium,
+              Required: re.Required,
+            }
+          )
+          console.log(missedRewards)
+        }
+        for(let i = 0; i < missedRewards.length; i++){
+          console.log(missedRewards[i])
+          let re = missedRewards[i];
+          if(re.Premium.toLowerCase().endsWith("cash")) {
+            userdata.cash += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("garage space") || re.Premium.toLowerCase().endsWith("garage spaces")) {
+            userdata.garageLimit += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(itemdb[re.Premium.toLowerCase()]) {
+            userdata.items.push(re.Premium.toLowerCase());
+          }
+          else if(cardb.Cars[re.Premium.toLowerCase()]) {
+            let car = cardb.Cars[re.Premium.toLowerCase()];
+            let carobj = {
+              ID: car.alias,
+              Name: car.Name,
+              Speed: car.Speed,
+              Acceleration: car["0-60"],
+              Handling: car.Handling,
+              WeightStat: car.Weight,
+              Emote: car.Emote,
+              Livery: car.Image,
+              Miles: 0,
+              Resale:0,
+              Gas: 10,
+              MaxGas: 10,
+            }
+            userdata.cars.push(carobj);
+          }
+          else if(re.Premium.toLowerCase().endsWith("barn map") || re.Premium.toLowerCase().endsWith("barn maps")) {
+            userdata.barnmaps += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("t5voucher") || re.Premium.toLowerCase().endsWith("t5vouchers")) {
+            userdata.t5vouchers += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("exotic keys")) {
+            userdata.ekeys += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("rare keys")) {
+            userdata.rkeys += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("common keys")) {
+            userdata.ckeys += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("lockpicks") || re.Premium.toLowerCase().endsWith("lockpick")) {
+            userdata.lockpicks += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("wheelspin") || re.Premium.toLowerCase().endsWith("wheelspins")) {
+            userdata.wheelspins += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("superwheelspins") || re.Premium.toLowerCase().endsWith("superwheelspin")) {
+            userdata.swheelspins += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("blueprint") || re.Premium.toLowerCase().endsWith("blueprints")) {
+            userdata.blueprints += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("xp")) {
+            userdata.xp += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(re.Premium.toLowerCase().endsWith("gold")) {
+            userdata.gold += parseInt(re.Premium.split(" ")[0]);
+          }
+          else if(outfitdb.Helmets[re.Premium.toLowerCase()]) {
+            userdata.outfits.push(re.Premium.toLowerCase());
+          }
+          else if(partdb.Parts[re.Premium.toLowerCase()]) {
+            userdata.parts.push(re.Premium.toLowerCase());
+          }
+
+          
+
+        }
+       await userdata.save()
+          await interaction.channel.send("You have received all past rewards")
       }
       else if (i.customId == "claim") {
           userdata = await User.findOne({id: interaction.user.id})

@@ -64,12 +64,54 @@
       "Reward": 0,
       "Image": "https://i.ibb.co/y42g3dh/achievement-gamble.png"
     },
-    "s1 spring badge": {
-      "Emote": "<:badge_springs1:1078234569972666421>",
-      "Task": "Complete the S1 Spring season",
-      "Name": "S1 Spring Badge",
+    "1k miles": {
+      "Emote": "<:achievement_1kmiles:1232465637893341184>",
+      "Task": "Reach 1k miles on any car",
+      "Name": "1K Miles",
       "Reward": 0,
-      "Image": "https://i.ibb.co/VJ736t0/badge-springs1.png"
+      "Image": "https://i.ibb.co/qxFbb0J/achievement-1kmiles.png"
+    },
+    "10k miles": {
+      "Emote": "<:achievement_10kmiles:1232465634785366138>",
+      "Task": "Reach 10k miles on any car",
+      "Name": "10K Miles",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/jJmXGCP/achievement-10kmiles.png"
+    },
+    "100k miles": {
+      "Emote": "<:achievement_100kmiles:1232465636265955388>",
+      "Task": "Reach 100k miles on any car",
+      "Name": "100K Miles",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/hcm6LQp/achievement-100kmiles.png"
+    },
+    "basic collector": {
+      "Emote": "<:achievement_basic_collector:1231450343485997077>",
+      "Task": "Collect 50 cars",
+      "Name": "Basic Collector",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/3kjzb5n/achievement-basic-collector.png"
+    },
+    "advanced collector": {
+      "Emote": "<:achievement_advanced_collector:1231450341455691826>",
+      "Task": "Collect 100 cars",
+      "Name": "Advanced Collector",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/k4mVXSH/achievement-advanced-collector.png"
+    },
+    "master collector": {
+      "Emote": "<:achievement_master_collector:1231450346681925732>",
+      "Task": "Collect 200 cars",
+      "Name": "Master Collector",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/1szY1DR/achievement-master-collector.png"
+    },
+    "grand master collector": {
+      "Emote": "<:achievement_grandmaster_collecto:1231450344907739217>",
+      "Task": "Collect 500 cars",
+      "Name": "Grand Master Collector",
+      "Reward": 0,
+      "Image": "https://i.ibb.co/c6mhL1y/achievement-grandmaster-collector.png"
     }
   },
   "Soon": {

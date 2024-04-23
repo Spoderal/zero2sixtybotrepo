@@ -143,8 +143,7 @@ module.exports = {
           "You don't have that many of that item!"
         );
       for (var p2 = 0; p2 < amount; p2++) user2items.push(trading);
-      for (var it = 0; it < amount; it++)
-        user1items.splice(user1items.indexOf(trading.toLowerCase()), 1);
+      for (var it = 0; it < amount; it++)  user1items.splice(user1items.indexOf(trading.toLowerCase()), 1);
 
     }
 
@@ -156,9 +155,8 @@ module.exports = {
 
     }
     if (partdb.Parts[trading2]) {
-      if (!userdata2.parts.includes(trading2))
-        return interaction.reply("The user you're trading with doesn't have this part!");
-      let filtereduser = userparts.filter(function hasmany(part) {
+      if (!userdata2.parts.includes(trading2))  return interaction.reply("The user you're trading with doesn't have this part!");
+      let filtereduser = userdata2.parts.filter(function hasmany(part) {
         return part === trading2.toLowerCase();
       });
       if (amount2 > filtereduser.length)
@@ -167,8 +165,7 @@ module.exports = {
         );
       item2 = `${partdb.Parts[trading2].Emote} ${partdb.Parts[trading2].Name} x${amount2}`;
       for (var p3 = 0; p3 < amount2; p3++) userparts.push(trading2);
-      for (var it3 = 0; it3 < amount2; it3++)
-        user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
+      for (var it3 = 0; it3 < amount2; it3++)  user2parts.splice(user2parts.indexOf(trading2.toLowerCase()), 1);
 
     }
     if (cardb.Cars[trading2]) {
@@ -293,17 +290,17 @@ module.exports = {
           item = `${toCurrency(newamount)}`;
           if (cashamount > udata2.cash) return interaction.editReply("You don't have enough cash!");
 
-          userdata2.cash -= cashamount;
-          userdata.cash += cashamount;
+          udata2.cash -= cashamount;
+          udata1.cash += cashamount;
 
         }
 
         if (partdb.Parts[trading]) {
           if (!udata1.parts.includes(trading)) return interaction.editReply("You don't have this part!");
-          for (var p4 = 0; p4 < amount2; p4++) {
+          for (var p4 = 0; p4 < amount; p4++) {
             udata2.parts.push(trading)
           }
-          for (var it4 = 0; it4 < amount2; it4++) udata1.parts.splice(udata1.parts.indexOf(trading.toLowerCase()), 1);
+          for (var it4 = 0; it4 < amount; it4++) udata1.parts.splice(udata1.parts.indexOf(trading.toLowerCase()), 1);
         }
         if (partdb.Parts[trading2]) {
           if (!udata2.parts.includes(trading2)) return interaction.editReply("You don't have this part!");
@@ -315,10 +312,10 @@ module.exports = {
 
         if (itemdb[trading]) {
           if (!udata1.items.includes(trading)) return interaction.editReply("You don't have this item!");
-          for (var p5 = 0; p5 < amount2; p5++) {
+          for (var p5 = 0; p5 < amount; p5++) {
             udata2.items.push(trading)
           }
-          for (var it5 = 0; it5 < amount2; it5++) udata1.items.splice(udata1.items.indexOf(trading.toLowerCase()), 1);
+          for (var it5 = 0; it5 < amount; it5++) udata1.items.splice(udata1.items.indexOf(trading.toLowerCase()), 1);
         }
 
         if (itemdb[trading2]) {

@@ -82,7 +82,14 @@
       "2023 ferrari 499p",
       "2019 porsche 911 rsr-19",
       "2023 toyota gr010 hybrid",
-      "2022 peugeot 9x8"
+      "2022 peugeot 9x8",
+      "2014 audi r18 e tron",
+      "2003 bentley speed 8",
+      "2012 toyota ts030 hybrid",
+      "1999 bmw v12 lmr",
+      "2023 cadillac v-series.r",
+      "2015 nissan gtr lm nismo",
+      "1985 porsche 962"
     ]
   },
   "fictional": {
@@ -183,6 +190,7 @@
       "2016 bmw i8",
       "1981 dmc delorean",
       "t1gastank",
+      "2020 ferrari 488 pista",
       "t2gastank",
       "t3gastank",
       "f1 blueprint",

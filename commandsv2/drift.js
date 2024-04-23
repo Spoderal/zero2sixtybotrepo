@@ -12,6 +12,7 @@ const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementdb = require("../data/achievements.json")
 const { createCanvas, loadImage } = require("canvas");
 const { toCurrency, isWeekend } = require("../common/utils");
+const Globals = require("../schema/global-schema")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -50,8 +51,8 @@ module.exports = {
     let user = interaction.user;
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
-    let cooldowndata =
-      (await Cooldowns.findOne({ id: interaction.user.id })) ||
+    let globals = await Globals.findOne({});
+    let cooldowndata = (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: user.id });
     let driftcooldown = cooldowndata.drift;
     let track = interaction.options.getString("track");
@@ -223,7 +224,7 @@ module.exports = {
 
   let trackdif = trackdifficulties.find(t => t.type == difficulty);
 
-  let livery = selected.Livery || selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
+  let livery = selected.Image || cars.Cars[selected.Name.toLowerCase()].Image;
 
   cooldowndata.drift = Date.now();
   await cooldowndata.save();
@@ -316,20 +317,74 @@ module.exports = {
         ],
       }
     );
+    if(userdata.items.includes("fake id")){
+      xp = xp * 2
+    }
+    if (userdata.using.includes("radio")) {
+      let itemcooldown = cooldowndata.radio;
+
+      let timeout = 300000;
+      if (
+        itemcooldown !== null &&
+        timeout - (Date.now() - itemcooldown) < 0
+      ) {
+        userdata.using.pull("radio");
+        userdata.update();
+        interaction.channel.send("Your radio ran out!");
+      } else {
+        let amounthead = 2
+        if(userdata.items.includes("headphones")){
+          amounthead = 4
+        }
+        cash = cash * amounthead;
+        xp *= amounthead
+      }
+    }
+    if (userdata.items.includes("record")) {
+      xp *= 2
+      
+    }
+    if (userdata.using.includes("chips")) {
+      let itemcooldown = cooldowndata.chips;
+
+      let timeout = 600000;
+      if (
+        itemcooldown !== null &&
+        timeout - (Date.now() - itemcooldown) < 0
+      ) {
+        userdata.using.pull("chips");
+        userdata.update();
+        interaction.channel.send("Your chips ran out!");
+      } else {
+        xp = xp * userdata.chips
+      }
+    }
+    let leteam = globals.leteams.filter((team) => team.members.includes(interaction.user.id))[0]
+
+    if(leteam && leteam.name == "Toyota"){
+      cash += 5000
+
+   }
     userdata.cash += cash
+
 
     userdata.xp += xp
     let keys = trackdif.keys
     userdata.driftKeys += keys
     let skill = userdata.skill
 
-    let requiredxp  = skill * 100
 
+    let requiredxp  = skill * 100
     if(userdata.xp >= requiredxp){
-      userdata.skill += 1
-      userdata.xp = 0
-      rewards.push(`${emotes.rank} Skill Level Up!`)
+      userdata.skill += 1;
+      userdata.xp = 0;
+      rewards.push(`${emotes.rank} x1 Skill Level Up!`);
     }
+
+
+
+
+    
     rewards.push(`${emotes.cash} ${toCurrency(cash)}`)
     rewards.push(`${emotes.xp} ${xp}`)
     rewards.push(`${emotes.dirftKey} ${keys} Drift Keys`)

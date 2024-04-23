@@ -54,11 +54,11 @@ module.exports = {
         trypick = true;
       }
     }
-    // if (trypick == false) {
-    //   interaction.reply("Your lockpick broke!");
-    //   udata.save();
-    //   return;
-    // }
+    if (trypick == false) {
+      interaction.reply("Your lockpick broke!");
+      udata.save();
+      return;
+    }
 
     let garages = [];
     for (let g in garagedb) {
@@ -95,7 +95,7 @@ module.exports = {
 
 
     let garageindb = garagedb[garagepicked];
-    let carchance1 = randomRange(1, 6);
+    let carchance1 = randomRange(1, 10);
 
 
     var chooser = randomNoRepeats(garageindb.Contents);
@@ -128,6 +128,7 @@ module.exports = {
           Emote: cars.Cars[it.toLowerCase()].Emote,
           Livery: cars.Cars[it.toLowerCase()].Image,
           Miles: 0,
+          Resale: cars.Cars[it.toLowerCase()].sellprice,
           WeightStat: cars.Cars[it.toLowerCase()].Weight,
           Gas: 10,
           MaxGas: 10,

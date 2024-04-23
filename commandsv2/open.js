@@ -29,7 +29,8 @@ module.exports = {
           { name: "Vote Crate", value: "vote crate" },
           { name: "PVP Crate", value: "pvp crate" },
           {name: "Item Crate", value: "item crate"},
-          {name: "Legendary Crate", value: "legendary crate"}
+          {name: "Legendary Crate", value: "legendary crate"},
+          {name: "Prestige Crate", value: "prestige crate"}
         )
         .setRequired(true)
     )
@@ -140,6 +141,10 @@ module.exports = {
         let cashReward = reward.split(" ")[0];
         console.log(cashReward)
         cash += parseInt(cashReward);
+      }
+      else if(reward == "super wheelspin") {
+        userdata.swheelspins += 1
+        displayrew.push(`${emotes.superWheel} Super Wheelspin`)
       }
       else if (
         reward.includes("garagespaces")

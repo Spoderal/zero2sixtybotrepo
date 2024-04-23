@@ -44,6 +44,11 @@ module.exports = {
     )
     )
     .addSubcommand((cmd) => cmd
+    .setName("mine")
+    .setDescription("View your listings")
+
+    )
+    .addSubcommand((cmd) => cmd
     .setName("unlist")
     .setDescription("Remove an item from the market")
     .addStringOption((option) => option
@@ -306,7 +311,9 @@ module.exports = {
         let itemto = itemtolist.split(" ")[1]
         console.log(itemto)
         if(!cardb[itemtolist.toLowerCase()] && !itemdb[itemtolist.toLowerCase()] && !partdb[itemtolist.toLowerCase()] && !currencydb[itemto.toLowerCase()]) return interaction.reply("Thats not a marketable item!\nIf you're trying to list a car, make sure its the cars name, **NOT** the id\nIf the currency includes a space, make sure to remove the space, so barn maps would be barnmaps")
-
+        let userMarketListings = globals.umarket.filter(listing => listing.UserID === interaction.user.id);
+        let numListings = userMarketListings.length;
+        if(numListings >= 5) return interaction.reply("You can only have 5 listings at a time!")
         let minprice
         let maxprice
         let car = cardb[itemtolist.toLowerCase()]
@@ -315,32 +322,39 @@ module.exports = {
 
         if(car && car.Price > 0){
             minprice = car.Price * 0.55
-            maxprice = 20000000
+            maxprice = car.Price * 1.5
         }
         else if(car && car.Price == 0) {
-            minprice = car.Speed * 100
-            maxprice = 200000000
+            if(car.sellprice && car.sellprice > 0){
+                minprice = car.sellprice * 0.55
+                maxprice = car.sellprice * 1.5
+            }
+            else {
+
+                minprice = car.Speed * 100
+                maxprice = car.Speed * 1000
+            }
         }
 
         if(item && item.Price > 0){
             minprice = item.Price * 0.65
-            maxprice = 20000000
+            maxprice = item.Price * 1.5
         }
         else if(item) {
             if(item.Tier){
                 minprice = item.Tier * 10000
-                maxprice = 200000000
+                maxprice = item.Tier * 100000
             }
         }
 
         if(part && part.Price > 0){
             minprice = part.Price * 0.45
-            maxprice = 20000000
+            maxprice = part.Price * 1.5
         }
         else if(part) {
             if(part.Tier){
                 minprice = part.Tier * 10000
-                maxprice = 200000000
+                maxprice = part.Tier * 100000
             }
         }
         else if(itemtolist.includes("wheelspins") || itemtolist.includes("wheelspin")){
@@ -459,7 +473,6 @@ module.exports = {
         let listing = {
             User:uname,
             UserID:interaction.user.id,
-
             Price: price,
             Item: itemtolist,
             ID: marketid1
@@ -468,7 +481,7 @@ module.exports = {
         
         if(cardb[itemtolist.toLowerCase()]){
             let carindb = userdata.cars.filter((car) => car.Name.toLowerCase() == itemtolist.toLowerCase())
-            if(!carindb) return interaction.reply("You dont have this car!")
+            if(!carindb[0]) return interaction.reply("You dont have this car!")
             listing = {
                 User:uname,
                 UserID:interaction.user.id,
@@ -540,6 +553,131 @@ module.exports = {
         return await interaction.reply(`Listed ${itemtolist}`)
 
     }
+    else if(command == "mine"){
+        let userMarketListings = globals.umarket.filter(listing => listing.UserID === interaction.user.id);
+        let numListings = userMarketListings.length;
+        userMarketListings = lodash.chunk(
+            userMarketListings.map((a) => a),
+            5
+          );
+        let embed = new EmbedBuilder()
+        .setTitle("Your Listings")
+        .setColor(colors.blue)
+        if(numListings <= 0){
+            embed.setDescription("You have no listings!")
+        }
+        else {
+            for(let i in userMarketListings[0]){
+                let itemname
+                if(cardb[userMarketListings[0][i].Item.toLowerCase()]){
+                    itemname = `${cardb[userMarketListings[0][i].Item.toLowerCase()].Emote} ${cardb[userMarketListings[0][i].Item.toLowerCase()].Name}`
+                }
+
+                else if(itemdb[userMarketListings[0][i].Item.toLowerCase()]){
+                    itemname = `${itemdb[userMarketListings[0][i].Item.toLowerCase()].Emote} ${itemdb[userMarketListings[0][i].Item.toLowerCase()].Name}`
+                }
+               else if(partdb[userMarketListings[0][i].Item.toLowerCase()]){
+                    itemname = `${partdb[userMarketListings[0][i].Item.toLowerCase()].Emote} ${partdb[userMarketListings[0][i].Item.toLowerCase()].Name}`
+                }
+                else if(userMarketListings[0][i].Item.toLowerCase().includes("wheelspins") || userMarketListings[0][i].Item.toLowerCase().includes("barnmaps")){
+                    let amount = Number(userMarketListings[0][i].Item.split(" ")[0]);
+                    itemname = `${amount}x ${currencydb[userMarketListings[0][i].Item.split(" ")[1]].Emote} ${currencydb[userMarketListings[0][i].Item.split(" ")[1]].Name}`
+                }
+                embed.addFields({name: `${itemname}`, value: `\`${userMarketListings[0][i].ID}\`\n${toCurrency(userMarketListings[0][i].Price)}`})
+            }
+
+        }
+
+        let row = new ActionRowBuilder()
+        .setComponents(
+            new ButtonBuilder()
+            .setCustomId("previous")
+            .setEmoji("⬅️")
+            .setStyle("Secondary"),
+            new ButtonBuilder()
+            .setCustomId("next")
+            .setEmoji("➡️")
+            .setStyle("Secondary")
+        )
+        await interaction.reply({embeds: [embed], components: [row]})
+
+        let filter = (btnInt) => {
+            return interaction.user.id === btnInt.user.id;
+          }
+            let collector = interaction.channel.createMessageComponentCollector({
+                filter: filter,
+            });
+
+            let page = 0
+            let displaypage = 1
+
+            collector.on('collect', async (i) => {
+                    
+                if(i.customId == "next"){
+                    page++
+                    if(userMarketListings[page] == undefined) {
+                        page--
+                        embed.setDescription("No more pages!")
+        
+                    }
+                    else {
+                     displaypage++
+                    embed.data.fields = []
+                    for(let i in userMarketListings[page]){
+                        let itemname
+                        if(cardb[userMarketListings[page][i].Item.toLowerCase()]){
+                            itemname = `${cardb[userMarketListings[page][i].Item.toLowerCase()].Emote} ${cardb[userMarketListings[page][i].Item.toLowerCase()].Name}`
+                        }
+        
+                        else if(itemdb[userMarketListings[page][i].Item.toLowerCase()]){
+                            itemname = `${itemdb[userMarketListings[page][i].Item.toLowerCase()].Emote} ${itemdb[userMarketListings[page][i].Item.toLowerCase()].Name}`
+                        }
+                       else if(partdb[userMarketListings[page][i].Item.toLowerCase()]){
+                            itemname = `${partdb[userMarketListings[page][i].Item.toLowerCase()].Emote} ${partdb[userMarketListings[page][i].Item.toLowerCase()].Name}`
+                        }
+        
+                        embed.addFields({name: `${itemname}`, value: `\`${userMarketListings[page][i].ID}\`\n${toCurrency(userMarketListings[page][i].Price)}`})
+                    }
+        
+                    embed.setTitle(`Your Listings Page ${displaypage}/${userMarketListings.length}`)
+                }
+                    await interaction.editReply({embeds: [embed], components: [row]})
+                }
+                else if(i.customId == "previous"){
+                    page--
+                  if(userMarketListings[page] == undefined) {
+                    page++
+                        embed.setDescription("No more pages!")
+        
+                    }
+                    else {
+        
+                    
+                    displaypage--
+                    embed.data.fields = []
+                    for(let i in userMarketListings[page]){
+                        let itemname
+
+                        if(cardb[userMarketListings[page][i].Item.toLowerCase()]){
+                            itemname = `${cardb[userMarketListings[page][i].Item.toLowerCase()].Emote} ${cardb[userMarketListings[page][i].Item.toLowerCase()].Name}`
+                        }
+        
+                        else if(itemdb[userMarketListings[page][i].Item.toLowerCase()]){
+                            itemname = `${itemdb[userMarketListings[page][i].Item.toLowerCase()].Emote} ${itemdb[userMarketListings[page][i].Item.toLowerCase()].Name}`
+                        }
+                       else if(partdb[userMarketListings[page][i].Item.toLowerCase()]){
+                            itemname = `${partdb[userMarketListings[page][i].Item.toLowerCase()].Emote} ${partdb[userMarketListings[page][i].Item.toLowerCase()].Name}`
+                        }
+        
+                        embed.addFields({name: `${itemname}`, value: `\`${userMarketListings[page][i].ID}\`\n${toCurrency(userMarketListings[page][i].Price)}`})
+                    }
+        
+                    embed.setTitle(`Your Listings Page ${displaypage}/${userMarketListings.length}`)
+                }
+            }
+                    })
+
+    }
     else if(command == "buy"){
         let itemtolist = interaction.options.getString("id")
         let itemindb = market.filter((item) => item.ID == itemtolist)[0]
@@ -550,11 +688,9 @@ module.exports = {
 
         if(itemindb.UserID == interaction.user.id) return interaction.reply("You're the owner of this listing you cant buy it")
         
+        console.log(itemindb.CarOBJ)
         if(cardb[itemindb.Item.toLowerCase()]){
-
-            
             userdata.cars.push(itemindb.CarOBJ)
-        
         }
 
      
@@ -627,12 +763,18 @@ module.exports = {
               break;
             }
         }
+        await Global.findOneAndUpdate({}, {umarket: umarket})
         globals.umarket = umarket
-        globals.updateOne(`umarket`)
-        globals.save()
+        await globals.updateOne(`umarket`)
+        await globals.save()
 
         await userdata.save()
         await userdata2.save()
+
+        let submitchannel =
+        interaction.client.channels.cache.get("931004191428706397");
+
+      submitchannel.send({ content: `User ${interaction.user.id} bought ${itemtolist}` });
 
         try{
             let usertodm = await interaction.client.users.fetch(itemindb.UserID);
@@ -649,10 +791,10 @@ module.exports = {
     else if(command == "unlist"){
         let itemtolist = interaction.options.getString("id")
         let itemindb = market.filter((item) => item.ID == itemtolist)[0]
-
+        console.log(itemindb)
         if(!itemindb) return interaction.reply(`Thats not an ID for an item! Try using the number you see \`in this format\``)
-
-        if(!itemindb.UserID == interaction.user.id) return interaction.reply(`Nice try, but that item isn't yours!`)
+        console.log(itemindb.UserID)
+        if(`${itemindb.UserID}` !== `${interaction.user.id}`) return interaction.reply(`Nice try, but that item isn't yours!`)
 
 
         if(cardb[itemindb.Item.toLowerCase()]){

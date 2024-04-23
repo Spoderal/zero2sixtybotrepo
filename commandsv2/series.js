@@ -31,11 +31,11 @@ module.exports = {
             customId: "help",
           },
           {
-            label: "Perfect Engineering",
-            description: "Information for the Perfect Engineering Series",
-            value: "perfect_engineering",
-            customId: "pe",
-            emoji: "<:porsche:931011550880338011>",
+            label: "Fiesta Familia",
+            description: "Information for the Fiesta Familia Series",
+            value: "fiesta",
+            customId: "fiesta",
+            emoji: "<:ford:931012624152399902>",
           },
           {
             label: "Pressure",
@@ -45,11 +45,11 @@ module.exports = {
             emoji: "<:bmw:931011550054056007>",
           },
           {
-            label: "Fiesta Familia",
-            description: "Information for the Fiesta Familia Series",
-            value: "fiesta",
-            customId: "fiesta",
-            emoji: "<:ford:931012624152399902>",
+            label: "Perfect Engineering",
+            description: "Information for the Perfect Engineering Series",
+            value: "perfect_engineering",
+            customId: "pe",
+            emoji: "<:porsche:931011550880338011>",
           },
           {
             label: "Italian Heritage",
@@ -125,18 +125,12 @@ module.exports = {
     embed.setTitle("Series Menu");
     embed.setFooter({ text: 'Prefix is "/"' });
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
-    embed.setDescription(`Here you can check out the current car series going on!\n\n
-            **__Events__**
-            Perfect Engineering <:porsche:931011550880338011> *Prestige 5* ${winstext}
-
-            Pressure <:bmw:931011550054056007> *Prestige 3* ${winstext2}
-
-            Fiesta Familia <:ford:931012624152399902> *Prestige 2* ${winstext3}
-
-            Italian Heritage <:ferrari:931011838374727730> *Prestige 8* ${winstext4}
-
-            ||<:egg_plastic:1219112539296632954> CODE: \`WHYPLASTIC\`||
-
+    embed.setDescription(`
+            **__Series__**
+            Fiesta Familia <:ford:931012624152399902> *Requires Skill 10* ${winstext3}\n
+            Pressure <:bmw:931011550054056007> *Requires Skill 30* ${winstext2}\n
+            Perfect Engineering <:porsche:931011550880338011> *Requires Skill 50* ${winstext}\n
+            Italian Heritage <:ferrari:931011838374727730> *Prestige 1* ${winstext4}
         `);
 
     embed.setColor(colors.blue);
@@ -234,7 +228,7 @@ module.exports = {
 
     collector.on("collect", async (collected) => {
       const value = collected.values[0];
-      if (value === "perfect_engineering" && userdata.prestige >= 5) {
+      if (value === "perfect_engineering" && userdata.skill >= 50) {
         embed.setTitle("Perfect Engineering Car Series");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
@@ -242,7 +236,7 @@ module.exports = {
 
           You're gonna have a 1980 Porsche 911 on loan, that you cant upgrade unless you use Loaned Parts, this will be until you finish the series
 
-          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2018 Singer DLS**
+          You have 3 days to complete the series, You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2018 Singer DLS**
 
           Once you have 50 wins, come back and claim your Singer DLS
 
@@ -260,13 +254,11 @@ module.exports = {
         embed.setTitle("Help with series");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
-          Car series are small permanent events that you can do when you reach a certain prestige, the prestige required for each series is highlighted next to the name.
+          Car series are small permanent events that you can do when you reach a certain skill rank, the skill rank required for each series is highlighted next to the name.
 
-          There are 2 types of series, series where you can earn a final car prize, and series where you just race with the car to earn diamond parts, diamond parts have a 10% chance to drop depending on which series you're doing.
+          There are 2 types of series, series where you can earn a final car prize, and series where you just race with the car to earn t6 parts, t6 parts have a 10% chance to drop depending on which series you're doing.
 
-          Each series will only give you 24 hours to complete it. The series where you get parts from will NOT let you do it again after your first try, but the others will.
-
-          You will receive 10 series tickets to start, you'll need a series ticket to race with the car. You will get 1 series ticket every 30 minutes.
+         You will receive 10 series tickets to start, and you'll need a series ticket to race with the car. You will get 1 series ticket every 30 minutes.
   
                     `);
         embed.setThumbnail("https://i.ibb.co/Ttth621/carseries.png");
@@ -276,13 +268,13 @@ module.exports = {
           embeds: [embed],
           components: [row2],
         });
-      } else if (value === "pressure" && userdata.prestige >= 3) {
+      } else if (value === "pressure" && userdata.skill >= 30) {
         embed.setTitle("Pressure");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
           Put some pressure on your opponents with the brand new 2018 BMW M4CS!
 
-          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2016 BMW M4 GTS**
+          You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2016 BMW M4 GTS**
 
           Once you have 50 wins, come back and claim your 2016 BMW M4 GTS
                     `);
@@ -295,13 +287,13 @@ module.exports = {
           embeds: [embed],
           components: [row2, row4],
         });
-      } else if (value === "fiesta" && userdata.prestige >= 2) {
+      } else if (value === "fiesta" && userdata.skill >= 10) {
         embed.setTitle("Fiesta Familia");
         embed.setFooter({ text: 'Prefix is "/"' });
         embed.setDescription(`
           A member of our family, the fiesta is going out of production, so its time for one last ride with the 2017 Ford Fiesta ST!
 
-          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2016 Ford Focus RS**
+          You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2016 Ford Focus RS**
 
           Once you have 50 wins, come back and claim your 2016 Ford Focus RS
                     `);
@@ -321,7 +313,7 @@ module.exports = {
         embed.setDescription(`
           You've been chosen to race for Ferrari, start with the 348tb and work your way up!
 
-          You have 10 series tickets per day, use them wisely! You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2023 Ferrari Daytona SP8**
+          You use 1 ticket when you race with this car, after you win 50 races with this car, you finish the series and earn the **2023 Ferrari Daytona SP8**
 
           Once you have 50 wins, come back and claim your 2023 Ferrari Daytona SP8
                     `);

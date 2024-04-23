@@ -16,6 +16,12 @@ const Profile = new mongoose.Schema({
     required: false,
     default: 10,
   },
+  racetime:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  
   racedisabled:{
     type: Boolean,
     required: false,
@@ -839,8 +845,11 @@ const Profile = new mongoose.Schema({
     type: Number,
     required: false,
     default: 0,
+  },
+  usercrew: {
+    type: String,
+    required: false,
   }
-  
 });
 
 module.exports = mongoose.model("profile", Profile);

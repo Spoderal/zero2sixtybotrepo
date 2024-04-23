@@ -18,7 +18,7 @@ module.exports = {
         .setPlaceholder("No update selected")
         .addOptions([
           {
-            label: "3/8/2024",
+            label: "4/23/2024",
             description: "Information for the latest patch",
             value: "3_update",
             customId: "up3",
@@ -26,7 +26,7 @@ module.exports = {
           },
         
           {
-            label: "3/19/2024",
+            label: "4/14/2024",
             description: "Information for the recent update!",
             value: "2_update",
             customId: "up4",
@@ -39,13 +39,6 @@ module.exports = {
             customId: "up1",
             emoji: "⬆️",
           },
-          {
-            label: "Roadmap",
-            description: "Information for the 2024 roadmap!",
-            value: "roadmap",
-            customId: "roadmap",
-            emoji: "🛣️",
-          },
         ])
     );
 
@@ -55,8 +48,8 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the recent updates!\n\n
             **__Updates__**
-            ⚙️ Latest Patch *3/8/2024*\n
-            ⬆️ New Update *3/19/2024*\n
+            ⚙️ Latest Patch *4/23/2024*\n
+            ⬆️ New Update *4/14/2024*\n
             <:season4_icon:1211169992213794827> Season 4 *3/1/2024*\n
             🛣️ Roadmap
         `);
@@ -81,27 +74,39 @@ module.exports = {
   if (value === "2_update") {
     embed.data.fields = [];
             embed.setDescription("\u200b");
-            embed.setTitle(`Update 3/19/2024`);
+            embed.setTitle(`Update 4/14/2024`);
             embed
               .addFields(
                 {
                   name: "Features ⭐",
                   value: `
-                  - Car shows! Create one with \`/carshow create\` and join one with \`/carshow join\`\n
-                  - Garage parts now display similar to cars\n
-                  - Class X makes a return! Obtain xessence for a certain car by racing with it, and use \`/prestige car\` to make it X Class! **you need to be prestige 2 to prestige cars to X Class**\n
-                  - Prestiging no longe resets your cash\n
-                  - Surfaces, and tire overhaul, see /tires for more info\n
-                  - Referral system added, refer a friend to get rewards\n
-                  - Easter event! /events\n
-                  - You can now open multiple crates at once\n
+                  - Items drop based on tier rarity, tier 1 60% chance, 2 30%, 3 10%\n
+                  - Nerfed lockpick drop rate to 20%\n
+                  - Le Mans returns!\n
+                  - New Z Pass benefits\n
+                  - You can now buy cars with gold\n
                   - New cars\n
+                  - Buying the premium pass will automatically give you any past premium rewards you missed\n
+                  - TXParts return!\n
+                  - Buffed prestige crates\n
+                  - Cash bombs no longer give bots cash\n
+                  - Gold revamp\n
+                  - Switched default track in track race to be the easy track\n
+                  - /mystats (beta) shows your stats on the bot such as race time, best cars, and more!
                   `,
                   inline: true,
+                },
+                {
+                  name: "Items",
+                  value: `
+                  <:item_applepie:1225439417737678848> Apple pie
+                  <:item_apple:1227292354386591744> Apple
+                  <:item_xessencedetector:1229122030893404261> Xessence Detector
+                  `
                 }
             
               )
-              .setFooter({ text: "3/19/2024" })
+              .setFooter({ text: "4/14/2024" })
               .setThumbnail(`https://i.ibb.co/5WBX33k/icons8-upgrade-144.png`)
               .setColor(colors.blue);
 
@@ -117,53 +122,32 @@ module.exports = {
               {
                 name: "Features ⭐",
                 value: `
-                * Added buttons to purchase cars in the dealership\n
-                * Added double xp/double cash weekend\n
-                * Added tutorial for seasons\n
-                * Added custom crew icons **/custom-icon**\n
-                * Added task details for tutorials depending on what stage you're on if you forget what to do\n
-                * Type takeover returns! Part 2... See how the story progresses in \`/event\`!\n
-                * Updated livery submissions to require image in command options instead of sending the image after sending the command\n
-                * Suggest command added\n
-                * Legendary crates added\n
-                * Moved filter by favorites to a select menu in the garage\n
-                * Moved unobtainable cars to new methods of obtaining\n
-                * Moved owner commands to a separate bot\n
-                * Increased base daily reward to $5K\n
+                - New Le Mans cars added to the Le Mans crate\n
+                - Space Race returns! /events\n
+                - Added upper limit to market items\n
+                - Added limit on how many market listings you can have\n
+                - Added search function to dealer\n
+                - Added new achievements, view them with /achievements\n
+                - Added a new squad: Impossible Defenders\n
+                - Buffed rewards when beating a squad, or its squad members\n
+
                 `,
                 inline: true,
               },
-         
-              {
-                name: "Cars 🚗",
-                value: `
-                ${cardb.Cars["2021 porsche 911 turbo"].Emote} 2021 Porsche 911 Turbo -> PVP Shop\n
-                ${cardb.Cars["2024 ford mustang dark horse"].Emote} 2024 Ford Mustang Dark Horse -> PVP Shop\n
-                ${cardb.Cars["2023 bentley bentayga"].Emote} 2023 Bentley Bentayga -> Super Wheelspin\n
-                ${cardb.Cars["1992 bugatti eb110"].Emote} 1992 Bugatti EB110 -> Exotic Imports\n
-                ${cardb.Cars["2008 acura tl"].Emote} 2008 Acura TL -> $12K in dealership\n
-                ${cardb.Cars["2010 noble m600"].Emote} 2010 Noble M600 -> Blueprints\n
-                ${cardb.Cars["2012 honda accord"].Emote} 2012 Honda Accord -> Blueprints\n
-                ${cardb.Cars["1997 honda civic del sol"].Emote} 1997 Honda Civic Del Sol -> Common Imports\n
-                ${cardb.Cars["1987 ford mustang gt"].Emote} 1987 Ford Mustang GT -> Common Garage\n
-                ${cardb.Cars["2023 rolls royce ghost"].Emote} 2023 Rolls Royce Ghost -> Super Wheelspin\n
-                ${cardb.Cars["1989 toyota corolla"].Emote} 1989 Toyota Corolla -> Common Imports\n
-                `,
-                inline: true
-              },
+          
               {
                 name: "Bug Fixes 🐞",
-                value: `
-                * Fixed undefined appearing in crates\n
-                * Fixed tutorial command saying you're already in a tutorial after completing one\n
-                * Fixed motorcycle races\n
-                `,
-                inline: true,
-              },
-              
+                value:`
+                - Fixed an issue where the cars original image would display while drifting instead of the livery.\n
+                - Fixed a bug in racing where it would display the wrong bot car stats\n
+                - Fixed a bug where /mystats would only display cars from your garage, instead of your garage including your vault.\n
+                - Improved achievement displaying in /profile\n
 
+
+                `
+              }
               )
-              .setFooter({ text: "3/8/2024" })
+              .setFooter({ text: "4/23/2024" })
               .setThumbnail("https://i.ibb.co/5WBX33k/icons8-upgrade-144.png")
               .setColor(colors.blue);
 

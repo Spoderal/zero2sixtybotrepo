@@ -7,6 +7,7 @@ const { updateCrew } = require("./crews/updateCrew");
 const { patreon } = require("./patreon");
 const User = require("../schema/profile-schema");
 const { PermissionsBitField } = require('discord.js');
+const {achievements} = require("./achievements")
 
 //test
 //test
@@ -61,6 +62,12 @@ module.exports = {
         }
         catch (err){
           return console.log("err")
+        }
+        try{
+          achievements(interaction)
+        }
+        catch(err){
+          return console.log(err)
         }
 
         try {

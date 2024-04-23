@@ -11,7 +11,7 @@ module.exports = {
     let uid = interaction.user.id;
     let userdata = (await User.findOne({ id: uid })) || new User({ id: uid });
     let embed = new Discord.EmbedBuilder().setDescription(
-      `You haven't voted yet! [Vote](https://top.gg/bot/932455367777067079/vote) then run the command again.`
+      `You haven't voted yet! [Vote](https://top.gg/bot/932455367777067079/vote) then run the command again. **Vote rewards are temporarily disabled, but if you'd like to vote to help us out you are welcome to!**`
     );
 
     embed.setColor(colors.blue);

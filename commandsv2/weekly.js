@@ -23,7 +23,7 @@ module.exports = {
     let daily = cooldowns.weekly;
     let patron = userdata.zpass
     let gold;
- 
+    let t5vouch
     let timeout = 604800000;
     let prestige = userdata.prestige;
     if (prestige) {
@@ -37,6 +37,7 @@ module.exports = {
     if(patron == true){
       cash = cash * 2
       gold = 100
+      t5vouch = 1
     }
     if (daily !== null && timeout - (Date.now() - daily) > 0) {
       let time = ms(timeout - (Date.now() - daily));
@@ -60,6 +61,15 @@ module.exports = {
           {
             name: `Earned Gold`,
             value: `<:z_gold:933929482518167552> ${gold}`,
+          },
+        ]);
+      }
+      if(t5vouch > 0){
+        userdata.t5vouchers += Number(t5vouch);
+        embed.addFields([
+          {
+            name: `Earned T5 Vouchers`,
+            value: `<:t5vouchers:1199876227184472145> ${t5vouch}`,
           },
         ]);
       }

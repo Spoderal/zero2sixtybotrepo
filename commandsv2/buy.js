@@ -14,6 +14,7 @@ const { toCurrency, numberWithCommas } = require("../common/utils");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const partdb = require("../data/partsdb.json")
 const carpacks = require("../data/carpacks.json")
+const classdb = require("../data/cardb.json").Tiers
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,6 +34,11 @@ module.exports = {
         .setRequired(false)
         .setMinValue(1)
         .setMaxValue(100)
+    )
+    .addBooleanOption((option) => option
+    .setName("gold")
+    .setDescription("Buy the item with gold")
+    .setRequired(false)
     ),
 
 
@@ -49,7 +55,7 @@ module.exports = {
     const garagelimit = userdata.garageLimit;
     let tier = userdata.tier;
     let bought = interaction.options.getString("item").toLowerCase();
-   
+    let gold = interaction.options.getBoolean("gold") || false
 
 
     let cars = []
@@ -69,7 +75,6 @@ module.exports = {
       let house = hous.find(h => h.id.toLowerCase() === bought)
       let warehouse = warehousedb[bought.toLowerCase()]
       let carpack = carpacks[bought.toLowerCase()]
-
 
   
 
@@ -106,28 +111,48 @@ module.exports = {
 
       }
       else if(part){
-        
+        let goldprice
+        let embed
         if(part.Price == 0) return interaction.reply("This part isn't purchasable!")
         let itemprice = part.Price * amount
-        if(itemprice > cash){
+        if(itemprice > cash && !gold){
           return await interaction.reply({ content: `You don't have enough cash`, ephemeral: true })
         }
-        if(part.Price > cash){
-          return await interaction.reply({ content: `You don't have enough cash to buy this part`, ephemeral: true })
+        if(!gold){
+          userdata.cash -= itemprice
+
         }
-        userdata.cash -= itemprice
+        else if(gold == true) {
+         goldprice = (part.Price / 10) * amount
+          if(goldprice > userdata.gold){
+            return await interaction.reply({ content: `You don't have enough gold to buy this part!`, ephemeral: true })
+          }
+          userdata.gold -= goldprice
+        }
         for (let i = 0; i < amount; i++) {
           userdata.parts.push(part.Name.toLowerCase());
         }
 
         await userdata.save()
+        if(!gold){
+           embed = new EmbedBuilder()
+          .setTitle(`You bought a ${part.Name}`)
+          .setDescription(`You bought x${amount} ${part.Emote} ${part.Name} for ${emotes.cash} ${toCurrency(itemprice)}`)
+          .setColor(colors.blue)
+          .setThumbnail(part.Image)
+          .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
 
-        let embed = new EmbedBuilder()
-        .setTitle(`You bought a ${part.Name}`)
-        .setDescription(`You bought x${amount} ${part.Emote} ${part.Name} for ${emotes.cash} ${toCurrency(itemprice)}`)
-        .setColor(colors.blue)
-        .setThumbnail(part.Image)
-        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+        }
+        else {
+           embed = new EmbedBuilder()
+          .setTitle(`You bought a ${part.Name}`)
+          .setDescription(`You bought x${amount} ${part.Emote} ${part.Name} for ${emotes.gold} ${numberWithCommas(goldprice)}`)
+          .setColor(colors.blue)
+          .setThumbnail(part.Image)
+          .setFooter({text: `You now have ${toCurrency(userdata.gold)}`})
+
+        }
+
 
         await interaction.reply({ embeds: [embed] })
 
@@ -231,7 +256,7 @@ module.exports = {
       }
       else if(car){
         if(car.Price == 0 && !car.Heart && !car.Carver && !car.Tokens && !car.Exclusive) return interaction.reply("This car isn't purchasable!")
-
+        
         if(car.tier > tier){
           return await interaction.reply({ content: `You need to be tier ${car.tier} to buy this car, try beating the tier ${car.tier} squad`, ephemeral: true })
         }
@@ -240,38 +265,7 @@ module.exports = {
         }
         let currency = `${emotes.cash} ${toCurrency(car.Price)}`
       
-        if(car.Exclusive){
-          if(userdata.zkeys < car.Exclusive){
-            return await interaction.reply({ content: `You need ${car.Exclusive} carver cash to buy this car`, ephemeral: true })
-          }
-          userdata.zkeys -= car.Exclusive
-          let carobj = {
-            ID: car.alias,
-            Name: car.Name,
-            Speed: car.Speed,
-            Acceleration: car["0-60"],
-            Handling: car.Handling,
-            WeightStat: car.Weight,
-            Emote: car.Emote,
-            Livery: car.Image,
-            Miles: 0,
-            Resale:0,
-            Gas: 10,
-            MaxGas: 10,
-          };
-
-          userdata.cars.push(carobj)
-          userdata.save()
-          currency = `<:key_z:1140029565360668783> ${numberWithCommas(car.Exclusive)}`
-          let embed = new EmbedBuilder()
-          .setTitle(`You bought a ${car.Name}`)
-          .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
-          .setColor(colors.blue)
-          .setImage(car.Image)
-          .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
-  
-         return await interaction.reply({ embeds: [embed] })
-        }
+      
         if(car.Tokens){
           if(userdata.pvptokens < car.Tokens){
             return await interaction.reply({ content: `You need ${car.Tokens} PVP Tokens to buy this car`, ephemeral: true })
@@ -291,7 +285,7 @@ module.exports = {
             Gas: 10,
             MaxGas: 10,
           };
-          currency = `${emotes.pvptokens} ${numberWithCommas(car.Exclusive)}`
+          currency = `${emotes.pvptokens} ${numberWithCommas(car.Tokens)}`
           userdata.cars.push(carobj)
           userdata.save()
           let embed = new EmbedBuilder()
@@ -299,20 +293,71 @@ module.exports = {
           .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
           .setColor(colors.blue)
           .setImage(car.Image)
-          .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+          .setFooter({text: `You now have ${toCurrency(userdata.pvptokens)}`})
   
          return await interaction.reply({ embeds: [embed] })
         }
         
         else {
 
-          if(car.Price > cash){
-            return await interaction.reply({ content: `You don't have enough cash to buy this car`, ephemeral: true })
+          if(car.Stock){
+            let carstock = global.stock.filter((car) => car.alias == bought.toLowerCase() || car.Name.toLowerCase() == bought.toLowerCase())[0].Stock
+            let carinstock = global.stock.filter((car) => car.alias == bought.toLowerCase() || car.Name.toLowerCase() == bought.toLowerCase())[0]
+
+            if(carinstock.Bought.includes(interaction.user.id)) return await interaction.reply({ content: `You already bought this car`, ephemeral: true })
+
+            if(carstock == 0){
+              return await interaction.reply({ content: `This car is out of stock`, ephemeral: true })
+            }
+            
+            console.log(carstock)
+            carstock -= 1
+            console.log(carstock)
+            carinstock.Bought.push(interaction.user.id)
+
+            await Global.findOneAndUpdate(
+              {
+
+              },
+              {
+                $set: {
+                  "stock.$[car].Stock": carstock,
+                  "stock.$[car].Bought": carinstock.Bought
+                },
+              },
+        
+              {
+                arrayFilters: [
+                  {
+                    "car.Name": carinstock.Name,
+                  },
+                ],
+              }
+            );
+
+            await global.save()
           }
+          let goldprice
+          if(!gold){
+            if(car.Price > cash){
+              return await interaction.reply({ content: `You don't have enough cash to buy this car`, ephemeral: true })
+            }
+            userdata.cash -= car.Price
+          }
+          else if(gold == true) {
+            let carclass = cardb[car.Name.toLowerCase()].Class
+            let classindb = classdb[carclass.toLowerCase()].Gold
+            goldprice = Math.floor(car.Price / classindb) * amount
+             if(goldprice > userdata.gold){
+               return await interaction.reply({ content: `You don't have enough gold to buy this car!`, ephemeral: true })
+             }
+             userdata.gold -= goldprice
+             currency = `${emotes.gold} ${goldprice}`
+            }
           if(usercars.find(c => c.alias === car.alias)){
             return await interaction.reply({ content: `You already own this car`, ephemeral: true })
           }
-          userdata.cash -= car.Price
+
           let resale = car.Price * 0.75
           let carobj = {
             ID: car.alias,
@@ -342,14 +387,19 @@ module.exports = {
           userdata.cars.push(carobj)
         }
 
+        let nowhave = userdata.cash
+        if(gold){
+          nowhave = userdata.gold
+        }
+
         await userdata.save()
 
-        let embed = new EmbedBuilder()
-        .setTitle(`You bought a ${car.Name}`)
-        .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
-        .setColor(colors.blue)
-        .setImage(car.Image)
-        .setFooter({text: `You now have ${toCurrency(userdata.cash)}`})
+           let embed = new EmbedBuilder()
+          .setTitle(`You bought a ${car.Name}`)
+          .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)
+          .setColor(colors.blue)
+          .setImage(car.Image)
+          .setFooter({text: `You now have ${toCurrency(nowhave)}`})
 
         await interaction.reply({ embeds: [embed] })
       }

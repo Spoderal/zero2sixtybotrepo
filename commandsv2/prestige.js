@@ -6,6 +6,7 @@ const User = require("../schema/profile-schema");
 const { ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require("discord.js");
 const { emotes } = require("../common/emotes");
 const colors = require("../common/colors");
+const partdb = require("../data/partsdb.json");
 const cardb = require("../data/cardb.json");
 
 module.exports = {
@@ -18,6 +19,15 @@ module.exports = {
     .addStringOption((option) => option
     .setName("car")
     .setDescription("The car to prestige")
+    .setRequired(true)
+    )
+    )
+    .addSubcommand((subcommand) => subcommand
+    .setName("part")
+    .setDescription("Prestige your t5 part to X")
+    .addStringOption((option) => option
+    .setName("part")
+    .setDescription("The part to prestige")
     .setRequired(true)
     )
     )
@@ -82,7 +92,7 @@ module.exports = {
           },
           {
             $set: {
-              skill: 0,
+              skill: 1,
             },
           }
         );
@@ -188,6 +198,35 @@ module.exports = {
     userdata.save();
 
     await interaction.reply(`Prestiged ${cardb.Cars[carobj.Name.toLowerCase()].Emote} ${carobj.Name} to X Class!`);
+
+  }
+  else if(subcommand == "part"){
+    let prestige = userdata.prestige;
+    if(prestige < 1) return await interaction.reply("You need prestige 1 to prestige a part to X Class!");
+    let part = interaction.options.getString("part");
+
+    if (!userdata.parts.includes(part.toLowerCase())) return await interaction.reply("You don't have this part!");
+
+    let partindb = partdb.Parts[part.toLowerCase()]
+    let xessence = userdata.xessence
+    if(!partindb.TierX) return await interaction.reply("This part cannot be prestiged! Try a tier 5 part, there's also a chance this part doesn't have a Tier X part yet.");
+    let tierxpart = partdb.Parts[part.toLowerCase()].TierX
+    let tierxindb = partdb.Parts[tierxpart.toLowerCase()];
+    
+    let xessencer = tierxindb.Xessence
+    if(xessence < tierxindb.Xessence){
+      return await interaction.reply(`You need ${xessencer} Xessence to prestige this part to X Class!`);
+    }
+    userdata.xessence -= xessencer
+    let userparts = userdata.parts;
+    userparts.splice(userparts.indexOf(part.toLowerCase()), 1);
+   userdata.parts = userparts;
+    console.log(userdata.parts)
+  await userdata.parts.push(tierxpart);
+
+   await userdata.save();
+
+    await interaction.reply(`Prestiged ${partdb.Parts[part.toLowerCase()].Emote} ${partdb.Parts[part.toLowerCase()].Name} to ${tierxindb.Emote} ${tierxindb.Name}!`);
 
   }
   },

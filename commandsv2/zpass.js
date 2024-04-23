@@ -14,7 +14,18 @@ module.exports = {
       }
     let embed = new Discord.EmbedBuilder()
       .setTitle("Z Pass")
-      .setDescription(`Buy the Z Pass [here!](https://www.patreon.com/zero2sixtybot/membership)\nIs Your Z Pass Active: ${zpass}\n\n**__What does it include?__**\n⏲️ Reduced racing cooldowns to 15 seconds\n💵 2x cash from racing\n💵 2x cash from daily/weekly rewards\n🪙 100 weekly gold\n#️⃣ Exclusive channel in the community\n🌌Premium season pass in the future\n\nBe on the look out for more perks as this list will get longer!`)
+      .setDescription(`
+      Buy the Z Pass [here!](https://www.patreon.com/zero2sixtybot/membership)\n
+      Is Your Z Pass Active: ${zpass}\n\n**__What does it include?__**
+      ⏲️ Reduced racing cooldowns to 10 seconds
+      💵 2x cash from racing
+      💵 2x cash from daily/weekly rewards
+      🪙 100 weekly gold
+      <:t5vouchers:1199876227184472145> 1 Weekly T5 Voucher
+
+      #️⃣ Exclusive channel in the community
+      🌌Premium season pass
+      Be on the look out for more perks as this list will get longer!`)
       .setColor(`#60b0f4`)
       .setThumbnail("https://i.ibb.co/fpqbgGT/zpass.png");
 

@@ -21,7 +21,13 @@ module.exports = {
     .addSubcommand((subcommand) => subcommand
     .setName("cars")
     .setDescription("View cars for sale")
+    .addStringOption((option) =>
+      option
+        .setName("search")
+        .setDescription("Search a cars name, or brand")
+        
     )
+  )
     .addSubcommand((subcommand) => subcommand
     .setName("parts")
     .setDescription("View parts for sale")
@@ -29,12 +35,13 @@ module.exports = {
   async execute(interaction) {
     let subcommand = interaction.options.getSubcommand()
     let userdata = await User.findOne({ id: interaction.user.id });
-
+    
     if(!userdata){
       return interaction.reply({content: GET_STARTED_MESSAGE, ephemeral: true})
     }
-
+    
     if(subcommand == "cars"){
+      let search = interaction.options.getString("search")
 
     
     let cardb = require("../data/cardb.json").Cars
@@ -43,6 +50,10 @@ module.exports = {
 
     for(let car in cardb){
       dealerarray.push(cardb[car])
+    }
+    
+    if(search){
+      dealerarray = dealerarray.filter((car2) => car2.Name.toLowerCase().includes(search.toLowerCase()))
     }
 
     let featured = dealerarray.filter((car) => car.Price > 0 && !car.Police)
@@ -92,11 +103,7 @@ module.exports = {
 					.setDescription('View the list of new cars')
           .setEmoji(`⭐`)
 					.setValue('new'),
-          new StringSelectMenuOptionBuilder()
-					.setLabel('Type Takeover')
-					.setDescription('View the list of Type Takeover event cars')
-          .setEmoji(`<:key_z:1140029565360668783>`)
-					.setValue('typetakeover'),
+       
       )
     )
 
@@ -120,7 +127,7 @@ module.exports = {
     let embed = new EmbedBuilder()
     .setTitle("Vehicle Dealership")
     .setThumbnail("https://i.ibb.co/Fs8KR56/icons8-car-rental-480.png")
-    .setDescription(`**${classdb[featurecar.Class.toLowerCase()].Emote} __Featured Car__**\n${featurecar.Emote} ${featurecar.Name}\n${emotes.cash} ${(toCurrency(featurecar.Price))}\n${emotes.speed} Power: ${featurecar.Speed}\n${emotes.acceleration} Acceleration: ${featurecar["0-60"]}\n${emotes.handling} Handling: ${featurecar.Handling}\n${emotes.weight} Weight: ${featurecar.Weight}\n\n||Wow look, an egg! <:egg_porsche:1219112541347905607> CODE: \`HORSESARECOOL\`||`)
+    .setDescription(`**${classdb[featurecar.Class.toLowerCase()].Emote} __Featured Car__**\n${featurecar.Emote} ${featurecar.Name}\n${emotes.cash} ${(toCurrency(featurecar.Price))}\n${emotes.speed} Power: ${featurecar.Speed}\n${emotes.acceleration} Acceleration: ${featurecar["0-60"]}\n${emotes.handling} Handling: ${featurecar.Handling}\n${emotes.weight} Weight: ${featurecar.Weight}`)
     .setImage(`${featurecar.Image}`)
     .setColor(colors.blue)
 
@@ -218,28 +225,7 @@ module.exports = {
             await interaction.editReply({embeds: [carpackembed], fetchReply: true})
             return
           }
-          else if(i.values[0] && i.values[0] == "typetakeover" && i.customId !== "next" && i.customId !== "prev" && !caridfilter[0]){
-           
-            console.log("type")
-           
-            typetakover = true
-            let embed3 = new EmbedBuilder()
-            .setTitle("Type Takeover")
-            
-            .setThumbnail("https://i.ibb.co/Fs8KR56/icons8-car-rental-480.png")
-            .setColor(colors.blue)
 
-            for(let c in cardb){
-              let car = cardb[c]
-              if(car.Exclusive){
-                console.log(car)
-                embed3.addFields({name: `${car.Emote} ${car.Name}`, value: `<:key_z:1140029565360668783> ${numberWithCommas(car.Exclusive)}\n${emotes.speed} Power: ${car.Speed}\n${emotes.acceleration} Acceleration: ${car["0-60"]}\n${emotes.handling} Handling: ${car.Handling}\n${emotes.weight} Weight: ${car.Weight}`, inline: true})
-              }
-            }
-
-            await interaction.editReply({embeds: [embed3], fetchReply: true})
-            
-          }
 
         
         page = 1
@@ -274,7 +260,7 @@ module.exports = {
        );
 
 
-       if(classmaps[page - 1] == undefined) return interaction.editReply("")
+       if(classmaps[page - 1] == undefined) return interaction.editReply("There are no more cars in your search with this class")
 
 
           let classpage2 = classmaps[page - 1]
@@ -286,6 +272,7 @@ module.exports = {
           let buyrow1 = classpage2.slice(0, 3)
           let buyrow2 = classpage2.slice(3)
           console.log(buyrow1)
+          if(!classmaps[page - 1]) return interaction.editReply("There are no cars in your search with this class")
          for(let car3 in classmaps[page - 1]){
            let cartodisplay = classmaps[page - 1][car3]
            let price = ""
@@ -293,10 +280,12 @@ module.exports = {
             price = `Obtained: ${cartodisplay.Obtained}`
            }
            else {
-            price = `${toCurrency(cartodisplay.Price)}`
+            price = cartodisplay.Price
            }
+           let classcar = classdb[cartodisplay.Class.toLowerCase()]
+           
            embed.addFields(
-            {name: `${cartodisplay.Emote} ${cartodisplay.Name}`, value: `${emotes.cash} ${price}\n${emotes.speed} Power: ${cartodisplay.Speed}\n${emotes.acceleration} Acceleration: ${cartodisplay["0-60"]}\n${emotes.handling} Handling: ${cartodisplay.Handling}\n${emotes.weight} Weight: ${cartodisplay.Weight}`, inline: true}
+            {name: `${cartodisplay.Emote} ${cartodisplay.Name}`, value: `${emotes.cash} ${toCurrency(price)}\n${emotes.gold} ${numberWithCommas(Math.floor(price / classcar.Gold))}\n${emotes.speed} Power: ${cartodisplay.Speed}\n${emotes.acceleration} Acceleration: ${cartodisplay["0-60"]}\n${emotes.handling} Handling: ${cartodisplay.Handling}\n${emotes.weight} Weight: ${cartodisplay.Weight}`, inline: true}
            )
          }
 
@@ -537,9 +526,53 @@ module.exports = {
 
     collector.on('collect', async (i) => {
         let partf = i.values[0]
+        console.log(partf)
+        if(partf == "gold"){
+          embed = new EmbedBuilder()
+          .setTitle(`Store for ${partf}`)
+          .setColor(colors.blue)
+          let goldfilter = partarray.filter((part) => part.Tier == "6" && part.Gold > 0)
+          for(let p in goldfilter){
+            let par = goldfilter[p]
+            let stats = []
+            if(par.Power > 0){
+              stats.push(`${emotes.speed} Speed: +${par.Power}`)
+            }
+            if(par.RemovePower > 0){
+              stats.push(`${emotes.speed} Speed: -${par.RemovePower}`)
+            }
+            if(par.Acceleration > 0){
+              stats.push(`${emotes.acceleration} Acceleration: -${par.Acceleration}`)
+            }
+            if(par.RemoveAcceleration > 0){
+              stats.push(`${emotes.acceleration} Acceleration: +${par.RemoveAcceleration}`)
+            }
+            if(par.Handling > 0){
+              stats.push(`${emotes.handling} Handling: +${par.Handling}`)
+            }
+            if(par.RemoveHandling > 0){
+              stats.push(`${emotes.handling} Handling: -${par.RemoveHandling}`)
+            }
+            if(par.RemoveWeight > 0){
+              stats.push(`${emotes.weight} Weight: -${par.RemoveWeight}`)
+            }
+            if(par.Weight > 0){
+              stats.push(`${emotes.weight} Weight: +${par.Weight}`)
+            }
+            if(par.Stars > 0){
+              stats.push(`⭐ Rating: +${par.Stars}`)
+            }
+          embed.addFields(
+            {name: `${par.Emote} ${par.Name}`, value: `Cost: ${emotes.gold} ${par.Gold}\n${stats.join("\n")}`, inline: true}
+        )
+          }
+        }
+        else if(partf !== "gold") {
+
+        
         let partsfilter = partarray.filter((part) => part.Type == partf && part.Price > 0)
 
-        let embed = new EmbedBuilder()
+         embed = new EmbedBuilder()
         .setTitle(`Store for ${partf}`)
         .setColor(colors.blue)
         for(let p in partsfilter){
@@ -577,6 +610,7 @@ module.exports = {
                   {name: `${par.Emote} ${par.Name}`, value: `${emotes.cash} Cost: ${toCurrency(par.Price)}\n${stats.join("\n")}`, inline: true}
               )
         }
+      }
         
         await msg.edit({embeds: [embed]})
 

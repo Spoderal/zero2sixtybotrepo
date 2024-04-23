@@ -1,14 +1,14 @@
 {
   "Races":{
-    "streetrace": {
+    "street": {
       "Name": "Street Race",
       "Reward": 200
     },
-    "dragrace": {
+    "drag": {
       "Name": "Drag Race",
       "Reward": 250
     },
-    "trackrace": {
+    "track": {
       "Name": "Track Race",
       "Reward": 225
     },
@@ -17,7 +17,7 @@
       "Name": "Track Race (EVENT)",
       "Reward": 225
     },
-    "motorcyclemad": {
+    "motorcycle": {
       "Name": "Motorcycle Madness",
       "Reward": 220
     },
@@ -25,7 +25,7 @@
       "Name": "Cross Country",
       "Reward": 275
     },
-    "junkrace": {
+    "junk": {
       "Name": "Junk Race",
       "Reward": 100
     },
@@ -38,7 +38,7 @@
       "Name": "Offroad Race",
       "Reward": 300
     },
-    "carseries": {
+    "series": {
       "Name": "Car Series",
       "Reward": 100
     }

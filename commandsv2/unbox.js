@@ -19,9 +19,9 @@ module.exports = {
           { name: "Common", value: "common" },
           { name: "Rare", value: "rare" },
           { name: "Exotic", value: "exotic" },
-          { name: "Track legends", value: "track" },
           {name: "McLaren", value: "mclaren"},
           {name: "Drift", value: "drift"},
+          {name: "Le Mans", value: "le mans"},
         )
         .setRequired(true)
     )
@@ -42,7 +42,8 @@ module.exports = {
       "exotic",
       "mclaren",
       "track",
-      "drift"
+      "drift",
+      "le mans"
     ];
 
     let userdata = await User.findOne({ id: interaction.user.id });
@@ -154,9 +155,9 @@ module.exports = {
           );
   
   
-        if (bought == "le mans" && lekeys < 10)
+        if (bought == "le mans" && lekeys < 50)
           return await interaction.reply(
-            `You dont have enough keys! This crate costs 10 Le Keys`
+            `You dont have enough keys! This crate costs 50 Le Keys`
           );
         if (bought == "rain" && trophy < 25)
           return await interaction.reply(
@@ -174,7 +175,7 @@ module.exports = {
         else if (bought == "fools") {
           userdata.foolskeys -= 25;
         } else if (bought == "le mans") {
-          userdata.lekeys -= 10;
+          userdata.lekeys -= 50;
         } else if (bought == "mclaren") {
           userdata.mKeys -= 35;
         }else if (bought == "track") {
