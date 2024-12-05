@@ -129,7 +129,7 @@ module.exports = {
           row.components[0].setLabel("Disable Daily Reward Reminders");
         }
         userdata.markModified("settings");
-        userdata.save();
+        await  userdata.save();
         if (userdata.settings.daily == true) {
           demote = "✅";
         } else {
@@ -161,7 +161,7 @@ module.exports = {
           row.components[0].setLabel("Disable Daily Reward Reminders");
         }
         userdata.markModified("settings");
-        userdata.save();
+        await   userdata.save();
         if (userdata.autogas == true) {
           gasemote = "✅";
         } else {
@@ -194,7 +194,7 @@ module.exports = {
           row.components[1].setLabel("Disable Vote Reminders");
         }
         userdata.markModified("settings");
-        userdata.save();
+        await   userdata.save();
         if (userdata.settings.vote == true) {
           vemote = "✅";
         } else {
@@ -226,7 +226,7 @@ module.exports = {
           row.components[2].setLabel("Disable Tips");
         }
         userdata.markModified("settings");
-        userdata.save();
+        await   userdata.save();
         if (userdata.settings.tips == true) {
           temote = "✅";
         } else {

@@ -53,7 +53,7 @@ module.exports = {
       let finalamount = toturnin * 10000;
       userdata.gold -= toturnin;
       userdata.cash += finalamount;
-      userdata.save();
+      await    userdata.save();
 
       await interaction.reply(
         `Converted ${toturnin} gold into ${toCurrency(finalamount)}`
@@ -62,7 +62,7 @@ module.exports = {
       let finalamount = toturnin * 1;
       userdata.gold -= toturnin;
       userdata.rkeys += finalamount;
-      userdata.save();
+      await   userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} rare keys`
       );
@@ -72,7 +72,7 @@ module.exports = {
 
       userdata.gold -= toturnin;
       userdata.ekeys += finalamount;
-      userdata.save();
+      await   userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} exotic keys`
       );
@@ -82,7 +82,7 @@ module.exports = {
 
       userdata.gold -= toturnin;
       userdata.barnmaps += finalamount;
-      userdata.save();
+      await  userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} barn maps`
       );
@@ -92,7 +92,7 @@ module.exports = {
       if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 t5voucher! You need at least 5 gold`)
       userdata.gold -= toturnin;
       userdata.t5vouchers += finalamount;
-      userdata.save();
+      await  userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} t5 vouchers`
       );
@@ -102,7 +102,7 @@ module.exports = {
       if(finalamount < 1) return interaction.reply(`You don't have enough gold to make 1 garage space! You need at least 10 gold`)
       userdata.gold -= toturnin;
       userdata.garageLimit += Math.floor(finalamount);
-      userdata.save();
+      await   userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${Math.floor(finalamount)} garage spaces`
       );
@@ -113,7 +113,7 @@ module.exports = {
 
       userdata.gold -= toturnin;
       userdata.swheelspins += finalamount;
-      userdata.save();
+      await   userdata.save();
       await interaction.reply(
         `Converted ${toturnin} gold into ${finalamount} Super wheelspins`
       );

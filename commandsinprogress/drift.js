@@ -336,7 +336,7 @@ module.exports = {
         ],
       }
     );
-          userdata.save();
+    await  userdata.save();
           embed.setDescription(`${earnings.join("\n")}`);
           embed.setTitle(`${trackemote} ${difficulty} ${track} track won!`);
           await interaction.editReply({ embeds: [embed] });

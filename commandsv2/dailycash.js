@@ -154,7 +154,7 @@ console.log(isWeekend)
       userdata.cash += dcash;
       cooldowndata.daily = Date.now();
       cooldowndata.lastDaily = Date.now();
-      userdata.save();
+      await   userdata.save();
       cooldowndata.save();
 
       let embed = new Discord.EmbedBuilder()

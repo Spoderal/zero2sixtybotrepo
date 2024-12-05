@@ -14,7 +14,8 @@ module.exports = {
         .setName("badge")
         .setDescription("The badge to give")
         .setRequired(true)
-        .addChoices({name: "Bug Smasher", value: "bug smasher"})
+        .addChoices({name: "Bug Smasher", value: "bug smasher"}, 
+      {name: "Legacy", value: "legacy"},)
     )
     .addUserOption((option) =>
       option

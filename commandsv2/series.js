@@ -368,7 +368,7 @@ module.exports = {
         cooldowndata.series1 = Date.now();
         userdata.perfectengineering = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
         cooldowndata.save();
 
         interaction.editReply("✅");
@@ -410,7 +410,7 @@ module.exports = {
         cooldowndata.series1 = Date.now();
         userdata.pressure = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
         cooldowndata.save();
 
         interaction.editReply("✅");
@@ -452,7 +452,7 @@ module.exports = {
         cooldowndata.series1 = Date.now();
         userdata.fiestafamilia = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await  userdata.save();
         cooldowndata.save();
 
         interaction.editReply("✅");
@@ -495,7 +495,7 @@ module.exports = {
         cooldowndata.series1 = Date.now();
         userdata.italian = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
         cooldowndata.save();
 
         interaction.editReply("✅");
@@ -528,7 +528,7 @@ module.exports = {
         userdata.perfectengineering = true;
         userdata.perfectengineeringcomplete = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
 
         interaction.editReply("✅");
       } else if (
@@ -560,7 +560,7 @@ module.exports = {
         userdata.pressure = true;
         userdata.pressurecomplete = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
 
         interaction.editReply("✅");
       } else if (
@@ -592,7 +592,7 @@ module.exports = {
         userdata.fiestafamilia = true;
         userdata.fiestafamiliacomplete = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
 
         interaction.editReply("✅");
       }
@@ -625,7 +625,7 @@ module.exports = {
         userdata.italian = true;
         userdata.italiancomplete = true;
         userdata.cars.push(newobj);
-        userdata.save();
+        await   userdata.save();
 
         interaction.editReply("✅");
       }

@@ -20,7 +20,6 @@ const trackdb = require("../data/tracks.json")
 const achievementdb = require("../data/achievements.json")
  const outfits = require("../data/characters.json")
  const { tipFooterRandom } = require("../common/tips");
- const partdb = require("../data/partsdb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -592,7 +591,7 @@ const dodrag = function(speed, acceleration, handling, weight) {
               }
               
 
-              userdata.save()
+              await  userdata.save()
               trackembed.setDescription(`${rewards.join('\n')}`)
             }
 
@@ -924,7 +923,7 @@ const dodrag = function(speed, acceleration, handling, weight) {
       ) {
         userdata.seriestickets = 10;
         cooldowndata.series1tickets = Date.now()
-        userdata.save()
+        await  userdata.save()
         cooldowndata.save()
         return interaction.editReply("Your series tickets have been refilled!")
       }
@@ -1967,7 +1966,7 @@ const dodrag = function(speed, acceleration, handling, weight) {
       }
 
 
-      userdata.save();
+      await  userdata.save();
 
 
 

@@ -73,7 +73,7 @@ module.exports = {
         }
       }
       interaction.editReply({ embeds: [embed] });
-      setTimeout(() => {
+      setTimeout(async () => {
         if (item == "⚙️") {
           let reward;
 
@@ -130,7 +130,7 @@ module.exports = {
             interaction.channel.send(
               `You already own this car, so you got $${sellprice} instead.`
             );
-            userdata.save();
+            await  userdata.save();
             return;
           }
           collector.on("collect", async (i) => {
@@ -177,22 +177,22 @@ module.exports = {
                   if (carsdb.Cars[reward.toLowerCase()].Range) {
                     vault.push(ecarobj);
                     userdata.vault = vault
-                    userdata.save();
+                    await  userdata.save();
                   } else {
                     console.log("pushed")
                     vault.push(carobj);
                     userdata.vault = vault
-                    userdata.save();
+                    await   userdata.save();
                   }
                   
                 }
                 else {
                   if (carsdb.Cars[reward.toLowerCase()].Range) {
                     userdata.cars.push(ecarobj);
-                    userdata.save();
+                    await   userdata.save();
                   } else {
                     userdata.cars.push(carobj);
-                    userdata.save();
+                    await   userdata.save();
                   }
                 }
    
@@ -202,7 +202,7 @@ module.exports = {
               return;
             } else if (i.customId.includes("sell")) {
               userdata.cash += sellprice;
-              userdata.save();
+              await  userdata.save();
               embed.setTitle("✅");
               await interaction.editReply({ embeds: [embed] });
 
@@ -229,7 +229,7 @@ module.exports = {
           );
           interaction.editReply({ embeds: [embed] });
         }
-        userdata.save();
+        await  userdata.save();
       }, 500);
     }, 2000);
   },

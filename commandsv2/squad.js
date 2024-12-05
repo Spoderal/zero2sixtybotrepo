@@ -118,6 +118,11 @@ module.exports = {
       {name: "cool cobras", car: 0},
       {name: "demonz", car: 0}
     ];
+    if (!sqlevels.includes({ name: "demonz", car: 0 })) {
+      sqlevels.push({ name: "demonz", car: 0 });
+      userdata.markModified("squads");
+      userdata.update();
+    }
     if (!sqlevels.includes({ name: "double 0", car: 0 })) {
       sqlevels.push({ name: "double 0", car: 0 });
       userdata.markModified("squads");
@@ -131,6 +136,7 @@ module.exports = {
     let sqlevelfiltered = sqlevels.filter(
       (sqt) => sqt.name == squadfiltered[0].Name.toLowerCase()
     );
+    console.log(squadfiltered)
     let moneyearned = squadfiltered[0].Reward;
     if (sqlevelfiltered[0].car >= 4) {
       moneyearned = squadfiltered[0].BigReward;
@@ -163,7 +169,11 @@ module.exports = {
     let mph = selected.Speed;
     let weight =
       selected.WeightStat || cardb.Cars[selected.Name.toLowerCase()].Weight;
-    let acceleration = selected.Acceleration;
+      let acceleration = Math.max(2, selected.Acceleration)
+      if(selected.Class == "X" || cardb.Cars[selected.Name.toLowerCase()]["0-60"] == 1.5){
+        acceleration = Math.max(1.5, selected.Acceleration)
+      }
+
     let handling = selected.Handling;
 
     if (!selected.WeightStat) {
@@ -238,7 +248,7 @@ module.exports = {
 
         if (cardb.Cars[selected.Name.toLowerCase()].StatTrack) {
           selected.Wins += 1;
-          userdata.save();
+          await   userdata.save();
         }
         if (interaction.guild.id == "931004190149460048") {
           let calccash = moneyearned * 0.05;
@@ -292,14 +302,14 @@ module.exports = {
           selected.Range -= 1;
         }
 
-        userdata.save();
+        await  userdata.save();
       } else if (winner == "Opponent") {
         embed.setTitle(`Race lost!`);
 
         if (range > 0) {
           selected.Range -= 1;
         }
-        userdata.save();
+        await   userdata.save();
         interaction.editReply({ embeds: [embed] });
         return;
       }

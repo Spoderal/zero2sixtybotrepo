@@ -644,25 +644,6 @@
       "Drivetrain": "RWD",
       "Weight": 2813
     },
-    "kaylas 2010 ford mustang": {
-      "alias": "kaylas 2010 mustang",
-      "Name": "Kaylas 2010 Ford Mustang",
-      "Emote": "<:brand_ford:1192958185863118889>",
-      "kmh": 250,
-      "Speed": 405,
-      "Price": 0,
-      "sellprice": 12400,
-      "Engine": "V6",
-      "Image": "https://i.ibb.co/PNdGcCR/red-modified-ford-mustang-muscle-sport-car-wallpaper-1280x720-45.jpg",
-      "0-60": 5.6,
-      "Drift": 5,
-      "Handling": 300,
-      "Class": "C",
-      "Drivetrain": "RWD",
-      "Squad": true,
-      "Weight": 3601,
-      "Muscle": true
-    },
     "toms 1994 porsche 911": {
       "alias": "toms 1994 911",
       "Name": "Toms 1994 Porsche 911",
@@ -9083,23 +9064,7 @@
       "Obtained": "Rare Imports",
       "Weight": 4200
     },
-    "kaylas 2024 porsche mission x": {
-      "alias": "kaylas 2024 mission x",
-      "Name": "Kaylas 2024 Porsche Mission X",
-      "Emote": "<:porsche:931011550880338011>",
-      "Speed": 1500,
-      "Price": 0,
-      "sellprice": 0,
-      "Engine": "V12",
-      "Image": "https://i.ibb.co/TY112vr/DSF4308-ret-lores.jpg",
-      "0-60": 2,
-      "Drivetrain": "RWD",
-      "Drift": 0,
-      "Handling": 1500,
-      "Class": "X",
-      "Weight": 3000,
-      "Boss": true
-    },
+
 
     "1987 porsche 911 slant nose": {
       "alias": "1987 911 slant nose",

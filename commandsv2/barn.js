@@ -90,7 +90,7 @@ module.exports = {
     let arrByID = cars.filter((item) => item.Name == carobj.Name);
     if (arrByID[0]) {
       await interaction.reply(`You found a ${carindb.Name} but you already have this car..`);
-      userdata.save();
+      await  userdata.save();
       return;
     }
 
@@ -115,7 +115,7 @@ module.exports = {
       
       await interaction.reply({ embeds: [embed] });
       userdata.cars.push(carobj);
-      userdata.save();
+      await  userdata.save();
       
       if(userdata.tutorial && userdata.tutorial.started == true && userdata.tutorial.stage == 1 && userdata.tutorial.type == "restore"){
         console.log("tutorial")

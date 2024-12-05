@@ -1,12 +1,8 @@
 const {
-    ActionRowBuilder,
     EmbedBuilder,
-    SelectMenuBuilder,
   } = require("discord.js");
   const { SlashCommandBuilder } = require("@discordjs/builders");
   const colors = require("../common/colors");
-  const { emotes } = require("../common/emotes");
-  const squads = require("../data/squads.json");
   const { toCurrency } = require("../common/utils");
   const Codes = require("../schema/codes");
   const User = require("../schema/profile-schema");
@@ -83,7 +79,7 @@ const {
             let userdata2 = await User.findOne({ id: existingCode.creator });
             existingCode.uses++;
             userdata.cash += 10000;
-            userdata.save()
+            await    userdata.save()
             userdata2.cash += cash2;
             userdata2.save();
             existingCode.usedBy.push(interaction.user.id);

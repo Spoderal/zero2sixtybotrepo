@@ -6,11 +6,18 @@ const colors = require("../common/colors");
 const { numberWithCommas } = require("../common/utils");
 const Global = require("../schema/global-schema");
 const { emotes } = require("../common/emotes");
+const cardb = require("../data/cardb.json");
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("bot")
     .setDescription("Check the bot information"),
   async execute(interaction) {
+    let cars = []
+
+    for(let car in cardb.Cars){
+        cars.push(cardb.Cars[car])
+    }
     let global = await Global.findOne({});
     let bot = interaction.client.user;
     let totalSeconds = interaction.client.uptime / 1000;
@@ -32,26 +39,22 @@ module.exports = {
           name: "Stats",
           value: `🌎 ${
             interaction.client.guilds.cache.size
-          } servers\n\n👤 ${numberWithCommas(
-            interaction.client.guilds.cache.reduce(
-              (a, g) => a + g.memberCount,
-              0
-            )
-          )} users\n\n🏓 Ping: ${Math.round(
-            interaction.client.ws.ping
-          )}ms\n\n📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n${emotes.gas} Gas Price: ${
-            emotes.cash
-          } $${fixed}\n\nVoting helps us a lot! Use /vote to vote for us
+          } servers\n
+          👤 ${numberWithCommas(interaction.client.guilds.cache.reduce((a, g) => a + g.memberCount, 0))} users\n
+          🏓 Ping: ${Math.round(interaction.client.ws.ping)}ms\n
+          📈 Uptime\n${days} days\n${hours} hours\n${minutes} minutes\n${seconds} seconds\n\n${emotes.gas} Gas Price: ${emotes.cash} $${fixed}
+          🚗 Car Count: ${cars.length}
           `,
           inline: true,
         },
         {
           name: "Links",
-          value: `[Community Server](https://discord.gg/bHwqpxJnJk)\n\n[Invite Bot](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=59392&scope=bot%20applications.commands)\n\n[Patreon](https://www.patreon.com/zero2sixtybot)`,
+          value: `[Community Server](https://discord.gg/bHwqpxJnJk)\n\n[Invite Bot](https://discord.com/api/oauth2/authorize?client_id=932455367777067079&permissions=321600&scope=bot%20applications.commands)\n\n[Patreon](https://www.patreon.com/zero2sixtybot)`,
           inline: true,
         },
       ])
-      .setColor(colors.blue);
+      .setColor(colors.blue)
+      .setDescription("This bot is no longer being maintained. Please join the community server for more information.")
 
       console.log("test log")
 

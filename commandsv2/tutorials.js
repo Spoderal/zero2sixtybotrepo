@@ -1,10 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { ButtonBuilder, EmbedBuilder, ActionRowBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
-const cardb = require("../data/cardb.json");
 const colors = require("../common/colors");
-const lodash = require("lodash");
-const { emotes } = require("../common/emotes");
 const tutorials = require("../data/tutorials.json");
 
 module.exports = {
@@ -138,7 +135,7 @@ module.exports = {
                 type: "starter",
                 stage: 1,
               };
-              userdata.save()
+              await   userdata.save()
 
               interaction.editReply(`Starting the tutorial... Run \`/garage\` to start!`)
         }
@@ -153,7 +150,7 @@ module.exports = {
                 stage: 1,
               };
               userdata.barnmaps += 1
-              userdata.save()
+              await   userdata.save()
 
               interaction.editReply(`Starting the restoration tutorial... Run \`/barn\` to start! I've given you a free barn map, see what you can find!`)
         }
@@ -167,7 +164,7 @@ module.exports = {
               type: "season",
               stage: 1,
             };
-            userdata.save()
+            await  userdata.save()
 
             interaction.editReply(`Starting the season tutorial... Run \`/events\` to start!`)
       }

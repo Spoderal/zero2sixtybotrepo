@@ -45,7 +45,7 @@ module.exports = {
         )
         .setRequired(true)
     )
-    .addStringOption((option) =>
+    .addBooleanOption((option) =>
       option 
       .setName("t5voucher")
       .setDescription("Use a T5 Voucher to skip the fusion process")
@@ -65,7 +65,7 @@ module.exports = {
         "Specify a part! Try: Exhaust, Tires, Clutch, or Intake"
       );
 
-      let t5vouch = interaction.options.getString("t5voucher")
+      let t5vouch = interaction.options.getBoolean("t5voucher")
       let uservouchers = userdata.t5vouchers
 
       if(t5vouch == true && uservouchers <= 0) return await interaction.reply("You dont have any T5 Vouchers!")
@@ -102,7 +102,7 @@ module.exports = {
 
       await interaction.reply({ embeds: [embed] });
 
-      let xt = setTimeout(() => {
+      let xt = setTimeout(async () => {
         embed.setTitle("Fused!");
         embed.setColor("#ffffff");
         embed.fields = [];
@@ -113,7 +113,7 @@ module.exports = {
           },
         ]);
         userdata.items.push("fruit punch");
-        userdata.save();
+        await   userdata.save();
         interaction.editReply({ embeds: [embed] });
         
         clearTimeout(xt)
@@ -270,6 +270,7 @@ module.exports = {
     else {
       
       if(partdb.Parts[`t4${parttoinstall.toLowerCase()}`]){
+        let t5option = interaction.options.getBoolean("t5voucher")
 
         let parte = `t4${parttoinstall.toLowerCase()}`
         let partb = `t5${parttoinstall.toLowerCase()}`
@@ -277,7 +278,8 @@ module.exports = {
         let filtereduser = parts.filter(function hasmany(part) {
           return part === parte.toLowerCase();
         });
-        if (2 > filtereduser.length && userdata.t5vouchers <= 0)
+        console.log(t5option)
+        if (2 > filtereduser.length && !t5option)
           return await interaction.reply(
             `You need 2 ${partdb.Parts[parte].Name} to fuse them!`
           );
@@ -344,11 +346,11 @@ module.exports = {
             },
           ]);
           interaction.editReply({ embeds: [embed] });
-          let t5option = interaction.options.getString("t5voucher")
           if(userdata.t5vouchers > 0 && t5option == true){
             userdata.t5vouchers -= 1
           }
           else {
+            
             for (var i = 0; i < 2; i++) parts.splice(parts.indexOf(parte.toLowerCase()), 1);
 
             userdata.parts = parts;

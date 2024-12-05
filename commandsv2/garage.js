@@ -103,7 +103,7 @@ module.exports = {
     let itempage = cars;
     let embed = new EmbedBuilder()
       .setTitle(`<a:icon_car:1203820291348766750> Displaying cars for ${user.username}`)
-      .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}`)
+      .setDescription(`Garage Limit: ${ucars.length}/${garagelimit}\n\nDonate to support Gaza [here](https://humanappealusa.org/appeals/gaza-emergency-for-us-supporters)\n🇵🇸 Free Palestine`)
       .setColor(colors.blue)
       .setThumbnail("https://i.ibb.co/w66Pwgz/icons8-garage-240.png")
       .setFooter({ text: `Pages 1/${itempage.length}` });
@@ -119,7 +119,10 @@ module.exports = {
       let favorite = car.Favorite ? "⭐" : "";
       let tag = car.Tag ? `🏷️ ${car.Tag}` : "";
       let spe = car.Speed;
-      let acc =(Math.round(car.Acceleration * 10) / 10).toFixed(1)
+      let acc = Math.max(2, car.Acceleration)
+      if(car.Class == "X" || cardb.Cars[car.Name.toLowerCase()]["0-60"] == 1.5){
+        acc = Math.max(1.5, car.Acceleration)
+      }
       let weigh = Math.floor(car.WeightStat);
       let hand = Math.floor(car.Handling);
       let hp = ((spe / acc) + ((hand / 10) - (weigh / 100))) / 4;
@@ -214,7 +217,7 @@ module.exports = {
       fetchReply: true,
     });
 
-    if(udata.tutorial && udata.tutorial.started == true && udata.tutorial.stage == 1 && udata.tutorial.type == "starter"){
+    if(udata.tutorial && udata.tutorial.started == true && udata.tutorial.stage == 1 && udata.tutorial.type == "starter" && udata.id == interaction.user.id){
       await interaction.channel.send(`**TUTORIAL:** Now that you know where to find your car's ID, lets race! Run \`/race [street race] [your car's ID]  [tier 1]\``)
       await interaction.channel.send("https://i.ibb.co/4gCYQMb/Discord-X8z2t2iuqa.gif")
       let tut = udata.tutorial
@@ -271,7 +274,10 @@ module.exports = {
           let favorite = car.Favorite ? "⭐" : "";
           let tag = car.Tag ? `🏷️ ${car.Tag}` : "";
           let spe = car.Speed;
-          let acc =(Math.round(car.Acceleration * 10) / 10).toFixed(1)
+          let acc = Math.max(2, car.Acceleration)
+          if(car.Class == "X" || cardb.Cars[car.Name.toLowerCase()]["0-60"] == 1.5){
+            acc = Math.max(1.5, car.Acceleration)
+          }
           let carclass = car.Class || cardb.Cars[car.Name.toLowerCase()].Class || "N/A"
           let classindb
           if(carclass !== "N/A"){
@@ -315,7 +321,10 @@ module.exports = {
           let favorite = car.Favorite ? "⭐" : "";
           let tag = car.Tag ? `🏷️ ${car.Tag}` : "";
           let spe = car.Speed;
-          let acc =(Math.round(car.Acceleration * 10) / 10).toFixed(1)
+          let acc = Math.max(2, car.Acceleration)
+          if(car.Class == "X" || cardb.Cars[car.Name.toLowerCase()]["0-60"] == 1.5){
+            acc = Math.max(1.5, car.Acceleration)
+          }
           let weigh = Math.floor(car.WeightStat);
           let hand = Math.floor(car.Handling);
           let hp = ((spe - acc) + (hand - (weigh / 100))) / 4;
@@ -419,7 +428,7 @@ module.exports = {
           fetchReply: true,
         });
 
-        if(udata.tutorial && udata.tutorial.started == true && udata.tutorial.stage == 6 && udata.tutorial.type == "starter"){
+        if(udata.tutorial && udata.tutorial.started == true && udata.tutorial.stage == 6 && udata.tutorial.type == "starter" && udata.id == interaction.user.id){
           let tut = udata.tutorial
           tut.stage += 1
           await User.findOneAndUpdate(
@@ -495,7 +504,10 @@ module.exports = {
             let favorite = car.Favorite ? "⭐" : "";
             let tag = car.Tag ? `🏷️ ${car.Tag}` : "";
             let spe = car.Speed;
-            let acc =(Math.round(car.Acceleration * 10) / 10).toFixed(1)
+            let acc = Math.max(2, car.Acceleration)
+            if(car.Class == "X" || cardb.Cars[car.Name.toLowerCase()]["0-60"] == 1.5){
+              acc = Math.max(1.5, car.Acceleration)
+            }
             let weigh = Math.floor(car.WeightStat);
             let hand = Math.floor(car.Handling);
             let hp = ((spe - acc) + (hand - (weigh / 100))) / 4;

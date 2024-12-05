@@ -61,7 +61,7 @@ module.exports = {
       userdata.blueprints -= 1;
       userdata.update();
 
-      userdata.save();
+      await  userdata.save();
       let embed = new EmbedBuilder()
         .setTitle(`Revealing blueprint...`)
         .setColor(`#60b0f4`);
@@ -273,7 +273,7 @@ module.exports = {
               };
 
               userdata.cars.push(carobj);
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -282,7 +282,7 @@ module.exports = {
               let amount = Number(reward1.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -291,14 +291,14 @@ module.exports = {
  
 
               userdata.f1blueprint += 1
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward1.toLowerCase()]) {
               userdata.parts.push(reward1.toLowerCase());
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -322,7 +322,7 @@ module.exports = {
               };
 
               userdata.cars.push(carobj);
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -331,7 +331,7 @@ module.exports = {
               let amount = Number(reward2.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -340,14 +340,14 @@ module.exports = {
  
 
               userdata.f1blueprint += 1
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward2.toLowerCase()]) {
               userdata.parts.push(reward2.toLowerCase());
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -370,7 +370,7 @@ module.exports = {
               };
 
               userdata.cars.push(carobj);
-              userdata.save();
+              await    userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -379,7 +379,7 @@ module.exports = {
               let amount = Number(reward3.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -388,14 +388,14 @@ module.exports = {
  
 
               userdata.f1blueprint += 1
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward3.toLowerCase()]) {
               userdata.parts.push(reward3.toLowerCase());
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -604,7 +604,7 @@ module.exports = {
               };
 
               userdata.cars.push(carobj);
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -613,7 +613,7 @@ module.exports = {
               let amount = Number(reward1.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -621,14 +621,14 @@ module.exports = {
             if (reward1 == "f1 blueprint") {
 
               userdata.f1blueprints += 1
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward1.toLowerCase()]) {
               userdata.parts.push(reward1.toLowerCase());
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -651,7 +651,7 @@ module.exports = {
               };
 
               userdata.cars.push(carobj);
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -660,7 +660,7 @@ module.exports = {
               let amount = Number(reward2.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -668,14 +668,14 @@ module.exports = {
             if (reward2 == "f1 blueprint") {
 
               userdata.f1blueprints += 1
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward2.toLowerCase()]) {
               userdata.parts.push(reward2.toLowerCase());
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -698,7 +698,7 @@ module.exports = {
               };
 
               userdata.cars.push(carobj);
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -707,7 +707,7 @@ module.exports = {
               let amount = Number(reward3.split(" ")[0]);
 
               userdata.cash += parseInt(amount);
-              userdata.save();
+              await  userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
@@ -715,14 +715,14 @@ module.exports = {
             if (reward3 == "f1 blueprint") {
 
               userdata.f1blueprint += 1
-              userdata.save();
+              await    userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;
             }
             if (partdb.Parts[reward3.toLowerCase()]) {
               userdata.parts.push(reward3.toLowerCase());
-              userdata.save();
+              await   userdata.save();
               await interaction.editReply({ content: "✅" });
               collector.stop();
               return;

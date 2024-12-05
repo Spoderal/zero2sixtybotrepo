@@ -85,7 +85,7 @@ module.exports = {
       );
 
       userdata.cash -= finalprice;
-      userdata.save();
+      await   userdata.save();
 
       interaction.reply(
         `Charged up your ${selected[0].Name} for ${toCurrency(finalprice)}`
@@ -173,7 +173,7 @@ module.exports = {
         }
       );
       userdata.cash -= finalprice;
-      userdata.save();
+      await    userdata.save();
 
       interaction.reply(
         `${emotes.gas} Filled up your ${selected[0].Name} for ${toCurrency(finalprice)}`

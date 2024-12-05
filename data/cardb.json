@@ -913,25 +913,7 @@
       "Drivetrain": "RWD",
       "Weight": 2813
     },
-    "kaylas 2010 ford mustang": {
-      "alias": "kaylas 2010 mustang",
-      "Name": "Kaylas 2010 Ford Mustang",
-      "Emote": "<:brand_ford:1192958185863118889>",
-      "kmh": 250,
-      "Speed": 405,
-      "Price": 0,
-      "sellprice": 12400,
-      "Engine": "V6",
-      "Image": "https://i.ibb.co/PNdGcCR/red-modified-ford-mustang-muscle-sport-car-wallpaper-1280x720-45.jpg",
-      "0-60": 5.6,
-      "Drift": 5,
-      "Handling": 300,
-      "Class": "C",
-      "Drivetrain": "RWD",
-      "Squad": true,
-      "Weight": 3601,
-      "Muscle": true
-    },
+
     "toms 1994 porsche 911": {
       "alias": "toms 1994 911",
       "Name": "Toms 1994 Porsche 911",
@@ -1403,15 +1385,15 @@
       "kmh": 347,
       "Price": 447000,
       "sellprice": 160000,
-      "Engine": "V8",
+      "Engine": "V6",
       "PremiumPrice": "81900",
       "Image": "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/images/17q2/678295/2017-ford-gt-supercar-first-ride-review-car-and-driver-photo-679402-s-original.jpg?fill=2:1&resize=1200:*",
-      "0-60": 2.9,
+      "0-60": 3,
       "Drift": 0,
       "Handling": 1000,
       "Drivetrain": "RWD",
       "Class": "A",
-      "Weight": 3300
+      "Weight": 3354
     },
     "2013 mclaren p1": {
       "alias": "2013 p1",
@@ -2807,8 +2789,7 @@
       "Handling": 800,
       "Drivetrain": "RWD",
       "Class": "S",
-      "Weight": 2200,
-      "Obtained": "Exotic Imports"
+      "Weight": 2200
     },
     "2024 aston martin valhalla": {
       "alias": "2024 valhalla",
@@ -2825,7 +2806,6 @@
       "Drivetrain": "AWD",
       "Handling": 1000,
       "Class": "S",
-      "Obtained": "Exotic Imports",
       "Weight": 3600
     },
     "2021 nissan gtr": {
@@ -6703,15 +6683,15 @@
       "Price": 0,
       "sellprice": 53000,
       "Engine": "FLAT6",
-      "Image": "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/pnr/2020/Scene-and-Passion/Christophorus-The-Drift-Dance/b-tanz-044.jpeg/jcr:content/b-tanz-044.jpeg",
+      "Image": "https://i.ibb.co/N9zSY1m/sc.png",
       "Rally": 3,
       "0-60": 7,
       "Drivetrain": "RWD",
       "Drift": 0,
-      "Handling": 600,
+      "Handling": 800,
       "Obtained": "Season",
       "Class": "C",
-      "Weight": 6000
+      "Weight": 3000
     },
     "2017 ford focus rs": {
       "alias": "2017 focus rs",
@@ -6721,7 +6701,7 @@
       "Price": 36000,
       "sellprice": 22197,
       "Engine": "I4",
-      "Image": "",
+      "Image": "https://i.ibb.co/tbwQR4H/focus.png",
       "Rally": 2,
       "0-60": 4.5,
       "Drivetrain": "RWD",
@@ -9030,7 +9010,7 @@
       "sellprice": 1000000,
       "Engine": "V12",
       "Image": "https://i.ibb.co/KX9RvGQ/porsche-963-lmdh-porsche-penske-motorsport-2.jpg",
-      "0-60": 5,
+      "0-60": 3,
       "Drift": 0,
       "Handling": 2500,
       "Starter": true,
@@ -9441,23 +9421,7 @@
       "Obtained": "Rare Imports",
       "Weight": 4200
     },
-    "kaylas 2024 porsche mission x": {
-      "alias": "kaylas 2024 mission x",
-      "Name": "Kaylas 2024 Porsche Mission X",
-      "Emote": "<:porsche:931011550880338011>",
-      "Speed": 1500,
-      "Price": 0,
-      "sellprice": 0,
-      "Engine": "V12",
-      "Image": "https://i.ibb.co/TY112vr/DSF4308-ret-lores.jpg",
-      "0-60": 2,
-      "Drivetrain": "RWD",
-      "Drift": 0,
-      "Handling": 1500,
-      "Class": "S",
-      "Weight": 3000,
-      "Boss": true
-    },
+
 
     "1987 porsche 911 slant nose": {
       "alias": "1987 911 slant nose",
@@ -9532,19 +9496,19 @@
       "alias": "1998 mercedes amg clk gtr",
       "Name": "1998 Mercedes AMG CLK GTR",
       "Emote": "<:mercedes_z:973000364410404924>",
-      "Speed": 215,
+      "Speed": 622,
       "kmh": 233,
       "Price": 0,
       "sellprice": 1000000,
-      "Engine": "V8",
+      "Engine": "V12",
       "Image": "https://i.ibb.co/n3mQKBx/clk.png",
-      "0-60": 6,
+      "0-60": 3.6,
       "Drift": 0,
       "Handling": 1200,
       "Obtained": "Event",
       "Drivetrain": "RWD",
       "Class": "S",
-      "Weight": 2200
+      "Weight": 3175 
     },
     "2021 volvo s90": {
       "alias": "2021 s90",
@@ -12682,6 +12646,96 @@
     "Class": "A",
     "Weight":  1984,
     "Obtained":"Event"
+  },
+  "2002 plymouth prowler": {
+    "alias": "2002 prowler",
+    "Name": "2002 Plymouth Prowler",
+    "Emote": "<:plymouth:965096601829916672>",
+    "kmh": 265,
+    "Speed": 253,
+    "Price": 0,
+    "sellprice": 20000,
+    "Engine": "V6",
+    "Image": "https://i.ibb.co/41Gc5T7/prowler.png",
+    "0-60": 5.9,
+    "Drift": 0,
+    "Handling": 600,
+    "Class": "D",
+    "Drivetrain": "RWD",
+    "Obtained": "Crew Season",
+    "Weight": 2800,
+    "Muscle": true
+  },
+  "1968 mazda cosmo sport": {
+    "alias": "1968 cosmo s",
+    "Name": "1968 Mazda Cosmo Sport",
+    "Emote": "<:mazda:931011549680779364>",
+    "kmh": 265,
+    "Speed": 128,
+    "Price": 0,
+    "sellprice": 10000,
+    "Engine": "R20B",
+    "Image": "https://i.ibb.co/fq5ZXwx/mazda-cosmo-sport-928-1.jpg",
+    "0-60": 7.7,
+    "Drift": 0,
+    "Handling": 400,
+    "Class": "D",
+    "Drivetrain": "RWD",
+    "Obtained": "Crew Season",
+    "Weight": 2110
+  },
+  "1976 maserati merak ss": {
+    "alias": "1976 merak ss",
+    "Name": "1976 Maserati Merak SS",
+    "Emote": "<:maserati:961332832767184987>",
+    "kmh": 265,
+    "Speed": 220,
+    "Price": 0,
+    "sellprice": 100000,
+    "Engine": "V6",
+    "Image": "https://i.ibb.co/CnddbYZ/maseratii.png",
+    "0-60": 7.7,
+    "Drift": 0,
+    "Handling": 500,
+    "Class": "C",
+    "Drivetrain": "RWD",
+    "Obtained": "Crew Season",
+    "Weight": 3086
+  },
+  "2010 ford focus rs500": {
+    "alias": "2010 focus rs500",
+    "Name": "2010 Ford Focus RS500",
+    "Emote": "<:brand_ford:1192958185863118889>",
+    "kmh": 265,
+    "Speed": 345,
+    "Price": 0,
+    "sellprice": 100000,
+    "Engine": "I5",
+    "Image": "https://i.ibb.co/K2yMLwK/rs500.png",
+    "0-60": 5.4,
+    "Drift": 0,
+    "Handling": 800,
+    "Class": "C",
+    "Drivetrain": "FWD",
+    "Obtained": "Crew Season",
+    "Weight": 3300
+  },
+  "2026 zenvo aurora tur": {
+    "alias": "2026 aurora tur",
+    "Name": "2026 Zenvo Aurora Tur",
+    "Emote": "<:zenvo:1208708450444644392>",
+    "Speed": 1850,
+    "kmh": 251,
+    "Price": 0,
+    "sellprice": 1500000,
+    "Engine": "V12",
+    "Image": "https://i.ibb.co/HVfbpZc/zenovaura.png",
+    "0-60": 2.2,
+    "Drivetrain": "RWD",
+    "Handling": 1700,
+    "Class": "S",
+    "Obtained": "Crew Season",
+    "Weight": 3197
   }
 
   }

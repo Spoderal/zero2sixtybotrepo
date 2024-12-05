@@ -167,7 +167,7 @@ module.exports = {
       interaction.channel.send(`**TUTORIAL:** Enjoy your newly aquired classic! Race with it with \`/race [street race] [${carobj.ID}] [tier 1]\`\n\nThanks for completing the restoration tutorial! You've received $5K`)
     }
 
-    userdata.save();
+    await   userdata.save();
 
     await interaction.reply(`Restored ✅`);
   },

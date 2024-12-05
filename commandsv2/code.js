@@ -4,8 +4,6 @@ const codes = require("../data/codes.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const { toCurrency } = require("../common/utils");
-const cardb = require("../data/cardb.json");
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("code")
@@ -41,7 +39,7 @@ module.exports = {
       userdata.cash += Number(codes.Twitter[code].Reward);
 
       codesredeemed.push(code);
-      userdata.save();
+      await   userdata.save();
     } 
  
     else if (codes.Discord[code]) {
@@ -56,7 +54,7 @@ module.exports = {
       userdata.cash += Number(codes.Discord[code].Reward);
 
       codesredeemed.push(code);
-      userdata.save();
+      await  userdata.save();
     } else if (codes.Patreon[code]) {
       let patreontier = userdata.zpass;
 
@@ -85,7 +83,7 @@ module.exports = {
       }
 
       codesredeemed.push(code);
-      userdata.save();
+      await    userdata.save();
     } else {
       await interaction.reply({
         content: "Thats not a valid code!",

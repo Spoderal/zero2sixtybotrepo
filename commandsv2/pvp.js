@@ -171,7 +171,14 @@ module.exports = {
 
       let weight = selected.WeightStat;
       let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
+      let acceleration = Math.max(2, selected.Acceleration)
+      if(selected.Class == "X"){
+        acceleration = Math.max(1.5, selected.Acceleration)
+      }
+      if(cars.Cars[selected.Name.toLowerCase()]["0-60"] < 2){
+        acceleration = Math.max(cars.Cars[selected.Name.toLowerCase()]["0-60"], selected.Acceleration)
+  
+      }
       let handling = selected.Handling;
 
       let carimage1 =
@@ -234,7 +241,14 @@ module.exports = {
           let carindb2 = cars.Cars[selected2.Name.toLowerCase()];
           let weight2 = selected2.WeightStat;
           let speed2 = selected2.Speed;
-          let acceleration2 = selected2.Acceleration;
+          let acceleration2 = Math.max(2, selected2.Acceleration)
+          if(selected2.Class == "X"){
+            acceleration = Math.max(1.5, selected2.Acceleration)
+          }
+          if(cars.Cars[selected2.Name.toLowerCase()]["0-60"] < 2){
+            acceleration = Math.max(cars.Cars[selected2.Name.toLowerCase()]["0-60"], selected2.Acceleration)
+      
+          }
           let handling2 = selected2.Handling;
 
           let carimage2 = selected2.Image || selected2.Livery || carindb2.Image;
@@ -253,12 +267,12 @@ module.exports = {
               name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} ${user.username}'s ${
                 selected.Emote
               } ${selected.Name}`,
-              value: `${emotes.speed} HP: ${selected.Speed}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${selected.Handling}\n${emotes.weight} Weight: ${selected.WeightStat}`,
+              value: `${emotes.speed} HP: ${selected.Speed}\n${emotes.acceleration} Acceleration: ${acceleration}s\n${emotes.handling} Handling: ${selected.Handling}\n${emotes.weight} Weight: ${selected.WeightStat}`,
               inline: true,
             },
             {
               name: `${outfits.Helmets[userpfp2.toLowerCase()].Emote} ${user2.username}'s ${selected2.Emote} ${selected2.Name}`,
-              value: `${emotes.speed} HP: ${speed2}\n${emotes.acceleration} Acceleration: ${selected2.Acceleration}s\n${emotes.handling} Handling: ${handling2}\n${emotes.weight} Weight: ${selected2.WeightStat}`,
+              value: `${emotes.speed} HP: ${speed2}\n${emotes.acceleration} Acceleration: ${acceleration2}s\n${emotes.handling} Handling: ${handling2}\n${emotes.weight} Weight: ${selected2.WeightStat}`,
               inline: true,
             }
           )
@@ -315,8 +329,8 @@ module.exports = {
               userdata.markModified("pvprank");
               userdata2.markModified("pvprank");
 
-              userdata.save()
-              userdata2.save()
+              await   userdata.save()
+              await   userdata2.save()
             }
             else if(user2car > user1car) {
               userdata2.pvprank.Wins = userdata2.pvprank.Wins += 1;
@@ -353,8 +367,8 @@ module.exports = {
 
               userdata.markModified("pvprank");
               userdata2.markModified("pvprank");
-              userdata.save();
-              userdata2.save();
+              await  userdata.save();
+              await   userdata2.save();
             }
             else if(user2car == user1car){
               embed.setTitle(`It was a tie!`)

@@ -59,7 +59,14 @@ module.exports = {
 
     let carimage =  selected[0].Image || cardb[selected[0].Name.toLowerCase()].Image;
     let carspeed = selected[0].Speed
-    let caracc = selected[0].Acceleration
+    let caracc = Math.max(2, selected[0].Acceleration)
+    if(selected[0].Class == "X"){
+      caracc = Math.max(1.5, selected[0].Acceleration)
+    }
+    if(cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){
+      caracc = Math.max(cardb[selected[0].Name.toLowerCase()]["0-60"], selected[0].Acceleration)
+
+    }
     let carhandling = selected[0].Handling
     let carweight = selected[0].WeightStat
 
@@ -120,9 +127,10 @@ module.exports = {
         }
       
       let hpengine = partindb.Power
-      let handlingengine = partindb.Handling
       console.log(engine.toLowerCase())
       let oldhp = partdb.Parts[engine.toLowerCase()]
+ 
+      
       let oldcarhp = selected[0].Speed
       let oldcarweight = selected[0].WeightStat
 
@@ -155,13 +163,31 @@ module.exports = {
       if(partindb.RemoveWeight && partindb.RemoveWeight > 0){
         selected[0].WeightStat -= Number(partindb.RemoveWeight)
       }
+      if(oldhp.Acceleration && oldhp.Acceleration > 0){
+        selected[0].Acceleration += oldhp.Acceleration
+
+      }
+      if(partindb.Acceleration && partindb.Acceleration > 0){
+        selected[0].Acceleration -= partindb.Acceleration
+      }
+
+      let newaccel = Math.max(2, selected[0].Acceleration)
+
+      if(selected[0].Class == "X"){
+        newaccel = Math.max(1.5, selected[0].Acceleration)
+      }
+      if(cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){
+        newaccel = Math.max(cardb[selected[0].Name.toLowerCase()]["0-60"], selected[0].Acceleration)
+
+      }
+
 
       console.log(resale)
 
       let embed = new EmbedBuilder()
       .setTitle(`Engine swap`)
       .addFields({name: "Old Engine", value: `${oldhp.Emote} ${oldhp.Name}\n${emotes.speed} HP ${oldhp.Power}`, inline: true}, {name: "New Engine", value: `${partindb.Emote} ${partindb.Name}\n${emotes.speed} HP ${hpengine}`, inline: true})
-      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}\n${emotes.weight} Weight ${oldcarweight} -> ${selected[0].WeightStat}\nValue: ${toCurrency(resale)} -> ${toCurrency(oldresalecar)}`)
+      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}\n${emotes.weight} Weight ${oldcarweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} Acceleration: ${caracc} -> ${Math.round(newaccel)}\nValue: ${toCurrency(resale)} -> ${toCurrency(oldresalecar)}`)
       .setColor(colors.blue)
       .setImage(`${carimage}`)
       .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
@@ -279,6 +305,11 @@ module.exports = {
       console.log(resale)
       
       console.log(`part value ${partvalue}`)
+      let oldaccel = Math.max(2, selected[0].Acceleration)
+
+      if(selected[0].Class == "X" || cardb[selected[0].Name.toLowerCase()]["0-60"] == 1.5){
+        oldaccel = Math.max(1.5, selected[0].Acceleration)
+      }
 
       selected[0].Resale = oldresalecar
 
@@ -288,7 +319,7 @@ module.exports = {
       if(oldhp.RemoveWeight && oldhp.RemoveWeight > 0){
         selected[0].WeightStat += Number(oldhp.RemoveWeight)
       }
-      if(oldhp.Handling && oldhp.Handling > 0){
+      if(oldhp.Handling && oldhp.Handling > 0 && selected[0].Handling > 100){
         selected[0].Handling -= Number(oldhp.Handling)
       }
       if(oldhp.Acceleration && oldhp.Acceleration > 0){
@@ -303,8 +334,19 @@ module.exports = {
       if(partindb.Handling && partindb.Handling > 0){
         selected[0].Handling += Number(partindb.Handling)
       }
-      if(partindb.Acceleration && partindb.Acceleration > 0){
+      if(partindb.Acceleration && partindb.Acceleration > 0 ){
         selected[0].Acceleration -= Number(partindb.Acceleration)
+      }
+
+
+      let newaccel = Math.max(2, selected[0].Acceleration)
+
+      if(selected[0].Class == "X"){
+        newaccel = Math.max(1.5, selected[0].Acceleration)
+      }
+      if(cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){
+        newaccel = Math.max(cardb[selected[0].Name.toLowerCase()]["0-60"], selected[0].Acceleration)
+
       }
 
       console.log(resale)
@@ -312,7 +354,7 @@ module.exports = {
       let embed = new EmbedBuilder()
       .setTitle(`Drivetrain swap`)
       .addFields({name: "Old Drivetrain", value: `${oldhp.Emote} ${oldhp.Name}\n${emotes.speed} HP ${oldhp.Power}`, inline: true}, {name: "New Drivetrain", value: `${partindb.Emote} ${partindb.Name}\n${emotes.speed} HP ${hpdrivetrain}`, inline: true})
-      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}\n${emotes.weight} Weight ${oldcarweight} -> ${selected[0].WeightStat}\n${emotes.handling} Handling ${oldcarhandling} -> ${selected[0].Handling}\n${emotes.acceleration} Acceleration: ${oldcaracceleration} -> ${selected[0].Acceleration}\nValue: ${toCurrency(resale)} -> ${toCurrency(oldresalecar)}`)
+      .setDescription(`${emotes.speed} HP ${oldcarhp} -> ${selected[0].Speed}\n${emotes.weight} Weight ${oldcarweight} -> ${selected[0].WeightStat}\n${emotes.handling} Handling ${oldcarhandling} -> ${selected[0].Handling}\n${emotes.acceleration} Acceleration: ${oldaccel} -> ${newaccel}\nValue: ${toCurrency(resale)} -> ${toCurrency(oldresalecar)}`)
       .setColor(colors.blue)
       .setImage(`${carimage}`)
       .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
@@ -364,28 +406,16 @@ module.exports = {
     if(partindb.Power > 0){
       selected[0].Speed += Number(partindb.Power)
     }
-    if(partindb.Acceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2){
-    if(newacc < 2 && xclass !== "X"){
-      selected[0].Acceleration = 2
-    } 
-    else {
-      if(newacc < 2 && xclass == "X" || cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){  
-        selected[0].Acceleration = 1.5
-      }
-      else {
-        selected[0].Acceleration -= partindb.Acceleration
-
-      }
-
-    }
+    if(partindb.Acceleration > 0 ){
+        selected[0].Acceleration -= (partindb.Acceleration).toFixed(2)
   }
-    if(partindb.RemoveAcceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2){
-      selected[0].Acceleration += Number(partindb.RemoveAcceleration)
+    if(partindb.RemoveAcceleration > 0 ){
+      selected[0].Acceleration += (partindb.RemoveAcceleration).toFixed(2)
     }
     if(partindb.RemovePower > 0){
       selected[0].Speed -= Number(partindb.RemovePower)
     }
-    if(partindb.DecreaseHandling > 0){
+    if(partindb.DecreaseHandling > 0 && selected[0].Handling > 200){
       selected[0].Handling -= Number(partindb.DecreaseHandling)
     }
 
@@ -443,16 +473,24 @@ module.exports = {
     );
 
     let userparts = userdata.parts
-    let tutorial = userdata.tutorial
     for (var i4 = 0; i4 < 1; i4++)  userparts.splice(userparts.indexOf(inputUpgrade.toLowerCase()), 1);
     userdata.parts = userparts
     
-    userdata.save()
+    await   userdata.save()
     
+    let newaccel = Math.max(2, selected[0].Acceleration)
+
+    if(selected[0].Class == "X"){
+      newaccel = Math.max(1.5, selected[0].Acceleration)
+    }
+    if(cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){
+      newaccel = Math.max(cardb[selected[0].Name.toLowerCase()]["0-60"], selected[0].Acceleration)
+
+    }
     
     let embed = new EmbedBuilder()
     .setTitle(`Installed a ${partindb.Emote} ${partindb.Name}`)
-    .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${Math.floor(caracc * 100) / 100} -> ${Math.floor(selected[0].Acceleration * 100) / 100}\nValue: ${toCurrency(resale)} -> ${toCurrency(resale + partvalue)}`)
+    .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${Math.floor(caracc * 100) / 100} -> ${newaccel}\nValue: ${toCurrency(resale)} -> ${toCurrency(resale + partvalue)}`)
     .setColor(colors.blue)
     .setImage(`${carimage}`)
     .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)

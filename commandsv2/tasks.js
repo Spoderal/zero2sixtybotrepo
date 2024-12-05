@@ -86,7 +86,7 @@ module.exports = {
       }
 
       userdata.tasks.push(taskobj);
-      userdata.save();
+      await   userdata.save();
 
       interaction.reply(`You claimed the task **"${taskindb.Task}"**`);
     } else if (subcommand == "view") {

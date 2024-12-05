@@ -3,15 +3,13 @@
 const {
   ActionRowBuilder,
   EmbedBuilder,
-  SelectMenuBuilder,
-  StringSelectMenuBuilder
+  StringSelectMenuBuilder,
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const User = require("../schema/profile-schema");
-let seasondb = require("../data/seasons.json");
-const { emotes } = require("../common/emotes");
+const seasondb = require("../data/seasons.json");
 const Global = require("../schema/global-schema");
 const cardb = require("../data/cardb.json")
 
@@ -21,16 +19,16 @@ module.exports = {
     .setDescription("Check the current events"),
   async execute(interaction) {
     const row2 = new ActionRowBuilder().addComponents(
-      new SelectMenuBuilder()
+      new StringSelectMenuBuilder()
         .setCustomId("select")
         .setPlaceholder("No event selected")
         .addOptions([
           {
-            label: "Season 4",
-            description: "Information for the Season 4 Z Pass",
-            value: "spring_event",
-            customId: "spring",
-            emoji: "<:season4_icon:1211169992213794827>",
+            label: "Season 5",
+            description: "Information for the Season 5 Z Pass",
+            value: "summer_event",
+            customId: "summer",
+            emoji: "<:SEASON5_icon:1239281860136145037>",
           },
           {
             label: "Le Mans",
@@ -58,7 +56,7 @@ module.exports = {
     embed.setThumbnail("https://i.ibb.co/488Qf9M/Logo-Makr-24.png");
     embed.setDescription(`Here you can check out the current events going on!\n\n
           **__Events__**
-          Season 4 <:season4_icon:1211169992213794827>
+          Season 5 <:SEASON5_icon:1239281860136145037>
           Le Mans 🏆
           Space Race 🚀
       `);
@@ -85,7 +83,7 @@ module.exports = {
         },
 
       );
-      userdata.save()
+      await  userdata.save()
       interaction.channel.send(`**TUTORIAL**: There's many events here, but we're just going to focus on seasons for now. Click on season 4 on the drop down menu to get started.`)
     }
 
@@ -100,24 +98,24 @@ module.exports = {
 
     collector.on("collect", async (collected) => {
       const value = collected.values[0];
-      if (value === "spring_event") {
-        embed.setTitle("Season 4");
+      if (value === "summer_event") {
+        embed.setTitle("Season 5");
         embed.setFooter({ text: 'Prefix is "/"' });
-        embed.setDescription(`Welcome to the fourth season on Zero2Sixty!
+        embed.setDescription(`Welcome to the 5th season on Zero2Sixty!
 
-            Welcome to spring! The snow is melting and the flowers are blooming. With a whole new Z Pass, and new cars, you can't miss out on this season!
+            Welcome to **Summer**! The sun is coming out and its very hot, With a whole new Z Pass, and new cars, you can't miss out on this season!
 
-            Try out the new PERMANENT race, Offroad, where you will need AWD, and lots of weight to get notoriety!
+            Try out the new temporary race, Rally, where you will need a good balance of handling and weight, while also having rally tires!
 
-            Earn notoriety from offroad, and use that towards the Z Pass in /season!
+            Earn notoriety from rally, and use that towards the Z Pass in /season!
 
-            **Ends May 31st 2024**
+            **Ends August 31st 2024**
 
                   `);
-        embed.setThumbnail(seasondb.Seasons.Spring.Image);
+        embed.setThumbnail(seasondb.Seasons.Summer.Image);
         embed
           .setColor(colors.blue)
-          .setImage("https://i.ibb.co/dr0Q9Hq/season4-image.png");
+          .setImage("https://i.ibb.co/LxS3M8n/season5-image.png");
 
         await interaction.editReply({
           embeds: [embed],
@@ -137,7 +135,7 @@ module.exports = {
             },
     
           );
-          userdata.save()
+          await   userdata.save()
           interaction.channel.send(`**TUTORIAL**: Every time the season in real life changes, for example spring, the season in the game changes too. You can earn notoriety from the race specified above to get cool prizes! Lets see what prizes we can get with \`/season\``)
         }
       } 
@@ -151,8 +149,6 @@ module.exports = {
             Earn parts to make an EPIC ROCKET ENGINE! This is the last time this engine will be obtainable. Super and regular rocket engines are back in rotation in super wheelspins
 
             There's also a chance you'll meet the 2019 Apollo IE in /race spacerace so be prepared! If you beat it, you keep it!
-
-            **You only get 1 epic rocket engine, so use it wisely!**
 
             Requirements to fuse a rocket engine into an epic rocket engine:
             * 1 Rocket Engine\n
@@ -189,7 +185,7 @@ module.exports = {
             },
     
           );
-          userdata.save()
+          await   userdata.save()
           interaction.channel.send(`**TUTORIAL**: Every time the season in real life changes, for example spring, the season in the game changes too. You can earn notoriety from the race specified above to get cool prizes! Lets see what prizes we can get with \`/season\``)
         }
       } 
@@ -309,7 +305,7 @@ module.exports = {
         }
 
         userdata.cars.push(carobj)
-        userdata.save()
+        await  userdata.save()
         globals.markModified("leteams")
 
         await globals.save()
@@ -347,7 +343,7 @@ module.exports = {
         }
 
         userdata.cars.push(carobj)
-        userdata.save()
+        await  userdata.save()
         globals.markModified("leteams")
 
         await globals.save()
@@ -386,7 +382,7 @@ module.exports = {
         }
 
         userdata.cars.push(carobj)
-        userdata.save()
+        await    userdata.save()
         globals.markModified("leteams")
 
         await globals.save()
@@ -425,7 +421,7 @@ module.exports = {
         }
 
         userdata.cars.push(carobj)
-        userdata.save()
+        await   userdata.save()
 
         globals.markModified("leteams")
 

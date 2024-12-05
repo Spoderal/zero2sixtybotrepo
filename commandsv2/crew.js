@@ -151,7 +151,6 @@ module.exports = {
       crew2 = crew2[0];
       await interaction.reply({ content: `Please wait...`, fetchReply: true });
       let rpmembers = crew2.members;
-      let emoji = emotes.zerorp;
       let finalLb = "";
       let total = 0;
       let rparray = [];
@@ -224,8 +223,8 @@ module.exports = {
         row.addComponents(
           new ButtonBuilder()
             .setCustomId("season")
-            .setEmoji("<:crew_season6:1224007183855910963>")
-            .setLabel("Season 6")
+            .setEmoji("<:crew_season7:1234618870392684604>")
+            .setLabel("Season 7")
             .setStyle("Secondary")
         );
       }
@@ -302,9 +301,9 @@ module.exports = {
                 }
               }
               let embed2 = new Discord.EmbedBuilder()
-                .setTitle(`Season 6 for ${crew2.name}`)
+                .setTitle(`Season 7 for ${crew2.name}`)
                 .setDescription(`${reward.join("\n")}`)
-                .setFooter({text: `Ends April 1st 2024`})
+                .setFooter({text: `Ends May 31st 2024`})
                 .setThumbnail(icon)
                 .setColor(colors.blue);
 
@@ -425,7 +424,7 @@ module.exports = {
       userdata.crewseasonclaimed = crew2[0].Rank
       userdata.rp = 0;
       userdata.joinedcrew = Date.now();
-      userdata.save();
+      await  userdata.save();
 
       await interaction.reply(`✅ Joined ${crewname}`);
     } else if (option == "claim") {
@@ -474,7 +473,7 @@ module.exports = {
         let amount = item.Item.split(" ")[0];
         userdata.ckeys += Number(amount);
 
-        userdata.save();
+        await   userdata.save();
       } else if (item.Item.endsWith("Drift Keys")) {
         let amount = item.Item.split(" ")[0];
         userdata.dkeys += Number(amount);
@@ -535,7 +534,7 @@ module.exports = {
       }
 
       userdata.crewseasonclaimed += 1
-      userdata.save();
+      await  userdata.save();
 
       interaction.reply(`Claimed ${item.Item}`);
     } else if (option == "create") {
@@ -597,7 +596,7 @@ module.exports = {
       }
       userdata.crewseasonclaimed = 0
       userdata.usercrew = crewobj.name;
-      userdata.save();
+      await  userdata.save();
 
       let embed = new Discord.EmbedBuilder()
         .setTitle(`${crewname}`)
@@ -670,7 +669,8 @@ module.exports = {
           );
           globalModel.save();
           userdata.usercrew = null;
-          userdata.save();
+          userdata.rp = 0
+          await   userdata.save();
           row.components[0].setDisabled();
           row.components[1].setDisabled();
           interaction.editReply({ components: [row] });
@@ -921,7 +921,7 @@ module.exports = {
       );
       globalModel.save();
       utokickdata.usercrew = null;
-      userdata.save();
+      await   userdata.save();
     } else if (option == "delete") {
       let crewname = userdata.usercrew;
       if (!crewname) return await interaction.reply("You are not in a crew!");
@@ -959,7 +959,7 @@ module.exports = {
             let member = crew2[0].members[mem];
 
             let memberdata = await User.findOne({ id: member });
-
+            memberdata.rp = 0
             if (memberdata.usercrew) {
               await User.findOneAndUpdate(
                 {
@@ -992,6 +992,7 @@ module.exports = {
             },
             {}
           );
+          userdata.rp = 0
 
           await  userdata.save();
 
@@ -2050,7 +2051,7 @@ module.exports = {
 
       if (!crewname) return await interaction.reply("You are not in a crew!");
 
-      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.name.toLowerCase());
+      let crew2 = crews.filter((crew) => crew.name.toLowerCase() == crewname.toLowerCase());
       if (!crew2[0]) return await interaction.reply("That crew doesn't exist!");
 
       if (crew2[0].owner.id !== interaction.user.id) return await interaction.reply("You are not the leader of this crew!");

@@ -51,18 +51,11 @@
       "Image": "https://i.ibb.co/vkfr887/ACH-driftking.png"
     },
     "legacy": {
-      "Emote": "<:ach_legacy:1124125405402640536>",
+      "Emote": "<:zero2sixty:966453514425495602>",
       "Task": "Use the bot before June 30th 2023",
       "Name": "Legacy",
       "Reward": 0,
-      "Image": "https://i.ibb.co/0hTDFp9/ach-legacy.png"
-    },
-    "gambling god": {
-      "Emote": "<:achievement_gamble:1192271544899076156>",
-      "Task": "Gamble and win 1000 times",
-      "Name": "Gambling God",
-      "Reward": 0,
-      "Image": "https://i.ibb.co/y42g3dh/achievement-gamble.png"
+      "Image": "https://i.ibb.co/BGjtjCw/achievement-legacy.png"
     },
     "1k miles": {
       "Emote": "<:achievement_1kmiles:1232465637893341184>",

@@ -83,11 +83,21 @@ module.exports = {
       let eventloss = userdata.eventloss || 0
 
       let cars = userdata.cars;
+      let vault = userdata.vault;
       let finalprice = 0;
 
       for (let car in cars) {
         let car2 = cars[car];
         let price = car2.Resale
+        if (price) finalprice += Number(price);
+      }
+      for (let car in vault) {
+        let car2 = vault[car];
+        let carindb = cardb.Cars[car2.Name.toLowerCase()];
+        let price = carindb.Price * 0.75
+        if(price == 0){
+          price = carindb.sellprice * 0.75
+        }
         if (price) finalprice += Number(price);
       }
 
@@ -153,20 +163,29 @@ module.exports = {
 
       ctx.font = "30px Days One";
       ctx.fillStyle = "#ffffff";
+      if(!showcase.Name){
+        showcase = null
+      }
       if(showcase && showcase !== null && showcase !== undefined){
-        let showcasedimg2 = showcase.Image || showcase.Livery || cardb.Cars[showcase.Name.toLowerCase()].Image
+        let findshowcase = userdata.cars.filter((car) => car.ID.toLowerCase() == showcase.ID.toLowerCase())[0]
+        let showcasedimg2 = findshowcase.Image || findshowcase.Livery || cardb.Cars[findshowcase.Name.toLowerCase()].Image
         let showcasedimg = await loadImage(`${showcasedimg2}`)
         ctx.drawImage(showcasedimg, 850, 15, 410, 250);
         ctx.font = "20px Days One";
+        let accel = Math.max(2, findshowcase.Acceleration)
 
-        ctx.fillText(`P: ${showcase.Speed}`, 720, 50);
-        ctx.fillText(`A: ${showcase.Acceleration}s`, 720, 80);
-        ctx.fillText(`W: ${showcase.Weight}`, 720, 110);
-        ctx.fillText(`H: ${showcase.Handling}`, 720, 140);
+        if(findshowcase.Class == "X" || cardb.Cars[findshowcase.Name.toLowerCase()]["0-60"] == 1.5){
+          accel = Math.max(1.5, findshowcase.Acceleration)
+        }
+
+        ctx.fillText(`P: ${findshowcase.Speed}`, 720, 50);
+        ctx.fillText(`A: ${accel}s`, 720, 80);
+        ctx.fillText(`W: ${findshowcase.WeightStat}`, 720, 110);
+        ctx.fillText(`H: ${findshowcase.Handling}`, 720, 140);
 
       }
       else {
-        ctx.fillText("/showcase", 950, 140);
+        ctx.fillText("/profile edit showcase", 950, 140);
 
       }
 

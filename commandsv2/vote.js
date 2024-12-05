@@ -57,7 +57,7 @@ module.exports = {
       );
     embed.setColor(colors.blue);
 
-    userdata.save();
+    await   userdata.save();
 
     await interaction.editReply({ embeds: [embed2] });
   },

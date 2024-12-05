@@ -23,6 +23,9 @@ const {
 
       let cars = userdata.cars;
       let racetime = userdata.racetime
+      let vault = userdata.vault
+
+      let carvaults = cars.length += vault.length
 
       let cararray = []
 
@@ -44,7 +47,7 @@ const {
         .addFields({name: "Race Time", value: `${racetimems}`})
         .addFields({name: "Top Car Speed", value: `${cardata.Emote} ${cardata.Name} with ${bestcarspeed.Speed} speed`})
         .addFields({name: "Top Car Handling", value: `${cardata2.Emote} ${cardata2.Name} with ${bestcarhandling.Handling} handling`})
-        .addFields({name: "Total Cars", value: `${cars.length}`})
+        .addFields({name: "Total Cars", value: `${carvaults}`})
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .setTimestamp()
 

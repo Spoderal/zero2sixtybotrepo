@@ -11,7 +11,6 @@ const { emotes } = require("../common/emotes");
 const { toCurrency, numberWithCommas } = require("../common/utils");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
-const { userGetFromInteraction } = require("../common/user");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const partdb = require("../data/partsdb.json").Parts
 module.exports = {
@@ -178,7 +177,7 @@ module.exports = {
               MaxGas: 10,
             };
             userdata.cars.push(carobj)
-            userdata.save()
+            await  userdata.save()
             let embed2 = new EmbedBuilder()
             .setTitle(`You bought a ${car.Name}`)
             .setDescription(`You bought a ${car.Emote} ${car.Name} for ${toCurrency(car.Price)}`)

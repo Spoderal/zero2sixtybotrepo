@@ -105,7 +105,7 @@ module.exports = {
         userdata.items.push("prestige crate");
       
 
-        userdata.save();
+        await  userdata.save();
         
         let newrank = oldrank + prestigetoadd;
         let embed = new EmbedBuilder()
@@ -167,12 +167,12 @@ module.exports = {
     let oldhandling = carobj.Handling;
 
     carobj.Class = "X";
-    carobj.Speed = oldspeed + (oldspeed * 0.25);
+    carobj.Speed = oldspeed += (oldspeed * 0.25);
     if(carobj.Acceleration > 1.5){
       carobj.Acceleration =  oldacc - 0.5
 
     }
-    carobj.Handling = oldhandling + (oldhandling * 0.25);
+    carobj.Handling = oldhandling += (oldhandling * 0.25);
 
     await User.findOneAndUpdate(
       {
@@ -195,7 +195,7 @@ module.exports = {
 
     userdata.xess -= xessenceneeded;
 
-    userdata.save();
+    await  userdata.save();
 
     await interaction.reply(`Prestiged ${cardb.Cars[carobj.Name.toLowerCase()].Emote} ${carobj.Name} to X Class!`);
 

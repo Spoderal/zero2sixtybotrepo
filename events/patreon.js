@@ -23,11 +23,11 @@ async function patreon(interaction, client) {
   if(userdata){
     if (role == true && userdata.zpass == false) {
       userdata.zpass = true
-      userdata.save()
+      await  userdata.save()
     }
     else if(role == false && userdata.zpass == true) {
       userdata.zpass = false
-      userdata.save()
+      await  userdata.save()
     }
 
     

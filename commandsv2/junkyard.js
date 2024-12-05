@@ -1,22 +1,12 @@
-
-
-const cars = require("../data/cardb.json");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const {
-  ActionRowBuilder,
   EmbedBuilder,
-  ButtonBuilder,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder
 } = require("discord.js");
 const colors = require("../common/colors");
-const { emotes } = require("../common/emotes");
-const { toCurrency, numberWithCommas } = require("../common/utils");
 const lodash = require("lodash");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const ms = require("pretty-ms")
-const Global = require("../schema/global-schema");
 const partdb = require("../data/partsdb.json").Parts
 module.exports = {
   data: new SlashCommandBuilder()
@@ -74,7 +64,7 @@ module.exports = {
             userdata.parts.push(`body`)
             interaction.channel.send(`**TUTORIAL:** Great! We found a part! Since we want this tutorial to go faster, I've given you all the parts you need to restore this classic car. Go ahead and run \`/restore [car id]\`!`)
           }
-          userdata.save()
+          await   userdata.save()
           interaction.reply(`You found a ${partdb[randomrest].Emote} ${partdb[randomrest].Name}!`)
 
 

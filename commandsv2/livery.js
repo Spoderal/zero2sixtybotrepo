@@ -153,7 +153,7 @@ module.exports = {
         .setColor(colors.blue);
 
       userdata.cash -= 500;
-      userdata.save();
+      await   userdata.save();
 
       await interaction.reply({ embeds: [embedapprove] });
     } else if (subcommand == "view") {

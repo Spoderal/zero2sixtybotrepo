@@ -1,7 +1,7 @@
 const Global = require(`../schema/global-schema`);
 const lodash = require("lodash");
 let schedule = require("node-schedule")
-async function updateItemShop() {
+async function updateGas() {
   
 
 
@@ -23,7 +23,7 @@ schedule.scheduleJob({hour: 0, minute: 0}, function(){
 
       let randomAmount = lodash.sample(randomAmounts)
 
-      let increaseOrDecrease = Math.floor(Math.random() * 1);
+      let increaseOrDecrease = lodash.sample([0, 1, 1])
 
       switch(increaseOrDecrease){
         case 0:
@@ -32,7 +32,10 @@ schedule.scheduleJob({hour: 0, minute: 0}, function(){
           break;
 
           case 1:
-            gas = gas -= randomAmount
+            if(gas > 5){
+              gas = gas -= randomAmount
+
+            }
 
             break;
       }
@@ -49,5 +52,5 @@ schedule.scheduleJob({hour: 0, minute: 0}, function(){
 }
 
 module.exports = {
-  updateItemShop,
+  updateGas,
 };

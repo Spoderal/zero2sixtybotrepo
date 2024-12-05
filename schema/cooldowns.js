@@ -21,6 +21,12 @@ const Cooldowns = new mongoose.Schema({
     required: false,
     default: 0,
   },
+  perks:{
+    type: Number,
+    required: false,
+    default: 0,
+  },
+  
   apple:{
     type: Number,
     required: false,

@@ -11,6 +11,7 @@ const {
 } = require("../common/utils");
 const itemdb = require("../data/items.json");
 const { createCanvas, loadImage } = require("canvas");
+const perkdb = require("../data/perksdb.json")
 const brands = require("../data/brands.json");
 const currencies = require("../data/currencies.json");
 
@@ -353,9 +354,17 @@ module.exports = {
       
 
       ctx.font = "bold 35px sans-serif";
-      let acceleration = Math.round(carindb[0].Acceleration * 10) / 10;
+      let acceleration = Math.max(2, carindb[0].Acceleration)
+      if(carindb[0].Class == "X"){
+        acceleration = Math.max(1.5, carindb[0].Acceleration)
+      }
+      if(cars.Cars[carindb[0].Name.toLowerCase()]["0-60"] < 2){
+        acceleration = Math.max(cars.Cars[carindb[0].Name.toLowerCase()]["0-60"], carindb[0].Acceleration)
+
+      }
       let speed = Math.round(carindb[0].Speed);
       let handling = Math.round(carindb[0].Handling);
+      let perks = carindb[0].perks
       
       ctx.fillText(speed, 80, 190);
       ctx.fillText(acceleration, 90, 300);
@@ -363,6 +372,22 @@ module.exports = {
       ctx.fillText(carindb[0].WeightStat, 75, 550);
 
       ctx.font = "regular 35px sans-serif";
+
+      if(perks && perks.length > 0){
+        let perk1 = perks[0]
+        let perk2 = perks[1]
+
+        
+        let perk1indb = perkdb.Perks[perk1.name.toLowerCase()]
+        let perk2indb = perkdb.Perks[perk2.name.toLowerCase()]
+        
+        let perk1image = await loadImage(perk1indb.image)
+        let perk2image = await loadImage(perk2indb.image)
+
+        ctx.drawImage(perk1image, 600, 650, 70, 70)
+        ctx.drawImage(perk2image, 675, 650, 70, 70)
+
+      }
 
 
 
@@ -436,6 +461,11 @@ module.exports = {
         .setCustomId("parts")
         .setLabel("Parts")
         .setEmoji("⚙️")
+        .setStyle("Secondary"),
+        new ButtonBuilder()
+        .setCustomId("perks")
+        .setLabel("Perks")
+        .setEmoji("💫")
         .setStyle("Secondary")
 
       )
@@ -496,6 +526,16 @@ module.exports = {
 
           await interaction.editReply({embeds: [embed]})
 
+        }
+        else if(i.customId == "perks"){
+          let perks = carindb[0].Perks || ["No perks"]
+          let embed = new Discord.EmbedBuilder()
+          .setTitle(`Your ${carindb[0].Emote} ${carindb[0].Name}'s perks`)
+          .setDescription(`**Perks**\n${perks.join('\n')}`)
+          .setColor(colors.blue)
+
+
+          await interaction.editReply({embeds: [embed], components: [row]})
         }
      
       })

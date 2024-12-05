@@ -287,7 +287,7 @@ module.exports = {
           };
           currency = `${emotes.pvptokens} ${numberWithCommas(car.Tokens)}`
           userdata.cars.push(carobj)
-          userdata.save()
+          await   userdata.save()
           let embed = new EmbedBuilder()
           .setTitle(`You bought a ${car.Name}`)
           .setDescription(`You bought a ${car.Emote} ${car.Name} for ${currency}`)

@@ -16,9 +16,6 @@ module.exports = {
   once: false,
   async execute(interaction) {
     let command;
-    let options = interaction.options;
-    let user = interaction.user;
-    let guild = interaction.guild;
     let timeout2 = 5000;
 
 
@@ -48,7 +45,7 @@ module.exports = {
             if (zpasstimer !== null && timeoutmonth - (Date.now() - zpasstimer) > 0) {
 
               userdata.zpass = false
-              userdata.save()
+              await  userdata.save()
             }
           }
         }

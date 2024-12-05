@@ -1,7 +1,7 @@
 
 
 const {
-  EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder
+  EmbedBuilder, ActionRowBuilder, ButtonBuilder
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const colors = require("../common/colors");
@@ -21,6 +21,9 @@ const achievementdb = require("../data/achievements.json")
  const outfits = require("../data/characters.json")
  const { tipFooterRandom } = require("../common/tips");
  const partdb = require("../data/partsdb.json")
+ const {dorace, dodrag, dotrack, dooffroad, dospace, dorally} = require("../common/races")
+ const {perk_nitrous, perk_rocket} = require("../common/perks")
+ const perkdb = require("../data/perksdb.json")
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -148,6 +151,29 @@ option
     { name: `Tier 6`, value: 6 },
     { name: `Tier 7`, value: 7 },
     { name: `Tier 8`, value: 8 }
+  )
+  )
+.addStringOption((option) =>
+option
+.setName("car")
+.setDescription("The car ID to race with")
+.setRequired(true)
+)
+)
+.addSubcommand((subcommand) => subcommand
+.setName("rally")
+.setDescription("Start a rally race")
+.addNumberOption((option) =>
+option
+  .setName("tier")
+  .setDescription("The tier to race")
+  .setRequired(true)
+  .setMaxValue(4)
+  .setChoices(
+    { name: `Tier 1`, value: 1 },
+    { name: `Tier 2`, value: 2 },
+    { name: `Tier 3`, value: 3 },
+    { name: `Tier 4`, value: 4 }
   )
   )
 .addStringOption((option) =>
@@ -293,215 +319,8 @@ option
     let raceoption = interaction.options.getSubcommand();
     let playerrace
     let opponentrace
-    const dorace = function(speed, acceleration, handling, weight, surface, tires) {
-      let sspeed = surface.Speed
-      let shandling = surface.Handling
-      if(tires && tires !== null && tires !== undefined){
-        let tiresindb = partdb.Parts[tires.toLowerCase()]
-
-        if(tiresindb && tiresindb.Name.includes("allsurfacetires") && surface.Name.toLowerCase() !== "asphalt"){
-          sspeed += 0.2
-          shandling += 0.2
-        }
-        if(tiresindb && tiresindb.Name.includes("slicks") && surface.Name.toLowerCase() !== "asphalt"){
-          sspeed -= 0.2
-          shandling -= 0.2
-        }
-        if(tiresindb && tiresindb.Name.includes("offroadtires") && surface.Name.toLowerCase() == "dirt" || surface.Name.toLowerCase() == "snow" || surface.Name.toLowerCase() == "ice"){
-          sspeed -= 0.2
-          shandling -= 0.2
-        }
-        if(tiresindb && tiresindb.Name.includes("offroadtires") && surface.Name.toLowerCase() !== "dirt" || surface.Name.toLowerCase() !== "snow" || surface.Name.toLowerCase() !== "ice"){
-          sspeed += 0.2
-          shandling += 0.2
-        }
-       else {
-        sspeed += 0
-        shandling += 0
-       }
-      }
-
-      // Define the importance of each factor
-      var speedImportance = 0.30;
-      var accelerationImportance = 0.25;
-      var handlingImportance = 0.20;
-      var weightImportance = 0.25;
-      let surfacespeed = sspeed
-      let surfacehandling = shandling
-  
-
-  
-      var normalizedSpeed = speed * surfacespeed
-      var normalizedAcceleration = acceleration  // Lower acceleration is better
-      var normalizedHandling = handling * surfacehandling
-      var normalizedWeight = weight / 100  // Lower weight is better
-  
-      // Calculate the final score
-      var score = (speedImportance * normalizedSpeed +
-                   accelerationImportance * normalizedAcceleration +
-                   handlingImportance * normalizedHandling -
-                   weightImportance - normalizedWeight);
-  
-      return score;
-  }
-  const dospace = function(speed, acceleration, handling, weight) {
-
-    // Define the importance of each factor
-    var speedImportance = 0.30;
-    var accelerationImportance = 0.10;
-    var handlingImportance = 0.60;
-    var weightImportance = 0;
-
-
-
-    var normalizedSpeed = speed
-    var normalizedHandling = handling 
-    var normalizedAcceleration = acceleration  // Lower acceleration is better
-    var normalizedWeight = weight / 100  // Lower weight is better
-
-    // Calculate the final score
-    var score = (speedImportance * normalizedSpeed +
-                 accelerationImportance * normalizedAcceleration +
-                 handlingImportance * normalizedHandling -
-                 weightImportance - normalizedWeight);
-
-    return score;
-}
-
-  const dotrack = function(speed, acceleration, handling, weight, tires) {
-
-    if(tires.toLowerCase().includes("tracktires")){
-     handling += 100
-    }
- 
-  
-    // Define the importance of each factor
-    var speedImportance = 0.10;
-    var accelerationImportance = 0.20;
-    var handlingImportance = 0.40;
-    var weightImportance = 0.30;
-
-
-
-    var normalizedSpeed = speed
-    var normalizedHandling = handling 
-    var normalizedAcceleration = acceleration  // Lower acceleration is better
-    var normalizedWeight = weight / 100  // Lower weight is better
-
-    // Calculate the final score
-    var score = (speedImportance * normalizedSpeed +
-                 accelerationImportance * normalizedAcceleration +
-                 handlingImportance * normalizedHandling -
-                 weightImportance - normalizedWeight);
-
-    return score;
-}
-const dooffroad = function(speed, acceleration, handling, weight, surface, tires) {
-  let tiresindb = partdb.Parts[tires]
-  let sspeed = surface.Speed
-  let shandling = surface.Handling
-  if(tires && tires !== null && tires !== undefined){
-
-  if(tiresindb && tiresindb.Name.includes("allsurfacetires") && surface.Name.toLowerCase() !== "asphalt"){
-    sspeed += 0.25
-    shandling += 0.25
-  }
-  if(tiresindb && tiresindb.Name.includes("slicks") && surface.Name.toLowerCase() == "asphalt"){
-    sspeed += 0.2
-    shandling += 0.2
-  }
-  if(tiresindb && tiresindb.Name.includes("slicks") && surface.Name.toLowerCase() !== "asphalt"){
-    sspeed -= 0.2
-    shandling -= 0.2
-  }
-  if(tiresindb && tiresindb.Name.includes("offroadtires")){
-    sspeed += 0.4
-    shandling += 0.4
-  }
- else {
-  sspeed += 0
-  shandling += 0
- }}
-  // Define the importance of each factor
-  var speedImportance = 0.10;
-  var accelerationImportance = 0.10;
-  var handlingImportance = 0.30;
-  var weightImportance = 0.50;
-  let surfacespeed = sspeed
-  let surfacehandling = shandling
-
-
-
-  var normalizedSpeed = speed * surfacespeed
-  var normalizedHandling = handling * surfacehandling 
-
-
-
-  var normalizedAcceleration = acceleration  // Lower acceleration is better
-
-  var normalizedWeight = weight / 100  // Lower weight is better
-
-  // Calculate the final score
-  var score = (speedImportance * normalizedSpeed +
-               accelerationImportance * normalizedAcceleration +
-               handlingImportance * normalizedHandling +
-               weightImportance + normalizedWeight);
-
-  console.log(score)
-
-  return score;
-}
-const dodrag = function(speed, acceleration, handling, weight, surface, tires) {
-  let tiresindb = partdb.Parts[tires]
-  let sspeed = surface.Speed
-  let shandling = surface.Handling
-  if(tires && tires !== null && tires !== undefined){
-
-  if(tiresindb && tiresindb.Name.includes("allsurfacetires") && surface.Name.toLowerCase() !== "asphalt"){
-    sspeed += 0.1
-    shandling += 0.1
-  }
-  if(tiresindb && tiresindb.Name.includes("slicks") && surface.Name.toLowerCase() == "asphalt"){
-    sspeed += 0.5
-    shandling += 0.5
-  }
-  if(tiresindb && tiresindb.Name.includes("slicks") && surface.Name.toLowerCase() !== "asphalt"){
-    sspeed += 0.2
-    shandling += 0.2
-  }
-  if(tiresindb && tiresindb.Name.includes("offroadtires")){
-    sspeed -= 0.2
-    shandling -= 0.2
-  }
- else {
-  sspeed += 0
-  shandling += 0
- }
-}
-  var speedImportance = 0.30;
-  var accelerationImportance = 0.50;
-  var handlingImportance = 0.05;
-  var weightImportance = 0.15;
-  let surfacespeed = sspeed
-  let surfacehandling = shandling
-
-  
-
-  var normalizedSpeed = speed * surfacespeed
-  var normalizedHandling = surfacehandling 
-
-  var normalizedAcceleration = acceleration  // Lower acceleration is better
-  var normalizedWeight = weight / 100  // Lower weight is better
-
-  // Calculate the final score
-  var score = (speedImportance * normalizedSpeed +
-    accelerationImportance * normalizedAcceleration +
-    handlingImportance * normalizedHandling -
-    weightImportance * normalizedWeight);
-
-  return score;
-}
-let surfacerandom = lodash.sample(["wet", "dirt", "snow", "asphalt", "ice"])
+    
+let surfacerandom = lodash.sample(["asphalt"]);
 let surface = racedb.Surface[surfacerandom];
     for (let car1 in cardb.Cars) {
       let caroj = cardb.Cars[car1];
@@ -532,7 +351,6 @@ let surface = racedb.Surface[surfacerandom];
         carsfiltered.push(car);
       }
     }
-
     let filteredcar = carsfiltered.filter(
       (car) => car.ID.toLowerCase() == idtoselect
     );
@@ -549,14 +367,74 @@ let surface = racedb.Surface[surfacerandom];
     }
     if(cardb.Cars[selected.Name.toLowerCase()].Motorcycle && raceoption !== "motorcycle") return interaction.reply("You cant use a motorcycle for this race!")
     if (raceoption == "motorcycle" &&  !cardb.Cars[selected.Name.toLowerCase()].Motorcycle || raceoption == "motorcycle" && cardb.Cars[selected.Name.toLowerCase()].Motorcycle == null || raceoption == "motorcycle" && cardb.Cars[selected.Name.toLowerCase()].Motorcycle == undefined ) return interaction.reply("You need a motorcycle for this race!");
+    let speed = selected.Speed
+    let acceleration = Math.max(2, selected.Acceleration)
+    if(selected.Class == "X"){
+      acceleration = Math.max(1.5, selected.Acceleration)
+    }
+    if(cardb.Cars[selected.Name.toLowerCase()]["0-60"] < 2){
+      acceleration = Math.max(cardb.Cars[selected.Name.toLowerCase()]["0-60"], selected.Acceleration)
+
+    }
+    let handling = selected.Handling
+    let weight = selected.WeightStat
+
+    let perks = selected.perks || []
+    let perktext = []
+    let perksarray = []
+
+    if(perks.length > 0){
+      
+      for(let perk in perks){
+        let perkname = perks[perk].name.toLowerCase()
+
+        perksarray.push(perkname)
+        
+      }
+
+      if(perksarray.includes("nitro boost 1") || perksarray.includes("nitro boost 2") || perksarray.includes("nitro boost 3") || perksarray.includes("nitro boost 4") || perksarray.includes("nitro boost 5")){
+        let perkname = perks.find((perk) => perk.name.toLowerCase().includes("nitro boost"))
+        perktext.push(`${perkdb.Perks[perkname.name.toLowerCase()].emote} Nitrous Active\n`)
+        speed = perk_nitrous(speed, perkname.name.toLowerCase())
+      }
+
+      if(perksarray.includes("rocket scientist") && selected.engine == "rocket engine" || perksarray.includes("rocket scientist") && selected.engine == "super rocket engine" || perksarray.includes("rocket scientist") && selected.engine == "epic rocket engine"){
+        perktext.push(`${perkdb.Perks["rocket scientist"].emote} Rocket Scientist Active\n`)
+        speed = perk_rocket(speed)
+      }
+
+      if(perksarray.includes("curse of 1000 suns")){
+        let chance = randomRange(1, 100)
+        if(chance > 50){
+          speed = speed += 1000
+          handling -= handling * 0.75
+          perktext.push(`${perkdb.Perks["curse of 1000 suns"].emote} Curse of 1000 Suns Active\n`)
+        }
+      }
+
+      if(perksarray.includes("asphalt angel")){
+        surface = racedb.Surface["asphalt"]
+        perktext.push(`${perkdb.Perks["asphalt angel"].emote} Asphalt Angel Active\n`)
+      }
+      if(perksarray.includes("asphalt devil") && surface == racedb.Surface["asphalt"]){
+        perktext.push(`${perkdb.Perks["asphalt devil"].emote} Asphalt Devil Active\n`)
+      }
+      if(perksarray.includes("quark drive") && selected.engine.toLowerCase() == "ev" || perksarray.includes("quark drive") && cardb.Cars[selected.Name.toLowerCase()].Engine == "ev"){
+        speed = speed * 1.3
+        weight -= weight * 0.3
+        perktext.push(`${perkdb.Perks["quark drive"].emote} Quark Drive Active\n`)
+      }
+
+      if(perksarray.includes("banana peel") && selected.Name.toLowerCase == "peel p50" || perksarray.includes("banana peel") && cardb.Cars[selected.Name.toLowerCase()].Name == "1964 peel p50"){
+        speed += 1000
+        perktext.push(`${perkdb.Perks["banana peel"].emote} Banana Peel Active\n`)
+      }
+ 
+    }
 
     if(raceoption == "dyno"){
       let surface = interaction.options.getString("surface")
       let surfaceindb = racedb.Surface[surface]
-      let speed = selected.Speed
-      let acceleration = selected.Acceleration
-      let handling = selected.Handling
-      let weight = selected.WeightStat
       let image = selected.Image || selected.Livery || cardb.Cars[selected.Name.toLowerCase()].Image
       let tires = selected.tires || "t1tires"
 
@@ -574,7 +452,7 @@ let surface = racedb.Surface[surfacerandom];
       .setImage(`${image}`)
       .setFields(
         {name: "Power", value: `${selected.Speed} HP`, inline: true},
-        {name: "Acceleration", value: `${selected.Acceleration}s`, inline: true},
+        {name: "Acceleration", value: `${acceleration}s`, inline: true},
         {name: "Weight", value: `${selected.WeightStat} lbs`, inline: true},
         {name: "Handling", value: `${selected.Handling}`, inline: true},
       )
@@ -706,17 +584,20 @@ let surface = racedb.Surface[surfacerandom];
     cooldowndata.racing = Date.now();
     cooldowndata.is_racing = Date.now();
     await cooldowndata.save();
-    let msg =  await interaction.reply({content: `Revving engines...`, fetchReply: true})
+     await interaction.reply({content: `Revving engines...`, fetchReply: true})
 
     let image = selected.Image || cardb.Cars[selected.Name.toLowerCase()].Image
     if(raceoption == "track"){
       cooldowndata.racing = Date.now()
       await cooldowndata.save()
       let newtrack = trackdb[interaction.options.getString("track")]
-      
+      if(perktext == [] || perktext.length == 0){
+        perktext = ["No Perks Active"]
+      }
       let trackembed = new EmbedBuilder()
       .setTitle(`Racing on ${newtrack.Name}`)
       .setImage(newtrack.Image)
+      .setDescription(`${perktext.join('\n')}`)
       .setColor(colors.blue)
               
         
@@ -749,8 +630,12 @@ let surface = racedb.Surface[surfacerandom];
           let oppcount = newtrack.Racers
           trackembed.setImage(newtrack.Image)
           trackembed.data.fields = []
+          let acceleration = Math.max(2, selected.Acceleration)
+          if(selected.Class == "X" || cardb.Cars[selected.Name.toLowerCase()]["0-60"] < 2){
+            acceleration = Math.max(cardb.Cars[selected.Name.toLowerCase()]["0-60"], selected.Acceleration)
+          }
           let racers = []
-          trackembed.addFields( {name: "Your car", value: `${selected.Emote} ${selected.Name}\n${emotes.speed}${selected.Speed}\n${emotes.acceleration}${selected.Acceleration}\n${emotes.handling}${selected.Handling}\n${emotes.weight}${selected.WeightStat}`, inline: true})
+          trackembed.addFields( {name: "Your car", value: `${selected.Emote} ${selected.Name}\n${emotes.speed}${selected.Speed}\n${emotes.acceleration}${acceleration}\n${emotes.handling}${selected.Handling}\n${emotes.weight}${selected.WeightStat}`, inline: true})
            for (let i = 0; i < oppcount; i++) {
             cashwinnings += 250
             let carstopick = carsarray.filter((car) => car.Class == newtrack.Class && car.Handling >= newtrack.Handling)
@@ -782,7 +667,7 @@ let surface = racedb.Surface[surfacerandom];
           await interaction.editReply({embeds: [trackembed], components: [], fetchReply: true})
           let tires = selected.tires || "t1tires"
 
-          let formulauser = dotrack(selected.Speed, selected.Acceleration, selected.Handling, selected.WeightStat, tires)
+          let formulauser = dotrack(selected.Speed, acceleration, selected.Handling, selected.WeightStat, tires)
          let racersformulas = []
           racersformulas.push({User: interaction.user.username, Score: formulauser, Image: `${image}`})
           for(let car in racers){
@@ -849,9 +734,7 @@ let surface = racedb.Surface[surfacerandom];
 
             if(winner.User == interaction.user.username){
               let rewards = []
-              if(isWeekend()){
-                cashwinnings = cashwinnings * 2
-              }
+
               let randomChance = randomRange(1, 100)
               if(newtrack.Name == "Spa-Francorchamps" && randomChance <= 50){
                 let amount = 5
@@ -941,9 +824,19 @@ let surface = racedb.Surface[surfacerandom];
               let xpwon = 10 * oppcount;
               console.log(`XP won: ${xpwon}`)
               if(isWeekend()){
-                xpwon = xpwon * 2
-                cashwinnings = cashwinnings * 2
+                let mult = 2
+                if(perksarray.includes("weekend warrior")){
+                  mult = 3
+                  perktext.push(`${perkdb.Perks["weekend warrior"].emote} Weekend Warrior Active\n`)
+                }
+          
                 rewards.push("Double Cash & XP Weekend")
+
+                xpwon = xpwon * mult
+                cashwinnings = cashwinnings * mult
+              }
+              if(userdata.location.toLowerCase() == "germany"){
+                cashwinnings = cashwinnings * 2
               }
               if(userdata.items.includes("fake id")){
                 xpwon = xpwon * 2
@@ -999,6 +892,9 @@ let surface = racedb.Surface[surfacerandom];
                 cashwinnings += 5000
     
               }
+
+       
+
               console.log(`after ${cashwinnings}`)
               let skill = userdata.skill
               let requiredxp = 100 * skill
@@ -1086,7 +982,7 @@ let surface = racedb.Surface[surfacerandom];
             }
             
             userdata.racetime += 5000
-            userdata.save()
+            await   userdata.save()
 
             await interaction.editReply({embeds: [trackembed]})
           }, 5000);
@@ -1240,6 +1136,26 @@ let surface = racedb.Surface[surfacerandom];
     } else if (tieroption > 5 && raceoption == "offroad")
     return interaction.editReply("The max tier for this race is 5!");
 
+
+    if (tieroption == 1 && raceoption == "rally") {
+      cartofilter = carsarray.filter(
+        (car) => car.Handling >= 700 && car.Weight > 2000
+      );
+    } else if (tieroption == 2 && raceoption == "rally") {
+      cartofilter = carsarray.filter(
+        (car) => car.Handling >= 800 && car.Weight > 3000
+      );
+    } else if (tieroption == 3 && raceoption == "rally") {
+      cartofilter = carsarray.filter(
+        (car) => car.Handling >= 900 && car.Weight > 3000
+      );
+    } else if (tieroption == 4 && raceoption == "rally") {
+      cartofilter = carsarray.filter(
+        (car) => car.Handling >= 1000 && car.Weight > 4000
+      );
+    } else if (tieroption > 4 && raceoption == "rally")
+    return interaction.editReply("The max tier for this race is 4!");
+
     if (tieroption == 1 && raceoption == "motorcycle") {
       cartofilter = carsarray.filter(
         (car) => car.Motorcycle && car.Speed <= 150
@@ -1265,23 +1181,71 @@ let surface = racedb.Surface[surfacerandom];
 
       let speed2 = car2.Speed
       let handling2 = car2.Handling
+      let weight2 = car2.Weight
+      let acceleration2 = car2["0-60"]
       let prestige = userdata.prestige
   
       let winner;
     let rewards = [];
+
     if (raceoption == "street" ) {
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
 
-   
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
 
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
+      
+          speed2 -= (speed2 * 0.2)
+          speed += (speed2 * 0.2)
+          handling2 -= (handling2 * 0.2)
+          handling += (handling2 * 0.2)
+          perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+        
+      }
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
+      if(perksarray.includes("reverse psychology")){
+        let chance = randomRange(1, 100)
 
+        if(chance <= 10){
+          speed2 = speed
+          handling2 = handling
+          weight2 = weight
+          acceleration2 = selected.Acceleration
+          speed = car2.Speed
+          handling = car2.Handling
+          weight = car2.Weight
+          acceleration = car2["0-60"]
+          perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+        }
+      
+    }
 
+    
+    if(perksarray.includes("haters energy")){
+      let chance = randomRange(1, 100)
+      if(chance <= 10){
+        speed2 = (speed2 * 0.25)
+        handling2 = (handling2 * 0.25)
+        weight2 = (weight2 * 0.25)
+        perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
+
+      }
+    
+  }
       let tires = selected.tires || "t1tires"
        playerrace = dorace(speed, acceleration, handling, weight, surface, tires);
        opponentrace = dorace(speed2, acceleration2, handling2, weight2, surface, "t1tires");
@@ -1294,28 +1258,124 @@ let surface = racedb.Surface[surfacerandom];
 
     } 
     else if(raceoption == "spacerace"){
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
 
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
+
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
+      
+        speed2 -= (speed2 * 0.2)
+        speed += (speed2 * 0.2)
+        handling2 -= (handling2 * 0.2)
+        handling += (handling2 * 0.2)
+        perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+      
+    }
+    if(perksarray.includes("reverse psychology")){
+      
+      let chance = randomRange(1, 100)
+
+      if(chance <= 10){
+        speed2 = speed
+        handling2 = handling
+        weight2 = weight
+        acceleration2 = selected.Acceleration
+        speed = car2.Speed
+        handling = car2.Handling
+        weight = car2.Weight
+        acceleration = car2["0-60"]
+        perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+      }
+    
+  }
+  if(perksarray.includes("haters energy")){
+    let chance = randomRange(1, 100)
+    if(chance <= 10){
+      speed2 = (speed2 * 0.25)
+      handling2 = (handling2 * 0.25)
+      weight2 = (weight2 * 0.25)
+      perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
+
+    }
+  
+}
        playerrace = dospace(speed, acceleration, handling, weight);
        opponentrace = dospace(speed2, acceleration2, handling2, weight2);
 
       winner = playerrace > opponentrace;
     }
     else if (raceoption == "offroad") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
 
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
+
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
+      
+        speed2 -= (speed2 * 0.2)
+        speed += (speed2 * 0.2)
+        handling2 -= (handling2 * 0.2)
+        handling += (handling2 * 0.2)
+        perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+      
+    }
+    if(perksarray.includes("reverse psychology")){
+      
+      let chance = randomRange(1, 100)
+
+        if(chance <= 10){
+          speed2 = speed
+          handling2 = handling
+          weight2 = weight
+          acceleration2 = selected.Acceleration
+          speed = car2.Speed
+          handling = car2.Handling
+          weight = car2.Weight
+          acceleration = car2["0-60"]
+          perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+        }
+    
+  }
+  if(perksarray.includes("haters energy")){
+    let chance = randomRange(1, 100)
+    if(chance <= 10){
+      speed2 = (speed2 * 0.25)
+      handling2 = (handling2 * 0.25)
+      weight2 = (weight2 * 0.25)
+      perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
+
+    }
+  
+}
       let handscore = handling
       let handscore2 = handling2
 
@@ -1352,16 +1412,157 @@ let surface = racedb.Surface[surfacerandom];
       winner = playerrace > opponentrace;
 
 
-    } else if (raceoption == "drag") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
+    } 
+    else if (raceoption == "rally") {
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
 
+      weight2 = car2.Weight;
+      acceleration2 = car2["0-60"];
+
+     if(perksarray.includes("critical mass")){
+       let chance = randomRange(1, 100)
+       if(chance <= 10){
+         weight2 = weight2 += 1500
+         perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+       }
+     }
+     if(perksarray.includes("flare gun")){
+       let chance = randomRange(1, 100)
+       if(chance <= 20){
+         speed2 = (speed2 * 0.5)
+         perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+       }
+     }
+     if(perksarray.includes("life force")){
+     
+       speed2 -= (speed2 * 0.2)
+       speed += (speed2 * 0.2)
+       handling2 -= (handling2 * 0.2)
+       handling += (handling2 * 0.2)
+       perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+     
+   }
+   if(perksarray.includes("reverse psychology")){
+     
+     let chance = randomRange(1, 100)
+
+       if(chance <= 10){
+         speed2 = speed
+         handling2 = handling
+         weight2 = weight
+         acceleration2 = selected.Acceleration
+         speed = car2.Speed
+         handling = car2.Handling
+         weight = car2.Weight
+         acceleration = car2["0-60"]
+         perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+       }
+   
+ }
+ if(perksarray.includes("haters energy")){
+   let chance = randomRange(1, 100)
+   if(chance <= 10){
+     speed2 = (speed2 * 0.25)
+     handling2 = (handling2 * 0.25)
+     weight2 = (weight2 * 0.25)
+     perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
+
+   }
+ 
+}
+     let handscore = handling
+     let handscore2 = handling2
+
+     let speedscore = speed 
+     let speedscore2 = speed2 
+
+     if (
+       cardb.Cars[selected.Name.toLowerCase()].Drivetrain &&
+       cardb.Cars[selected.Name.toLowerCase()].Drivetrain == "AWD"
+     ) {
+       speedscore += 100;
+     } else {
+       speedscore -= 100;
+     }
+
+     if (
+       cardb.Cars[car2.Name.toLowerCase()].Drivetrain &&
+       cardb.Cars[car2.Name.toLowerCase()].Drivetrain == "AWD"
+     ) {
+       speedscore += 100;
+     } else {
+       speedscore -= 10;
+     }
+     let tires = selected.tires || "t1tires"
+      playerrace = dorally(speedscore, acceleration, weight, handscore, surface, tires);
+      opponentrace = dorally(
+       speedscore2,
+       acceleration2,
+       weight2,
+       handscore2,surface,
+       "t1tires"
+     );
+
+     winner = playerrace > opponentrace;
+
+
+   } 
+    else if (raceoption == "drag") {
+
+
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
       
+        speed2 -= (speed2 * 0.2)
+        speed += (speed2 * 0.2)
+        handling2 -= (handling2 * 0.2)
+        handling += (handling2 * 0.2)
+        perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+      
+    }
+    if(perksarray.includes("reverse psychology")){
+      
+      let chance = randomRange(1, 100)
+
+      if(chance <= 10){
+        speed2 = speed
+        handling2 = handling
+        weight2 = weight
+        acceleration2 = selected.Acceleration
+        speed = car2.Speed
+        handling = car2.Handling
+        weight = car2.Weight
+        acceleration = car2["0-60"]
+        perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+      }
+    
+  }
+  if(perksarray.includes("haters energy")){
+    let chance = randomRange(1, 100)
+    if(chance <= 10){
+      speed2 = (speed2 * 0.25)
+      handling2 = (handling2 * 0.25)
+      weight2 = (weight2 * 0.25)
+      perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
+
+    }
+  
+}
       let tires = selected.tires || "t1tires"
        playerrace = dodrag(speed, acceleration, handling, weight, surface, tires);
        opponentrace = dodrag(speed2, acceleration2, handling2, weight2, surface, tires);
@@ -1369,13 +1570,10 @@ let surface = racedb.Surface[surfacerandom];
       winner = playerrace > opponentrace;
 
     } else if (raceoption == "track") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
+
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
 
       let tires = selected.tires || "t1tires"
        playerrace = dotrack(speed, acceleration, handling, weight, surface, tires);
@@ -1384,13 +1582,10 @@ let surface = racedb.Surface[surfacerandom];
       winner = playerrace > opponentrace;
 
     } else if (raceoption == "trackraceevent") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
+
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
 
     
 
@@ -1403,13 +1598,9 @@ let surface = racedb.Surface[surfacerandom];
     }
     //test
     else if (raceoption == "motorcycle") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
 
        playerrace = domotor(speed, acceleration, handling, weight, surface, "t1tires");
        opponentrace = domotor(speed2, acceleration2, handling2, weight2, surface, "t1tires");
@@ -1422,17 +1613,61 @@ let surface = racedb.Surface[surfacerandom];
 
       if (!cardb.Cars[selected.Name.toLowerCase()].Series)  return interaction.channel.send("You need to use a series car!");
 
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
+       weight2 = car2.Weight;
+       speed2 = car2.Speed;
+       acceleration2 = car2["0-60"];
+       handling2 = car2.Handling;
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
+      
+        speed2 -= (speed2 * 0.2)
+        speed += (speed2 * 0.2)
+        handling2 -= (handling2 * 0.2)
+        handling += (handling2 * 0.2)
+        perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+      
+    }
+    if(perksarray.includes("reverse psychology")){
+      
+      let chance = randomRange(1, 100)
 
-      let weight2 = car2.Weight;
-      let speed2 = car2.Speed;
-      let acceleration2 = car2["0-60"];
-      let handling2 = car2.Handling;
+        if(chance <= 10){
+          speed2 = speed
+          handling2 = handling
+          weight2 = weight
+          acceleration2 = selected.Acceleration
+          speed = car2.Speed
+          handling = car2.Handling
+          weight = car2.Weight
+          acceleration = car2["0-60"]
+          perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+        }
+    
+  }
+  if(perksarray.includes("haters energy")){
+    let chance = randomRange(1, 100)
+    if(chance <= 10){
+      speed2 = (speed2 * 0.25)
+      handling2 = (handling2 * 0.25)
+      weight2 = (weight2 * 0.25)
+      perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
 
+    }
   
+}
       let tires = selected.tires || "t1tires"
 
        playerrace = dorace(speed, acceleration, handling, weight, surface, tires);
@@ -1442,14 +1677,49 @@ let surface = racedb.Surface[surfacerandom];
 
 
     } else if (raceoption == "crosscountry") {
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
+      
+        speed2 -= (speed2 * 0.2)
+        speed += (speed2 * 0.2)
+        handling2 -= (handling2 * 0.2)
+        handling += (handling2 * 0.2)
+        perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+      
+    }
+    if(perksarray.includes("reverse psychology")){
+      
+      let chance = randomRange(1, 100)
 
+      if(chance <= 10){
+        speed2 = speed
+        handling2 = handling
+        weight2 = weight
+        acceleration2 = selected.Acceleration
+        speed = car2.Speed
+        handling = car2.Handling
+        weight = car2.Weight
+        acceleration = car2["0-60"]
+        perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+      }
+    
+  }
       let tires = selected.tires || "t1tires"
        playerrace = dorace(speed, acceleration, handling, weight, surface, tires);
        opponentrace = dorace(speed2, acceleration2, handling2, weight2, surface, "t1tires");
@@ -1464,15 +1734,60 @@ let surface = racedb.Surface[surfacerandom];
       )
         return interaction.editReply("You need to use a barn find!");
 
-      let weight = selected.WeightStat;
-      let speed = selected.Speed;
-      let acceleration = selected.Acceleration;
-      let handling = selected.Handling;
 
-      let weight2 = car2.Weight;
-      let acceleration2 = car2["0-60"];
+       weight2 = car2.Weight;
+       acceleration2 = car2["0-60"];
+      if(perksarray.includes("flare gun")){
+        let chance = randomRange(1, 100)
+        if(chance <= 20){
+          speed2 = (speed2 * 0.5)
+          perktext.push(`${perkdb.Perks["flare gun"].emote} Flare Gun Active\n`)
+        }
+      }
+      if(perksarray.includes("critical mass")){
+        let chance = randomRange(1, 100)
+        if(chance <= 10){
+          weight2 = weight2 += 1500
+          perktext.push(`${perkdb.Perks["critical mass"].emote} Critical Mass Active\n`)
+        }
+      }
+      if(perksarray.includes("life force")){
+      
+        speed2 -= (speed2 * 0.2)
+        speed += (speed2 * 0.2)
+        handling2 -= (handling2 * 0.2)
+        handling += (handling2 * 0.2)
+        perktext.push(`${perkdb.Perks["life force"].emote} Life Force Active\n`)
+      
+    }
+    if(perksarray.includes("reverse psychology")){
+      
+      let chance = randomRange(1, 100)
 
+      if(chance <= 10){
+        speed2 = speed
+        handling2 = handling
+        weight2 = weight
+        acceleration2 = selected.Acceleration
+        speed = car2.Speed
+        handling = car2.Handling
+        weight = car2.Weight
+        acceleration = car2["0-60"]
+        perktext.push(`${perkdb.Perks["reverse psychology"].emote} Reverse Psychology Active\n`)
+      }
+    
+  }
+  if(perksarray.includes("haters energy")){
+    let chance = randomRange(1, 100)
+    if(chance <= 10){
+      speed2 = (speed2 * 0.25)
+      handling2 = (handling2 * 0.25)
+      weight2 = (weight2 * 0.25)
+      perktext.push(`${perkdb.Perks["haters energy"].emote} Haters Energy Active\n`)
 
+    }
+  
+}
 let tires = selected.tires || "t1tires"
      playerrace = dorace(speed, acceleration, handling, weight, surface, tires);
      opponentrace = dorace(speed2, acceleration2, handling2, weight2, surface, "t1tires");
@@ -1492,7 +1807,7 @@ let tires = selected.tires || "t1tires"
       cashwon = cashwon * 1.5
     }
     cashwon = cashwon * 2
-    let rpwon = 10;
+    let rpwon = randomRange(1, 10);
     if (prestige) {
       let prestigebonus = prestige * 0.1;
 
@@ -1509,6 +1824,19 @@ let tires = selected.tires || "t1tires"
     let speedpercent = surface.Speed * 100;
     let handlingpercent = surface.Handling * 100;
 
+    let surfacehandl = Math.floor(handling * surface.Handling)
+
+    let surfacehandl2 = Math.floor(handling2 * surface.Handling)
+
+    let surfaces = Math.floor(speed * surface.Speed)
+
+    let surfaces2 = Math.floor(speed2 * surface.Speed)
+    if(perktext == [] || perktext.length == 0 || perktext == undefined){
+      perktext = ["No Perks Active"]
+    }
+    console.log(perktext)
+
+
 
     let embed = new EmbedBuilder()
       .setTitle(`Racing tier ${tieroption} ${raceindb.Name} on ${surface.Emote} ${surface.Name}`)
@@ -1516,21 +1844,22 @@ let tires = selected.tires || "t1tires"
       .setThumbnail(`${car2.Image}`)
       .setColor(colors.blue)
       .setFooter(tipFooterRandom)
+      .setDescription(`${perktext.join('\n')}`)
       .setFields(
         {
           name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} Your ${
             selected.Emote
           } ${selected.Name}`,
-          value: `${emotes.speed} HP: ${(Math.floor(selected.Speed * surface.Speed))} (${speedpercent}%)\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Handling)}(${handlingpercent}%)\n${emotes.weight} Weight: ${selected.WeightStat}`,
+          value: `${emotes.speed} HP: ${(surfaces)} (${speedpercent}%)\n${emotes.acceleration} Acceleration: ${acceleration}s\n${emotes.handling} Handling: ${surfacehandl}(${handlingpercent}%)\n${emotes.weight} Weight: ${weight}`,
           inline: true,
         },
         {
           name: `${car2.Emote} ${car2.Name}`,
-          value: `${emotes.speed} HP: ${Math.floor(speed2 * surface.Speed)}\n${
+          value: `${emotes.speed} HP: ${surfaces2}\n${
             emotes.acceleration
-          } Acceleration: ${car2[`0-60`]}s\n${emotes.handling} Handling: ${
-            Math.floor(handling2 * surface.Handling)
-          }\n${emotes.weight} Weight: ${car2.Weight}`,
+          } Acceleration: ${acceleration2}s\n${emotes.handling} Handling: ${
+            surfacehandl2
+          }\n${emotes.weight} Weight: ${weight2}`,
           inline: true,
         }
       )
@@ -1541,14 +1870,14 @@ let tires = selected.tires || "t1tires"
             name: `${outfits.Helmets[userpfp.toLowerCase()].Emote} Your ${
               selected.Emote
             } ${selected.Name}`,
-            value: `${emotes.speed} HP: ${(Math.floor(selected.Speed))}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling)}\n${emotes.weight} Weight: 0 (You're in space)`,
+            value: `${emotes.speed} HP: ${(Math.floor(selected.Speed))}\n${emotes.acceleration} Acceleration: ${acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling)}\n${emotes.weight} Weight: 0 (You're in space)`,
             inline: true,
           },
           {
             name: `${car2.Emote} ${car2.Name}`,
             value: `${emotes.speed} HP: ${Math.floor(speed2)}\n${
               emotes.acceleration
-            } Acceleration: ${car2[`0-60`]}s\n${emotes.handling} Handling: ${
+            } Acceleration: ${acceleration2}s\n${emotes.handling} Handling: ${
               Math.floor(handling2)
             }\n${emotes.weight} Weight: 0 (You're in space)`,
             inline: true,
@@ -1891,8 +2220,8 @@ let tires = selected.tires || "t1tires"
        
         }
 
-        if(raceoption == "offroad"){
-          notorietywon = Number(tieroption) * 50
+        if(raceoption == "rally"){
+          notorietywon = Number(tieroption) * 25
           let houses = userdata.houses
           let house1 = houses.filter((house) => house.Name.toLowerCase() == "casa sul lago")
           if(house1[0]){
@@ -1914,23 +2243,21 @@ let tires = selected.tires || "t1tires"
             }
           }
 
-          if (userdata.using.includes("applepie")) {
-            let itemcooldown = cooldowndata.apple;
+          if (userdata.using.includes("apple pie")) {
+            let itemcooldown = cooldowndata.applepie;
 
             let timeout = 120000;
             if (
               itemcooldown !== null &&
               timeout - (Date.now() - itemcooldown) < 0
             ) {
-              userdata.using.pull("applepie");
+              userdata.using.pull("apple pie");
               userdata.update();
               interaction.channel.send("Your apple pie ran out!");
             } else {
               notorietywon = notorietywon * 5;
             }
           }
-
-
           rewards.push(`${emotes.notoriety} ${notorietywon}`);
 
           userdata.notoriety += notorietywon;
@@ -2357,18 +2684,18 @@ let tires = selected.tires || "t1tires"
 
         if(raceoption == "spacerace"){
           if(car2.Name == "2019 Apollo IE"){
-            rewards.push(`${cardb.Cars["2019apolloie"].Emote} 2019 Apollo IE Won!`)
+            rewards.push(`${cardb.Cars["2019 apollo ie"].Emote} 2019 Apollo IE Won!`)
            
             let carobj = {
-              ID: cardb.Cars["2019apolloie"].alias,
+              ID: cardb.Cars["2019 apollo ie"].alias,
               Name: "2019 Apollo IE",
-              Speed: cardb.Cars["2019apolloie"].Speed,
-              Acceleration: cardb.Cars["2019apolloie"]["0-60"],
-              Handling: cardb.Cars["2019apolloie"].Handling,
-              Emote: cardb.Cars["2019apolloie"].Emote,
-              Livery: cardb.Cars["2019apolloie"].Image,
+              Speed: cardb.Cars["2019 apollo ie"].Speed,
+              Acceleration: cardb.Cars["2019 apollo ie"]["0-60"],
+              Handling: cardb.Cars["2019 apollo ie"].Handling,
+              Emote: cardb.Cars["2019 apollo ie"].Emote,
+              Livery: cardb.Cars["2019 apollo ie"].Image,
               Miles: 0,
-              WeightStat: cardb.Cars["2019apolloie"].Weight,
+              WeightStat: cardb.Cars["2019 apollo ie"].Weight,
               Gas: 10,
               MaxGas: 10,
             };
@@ -2410,6 +2737,10 @@ let tires = selected.tires || "t1tires"
           cashwon = cashwon * 2
         }
 
+        if(perksarray.includes("asphalt devil") && surface.Name == "Asphalt"){
+          cashwon = cashwon * 2
+        }
+
         rewards.push(`${emotes.cash} ${toCurrency(cashwon)}`);
         rewards.push(`${emotes.xp} ${xpwon}`);
         
@@ -2422,6 +2753,21 @@ let tires = selected.tires || "t1tires"
             userdata.skill += 1;
             userdata.xp = 0;
             rewards.push(`${emotes.rank} x1 Skill Level Up!`);
+          }
+
+          if(raceoption == "junk"){
+            let chance = randomRange(1, 100)
+            if(chance <= 5){
+              let t4array = []
+              for(let i in partdb.Parts){
+                if(partdb.Parts[i].Tier == 4){
+                  t4array.push(partdb.Parts[i])
+                }
+              }
+              let t4part = lodash.sample(t4array)
+              rewards.push(`${t4part.Emote} ${t4part.Name}`)
+              userdata.parts.push(t4part.Name.toLowerCase())
+            }
           }
         
 
@@ -2535,8 +2881,8 @@ let tires = selected.tires || "t1tires"
           userdata.trackwins += 1
         }
 
-        embed.data.fields[0].value = `${emotes.speed} HP: ${Math.floor(selected.Speed * surface.Speed)}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Handling)}\n${emotes.weight} Weight: ${selected.WeightStat}\n${emotes.OVR} Score: ${Math.round(playerrace)}`
-        embed.data.fields[1].value = `${emotes.speed} HP: ${Math.floor(speed2) * surface.Speed}\n${emotes.acceleration} Acceleration: ${car2["0-60"]}s\n${emotes.handling} Handling: ${Math.floor(handling2 * surface.Handling)}\n${emotes.weight} Weight: ${car2.Weight}\n${emotes.OVR} Score: ${Math.round(opponentrace)}`;
+        embed.data.fields[0].value += `\n${emotes.OVR} Score: ${Math.round(playerrace)}`;
+        embed.data.fields[1].value += `\n${emotes.OVR} Score: ${Math.round(opponentrace)}`;
 
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} on ${surface.Emote} ${surface.Name} won!`);
       
@@ -2553,9 +2899,9 @@ let tires = selected.tires || "t1tires"
         if(raceindb.Name == "Track Race"){
           userdata.trackloss += 1
         }
-        embed.data.fields[0].value = `${emotes.speed} HP: ${selected.Speed}\n${emotes.acceleration} Acceleration: ${selected.Acceleration}s\n${emotes.handling} Handling: ${Math.floor(selected.Handling * surface.Handling)}\n${emotes.weight} Weight: ${selected.WeightStat}\n${emotes.OVR} Score: ${Math.round(playerrace)}`
-        embed.data.fields[1].value = `${emotes.speed} HP: ${Math.floor(speed2 * surface.Handling)}\n${emotes.acceleration} Acceleration: ${car2["0-60"]}s\n${emotes.handling} Handling: ${Math.floor(handling2 * surface.Handling)}\n${emotes.weight} Weight: ${car2.Weight}\n${emotes.OVR} Score: ${Math.round(opponentrace)}`;
         embed.setTitle(`Tier ${tieroption} ${raceindb.Name} on ${surface.Emote} ${surface.Name} lost!`);
+        embed.data.fields[0].value += `\n${emotes.OVR} Score: ${Math.round(playerrace)}`;
+        embed.data.fields[1].value += `\n${emotes.OVR} Score: ${Math.round(opponentrace)}`;
       }
 
       
@@ -2660,7 +3006,7 @@ let tires = selected.tires || "t1tires"
 
 
       userdata.racetime += 5000
-      userdata.save();
+      await   userdata.save();
 
 
 

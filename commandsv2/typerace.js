@@ -4,12 +4,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const Cooldowns = require("../schema/cooldowns");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
-const { emotes } = require("../common/emotes");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const Global = require("../schema/global-schema");
-const cardb = require("../data/cardb.json");
-const { toCurrency } = require("../common/utils");
-const achievementdb = require("../data/achievements.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -36,7 +31,6 @@ module.exports = {
       (await Cooldowns.findOne({ id: interaction.user.id })) ||
       new Cooldowns({ id: interaction.user.id });
 
-      let typecooldown = cooldowndata.typecooldown;
       let timeout = 60000;
 
         if (cooldowndata.typecooldown !== null &&
@@ -96,7 +90,7 @@ module.exports = {
         userdata.typespeed2 = time
         
       }
-      userdata.save()
+      await   userdata.save()
   
     }
     else if(subcommand == "leaderboard"){

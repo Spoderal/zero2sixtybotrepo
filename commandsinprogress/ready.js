@@ -14,9 +14,6 @@ const User = require("../schema/profile-schema");
 const Topgg = require("@top-gg/sdk");
 const gold = require("../gold");
 const {itemshop} = require("./shopdata");
-const { updateCrew } = require("./crews/updateCrew");
-const { newseason } = require("./crews/newseason");
-const { season } = require("./season");
 const {isWeekend} = require("../common/utils")
 
 
@@ -81,7 +78,7 @@ module.exports = {
           if (!userdata) return;
           userdata.hasvoted = true;
           userdata.votetimer = Date.now();
-          userdata.save();
+          await   userdata.save();
         })
       );
       console.log("Registered endpoint: /vote");

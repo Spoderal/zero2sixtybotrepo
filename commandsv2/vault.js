@@ -172,7 +172,7 @@ module.exports = {
 
         userdata.cars.push(filt[0])
 
-        userdata.save()
+        await  userdata.save()
 
         await interaction.reply(`✅`)
     }
@@ -202,7 +202,7 @@ module.exports = {
 
         userdata.vault.push(filt[0])
 
-        userdata.save()
+        await  userdata.save()
 
         await interaction.reply(`✅`)
     }
@@ -231,7 +231,7 @@ module.exports = {
         userdata.cash += final
         userdata.vault = []
 
-        userdata.save()
+        await  userdata.save()
 
         await interaction.reply(`✅ Sold all your cars in your vault for ${toCurrency(final)}`)
     }

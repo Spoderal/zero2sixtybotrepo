@@ -160,7 +160,7 @@ module.exports = {
         }
       );
 
-      userdata.save();
+      await   userdata.save();
 
       let embed = new Discord.EmbedBuilder()
         .setTitle("Selected ✅")
@@ -216,7 +216,7 @@ module.exports = {
       );
 
       userdata.markModified("cars");
-      userdata.save();
+      await    userdata.save();
 
       await interaction.reply({ embeds: [embed] });
     } else if (option == "tag") {
@@ -292,7 +292,7 @@ module.exports = {
       );
 
       userdata.markModified("cars");
-      userdata.save();
+      await    userdata.save();
 
       await interaction.reply({ embeds: [embed] });
     } else if (option == "untag") {
@@ -368,7 +368,7 @@ module.exports = {
       );
 
       userdata.markModified("cars");
-      userdata.save();
+      await   userdata.save();
 
       await interaction.reply({ embeds: [embed] });
     } else if (option == "unfavorite") {
@@ -416,7 +416,7 @@ module.exports = {
       );
 
       userdata.markModified("cars");
-      userdata.save();
+      await   userdata.save();
 
       await interaction.reply({ embeds: [embed] });
     }

@@ -55,15 +55,25 @@ module.exports = {
           console.log(carindb)
           if(!carindb) return interaction.reply("That's not a car! Make sure to specify a car ID, or car name")
           let ogcar = cardb[carindb.Name.toLowerCase()]
-          let speed = carindb.Speed
-          let accel = carindb.Acceleration
-          let handling = carindb.Handling
-          let weight = carindb.WeightStat
+          let speed = ogcar.Speed
+          let accel = ogcar["0-60"]
+          let handling = ogcar.Handling
+          let weight = ogcar.Weight
           let ogspeed = carindb.Speed
-          let ogacc = carindb.Acceleration
+          let ogacc = Math.max(2, carindb.Acceleration)
+          if(carindb.Class == "X"){
+            ogacc = Math.max(1.5, carindb.Acceleration)
+          }
+          if(cardb[carindb.Name.toLowerCase()]["0-60"] < 2){
+            ogacc = Math.max(cardb[carindb.Name.toLowerCase()]["0-60"], carindb.Acceleration)
+    
+          }
           let oghandling = carindb.Handling
           let ogweight = carindb.WeightStat
-          
+          if(carindb.Class == "X"){
+            speed += (speed * 0.25)
+            handling += (handling * 0.25)
+          }
       let exhaust = carindb.exhaust || "stock exhaust"
       let intake = carindb.intake || "stock intake"
       let tires = carindb.tires || "stock tires"
@@ -83,138 +93,61 @@ module.exports = {
       let brakes = carindb.brakes || "stock brakes"
 
           if(exhaust !== "stock exhaust"){
-            speed -= partdb.Parts[exhaust.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[exhaust.toLowerCase()].Acceleration)
-            if(partdb.Parts[exhaust.toLowerCase()].Handling){
-            handling -= partdb.Parts[exhaust.toLowerCase()].Handling
-            }
+      
             await userdata.parts.push(exhaust.toLowerCase())
           }
           if(turbo  !== "no turbo"){
-            speed -= partdb.Parts[turbo.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[turbo.toLowerCase()].Acceleration)
-            if(partdb.Parts[turbo.toLowerCase()].Handling){
-              handling -= partdb.Parts[turbo.toLowerCase()].Handling
-              }
-              if(partdb.Parts[turbo.toLowerCase()].DecreaseHandling){
-                handling += partdb.Parts[turbo.toLowerCase()].DecreaseHandling
-                }
-              
+
               await userdata.parts.push(turbo)
           }
           if(intake  !== "stock intake"){
-            speed -= partdb.Parts[intake.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[intake.toLowerCase()].Acceleration)
-            if(partdb.Parts[intake.toLowerCase()].Handling){
-              handling -= partdb.Parts[intake.toLowerCase()].Handling
-              }
+        
               await userdata.parts.push(intake)
           }
       
           if(tires !== "stock tires"){
-            speed -= partdb.Parts[tires.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[tires.toLowerCase()].Acceleration)
-            if(partdb.Parts[tires.toLowerCase()].Handling){
-              handling -= partdb.Parts[tires.toLowerCase()].Handling
-              }
-              if(partdb.Parts[tires.toLowerCase()].DecreaseHandling){
-                handling += partdb.Parts[tires.toLowerCase()].DecreaseHandling
-                }
-                if(partdb.Parts[tires.toLowerCase()].Weight){
-                  handling -= partdb.Parts[tires.toLowerCase()].Weight
-                  }
+       
               await  userdata.parts.push(carindb.tires)
           }
           if(suspension !== "stock suspension"){
-            speed -= partdb.Parts[suspension.toLowerCase()].Power
-            speed += parseFloat(partdb.Parts[suspension.toLowerCase()].Acceleration)
-            if(partdb.Parts[suspension.toLowerCase()].Handling){
-              handling -= partdb.Parts[suspension.toLowerCase()].Handling
-              }
+        
               await userdata.parts.push(suspension)
           }
           if(gearbox !== "stock gearbox"){
-            speed -= partdb.Parts[gearbox.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[gearbox.toLowerCase()].Acceleration)
-            if(partdb.Parts[gearbox.toLowerCase()].Handling){
-              handling -= partdb.Parts[gearbox.toLowerCase()].Handling
-              }
+          
               await  userdata.parts.push(gearbox)
           }
           if(clutch !== "stock clutch"){
-            speed -= partdb.Parts[clutch.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[clutch.toLowerCase()].Acceleration)
-            if(partdb.Parts[clutch.toLowerCase()].Handling){
-              handling -= partdb.Parts[clutch.toLowerCase()].Handling
-              }
-              await    userdata.parts.push(clutch)
+       
+              await  userdata.parts.push(clutch)
           }
           if(intercooler !== "no intercooler"){
-            speed -= partdb.Parts[intercooler.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[intercooler.toLowerCase()].Acceleration)
-            if(partdb.Parts[intercooler.toLowerCase()].Handling){
-              handling -= partdb.Parts[intercooler.toLowerCase()].Handling
-              }
+       
             userdata.parts.push(intercooler)
           }
           if(ecu !== "stock ecu"){
-            speed -= partdb.Parts[ecu.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[ecu.toLowerCase()].Acceleration)
-            if(partdb.Parts[ecu.toLowerCase()].Handling){
-              handling -= partdb.Parts[ecu.toLowerCase()].Handling
-              }
+           
               await userdata.parts.push(ecu)
           }
           if(spoiler !== "no spoiler"){
-            speed -= partdb.Parts[spoiler.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[spoiler.toLowerCase()].Acceleration)
-            if(partdb.Parts[spoiler.toLowerCase()].Handling){
-              handling -= partdb.Parts[spoiler.toLowerCase()].Handling
-              }
-              await   userdata.parts.push(spoiler)
+           
+              await userdata.parts.push(spoiler)
           }
           if(brakes !== "stock brakes"){
-            speed -= partdb.Parts[brakes.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[brakes.toLowerCase()].Acceleration)
-            userdata.parts.push(brakes)
-            if(partdb.Parts[tires.toLowerCase()].Handling){
-              handling -= partdb.Parts[tires.toLowerCase()].Handling
-              }
+       
+            await userdata.parts.push(brakes)
+         
           }
           if(springs !== "stock springs"){
-            speed -= partdb.Parts[springs.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[springs.toLowerCase()].Acceleration)
-            if(partdb.Parts[springs.toLowerCase()].Handling){
-              handling -= partdb.Parts[springs.toLowerCase()].Handling
-              }
-              if(partdb.Parts[springs.toLowerCase()].DecreaseHandling){
-                handling += partdb.Parts[springs.toLowerCase()].DecreaseHandling
-                }
               await   userdata.parts.push(springs)
           }
           if(crankshaft !== "stock crankshaft"){
-            speed -= partdb.Parts[crankshaft.toLowerCase()].Power
-            accel += parseFloat(partdb.Parts[crankshaft.toLowerCase()].Acceleration)
-            weight += partdb.Parts[crankshaft.toLowerCase()].RemoveWeight
-            if(partdb.Parts[crankshaft.toLowerCase()].Handling){
-              handling -= partdb.Parts[crankshaft.toLowerCase()].Handling
-              }
-              if(partdb.Parts[crankshaft.toLowerCase()].DecreaseHandling){
-                handling += partdb.Parts[crankshaft.toLowerCase()].DecreaseHandling
-                }
+      
               await   userdata.parts.push(crankshaft)
           }
  
           if(weightreduction.toLowerCase() !== "no weight"){
-            console.log("weight")
-            if(partdb.Parts[weightreduction.toLowerCase()].RemoveWeight){
-              console.log("remove weight")
-            weight += partdb.Parts[weightreduction.toLowerCase()].RemoveWeight
-            }
-            else if(partdb.Parts[weightreduction.toLowerCase()].Weight){
-              weight -= partdb.Parts[weightreduction.toLowerCase()].Weight
-
-            }
+       
             await  userdata.parts.push(weightreduction)
           }
 
@@ -230,7 +163,10 @@ module.exports = {
 
             }
           }
-
+          if(engine !== ogcar.Engine){
+            speed = speed += partdb.Parts[engine.toLowerCase()].Power
+            accel = accel -= partdb.Parts[engine.toLowerCase()].Acceleration
+          }
           console.log(sellprice)
           
           await User.findOneAndUpdate(
@@ -272,14 +208,14 @@ module.exports = {
             let carimage = carindb.Image || carindb.Livery || ogcar.Image;
           let embed = new EmbedBuilder()
           .setTitle(`Removed all parts on ${carindb.Name}`)
-          .setDescription(`${emotes.speed} ${ogspeed} -> ${speed}\n${emotes.handling} ${oghandling} -> ${handling}\n${emotes.weight} ${ogweight} -> ${weight}\n${emotes.acceleration} ${Math.floor(ogacc * 100) / 100} -> ${Math.floor(accel * 100) / 100}`)
+          .setDescription(`${emotes.speed} ${ogspeed} -> ${speed}\n${emotes.handling} ${oghandling} -> ${handling}\n${emotes.weight} ${ogweight} -> ${weight}\n${emotes.acceleration} ${ogacc} -> ${accel}`)
           .setColor(colors.blue)
           .setImage(`${carimage}`)
           .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)
       
           await interaction.reply({embeds: [embed]})
 
-          userdata.save()
+          await  userdata.save()
           return
 
     }else {
@@ -327,8 +263,11 @@ module.exports = {
         }
       
       }
-      let acc = selected[0].Acceleration
-      let newacc = acc -= partindb.Acceleration
+      let acc = Math.max(2, selected[0].Acceleration)
+
+      if(selected[0].Class == "X" || cardb[selected[0].Name.toLowerCase()]["0-60"] == 1.5){
+        acc = Math.max(1.5, selected[0].Acceleration)
+      }
       
       if(partindb.Handling > 0){
      
@@ -344,13 +283,10 @@ module.exports = {
         selected[0].Acceleration += (Math.floor(partindb.Acceleration * 100) / 100)
       }
       if(partindb.RemoveAcceleration > 0 && cardb[selected[0].Name.toLowerCase()]["0-60"] > 2){
-        if(newacc < 2){
-          selected[0].Acceleration = 2
-        } 
-        else {
+     
           selected[0].Acceleration -= (Math.floor(partindb.RemoveAcceleration * 100) / 100)
   
-        }
+        
       }
       if(partindb.RemovePower > 0){
         selected[0].Speed += Number(partindb.RemovePower)
@@ -396,12 +332,20 @@ module.exports = {
       );
   
   
-      userdata.save()
-  
+      await   userdata.save()
+      let newaccel = Math.max(2, selected[0].Acceleration)
+
+      if(selected[0].Class == "X"){
+        newaccel = Math.max(1.5, selected[0].Acceleration)
+      }
+      if(cardb[selected[0].Name.toLowerCase()]["0-60"] < 2){
+        newaccel = Math.max(cardb[selected[0].Name.toLowerCase()]["0-60"], selected[0].Acceleration)
+
+      }
       
       let embed = new EmbedBuilder()
       .setTitle(`Removed ${partindb.Emote} ${partindb.Name}`)
-      .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${Math.floor(caracc * 100) / 100} -> ${Math.floor(selected[0].Acceleration * 100) / 100}`)
+      .setDescription(`${emotes.speed} ${carspeed} -> ${selected[0].Speed}\n${emotes.handling} ${carhandling} -> ${selected[0].Handling}\n${emotes.weight} ${carweight} -> ${selected[0].WeightStat}\n${emotes.acceleration} ${acc} -> ${newaccel}`)
       .setColor(colors.blue)
       .setImage(`${carimage}`)
       .setThumbnail(`https://i.ibb.co/56HPHdq/upgradeicon.png`)

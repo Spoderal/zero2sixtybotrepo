@@ -539,7 +539,7 @@
     },
     "t1nitro": {
       "Name": "T1Nitro",
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "Power": 0,
       "sellprice": 1500,
@@ -891,7 +891,7 @@
       "Name": "T4TrackTires",
       "Power": "0",
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 1000,
       "Price": 0,
       "Emote": "<:t4tracktires:1012068670937239572>",
@@ -908,7 +908,7 @@
       "Name": "T5TrackTires",
       "Power": "0",
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 562,
       "Price": 0,
       "Emote": "<:t5tracktires:1012068669976752148>",
@@ -926,7 +926,7 @@
       "Name": "TXTrackTires",
       "Power": "0",
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 562,
       "Price": 0,
       "Emote": "<:txtracktires:1012068674871496785>",
@@ -943,7 +943,7 @@
       "Name": "T1DriftSprings",
       "Power": 0,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:driftsprings:1014009322482716803>",
@@ -962,7 +962,7 @@
       "Name": "T1RaceSprings",
       "Power": 5,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:racesprings:1014009323531280414>",
@@ -980,7 +980,7 @@
       "Name": "T1RaceSprings",
       "Power": 5,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:racesprings:1014009323531280414>",
@@ -998,7 +998,7 @@
       "Name": "T1RaceSprings",
       "Power": 5,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:racesprings:1014009323531280414>",
@@ -1034,7 +1034,7 @@
       "Name": "T1Intake",
       "Power": 1,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 700,
       "Price": 2000,
       "Emote": "<:part_t1intake:1101659642095992882>",
@@ -1050,7 +1050,7 @@
       "Name": "Loan Intake",
       "Power": 5,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:part_t1intake:1101659642095992882>",
@@ -1331,7 +1331,7 @@
       "Name": "Rotary",
       "Power": 100,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 100,
       "Price": 0,
       "Emote": "<:enginerestored:941546331808333864>",
@@ -1347,7 +1347,7 @@
     "j1exhaust": {
       "Name": "J1Exhaust",
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "Power": "0",
       "sellprice": 1,
       "Price": 0,
@@ -1363,7 +1363,7 @@
     },
     "j1tires": {
       "Name": "J1Tires",
-      "Acceleration": "0",
+      
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 1,
@@ -1381,7 +1381,7 @@
     "j1intake": {
       "Name": "J1Intake",
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "Power": "0",
       "sellprice": 1,
       "Price": 0,
@@ -1398,7 +1398,7 @@
     "j1suspension": {
       "Name": "J1Suspension",
       "Power": "0",
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "sellprice": 1,
       "Price": 0,
@@ -1412,7 +1412,7 @@
     "j1gearbox": {
       "Name": "J1Gearbox",
       "Power": "0",
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "sellprice": 1,
       "Price": 0,
@@ -1429,7 +1429,7 @@
     "j1clutch": {
       "Name": "J1Clutch",
       "Power": "0",
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "sellprice": 1,
       "Price": 0,
@@ -1446,7 +1446,7 @@
     "body": {
       "Name": "Body",
       "Power": "0",
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "sellprice": 1125,
       "Price": 0,
@@ -1464,7 +1464,7 @@
       "Name": "V4",
       "Power": 50,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 425,
       "Price": 0,
       "Emote": "<:engine_v4:1222632152726896793>",
@@ -1480,7 +1480,7 @@
       "Name": "V6",
       "Power": 100,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "sellprice": 425,
       "Price": 0,
       "Emote": "<:engine_v6:1191488058864959558>",
@@ -2292,7 +2292,7 @@
       "Name": "T1RallyTires",
       "Power": "0",
       "AddedOffRoad": 2,
-      "Acceleration": "0",
+      
       "sellprice": 3750,
       "Price": 0,
       "Emote": "<:tires1:932046342489006080>",
@@ -2308,7 +2308,7 @@
       "Name": "T2RallyTires",
       "Power": "0",
       "AddedOffRoad": 3,
-      "Acceleration": "0",
+      
       "sellprice": 5025,
       "Price": 0,
       "Emote": "<:tires2:932046341650124882>",
@@ -2324,7 +2324,7 @@
       "Name": "T3RallyTires",
       "Power": "0",
       "AddedOffRoad": 5,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "Price": 0,
       "Emote": "<:tires3:932046342442864650>",
@@ -2335,6 +2335,38 @@
       "Type": "tires",
       "DecreasedSpeed": "0",
       "Handling": 25
+    },
+    "t4rallytires": {
+      "Name": "T4RallyTires",
+      "Power": "0",
+      "AddedOffRoad": 5,
+      
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:part_t4tires:1101042349125148782>",
+      "Tier": "4",
+      "AddedDrift": "0",
+      "DecreasedDrift": "3",
+      "RemoveAcceleration": "0",
+      "Type": "tires",
+      "DecreasedSpeed": "0",
+      "Handling": 35
+    },
+    "t5rallytires": {
+      "Name": "T5RallyTires",
+      "Power": "0",
+      "AddedOffRoad": 5,
+      
+      "sellprice": 0,
+      "Price": 0,
+      "Emote": "<:part_t5tires:1101042350773514311>",
+      "Tier": "5",
+      "AddedDrift": "0",
+      "DecreasedDrift": "3",
+      "RemoveAcceleration": "0",
+      "Type": "tires",
+      "DecreasedSpeed": "0",
+      "Handling": 50
     },
     "t1spacetires": {
       "Name": "T1SpaceTires",
@@ -2359,7 +2391,7 @@
       "DriftScore": 5,
       "AddedSnow": 0,
       "Power": "0",
-      "Acceleration": "0",
+      
       "sellprice": 1500,
       "Tread": 100,
       "Price": 4500,
@@ -2374,7 +2406,7 @@
     },
     "t2drifttires": {
       "Name": "T2DriftTires",
-      "Acceleration": "0",
+      
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 3750,
@@ -2395,7 +2427,7 @@
     "t3drifttires": {
       "Name": "T3DriftTires",
       "RemovePower": 3,
-      "Acceleration": "0",
+      
       "Power": "0",
       "Tread": 300,
       "AddedSnow": 0,
@@ -2413,7 +2445,7 @@
     "t4drifttires": {
       "Name": "T4DriftTires",
       "RemovePower": 2,
-      "Acceleration": "0",
+      
       "Power": "0",
       "Tread": 300,
       "AddedSnow": 0,
@@ -2432,7 +2464,7 @@
     "t5drifttires": {
       "Name": "T5DriftTires",
       "RemovePower": 2,
-      "Acceleration": "0",
+      
       "Power": "0",
       "Tread": 300,
       "AddedSnow": 0,
@@ -2451,7 +2483,7 @@
     "t1driftspoiler": {
       "Name": "T1DriftSpoiler",
       "RemovePower": 2,
-      "Acceleration": "0",
+      
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 3750,
@@ -2469,7 +2501,7 @@
     "t2driftspoiler": {
       "Name": "T2DriftSpoiler",
       "RemovePower": 2,
-      "Acceleration": "0",
+      
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 3750,
@@ -2487,7 +2519,7 @@
     "t3driftspoiler": {
       "Name": "T3DriftSpoiler",
       "RemovePower": 2,
-      "Acceleration": "0",
+      
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 3750,
@@ -2505,7 +2537,7 @@
     "bm1drifttires": {
       "Name": "BM1DriftTires",
       "RemovePower": 0,
-      "Acceleration": "0",
+      
       "Power": "0",
       "Tread": 400,
       "AddedSnow": 0,
@@ -2542,7 +2574,7 @@
     "bm1driftsuspension": {
       "Name": "BM1DriftSuspension",
       "RemovePower": 0,
-      "Acceleration": "0",
+      
       "Power": "0",
       "DriftScore": 15,
       "AddedSnow": 0,
@@ -2579,7 +2611,7 @@
     "t1offroadsuspension": {
       "Name": "T1OffroadSuspension",
       "Power": 0,
-      "Acceleration": "0",
+      
       "sellprice": 3187,
       "AddedOffRoad": 3,
       "Price": 10000,
@@ -2597,7 +2629,7 @@
     "t2offroadsuspension": {
       "Name": "T2OffroadSuspension",
       "Power": 0,
-      "Acceleration": "0",
+      
       "sellprice": 5250,
       "AddedOffRoad": 5,
       "Price": 15000,
@@ -2615,7 +2647,7 @@
     "t3offroadsuspension": {
       "Name": "T3OffroadSuspension",
       "Power": 0,
-      "Acceleration": "0",
+      
       "sellprice": 0,
       "AddedOffRoad": 7,
       "Price": 25000,
@@ -2848,7 +2880,7 @@
 
     "wintertires": {
       "Name": "WinterTires",
-      "Acceleration": "0",
+      
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 3750,
@@ -2864,7 +2896,7 @@
     },
     "t1wintertires": {
       "Name": "T1WinterTires",
-      "Acceleration": "0",
+      
       "AddedSnow": 5,
       "sellprice": 1875,
       "Price": 0,
@@ -2880,7 +2912,7 @@
     },
     "t2wintertires": {
       "Name": "T2WinterTires",
-      "Acceleration": "0",
+      
       "AddedSnow": 10,
       "sellprice": 3750,
       "Price": 0,
@@ -2896,7 +2928,7 @@
     },
     "t3wintertires": {
       "Name": "T3WinterTires",
-      "Acceleration": "0",
+      
       "AddedSnow": 10,
       "sellprice": 3750,
       "Price": 0,
@@ -2912,7 +2944,7 @@
     },
     "t4wintertires": {
       "Name": "T4WinterTires",
-      "Acceleration": "0",
+      
       "AddedSnow": 10,
       "sellprice": 3750,
       "Price": 0,
@@ -2929,7 +2961,7 @@
     },
     "t5wintertires": {
       "Name": "T5WinterTires",
-      "Acceleration": "0",
+      
       "AddedSnow": 10,
       "sellprice": 3750,
       "Price": 0,
@@ -2946,7 +2978,6 @@
 
     "t1winterweight": {
       "Name": "T1WinterWeight",
-      "Acceleration": "0",
       "Power": "0",
       "AddedSnow": 15,
       "sellprice": 5625,
@@ -2961,7 +2992,6 @@
     },
     "t1driftsuspension": {
       "Name": "T1DriftSuspension",
-      "Acceleration": "0",
       "Power": "0",
       "AddedSnow": 0,
       "sellprice": 3000,
@@ -2978,7 +3008,6 @@
     },
     "t2driftsuspension": {
       "Name": "T2DriftSuspension",
-      "Acceleration": "0",
       "Power": "0",
       "sellprice": 3000,
       "AddedSnow": 0,
@@ -2997,7 +3026,6 @@
     },
     "t3driftsuspension": {
       "Name": "T3DriftSuspension",
-      "Acceleration": "0",
       "Power": "0",
       "sellprice": 3000,
       "AddedSnow": 0,
@@ -3016,7 +3044,6 @@
     },
     "t4driftsuspension": {
       "Name": "T4DriftSuspension",
-      "Acceleration": "0",
       "Power": "0",
       "sellprice": 3000,
       "AddedSnow": 0,
@@ -3037,7 +3064,6 @@
     },
     "t5driftsuspension": {
       "Name": "T5DriftSuspension",
-      "Acceleration": "0",
       "Power": "0",
       "sellprice": 3000,
       "AddedSnow": 0,
@@ -3465,7 +3491,7 @@
       "AddedSnow": 0,
       "sellprice": 3000,
       "Price": 4000,
-      "Acceleration": "0",
+      
       "Emote": "<:t1dspoiler:1079950255157694545>",
       "Tier": "1",
       "AddedDrift": "0",
@@ -3478,7 +3504,7 @@
     "t2spoiler": {
       "Name": "T2Spoiler",
       "Power": 1,
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "Handling": 10,
       "sellprice": 5250,
@@ -3495,7 +3521,7 @@
     "t3spoiler": {
       "Name": "T3Spoiler",
       "Power": 2,
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "Handling": 15,
       "sellprice": 5250,
@@ -3512,7 +3538,7 @@
     "t4spoiler": {
       "Name": "T4Spoiler",
       "Power": 3,
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "Handling": 20,
       "sellprice": 5250,
@@ -3530,7 +3556,7 @@
     "t5spoiler": {
       "Name": "T5Spoiler",
       "Power": 3,
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "Handling": 25,
       "sellprice": 5250,
@@ -3547,7 +3573,7 @@
     "bm1spoiler": {
       "Name": "BM1Spoiler",
       "Power": 4,
-      "Acceleration": "0",
+      
       "AddedSnow": 0,
       "Handling": 35,
       "sellprice": 5250,
@@ -3617,7 +3643,7 @@
       "Power": "0",
       "sellprice": 7500,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "Price": 0,
       "Emote": "<:batteryicon:953575541041160212>",
       "Tier": "1",
@@ -3633,7 +3659,7 @@
       "Power": "0",
       "sellprice": 11250,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "Price": 0,
       "Emote": "<:batteryicon:953575541041160212>",
       "Tier": "2",
@@ -3649,7 +3675,7 @@
       "Power": "0",
       "sellprice": 0,
       "AddedSnow": 0,
-      "Acceleration": "0",
+      
       "Price": 0,
       "Emote": "<:batteryicon:953575541041160212>",
       "Tier": "3",

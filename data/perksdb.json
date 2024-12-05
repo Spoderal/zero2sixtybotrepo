@@ -1,0 +1,131 @@
+{
+    "Perks":{
+        "curse of 1000 suns":{
+            "name":"Curse of 1000 Suns",
+            "description":"Your car has a 50% chance to gain 1000 HP but lose 75% handling in each race",
+            "rarity":4,
+            "image":"https://i.ibb.co/0K51yCr/perk-suns.png",
+            "emote":"<:perk_suns:1236548850110435338>"
+        },
+        "rocket scientist":{
+            "name":"Rocket Scientist",
+            "description":"Rocket engines are 10% more powerful",
+            "rarity":3,
+            "image":"https://i.ibb.co/M2hfQdn/perk-rocket.png",
+            "emote":"<:perk_rocket:1236548832053952534>"
+        },
+        "nitro boost 1":{
+            "name":"Nitro Boost 1",
+            "description":"HP is boosted by 5%",
+            "rarity":1,
+            "image":"https://i.ibb.co/W5jFdQ6/perk-nitrous.png",
+            "emote":"<:perk_nitrous:1236548830661447731>"
+        },
+        "nitro boost 2":{
+            "name":"Nitro Boost 2",
+            "description":"HP is boosted by 10%",
+            "rarity":2,
+            "image":"https://i.ibb.co/DDgY4Jf/perk-nitrous2.png",
+            "emote":"<:perk_nitrous2:1236548828954497074>"
+        },
+        "nitro boost 3":{
+            "name":"Nitro Boost 3",
+            "description":"HP is boosted by 15%",
+            "rarity":3,
+            "image":"https://i.ibb.co/zbYZHHD/perk-nitrous3.png",
+            "emote":"<:perk_nitrous3:1236548827347943546>"
+        },
+        "nitro boost 4":{
+            "name":"Nitro Boost 4",
+            "description":"HP is boosted by 20%",
+            "rarity":4,
+            "image":"https://i.ibb.co/9GcRwJp/perk-nitrous4.png",
+            "emote":"<:perk_nitrous4:1236548825020239882>"
+        },
+        "nitro boost 5":{
+            "name":"Nitro Boost 5",
+            "description":"HP is boosted by 25%",
+            "rarity":5,
+            "image":"https://i.ibb.co/j8nHT8L/perk-nitrous5.png",
+            "emote":"<:perk_nitrous5:1236548837116481536>"
+        },
+        "quark drive":{
+            "name":"Quark Drive",
+            "description":"Electric Cars have 30% more HP, and 30% less weight",
+            "rarity":4,
+            "image":"https://i.ibb.co/2g8zWwv/perk-quark.png",
+            "emote":"<:perk_quark:1236820945448992839>"
+        },
+        "critical mass":{
+            "name":"Critical Mass",
+            "description":"Opponents car has a 10% chance to gain 1500 weight (does not apply to track race)",
+            "rarity":3,
+            "image":"https://i.ibb.co/W3QcZQt/perk-criticalmass.png",
+            "emote":"<:perk_criticalmass:1236820943079211050>"
+        },
+        "weekend warrior":{
+            "name":"Weekend Warrior",
+            "description":"Double XP/Cash Weekend will give 3x instead of 2x XP and Cash",
+            "rarity":1,
+            "image":"https://i.ibb.co/nwhRBd6/perk-weekendwarrior.png",
+            "emote":"<:perk_weekendwarrior:1236820958900125696>"
+        },
+        "flare gun":{
+            "name":"Flare Gun",
+            "rarity": 5,
+            "image":"https://i.ibb.co/r3MtVpd/perk-flaregun.png",
+            "emote":"<:perk_flaregun:1236820998460932137>",
+            "description":"Opponents car has a 20% chance to lose half of their HP (does not apply to track race)"
+        },
+        "life force":{
+            "name":"Life Force",
+            "rarity":4,
+            "image":"https://i.ibb.co/SVq8sWr/perk-lifeforce.png",
+            "emote":"<:perk_lifeforce:1236820955452542976>",
+            "description":"Steal 20% of opponents HP and Handling (does not apply to track race)"
+        },
+        "sixth sense":{
+            "name":"Sixth Sense",
+            "rarity":2,
+            "image":"https://i.ibb.co/nn0QXK4/perk-sixthsense.png",
+            "emote":"<:perk_sixthsense:1236820954131333201>",
+            "description":"5% chance to obtain T4Parts from junk races"
+        },
+        "reverse psychology":{
+            "name":"Reverse Psychology",
+            "rarity":2,
+            "image":"https://i.ibb.co/P5GXK1x/perk-reversepsychology.png",
+            "emote":"<:perk_reversepsychology:1236820952621387796>",
+            "description":"10% chance to swap stats with your opponents car (does not apply to track race or squad race)"
+        },
+        "haters energy":{
+            "name":"Haters Energy",
+            "rarity":5,
+            "image":"https://i.ibb.co/h9gk8Z4/perk-hater.png",
+            "emote":"<:perk_hater:1236820950951919616>",
+            "description":"10% chance for your opponents car to lose 75% of all their stats (does not apply to track race)"
+        },
+        "asphalt angel":{
+            "name":"Asphalt Angel",
+            "rarity":5,
+            "image":"https://i.ibb.co/vHy7Y3N/perk-asphaltangel.png",
+            "emote":"<:perk_asphaltangel:1236820949534249060>",
+            "description":"Surfaces will always be asphalt"
+        },
+        "banana peel":{
+            "name":"Banana Peel",
+            "rarity":5,
+            "image":"https://i.ibb.co/7zT1RGp/perk-peel.png",
+            "emote":"<:perk_peel:1236820948322357320>",
+            "description":"Peel P50s gain 1000 HP"
+        },
+        "asphalt devil":{
+            "name":"Asphalt Devil",
+            "rarity":1,
+            "image":"https://i.ibb.co/nbPPTNh/perk-asphaltdevil.png",
+            "emote":"<:perkasphaltdevil:1236926530651684885>",
+            "description":"Gain 2x cash on asphalt surfaces"
+        }
+        
+    }
+}

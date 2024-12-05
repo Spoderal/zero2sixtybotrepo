@@ -22,12 +22,17 @@ async function newseason() {
         let user = crewmembers[i];
         console.log(user)
         let rpdata = await User.findOne({ id: user });
-        let userrp = rpdata.rp;
-        console.log(userrp);
-        rpdata.rp = 0
-        rpdata.crewseasonclaimed = 0
-        rpdata.save()
+        if(rpdata){
+          let userrp = rpdata.rp;
+          console.log(userrp);
+          rpdata.rp = 0
+          rpdata.crewseasonclaimed = 0
+          rpdata.save()
+
+        }
       }
+      await Global.findOneAndUpdate({  "crews.$[crew]": crew2, }, {"crew.Name": crew2.name,});
+      global.save()
       console.log(`rp: ${totalrp}`);
       let nextrank = (crewrank + 1);
       let requiredrp = nextrank * 1000;

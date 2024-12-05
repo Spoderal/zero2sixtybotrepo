@@ -235,7 +235,7 @@ module.exports = {
               `You already own this car, so you got ${toCurrency(price)} instead.`
             );
     
-            userdata.save();
+            await  userdata.save();
             return;
           }
     
@@ -244,7 +244,7 @@ module.exports = {
             .setColor(colors.blue);
     
           await interaction.reply({ embeds: [embedfinal] });
-          setTimeout(() => {
+          setTimeout(async () => {
             if (userdata.cars.length >= userdata.garageLimit) {
               let vault = userdata.vault || []
     
@@ -272,7 +272,7 @@ module.exports = {
             ]);
             embedfinal.setImage(cars.Cars[randomitem2.name].Image);
             interaction.editReply({ embeds: [embedfinal] });
-            userdata.save();
+            await   userdata.save();
           }, 1000);
         }
         else {
@@ -323,7 +323,7 @@ module.exports = {
               `You already own this car, so you got ${toCurrency(price)} instead.`
             );
     
-            userdata.save();
+            await    userdata.save();
             return;
           }
     
@@ -332,7 +332,7 @@ module.exports = {
             .setColor(colors.blue);
     
           await interaction.reply({ embeds: [embedfinal] });
-          setTimeout(() => {
+          setTimeout(async () => {
             if (userdata.cars.length >= userdata.garageLimit) {
               let vault = userdata.vault || []
     
@@ -360,7 +360,7 @@ module.exports = {
             ]);
             embedfinal.setImage(cars.Cars[randomitem].Image);
             interaction.editReply({ embeds: [embedfinal] });
-            userdata.save();
+            await   userdata.save();
           }, 1000);
         }
 

@@ -76,7 +76,7 @@ module.exports = {
       }
 
       interaction.editReply({ embeds: [embed] });
-      setTimeout(() => {
+      setTimeout(async () => {
         if (item == "⚙️") {
           let reward = lodash.sample(parts);
           userdata.parts.push(reward.toLowerCase());
@@ -164,7 +164,7 @@ module.exports = {
             interaction.channel.send(
               `You already own this car, so you got $${sellprice} instead.`
             );
-            userdata.save();
+            await   userdata.save();
             return;
           }
           collector.on("collect", async (i) => {
@@ -231,14 +231,14 @@ module.exports = {
                   userdata.cars.push(carobj);
                 }
               }
-              userdata.save();
+              await    userdata.save();
               embed.setTitle("✅");
               await interaction.editReply({ embeds: [embed] });
               return;
             } else if (i.customId.includes("sell")) {
               collector.stop();
 
-              userdata.save();
+              await   userdata.save();
               embed.setTitle("✅");
               await interaction.editReply({ embeds: [embed] });
               return;
@@ -253,7 +253,7 @@ module.exports = {
           interaction.editReply({ embeds: [embed] });
         }
 
-        userdata.save();
+        await   userdata.save();
       }, 500);
     }, 3000);
   },

@@ -2,7 +2,7 @@
 
 const ms = require("pretty-ms");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const User = require("../schema/profile-schema");
 const Cooldowns = require("../schema/cooldowns");
 const colors = require("../common/colors");
@@ -10,7 +10,6 @@ const { emotes } = require("../common/emotes");
 const cars = require("../data/cardb.json");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
 const achievementdb = require("../data/achievements.json")
-const { createCanvas, loadImage } = require("canvas");
 const { toCurrency, isWeekend } = require("../common/utils");
 const Globals = require("../schema/global-schema")
 
@@ -124,13 +123,16 @@ module.exports = {
       return { driftScore, isTrackComplete };
   }
   
-  
+  let acceleration = Math.max(2, selected.Acceleration)
+  if(selected.Class == "X" || cars.Cars[selected.Name.toLowerCase()]["0-60"] == 1.5){
+    acceleration = Math.max(1.5, selected.Acceleration)
+  }
   // Example usage with track difficulty
-  const currentSpeed = selected.Speed / selected.Acceleration; // Example current speed
+  const currentSpeed = selected.Speed / acceleration; // Example current speed
   const maxSpeed = selected.Speed; // Example maximum speed
   const currentAngle = 45; // Example current angle
   const maxAngle = 90; // Example maximum angle
-  const currentControl = (selected.Handling) / selected.Acceleration; // Example current control
+  const currentControl = (selected.Handling) / acceleration; // Example current control
   const maxControl = (selected.Handling); // Example maximum control
   
   const weightSpeed = (selected.WeightStat / 100) / selected.Speed; // Base weight for speed
@@ -234,7 +236,7 @@ module.exports = {
   .setColor(colors.blue)
   .addFields({name: "Track", value: `${trackdif.name} ${tracktype.name}`, inline: true})
   .addFields({name: "Car", value: `${selected.Emote} ${selected.Name}`, inline: true})
-  .addFields({name: "Stats", value: `${emotes.speed} ${selected.Speed}\n${emotes.acceleration} ${selected.Acceleration}\n${emotes.handling} ${selected.Handling}\n${emotes.weight} ${selected.WeightStat}`, inline: true})
+  .addFields({name: "Stats", value: `${emotes.speed} ${selected.Speed}\n${emotes.acceleration} ${acceleration}s\n${emotes.handling} ${selected.Handling}\n${emotes.weight} ${selected.WeightStat}`, inline: true})
   .addFields({name: "Drift Score Needed", value: `${tracktype.threshold}`, inline: true})
   .setThumbnail(tracktype.image)
   .setImage(livery)
@@ -251,7 +253,7 @@ module.exports = {
   .setColor(colors.blue)
   .addFields({name: "Track", value: `${trackdif.name} ${tracktype.name}`, inline: true})
   .addFields({name: "Car", value: `${selected.Emote} ${selected.Name}`, inline: true})
-  .addFields({name: "Stats", value: `${emotes.speed} ${selected.Speed}\n${emotes.acceleration} ${selected.Acceleration}\n${emotes.handling} ${selected.Handling}\n${emotes.weight} ${selected.WeightStat}`, inline: true})
+  .addFields({name: "Stats", value: `${emotes.speed} ${selected.Speed}\n${emotes.acceleration} ${acceleration}s\n${emotes.handling} ${selected.Handling}\n${emotes.weight} ${selected.WeightStat}`, inline: true})
   .addFields({name: "Drift Score", value: `${driftScore.driftScore}`, inline: true})
   .addFields({name: "Drift Score Needed", value: `${tracktype.threshold}`, inline: true})
   .setThumbnail(tracktype.image)
@@ -390,7 +392,7 @@ module.exports = {
     rewards.push(`${emotes.dirftKey} ${keys} Drift Keys`)
     embed.addFields({name: "Rewards", value: rewards.join("\n"), inline: true})
 
-    userdata.save()
+    await   userdata.save()
   }
   
   

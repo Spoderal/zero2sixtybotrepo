@@ -6,7 +6,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const User = require("../schema/profile-schema");
 const colors = require("../common/colors");
 const { GET_STARTED_MESSAGE } = require("../common/constants");
-const titledb = require("../data/titles.json");
 const partdb = require("../data/partsdb.json");
 const itemdb = require("../data/items.json")
 const ms = require("ms");

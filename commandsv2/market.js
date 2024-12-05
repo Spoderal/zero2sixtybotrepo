@@ -3,8 +3,6 @@ const {
   ActionRowBuilder,
   EmbedBuilder,
   ButtonBuilder,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder
 } = require("discord.js");
 const colors = require("../common/colors");
 const { emotes } = require("../common/emotes");
@@ -827,9 +825,9 @@ module.exports = {
         }
         globals.umarket = umarket
         globals.updateOne(`umarket`)
-        globals.save()
+        await globals.save()
 
-        userdata.save()
+        await   userdata.save()
 
         await interaction.reply(`Unlisted ${itemindb.Item}`)
 

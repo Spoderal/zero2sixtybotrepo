@@ -557,24 +557,7 @@
       "Squad": true,
       "Weight": 2000
     },
-    "kaylas 2010 ford mustang": {
-      "alias": "kaylas 2010 mustang",
-      "Name": "Kaylas 2010 Ford Mustang",
-      "Emote": "<:ford:931012624152399902>",
-      "kmh": 250,
-      "Speed": 355,
-      "Price": 31000,
-      "sellprice": 12400,
-      "Engine": "2.0 L 4-cylinder",
-      "Image": "https://www.morimotohid.com/images/Item%20Images/26965.Ford_Mustang_10_14_XB_LED_Headlights.130.jpg",
-      "0-60": 5.6,
-      "Drift": 5,
-      "Handling": 300,
-      "Class": "C",
-      "Squad": true,
-      "Weight": 3601,
-      "Muscle": true
-    },
+
     "toms 1994 porsche 911": {
       "alias": "toms 1994 911",
       "Name": "Toms 1994 Porsche 911",
@@ -4046,20 +4029,7 @@
       "Handling": 750,
       "Weight": 3100
     },
-    "kaylas 2020 koenigsegg regera": {
-      "alias": "kaylas 2020 regera",
-      "Name": "Kaylas 2020 Koenigsegg Regera",
-      "Emote": "<:koenigsegg:931011849212797029>",
-      "Speed": 350,
-      "Price": 0,
-      "sellprice": 0,
-      "Engine": "5.0 L V8",
-      "Image": "https://www.carscoops.com/wp-content/uploads/2020/09/Koenigsegg-Regera.jpg",
-      "0-60": 2.3,
-      "Drift": 0,
-      "Handling": 800,
-      "Weight": 3100
-    },
+
     "freds 2014 porsche 918 spyder": {
       "alias": "freds 2014 918 spyder",
       "Name": "Freds 2014 Porsche 918 Spyder",
@@ -9440,23 +9410,7 @@
       "Obtained": "Rare Imports",
       "Weight": 4695
     },
-    "kaylas 2024 porsche mission x": {
-      "alias": "kaylas 2024 mission x",
-      "Name": "Kaylas 2024 Porsche Mission X",
-      "Emote": "<:porsche:931011550880338011>",
-      "Speed": 1650,
-      "kmh": 386,
-      "Price": 5000000,
-      "sellprice": 2000000,
-      "Engine": "N/A",
-      "Image": "https://i.ibb.co/TY112vr/DSF4308-ret-lores.jpg",
-      "0-60": 2,
-      "Drift": 0,
-      "Handling": 1500,
-      "Class": "X",
-      "Weight": 2500,
-      "Boss": true
-    },
+
     "madisons 2021 mercedes amg gt black series": {
       "alias": "madisons 2021 amg gt black series",
       "Name": "Madisons 2021 Mercedes AMG GT Black Series",

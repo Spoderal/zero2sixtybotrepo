@@ -74,7 +74,7 @@ module.exports = {
         ]);
       }
       cooldowns.save();
-      userdata.save();
+      await    userdata.save();
       await interaction.reply({ embeds: [embed] });
     }
   },

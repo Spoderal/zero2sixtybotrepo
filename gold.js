@@ -21,7 +21,7 @@ module.exports = (client) => {
       
 
 
-      userdata.save();
+      await userdata.save();
     }
   });
 };

@@ -256,8 +256,8 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       userdata.using.push("apple");
       cooldowndata.apple = Date.now();
     }
-    else if (itemtouse.toLowerCase() == "applepie") {
-      userdata.using.push("applepie");
+    else if (itemtouse.toLowerCase() == "apple pie") {
+      userdata.using.push("apple pie");
       cooldowndata.applepie = Date.now();
     }
     else if (itemtouse.toLowerCase() == "secret brief case") {
@@ -289,7 +289,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       }
       for (var i5 = 0; i5 < amount2; i5++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
-      userdata.save()
+      await   userdata.save()
       cooldowndata.save()
       let randommessage = lodash.sample(itemdb[itemtouse.toLowerCase()].Used);
 
@@ -325,7 +325,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
           items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
         userdata.items = items;
 
-        userdata.save();
+        await  userdata.save();
         return;
       } else {
         let usertothrow = interaction.options.getUser("user");
@@ -343,7 +343,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
         for (var i2 = 0; i2 < amount2; i2++)
           items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
         userdata.items = items;
-        userdata.save();
+        await   userdata.save();
         interaction.reply(
           `${usertothrow}, ${interaction.user} threw dirt at you and now you cant race for 10 minutes!`
         );
@@ -379,7 +379,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       }
         for (var i3 = 0; i3 < amount2; i3++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
         userdata.items = items;
-        userdata.save();
+        await   userdata.save();
         userdatathrow.save()
         interaction.reply(
           `${usertothrow}, ${interaction.user} threw a ${itemdb.snowball.Emote} snowball at you, ${promp}`
@@ -461,7 +461,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       let rand= lodash.sample(randomcar)
 
       if(rand == "Nothing"){
-        userdata.save()
+        await   userdata.save()
         return await interaction.reply(`You used a swan note and found nothing`)
 
       }
@@ -490,13 +490,13 @@ else if (itemtouse.toLowerCase() == "energy drink") {
             console.log("pushed")
             vault.push(carobj);
             userdata.vault = vault
-            userdata.save();
+            await  userdata.save();
           
             
           }
           else {
             userdata.cars.push(carobj);
-            userdata.save();
+            await    userdata.save();
           }
          return await interaction.reply(`You used a swan note and found the ${cardb.Cars[rand.toLowerCase()].Emote} ${cardb.Cars[rand.toLowerCase()].Name}`)
     }
@@ -888,7 +888,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       }
        items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
-      userdata.save();
+      await  userdata.save();
       interaction.reply(`${randomeffect}`);
 
       return;
@@ -904,7 +904,7 @@ else if (itemtouse.toLowerCase() == "energy drink") {
       for (var i7 = 0; i7 < amount2; i7++) items.splice(items.indexOf(itemtouse.toLowerCase()), 1);
       userdata.items = items;
       cooldowndata.save();
-      userdata.save();
+      await  userdata.save();
       if (itemdb[itemtouse.toLowerCase()].Used) {
         let randommessage = lodash.sample(itemdb[itemtouse.toLowerCase()].Used);
 
@@ -926,7 +926,7 @@ async function giveRandomCash(interaction, users) {
   let userdata = await User.findOne({ id: randomUser.id });
   if(userdata){
     userdata.cash += randomAmount;
-    userdata.save()
+    await   userdata.save()
 
   }
   return await interaction.channel.send(

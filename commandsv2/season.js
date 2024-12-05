@@ -13,18 +13,17 @@ const cardb = require("../data/cardb.json");
 const lodash = require("lodash");
 const itemdb = require("../data/items.json");
 const emotes = require("../common/emotes").emotes;
-const ms = require("ms");
 const outfitdb = require("../data/characters.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("season")
-    .setDescription("Check the season 4 rewards page"),
+    .setDescription("Check the season 5 rewards page"),
   async execute(interaction) {
     let userdata = await User.findOne({ id: interaction.user.id });
     if (!userdata?.id) return await interaction.reply(GET_STARTED_MESSAGE);
     let cooldowndata = await Cooldown.findOne({ id: interaction.user.id });
-    let seasonRewards = seasons.Seasons.Spring.Rewards;
+    let seasonRewards = seasons.Seasons.Summer.Rewards;
     let notoriety = userdata.notoriety;
     let premiumpass = userdata.premium
 
@@ -331,11 +330,11 @@ module.exports = {
     //premium
 
     let embed = new EmbedBuilder()
-      .setTitle(`Season 4 Page ${vispage}/${pages.length}`)
+      .setTitle(`Season 5 Page ${vispage}/${pages.length}`)
       .setColor(colors.blue)
-      .setThumbnail(seasons.Seasons.Spring.Image)
+      .setThumbnail(seasons.Seasons.Summer.Image)
       .setDescription(`Tier ${claimable}: ${notoriety}/${rewardtoclaim.Required}\nReward: ${rewarddisp}\nPremium Reward: ${premiumreward}\n\nEnds <t:1717128000:f>`)
-      .setImage("https://i.ibb.co/93zQt1N/season4-page.png")
+      .setImage("https://i.ibb.co/BLSB5zz/season5-page1.png")
 
 
     let msg = await interaction.reply({
@@ -348,7 +347,7 @@ module.exports = {
         userdata.tutorial.stage = 5
         userdata.tutorial.seasonfinished = true
         userdata.notoriety += 5000
-        userdata.save()
+        await   userdata.save()
        return interaction.channel.send(`**TUTORIAL**: You've already claimed a reward, you can claim more rewards by clicking the claim button.`)
       }
       let tut = userdata.tutorial
@@ -365,7 +364,7 @@ module.exports = {
 
       );
       userdata.notoriety += 1000
-      userdata.save()
+      await   userdata.save()
       interaction.channel.send(`**TUTORIAL**: Ok, now we are at the season page. Here you can see the rewards for the season. You can claim the rewards by clicking the claim button. If you have the premium pass, you can claim the premium rewards as well. You can buy the premium pass for 500 gold. You can navigate through the pages by clicking the buttons. You can also click the first and last button to go to the first and last page of the rewards.\n\nLets try clicking claim, I've given you enough notoriety to claim the reward. Click the claim button now!`)
     }
     cooldowndata.opened = Date.now();
@@ -666,15 +665,15 @@ module.exports = {
         
           notoriety = userdata.notoriety;
           userdata.seasonclaimed += 1
-          userdata.save()
+          await   userdata.save()
       }
       
 
       console.log(page)
       embed = new EmbedBuilder()
-        .setTitle(`Season 4 Page ${vispage}/${pages.length}`)
+        .setTitle(`Season 5 Page ${vispage}/${pages.length}`)
         .setColor(colors.blue)
-        .setThumbnail(seasons.Seasons.Spring.Image)
+        .setThumbnail(seasons.Seasons.Summer.Image)
         .setImage(pages[page].image)
         .setDescription(`Tier ${claimable}: ${notoriety}/${rewardtoclaim.Required}\nReward: ${rewarddisp}\nPremium Reward: ${premiumreward}\n\nEnds <t:1717128000:f>`)
 
@@ -720,7 +719,7 @@ module.exports = {
   
         );
         userdata.notoriety += 5000
-        userdata.save()
+        await   userdata.save()
         interaction.channel.send(`**TUTORIAL**: Now that we've claimed our reward, we can see that the reward has been added to our inventory. You can also see the premium reward if you have the premium pass\n\nYou can earn more notoriety to claim these rewards with the seasonal race you see in /events\nThats all for the season tutorial! I've given you 5k notoriety as a reward for completing the tutorial`)
       }
     });

@@ -132,7 +132,7 @@ module.exports = {
         for (var i5 = 0; i5 < 1; i5++) userdata.items.splice(userdata.items.indexOf("airplane"), 1);
         embed.setTitle(`You flew to **${locationchosen}**`)
         await interaction.editReply({embeds: [embed], components: []})
-        userdata.save()
+        await  userdata.save()
         return
       })
     }
@@ -152,7 +152,7 @@ module.exports = {
   
       userdata.location = newloc.toLowerCase()
   
-      userdata.save()
+      await  userdata.save()
   
       await interaction.reply(`You relocated to **${newloc}**`)
     }

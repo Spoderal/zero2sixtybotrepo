@@ -94,7 +94,14 @@ module.exports = {
       let weight =
         selected.WeightStatStat ||
         cardb.Cars[selected.Name.toLowerCase()].Weight;
-      let acceleration = selected.Acceleration;
+      let acceleration = Math.max(2, selected.Acceleration)
+      if(selected.Class == "X"){
+        acceleration = Math.max(1.5, selected.Acceleration)
+      }
+      if(cardb[selected.Name.toLowerCase()]["0-60"] < 2){
+        acceleration = Math.max(cardb[selected.Name.toLowerCase()]["0-60"], selected.Acceleration)
+
+      }
       let handling = selected.Handling;
 
       if (!selected.WeightStat) {
@@ -201,7 +208,7 @@ module.exports = {
           }
 
           await interaction.editReply({ embeds: [embed] });
-          userdata.save();
+          await    userdata.save();
         }
 
       
